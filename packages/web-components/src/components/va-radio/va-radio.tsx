@@ -78,6 +78,11 @@ export class VaRadio {
   @Prop() headerAriaDescribedby?: string;
 
   /**
+   * An optional message that will be read by screen readers when a radio option is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
+
+  /**
    * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
    */
   @Prop() useFormsPattern?: string;
@@ -231,12 +236,14 @@ export class VaRadio {
       required, 
       error, 
       headerAriaDescribedby,
+      messageAriaDescribedby,
       useFormsPattern,
       formHeadingLevel,
       formHeading
     } = this;
     const HeaderLevel = this.getHeaderLevel();
     const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
+    const messageAriaDescribedbyId = messageAriaDescribedby ? 'description-message' : null;
     const ariaLabeledByIds = 
     `${useFormsPattern && formHeading ? 'form-question' : ''} ${
       useFormsPattern ? 'form-description' : ''} ${
@@ -270,7 +277,7 @@ export class VaRadio {
         {formsHeading}
         <div class="input-wrap">
           <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
-            <legend class={legendClass} part="legend">
+            <legend class={legendClass} part="legend" aria-describedby={messageAriaDescribedbyId} >
               {HeaderLevel ? (
                 <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
               ) : (
@@ -278,14 +285,19 @@ export class VaRadio {
               )}&nbsp;
               {
                 useFormsPattern === 'multiple' && (
-                  <span id="header-message" class="sr-only">
+                  <span id="header-message" class="usa-sr-only">
                     {label}
                   </span>
                 )
               }
               {headerAriaDescribedby && (
-                <span id="header-message" class="sr-only">
+                <span id="header-message" class="usa-sr-only">
                   {headerAriaDescribedby}
+                </span>
+              )}
+              {messageAriaDescribedby && (
+                <span id="description-message" class="usa-sr-only">
+                  {messageAriaDescribedby}
                 </span>
               )}
               {required && <span class="usa-label--required" part="required">{i18next.t('required')}</span>}

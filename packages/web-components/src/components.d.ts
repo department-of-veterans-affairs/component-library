@@ -1188,6 +1188,10 @@ export namespace Components {
          */
         "labelHeaderLevel"?: string;
         /**
+          * An optional message that will be read by screen readers when a radio option is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Whether or not this input field is required.
          */
         "required"?: boolean;
@@ -4302,6 +4306,10 @@ declare namespace LocalJSX {
           * Insert a header with defined level inside the label (legend)
          */
         "labelHeaderLevel"?: string;
+        /**
+          * An optional message that will be read by screen readers when a radio option is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The event used to track usage of the component. This is emitted when a radio option is selected and enableAnalytics is true.
          */
