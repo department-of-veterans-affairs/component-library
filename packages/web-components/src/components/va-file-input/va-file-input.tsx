@@ -10,9 +10,9 @@ import {
   EventEmitter,
   State,
 } from '@stencil/core';
-import { i18next } from '../..';
+import i18next from 'i18next';
 import { fileInput } from './va-file-input-upgrader';
-import { extensionToMimeType } from "./fileExtensionToMimeType";
+import { extensionToMimeType } from './fileExtensionToMimeType';
 
 /**
  * @componentName File input
@@ -51,6 +51,11 @@ export class VaFileInput {
    * The text displayed on the button.
    */
   @Prop() buttonText: string;
+
+  /**
+   * The value attribute for the file view element.
+   */
+  @Prop() value?: File;
 
   /**
    * Sets the input to required and renders the (*Required) text.
@@ -312,6 +317,7 @@ export class VaFileInput {
     const {
       label,
       name,
+      value,
       required,
       accept,
       error,
@@ -324,6 +330,10 @@ export class VaFileInput {
       headless,
       readOnly,
     } = this;
+
+    if (value) {
+      this.handleFile(value);
+    }
 
     const displayError = this.error || this.internalError;
     const ariaDescribedbyIds =
