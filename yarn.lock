@@ -3334,7 +3334,7 @@ __metadata:
     "@babel/core": "npm:^7.12.13"
     "@department-of-veterans-affairs/css-library": "npm:^0.8.1"
     "@department-of-veterans-affairs/formation": "npm:^11.0.6"
-    "@stencil/core": "npm:4.21.0"
+    "@stencil/core": "npm:^4.21.0"
     "@stencil/postcss": "npm:^2.0.0"
     "@stencil/react-output-target": "npm:^0.5.3"
     "@stencil/sass": "npm:^2.0.0"
@@ -5041,7 +5041,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stencil/core@npm:4.21.0":
+"@stencil/core@npm:^4.21.0":
   version: 4.21.0
   resolution: "@stencil/core@npm:4.21.0"
   bin:
