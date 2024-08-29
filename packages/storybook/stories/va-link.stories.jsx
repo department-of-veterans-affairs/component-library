@@ -106,26 +106,28 @@ const VariantTemplate = ({
   'icon-size': iconSize,
 }) => {
   return (
-    <va-link
-      abbr-title={abbrTitle}
-      active={active}
-      back={back}
-      calendar={calendar}
-      channel={channel}
-      disable-analytics={disableAnalytics}
-      download={download}
-      href={href}
-      filename={filename}
-      filetype={filetype}
-      pages={pages}
-      reverse={reverse}
-      text={text}
-      external={external}
-      video={video}
-      label={label}
-      icon-name={iconName}
-      icon-size={iconSize}
-    />
+    <p>
+      <va-link
+        abbr-title={abbrTitle}
+        active={active}
+        back={back}
+        calendar={calendar}
+        channel={channel}
+        disable-analytics={disableAnalytics}
+        download={download}
+        href={href}
+        filename={filename}
+        filetype={filetype}
+        pages={pages}
+        reverse={reverse}
+        text={text}
+        external={external}
+        video={video}
+        label={label}
+        icon-name={iconName}
+        icon-size={iconSize}
+      />
+    </p>
   );
 };
 
