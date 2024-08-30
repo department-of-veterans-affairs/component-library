@@ -205,7 +205,7 @@ const WidthsTemplate = ({
       </va-select>
     )
   }
-  const widths = ["sm", "md", "lg", "xl", "2xl"];
+  const widths = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"];
   return (
     <>
       {widths.map(width => <div key={width}>{getSelect(width)}</div>)}
