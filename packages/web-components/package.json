@@ -14,7 +14,7 @@
     "dist/",
     "loader/",
     "component-docs.json",
-    "dist/react-bindings/"
+    "react-bindings/"
   ],
   "scripts": {
     "build": "stencil build --docs-json component-docs.json",
