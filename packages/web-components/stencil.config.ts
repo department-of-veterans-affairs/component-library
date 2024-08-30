@@ -32,8 +32,7 @@ export const config: Config = {
   },
   outputTargets: [
     reactOutputTarget({
-      outDir: './react-bindings/',
-      customElementsDir: '/dist/components/'
+      outDir: './react-bindings/'
     }),
     {
       type: 'dist',
