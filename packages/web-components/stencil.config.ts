@@ -32,7 +32,7 @@ export const config: Config = {
   },
   outputTargets: [
     reactOutputTarget({
-      outDir: '@department-of-veterans-affairs/web-components/dist/types'
+      outDir: path.resolve(__dirname, './react-bindings'),
     }),
     {
       type: 'dist',
