@@ -95,6 +95,11 @@ export class VaSelect {
   @Event() vaSelect: EventEmitter;
 
   /**
+   * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+   */
+  @Prop() width?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when an
    * option is selected and enableAnalytics is true.
    */
@@ -165,7 +170,7 @@ export class VaSelect {
   }
 
   render() {
-    const { error, reflectInputError, invalid, label, required, name, hint, messageAriaDescribedby } = this;
+    const { error, reflectInputError, invalid, label, required, name, hint, messageAriaDescribedby, width } = this;
 
     const errorID = 'input-error-message';
     const ariaDescribedbyIds = 
@@ -180,6 +185,7 @@ export class VaSelect {
     const selectClass = classnames({
       'usa-select': true,
       'usa-input--error': error || reflectInputError,
+      [`usa-input--${width}`]: width,
     });
     return (
       <Host>
