@@ -2,7 +2,7 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-memorable-date', () => {
-  it('uswds v3 renders', async () => {
+  it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" month-select />');
 
@@ -75,7 +75,7 @@ describe('va-memorable-date', () => {
     `);
   });
 
-  it('uswds v3 passes an axe check', async () => {
+  it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `
@@ -85,7 +85,7 @@ describe('va-memorable-date', () => {
     await axeCheck(page);
   });
 
-  it('uswds v3 renders hint text', async () => {
+  it('renders hint text', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date label="Label" hint="hint text" required month-select ></va-memorable-date>');
 
@@ -165,7 +165,7 @@ describe('va-memorable-date', () => {
     `);
   });
 
-  it('uswds v3 renders an error message', async () => {
+  it('renders an error message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date error="This is a mistake" />');
 
@@ -175,7 +175,7 @@ describe('va-memorable-date', () => {
     expect(error.innerText).toContain('This is a mistake');
   });
 
-  it('uswds v3 maintains custom error message after multiple blurs', async () => {
+  it('maintains custom error message after multiple blurs', async () => {
     const page = await newE2EPage();
 
     // await page.addScriptTag({ content: ``);
@@ -193,7 +193,7 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('error')).toEqual('custom error');
   });
 
-  it('uswds v3 renders a required span', async () => {
+  it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date label="This is a field" required />',
@@ -203,8 +203,8 @@ describe('va-memorable-date', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
-  describe('uswds v3 validation', () => {
-    it('uswds v3 does year validation without required prop', async () => {
+  describe('validation', () => {
+    it('does year validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date value="1999-05-03" name="test" />',
@@ -222,7 +222,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual(`year-range`);
     });
 
-    it('uswds v3 does month validation without required prop', async () => {
+    it('does month validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date name="test" month-select />',
@@ -241,7 +241,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual("month-range");
     });
 
-    it('uswds v3 does day validation without required prop', async () => {
+    it('does day validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date value="1999-05-03" name="test" month-select/>',
@@ -260,7 +260,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual("day-range");
     });
 
-   it('uswds v3 does validation for required components', async () => {
+   it('does validation for required components', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date name="test" required />',
@@ -277,7 +277,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual("month-range");
     });
 
-    it('uswds v3 allows for a custom required message', async () => {
+    it('allows for a custom required message', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-memorable-date value="2000-01-01" name="test" label="This is a field" required />');
 
@@ -298,10 +298,10 @@ describe('va-memorable-date', () => {
       expect(errorSpan.textContent).toContain("Fill me out");
     });
 
-    it('uswds v3 resets error to null when fixed', async () => {
+    it('resets error to null when fixed', async () => {
       const page = await newE2EPage();
       await page.setContent(
-        '<va-memorable-date value="1999-05-03" name="test" required="true" uswds />',
+        '<va-memorable-date value="1999-05-03" name="test" required="true" />',
       );
       const date = await page.find('va-memorable-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
@@ -324,8 +324,8 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual(null);
     });
 
-    describe('uswds v3 invalid subcomponents', () => {
-      it('uswds v3 correctly indicates an invalid year', async () => {
+    describe('invalid subcomponents', () => {
+      it('correctly indicates an invalid year', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date value="1999-05-03" name="test" required="true" month-select/>',
@@ -368,7 +368,7 @@ describe('va-memorable-date', () => {
         expect(invalidDay).toEqual('false');
       });
 
-      it('uswds v3 correctly indicates an invalid month', async () => {
+      it('correctly indicates an invalid month', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date value="1999-05-03" name="test" required="true" month-select/>',
@@ -408,7 +408,7 @@ describe('va-memorable-date', () => {
         expect(invalidDay).toEqual('false');
       });
 
-      it('uswds v3 correctly indicates an invalid day', async () => {
+      it('correctly indicates an invalid day', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date value="1999-05-03" name="test" required="true" month-select />',
@@ -450,7 +450,7 @@ describe('va-memorable-date', () => {
         expect(invalidDay).toEqual('false');
       });
 
-      it('uswds v3 passes the invalidDay prop correctly', async () => {
+      it('passes the invalidDay prop correctly', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date name="test" invalid-day month-select />',
@@ -470,7 +470,7 @@ describe('va-memorable-date', () => {
         expect(invalidDay).toEqual('true');
       });
 
-      it('uswds v3 passes the invalidMonth prop correctly', async () => {
+      it('passes the invalidMonth prop correctly', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date name="test" invalid-month month-select/>',
@@ -490,7 +490,7 @@ describe('va-memorable-date', () => {
         expect(invalidDay).toEqual('false');
       });
 
-      it('uswds v3 passes the invalidYear prop correctly', async () => {
+      it('passes the invalidYear prop correctly', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date name="test" invalid-year month-select/>',
@@ -512,7 +512,7 @@ describe('va-memorable-date', () => {
     });
   });
 
-  it('uswds v3 sets a label', async () => {
+  it('sets a label', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date label="This is a label" />');
 
@@ -520,7 +520,7 @@ describe('va-memorable-date', () => {
     expect(label.innerText).toContain('This is a label');
   });
 
-  it('uswds v3 sets a default date', async () => {
+  it('sets a default date', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date value="1999-05-03" month-select/>');
 
@@ -533,7 +533,7 @@ describe('va-memorable-date', () => {
     expect(year.getAttribute('value')).toBe('1999');
   });
 
-  it('uswds v3 updates date based on input fields', async () => {
+  it('updates date based on input fields', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date value="1999-05-03" name="test" month-select />',
@@ -567,7 +567,7 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('2022-7-21');
   });
 
-  it('uswds v3 year input only allows for 4 characters to be used', async () => {
+  it('year input only allows for 4 characters to be used', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" />');
 
@@ -583,7 +583,7 @@ describe('va-memorable-date', () => {
     expect(elementYear.getAttribute('value')).toBe('2022');
   });
 
-  it('uswds v3 emits dateBlur event', async () => {
+  it('emits dateBlur event', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
@@ -598,7 +598,7 @@ describe('va-memorable-date', () => {
     expect(blurSpy).toHaveReceivedEvent();
   });
 
-  it('uswds v3 emits dateChange event when input value is updated', async () => {
+  it('emits dateChange event when input value is updated', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
@@ -630,7 +630,7 @@ describe('va-memorable-date', () => {
     expect(spy).toHaveReceivedEventTimes(7);
   });
 
-  it('uswds v3 formats single digit days and months into 2 digits with a leading 0', async () => {
+  it('formats single digit days and months into 2 digits with a leading 0', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-memorable-date name="test" month-select />');
@@ -655,7 +655,7 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('2022-01-02');
   });
 
-  it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
+  it('fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date enable-analytics name="test" label="Example label" month-select />',
@@ -693,8 +693,8 @@ describe('va-memorable-date', () => {
     });
   });
 
-  // Begin USWDS v3 test without monthSelect prop
-  it('uswds v3 renders without monthSelect', async () => {
+  // Begin test without monthSelect prop
+  it('renders without monthSelect', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" month-select="false" />');
 
@@ -730,7 +730,7 @@ describe('va-memorable-date', () => {
     `);
   });
 
-  it('uswds v3 passes an axe check without monthSelect', async () => {
+  it('passes an axe check without monthSelect', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `
@@ -740,7 +740,7 @@ describe('va-memorable-date', () => {
     await axeCheck(page);
   });
 
-  it('uswds v3 renders hint text without month-select', async () => {
+  it('renders hint text without month-select', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date label="Label" hint="hint text" required month-select="false"></va-memorable-date>');
 
@@ -783,7 +783,7 @@ describe('va-memorable-date', () => {
     `);
   });
 
-  it('uswds v3 renders an error message without monthSelect', async () => {
+  it('renders an error message without monthSelect', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date error="This is a mistake" month-select="false" />');
 
@@ -793,7 +793,7 @@ describe('va-memorable-date', () => {
     expect(error.innerText).toContain('This is a mistake');
   });
 
-  it('uswds v3 renders a required span without monthSelect', async () => {
+  it('renders a required span without monthSelect', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date label="This is a field" required month-select="false" />',
@@ -803,7 +803,7 @@ describe('va-memorable-date', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
-  it('uswds v3 without monthSelect day and month input fields only allows for a maximum of 2 characters to be used', async () => {
+  it('without monthSelect day and month input fields only allows for a maximum of 2 characters to be used', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" month-select="false" />');
 
@@ -828,8 +828,8 @@ describe('va-memorable-date', () => {
     expect(elementDay.getAttribute('value')).toBe('12');
   });
 
-  describe('uswds v3 validation without monthSelect', () => {
-    it('uswds v3 without monthSelect does year validation without required prop', async () => {
+  describe('validation without monthSelect', () => {
+    it('without monthSelect does year validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date value="1999-05-03" name="test" month-select="false" />',
@@ -847,7 +847,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual(`year-range`);
     });
 
-    it('uswds v3 without monthSelect does day validation without required prop', async () => {
+    it('without monthSelect does day validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date value="1999-05-03" name="test" month-select="false" />',
@@ -866,7 +866,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual("day-range");
     });
 
-   it('uswds v3 without monthSelect does validation for required components and displays the correct error message', async () => {
+   it('without monthSelect does validation for required components and displays the correct error message', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date name="test" required month-select="false" />',
@@ -886,7 +886,7 @@ describe('va-memorable-date', () => {
       expect(errorSpan.textContent).toContain("month-range");
     });
 
-    it('uswds v3 with monthSelect displays the correct error message', async () => {
+    it('with monthSelect displays the correct error message', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date name="test" required month-select="true" />',
@@ -906,7 +906,7 @@ describe('va-memorable-date', () => {
       expect(errorSpan.textContent).toContain("month-select");
     });
 
-    it('uswds v3 without monthSelect allows for a custom required message', async () => {
+    it('without monthSelect allows for a custom required message', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-memorable-date value="2000-01-01" name="test" label="This is a field" required month-select="false" />');
 
@@ -927,7 +927,7 @@ describe('va-memorable-date', () => {
       expect(errorSpan.textContent).toContain("Fill me out");
     });
 
-    it('uswds v3 without monthSelect resets error to null when fixed', async () => {
+    it('without monthSelect resets error to null when fixed', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date value="1999-05-03" name="test" required="true" month-select="false" />',
@@ -953,8 +953,8 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual(null);
     });
 
-    describe('uswds v3 without monthSelect invalid subcomponents', () => {
-      it('uswds v3 without monthSelect correctly indicates an invalid year', async () => {
+    describe('without monthSelect invalid subcomponents', () => {
+      it('without monthSelect correctly indicates an invalid year', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date value="1999-05-03" name="test" required="true" month-select="false" />',
@@ -997,7 +997,7 @@ describe('va-memorable-date', () => {
         expect(invalidDay).toEqual('false');
       });
 
-      it('uswds v3 without monthSelect correctly indicates an invalid day', async () => {
+      it('without monthSelect correctly indicates an invalid day', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date value="1999-05-03" name="test" required="true" month-select="false" />',
@@ -1039,7 +1039,7 @@ describe('va-memorable-date', () => {
         expect(invalidDay).toEqual('false');
       });
 
-      it('uswds v3 without monthSelect passes the invalidDay prop correctly', async () => {
+      it('without monthSelect passes the invalidDay prop correctly', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date name="test" invalid-day month-select="false" />',
@@ -1059,7 +1059,7 @@ describe('va-memorable-date', () => {
         expect(invalidDay).toEqual('true');
       });
 
-      it('uswds v3 without monthSelect passes the invalidMonth prop correctly', async () => {
+      it('without monthSelect passes the invalidMonth prop correctly', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date name="test" invalid-month month-select="false" />',
@@ -1079,7 +1079,7 @@ describe('va-memorable-date', () => {
         expect(invalidDay).toEqual('false');
       });
 
-      it('uswds v3 without monthSelect passes the invalidYear prop correctly', async () => {
+      it('without monthSelect passes the invalidYear prop correctly', async () => {
         const page = await newE2EPage();
         await page.setContent(
           '<va-memorable-date name="test" invalid-year month-select />',
@@ -1101,7 +1101,7 @@ describe('va-memorable-date', () => {
     });
   });
 
-  it('uswds v3 without monthSelect sets a label', async () => {
+  it('without monthSelect sets a label', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date label="This is a label" month-select="false" />');
 
@@ -1109,7 +1109,7 @@ describe('va-memorable-date', () => {
     expect(label.innerText).toContain('This is a label');
   });
 
-  it('uswds v3 without monthSelect emits dateBlur event', async () => {
+  it('without monthSelect emits dateBlur event', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
@@ -1124,7 +1124,7 @@ describe('va-memorable-date', () => {
     expect(blurSpy).toHaveReceivedEvent();
   });
 
-  it('uswds v3 without monthSelect formats single digit days and months into 2 digits with a leading 0', async () => {
+  it('without monthSelect formats single digit days and months into 2 digits with a leading 0', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-memorable-date name="test" month-select="false" />');
@@ -1149,7 +1149,7 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('2022-01-02');
   });
 
-  it('uswds v3 without monthSelect fires an analytics event when enableAnalytics is true', async () => {
+  it('without monthSelect fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date enable-analytics name="test" label="Example label" month-select="false" />',
@@ -1187,7 +1187,7 @@ describe('va-memorable-date', () => {
     });
   });
 
-  it('uswds v3 Applies a unique name attribute for each input', async () => {
+  it('Applies a unique name attribute for each input', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" />');
 
@@ -1199,7 +1199,7 @@ describe('va-memorable-date', () => {
     expect(dayInput).not.toBeNull();
   });
 
-  it('uswds v3 When the name prop is not set, input name attributes default to input type name', async () => {
+  it('When the name prop is not set, input name attributes default to input type name', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date />');
 
@@ -1211,7 +1211,7 @@ describe('va-memorable-date', () => {
     expect(dayInput).not.toBeNull();
   });
 
-  it('uswds useFormsPattern displays header for the single field pattern', async () => {
+  it('useFormsPattern displays header for the single field pattern', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation"></va-textarea>',
@@ -1221,7 +1221,7 @@ describe('va-memorable-date', () => {
     expect(formHeader.innerText).toEqual('This is a form header');
   });
 
-  it('uswds useFormsPattern displays header for the multiple field pattern', async () => {
+  it('useFormsPattern displays header for the multiple field pattern', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation"></va-textarea>',
@@ -1231,7 +1231,7 @@ describe('va-memorable-date', () => {
     expect(formHeader.innerText).toEqual('This is a form header');
   });
 
-  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+  it('useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation"></va-textarea>',
@@ -1241,7 +1241,7 @@ describe('va-memorable-date', () => {
     expect(formHeader).toBeNull();
   });
 
-  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+  it('useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation"></va-textarea>',
@@ -1250,7 +1250,7 @@ describe('va-memorable-date', () => {
     await axeCheck(page);
   });
 
-  it('uswds v3 renders custom month error when custom-month-error-message set', async () => {
+  it('renders custom month error when custom-month-error-message set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date name="test" label="Example label" month-select="false" custom-month-error-message="This is a custom month error message"/>',
@@ -1279,7 +1279,7 @@ describe('va-memorable-date', () => {
     expect(errorSpan.innerHTML).toEqual('This is a custom month error message')
   });
 
-  it('uswds v3 renders custom day error when custom-day-error-message set', async () => {
+  it('renders custom day error when custom-day-error-message set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date name="test" label="Example label" month-select="false" custom-day-error-message="This is a custom day error message"/>',
@@ -1308,7 +1308,7 @@ describe('va-memorable-date', () => {
     expect(errorSpan.innerHTML).toEqual('This is a custom day error message')
   });
 
-  it('uswds v3 renders custom year error when custom-year-error-message set', async () => {
+  it('renders custom year error when custom-year-error-message set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date name="test" label="Example label" month-select="false" custom-year-error-message="This is a custom year error message"/>',
