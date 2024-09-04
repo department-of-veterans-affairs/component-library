@@ -28,19 +28,20 @@ export const config: Config = {
     scriptDataOpts: true,
     appendChildSlotFix: false,
     cloneNodeFix: false,
-    slotChildNodesFix: true,
+    slotChildNodesFix: true
   },
   outputTargets: [
     reactOutputTarget({
-      outDir: './react-bindings/',
-      customElementsDir: './dist/components/'
+      componentCorePackage: '@department-of-veterans-affairs/web-components/dist/types',
+      proxiesFile: './react-bindings/index.ts',
+      includeImportCustomElements: false
     }),
     {
       type: 'dist',
       esmLoaderPath: '../loader',
       copy: [
         { src: 'assets', dest: path.join(__dirname, 'dist/assets') },
-        { src: 'img/sprite.svg', dest: path.join(__dirname, 'dist/img/') }
+        { src: 'img/sprite.svg', dest: path.join(__dirname, 'dist/img/sprite.svg') }
       ]
     },
     {
@@ -50,7 +51,6 @@ export const config: Config = {
     {
       type: 'dist-custom-elements',
       customElementsExportBehavior: 'single-export-module',
-      externalRuntime: false
     }
   ],
   testing: {
