@@ -85,12 +85,11 @@ describe('va-statement-of-truth', () => {
   it('permits prefilling the form', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth input-value="John Doe" checked/>');
-    const inputEl = await page.$('pierce/[name="veteran-signature"]');
-    const value = await page.evaluate(element => element.value, inputEl);
+
+    const value = await page.$eval('va-statement-of-truth >>> va-text-input >>> input', (comp: HTMLInputElement) => comp.value);
     expect(value).toBe('John Doe');
 
-    const checkboxEl = await page.$('pierce/[name="veteran-certify"]');
-    const checked = await page.evaluate(element => element.checked, checkboxEl);
+    const checked = await page.$eval('va-statement-of-truth >>> va-checkbox >>> input', (comp: HTMLInputElement) => comp.checked);
     expect(checked).toBeTruthy();
   });
 
