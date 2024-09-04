@@ -8,6 +8,7 @@
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-select/src/styles/usa-select';
 
+@import '../../mixins/uswds-input-width.scss';
 @import '../../mixins/uswds-error-border.scss';
 
 :host {

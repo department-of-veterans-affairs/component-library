@@ -177,3 +177,41 @@ const I18nTemplate = args => {
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = { ...defaultArgs, required: true };
+
+const WidthsTemplate = ({
+  label,
+  name,
+  value,
+  required,
+  error,
+  hint,
+  'aria-live-region-text': ariaLiveRegionText,
+  'aria-describedby-message': ariaDescribedbyMessage,
+  options, }) => {
+  function getSelect(width) {
+    return (
+      <va-select
+        label={`${label} - (${width})`}
+        name={name}
+        value={value}
+        required={required}
+        error={error}
+        hint={hint}
+        aria-live-region-text={ariaLiveRegionText}
+        message-aria-describedby={ariaDescribedbyMessage}
+        width={width}
+      >
+        {options}
+      </va-select>
+    )
+  }
+  const widths = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"];
+  return (
+    <>
+      {widths.map(width => <div key={width}>{getSelect(width)}</div>)}
+    </>
+  );
+};
+
+export const Widths = WidthsTemplate.bind(null);
+Widths.args = { ...defaultArgs };

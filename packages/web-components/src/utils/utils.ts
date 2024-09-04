@@ -50,8 +50,8 @@ export function plurality(length: number): string {
 }
 
 /**
- * generates message to update character count if uswds prop set
- * currently used in va-text-input and va-text-area v3 components
+ * Generates message to update character count.
+ * Currently used in va-text-input and va-text-area components.
  * update this method with translations instead of string literals
  */
 export function getCharacterMessage(
