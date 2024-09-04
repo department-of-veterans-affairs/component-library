@@ -15,22 +15,13 @@
 
 @import '../../mixins/headers.css';
 
-:host(:not([uswds='false'])) {
+:host {
   color: var(--vads-color-base);
 }
 
 :host {
   display: block;
   font-family: var(--font-source-sans);
-}
-
-:host(:focus) {
-  outline: none !important;
-}
-
-:host(:not([uswds='false'])) input:not([disabled]):focus {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
-  outline-offset: 2px;
 }
 
 input {

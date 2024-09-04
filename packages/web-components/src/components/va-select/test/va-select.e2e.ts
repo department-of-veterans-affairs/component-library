@@ -57,4 +57,16 @@ describe('va-select', () => {
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
   });
+
+  it('sets the width of the select element if the width prop is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo" width="md">
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+    const select = await page.find('va-select >>> select');
+    expect(select.classList.contains('usa-input--md')).toBeTruthy();
+  });
 });

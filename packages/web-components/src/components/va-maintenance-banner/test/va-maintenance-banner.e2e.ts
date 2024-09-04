@@ -2,8 +2,8 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 import { formatDate } from '../../../utils/date-utils';
 
-describe('USWDS maintenance-banner', () => {
-  it('uswds - renders', async () => {
+describe('maintenance-banner', () => {
+  it('renders', async () => {
     let startsAt = new Date(),
       expiresAt = new Date();
     expiresAt.setHours(expiresAt.getHours(), expiresAt.getMinutes() + 10);
@@ -68,7 +68,7 @@ describe('USWDS maintenance-banner', () => {
     `);
   });
 
-  it('uswds - Does not render when expiration date is in the past', async () => {
+  it('does not render when expiration date is in the past', async () => {
     let startsAt = new Date(),
       expiresAt = new Date();
     startsAt.setDate(startsAt.getDate() - 2);
@@ -85,7 +85,7 @@ describe('USWDS maintenance-banner', () => {
     `);
   });
 
-  it('uswds - does not render if before warning start date', async () => {
+  it('does not render if before warning start date', async () => {
     let startsAt = new Date(),
       expiresAt = new Date(),
       warnStartsAt = new Date();
@@ -104,7 +104,7 @@ describe('USWDS maintenance-banner', () => {
     `);
   });
 
-  it('uswds - renders warning if before maintenance', async () => {
+  it('renders warning if before maintenance', async () => {
     let startsAt = new Date(),
       expiresAt = new Date(),
       warnStartsAt = new Date();
@@ -171,7 +171,7 @@ describe('USWDS maintenance-banner', () => {
     `);
   });
 
-  it('uswds - renders error if before maintenance but isError is true', async () => {
+  it('renders error if before maintenance but isError is true', async () => {
     let startsAt = new Date(),
       expiresAt = new Date(),
       warnStartsAt = new Date();
@@ -238,7 +238,7 @@ describe('USWDS maintenance-banner', () => {
       </va-maintenance-banner>
     `);
   });
-  it('uswds - passes an axe check', async () => {
+  it('passes an axe check', async () => {
     let currentDate = new Date(),
         expiresAt = new Date();
     expiresAt.setHours(expiresAt.getHours() + 4);

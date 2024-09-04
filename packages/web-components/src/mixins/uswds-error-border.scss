@@ -4,17 +4,17 @@
     font-size: 1.06rem;
 }
 
-:host([error]:not([error='']):not([uswds='false'])) {
+:host([error]:not([error=''])) {
     border-left: 0.25rem solid $vads-color-secondary-dark;
     padding-left: 1rem;
     position: relative;
 }
 
-:host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
+:host([error]:not([error=''])[use-forms-pattern='multiple']) {
     border-left: none;
 }
 
-:host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
+:host([error]:not([error=''])[use-forms-pattern='multiple']) {
     .input-wrap {
         border-left: 0.25rem solid $vads-color-secondary-dark;
         padding-left: 1rem;
@@ -23,10 +23,10 @@
 }
 
 @media screen and (min-width: 1008px) {
-    :host([error]:not([error='']):not([uswds='false'])) {
+    :host([error]:not([error=''])) {
         margin-left: -0.9rem;
     }
-    :host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
+    :host([error]:not([error=''])[use-forms-pattern='multiple']) {
         .input-wrap {
             margin-left: -0.9rem;
         }
@@ -34,7 +34,7 @@
 }
 
 @media screen and (max-width: 1008px) {
-    :host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
+    :host([error]:not([error=''])[use-forms-pattern='multiple']) {
         padding-left: 0;
     }
 }

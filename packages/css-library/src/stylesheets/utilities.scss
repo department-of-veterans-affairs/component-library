@@ -45,9 +45,9 @@ $breakpoint-class-name: 'medium-screen';
         @each $name, $value in $u-values {
           .#{$breakpoint-class-name}\:#{$u-base}#{$modifier-value}-#{$name} {
             @if $modifier == 'noModifier' {
-              #{$u-property}: #{$value};
+              #{$u-property}: #{$value} !important;
             } @else {
-              #{$u-property}#{$modifier-value}: #{$value};
+              #{$u-property}#{$modifier-value}: #{$value} !important;
             }
           }
         }
@@ -58,10 +58,10 @@ $breakpoint-class-name: 'medium-screen';
       .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
         @if type-of($u-property) == 'list' {
           @each $property in $u-property {
-            #{$property}: #{$value};
+            #{$property}: #{$value} !important;
           }
         } @else { 
-          #{$u-property}: #{$value};
+          #{$u-property}: #{$value} !important;
         }
       }
     }
@@ -86,9 +86,9 @@ $breakpoint-class-name: 'medium-screen';
       $content: map-get($value, content);
       .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
         @each $css-property, $css-value in $extend {
-          #{$css-property}: $css-value;
+          #{$css-property}: $css-value !important;
         }
-        #{$u-property}: #{$content}; // flex property
+        #{$u-property}: #{$content} !important; // flex property
       }
     }
   }
@@ -121,13 +121,13 @@ $breakpoint-class-name: 'medium-screen';
           @each $key, $modifier in $u-modifiers {
             .#{$breakpoint-class-name}\:#{$u-base}-#{$key}-#{$name} {
               @if $key == 'y-' or $key == 'x-' {
-                margin-top: #{$value};
-                margin-bottom: #{$value};
+                margin-top: #{$value} !important;
+                margin-bottom: #{$value} !important;
               } @else if $key != 'y-' or $key != 'x-'{
                 $direction: map-get($u-modifiers, $key);
-                margin#{$direction}: #{$value};
+                margin#{$direction}: #{$value} !important;
               } @else {
-                margin: #{$value};
+                margin: #{$value} !important;
               }
             }
           }
@@ -136,7 +136,7 @@ $breakpoint-class-name: 'medium-screen';
     } @else {
       @each $name, $value in $u-values {
         .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
-          #{$u-property}: #{$value};
+          #{$u-property}: #{$value} !important;
         }
       }
     }

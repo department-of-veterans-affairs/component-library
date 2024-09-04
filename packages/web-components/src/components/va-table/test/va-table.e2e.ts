@@ -1,9 +1,8 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-function getTableMarkup(uswds: boolean): string {
+function getTableMarkup(): string {
   return `<va-table
   table-title="My table"
-  uswds=${uswds}
 >
   <va-table-row slot="headers">
     <span>
@@ -32,7 +31,7 @@ function getTableMarkup(uswds: boolean): string {
       Bill of Rights
     </span>
     <span>
-      The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms
+      The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms
     </span>
     <span>
       1791
@@ -64,11 +63,11 @@ function getTableMarkup(uswds: boolean): string {
 }
 
 describe('V1 table', () => {
-  
+
 
   it('renders a V1 va-table-inner with va-table-rows inside', async () => {
     const page = await newE2EPage();
-    await page.setContent(getTableMarkup(false));
+    await page.setContent(getTableMarkup());
 
     const headerRow = await page.find('va-table-inner >>> va-table-row');
     expect(headerRow).toBeDefined();
@@ -81,7 +80,7 @@ describe('V3 table', () => {
 
   it('renders a V3 va-table-inner with an HTML table inside', async () => {
     const page = await newE2EPage();
-    await page.setContent(getTableMarkup(true));
+    await page.setContent(getTableMarkup());
     const element = await page.find('va-table-inner >>> table');
 
     expect(element).toBeDefined();
@@ -91,7 +90,6 @@ describe('V3 table', () => {
     const page = await newE2EPage();
     await page.setContent(`<va-table
       table-title="My table"
-      uswds="true"
       stacked="false"
     >
       <va-table-row slot="headers">
@@ -121,7 +119,7 @@ describe('V3 table', () => {
           Bill of Rights
         </span>
         <span>
-          The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms
+          The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms
         </span>
         <span>
           1791
@@ -157,7 +155,7 @@ describe('V3 table', () => {
 
   it('is stacked by default', async () => {
     const page = await newE2EPage();
-    await page.setContent(getTableMarkup(true));
+    await page.setContent(getTableMarkup());
     const element = await page.find('va-table-inner >>> table');
 
     expect(element).toHaveClass('usa-table--stacked');
