@@ -78,7 +78,7 @@ describe('va-select', () => {
         <option value="bar">Bar</option>
       </va-select>
     `);
-    const span = page.find('span.usa-error-message');
+    const span = await page.find('span.usa-error-message');
     expect(span).toBeNull()
   });
 });
