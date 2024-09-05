@@ -140,12 +140,12 @@ describe('va-textarea', () => {
     // Act
     await textareaEl.press('a');
     const firstValue = await page.$eval(
-      'va-textarea',
+      'va-textarea >>> textarea',
       (comp: HTMLTextAreaElement) => comp.value,
     );
     await textareaEl.press('s');
     const secondValue = await page.$eval(
-      'va-textarea',
+      'va-textarea >>> textarea',
       (comp: HTMLTextAreaElement) => comp.value,
     );
 

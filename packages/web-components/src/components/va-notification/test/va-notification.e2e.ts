@@ -103,7 +103,7 @@ describe('va-notification', () => {
           .shadowRoot.querySelector("va-link")
           .shadowRoot.querySelector("a")
       )
-    ).asElement();
+    );
 
     await anchor.click();
 
@@ -175,7 +175,7 @@ describe('va-notification', () => {
           .shadowRoot.querySelector("va-link")
           .shadowRoot.querySelector("a")
       )
-    ).asElement();
+    );
 
     await close.click();
     await anchor.click();

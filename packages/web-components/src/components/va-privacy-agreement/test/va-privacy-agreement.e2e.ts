@@ -27,9 +27,9 @@ describe('va-privacy-agreement', () => {
 
   it('renders error label when showError is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-privacy-agreement checked showError="true"></va-privacy-agreement>');
+    await page.setContent('<va-privacy-agreement checked show-error="true"></va-privacy-agreement>');
 
-    const element = await page.find('va-privacy-agreement >>> va-checkbox >>> span.usa-label--error');
+    const element = await page.find('va-privacy-agreement >>>> span.usa-label--error');
     expect(element).toBeTruthy();
   });
 
@@ -85,7 +85,7 @@ describe('va-privacy-agreement', () => {
           .shadowRoot.querySelector('va-checkbox')
           .shadowRoot.querySelector('input')
       )
-    ).asElement();
+    );
 
     await input.click();
 
@@ -104,7 +104,7 @@ describe('va-privacy-agreement', () => {
           .shadowRoot.querySelector('va-checkbox')
           .shadowRoot.querySelector('input')
       )
-    ).asElement();
+    );
 
     input.click();
     await page.waitForChanges();
@@ -142,7 +142,7 @@ describe('va-privacy-agreement', () => {
           .shadowRoot.querySelector('va-checkbox')
           .shadowRoot.querySelector('input')
       )
-    ).asElement();
+    );
 
     input.click();
     await page.waitForChanges();
