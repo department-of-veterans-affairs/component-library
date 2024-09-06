@@ -52,10 +52,9 @@ a:not([disabled]):active, a:not([disabled]):focus {
   outline-offset: 2px;
 }
 a:not([disabled]):hover {
+  border-radius: 5px;
   background-color: var(--vads-color-gray-cool-light);
-  border-radius: 0;
   color: var(--vads-color-primary-darker);
-  outline: none;
 }
 
 div a {
