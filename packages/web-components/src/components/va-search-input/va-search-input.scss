@@ -20,6 +20,29 @@
 #va-search-listbox {
   top: 37px;
   z-index: 1;
+  background-color: var(--vads-color-white);
+  box-shadow: 0px 2px 6px 1px rgba(20, 20, 20, 0.14);
+  display: block;
+  left: 0;
+  line-height: 24px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 48px;
+}
+
+.va-search-suggestion {
+  cursor: pointer;
+  padding: 8px;
+}
+
+.va-search-suggestion[aria-selected='true'],
+.va-search-suggestion:focus,
+.va-search-suggestion:hover {
+  background-color: var(--vads-color-primary);
+  color: var(--vads-color-white);
 }
 
 :host([big="true"]) #va-search-listbox  {
