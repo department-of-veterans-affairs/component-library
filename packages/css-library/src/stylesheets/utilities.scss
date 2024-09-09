@@ -9,7 +9,6 @@ $utilities-package: map-collect(
   $u-border,
   $u-color,
   $u-display,
-  $u-flex-grid,
   $u-flexbox,
   $u-font,
   $u-height,
@@ -76,22 +75,22 @@ $breakpoint-class-name: 'medium-screen';
   @include generate-utilities-from-settings($u-display);
 
   // $u-flex-grid
-  @each $property, $property-map in $u-flex-grid { 
-    $u-base: map-get($property-map, base);
-    $u-values: map-get($property-map, values);
-    $u-property: map-get($property-map, property);
+  // @each $property, $property-map in $u-flex-grid { 
+  //   $u-base: map-get($property-map, base);
+  //   $u-values: map-get($property-map, values);
+  //   $u-property: map-get($property-map, property);
 
-    @each $name, $value in $u-values {
-      $extend: map-get($value, extend);
-      $content: map-get($value, content);
-      .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
-        @each $css-property, $css-value in $extend {
-          #{$css-property}: $css-value !important;
-        }
-        #{$u-property}: #{$content} !important; // flex property
-      }
-    }
-  }
+  //   @each $name, $value in $u-values {
+  //     $extend: map-get($value, extend);
+  //     $content: map-get($value, content);
+  //     .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+  //       @each $css-property, $css-value in $extend {
+  //         #{$css-property}: $css-value !important;
+  //       }
+  //       #{$u-property}: #{$content} !important; // flex property
+  //     }
+  //   }
+  // }
 
   // $u-flexbox
   @include generate-utilities-from-settings($u-flexbox);
