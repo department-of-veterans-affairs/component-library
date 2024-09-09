@@ -35,10 +35,12 @@ const tokensToKeep = {
   'blue-warm': {
     file: 'blue-warm.json',
     colors: [
+      'blue-warm-5',
       'blue-warm-10',
       'blue-warm-30',
       'blue-warm-50',
       'blue-warm-60',
+      'blue-warm-80',
       'blue-warm-vivid-60',
       'blue-warm-vivid-70',
       'blue-warm-vivid-80',
