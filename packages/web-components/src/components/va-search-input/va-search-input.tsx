@@ -217,6 +217,7 @@ export class VaSearchInput {
         this.selectSuggestion(lastOption);
         break;
       case 'Enter':
+        event.preventDefault();
         this.handleSubmit();
         break;
       case 'Escape':
