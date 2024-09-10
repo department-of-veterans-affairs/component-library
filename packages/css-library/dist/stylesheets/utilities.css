@@ -3944,6 +3944,10 @@ through all possible variants
   background-color: #162e51 !important;
 }
 
+.vads-u-background-color--hub-records {
+  background-color: #6f7a41 !important;
+}
+
 .vads-u-border--0 {
   border: 0 !important;
 }
@@ -4320,6 +4324,10 @@ through all possible variants
   border-color: #162e51 !important;
 }
 
+.vads-u-border-color--hub-records {
+  border-color: #6f7a41 !important;
+}
+
 .vads-u-color--base {
   color: #1b1b1b !important;
 }
@@ -4522,6 +4530,10 @@ through all possible variants
 
 .vads-u-color--hub-service-member {
   color: #162e51 !important;
+}
+
+.vads-u-color--hub-records {
+  color: #6f7a41 !important;
 }
 
 .vads-u-display--block {
@@ -13461,6 +13473,9 @@ through all possible variants
   }
   .medium-screen\:vads-u-border-color--hub-service-member {
     border-color: #162e51 !important;
+  }
+  .medium-screen\:vads-u-border-color--hub-records {
+    border-color: #6f7a41 !important;
   }
   .medium-screen\:vads-u-display--block {
     display: block !important;
