@@ -156,7 +156,8 @@ export class VaMemorableDate {
                      day: dayNum,
                      yearTouched: this.yearTouched,
                      monthTouched: this.monthTouched,
-                     dayTouched: this.dayTouched
+                     dayTouched: this.dayTouched,
+                     monthSelect: this.monthSelect
     });
 
     if (this.error) {
@@ -300,11 +301,7 @@ export class VaMemorableDate {
 
     // get the default message if internal validation fails
     const getStandardErrorMessage = (error: string) => {
-      let key = error;
-      if (monthSelect && error === 'month-range') {
-        key = 'month-select';
-      }
-      return i18next.t(key, errorParameters(error))
+      return i18next.t(error, errorParameters(error))
     }
 
     // Error attribute should be leveraged for custom error messaging
@@ -344,6 +341,7 @@ export class VaMemorableDate {
             reflectInputError={error === 'month-range' ? true : false}
             value={month ? String(parseInt(month)) : month}
             error={this.invalidMonth ? getStandardErrorMessage(error) : null}
+            showError={false}
           >
             {months &&
               months.map(monthOption => (

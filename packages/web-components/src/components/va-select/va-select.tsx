@@ -100,6 +100,12 @@ export class VaSelect {
   @Prop() width?: string;
 
   /**
+   * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date 
+   * in which the error for the va-select will be rendered outside of va-select
+   */
+  @Prop() showError?: boolean = true;
+
+  /**
    * The event used to track usage of the component. This is emitted when an
    * option is selected and enableAnalytics is true.
    */
@@ -170,7 +176,7 @@ export class VaSelect {
   }
 
   render() {
-    const { error, reflectInputError, invalid, label, required, name, hint, messageAriaDescribedby, width } = this;
+    const { error, reflectInputError, invalid, label, required, name, hint, messageAriaDescribedby, width, showError } = this;
 
     const errorID = 'input-error-message';
     const ariaDescribedbyIds = 
@@ -197,7 +203,7 @@ export class VaSelect {
         )}
         {hint && <span class="usa-hint" id="input-hint">{hint}</span>}
         <span id={errorID} role="alert">
-          {error && (
+          {showError && error && (
             <Fragment>
               <span class="usa-sr-only">{i18next.t('error')}</span> 
               <span class="usa-error-message">{error}</span>
