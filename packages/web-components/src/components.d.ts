@@ -1368,6 +1368,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date  in which the error for the va-select will be rendered outside of va-select
+         */
+        "showError"?: boolean;
+        /**
           * Selected value (will get updated on select).
          */
         "value"?: string;
@@ -1866,6 +1870,9 @@ export interface VaTextareaCustomEvent<T> extends CustomEvent<T> {
     target: HTMLVaTextareaElement;
 }
 declare global {
+    interface HTMLVaAccordionElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Accordion
      * @accordionItemToggled This event is fired when an accordion item is opened or closed
@@ -1876,45 +1883,99 @@ declare global {
      * @translations Tagalog
      */
     interface HTMLVaAccordionElement extends Components.VaAccordion, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaAccordionElementEventMap>(type: K, listener: (this: HTMLVaAccordionElement, ev: VaAccordionCustomEvent<HTMLVaAccordionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaAccordionElementEventMap>(type: K, listener: (this: HTMLVaAccordionElement, ev: VaAccordionCustomEvent<HTMLVaAccordionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaAccordionElement: {
         prototype: HTMLVaAccordionElement;
         new (): HTMLVaAccordionElement;
     };
+    interface HTMLVaAccordionItemElementEventMap {
+        "accordionItemToggled": any;
+    }
     interface HTMLVaAccordionItemElement extends Components.VaAccordionItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaAccordionItemElementEventMap>(type: K, listener: (this: HTMLVaAccordionItemElement, ev: VaAccordionItemCustomEvent<HTMLVaAccordionItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaAccordionItemElementEventMap>(type: K, listener: (this: HTMLVaAccordionItemElement, ev: VaAccordionItemCustomEvent<HTMLVaAccordionItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaAccordionItemElement: {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaAdditionalInfoElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Additional info
      * @maturityCategory use
      * @maturityLevel deployed
      */
     interface HTMLVaAdditionalInfoElement extends Components.VaAdditionalInfo, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaAdditionalInfoElementEventMap>(type: K, listener: (this: HTMLVaAdditionalInfoElement, ev: VaAdditionalInfoCustomEvent<HTMLVaAdditionalInfoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaAdditionalInfoElementEventMap>(type: K, listener: (this: HTMLVaAdditionalInfoElement, ev: VaAdditionalInfoCustomEvent<HTMLVaAdditionalInfoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaAdditionalInfoElement: {
         prototype: HTMLVaAdditionalInfoElement;
         new (): HTMLVaAdditionalInfoElement;
     };
+    interface HTMLVaAlertElementEventMap {
+        "va-component-did-load": any;
+        "closeEvent": any;
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Alert
      * @maturityCategory use
      * @maturityLevel best_practice
      */
     interface HTMLVaAlertElement extends Components.VaAlert, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaAlertElementEventMap>(type: K, listener: (this: HTMLVaAlertElement, ev: VaAlertCustomEvent<HTMLVaAlertElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaAlertElementEventMap>(type: K, listener: (this: HTMLVaAlertElement, ev: VaAlertCustomEvent<HTMLVaAlertElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaAlertElement: {
         prototype: HTMLVaAlertElement;
         new (): HTMLVaAlertElement;
     };
+    interface HTMLVaAlertExpandableElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Alert - expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface HTMLVaAlertExpandableElement extends Components.VaAlertExpandable, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaAlertExpandableElementEventMap>(type: K, listener: (this: HTMLVaAlertExpandableElement, ev: VaAlertExpandableCustomEvent<HTMLVaAlertExpandableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaAlertExpandableElementEventMap>(type: K, listener: (this: HTMLVaAlertExpandableElement, ev: VaAlertExpandableCustomEvent<HTMLVaAlertExpandableElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaAlertExpandableElement: {
         prototype: HTMLVaAlertExpandableElement;
@@ -1931,28 +1992,54 @@ declare global {
         prototype: HTMLVaBackToTopElement;
         new (): HTMLVaBackToTopElement;
     };
+    interface HTMLVaBannerElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Banner
      * @maturityCategory use
      * @maturityLevel deployed
      */
     interface HTMLVaBannerElement extends Components.VaBanner, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaBannerElementEventMap>(type: K, listener: (this: HTMLVaBannerElement, ev: VaBannerCustomEvent<HTMLVaBannerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaBannerElementEventMap>(type: K, listener: (this: HTMLVaBannerElement, ev: VaBannerCustomEvent<HTMLVaBannerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaBannerElement: {
         prototype: HTMLVaBannerElement;
         new (): HTMLVaBannerElement;
     };
+    interface HTMLVaBreadcrumbsElementEventMap {
+        "component-library-analytics": any;
+        "routeChange": { href: string };
+    }
     /**
      * @componentName Breadcrumbs
      * @maturityCategory use
      * @maturityLevel deployed
      */
     interface HTMLVaBreadcrumbsElement extends Components.VaBreadcrumbs, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaBreadcrumbsElementEventMap>(type: K, listener: (this: HTMLVaBreadcrumbsElement, ev: VaBreadcrumbsCustomEvent<HTMLVaBreadcrumbsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaBreadcrumbsElementEventMap>(type: K, listener: (this: HTMLVaBreadcrumbsElement, ev: VaBreadcrumbsCustomEvent<HTMLVaBreadcrumbsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaBreadcrumbsElement: {
         prototype: HTMLVaBreadcrumbsElement;
         new (): HTMLVaBreadcrumbsElement;
     };
+    interface HTMLVaButtonElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Button
      * @nativeHandler onClick
@@ -1960,11 +2047,22 @@ declare global {
      * @maturityLevel candidate
      */
     interface HTMLVaButtonElement extends Components.VaButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaButtonElementEventMap>(type: K, listener: (this: HTMLVaButtonElement, ev: VaButtonCustomEvent<HTMLVaButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaButtonElementEventMap>(type: K, listener: (this: HTMLVaButtonElement, ev: VaButtonCustomEvent<HTMLVaButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaButtonElement: {
         prototype: HTMLVaButtonElement;
         new (): HTMLVaButtonElement;
     };
+    interface HTMLVaButtonIconElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Button - Icon
      * @nativeHandler onClick
@@ -1972,11 +2070,24 @@ declare global {
      * @maturityLevel candidate
      */
     interface HTMLVaButtonIconElement extends Components.VaButtonIcon, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaButtonIconElementEventMap>(type: K, listener: (this: HTMLVaButtonIconElement, ev: VaButtonIconCustomEvent<HTMLVaButtonIconElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaButtonIconElementEventMap>(type: K, listener: (this: HTMLVaButtonIconElement, ev: VaButtonIconCustomEvent<HTMLVaButtonIconElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaButtonIconElement: {
         prototype: HTMLVaButtonIconElement;
         new (): HTMLVaButtonIconElement;
     };
+    interface HTMLVaButtonPairElementEventMap {
+        "primaryClick": any;
+        "secondaryClick": any;
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Button pair
      * @maturityCategory caution
@@ -1984,6 +2095,14 @@ declare global {
      * @guidanceHref button/button-pair
      */
     interface HTMLVaButtonPairElement extends Components.VaButtonPair, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaButtonPairElementEventMap>(type: K, listener: (this: HTMLVaButtonPairElement, ev: VaButtonPairCustomEvent<HTMLVaButtonPairElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaButtonPairElementEventMap>(type: K, listener: (this: HTMLVaButtonPairElement, ev: VaButtonPairCustomEvent<HTMLVaButtonPairElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaButtonPairElement: {
         prototype: HTMLVaButtonPairElement;
@@ -2000,6 +2119,10 @@ declare global {
         prototype: HTMLVaCardElement;
         new (): HTMLVaCardElement;
     };
+    interface HTMLVaCheckboxElementEventMap {
+        "vaChange": any;
+        "component-library-analytics": any;
+    }
     /**
      * @nativeHandler onBlur
      * @componentName Checkbox
@@ -2011,11 +2134,22 @@ declare global {
      * @translations Tagalog
      */
     interface HTMLVaCheckboxElement extends Components.VaCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaCheckboxElementEventMap>(type: K, listener: (this: HTMLVaCheckboxElement, ev: VaCheckboxCustomEvent<HTMLVaCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaCheckboxElementEventMap>(type: K, listener: (this: HTMLVaCheckboxElement, ev: VaCheckboxCustomEvent<HTMLVaCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaCheckboxElement: {
         prototype: HTMLVaCheckboxElement;
         new (): HTMLVaCheckboxElement;
     };
+    interface HTMLVaCheckboxGroupElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @vaChange The event emitted when the input value changes.
      * @componentName Checkbox group
@@ -2027,6 +2161,14 @@ declare global {
      * @translations Tagalog
      */
     interface HTMLVaCheckboxGroupElement extends Components.VaCheckboxGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaCheckboxGroupElementEventMap>(type: K, listener: (this: HTMLVaCheckboxGroupElement, ev: VaCheckboxGroupCustomEvent<HTMLVaCheckboxGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaCheckboxGroupElementEventMap>(type: K, listener: (this: HTMLVaCheckboxGroupElement, ev: VaCheckboxGroupCustomEvent<HTMLVaCheckboxGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaCheckboxGroupElement: {
         prototype: HTMLVaCheckboxGroupElement;
@@ -2043,6 +2185,11 @@ declare global {
         prototype: HTMLVaCrisisLineModalElement;
         new (): HTMLVaCrisisLineModalElement;
     };
+    interface HTMLVaDateElementEventMap {
+        "dateChange": any;
+        "dateBlur": any;
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Date input
      * @maturityCategory use
@@ -2050,11 +2197,23 @@ declare global {
      * @guidanceHref form/date-input
      */
     interface HTMLVaDateElement extends Components.VaDate, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaDateElementEventMap>(type: K, listener: (this: HTMLVaDateElement, ev: VaDateCustomEvent<HTMLVaDateElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaDateElementEventMap>(type: K, listener: (this: HTMLVaDateElement, ev: VaDateCustomEvent<HTMLVaDateElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaDateElement: {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
     };
+    interface HTMLVaFileInputElementEventMap {
+        "vaChange": any;
+        "component-library-analytics": any;
+    }
     /**
      * @componentName File input
      * @maturityCategory caution
@@ -2062,11 +2221,22 @@ declare global {
      * @guidanceHref form/file-input
      */
     interface HTMLVaFileInputElement extends Components.VaFileInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaFileInputElementEventMap>(type: K, listener: (this: HTMLVaFileInputElement, ev: VaFileInputCustomEvent<HTMLVaFileInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaFileInputElementEventMap>(type: K, listener: (this: HTMLVaFileInputElement, ev: VaFileInputCustomEvent<HTMLVaFileInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaFileInputElement: {
         prototype: HTMLVaFileInputElement;
         new (): HTMLVaFileInputElement;
     };
+    interface HTMLVaFileInputMultipleElementEventMap {
+        "vaMultipleChange": any;
+    }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
      * It supports adding, changing, and removing files with dynamic error handling.
@@ -2076,6 +2246,14 @@ declare global {
      * @guidanceHref form/file-input-multiple
      */
     interface HTMLVaFileInputMultipleElement extends Components.VaFileInputMultiple, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaFileInputMultipleElementEventMap>(type: K, listener: (this: HTMLVaFileInputMultipleElement, ev: VaFileInputMultipleCustomEvent<HTMLVaFileInputMultipleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaFileInputMultipleElementEventMap>(type: K, listener: (this: HTMLVaFileInputMultipleElement, ev: VaFileInputMultipleCustomEvent<HTMLVaFileInputMultipleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaFileInputMultipleElement: {
         prototype: HTMLVaFileInputMultipleElement;
@@ -2104,50 +2282,100 @@ declare global {
         prototype: HTMLVaIconElement;
         new (): HTMLVaIconElement;
     };
+    interface HTMLVaLinkElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Link
      * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface HTMLVaLinkElement extends Components.VaLink, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaLinkElementEventMap>(type: K, listener: (this: HTMLVaLinkElement, ev: VaLinkCustomEvent<HTMLVaLinkElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaLinkElementEventMap>(type: K, listener: (this: HTMLVaLinkElement, ev: VaLinkCustomEvent<HTMLVaLinkElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaLinkElement: {
         prototype: HTMLVaLinkElement;
         new (): HTMLVaLinkElement;
     };
+    interface HTMLVaLinkActionElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Link - Action
      * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface HTMLVaLinkActionElement extends Components.VaLinkAction, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaLinkActionElementEventMap>(type: K, listener: (this: HTMLVaLinkActionElement, ev: VaLinkActionCustomEvent<HTMLVaLinkActionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaLinkActionElementEventMap>(type: K, listener: (this: HTMLVaLinkActionElement, ev: VaLinkActionCustomEvent<HTMLVaLinkActionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaLinkActionElement: {
         prototype: HTMLVaLinkActionElement;
         new (): HTMLVaLinkActionElement;
     };
+    interface HTMLVaLoadingIndicatorElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Loading indicator
      * @maturityCategory use
      * @maturityLevel best_practice
      */
     interface HTMLVaLoadingIndicatorElement extends Components.VaLoadingIndicator, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaLoadingIndicatorElementEventMap>(type: K, listener: (this: HTMLVaLoadingIndicatorElement, ev: VaLoadingIndicatorCustomEvent<HTMLVaLoadingIndicatorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaLoadingIndicatorElementEventMap>(type: K, listener: (this: HTMLVaLoadingIndicatorElement, ev: VaLoadingIndicatorCustomEvent<HTMLVaLoadingIndicatorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaLoadingIndicatorElement: {
         prototype: HTMLVaLoadingIndicatorElement;
         new (): HTMLVaLoadingIndicatorElement;
     };
+    interface HTMLVaMaintenanceBannerElementEventMap {
+        "closeEvent": any;
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Banner - Maintenance
      * @maturityCategory caution
      * @maturityLevel available
      */
     interface HTMLVaMaintenanceBannerElement extends Components.VaMaintenanceBanner, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaMaintenanceBannerElementEventMap>(type: K, listener: (this: HTMLVaMaintenanceBannerElement, ev: VaMaintenanceBannerCustomEvent<HTMLVaMaintenanceBannerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaMaintenanceBannerElementEventMap>(type: K, listener: (this: HTMLVaMaintenanceBannerElement, ev: VaMaintenanceBannerCustomEvent<HTMLVaMaintenanceBannerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaMaintenanceBannerElement: {
         prototype: HTMLVaMaintenanceBannerElement;
         new (): HTMLVaMaintenanceBannerElement;
     };
+    interface HTMLVaMemorableDateElementEventMap {
+        "dateChange": any;
+        "dateBlur": any;
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Memorable date
      * @maturityCategory caution
@@ -2157,6 +2385,14 @@ declare global {
      * @translations Spanish
      */
     interface HTMLVaMemorableDateElement extends Components.VaMemorableDate, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaMemorableDateElementEventMap>(type: K, listener: (this: HTMLVaMemorableDateElement, ev: VaMemorableDateCustomEvent<HTMLVaMemorableDateElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaMemorableDateElementEventMap>(type: K, listener: (this: HTMLVaMemorableDateElement, ev: VaMemorableDateCustomEvent<HTMLVaMemorableDateElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaMemorableDateElement: {
         prototype: HTMLVaMemorableDateElement;
@@ -2173,6 +2409,12 @@ declare global {
         prototype: HTMLVaMinimalFooterElement;
         new (): HTMLVaMinimalFooterElement;
     };
+    interface HTMLVaModalElementEventMap {
+        "closeEvent": any;
+        "primaryButtonClick": any;
+        "secondaryButtonClick": any;
+        "component-library-analytics": any;
+    }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
      * @keydown Used to detect Escape key to close modal.
@@ -2181,6 +2423,14 @@ declare global {
      * @maturityLevel deployed
      */
     interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaModalElementEventMap>(type: K, listener: (this: HTMLVaModalElement, ev: VaModalCustomEvent<HTMLVaModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaModalElementEventMap>(type: K, listener: (this: HTMLVaModalElement, ev: VaModalCustomEvent<HTMLVaModalElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaModalElement: {
         prototype: HTMLVaModalElement;
@@ -2198,23 +2448,46 @@ declare global {
         prototype: HTMLVaNeedHelpElement;
         new (): HTMLVaNeedHelpElement;
     };
+    interface HTMLVaNotificationElementEventMap {
+        "closeEvent": any;
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Notification
      * @maturityCategory dont_use
      * @maturityLevel deprecated
      */
     interface HTMLVaNotificationElement extends Components.VaNotification, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaNotificationElementEventMap>(type: K, listener: (this: HTMLVaNotificationElement, ev: VaNotificationCustomEvent<HTMLVaNotificationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaNotificationElementEventMap>(type: K, listener: (this: HTMLVaNotificationElement, ev: VaNotificationCustomEvent<HTMLVaNotificationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaNotificationElement: {
         prototype: HTMLVaNotificationElement;
         new (): HTMLVaNotificationElement;
     };
+    interface HTMLVaOfficialGovBannerElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Banner - Official Gov
      * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface HTMLVaOfficialGovBannerElement extends Components.VaOfficialGovBanner, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaOfficialGovBannerElementEventMap>(type: K, listener: (this: HTMLVaOfficialGovBannerElement, ev: VaOfficialGovBannerCustomEvent<HTMLVaOfficialGovBannerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaOfficialGovBannerElementEventMap>(type: K, listener: (this: HTMLVaOfficialGovBannerElement, ev: VaOfficialGovBannerCustomEvent<HTMLVaOfficialGovBannerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaOfficialGovBannerElement: {
         prototype: HTMLVaOfficialGovBannerElement;
@@ -2231,6 +2504,9 @@ declare global {
         prototype: HTMLVaOmbInfoElement;
         new (): HTMLVaOmbInfoElement;
     };
+    interface HTMLVaOnThisPageElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName On this page
      * @maturityCategory use
@@ -2240,28 +2516,60 @@ declare global {
      * @translations Tagalog
      */
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaOnThisPageElementEventMap>(type: K, listener: (this: HTMLVaOnThisPageElement, ev: VaOnThisPageCustomEvent<HTMLVaOnThisPageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaOnThisPageElementEventMap>(type: K, listener: (this: HTMLVaOnThisPageElement, ev: VaOnThisPageCustomEvent<HTMLVaOnThisPageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaOnThisPageElement: {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaPaginationElementEventMap {
+        "pageSelect": any;
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Pagination
      * @maturityCategory use
      * @maturityLevel deployed
      */
     interface HTMLVaPaginationElement extends Components.VaPagination, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaPaginationElementEventMap>(type: K, listener: (this: HTMLVaPaginationElement, ev: VaPaginationCustomEvent<HTMLVaPaginationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaPaginationElementEventMap>(type: K, listener: (this: HTMLVaPaginationElement, ev: VaPaginationCustomEvent<HTMLVaPaginationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaPaginationElement: {
         prototype: HTMLVaPaginationElement;
         new (): HTMLVaPaginationElement;
     };
+    interface HTMLVaPrivacyAgreementElementEventMap {
+        "component-library-analytics": any;
+        "vaChange": any;
+    }
     /**
      * @componentName Privacy agreement
      * @maturityCategory caution
      * @maturityLevel available
      */
     interface HTMLVaPrivacyAgreementElement extends Components.VaPrivacyAgreement, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaPrivacyAgreementElementEventMap>(type: K, listener: (this: HTMLVaPrivacyAgreementElement, ev: VaPrivacyAgreementCustomEvent<HTMLVaPrivacyAgreementElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaPrivacyAgreementElementEventMap>(type: K, listener: (this: HTMLVaPrivacyAgreementElement, ev: VaPrivacyAgreementCustomEvent<HTMLVaPrivacyAgreementElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaPrivacyAgreementElement: {
         prototype: HTMLVaPrivacyAgreementElement;
@@ -2284,17 +2592,32 @@ declare global {
         prototype: HTMLVaProcessListItemElement;
         new (): HTMLVaProcessListItemElement;
     };
+    interface HTMLVaProgressBarElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Progress bar - activity
      * @maturityCategory use
      * @maturityLevel deployed
      */
     interface HTMLVaProgressBarElement extends Components.VaProgressBar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaProgressBarElementEventMap>(type: K, listener: (this: HTMLVaProgressBarElement, ev: VaProgressBarCustomEvent<HTMLVaProgressBarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaProgressBarElementEventMap>(type: K, listener: (this: HTMLVaProgressBarElement, ev: VaProgressBarCustomEvent<HTMLVaProgressBarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaProgressBarElement: {
         prototype: HTMLVaProgressBarElement;
         new (): HTMLVaProgressBarElement;
     };
+    interface HTMLVaPromoBannerElementEventMap {
+        "closeEvent": any;
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Banner - Promo
      * @maturityCategory use
@@ -2302,11 +2625,23 @@ declare global {
      * @guidanceHref banner/promo
      */
     interface HTMLVaPromoBannerElement extends Components.VaPromoBanner, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaPromoBannerElementEventMap>(type: K, listener: (this: HTMLVaPromoBannerElement, ev: VaPromoBannerCustomEvent<HTMLVaPromoBannerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaPromoBannerElementEventMap>(type: K, listener: (this: HTMLVaPromoBannerElement, ev: VaPromoBannerCustomEvent<HTMLVaPromoBannerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaPromoBannerElement: {
         prototype: HTMLVaPromoBannerElement;
         new (): HTMLVaPromoBannerElement;
     };
+    interface HTMLVaRadioElementEventMap {
+        "component-library-analytics": any;
+        "vaValueChange": any;
+    }
     /**
      * @keydown The event emitted when a key is pressed.
      * @radioOptionSelected The event emitted when the selected option value changes.
@@ -2319,28 +2654,61 @@ declare global {
      * @translations Tagalog
      */
     interface HTMLVaRadioElement extends Components.VaRadio, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaRadioElementEventMap>(type: K, listener: (this: HTMLVaRadioElement, ev: VaRadioCustomEvent<HTMLVaRadioElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaRadioElementEventMap>(type: K, listener: (this: HTMLVaRadioElement, ev: VaRadioCustomEvent<HTMLVaRadioElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaRadioElement: {
         prototype: HTMLVaRadioElement;
         new (): HTMLVaRadioElement;
     };
+    interface HTMLVaRadioOptionElementEventMap {
+        "radioOptionSelected": any;
+    }
     interface HTMLVaRadioOptionElement extends Components.VaRadioOption, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaRadioOptionElementEventMap>(type: K, listener: (this: HTMLVaRadioOptionElement, ev: VaRadioOptionCustomEvent<HTMLVaRadioOptionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaRadioOptionElementEventMap>(type: K, listener: (this: HTMLVaRadioOptionElement, ev: VaRadioOptionCustomEvent<HTMLVaRadioOptionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaRadioOptionElement: {
         prototype: HTMLVaRadioOptionElement;
         new (): HTMLVaRadioOptionElement;
     };
+    interface HTMLVaSearchInputElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Search input
      * @maturityCategory use
      * @maturityLevel deployed
      */
     interface HTMLVaSearchInputElement extends Components.VaSearchInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaSearchInputElementEventMap>(type: K, listener: (this: HTMLVaSearchInputElement, ev: VaSearchInputCustomEvent<HTMLVaSearchInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaSearchInputElementEventMap>(type: K, listener: (this: HTMLVaSearchInputElement, ev: VaSearchInputCustomEvent<HTMLVaSearchInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaSearchInputElement: {
         prototype: HTMLVaSearchInputElement;
         new (): HTMLVaSearchInputElement;
     };
+    interface HTMLVaSegmentedProgressBarElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Progress bar - segmented
      * @maturityCategory use
@@ -2348,11 +2716,24 @@ declare global {
      * @guidanceHref form/progress-bar-segmented
      */
     interface HTMLVaSegmentedProgressBarElement extends Components.VaSegmentedProgressBar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaSegmentedProgressBarElementEventMap>(type: K, listener: (this: HTMLVaSegmentedProgressBarElement, ev: VaSegmentedProgressBarCustomEvent<HTMLVaSegmentedProgressBarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaSegmentedProgressBarElementEventMap>(type: K, listener: (this: HTMLVaSegmentedProgressBarElement, ev: VaSegmentedProgressBarCustomEvent<HTMLVaSegmentedProgressBarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaSegmentedProgressBarElement: {
         prototype: HTMLVaSegmentedProgressBarElement;
         new (): HTMLVaSegmentedProgressBarElement;
     };
+    interface HTMLVaSelectElementEventMap {
+        "vaKeyDown": any;
+        "vaSelect": any;
+        "component-library-analytics": any;
+    }
     /**
      * @nativeHandler onKeyDown
      * @componentName Select
@@ -2363,17 +2744,38 @@ declare global {
      * @translations Spanish
      */
     interface HTMLVaSelectElement extends Components.VaSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaSelectElementEventMap>(type: K, listener: (this: HTMLVaSelectElement, ev: VaSelectCustomEvent<HTMLVaSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaSelectElementEventMap>(type: K, listener: (this: HTMLVaSelectElement, ev: VaSelectCustomEvent<HTMLVaSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaSelectElement: {
         prototype: HTMLVaSelectElement;
         new (): HTMLVaSelectElement;
     };
+    interface HTMLVaStatementOfTruthElementEventMap {
+        "vaInputChange": any;
+        "vaInputBlur": any;
+        "vaCheckboxChange": any;
+    }
     /**
      * @componentName Statement of truth
      * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface HTMLVaStatementOfTruthElement extends Components.VaStatementOfTruth, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaStatementOfTruthElementEventMap>(type: K, listener: (this: HTMLVaStatementOfTruthElement, ev: VaStatementOfTruthCustomEvent<HTMLVaStatementOfTruthElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaStatementOfTruthElementEventMap>(type: K, listener: (this: HTMLVaStatementOfTruthElement, ev: VaStatementOfTruthCustomEvent<HTMLVaStatementOfTruthElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaStatementOfTruthElement: {
         prototype: HTMLVaStatementOfTruthElement;
@@ -2413,17 +2815,31 @@ declare global {
         prototype: HTMLVaTableRowElement;
         new (): HTMLVaTableRowElement;
     };
+    interface HTMLVaTelephoneElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Telephone
      * @maturityCategory use
      * @maturityLevel best_practice
      */
     interface HTMLVaTelephoneElement extends Components.VaTelephone, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTelephoneElementEventMap>(type: K, listener: (this: HTMLVaTelephoneElement, ev: VaTelephoneCustomEvent<HTMLVaTelephoneElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTelephoneElementEventMap>(type: K, listener: (this: HTMLVaTelephoneElement, ev: VaTelephoneCustomEvent<HTMLVaTelephoneElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaTelephoneElement: {
         prototype: HTMLVaTelephoneElement;
         new (): HTMLVaTelephoneElement;
     };
+    interface HTMLVaTextInputElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @nativeHandler onInput
      * @nativeHandler onBlur
@@ -2436,11 +2852,22 @@ declare global {
      * @translations Tagalog
      */
     interface HTMLVaTextInputElement extends Components.VaTextInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTextInputElementEventMap>(type: K, listener: (this: HTMLVaTextInputElement, ev: VaTextInputCustomEvent<HTMLVaTextInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTextInputElementEventMap>(type: K, listener: (this: HTMLVaTextInputElement, ev: VaTextInputCustomEvent<HTMLVaTextInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaTextInputElement: {
         prototype: HTMLVaTextInputElement;
         new (): HTMLVaTextInputElement;
     };
+    interface HTMLVaTextareaElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @nativeHandler onInput
      * @nativeHandler onBlur
@@ -2452,6 +2879,14 @@ declare global {
      * @translations Spanish
      */
     interface HTMLVaTextareaElement extends Components.VaTextarea, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTextareaElementEventMap>(type: K, listener: (this: HTMLVaTextareaElement, ev: VaTextareaCustomEvent<HTMLVaTextareaElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTextareaElementEventMap>(type: K, listener: (this: HTMLVaTextareaElement, ev: VaTextareaCustomEvent<HTMLVaTextareaElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaTextareaElement: {
         prototype: HTMLVaTextareaElement;
@@ -4091,6 +4526,10 @@ declare namespace LocalJSX {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
+        /**
+          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date  in which the error for the va-select will be rendered outside of va-select
+         */
+        "showError"?: boolean;
         /**
           * Selected value (will get updated on select).
          */

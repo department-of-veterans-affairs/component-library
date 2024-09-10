@@ -33,7 +33,7 @@ import {
  */
 @Component({
   tag: 'va-date',
-  styleUrl: 'va-date.css',
+  styleUrl: 'va-date.scss',
   shadow: true,
 })
 export class VaDate {
@@ -151,7 +151,8 @@ export class VaDate {
                day,
                yearTouched: this.yearTouched,
                monthTouched: this.monthTouched,
-               dayTouched: this.dayTouched
+               dayTouched: this.dayTouched,
+               monthSelect: true
              });
 
     if (this.error) {
@@ -232,7 +233,6 @@ export class VaDate {
     const errorParameters = (error: string) => {
       return getErrorParameters(error, year, month);
     }
-
     // Fieldset has an implicit aria role of group
     return (
       <Host onBlur={handleDateBlur}>
@@ -261,6 +261,8 @@ export class VaDate {
               invalid={this.invalidMonth}
               class="select-month"
               aria-label="Please enter two digits for the month"
+              error={this.monthTouched && this.invalidMonth ? error : null}
+              showError={false}
             >
               <option value=""></option>
               {months &&
@@ -282,6 +284,8 @@ export class VaDate {
                 invalid={this.invalidDay}
                 class="select-day"
                 aria-label="Please enter two digits for the day"
+                error={this.dayTouched && this.invalidDay ? this.error : null}
+                showError={false}
               >
                 <option value=""></option>
                 {daysForSelectedMonth &&
@@ -302,6 +306,7 @@ export class VaDate {
               invalid={this.invalidYear}
               onInput={handleDateChange}
               onBlur={this.handleYearBlur}
+              error={this.yearTouched && this.invalidYear ? error : null}
               show-input-error="false"
               class="input-year"
               inputmode="numeric"

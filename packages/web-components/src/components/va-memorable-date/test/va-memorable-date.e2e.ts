@@ -238,7 +238,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual("month-range");
+      expect(date.getAttribute('error')).toEqual("month-select");
     });
 
     it('does day validation without required prop', async () => {
@@ -900,7 +900,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual("month-range");
+      expect(date.getAttribute('error')).toEqual("month-select");
 
       const errorSpan = await page.find('va-memorable-date >>> span#error-message');
       expect(errorSpan.textContent).toContain("month-select");

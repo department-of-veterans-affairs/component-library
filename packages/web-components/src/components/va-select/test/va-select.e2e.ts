@@ -69,4 +69,16 @@ describe('va-select', () => {
     const select = await page.find('va-select >>> select');
     expect(select.classList.contains('usa-input--md')).toBeTruthy();
   });
+
+  it('does not render the error if showError is false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo" error="month-range" show-error="false">
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+    const span = await page.find('span.usa-error-message');
+    expect(span).toBeNull()
+  });
 });
