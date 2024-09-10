@@ -295,6 +295,7 @@ export class VaSearchInput {
         }
         break;
       case 'Enter':
+        event.preventDefault();
         this.inputRef.value = options[index].innerText;
         this.inputRef.dispatchEvent(
           new InputEvent('input', {
