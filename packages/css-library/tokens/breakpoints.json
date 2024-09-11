@@ -12,9 +12,21 @@
     "value": "768px"
   },
   "small-desktop-screen": {
-    "value": "1008px"
+    "value": "1024px"
   },
   "large-screen": {
+    "value": "1201px"
+  },
+  "mobile": {
+    "value": "320px"
+  },
+  "mobile-lg": {
+    "value": "480px"
+  },
+  "desktop": {
+    "value": "1024px"
+  },
+  "desktop-lg": {
     "value": "1201px"
   }
 }
