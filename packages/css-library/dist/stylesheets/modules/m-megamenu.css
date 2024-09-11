@@ -342,16 +342,16 @@
     vertical-align: middle;
   }
 }
-@media screen and (min-width: 1008px), print and (min-width: 1008px) {
+@media screen and (min-width: 1024px), print and (min-width: 1024px) {
   #mega-menu .vetnav-panel,
   .mega-menu .vetnav-panel {
-    width: 1008px;
+    width: 1024px;
     height: 490px;
   }
   #mega-menu .panel-bottom-link,
   .mega-menu .panel-bottom-link {
     position: absolute;
-    width: 711px;
+    width: 727px;
   }
   #mega-menu .column-one,
   .mega-menu .column-one {
