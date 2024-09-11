@@ -115,7 +115,7 @@ const AdditionalFormInputsContentTemplate = ({
       </VaFileInputMultiple>
       <hr/>
       <div>
-        <p>To add additional fields associated with some file, you can pass custom content into the slot of this component and it will render in each file input.</p>
+        <p>You can collect additional information about an uploaded file by passing inputs to the slot of this component. The slot content will render after a file is uploaded.</p>
         <p>This example showcases how to include custom content, such as dropdowns, within the file input component.</p>
       </div>
       <div className="vads-u-margin-top--2">
