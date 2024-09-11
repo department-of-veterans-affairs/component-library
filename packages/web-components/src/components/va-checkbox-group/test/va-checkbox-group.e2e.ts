@@ -171,6 +171,14 @@ describe('va-checkbox-group', () => {
    `);
   });
 
+  it('renders aria message text if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group message-aria-describedby="Some additional info"></va-checkbox-group>');
+    const message = await page.find('va-checkbox-group >>> #description-message');
+    expect(message.textContent).toEqual("Some additional info");
+    expect(message).toHaveClass("usa-sr-only");
+  });
+
   it('useFormsPattern displays header for the single field pattern', async () => {
     const page = await newE2EPage();
     await page.setContent(
