@@ -81,7 +81,7 @@ HeaderSize.args = {
 
 const additionalFormInputsContent = (
   <div>
-    <va-select uswds label='What kind of file is this?' required>
+    <va-select label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
       <option key="2" value="2">Private Document</option>
     </va-select>
@@ -123,7 +123,7 @@ const AdditionalFormInputsContentTemplate = ({
             <code>
   {`const additionalFormInputsContent = (
   <div>
-    <va-select uswds label='What kind of file is this?' required>
+    <va-select label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
       <option key="2" value="2">Private Document</option>
     </va-select>
