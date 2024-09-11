@@ -702,6 +702,10 @@ export namespace Components {
          */
         "href": string;
         /**
+          * This provides an aria-label to the link, if present
+         */
+        "label"?: string;
+        /**
           * An optional message that will be read by screen readers when the link is focused.
          */
         "messageAriaDescribedby"?: string;
@@ -712,7 +716,7 @@ export namespace Components {
         /**
           * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
          */
-        "type": "primary" | "secondary" | "reverse";
+        "type": 'primary' | 'secondary' | 'reverse';
     }
     /**
      * @componentName Loading indicator
@@ -3741,6 +3745,10 @@ declare namespace LocalJSX {
          */
         "href": string;
         /**
+          * This provides an aria-label to the link, if present
+         */
+        "label"?: string;
+        /**
           * An optional message that will be read by screen readers when the link is focused.
          */
         "messageAriaDescribedby"?: string;
@@ -3755,7 +3763,7 @@ declare namespace LocalJSX {
         /**
           * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
          */
-        "type"?: "primary" | "secondary" | "reverse";
+        "type"?: 'primary' | 'secondary' | 'reverse';
     }
     /**
      * @componentName Loading indicator
