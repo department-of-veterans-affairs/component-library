@@ -178,8 +178,9 @@ export class VaCheckbox {
       messageAriaDescribedby,
       name
     } = this;
-
-    const hasDescription = description || !!this.el.querySelector('[slot="description"]');
+    const hasDescriptionSlot =
+      !description &&
+      this.el.querySelectorAll('[slot="description"]:not(:empty)').length > 0;
 
     const inputClass = classnames({
       'usa-checkbox__input': true,
@@ -192,16 +193,14 @@ export class VaCheckbox {
     const ariaDescribedbyIds = [
       messageAriaDescribedby ? 'input-message' : '',
       error ? 'checkbox-error-message' : '',
-      hasDescription ? 'description' : '',
+      description || hasDescriptionSlot ? 'description' : '',
       // Return null so we don't add the attribute if we have an empty string
     ].filter(Boolean).join(' ').trim() || null;
 
     return (
       <Host>
-        {description ?
-          <legend id="description" class={descriptionClass}>{description}</legend> :
-          <slot name="description" />
-        }
+        {description && <legend id="description" class={descriptionClass}>{description}</legend>}
+        {hasDescriptionSlot && <div id="description"><slot name="description" /></div>}
 
         {hint && <span class="usa-hint">{hint}</span>}
         <span id="checkbox-error-message" role="alert">
