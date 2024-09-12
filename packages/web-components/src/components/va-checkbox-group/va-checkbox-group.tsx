@@ -67,6 +67,10 @@ export class VaCheckboxGroup {
    * Insert a header with defined level inside the label (legend)
    */
   @Prop() labelHeaderLevel?: string;
+  /**
+   * An optional message that will be read by screen readers when a checkbox is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
    /**
    * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
    */
@@ -76,7 +80,7 @@ export class VaCheckboxGroup {
     * The heading level for the heading if `useFormsPattern` is true.
     */
    @Prop() formHeadingLevel?: number = 3;
- 
+
    /**
     * The content of the heading if `useFormsPattern` is true.
     */
@@ -132,15 +136,16 @@ export class VaCheckboxGroup {
       required,
       error,
       hint,
+      messageAriaDescribedby,
       useFormsPattern,
       formHeadingLevel,
       formHeading, } = this;
     const HeaderLevel = this.getHeaderLevel();
-    const ariaLabeledByIds = 
-        `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
+    const ariaLabeledByIds =
+        `${useFormsPattern && formHeading ? 'form-question' : ''} ${
         useFormsPattern ? 'form-description' : ''} ${
         useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() || null;
-
+    const messageAriaDescribedbyId = messageAriaDescribedby ? 'description-message' : null;
 
     const legendClass = classnames({
       'usa-legend': true,
@@ -170,7 +175,7 @@ export class VaCheckboxGroup {
         {formsHeading}
         <div class="input-wrap">
           <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
-            <legend class={legendClass}>
+            <legend class={legendClass} aria-describedby={messageAriaDescribedbyId}>
               {HeaderLevel ? (
                 <HeaderLevel part="header">{label}</HeaderLevel>
               ) : (
@@ -183,6 +188,11 @@ export class VaCheckboxGroup {
                   </span>
                 )
               }
+              {messageAriaDescribedby && (
+                <span id="description-message" class="usa-sr-only">
+                  {messageAriaDescribedby}
+                </span>
+              )}
               {required && <span class="usa-label--required">{i18next.t('required')}</span>}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>

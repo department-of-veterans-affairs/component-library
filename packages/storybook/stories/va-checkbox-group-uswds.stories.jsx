@@ -33,6 +33,7 @@ const vaCheckboxGroup = args => {
     required,
     hint,
     'label-header-level': labelHeaderLevel,
+    'message-aria-describedby': messageAriaDescribedby,
     ...rest
   } = args;
   return (
@@ -43,6 +44,7 @@ const vaCheckboxGroup = args => {
       required={required}
       hint={hint}
       label-header-level={labelHeaderLevel}
+      message-aria-describedby={messageAriaDescribedby}
     >
       <va-checkbox label="Sojourner Truth" name="example" value="1" />
       <va-checkbox label="Frederick Douglass" name="example" value="2" />
@@ -152,6 +154,7 @@ const defaultArgs = {
   'form-heading-level': null,
   'form-heading': null,
   'form-description': null,
+  'message-aria-describedby': null,
 };
 
 export const Default = Template.bind(null);
@@ -206,7 +209,7 @@ const FormsPatternMultipleTemplate = ({
   label,
   required,
   tile,
-  'message-aria-describedby': messageAriaDescribedBy,
+  'message-aria-describedby': messageAriaDescribedby,
 }) => {
   const handleClick = () => {
     const header = document
@@ -292,7 +295,7 @@ const FormsPatternSingleTemplate = ({
   error,
   label,
   required,
-  'message-aria-describedby': messageAriaDescribedBy,
+  'message-aria-describedby': messageAriaDescribedby,
 }) => {
   const id = Math.floor(Math.random() * 10) + 1;
   const handleClick = () => {
@@ -360,6 +363,12 @@ export const Tile = USWDSTiled.bind(null);
 Tile.args = {
   ...defaultArgs,
   label: 'Select any historical figure',
+};
+
+export const withDescriptionMessage = Template.bind(null);
+withDescriptionMessage.args = {
+  ...defaultArgs,
+  'message-aria-describedby': 'some additional info',
 };
 
 export const Internationalization = I18nTemplate.bind(null);

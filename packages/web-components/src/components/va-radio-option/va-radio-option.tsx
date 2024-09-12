@@ -102,7 +102,6 @@ export class VaRadioOption {
             <span
               class="usa-radio__label-description dd-privacy-hidden"
               data-dd-action-name="description"
-              aria-describedby="option-label"
             >
               {description}
             </span>
