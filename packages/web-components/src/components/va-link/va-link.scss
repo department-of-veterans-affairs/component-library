@@ -6,6 +6,11 @@
   display: inline;
 }
 
+// override formation [href]:focus style that added an outline to the host resulting in a double outline for the link
+:host([href]:focus) {
+  outline: none !important;
+}
+
 :host a {
   cursor: pointer;
   text-decoration: underline;

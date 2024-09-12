@@ -72,7 +72,6 @@ const vaRadioConst = args => {
         label="George Washington Carver"
         name={name}
         value="4"
-        disabled
       />
     </va-radio>
   );
@@ -207,7 +206,6 @@ const USWDSTiled = ({
           name="group3"
           value="4"
           description="This is optional text that can be used to describe the label in more detail."
-          disabled={true}
           tile
         />
       </va-radio>
