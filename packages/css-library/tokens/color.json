@@ -284,5 +284,11 @@
   },
   "vads-color-background-default-on-dark": {
     "*": { "value": "{uswds-system-color-gray-warm-90}"}
+  },
+  "vads-color-forms-surface-active-on-light": {
+    "*": { "value": "{uswds-system-color-blue-warm-5}"}
+  },
+  "vads-color-forms-surface-active-on-dark": {
+    "*": { "value": "{uswds-system-color-blue-warm-80}"}
   }
 }

@@ -4,6 +4,7 @@
 @import '../../../../../node_modules/animate.css/source/sliding_exits/slideOutDown.css';
 @import '../../mixins/buttons.css';
 @import '../../mixins/accessibility.css';
+@import '../../mixins/focusable.css';
 
 #marginWrapper {
   display: block;
@@ -43,7 +44,7 @@ a {
   padding: 0;
   pointer-events: none;
   position: absolute;
-  transition: all 0.25s ease-in;
+  transition: background-color 0.25s ease-in;
 }
 a:not([disabled]):active, a:not([disabled]):focus {
   border-radius: 5px;
@@ -51,10 +52,9 @@ a:not([disabled]):active, a:not([disabled]):focus {
   outline-offset: 2px;
 }
 a:not([disabled]):hover {
+  border-radius: 5px;
   background-color: var(--vads-color-gray-cool-light);
-  border-radius: 0;
   color: var(--vads-color-primary-darker);
-  outline: none;
 }
 
 div a {

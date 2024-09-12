@@ -59,6 +59,9 @@
   "uswds-system-color-blue-cool-vivid-60": {
     "value": "#07648d"
   },
+  "uswds-system-color-blue-warm-5": {
+    "value": "#ecf1f7"
+  },
   "uswds-system-color-blue-warm-10": {
     "value": "#e1e7f1"
   },
@@ -70,6 +73,9 @@
   },
   "uswds-system-color-blue-warm-60": {
     "value": "#345d96"
+  },
+  "uswds-system-color-blue-warm-80": {
+    "value": "#252f3e"
   },
   "uswds-system-color-blue-warm-vivid-60": {
     "value": "#0050d8"

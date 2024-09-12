@@ -60,11 +60,11 @@
     ]
   },
   "small-desktop-screen": {
-    "value": "1008px",
+    "value": "1024px",
     "filePath": "tokens/breakpoints.json",
     "isSource": true,
     "original": {
-      "value": "1008px"
+      "value": "1024px"
     },
     "name": "small-desktop-screen",
     "attributes": {
@@ -87,6 +87,66 @@
     },
     "path": [
       "large-screen"
+    ]
+  },
+  "mobile": {
+    "value": "320px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "320px"
+    },
+    "name": "mobile",
+    "attributes": {
+      "category": "mobile"
+    },
+    "path": [
+      "mobile"
+    ]
+  },
+  "mobile-lg": {
+    "value": "480px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "480px"
+    },
+    "name": "mobile-lg",
+    "attributes": {
+      "category": "mobile-lg"
+    },
+    "path": [
+      "mobile-lg"
+    ]
+  },
+  "desktop": {
+    "value": "1024px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "1024px"
+    },
+    "name": "desktop",
+    "attributes": {
+      "category": "desktop"
+    },
+    "path": [
+      "desktop"
+    ]
+  },
+  "desktop-lg": {
+    "value": "1201px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "1201px"
+    },
+    "name": "desktop-lg",
+    "attributes": {
+      "category": "desktop-lg"
+    },
+    "path": [
+      "desktop-lg"
     ]
   },
   "color-link-default-hover": {
@@ -1892,6 +1952,44 @@
       ]
     }
   },
+  "vads-color-forms-surface-active-on-light": {
+    "*": {
+      "value": "#ecf1f7",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-warm-5}"
+      },
+      "name": "vads-color-forms-surface-active-on-light",
+      "attributes": {
+        "category": "vads-color-forms-surface-active-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-forms-surface-active-on-light",
+        "*"
+      ]
+    }
+  },
+  "vads-color-forms-surface-active-on-dark": {
+    "*": {
+      "value": "#252f3e",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-warm-80}"
+      },
+      "name": "vads-color-forms-surface-active-on-dark",
+      "attributes": {
+        "category": "vads-color-forms-surface-active-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-forms-surface-active-on-dark",
+        "*"
+      ]
+    }
+  },
   "font": {
     "family": {
       "sans": {
@@ -3168,6 +3266,21 @@
       "uswds-system-color-blue-cool-vivid-60"
     ]
   },
+  "uswds-system-color-blue-warm-5": {
+    "value": "#ecf1f7",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#ecf1f7"
+    },
+    "name": "uswds-system-color-blue-warm-5",
+    "attributes": {
+      "category": "uswds-system-color-blue-warm-5"
+    },
+    "path": [
+      "uswds-system-color-blue-warm-5"
+    ]
+  },
   "uswds-system-color-blue-warm-10": {
     "value": "#e1e7f1",
     "filePath": "tokens/uswds.json",
@@ -3226,6 +3339,21 @@
     },
     "path": [
       "uswds-system-color-blue-warm-60"
+    ]
+  },
+  "uswds-system-color-blue-warm-80": {
+    "value": "#252f3e",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#252f3e"
+    },
+    "name": "uswds-system-color-blue-warm-80",
+    "attributes": {
+      "category": "uswds-system-color-blue-warm-80"
+    },
+    "path": [
+      "uswds-system-color-blue-warm-80"
     ]
   },
   "uswds-system-color-blue-warm-vivid-60": {
