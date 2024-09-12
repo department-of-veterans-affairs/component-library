@@ -51,6 +51,13 @@ module.exports = {
     name: getAbsolutePath("@storybook/react-webpack5"),
     options: {}
   },
+  refs: {
+    "va-mobile": {
+      title: "VA Mobile Design System",
+      url: "https://department-of-veterans-affairs.github.io/va-mobile-library",
+      expanded: "false"
+    }
+  },
   docs: {
     autodocs: true
   }
