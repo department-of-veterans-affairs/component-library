@@ -57,7 +57,6 @@ const vaCheckboxGroup = args => {
         label="George Washington Carver"
         name="example"
         value="4"
-        disabled
       />
     </va-checkbox-group>
   );
@@ -109,7 +108,6 @@ const USWDSTiled = ({
           name="group1"
           value="4"
           tile
-          disabled
         />
       </va-checkbox-group>
     </>
