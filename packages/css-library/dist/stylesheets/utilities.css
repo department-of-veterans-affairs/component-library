@@ -14053,8 +14053,8 @@ through all possible variants
     margin-bottom: -1px !important;
   }
   .medium-screen\:vads-u-margin-x--0 {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
   .medium-screen\:vads-u-margin-right--0 {
     margin-right: 0 !important;
@@ -14063,8 +14063,8 @@ through all possible variants
     margin-left: 0 !important;
   }
   .medium-screen\:vads-u-margin-x--1px {
-    margin-top: 1px !important;
-    margin-bottom: 1px !important;
+    margin-left: 1px !important;
+    margin-right: 1px !important;
   }
   .medium-screen\:vads-u-margin-right--1px {
     margin-right: 1px !important;
@@ -14073,8 +14073,8 @@ through all possible variants
     margin-left: 1px !important;
   }
   .medium-screen\:vads-u-margin-x--0p25 {
-    margin-top: 2px !important;
-    margin-bottom: 2px !important;
+    margin-left: 2px !important;
+    margin-right: 2px !important;
   }
   .medium-screen\:vads-u-margin-right--0p25 {
     margin-right: 2px !important;
@@ -14083,8 +14083,8 @@ through all possible variants
     margin-left: 2px !important;
   }
   .medium-screen\:vads-u-margin-x--0p5 {
-    margin-top: 0.25rem !important;
-    margin-bottom: 0.25rem !important;
+    margin-left: 0.25rem !important;
+    margin-right: 0.25rem !important;
   }
   .medium-screen\:vads-u-margin-right--0p5 {
     margin-right: 0.25rem !important;
@@ -14093,8 +14093,8 @@ through all possible variants
     margin-left: 0.25rem !important;
   }
   .medium-screen\:vads-u-margin-x--1 {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--1 {
     margin-right: 0.5rem !important;
@@ -14103,8 +14103,8 @@ through all possible variants
     margin-left: 0.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--1p5 {
-    margin-top: 0.75rem !important;
-    margin-bottom: 0.75rem !important;
+    margin-left: 0.75rem !important;
+    margin-right: 0.75rem !important;
   }
   .medium-screen\:vads-u-margin-right--1p5 {
     margin-right: 0.75rem !important;
@@ -14113,8 +14113,8 @@ through all possible variants
     margin-left: 0.75rem !important;
   }
   .medium-screen\:vads-u-margin-x--2 {
-    margin-top: 1rem !important;
-    margin-bottom: 1rem !important;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
   }
   .medium-screen\:vads-u-margin-right--2 {
     margin-right: 1rem !important;
@@ -14123,8 +14123,8 @@ through all possible variants
     margin-left: 1rem !important;
   }
   .medium-screen\:vads-u-margin-x--2p5 {
-    margin-top: 1.25rem !important;
-    margin-bottom: 1.25rem !important;
+    margin-left: 1.25rem !important;
+    margin-right: 1.25rem !important;
   }
   .medium-screen\:vads-u-margin-right--2p5 {
     margin-right: 1.25rem !important;
@@ -14133,8 +14133,8 @@ through all possible variants
     margin-left: 1.25rem !important;
   }
   .medium-screen\:vads-u-margin-x--3 {
-    margin-top: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
+    margin-left: 1.5rem !important;
+    margin-right: 1.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--3 {
     margin-right: 1.5rem !important;
@@ -14143,8 +14143,8 @@ through all possible variants
     margin-left: 1.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--4 {
-    margin-top: 2rem !important;
-    margin-bottom: 2rem !important;
+    margin-left: 2rem !important;
+    margin-right: 2rem !important;
   }
   .medium-screen\:vads-u-margin-right--4 {
     margin-right: 2rem !important;
@@ -14153,8 +14153,8 @@ through all possible variants
     margin-left: 2rem !important;
   }
   .medium-screen\:vads-u-margin-x--5 {
-    margin-top: 2.5rem !important;
-    margin-bottom: 2.5rem !important;
+    margin-left: 2.5rem !important;
+    margin-right: 2.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--5 {
     margin-right: 2.5rem !important;
@@ -14163,8 +14163,8 @@ through all possible variants
     margin-left: 2.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--6 {
-    margin-top: 3rem !important;
-    margin-bottom: 3rem !important;
+    margin-left: 3rem !important;
+    margin-right: 3rem !important;
   }
   .medium-screen\:vads-u-margin-right--6 {
     margin-right: 3rem !important;
@@ -14173,8 +14173,8 @@ through all possible variants
     margin-left: 3rem !important;
   }
   .medium-screen\:vads-u-margin-x--7 {
-    margin-top: 3.5rem !important;
-    margin-bottom: 3.5rem !important;
+    margin-left: 3.5rem !important;
+    margin-right: 3.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--7 {
     margin-right: 3.5rem !important;
@@ -14183,8 +14183,8 @@ through all possible variants
     margin-left: 3.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--8 {
-    margin-top: 4rem !important;
-    margin-bottom: 4rem !important;
+    margin-left: 4rem !important;
+    margin-right: 4rem !important;
   }
   .medium-screen\:vads-u-margin-right--8 {
     margin-right: 4rem !important;
@@ -14193,8 +14193,8 @@ through all possible variants
     margin-left: 4rem !important;
   }
   .medium-screen\:vads-u-margin-x--9 {
-    margin-top: 4.5rem !important;
-    margin-bottom: 4.5rem !important;
+    margin-left: 4.5rem !important;
+    margin-right: 4.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--9 {
     margin-right: 4.5rem !important;
@@ -14203,8 +14203,8 @@ through all possible variants
     margin-left: 4.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg9 {
-    margin-top: -4.5rem !important;
-    margin-bottom: -4.5rem !important;
+    margin-left: -4.5rem !important;
+    margin-right: -4.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg9 {
     margin-right: -4.5rem !important;
@@ -14213,8 +14213,8 @@ through all possible variants
     margin-left: -4.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg8 {
-    margin-top: -4rem !important;
-    margin-bottom: -4rem !important;
+    margin-left: -4rem !important;
+    margin-right: -4rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg8 {
     margin-right: -4rem !important;
@@ -14223,8 +14223,8 @@ through all possible variants
     margin-left: -4rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg7 {
-    margin-top: -3.5rem !important;
-    margin-bottom: -3.5rem !important;
+    margin-left: -3.5rem !important;
+    margin-right: -3.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg7 {
     margin-right: -3.5rem !important;
@@ -14233,8 +14233,8 @@ through all possible variants
     margin-left: -3.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg6 {
-    margin-top: -3rem !important;
-    margin-bottom: -3rem !important;
+    margin-left: -3rem !important;
+    margin-right: -3rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg6 {
     margin-right: -3rem !important;
@@ -14243,8 +14243,8 @@ through all possible variants
     margin-left: -3rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg5 {
-    margin-top: -2.5rem !important;
-    margin-bottom: -2.5rem !important;
+    margin-left: -2.5rem !important;
+    margin-right: -2.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg5 {
     margin-right: -2.5rem !important;
@@ -14253,8 +14253,8 @@ through all possible variants
     margin-left: -2.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg4 {
-    margin-top: -2rem !important;
-    margin-bottom: -2rem !important;
+    margin-left: -2rem !important;
+    margin-right: -2rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg4 {
     margin-right: -2rem !important;
@@ -14263,8 +14263,8 @@ through all possible variants
     margin-left: -2rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg3 {
-    margin-top: -1.5rem !important;
-    margin-bottom: -1.5rem !important;
+    margin-left: -1.5rem !important;
+    margin-right: -1.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg3 {
     margin-right: -1.5rem !important;
@@ -14273,8 +14273,8 @@ through all possible variants
     margin-left: -1.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg2p5 {
-    margin-top: -1.25rem !important;
-    margin-bottom: -1.25rem !important;
+    margin-left: -1.25rem !important;
+    margin-right: -1.25rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg2p5 {
     margin-right: -1.25rem !important;
@@ -14283,8 +14283,8 @@ through all possible variants
     margin-left: -1.25rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg2 {
-    margin-top: -1rem !important;
-    margin-bottom: -1rem !important;
+    margin-left: -1rem !important;
+    margin-right: -1rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg2 {
     margin-right: -1rem !important;
@@ -14293,8 +14293,8 @@ through all possible variants
     margin-left: -1rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg1p5 {
-    margin-top: -0.75rem !important;
-    margin-bottom: -0.75rem !important;
+    margin-left: -0.75rem !important;
+    margin-right: -0.75rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg1p5 {
     margin-right: -0.75rem !important;
@@ -14303,8 +14303,8 @@ through all possible variants
     margin-left: -0.75rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg1 {
-    margin-top: -0.5rem !important;
-    margin-bottom: -0.5rem !important;
+    margin-left: -0.5rem !important;
+    margin-right: -0.5rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg1 {
     margin-right: -0.5rem !important;
@@ -14313,8 +14313,8 @@ through all possible variants
     margin-left: -0.5rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg0p5 {
-    margin-top: -0.25rem !important;
-    margin-bottom: -0.25rem !important;
+    margin-left: -0.25rem !important;
+    margin-right: -0.25rem !important;
   }
   .medium-screen\:vads-u-margin-right--neg0p5 {
     margin-right: -0.25rem !important;
@@ -14323,8 +14323,8 @@ through all possible variants
     margin-left: -0.25rem !important;
   }
   .medium-screen\:vads-u-margin-x--neg0p25 {
-    margin-top: -2px !important;
-    margin-bottom: -2px !important;
+    margin-left: -2px !important;
+    margin-right: -2px !important;
   }
   .medium-screen\:vads-u-margin-right--neg0p25 {
     margin-right: -2px !important;
@@ -14333,8 +14333,8 @@ through all possible variants
     margin-left: -2px !important;
   }
   .medium-screen\:vads-u-margin-x--neg1px {
-    margin-top: -1px !important;
-    margin-bottom: -1px !important;
+    margin-left: -1px !important;
+    margin-right: -1px !important;
   }
   .medium-screen\:vads-u-margin-right--neg1px {
     margin-right: -1px !important;
@@ -14343,8 +14343,8 @@ through all possible variants
     margin-left: -1px !important;
   }
   .medium-screen\:vads-u-margin-x--auto {
-    margin-top: -1px !important;
-    margin-bottom: -1px !important;
+    margin-left: -1px !important;
+    margin-right: -1px !important;
   }
   .medium-screen\:vads-u-margin-right--auto {
     margin-right: -1px !important;
