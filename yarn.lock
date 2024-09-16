@@ -3168,7 +3168,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/component-library-monorepo@workspace:."
   dependencies:
-    "@department-of-veterans-affairs/css-library": "npm:^0.11.0"
+    "@department-of-veterans-affairs/css-library": "npm:^0.11.1"
     husky: "npm:^9.0.11"
     webpack: "npm:5"
   languageName: unknown
@@ -3198,7 +3198,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/css-library@npm:^0.11.0, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
+"@department-of-veterans-affairs/css-library@npm:^0.11.1, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
@@ -3332,7 +3332,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": "npm:^4.4.0"
     "@babel/core": "npm:^7.12.13"
-    "@department-of-veterans-affairs/css-library": "npm:^0.11.0"
+    "@department-of-veterans-affairs/css-library": "npm:^0.11.1"
     "@department-of-veterans-affairs/formation": "npm:^11.0.6"
     "@stencil/core": "npm:4.20.0"
     "@stencil/postcss": "npm:^2.0.0"
