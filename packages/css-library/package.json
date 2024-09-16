@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
-  "version": "0.12.0",
+  "version": "0.11.1",
   "description": "Department of Veterans Affairs stylesheets, tokens, and utilities",
   "packageManager": "yarn@3.2.0",
   "files": [
