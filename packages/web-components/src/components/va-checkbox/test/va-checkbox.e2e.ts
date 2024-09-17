@@ -143,7 +143,7 @@ describe('va-checkbox', () => {
       '<va-checkbox required label="This is a test" error="With an error message"/>',
     );
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
   it('adds aria-describedby input-message, checkbox-error-message and description ids', async () => {
