@@ -158,9 +158,21 @@ export class VaSelect {
    */
   private populateOptions() {
     const { value } = this;
-    if (getSlottedNodes(this.el, 'optgroup').length > 0) {
-      this.options = getSlottedNodes(this.el, 'optgroup').map(
-        (node: HTMLOptGroupElement) => {
+
+    // Get all slotted nodes
+    const allNodes = getSlottedNodes(this.el, null);
+
+    // Filter nodes to include only <option> and <optgroup>
+    // supports scenario where <option> may be slotted within <optgroup> as well as <option> directly
+    // preserving the order of the nodes as they are slotted
+    const nodes = allNodes.filter((node: Node) => {
+      const nodeName = node.nodeName.toLowerCase();
+      return nodeName === 'option' || nodeName === 'optgroup';
+    });
+
+    this.options = nodes.map(
+      (node: HTMLOptionElement | HTMLOptGroupElement) => {
+        if (node.nodeName.toLowerCase() === 'optgroup') {
           return (
             <optgroup label={node.label}>
               {Array.from(node.children).map((child: HTMLOptionElement) => {
@@ -172,19 +184,18 @@ export class VaSelect {
               })}
             </optgroup>
           );
-        },
-      );
-    } else {
-      this.options = getSlottedNodes(this.el, 'option').map(
-        (node: HTMLOptionElement) => {
+        } else if (node.nodeName.toLowerCase() === 'option') {
           return (
-            <option value={node.value} selected={value === node.value}>
-              {node.text}
+            <option
+              value={(node as HTMLOptionElement).value}
+              selected={value === (node as HTMLOptionElement).value}
+            >
+              {node.textContent}
             </option>
           );
-        },
-      );
-    }
+        }
+      },
+    );
   }
 
   @Watch('value')
