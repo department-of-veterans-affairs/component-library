@@ -100,7 +100,7 @@ export class VaSelect {
   @Prop() width?: string;
 
   /**
-   * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date 
+   * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date
    * in which the error for the va-select will be rendered outside of va-select
    */
   @Prop() showError?: boolean = true;
@@ -158,16 +158,33 @@ export class VaSelect {
    */
   private populateOptions() {
     const { value } = this;
-
-    this.options = getSlottedNodes(this.el, 'option').map(
-      (node: HTMLOptionElement) => {
-        return (
-          <option value={node.value} selected={value === node.value}>
-            {node.text}
-          </option>
-        );
-      },
-    );
+    if (getSlottedNodes(this.el, 'optgroup').length > 0) {
+      this.options = getSlottedNodes(this.el, 'optgroup').map(
+        (node: HTMLOptGroupElement) => {
+          return (
+            <optgroup label={node.label}>
+              {Array.from(node.children).map((child: HTMLOptionElement) => {
+                return (
+                  <option value={child.value} selected={value === child.value}>
+                    {child.text}
+                  </option>
+                );
+              })}
+            </optgroup>
+          );
+        },
+      );
+    } else {
+      this.options = getSlottedNodes(this.el, 'option').map(
+        (node: HTMLOptionElement) => {
+          return (
+            <option value={node.value} selected={value === node.value}>
+              {node.text}
+            </option>
+          );
+        },
+      );
+    }
   }
 
   @Watch('value')
@@ -176,14 +193,25 @@ export class VaSelect {
   }
 
   render() {
-    const { error, reflectInputError, invalid, label, required, name, hint, messageAriaDescribedby, width, showError } = this;
+    const {
+      error,
+      reflectInputError,
+      invalid,
+      label,
+      required,
+      name,
+      hint,
+      messageAriaDescribedby,
+      width,
+      showError,
+    } = this;
 
     const errorID = 'input-error-message';
-    const ariaDescribedbyIds = 
+    const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
-        error ? errorID : ''} ${
-        hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
-    
+        error ? errorID : ''
+      } ${hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
@@ -198,14 +226,20 @@ export class VaSelect {
         {label && (
           <label htmlFor="options" class={labelClass} part="label">
             {label}
-            {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+            {required && (
+              <span class="usa-label--required"> {i18next.t('required')}</span>
+            )}
           </label>
         )}
-        {hint && <span class="usa-hint" id="input-hint">{hint}</span>}
+        {hint && (
+          <span class="usa-hint" id="input-hint">
+            {hint}
+          </span>
+        )}
         <span id={errorID} role="alert">
           {showError && error && (
             <Fragment>
-              <span class="usa-sr-only">{i18next.t('error')}</span> 
+              <span class="usa-sr-only">{i18next.t('error')}</span>
               <span class="usa-error-message">{error}</span>
             </Fragment>
           )}
@@ -222,7 +256,9 @@ export class VaSelect {
           onChange={e => this.handleChange(e)}
           part="select"
         >
-          <option key="0" value="" selected>{i18next.t('select')}</option>
+          <option key="0" value="" selected>
+            {i18next.t('select')}
+          </option>
           {this.options}
         </select>
         {messageAriaDescribedby && (
@@ -231,6 +267,6 @@ export class VaSelect {
           </span>
         )}
       </Host>
-    )
+    );
   }
 }
