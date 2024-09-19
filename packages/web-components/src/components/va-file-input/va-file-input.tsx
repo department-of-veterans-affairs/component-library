@@ -180,6 +180,14 @@ export class VaFileInput {
     }, 0);
   }
 
+  private closeModalAndKeepFile = () => {
+    this.showModal = false;
+    setTimeout(() => {
+      this.el.shadowRoot.querySelector('#delete')?.shadowRoot
+        .querySelector('button').focus();
+    }, 0);
+  }
+
   private changeFile = () => {
     if (this.fileInputRef) {
       this.fileInputRef.click();
@@ -452,6 +460,7 @@ export class VaFileInput {
                         aria-label={'change file ' + file.name}
                       ></va-button-icon>
                       <va-button-icon
+                        id="delete"
                         buttonType="delete"
                         onClick={this.openModal}
                         aria-label={'delete file ' + file.name}
@@ -465,7 +474,7 @@ export class VaFileInput {
                       secondaryButtonText='No, keep this'
                       onCloseEvent={this.closeModal}
                       onPrimaryButtonClick={() => this.removeFile(true)}
-                      onSecondaryButtonClick={this.closeModal}
+                      onSecondaryButtonClick={this.closeModalAndKeepFile}
                     >
                       We'll remove the uploaded document <span class="file-label">{file.name}</span>
                     </va-modal>
@@ -477,5 +486,5 @@ export class VaFileInput {
         </div>
       </Host>
     );
-  } 
+  }
 }

@@ -19,6 +19,7 @@ const defaultArgs = {
   'href': 'https://www.va.gov',
   'text': undefined,
   'type': 'primary',
+  'label': undefined,
 };
 
 const Template = ({
@@ -26,12 +27,14 @@ const Template = ({
   href,
   text,
   'message-aria-describedby': messageAriaDescribedBy,
+  label,
 }) => {
   return (
     <va-link-action
       disable-analytics={disableAnalytics}
       href={href}
       text={text}
+      label={label}
       message-aria-describedby={messageAriaDescribedBy}
     />
   );
@@ -43,6 +46,7 @@ Default.args = {
   'href': 'https://va.gov/vso/',
   'text': 'Call to action',
   'message-aria-describedby': 'Custom message',
+  'label': 'This is an aria label for the Action Link',
 };
 Default.argTypes = propStructure(linkDocs);
 
@@ -51,6 +55,7 @@ const VariantTemplate = ({
   href,
   text,
   type,
+  label,
 }) => {
   return (
     <va-link-action
@@ -58,6 +63,7 @@ const VariantTemplate = ({
       href={href}
       text={text}
       type={type}
+      label={label}
     />
   );
 };

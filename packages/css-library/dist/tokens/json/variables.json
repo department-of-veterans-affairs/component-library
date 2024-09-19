@@ -60,11 +60,11 @@
     ]
   },
   "small-desktop-screen": {
-    "value": "1008px",
+    "value": "1024px",
     "filePath": "tokens/breakpoints.json",
     "isSource": true,
     "original": {
-      "value": "1008px"
+      "value": "1024px"
     },
     "name": "small-desktop-screen",
     "attributes": {
@@ -87,6 +87,66 @@
     },
     "path": [
       "large-screen"
+    ]
+  },
+  "mobile": {
+    "value": "320px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "320px"
+    },
+    "name": "mobile",
+    "attributes": {
+      "category": "mobile"
+    },
+    "path": [
+      "mobile"
+    ]
+  },
+  "mobile-lg": {
+    "value": "480px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "480px"
+    },
+    "name": "mobile-lg",
+    "attributes": {
+      "category": "mobile-lg"
+    },
+    "path": [
+      "mobile-lg"
+    ]
+  },
+  "desktop": {
+    "value": "1024px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "1024px"
+    },
+    "name": "desktop",
+    "attributes": {
+      "category": "desktop"
+    },
+    "path": [
+      "desktop"
+    ]
+  },
+  "desktop-lg": {
+    "value": "1201px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "1201px"
+    },
+    "name": "desktop-lg",
+    "attributes": {
+      "category": "desktop-lg"
+    },
+    "path": [
+      "desktop-lg"
     ]
   },
   "color-link-default-hover": {

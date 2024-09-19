@@ -427,6 +427,10 @@ export namespace Components {
          */
         "labelHeaderLevel"?: string;
         /**
+          * An optional message that will be read by screen readers when a checkbox is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Whether or not this input field is required.
          */
         "required"?: boolean;
@@ -702,6 +706,10 @@ export namespace Components {
          */
         "href": string;
         /**
+          * This provides an aria-label to the link, if present
+         */
+        "label"?: string;
+        /**
           * An optional message that will be read by screen readers when the link is focused.
          */
         "messageAriaDescribedby"?: string;
@@ -712,7 +720,7 @@ export namespace Components {
         /**
           * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
          */
-        "type": "primary" | "secondary" | "reverse";
+        "type": 'primary' | 'secondary' | 'reverse';
     }
     /**
      * @componentName Loading indicator
@@ -3434,6 +3442,10 @@ declare namespace LocalJSX {
          */
         "labelHeaderLevel"?: string;
         /**
+          * An optional message that will be read by screen readers when a checkbox is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: VaCheckboxGroupCustomEvent<any>) => void;
@@ -3741,6 +3753,10 @@ declare namespace LocalJSX {
          */
         "href": string;
         /**
+          * This provides an aria-label to the link, if present
+         */
+        "label"?: string;
+        /**
           * An optional message that will be read by screen readers when the link is focused.
          */
         "messageAriaDescribedby"?: string;
@@ -3755,7 +3771,7 @@ declare namespace LocalJSX {
         /**
           * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
          */
-        "type"?: "primary" | "secondary" | "reverse";
+        "type"?: 'primary' | 'secondary' | 'reverse';
     }
     /**
      * @componentName Loading indicator
