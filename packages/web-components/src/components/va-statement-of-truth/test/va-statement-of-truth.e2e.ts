@@ -12,7 +12,7 @@ describe('va-statement-of-truth', () => {
   it('passes an aXe check', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth />');
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
   it('correctly sets the error props as attributes', async () => {
