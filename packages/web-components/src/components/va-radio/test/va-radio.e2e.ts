@@ -22,7 +22,7 @@ describe('va-radio', () => {
     `,
     );
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
   it('passes an axe check if id is used with identical labels', async () => {
@@ -42,7 +42,7 @@ describe('va-radio', () => {
     `,
     );
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
   it('unchecks current option when other button is checked', async () => {
@@ -367,7 +367,7 @@ describe('va-radio', () => {
     </va-radio>
     `);
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
 });

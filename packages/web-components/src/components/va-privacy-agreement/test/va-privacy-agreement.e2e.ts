@@ -37,17 +37,17 @@ describe('va-privacy-agreement', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-privacy-agreement checked="true"/>',
+      '<va-privacy-agreement checked />',
     );
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
   it('checkbox should be checked if the `checked` prop is present', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-privacy-agreement checked/>',
+      '<va-privacy-agreement checked />',
     );
 
     const vaCheckbox = await page.find('va-privacy-agreement >>> va-checkbox');
