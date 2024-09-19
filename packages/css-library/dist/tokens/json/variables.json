@@ -2343,6 +2343,302 @@
       }
     }
   },
+  "vads-font": {
+    "line-height": {
+      "body-lead": {
+        "value": "1.75",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.75"
+        },
+        "name": "vads-font-line-height-body-lead",
+        "attributes": {
+          "category": "vads-font",
+          "type": "line-height",
+          "item": "body-lead"
+        },
+        "path": [
+          "vads-font",
+          "line-height",
+          "body-lead"
+        ]
+      },
+      "default": {
+        "value": "1.5",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.5"
+        },
+        "name": "vads-font-line-height-default",
+        "attributes": {
+          "category": "vads-font",
+          "type": "line-height",
+          "item": "default"
+        },
+        "path": [
+          "vads-font",
+          "line-height",
+          "default"
+        ]
+      },
+      "heading": {
+        "value": "1.2",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.2"
+        },
+        "name": "vads-font-line-height-heading",
+        "attributes": {
+          "category": "vads-font",
+          "type": "line-height",
+          "item": "heading"
+        },
+        "path": [
+          "vads-font",
+          "line-height",
+          "heading"
+        ]
+      }
+    },
+    "size": {
+      "body": {
+        "large": {
+          "value": "20px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "20px"
+          },
+          "name": "vads-font-size-body-large",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "body",
+            "subitem": "large"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "body",
+            "large"
+          ]
+        },
+        "lead": {
+          "value": "20px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "20px"
+          },
+          "name": "vads-font-size-body-lead",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "body",
+            "subitem": "lead"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "body",
+            "lead"
+          ]
+        },
+        "medium": {
+          "value": "17px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "17px"
+          },
+          "name": "vads-font-size-body-medium",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "body",
+            "subitem": "medium"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "body",
+            "medium"
+          ]
+        },
+        "small": {
+          "value": "15px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "15px"
+          },
+          "name": "vads-font-size-body-small",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "body",
+            "subitem": "small"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "body",
+            "small"
+          ]
+        }
+      },
+      "eyebrow": {
+        "value": "17px",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "17px"
+        },
+        "name": "vads-font-size-eyebrow",
+        "attributes": {
+          "category": "vads-font",
+          "type": "size",
+          "item": "eyebrow"
+        },
+        "path": [
+          "vads-font",
+          "size",
+          "eyebrow"
+        ]
+      },
+      "heading": {
+        "level-1": {
+          "value": "40px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "40px"
+          },
+          "name": "vads-font-size-heading-level-1",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "heading",
+            "subitem": "level-1"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "heading",
+            "level-1"
+          ]
+        },
+        "level-2": {
+          "value": "32px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "32px"
+          },
+          "name": "vads-font-size-heading-level-2",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "heading",
+            "subitem": "level-2"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "heading",
+            "level-2"
+          ]
+        },
+        "level-3": {
+          "value": "20px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "20px"
+          },
+          "name": "vads-font-size-heading-level-3",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "heading",
+            "subitem": "level-3"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "heading",
+            "level-3"
+          ]
+        },
+        "level-4": {
+          "value": "17px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "17px"
+          },
+          "name": "vads-font-size-heading-level-4",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "heading",
+            "subitem": "level-4"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "heading",
+            "level-4"
+          ]
+        },
+        "level-5": {
+          "value": "15px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "15px"
+          },
+          "name": "vads-font-size-heading-level-5",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "heading",
+            "subitem": "level-5"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "heading",
+            "level-5"
+          ]
+        },
+        "level-6": {
+          "value": "15px",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "15px"
+          },
+          "name": "vads-font-size-heading-level-6",
+          "attributes": {
+            "category": "vads-font",
+            "type": "size",
+            "item": "heading",
+            "subitem": "level-6"
+          },
+          "path": [
+            "vads-font",
+            "size",
+            "heading",
+            "level-6"
+          ]
+        }
+      }
+    }
+  },
   "units": {
     "0": {
       "value": "0",

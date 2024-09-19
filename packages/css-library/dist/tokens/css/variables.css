@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 10 Sep 2024 14:57:42 GMT
+ * Generated on Thu, 19 Sep 2024 03:37:54 GMT
  */
 
 :root {
@@ -128,6 +128,20 @@
   --font-size-h5: 0.938rem;
   --font-size-h6: 0.938rem;
   --v3-font-base-size: 16px;
+  --vads-font-line-height-body-lead: 1.75;
+  --vads-font-line-height-default: 1.5;
+  --vads-font-line-height-heading: 1.2;
+  --vads-font-size-body-large: 20px;
+  --vads-font-size-body-lead: 20px;
+  --vads-font-size-body-medium: 17px;
+  --vads-font-size-body-small: 15px;
+  --vads-font-size-eyebrow: 17px;
+  --vads-font-size-heading-level-1: 40px;
+  --vads-font-size-heading-level-2: 32px;
+  --vads-font-size-heading-level-3: 20px;
+  --vads-font-size-heading-level-4: 17px;
+  --vads-font-size-heading-level-5: 15px;
+  --vads-font-size-heading-level-6: 15px;
   --units-0: 0;
   --units-1: 0.5rem;
   --units-2: 1rem;

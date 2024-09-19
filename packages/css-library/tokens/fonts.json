@@ -35,5 +35,29 @@
     "base": {
       "size": { "value": "16px"}
     }
+  },
+  "vads-font": {
+    "line-height": {
+      "body-lead": { "value": "1.75" },
+      "default": { "value": "1.5" },
+      "heading": { "value": "1.2" }
+    },
+    "size": {
+      "body": {
+        "large": { "value": "20px" },
+        "lead": { "value": "20px" },
+        "medium": { "value": "17px" },
+        "small": { "value": "15px" }
+      },
+      "eyebrow": { "value": "17px" },
+      "heading": {
+        "level-1": { "value": "40px" },
+        "level-2": { "value": "32px" },
+        "level-3": { "value": "20px" },
+        "level-4": { "value": "17px" },
+        "level-5": { "value": "15px" },
+        "level-6": { "value": "15px" }
+      }
+    }
   }
 }
