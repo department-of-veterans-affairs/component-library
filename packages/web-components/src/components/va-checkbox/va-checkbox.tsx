@@ -196,20 +196,11 @@ export class VaCheckbox {
       description || hasDescriptionSlot ? 'description' : '',
       // Return null so we don't add the attribute if we have an empty string
     ].filter(Boolean).join(' ').trim() || null;
-    const ariaChecked = checked ? 'true' : 'false';
 
     return (
       <Host>
-        {description && (
-          <legend id="description" class={descriptionClass}>
-            {description}
-          </legend>
-        )}
-        {hasDescriptionSlot && (
-          <div id="description">
-            <slot name="description" />
-          </div>
-        )}
+        {description && <legend id="description" class={descriptionClass}>{description}</legend>}
+        {hasDescriptionSlot && <div id="description"><slot name="description" /></div>}
 
         {hint && <span class="usa-hint">{hint}</span>}
         <span id="checkbox-error-message" role="alert">
@@ -232,25 +223,13 @@ export class VaCheckbox {
             disabled={disabled}
             onChange={this.handleChange}
           />
-          <label
-            htmlFor="checkbox-element"
-            class="usa-checkbox__label"
-            part="label"
-            role="checkbox"
-            aria-checked={ariaChecked}
-          >
+          <label htmlFor="checkbox-element" class="usa-checkbox__label" part="label">
             {label}&nbsp;
-            {required && (
-              <span class="usa-label--required">{i18next.t('required')}</span>
-            )}
-            {checkboxDescription && (
-              <span class="usa-checkbox__label-description" part="description">
-                {checkboxDescription}
-              </span>
-            )}
+            {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+            {checkboxDescription && <span class="usa-checkbox__label-description" part="description">{checkboxDescription}</span>}
           </label>
           {messageAriaDescribedby && (
-            <span id="input-message" class="usa-sr-only dd-privacy-hidden">
+            <span id='input-message' class="usa-sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}
