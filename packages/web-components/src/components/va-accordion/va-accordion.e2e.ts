@@ -285,4 +285,16 @@ describe('va-accordion', () => {
       },
     });
   });
+
+  it('shows "Collapse all -" if one or more accordion-items is open on load', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion section-heading="The Section Heading">
+        <va-accordion-item header="First item" open="true">Some content</va-accordion-item>
+      </va-accordion>`);
+    
+    const button = await page.find('va-accordion >>> button');
+
+    expect(button.innerText).toEqual('collapse-all -');
+  })
 });
