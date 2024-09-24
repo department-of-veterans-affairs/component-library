@@ -100,7 +100,7 @@ export class VaSelect {
   @Prop() width?: string;
 
   /**
-   * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date 
+   * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date
    * in which the error for the va-select will be rendered outside of va-select
    */
   @Prop() showError?: boolean = true;
@@ -159,13 +159,41 @@ export class VaSelect {
   private populateOptions() {
     const { value } = this;
 
-    this.options = getSlottedNodes(this.el, 'option').map(
-      (node: HTMLOptionElement) => {
-        return (
-          <option value={node.value} selected={value === node.value}>
-            {node.text}
-          </option>
-        );
+    // Get all slotted nodes
+    const allNodes = getSlottedNodes(this.el, null);
+
+    // Filter nodes to include only <option> and <optgroup>
+    // supports scenario where <option> may be slotted within <optgroup> as well as <option> directly
+    // preserving the order of the nodes as they are slotted
+    const nodes = allNodes.filter((node: Node) => {
+      const nodeName = node.nodeName.toLowerCase();
+      return nodeName === 'option' || nodeName === 'optgroup';
+    });
+
+    this.options = nodes.map(
+      (node: HTMLOptionElement | HTMLOptGroupElement) => {
+        if (node.nodeName.toLowerCase() === 'optgroup') {
+          return (
+            <optgroup label={node.label}>
+              {Array.from(node.children).map((child: HTMLOptionElement) => {
+                return (
+                  <option value={child.value} selected={value === child.value}>
+                    {child.text}
+                  </option>
+                );
+              })}
+            </optgroup>
+          );
+        } else if (node.nodeName.toLowerCase() === 'option') {
+          return (
+            <option
+              value={(node as HTMLOptionElement).value}
+              selected={value === (node as HTMLOptionElement).value}
+            >
+              {node.textContent}
+            </option>
+          );
+        }
       },
     );
   }
@@ -176,14 +204,25 @@ export class VaSelect {
   }
 
   render() {
-    const { error, reflectInputError, invalid, label, required, name, hint, messageAriaDescribedby, width, showError } = this;
+    const {
+      error,
+      reflectInputError,
+      invalid,
+      label,
+      required,
+      name,
+      hint,
+      messageAriaDescribedby,
+      width,
+      showError,
+    } = this;
 
     const errorID = 'input-error-message';
-    const ariaDescribedbyIds = 
+    const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
-        error ? errorID : ''} ${
-        hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
-    
+        error ? errorID : ''
+      } ${hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
@@ -198,14 +237,20 @@ export class VaSelect {
         {label && (
           <label htmlFor="options" class={labelClass} part="label">
             {label}
-            {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+            {required && (
+              <span class="usa-label--required"> {i18next.t('required')}</span>
+            )}
           </label>
         )}
-        {hint && <span class="usa-hint" id="input-hint">{hint}</span>}
+        {hint && (
+          <span class="usa-hint" id="input-hint">
+            {hint}
+          </span>
+        )}
         <span id={errorID} role="alert">
           {showError && error && (
             <Fragment>
-              <span class="usa-sr-only">{i18next.t('error')}</span> 
+              <span class="usa-sr-only">{i18next.t('error')}</span>
               <span class="usa-error-message">{error}</span>
             </Fragment>
           )}
@@ -222,7 +267,9 @@ export class VaSelect {
           onChange={e => this.handleChange(e)}
           part="select"
         >
-          <option key="0" value="" selected>{i18next.t('select')}</option>
+          <option key="0" value="" selected>
+            {i18next.t('select')}
+          </option>
           {this.options}
         </select>
         {messageAriaDescribedby && (
@@ -231,6 +278,6 @@ export class VaSelect {
           </span>
         )}
       </Host>
-    )
+    );
   }
 }

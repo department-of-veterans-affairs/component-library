@@ -155,6 +155,40 @@ ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
 
+export const OptGroups = Template.bind(null);
+OptGroups.args = {
+  ...defaultArgs,
+  options: [
+    <optgroup key="1" label="Branches of Service">
+      <option value="navy">Navy</option>
+      <option value="army">Army</option>
+      <option value="marines">Marines</option>
+      <option value="air-force">Air Force</option>
+      <option value="coastguard">Coastguard</option>
+    </optgroup>,
+    <optgroup key="2" label="Other">
+      <option value="other">Other</option>
+    </optgroup>,
+  ],
+};
+
+export const OptGroupsWithOptions = Template.bind(null);
+OptGroupsWithOptions.args = {
+  ...defaultArgs,
+  options: [
+    <optgroup key="1" label="Branches of Service">
+      <option value="navy">Navy</option>
+      <option value="army">Army</option>
+      <option value="marines">Marines</option>
+      <option value="air-force">Air Force</option>
+      <option value="coastguard">Coastguard</option>
+    </optgroup>,
+    <option key="2" value="other">
+      Other
+    </option>,
+  ],
+};
+
 export const ReadOnly = InertTemplate.bind(null);
 ReadOnly.args = { ...defaultArgs };
 
