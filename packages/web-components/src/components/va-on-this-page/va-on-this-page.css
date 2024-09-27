@@ -7,6 +7,7 @@
   border-radius: 4px;
   padding: 1em;
 }
+
 @media (min-width: 768px) {
   :host {
     border: none;
@@ -14,17 +15,13 @@
   }
 }
 
-dt {
+#on-this-page {
   font-family: var(--font-serif);
   font-size: 1.25rem;
   margin: 0.4em 0em;
 }
 
-dd {
-  margin: 0.4em 0em;
-}
-
-dl {
+ul {
   margin-top: 0;
   margin-bottom: 0;
   margin-left: 0;
@@ -32,18 +29,25 @@ dl {
   padding-left: 0;
 }
 
-dd a {
-  display: flex;
-  align-items: baseline;
+li {
   padding: 0.5em;
-  line-height: 1.5em;
   max-width: 285px;
 }
 
-a:active {
-  background-color: var(--vads-color-base-lighter);
+li a {
+  line-height: 1.5em;
+}
+
+li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Needed to override the background color from the links mixin */
+li a:hover {
+  background-color: transparent;
 }
 
 va-icon {
   margin-right: 4px;
+  line-height: 1;
 }
