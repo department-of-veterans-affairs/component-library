@@ -44,10 +44,11 @@ const Template = (args) => {
     'table-title': tableTitle,
     'table-type': tableType,
     rows = data,
+    sortable
   } = args;
 
   return (
-    <va-table uswds table-title={tableTitle} stacked={args.stacked} table-type={tableType}>
+    <va-table table-title={tableTitle} stacked={args.stacked} table-type={tableType} sortable={!!sortable}>
       <va-table-row>
           {columns.map((col, i) => (
             <span key={`header-default-${i}`}>{col}</span>
@@ -343,4 +344,11 @@ export const WithMissingData = Template.bind(null);
 WithMissingData.args = {
   'table-title': "This table has some cells without data",
   rows: missingData
+}
+
+export const Sortable = Template.bind(null);
+Sortable.args = {
+  'table-title': "This is a sortable table",
+  rows: data,
+  sortable: true
 }

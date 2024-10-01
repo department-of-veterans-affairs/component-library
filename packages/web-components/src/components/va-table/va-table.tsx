@@ -5,9 +5,11 @@ import {
   Element,
   h,
   State,
-  Prop
+  Prop,
+  Listen
 } from '@stencil/core';
 
+import { getCompareFunc } from './utils';
 
 @Component({
   tag: 'va-table',
@@ -37,6 +39,9 @@ export class VaTable {
    */
   @Prop() stacked?: boolean = true;
   
+
+  @Prop() sortable: boolean = false; 
+
   // The number of va-table-rows
   @State() rows: number;
 
@@ -79,10 +84,10 @@ export class VaTable {
    * Generate an array of all the spans in all the va-table-rows 
    * in the slot in order starting with row 0, column 0.
    */
-  getAllCells(): void {
+  getAllCells(rows: Element[] = this.getRows()): void {
     const cells: HTMLSpanElement[] = [];
     let count = 0;
-    for (const row of this.getRows()) {
+    for (const row of rows) {
       const cellsInRow = this.getCellsInRow(row);
       cellsInRow.forEach((cell) => {
         cell.setAttribute('slot', `va-table-slot-${count}`);
@@ -93,6 +98,7 @@ export class VaTable {
     }
     this.cells = cells;
   }
+
 
   /**
    * Generate a DocumentFragment that holds the cells 
@@ -109,13 +115,19 @@ export class VaTable {
   /**
    * Generate a va-table-inner to add to the DOM 
    */
-  makeVATable(): HTMLVaTableInnerElement {
+  makeVATable(sortdir: string, sortindex: number): HTMLVaTableInnerElement {
     const vaTable = document.createElement('va-table-inner');
     // add attributes
     vaTable.setAttribute('rows', `${this.rows}`);
     vaTable.setAttribute('cols', `${this.cols}`);
     vaTable.setAttribute('stacked', this.stacked ? "true" : "false");
-    
+    vaTable.setAttribute('sortable', `${this.sortable}`);
+    // we rebuild the inner table after a sort
+    if (this.sortable && sortdir && sortindex) {
+      vaTable.setAttribute('sortdir', sortdir);
+      vaTable.setAttribute('sortindex', `${sortindex}`);
+    }
+   
     if (this.tableTitle) {
       vaTable.setAttribute('table-title', this.tableTitle);
     }
@@ -130,20 +142,23 @@ export class VaTable {
     return vaTable;
   }
 
+  resetVaTableInner() {
+    const oldTable = this.el.querySelector('va-table-inner');
+    if (oldTable) {
+      oldTable.remove();
+      this.rows = null;
+      this.cols = null;
+      this.cells = null;
+    }
+  }
+
   watchForDataChanges() {
     // Watch for changes to the slot.
     const row = this.el.querySelectorAll('va-table-row')[1] as HTMLVaTableRowElement;
     const callback = () => {
-      const oldTable = this.el.querySelector('va-table-inner');
-      if (oldTable) {
-        oldTable.remove();
-        this.rows = null;
-        this.cols = null;
-        this.cells = null;
-      }
+      this.resetVaTableInner()
       this.addVaTableInner();
     }
-
     this.observer = new MutationObserver(callback);
     this.observer.observe(row, {
       childList: true,
@@ -159,11 +174,12 @@ export class VaTable {
   }
 
   // Add a va-table-inner instance to the DOM
-  addVaTableInner() {
+  addVaTableInner(sortdir: string = null, sortindex: number = null) {
+    console.log('addVaTableInner', sortdir, sortindex);
     // generate a list of all table cells
     this.getAllCells();
     // create a va-table-inner with the cells in the slots
-    const vaTable = this.makeVATable();
+    const vaTable = this.makeVATable(sortdir, sortindex);
     // add the table to the component
     this.el.appendChild(vaTable);
   }
@@ -175,6 +191,25 @@ export class VaTable {
     this.watchForDataChanges();
   }
 
+  @Listen('sortTable')
+  doSort(e: CustomEvent) {
+    e.stopPropagation();
+    const { index, sortdir } = e.detail;
+    const [header, ...rows] = this.getRows();
+    //sort the data rows
+    rows.sort((a: Element, b: Element) => {
+      const _a = a.children[index].innerHTML.trim();
+      const _b = b.children[index].innerHTML.trim();
+      return getCompareFunc(_a, sortdir)(_a, _b);
+    });
+    const sortedDataRows = [header, ...rows];
+    // clear the inner table
+    this.resetVaTableInner();
+    // replace children with the newly sorted va-table-row elements
+    this.el.replaceChildren(...sortedDataRows);
+    // render the table with details for next possible sort
+    this.addVaTableInner(sortdir === 'asc' ? 'desc' : 'asc', index);
+  }
   render() {
     return (
       <Host>

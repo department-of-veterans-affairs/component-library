@@ -1,4 +1,4 @@
-import { Component, Element, Prop, h } from '@stencil/core';
+import { Component, Element, Prop, h, Event, EventEmitter } from '@stencil/core';
 import classnames from 'classnames';
 
 /**
@@ -47,6 +47,22 @@ export class VaTableInner {
    */
   @Prop() stacked?: boolean = false;
 
+  @Prop() sortdir?: string = null;
+
+  @Prop() sortindex?: number = null;
+
+  @Prop() sortable?: boolean = false;
+
+   /**
+   * Fires when the component is closed by clicking on the close icon. This fires only
+   * when closeable is true.
+   */
+   @Event({
+    composed: true,
+    bubbles: true,
+  })
+  sortTable: EventEmitter;
+
   private observer: MutationObserver;
 
   disconnectedCallback() {
@@ -55,6 +71,27 @@ export class VaTableInner {
     }
   }
 
+  fireSort(e: MouseEvent) {
+    const column = e.currentTarget as HTMLElement;
+    const sortdir = column.dataset.sortdir;
+    const index = column.dataset.rowindex;
+    this.sortTable.emit({ index, sortdir });    
+  }
+
+  getSortIcon(index: number, row: number): HTMLVaIconElement {
+    let icon: HTMLVaIconElement = null;
+    // th must be in header
+    if (this.sortable && row === 0) {
+      // we have performed a sort on this column
+      if (this.sortindex && this.sortindex === index) {
+        const icon_name = this.sortdir == 'asc' ? 'arrow_downward' : 'arrow_upward';
+        icon = <va-icon icon={icon_name} />
+      }
+      // we have not performed a sort on this column
+      icon = <va-icon icon="sort_arrow" />
+    }
+    return icon;
+  }
   /**
    * Generate the markup for a table row where row is the zero-indexed row number
    */
@@ -65,7 +102,15 @@ export class VaTableInner {
           const slotName = `va-table-slot-${row * this.cols + i}`;
           const slot = <slot name={slotName}></slot>
           return (i === 0 || row === 0)
-            ? <th scope="row">{slot}</th>
+            ?
+            <th
+              scope="row"
+              data-rowindex={i}
+              data-sortdir={i === this.sortindex ? this.sortdir : 'asc'}
+              onClick={(e) => this.fireSort(e)}
+            >
+              {slot}{this.getSortIcon(i, row)}
+            </th>
             : <td>{slot}</td>
         })}
       </tr>
@@ -91,13 +136,15 @@ export class VaTableInner {
       'usa-table--borderless': tableType === 'borderless',
     });
     return (
+      <div>
       <table class={classes}>
         { tableTitle && <caption>{tableTitle}</caption> }
         <thead>{ this.makeRow(0) }</thead>
         <tbody id="va-table-body">
           { this.getBodyRows() }
         </tbody>
-      </table>
+        </table>
+      </div>
     )
   }
 }

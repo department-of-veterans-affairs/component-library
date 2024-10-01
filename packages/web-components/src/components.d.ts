@@ -579,6 +579,8 @@ export namespace Components {
          */
         "required"?: boolean;
     }
+    interface VaHack {
+    }
     /**
      * @componentName Header - Minimal
      * @maturityCategory caution
@@ -1376,7 +1378,7 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date  in which the error for the va-select will be rendered outside of va-select
+          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
         /**
@@ -1435,6 +1437,7 @@ export namespace Components {
     interface VaSummaryBox {
     }
     interface VaTable {
+        "sortable": boolean;
         /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
@@ -1459,6 +1462,9 @@ export namespace Components {
          */
         "cols"?: number;
         "rows"?: number;
+        "sortable"?: boolean;
+        "sortdir"?: string;
+        "sortindex"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -1865,6 +1871,10 @@ export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaStatementOfTruthElement;
 }
+export interface VaTableInnerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTableInnerElement;
+}
 export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaTelephoneElement;
@@ -2266,6 +2276,12 @@ declare global {
     var HTMLVaFileInputMultipleElement: {
         prototype: HTMLVaFileInputMultipleElement;
         new (): HTMLVaFileInputMultipleElement;
+    };
+    interface HTMLVaHackElement extends Components.VaHack, HTMLStencilElement {
+    }
+    var HTMLVaHackElement: {
+        prototype: HTMLVaHackElement;
+        new (): HTMLVaHackElement;
     };
     /**
      * @componentName Header - Minimal
@@ -2806,12 +2822,23 @@ declare global {
         prototype: HTMLVaTableElement;
         new (): HTMLVaTableElement;
     };
+    interface HTMLVaTableInnerElementEventMap {
+        "sortTable": any;
+    }
     /**
      * @componentName Table
      * @maturityCategory use
      * @maturityLevel best_practice
      */
     interface HTMLVaTableInnerElement extends Components.VaTableInner, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTableInnerElementEventMap>(type: K, listener: (this: HTMLVaTableInnerElement, ev: VaTableInnerCustomEvent<HTMLVaTableInnerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTableInnerElementEventMap>(type: K, listener: (this: HTMLVaTableInnerElement, ev: VaTableInnerCustomEvent<HTMLVaTableInnerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaTableInnerElement: {
         prototype: HTMLVaTableInnerElement;
@@ -2919,6 +2946,7 @@ declare global {
         "va-date": HTMLVaDateElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
+        "va-hack": HTMLVaHackElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
@@ -3621,6 +3649,8 @@ declare namespace LocalJSX {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+    }
+    interface VaHack {
     }
     /**
      * @componentName Header - Minimal
@@ -4543,7 +4573,7 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date  in which the error for the va-select will be rendered outside of va-select
+          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
         /**
@@ -4614,6 +4644,7 @@ declare namespace LocalJSX {
     interface VaSummaryBox {
     }
     interface VaTable {
+        "sortable"?: boolean;
         /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
@@ -4637,7 +4668,14 @@ declare namespace LocalJSX {
           * The number of columns in the table
          */
         "cols"?: number;
+        /**
+          * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
+         */
+        "onSortTable"?: (event: VaTableInnerCustomEvent<any>) => void;
         "rows"?: number;
+        "sortable"?: boolean;
+        "sortdir"?: string;
+        "sortindex"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -4938,6 +4976,7 @@ declare namespace LocalJSX {
         "va-date": VaDate;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
+        "va-hack": VaHack;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
         "va-link": VaLink;
@@ -5102,6 +5141,7 @@ declare module "@stencil/core" {
              * @guidanceHref form/file-input-multiple
              */
             "va-file-input-multiple": LocalJSX.VaFileInputMultiple & JSXBase.HTMLAttributes<HTMLVaFileInputMultipleElement>;
+            "va-hack": LocalJSX.VaHack & JSXBase.HTMLAttributes<HTMLVaHackElement>;
             /**
              * @componentName Header - Minimal
              * @maturityCategory caution
