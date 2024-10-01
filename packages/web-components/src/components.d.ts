@@ -587,9 +587,9 @@ export namespace Components {
      */
     interface VaHeaderMinimal {
         /**
-          * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is for when a heading level 1 needs to be used elsewhere, as there should only be one heading level 1 per page.
+          * Enables use of heading tags in the minimal header instead of `<div>` tags. This is for when a heading level 1 needs to be used in the header, as there should only be one heading level 1 per page.
          */
-        "disableHeadings"?: boolean;
+        "enableHeadings"?: boolean;
         "header"?: string;
         "subheader"?: string;
     }
@@ -1376,7 +1376,7 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date  in which the error for the va-select will be rendered outside of va-select
+          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
         /**
@@ -3630,9 +3630,9 @@ declare namespace LocalJSX {
      */
     interface VaHeaderMinimal {
         /**
-          * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is for when a heading level 1 needs to be used elsewhere, as there should only be one heading level 1 per page.
+          * Enables use of heading tags in the minimal header instead of `<div>` tags. This is for when a heading level 1 needs to be used in the header, as there should only be one heading level 1 per page.
          */
-        "disableHeadings"?: boolean;
+        "enableHeadings"?: boolean;
         "header"?: string;
         "subheader"?: string;
     }
@@ -4543,7 +4543,7 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date  in which the error for the va-select will be rendered outside of va-select
+          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
         /**
