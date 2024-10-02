@@ -63,13 +63,13 @@ describe('va-on-this-page', () => {
               <li>
                 <a href="#an-id">
                   <va-icon class="hydrated"></va-icon>
-                  Hello
+                  <span>Hello</span>
                 </a>
               </li>
               <li>
                 <a href="#its-me">
                   <va-icon class="hydrated"></va-icon>
-                  It's me
+                  <span>It's me</span>
                 </a>
               </li>
             </ul>
@@ -104,7 +104,7 @@ describe('va-on-this-page', () => {
           <li>
             <a href="#foo">
               <va-icon class="hydrated"></va-icon>
-              Foo
+              <span>Foo</span>
             </a>
           </li>
         </ul>
@@ -141,13 +141,13 @@ describe('va-on-this-page', () => {
               <li>
                 <a href="#an-id">
                   <va-icon class="hydrated"></va-icon>
-                  Hello
+                  <span>Hello</span>
                 </a>
               </li>
               <li>
                 <a href="#its-me">
                   <va-icon class="hydrated"></va-icon>
-                  It's me
+                  <span>It's me</span>
                 </a>
               </li>
             </ul>
