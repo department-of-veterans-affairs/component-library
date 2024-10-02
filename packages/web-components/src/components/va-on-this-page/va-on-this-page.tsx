@@ -96,7 +96,7 @@ export class VaOnThisPage {
             <li>
               <a href={`#${heading.id}`} onClick={handleOnClick}>
                 <va-icon icon="arrow_downward"></va-icon>
-                {heading.innerText}
+                <span>{heading.innerText}</span>
               </a>
             </li>
           ))}
