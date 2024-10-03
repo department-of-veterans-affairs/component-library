@@ -6,6 +6,7 @@
 
 //============ MIXINS & OTHER FUNCTIONS ==============//
 @use './override-function' as *;
+@use'./functions' as *;
 @use './mixins' as *;
 
 //============ VENDOR PARTIALS ==============//
@@ -18,10 +19,6 @@
 @import 'formation-overrides/core/fonts';
 @import 'formation-overrides/core/utilities';
 @import 'formation-overrides/core/base';
-
-// ----- VA BASE (VARIABLES/HELPERS) ---- //
-@import 'base/functions';
-@import 'base/fonts';
 
 // ---- USWDS v1 STANDARDS ELEMENTS/COMPONENTS --- //
 @import 'formation-overrides/elements/buttons';
