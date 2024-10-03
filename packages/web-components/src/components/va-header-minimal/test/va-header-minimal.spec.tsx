@@ -17,7 +17,7 @@ describe('va-header-minimal', () => {
               <img alt="VA logo and Seal, U.S. Department of Veterans Affairs" class="va-logo" src="[object Object]">
             </a>
             <div class="header-container">
-              <h1>Header</h1>
+              <div class="header">Header</div>
             </div>
           </div>
         </mock:shadow-root>
@@ -40,8 +40,8 @@ describe('va-header-minimal', () => {
               <img alt="VA logo and Seal, U.S. Department of Veterans Affairs" class="va-logo" src="[object Object]">
             </a>
             <div class="header-container">
-              <h1>Header</h1>
-              <h2>Subheader</h2>
+              <div class="header">Header</div>
+              <div class="subheader">Subheader</div>
             </div>
           </div>
         </mock:shadow-root>
@@ -49,13 +49,13 @@ describe('va-header-minimal', () => {
     `);
   });
 
-  it('renders without headings', async () => {
+  it('renders with headings', async () => {
     const page = await newSpecPage({
       components: [VaHeaderMinimal],
-      html: `<va-header-minimal header='Header' subheader='Subheader' disable-headings='true'></va-header-minimal>`,
+      html: `<va-header-minimal header='Header' subheader='Subheader' enable-headings></va-header-minimal>`,
     });
     expect(page.root).toEqualHtml(`
-      <va-header-minimal header='Header' role="banner" subheader='Subheader' disable-headings='true'>
+      <va-header-minimal header='Header' role="banner" subheader='Subheader' enable-headings>
         <mock:shadow-root>
           <va-official-gov-banner></va-official-gov-banner>
           <va-crisis-line-modal></va-crisis-line-modal>
@@ -64,8 +64,8 @@ describe('va-header-minimal', () => {
               <img alt="VA logo and Seal, U.S. Department of Veterans Affairs" class="va-logo" src="[object Object]">
             </a>
             <div class="header-container">
-              <div class="header">Header</div>
-              <div class="subheader">Subheader</div>
+              <h1>Header</h1>
+              <h2>Subheader</h2>
             </div>
           </div>
         </mock:shadow-root>
