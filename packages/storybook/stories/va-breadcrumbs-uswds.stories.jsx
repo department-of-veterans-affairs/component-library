@@ -167,7 +167,7 @@ const WithRouterTemplate = ({
 import React from 'react';<br/>
 import &#x7b; useHistory &#x7d; from 'react-router-dom';<br/>
 <br/>
-const YourComponent &#61; (&#x7b; label, disableAnalytics, uswds, breadcrumbList, wrapping &#x7d;) &#61;&#62;  &#x7b;<br/>
+const YourComponent &#61; (&#x7b; label, disableAnalytics, breadcrumbList, wrapping &#x7d;) &#61;&#62;  &#x7b;<br/>
 &nbsp;const history &#61; useHistory();<br/>
 <br/>
 &nbsp;function handleRouteChange(&#x7b; detail &#x7d;) &#x7b;<br/>
@@ -180,7 +180,6 @@ const YourComponent &#61; (&#x7b; label, disableAnalytics, uswds, breadcrumbList
   &nbsp;&nbsp;&#60;VaBreadcrumbs<br/>
   &nbsp;&nbsp;&nbsp;label=&#x7b;label&#x7d;<br/>
   &nbsp;&nbsp;&nbsp;disableAnalytics=&#x7b;disableAnalytics&#x7d;<br/>
-  &nbsp;&nbsp;&nbsp;uswds=&#x7b;uswds&#x7d;<br/>
   &nbsp;&nbsp;&nbsp;breadcrumbList=&#x7b;breadcrumbs&#x7d;<br/>
   &nbsp;&nbsp;&nbsp;wrapping=&#x7b;wrapping&#x7d;<br/>
   &nbsp;&nbsp;&nbsp;onRouteChange=&#x7b;handleRouteChange&#x7d;<br/>
