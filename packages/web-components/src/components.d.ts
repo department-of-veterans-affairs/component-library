@@ -671,6 +671,10 @@ export namespace Components {
          */
         "iconSize"?: number;
         /**
+          * If `true`, the routeChange event will be emitted when the link is clicked.
+         */
+        "isRouterLink"?: boolean;
+        /**
           * Adds an aria-label attribute to the link element.
          */
         "label"?: string;
@@ -2292,6 +2296,7 @@ declare global {
     };
     interface HTMLVaLinkElementEventMap {
         "component-library-analytics": any;
+        "route-change": { href: string };
     }
     /**
      * @componentName Link
@@ -3714,6 +3719,10 @@ declare namespace LocalJSX {
          */
         "iconSize"?: number;
         /**
+          * If `true`, the routeChange event will be emitted when the link is clicked.
+         */
+        "isRouterLink"?: boolean;
+        /**
           * Adds an aria-label attribute to the link element.
          */
         "label"?: string;
@@ -3721,6 +3730,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaLinkCustomEvent<any>) => void;
+        /**
+          * Fires when user clicks on the link. Has no effect unless the isRouterLink prop is set to `true`.
+         */
+        "onRoute-change"?: (event: VaLinkCustomEvent<{ href: string }>) => void;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
          */

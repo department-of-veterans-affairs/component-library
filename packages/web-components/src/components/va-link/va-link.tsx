@@ -103,6 +103,12 @@ export class VaLink {
    * an integer between 3 and 9 inclusive.
    */
   @Prop() iconSize?: number = 3;
+
+  /**
+   * If `true`, the routeChange event will be emitted when the link is clicked.
+   */
+  @Prop() isRouterLink?: boolean = false;
+
   /**
    * The event used to track usage of the component.
    */
@@ -113,18 +119,42 @@ export class VaLink {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * Fires when user clicks on the link.
+   * Has no effect unless the isRouterLink prop is set to `true`.
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+    eventName: 'route-change',
+  })
+  routeChange: EventEmitter<{ href: string }>;
+
+  /**
+   * Emit event when the link is clicked.
+   * Only used when isRouterLink is true.
+   */
+  private handleRouteChange(e: MouseEvent, href: string): void {
+    e.preventDefault();
+    this.routeChange.emit({ href });
+  }
+
   /** @ts-ignore */
   private handleClick = (e: MouseEvent): void => {
+    const { href, text, isRouterLink } = this;
     if (!this.disableAnalytics) {
       const detail = {
         componentName: 'va-link',
         action: 'click',
         details: {
-          label: this.text,
-          destination: this.href,
+          label: text,
+          destination: href,
           origin: window.location.href,
         },
       };
+      if (isRouterLink) {
+        this.handleRouteChange(e, href);
+      }
       this.componentLibraryAnalytics.emit(detail);
     }
   };
