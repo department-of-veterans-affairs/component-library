@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const linkDocs = getWebComponentDocs('va-link');
@@ -33,6 +33,7 @@ const defaultArgs = {
   'label': undefined,
   'icon-name': undefined,
   'icon-size': undefined,
+  'is-router-link': undefined,
 };
 
 const Template = ({
@@ -302,4 +303,82 @@ Reverse.args = {
   href: 'https://va.gov/',
   text: 'Example Link',
   reverse: true,
+};
+
+const WithRouterTemplate = ({
+  href: href,
+  text: text,
+  'is-router-link': isRouterLink,
+}) => {
+  const routerLinkRef = useRef(null)
+
+  function handleRouteChange({ detail }) {
+    const { href } = detail;
+    console.log(`Router link clicked. The href is: ${href}`)
+  }
+
+  useEffect(() => {
+    if (routerLinkRef.current) {
+      routerLinkRef.current.addEventListener('route-change', handleRouteChange);
+    }
+  }, []);
+
+  return (
+    <>
+    <p>Links that have the property <code>isRouterLink: true</code> set will emit a <code>route-change</code> event.
+      This event will allow the navigation behavior of the link to be handled with custom routing
+      as in the example below using React Router:
+    </p>
+    <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+        <code>
+import React, &#x7b; useEffect, useRef &#x7d; from 'react';<br/>
+import &#x7b; useHistory &#x7d; from 'react-router-dom';<br/>
+<br/>
+const YourComponent &#61; (&#x7b; href, text &#x7d;) &#61;&#62;  &#x7b;<br/>
+&nbsp;const history &#61; useHistory();<br/>
+&nbsp;const routerLinkRef &#61; useRef(null);<br/>
+<br/>
+&nbsp;function handleRouteChange(&#x7b; detail &#x7d;) &#x7b;<br/>
+&nbsp;&nbsp;&nbsp;const &#x7b; href &#x7d; &#61; detail;<br/>
+&nbsp;&nbsp;&nbsp;history.push(href);<br/>
+&nbsp;&#x7d;<br/>
+<br/>
+&nbsp;useEffect&#x28;&#x28;&#x29;&#x20;&#x3d;&#x3e;&#x20;&#x7b;&#xa;<br/>
+&nbsp;&nbsp;if &#x28;routerLinkRef.current&#x29; &#x7b;<br/>
+&nbsp;&nbsp;&nbsp;routerLinkRef.current.addEventListener&#x28;&#x27;route-change&#x27;, handleRouteChange&#x29;;<br/>
+&nbsp;&nbsp;&#x7d;<br/>
+&nbsp;&#x7d;, []);<br/>
+<br/>
+  &nbsp;return (<br/>
+  &nbsp;&nbsp;&nbsp;&#60;va-link<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;ref=&#x7b;ref =&gt; routerLinkRef.current = ref&#x7d;<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;href=&#x7b;href&#x7d;<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;text=&#x7b;text&#x7d;<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;is-router-link=&#x7b;true&#x7d;<br/>
+  &nbsp;&nbsp;&nbsp;&#62;&#60;/va-link&#62;<br/>
+  &nbsp;);<br/>
+&#x7d;;
+
+        </code>
+      </pre>
+    <p>
+      If you need help to gather your information or fill out your
+      application/form,{' '}
+      <va-link
+        ref={ref => routerLinkRef.current = ref}
+        href={href}
+        text={text}
+        is-router-link={isRouterLink}
+      />
+    </p>
+    </>
+  );
+};
+
+export const WithRouterLinkSupport = WithRouterTemplate.bind(null);
+WithRouterLinkSupport.args = {
+  ...defaultArgs,
+  href: 'https://va.gov/',
+  text: 'example router link',
+  'is-router-link': true,
 };
