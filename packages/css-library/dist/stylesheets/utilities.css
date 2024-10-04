@@ -5304,11 +5304,11 @@ through all possible variants
   order: 0 !important;
 }
 
-.vads-u-font-family-sans {
+.vads-u-font-family--sans {
   font-family: Source Sans Pro, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif !important;
 }
 
-.vads-u-font-family-serif {
+.vads-u-font-family--serif {
   font-family: Bitter, Georgia, Cambria, Times New Roman, Times, serif !important;
 }
 
@@ -14341,10 +14341,10 @@ through all possible variants
   .medium-screen\:vads-u-order--initial {
     order: 0 !important;
   }
-  .medium-screen\:vads-u-font-family-sans {
+  .medium-screen\:vads-u-font-family--sans {
     font-family: Source Sans Pro, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif !important;
   }
-  .medium-screen\:vads-u-font-family-serif {
+  .medium-screen\:vads-u-font-family--serif {
     font-family: Bitter, Georgia, Cambria, Times New Roman, Times, serif !important;
   }
   .medium-screen\:vads-u-font-size--sm {
