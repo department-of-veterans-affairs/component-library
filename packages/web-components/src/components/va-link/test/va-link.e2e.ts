@@ -230,4 +230,35 @@ describe('va-link', () => {
     await anchor.click();
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
+
+  it('fires route-change event when isRouterLink is truthy', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-link is-router-link href="https://www.va.gov" text="example link text" />',
+    );
+
+    const routerChangeSpy = await page.spyOnEvent('route-change');
+    const anchor = await page.find('va-link >>> a');
+
+    await anchor.click();
+
+    expect(routerChangeSpy).toHaveReceivedEventDetail({
+      href: 'https://www.va.gov'
+    });
+  });
+
+  it('does not fire route-change event when isRouterLink is falsy', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-link is-router-link=false href="https://www.va.gov" text="example link text" />',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('route-change');
+    const anchor = await page.find('va-link >>> a');
+
+    await anchor.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
 });
