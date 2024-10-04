@@ -4,7 +4,7 @@
 
 $u-font-family: (
   font-family: (
-    base: 'vads-u-font-',
+    base: 'vads-u-font-family',
     modifiers: null,
     values: map-collect($tokens-font-family),
     settings: $font-settings,
