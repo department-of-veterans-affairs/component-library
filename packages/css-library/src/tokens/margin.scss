@@ -42,6 +42,6 @@ $tokens-margin-x: map-collect(
   $tokens-margin,
   $tokens-negative-margin,
   (
-    auto: -1px,
+    auto: auto,
   )
 );

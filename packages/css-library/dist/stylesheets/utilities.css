@@ -6247,16 +6247,16 @@ through all possible variants
 }
 
 .vads-u-margin-x--auto {
-  margin-left: -1px !important;
-  margin-right: -1px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .vads-u-margin-right--auto {
-  margin-right: -1px !important;
+  margin-right: auto !important;
 }
 
 .vads-u-margin-left--auto {
-  margin-left: -1px !important;
+  margin-left: auto !important;
 }
 
 .vads-u-measure--1 {
@@ -7774,14 +7774,14 @@ through all possible variants
     margin-left: -1px !important;
   }
   .mobile\:vads-u-margin-x--auto {
-    margin-left: -1px !important;
-    margin-right: -1px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .mobile\:vads-u-margin-right--auto {
-    margin-right: -1px !important;
+    margin-right: auto !important;
   }
   .mobile\:vads-u-margin-left--auto {
-    margin-left: -1px !important;
+    margin-left: auto !important;
   }
   .mobile\:vads-u-measure--1 {
     max-width: 40ch !important;
@@ -9161,14 +9161,14 @@ through all possible variants
     margin-left: -1px !important;
   }
   .mobile-lg\:vads-u-margin-x--auto {
-    margin-left: -1px !important;
-    margin-right: -1px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .mobile-lg\:vads-u-margin-right--auto {
-    margin-right: -1px !important;
+    margin-right: auto !important;
   }
   .mobile-lg\:vads-u-margin-left--auto {
-    margin-left: -1px !important;
+    margin-left: auto !important;
   }
   .mobile-lg\:vads-u-measure--1 {
     max-width: 40ch !important;
@@ -10548,14 +10548,14 @@ through all possible variants
     margin-left: -1px !important;
   }
   .tablet\:vads-u-margin-x--auto {
-    margin-left: -1px !important;
-    margin-right: -1px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .tablet\:vads-u-margin-right--auto {
-    margin-right: -1px !important;
+    margin-right: auto !important;
   }
   .tablet\:vads-u-margin-left--auto {
-    margin-left: -1px !important;
+    margin-left: auto !important;
   }
   .tablet\:vads-u-measure--1 {
     max-width: 40ch !important;
@@ -11935,14 +11935,14 @@ through all possible variants
     margin-left: -1px !important;
   }
   .desktop\:vads-u-margin-x--auto {
-    margin-left: -1px !important;
-    margin-right: -1px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .desktop\:vads-u-margin-right--auto {
-    margin-right: -1px !important;
+    margin-right: auto !important;
   }
   .desktop\:vads-u-margin-left--auto {
-    margin-left: -1px !important;
+    margin-left: auto !important;
   }
   .desktop\:vads-u-measure--1 {
     max-width: 40ch !important;
@@ -13322,14 +13322,14 @@ through all possible variants
     margin-left: -1px !important;
   }
   .desktop-lg\:vads-u-margin-x--auto {
-    margin-left: -1px !important;
-    margin-right: -1px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .desktop-lg\:vads-u-margin-right--auto {
-    margin-right: -1px !important;
+    margin-right: auto !important;
   }
   .desktop-lg\:vads-u-margin-left--auto {
-    margin-left: -1px !important;
+    margin-left: auto !important;
   }
   .desktop-lg\:vads-u-measure--1 {
     max-width: 40ch !important;
@@ -15063,14 +15063,14 @@ through all possible variants
     margin-left: -1px !important;
   }
   .medium-screen\:vads-u-margin-x--auto {
-    margin-left: -1px !important;
-    margin-right: -1px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .medium-screen\:vads-u-margin-right--auto {
-    margin-right: -1px !important;
+    margin-right: auto !important;
   }
   .medium-screen\:vads-u-margin-left--auto {
-    margin-left: -1px !important;
+    margin-left: auto !important;
   }
   .medium-screen\:vads-u-measure--1 {
     max-width: 40ch !important;
