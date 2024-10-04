@@ -1,5 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
+import { ElementHandle } from 'puppeteer';
 const path = require('path');
 
 describe('va-file-input', () => {
@@ -59,7 +60,7 @@ describe('va-file-input', () => {
     const fileUploadSpy = await page.spyOnEvent('vaChange');
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
 
-    const input = await page.$('pierce/#fileInputField');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
     expect(input).not.toBeNull();
 
     await input
@@ -92,7 +93,7 @@ describe('va-file-input', () => {
           .querySelector('va-file-input')
           .shadowRoot.querySelector('input[type=file]'),
       )
-    ).asElement();
+    ) as ElementHandle<HTMLInputElement>;
 
     expect(input).not.toBeNull();
 
@@ -114,7 +115,7 @@ describe('va-file-input', () => {
       await page.waitForFunction(() =>
         document.querySelector('va-file-input').shadowRoot.querySelector('va-modal').shadowRoot.querySelector('va-button[secondary]')
       )
-    ).asElement();
+    );
 
     //don't delete
     noButton.click();
@@ -146,7 +147,7 @@ describe('va-file-input', () => {
           .querySelector('va-file-input')
           .shadowRoot.querySelector('input[type=file]'),
       )
-    ).asElement();
+    ) as ElementHandle<HTMLInputElement>;
 
     expect(input).not.toBeNull();
 
@@ -168,7 +169,7 @@ describe('va-file-input', () => {
       await page.waitForFunction(() =>
         document.querySelector('va-file-input').shadowRoot.querySelector('va-modal').shadowRoot.querySelector('va-button')
       )
-    ).asElement();
+    );
 
     // yes we want to remove the file
     yesButton.click();

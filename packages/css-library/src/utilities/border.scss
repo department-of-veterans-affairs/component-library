@@ -40,7 +40,8 @@ $u-border-color: (
         $tokens-color-basic,
         $tokens-color-grayscale,
         $tokens-color-tertiary,
-        $tokens-color-hub
+        $tokens-color-hub,
+        $tokens-color-semantic
       ),
     settings: $border-other-settings,
     property: 'border-color',

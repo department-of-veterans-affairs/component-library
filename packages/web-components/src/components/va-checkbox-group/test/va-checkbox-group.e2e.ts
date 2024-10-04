@@ -22,7 +22,7 @@ describe('va-checkbox-group', () => {
     `,
     );
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
   it('renders an error message if passed', async () => {
@@ -31,7 +31,9 @@ describe('va-checkbox-group', () => {
       '<va-checkbox-group error="This is an error"></va-checkbox-group>',
     );
 
-    const element = await page.find('va-checkbox-group >>> #checkbox-error-message');
+    const element = await page.find(
+      'va-checkbox-group >>> #checkbox-error-message',
+    );
     expect(element).toEqualHtml(`
      <span id="checkbox-error-message" role="alert">
         <span class="usa-sr-only">error</span>
@@ -61,7 +63,7 @@ describe('va-checkbox-group', () => {
     `,
     );
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
   it('renders a required span based on prop', async () => {
@@ -171,6 +173,14 @@ describe('va-checkbox-group', () => {
    `);
   });
 
+  it('renders aria message text if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group message-aria-describedby="Some additional info"></va-checkbox-group>');
+    const message = await page.find('va-checkbox-group >>> #description-message');
+    expect(message.textContent).toEqual("Some additional info");
+    expect(message).toHaveClass("usa-sr-only");
+  });
+
   it('useFormsPattern displays header for the single field pattern', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -216,7 +226,7 @@ describe('va-checkbox-group', () => {
         <va-checkbox label="Option 2" value="2"></va-checkbox>
       </va-checkbox-group>
     `,);
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
 });

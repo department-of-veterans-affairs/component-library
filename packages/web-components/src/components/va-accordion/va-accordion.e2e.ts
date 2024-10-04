@@ -285,4 +285,29 @@ describe('va-accordion', () => {
       },
     });
   });
+
+  it('shows "Collapse all -" if all accordion-items are open on load', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion section-heading="The Section Heading">
+        <va-accordion-item header="First item" open="true">Some content</va-accordion-item>
+      </va-accordion>`);
+    
+    const button = await page.find('va-accordion >>> button');
+
+    expect(button.innerText).toEqual('collapse-all -');
+  });
+
+  it('shows "Collapse all -" if some of accordion-items are open on load', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion section-heading="The Section Heading">
+        <va-accordion-item header="First item" open="true">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">Some content</va-accordion-item>
+      </va-accordion>`);
+    
+    const button = await page.find('va-accordion >>> button');
+
+    expect(button.innerText).toEqual('collapse-all -');
+  });
 });

@@ -26,6 +26,7 @@
   margin-bottom: 0;
 }
 
-::slotted(option) {
+::slotted(option),
+::slotted(optgroup) {
   display: none;
 }

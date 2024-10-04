@@ -33,9 +33,9 @@ export class VaHeaderMinimal {
   @Prop() subheader?: string;
 
   /**
-   * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is for when a heading level 1 needs to be used elsewhere, as there should only be one heading level 1 per page.
+   * Enables use of heading tags in the minimal header instead of `<div>` tags. This is for when a heading level 1 needs to be used in the header, as there should only be one heading level 1 per page.
    */
-  @Prop() disableHeadings?: boolean = false;
+  @Prop() enableHeadings?: boolean = false;
 
   // This keydown event listener tracks if the shift key is held down while changing focus
   @Listen('keydown', { target: 'window' })
@@ -62,7 +62,7 @@ export class VaHeaderMinimal {
   }
 
   render() {
-    const { header, subheader, disableHeadings: disableHeadings } = this;
+    const { header, subheader, enableHeadings: enableHeadings } = this;
 
     return (
       <Host role="banner">
@@ -74,10 +74,10 @@ export class VaHeaderMinimal {
           </a>
           <div class="header-container">
             
-            {!disableHeadings ? <h1>{header}</h1> : <div class="header">{header}</div>}
+            {enableHeadings ? <h1>{header}</h1> : <div class="header">{header}</div>}
 
             {subheader && (
-              !disableHeadings ? <h2>{subheader}</h2> : <div class="subheader">{subheader}</div>
+              enableHeadings ? <h2>{subheader}</h2> : <div class="subheader">{subheader}</div>
             )}
           </div>
         </div>

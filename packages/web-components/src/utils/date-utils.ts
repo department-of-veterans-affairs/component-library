@@ -157,8 +157,18 @@ export const internalErrors = [
   'year-range',
   'day-range',
   'month-range',
-  'date-error'
+  'date-error',
+  'month-select'
 ];
+
+/**
+ the month error key for a va-select instance varies if 
+ the instance is inside va-date or va-memorable-date
+ */
+function getMonthErrorKey(monthSelect: boolean): string {
+  return monthSelect ? 'month-select' : 'month-range';
+}
+
 
 interface ValidateConfig {
   component: Components.VaDate | Components.VaMemorableDate,
@@ -169,6 +179,7 @@ interface ValidateConfig {
   yearTouched?: boolean,
   monthTouched?: boolean,
   dayTouched?: boolean,
+  monthSelect?: boolean
 }
 
 export function validate({
@@ -179,7 +190,8 @@ export function validate({
                            monthYearOnly,
                            yearTouched,
                            monthTouched,
-                           dayTouched
+                           dayTouched,
+                           monthSelect
                          }: ValidateConfig): void {
 
   const maxDays = daysForSelectedMonth(year, month);
@@ -192,7 +204,7 @@ export function validate({
   // Check NaN and set errors based on NaN values
   if (isNaN(month) && monthTouched) {
     component.invalidMonth = true;
-    component.error = 'month-range';
+    component.error = getMonthErrorKey(monthSelect);
     return;
   }
   if (!monthYearOnly && isNaN(day) && dayTouched) {
@@ -228,7 +240,7 @@ export function validate({
   // Check for empty values after the fields are touched
   if (!month && monthTouched) {
     component.invalidMonth = true;
-    component.error = 'month-range';
+    component.error = getMonthErrorKey(monthSelect);
     return;
   }
   if (!day && !monthYearOnly && dayTouched) {
@@ -245,7 +257,7 @@ export function validate({
   // Validate year, month, and day ranges if they have a value regardless of whether they are required
   if (month && (month < minMonths || month > maxMonths) && monthTouched) {
     component.invalidMonth = true;
-    component.error = 'month-range';
+    component.error = getMonthErrorKey(monthSelect);
     return;
   }
   if (day && !monthYearOnly && (day < minDays || day > maxDays) && dayTouched) {
@@ -273,9 +285,9 @@ export function getErrorParameters(
   month: number) {
 
   const maxDay = daysForSelectedMonth(year, month);
-
   switch(error) {
     case 'month-range':
+    case 'month-select':
       return { start: 1, end: maxMonths };
     case 'day-range':
       return { start: 1, end: maxDay };
