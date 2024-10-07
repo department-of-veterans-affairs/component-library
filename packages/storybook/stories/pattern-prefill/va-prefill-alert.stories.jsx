@@ -4,7 +4,9 @@ import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
 // Remove backgroundOnly prop, this code and prop should be removed with the v1 version
-alertDocs.props = alertDocs.props.filter((prop) => prop.name !== 'backgroundOnly');
+alertDocs.props = alertDocs.props.filter(
+  prop => prop.name !== 'backgroundOnly',
+);
 
 export default {
   title: 'Patterns/Prefill/Components/Prefill Alert',
@@ -24,7 +26,9 @@ export default {
   parameters: {
     componentSubtitle: 'va prefill alert',
     docs: {
-      page: () => <StoryDocs storyDefault={SignedInPrefillAlert} data={alertDocs} />,
+      page: () => (
+        <StoryDocs storyDefault={SignedInPrefillAlert} data={alertDocs} />
+      ),
     },
   },
 };
@@ -40,13 +44,15 @@ const defaultArgs = {
   'close-btn-aria-label': 'Close notification',
   'closeable': false,
   'full-width': false,
-//   'headline': (
-//     <h2 id="track-your-status-on-mobile" slot="headline">
-// Note: Since you’re signed in to your account, we can prefill part of your form based on your account details. You can also save your form in progress and come back later to finish filling it out.    </h2>
-//   ),
+  //   'headline': (
+  //     <h2 id="track-your-status-on-mobile" slot="headline">
+  // Note: Since you’re signed in to your account, we can prefill part of your form based on your account details. You can also save your form in progress and come back later to finish filling it out.    </h2>
+  //   ),
   'children': (
     <p className="vads-u-margin-y--0">
- Note: Since you’re signed in to your account, we can prefill part of your form based on your account details. You can also save your form in progress and come back later to finish filling it out.
+      <strong>Note:</strong> Since you’re signed in to your account, we can
+      prefill part of your form based on your account details. You can also save
+      your form in progress and come back later to finish filling it out.
     </p>
   ),
 };
@@ -115,7 +121,8 @@ const SlimTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         <p className="vads-u-margin-y--0">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod.
         </p>
       </va-alert>
       <va-alert
@@ -130,7 +137,8 @@ const SlimTemplate = ({
       >
         <>
           <p className="vads-u-margin-y--0">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod.
           </p>
         </>
       </va-alert>
@@ -145,7 +153,8 @@ const SlimTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         <p className="vads-u-margin-y--0">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod.
         </p>
       </va-alert>
       <va-alert
@@ -160,7 +169,8 @@ const SlimTemplate = ({
       >
         <>
           <p className="vads-u-margin-y--0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod.
           </p>
         </>
       </va-alert>
@@ -176,7 +186,8 @@ const SlimTemplate = ({
       >
         <>
           <p className="vads-u-margin-y--0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod.
           </p>
         </>
       </va-alert>
@@ -184,38 +195,44 @@ const SlimTemplate = ({
   );
 };
 
-
 export const SignedInPrefillAlert = Template.bind(null);
 SignedInPrefillAlert.args = {
   ...defaultArgs,
 };
 SignedInPrefillAlert.argTypes = propStructure(alertDocs);
 
-
 export const UnauthenticatedPrefillAlert = Template.bind(null);
 UnauthenticatedPrefillAlert.args = {
   ...defaultArgs,
   headline: (
     <h2 slot="headline">
-    Sign in with a verified account to update your information online
+      Sign in now to save time and save your work in progress
     </h2>
   ),
   children: (
     <div>
-      <p className="vads-u-margin-top--0">
-      You’ll need to sign in with an identity-verified account  through one of our account providers. Identity verification helps us  protect all Veterans’ information and prevent scammers from stealing  your benefits.
+      <p className="vads-u-margin-top--2">
+        Here’s how signing in now helps you:
       </p>
+      <ul>
+        <li>
+          We can fill in some of your information for you to save you time.
+        </li>
+        <li>
+          You can save your work in progress. You’ll have 60 days from when you
+          start or make updates to your application to come back and finish it.
+        </li>
+      </ul>
       <p>
-<strong>Don't yet have a verified account?</strong> Create a <strong>Login.gov</strong> or <strong>ID.me</strong> account now. Then come back here and sign in. We’ll help you verify your identity for your account.
+        <strong>Note:</strong> You can sign in after you start your application.
+        But you'll lose any information you already filled in.
       </p>
+      <va-button text="Sign in to start your application" />
       <p>
-        <strong>Not sure if your account is verified?</strong> Sign in here. We’ll tell you if you need to verify.
+        <a href="#start">Start your application without signing in</a>
       </p>
-    
-      <p><strong>Note:</strong> You can sign in after you start your application. But you'll lose any information you already filled in.</p>
-      <va-button text="Sign in to start your form"/>
     </div>
-  )
+  ),
 };
 
 export const PrefilledInfoAlert = Template.bind(null);
@@ -223,12 +240,9 @@ PrefilledInfoAlert.args = {
   ...defaultArgs,
   children: (
     <p className="vads-u-margin-y--0">
-     We've prefilled some of your information from your account. If you need to correct anything, you can select edit below.
+      <strong>Note:</strong> We've prefilled some of your information from your
+      account. If you need to correct anything, you can select edit below. All
+      updates will be made only to this form.
     </p>
   ),
 };
-
-
-
-
-
