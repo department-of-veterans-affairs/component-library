@@ -579,8 +579,6 @@ export namespace Components {
          */
         "required"?: boolean;
     }
-    interface VaHack {
-    }
     /**
      * @componentName Header - Minimal
      * @maturityCategory caution
@@ -1437,6 +1435,9 @@ export namespace Components {
     interface VaSummaryBox {
     }
     interface VaTable {
+        /**
+          * Is the table sortable
+         */
         "sortable": boolean;
         /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
@@ -1447,7 +1448,7 @@ export namespace Components {
          */
         "tableTitle"?: string;
         /**
-          * If uswds is true, the type of table
+          * The type of table
          */
         "tableType"?: 'borderless';
     }
@@ -2277,12 +2278,6 @@ declare global {
         prototype: HTMLVaFileInputMultipleElement;
         new (): HTMLVaFileInputMultipleElement;
     };
-    interface HTMLVaHackElement extends Components.VaHack, HTMLStencilElement {
-    }
-    var HTMLVaHackElement: {
-        prototype: HTMLVaHackElement;
-        new (): HTMLVaHackElement;
-    };
     /**
      * @componentName Header - Minimal
      * @maturityCategory caution
@@ -2946,7 +2941,6 @@ declare global {
         "va-date": HTMLVaDateElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
-        "va-hack": HTMLVaHackElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
@@ -3649,8 +3643,6 @@ declare namespace LocalJSX {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
-    }
-    interface VaHack {
     }
     /**
      * @componentName Header - Minimal
@@ -4644,6 +4636,9 @@ declare namespace LocalJSX {
     interface VaSummaryBox {
     }
     interface VaTable {
+        /**
+          * Is the table sortable
+         */
         "sortable"?: boolean;
         /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
@@ -4654,7 +4649,7 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
-          * If uswds is true, the type of table
+          * The type of table
          */
         "tableType"?: 'borderless';
     }
@@ -4976,7 +4971,6 @@ declare namespace LocalJSX {
         "va-date": VaDate;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
-        "va-hack": VaHack;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
         "va-link": VaLink;
@@ -5141,7 +5135,6 @@ declare module "@stencil/core" {
              * @guidanceHref form/file-input-multiple
              */
             "va-file-input-multiple": LocalJSX.VaFileInputMultiple & JSXBase.HTMLAttributes<HTMLVaFileInputMultipleElement>;
-            "va-hack": LocalJSX.VaHack & JSXBase.HTMLAttributes<HTMLVaHackElement>;
             /**
              * @componentName Header - Minimal
              * @maturityCategory caution

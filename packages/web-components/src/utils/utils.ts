@@ -13,12 +13,6 @@ export function isNumeric(value: string): boolean {
   return !Number.isNaN(parseFloat(value));
 }
 
-
-export function isValidDate(string: string) {
-  const date = new Date(string);
-  return !isNaN(date.getTime());
-}
-
 /**
  * Get all of the slotted children in the root element that match `nodeName`
  * If nodeName is null we still want all children to be accessible
