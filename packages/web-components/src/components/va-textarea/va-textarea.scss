@@ -12,11 +12,6 @@
 @import '../../mixins/focusable.css';
 @import '../../mixins/headers.css';
 
-
-.usa-textarea {
-  resize: inherit;
-}
-
 :host {
   color: var(--vads-color-base);
   display: block;

@@ -90,17 +90,17 @@ export class VaOnThisPage {
 
     return (
       <nav aria-labelledby="on-this-page">
-        <dl>
-          <dt id="on-this-page">{i18next.t('on-this-page')}</dt>
-          <dd role="definition">
-            {h2s.map(heading => (
+        <ul>
+          <li id="on-this-page">{i18next.t('on-this-page')}</li>
+          {h2s.map(heading => (
+            <li>
               <a href={`#${heading.id}`} onClick={handleOnClick}>
                 <va-icon icon="arrow_downward"></va-icon>
-                {heading.innerText}
+                <span>{heading.innerText}</span>
               </a>
-            ))}
-          </dd>
-        </dl>
+            </li>
+          ))}
+        </ul>
       </nav>
     );
   }
