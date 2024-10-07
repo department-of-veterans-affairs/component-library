@@ -29,6 +29,7 @@ const Template = ({
 }) => {
   return (
     <>
+    <div style={{ padding: '20px' }}>
       <div class="schemaform-title">
         <h1 data-testid="form-title">Request a Board Appeal</h1>
         <div class="schemaform-subtitle" data-testid="form-subtitle">
@@ -53,6 +54,7 @@ const Template = ({
       <a href="#start" class="vads-c-action-link--green">
         Start the Board Appeal request
       </a>
+      </div>
     </>
   );
 };

@@ -30,6 +30,7 @@ const Template = ({
 }) => {
   return (
     <>
+    <div style={{ padding: '20px' }}>
       <div class="schemaform-title">
         <h1 data-testid="form-title">
           Update your VA health benefits information
@@ -63,6 +64,7 @@ const Template = ({
         call your VA health facility.{' '}
         <va-link href="#" text="Find your VA health facility" />
       </p>
+      </div>
     </>
   );
 };
