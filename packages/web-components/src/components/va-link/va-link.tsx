@@ -126,7 +126,6 @@ export class VaLink {
   @Event({
     composed: true,
     bubbles: true,
-    eventName: 'route-change',
   })
   routeChange: EventEmitter<{ href: string }>;
 

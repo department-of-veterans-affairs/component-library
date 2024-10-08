@@ -2296,7 +2296,7 @@ declare global {
     };
     interface HTMLVaLinkElementEventMap {
         "component-library-analytics": any;
-        "route-change": { href: string };
+        "routeChange": { href: string };
     }
     /**
      * @componentName Link
@@ -3733,7 +3733,7 @@ declare namespace LocalJSX {
         /**
           * Fires when user clicks on the link. Has no effect unless the isRouterLink prop is set to `true`.
          */
-        "onRoute-change"?: (event: VaLinkCustomEvent<{ href: string }>) => void;
+        "onRouteChange"?: (event: VaLinkCustomEvent<{ href: string }>) => void;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
          */
