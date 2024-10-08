@@ -15,6 +15,11 @@
 //============ PORTED VARIABLES ==============//
 @import './formation-overrides/variables';
 
+// ----- VA GENERAL (MAIN FILE/OTHER) ---- //
+@import 'base/va';
+@import 'base/fonts';
+@import 'base/utils';
+
 //============ USWDS v1 ==============//
 @import 'formation-overrides/core/fonts';
 @import 'formation-overrides/core/utilities';
@@ -34,10 +39,6 @@
 @import 'formation-overrides/components/media-block';
 @import 'formation-overrides/components/side-nav';
 
-// ----- VA GENERAL (MAIN FILE/OTHER) ---- //
-@import 'base/va';
-@import 'base/fonts';
-@import 'base/utils';
 
 // ----- VA MODULES ---- //
 @import 'modules/m-external-link';
