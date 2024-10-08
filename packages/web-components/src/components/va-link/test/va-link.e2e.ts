@@ -237,7 +237,7 @@ describe('va-link', () => {
       '<va-link is-router-link href="https://www.va.gov" text="example link text" />',
     );
 
-    const routerChangeSpy = await page.spyOnEvent('route-change');
+    const routerChangeSpy = await page.spyOnEvent('routeChange');
     const anchor = await page.find('va-link >>> a');
 
     await anchor.click();
@@ -253,7 +253,7 @@ describe('va-link', () => {
       '<va-link is-router-link=false href="https://www.va.gov" text="example link text" />',
     );
 
-    const analyticsSpy = await page.spyOnEvent('route-change');
+    const analyticsSpy = await page.spyOnEvent('routeChange');
     const anchor = await page.find('va-link >>> a');
 
     await anchor.click();
