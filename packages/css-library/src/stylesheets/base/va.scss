@@ -277,7 +277,11 @@ table {
   @include media($medium-screen) {
     background: $color-gray-lightest;
     .usa-banner-inner {
+      font-size: 12px;
       padding-left: scale-rem(1.5rem);
+      p {
+        font-size: 12px;
+      }
     }
 
     .usa-banner-content {
@@ -289,6 +293,10 @@ table {
   @include media($small-desktop-screen) {
     .usa-banner-inner {
       padding-left: 0;
+      font-size: 12px;
+      p {
+        font-size: 12px;
+      }
     }
   }
 
@@ -301,7 +309,6 @@ table {
 
 .va-notice--banner {
   p {
-    font-size: 16px;
     margin: 0;
   }
   a {

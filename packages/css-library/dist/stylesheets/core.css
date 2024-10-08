@@ -1940,7 +1940,7 @@ button,
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 1;
@@ -2613,7 +2613,7 @@ legend {
 
 .usa-form-hint {
   color: #757575;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   margin-bottom: 0;
 }
 
@@ -3026,7 +3026,7 @@ caption {
   ***THIS IS USWDS v1***
 */
 html {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 16px;
 }
 
@@ -3186,7 +3186,7 @@ dfn {
 .usa-sans a,
 .usa-sans li,
 .usa-sans span {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 .usa-sans a {
   border-bottom: none;
@@ -3360,7 +3360,7 @@ dfn {
 .usa-accordion > ul > li,
 .usa-accordion-bordered > ul > li {
   background-color: #f0f0f0;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   list-style: none;
   margin-bottom: 0.3125rem;
   width: 100%;
@@ -3384,7 +3384,7 @@ dfn {
   color: #212121;
   cursor: pointer;
   display: inline-block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: 700;
   margin: 0;
   padding: 0.9375rem 3.4375rem 0.9375rem 1.25rem;
@@ -3423,7 +3423,7 @@ dfn {
 .usa-accordion > li,
 .usa-accordion-bordered > li {
   background-color: #f0f0f0;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   list-style: none;
   margin-bottom: 0.3125rem;
   width: 100%;
@@ -3472,7 +3472,7 @@ dfn {
   color: #212121;
   cursor: pointer;
   display: inline-block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: 700;
   margin: 0;
   padding: 0.9375rem 3.4375rem 0.9375rem 1.25rem;
@@ -3563,7 +3563,7 @@ dfn {
 }
 
 .usa-alert-text {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   margin-bottom: 0;
   margin-top: 0;
 }
@@ -3971,7 +3971,7 @@ fieldset {
 
 .usa-form-note {
   float: right;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 0.9375rem;
   margin: 0 0 scale(1.5rem);
 }
@@ -4119,7 +4119,7 @@ fieldset {
   border: none;
   color: #212121;
   display: block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   line-height: 1.3;
   padding: 0.53125rem 0.625rem 0.53125rem 0.5859375rem;
   text-decoration: none;
@@ -5740,7 +5740,7 @@ h1, h2, h3, h4, h5 {
 }
 
 h6 {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: 700;
 }
 
@@ -5954,7 +5954,11 @@ table {
     background: #f1f1f1;
   }
   .va-notice--banner .usa-banner-inner {
+    font-size: 12px;
     padding-left: 0.9375rem;
+  }
+  .va-notice--banner .usa-banner-inner p {
+    font-size: 12px;
   }
   .va-notice--banner .usa-banner-content {
     padding-left: 0;
@@ -5964,6 +5968,10 @@ table {
 @media screen and (min-width: 1024px), print and (min-width: 1024px) {
   .va-notice--banner .usa-banner-inner {
     padding-left: 0;
+    font-size: 12px;
+  }
+  .va-notice--banner .usa-banner-inner p {
+    font-size: 12px;
   }
 }
 .va-notice--banner-inner {
@@ -5973,7 +5981,6 @@ table {
 }
 
 .va-notice--banner p {
-  font-size: 16px;
   margin: 0;
 }
 .va-notice--banner a {
@@ -7735,7 +7742,7 @@ through all possible variants
   font-weight: 400;
   line-height: 1.5;
   text-transform: uppercase;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 
 /**

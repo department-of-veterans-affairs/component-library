@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 08 Oct 2024 17:42:53 GMT
+ * Generated on Tue, 08 Oct 2024 18:41:07 GMT
  */
 
 :root {
@@ -111,10 +111,10 @@
   --vads-color-background-default-on-dark: #171716;
   --vads-color-forms-surface-active-on-light: #ecf1f7;
   --vads-color-forms-surface-active-on-dark: #252f3e;
-  --font-family-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+  --font-family-sans: 'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
   --font-family-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-source-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+  --font-source-sans: 'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
   --font-style-normal: normal;

@@ -30,7 +30,7 @@
 }
 
 html {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 16px;
 }
 
@@ -190,7 +190,7 @@ dfn {
 .usa-sans a,
 .usa-sans li,
 .usa-sans span {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 .usa-sans a {
   border-bottom: none;

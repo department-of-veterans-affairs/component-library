@@ -5305,7 +5305,7 @@ through all possible variants
 }
 
 .vads-u-font-family--sans {
-  font-family: Source Sans Pro, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif !important;
+  font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif !important;
 }
 
 .vads-u-font-family--serif {
@@ -14342,7 +14342,7 @@ through all possible variants
     order: 0 !important;
   }
   .medium-screen\:vads-u-font-family--sans {
-    font-family: Source Sans Pro, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif !important;
+    font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif !important;
   }
   .medium-screen\:vads-u-font-family--serif {
     font-family: Bitter, Georgia, Cambria, Times New Roman, Times, serif !important;

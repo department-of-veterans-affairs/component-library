@@ -1563,7 +1563,7 @@ h1, h2, h3, h4, h5 {
 }
 
 h6 {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: 700;
 }
 
@@ -1777,7 +1777,11 @@ table {
     background: #f1f1f1;
   }
   .va-notice--banner .usa-banner-inner {
+    font-size: 12px;
     padding-left: 0.9375rem;
+  }
+  .va-notice--banner .usa-banner-inner p {
+    font-size: 12px;
   }
   .va-notice--banner .usa-banner-content {
     padding-left: 0;
@@ -1787,6 +1791,10 @@ table {
 @media screen and (min-width: 1024px), print and (min-width: 1024px) {
   .va-notice--banner .usa-banner-inner {
     padding-left: 0;
+    font-size: 12px;
+  }
+  .va-notice--banner .usa-banner-inner p {
+    font-size: 12px;
   }
 }
 .va-notice--banner-inner {
@@ -1796,7 +1804,6 @@ table {
 }
 
 .va-notice--banner p {
-  font-size: 16px;
   margin: 0;
 }
 .va-notice--banner a {
