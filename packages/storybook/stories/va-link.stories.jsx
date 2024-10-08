@@ -312,7 +312,7 @@ const WithRouterTemplate = ({
   return (
     <>
     <p>The <code>va-link</code> web component can be used with a routing framework like react-router using 
-    the native <code>onClick</code> event:
+    the native <code>click</code> event like in the following example:
     </p>
     <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
         <code>
@@ -342,7 +342,7 @@ export default withRouter(YourComponent);
 
         </code>
       </pre>
-    <p>Example: If you need help to gather your information or fill out your
+    <p>If you need help to gather your information or fill out your
       application/form,{' '}
       <VaLink
         href={href}
