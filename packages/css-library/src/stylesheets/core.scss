@@ -6,7 +6,7 @@
 
 //============ MIXINS & OTHER FUNCTIONS ==============//
 @use './override-function' as *;
-@use'./functions' as *;
+@use './functions' as *;
 @use './mixins' as *;
 
 //============ VENDOR PARTIALS ==============//
@@ -36,6 +36,9 @@
 
 // ----- VA GENERAL (MAIN FILE/OTHER) ---- //
 @import 'base/va';
+@forward 'shame' as *;
+@forward 'base/fonts';
+@forward 'base/utils';
 
 // ----- VA MODULES ---- //
 @import 'modules/m-external-link';
