@@ -36,9 +36,8 @@
 
 // ----- VA GENERAL (MAIN FILE/OTHER) ---- //
 @import 'base/va';
-@forward 'shame' as *;
-@forward 'base/fonts';
-@forward 'base/utils';
+@import 'base/fonts';
+@import 'base/utils';
 
 // ----- VA MODULES ---- //
 @import 'modules/m-external-link';

@@ -1,12 +1,12 @@
 {
   "font": {
     "family": {
-      "sans": { "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
+      "sans": { "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
       "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" }
     },
     "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" },
     "source": {
-      "sans": { "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"}
+      "sans": { "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"}
     },
     "weight": {
       "normal": { "value": "400"},
