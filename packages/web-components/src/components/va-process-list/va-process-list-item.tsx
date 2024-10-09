@@ -45,11 +45,6 @@ export class VaProcessListItem {
     
     return (
       <Host role="listitem" class='usa-process-list__item'>
-        {
-          checkmark || active || pending ? 
-            <span class='sr-only'>{checkmark ? 'Completed:' : active ? 'Current Step:' : pending ? 'Pending:' : null}</span>
-          : null
-        }
         { checkmark || active || pending ?
           <div class="usa-process-list__heading-eyebrow">{checkmark ? 'Complete' : active ? 'Active' : pending ? 'Pending' : null}</div>
           : null
