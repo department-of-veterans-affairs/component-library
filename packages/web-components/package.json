@@ -21,7 +21,7 @@
     "build-bindings": "tsc -p tsconfig.bindings.json",
     "lint": "eslint src/**/*{.ts,.tsx}",
     "watch:stencil": "stencil build --watch",
-    "test": "stencil test --spec --e2e",
+    "test": "stencil test --spec --e2e --no-sandbox",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "serve": "stencil build --dev --watch --serve"
