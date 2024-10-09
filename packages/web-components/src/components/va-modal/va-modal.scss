@@ -45,6 +45,7 @@
 :host .usa-modal__main {
   position: relative;
   margin: 0px auto;
+  box-sizing: border-box;
 }
 
 .va-modal-alert__icon {
