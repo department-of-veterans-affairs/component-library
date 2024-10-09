@@ -54,7 +54,8 @@ caption {
 }
 
 @media screen and (max-width: 768px) {
-  thead, ::slotted([slot=headers]) {
+  table.usa-table--stacked thead,
+  ::slotted([slot=headers]) {
     display: none;
   }
 

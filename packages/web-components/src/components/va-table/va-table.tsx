@@ -123,7 +123,8 @@ export class VaTable {
     // add attributes
     vaTable.setAttribute('rows', `${this.rows}`);
     vaTable.setAttribute('cols', `${this.cols}`);
-    vaTable.setAttribute('stacked', this.stacked ? "true" : "false");
+    // a sortable table should never stack
+    vaTable.setAttribute('stacked', (this.stacked && !this.sortable) ? "true" : "false");
     vaTable.setAttribute('sortable', `${this.sortable}`);
     // we rebuild the inner table after a sort
     if (this.sortable && sortdir && sortindex) {
