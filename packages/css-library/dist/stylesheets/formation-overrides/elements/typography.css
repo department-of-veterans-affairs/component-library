@@ -52,8 +52,8 @@ a:hover, a:active {
   color: #1a4480;
 }
 a:focus {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 a:visited {
   color: #54278f;

@@ -233,8 +233,8 @@ legend {
 }
 
 [type=radio]:focus + label::before {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 6px;
+  outline: 2px solid #face00;
+  outline-offset: 4px;
 }
 
 [type=checkbox]:disabled + label {
@@ -242,8 +242,8 @@ legend {
 }
 
 [type=checkbox]:focus + label::before {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 
 [type=checkbox]:disabled + label::before,

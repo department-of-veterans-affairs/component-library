@@ -2087,6 +2087,7 @@ article > h1 {
   max-width: 48.125rem;
 }
 .va-introtext p, .va-introtext a {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.7;
@@ -3751,7 +3752,7 @@ through all possible variants
   background: rgba(0, 0, 0, 0.05);
 }
 .va-button-link:focus {
-  outline: 2px dotted #aeb0b5;
+  outline: 2px solid #face00;
   outline-offset: 2px;
   outline-offset: 0;
 }
@@ -3922,21 +3923,21 @@ input:not([disabled]):focus,
 select:not([disabled]):focus,
 textarea:not([disabled]):focus,
 button:not([disabled]):focus {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 
 iframe:focus,
 [href]:focus,
 [tabindex]:focus,
 [contentEditable=true]:focus {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 
 .usa-focus {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 
 /**
@@ -4734,8 +4735,8 @@ legend {
 }
 
 [type=radio]:focus + label::before {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 6px;
+  outline: 2px solid #face00;
+  outline-offset: 4px;
 }
 
 [type=checkbox]:disabled + label {
@@ -4743,8 +4744,8 @@ legend {
 }
 
 [type=checkbox]:focus + label::before {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 
 [type=checkbox]:disabled + label::before,
@@ -5096,8 +5097,8 @@ a:hover, a:active {
   color: #1a4480;
 }
 a:focus {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 a:visited {
   color: #54278f;

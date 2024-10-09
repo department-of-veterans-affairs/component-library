@@ -233,7 +233,7 @@
   font-size: 15px;
 }
 .va-sidebarnav .usa-sidenav-sub_list a:focus {
-  outline: 2px dotted #aeb0b5;
+  outline: 2px solid #face00;
   outline-offset: 0px;
 }
 .va-sidebarnav .usa-sidenav-sub_list a:hover, .va-sidebarnav .usa-sidenav-sub_list a:focus {

@@ -152,6 +152,7 @@ fieldset {
 **/
 body .row {
   max-width: 62.5em;
+  margin: 0 auto;
 }
 body .row-padded {
   max-width: 62.5rem;

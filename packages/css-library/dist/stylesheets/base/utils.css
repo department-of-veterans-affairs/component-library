@@ -76,7 +76,7 @@
   background: rgba(0, 0, 0, 0.05);
 }
 .va-button-link:focus {
-  outline: 2px dotted #aeb0b5;
+  outline: 2px solid #face00;
   outline-offset: 2px;
   outline-offset: 0;
 }
