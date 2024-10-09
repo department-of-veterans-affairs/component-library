@@ -101,5 +101,53 @@ describe('va-process-list-item', () => {
     const element = await page.find('va-process-list-item .sr-only');
     expect(element.innerText).toEqual('Current Step:');
   })
+  it('renders the right status text for checkmark status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <ol>
+        <va-process-list-item header="Heading" checkmark>
+          <p>Some content</p>
+        </va-process-list>
+      </ol>
+    `);
+    const element = await page.find('va-process-list-item .usa-process-list__heading-eyebrow');
+    expect(element.innerText).toEqual('Complete');
+  })
+  it('renders the right status text for active status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <ol>
+        <va-process-list-item header="Heading" active>
+          <p>Some content</p>
+        </va-process-list>
+      </ol>
+    `);
+    const element = await page.find('va-process-list-item .usa-process-list__heading-eyebrow');
+    expect(element.innerText).toEqual('Active');
+  })
+  it('renders the right status text for pending status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <ol>
+        <va-process-list-item header="Heading" pending>
+          <p>Some content</p>
+        </va-process-list>
+      </ol>
+    `);
+    const element = await page.find('va-process-list-item .usa-process-list__heading-eyebrow');
+    expect(element.innerText).toEqual('Pending');
+  })
+  it('does not render the status text by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <ol>
+        <va-process-list-item header="Heading">
+          <p>Some content</p>
+        </va-process-list>
+      </ol>
+    `);
+    const element = await page.find('va-process-list-item .usa-process-list__heading-eyebrow');
+    expect(element).toBeNull;
+  })
 })
 

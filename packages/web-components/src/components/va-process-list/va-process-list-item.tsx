@@ -50,6 +50,10 @@ export class VaProcessListItem {
             <span class='sr-only'>{checkmark ? 'Completed:' : active ? 'Current Step:' : pending ? 'Pending:' : null}</span>
           : null
         }
+        { checkmark || active || pending ?
+          <div class="usa-process-list__heading-eyebrow">{checkmark ? 'Complete' : active ? 'Active' : pending ? 'Pending' : null}</div>
+          : null
+        }
         {header ? <HeaderTag class='usa-process-list__heading'>{header}</HeaderTag> : null}
         <slot/>
       </Host>
