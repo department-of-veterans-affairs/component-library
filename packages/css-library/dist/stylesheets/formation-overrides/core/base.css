@@ -44,21 +44,21 @@ input:not([disabled]):focus,
 select:not([disabled]):focus,
 textarea:not([disabled]):focus,
 button:not([disabled]):focus {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 
 iframe:focus,
 [href]:focus,
 [tabindex]:focus,
 [contentEditable=true]:focus {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 
 .usa-focus {
-  outline: 2px dotted #aeb0b5;
-  outline-offset: 3px;
+  outline: 2px solid #face00;
+  outline-offset: 2px;
 }
 
 /*# sourceMappingURL=base.css.map */

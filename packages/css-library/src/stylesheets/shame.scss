@@ -15,6 +15,7 @@ body {
   // used a lot in vets-website
   .row {
     max-width: 62.5em;
+    margin: 0 auto;
   }
 
   // We have no container element, so elements that are full width have to redefine the container layout every time
