@@ -18,9 +18,6 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={accordionDocs} />,
     },
-    chromatic: {
-      media: 'print'
-    },
   },
 };
 
@@ -308,7 +305,9 @@ const defaultArgs = {
   'open-single': undefined,
 };
 
-export const Default = Template.bind(null);
+export const Default = Template.bind({parameters:{chromatic: {
+  media: 'print'
+},}});
 Default.args = {
   ...defaultArgs,
 };
