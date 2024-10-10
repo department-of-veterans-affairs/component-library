@@ -54,6 +54,7 @@ export const config: Config = {
     }
   ],
   testing: {
+    browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
     moduleNameMapper: {
       '^.+.(svg)$': 'jest-transformer-svg',
     },
