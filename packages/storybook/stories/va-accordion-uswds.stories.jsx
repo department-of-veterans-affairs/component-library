@@ -18,6 +18,9 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={accordionDocs} />,
     },
+    chromatic: {
+      media: 'print'
+    },
   },
 };
 
@@ -326,11 +329,6 @@ Bordered.args = {
 export const Subheader = TemplateSubheader.bind(null);
 Subheader.args = {
   ...defaultArgs,
-  parameters: {
-    chromatic: {
-      media: 'print'
-    }
-  }
 };
 
 export const IconHeaders = TemplateIconHeaders.bind(null);
