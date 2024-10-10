@@ -130,7 +130,7 @@ const additionalFormInputsContent = (
 export const AdditionalFormInputs = Template.bind(null);
 AdditionalFormInputs.args = {
   ...defaultArgs,
-  label: 'Header label',
+  label: 'Additional Form Inputs',
   children: additionalFormInputsContent,
 };
 
@@ -273,3 +273,11 @@ FileUploaded.args = { ...defaultArgs, vaChange: event => event };
 
 export const ReadOnly = FileUploadedTemplate.bind(null);
 ReadOnly.args = { ...defaultArgs, vaChange: event => event, readOnly: true };
+
+export const ReadOnlyWithAdditionalInputs = FileUploadedTemplate.bind(null);
+ReadOnlyWithAdditionalInputs.args = {
+  ...defaultArgs,
+  vaChange: event => event,
+  readOnly: true,
+  children: additionalFormInputsContent,
+};

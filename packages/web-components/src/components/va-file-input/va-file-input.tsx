@@ -10,7 +10,7 @@ import {
   EventEmitter,
   State,
 } from '@stencil/core';
-import i18next from 'i18next';
+import { i18next } from '../..';
 import { fileInput } from './va-file-input-upgrader';
 import { extensionToMimeType } from './fileExtensionToMimeType';
 
@@ -160,7 +160,7 @@ export class VaFileInput {
         },
       });
     }
-  }
+  };
 
   private removeFile = (notifyParent: boolean = true) => {
     this.closeModal();
@@ -392,10 +392,12 @@ export class VaFileInput {
     const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
     return (
       <Host class={{ 'has-error': !!displayError }}>
-        <span class={{ 'usa-sr-only': !!headless }}>
-          {label && this.renderLabelOrHeader(label, required, headerSize)}
-        </span>
-        {hint && (
+        {!readOnly && (
+          <span class={{ 'usa-sr-only': !!headless }}>
+            {label && this.renderLabelOrHeader(label, required, headerSize)}
+          </span>
+        )}
+        {hint && !readOnly && (
           <div class={hintClass} id="input-hint-message">
             {hint}
           </div>
@@ -441,7 +443,9 @@ export class VaFileInput {
           {uploadStatus !== 'idle' && (
             <div class={selectedFileClassName}>
               {!headless && (
-                <div class="selected-files-label">Selected files</div>
+                <div class="selected-files-label">
+                  {readOnly ? 'Files you uploaded' : 'Selected files'}
+                </div>
               )}
               <div
                 class="usa-sr-only"
@@ -453,50 +457,52 @@ export class VaFileInput {
                   {fileThumbnail}
                   <div class="file-info-group vads-u-line-height--2">
                     <span class="file-label">{file.name}</span>
-                    <span id="input-error-message" role="alert">
-                      {displayError && (
-                        <Fragment>
-                          <span class="usa-sr-only">{i18next.t('error')}</span>
-                          <span class="usa-error-message">{displayError}</span>
-                        </Fragment>
-                      )}
-                    </span>
+                    {displayError && (
+                      <span id="input-error-message" role="alert">
+                        <span class="usa-sr-only">{i18next.t('error')}</span>
+                        <span class="usa-error-message">{displayError}</span>
+                      </span>
+                    )}
                     <span class="file-size-label">
                       {this.formatFileSize(file.size)}
                     </span>
                   </div>
                 </div>
-                {file && !readOnly && (
+                {(file || value) && (
                   <div>
                     <div class="additional-info-slot">
                       <slot></slot>
                     </div>
-                    <div class="file-button-section">
-                      <va-button-icon
-                        buttonType="change-file"
-                        onClick={this.changeFile}
-                        label="Change file"
-                        aria-label={'change file ' + file.name}
-                      ></va-button-icon>
-                      <va-button-icon
-                        buttonType="delete"
-                        onClick={this.openModal}
-                        aria-label={'delete file ' + file.name}
-                        label="Delete"
-                      ></va-button-icon>
-                    </div>
-                    <va-modal
-                      modalTitle="Delete this file?"
-                      visible={this.showModal}
-                      primaryButtonText="Yes, remove this"
-                      secondaryButtonText="No, keep this"
-                      onCloseEvent={this.closeModal}
-                      onPrimaryButtonClick={() => this.removeFile(true)}
-                      onSecondaryButtonClick={this.closeModal}
-                    >
-                      We'll remove the uploaded document{' '}
-                      <span class="file-label">{file.name}</span>
-                    </va-modal>
+                    {!readOnly && (
+                      <Fragment>
+                        <div class="file-button-section">
+                          <va-button-icon
+                            buttonType="change-file"
+                            onClick={this.changeFile}
+                            label="Change file"
+                            aria-label={'change file ' + file.name}
+                          ></va-button-icon>
+                          <va-button-icon
+                            buttonType="delete"
+                            onClick={this.openModal}
+                            aria-label={'delete file ' + file.name}
+                            label="Delete"
+                          ></va-button-icon>
+                        </div>
+                        <va-modal
+                          modalTitle="Delete this file?"
+                          visible={this.showModal}
+                          primaryButtonText="Yes, remove this"
+                          secondaryButtonText="No, keep this"
+                          onCloseEvent={this.closeModal}
+                          onPrimaryButtonClick={() => this.removeFile(true)}
+                          onSecondaryButtonClick={this.closeModal}
+                        >
+                          We'll remove the uploaded document{' '}
+                          <span class="file-label">{file.name}</span>
+                        </va-modal>
+                      </Fragment>
+                    )}
                   </div>
                 )}
               </va-card>
