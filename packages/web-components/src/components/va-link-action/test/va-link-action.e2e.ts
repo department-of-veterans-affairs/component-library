@@ -59,6 +59,25 @@ describe('va-link-action', () => {
     `);
   });
 
+  it('renders an aria-label if one is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-link-action href="https://www.va.gov" text="Find out if you qualify for this program and how to apply" label="This is an aria label"></va-link-action>',
+    );
+
+    const element = await page.find('va-link-action');
+    expect(element).toEqualHtml(`
+    <va-link-action class="hydrated" href="https://www.va.gov" label="This is an aria label" text="Find out if you qualify for this program and how to apply">
+      <mock:shadow-root>
+        <a aria-label="This is an aria label" href="https://www.va.gov" class="va-link--primary">
+          <va-icon class="link-icon--left link-icon hydrated"></va-icon>
+          <span class="link-text">Find out if you qualify for this program and how to apply</span>
+        </a>
+      </mock:shadow-root>
+    </va-link-action>
+    `);
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(

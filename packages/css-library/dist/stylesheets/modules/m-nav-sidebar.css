@@ -39,7 +39,7 @@
   color: #000000;
   padding-left: 1em;
 }
-@media screen and (min-width: 1008px), print and (min-width: 1008px) {
+@media screen and (min-width: 1024px), print and (min-width: 1024px) {
   .left-side-nav-title {
     padding-left: 0;
   }

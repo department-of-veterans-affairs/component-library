@@ -176,12 +176,12 @@ describe('va-text-input', () => {
     // Act
     await inputEl.press('a');
     const firstValue = await page.$eval(
-      'va-text-input',
+      'va-text-input >>> input',
       (comp: HTMLInputElement) => comp.value,
     );
     await inputEl.press('s');
     const secondValue = await page.$eval(
-      'va-text-input',
+      'va-text-input >>> input',
       (comp: HTMLInputElement) => comp.value,
     );
 

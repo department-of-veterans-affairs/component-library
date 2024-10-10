@@ -108,7 +108,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual("month-range");
+      expect(date.getAttribute('error')).toEqual("month-select");
     });
 
     it('allows for a custom required message', async () => {
@@ -515,7 +515,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('month-range');
+      expect(date.getAttribute('error')).toEqual('month-select');
     });
 
     it('is valid without a day value', async () => {

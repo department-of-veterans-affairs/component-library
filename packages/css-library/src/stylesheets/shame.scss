@@ -20,7 +20,7 @@ body {
   // We have no container element, so elements that are full width have to redefine the container layout every time
   // if they want to line up.
   // unused in content-build
-  // Used in vets-website, used in src/platform/monitoring/DowntimeNotification/components/DowntimeApproaching.jsx 
+  // Used in vets-website, used in src/platform/monitoring/DowntimeNotification/components/DowntimeApproaching.jsx
   .row-padded {
     max-width: scale-rem(100rem);
     padding: scale-rule(0 1rem);
@@ -38,7 +38,7 @@ body {
 }
 
 // unused in content-build
-// used in vets-website, used in src/platform/forms-system/src/js/containers/FormApp.jsx 
+// used in vets-website, used in src/platform/forms-system/src/js/containers/FormApp.jsx
 // and src/applications/simple-forms/mock-alternate-header-21-0845/components/CustomFormApp.jsx
 .progress-box {
   button {
@@ -49,7 +49,7 @@ body {
 .progress-box {
   border: 1px solid $color-gray-lightest;
   margin: scale-rule(1.5rem 0);
-  padding: scale-rule(1rem 2rem);
+  padding: scale-rule(1rem 0);
 }
 
 
@@ -82,7 +82,7 @@ body {
 // unused in content-build
 // used in vets-website in src/applications/terms-of-use/components/TermsAcceptanceAction.jsx,
 // src/platform/forms-system/src/js/containers/FormApp.jsx, src/platform/forms-system/src/js/review/submit-states/ClientError.jsx,
-// src/platform/forms-system/src/js/review/submit-states/Pending.jsx, src/platform/forms-system/src/js/review/submit-states/Submitted.jsx, 
+// src/platform/forms-system/src/js/review/submit-states/Pending.jsx, src/platform/forms-system/src/js/review/submit-states/Submitted.jsx,
 // src/platform/forms-system/src/js/review/submit-states/ThrottledError.jsx, src/platform/forms-system/src/js/review/submit-states/ValidationError.jsx
 .hidden {
   display: none !important;

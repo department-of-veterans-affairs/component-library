@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
-  "version": "0.8.8",
+  "version": "0.12.2",
   "description": "Department of Veterans Affairs stylesheets, tokens, and utilities",
   "packageManager": "yarn@3.2.0",
   "files": [
@@ -16,7 +16,7 @@
     "build:minify-core": "sass --style compressed dist/core.css:dist/core.min.css",
     "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn copy:scss-files",
     "clean-dist": "rimraf dist/*",
-    "copy:scss-files": "cp -rv src/stylesheets/_mixins.scss dist/stylesheets/_mixins.scss && cp -rv src/stylesheets/formation-overrides/_variables.scss dist/stylesheets/formation-overrides/_variables.scss",
+    "copy:scss-files": "cp -rv src/stylesheets/_override-function.scss dist/stylesheets/_override-function.scss && cp -rv src/stylesheets/_mixins.scss dist/stylesheets/_mixins.scss && cp -rv src/stylesheets/_functions.scss dist/stylesheets/_functions.scss && cp -rv src/stylesheets/formation-overrides/_variables.scss dist/stylesheets/formation-overrides/_variables.scss",
     "copy-assets": "cp -rv src/assets/fonts dist/fonts/ && cp -rv src/assets/img dist/img/",
     "copy": "node ./copy-uswds-color-tokens.js && yarn run copy-assets"
   },

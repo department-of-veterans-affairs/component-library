@@ -12,10 +12,9 @@ describe('va-on-this-page', () => {
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
-            <dl>
-              <dt id="on-this-page">on-this-page</dt>
-              <dd role="definition"></dd>
-            </dl>
+            <ul>
+              <li id="on-this-page">on-this-page</li>
+            </ul>
           </nav>
         </mock:shadow-root>
       </va-on-this-page>
@@ -59,19 +58,21 @@ describe('va-on-this-page', () => {
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
-            <dl>
-              <dt id="on-this-page">on-this-page</dt>
-              <dd role="definition">
+            <ul>
+              <li id="on-this-page">on-this-page</li>
+              <li>
                 <a href="#an-id">
                   <va-icon class="hydrated"></va-icon>
-                  Hello
+                  <span>Hello</span>
                 </a>
+              </li>
+              <li>
                 <a href="#its-me">
                   <va-icon class="hydrated"></va-icon>
-                  It's me
+                  <span>It's me</span>
                 </a>
-              </dd>
-            </dl>
+              </li>
+            </ul>
           </nav>
         </mock:shadow-root>
       </va-on-this-page>
@@ -98,15 +99,15 @@ describe('va-on-this-page', () => {
     <va-on-this-page class="hydrated">
     <mock:shadow-root>
       <nav aria-labelledby="on-this-page">
-        <dl>
-          <dt id="on-this-page">on-this-page</dt>
-          <dd role="definition">
+        <ul>
+          <li id="on-this-page">on-this-page</li>
+          <li>
             <a href="#foo">
               <va-icon class="hydrated"></va-icon>
-              Foo
+              <span>Foo</span>
             </a>
-          </dd>
-        </dl>
+          </li>
+        </ul>
       </nav>
     </mock:shadow-root>
   </va-on-this-page>
@@ -135,19 +136,21 @@ describe('va-on-this-page', () => {
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
-            <dl>
-              <dt id="on-this-page">on-this-page</dt>
-              <dd role="definition">
+            <ul>
+              <li id="on-this-page">on-this-page</li>
+              <li>
                 <a href="#an-id">
                   <va-icon class="hydrated"></va-icon>
-                  Hello
+                  <span>Hello</span>
                 </a>
+              </li>
+              <li>
                 <a href="#its-me">
                   <va-icon class="hydrated"></va-icon>
-                  It's me
+                  <span>It's me</span>
                 </a>
-              </dd>
-            </dl>
+              </li>
+            </ul>
           </nav>
         </mock:shadow-root>
       </va-on-this-page>

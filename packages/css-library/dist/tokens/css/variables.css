@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 26 Aug 2024 15:26:01 GMT
+ * Generated on Fri, 04 Oct 2024 19:27:10 GMT
  */
 
 :root {
@@ -8,8 +8,12 @@
   --small-screen: 481px;
   --tablet: 640px;
   --medium-screen: 768px;
-  --small-desktop-screen: 1008px;
+  --small-desktop-screen: 1024px;
   --large-screen: 1201px;
+  --mobile: 320px;
+  --mobile-lg: 480px;
+  --desktop: 1024px;
+  --desktop-lg: 1201px;
   --color-link-default-hover: rgba(#000000, 0.05);
   --vads-button-color-background-primary-alt-active-on-light: #154c21;
   --vads-button-color-background-secondary-on-light: #ffffff;
@@ -105,6 +109,8 @@
   --vads-color-feedback-surface-error-on-dark: #5c1111;
   --vads-color-feedback-border-warning-on-dark: #face00;
   --vads-color-background-default-on-dark: #171716;
+  --vads-color-forms-surface-active-on-light: #ecf1f7;
+  --vads-color-forms-surface-active-on-dark: #252f3e;
   --font-family-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
   --font-family-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
@@ -126,6 +132,20 @@
   --font-size-h5: 0.938rem;
   --font-size-h6: 0.938rem;
   --v3-font-base-size: 16px;
+  --vads-font-line-height-body-lead: 1.75;
+  --vads-font-line-height-default: 1.5;
+  --vads-font-line-height-heading: 1.2;
+  --vads-font-size-body-large: 20px;
+  --vads-font-size-body-lead: 20px;
+  --vads-font-size-body-medium: 17px;
+  --vads-font-size-body-small: 15px;
+  --vads-font-size-eyebrow: 17px;
+  --vads-font-size-heading-level-1: 40px;
+  --vads-font-size-heading-level-2: 32px;
+  --vads-font-size-heading-level-3: 20px;
+  --vads-font-size-heading-level-4: 17px;
+  --vads-font-size-heading-level-5: 15px;
+  --vads-font-size-heading-level-6: 15px;
   --units-0: 0;
   --units-1: 0.5rem;
   --units-2: 1rem;
@@ -179,10 +199,12 @@
   --uswds-system-color-blue-cool-vivid-20: #97d4ea;
   --uswds-system-color-blue-cool-vivid-40: #28a0cb;
   --uswds-system-color-blue-cool-vivid-60: #07648d;
+  --uswds-system-color-blue-warm-5: #ecf1f7;
   --uswds-system-color-blue-warm-10: #e1e7f1;
   --uswds-system-color-blue-warm-30: #98afd2;
   --uswds-system-color-blue-warm-50: #4a77b4;
   --uswds-system-color-blue-warm-60: #345d96;
+  --uswds-system-color-blue-warm-80: #252f3e;
   --uswds-system-color-blue-warm-vivid-60: #0050d8;
   --uswds-system-color-blue-warm-vivid-70: #1a4480;
   --uswds-system-color-blue-warm-vivid-80: #162e51;

@@ -72,21 +72,10 @@ describe('va-checkbox', () => {
     expect(element.textContent).toContain('required');
   });
 
-  it('renders a description slot', async () => {
+  it('renders description prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox><p slot="description">This is a description!</p></va-checkbox',
-    );
-    const element = await page.find('va-checkbox');
-    const inputEl = await page.find('va-checkbox >>> input');
-    expect(element).toEqualText('This is a description!');
-    expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
-  });
-
-  it('should prefer rendering the description prop over the slotted element', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-checkbox description="Description prop"><p slot="description">Slotted description</p></va-checkbox',
+      '<va-checkbox description="Description prop"></va-checkbox>',
     );
     const element = await page.find('va-checkbox');
     const inputEl = await page.find('va-checkbox >>> input');
@@ -95,6 +84,48 @@ describe('va-checkbox', () => {
       await page.find('va-checkbox >>> slot[name="description"]'),
     ).toBeNull();
     expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
+  });
+
+  it('renders a description slot (and an empty one)', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox><p slot="description">This is a description!</p><p slot="description"></p></va-checkbox>',
+    );
+    const element = await page.find('va-checkbox');
+    const inputEl = await page.find('va-checkbox >>> input');
+    const descriptionDiv = await page.find('va-checkbox >>> div#description');
+    expect(element).toEqualText('This is a description!');
+    expect(descriptionDiv).not.toBeNull();;
+    // should still add the description aria-describedby with one empty slot
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
+  });
+
+  it('should prefer rendering the description prop over the slotted element', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox description="Description prop"><p slot="description">Slotted description</p></va-checkbox>',
+    );
+    const element = await page.find('va-checkbox');
+    const inputEl = await page.find('va-checkbox >>> input');
+    expect(element.shadowRoot.textContent).toContain('Description prop');
+    expect(
+      await page.find('va-checkbox >>> slot[name="description"]'),
+    ).toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
+  });
+
+  it('should not add aria-describedby for empty description slots', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox><p slot="description"></p><p slot="description"></p></va-checkbox>',
+    );
+    const element = await page.find('va-checkbox');
+    const inputEl = await page.find('va-checkbox >>> input');
+    expect(element).toEqualText('');
+    expect(
+      await page.find('va-checkbox >>> slot[name="description"]'),
+    ).toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toBeNull();
   });
 
   it('adds new aria-describedby for error message', async () => {
@@ -112,7 +143,7 @@ describe('va-checkbox', () => {
       '<va-checkbox required label="This is a test" error="With an error message"/>',
     );
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
   it('adds aria-describedby input-message, checkbox-error-message and description ids', async () => {

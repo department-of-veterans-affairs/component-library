@@ -97,7 +97,7 @@ describe('va-button-pair', () => {
       await page.waitForFunction(() =>
         document.querySelector('va-button-pair').shadowRoot.querySelector('va-button').shadowRoot.querySelector('button')
       )
-    ).asElement();
+    );
 
     const leftText = await leftButton.evaluate(element => element.innerHTML);
     expect(leftText).toEqual('hello');
@@ -107,7 +107,7 @@ describe('va-button-pair', () => {
         const vaButtons = document.querySelector('va-button-pair').shadowRoot.querySelectorAll('va-button');
         return vaButtons[1].shadowRoot.querySelector('button');
       })
-    ).asElement();
+    );
 
     const rightText = await rightButton.evaluate(element => element.innerHTML);
     expect(rightText).toEqual('world');

@@ -1,5 +1,7 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
+import { ElementHandle } from 'puppeteer';
+
 const path = require('path');
 
 describe('va-file-input-multiple', () => {
@@ -66,7 +68,7 @@ describe('va-file-input-multiple', () => {
     const fileUploadSpy = await page.spyOnEvent('vaMultipleChange');
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
 
-    const input = await page.$('pierce/#fileInputField');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
     expect(input).not.toBeNull();
 
     await input

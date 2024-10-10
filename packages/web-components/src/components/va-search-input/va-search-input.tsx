@@ -217,6 +217,7 @@ export class VaSearchInput {
         this.selectSuggestion(lastOption);
         break;
       case 'Enter':
+        event.preventDefault();
         this.handleSubmit();
         break;
       case 'Escape':
@@ -294,6 +295,7 @@ export class VaSearchInput {
         }
         break;
       case 'Enter':
+        event.preventDefault();
         this.inputRef.value = options[index].innerText;
         this.inputRef.dispatchEvent(
           new InputEvent('input', {

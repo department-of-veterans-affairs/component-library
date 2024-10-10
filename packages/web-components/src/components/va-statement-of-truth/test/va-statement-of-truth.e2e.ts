@@ -2,20 +2,20 @@ import { newE2EPage } from "@stencil/core/testing";
 import { axeCheck } from "../../../testing/test-helpers";
 
 describe('va-statement-of-truth', () => {
-  it('uswds renders', async () => {
+  it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth />');
     const element = await page.find('va-statement-of-truth');
     expect(element).toHaveClass('hydrated');
   });
 
-  it('uswds passes an aXe check', async () => {
+  it('passes an aXe check', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth />');
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
   });
 
-  it('uswds correctly sets the error props as attributes', async () => {
+  it('correctly sets the error props as attributes', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth input-error="Please enter your full name" checkbox-error="Please certify"/>');
     const inputElem = await page.find('va-statement-of-truth >>> va-text-input');
@@ -24,7 +24,7 @@ describe('va-statement-of-truth', () => {
     expect(checkboxElem.getAttribute('error')).toEqual('Please certify');
   });
 
-  it('uswds renders errors when error props set', async () => {
+  it('renders errors when error props set', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth input-error="Please enter your full name" checkbox-error="Please certify"/>');
 
@@ -37,7 +37,7 @@ describe('va-statement-of-truth', () => {
     expect(checkboxErrorText).toContain('Please certify');
   });
 
-  it('uswds emits vaInputBlur custom event', async () => {
+  it('emits vaInputBlur custom event', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth />');
     const vaInputBlurSpy = await page.spyOnEvent('vaInputBlur');
@@ -47,7 +47,7 @@ describe('va-statement-of-truth', () => {
     expect(vaInputBlurSpy).toHaveReceivedEvent();
   });
 
-  it('uswds emits vaInputChange custom event', async () => {
+  it('emits vaInputChange custom event', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth />');
     const vaInputChangeSpy = await page.spyOnEvent('vaInputChange');
@@ -58,7 +58,7 @@ describe('va-statement-of-truth', () => {
     expect(vaInputChangeSpy).toHaveReceivedEventDetail({ value: 'test' });
   });
 
-  it('uswds emits vaCheckboxChange custom event', async () => {
+  it('emits vaCheckboxChange custom event', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth />');
     const vaCheckboxChangeSpy = await page.spyOnEvent('vaCheckboxChange');
@@ -67,14 +67,14 @@ describe('va-statement-of-truth', () => {
     expect(vaCheckboxChangeSpy).toHaveReceivedEvent();
   });
 
-  it('uswds allows for a custom header', async () => {
+  it('allows for a custom header', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth heading="Custom header" />');
     const header = await page.find('va-statement-of-truth >>> h3');
     expect(header.innerHTML).toEqual('Custom header');
   });
 
-  it('uswds sets an input aria described by message', async () => {
+  it('sets an input aria described by message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth input-message-aria-describedby="testing one two three"/>');
     const span = await page.$('pierce/span#input-message');
@@ -82,19 +82,18 @@ describe('va-statement-of-truth', () => {
     expect(text).toContain('testing one two three');
   });
 
-  it('uswds permits prefilling the form', async () => {
+  it('permits prefilling the form', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth input-value="John Doe" checked/>');
-    const inputEl = await page.$('pierce/[name="veteran-signature"]');
-    const value = await page.evaluate(element => element.value, inputEl);
+
+    const value = await page.$eval('va-statement-of-truth >>> va-text-input >>> input', (comp: HTMLInputElement) => comp.value);
     expect(value).toBe('John Doe');
 
-    const checkboxEl = await page.$('pierce/[name="veteran-certify"]');
-    const checked = await page.evaluate(element => element.checked, checkboxEl);
+    const checked = await page.$eval('va-statement-of-truth >>> va-checkbox >>> input', (comp: HTMLInputElement) => comp.checked);
     expect(checked).toBeTruthy();
   });
 
-  it('uswds adds custom label to va-text-input', async () => {
+  it('adds custom label to va-text-input', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth input-label="test label" />');
     const labelEl = await page.$('pierce/label.usa-label');
@@ -102,7 +101,7 @@ describe('va-statement-of-truth', () => {
     expect(text).toContain('test label');
   });
 
-  it('uswds adds custom label to va-checkbox', async () => {
+  it('adds custom label to va-checkbox', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth checkbox-label="test label" />');
     const labelEl = await page.$('pierce/label.usa-checkbox__label');

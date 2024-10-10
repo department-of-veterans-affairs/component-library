@@ -138,7 +138,7 @@ export class VaAccordion {
       this.accordionsOpened();
   }
 
-  private accordionsOpened() {
+  private accordionsOpened(method='every') {
     // Track user clicks on va-accordion-item within an array to compare if all values are true or false
     let accordionItems = [];
     getSlottedNodes(this.el, 'va-accordion-item').forEach(item => {
@@ -146,10 +146,10 @@ export class VaAccordion {
     });
     const allOpen = currentValue => currentValue === 'true';
     const allClosed = currentValue => currentValue === 'false';
-    if (accordionItems.every(allOpen)) {
+    if (accordionItems[method](allOpen)) {
       this.expanded = true;
     }
-    if (accordionItems.every(allClosed)) {
+    if (accordionItems[method](allClosed)) {
       this.expanded = false;
     }
   }
@@ -181,6 +181,11 @@ export class VaAccordion {
 
   disconnectedCallback() {
     i18next.off('languageChanged');
+  }
+
+  // if one or more accordion-items are open on load, then we should put component in state to "Collapse all"
+  componentDidLoad() {
+    this.accordionsOpened('some');
   }
 
   render() {

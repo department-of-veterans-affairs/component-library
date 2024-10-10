@@ -155,6 +155,40 @@ ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
 
+export const OptGroups = Template.bind(null);
+OptGroups.args = {
+  ...defaultArgs,
+  options: [
+    <optgroup key="1" label="Branches of Service">
+      <option value="navy">Navy</option>
+      <option value="army">Army</option>
+      <option value="marines">Marines</option>
+      <option value="air-force">Air Force</option>
+      <option value="coastguard">Coastguard</option>
+    </optgroup>,
+    <optgroup key="2" label="Other">
+      <option value="other">Other</option>
+    </optgroup>,
+  ],
+};
+
+export const OptGroupsWithOptions = Template.bind(null);
+OptGroupsWithOptions.args = {
+  ...defaultArgs,
+  options: [
+    <optgroup key="1" label="Branches of Service">
+      <option value="navy">Navy</option>
+      <option value="army">Army</option>
+      <option value="marines">Marines</option>
+      <option value="air-force">Air Force</option>
+      <option value="coastguard">Coastguard</option>
+    </optgroup>,
+    <option key="2" value="other">
+      Other
+    </option>,
+  ],
+};
+
 export const ReadOnly = InertTemplate.bind(null);
 ReadOnly.args = { ...defaultArgs };
 
@@ -177,3 +211,41 @@ const I18nTemplate = args => {
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = { ...defaultArgs, required: true };
+
+const WidthsTemplate = ({
+  label,
+  name,
+  value,
+  required,
+  error,
+  hint,
+  'aria-live-region-text': ariaLiveRegionText,
+  'aria-describedby-message': ariaDescribedbyMessage,
+  options, }) => {
+  function getSelect(width) {
+    return (
+      <va-select
+        label={`${label} - (${width})`}
+        name={name}
+        value={value}
+        required={required}
+        error={error}
+        hint={hint}
+        aria-live-region-text={ariaLiveRegionText}
+        message-aria-describedby={ariaDescribedbyMessage}
+        width={width}
+      >
+        {options}
+      </va-select>
+    )
+  }
+  const widths = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"];
+  return (
+    <>
+      {widths.map(width => <div key={width}>{getSelect(width)}</div>)}
+    </>
+  );
+};
+
+export const Widths = WidthsTemplate.bind(null);
+Widths.args = { ...defaultArgs };

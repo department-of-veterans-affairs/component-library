@@ -9,7 +9,7 @@ $utilities-package: map-collect(
   $u-border,
   $u-color,
   $u-display,
-  $u-flex-grid,
+  /*$u-flex-grid,*/
   $u-flexbox,
   $u-font,
   $u-height,
@@ -34,7 +34,7 @@ $medium-screen-breakpoint: 768px;
 $breakpoint-class-name: 'medium-screen';
 
 @mixin generate-utilities-from-settings($collection) {
-  @each $property, $property-map in $collection { 
+  @each $property, $property-map in $collection {
     $u-base: map-get($property-map, base);
     $u-values: map-get($property-map, values);
     $u-property: map-get($property-map, property);
@@ -45,9 +45,9 @@ $breakpoint-class-name: 'medium-screen';
         @each $name, $value in $u-values {
           .#{$breakpoint-class-name}\:#{$u-base}#{$modifier-value}-#{$name} {
             @if $modifier == 'noModifier' {
-              #{$u-property}: #{$value};
+              #{$u-property}: #{$value} !important;
             } @else {
-              #{$u-property}#{$modifier-value}: #{$value};
+              #{$u-property}#{$modifier-value}: #{$value} !important;
             }
           }
         }
@@ -58,10 +58,10 @@ $breakpoint-class-name: 'medium-screen';
       .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
         @if type-of($u-property) == 'list' {
           @each $property in $u-property {
-            #{$property}: #{$value};
+            #{$property}: #{$value} !important;
           }
-        } @else { 
-          #{$u-property}: #{$value};
+        } @else {
+          #{$u-property}: #{$value} !important;
         }
       }
     }
@@ -76,22 +76,22 @@ $breakpoint-class-name: 'medium-screen';
   @include generate-utilities-from-settings($u-display);
 
   // $u-flex-grid
-  @each $property, $property-map in $u-flex-grid { 
-    $u-base: map-get($property-map, base);
-    $u-values: map-get($property-map, values);
-    $u-property: map-get($property-map, property);
+  // @each $property, $property-map in $u-flex-grid {
+  //   $u-base: map-get($property-map, base);
+  //   $u-values: map-get($property-map, values);
+  //   $u-property: map-get($property-map, property);
 
-    @each $name, $value in $u-values {
-      $extend: map-get($value, extend);
-      $content: map-get($value, content);
-      .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
-        @each $css-property, $css-value in $extend {
-          #{$css-property}: $css-value;
-        }
-        #{$u-property}: #{$content}; // flex property
-      }
-    }
-  }
+  //   @each $name, $value in $u-values {
+  //     $extend: map-get($value, extend);
+  //     $content: map-get($value, content);
+  //     .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+  //       @each $css-property, $css-value in $extend {
+  //         #{$css-property}: $css-value !important;
+  //       }
+  //       #{$u-property}: #{$content} !important; // flex property
+  //     }
+  //   }
+  // }
 
   // $u-flexbox
   @include generate-utilities-from-settings($u-flexbox);
@@ -106,7 +106,7 @@ $breakpoint-class-name: 'medium-screen';
   @include generate-utilities-from-settings($u-line-height);
 
   // $u-margin
-  @each $property, $property-map in $u-margin { 
+  @each $property, $property-map in $u-margin {
     $u-base: map-get($property-map, base);
     $u-values: map-get($property-map, values);
     $u-property: map-get($property-map, property);
@@ -116,18 +116,21 @@ $breakpoint-class-name: 'medium-screen';
       $modifier-y: map-get($u-modifiers, 'y-');
       $modifier-x: map-get($u-modifiers, 'x-');
 
-      @each $name, $value in $u-values { 
+      @each $name, $value in $u-values {
         @if $u-modifiers {
           @each $key, $modifier in $u-modifiers {
             .#{$breakpoint-class-name}\:#{$u-base}-#{$key}-#{$name} {
-              @if $key == 'y-' or $key == 'x-' {
-                margin-top: #{$value};
-                margin-bottom: #{$value};
+              @if $key == 'y-' {
+                margin-top: #{$value} !important;
+                margin-bottom: #{$value} !important;
+              } @else if $key == 'x-' {
+                margin-left: #{$value} !important;
+                margin-right: #{$value} !important;
               } @else if $key != 'y-' or $key != 'x-'{
                 $direction: map-get($u-modifiers, $key);
-                margin#{$direction}: #{$value};
+                margin#{$direction}: #{$value} !important;
               } @else {
-                margin: #{$value};
+                margin: #{$value} !important;
               }
             }
           }
@@ -136,7 +139,7 @@ $breakpoint-class-name: 'medium-screen';
     } @else {
       @each $name, $value in $u-values {
         .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
-          #{$u-property}: #{$value};
+          #{$u-property}: #{$value} !important;
         }
       }
     }

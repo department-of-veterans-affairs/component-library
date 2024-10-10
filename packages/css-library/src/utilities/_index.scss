@@ -2,7 +2,7 @@
 @forward 'border';
 @forward 'color';
 @forward 'display';
-@forward 'flex-grid';
+// @forward 'flex-grid'; TODO: re-add this to $utilities-package in utilities.scss when we're ready to use grid
 @forward 'flexbox';
 @forward 'float-grid';
 @forward 'font';

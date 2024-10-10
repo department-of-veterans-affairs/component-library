@@ -12,7 +12,8 @@ $u-bg-color: (
         $tokens-color-basic,
         $tokens-color-grayscale,
         $tokens-color-tertiary,
-        $tokens-color-hub
+        $tokens-color-hub,
+        $tokens-color-semantic
       ),
     settings: $color-settings,
     property: "background-color",

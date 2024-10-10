@@ -189,6 +189,14 @@ export class VaFileInput {
     }, 0);
   };
 
+  private closeModalAndKeepFile = () => {
+    this.showModal = false;
+    setTimeout(() => {
+      this.el.shadowRoot.querySelector('#delete')?.shadowRoot
+        .querySelector('button').focus();
+    }, 0);
+  }
+
   private changeFile = () => {
     if (this.fileInputRef) {
       this.fileInputRef.click();
