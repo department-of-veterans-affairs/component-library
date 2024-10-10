@@ -29,6 +29,10 @@ body.modal-open {
   overflow: hidden;
 }
 
+h1 {
+  margin-top: 0;
+}
+
 .show-on-focus {
   position: absolute;
   top: -10em;
@@ -324,6 +328,40 @@ article > h1 {
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.7;
+}
+
+.va-h-ruled--stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("/img/stars.png") no-repeat center;
+  background-size: 6.875rem auto;
+  margin: 1rem auto auto;
+  padding: 1.25rem 0 0;
+  text-align: center;
+}
+.va-h-ruled--stars::before {
+  margin-right: 7.5rem;
+}
+.va-h-ruled--stars::before, .va-h-ruled--stars::after {
+  border-top: 1px solid #aeb0b5;
+  content: " ";
+  flex: 1 1 50%;
+  padding: 0.625rem 0;
+}
+@media screen and (min-width: 768px), print and (min-width: 768px) {
+  .va-h-ruled--stars {
+    padding-left: 0;
+  }
+}
+
+.last-updated {
+  margin-top: 1.5em;
+  border-top: 2px solid #aeb0b5;
+  padding: 1em 0;
+}
+.last-updated p {
+  color: #323a45 !important;
 }
 
 /*# sourceMappingURL=va.css.map */

@@ -16,7 +16,6 @@
 @import './formation-overrides/variables';
 
 // ----- VA GENERAL (MAIN FILE/OTHER) ---- //
-@import 'base/va';
 @import 'base/fonts';
 @import 'base/utils';
 
@@ -39,6 +38,7 @@
 @import 'formation-overrides/components/media-block';
 @import 'formation-overrides/components/side-nav';
 
+@import 'base/va';
 
 // ----- VA MODULES ---- //
 @import 'modules/m-external-link';

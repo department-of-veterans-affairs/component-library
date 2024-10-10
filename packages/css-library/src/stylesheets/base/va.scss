@@ -1,4 +1,5 @@
 @use '../override-function' as *;
+@import '../core-variables';
 @import "../mixins";
 
 $lead-max-width: scale-rem(77rem);
@@ -24,6 +25,10 @@ body {
   &.modal-open {
     overflow: hidden;
   }
+}
+
+h1 {
+  margin-top: 0;
 }
 
 // Skip link
@@ -359,5 +364,43 @@ article > h1 {
     font-size: $lead-font-size;
     font-weight: $font-weight-normal;
     line-height: $lead-line-height;
+  }
+}
+
+// Used on content-build hub pages and a couple of places in vets-website
+.va-h-ruled--stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    margin-right: scale-rem(12rem);
+  }
+
+  &::before,
+  &::after {
+    border-top: 1px solid $color-gray-light;
+    content: " ";
+    flex: 1 1 50%;
+    padding: scale-rule(1rem 0);
+  }
+
+  background: url('#{$image-path}/stars.png') no-repeat center;
+  background-size: scale-rule(11rem auto);
+  margin: scale-rule(1.6rem auto auto);
+  padding: scale-rule(2rem 0 0);
+  text-align: center;
+
+  @include media($medium-screen) {
+    padding-left: 0;
+  }
+}
+// used mostly in content-build, we should consider moving this over there 
+.last-updated {
+  margin-top: 1.5em;
+  border-top: 2px solid $color-gray-light;
+  padding: 1em 0;
+  p {
+    color: $color-gray-dark !important;
   }
 }
