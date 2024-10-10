@@ -1,5 +1,6 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { VaLink } from '@department-of-veterans-affairs/component-library/dist/react-bindings';
 
 const linkDocs = getWebComponentDocs('va-link');
 
@@ -302,4 +303,63 @@ Reverse.args = {
   href: 'https://va.gov/',
   text: 'Example Link',
   reverse: true,
+};
+
+const WithRouterTemplate = ({
+  href: href,
+  text: text
+}) => {
+  return (
+    <>
+    <p>The <code>va-link</code> web component can be used with a routing framework like react-router using 
+    the native <code>click</code> event like in the following example:
+    </p>
+    <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+        <code>
+import React from 'react';<br/>
+import &#x7b; withRouter &#x7d; from 'react-router';<br/>
+import &#x7b; useHistory &#x7d; from 'react-router-dom';<br/>
+import &#x7b; VaLink &#x7d; from '@department-of-veterans-affairs/component-library/dist/react-bindings';<br/>
+<br/>
+const YourComponent &#61; (&#x7b; href, text, router &#x7d;) &#61;&#62;  &#x7b;<br/>
+<br/>
+&nbsp;function handleRouteChange(event) &#x7b;<br/>
+&nbsp;&nbsp;&nbsp;event.preventDefault&#x28;&#x29;;<br/>
+&nbsp;&nbsp;&nbsp;history.push(href);<br/>
+&nbsp;&#x7d;<br/>
+<br/>
+  &nbsp;return (<br/>
+  &nbsp;&nbsp;&nbsp;&#60;VaLink<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;href=&#x7b;href&#x7d;<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;text=&#x7b;text&#x7d;<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;onClick=&#x7b;handleRouteChange&#x7d;<br/>
+  &nbsp;&nbsp;&nbsp;/&#62;<br/>
+  &nbsp;);<br/>
+&#x7d;;
+<br/>
+<br/>
+export default withRouter(YourComponent);
+
+        </code>
+      </pre>
+    <p>If you need help to gather your information or fill out your
+      application/form,{' '}
+      <VaLink
+        href={href}
+        text={text}
+        onClick={(e) => {
+          e.preventDefault();
+          console.log('Router link clicked');
+        }}
+      />
+    </p>
+    </>
+  );
+};
+
+export const WithRouterLinkSupport = WithRouterTemplate.bind(null);
+WithRouterLinkSupport.args = {
+  ...defaultArgs,
+  href: 'https://va.gov/',
+  text: 'example router link'
 };
