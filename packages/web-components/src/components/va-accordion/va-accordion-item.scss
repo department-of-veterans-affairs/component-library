@@ -64,15 +64,15 @@ button {
   max-width: 64ex;
 }
 
+:host(:not([open])) #content,
+:host([open='false']) #content {
+  display: none;
+}
+
 /* overrides hidden attribute on #content */
 @media print {
   :host(:not([open])) #content,
   :host([open='false']) #content {
     display: block;
   }
-}
-
-:host(:not([open])) #content,
-:host([open='false']) #content {
-  display: none;
 }
