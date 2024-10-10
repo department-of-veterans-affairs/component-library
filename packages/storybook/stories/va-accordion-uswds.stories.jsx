@@ -305,12 +305,15 @@ const defaultArgs = {
   'open-single': undefined,
 };
 
-export const Default = Template.bind({parameters:{chromatic: {
-  media: 'print'
-},}});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
+Default.parameters = { 
+  chromatic: {
+    media: 'print'
+  }
+}
 Default.argTypes = propStructure(accordionDocs);
 
 export const SingleSelect = Template.bind(null);
