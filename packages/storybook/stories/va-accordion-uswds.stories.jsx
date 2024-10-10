@@ -326,6 +326,11 @@ Bordered.args = {
 export const Subheader = TemplateSubheader.bind(null);
 Subheader.args = {
   ...defaultArgs,
+  parameters: {
+    chromatic: {
+      media: 'print'
+    }
+  }
 };
 
 export const IconHeaders = TemplateIconHeaders.bind(null);
