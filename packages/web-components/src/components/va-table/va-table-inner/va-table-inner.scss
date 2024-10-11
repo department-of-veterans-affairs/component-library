@@ -45,14 +45,6 @@ caption {
   margin-bottom: .75rem;
 }
 
-.th-sort-header {
-  background-color: var(--vads-color-primary-alt-light) !important;
-}
-
-.sorted-data {
-  background-color: var(--vads-color-primary-alt-lightest) !important;
-}
-
 @media screen and (max-width: 768px) {
   table.usa-table--stacked thead,
   ::slotted([slot=headers]) {

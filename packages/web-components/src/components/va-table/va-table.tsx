@@ -128,8 +128,8 @@ export class VaTable {
     vaTable.setAttribute('sortable', `${this.sortable}`);
     // we rebuild the inner table after a sort
     if (this.sortable && sortdir && sortindex) {
-      vaTable.setAttribute('sortdir', sortdir);
-      vaTable.setAttribute('sortindex', `${sortindex}`);
+      vaTable.dataset.sortdir = sortdir;
+      vaTable.dataset.sortindex = `${sortindex}`;
     }
    
     if (this.tableTitle) {

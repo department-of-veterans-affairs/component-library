@@ -1,8 +1,7 @@
-import { months } from './constants';
+import { months } from '../../../utils/constants';
 import { CompareFuncReturn, difference } from "./utils";
 
-
-// conventional date or month only
+// conventional date representation or month only will be valid
 export function isValidDate(string: string): boolean {
   const date = new Date(string);
   return !isNaN(date.getTime()) || !!months[string.toLowerCase()];
@@ -18,6 +17,8 @@ function getDateValue(string: string): number {
   return month ? month : new Date(string).getTime();
 }
 
+// this function returns a function that sorts date strings and which can be passed to Array.sort
+// the "sordir" argument controls whether the function that is returned sorts ascending or descending
 export function dateSort(sortdir: string): CompareFuncReturn {
   return function (a: string, b: string): number {
     const aTime = getDateValue(a);

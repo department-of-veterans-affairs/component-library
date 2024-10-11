@@ -1463,9 +1463,10 @@ export namespace Components {
          */
         "cols"?: number;
         "rows"?: number;
+        /**
+          * Is this a sortable table
+         */
         "sortable"?: boolean;
-        "sortdir"?: string;
-        "sortindex"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -4668,9 +4669,10 @@ declare namespace LocalJSX {
          */
         "onSortTable"?: (event: VaTableInnerCustomEvent<any>) => void;
         "rows"?: number;
+        /**
+          * Is this a sortable table
+         */
         "sortable"?: boolean;
-        "sortdir"?: string;
-        "sortindex"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
