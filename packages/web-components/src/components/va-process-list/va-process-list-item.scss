@@ -7,6 +7,10 @@
   display: list-item;
 }
 
+.usa-process-list__heading-eyebrow {
+  color: var(--uswds-system-color-gray-cool-70);
+}
+
 va-process-list-item[pending='true'] .usa-process-list__heading {
   color: var(--vads-process-list-color-text-pending-on-light);
 }
