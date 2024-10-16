@@ -5,8 +5,8 @@
 
 This is a monorepo containing two main packages:
 
-- `react-components`
 - `web-components`
+- `react-components`
 
 The `core` package is for bundling the two main packages into one for publishing. The `storybook` package is for the combined story files from each `*-components` package.
 The `design-system-dashboard-cli` package is used to gather metrics on design system usage.
@@ -78,36 +78,37 @@ Releases will occur no less often than at the beginning of each sprint (every ot
 # Running Build via Storybook
 
 1. `cd packages/web-components/`
-    1. `yarn install`
-    2. `yarn build`
-    3. `yarn build-bindings` (build React bindings)
-    4. `yarn watch:stencil` (optional)
+   1. `yarn install`
+   2. `yarn build`
+   3. `yarn build-bindings` (build React bindings)
+   4. `yarn watch:stencil` (optional)
 2. `cd ../react-components/`
-    1. `yarn install`
-    2. `yarn build`
+   1. `yarn install`
+   2. `yarn build`
 3. `cd ../core/`
-    1. `yarn install`
-    2. `yarn build`
+   1. `yarn install`
+   2. `yarn build`
 4. `cd ../storybook/`
-    1. `yarn install`
-    2. `yarn storybook`
+   1. `yarn install`
+   2. `yarn storybook`
 
 This will allow you to run Storybook locally to view all components
 
 # Stencil Dev Server for Testing IE11
 
 1. Update `stencil.config.ts` line 16 to `buildEs5: true,`
-    1. [More information on buildEs5 in Stencil](https://stenciljs.com/docs/config#buildes5)
-    2. Stencil Dev Server is run in `dev` mode
+   1. [More information on buildEs5 in Stencil](https://stenciljs.com/docs/config#buildes5)
+   2. Stencil Dev Server is run in `dev` mode
 2. Within `component-library/packages/web-components/src/index.html` Web Components can be added inside of the `<body>` tag for testing
-    1. Example:
 
-    ```
-    <body>
-        <va-progress-bar label="Add a label here" percent={35}></va-progress-bar>
-        <va-segmented-progress-bar current={2} total={6}></va-segmented-progress-bar>
-    </body>
-    ```
+   1. Example:
+
+   ```
+   <body>
+       <va-progress-bar label="Add a label here" percent={35}></va-progress-bar>
+       <va-segmented-progress-bar current={2} total={6}></va-segmented-progress-bar>
+   </body>
+   ```
 
 3. Run `yarn serve` inside `packages/web-components/` to start the Stencil Dev Server
 
