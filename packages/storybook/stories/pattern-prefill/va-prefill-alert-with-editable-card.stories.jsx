@@ -8,10 +8,10 @@ import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
-  title: 'Patterns/Prefill/Usage Examples/Prefill alert with unlocked card',
-  id: 'patterns/va-prefill-alert-with-editable-unlocked-card',
+  title: 'Patterns/Prefill/Usage Examples/Prefill alert with editable card',
+  id: 'patterns/va-prefill-alert-with-editable-card',
   parameters: {
-    componentSubtitle: 'va prefill alert with unlocked card',
+    componentSubtitle: 'va prefill alert with editable card',
   },
 };
 

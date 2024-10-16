@@ -10,7 +10,7 @@ export default {
   parameters: {
     componentSubtitle: 'Prefill card variations',
     docs: {
-      page: () => <StoryDocs storyDefault={unlockedWithEdit} data={cardDocs} />,
+      page: () => <StoryDocs storyDefault={Editable} data={cardDocs} />,
     },
   },
 };
@@ -18,13 +18,13 @@ export default {
 const defaultArgs = {
   'show-shadow': false,
   'background': false,
-  'isLocked': false,
+  'canEdit': false,
 };
 
 const Template = ({
   'show-shadow': showShadow,
   'background': background,
-  isLocked,
+  canEdit,
 }) => (
   <va-card show-shadow={showShadow} background={background} class="hydrated">
     <div class="vads-u-padding-left--1 vads-u-padding-y--1">
@@ -81,7 +81,7 @@ const Template = ({
           </dd>
         </div>
       </dl>
-      {!isLocked && (
+      {!canEdit && (
         <div class="vads-u-margin-y--1">
           <a
             class="vads-u-font-weight--bold"
@@ -105,15 +105,15 @@ const Template = ({
   </va-card>
 );
 
-export const unlockedWithEdit = Template.bind(null);
-unlockedWithEdit.args = {
+export const Editable = Template.bind(null);
+Editable.args = {
   ...defaultArgs,
-  isLocked: false,
+  canEdit: false,
 };
 
-export const Locked = Template.bind(null);
-Locked.args = {
+export const Uneditable = Template.bind(null);
+Uneditable.args = {
   ...defaultArgs,
   background: true,
-  isLocked: true,
+  canEdit: true,
 };

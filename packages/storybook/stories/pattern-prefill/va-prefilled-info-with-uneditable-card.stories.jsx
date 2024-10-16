@@ -4,15 +4,15 @@ import {
   VaButtonPair,
 } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
-import { Locked } from './va-card.stories';
+import { Uneditable } from './va-card.stories';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
-  title: 'Patterns/Prefill/Usage Examples/Prefilled info with locked card',
-  id: 'patterns/va-prefilled-info-with-locked-card',
+  title: 'Patterns/Prefill/Usage Examples/Prefilled info with uneditable card',
+  id: 'patterns/va-prefilled-info-with-uneditable-card',
   parameters: {
-    componentSubtitle: 'va prefilled info with locked card',
+    componentSubtitle: 'va prefilled info with uneditable card',
   },
 };
 
@@ -56,7 +56,7 @@ const Template = ({
       <div className="vads-u-padding-y--2">
         <p>Confirm your information before you continue.</p>
       </div>
-      <Locked {...{ background: true, isLocked: true }} />
+      <Uneditable {...{ background: true, canEdit: true }} />
       <p>
         <strong>Note:</strong> To protect your personal information, we don’t
         allow online changes to your name, date of birth, or Social Security
