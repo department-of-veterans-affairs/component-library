@@ -533,9 +533,17 @@ export namespace Components {
          */
         "name"?: string;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
@@ -3572,9 +3580,17 @@ declare namespace LocalJSX {
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
