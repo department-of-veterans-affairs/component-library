@@ -536,6 +536,10 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Custom instructional message in the file input.
+         */
+        "uploadMessage"?: HTMLElement;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
@@ -3575,6 +3579,10 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Custom instructional message in the file input.
+         */
+        "uploadMessage"?: HTMLElement;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
