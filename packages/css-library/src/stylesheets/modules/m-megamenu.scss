@@ -103,7 +103,7 @@ $marketing-container-height: 380px;
       h3 {
         display: block;
         color: $vads-color-black;
-        font-family: Source Sans Pro, sans serif;
+        font-family: $font-family-sans;
         font-size: 16px;
         font-weight: bold;
         margin-top: 4px;
@@ -260,7 +260,7 @@ $marketing-container-height: 380px;
 
     .vetnav-panel--submenu:not([hidden]) {
       h3 {
-        font-family: Source Sans Pro, sans serif;
+        font-family: $font-family-sans;
         font-size: 16px;
       }
     }
