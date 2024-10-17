@@ -28,8 +28,8 @@ export class VaTableInner {
   @Prop() tableTitle: string;
 
   /*
-  * The number of rows in the table
-  */
+   * The number of rows in the table
+   */
   @Prop() rows?: number;
 
   /**
@@ -63,14 +63,32 @@ export class VaTableInner {
       <tr>
         {Array.from({ length: this.cols }).map((_, i) => {
           const slotName = `va-table-slot-${row * this.cols + i}`;
-          const slot = <slot name={slotName}></slot>
-          const header = this.el.querySelector(`[slot="va-table-slot-${i}"]`).innerHTML;
-          return (i === 0 || row === 0)
-            ? <th data-label={header} scope="row">{slot}</th>
-            : <td data-label={header}>{slot}</td>
+          const slot = <slot name={slotName}></slot>;
+          const header = this.el.querySelector(
+            `[slot="va-table-slot-${i}"]`,
+          ).innerHTML;
+
+          // Scope TH appropriately for column or row headers
+          if (row === 0) {
+            return (
+              <th data-label={header} scope="col">
+                {slot}
+              </th>
+            );
+          }
+
+          if (i === 0) {
+            return (
+              <th data-label={header} scope="row">
+                {slot}
+              </th>
+            );
+          }
+
+          return <td data-label={header}>{slot}</td>;
         })}
       </tr>
-    )
+    );
   }
 
   /**
@@ -79,7 +97,7 @@ export class VaTableInner {
   getBodyRows(): HTMLTableRowElement[] {
     const rows = [];
     for (let i = 1; i < this.rows; i++) {
-      rows.push(this.makeRow(i))
+      rows.push(this.makeRow(i));
     }
     return rows;
   }
@@ -93,12 +111,10 @@ export class VaTableInner {
     });
     return (
       <table class={classes}>
-        { tableTitle && <caption>{tableTitle}</caption> }
-        <thead>{ this.makeRow(0) }</thead>
-        <tbody id="va-table-body">
-          { this.getBodyRows() }
-        </tbody>
+        {tableTitle && <caption>{tableTitle}</caption>}
+        <thead>{this.makeRow(0)}</thead>
+        <tbody id="va-table-body">{this.getBodyRows()}</tbody>
       </table>
-    )
+    );
   }
 }
