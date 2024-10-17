@@ -129,6 +129,7 @@ export class VaTableInner {
         {Array.from({ length: this.cols }).map((_, i) => {
           const slotName = `va-table-slot-${row * this.cols + i}`;
           const slot = <slot name={slotName}></slot>;
+          const header = this.el.querySelector('[slot="va-table-slot-${i}"]').innerHTML;
           const dataSortActive = row > 0 && this.sortindex === i ? true : false;
           return (i === 0 || row === 0)
             ?
@@ -136,12 +137,16 @@ export class VaTableInner {
               scope="row"
               data-sortable
               data-sort-active={dataSortActive}
+              data-label={header}
               data-rowindex={i}
               data-sortdir={i === this.sortindex ? this.sortdir : 'ascending'}
             >
               {slot}{this.getSortIcon(i, row)}
             </th>
-            : <td data-sort-active={dataSortActive}>{slot}</td>
+            :
+            <td data-label={header} data-sort-active={dataSortActive}>
+              {slot}
+            </td>
         })}
       </tr>
     )
