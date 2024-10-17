@@ -107,14 +107,13 @@ export class VaTableInner {
         icon = <va-icon icon="sort_arrow" size={3} />
       }
       return (
-        <span
-          role="button"
+        <button
           tabIndex={0}
           onClick={(e) => this.fireSort(e)}
           onKeyDown={(e) => this.handleKeyDown(e)}
         >
           {icon}
-        </span>
+        </button>
       )
     } else {
       return null;
@@ -140,7 +139,7 @@ export class VaTableInner {
               data-rowindex={i}
               data-sortdir={i === this.sortindex ? this.sortdir : 'ascending'}
             >
-              <div>{slot}{this.getSortIcon(i, row)}</div>
+              {slot}{this.getSortIcon(i, row)}
             </th>
             : <td data-sort-active={dataSortActive}>{slot}</td>
         })}
@@ -188,12 +187,12 @@ export class VaTableInner {
   // only runs if sortable is true
   // update the title info on span clicked to sort and focus it
   updateSpan(th: HTMLTableCellElement, thSorted: boolean, nextSortDirection: string, content: string) {
-    const span = th.querySelector('span');
+    const button = th.querySelector('button');
     let spanSortInfo = `Click to sort by ${content} in ${nextSortDirection} order`;
-    span.setAttribute('title', spanSortInfo);
+    button.setAttribute('title', spanSortInfo);
     if (thSorted) {
       setTimeout(() => {
-        span.focus();
+        button.focus();
       }, 0);
     }
   }
