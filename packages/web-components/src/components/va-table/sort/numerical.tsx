@@ -2,9 +2,15 @@ import { isNumeric } from '../../../utils/utils'
 import { CompareFuncReturn, difference } from "./utils";
 import { ordinals } from '../../../utils/constants';
 
+const dateRegex = /^(\d{1,2}\/){1,2}(\d{2}|\d{4})$/;
+
 // check if a string is numeric
 export function _isNumeric(string: string): boolean {
   const value = cleanString(string);
+  // isNumeric will return true for a string like 04/02/2024 but we want to treat it like a date
+  if (dateRegex.test(string)) {
+    return false
+  }
   if (typeof value === 'number') {
     return true;
   }

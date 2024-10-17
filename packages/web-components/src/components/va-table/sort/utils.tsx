@@ -12,10 +12,10 @@ export function difference(a: number, b: number, sortdir: string): number {
 // return the sort function for the data type of the sort
 function _getCompareFunc(a: string, sortdir: string) {
   let func: CompareFuncReturn;
-  if (isValidDate(a)) {
-    func = dateSort(sortdir);
-  } else if (isNumeric(a)) {
+  if (isNumeric(a)) {
     func = numSort(sortdir);
+  } else if (isValidDate(a)) {
+    func = dateSort(sortdir);
   } else {
     func = alphaSort.bind(this)(sortdir);
   }
