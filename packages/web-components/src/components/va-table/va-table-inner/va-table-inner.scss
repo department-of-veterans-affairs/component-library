@@ -34,10 +34,6 @@ caption {
 }
 
 @media screen and (max-width: 768px) {
-  thead, ::slotted([slot=headers]) {
-    display: none;
-  }
-
   ::slotted(va-table-row) {
     border-bottom: 1px solid var(--vads-color-gray-medium);
   }
