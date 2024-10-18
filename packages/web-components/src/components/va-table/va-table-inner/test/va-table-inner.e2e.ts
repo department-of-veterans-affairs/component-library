@@ -84,7 +84,7 @@ describe('va-table', () => {
   });
 });
 
-describe.only('sorted va-table ', () => {
+describe('sorted va-table ', () => {
   function getTableMarkup() {
     return `
     <va-table
@@ -231,17 +231,17 @@ describe.only('sorted va-table ', () => {
     // we need to update these variables after each sort
     let table = null;
     let rows = null;
-    let spans = null;
+    let buttons = null;
 
-    spans = await page.findAll('va-table-inner >>> thead >>> th >>> span');
+    buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
     table = await page.find('va-table');
     rows = await table.findAll('va-table-row');
     // initial
     expect(rows[1].id).toEqual('sort-2');
 
     // sort ascending
-    spans = await page.findAll('va-table-inner >>> thead >>> th >>> span');
-    await spans[index].click();
+    buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
+    await buttons[index].click();
     await page.waitForChanges();
 
     table = await page.find('va-table');
@@ -249,8 +249,8 @@ describe.only('sorted va-table ', () => {
     expect(rows[1].id).toEqual(asc);
 
     //sort descending
-    spans = await page.findAll('va-table-inner >>> thead >>> th >>> span');
-    await spans[index].click();
+    buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
+    await buttons[index].click();
     await page.waitForChanges();
 
     table = await page.find('va-table');

@@ -129,7 +129,7 @@ export class VaTableInner {
         {Array.from({ length: this.cols }).map((_, i) => {
           const slotName = `va-table-slot-${row * this.cols + i}`;
           const slot = <slot name={slotName}></slot>;
-          const header = this.el.querySelector('[slot="va-table-slot-${i}"]').innerHTML;
+          const header = this.el.querySelector(`[slot="va-table-slot-${i}"]`).innerHTML;
           const dataSortActive = row > 0 && this.sortindex === i ? true : false;
           return (i === 0 || row === 0)
             ?
