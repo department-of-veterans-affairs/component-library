@@ -78,6 +78,17 @@ export class VaFileInput {
   @Prop() hint?: string;
 
   /**
+   * Custom instructional message in the file input.
+   */
+  @Prop() uploadMessage?: HTMLElement = 
+  <span>
+    Drag a file here or{' '}
+    <span class="file-input-choose-text">
+      choose from folder
+    </span>
+  </span>;
+
+  /**
    * Emit component-library-analytics events on the file input change event.
    */
   @Prop() enableAnalytics?: boolean = false;
@@ -434,8 +445,7 @@ export class VaFileInput {
               <div class={fileInputTargetClasses}>
                 <div class="file-input-box"></div>
                 <div class="file-input-instructions">
-                  <span class="file-input-drag-text">Drag files here or </span>
-                  <span class="file-input-choose-text">choose from folder</span>
+                  {this.uploadMessage}
                 </div>
               </div>
             </div>

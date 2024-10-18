@@ -7,6 +7,11 @@
   display: list-item;
 }
 
+.usa-process-list__heading-eyebrow {
+  color: var(--vads-color-base-darker);
+  text-transform: uppercase;
+}
+
 va-process-list-item[pending='true'] .usa-process-list__heading {
   color: var(--vads-process-list-color-text-pending-on-light);
 }

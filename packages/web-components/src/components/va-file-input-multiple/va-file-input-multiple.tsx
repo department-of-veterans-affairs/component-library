@@ -99,6 +99,15 @@ export class VaFileInputMultiple {
   private fileKeyCounter: number = 0;
   private additionalSlot = null;
 
+  private additionalFileUploadMessage = (
+    <span>
+       Drag an additional file here or{' '}
+      <span class="file-input-choose-text">
+        choose from folder
+      </span>
+    </span>
+  )
+
   /**
    * Finds a file entry by its unique key.
    * @param {number} fileKey - The unique key of the file.
@@ -337,6 +346,8 @@ export class VaFileInputMultiple {
                 name={`${name}-${fileEntry.key}`}
                 accept={accept}
                 required={required}
+                // only add custom upload message after the first file input
+                {... pageIndex > 0 ? {uploadMessage: this.additionalFileUploadMessage} : {}}
                 error={errors[pageIndex]}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)

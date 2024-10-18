@@ -64,9 +64,10 @@ export class VaTableInner {
         {Array.from({ length: this.cols }).map((_, i) => {
           const slotName = `va-table-slot-${row * this.cols + i}`;
           const slot = <slot name={slotName}></slot>
+          const header = this.el.querySelector(`[slot="va-table-slot-${i}"]`).innerHTML;
           return (i === 0 || row === 0)
-            ? <th scope="row">{slot}</th>
-            : <td>{slot}</td>
+            ? <th data-label={header} scope="row">{slot}</th>
+            : <td data-label={header}>{slot}</td>
         })}
       </tr>
     )

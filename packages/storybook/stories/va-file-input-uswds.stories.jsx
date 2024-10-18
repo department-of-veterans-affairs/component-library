@@ -18,6 +18,14 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={fileInputDocs} />,
     },
   },
+  argTypes: {
+    // hide the uploadMessage prop from the properties table in storybook
+    uploadMessage: {
+      table: {
+        disable: true
+      }
+    }
+  }
 };
 
 const defaultArgs = {

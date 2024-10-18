@@ -53,6 +53,30 @@ describe('va-file-input', () => {
     expect(fileInput.getAttribute('accept')).toBeFalsy();
   });
 
+  it('the `uploadMessage` attribute changes the text in file input', async () => {
+    const page = await newE2EPage();
+    
+    await page.setContent(`<va-file-input />`);
+
+    await page.$eval('va-file-input', (elm: any) => {
+      // within the browser's context
+      // let's set new property values on the component
+      elm.uploadMessage = "Test text";
+    });
+    await page.waitForChanges();
+
+    const fileInput = await page.find('va-file-input >>> .file-input-instructions');
+    expect(fileInput.innerHTML).toContain(`Test text`);
+ });
+
+  it('the component shows default text when `uploadMessage` is not set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input />`);
+
+    const fileInput = await page.find('va-file-input >>> .file-input-instructions');
+    expect(fileInput.innerHTML).toContain(`<span>Drag a file here or <span class="file-input-choose-text">choose from folder</span></span>`);
+  });
+
   it('emits the vaChange event only once', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input buttonText="Upload a file" />`);
