@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { VaFileInputMultiple } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+// @ts-ignore
+import testImage from './images/search-bar.png';
 
 VaFileInputMultiple.displayName = 'VaFileInputMultiple';
 
@@ -28,7 +30,9 @@ const defaultArgs = {
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaMultipleChange': null,
   'header-size': null,
-  'children': null
+  'children': null,
+  'value': null,
+  'read-only': false,
 };
 
 const Template = ({
@@ -38,10 +42,12 @@ const Template = ({
   errors,
   required,
   hint,
-  'enable-analytics': enableAnalytics,
+  enableAnalytics,
   vaMultipleChange,
   headerSize,
-  additional
+  value,
+  readOnly,
+  children,
 }) => {
   return (
     <VaFileInputMultiple
@@ -54,7 +60,9 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaMultipleChange={vaMultipleChange}
       header-size={headerSize}
-      children={additional}
+      value={value}
+      read-only={readOnly}
+      children={children}
     />
   );
 };
@@ -68,7 +76,7 @@ Accept.args = {
   ...defaultArgs,
   label: 'Select PDF files',
   hint: 'All files in this list must be PDFs',
-  accept: '.pdf'
+  accept: '.pdf',
 };
 
 export const HeaderSize = Template.bind(null);
@@ -76,7 +84,7 @@ HeaderSize.args = {
   ...defaultArgs,
   label: 'Custom sized header',
   hint: 'Numbers from 1-6 correspond to an H1-H6 tag',
-  headerSize: 1
+  headerSize: 1,
 };
 
 const additionalFormInputsContent = (
@@ -85,7 +93,8 @@ const additionalFormInputsContent = (
       <option key="1" value="1">Public Document</option>
       <option key="2" value="2">Private Document</option>
     </va-select>
-  </div>);
+  </div>
+);
 
 const AdditionalFormInputsContentTemplate = ({
   label,
@@ -97,7 +106,7 @@ const AdditionalFormInputsContentTemplate = ({
   'enable-analytics': enableAnalytics,
   vaMultipleChange,
   headerSize,
-  additional
+  children,
 }) => {
   return (
     <>
@@ -110,10 +119,11 @@ const AdditionalFormInputsContentTemplate = ({
         hint={hint}
         enable-analytics={enableAnalytics}
         onVaMultipleChange={vaMultipleChange}
-        header-size={headerSize}>
-        {additional}
+        header-size={headerSize}
+      >
+        {children}
       </VaFileInputMultiple>
-      <hr/>
+      <hr />
       <div>
         <p>You can collect additional information about an uploaded file by passing inputs to the slot of this component. The slot content will render after a file is uploaded.</p>
         <p>This example showcases how to include custom content, such as dropdowns, within the file input component.</p>
@@ -129,7 +139,7 @@ const AdditionalFormInputsContentTemplate = ({
     </va-select>
   </div>
 );
-  
+
 <VaFileInputMultiple ... >
   {additionalFormInputsContent}
 </VaFileInputMultiple>`}
@@ -149,11 +159,11 @@ const AdditionalFormInputsContentTemplate = ({
 export const AdditionalFormInputs = AdditionalFormInputsContentTemplate.bind(null);
 AdditionalFormInputs.args = {
   ...defaultArgs,
-  label: 'Label Header',
-  additional: additionalFormInputsContent
-}
+  label: 'Additional Form Inputs',
+  children: additionalFormInputsContent,
+};
 
-const ErrorsTemplate = ({label, name, hint}) => {
+const ErrorsTemplate = ({ label, name, hint }) => {
   const [errorsList, setErrorsList] = useState([]);
 
   function setErrorForEachFile(event) {
@@ -184,7 +194,7 @@ const ErrorsTemplate = ({label, name, hint}) => {
           <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
             <code>
   {`const [errorsList, setErrorsList] = useState([]);
-  
+
   function setErrorForEachFile(event) {
     const fileEntries = event.detail.files;
     const errors = fileEntries.map((file, index) => {
@@ -212,14 +222,14 @@ const ErrorsTemplate = ({label, name, hint}) => {
         </a>
       </div>
     </>
-  )
+  );
 };
 
 export const Errors = ErrorsTemplate.bind(null);
 Errors.args = {
   ...defaultArgs,
   label: 'Label Header',
-}
+};
 
 const CustomValidationTemplate = ({ label, name, accept, hint }) => {
   const [errorsList, setErrorsList] = useState([]);
@@ -232,8 +242,9 @@ const CustomValidationTemplate = ({ label, name, accept, hint }) => {
       if (fileEntry) {
         let error = '';
 
-        if (fileEntry.size > 2 * 1024 * 1024) { // 2MB = 2 * 1024 * 1024 bytes
-          error = "File size cannot be greater than 2MB";
+        if (fileEntry.size > 2 * 1024 * 1024) {
+          // 2MB = 2 * 1024 * 1024 bytes
+          error = 'File size cannot be greater than 2MB';
         }
 
         errors.push(error);
@@ -309,4 +320,49 @@ CustomValidation.args = {
   ...defaultArgs,
   label: 'Upload files which are smaller than 2 MB',
   hint: 'Select any file type',
-}
+};
+
+const FilesUploadedTemplate = args => {
+  const [mockFiles, setMockFiles] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadImage = async () => {
+      const response = await fetch(testImage);
+      const blob = await response.blob();
+      const file1 = new File([blob], 'test1.jpg', { type: 'image/jpeg' });
+      const file2 = new File([blob], 'test2.jpg', { type: 'image/jpeg' });
+
+      if (isMounted) {
+        // @ts-ignore
+        setMockFiles([file1, file2]);
+      }
+    };
+    loadImage();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return <Template {...args} value={mockFiles} />;
+};
+
+export const FilesUploaded = FilesUploadedTemplate.bind(null);
+FilesUploaded.args = { ...defaultArgs, vaMultipleChange: event => event };
+
+export const ReadOnly = FilesUploadedTemplate.bind(null);
+ReadOnly.args = {
+  ...defaultArgs,
+  vaMultipleChange: event => event,
+  readOnly: true,
+};
+
+export const ReadOnlyWithAdditionalInputs = FilesUploadedTemplate.bind(null);
+ReadOnlyWithAdditionalInputs.args = {
+  ...defaultArgs,
+  vaMultipleChange: event => event,
+  readOnly: true,
+  children: additionalFormInputsContent,
+};
