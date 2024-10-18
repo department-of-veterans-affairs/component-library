@@ -69,6 +69,16 @@ export class VaFileInputMultiple {
   @Prop() headerSize?: number;
 
   /**
+   * The value attribute for the file view element.
+   */
+  @Prop() value?: File[];
+
+  /**
+   * Optionally displays the read-only view
+   */
+  @Prop() readOnly?: boolean = false;
+
+  /**
    * Event emitted when any change to the file inputs occurs.
    */
   @Event() vaMultipleChange: EventEmitter;
@@ -76,7 +86,12 @@ export class VaFileInputMultiple {
   /**
    * Internal state to track files and their unique keys.
    */
-  @State() files: FileIndex[] = [{ key: 0, file: null , content: null}];
+  @State() files: FileIndex[] = [{ key: 0, file: null, content: null }];
+
+  /**
+   * Internal state to track whether files added via the "value" prop have already been added to the "files" state or not.
+   */
+  @State() valueAdded: boolean = false;
 
   /**
    * Counter to assign unique keys to new file inputs.
@@ -124,7 +139,9 @@ export class VaFileInputMultiple {
    * @returns {Node[]} An array of cloned nodes from the additionalSlot.
    */
   private getAdditionalContent() {
-    return this.additionalSlot.map(n => n.cloneNode(true));
+    return (
+      this.additionalSlot && this.additionalSlot.map(n => n.cloneNode(true))
+    );
   }
 
   /**
@@ -208,6 +225,49 @@ export class VaFileInputMultiple {
   };
 
   /**
+   * If an array of files is provided via the "value" prop, we have to add these to the state before the component is loaded.
+   */
+  private addValueFiles = async () => {
+    // Remove the 'dummy' file from state
+    this.files.shift();
+
+    // Add each provided file
+    this.value.forEach(file => {
+      this.files.push({
+        file: file,
+        key: this.fileKeyCounter,
+        content: this.getAdditionalContent() || null,
+      });
+      this.fileKeyCounter++;
+    });
+
+    // Add a 'dummy' file back to the end of the array, if not readonly
+    if (!this.readOnly) {
+      this.files.push({
+        file: null,
+        key: this.fileKeyCounter,
+        content: null,
+      });
+    }
+
+    // Change the valueAdded state to indicate that we added these files (prevents an infinite loop)
+    this.valueAdded = true;
+
+    return Promise.resolve();
+  };
+
+  /**
+   * Checks if we need to add files from the "value" prop to state
+   */
+  componentWillRender() {
+    if (this.value && this.value.length && !this.valueAdded) {
+      return this.addValueFiles();
+    } else {
+      return Promise.resolve();
+    }
+  }
+
+  /**
    * It first ensures that the slot content is correctly set up, then iterates over each file input in the component,
    * appending cloned additional content where applicable. This method ensures that additional content is
    * consistently rendered across multiple file inputs after updates to the DOM.
@@ -228,7 +288,7 @@ export class VaFileInputMultiple {
    */
   private hasErrors = () => {
     return this.errors.some(error => !!error);
-  }
+  };
 
   /**
    * The render method to display the component structure.
@@ -245,22 +305,27 @@ export class VaFileInputMultiple {
       accept,
       errors,
       enableAnalytics,
+      readOnly,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
-    const hasError = this.hasErrors() ? 'has-error': '';
+    const hasError = this.hasErrors() ? 'has-error' : '';
 
     return (
       <Host class={hasError}>
-        {label && this.renderLabelOrHeader(label, required, headerSize)}
-        {hint && (
+        {label &&
+          !readOnly &&
+          this.renderLabelOrHeader(label, required, headerSize)}
+        {hint && !readOnly && (
           <div class="usa-hint" id="input-hint-message">
             {hint}
           </div>
         )}
         <div class={outerWrapClass}>
-          <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
+          <div class="usa-sr-only" aria-live="polite" id="statusMessage"></div>
           {!this.isEmpty() && (
-            <div class="selected-files-label">Selected files</div>
+            <div class="selected-files-label">
+              {readOnly ? 'Files you uploaded' : 'Selected files'}
+            </div>
           )}
           {files.map((fileEntry, pageIndex) => {
             return (
@@ -277,6 +342,8 @@ export class VaFileInputMultiple {
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
                 enable-analytics={enableAnalytics}
+                value={fileEntry.file}
+                readOnly={readOnly}
               />
             );
           })}

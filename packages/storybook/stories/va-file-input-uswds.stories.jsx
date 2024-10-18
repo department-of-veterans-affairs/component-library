@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+// @ts-ignore
 import testImage from './images/search-bar.png';
 
 VaFileInput.displayName = 'VaFileInput';
@@ -33,7 +34,7 @@ const defaultArgs = {
   'header-size': null,
   'children': null,
   'value': null,
-  'children': null,
+  'read-only': false,
 };
 
 const Template = ({
@@ -43,9 +44,8 @@ const Template = ({
   error,
   required,
   hint,
-  'enable-analytics': enableAnalytics,
+  enableAnalytics,
   vaChange,
-  uswds,
   headerSize,
   readOnly,
   value,
@@ -61,7 +61,6 @@ const Template = ({
       hint={hint}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
-      uswds={uswds}
       header-size={headerSize}
       readOnly={readOnly}
       value={value}
@@ -111,12 +110,7 @@ HeaderLabel.args = {
 
 const additionalFormInputsContent = (
   <div>
-    <va-select
-      className="hydrated"
-      uswds
-      label="What kind of file is this?"
-      required
-    >
+    <va-select className="hydrated" label="What kind of file is this?" required>
       <option key="1" value="1">
         Public Document
       </option>
@@ -164,7 +158,6 @@ const CustomValidationTemplate = ({
   return (
     <>
       <VaFileInput
-        uswds
         label={label}
         name={name}
         accept={accept}
@@ -254,10 +247,10 @@ const FileUploadedTemplate = args => {
       const file = new File([blob], 'test.jpg', { type: 'image/jpeg' });
 
       if (isMounted) {
+        // @ts-ignore
         setMockFile(file);
       }
     };
-
     loadImage();
 
     return () => {
