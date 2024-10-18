@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
+import { getWebComponentDocs, StoryDocs } from '../wc-helpers';
 
 const cardDocs = getWebComponentDocs('va-card');
 
@@ -83,22 +83,12 @@ const Template = ({
       </dl>
       {!canEdit && (
         <div class="vads-u-margin-y--1">
-          <a
-            class="vads-u-font-weight--bold"
-            aria-label="Edit mailing address"
-            href="/mock-form-ae-design-patterns/1/task-yellow/veteran-information/edit-mailing-address"
-          >
-            Edit{' '}
-            <span class="vads-u-visibility--screen-reader">
-              your mailing address
-            </span>
-            <va-icon
-              icon="chevron_right"
-              size="2"
-              class="hydrated"
-              style={{ position: 'relative', top: '-5px', left: '-1px' }}
-            ></va-icon>{' '}
-          </a>
+          <va-link
+          active
+          label="Edit mailing address"
+          href="/mock-form-ae-design-patterns/1/task-yellow/veteran-information/edit-mailing-address"
+          text="Edit"
+          />
         </div>
       )}
     </div>

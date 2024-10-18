@@ -1,11 +1,7 @@
 import React from 'react';
 import {
   VaAlert,
-  VaButtonPair,
 } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
-
-const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
   title: 'Patterns/Prefill/Usage Examples/Prefill alert with editable card',
@@ -18,13 +14,7 @@ export default {
 const Template = ({
   slim,
   status,
-  'disable-analytics': disableAnalytics,
-  visible,
-  'close-btn-aria-label': closeBtnAriaLabel,
-  closeable,
-  'full-width': fullWidth,
   headline,
-  onCloseEvent,
   children,
 }) => {
   return (
@@ -56,12 +46,6 @@ const Template = ({
         <VaAlert
           slim={slim}
           status={status}
-          disableAnalytics={disableAnalytics}
-          visible={visible}
-          closeBtnAriaLabel={closeBtnAriaLabel}
-          closeable={closeable}
-          fullWidth={fullWidth}
-          onCloseEvent={onCloseEvent}
         >
           {headline}
           {children}
@@ -89,22 +73,12 @@ const Template = ({
           Fulton, NY 97063
         </div>
         <div class="vads-u-margin-y--1">
-          <a
-            class="vads-u-font-weight--bold"
-            aria-label="Edit mailing address"
-            href="/mock-form-ae-design-patterns/1/task-yellow/veteran-information/edit-mailing-address"
-          >
-            Edit{' '}
-            <span class="vads-u-visibility--screen-reader">
-              your mailing address
-            </span>
-            <va-icon
-              icon="chevron_right"
-              size="2"
-              class="hydrated"
-              style={{ position: 'relative', top: '-5px', left: '-1px' }}
-            ></va-icon>{' '}
-          </a>
+          <va-link
+          active
+          label="Edit mailing address"
+          href="/mock-form-ae-design-patterns/1/task-yellow/veteran-information/edit-mailing-address"
+          text="Edit"
+          />
         </div>
       </va-card>
       </div>
@@ -115,11 +89,6 @@ const Template = ({
 const defaultArgs = {
   'slim': true,
   'status': 'info',
-  'disable-analytics': false,
-  'visible': true,
-  'close-btn-aria-label': 'Close notification',
-  'closeable': false,
-  'full-width': false,
   'children': (
     <p className="vads-u-margin-y--0">
       <strong>Note:</strong> We've prefilled some of your information from your

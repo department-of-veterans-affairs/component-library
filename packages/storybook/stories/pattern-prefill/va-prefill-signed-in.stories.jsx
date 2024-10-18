@@ -1,11 +1,7 @@
 import React from 'react';
 import {
   VaAlert,
-  VaButtonPair,
 } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
-
-const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
   title: 'Patterns/Prefill/Usage Examples/Signed In Prefill Alert',
@@ -18,13 +14,7 @@ export default {
 const Template = ({
   slim,
   status,
-  'disable-analytics': disableAnalytics,
-  visible,
-  'close-btn-aria-label': closeBtnAriaLabel,
-  closeable,
-  'full-width': fullWidth,
   headline,
-  onCloseEvent,
   children,
 }) => {
   return (
@@ -40,20 +30,16 @@ const Template = ({
         <VaAlert
           slim={slim}
           status={status}
-          disableAnalytics={disableAnalytics}
-          visible={visible}
-          closeBtnAriaLabel={closeBtnAriaLabel}
-          closeable={closeable}
-          fullWidth={fullWidth}
-          onCloseEvent={onCloseEvent}
         >
           {headline}
           {children}
         </VaAlert>
       </div>
-      <a href="#start" class="vads-c-action-link--green">
-        Start the Board Appeal request
-      </a>
+      <va-link-action
+        href="#start"
+        label="This is an aria label for the Action Link"
+        text="Start the Board Appeal request"
+       />
       </div>
     </>
   );
@@ -62,11 +48,6 @@ const Template = ({
 const defaultArgs = {
   'slim': true,
   'status': 'info',
-  'disable-analytics': false,
-  'visible': true,
-  'close-btn-aria-label': 'Close notification',
-  'closeable': false,
-  'full-width': false,
   'children': (
     <p className="vads-u-margin-y--0">
       <strong>Note:</strong> Since you’re signed in to your account, we can

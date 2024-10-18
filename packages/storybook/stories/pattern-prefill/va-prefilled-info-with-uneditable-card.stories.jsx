@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  VaAlert,
-  VaButtonPair,
-} from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
 import { Uneditable } from './va-card.stories';
-
-const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
   title: 'Patterns/Prefill/Usage Examples/Prefilled info with uneditable card',
@@ -17,16 +10,6 @@ export default {
 };
 
 const Template = ({
-  slim,
-  status,
-  'disable-analytics': disableAnalytics,
-  visible,
-  'close-btn-aria-label': closeBtnAriaLabel,
-  closeable,
-  'full-width': fullWidth,
-  headline,
-  onCloseEvent,
-  children,
 }) => {
   return (
     <>
@@ -69,24 +52,5 @@ const Template = ({
   );
 };
 
-const defaultArgs = {
-  'slim': true,
-  'status': 'info',
-  'disable-analytics': false,
-  'visible': true,
-  'close-btn-aria-label': 'Close notification',
-  'closeable': false,
-  'full-width': false,
-  'children': (
-    <p className="vads-u-margin-y--0">
-      <strong>Note:</strong> We've prefilled some of your information from your
-      account. If you need to correct anything, you can select edit below. All
-      updates will be made only to this form.
-    </p>
-  ),
-};
 
 export const Default = Template.bind(null);
-Default.args = {
-  ...defaultArgs,
-};

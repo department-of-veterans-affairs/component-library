@@ -39,15 +39,6 @@ VaAlert.displayName = 'VaAlert';
 const defaultArgs = {
   'slim': false,
   'status': 'info',
-  'disable-analytics': false,
-  'visible': true,
-  'close-btn-aria-label': 'Close notification',
-  'closeable': false,
-  'full-width': false,
-  //   'headline': (
-  //     <h2 id="track-your-status-on-mobile" slot="headline">
-  // Note: Since you’re signed in to your account, we can prefill part of your form based on your account details. You can also save your form in progress and come back later to finish filling it out.    </h2>
-  //   ),
   'children': (
     <p className="vads-u-margin-y--0">
       <strong>Note:</strong> Since you’re signed in to your account, we can
@@ -60,41 +51,13 @@ const defaultArgs = {
 const Template = ({
   slim,
   status,
-  'disable-analytics': disableAnalytics,
-  visible,
-  'close-btn-aria-label': closeBtnAriaLabel,
-  closeable,
-  'full-width': fullWidth,
   headline,
-  onCloseEvent,
   children,
 }) => {
-  if (onCloseEvent)
-    return (
-      <VaAlert
-        slim={slim}
-        status={status}
-        disableAnalytics={disableAnalytics}
-        visible={visible}
-        closeBtnAriaLabel={closeBtnAriaLabel}
-        closeable={closeable}
-        fullWidth={fullWidth}
-        onCloseEvent={onCloseEvent}
-      >
-        {headline}
-        {children}
-      </VaAlert>
-    );
-
   return (
     <va-alert
       slim={slim}
       status={status}
-      disable-analytics={disableAnalytics}
-      visible={visible}
-      close-btn-aria-label={closeBtnAriaLabel}
-      closeable={closeable}
-      full-width={fullWidth}
     >
       {headline}
       {children}
@@ -102,98 +65,6 @@ const Template = ({
   );
 };
 
-const SlimTemplate = ({
-  'close-btn-aria-label': closeBtnAriaLabel,
-  closeable,
-  slim,
-  uswds,
-}) => {
-  return (
-    <>
-      <va-alert
-        slim={slim}
-        status="info"
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <p className="vads-u-margin-y--0">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod.
-        </p>
-      </va-alert>
-      <va-alert
-        slim={slim}
-        status="error"
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <>
-          <p className="vads-u-margin-y--0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod.
-          </p>
-        </>
-      </va-alert>
-      <va-alert
-        slim={slim}
-        status="success"
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <p className="vads-u-margin-y--0">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod.
-        </p>
-      </va-alert>
-      <va-alert
-        slim={slim}
-        status="warning"
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <>
-          <p className="vads-u-margin-y--0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod.
-          </p>
-        </>
-      </va-alert>
-      <va-alert
-        slim={slim}
-        status="continue"
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <>
-          <p className="vads-u-margin-y--0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod.
-          </p>
-        </>
-      </va-alert>
-    </>
-  );
-};
 
 export const SignedInPrefillAlert = Template.bind(null);
 SignedInPrefillAlert.args = {
@@ -229,7 +100,10 @@ UnauthenticatedPrefillAlert.args = {
       </p>
       <va-button text="Sign in to start your application" />
       <p>
-        <a href="#start">Start your application without signing in</a>
+        <va-link
+          href="#start"
+          text="Start your application without signing in"
+        />
       </p>
     </div>
   ),
