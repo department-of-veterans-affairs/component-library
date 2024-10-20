@@ -74,7 +74,7 @@ const CustomComponentsTemplate = (args) => {
     columns
   } = args;
   return (
-    <va-table uswds table-title={tableTitle}>
+    <va-table table-title={tableTitle}>
       <va-table-row>
           {columns.map((col, i) => (
             <span key={`header-default-${i}`}>{col}</span>
@@ -268,10 +268,7 @@ const Pagination = (args) => {
 
   return (
     <main>
-      <va-table
-        table-title={tableTitle}
-        uswds
-      >
+      <va-table table-title={tableTitle} >
         <va-table-row>
           {columns.map((col, index) => (
             <span key={`table-header-${index}`}>{col}</span>
