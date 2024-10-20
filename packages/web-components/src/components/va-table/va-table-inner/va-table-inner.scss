@@ -1,5 +1,6 @@
 @forward 'settings';
 @use 'usa-table/src/styles/usa-table';
+@use 'uswds-helpers/src/styles/usa-sr-only';
 
 :host {
   td slot::slotted(span:empty)::before,
@@ -17,6 +18,24 @@
   margin: 0;
   padding: 0;
   width: 100%;
+}
+:host thead tr th {
+  button {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translate(0, -50%);
+    text-align: center;
+    
+    &:focus {
+      outline: 2px solid var(--vads-color-action-focus-on-light);
+    }
+  }
 }
 
 ::slotted([slot='headers']) {
