@@ -20,7 +20,7 @@ function getDateValue(string: string): number {
 // this function returns a function that sorts date strings and which can be passed to Array.sort
 // the "sordir" argument controls whether the function that is returned sorts ascending or descending
 export function dateSort(sortdir: string): CompareFuncReturn {
-  return function (a: string, b: string): number {
+  return function datesSort(a: string, b: string): number {
     const aTime = getDateValue(a);
     const bTime = getDateValue(b);
     return difference(aTime, bTime, sortdir);

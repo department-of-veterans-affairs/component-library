@@ -34,7 +34,7 @@ function cleanString(string: string): string | number {
 // this function returns a function that sorts numbers and which can be passed to Array.sort
 // the "sordir" argument controls whether the function that is returned sorts ascending or descending
 export function numSort(sortdir: string): CompareFuncReturn {
-  return function (a: string, b: string): number {
+  return function numberSort(a: string, b: string): number {
     return difference(+cleanString(a), +cleanString(b), sortdir);
   }
 }

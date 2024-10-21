@@ -1,5 +1,9 @@
 import { E2EPage, newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../../testing/test-helpers';
+import { alphaSort } from '../../sort/alpha';
+import { numSort } from '../../sort/numerical';
+import { dateSort } from '../../sort/date';
+import { _getCompareFunc } from '../../sort/utils';
 
 describe('va-table', () => {
   function makeTable() {
@@ -305,6 +309,71 @@ describe('sorted va-table ', () => {
     await page.setContent(getTableMarkup());
     await checkSorts(page, 7, 'sort-4', 'sort-2');
   });
+});
 
+describe('sort utilities', () => {
+  it('correctly sorts alphabetically - ascending', () => {
+    const data = ['dog', 'cat', 'mouse'];
+    data.sort(alphaSort('ascending'));
+    expect(data[0]).toEqual('cat');
+  });
 
+  it('correctly sorts alphabetically - descending', () => {
+    const data = ['dog', 'cat', 'mouse'];
+    data.sort(alphaSort('descending'));
+    expect(data[0]).toEqual('mouse');
+  });
+
+  it('correctly sorts by date - ascending', () => {
+    const data1 = ['October 1, 1900', 'November 1, 1900', 'December 1, 1900'];
+    const data2 = ['October', 'November', 'December'];
+    const data3 = ['10/01/1900', '11/01/1900', '12/01/1900'];
+    const sortFunc = dateSort('ascending');
+
+    data1.sort(sortFunc);
+    expect(data1[0]).toContain('October');
+
+    data2.sort(sortFunc);
+    expect(data2[0]).toContain('October');
+
+    data3.sort(sortFunc);
+    expect(data3[0]).toEqual('10/01/1900');
+  });
+
+  it('correctly sorts by date - descending', () => {
+    const data1 = ['October 1, 1900', 'November 1, 1900', 'December 1, 1900'];
+    const data2 = ['October', 'November', 'December'];
+    const data3 = ['10/01/1900', '11/01/1900', '12/01/1900'];
+    const sortFunc = dateSort('descending');
+
+    data1.sort(sortFunc);
+    expect(data1[0]).toContain('December');
+
+    data2.sort(sortFunc);
+    expect(data2[0]).toContain('December');
+
+    data3.sort(sortFunc);
+    expect(data3[0]).toEqual('12/01/1900');
+  });
+
+  it('correctly sorts numerically - ascending', () => {
+    const data = ['100', '3', '56', '11', '99'];
+    data.sort(numSort('ascending'));
+    expect(data[0]).toEqual('3');
+  });
+
+  it('correctly sorts numerically - descending', () => {
+    const data = ['100', '3', '56', '11', '99'];
+    data.sort(numSort('descending'));
+    expect(data[0]).toEqual('100');
+  });
+
+  it('finds the correct sort function for a datatype', () => {
+    const func = _getCompareFunc('123', '');
+    expect(func.name).toEqual('numberSort');
+    const func2 = _getCompareFunc('abc', '');
+    expect(func2.name).toEqual('alphabeticalSort');
+    const func3 = _getCompareFunc('October 31, 1899', '');
+    expect(func3.name).toEqual('datesSort');
+  });
 })
