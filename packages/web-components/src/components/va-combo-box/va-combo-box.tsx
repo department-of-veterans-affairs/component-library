@@ -14,7 +14,6 @@ import {
 // import classnames from 'classnames';
 import { i18next } from '../..';
 import { getSlottedNodes } from '../../utils/utils';
-// import uswdsInit from '@uswds/uswds/dist/js/uswds';
 import comboBox from '@uswds/uswds/packages/usa-combo-box/src';
 
 /**
@@ -36,6 +35,8 @@ export class VaComboBox {
   @Element() el: any;
 
   @State() options: Array<Node>;
+
+  @State() labelNode: Node;
 
   /**
    * Whether or not this is a required field.
@@ -155,6 +156,10 @@ export class VaComboBox {
     // Get all slotted nodes
     const allNodes = getSlottedNodes(this.el, null);
 
+    this.labelNode = allNodes.find(
+      (node: Node) => node.nodeName.toLowerCase() === 'label',
+    );
+
     // Filter nodes to include only <option> and <optgroup>
     // supports scenario where <option> may be slotted within <optgroup> as well as <option> directly
     // preserving the order of the nodes as they are slotted
@@ -228,17 +233,12 @@ export class VaComboBox {
     return (
       <Host>
         <label class="usa-label" htmlFor="fruit">
-          {this.label}
+          Select a fruit
         </label>
-        <div class="usa-combo-box" data-enhanced="true">
-          <select
-            class="usa-select usa-sr-only usa-combo-box__select"
-            name="fruit"
-            id=""
-            aria-hidden="true"
-            tabindex="-1"
-          >
-            <option value="">Select a fruit</option>
+        <div class="usa-combo-box">
+          <select class="usa-select" name="fruit" id="fruit">
+            {/* <option>Select a fruit</option> */}
+            {/* {this.options} */}
             <option value="apple">Apple</option>
             <option value="apricot">Apricot</option>
             <option value="avocado">Avocado</option>

@@ -2,15 +2,16 @@
 
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-icon/src/styles/usa-icon';
-@use 'usa-label/src/styles/usa-label';
-@use 'usa-input/src/styles/usa-input';
-@use 'usa-error-message/src/styles/usa-error-message';
-@use 'usa-hint/src/styles/usa-hint';
 @use 'usa-select/src/styles/usa-select';
-@use 'usa-combo-box/src/styles/usa-combo-box';
+@use 'usa-combo-box/src/styles';
+// @use 'usa-label/src/styles/usa-label';
+// @use 'usa-input/src/styles/usa-input';
+// @use 'usa-error-message/src/styles/usa-error-message';
+// @use 'usa-hint/src/styles/usa-hint';
 
-@import '../../mixins/uswds-input-width.scss';
-@import '../../mixins/uswds-error-border.scss';
+// @import '../../mixins/uswds-input-width.scss';
+// @import '../../mixins/uswds-error-border.scss';
+
 
 :host {
   display: block;
@@ -30,4 +31,27 @@
 ::slotted(option),
 ::slotted(optgroup) {
   display: none;
+}
+
+.usa-combo-box{
+  font-size: 16px;
+  max-width: 30rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.usa-combo-box input {
+  height: 4rem;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.usa-combo-box__list-option{
+  font-size: 16px;
+  padding: 1rem;
+}
+
+.usa-combo-box__input-button-separator {
+  right: calc(2.5rem + 7px);
 }
