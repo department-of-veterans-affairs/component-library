@@ -18,7 +18,7 @@
 **/
 @media screen and (min-width: 768px), print and (min-width: 768px) {
   [type=submit] {
-    margin-top: calc(3rem - 0.2em);
+    margin-top: calc(1.875rem - 0.2em);
   }
 }
 
