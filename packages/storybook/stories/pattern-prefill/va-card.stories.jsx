@@ -29,7 +29,7 @@ const Template = ({
   <va-card show-shadow={showShadow} background={background} class="hydrated">
     <div class="vads-u-padding-left--1 vads-u-padding-y--1">
       <dl class="vads-u-padding-y--0 vads-u-margin-y--0">
-        <div data-testid="ezr-veteran-fullname" class="vads-u-margin-bottom--2">
+        <div class="vads-u-margin-bottom--2">
           <dt class="vads-u-visibility--screen-reader">Full name:</dt>
           <dd
             class="vads-u-font-weight--bold dd-privacy-mask vads-u-font-family--serif"
@@ -38,7 +38,7 @@ const Template = ({
             Maverick P Mitchell
           </dd>
         </div>
-        <div data-testid="ezr-veteran-ssn" class="vads-u-margin-bottom--2">
+        <div class="vads-u-margin-bottom--2">
           <dt class="vads-u-display--inline-block vads-u-font-weight--bold vads-u-margin-right--0p5">
             Social Security:
           </dt>
@@ -52,7 +52,7 @@ const Template = ({
             </span>
           </dd>
         </div>
-        <div data-testid="ezr-veteran-dob">
+        <div>
           <dt class="vads-u-display--inline-block vads-u-margin-right--0p5 vads-u-font-weight--bold">
             Date of birth:
           </dt>
@@ -69,7 +69,7 @@ const Template = ({
             Mar 04, 1949
           </dd>
         </div>
-        <div data-testid="ezr-veteran-gender">
+        <div>
           <dt class="vads-u-display--inline-block vads-u-margin-right--0p5 vads-u-font-weight--bold vads-u-margin-top--2">
             Gender:
           </dt>

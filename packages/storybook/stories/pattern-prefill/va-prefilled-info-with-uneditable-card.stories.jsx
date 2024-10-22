@@ -14,11 +14,11 @@ const Template = ({
   return (
     <>
     <div style={{ padding: '20px' }}>
-      <div class="schemaform-title">
-        <h1 data-testid="form-title">
+      <div>
+        <h1>
           Update your VA health benefits information
         </h1>
-        <div class="schemaform-subtitle" data-testid="form-subtitle">
+        <div>
           Health Benefits Update Form (VA Form 10-10EZR)
         </div>
       </div>
@@ -30,7 +30,7 @@ const Template = ({
         />
       </div>
       <div class="nav-header">
-        <div data-testid="navFormDiv" class="vads-u-font-size--h4">
+        <div class="vads-u-font-size--h4">
           <span class="vads-u-display--block vads-u-font-family--sans vads-u-font-weight--normal vads-u-font-size--base vads-u-padding-top--0">
             We’ll save your application on every change.{' '}
           </span>

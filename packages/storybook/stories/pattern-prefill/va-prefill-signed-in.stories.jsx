@@ -20,9 +20,9 @@ const Template = ({
   return (
     <>
     <div style={{ padding: '20px' }}>
-      <div class="schemaform-title">
-        <h1 data-testid="form-title">Request a Board Appeal</h1>
-        <div class="schemaform-subtitle" data-testid="form-subtitle">
+      <div>
+        <h1>Request a Board Appeal</h1>
+        <div>
           VA Form 10182 (Notice of Disagreement)
         </div>
       </div>
