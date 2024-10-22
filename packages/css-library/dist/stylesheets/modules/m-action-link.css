@@ -1399,7 +1399,6 @@ a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--w
 }
 a.vads-c-action-link--blue:before, a.vads-c-action-link--green:before, a.vads-c-action-link--white:before {
   background-image: url("../../img/arrow-right-white.svg");
-  background-color: var(--vads-color-success-dark);
   background-size: 18px 18px;
   background-repeat: no-repeat;
   background-position: center;
@@ -1416,11 +1415,11 @@ a.vads-c-action-link--blue:before, a.vads-c-action-link--green:before, a.vads-c-
 }
 
 a.vads-c-action-link--blue:before {
-  color: #005ea2;
+  background-color: #005ea2;
 }
 
 a.vads-c-action-link--green:before {
-  color: #008817;
+  background-color: #008817;
 }
 
 a.vads-c-action-link--white {
