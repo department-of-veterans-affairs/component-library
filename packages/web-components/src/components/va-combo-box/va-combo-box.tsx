@@ -36,7 +36,7 @@ export class VaComboBox {
 
   @State() options: Array<Node>;
 
-  @State() labelNode: Node;
+  @State() labelNode: HTMLLabelElement;
 
   /**
    * Whether or not this is a required field.
@@ -121,6 +121,26 @@ export class VaComboBox {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  componentWillLoad() {
+    if(!this.label){
+      throw new Error('va-combo-box: label is a required property');
+    }else{
+      this.labelNode = document.createElement('label');
+      this.labelNode.textContent = this.label;
+      this.labelNode.htmlFor = 'options';
+      if (this.required){
+        const requiredNode = document.createElement('span');
+        requiredNode.textContent =` ${i18next.t('required')}`;
+        requiredNode.classList.add('usa-label--required');
+        // {required && (
+        //   <span class="usa-label--required"> {i18next.t('required')}</span>
+        // )}
+        this.labelNode.appendChild(requiredNode);
+      }
+      this.el.prepend(this.labelNode);
+    }
+  }
+
   componentDidRender() {
     const comboBoxElement = this.el.shadowRoot.querySelector('.usa-combo-box');
     if (comboBoxElement) {
@@ -155,10 +175,6 @@ export class VaComboBox {
 
     // Get all slotted nodes
     const allNodes = getSlottedNodes(this.el, null);
-
-    this.labelNode = allNodes.find(
-      (node: Node) => node.nodeName.toLowerCase() === 'label',
-    );
 
     // Filter nodes to include only <option> and <optgroup>
     // supports scenario where <option> may be slotted within <optgroup> as well as <option> directly
@@ -232,63 +248,12 @@ export class VaComboBox {
     // });
     return (
       <Host>
-        <label class="usa-label" htmlFor="fruit">
-          Select a fruit
-        </label>
+        <slot onSlotchange={() => this.populateOptions()}></slot>
+
         <div class="usa-combo-box">
-          <select class="usa-select" name="fruit" id="fruit">
-            {/* <option>Select a fruit</option> */}
-            {/* {this.options} */}
-            <option value="apple">Apple</option>
-            <option value="apricot">Apricot</option>
-            <option value="avocado">Avocado</option>
-            <option value="banana">Banana</option>
-            <option value="blackberry">Blackberry</option>
-            <option value="blood orange">Blood orange</option>
-            <option value="blueberry">Blueberry</option>
-            <option value="boysenberry">Boysenberry</option>
-            <option value="breadfruit">Breadfruit</option>
+          <select class="usa-select" name="options" id="options">
+            {this.options}
           </select>
-          <input
-            id="fruit"
-            aria-owns="fruit--list"
-            aria-controls="fruit--list"
-            aria-autocomplete="list"
-            aria-expanded="false"
-            autocapitalize="off"
-            autocomplete="off"
-            class="usa-combo-box__input"
-            type="text"
-            role="combobox"
-          />
-          <span class="usa-combo-box__clear-input__wrapper" tabindex="-1">
-            <button
-              type="button"
-              class="usa-combo-box__clear-input"
-              aria-label="Clear the select contents"
-            >
-              &nbsp;
-            </button>
-          </span>
-          <span class="usa-combo-box__input-button-separator">&nbsp;</span>
-          <span class="usa-combo-box__toggle-list__wrapper" tabindex="-1">
-            <button
-              type="button"
-              tabindex="-1"
-              class="usa-combo-box__toggle-list"
-              aria-label="Toggle the dropdown list"
-            >
-              &nbsp;
-            </button>
-          </span>
-          <ul
-            tabindex="-1"
-            id="fruit--list"
-            class="usa-combo-box__list"
-            role="listbox"
-            aria-labelledby="fruit-label"
-          ></ul>
-          <div class="usa-combo-box__status usa-sr-only" role="status"></div>
         </div>
       </Host>
     );
