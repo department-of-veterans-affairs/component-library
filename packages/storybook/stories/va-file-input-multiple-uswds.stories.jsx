@@ -359,10 +359,23 @@ ReadOnly.args = {
   readOnly: true,
 };
 
+const readOnlyAdditionalInfoContent = (
+  <div>
+    <va-select label="What kind of file is this?" required inert value="1">
+      <option key="1" value="1">
+        Public Document
+      </option>
+      <option key="2" value="2">
+        Private Document
+      </option>
+    </va-select>
+  </div>
+);
+
 export const ReadOnlyWithAdditionalInputs = FilesUploadedTemplate.bind(null);
 ReadOnlyWithAdditionalInputs.args = {
   ...defaultArgs,
   vaMultipleChange: event => event,
   readOnly: true,
-  children: additionalFormInputsContent,
+  children: readOnlyAdditionalInfoContent,
 };

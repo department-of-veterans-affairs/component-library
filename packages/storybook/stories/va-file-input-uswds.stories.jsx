@@ -275,10 +275,28 @@ FileUploaded.args = { ...defaultArgs, vaChange: event => event };
 export const ReadOnly = FileUploadedTemplate.bind(null);
 ReadOnly.args = { ...defaultArgs, vaChange: event => event, readOnly: true };
 
+const readOnlyAdditionalInfoContent = (
+  <div>
+    <va-select
+      className="hydrated"
+      label="What kind of file is this?"
+      inert
+      value="1"
+    >
+      <option key="1" value="1">
+        Public Document
+      </option>
+      <option key="2" value="2">
+        Private Document
+      </option>
+    </va-select>
+  </div>
+);
+
 export const ReadOnlyWithAdditionalInputs = FileUploadedTemplate.bind(null);
 ReadOnlyWithAdditionalInputs.args = {
   ...defaultArgs,
   vaChange: event => event,
   readOnly: true,
-  children: additionalFormInputsContent,
+  children: readOnlyAdditionalInfoContent,
 };

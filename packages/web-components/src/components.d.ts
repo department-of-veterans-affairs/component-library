@@ -541,13 +541,13 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * The value attribute for the file view element.
-         */
-        "value"?: File;
-        /**
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
@@ -3600,13 +3600,13 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * The value attribute for the file view element.
-         */
-        "value"?: File;
-        /**
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.

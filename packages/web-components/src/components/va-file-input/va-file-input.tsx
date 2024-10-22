@@ -36,6 +36,7 @@ export class VaFileInput {
   @State() fileContents?: string;
   @State() internalError?: string;
   @State() showModal: boolean = false;
+  @State() showSeparator: boolean = true;
 
   /**
    * The label for the file input.
@@ -80,13 +81,12 @@ export class VaFileInput {
   /**
    * Custom instructional message in the file input.
    */
-  @Prop() uploadMessage?: HTMLElement = 
-  <span>
-    Drag a file here or{' '}
-    <span class="file-input-choose-text">
-      choose from folder
+  @Prop() uploadMessage?: HTMLElement = (
+    <span>
+      Drag a file here or{' '}
+      <span class="file-input-choose-text">choose from folder</span>
     </span>
-  </span>;
+  );
 
   /**
    * Emit component-library-analytics events on the file input change event.
@@ -107,13 +107,14 @@ export class VaFileInput {
   @Prop() headless?: boolean = false;
 
   /**
-   * The event emitted when the file input value changes.
-   */
-  @Event() vaChange: EventEmitter;
-  /**
    * Optionally displays the read-only view
    */
   @Prop() readOnly?: boolean = false;
+
+  /**
+   * The event emitted when the file input value changes.
+   */
+  @Event() vaChange: EventEmitter;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -312,6 +313,18 @@ export class VaFileInput {
     }
   }
 
+  /**
+   * This method checks if there is "additional info" content in the default slot,
+   * or if a file has been uploaded and the change/delete buttons need to show,
+   * and shows or hides the "separator" horizontal rule as needed.
+   */
+  componentWillRender() {
+    const hasSlottedContent = !!this.el.querySelector(':scope > *');
+    const needsButtons = (!!this.value || !!this.file) && !this.readOnly;
+    this.showSeparator =
+      hasSlottedContent || needsButtons;
+  }
+
   componentDidLoad() {
     fileInput.init(this.el);
   }
@@ -444,9 +457,7 @@ export class VaFileInput {
               ></div>
               <div class={fileInputTargetClasses}>
                 <div class="file-input-box"></div>
-                <div class="file-input-instructions">
-                  {this.uploadMessage}
-                </div>
+                <div class="file-input-instructions">{this.uploadMessage}</div>
               </div>
             </div>
           )}
@@ -480,9 +491,12 @@ export class VaFileInput {
                 </div>
                 {(file || value) && (
                   <div>
+                    {this.showSeparator && <hr class="separator" />}
+
                     <div class="additional-info-slot">
                       <slot></slot>
                     </div>
+
                     {!readOnly && (
                       <Fragment>
                         <div class="file-button-section">

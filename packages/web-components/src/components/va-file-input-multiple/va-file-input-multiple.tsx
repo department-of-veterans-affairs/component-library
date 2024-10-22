@@ -347,7 +347,9 @@ export class VaFileInputMultiple {
                 accept={accept}
                 required={required}
                 // only add custom upload message after the first file input
-                {... pageIndex > 0 ? {uploadMessage: this.additionalFileUploadMessage} : {}}
+                {...(pageIndex > 0
+                  ? { uploadMessage: this.additionalFileUploadMessage }
+                  : {})}
                 error={errors[pageIndex]}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
@@ -355,6 +357,7 @@ export class VaFileInputMultiple {
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}
                 readOnly={readOnly}
+                class={fileEntry.file ? 'has-file' : 'no-file'}
               />
             );
           })}

@@ -151,15 +151,16 @@
       font-size: 1.06rem;
     }
 
-    @media screen and (max-width: $small-screen) {
+    @media screen and (max-width: $xsmall-screen) {
       flex-direction: column;
       align-items: flex-start;
     }
   }
 
-  .additional-info-slot {
+  .separator {
+    border: 0;
     border-top: 1px solid var(--vads-color-base-lighter);
-    padding-bottom: 16px;
+    margin: 0;
   }
 
   /* copied from Formation
