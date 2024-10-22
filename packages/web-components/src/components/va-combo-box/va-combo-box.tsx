@@ -56,6 +56,11 @@ export class VaComboBox {
   @Prop() label!: string;
 
   /**
+   * The placeholder string.
+   */
+  @Prop() placeholder?: string;
+
+  /**
    * Name attribute for the select field.
    */
   @Prop() name!: string;
@@ -207,7 +212,8 @@ export class VaComboBox {
     //   reflectInputError,
     //   invalid,
     defaultValue,
-    disabled
+      disabled,
+      placeholder,
     //   label,
     //   required,
     //   name,
@@ -234,7 +240,11 @@ export class VaComboBox {
     // });
     return (
       <Host>
-        <div class="usa-combo-box" data-default-value={defaultValue}>
+        <div
+          class="usa-combo-box"
+          data-default-value={defaultValue}
+          data-placeholder={placeholder}
+        >
           <select
             class="usa-select"
             name="options"
