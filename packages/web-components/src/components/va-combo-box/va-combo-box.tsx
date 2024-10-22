@@ -48,6 +48,8 @@ export class VaComboBox {
    */
   @Prop() disabled?: boolean = false;
 
+  @Prop() defaultValue?: string;
+
   /**
    * Text label for the field.
    */
@@ -179,43 +181,17 @@ export class VaComboBox {
    * but this solves that problem.
    */
   private populateOptions() {
-    const { value } = this;
+    const allNodes = this.el.querySelectorAll('option');
 
-    // Get all slotted nodes
-    const allNodes = getSlottedNodes(this.el, null);
-
-    // Filter nodes to include only <option> and <optgroup>
-    // supports scenario where <option> may be slotted within <optgroup> as well as <option> directly
-    // preserving the order of the nodes as they are slotted
-    const nodes = allNodes.filter((node: Node) => {
-      const nodeName = node.nodeName.toLowerCase();
-      return nodeName === 'option' || nodeName === 'optgroup';
-    });
-
-    this.options = nodes.map(
+    return Array.from(allNodes).map(
       (node: HTMLOptionElement | HTMLOptGroupElement) => {
-        if (node.nodeName.toLowerCase() === 'optgroup') {
-          return (
-            <optgroup label={node.label}>
-              {Array.from(node.children).map((child: HTMLOptionElement) => {
-                return (
-                  <option value={child.value} selected={value === child.value}>
-                    {child.text}
-                  </option>
-                );
-              })}
-            </optgroup>
-          );
-        } else if (node.nodeName.toLowerCase() === 'option') {
           return (
             <option
               value={(node as HTMLOptionElement).value}
-              selected={value === (node as HTMLOptionElement).value}
             >
               {node.textContent}
             </option>
           );
-        }
       },
     );
   }
@@ -226,10 +202,12 @@ export class VaComboBox {
   }
 
   render() {
-    // const {
+    const {
     //   error,
     //   reflectInputError,
     //   invalid,
+    defaultValue,
+    disabled
     //   label,
     //   required,
     //   name,
@@ -237,7 +215,7 @@ export class VaComboBox {
     //   messageAriaDescribedby,
     //   width,
     //   showError,
-    // } = this;
+    } = this;
 
     // const errorID = 'input-error-message';
     // const ariaDescribedbyIds =
@@ -256,11 +234,14 @@ export class VaComboBox {
     // });
     return (
       <Host>
-        <slot onSlotchange={() => this.populateOptions()}></slot>
-
-        <div class="usa-combo-box">
-          <select class="usa-select" name="options" id="options">
-            {this.options}
+        <div class="usa-combo-box" data-default-value={defaultValue}>
+          <select
+            class="usa-select"
+            name="options"
+            id="options"
+            disabled={disabled}
+          >
+            {this.populateOptions()}
           </select>
         </div>
       </Host>
