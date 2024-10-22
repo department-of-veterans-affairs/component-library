@@ -44,6 +44,11 @@ export class VaComboBox {
   @Prop() required?: boolean = false;
 
   /**
+   * The combo box component will be disabled / read-only.
+   */
+  @Prop() disabled?: boolean = false;
+
+  /**
    * Text label for the field.
    */
   @Prop() label!: string;
@@ -146,6 +151,9 @@ export class VaComboBox {
     if (comboBoxElement) {
       comboBox.init(comboBoxElement);
       comboBox.on(comboBoxElement);
+    }
+    if (this.disabled) {
+      comboBox.disable(comboBoxElement);
     }
   }
 
