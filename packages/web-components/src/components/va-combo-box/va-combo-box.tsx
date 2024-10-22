@@ -13,7 +13,6 @@ import {
 } from '@stencil/core';
 // import classnames from 'classnames';
 import { i18next } from '../..';
-import { getSlottedNodes } from '../../utils/utils';
 import comboBox from '@uswds/uswds/packages/usa-combo-box/src';
 
 /**
@@ -134,33 +133,27 @@ export class VaComboBox {
   componentLibraryAnalytics: EventEmitter;
 
   componentWillLoad() {
-    if(!this.label){
+    if (!this.label) {
       throw new Error('va-combo-box: label is a required property');
-    }else{
+    } else {
       this.labelNode = document.createElement('label');
       this.labelNode.textContent = this.label;
       this.labelNode.htmlFor = 'options';
-      if (this.required){
+      if (this.required) {
         const requiredNode = document.createElement('span');
-        requiredNode.textContent =` ${i18next.t('required')}`;
+        requiredNode.textContent = ` ${i18next.t('required')}`;
         requiredNode.classList.add('usa-label--required');
-        // {required && (
-        //   <span class="usa-label--required"> {i18next.t('required')}</span>
-        // )}
         this.labelNode.appendChild(requiredNode);
       }
       this.el.prepend(this.labelNode);
     }
   }
 
-  componentDidRender() {
+  componentDidLoad() {
     const comboBoxElement = this.el.shadowRoot.querySelector('.usa-combo-box');
     if (comboBoxElement) {
       comboBox.init(comboBoxElement);
       comboBox.on(comboBoxElement);
-    }
-    if (this.disabled) {
-      comboBox.disable(comboBoxElement);
     }
   }
 
@@ -190,13 +183,11 @@ export class VaComboBox {
 
     return Array.from(allNodes).map(
       (node: HTMLOptionElement | HTMLOptGroupElement) => {
-          return (
-            <option
-              value={(node as HTMLOptionElement).value}
-            >
-              {node.textContent}
-            </option>
-          );
+        return (
+          <option value={(node as HTMLOptionElement).value}>
+            {node.textContent}
+          </option>
+        );
       },
     );
   }
@@ -208,19 +199,19 @@ export class VaComboBox {
 
   render() {
     const {
-    //   error,
-    //   reflectInputError,
-    //   invalid,
-    defaultValue,
+      //   error,
+      //   reflectInputError,
+      //   invalid,
+      defaultValue,
       disabled,
       placeholder,
-    //   label,
-    //   required,
-    //   name,
-    //   hint,
-    //   messageAriaDescribedby,
-    //   width,
-    //   showError,
+      //   label,
+      //   required,
+      //   name,
+      //   hint,
+      //   messageAriaDescribedby,
+      //   width,
+      //   showError,
     } = this;
 
     // const errorID = 'input-error-message';
