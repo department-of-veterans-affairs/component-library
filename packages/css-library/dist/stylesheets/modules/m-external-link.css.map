@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../../../src/stylesheets/modules/m-external-link.scss"],"names":[],"mappings":"AAIA,0BACE,2CACA,6BACA,4BACA,yBACA,oBACA","file":"m-external-link.css"}
+{"version":3,"sourceRoot":"","sources":["../../../src/stylesheets/formation-overrides/_variables.scss","../../../src/stylesheets/modules/m-external-link.scss"],"names":[],"mappings":"AAAA;AAAA;AAAA;AAAA;ACIA;EACE;EACA;EACA;EACA;EACA;EACA","file":"m-external-link.css"}
