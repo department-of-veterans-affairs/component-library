@@ -106,9 +106,6 @@
 .usa-alert-continue {
   border-left-color: #008817;
 }
-.usa-alert-continue::before {
-  color: #008817;
-}
 .usa-alert.background-color-only {
   border-left: none;
   padding: 1.25rem;
@@ -246,10 +243,6 @@ p.usa-alert-heading {
 }
 .usa-alert-full-width-info .usa-alert:before, .usa-alert-full-width-information .usa-alert:before {
   background: none;
-  font-size: 1.25rem;
-  margin-right: 0.9375rem;
-  position: static;
-  font-weight: 900;
 }
 
 /*# sourceMappingURL=m-alert.css.map */

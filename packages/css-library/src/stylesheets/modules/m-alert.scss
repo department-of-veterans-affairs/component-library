@@ -122,7 +122,7 @@
     border-left-color: $color-green;
 
     &::before {
-      color: $color-green;
+      // color: $color-green;
       // content: "\f023";
     }
   }
@@ -255,10 +255,10 @@ p.usa-alert-heading {
     .usa-alert:before {
       // content: "\F05A";
       background: none;
-      font-size: scale-rem(2rem);
-      margin-right: scale-rem(1.5rem);
-      position: static;
-      font-weight: 900;
+      // font-size: scale-rem(2rem);
+      // margin-right: scale-rem(1.5rem);
+      // position: static;
+      // font-weight: 900;
     }
   }
 }
