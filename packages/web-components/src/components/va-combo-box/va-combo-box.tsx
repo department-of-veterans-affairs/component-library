@@ -7,13 +7,12 @@ import {
   Host,
   Prop,
   h,
-  Watch,
   State,
-  //   Fragment,
+  Fragment,
 } from '@stencil/core';
-// import classnames from 'classnames';
+import classnames from 'classnames';
 import { i18next } from '../..';
-import comboBox from '@uswds/uswds/packages/usa-combo-box/src';
+import { comboBox } from './va-combo-box-library.js';
 
 /**
  * @nativeHandler onKeyDown
@@ -132,35 +131,30 @@ export class VaComboBox {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  componentWillLoad() {
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
     if (!this.label) {
       throw new Error('va-combo-box: label is a required property');
-    } else {
-      this.labelNode = document.createElement('label');
-      this.labelNode.textContent = this.label;
-      this.labelNode.htmlFor = 'options';
-      if (this.required) {
-        const requiredNode = document.createElement('span');
-        requiredNode.textContent = ` ${i18next.t('required')}`;
-        requiredNode.classList.add('usa-label--required');
-        this.labelNode.appendChild(requiredNode);
-      }
-      this.el.prepend(this.labelNode);
     }
   }
 
   componentDidLoad() {
     const comboBoxElement = this.el.shadowRoot.querySelector('.usa-combo-box');
+    const labelElement = this.el.shadowRoot.querySelector('label');
     if (comboBoxElement) {
-      comboBox.init(comboBoxElement);
+      comboBox.init(comboBoxElement, labelElement);
       comboBox.on(comboBoxElement);
     }
-  }
-
-  connectedCallback() {
-    i18next.on('languageChanged', () => {
-      forceUpdate(this.el);
-    });
+    const inputElement = this.el.shadowRoot.querySelector('input');
+    if (inputElement && this.error) {
+      inputElement.classList.add('usa-input--error');
+    }
+    const slot = this.el.shadowRoot.querySelector('slot[name="label"]');
+    if (slot) {
+      slot.appendChild(this.labelNode);
+    }
   }
 
   disconnectedCallback() {
@@ -192,45 +186,72 @@ export class VaComboBox {
     );
   }
 
-  @Watch('value')
-  handleValueChange() {
-    this.populateOptions();
+  private handleChange(e: Event) {
+    const target: HTMLSelectElement = e.target as HTMLSelectElement;
+    this.value = target.value;
+
+    if (this.enableAnalytics) {
+      const detail = {
+        componentName: 'va-select',
+        action: 'change',
+        details: {
+          label: this.label,
+          selectLabel: this.value,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
+    this.vaSelect.emit({ value: this.value });
   }
 
   render() {
     const {
-      //   error,
-      //   reflectInputError,
+      error,
+      // reflectInputError,
       //   invalid,
       defaultValue,
       disabled,
       placeholder,
-      //   label,
+      label,
       //   required,
       //   name,
       //   hint,
       //   messageAriaDescribedby,
       //   width,
-      //   showError,
+      showError,
     } = this;
 
-    // const errorID = 'input-error-message';
+    const errorID = 'input-error-message';
     // const ariaDescribedbyIds =
     //   `${messageAriaDescribedby ? 'input-message' : ''} ${
     //     error ? errorID : ''
     //   } ${hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
-
-    // const labelClass = classnames({
-    //   'usa-label': true,
-    //   'usa-label--error': error,
-    // });
+    const labelClass = classnames({
+      'usa-label': true,
+      'usa-label--error': error,
+    });
     // const selectClass = classnames({
     //   'usa-select': true,
     //   'usa-input--error': error || reflectInputError,
-    //   [`usa-input--${width}`]: width,
+    //   // [`usa-input--${width}`]: width,
     // });
     return (
       <Host>
+        <label
+          htmlFor="options"
+          class={labelClass}
+          id="options-label"
+        >
+          {label}
+        </label>
+        <span id={errorID} role="alert">
+          {showError && error && (
+            <Fragment>
+              <span class="usa-sr-only">{i18next.t('error')}</span>
+              <span class="usa-error-message">{error}</span>
+            </Fragment>
+          )}
+        </span>
         <div
           class="usa-combo-box"
           data-default-value={defaultValue}
@@ -240,6 +261,7 @@ export class VaComboBox {
             class="usa-select"
             name="options"
             id="options"
+            onChange={e => this.handleChange(e)}
             disabled={disabled}
           >
             {this.populateOptions()}
