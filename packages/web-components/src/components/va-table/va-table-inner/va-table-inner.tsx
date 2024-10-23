@@ -133,6 +133,9 @@ export class VaTableInner {
    * Generate the markup for a table row where row is the zero-indexed row number
    */
   makeRow(row: number): HTMLTableRowElement {
+    // Ensure first row <th> are col scoped for screen reader usability
+    let scopeDimension = (row === 0 && 'col') || 'row';
+
     return (
       <tr>
         {Array.from({ length: this.cols }).map((_, i) => {
@@ -144,7 +147,7 @@ export class VaTableInner {
           const dataSortActive = row > 0 && this.sortindex === i ? true : false;
           return i === 0 || row === 0 ? (
             <th
-              scope="row"
+              scope={scopeDimension}
               data-sortable
               data-sort-active={dataSortActive}
               data-label={header}
