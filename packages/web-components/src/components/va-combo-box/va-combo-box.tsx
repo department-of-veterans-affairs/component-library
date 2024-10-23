@@ -213,7 +213,7 @@ export class VaComboBox {
       disabled,
       placeholder,
       label,
-      //   required,
+      required,
       //   name,
       //   hint,
       //   messageAriaDescribedby,
@@ -237,12 +237,11 @@ export class VaComboBox {
     // });
     return (
       <Host>
-        <label
-          htmlFor="options"
-          class={labelClass}
-          id="options-label"
-        >
+        <label htmlFor="options" class={labelClass} id="options-label">
           {label}
+          {required && (
+            <span class="usa-label--required"> {i18next.t('required')}</span>
+          )}
         </label>
         <span id={errorID} role="alert">
           {showError && error && (
