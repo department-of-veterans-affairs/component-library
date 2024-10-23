@@ -16,9 +16,9 @@ import { comboBox } from './va-combo-box-library.js';
 
 /**
  * @nativeHandler onKeyDown
- * @componentName Select
- * @maturityCategory use
- * @maturityLevel deployed
+ * @componentName Combo Box
+ * @maturityCategory dont_use
+ * @maturityLevel proposed
  * @guidanceHref form/select
  * @translations English
  * @translations Spanish
@@ -74,11 +74,6 @@ export class VaComboBox {
   @Prop() error?: string;
 
   /**
-   * Whether or not to add usa-input--error as class if error message is outside of component
-   */
-  @Prop() reflectInputError?: boolean = false;
-
-  /**
    * Whether or not `aria-invalid` will be set on the inner select. Useful when
    * composing the component into something larger, like a date component.
    */
@@ -100,19 +95,9 @@ export class VaComboBox {
   @Prop() messageAriaDescribedby?: string;
 
   /**
-   * The event attached to select's onkeydown
-   */
-  @Event() vaKeyDown: EventEmitter;
-
-  /**
    * The event emitted when the selected value changes
    */
   @Event() vaSelect: EventEmitter;
-
-  /**
-   * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
-   */
-  @Prop() width?: string;
 
   /**
    * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date
@@ -151,10 +136,6 @@ export class VaComboBox {
     if (inputElement && this.error) {
       inputElement.classList.add('usa-input--error');
     }
-    const slot = this.el.shadowRoot.querySelector('slot[name="label"]');
-    if (slot) {
-      slot.appendChild(this.labelNode);
-    }
   }
 
   disconnectedCallback() {
@@ -192,7 +173,7 @@ export class VaComboBox {
 
     if (this.enableAnalytics) {
       const detail = {
-        componentName: 'va-select',
+        componentName: 'va-combo-box',
         action: 'change',
         details: {
           label: this.label,
@@ -207,7 +188,6 @@ export class VaComboBox {
   render() {
     const {
       error,
-      // reflectInputError,
       //   invalid,
       defaultValue,
       disabled,
@@ -217,7 +197,6 @@ export class VaComboBox {
       //   name,
       //   hint,
       //   messageAriaDescribedby,
-      //   width,
       showError,
     } = this;
 
@@ -230,11 +209,6 @@ export class VaComboBox {
       'usa-label': true,
       'usa-label--error': error,
     });
-    // const selectClass = classnames({
-    //   'usa-select': true,
-    //   'usa-input--error': error || reflectInputError,
-    //   // [`usa-input--${width}`]: width,
-    // });
     return (
       <Host>
         <label htmlFor="options" class={labelClass} id="options-label">
