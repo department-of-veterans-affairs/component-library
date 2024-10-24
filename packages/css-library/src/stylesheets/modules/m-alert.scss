@@ -29,6 +29,9 @@
     font-family: unset;
     font-weight: unset;
     font-size: unset;
+    margin-right: 1rem;
+    position: static;
+    display: block;
   }
 
   // &-body would not have had high enough precedence.

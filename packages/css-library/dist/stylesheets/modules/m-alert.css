@@ -35,6 +35,9 @@
   font-family: unset;
   font-weight: unset;
   font-size: unset;
+  margin-right: 1rem;
+  position: static;
+  display: block;
 }
 .usa-alert .usa-alert-body {
   display: table-cell;
