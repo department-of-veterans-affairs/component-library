@@ -15,11 +15,10 @@ import { i18next } from '../..';
 import { comboBox } from './va-combo-box-library.js';
 
 /**
- * @nativeHandler onKeyDown
  * @componentName Combo Box
  * @maturityCategory dont_use
  * @maturityLevel proposed
- * @guidanceHref form/select
+ * @guidanceHref form/combo-box
  * @translations English
  * @translations Spanish
  */
