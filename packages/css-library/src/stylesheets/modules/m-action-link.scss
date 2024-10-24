@@ -6,15 +6,20 @@
 
 a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--white {
   &:before {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 175%;
-    // Sets alt text for the icon to blank to hide it from screen readers. The content property is duplicated as a fallback for browsers that do not support alt text for it (Firefox, Safari).
-    content: "\f138";
-    content: "\f138" / "";
-    position: absolute; 
-    left: 0px;
-    top: -4px;
+    background-image: url("../../img/arrow-right-white.svg");
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    content: "";
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    font-family: unset;
+    font-weight: unset;
+    font-size: unset;
   }
   font-weight: bold;
   padding: 4px 0 4px 38px;
@@ -23,18 +28,19 @@ a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--w
 }
 
 a.vads-c-action-link--blue:before {
-  color: $color-link-default;
+  background-color: $color-link-default;
 }
 
 a.vads-c-action-link--green:before {
-  color: $color-green;
+  background-color: $color-green;
 }
 
 a.vads-c-action-link--white {
   color: $vads-color-white;
 
   &:before {
-    color: $vads-color-white;
+    background-image: url("../../img/arrow-right.svg");
+    background-color: $vads-color-white;
     @include color-transition;
   }
 }
@@ -44,6 +50,6 @@ a.vads-c-action-link--white:hover {
   background-color: transparent;
 
   &:before {
-    color: $vads-color-action-focus-on-light;
+    background-color: $vads-color-action-focus-on-light;
   }
 }

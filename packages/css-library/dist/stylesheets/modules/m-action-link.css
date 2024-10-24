@@ -1398,29 +1398,36 @@ a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--w
   display: inline-block;
 }
 a.vads-c-action-link--blue:before, a.vads-c-action-link--green:before, a.vads-c-action-link--white:before {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-size: 175%;
-  content: "\f138";
-  content: "\f138"/"";
+  background-image: url("../../img/arrow-right-white.svg");
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  content: "";
+  height: 30px;
+  width: 30px;
   position: absolute;
-  left: 0px;
-  top: -4px;
+  top: 2px;
+  left: 0;
+  font-family: unset;
+  font-weight: unset;
+  font-size: unset;
 }
 
 a.vads-c-action-link--blue:before {
-  color: #005ea2;
+  background-color: #005ea2;
 }
 
 a.vads-c-action-link--green:before {
-  color: #008817;
+  background-color: #008817;
 }
 
 a.vads-c-action-link--white {
   color: #ffffff;
 }
 a.vads-c-action-link--white:before {
-  color: #ffffff;
+  background-image: url("../../img/arrow-right.svg");
+  background-color: #ffffff;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
   -webkit-transition-timing-function: ease-in-out;
@@ -1434,7 +1441,7 @@ a.vads-c-action-link--white:hover {
   background-color: transparent;
 }
 a.vads-c-action-link--white:hover:before {
-  color: #face00;
+  background-color: #face00;
 }
 
 /*# sourceMappingURL=m-action-link.css.map */

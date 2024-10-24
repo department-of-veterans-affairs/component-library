@@ -14,14 +14,19 @@
   width: 100%;
 
   &::before {
-    display: block;
-    width: auto;
-    background: none;
-    font-family: "Font Awesome 5 Free";
-    font-size: scale-rem(2rem);
-    margin-right: units(2);
-    position: static;
-    font-weight: 900;
+    background-image: url("../../img/alerts/info.svg");
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    content: "";
+    height: 31px;
+    width: 31px;
+    top: 2px;
+    left: 0;
+    font-family: unset;
+    font-weight: unset;
+    font-size: unset;
   }
 
   // &-body would not have had high enough precedence.
@@ -69,7 +74,7 @@
     border-left-color: $color-primary-alt-dark;
 
     &::before {
-      content: "\f05a";
+      background-image: url("../../img/alerts/info.svg");
     }
 
     &.background-color-only {
@@ -81,8 +86,7 @@
     border-left-color: $color-secondary-dark;
 
     &::before {
-      color: $color-secondary-dark;
-      content: "\f06a"
+      background-image: url("../../img/alerts/error.svg");
     }
 
     &.background-color-only {
@@ -94,8 +98,7 @@
     border-left-color: $color-green;
 
     &::before {
-      color: $color-green;
-      content: "\f00c";
+      background-image: url("../../img/alerts/success.svg");
     }
 
     &.background-color-only {
@@ -107,7 +110,7 @@
     border-left-color: $color-gold;
 
     &::before {
-      content: "\f071";
+      background-image: url("../../img/alerts/warning.svg");
     }
 
     &.background-color-only {
@@ -119,8 +122,8 @@
     border-left-color: $color-green;
 
     &::before {
-      color: $color-green;
-      content: "\f023";
+      // color: $color-green;
+      // content: "\f023";
     }
   }
 
@@ -250,12 +253,12 @@ p.usa-alert-heading {
   &-information {
     border-top: scale-rem(1rem) solid $color-primary-alt-dark;
     .usa-alert:before {
-      content: "\F05A";
+      // content: "\F05A";
       background: none;
-      font-size: scale-rem(2rem);
-      margin-right: scale-rem(1.5rem);
-      position: static;
-      font-weight: 900;
+      // font-size: scale-rem(2rem);
+      // margin-right: scale-rem(1.5rem);
+      // position: static;
+      // font-weight: 900;
     }
   }
 }

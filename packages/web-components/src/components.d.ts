@@ -1456,6 +1456,10 @@ export namespace Components {
     }
     interface VaTable {
         /**
+          * Is the table sortable
+         */
+        "sortable": boolean;
+        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -1464,7 +1468,7 @@ export namespace Components {
          */
         "tableTitle"?: string;
         /**
-          * If uswds is true, the type of table
+          * The type of table
          */
         "tableType"?: 'borderless';
     }
@@ -1479,6 +1483,10 @@ export namespace Components {
          */
         "cols"?: number;
         "rows"?: number;
+        /**
+          * Is this a sortable table
+         */
+        "sortable"?: boolean;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -1884,6 +1892,10 @@ export interface VaSelectCustomEvent<T> extends CustomEvent<T> {
 export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaStatementOfTruthElement;
+}
+export interface VaTableInnerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTableInnerElement;
 }
 export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2826,12 +2838,23 @@ declare global {
         prototype: HTMLVaTableElement;
         new (): HTMLVaTableElement;
     };
+    interface HTMLVaTableInnerElementEventMap {
+        "sortTable": any;
+    }
     /**
      * @componentName Table
      * @maturityCategory use
      * @maturityLevel best_practice
      */
     interface HTMLVaTableInnerElement extends Components.VaTableInner, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTableInnerElementEventMap>(type: K, listener: (this: HTMLVaTableInnerElement, ev: VaTableInnerCustomEvent<HTMLVaTableInnerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTableInnerElementEventMap>(type: K, listener: (this: HTMLVaTableInnerElement, ev: VaTableInnerCustomEvent<HTMLVaTableInnerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaTableInnerElement: {
         prototype: HTMLVaTableInnerElement;
@@ -4655,6 +4678,10 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
+          * Is the table sortable
+         */
+        "sortable"?: boolean;
+        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -4663,7 +4690,7 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
-          * If uswds is true, the type of table
+          * The type of table
          */
         "tableType"?: 'borderless';
     }
@@ -4677,7 +4704,15 @@ declare namespace LocalJSX {
           * The number of columns in the table
          */
         "cols"?: number;
+        /**
+          * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
+         */
+        "onSortTable"?: (event: VaTableInnerCustomEvent<any>) => void;
         "rows"?: number;
+        /**
+          * Is this a sortable table
+         */
+        "sortable"?: boolean;
         /**
           * If true convert to a stacked table when screen size is small
          */

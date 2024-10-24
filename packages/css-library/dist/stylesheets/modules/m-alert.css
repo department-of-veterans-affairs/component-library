@@ -22,14 +22,19 @@
   width: 100%;
 }
 .usa-alert::before {
-  display: block;
-  width: auto;
-  background: none;
-  font-family: "Font Awesome 5 Free";
-  font-size: 1.25rem;
-  margin-right: units(2);
-  position: static;
-  font-weight: 900;
+  background-image: url("../../img/alerts/info.svg");
+  background-size: 35px 35px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  content: "";
+  height: 31px;
+  width: 31px;
+  top: 2px;
+  left: 0;
+  font-family: unset;
+  font-weight: unset;
+  font-size: unset;
 }
 .usa-alert .usa-alert-body {
   display: table-cell;
@@ -66,7 +71,7 @@
   border-left-color: #00a6d2;
 }
 .usa-alert-info::before {
-  content: "\f05a";
+  background-image: url("../../img/alerts/info.svg");
 }
 .usa-alert-info.background-color-only {
   background-color: #e1f3f8;
@@ -75,8 +80,7 @@
   border-left-color: #cd2026;
 }
 .usa-alert-error::before {
-  color: #cd2026;
-  content: "\f06a";
+  background-image: url("../../img/alerts/error.svg");
 }
 .usa-alert-error.background-color-only {
   background-color: #f9dede;
@@ -85,8 +89,7 @@
   border-left-color: #008817;
 }
 .usa-alert-success::before {
-  color: #008817;
-  content: "\f00c";
+  background-image: url("../../img/alerts/success.svg");
 }
 .usa-alert-success.background-color-only {
   background-color: #e7f4e4;
@@ -95,17 +98,13 @@
   border-left-color: #fdb81e;
 }
 .usa-alert-warning::before {
-  content: "\f071";
+  background-image: url("../../img/alerts/warning.svg");
 }
 .usa-alert-warning.background-color-only {
   background-color: #fff1d2;
 }
 .usa-alert-continue {
   border-left-color: #008817;
-}
-.usa-alert-continue::before {
-  color: #008817;
-  content: "\f023";
 }
 .usa-alert.background-color-only {
   border-left: none;
@@ -243,12 +242,7 @@ p.usa-alert-heading {
   border-top: 0.625rem solid #00a6d2;
 }
 .usa-alert-full-width-info .usa-alert:before, .usa-alert-full-width-information .usa-alert:before {
-  content: "\f05a";
   background: none;
-  font-size: 1.25rem;
-  margin-right: 0.9375rem;
-  position: static;
-  font-weight: 900;
 }
 
 /*# sourceMappingURL=m-alert.css.map */

@@ -15,7 +15,7 @@ export default {
   }
 }
 
-const columns = ['Document title', 'Description', 'Year'];
+const defaultColumns = ['Document title', 'Description', 'Year'];
 const data = [
   [
     'Declaration of Independence',
@@ -44,10 +44,12 @@ const Template = (args) => {
     'table-title': tableTitle,
     'table-type': tableType,
     rows = data,
+    sortable,
+    columns
   } = args;
 
   return (
-    <va-table uswds table-title={tableTitle} stacked={args.stacked} table-type={tableType}>
+    <va-table table-title={tableTitle} stacked={args.stacked} table-type={tableType} sortable={!!sortable}>
       <va-table-row>
           {columns.map((col, i) => (
             <span key={`header-default-${i}`}>{col}</span>
@@ -69,9 +71,10 @@ const CustomComponentsTemplate = (args) => {
   const {
     'table-title': tableTitle,
     rows,
+    columns
   } = args;
   return (
-    <va-table uswds table-title={tableTitle}>
+    <va-table table-title={tableTitle}>
       <va-table-row>
           {columns.map((col, i) => (
             <span key={`header-default-${i}`}>{col}</span>
@@ -265,10 +268,7 @@ const Pagination = (args) => {
 
   return (
     <main>
-      <va-table
-        table-title={tableTitle}
-        uswds
-      >
+      <va-table table-title={tableTitle} >
         <va-table-row>
           {columns.map((col, index) => (
             <span key={`table-header-${index}`}>{col}</span>
@@ -306,7 +306,8 @@ const missingData = [
 export const Default = Template.bind(null);
 Default.args = {
   'table-title': "This is a borderless table.",
-  rows: data
+  rows: data,
+  columns: defaultColumns
 }
 Default.argTypes = propStructure(vaTableDocs);
 
@@ -315,7 +316,8 @@ export const Bordered = Template.bind(null);
 Bordered.args = {
   'table-title': "This is a stacked bordered table.",
   'table-type': 'bordered',
-  rows: data
+  rows: data,
+  columns: defaultColumns
 }
 Bordered.argTypes = propStructure(vaTableDocs);
 
@@ -323,14 +325,16 @@ export const NonStacked = Template.bind(null);
 NonStacked.args = {
   'table-title': "This table is not stacked. It will not change on a mobile screen.",
   stacked: false,
-  rows: data
+  rows: data,
+  columns: defaultColumns
 }
 NonStacked.argTypes = propStructure(vaTableDocs);
 
 export const WithCustomMarkup = CustomComponentsTemplate.bind(null);
 WithCustomMarkup.args = {
   'table-title': "This table has custom markup in some of its cells.",
-  rows: data
+  rows: data,
+  columns: defaultColumns
 }
 
 export const WithPagination = Pagination.bind(null);
@@ -342,5 +346,68 @@ WithPagination.args = {
 export const WithMissingData = Template.bind(null);
 WithMissingData.args = {
   'table-title': "This table has some cells without data",
-  rows: missingData
+  rows: missingData,
+  columns: defaultColumns
+}
+
+const sortColumns = [
+  'Integer/Float',
+  'Percent',
+  'Currency',
+  'Ordinal mixed',
+  'Ordinal',
+  'Month only',
+  'Full date',
+  'Alphabetical'
+]
+
+const sortData = [
+  [
+    '3',
+    '60%',
+    '$2,500',
+    '4th',
+    'Ninth',
+    'August',
+    'June 3, 1903',
+    "Lorem ipsum dolor sit,"
+  ],
+  [
+    '8.9',
+    '1%',
+    '$17,000',
+    '3rd',
+    'Second',
+    "February",
+    'October 25, 1415',
+    "amet consectetur adipisicing elit."
+  ],
+  [
+    '-5',
+    '60.01%',
+    '$100,000',
+    "8th",
+    'Fifth',
+    "November",
+    'December 10, 1621',
+    "Alias nam eum minima",
+  ],
+  [
+    '99',
+    '44%',
+    '$1,100',
+    "5th",
+    'First',
+    "April",
+    'September 30, 1885',
+    "delectus explicabo"
+  ]
+]
+
+export const Sortable = Template.bind(null);
+Sortable.args = {
+  'table-title': "This is a sortable table",
+  rows: sortData,
+  columns: sortColumns,
+  sortable: true
 }
