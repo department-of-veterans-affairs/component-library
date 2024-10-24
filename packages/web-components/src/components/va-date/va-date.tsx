@@ -73,6 +73,11 @@ export class VaDate {
   @Prop() monthYearOnly?: boolean = false;
 
   /**
+   * Whether month should be optional; has no effect unless monthYearOnly is true
+   */
+  @Prop() monthOptional?: boolean = false;
+
+  /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
   @Prop({
@@ -152,7 +157,9 @@ export class VaDate {
                yearTouched: this.yearTouched,
                monthTouched: this.monthTouched,
                dayTouched: this.dayTouched,
-               monthSelect: true
+               monthSelect: true,
+               monthYearOnly: this.monthYearOnly,
+               monthOptional: this.monthOptional
              });
 
     if (this.error) {

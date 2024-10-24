@@ -25,6 +25,7 @@ const defaultArgs = {
   'error': undefined,
   'value': undefined,
   'month-year-only': undefined,
+  'month-optional': false,
   'enable-analytics': false,
 };
 
@@ -36,6 +37,7 @@ const Template = ({
   'month-year-only': monthYearOnly,
   value,
   'enable-analytics': enableAnalytics,
+  'month-optional': monthOptional
 }) => {
   return (
     <VaDate
@@ -45,6 +47,7 @@ const Template = ({
       error={error}
       value={value}
       monthYearOnly={monthYearOnly}
+      monthOptional={monthOptional}
       onDateBlur={e => {
         console.log(e, 'DATE BLUR FIRED');
         console.log(e.target.value);
@@ -180,6 +183,9 @@ WithHintTextError.args = {
 
 export const MonthYear = Template.bind({});
 MonthYear.args = { ...defaultArgs, 'month-year-only': true };
+
+export const MonthOptional = Template.bind({});
+MonthOptional.args = {...defaultArgs, 'month-year-only': true, 'month-optional': true}
 
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {

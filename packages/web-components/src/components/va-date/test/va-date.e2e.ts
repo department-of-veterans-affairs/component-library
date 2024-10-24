@@ -602,4 +602,21 @@ describe('va-date', () => {
     });
   });
 
+  it('month is not required if month-year-only and month-optional props set',  async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-date name="test" month-year-only month-optional/>');
+
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+
+    await handleMonth.press('Tab');
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+    let month = await handleMonth.evaluate(getAriaInvalid);
+    expect(month).toEqual('false');
+  })
 });
