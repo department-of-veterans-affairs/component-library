@@ -192,17 +192,17 @@ export class VaComboBox {
       placeholder,
       label,
       required,
-      //   name,
-      //   hint,
-      //   messageAriaDescribedby,
+      name,
+      hint,
+      messageAriaDescribedby,
       showError,
     } = this;
 
     const errorID = 'input-error-message';
-    // const ariaDescribedbyIds =
-    //   `${messageAriaDescribedby ? 'input-message' : ''} ${
-    //     error ? errorID : ''
-    //   } ${hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+    const ariaDescribedbyIds =
+      `${messageAriaDescribedby ? 'input-message' : ''} ${
+        error ? errorID : ''
+      } ${hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
@@ -215,6 +215,11 @@ export class VaComboBox {
             <span class="usa-label--required"> {i18next.t('required')}</span>
           )}
         </label>
+        {hint && (
+          <span class="usa-hint" id="input-hint">
+            {hint}
+          </span>
+        )}
         <span id={errorID} role="alert">
           {showError && error && (
             <Fragment>
@@ -223,6 +228,7 @@ export class VaComboBox {
             </Fragment>
           )}
         </span>
+        <slot></slot>
         <div
           class="usa-combo-box"
           data-default-value={value}
@@ -230,7 +236,9 @@ export class VaComboBox {
         >
           <select
             class="usa-select"
-            name="options"
+            aria-describedby={ariaDescribedbyIds}
+            aria-invalid={invalid || error ? 'true' : 'false'}
+            name={name}
             id="options"
             onChange={e => this.handleChange(e)}
             disabled={disabled}
