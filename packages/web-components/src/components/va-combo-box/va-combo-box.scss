@@ -17,6 +17,7 @@
   display: block;
   font-family: var(--font-source-sans);
   color: var(--vads-color-base);
+  width: 30rem;
 }
 
 :host([inert]) select {
@@ -34,24 +35,25 @@
 }
 
 .usa-combo-box{
-  font-size: 16px;
-  max-width: 30rem;
+  font-size: 12px;
+  max-width: 100%;
   width: 100%;
   box-sizing: border-box;
 }
 
 .usa-combo-box input {
-  height: 4rem;
-  font-size: 16px;
   width: 100%;
   box-sizing: border-box;
 }
 
 .usa-combo-box__list-option{
-  font-size: 16px;
   padding: 1rem;
 }
 
 .usa-combo-box__input-button-separator {
-  right: calc(2.5rem + 7px);
+  right: calc(2.5em + 9px);
+}
+
+.usa-combo-box__list{
+  max-height: 20em;
 }
