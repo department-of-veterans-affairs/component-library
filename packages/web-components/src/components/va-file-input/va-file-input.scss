@@ -95,7 +95,7 @@
 
   .selected-files-wrapper {
     background-color: var(--vads-color-primary-lighter);
-    border: 1px solid var(--vads-color-base-light)
+    border: 1px solid var(--vads-color-base-light);
   }
 
   .selected-files-label {
@@ -137,13 +137,13 @@
   }
 
   .file-info-section {
-    border-bottom: 1px solid var(--vads-color-base-lighter);
     padding: 0 8px 8px;
     display: flex;
     align-items: center;
   }
 
   .file-button-section {
+    margin-top: 8px;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -152,21 +152,23 @@
       font-size: 1.06rem;
     }
 
-    @media screen and (max-width: $small-screen) {
+    @media screen and (max-width: $xsmall-screen) {
       flex-direction: column;
       align-items: flex-start;
     }
   }
 
-  .additional-info-slot {
-    padding-bottom: 16px;
+  .separator {
+    border: 0;
+    border-top: 1px solid var(--vads-color-base-lighter);
+    margin: 0;
   }
 
   /* copied from Formation
   /* TO DO: decide whether to import from CSS-Library or simply rename,
   /* as this is the only attibute currently needed from utilities
   */
-  .vads-u-line-height--2{
+  .vads-u-line-height--2 {
     line-height: 1.15;
   }
 
