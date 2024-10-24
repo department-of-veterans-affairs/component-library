@@ -55,26 +55,81 @@ describe('va-file-input', () => {
 
   it('the `uploadMessage` attribute changes the text in file input', async () => {
     const page = await newE2EPage();
-    
+
     await page.setContent(`<va-file-input />`);
 
     await page.$eval('va-file-input', (elm: any) => {
       // within the browser's context
       // let's set new property values on the component
-      elm.uploadMessage = "Test text";
+      elm.uploadMessage = 'Test text';
     });
     await page.waitForChanges();
 
-    const fileInput = await page.find('va-file-input >>> .file-input-instructions');
+    const fileInput = await page.find(
+      'va-file-input >>> .file-input-instructions',
+    );
     expect(fileInput.innerHTML).toContain(`Test text`);
- });
+  });
 
   it('the component shows default text when `uploadMessage` is not set', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input />`);
 
-    const fileInput = await page.find('va-file-input >>> .file-input-instructions');
-    expect(fileInput.innerHTML).toContain(`<span>Drag a file here or <span class="file-input-choose-text">choose from folder</span></span>`);
+    const fileInput = await page.find(
+      'va-file-input >>> .file-input-instructions',
+    );
+    expect(fileInput.innerHTML).toContain(
+      `<span>Drag a file here or <span class="file-input-choose-text">choose from folder</span></span>`,
+    );
+  });
+
+  it('renders a "Change File" button if there is a file', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input buttonText="Upload a file" />`);
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (await page.$(
+      'pierce/#fileInputField',
+    )) as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    const fileInfoCard = await page.find('va-file-input >>> va-card');
+    const fileChangeButton = await fileInfoCard.find(
+      '.file-button-section va-button-icon',
+    );
+    const buttonLabel = await fileChangeButton.getProperty('label');
+    expect(buttonLabel).toBe('Change file');
+  });
+
+  it('does not render a "Change File" button if read-only', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-file-input buttonText="Upload a file" read-only />`,
+    );
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (await page.$(
+      'pierce/#fileInputField',
+    )) as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    const fileInfoCard = await page.find('va-file-input >>> va-card');
+    const fileChangeButton = await fileInfoCard.find(
+      '.file-button-section va-button-icon',
+    );
+    expect(fileChangeButton).toBeNull();
   });
 
   it('emits the vaChange event only once', async () => {
