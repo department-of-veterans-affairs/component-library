@@ -86,7 +86,7 @@ WithDefaultValue.args = {
 export const WithError = Template.bind({});
 WithError.args = {
   ...defaultArgs,
-  error: 'This field is required.',
+  error: 'This field contains an error.',
 };
 
 export const Required = Template.bind({});
