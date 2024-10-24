@@ -1,3 +1,5 @@
+@use '../core-variables' as *;
+
 @import "../formation-overrides/variables";
 @import "../../../dist/tokens/scss/variables.scss";
 @import "../mixins";
@@ -14,7 +16,7 @@
   width: 100%;
 
   &::before {
-    background-image: url("../../img/alerts/info.svg");
+    background-image: url("#{$image-path}/info.svg");
     background-size: 35px 35px;
     background-repeat: no-repeat;
     background-position: center;
@@ -74,7 +76,7 @@
     border-left-color: $color-primary-alt-dark;
 
     &::before {
-      background-image: url("../../img/alerts/info.svg");
+      background-image: url("#{$image-path}/info.svg");
     }
 
     &.background-color-only {
@@ -86,7 +88,7 @@
     border-left-color: $color-secondary-dark;
 
     &::before {
-      background-image: url("../../img/alerts/error.svg");
+      background-image: url("#{$image-path}/error.svg");
     }
 
     &.background-color-only {
@@ -98,7 +100,7 @@
     border-left-color: $color-green;
 
     &::before {
-      background-image: url("../../img/alerts/success.svg");
+      background-image: url("#{$image-path}/success.svg");
     }
 
     &.background-color-only {
@@ -110,7 +112,7 @@
     border-left-color: $color-gold;
 
     &::before {
-      background-image: url("../../img/alerts/warning.svg");
+      background-image: url("#{$image-path}/warning.svg");
     }
 
     &.background-color-only {
