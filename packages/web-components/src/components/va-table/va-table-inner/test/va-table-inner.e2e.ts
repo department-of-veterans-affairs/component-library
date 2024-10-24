@@ -76,15 +76,25 @@ describe('va-table', () => {
     await page.setContent(makeTable());
     const caption = await page.find('va-table-inner >>> caption');
     expect(caption.innerHTML).toEqual('this is a caption');
-  })
+  });
 
   it('renders a table with the proper number of rows and columns', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());
 
     const table = await page.find('va-table-inner');
-    expect(table.getAttribute('rows')).toEqual("2");
-    expect(table.getAttribute('cols',)).toEqual("3");
+    expect(table.getAttribute('rows')).toEqual('2');
+    expect(table.getAttribute('cols')).toEqual('3');
+  });
+
+  it('sets the proper scope attributes for rows and columns', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+
+    const columnHeader = await page.find('va-table-inner >>> thead >>> th');
+    const rowHeader = await page.find('va-table-inner >>> tbody >>> th');
+    expect(columnHeader.getAttribute('scope')).toEqual('col');
+    expect(rowHeader.getAttribute('scope')).toEqual('row');
   });
 });
 
@@ -225,13 +235,18 @@ describe('sorted va-table ', () => {
           delectus explicabo
         </span>
       </va-table-row>
-    </va-table>`
-  };
+    </va-table>`;
+  }
 
-  // due to content in slots being hard to access in tests, 
+  // due to content in slots being hard to access in tests,
   // the va-table-rows are given ids (which don't change during sort),
   // then after each sort we check that the ids are in the correct order for the sort
-  async function checkSorts(page: E2EPage, index: number, asc: string, desc: string) {
+  async function checkSorts(
+    page: E2EPage,
+    index: number,
+    asc: string,
+    desc: string,
+  ) {
     // we need to update these variables after each sort
     let table = null;
     let rows = null;
@@ -376,4 +391,4 @@ describe('sort utilities', () => {
     const func3 = _getCompareFunc('October 31, 1899', '');
     expect(func3.name).toEqual('datesSort');
   });
-})
+});
