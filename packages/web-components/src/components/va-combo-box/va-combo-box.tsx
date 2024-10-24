@@ -46,8 +46,6 @@ export class VaComboBox {
    */
   @Prop() disabled?: boolean = false;
 
-  @Prop() defaultValue?: string;
-
   /**
    * Text label for the field.
    */
@@ -188,8 +186,8 @@ export class VaComboBox {
   render() {
     const {
       error,
-      //   invalid,
-      defaultValue,
+      invalid,
+      value,
       disabled,
       placeholder,
       label,
@@ -227,7 +225,7 @@ export class VaComboBox {
         </span>
         <div
           class="usa-combo-box"
-          data-default-value={defaultValue}
+          data-default-value={value}
           data-placeholder={placeholder}
         >
           <select
