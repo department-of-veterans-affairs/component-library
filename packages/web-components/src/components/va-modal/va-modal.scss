@@ -30,7 +30,7 @@
     width: 100%;
   }
 }
-.usa-modal__main *:not(va-button) {
+.usa-modal__main div[role=document] {
   overflow-wrap: anywhere; // Prevent text overflowing the modal when words are longer than the modal width
 }
 
