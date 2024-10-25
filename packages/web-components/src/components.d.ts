@@ -473,6 +473,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Whether month should be optional; has no effect unless monthYearOnly is true
+         */
+        "monthOptional"?: boolean;
+        /**
           * Whether or not only the Month and Year inputs should be displayed.
          */
         "monthYearOnly"?: boolean;
@@ -3534,6 +3538,10 @@ declare namespace LocalJSX {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Whether month should be optional; has no effect unless monthYearOnly is true
+         */
+        "monthOptional"?: boolean;
         /**
           * Whether or not only the Month and Year inputs should be displayed.
          */

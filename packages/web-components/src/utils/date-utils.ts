@@ -179,7 +179,8 @@ interface ValidateConfig {
   yearTouched?: boolean,
   monthTouched?: boolean,
   dayTouched?: boolean,
-  monthSelect?: boolean
+  monthSelect?: boolean,
+  monthOptional?: boolean
 }
 
 export function validate({
@@ -191,9 +192,9 @@ export function validate({
                            yearTouched,
                            monthTouched,
                            dayTouched,
-                           monthSelect
+                           monthSelect,
+                           monthOptional
                          }: ValidateConfig): void {
-
   const maxDays = daysForSelectedMonth(year, month);
 
   // Reset previous invalid states
@@ -201,8 +202,10 @@ export function validate({
   component.invalidMonth = false;
   component.invalidDay = false;
 
+  const monthRequired = !(monthYearOnly && monthOptional);
+
   // Check NaN and set errors based on NaN values
-  if (isNaN(month) && monthTouched) {
+  if (monthRequired && isNaN(month) && monthTouched) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
     return;
@@ -219,8 +222,8 @@ export function validate({
   }
 
   // Validate required fields
-  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
-    if (monthTouched && !month) {
+  if (component.required && (!year || (monthRequired && !month) || (!monthYearOnly && !day))) {
+    if (monthRequired && monthTouched && !month) {
       component.invalidMonth = true;
       component.error = 'date-error';
       return;
@@ -238,7 +241,7 @@ export function validate({
   }
 
   // Check for empty values after the fields are touched
-  if (!month && monthTouched) {
+  if (monthRequired && !month && monthTouched) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
     return;
@@ -255,7 +258,7 @@ export function validate({
   }
 
   // Validate year, month, and day ranges if they have a value regardless of whether they are required
-  if (month && (month < minMonths || month > maxMonths) && monthTouched) {
+  if (monthRequired && month && (month < minMonths || month > maxMonths) && monthTouched) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
     return;
