@@ -10,7 +10,7 @@ __metadata:
   resolution: "@department-of-veterans-affairs/css-library@workspace:."
   dependencies:
     "@divriots/style-dictionary-to-figma": "npm:^0.4.0"
-    "@uswds/uswds": "npm:^3.8.1"
+    "@uswds/uswds": "npm:^3.9.0"
     rimraf: "npm:^5.0.5"
     sass: "npm:^1.64.1"
     style-dictionary: "npm:3.8.0"
@@ -67,15 +67,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "@uswds/uswds@npm:3.8.1"
+"@uswds/uswds@npm:^3.9.0":
+  version: 3.9.0
+  resolution: "@uswds/uswds@npm:3.9.0"
   dependencies:
-    classlist-polyfill: "npm:1.2.0"
     object-assign: "npm:4.1.1"
     receptor: "npm:1.0.0"
     resolve-id-refs: "npm:0.1.0"
-  checksum: 10/69859ff4c2da126a425b21fc7346023c793ba0fc517a3c52ff23f9466e8c45e4a0b8a534997f15a9611ee525b639000213b045242cf577e3e31a9f131810a47e
+  checksum: 10/cdd7ba35192c54b59f86543070452f0d6a2c49bbc3f68f6d905f8f297f0474b4ea95b6ff039a8212c6020a3dad933e1942dcb53f9479721b339e9b65108f34e5
   languageName: node
   linkType: hard
 
@@ -281,13 +280,6 @@ __metadata:
   version: 2.0.0
   resolution: "chownr@npm:2.0.0"
   checksum: 10/c57cf9dd0791e2f18a5ee9c1a299ae6e801ff58fee96dc8bfd0dcb4738a6ce58dd252a3605b1c93c6418fe4f9d5093b28ffbf4d66648cb2a9c67eaef9679be2f
-  languageName: node
-  linkType: hard
-
-"classlist-polyfill@npm:1.2.0":
-  version: 1.2.0
-  resolution: "classlist-polyfill@npm:1.2.0"
-  checksum: 10/dd7211ca016eaa1fa1ae3f7c65680fce8815b1e5b7541b524c3762ab98ce73e1a782cf71819a07e1e2614385f082bbd0285b1a34f389daf16bed23a11efe06a1
   languageName: node
   linkType: hard
 
