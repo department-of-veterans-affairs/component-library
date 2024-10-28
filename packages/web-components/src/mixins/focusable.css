@@ -7,7 +7,8 @@ h1:focus,
 input:not([disabled]):focus,
 textarea:not([disabled]):focus,
 #form-question
-[role='option']:focus {
+[role='option']:focus,
+*[tabindex]:focus {
   outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px;
 }
