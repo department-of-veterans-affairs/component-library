@@ -111,8 +111,8 @@ $icon-size: scale-rem(3rem);
 @each $name, $bgcolor in $alerts {
   .usa-alert-#{$name} {
     background-color: $bgcolor;
-    background-image: url('#{$image-path}/alerts/#{$name}.png');
-    background-image: url('#{$image-path}/alerts/#{$name}.svg');
+    background-image: url('#{$image-path}/#{$name}.png');
+    background-image: url('#{$image-path}/#{$name}.svg');
 
     &::before {
       background-color: map-get($alerts-bar, $name);
