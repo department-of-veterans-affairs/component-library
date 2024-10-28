@@ -2699,6 +2699,159 @@
       }
     }
   },
+  "vads": {
+    "size": {
+      "line-length": {
+        "1": {
+          "value": "44ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "44ex"
+          },
+          "name": "vads-size-line-length-1",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "1"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "1"
+          ]
+        },
+        "2": {
+          "value": "60ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "60ex"
+          },
+          "name": "vads-size-line-length-2",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "2"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "2"
+          ]
+        },
+        "3": {
+          "value": "64ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "64ex"
+          },
+          "name": "vads-size-line-length-3",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "3"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "3"
+          ]
+        },
+        "4": {
+          "value": "68ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "68ex"
+          },
+          "name": "vads-size-line-length-4",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "4"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "4"
+          ]
+        },
+        "5": {
+          "value": "72ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "72ex"
+          },
+          "name": "vads-size-line-length-5",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "5"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "5"
+          ]
+        },
+        "6": {
+          "value": "88ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "88ex"
+          },
+          "name": "vads-size-line-length-6",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "6"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "6"
+          ]
+        },
+        "none": {
+          "value": "999ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "999ex"
+          },
+          "name": "vads-size-line-length-none",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "none"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "none"
+          ]
+        }
+      }
+    }
+  },
   "units": {
     "0": {
       "value": "0",
