@@ -15,6 +15,7 @@
   "types": "dist/components/types/index.d.ts",
   "module": "src/main.js",
   "dependencies": {
+    "@department-of-veterans-affairs/css-library": "^0.12.2",
     "@department-of-veterans-affairs/react-components": "workspace:*",
     "@department-of-veterans-affairs/web-components": "workspace:*",
     "i18next": "^21.6.14",
