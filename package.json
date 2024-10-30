@@ -8,11 +8,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "workspaces": [
-    "packages/core",
-    "packages/design-system-dashboard-cli",
-    "packages/react-components",
-    "packages/storybook",
-    "packages/web-components"
+    "packages/*"
   ],
   "packageManager": "yarn@4.2.2",
   "resolutions": {
