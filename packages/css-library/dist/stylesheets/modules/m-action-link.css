@@ -1405,7 +1405,7 @@ a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--w
   display: inline-block;
 }
 a.vads-c-action-link--blue:before, a.vads-c-action-link--green:before, a.vads-c-action-link--white:before {
-  background-image: url("../../img/arrow-right-white.svg");
+  background-image: url("/img/arrow-right-white.svg");
   background-size: 18px 18px;
   background-repeat: no-repeat;
   background-position: center;
@@ -1433,7 +1433,7 @@ a.vads-c-action-link--white {
   color: #ffffff;
 }
 a.vads-c-action-link--white:before {
-  background-image: url("../../img/arrow-right.svg");
+  background-image: url("/img/arrow-right.svg");
   background-color: #ffffff;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
