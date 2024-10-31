@@ -4,19 +4,11 @@
 
 @use './core-variables' as *;
 
-//============ MIXINS & OTHER FUNCTIONS ==============//
-@use './override-function' as *;
-@use './functions' as *;
-@use './mixins' as *;
-
 //============ VENDOR PARTIALS ==============//
 @import 'lib/normalize';
 
 // Grid/columns classes
 @import "./formation-overrides/foundation-sites";
-
-//============ PORTED VARIABLES ==============//
-@import './formation-overrides/variables';
 
 // ----- VA GENERAL (MAIN FILE/OTHER) ---- //
 @import 'base/fonts';
