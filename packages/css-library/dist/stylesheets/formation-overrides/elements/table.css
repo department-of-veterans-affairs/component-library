@@ -1,1 +1,78 @@
-.usa-sr-only{position:absolute;left:-999em}table{border-spacing:0;margin:2em 0}thead th{font-weight:700}thead th,thead td{background-color:#f0f0f0}th{text-align:left}th,td{background-color:#fff;border:1px solid #565c65;font-weight:400;padding:.625rem .9375rem}.usa-table-borderless thead th{background-color:rgba(0,0,0,0);border-top:0}.usa-table-borderless th,.usa-table-borderless td{border-left:0;border-right:0}.usa-table-borderless th:first-child{padding-left:0}caption{font-size:.9375rem;font-weight:700;font-family:Bitter,Georgia,Cambria,"Times New Roman",Times,serif;margin-bottom:.75rem;text-align:left}/*# sourceMappingURL=table.css.map */
+/*
+  Original: @import "~uswds/src/stylesheets/elements/table";
+  ***THIS IS USWDS v1***
+*/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/*
+  Original: @import "~uswds/src/stylesheets/core/utilities";
+  ***THIS IS USWDS v1***
+*/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
+/*
+  Original: @import "~uswds/src/stylesheets/elements/table";
+  ***THIS IS USWDS v1***
+*/
+.usa-sr-only {
+  position: absolute;
+  left: -999em;
+}
+
+table {
+  border-spacing: 0;
+  margin: 2em 0;
+}
+
+thead th {
+  font-weight: 700;
+}
+thead th,
+thead td {
+  background-color: #f0f0f0;
+}
+
+th {
+  text-align: left;
+}
+
+th,
+td {
+  background-color: #ffffff;
+  border: 1px solid #565c65;
+  font-weight: 400;
+  padding: 0.625rem 0.9375rem;
+}
+
+.usa-table-borderless thead th {
+  background-color: transparent;
+  border-top: 0;
+}
+.usa-table-borderless th,
+.usa-table-borderless td {
+  border-left: 0;
+  border-right: 0;
+}
+.usa-table-borderless th:first-child {
+  padding-left: 0;
+}
+
+caption {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+/*# sourceMappingURL=table.css.map */
