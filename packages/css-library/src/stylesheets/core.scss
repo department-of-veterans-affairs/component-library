@@ -4,11 +4,6 @@
 
 @use './core-variables' as *;
 
-//============ MIXINS & OTHER FUNCTIONS ==============//
-@use './override-function' as *;
-@use './functions' as *;
-@use './mixins' as *;
-
 //============ VENDOR PARTIALS ==============//
 @import 'lib/normalize';
 
