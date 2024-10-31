@@ -63,7 +63,6 @@ describe('va-combo-box', () => {
           </va-select>
         `);
 
-    // const element = await page.find('va-combo-box');
     await page.find('va-combo-box >>> input');
     const combobox = await page.find('va-combo-box >>> .usa-combo-box');
     expect(combobox).toEqualAttribute('data-default-value', 'bar');
@@ -137,7 +136,7 @@ describe('va-combo-box', () => {
             ${hintText}
             </span>`);
     const element = await page.find('va-combo-box');
-    
+
     // validate that the label is followed by the hint
     expect(element.shadowRoot.innerHTML).toContain(
       `<label for="options" class="usa-label" id="options-label">${labelText}</label><span class="usa-hint" id="input-hint">${hintText}</span>`,

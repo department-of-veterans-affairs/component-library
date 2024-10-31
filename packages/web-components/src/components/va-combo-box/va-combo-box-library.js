@@ -2,7 +2,6 @@ import keymap from 'receptor/keymap';
 import selectOrMatches from '@uswds/uswds/packages/uswds-core/src/js/utils/select-or-matches';
 import behavior from '@uswds/uswds/packages/uswds-core/src/js/utils/behavior';
 import Sanitizer from '@uswds/uswds/packages/uswds-core/src/js/utils/sanitizer';
-// import { PREFIX } from '@uswds/uswds/packages/uswds-core/src/js/config';
 import { CLICK } from '@uswds/uswds/packages/uswds-core/src/js/events';
 
 const PREFIX = 'usa';
