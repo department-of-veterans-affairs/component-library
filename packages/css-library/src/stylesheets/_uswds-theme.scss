@@ -25,8 +25,8 @@
     "desktop-lg": true,
     "widescreen": false
   ),
-  $utilities-use-important: true,
   $theme-utility-breakpoints-custom: (
     "medium-screen": 768px
-  )
+  ),
+  $utilities-use-important: true,
 );
