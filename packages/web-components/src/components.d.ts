@@ -6,7 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+import { LangUrl } from "./components/va-language-toggle/va-language-toggle";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+export { LangUrl } from "./components/va-language-toggle/va-language-toggle";
 export namespace Components {
     /**
      * @componentName Accordion
@@ -615,6 +617,25 @@ export namespace Components {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
+    }
+    /**
+     * @componentName LanguageToggle
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaLanguageToggle {
+        /**
+          * The ISO language code for the page. Default is 'en'.
+         */
+        "language": string;
+        /**
+          * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
+         */
+        "routerLinks"?: boolean;
+        /**
+          * A JSON array of objects with link data for the toggle to render. Each object should have an href, lang (ISO language code), and label properties. If using the pure web component provide as a string. Example: '[{"href":"https://www.va.gov/resources/the-pact-act-and-your-va-benefits/","lang":"en","label":"English"},{"href":"https://www.va.gov/resources/the-pact-act-and-your-va-benefits/","lang":"es","label":"Español"}]'
+         */
+        "urls": LangUrl[] | string;
     }
     /**
      * @componentName Link
@@ -1801,6 +1822,10 @@ export interface VaFileInputMultipleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputMultipleElement;
 }
+export interface VaLanguageToggleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaLanguageToggleElement;
+}
 export interface VaLinkCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaLinkElement;
@@ -2305,6 +2330,29 @@ declare global {
     var HTMLVaIconElement: {
         prototype: HTMLVaIconElement;
         new (): HTMLVaIconElement;
+    };
+    interface HTMLVaLanguageToggleElementEventMap {
+        "component-library-analytics": any;
+        "vaLanguageToggle": any;
+    }
+    /**
+     * @componentName LanguageToggle
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaLanguageToggleElement extends Components.VaLanguageToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaLanguageToggleElementEventMap>(type: K, listener: (this: HTMLVaLanguageToggleElement, ev: VaLanguageToggleCustomEvent<HTMLVaLanguageToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaLanguageToggleElementEventMap>(type: K, listener: (this: HTMLVaLanguageToggleElement, ev: VaLanguageToggleCustomEvent<HTMLVaLanguageToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaLanguageToggleElement: {
+        prototype: HTMLVaLanguageToggleElement;
+        new (): HTMLVaLanguageToggleElement;
     };
     interface HTMLVaLinkElementEventMap {
         "component-library-analytics": any;
@@ -2948,6 +2996,7 @@ declare global {
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
+        "va-language-toggle": HTMLVaLanguageToggleElement;
         "va-link": HTMLVaLinkElement;
         "va-link-action": HTMLVaLinkActionElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
@@ -3685,6 +3734,33 @@ declare namespace LocalJSX {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
+    }
+    /**
+     * @componentName LanguageToggle
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaLanguageToggle {
+        /**
+          * The ISO language code for the page. Default is 'en'.
+         */
+        "language"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: VaLanguageToggleCustomEvent<any>) => void;
+        /**
+          * Event fired when a link is clicked. Includes the selected language's ISO code.
+         */
+        "onVaLanguageToggle"?: (event: VaLanguageToggleCustomEvent<any>) => void;
+        /**
+          * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
+         */
+        "routerLinks"?: boolean;
+        /**
+          * A JSON array of objects with link data for the toggle to render. Each object should have an href, lang (ISO language code), and label properties. If using the pure web component provide as a string. Example: '[{"href":"https://www.va.gov/resources/the-pact-act-and-your-va-benefits/","lang":"en","label":"English"},{"href":"https://www.va.gov/resources/the-pact-act-and-your-va-benefits/","lang":"es","label":"Español"}]'
+         */
+        "urls"?: LangUrl[] | string;
     }
     /**
      * @componentName Link
@@ -4983,6 +5059,7 @@ declare namespace LocalJSX {
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
+        "va-language-toggle": VaLanguageToggle;
         "va-link": VaLink;
         "va-link-action": VaLinkAction;
         "va-loading-indicator": VaLoadingIndicator;
@@ -5158,6 +5235,12 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
+            /**
+             * @componentName LanguageToggle
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-language-toggle": LocalJSX.VaLanguageToggle & JSXBase.HTMLAttributes<HTMLVaLanguageToggleElement>;
             /**
              * @componentName Link
              * @maturityCategory caution

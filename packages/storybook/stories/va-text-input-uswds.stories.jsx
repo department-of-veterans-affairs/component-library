@@ -7,7 +7,7 @@ import {
   applyFocus,
 } from './wc-helpers';
 
-import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaLanguageToggle, VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 
 const textInputDocs = getWebComponentDocs('va-text-input');
@@ -159,6 +159,8 @@ const I18nTemplate = ({
       <va-button onClick={e => setLang('en')} text="English" />
       <va-button onClick={e => setLang('tl')} text="Tagalog" />
 
+      <VaLanguageToggle /> 
+      
       <va-text-input
         name={name}
         label={label}
