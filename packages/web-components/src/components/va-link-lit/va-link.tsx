@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 import classNames from 'classnames';
+import '../../../../../../uswds-web-components/dist/components/usa-link.js';
 
 /**
  * @componentName Link
@@ -8,7 +9,7 @@ import classNames from 'classnames';
  */
 
 @Component({
-  tag: 'va-link-old',
+  tag: 'va-link',
   styleUrl: 'va-link.scss',
   shadow: true,
 })
@@ -296,14 +297,7 @@ export class VaLink {
     // Default
     return (
       <Host>
-        <a
-          href={href}
-          class={linkClass}
-          onClick={handleClick}
-          aria-label={this.label}
-        >
-          {text}
-        </a>
+        <usa-link href={href}>{text}</usa-link>
       </Host>
     );
   }

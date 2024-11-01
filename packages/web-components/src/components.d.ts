@@ -747,6 +747,85 @@ export namespace Components {
         "type": 'primary' | 'secondary' | 'reverse';
     }
     /**
+     * @componentName Link
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaLinkOld {
+        /**
+          * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
+         */
+        "abbrTitle"?: string;
+        /**
+          * If `true`, the anchor text will be bolded and include a right arrow icon.
+         */
+        "active"?: boolean;
+        /**
+          * If 'true', renders a "back arrow" in front of the link text
+         */
+        "back"?: boolean;
+        /**
+          * If `true`, a calendar icon will be displayed before the anchor text.
+         */
+        "calendar"?: boolean;
+        /**
+          * If `true`, a channel icon will be displayed before the anchor text.
+         */
+        "channel"?: boolean;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
+         */
+        "download"?: boolean;
+        /**
+          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+         */
+        "external"?: boolean;
+        /**
+          * The suggested filename. Only valid if download or calendar is `true`.
+         */
+        "filename"?: string;
+        /**
+          * The type of the file. Only displayed if download is `true`.
+         */
+        "filetype"?: string;
+        /**
+          * The href attribute of the anchor.
+         */
+        "href": string;
+        /**
+          * The name of the icon to be displayed in the link.
+         */
+        "iconName"?: string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive.
+         */
+        "iconSize"?: number;
+        /**
+          * Adds an aria-label attribute to the link element.
+         */
+        "label"?: string;
+        /**
+          * The number of pages of the file. Only displayed if download is `true`.
+         */
+        "pages"?: number;
+        /**
+          * If 'true', will represent the link with white text instead of blue.
+         */
+        "reverse"?: boolean;
+        /**
+          * The anchor text.
+         */
+        "text": string;
+        /**
+          * If `true`, a video icon will be displayed before the anchor text.
+         */
+        "video"?: boolean;
+    }
+    /**
      * @componentName Loading indicator
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -1829,6 +1908,10 @@ export interface VaLinkActionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaLinkActionElement;
 }
+export interface VaLinkOldCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaLinkOldElement;
+}
 export interface VaLoadingIndicatorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaLoadingIndicatorElement;
@@ -2369,6 +2452,28 @@ declare global {
     var HTMLVaLinkActionElement: {
         prototype: HTMLVaLinkActionElement;
         new (): HTMLVaLinkActionElement;
+    };
+    interface HTMLVaLinkOldElementEventMap {
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Link
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaLinkOldElement extends Components.VaLinkOld, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaLinkOldElementEventMap>(type: K, listener: (this: HTMLVaLinkOldElement, ev: VaLinkOldCustomEvent<HTMLVaLinkOldElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaLinkOldElementEventMap>(type: K, listener: (this: HTMLVaLinkOldElement, ev: VaLinkOldCustomEvent<HTMLVaLinkOldElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaLinkOldElement: {
+        prototype: HTMLVaLinkOldElement;
+        new (): HTMLVaLinkOldElement;
     };
     interface HTMLVaLoadingIndicatorElementEventMap {
         "component-library-analytics": any;
@@ -2970,6 +3075,7 @@ declare global {
         "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
         "va-link-action": HTMLVaLinkActionElement;
+        "va-link-old": HTMLVaLinkOldElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
@@ -3843,6 +3949,89 @@ declare namespace LocalJSX {
           * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
          */
         "type"?: 'primary' | 'secondary' | 'reverse';
+    }
+    /**
+     * @componentName Link
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaLinkOld {
+        /**
+          * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
+         */
+        "abbrTitle"?: string;
+        /**
+          * If `true`, the anchor text will be bolded and include a right arrow icon.
+         */
+        "active"?: boolean;
+        /**
+          * If 'true', renders a "back arrow" in front of the link text
+         */
+        "back"?: boolean;
+        /**
+          * If `true`, a calendar icon will be displayed before the anchor text.
+         */
+        "calendar"?: boolean;
+        /**
+          * If `true`, a channel icon will be displayed before the anchor text.
+         */
+        "channel"?: boolean;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
+         */
+        "download"?: boolean;
+        /**
+          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+         */
+        "external"?: boolean;
+        /**
+          * The suggested filename. Only valid if download or calendar is `true`.
+         */
+        "filename"?: string;
+        /**
+          * The type of the file. Only displayed if download is `true`.
+         */
+        "filetype"?: string;
+        /**
+          * The href attribute of the anchor.
+         */
+        "href": string;
+        /**
+          * The name of the icon to be displayed in the link.
+         */
+        "iconName"?: string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive.
+         */
+        "iconSize"?: number;
+        /**
+          * Adds an aria-label attribute to the link element.
+         */
+        "label"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaLinkOldCustomEvent<any>) => void;
+        /**
+          * The number of pages of the file. Only displayed if download is `true`.
+         */
+        "pages"?: number;
+        /**
+          * If 'true', will represent the link with white text instead of blue.
+         */
+        "reverse"?: boolean;
+        /**
+          * The anchor text.
+         */
+        "text": string;
+        /**
+          * If `true`, a video icon will be displayed before the anchor text.
+         */
+        "video"?: boolean;
     }
     /**
      * @componentName Loading indicator
@@ -5025,6 +5214,7 @@ declare namespace LocalJSX {
         "va-icon": VaIcon;
         "va-link": VaLink;
         "va-link-action": VaLinkAction;
+        "va-link-old": VaLinkOld;
         "va-loading-indicator": VaLoadingIndicator;
         "va-maintenance-banner": VaMaintenanceBanner;
         "va-memorable-date": VaMemorableDate;
@@ -5210,6 +5400,12 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-link-action": LocalJSX.VaLinkAction & JSXBase.HTMLAttributes<HTMLVaLinkActionElement>;
+            /**
+             * @componentName Link
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-link-old": LocalJSX.VaLinkOld & JSXBase.HTMLAttributes<HTMLVaLinkOldElement>;
             /**
              * @componentName Loading indicator
              * @maturityCategory use

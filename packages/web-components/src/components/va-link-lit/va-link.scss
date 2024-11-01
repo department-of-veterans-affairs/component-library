@@ -1,0 +1,82 @@
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@import '~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css';
+@import '../../mixins/links.css';
+
+:host {
+  display: inline;
+}
+
+// override formation [href]:focus style that added an outline to the host resulting in a double outline for the link
+:host([href]:focus) {
+  outline: none !important;
+}
+
+:host a {
+  cursor: pointer;
+  text-decoration: underline;
+  font: inherit;
+}
+
+:host a.va-link--reverse,
+:host a.va-link--reverse .link-icon--back {
+  color: var(--vads-color-white);
+
+  &:hover,
+  &:active,
+  &:hover .link-icon--back,
+  &:active .link-icon--back {
+    color: var(--vads-color-action-focus-on-light);
+    background-color: transparent;
+  }
+}
+
+:host([active]:not([active='false'])) a {
+  font-weight: 700;
+}
+
+:host([icon-name]) va-icon {
+  margin-right: 4px;
+}
+
+.link-icon--active {
+  vertical-align: baseline;
+  position: relative;
+  top: 3px;
+}
+
+.link-icon--left {
+  margin-right: 4px;
+  vertical-align: baseline;
+  position: relative;
+  top: 3px;
+}
+
+// Needed by the back link variant for text alignment
+.link-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.link-icon--back {
+  color: var(--vads-color-gray-medium);
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-property: color, background-color, border-color;
+}
+
+.link--center {
+  display: inline-flex;
+  align-items: center;
+}
+
+dfn {
+  font-style: normal;
+}
+
+abbr {
+  text-decoration: none;
+}
+
+.external-link-icon {
+  margin-left: 4px;
+}
