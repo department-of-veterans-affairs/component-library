@@ -1436,20 +1436,6 @@ through all possible variants
 */
 /* prettier-ignore */
 /* prettier-ignore */
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
-/**
-  /uswds/dist/scss/lib/addons/_margin.scss
-**/
-/**
-  uswds/src/stylesheets/lib/helpers/_directional-values.scss
-**/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -1837,10 +1823,6 @@ template {
   float: left;
 }
 
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
 /*
 * * * * * ==============================
 * * * * * ==============================
@@ -3446,6 +3428,10 @@ through all possible variants
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
 **/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
 .usa-sr-only {
   position: absolute;
   left: -999em;
@@ -3616,6 +3602,10 @@ through all possible variants
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
 **/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
 /*
   Original: @import "~uswds/src/stylesheets/core/utilities";
   ***THIS IS USWDS v1***
@@ -3692,16 +3682,24 @@ iframe:focus,
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
 **/
+/*
+  Original: @import "~uswds/src/stylesheets/core/utilities";
+  ***THIS IS USWDS v1***
+*/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
 /**
   /uswds/dist/scss/lib/addons/_margin.scss
 **/
 /**
   uswds/src/stylesheets/lib/helpers/_directional-values.scss
 **/
-/*
-  Original: @import "~uswds/src/stylesheets/core/utilities";
-  ***THIS IS USWDS v1***
-*/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
 /**
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
@@ -4263,6 +4261,14 @@ html .usa-button-secondary-inverse-disabled,
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
 **/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
 /*
   Original: @import "~uswds/src/stylesheets/core/utilities";
   ***THIS IS USWDS v1***
@@ -4635,6 +4641,10 @@ legend {
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
 **/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
 /*
   Original: @import "~uswds/src/stylesheets/elements/labels";
   ***THIS IS USWDS v1***
@@ -4667,6 +4677,14 @@ legend {
 **/
 /**
   uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
 **/
 /**
   Variables ported over from Formation so that we can keep those stylesheets
@@ -4723,15 +4741,23 @@ li:last-child {
   working while we work on deprecation.
 **/
 /**
-  /uswds/dist/scss/lib/addons/_margin.scss
-**/
-/**
-  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
 **/
 /*
   Original: @import "~uswds/src/stylesheets/core/utilities";
   ***THIS IS USWDS v1***
 */
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
 /*
   Original: @import "~uswds/src/stylesheets/core/utilities";
   ***THIS IS USWDS v1***
@@ -4800,6 +4826,14 @@ caption {
 **/
 /**
   uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
 **/
 /**
   Variables ported over from Formation so that we can keep those stylesheets
@@ -5718,6 +5752,10 @@ dfn {
   width: 38px;
 }
 
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
 /**
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
