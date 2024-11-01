@@ -10,6 +10,7 @@ import {
 } from '@stencil/core';
 import { i18next } from '../..';
 import { FileIndex } from "./FileIndex";
+import { FileDetails } from "./FileDetails";
 
 /**
  * A component that manages multiple file inputs, allowing users to upload several files.
@@ -80,6 +81,7 @@ export class VaFileInputMultiple {
 
   /**
    * Event emitted when any change to the file inputs occurs.
+   * Sends back an array of FileDetails 
    */
   @Event() vaMultipleChange: EventEmitter;
 
@@ -115,6 +117,15 @@ export class VaFileInputMultiple {
    */
   private findFileByKey(fileKey: number) {
     return this.files.find(file => file.key === fileKey);
+  }
+
+  /**
+   * Finds a file entry by its unique key.
+   * @param {number} fileKey - The unique key of the file.
+   * @returns {FileIndex | undefined} The matching file index object or undefined if not found.
+   */
+  private findIndexByKey(fileKey: number) {
+    return this.files.indexOf(this.files.find(file => file.key === fileKey));
   }
 
   /**
@@ -161,10 +172,9 @@ export class VaFileInputMultiple {
    */
   private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
-
+    let filesArray:FileDetails[];
     if (newFile) {
-      const fileObject = this.findFileByKey(fileKey);
-
+      const fileObject = this.findFileByKey(fileKey);  
       if (fileObject.file) {
         // Change file
         fileObject.file = newFile;
@@ -179,6 +189,7 @@ export class VaFileInputMultiple {
           content: null,
         });
       }
+      filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), false, this.findIndexByKey(fileKey))
     } else {
       // Deleted file
       this.files.splice(pageIndex, 1);
@@ -188,10 +199,24 @@ export class VaFileInputMultiple {
       setTimeout(() => {
         statusMessageDiv.textContent = "File removed."
       }, 1000);
+      filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), true)
     }
-
-    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file).filter((file =>{ return !!file})) });
+    
+    this.vaMultipleChange.emit(filesArray);
     this.files = Array.of(...this.files);
+  }
+
+  public buildFilesArray (files: File[], deleted?: boolean, fileIndex?: number) {
+    // filter out null files
+    let filesArray:FileDetails[] = files.filter((file =>{ return !!file})).map((file) => {
+      return {file: file, changed: false}
+    });
+    
+    if (!deleted && filesArray[fileIndex]) {
+      // don't return a changed property on deletion
+      filesArray[fileIndex].changed = true
+    }
+    return filesArray;
   }
 
   /**
