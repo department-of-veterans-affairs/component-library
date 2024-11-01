@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 28 Oct 2024 15:35:17 GMT
+ * Generated on Fri, 01 Nov 2024 17:33:49 GMT
  */
 
 :root {
@@ -152,7 +152,7 @@
   --vads-size-line-length-4: 68ex;
   --vads-size-line-length-5: 72ex;
   --vads-size-line-length-6: 88ex;
-  --vads-size-line-length-none: 999ex;
+  --vads-size-line-length-none: inherit;
   --units-0: 0;
   --units-1: 0.5rem;
   --units-2: 1rem;

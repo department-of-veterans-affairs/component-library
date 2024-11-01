@@ -8,7 +8,7 @@
         "4": { "value": "68ex" },
         "5": { "value": "72ex" },
         "6": { "value": "88ex" },
-        "none": { "value": "999ex" }
+        "none": { "value": "inherit" }
       }
     }
   }

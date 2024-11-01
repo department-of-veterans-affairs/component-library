@@ -2829,11 +2829,11 @@
           ]
         },
         "none": {
-          "value": "999ex",
+          "value": "inherit",
           "filePath": "tokens/line-lengths.json",
           "isSource": true,
           "original": {
-            "value": "999ex"
+            "value": "inherit"
           },
           "name": "vads-size-line-length-none",
           "attributes": {
