@@ -1,0 +1,15 @@
+{
+  "vads": {
+    "size": {
+      "line-length": {
+        "1": { "value": "44ex" },
+        "2": { "value": "60ex" },
+        "3": { "value": "64ex" },
+        "4": { "value": "68ex" },
+        "5": { "value": "72ex" },
+        "6": { "value": "88ex" },
+        "none": { "value": "inherit" }
+      }
+    }
+  }
+}
