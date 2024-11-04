@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 01 Nov 2024 16:45:08 GMT
+ * Generated on Mon, 04 Nov 2024 14:51:30 GMT
  */
 
 :root {
@@ -146,6 +146,13 @@
   --vads-font-size-heading-level-4: 17px;
   --vads-font-size-heading-level-5: 15px;
   --vads-font-size-heading-level-6: 15px;
+  --vads-size-line-length-1: 44ex;
+  --vads-size-line-length-2: 60ex;
+  --vads-size-line-length-3: 64ex;
+  --vads-size-line-length-4: 68ex;
+  --vads-size-line-length-5: 72ex;
+  --vads-size-line-length-6: 88ex;
+  --vads-size-line-length-none: inherit;
   --units-0: 0;
   --units-1: 0.5rem;
   --units-2: 1rem;
