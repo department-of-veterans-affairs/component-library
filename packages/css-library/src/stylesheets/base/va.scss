@@ -396,6 +396,26 @@ article > h1 {
     padding-left: 0;
   }
 }
+
+// DEPRECATED: Replaced with va-button web component (still used in drupal content for anchor tags)
+.va-button-primary {
+  background: $color-green !important;
+
+  &:hover,
+  &:focus {
+    background-color: $uswds-system-color-green-cool-vivid-70 !important;
+    text-decoration: none !important;
+  }
+
+  svg {
+    display: inline-block;
+    height: scale-rem(1.2rem);
+    margin-left: scale-rem(0.5rem);
+    width: scale-rem(1.2rem);
+    vertical-align: -1px;
+  }
+}
+
 // used mostly in content-build, we should consider moving this over there 
 .last-updated {
   margin-top: 1.5em;
