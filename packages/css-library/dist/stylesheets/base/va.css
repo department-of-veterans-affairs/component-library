@@ -356,6 +356,21 @@ article > h1 {
   }
 }
 
+.va-button-primary {
+  background: #008817 !important;
+}
+.va-button-primary:hover, .va-button-primary:focus {
+  background-color: #154c21 !important;
+  text-decoration: none !important;
+}
+.va-button-primary svg {
+  display: inline-block;
+  height: 0.75rem;
+  margin-left: 0.3125rem;
+  width: 0.75rem;
+  vertical-align: -1px;
+}
+
 .last-updated {
   margin-top: 1.5em;
   border-top: 2px solid #aeb0b5;
