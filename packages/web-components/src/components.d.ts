@@ -1517,6 +1517,10 @@ export namespace Components {
          */
         "contact": string;
         /**
+          * Prepends the country code to the given contact number. Do NOT include the '+'
+         */
+        "countryCode"?: string;
+        /**
           * Optional numeric string phone number extension
          */
         "extension"?: string;
@@ -4746,6 +4750,10 @@ declare namespace LocalJSX {
           * Numeric string representing the contact number. Typical length is 3 or 10 digits - SMS short codes will be 5 or 6 digits.
          */
         "contact": string;
+        /**
+          * Prepends the country code to the given contact number. Do NOT include the '+'
+         */
+        "countryCode"?: string;
         /**
           * Optional numeric string phone number extension
          */
