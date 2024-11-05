@@ -1,5 +1,5 @@
-import React, { useState, Fragment } from 'react';
-import { getWebComponentDocs, StoryDocs } from './wc-helpers';
+import React, { Fragment } from 'react';
+import { getWebComponentDocs, StoryDocs, propStructure } from './wc-helpers';
 import { VaLanguageToggle } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const languageToggleDocs = getWebComponentDocs('va-language-toggle');
@@ -15,28 +15,31 @@ export default {
   },
 };
 
+const url = new URL(window.parent.location.href);
+url.searchParams.set('path', '/docs/components-va-language-toggle--docs');
+
 const defaultArgs = {
   urls: [
-    { "href": "#en", "lang": "en", "label": "English" },
-    { "href": "#es", "lang": "es", "label": "Español" },
-    { "href": "#tl", "lang": "tl", "label": "Tagalog" }
+    { "href": url.href, "lang": "en", "label": "English" },
+    { "href": url.href, "lang": "es", "label": "Español" },
+    { "href": url.href, "lang": "tl", "label": "Tagalog" }
   ],
-  routerLinks: false
 }
 
 const Template = ({ urls }) => {
-  const [lang, setLang] = useState('en');
-
+  let lang = sessionStorage.getItem('va-language-toggle-lang') ?? 'en';
   function handleLanguageToggle(e) {
-    setLang(e.detail.language);
+    const { language } = e.detail;
+    sessionStorage.setItem('va-language-toggle-lang', language)
   }
 
   return (
-    <VaLanguageToggle language={lang} urls={urls} onVaLanguageToggle={handleLanguageToggle} />
+    <VaLanguageToggle language={lang} urls={urls}  onVaLanguageToggle={handleLanguageToggle}/>
   );
 };
 
-const WithRouterLinksTemplate = ({ urls }) => {
+const WithRouterLinksTemplate = ({urls}) => {
+
   function handleLanguageToggle(e) {
     console.log(`the language has been toggled to ${e.detail.language}`);
   }
@@ -45,7 +48,7 @@ const WithRouterLinksTemplate = ({ urls }) => {
     <Fragment>
       <div>This example illustrates how to use the component with a router. When <code>router-links</code> is
         set to <code>true</code>, clicking on a link will not navigate to a new page (i.e. <code>event.preventDefault()</code> is called).
-        By capturing the <code>language-toggle</code> event the page can be updated as needed to reflect the selected language.
+        By capturing the <code>language-toggle</code> event page content can be updated as needed to reflect the selected language.
       </div>
       <VaLanguageToggle urls={urls} routerLinks={true} onVaLanguageToggle={handleLanguageToggle}/>
     </Fragment>
@@ -53,7 +56,10 @@ const WithRouterLinksTemplate = ({ urls }) => {
 }
 
 export const Default = Template.bind(null);
-Default.args = { ...defaultArgs };
+Default.args = {
+  ...defaultArgs,
+};
+Default.argTypes = propStructure(languageToggleDocs);
 
 export const WithRouterLinks = WithRouterLinksTemplate.bind(null);
 WithRouterLinks.args = { ...defaultArgs }

@@ -619,7 +619,7 @@ export namespace Components {
         "srtext"?: string;
     }
     /**
-     * @componentName LanguageToggle
+     * @componentName Language Toggle
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -633,7 +633,7 @@ export namespace Components {
          */
         "routerLinks"?: boolean;
         /**
-          * A JSON array of objects with link data for the toggle to render. Each object should have an href, lang (ISO language code), and label properties. If using the pure web component provide as a string. Example: '[{"href":"https://www.va.gov/resources/the-pact-act-and-your-va-benefits/","lang":"en","label":"English"},{"href":"https://www.va.gov/resources/the-pact-act-and-your-va-benefits/","lang":"es","label":"Español"}]'
+          * A JSON array of objects with link data. Each object should have an href, lang (ISO language code), and label properties. If using the pure web component provide as a string. Example: `[{"href": "/one", "lang": "en", "label": "English"}, ...]`.
          */
         "urls": LangUrl[] | string;
     }
@@ -2332,11 +2332,10 @@ declare global {
         new (): HTMLVaIconElement;
     };
     interface HTMLVaLanguageToggleElementEventMap {
-        "component-library-analytics": any;
         "vaLanguageToggle": any;
     }
     /**
-     * @componentName LanguageToggle
+     * @componentName Language Toggle
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3736,7 +3735,7 @@ declare namespace LocalJSX {
         "srtext"?: string;
     }
     /**
-     * @componentName LanguageToggle
+     * @componentName Language Toggle
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3746,10 +3745,6 @@ declare namespace LocalJSX {
          */
         "language"?: string;
         /**
-          * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
-         */
-        "onComponent-library-analytics"?: (event: VaLanguageToggleCustomEvent<any>) => void;
-        /**
           * Event fired when a link is clicked. Includes the selected language's ISO code.
          */
         "onVaLanguageToggle"?: (event: VaLanguageToggleCustomEvent<any>) => void;
@@ -3758,7 +3753,7 @@ declare namespace LocalJSX {
          */
         "routerLinks"?: boolean;
         /**
-          * A JSON array of objects with link data for the toggle to render. Each object should have an href, lang (ISO language code), and label properties. If using the pure web component provide as a string. Example: '[{"href":"https://www.va.gov/resources/the-pact-act-and-your-va-benefits/","lang":"en","label":"English"},{"href":"https://www.va.gov/resources/the-pact-act-and-your-va-benefits/","lang":"es","label":"Español"}]'
+          * A JSON array of objects with link data. Each object should have an href, lang (ISO language code), and label properties. If using the pure web component provide as a string. Example: `[{"href": "/one", "lang": "en", "label": "English"}, ...]`.
          */
         "urls"?: LangUrl[] | string;
     }
@@ -5236,7 +5231,7 @@ declare module "@stencil/core" {
              */
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             /**
-             * @componentName LanguageToggle
+             * @componentName Language Toggle
              * @maturityCategory caution
              * @maturityLevel candidate
              */
