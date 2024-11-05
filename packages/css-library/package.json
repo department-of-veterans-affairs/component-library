@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
-  "version": "0.12.2",
+  "version": "0.13.1",
   "description": "Department of Veterans Affairs stylesheets, tokens, and utilities",
   "packageManager": "yarn@3.2.0",
   "files": [
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@divriots/style-dictionary-to-figma": "^0.4.0",
-    "@uswds/uswds": "^3.8.1",
+    "@uswds/uswds": "^3.9.0",
     "rimraf": "^5.0.5"
   }
 }

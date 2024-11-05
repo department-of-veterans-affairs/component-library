@@ -500,6 +500,15 @@ https://designsystem.digital.gov/utilities
 */
 /*
 ----------------------------------------
+map-collect()
+----------------------------------------
+Collect multiple maps into a single
+large map
+source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
+----------------------------------------
+*/
+/*
+----------------------------------------
 Utility breakpoints
 ----------------------------------------
 Which breakpoints does your project
@@ -592,15 +601,6 @@ has-important()
 ----------------------------------------
 Check to see if `!important` is
 being passed in a mixin's props
-----------------------------------------
-*/
-/*
-----------------------------------------
-map-collect()
-----------------------------------------
-Collect multiple maps into a single
-large map
-source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
 ----------------------------------------
 */
 /*
@@ -757,18 +757,25 @@ Converts a value in px to a value in rem
 */
 /*
 ----------------------------------------
-rem-to-px()
-----------------------------------------
-Converts a value in rem to a value in px
-----------------------------------------
-*/
-/*
-----------------------------------------
 rem-to-user-em()
 ----------------------------------------
 Converts a value in rem to a value in
 [user-settings] em for use in media
 queries
+----------------------------------------
+*/
+/*
+----------------------------------------
+px-to-user-em()
+----------------------------------------
+Converts a value in px to a value in em
+----------------------------------------
+*/
+/*
+----------------------------------------
+rem-to-px()
+----------------------------------------
+Converts a value in rem to a value in px
 ----------------------------------------
 */
 /*
@@ -3575,8 +3582,8 @@ dfn {
 
 .usa-alert-success {
   background-color: #ecf3ec;
-  background-image: url("/img/alerts/success.png");
-  background-image: url("/img/alerts/success.svg");
+  background-image: url("/img/success.png");
+  background-image: url("/img/success.svg");
 }
 .usa-alert-success::before {
   background-color: #008817;
@@ -3587,8 +3594,8 @@ dfn {
 
 .usa-alert-warning {
   background-color: #fef0c8;
-  background-image: url("/img/alerts/warning.png");
-  background-image: url("/img/alerts/warning.svg");
+  background-image: url("/img/warning.png");
+  background-image: url("/img/warning.svg");
 }
 .usa-alert-warning::before {
   background-color: #ffbe2e;
@@ -3599,8 +3606,8 @@ dfn {
 
 .usa-alert-error {
   background-color: #f8dfe2;
-  background-image: url("/img/alerts/error.png");
-  background-image: url("/img/alerts/error.svg");
+  background-image: url("/img/error.png");
+  background-image: url("/img/error.svg");
 }
 .usa-alert-error::before {
   background-color: #d83933;
@@ -3611,8 +3618,8 @@ dfn {
 
 .usa-alert-info {
   background-color: #e1f3f8;
-  background-image: url("/img/alerts/info.png");
-  background-image: url("/img/alerts/info.svg");
+  background-image: url("/img/info.png");
+  background-image: url("/img/info.svg");
 }
 .usa-alert-info::before {
   background-color: #00bde3;
@@ -4800,6 +4807,15 @@ https://designsystem.digital.gov/utilities
 */
 /*
 ----------------------------------------
+map-collect()
+----------------------------------------
+Collect multiple maps into a single
+large map
+source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
+----------------------------------------
+*/
+/*
+----------------------------------------
 Utility breakpoints
 ----------------------------------------
 Which breakpoints does your project
@@ -4885,15 +4901,6 @@ has-important()
 ----------------------------------------
 Check to see if `!important` is
 being passed in a mixin's props
-----------------------------------------
-*/
-/*
-----------------------------------------
-map-collect()
-----------------------------------------
-Collect multiple maps into a single
-large map
-source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
 ----------------------------------------
 */
 /*
@@ -5427,18 +5434,25 @@ Converts a value in px to a value in rem
 */
 /*
 ----------------------------------------
-rem-to-px()
-----------------------------------------
-Converts a value in rem to a value in px
-----------------------------------------
-*/
-/*
-----------------------------------------
 rem-to-user-em()
 ----------------------------------------
 Converts a value in rem to a value in
 [user-settings] em for use in media
 queries
+----------------------------------------
+*/
+/*
+----------------------------------------
+px-to-user-em()
+----------------------------------------
+Converts a value in px to a value in em
+----------------------------------------
+*/
+/*
+----------------------------------------
+rem-to-px()
+----------------------------------------
+Converts a value in rem to a value in px
 ----------------------------------------
 */
 /*
