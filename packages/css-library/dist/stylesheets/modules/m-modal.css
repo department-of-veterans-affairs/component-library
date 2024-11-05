@@ -7,6 +7,10 @@
   working while we work on deprecation.
 **/
 /**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
   /uswds/dist/scss/lib/addons/_margin.scss
 **/
 /**
@@ -33,14 +37,14 @@
   }
 }
 .va-modal .va-modal-body {
-  margin-right: units(2.5);
+  margin-right: 1.25rem;
 }
 .va-modal .va-modal-body p:first-of-type {
   margin-top: 0;
 }
 .va-modal-title {
   margin: 0;
-  margin-bottom: units(2);
+  margin-bottom: 1rem;
 }
 .va-modal-inner {
   background: #ffffff;
@@ -62,17 +66,17 @@
   max-width: 37.5rem;
 }
 .va-modal-alert .alert-actions {
-  margin-top: units(3);
+  margin-top: 1.5rem;
 }
 .va-modal-alert .alert-actions button {
   margin: 0;
 }
 .va-modal-alert .alert-actions button + button {
-  margin-left: units(2.5);
+  margin-left: 1.25rem;
 }
 .va-modal-body {
   overflow-wrap: break-word;
-  padding: units(2.5);
+  padding: 1.25rem;
   word-break: break-word;
   word-wrap: break-word;
 }
@@ -99,7 +103,7 @@ button.va-modal-close {
   font-size: 1.40625rem;
   padding: 0;
   position: absolute;
-  margin: units(2);
+  margin: 1rem;
   right: 0;
   top: 0;
   width: auto;
