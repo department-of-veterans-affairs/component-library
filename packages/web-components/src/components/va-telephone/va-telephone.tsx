@@ -105,16 +105,24 @@ export class VaTelephone {
    * `international` and `extension` args only work on 10 digit contacts
    */
   /* eslint-disable i18next/no-literal-string */
-  static formatPhoneNumber(
-    num: string,
-    extension: string,
-    international: boolean = false,
-    countryCode: string,
-    vanity: string,
-    tty: boolean = false,
-  ): string {
+  static formatPhoneNumber({
+    contact: num,
+    extension,
+    international = false,
+    countryCode,
+    vanity,
+    tty = false,
+  }: {
+    contact: string;
+    extension?: string;
+    international?: boolean;
+    countryCode?: string;
+    vanity?: string;
+    tty?: boolean;
+  }): string {
     const splitNumber = countryCode ? [num] : VaTelephone.splitContact(num);
     let formattedNum = splitNumber.join('');
+
     if (formattedNum.length === 10 && !countryCode) {
       const [area, local, last4] = splitNumber;
       formattedNum = `${area}-${local}-${last4}`;
@@ -124,21 +132,29 @@ export class VaTelephone {
         formattedNum = `${area}-${local}-${vanity} (${last4})`;
       }
     }
+
     if (countryCode) {
       formattedNum = `+${countryCode} ${formattedNum}`;
     }
+
     if (tty) {
       formattedNum = `TTY: ${formattedNum}`;
     }
+
     return formattedNum;
   }
 
-  static createHref(
-    contact: string,
-    extension: string,
-    sms: boolean,
-    countryCode: string,
-  ): string {
+  static createHref({
+    contact,
+    extension,
+    sms,
+    countryCode,
+  }: {
+    contact: string;
+    extension?: string;
+    sms?: boolean;
+    countryCode?: string;
+  }): string {
     const cleanedContact = VaTelephone.cleanContact(contact);
     const isN11 = cleanedContact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
@@ -182,15 +198,20 @@ export class VaTelephone {
       sms,
       messageAriaDescribedby,
     } = this;
-    const formattedNumber = VaTelephone.formatPhoneNumber(
-      contact,
+    const formattedNumber = VaTelephone.formatPhoneNumber({
+      contact: contact,
       extension,
       international,
       countryCode,
       vanity,
       tty,
-    );
-    const href = VaTelephone.createHref(contact, extension, sms, countryCode);
+    });
+    const href = VaTelephone.createHref({
+      contact,
+      extension,
+      sms,
+      countryCode,
+    });
 
     // Null so we don't add the attribute if we have an empty string
     const ariaDescribedbyIds = messageAriaDescribedby
