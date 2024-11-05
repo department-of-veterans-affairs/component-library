@@ -499,6 +499,15 @@ https://designsystem.digital.gov/utilities
 */
 /*
 ----------------------------------------
+map-collect()
+----------------------------------------
+Collect multiple maps into a single
+large map
+source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
+----------------------------------------
+*/
+/*
+----------------------------------------
 Utility breakpoints
 ----------------------------------------
 Which breakpoints does your project
@@ -591,15 +600,6 @@ has-important()
 ----------------------------------------
 Check to see if `!important` is
 being passed in a mixin's props
-----------------------------------------
-*/
-/*
-----------------------------------------
-map-collect()
-----------------------------------------
-Collect multiple maps into a single
-large map
-source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
 ----------------------------------------
 */
 /*
@@ -756,18 +756,25 @@ Converts a value in px to a value in rem
 */
 /*
 ----------------------------------------
-rem-to-px()
-----------------------------------------
-Converts a value in rem to a value in px
-----------------------------------------
-*/
-/*
-----------------------------------------
 rem-to-user-em()
 ----------------------------------------
 Converts a value in rem to a value in
 [user-settings] em for use in media
 queries
+----------------------------------------
+*/
+/*
+----------------------------------------
+px-to-user-em()
+----------------------------------------
+Converts a value in px to a value in em
+----------------------------------------
+*/
+/*
+----------------------------------------
+rem-to-px()
+----------------------------------------
+Converts a value in rem to a value in px
 ----------------------------------------
 */
 /*
@@ -1936,6 +1943,15 @@ https://designsystem.digital.gov/utilities
 */
 /*
 ----------------------------------------
+map-collect()
+----------------------------------------
+Collect multiple maps into a single
+large map
+source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
+----------------------------------------
+*/
+/*
+----------------------------------------
 Utility breakpoints
 ----------------------------------------
 Which breakpoints does your project
@@ -2021,15 +2037,6 @@ has-important()
 ----------------------------------------
 Check to see if `!important` is
 being passed in a mixin's props
-----------------------------------------
-*/
-/*
-----------------------------------------
-map-collect()
-----------------------------------------
-Collect multiple maps into a single
-large map
-source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
 ----------------------------------------
 */
 /*
@@ -2563,18 +2570,25 @@ Converts a value in px to a value in rem
 */
 /*
 ----------------------------------------
-rem-to-px()
-----------------------------------------
-Converts a value in rem to a value in px
-----------------------------------------
-*/
-/*
-----------------------------------------
 rem-to-user-em()
 ----------------------------------------
 Converts a value in rem to a value in
 [user-settings] em for use in media
 queries
+----------------------------------------
+*/
+/*
+----------------------------------------
+px-to-user-em()
+----------------------------------------
+Converts a value in px to a value in em
+----------------------------------------
+*/
+/*
+----------------------------------------
+rem-to-px()
+----------------------------------------
+Converts a value in rem to a value in px
 ----------------------------------------
 */
 /*
@@ -3359,6 +3373,15 @@ https://designsystem.digital.gov/utilities
 */
 /*
 ----------------------------------------
+map-collect()
+----------------------------------------
+Collect multiple maps into a single
+large map
+source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
+----------------------------------------
+*/
+/*
+----------------------------------------
 Utility breakpoints
 ----------------------------------------
 Which breakpoints does your project
@@ -3393,15 +3416,6 @@ has-important()
 ----------------------------------------
 Check to see if `!important` is
 being passed in a mixin's props
-----------------------------------------
-*/
-/*
-----------------------------------------
-map-collect()
-----------------------------------------
-Collect multiple maps into a single
-large map
-source: https://gist.github.com/bigglesrocks/d75091700f8f2be5abfe
 ----------------------------------------
 */
 /*
@@ -3935,18 +3949,25 @@ Converts a value in px to a value in rem
 */
 /*
 ----------------------------------------
-rem-to-px()
-----------------------------------------
-Converts a value in rem to a value in px
-----------------------------------------
-*/
-/*
-----------------------------------------
 rem-to-user-em()
 ----------------------------------------
 Converts a value in rem to a value in
 [user-settings] em for use in media
 queries
+----------------------------------------
+*/
+/*
+----------------------------------------
+px-to-user-em()
+----------------------------------------
+Converts a value in px to a value in em
+----------------------------------------
+*/
+/*
+----------------------------------------
+rem-to-px()
+----------------------------------------
+Converts a value in rem to a value in px
 ----------------------------------------
 */
 /*
