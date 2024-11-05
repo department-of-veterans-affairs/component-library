@@ -3,7 +3,6 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 import { VaLink } from '@department-of-veterans-affairs/component-library/dist/react-bindings';
 
 const linkDocs = getWebComponentDocs('va-link');
-console.log('===>', linkDocs);
 
 export default {
   title: 'Components/Link',
