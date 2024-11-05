@@ -25,25 +25,45 @@ export class VaLanguageToggle {
   @Prop() language: string = 'en';
 
   /**
-   * A JSON array of objects with link data. Each object should have an href, lang (ISO language code), and label properties. If using the pure web component provide as a string. Example: `[{"href": "/one", "lang": "en", "label": "English"}, ...]`.
+   * The English language href for the page. Required.
    */
-  @Prop() urls: LangUrl[] | string;
+  @Prop() enHref!: string;
+
+  /**
+   * The Spanish language href for the page. Optional.
+   */
+  @Prop() esHref?: string;
+
+  /**
+   * The Tagalog language href for the page. Optional.
+   */
+  @Prop() tlHref?: string;
+
+  /**
+   * A JSON array of objects with link data.
+   */
+  @State() urls: LangUrl[];
 
   /**
    * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
    */
   @Prop() routerLinks?: boolean = false;
-    
-  /**
-   * The urls as a Javascript array of objects, each with href, lang, and label properties.
-   */
-  @State() formattedUrls: LangUrl[] = [];
   
   /**
    * Event fired when a link is clicked. Includes the selected language's ISO code.
    */
   @Event()
   vaLanguageToggle: EventEmitter;
+
+  /**
+   * The event used to track usage of the component.
+   */
+    @Event({
+      bubbles: true,
+      composed: true,
+      eventName: 'component-library-analytics',
+    })
+    componentLibraryAnalytics: EventEmitter;
 
   // get the current page's url with language as a query param. 
   // allows for marking "pages" as visited
@@ -54,7 +74,7 @@ export class VaLanguageToggle {
   }
 
   // This method is fired whenever a link is clicked
-  handleToggle(e: Event, langCode: string) {
+  handleToggle(e: Event, langCode: string): void {
     // don't navigate from current page but set new language
     if (this.routerLinks) {
       e.preventDefault();
@@ -64,20 +84,49 @@ export class VaLanguageToggle {
     }
 
     this.vaLanguageToggle.emit({ language: langCode });
+
+    const detail = {
+      componentName: 'va-language-toggle',
+      action: 'linkClick',
+      details: {
+        'pipe-delimited-list-header': langCode
+      },
+    };
+    this.componentLibraryAnalytics.emit(detail);
   }
 
   componentWillLoad() {
-    // parse urls if needed
-    this.formattedUrls = (typeof this.urls === 'string' || this.urls instanceof String)
-    ? JSON.parse(this.urls as string)
-    : this.urls;
+    // always include English
+    const urls = [{
+      label: "English",
+      lang: "en",
+      href: this.enHref
+    }];
+
+    if (this.esHref) {
+      urls.push({
+        label: "Español",
+        lang: "es",
+        href: this.esHref
+      });
+    }
+
+    if (this.tlHref) {
+      urls.push({
+        label: "Tagalog",
+        lang: "tl",
+        href: this.tlHref
+      });
+    }
+
+    this.urls = urls;
   }
 
   render() {
-    const { language, formattedUrls } = this;
+    const { language, urls } = this;
     return (
       <Host>
-        {this.formattedUrls.map(({href, lang, label}, i) => {
+        {urls.map(({href, lang, label}, i) => {
           const anchorClass = classNames({
             'is-current-lang': lang === language
           });
@@ -92,7 +141,7 @@ export class VaLanguageToggle {
               >
                 {label}
               </a>
-              { (i < formattedUrls.length - 1) && <span>|</span> }
+              { (i < urls.length - 1) && <span>|</span> }
             </Fragment>
           )
         })}

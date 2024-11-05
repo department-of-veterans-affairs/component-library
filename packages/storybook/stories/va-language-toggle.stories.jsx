@@ -19,14 +19,12 @@ const url = new URL(window.parent.location.href);
 url.searchParams.set('path', '/docs/components-va-language-toggle--docs');
 
 const defaultArgs = {
-  urls: [
-    { "href": url.href, "lang": "en", "label": "English" },
-    { "href": url.href, "lang": "es", "label": "Español" },
-    { "href": url.href, "lang": "tl", "label": "Tagalog" }
-  ],
+  enHref: url.href,
+  esHref: url.href,
+  tlHref: url.href,
 }
 
-const Template = ({ urls }) => {
+const Template = ({ enHref, esHref, tlHref }) => {
   let lang = sessionStorage.getItem('va-language-toggle-lang') ?? 'en';
   function handleLanguageToggle(e) {
     const { language } = e.detail;
@@ -34,11 +32,17 @@ const Template = ({ urls }) => {
   }
 
   return (
-    <VaLanguageToggle language={lang} urls={urls}  onVaLanguageToggle={handleLanguageToggle}/>
+    <VaLanguageToggle
+      language={lang}
+      enHref={enHref}
+      esHref={esHref}
+      tlHref={tlHref}
+      onVaLanguageToggle={handleLanguageToggle}
+    />
   );
 };
 
-const WithRouterLinksTemplate = ({urls}) => {
+const WithRouterLinksTemplate = ({ enHref, esHref, tlHref }) => {
 
   function handleLanguageToggle(e) {
     console.log(`the language has been toggled to ${e.detail.language}`);
@@ -50,7 +54,13 @@ const WithRouterLinksTemplate = ({urls}) => {
         set to <code>true</code>, clicking on a link will not navigate to a new page (i.e. <code>event.preventDefault()</code> is called).
         By capturing the <code>language-toggle</code> event page content can be updated as needed to reflect the selected language.
       </div>
-      <VaLanguageToggle urls={urls} routerLinks={true} onVaLanguageToggle={handleLanguageToggle}/>
+      <VaLanguageToggle
+        enHref={enHref}
+        esHref={esHref}
+        tlHref={tlHref}
+        routerLinks={true}
+        onVaLanguageToggle={handleLanguageToggle}
+      />
     </Fragment>
   )
 }

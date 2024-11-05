@@ -6,9 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
-import { LangUrl } from "./components/va-language-toggle/va-language-toggle";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
-export { LangUrl } from "./components/va-language-toggle/va-language-toggle";
 export namespace Components {
     /**
      * @componentName Accordion
@@ -645,6 +643,14 @@ export namespace Components {
      */
     interface VaLanguageToggle {
         /**
+          * The English language href for the page. Required.
+         */
+        "enHref": string;
+        /**
+          * The Spanish language href for the page. Optional.
+         */
+        "esHref"?: string;
+        /**
           * The ISO language code for the page. Default is 'en'.
          */
         "language": string;
@@ -653,9 +659,9 @@ export namespace Components {
          */
         "routerLinks"?: boolean;
         /**
-          * A JSON array of objects with link data. Each object should have an href, lang (ISO language code), and label properties. If using the pure web component provide as a string. Example: `[{"href": "/one", "lang": "en", "label": "English"}, ...]`.
+          * The Tagalog language href for the page. Optional.
          */
-        "urls": LangUrl[] | string;
+        "tlHref"?: string;
     }
     /**
      * @componentName Link
@@ -2353,6 +2359,7 @@ declare global {
     };
     interface HTMLVaLanguageToggleElementEventMap {
         "vaLanguageToggle": any;
+        "component-library-analytics": any;
     }
     /**
      * @componentName Language Toggle
@@ -3781,9 +3788,21 @@ declare namespace LocalJSX {
      */
     interface VaLanguageToggle {
         /**
+          * The English language href for the page. Required.
+         */
+        "enHref": string;
+        /**
+          * The Spanish language href for the page. Optional.
+         */
+        "esHref"?: string;
+        /**
           * The ISO language code for the page. Default is 'en'.
          */
         "language"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaLanguageToggleCustomEvent<any>) => void;
         /**
           * Event fired when a link is clicked. Includes the selected language's ISO code.
          */
@@ -3793,9 +3812,9 @@ declare namespace LocalJSX {
          */
         "routerLinks"?: boolean;
         /**
-          * A JSON array of objects with link data. Each object should have an href, lang (ISO language code), and label properties. If using the pure web component provide as a string. Example: `[{"href": "/one", "lang": "en", "label": "English"}, ...]`.
+          * The Tagalog language href for the page. Optional.
          */
-        "urls"?: LangUrl[] | string;
+        "tlHref"?: string;
     }
     /**
      * @componentName Link
