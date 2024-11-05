@@ -291,20 +291,11 @@ export class VaFileInputMultiple {
   };
 
   /**
-   * Checks if we need to add files from the "value" prop to state
-   */
-  componentWillRender() {
-    if (this.value && this.value.length && !this.valueAdded) {
-      return this.addValueFiles();
-    } else {
-      return Promise.resolve();
-    }
-  }
-
-  /**
    * It first ensures that the slot content is correctly set up, then iterates over each file input in the component,
    * appending cloned additional content where applicable. This method ensures that additional content is
    * consistently rendered across multiple file inputs after updates to the DOM.
+   * 
+   * Then checks if we need to add files from the "value" prop to state
    */
   componentDidRender() {
     const theFileInputs = this.el.shadowRoot.querySelectorAll(`va-file-input`);
@@ -314,6 +305,12 @@ export class VaFileInputMultiple {
         this.files[index].content.forEach(node => fileEntry.append(node));
       }
     });
+
+    if (this.value && this.value.length && !this.valueAdded) {
+      return this.addValueFiles();
+    } else {
+      return Promise.resolve();
+    }
   }
 
   /**
