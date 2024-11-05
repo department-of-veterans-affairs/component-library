@@ -22,7 +22,6 @@
     "prism": "^1.27.0"
   },
   "dependencies": {
-    "@department-of-veterans-affairs/css-library": "^0.11.1",
     "webpack": "5"
   },
   "devDependencies": {

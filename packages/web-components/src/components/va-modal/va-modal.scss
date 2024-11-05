@@ -30,6 +30,9 @@
     width: 100%;
   }
 }
+.usa-modal__main div[role=document] {
+  overflow-wrap: anywhere; // Prevent text overflowing the modal when words are longer than the modal width
+}
 
 @media screen and (max-width: 481px) {
   .usa-modal__content {

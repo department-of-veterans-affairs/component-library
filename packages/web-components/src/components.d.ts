@@ -475,6 +475,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Whether month should be optional; has no effect unless monthYearOnly is true
+         */
+        "monthOptional"?: boolean;
+        /**
           * Whether or not only the Month and Year inputs should be displayed.
          */
         "monthYearOnly"?: boolean;
@@ -535,6 +539,10 @@ export namespace Components {
          */
         "name"?: string;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
@@ -542,6 +550,10 @@ export namespace Components {
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
@@ -581,9 +593,17 @@ export namespace Components {
          */
         "name"?: string;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File[];
     }
     /**
      * @componentName Header - Minimal
@@ -3567,6 +3587,10 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
+          * Whether month should be optional; has no effect unless monthYearOnly is true
+         */
+        "monthOptional"?: boolean;
+        /**
           * Whether or not only the Month and Year inputs should be displayed.
          */
         "monthYearOnly"?: boolean;
@@ -3647,6 +3671,10 @@ declare namespace LocalJSX {
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
@@ -3654,6 +3682,10 @@ declare namespace LocalJSX {
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
@@ -3697,9 +3729,17 @@ declare namespace LocalJSX {
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File[];
     }
     /**
      * @componentName Header - Minimal
