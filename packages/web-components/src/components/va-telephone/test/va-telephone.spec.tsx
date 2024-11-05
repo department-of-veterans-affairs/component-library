@@ -73,7 +73,7 @@ describe('formatPhoneNumber', () => {
     expect(
       VaTelephone.formatPhoneNumber({
         contact: intlContact,
-        countryCode: '63',
+        countryCode,
       }),
     ).toBe('+63 (02) 8555 8888');
   });
