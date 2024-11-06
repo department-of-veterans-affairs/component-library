@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Event, EventEmitter, Prop, Fragment } from '@stencil/core';
+import { Component, Host, h, State, Event, EventEmitter, Prop } from '@stencil/core';
 import classNames from 'classnames';
 
 export type LangUrl = {
@@ -126,12 +126,16 @@ export class VaLanguageToggle {
     const { language, urls } = this;
     return (
       <Host>
+        <div>
         {urls.map(({href, lang, label}, i) => {
           const anchorClass = classNames({
             'is-current-lang': lang === language
           });
+          const divClass = classNames({
+            'inner-div': (i < urls.length - 1)
+          })
           return (
-            <Fragment>
+            <div class={divClass}>
               <a
                 class={anchorClass}
                 href={href}
@@ -141,10 +145,10 @@ export class VaLanguageToggle {
               >
                 {label}
               </a>
-              { (i < urls.length - 1) && <span>|</span> }
-            </Fragment>
+            </div>
           )
         })}
+        </div>
       </Host>
     );
   }

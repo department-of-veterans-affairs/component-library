@@ -54,6 +54,7 @@ const WithRouterLinksTemplate = ({ enHref, esHref, tlHref }) => {
         set to <code>true</code>, clicking on a link will not navigate to a new page (i.e. <code>event.preventDefault()</code> is called).
         By capturing the <code>language-toggle</code> event page content can be updated as needed to reflect the selected language.
       </div>
+      <br />
       <VaLanguageToggle
         enHref={enHref}
         esHref={esHref}

@@ -1,23 +1,21 @@
 @import '../../mixins/focusable.css';
 
-:host {
+:host div {
   display: inline-block;
-  margin: 32px 0 24px 0;
-  border-bottom: 1px solid var(--vads-color-base-dark);
 
-  span {
-    margin: 0 4px 0 4px;
-    color: var(--vads-color-base-dark);
+  div.inner-div {
+    border-right: 1px solid var(--vads-color-base-light);
+    padding-right: 8px;
+    margin-right: 8px;
   }
 
   a {
     &.is-current-lang {
       font-weight: var(--font-weight-bold);
-      text-decoration: none;
-      color: var(--vads-color-base);
     }
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
+    text-decoration: none;
+    color: var(--vads-color-link);
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--vads-color-link);
   }
 }
