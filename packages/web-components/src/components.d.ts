@@ -3677,7 +3677,7 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * Event emitted when any change to the file inputs occurs.
+          * Event emitted when any change to the file inputs occurs. Sends back an array of FileDetails
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
