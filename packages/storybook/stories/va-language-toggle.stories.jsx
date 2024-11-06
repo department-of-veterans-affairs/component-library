@@ -18,13 +18,7 @@ export default {
 const url = new URL(window.parent.location.href);
 url.searchParams.set('path', '/docs/components-va-language-toggle--docs');
 
-const defaultArgs = {
-  enHref: url.href,
-  esHref: url.href,
-  tlHref: url.href,
-}
-
-const Template = ({ enHref, esHref, tlHref }) => {
+const Template = () => {
   let lang = sessionStorage.getItem('va-language-toggle-lang') ?? 'en';
   function handleLanguageToggle(e) {
     const { language } = e.detail;
@@ -34,15 +28,15 @@ const Template = ({ enHref, esHref, tlHref }) => {
   return (
     <VaLanguageToggle
       language={lang}
-      enHref={enHref}
-      esHref={esHref}
-      tlHref={tlHref}
+      enHref={url.href}
+      esHref={url.href}
+      tlHref={url.href}
       onVaLanguageToggle={handleLanguageToggle}
     />
   );
 };
 
-const WithRouterLinksTemplate = ({ enHref, esHref, tlHref }) => {
+const WithRouterLinksTemplate = () => {
 
   function handleLanguageToggle(e) {
     console.log(`the language has been toggled to ${e.detail.language}`);
@@ -54,11 +48,11 @@ const WithRouterLinksTemplate = ({ enHref, esHref, tlHref }) => {
         set to <code>true</code>, clicking on a link will not navigate to a new page (i.e. <code>event.preventDefault()</code> is called).
         By capturing the <code>language-toggle</code> event page content can be updated as needed to reflect the selected language.
       </div>
-      <br />
+      <br/>
       <VaLanguageToggle
-        enHref={enHref}
-        esHref={esHref}
-        tlHref={tlHref}
+        enHref={url.href}
+        esHref={url.href}
+        tlHref={url.href}
         routerLinks={true}
         onVaLanguageToggle={handleLanguageToggle}
       />
@@ -67,10 +61,6 @@ const WithRouterLinksTemplate = ({ enHref, esHref, tlHref }) => {
 }
 
 export const Default = Template.bind(null);
-Default.args = {
-  ...defaultArgs,
-};
 Default.argTypes = propStructure(languageToggleDocs);
 
 export const WithRouterLinks = WithRouterLinksTemplate.bind(null);
-WithRouterLinks.args = { ...defaultArgs }
