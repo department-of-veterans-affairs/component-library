@@ -18,7 +18,7 @@ export default {
 const url = new URL(window.parent.location.href);
 url.searchParams.set('path', '/docs/components-va-language-toggle--docs');
 
-const Template = () => {
+const Template = ({}) => {
   let lang = sessionStorage.getItem('va-language-toggle-lang') ?? 'en';
   function handleLanguageToggle(e) {
     const { language } = e.detail;
@@ -36,7 +36,7 @@ const Template = () => {
   );
 };
 
-const WithRouterLinksTemplate = () => {
+const WithRouterLinksTemplate = ({}) => {
 
   function handleLanguageToggle(e) {
     console.log(`the language has been toggled to ${e.detail.language}`);
