@@ -42,6 +42,11 @@ export class VaTelephone {
   @Prop() international?: boolean = false;
 
   /**
+   * Prepends the country code to the given contact number. Do NOT include the '+'
+   */
+  @Prop() countryCode?: string;
+
+  /**
    * Indicates if this is a number meant to be called
    * from a teletypewriter for deaf users.
    */
@@ -75,11 +80,11 @@ export class VaTelephone {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  static cleanContact(contact: string) :string {
+  static cleanContact(contact: string): string {
     return (contact || '').replace(/[^\d]/g, '');
   }
 
-  static splitContact(contact: string) :string[] {
+  static splitContact(contact: string): string[] {
     const cleanedContact = VaTelephone.cleanContact(contact);
     if (cleanedContact.length === 10) {
       // const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
@@ -99,17 +104,27 @@ export class VaTelephone {
    * Format telephone number for display.
    * `international` and `extension` args only work on 10 digit contacts
    */
-  static formatPhoneNumber(
-    num: string,
-    extension: string,
-    international: boolean = false,
-    vanity: string,
-    tty: boolean = false,
-  ): string {
-    const splitNumber = VaTelephone.splitContact(num);
+  /* eslint-disable i18next/no-literal-string */
+  static formatPhoneNumber({
+    contact: num,
+    extension,
+    international = false,
+    countryCode,
+    vanity,
+    tty = false,
+  }: {
+    contact: string;
+    extension?: string;
+    international?: boolean;
+    countryCode?: string;
+    vanity?: string;
+    tty?: boolean;
+  }): string {
+    const splitNumber = countryCode ? [num] : VaTelephone.splitContact(num);
     let formattedNum = splitNumber.join('');
-    if (formattedNum.length === 10) {
-      const [ area, local, last4 ] = splitNumber;
+
+    if (formattedNum.length === 10 && !countryCode) {
+      const [area, local, last4] = splitNumber;
       formattedNum = `${area}-${local}-${last4}`;
       if (international) formattedNum = `+1-${formattedNum}`;
       if (extension) formattedNum = `${formattedNum}, ext. ${extension}`;
@@ -117,13 +132,29 @@ export class VaTelephone {
         formattedNum = `${area}-${local}-${vanity} (${last4})`;
       }
     }
+
+    if (countryCode) {
+      formattedNum = `+${countryCode} ${formattedNum}`;
+    }
+
     if (tty) {
       formattedNum = `TTY: ${formattedNum}`;
     }
+
     return formattedNum;
   }
 
-  static createHref(contact: string, extension: string, sms: boolean): string {
+  static createHref({
+    contact,
+    extension,
+    sms,
+    countryCode,
+  }: {
+    contact: string;
+    extension?: string;
+    sms?: boolean;
+    countryCode?: string;
+  }): string {
     const cleanedContact = VaTelephone.cleanContact(contact);
     const isN11 = cleanedContact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
@@ -134,11 +165,15 @@ export class VaTelephone {
       href = `sms:${cleanedContact}`;
     } else if (isN11) {
       href = `tel:${cleanedContact}`;
+    } else if (countryCode) {
+      href = `tel:+${countryCode}${cleanedContact}`;
     } else {
+      // RFC3966 (https://www.rfc-editor.org/rfc/rfc3966#section-5.1.5) calls for the inclusion of country codes whenever possible, so we add the +1 unless we know there's a different country code (above)
       href = `tel:+1${cleanedContact}`;
     }
     return `${href}${extension ? `,${extension}` : ''}`;
   }
+  /* eslint-enable i18next/no-literal-string */
 
   private handleClick(): void {
     this.componentLibraryAnalytics.emit({
@@ -152,37 +187,50 @@ export class VaTelephone {
   }
 
   render() {
-    const { 
-      contact, 
-      extension, 
-      notClickable, 
-      international, 
-      tty, 
-      vanity, 
-      sms, 
-      messageAriaDescribedby 
-    } = this;
-    const formattedNumber = VaTelephone.formatPhoneNumber(
+    const {
       contact,
       extension,
+      notClickable,
       international,
+      countryCode,
+      tty,
       vanity,
-      tty
-    );
+      sms,
+      messageAriaDescribedby,
+    } = this;
+    const formattedNumber = VaTelephone.formatPhoneNumber({
+      contact: contact,
+      extension,
+      international,
+      countryCode,
+      vanity,
+      tty,
+    });
+    const href = VaTelephone.createHref({
+      contact,
+      extension,
+      sms,
+      countryCode,
+    });
 
     // Null so we don't add the attribute if we have an empty string
-    const ariaDescribedbyIds = messageAriaDescribedby ? 'number-description' : null;
+    const ariaDescribedbyIds = messageAriaDescribedby
+      ? // eslint-disable-next-line i18next/no-literal-string
+        'number-description'
+      : null;
 
-    return ( 
+    return (
       <Host>
         {notClickable ? (
           <Fragment>
-            <span aria-hidden="true" aria-describedby={ariaDescribedbyIds}>{formattedNumber}</span>
+            <span aria-hidden="true" aria-describedby={ariaDescribedbyIds}>
+              {formattedNumber}
+            </span>
           </Fragment>
         ) : (
           <a
             aria-describedby={ariaDescribedbyIds}
-            href={VaTelephone.createHref(contact, extension, sms)}
+            href={href}
             onClick={this.handleClick.bind(this)}
           >
             {formattedNumber}
