@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import { getWebComponentDocs, StoryDocs, propStructure } from './wc-helpers';
 import { VaLanguageToggle } from '@department-of-veterans-affairs/web-components/react-bindings';
 
+VaLanguageToggle.displayName = 'VaLanguageToggle';
+
 const languageToggleDocs = getWebComponentDocs('va-language-toggle');
 
 export default {
