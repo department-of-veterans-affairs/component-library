@@ -25,11 +25,11 @@ This repo uses [`Chromatic`](https://www.chromatic.com/) to streamline reviews b
 Our web components have linting which checks for hard-coded user-facing strings. At the moment this linting isn't integrated into CI - so you will only see it if you run `yarn lint` or if your editor has ESLint integration through a plugin.
 
 ### Local testing with Verdaccio
-Contributors are encouraged to test their design system changes in `vets-website` using [Verdaccio](https://verdaccio.org/). From the website:
+Contributors are encouraged to test their changes in `vets-website` using [Verdaccio](https://verdaccio.org/). What is Verdaccio? From the website:
 
-> Verdaccio is a simple, zero-config-required local private NPM registry&hellip;
+> Verdaccio is a simple, zero-config-required local private NPM registry. No need for an entire database just to get started&hellip;
 
-Verdaccio allows contributors to publish a new version of the VA Design System on their local machine, and rebuild `vets-website` with their changes.
+Verdaccio allows contributors to publish a new version of the VA Design System on their local machine, and preview `vets-website` with their changes.
 
 #### Installing Verdaccio
 1. Verdaccio requires [Python3](https://www.python.org/downloads/). Ensure you have Python3 installed by opening a terminal window and typing the following command:
@@ -43,10 +43,11 @@ Verdaccio allows contributors to publish a new version of the VA Design System o
 
    ```shell
    # Install this version of Verdaccio for compatibility with Node v14.15.0.
-   # NPM
+   
+   # If you're using NPM
    npm install --location=global verdaccio@5.5.0
 
-   # Yarn
+   # If you're using Yarn
    yarn global add verdaccio@5.5.0
    ```
 1. Verify Verdaccio was installed correctly.
@@ -54,7 +55,7 @@ Verdaccio allows contributors to publish a new version of the VA Design System o
    ```shell
    verdaccio --version # Should see output like v5.5.0
    ```
-1. Start Verdaccio on your local machine. The server should be running at `localhost:4873`.
+1. Start Verdaccio on your local machine. The server will be running at `localhost:4873`.
 
    ```shell
    verdaccio
