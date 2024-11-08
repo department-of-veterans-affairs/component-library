@@ -64,7 +64,51 @@ Verdaccio allows contributors to publish a new version of the VA Design System o
    ```shell
    npm adduser --registry http://localhost:4873/
    ```
-   
+
+#### Publish your component-library changes to Verdaccio
+The next step is to update the `core` and `web-component` versions in their respective `package.json` files.
+
+1. Navigate to `packages/web-components` and change the version. For instance, if the current version is `10.1.1` and [your change is a patch](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#how-to-choose-a-version-number), your version might be `10.1.2-rc1`.
+
+   ```diff
+   ! packages/web-components/package.json
+
+   - "version": "10.1.1"
+   + "version": "10.1.2-rc1"
+   ```
+2. Navigate to `packages/core` and update the version using the same logic
+
+   ```diff
+   ! packages/core/package.json
+      
+   - "version": "15.0.1"
+   + "version": "15.0.2-rc1"
+   ```
+3. Still in the `packages/core` package.json file, update the VADS dependency entry
+
+   ```diff
+   ! packages/core/package.json
+
+   dependencies: {
+   -   "@department-of-veterans-affairs/web-components": "workspace:*"
+   +   "@department-of-veterans-affairs/web-components": "^10.2.2-rc1"
+   }
+   ```
+4. Build the components using the [Running Build via Storybook](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#running-build-via-storybook) instructions. Ignore the last step to start Storybook; you won't need it for this process.
+5. Publish the `core` package to Verdaccio
+
+   ```shell
+   cd ../packages/core
+   npm publish --registry http://localhost:4873
+   ```
+6. Publish the `web-component` pacakge to Veraccio
+
+   ```shell
+   cd ../packages/web-components
+   npm publish --registry http://localhost:4873
+   ```
+7. You're now ready to switch to your local `vets-website` directory and update the VADS dependency.
+
 
 ## Publishing
 
