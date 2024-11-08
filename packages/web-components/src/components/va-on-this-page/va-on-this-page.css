@@ -1,4 +1,5 @@
 @import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
+@import "~@department-of-veterans-affairs/css-library/dist/tokens/css/variables.css";
 @import '../../mixins/links.css';
 
 :host {
@@ -31,7 +32,7 @@ ul {
 
 li {
   padding: 0.5em;
-  max-width: 285px;
+  max-width: var(--vads-size-line-length-4);
 }
 
 li a {
