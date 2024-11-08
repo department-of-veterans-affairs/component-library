@@ -24,6 +24,48 @@ This repo uses [`Chromatic`](https://www.chromatic.com/) to streamline reviews b
 
 Our web components have linting which checks for hard-coded user-facing strings. At the moment this linting isn't integrated into CI - so you will only see it if you run `yarn lint` or if your editor has ESLint integration through a plugin.
 
+### Local testing with Verdaccio
+Contributors are encouraged to test their design system changes in `vets-website` using [Verdaccio](https://verdaccio.org/). From the website:
+
+> Verdaccio is a simple, zero-config-required local private NPM registry&hellip;
+
+Verdaccio allows contributors to publish a new version of the VA Design System on their local machine, and rebuild `vets-website` with their changes.
+
+#### Installing Verdaccio
+1. Verdaccio requires [Python3](https://www.python.org/downloads/). Ensure you have Python3 installed by opening a terminal window and typing the following command:
+
+   ```shell
+   which python3 # Should see output like /usr/bin/python3
+   ```
+   
+   You should see an execution path if Python3 is installed. If not, install it and type `which python3` again in a new terminal window.
+1. Install Verdaccio using NPM or Yarn:
+
+   ```shell
+   # Install this version of Verdaccio for compatibility with Node v14.15.0.
+   # NPM
+   npm install --location=global verdaccio@5.5.0
+
+   # Yarn
+   yarn global add verdaccio@5.5.0
+   ```
+1. Verify Verdaccio was installed correctly.
+
+   ```shell
+   verdaccio --version # Should see output like v5.5.0
+   ```
+1. Start Verdaccio on your local machine. The server should be running at `localhost:4873`.
+
+   ```shell
+   verdaccio
+   ```
+1. Create a new Verdaccio user by entering this command and following the prompts.
+
+   ```shell
+   npm adduser --registry http://localhost:4873/
+   ```
+   
+
 ## Publishing
 
 ### Updating the version
