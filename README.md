@@ -107,7 +107,44 @@ The next step is to update the `core` and `web-component` versions in their resp
    cd ../packages/web-components
    npm publish --registry http://localhost:4873
    ```
-7. You're now ready to switch to your local `vets-website` directory and update the VADS dependency.
+
+#### Link `vets-website` to local Verdaccio registry
+You're now ready to switch to `vets-website` and update the VADS dependency.
+
+1. Run two commands to point to your local Verdaccio registry
+
+   ```shell
+   cd /vets-website
+   yarn config set registry http://localhost:4873
+   npm config set registry http://localhost:4873
+   ```
+2. Add the local `core` package to `vets-website` and start the server
+
+   ```shell
+   yarn add -W @department-of-veterans-affairs/component-library@vX.X.rc-1
+   yarn watch
+   ```
+
+#### Reverting to the default registry
+After you are finished testing, reset `vets-website` to use the standard registry.
+
+   ```shell
+   npm config set registry https://registry.yarnpkg.com/
+
+   # Or alternatively
+   yarn config set registry https://registry.yarnpkg.com/
+   yarn config set npmRegistryServer https://registry.yarnpkg.com/
+   ```
+
+#### Troubleshooting
+If you encounter Webpack errors during the `yarn watch` step in `vets-website`, try deleting the `node_modules/` folder, then reinstalling dependencies.
+
+```shell
+cd vets-website
+rm -rf node_modules/ # Careful with this one
+yarn install
+yarn watch
+```
 
 
 ## Publishing
