@@ -1755,79 +1755,59 @@ template {
 }
 
 .row {
-  margin: 0 auto;
-  max-width: 62.5rem;
-  width: 100%;
-}
-
-.row:before, .row:after {
-  content: " ";
-  display: table;
-}
-
-.row:after {
-  clear: both;
-}
-
-.row.collapse > .column,
-.row.collapse > .columns {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.row.collapse .row {
-  margin-left: 0;
-  margin-right: 0;
+  max-width: 39.0625rem;
 }
 
 .row .row {
-  margin: 0 -0.9375rem;
-  max-width: none;
-  width: auto;
-}
-
-.row .row:before, .row .row:after {
-  content: " ";
-  display: table;
-}
-
-.row .row:after {
-  clear: both;
-}
-
-.row .row.collapse {
-  margin: 0;
-  max-width: none;
-  width: auto;
-}
-
-.row .row.collapse:before, .row .row.collapse:after {
-  content: " ";
-  display: table;
-}
-
-.row .row.collapse:after {
-  clear: both;
+  margin: 0 -0.5859375rem;
 }
 
 .column,
 .columns {
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
-  width: 100%;
-  float: left;
+  padding-left: 0.5859375rem;
+  padding-right: 0.5859375rem;
 }
 
-.column + .column:last-child,
-.columns + .column:last-child, .column + .columns:last-child,
-.columns + .columns:last-child {
-  float: right;
+@media only screen {
+  .column,
+  .columns {
+    padding-left: 0.5859375rem;
+    padding-right: 0.5859375rem;
+  }
+  .row.small-uncollapse > .column,
+  .row.small-uncollapse > .columns {
+    padding-left: 0.5859375rem;
+    padding-right: 0.5859375rem;
+  }
+}
+@media only screen and (min-width: 40.0625em) {
+  .column,
+  .columns {
+    padding-left: 0.5859375rem;
+    padding-right: 0.5859375rem;
+  }
+  .row.medium-uncollapse > .column,
+  .row.medium-uncollapse > .columns {
+    padding-left: 0.5859375rem;
+    padding-right: 0.5859375rem;
+  }
+  .column,
+  .columns {
+    padding-left: 0.5859375rem;
+    padding-right: 0.5859375rem;
+  }
+  .row.large-uncollapse > .column,
+  .row.large-uncollapse > .columns {
+    padding-left: 0.5859375rem;
+    padding-right: 0.5859375rem;
+  }
+}
+[class*=block-grid-] {
+  margin: 0 -0.390625rem;
 }
 
-.column + .column.end,
-.columns + .column.end, .column + .columns.end,
-.columns + .columns.end {
-  float: left;
+[class*=block-grid-] > li {
+  padding: 0 0.390625rem 0.78125rem;
 }
 
 /*
@@ -5802,7 +5782,7 @@ fieldset {
 
 @media screen and (min-width: 768px), print and (min-width: 768px) {
   .usa-form {
-    max-width: 20rem;
+    max-width: 32rem;
   }
 }
 
