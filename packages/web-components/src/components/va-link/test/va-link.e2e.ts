@@ -174,8 +174,7 @@ describe('va-link', () => {
     <va-link class="hydrated" external="" href="https://www.va.gov" text="Veteran's Affairs">
       <mock:shadow-root>
         <a href="https://www.va.gov" rel="noreferrer" class="link--center" target="_blank">
-          Veteran's Affairs
-          <va-icon class="external-link-icon hydrated"></va-icon>
+          Veteran's Affairs (opens in a new tab)
           <span class="usa-sr-only">
             opens in a new tab
           </span>
@@ -187,10 +186,12 @@ describe('va-link', () => {
 
   it('renders a link with a screen reader label', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" />`);
+    await page.setContent(
+      `<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" />`,
+    );
 
     const label = await page.find('va-link >>> a[aria-label]');
-    expect(label.getAttribute("aria-label")).toBe('Example label');
+    expect(label.getAttribute('aria-label')).toBe('Example label');
   });
 
   it('passes an axe check', async () => {
@@ -215,7 +216,7 @@ describe('va-link', () => {
       details: {
         label: 'Find out if you qualify for this program and how to apply',
         destination: 'https://www.va.gov',
-        origin: 'http://localhost:3333/',
+        origin: 'http://localhost:3334/',
       },
     });
   });
