@@ -29,16 +29,20 @@ Contributors are encouraged to test their changes in `vets-website` using [Verda
 
 > Verdaccio is a simple, zero-config-required local private NPM registry. No need for an entire database just to get started&hellip;
 
-Verdaccio allows contributors to publish a new version of the VA Design System on their local machine, and preview `vets-website` with their changes.
+Verdaccio allows contributors to publish a new version of the VA Design System component library on their local machine, and preview `vets-website` with their changes.
 
-#### Installing Verdaccio
-1. Verdaccio requires [Python3](https://www.python.org/downloads/). Ensure you have Python3 installed by opening a terminal window and typing the following command:
+#### Before you begin
+1. VA Design System component library and vets-website require different versions of NodeJS. Be sure you have [NVM installed](https://github.com/nvm-sh/nvm#installing-and-updating) before you begin.
+1. Download Node `v14.15.0` and a current Node `v18.x.x` or `v20.x.x`
+1. Verdaccio also requires [Python3](https://www.python.org/downloads/). Ensure you have Python3 installed by opening a terminal window and typing the following command:
 
    ```shell
    which python3 # Should see output like /usr/bin/python3
    ```
    
    You should see an execution path if Python3 is installed. If not, install it and type `which python3` again in a new terminal window.
+
+#### Installing Verdaccio
 1. Install Verdaccio using NPM or Yarn:
 
    ```shell
@@ -67,9 +71,9 @@ Verdaccio allows contributors to publish a new version of the VA Design System o
    ```
 
 #### Publish your component-library changes to Verdaccio
-The next step is to update the `core` and `web-component` versions in their respective `package.json` files.
+The next step is to update the `core` and `web-component` package versions in their respective `package.json` files.
 
-1. Navigate to `packages/web-components` and change the version. For instance, if the current version is `10.1.1` and [your change is a patch](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#how-to-choose-a-version-number), your version might be `10.1.2-rc1`.
+1. Navigate to `packages/web-components` and change the version. Assuming the current version is `10.1.1`, you could change the version to `10.1.2-rc1` or something similar.
 
    ```diff
    ! packages/web-components/package.json
@@ -95,14 +99,14 @@ The next step is to update the `core` and `web-component` versions in their resp
    +   "@department-of-veterans-affairs/web-components": "^10.2.2-rc1"
    }
    ```
-4. Build the components using the [Running Build via Storybook](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#running-build-via-storybook) instructions. Ignore the last step to start Storybook; you won't need it for this process.
+4. Build the components using the [Running Build via Storybook](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#running-build-via-storybook) instructions. Ignore the last step to start Storybook; you won't need it for this process. _**Note:** You must use Node `v18.x.x` or `v20.x.x` for this step._
 5. Publish the `core` package to Verdaccio
 
    ```shell
    cd ../packages/core
    npm publish --registry http://localhost:4873
    ```
-6. Publish the `web-component` pacakge to Veraccio
+6. Publish the `web-component` package to Veraccio
 
    ```shell
    cd ../packages/web-components
@@ -110,12 +114,13 @@ The next step is to update the `core` and `web-component` versions in their resp
    ```
 
 #### Link `vets-website` to local Verdaccio registry
-You're now ready to switch to `vets-website` and update the VADS dependency.
+You're now ready to switch to `vets-website` and update the VADS dependency. _**Note:** You must use Node `v14.15.0` for this step._
 
-1. Run two commands to point to your local Verdaccio registry
+1. Run the following commands to point to your local Verdaccio registry
 
    ```shell
    cd /vets-website
+   nvm use 14.15.0 # Ensure correct Node version
    yarn config set registry http://localhost:4873
    npm config set registry http://localhost:4873
    ```
@@ -138,14 +143,21 @@ After you are finished testing, reset `vets-website` to use the standard registr
    ```
 
 #### Troubleshooting
-If you encounter Webpack errors during the `yarn watch` step in `vets-website`, try deleting the `node_modules/` folder, then reinstalling dependencies.
+1. If you encounter Webpack errors during the `yarn watch` step in `vets-website`, try deleting the `node_modules/` folder, then reinstalling dependencies.
 
-```shell
-cd vets-website
-rm -rf node_modules/ # Careful with this one
-yarn install
-yarn watch
-```
+   ```shell
+   cd vets-website
+   rm -rf node_modules/ # Careful with this one
+   yarn install
+   yarn watch
+   ```
+2. If you encounter errors in the `component-library` or `vets-website` build or watch steps, try changing your Node version.
+
+   ```shell
+   nvm use 14.15.0 # In /vets-website
+   nvm use 18.x.x # In /component-library OR
+   nvm use 20.x.x # In /component-library
+   ```
 
 
 ## Publishing
