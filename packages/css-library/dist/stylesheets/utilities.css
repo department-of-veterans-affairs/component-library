@@ -5803,11 +5803,15 @@ through all possible variants
   font-family: Bitter, Georgia, Cambria, Times New Roman, Times, serif !important;
 }
 
+.vads-u-font-size--source-sans-normalized {
+  font-size: 1.063rem !important;
+}
+
 .vads-u-font-size--sm {
   font-size: 0.938rem !important;
 }
 
-.vads-u-font-size--base {
+.vads-u-font-size--root {
   font-size: 1rem !important;
 }
 
@@ -7561,10 +7565,13 @@ through all possible variants
   .mobile\:vads-u-order--initial {
     order: 0 !important;
   }
+  .mobile\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
+  }
   .mobile\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
   }
-  .mobile\:vads-u-font-size--base {
+  .mobile\:vads-u-font-size--root {
     font-size: 1rem !important;
   }
   .mobile\:vads-u-font-size--md {
@@ -8948,10 +8955,13 @@ through all possible variants
   .mobile-lg\:vads-u-order--initial {
     order: 0 !important;
   }
+  .mobile-lg\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
+  }
   .mobile-lg\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
   }
-  .mobile-lg\:vads-u-font-size--base {
+  .mobile-lg\:vads-u-font-size--root {
     font-size: 1rem !important;
   }
   .mobile-lg\:vads-u-font-size--md {
@@ -10335,10 +10345,13 @@ through all possible variants
   .tablet\:vads-u-order--initial {
     order: 0 !important;
   }
+  .tablet\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
+  }
   .tablet\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
   }
-  .tablet\:vads-u-font-size--base {
+  .tablet\:vads-u-font-size--root {
     font-size: 1rem !important;
   }
   .tablet\:vads-u-font-size--md {
@@ -11722,10 +11735,13 @@ through all possible variants
   .desktop\:vads-u-order--initial {
     order: 0 !important;
   }
+  .desktop\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
+  }
   .desktop\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
   }
-  .desktop\:vads-u-font-size--base {
+  .desktop\:vads-u-font-size--root {
     font-size: 1rem !important;
   }
   .desktop\:vads-u-font-size--md {
@@ -13109,10 +13125,13 @@ through all possible variants
   .desktop-lg\:vads-u-order--initial {
     order: 0 !important;
   }
+  .desktop-lg\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
+  }
   .desktop-lg\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
   }
-  .desktop-lg\:vads-u-font-size--base {
+  .desktop-lg\:vads-u-font-size--root {
     font-size: 1rem !important;
   }
   .desktop-lg\:vads-u-font-size--md {
@@ -14496,10 +14515,13 @@ through all possible variants
   .medium-screen\:vads-u-order--initial {
     order: 0 !important;
   }
+  .medium-screen\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
+  }
   .medium-screen\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
   }
-  .medium-screen\:vads-u-font-size--base {
+  .medium-screen\:vads-u-font-size--root {
     font-size: 1rem !important;
   }
   .medium-screen\:vads-u-font-size--md {
