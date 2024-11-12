@@ -16,6 +16,12 @@
   margin: 24px;
 }
 
+@media screen and (max-width: $small-screen) {
+  :host .short-line {
+    width: var(--vads-size-line-length-1);
+  }
+}
+
 :host va-text-input {
   margin-bottom: 24px;
 }
