@@ -2483,6 +2483,25 @@
           "source-sans-normalized"
         ]
       },
+      "root": {
+        "value": "1rem",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1rem"
+        },
+        "name": "vads-font-size-root",
+        "attributes": {
+          "category": "vads-font",
+          "type": "size",
+          "item": "root"
+        },
+        "path": [
+          "vads-font",
+          "size",
+          "root"
+        ]
+      },
       "body": {
         "large": {
           "value": "20px",
