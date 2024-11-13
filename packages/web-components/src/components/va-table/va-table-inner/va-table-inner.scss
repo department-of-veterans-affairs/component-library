@@ -11,13 +11,14 @@
 }
 
 :host {
-  display: table;
+  display: block;
   font-family: var(--font-source-sans);
   font-size: 1.06rem;
   border-collapse: collapse;
   margin: 0;
   padding: 0;
   width: 100%;
+  overflow-x: auto;
 }
 :host thead tr th {
   button {
