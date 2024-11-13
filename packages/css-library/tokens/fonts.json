@@ -44,7 +44,6 @@
     },
     "size": {
       "source-sans-normalized": { "value": "1.06rem" },
-      "root": { "value": "1rem" },
       "body": {
         "large": { "value": "20px" },
         "lead": { "value": "20px" },
