@@ -180,7 +180,6 @@ export class VaAlert {
           <div
             class="usa-alert__body"
             onClick={this.handleAlertBodyClick.bind(this)}
-            role="presentation"
           >
             <div>
               {status === 'continue' && (
