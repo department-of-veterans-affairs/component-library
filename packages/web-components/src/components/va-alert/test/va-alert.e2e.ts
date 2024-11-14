@@ -13,8 +13,10 @@ describe('va-alert', () => {
         <mock:shadow-root>
           <div class="usa-alert usa-alert--info">
             <div class="usa-alert__body">
-              <slot name="headline"></slot>
-              <slot></slot>
+              <div>
+                <slot name="headline"></slot>
+                <slot></slot>
+              </div>
             </div>
           </div>
         </mock:shadow-root>

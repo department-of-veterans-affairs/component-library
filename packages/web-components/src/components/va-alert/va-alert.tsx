@@ -181,15 +181,17 @@ export class VaAlert {
             class="usa-alert__body"
             onClick={this.handleAlertBodyClick.bind(this)}
           >
-            {status === 'continue' && (
-              <va-icon
-                class="va-alert__lock-icon"
-                icon="lock"
-                size={slim ? 3 : 4}
-              ></va-icon>
-            )}
-            {!slim && <slot name="headline"></slot>}
-            <slot></slot>
+            <div>
+              {status === 'continue' && (
+                <va-icon
+                  class="va-alert__lock-icon"
+                  icon="lock"
+                  size={slim ? 3 : 4}
+                ></va-icon>
+              )}
+              {!slim && <slot name="headline"></slot>}
+              <slot></slot>
+            </div>
           </div>
         </div>
 
