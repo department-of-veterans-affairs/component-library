@@ -14,7 +14,7 @@ describe('va-accordion', () => {
       <va-accordion class="hydrated">
         <mock:shadow-root>
           <div class="usa-accordion">
-            <button aria-controls="" aria-expanded="false" aria-label="expand-all-aria-label" class="va-accordion__button">
+            <button aria-label="expand-all-aria-label" class="va-accordion__button">
               expand-all +
             </button>
             <slot></slot>
@@ -292,7 +292,7 @@ describe('va-accordion', () => {
       <va-accordion section-heading="The Section Heading">
         <va-accordion-item header="First item" open="true">Some content</va-accordion-item>
       </va-accordion>`);
-    
+
     const button = await page.find('va-accordion >>> button');
 
     expect(button.innerText).toEqual('collapse-all -');
@@ -305,7 +305,7 @@ describe('va-accordion', () => {
         <va-accordion-item header="First item" open="true">Some content</va-accordion-item>
         <va-accordion-item header="Second item">Some content</va-accordion-item>
       </va-accordion>`);
-    
+
     const button = await page.find('va-accordion >>> button');
 
     expect(button.innerText).toEqual('collapse-all -');
