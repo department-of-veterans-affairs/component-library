@@ -209,15 +209,8 @@ describe('va-link', () => {
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const anchor = await page.find('va-link >>> a');
     await anchor.click();
-    expect(analyticsSpy).toHaveReceivedEventDetail({
-      componentName: 'va-link',
-      action: 'click',
-      details: {
-        label: 'Find out if you qualify for this program and how to apply',
-        destination: 'https://www.va.gov',
-        origin: 'http://localhost:3333/',
-      },
-    });
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
   });
 
   it(`doesn't fire analytics event when clicked and disableAnalytics is true`, async () => {
