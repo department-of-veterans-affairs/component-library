@@ -285,8 +285,7 @@ export class VaLink {
             onClick={handleClick}
             target="_blank"
           >
-            {text}
-            <va-icon class="external-link-icon" icon="launch"></va-icon>
+            {text} (opens in a new tab)
             <span class="usa-sr-only">opens in a new tab</span>
           </a>
         </Host>
