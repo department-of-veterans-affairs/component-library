@@ -12,9 +12,11 @@ describe('va-alert', () => {
       <va-alert class="hydrated" status="info">
         <mock:shadow-root>
           <div class="usa-alert usa-alert--info">
-            <div class="usa-alert__body" role="presentation">
-              <slot name="headline"></slot>
-              <slot></slot>
+            <div class="usa-alert__body">
+              <div>
+                <slot name="headline"></slot>
+                <slot></slot>
+              </div>
             </div>
           </div>
         </mock:shadow-root>

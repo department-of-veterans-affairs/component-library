@@ -13,11 +13,7 @@ describe('va-privacy-agreement', () => {
          <va-checkbox class="hydrated" id="checkbox">
            <span class="description" slot="description">
              Please read and accept the
-             <a href="/privacy-policy/" target="_blank">
-               privacy policy
-               <va-icon class="hydrated privacy-policy-icon"></va-icon>
-               <span class="usa-sr-only">opens in a new window</span>
-             </a>.
+             <va-link class="hydrated"></va-link>.
            </span>
          </va-checkbox>
        </mock:shadow-root>
