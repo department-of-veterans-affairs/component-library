@@ -2169,23 +2169,23 @@
           "sm"
         ]
       },
-      "base": {
+      "root": {
         "value": "1rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
           "value": "1rem"
         },
-        "name": "font-size-base",
+        "name": "font-size-root",
         "attributes": {
           "category": "font",
           "type": "size",
-          "item": "base"
+          "item": "root"
         },
         "path": [
           "font",
           "size",
-          "base"
+          "root"
         ]
       },
       "md": {
@@ -2464,6 +2464,44 @@
       }
     },
     "size": {
+      "source-sans-normalized": {
+        "value": "1.06rem",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.06rem"
+        },
+        "name": "vads-font-size-source-sans-normalized",
+        "attributes": {
+          "category": "vads-font",
+          "type": "size",
+          "item": "source-sans-normalized"
+        },
+        "path": [
+          "vads-font",
+          "size",
+          "source-sans-normalized"
+        ]
+      },
+      "root": {
+        "value": "1rem",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1rem"
+        },
+        "name": "vads-font-size-root",
+        "attributes": {
+          "category": "vads-font",
+          "type": "size",
+          "item": "root"
+        },
+        "path": [
+          "vads-font",
+          "size",
+          "root"
+        ]
+      },
       "body": {
         "large": {
           "value": "20px",
