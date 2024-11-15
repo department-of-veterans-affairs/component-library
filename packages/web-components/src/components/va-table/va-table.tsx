@@ -75,8 +75,6 @@ export class VaTable {
    */
   getRows(): Element[] {
     const rows = Array.from(this.el.querySelectorAll('va-table-row'));
-    // remove the role attr for each va-table-row; this line can be deleted when V1 is removed
-    rows.forEach(row => row.removeAttribute('role'));
     if (!this.rows) {
       this.rows = rows.length;
     }
