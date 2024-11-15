@@ -84,4 +84,30 @@ describe('va-banner', () => {
 
     expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(0);
   });
+
+  it('fires analytics event when close is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-banner headline="This is a test" show-close>Test Content</va-banner>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const closeButton = await page.find('va-banner >>> va-alert >>> .va-alert-close');
+    await closeButton.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+  });
+
+  it('does not fires analytics event when show-close is false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-banner headline="This is a test" show-close="false">Test Content</va-banner>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const closeButton = await page.find('va-banner >>> va-alert >>> .va-alert-close');
+
+    expect(closeButton).toBeNull();
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
 });
