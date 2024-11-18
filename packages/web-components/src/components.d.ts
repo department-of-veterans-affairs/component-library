@@ -726,7 +726,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * The lang attribute for the anchor tag
+          * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
          */
         "language"?: string;
         /**
@@ -3883,7 +3883,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The lang attribute for the anchor tag
+          * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
          */
         "language"?: string;
         "onComponent-library-analytics"?: (event: VaLinkCustomEvent<any>) => void;
