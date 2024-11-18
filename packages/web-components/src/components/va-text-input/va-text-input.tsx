@@ -54,7 +54,7 @@ export class VaTextInput {
   /**
    * The error message to render.
    */
-  @Prop({ reflect: true }) error?: string;
+  @Prop({ reflect: true, mutable: true }) error?: string;
 
   /**
    * Whether or not to add usa-input--error as class if error message is outside of component
