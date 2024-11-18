@@ -12,13 +12,24 @@ describe('va-link', () => {
     expect(element).toEqualHtml(`
     <va-link class="hydrated" href="https://www.va.gov" text="Find out if you qualify for this program and how to apply">
       <mock:shadow-root>
-        <a href="https://www.va.gov">
+        <a href="https://www.va.gov" part="anchor">
           Find out if you qualify for this program and how to apply
         </a>
       </mock:shadow-root>
     </va-link>
     `);
   });
+
+  it('adds a lang attribute if the language prop set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-link href="https://www.va.gov" text="Share your VA medical records" language="en" />'
+    );
+
+    const element = await page.find('va-link >>> a');
+    expect(element.getAttribute('lang')).toBe('en');
+    expect(element.getAttribute('hrefLang')).toBe('en');
+  })
 
   it('renders active link', async () => {
     const page = await newE2EPage();
