@@ -87,58 +87,59 @@ export class VaAccordion {
 
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
-      // eslint-disable-next-line i18next/no-literal-string
-      const clickedItem = (event.target as HTMLElement).closest('va-accordion-item');
-      // Usage for slot to provide context to analytics for header and level
-      const header = clickedItem.querySelector('[slot="headline"]');
-      // using the slot to provide context to analytics for header and level
-      let headerText
-      let headerLevel
-      if (header) {
-        headerText = header?.innerHTML
-        headerLevel = parseInt(header?.tagName?.toLowerCase().split('')[1]);
-      } else {
-        // using the props to provide context to analytics for header and level
-        headerText = clickedItem.header
-        headerLevel = clickedItem.level
-      }
+    // eslint-disable-next-line i18next/no-literal-string
+    const clickedItem = (event.target as HTMLElement).closest(
+      'va-accordion-item',
+    );
+    // Usage for slot to provide context to analytics for header and level
+    const header = clickedItem.querySelector('[slot="headline"]');
+    // using the slot to provide context to analytics for header and level
+    let headerText;
+    let headerLevel;
+    if (header) {
+      headerText = header?.innerHTML;
+      headerLevel = parseInt(header?.tagName?.toLowerCase().split('')[1]);
+    } else {
+      // using the props to provide context to analytics for header and level
+      headerText = clickedItem.header;
+      headerLevel = clickedItem.level;
+    }
 
-      if (this.openSingle) {
-        getSlottedNodes(this.el, 'va-accordion-item')
-          .filter(item => item !== clickedItem)
-          /* eslint-disable-next-line i18next/no-literal-string */
-          .forEach(item => (item as Element).setAttribute('open', 'false'));
-      }
+    if (this.openSingle) {
+      getSlottedNodes(this.el, 'va-accordion-item')
+        .filter(item => item !== clickedItem)
+        /* eslint-disable-next-line i18next/no-literal-string */
+        .forEach(item => (item as Element).setAttribute('open', 'false'));
+    }
 
-      const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
+    const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
 
-      if (!this.disableAnalytics) {
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-accordion',
+        action: prevAttr ? 'collapse' : 'expand',
+        details: {
+          header: headerText || clickedItem.header,
+          subheader: clickedItem.subheader,
+          level: headerLevel || clickedItem.level,
+          sectionHeading: this.sectionHeading,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
 
-        const detail = {
-          componentName: 'va-accordion',
-          action: prevAttr ? 'collapse' : 'expand',
-          details: {
-            header: headerText || clickedItem.header,
-            subheader: clickedItem.subheader,
-            level: headerLevel || clickedItem.level,
-            sectionHeading: this.sectionHeading,
-          },
-        };
-        this.componentLibraryAnalytics.emit(detail);
-      }
+    /* eslint-disable-next-line i18next/no-literal-string */
+    clickedItem.setAttribute('open', !prevAttr ? 'true' : 'false');
 
-      /* eslint-disable-next-line i18next/no-literal-string */
-      clickedItem.setAttribute('open', !prevAttr ? "true" : "false");
+    if (!this.isScrolledIntoView(clickedItem)) {
+      clickedItem.scrollIntoView();
+    }
 
-      if (!this.isScrolledIntoView(clickedItem)) {
-        clickedItem.scrollIntoView();
-      }
-
-      // Check if all accordions are open or closed due to user clicks
-      this.accordionsOpened();
+    // Check if all accordions are open or closed due to user clicks
+    this.accordionsOpened();
   }
 
-  private accordionsOpened(method='every') {
+  private accordionsOpened(method = 'every') {
     // Track user clicks on va-accordion-item within an array to compare if all values are true or false
     let accordionItems = [];
     getSlottedNodes(this.el, 'va-accordion-item').forEach(item => {
@@ -157,9 +158,11 @@ export class VaAccordion {
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
-    getSlottedNodes(this.el, 'va-accordion-item').forEach((item:HTMLElement) => {
-      item.setAttribute('open', `${expanded}`)
-    });
+    getSlottedNodes(this.el, 'va-accordion-item').forEach(
+      (item: HTMLElement) => {
+        item.setAttribute('open', `${expanded}`);
+      },
+    );
   };
 
   isScrolledIntoView(el: Element) {
@@ -195,36 +198,33 @@ export class VaAccordion {
       'usa-accordion': true,
     });
 
-    const accordionItemIDs = [...this.el.children]
-      .filter((el) => el.tagName.toLowerCase() === 'va-accordion-item')
-      .map((el) => el.id);
-    
     return (
       <Host>
-        <div class={ accordionClass } ref={(accordionContainer) => this.accordionContainer = accordionContainer}>
-          {
-            !openSingle ? (
-              <button
-                class="va-accordion__button"
-                ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
-                onClick={() => this.expandCollapseAll(!this.expanded)}
-                aria-label={
-                  this.expanded
-                    ? i18next.t('collapse-all-aria-label')
-                    : i18next.t('expand-all-aria-label')
-                }
-                aria-controls={accordionItemIDs.join(' ')}
-                aria-expanded={`${this.expanded}`}
-              >
-                {this.expanded
-                  ? `${i18next.t('collapse-all')} -`
-                  : `${i18next.t('expand-all')} +`}
-              </button>
-            ) : null
+        <div
+          class={accordionClass}
+          ref={accordionContainer =>
+            (this.accordionContainer = accordionContainer)
           }
+        >
+          {!openSingle ? (
+            <button
+              class="va-accordion__button"
+              ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+              onClick={() => this.expandCollapseAll(!this.expanded)}
+              aria-label={
+                this.expanded
+                  ? i18next.t('collapse-all-aria-label')
+                  : i18next.t('expand-all-aria-label')
+              }
+            >
+              {this.expanded
+                ? `${i18next.t('collapse-all')} -`
+                : `${i18next.t('expand-all')} +`}
+            </button>
+          ) : null}
           <slot></slot>
         </div>
       </Host>
-    )
+    );
   }
 }
