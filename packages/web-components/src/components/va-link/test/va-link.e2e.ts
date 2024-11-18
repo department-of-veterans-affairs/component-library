@@ -20,7 +20,7 @@ describe('va-link', () => {
     `);
   });
 
-  it('adds a lang attribute if the language prop set', async () => {
+  it('adds a lang attribute if the language prop set on default va-link', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-link href="https://www.va.gov" text="Share your VA medical records" language="en" />'
