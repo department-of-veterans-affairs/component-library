@@ -138,6 +138,10 @@ export class VaAccordion {
       this.accordionsOpened();
   }
 
+  /**
+   * Handles the accordion open state
+   * @param method "some" or "every"; array methods to check if all or some of the accordion items are open
+   */
   private accordionsOpened(method='every') {
     // Track user clicks on va-accordion-item within an array to compare if all values are true or false
     const accordionItems = [...this.el.children]
@@ -154,8 +158,6 @@ export class VaAccordion {
     if (accordionItems[method](allClosed)) {
       return this.expanded = false;
     }
-
-    return this.expanded = false;
   }
 
   // Expand or Collapse All Function for Button Click
