@@ -146,12 +146,16 @@ export class VaAccordion {
 
     const allOpen = currentValue => currentValue === true;
     const allClosed = currentValue => currentValue === false;
+
     if (accordionItems[method](allOpen)) {
-      this.expanded = true;
+      return this.expanded = true;
     }
+
     if (accordionItems[method](allClosed)) {
-      this.expanded = false;
+      return this.expanded = false;
     }
+
+    return this.expanded = false;
   }
 
   // Expand or Collapse All Function for Button Click

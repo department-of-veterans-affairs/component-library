@@ -308,6 +308,6 @@ describe('va-accordion', () => {
 
     const button = await page.find('va-accordion >>> button');
 
-    expect(button.innerText).toEqual('expand-all +');
+    expect(button.innerText).toEqual('collapse-all -');
   });
 });
