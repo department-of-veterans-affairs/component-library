@@ -52,6 +52,8 @@ describe('va-additional-info', () => {
     await anchorEl.click();
 
     await axeCheck(page);
+
+    expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
   });
 
   it('expands when clicked', async () => {

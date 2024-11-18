@@ -54,6 +54,8 @@ describe('va-alert-expandable', () => {
     await anchorEl.click();
 
     await axeCheck(page);
+
+    expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
   });
 
   it('expands when clicked', async () => {
