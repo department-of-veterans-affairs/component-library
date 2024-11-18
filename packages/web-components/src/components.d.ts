@@ -726,6 +726,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * The lang attribute for the anchor tag
+         */
+        "language"?: string;
+        /**
           * The number of pages of the file. Only displayed if download is `true`.
          */
         "pages"?: number;
@@ -3879,8 +3883,9 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The event used to track usage of the component.
+          * The lang attribute for the anchor tag
          */
+        "language"?: string;
         "onComponent-library-analytics"?: (event: VaLinkCustomEvent<any>) => void;
         /**
           * The number of pages of the file. Only displayed if download is `true`.

@@ -136,15 +136,13 @@ export class VaLanguageToggle {
           })
           return (
             <div class={divClass}>
-              <a
+              <va-link
                 class={anchorClass}
                 href={href}
-                lang={lang}
-                hrefLang={lang}
+                language={lang}
                 onClick={(e) => this.handleToggle(e, lang)}
-              >
-                {label}
-              </a>
+                text={label}
+              />
             </div>
           )
         })}
