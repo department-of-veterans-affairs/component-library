@@ -42,9 +42,20 @@ describe('va-telephone', () => {
     await axeCheck(page);
   });
 
+  it('passes an axe check for a phone number with a country code', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone country-code="63" contact="(02) 8555 8888"></va-telephone>',
+    );
+
+    await axeCheck(page);
+  });
+
   it('ignores non-digits in the contact prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-telephone contact="(877) 955-1234"></va-telephone>');
+    await page.setContent(
+      '<va-telephone contact="(877) 955-1234"></va-telephone>',
+    );
 
     const link = await page.find('va-telephone >>> a');
     expect(link.getAttribute('href')).toEqual('tel:+18779551234');
@@ -116,6 +127,17 @@ describe('va-telephone', () => {
     const link = await page.find('va-telephone >>> a');
     expect(link.getAttribute('href')).toEqual('tel:+18779551234,123');
     expect(link.innerText).toEqual('877-955-1234, ext. 123');
+  });
+
+  it('handles a phone number with a country code', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone country-code="63" contact="(02) 8555 8888"></va-telephone>',
+    );
+
+    const link = await page.find('va-telephone >>> a');
+    expect(link.getAttribute('href')).toEqual('tel:+630285558888');
+    expect(link.innerText).toEqual('+63 (02) 8555 8888');
   });
 
   it('handles a 3 digit contact prop', async () => {

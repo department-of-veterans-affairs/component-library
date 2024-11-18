@@ -3311,7 +3311,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/css-library@npm:^0.13.1, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
+"@department-of-veterans-affairs/css-library@npm:^0.15.0, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
@@ -3445,7 +3445,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": "npm:^4.10.0"
     "@babel/core": "npm:^7.12.13"
-    "@department-of-veterans-affairs/css-library": "npm:^0.13.1"
+    "@department-of-veterans-affairs/css-library": "npm:^0.15.0"
     "@department-of-veterans-affairs/formation": "npm:^11.0.6"
     "@stencil/core": "npm:4.20.0"
     "@stencil/postcss": "npm:^2.0.0"
@@ -3456,7 +3456,7 @@ __metadata:
     "@types/react-dom": "npm:18.3.0"
     "@typescript-eslint/eslint-plugin": "npm:^5.30.5"
     "@typescript-eslint/parser": "npm:^5.30.5"
-    "@uswds/uswds": "npm:^3.8.1"
+    "@uswds/uswds": "npm:^3.9.0"
     animate.css: "npm:^4.1.1"
     aria-hidden: "npm:^1.1.3"
     babel-loader: "npm:^8.2.2"
@@ -7450,18 +7450,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "@uswds/uswds@npm:3.8.1"
-  dependencies:
-    classlist-polyfill: "npm:1.2.0"
-    object-assign: "npm:4.1.1"
-    receptor: "npm:1.0.0"
-    resolve-id-refs: "npm:0.1.0"
-  checksum: 10/69859ff4c2da126a425b21fc7346023c793ba0fc517a3c52ff23f9466e8c45e4a0b8a534997f15a9611ee525b639000213b045242cf577e3e31a9f131810a47e
-  languageName: node
-  linkType: hard
-
 "@uswds/uswds@npm:^3.9.0":
   version: 3.9.0
   resolution: "@uswds/uswds@npm:3.9.0"
@@ -9387,13 +9375,6 @@ __metadata:
   version: 1.4.1
   resolution: "cjs-module-lexer@npm:1.4.1"
   checksum: 10/6e830a1e00a34d416949bbc1924f3e8da65cef4a6a09e2b7fa35722e2d1c34bf378d3baca987b698d1cbc3eb83e44b044039b4e82755c96f30e0f03d1d227637
-  languageName: node
-  linkType: hard
-
-"classlist-polyfill@npm:1.2.0":
-  version: 1.2.0
-  resolution: "classlist-polyfill@npm:1.2.0"
-  checksum: 10/dd7211ca016eaa1fa1ae3f7c65680fce8815b1e5b7541b524c3762ab98ce73e1a782cf71819a07e1e2614385f082bbd0285b1a34f389daf16bed23a11efe06a1
   languageName: node
   linkType: hard
 

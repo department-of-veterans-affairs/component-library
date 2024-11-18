@@ -60,6 +60,7 @@ const Template = ({
   extension,
   'not-clickable': notClickable,
   international,
+  'country-code': countryCode,
   vanity,
   tty,
   sms,
@@ -67,14 +68,13 @@ const Template = ({
 }) => {
   return (
     <div>
-      {messageAriaDescribedBy && (
-        <span>Main number to facility </span>
-      )}
+      {messageAriaDescribedBy && <span>Main number to facility </span>}
       <va-telephone
         contact={contact}
         extension={extension}
         not-clickable={notClickable}
         international={international}
+        country-code={countryCode}
         vanity={vanity}
         tty={tty}
         sms={sms}
@@ -89,6 +89,7 @@ const defaultArgs = {
   'extension': undefined,
   'not-clickable': false,
   'international': false,
+  'country-code': undefined,
   'tty': false,
   'sms': false,
   'vanity': undefined,
@@ -123,6 +124,13 @@ export const International = Template.bind(null);
 International.args = {
   ...defaultArgs,
   international: true,
+};
+
+export const CountryCode = Template.bind(null);
+CountryCode.args = {
+  ...defaultArgs,
+  'contact': '(02) 8555 8888',
+  'country-code': '63',
 };
 
 export const TTY = Template.bind(null);

@@ -129,10 +129,9 @@ export class VaStatementOfTruth {
         <article>
           <h3>{heading}</h3>
           <slot></slot>
-          <p class="font-sans-6">
+          <p class="font-sans-6 short-line">
             I have read and accept the&nbsp;
-            <va-link external text='privacy policy' href='/privacy-policy/' />
-            .
+            <va-link external text="privacy policy" href="/privacy-policy/" />.
           </p>
           <va-text-input
             id="veteran-signature"
