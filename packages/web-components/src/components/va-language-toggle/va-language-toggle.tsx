@@ -22,7 +22,7 @@ export class VaLanguageToggle {
   /**
    * The ISO language code for the page. Default is 'en'.
    */
-  @Prop() language: string = 'en';
+  @Prop({ mutable: true }) language: string = 'en';
 
   /**
    * The English language href for the page. Required.
@@ -48,7 +48,7 @@ export class VaLanguageToggle {
    * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
    */
   @Prop() routerLinks?: boolean = false;
-  
+
   /**
    * Event fired when a link is clicked. Includes the selected language's ISO code.
    */
@@ -65,7 +65,7 @@ export class VaLanguageToggle {
     })
     componentLibraryAnalytics: EventEmitter;
 
-  // get the current page's url with language as a query param. 
+  // get the current page's url with language as a query param.
   // allows for marking "pages" as visited
   getUrl(langCode: string): string {
     const url = new URL(window.location.href);
@@ -96,30 +96,27 @@ export class VaLanguageToggle {
   }
 
   componentWillLoad() {
-    // always include English
-    const urls = [{
+    this.urls = [{
       label: "English",
       lang: "en",
       href: this.enHref
     }];
 
     if (this.esHref) {
-      urls.push({
+      this.urls = [...this.urls, {
         label: "Español",
         lang: "es",
         href: this.esHref
-      });
+      }];
     }
 
     if (this.tlHref) {
-      urls.push({
+      this.urls = [...this.urls, {
         label: "Tagalog",
         lang: "tl",
         href: this.tlHref
-      });
+      }];
     }
-
-    this.urls = urls;
   }
 
   render() {
