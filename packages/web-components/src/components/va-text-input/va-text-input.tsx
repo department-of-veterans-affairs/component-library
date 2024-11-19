@@ -54,7 +54,7 @@ export class VaTextInput {
   /**
    * The error message to render.
    */
-  @Prop({ reflect: true }) error?: string;
+  @Prop({ reflect: true, mutable: true }) error?: string;
 
   /**
    * Whether or not to add usa-input--error as class if error message is outside of component
@@ -193,7 +193,7 @@ export class VaTextInput {
    * Displays a fixed suffix string at the end of the input field.
    */
   @Prop() inputSuffix?: string;
-  
+
 
    /**
    * A string that represents the name of an icon passed to va-icon, which will be applied as a suffix to the input.
@@ -491,7 +491,6 @@ export class VaTextInput {
               class={inputClass}
               id="inputField"
               type={type}
-              value={value}
               onInput={handleInput}
               onBlur={handleBlur}
               aria-describedby={ariaDescribedbyIds}
@@ -510,6 +509,7 @@ export class VaTextInput {
               part="input"
               min={min}
               max={max}
+              value={value}
             />
             {inputSuffix && <div class="usa-input-suffix" part="suffix" aria-hidden="true">{inputSuffix.substring(0, 25)}</div>}
             {inputIconSuffix && <div class="usa-input-suffix" part="input-suffix"><va-icon icon={inputIconSuffix} size={3} part="icon"></va-icon></div>}

@@ -3311,18 +3311,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/css-library@npm:^0.14.0":
-  version: 0.14.0
-  resolution: "@department-of-veterans-affairs/css-library@npm:0.14.0"
-  dependencies:
-    "@divriots/style-dictionary-to-figma": "npm:^0.4.0"
-    "@uswds/uswds": "npm:^3.9.0"
-    rimraf: "npm:^5.0.5"
-  checksum: 10/6a1e8cc4b6f7cb47c4f68e782b30670a21436aa1c11f3e7dac5f8a503655a1f0c97dc5c923b69e8ec3ce0072f75192bf2a83c756bb9f3878d401c8ad1f64d9d1
-  languageName: node
-  linkType: hard
-
-"@department-of-veterans-affairs/css-library@workspace:packages/css-library":
+"@department-of-veterans-affairs/css-library@npm:^0.15.0, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
@@ -3456,7 +3445,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": "npm:^4.10.0"
     "@babel/core": "npm:^7.12.13"
-    "@department-of-veterans-affairs/css-library": "npm:^0.14.0"
+    "@department-of-veterans-affairs/css-library": "npm:^0.15.0"
     "@department-of-veterans-affairs/formation": "npm:^11.0.6"
     "@stencil/core": "npm:4.20.0"
     "@stencil/postcss": "npm:^2.0.0"
