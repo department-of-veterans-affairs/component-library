@@ -51,7 +51,7 @@ export class VaSearchInput {
   /**
    * A boolean indicating whether listbox is open or closed
    */
-  isTouched: boolean;
+  isTouched: boolean = false;
 
   /**
    * Text displayed inside the search button
