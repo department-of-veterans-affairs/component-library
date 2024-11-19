@@ -40,6 +40,10 @@
   padding-right: 3.563rem;
 }
 
+.usa-alert .usa-alert__body {
+  margin-left: 0;
+}
+
 // Overriding USWDS' default success icon when using the 'continue' status
 .usa-alert--continue.usa-alert--success .usa-alert__body::before {
   mask: none;
