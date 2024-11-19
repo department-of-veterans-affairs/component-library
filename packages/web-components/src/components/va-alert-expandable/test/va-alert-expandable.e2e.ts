@@ -47,17 +47,15 @@ describe('va-alert-expandable', () => {
   it('passes an axe check when opened', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert-expandable status="warning" trigger="Limited services and hours">
-        <div>
-          Limited services and hours content
-        </div>
-      </va-alert-expandable>`,
+      `<va-alert-expandable status="warning" trigger="Limited services and hours"></va-alert-expandable>`,
     );
 
     const anchorEl = await page.find('va-alert-expandable >>> a');
     await anchorEl.click();
 
     await axeCheck(page);
+
+    expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
   });
 
   it('expands when clicked', async () => {
