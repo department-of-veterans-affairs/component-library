@@ -1,0 +1,21 @@
+:host div {
+  display: inline-block;
+
+  div.inner-div {
+    border-right: 1px solid var(--vads-color-base-light);
+    padding-right: 8px;
+    margin-right: 8px;
+  }
+
+  va-link {
+    &::part(anchor) {
+      text-decoration: none;
+    }
+    &.is-current-lang {
+      font-weight: var(--font-weight-bold);
+    }
+    color: var(--vads-color-link);
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--vads-color-link);
+  }
+}
