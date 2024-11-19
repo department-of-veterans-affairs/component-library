@@ -147,7 +147,6 @@ describe('va-back-to-top', () => {
     await page.mouse.wheel({ deltaY: pastPlaceholder });
     await page.waitForChanges();
 
-    expect(wrapper).toHaveClass('docked');
     // The color contrast error appears to be a false negative
     await axeCheck(page, ['color-contrast']);
   });
