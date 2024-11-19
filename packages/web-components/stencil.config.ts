@@ -14,7 +14,7 @@ export const config: Config = {
     sass({
       includePaths: [
         '../../node_modules/@uswds/uswds/packages/',
-        'src/global/'
+        'src/global/',
       ],
     }),
     postcss({
@@ -22,27 +22,32 @@ export const config: Config = {
     }),
   ],
   // This is for IE11 support
-  // https://stenciljs.com/docs/config-extras
   buildEs5: 'prod',
+  // https://stenciljs.com/docs/config-extras
   extras: {
     scriptDataOpts: true,
     appendChildSlotFix: false,
     cloneNodeFix: false,
-    slotChildNodesFix: true
+    slotChildNodesFix: true,
+    enableImportInjection: true,
   },
   outputTargets: [
     reactOutputTarget({
-      componentCorePackage: '@department-of-veterans-affairs/web-components/dist/types',
+      componentCorePackage:
+        '@department-of-veterans-affairs/web-components/dist/types',
       proxiesFile: './react-bindings/index.ts',
-      includeImportCustomElements: false
+      includeImportCustomElements: false,
     }),
     {
       type: 'dist',
       esmLoaderPath: '../loader',
       copy: [
         { src: 'assets', dest: path.join(__dirname, 'dist/assets') },
-        { src: 'img/sprite.svg', dest: path.join(__dirname, 'dist/img/sprite.svg') }
-      ]
+        {
+          src: 'img/sprite.svg',
+          dest: path.join(__dirname, 'dist/img/sprite.svg'),
+        },
+      ],
     },
     {
       type: 'www',
@@ -51,7 +56,7 @@ export const config: Config = {
     {
       type: 'dist-custom-elements',
       customElementsExportBehavior: 'single-export-module',
-    }
+    },
   ],
   testing: {
     browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
