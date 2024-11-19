@@ -106,10 +106,3 @@ WithHintText.args = {
   ...defaultArgs,
   hint: 'This is example hint text',
 };
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  ...defaultArgs,
-  value: 'elderberry',
-  disabled: true,
-};
