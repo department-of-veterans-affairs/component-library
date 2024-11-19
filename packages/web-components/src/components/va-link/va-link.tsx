@@ -106,6 +106,12 @@ export class VaLink {
   /**
    * The event used to track usage of the component.
    */
+
+  /**
+   * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
+   */
+  @Prop() language?: string;
+
   @Event({
     bubbles: true,
     composed: true,
@@ -154,6 +160,7 @@ export class VaLink {
       external,
       iconName,
       iconSize,
+      language
     } = this;
 
     const linkClass = classNames({
@@ -293,6 +300,7 @@ export class VaLink {
     }
 
     // Default
+    const lang = language ? language : null;
     return (
       <Host>
         <a
@@ -300,6 +308,9 @@ export class VaLink {
           class={linkClass}
           onClick={handleClick}
           aria-label={this.label}
+          part="anchor"
+          lang={lang}
+          hrefLang={lang}
         >
           {text}
         </a>
