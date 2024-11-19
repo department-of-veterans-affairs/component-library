@@ -167,18 +167,6 @@ export class VaComboBox {
   private handleChange(e: Event) {
     const target: HTMLSelectElement = e.target as HTMLSelectElement;
     this.value = target.value;
-
-    if (this.enableAnalytics) {
-      const detail = {
-        componentName: 'va-combo-box',
-        action: 'change',
-        details: {
-          label: this.label,
-          selectLabel: this.value,
-        },
-      };
-      this.componentLibraryAnalytics.emit(detail);
-    }
     this.vaSelect.emit({ value: this.value });
   }
 
