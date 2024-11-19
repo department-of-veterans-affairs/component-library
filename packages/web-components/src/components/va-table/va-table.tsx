@@ -1,7 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
-import { 
+import {
   Component,
-  Host, 
+  Host,
   Element,
   h,
   State,
@@ -18,11 +18,11 @@ import { getCompareFunc } from './sort/utils';
 })
 export class VaTable {
   /**
-  * This is a wrapper component whose job is to marshal the cells in slotted va-table-rows 
+  * This is a wrapper component whose job is to marshal the cells in slotted va-table-rows
   * through DOM manipulation for projection into the slots of the va-table-inner component for rendering
   */
   @Element() el: HTMLElement;
-  
+
   /**
    * The title of the table
    */
@@ -38,12 +38,12 @@ export class VaTable {
    * True by default, must specify if false if this is unwanted
    */
   @Prop() stacked?: boolean = true;
-  
+
 
   /**
    * Is the table sortable
    */
-  @Prop() sortable: boolean = false; 
+  @Prop() sortable: boolean = false;
 
   // The number of va-table-rows
   @State() rows: number;
@@ -58,7 +58,7 @@ export class VaTable {
   private observer: MutationObserver;
 
   /**
-   * Generate an array of span elements that are inside 
+   * Generate an array of span elements that are inside
    * a particular va-table-row element
    */
   getCellsInRow(row: Element): HTMLSpanElement[] {
@@ -84,7 +84,7 @@ export class VaTable {
   }
 
   /**
-   * Generate an array of all the spans in all the va-table-rows 
+   * Generate an array of all the spans in all the va-table-rows
    * in the slot in order starting with row 0, column 0.
    */
   getAllCells(rows: Element[] = this.getRows()): void {
@@ -96,7 +96,7 @@ export class VaTable {
         cell.setAttribute('slot', `va-table-slot-${count}`);
         count++;
       });
-     
+
       cells.push(...cellsInRow);
     }
     this.cells = cells;
@@ -104,7 +104,7 @@ export class VaTable {
 
 
   /**
-   * Generate a DocumentFragment that holds the cells 
+   * Generate a DocumentFragment that holds the cells
    * to be slotted into a va-table-inner component
    */
   makeFragment(): DocumentFragment {
@@ -116,7 +116,7 @@ export class VaTable {
   }
 
   /**
-   * Generate a va-table-inner to add to the DOM 
+   * Generate a va-table-inner to add to the DOM
    */
   makeVATable(sortdir: string, sortindex: number): HTMLVaTableInnerElement {
     const vaTable = document.createElement('va-table-inner');
@@ -131,7 +131,7 @@ export class VaTable {
       vaTable.dataset.sortdir = sortdir;
       vaTable.dataset.sortindex = `${sortindex}`;
     }
-   
+
     if (this.tableTitle) {
       vaTable.setAttribute('table-title', this.tableTitle);
     }
@@ -173,7 +173,7 @@ export class VaTable {
       characterData: true,
     });
   }
-  
+
   disconnectedCallback() {
     if (this.observer) {
       this.observer.disconnect();
@@ -190,7 +190,7 @@ export class VaTable {
     this.el.appendChild(vaTable);
   }
 
-  componentDidLoad() {
+  componentWillLoad() {
     // add a va-table-inner instance to the DOM
     this.addVaTableInner();
     // watch for changes to content
@@ -219,7 +219,7 @@ export class VaTable {
       // replace children with the newly sorted va-table-row elements
       this.el.replaceChildren(...sortedDataRows);
       // render the table with details for next possible sort
-      this.addVaTableInner(sortdir === 'ascending' ? 'descending' : 'ascending', index);  
+      this.addVaTableInner(sortdir === 'ascending' ? 'descending' : 'ascending', index);
     }
   }
 

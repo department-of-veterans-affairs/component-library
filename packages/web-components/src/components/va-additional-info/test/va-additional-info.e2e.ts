@@ -45,17 +45,15 @@ describe('va-additional-info', () => {
   it('passes an axe check when opened', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-additional-info trigger="Additional information">
-        <div>
-          Additional content
-        </div>
-      </va-additional-info>`,
+      `<va-additional-info trigger="Additional information"></va-additional-info>`,
     );
 
     const anchorEl = await page.find('va-additional-info >>> a');
     await anchorEl.click();
 
     await axeCheck(page);
+
+    expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
   });
 
   it('expands when clicked', async () => {
