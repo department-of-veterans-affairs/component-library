@@ -3311,7 +3311,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/css-library@npm:^0.15.0, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
+"@department-of-veterans-affairs/css-library@npm:^0.15.0":
+  version: 0.15.0
+  resolution: "@department-of-veterans-affairs/css-library@npm:0.15.0"
+  dependencies:
+    "@divriots/style-dictionary-to-figma": "npm:^0.4.0"
+    "@uswds/uswds": "npm:^3.9.0"
+    rimraf: "npm:^5.0.5"
+  checksum: 10/cc7dcd60edf4e2d0d027cedf5a4ad8c800f2997f8fe70591b636b571686f2168c713b0f2e18b52c109b11ccda1b7a2605a5432feef9224d73b6ef304187e3e3a
+  languageName: node
+  linkType: hard
+
+"@department-of-veterans-affairs/css-library@workspace:packages/css-library":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
