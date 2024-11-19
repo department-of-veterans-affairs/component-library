@@ -51,7 +51,7 @@ export class VaSearchInput {
   /**
    * A boolean indicating whether listbox is open or closed
    */
-  @State() isTouched: boolean = false;
+  isTouched: boolean;
 
   /**
    * Text displayed inside the search button
@@ -157,7 +157,7 @@ export class VaSearchInput {
         composed: true,
       }),
     );
-    
+
     if (!this.disableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-search-input',
