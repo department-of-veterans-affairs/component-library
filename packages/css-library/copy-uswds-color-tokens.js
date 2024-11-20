@@ -19,7 +19,7 @@ const tokensToKeep = {
       'blue-vivid-50',
       'blue-vivid-60',
       'blue-vivid-70',
-      'blue-vivid-80',
+      'blue-vivid-80'
     ],
   },
   'blue-cool': {
@@ -59,7 +59,7 @@ const tokensToKeep = {
       'gold-vivid-30',
       'gold-vivid-40',
       'gold-vivid-50',
-      'gold-50',
+      'gold-50'
     ],
   },
   'gray': {
@@ -107,7 +107,7 @@ const tokensToKeep = {
   },
   'green-warm': {
     file: 'green-warm.json',
-    colors: ['green-warm-50'],
+    colors: ['green-warm-50']
   },
   'green-cool': {
     file: 'green-cool.json',
@@ -122,7 +122,7 @@ const tokensToKeep = {
       'green-cool-vivid-50',
       'green-cool-vivid-60',
       'green-cool-vivid-70',
-      'green-cool-vivid-80',
+      'green-cool-vivid-80'
     ],
   },
   'orange': {
@@ -131,7 +131,7 @@ const tokensToKeep = {
   },
   'orange-warm': {
     file: 'orange-warm.json',
-    colors: ['orange-warm-50'],
+    colors: ['orange-warm-50']
   },
   'red': {
     file: 'red.json',
@@ -171,7 +171,7 @@ const tokensToKeep = {
   },
   'violet-warm': {
     file: 'violet-warm.json',
-    colors: ['violet-warm-60'],
+    colors: ['violet-warm-60']
   },
   'yellow': {
     file: 'yellow.json',
@@ -180,17 +180,17 @@ const tokensToKeep = {
       'yellow-50',
       'yellow-vivid-10',
       'yellow-vivid-20',
-      'yellow-vivid-80',
+      'yellow-vivid-80'
     ],
   },
   'indigo-cool': {
     file: 'indigo-cool.json',
-    colors: ['indigo-cool-60'],
+    colors: ['indigo-cool-60']
   },
   'mint-cool': {
     file: 'mint-cool.json',
-    colors: ['mint-cool-50'],
-  },
+    colors: ['mint-cool-50']
+  }
 };
 // Desired prefix/namespace for colors
 const prefix = 'uswds-system-color';
