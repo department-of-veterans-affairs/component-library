@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 13 Nov 2024 20:34:23 GMT
+ * Generated on Wed, 20 Nov 2024 20:31:53 GMT
  */
 
 :root {
@@ -103,6 +103,8 @@
   --vads-color-action-surface-destructive-on-dark: #fb5a47;
   --vads-color-action-border-base-active-on-light: #2e2e2e;
   --vads-color-action-border-base-active-on-dark: #adadad;
+  --vads-color-feedback-foregound-success-on-dark: #21c834;
+  --vads-color-feedback-foregound-warning-on-light: #c2850c;
   --vads-color-feedback-surface-info-on-dark: #112f4e;
   --vads-color-feedback-surface-success-on-dark: #19311e;
   --vads-color-feedback-surface-warning-on-dark: #422d19;
@@ -226,6 +228,7 @@
   --uswds-system-color-gold-vivid-10: #ffe396;
   --uswds-system-color-gold-vivid-20: #ffbe2e;
   --uswds-system-color-gold-vivid-30: #e5a000;
+  --uswds-system-color-gold-vivid-40: #c2850c;
   --uswds-system-color-gold-vivid-50: #936f38;
   --uswds-system-color-gray-1: #fcfcfc;
   --uswds-system-color-gray-2: #f9f9f9;
@@ -265,6 +268,7 @@
   --uswds-system-color-green-cool-40: #5e9f69;
   --uswds-system-color-green-cool-50: #4d8055;
   --uswds-system-color-green-cool-vivid-20: #70e17b;
+  --uswds-system-color-green-cool-vivid-30: #21c834;
   --uswds-system-color-green-cool-vivid-40: #00a91c;
   --uswds-system-color-green-cool-vivid-50: #008817;
   --uswds-system-color-green-cool-vivid-60: #216e1f;

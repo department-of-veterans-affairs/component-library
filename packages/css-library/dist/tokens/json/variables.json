@@ -1838,6 +1838,44 @@
       ]
     }
   },
+  "vads-color-feedback-foregound-success-on-dark": {
+    "*": {
+      "value": "#21c834",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-green-cool-vivid-30}"
+      },
+      "name": "vads-color-feedback-foregound-success-on-dark",
+      "attributes": {
+        "category": "vads-color-feedback-foregound-success-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-foregound-success-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-foregound-warning-on-light": {
+    "*": {
+      "value": "#c2850c",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gold-vivid-40}"
+      },
+      "name": "vads-color-feedback-foregound-warning-on-light",
+      "attributes": {
+        "category": "vads-color-feedback-foregound-warning-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-foregound-warning-on-light",
+        "*"
+      ]
+    }
+  },
   "vads-color-feedback-surface-info-on-dark": {
     "*": {
       "value": "#112f4e",
@@ -4023,6 +4061,21 @@
       "uswds-system-color-gold-vivid-30"
     ]
   },
+  "uswds-system-color-gold-vivid-40": {
+    "value": "#c2850c",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#c2850c"
+    },
+    "name": "uswds-system-color-gold-vivid-40",
+    "attributes": {
+      "category": "uswds-system-color-gold-vivid-40"
+    },
+    "path": [
+      "uswds-system-color-gold-vivid-40"
+    ]
+  },
   "uswds-system-color-gold-vivid-50": {
     "value": "#936f38",
     "filePath": "tokens/uswds.json",
@@ -4606,6 +4659,21 @@
     },
     "path": [
       "uswds-system-color-green-cool-vivid-20"
+    ]
+  },
+  "uswds-system-color-green-cool-vivid-30": {
+    "value": "#21c834",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#21c834"
+    },
+    "name": "uswds-system-color-green-cool-vivid-30",
+    "attributes": {
+      "category": "uswds-system-color-green-cool-vivid-30"
+    },
+    "path": [
+      "uswds-system-color-green-cool-vivid-30"
     ]
   },
   "uswds-system-color-green-cool-vivid-40": {
