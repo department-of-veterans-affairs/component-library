@@ -97,12 +97,6 @@ export class VaComboBox {
   @Event() vaSelect: EventEmitter;
 
   /**
-   * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date
-   * in which the error for the va-select will be rendered outside of va-select
-   */
-  @Prop() showError?: boolean = true;
-
-  /**
    * The event used to track usage of the component. This is emitted when an
    * option is selected and enableAnalytics is true.
    */
@@ -182,7 +176,6 @@ export class VaComboBox {
       name,
       hint,
       messageAriaDescribedby,
-      showError,
     } = this;
 
     const errorID = 'input-error-message';
@@ -208,7 +201,7 @@ export class VaComboBox {
           </span>
         )}
         <span id={errorID} role="alert">
-          {showError && error && (
+          {error && (
             <Fragment>
               <span class="usa-sr-only">{i18next.t('error')}</span>
               <span class="usa-error-message">{error}</span>

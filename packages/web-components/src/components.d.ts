@@ -489,10 +489,6 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
-         */
-        "showError"?: boolean;
-        /**
           * Selected value (will get updated on select).
          */
         "value"?: string;
@@ -3604,10 +3600,6 @@ declare namespace LocalJSX {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
-        /**
-          * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
-         */
-        "showError"?: boolean;
         /**
           * Selected value (will get updated on select).
          */
