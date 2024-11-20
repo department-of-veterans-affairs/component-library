@@ -267,10 +267,10 @@
   "vads-color-action-border-base-active-on-dark": {
     "*": { "value": "{uswds-system-color-gray-30}"}
   },
-  "vads-color-feedback-foregound-success-on-dark": {
+  "vads-color-feedback-foreground-success-on-dark": {
     "*": { "value": "{uswds-system-color-green-cool-vivid-30}"}
   },
-  "vads-color-feedback-foregound-warning-on-light": {
+  "vads-color-feedback-foreground-warning-on-light": {
     "*": { "value": "{uswds-system-color-gold-vivid-40}"}
   },
   "vads-color-feedback-surface-info-on-dark": {

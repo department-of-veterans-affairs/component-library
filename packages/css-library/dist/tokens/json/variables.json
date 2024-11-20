@@ -1838,7 +1838,7 @@
       ]
     }
   },
-  "vads-color-feedback-foregound-success-on-dark": {
+  "vads-color-feedback-foreground-success-on-dark": {
     "*": {
       "value": "#21c834",
       "filePath": "tokens/color.json",
@@ -1846,18 +1846,18 @@
       "original": {
         "value": "{uswds-system-color-green-cool-vivid-30}"
       },
-      "name": "vads-color-feedback-foregound-success-on-dark",
+      "name": "vads-color-feedback-foreground-success-on-dark",
       "attributes": {
-        "category": "vads-color-feedback-foregound-success-on-dark",
+        "category": "vads-color-feedback-foreground-success-on-dark",
         "type": "*"
       },
       "path": [
-        "vads-color-feedback-foregound-success-on-dark",
+        "vads-color-feedback-foreground-success-on-dark",
         "*"
       ]
     }
   },
-  "vads-color-feedback-foregound-warning-on-light": {
+  "vads-color-feedback-foreground-warning-on-light": {
     "*": {
       "value": "#c2850c",
       "filePath": "tokens/color.json",
@@ -1865,13 +1865,13 @@
       "original": {
         "value": "{uswds-system-color-gold-vivid-40}"
       },
-      "name": "vads-color-feedback-foregound-warning-on-light",
+      "name": "vads-color-feedback-foreground-warning-on-light",
       "attributes": {
-        "category": "vads-color-feedback-foregound-warning-on-light",
+        "category": "vads-color-feedback-foreground-warning-on-light",
         "type": "*"
       },
       "path": [
-        "vads-color-feedback-foregound-warning-on-light",
+        "vads-color-feedback-foreground-warning-on-light",
         "*"
       ]
     }
