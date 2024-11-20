@@ -143,7 +143,7 @@ const tokensToKeep = {
       'red-vivid-40',
       'red-vivid-60',
       'red-vivid-70',
-      'red-vivid-80',
+      'red-vivid-80'
     ],
   },
   'red-cool': {
