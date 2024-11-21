@@ -163,8 +163,6 @@ const noop = () => {};
    */
   const enhanceComboBox = (_comboBoxEl, _labelEl) => {
     const comboBoxEl = _comboBoxEl.closest(COMBO_BOX);
-    console.log('comboBoxEl', _comboBoxEl);
-    console.log('_labelEl', _labelEl);
 
     if (comboBoxEl.dataset.enhanced) return;
 
