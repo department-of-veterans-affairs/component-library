@@ -96,16 +96,6 @@ export class VaComboBox {
    */
   @Event() vaSelect: EventEmitter;
 
-  /**
-   * The event used to track usage of the component. This is emitted when an
-   * option is selected and enableAnalytics is true.
-   */
-  @Event({
-    eventName: 'component-library-analytics',
-    composed: true,
-    bubbles: true,
-  })
-  componentLibraryAnalytics: EventEmitter;
 
   connectedCallback() {
     i18next.on('languageChanged', () => {
