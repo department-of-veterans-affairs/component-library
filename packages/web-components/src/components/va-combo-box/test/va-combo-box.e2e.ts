@@ -21,7 +21,7 @@ describe('va-combo-box', () => {
                     <span id="input-error-message" role="alert"></span>
                     <slot></slot>
                     <div class="usa-combo-box usa-combo-box--pristine" data-default-value="bar" data-enhanced="true">
-                    <select aria-hidden="true" aria-invalid="false" class="usa-combo-box__select usa-select usa-sr-only" tabindex="-1">
+                    <select aria-hidden="true" class="usa-combo-box__select usa-select usa-sr-only" tabindex="-1">
                         <option value="foo">
                         Foo
                         </option>
@@ -77,12 +77,13 @@ describe('va-combo-box', () => {
             <option value="bar">Bar</option>
           </va-select>
         `);
-    await page.find('va-combo-box >>> input');
+    const input = await page.find('va-combo-box >>> input');
     const element = await page.find('va-combo-box >>>  #input-error-message');
     expect(element).toEqualHtml(`<span id="input-error-message" role="alert">
             <span class="usa-sr-only">Error</span>
             <span class="usa-error-message">test error message</span>
             </span>`);
+    expect(input).toEqualAttribute('aria-describedby', 'input-error-message  options--assistiveHint');
   });
 
   it('renders label with required', async () => {
@@ -155,5 +156,34 @@ describe('va-combo-box', () => {
     await page.find('va-combo-box >>> input');
     const element = await page.find('va-combo-box >>> input');
     expect(element).toHaveAttribute('disabled');
+  });
+
+  it('renders name property', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+          <va-combo-box label="A label" name="test-name">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-select>
+        `);
+    await page.find('va-combo-box >>> input');
+    const element = await page.find('va-combo-box >>> select');
+    expect(element).toEqualAttribute('name', 'test-name');
+  });
+
+  it('renders message-aria-describedby', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+          <va-combo-box label="A label" message-aria-describedby="test aria text">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-select>
+        `);
+    const input = await page.find('va-combo-box >>> input');
+    const element = await page.find('va-combo-box >>> #input-message');
+    expect(element).toEqualHtml('<span id="input-message" class="usa-sr-only dd-privacy-hidden">test aria text</span>');
+    expect(input).toEqualAttribute('aria-describedby', 'input-message   options--assistiveHint');
   });
 });
