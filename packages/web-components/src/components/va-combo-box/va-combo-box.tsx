@@ -71,17 +71,6 @@ export class VaComboBox {
   @Prop() error?: string;
 
   /**
-   * Whether or not `aria-invalid` will be set on the inner select. Useful when
-   * composing the component into something larger, like a date component.
-   */
-  @Prop() invalid?: boolean = false;
-
-  /**
-   * Whether or not to fire the analytics events
-   */
-  @Prop() enableAnalytics?: boolean = false;
-
-  /**
    * Optional hint text.
    */
   @Prop() hint?: string;
@@ -162,7 +151,6 @@ export class VaComboBox {
   render() {
     const {
       error,
-      invalid,
       value,
       disabled,
       placeholder,
@@ -206,7 +194,6 @@ export class VaComboBox {
         >
           <select
             class="usa-select"
-            aria-invalid={invalid || error ? 'true' : 'false'}
             name={name}
             id="options"
             onChange={e => this.handleChange(e)}

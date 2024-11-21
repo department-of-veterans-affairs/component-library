@@ -453,10 +453,6 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
-          * Whether or not to fire the analytics events
-         */
-        "enableAnalytics"?: boolean;
-        /**
           * Error message to display. When defined, this indicates an error.
          */
         "error"?: string;
@@ -464,10 +460,6 @@ export namespace Components {
           * Optional hint text.
          */
         "hint"?: string;
-        /**
-          * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
-         */
-        "invalid"?: boolean;
         /**
           * Text label for the field.
          */
@@ -3556,10 +3548,6 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Whether or not to fire the analytics events
-         */
-        "enableAnalytics"?: boolean;
-        /**
           * Error message to display. When defined, this indicates an error.
          */
         "error"?: string;
@@ -3567,10 +3555,6 @@ declare namespace LocalJSX {
           * Optional hint text.
          */
         "hint"?: string;
-        /**
-          * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
-         */
-        "invalid"?: boolean;
         /**
           * Text label for the field.
          */
