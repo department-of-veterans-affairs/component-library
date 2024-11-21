@@ -16,8 +16,8 @@ import { comboBox } from './va-combo-box-library.js';
 
 /**
  * @componentName Combo Box
- * @maturityCategory dont_use
- * @maturityLevel proposed
+ * @maturityCategory caution
+ * @maturityLevel candidate
  * @guidanceHref form/combo-box
  * @translations English
  * @translations Spanish
