@@ -2242,7 +2242,6 @@ declare global {
     };
     interface HTMLVaComboBoxElementEventMap {
         "vaSelect": any;
-        "component-library-analytics": any;
     }
     /**
      * @componentName Combo Box
@@ -3584,10 +3583,6 @@ declare namespace LocalJSX {
           * Name attribute for the select field.
          */
         "name": string;
-        /**
-          * The event used to track usage of the component. This is emitted when an option is selected and enableAnalytics is true.
-         */
-        "onComponent-library-analytics"?: (event: VaComboBoxCustomEvent<any>) => void;
         /**
           * The event emitted when the selected value changes
          */
