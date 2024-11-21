@@ -47,12 +47,12 @@
   box-sizing: border-box;
 }
 
-.usa-combo-box__list-option{
-  padding: 1rem;
+.usa-combo-box__clear-input{
+  right: calc(2.5rem + 3px);
 }
 
 .usa-combo-box__input-button-separator {
-  right: calc(2.5em + 9px);
+  right: calc(2.5rem + 2px);
 }
 
 .usa-combo-box__list{
