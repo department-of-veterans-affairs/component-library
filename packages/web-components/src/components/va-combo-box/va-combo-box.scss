@@ -18,7 +18,7 @@
   display: block;
   font-family: var(--font-source-sans);
   color: var(--vads-color-base);
-  width: 30rem;
+  max-width: 30rem;
 }
 
 :host([inert]) select {
