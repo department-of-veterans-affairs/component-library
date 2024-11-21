@@ -35,26 +35,10 @@
   display: none;
 }
 
-.usa-combo-box{
-  font-size: 12px;
-  max-width: 100%;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.usa-combo-box input {
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .usa-combo-box__clear-input{
   right: calc(2.5rem + 3px);
 }
 
 .usa-combo-box__input-button-separator {
   right: calc(2.5rem + 2px);
-}
-
-.usa-combo-box__list{
-  max-height: 20em;
 }
