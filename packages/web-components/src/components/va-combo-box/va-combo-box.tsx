@@ -101,9 +101,6 @@ export class VaComboBox {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
-    if (!this.label) {
-      throw new Error('va-combo-box: label is a required property');
-    }
   }
 
   componentDidLoad() {
