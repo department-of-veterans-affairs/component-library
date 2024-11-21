@@ -127,6 +127,14 @@ export class VaComboBox {
     if (inputElement && this.error) {
       inputElement.classList.add('usa-input--error');
     }
+
+    const errorID = 'input-error-message';
+    const ariaDescribedbyIds =
+      `${this.messageAriaDescribedby ? 'input-message' : ''} ${
+        this.error ? errorID : ''
+      } ${this.hint ? 'input-hint' : ''} ${inputElement.getAttribute('aria-describedby')}`.trim() ; 
+      // need to append to existing attribute which is set during initialization and contains USWDS "options--assistiveHint"
+      inputElement.setAttribute('aria-describedby', ariaDescribedbyIds);
   }
 
   disconnectedCallback() {
@@ -178,11 +186,6 @@ export class VaComboBox {
       messageAriaDescribedby,
     } = this;
 
-    const errorID = 'input-error-message';
-    const ariaDescribedbyIds =
-      `${messageAriaDescribedby ? 'input-message' : ''} ${
-        error ? errorID : ''
-      } ${hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
@@ -200,7 +203,7 @@ export class VaComboBox {
             {hint}
           </span>
         )}
-        <span id={errorID} role="alert">
+        <span id="input-error-message" role="alert">
           {error && (
             <Fragment>
               <span class="usa-sr-only">{i18next.t('error')}</span>
@@ -216,7 +219,6 @@ export class VaComboBox {
         >
           <select
             class="usa-select"
-            aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             name={name}
             id="options"
@@ -226,6 +228,11 @@ export class VaComboBox {
             {this.populateOptions()}
           </select>
         </div>
+        {messageAriaDescribedby && (
+          <span id="input-message" class="usa-sr-only dd-privacy-hidden">
+            {messageAriaDescribedby}
+          </span>
+        )}
       </Host>
     );
   }

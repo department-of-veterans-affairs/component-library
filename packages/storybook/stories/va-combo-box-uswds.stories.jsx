@@ -20,6 +20,7 @@ const defaultArgs = {
   value: '',
   required: false,
   error: undefined,
+  messageAriaDescribedby: undefined,
   options: [
     <option value="apple">Apple</option>,
     <option value="banana">Banana</option>,
@@ -55,6 +56,7 @@ const Template = ({
   options,
   placeholder,
   disabled,
+  messageAriaDescribedby,
 }) => {
 
   return (
@@ -67,6 +69,7 @@ const Template = ({
       hint={hint}
       placeholder={placeholder}
       disabled={disabled}
+      message-aria-describedby={messageAriaDescribedby}
     >
       {options}
     </va-combo-box>
@@ -105,4 +108,10 @@ export const WithHintText = Template.bind({});
 WithHintText.args = {
   ...defaultArgs,
   hint: 'This is example hint text',
+};
+
+export const WithMessageAriaDescribedBy = Template.bind({});
+WithMessageAriaDescribedBy.args = {
+  ...defaultArgs,
+  messageAriaDescribedby: 'This is example aria message',
 };
