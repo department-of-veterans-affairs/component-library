@@ -432,6 +432,7 @@ const defaultArgs = {
 
 export const Default = Template.bind(null);
 Default.args = {
+  name: 'group0',
   ...defaultArgs,
 };
 Default.argTypes = propStructure(radioDocs);

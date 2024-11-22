@@ -9,6 +9,7 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 
 @import '../../mixins/uswds-error-border.scss';
+@import '../../mixins/focusable.css';
 
 :host {
   display: block;
@@ -20,6 +21,6 @@
 }
 
 .usa-checkbox__input:focus + [class*='__label']::before {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
+  // outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 4px;
 }

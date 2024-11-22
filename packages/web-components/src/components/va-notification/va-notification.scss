@@ -1,3 +1,5 @@
+@import '../../mixins/focusable.css';
+
 :host {
     display: block;
     position: relative;
@@ -30,7 +32,7 @@ va-link {
 i.fa-times-circle::before {
     content: '\F057'; /* fa-times-circle*/
     font-size: 20px;
-} 
+}
 
 i.action-required::before {
     content: '\F06A'; /* fa-exclamation-circle */
@@ -103,12 +105,12 @@ p {
     background-color: transparent;
 }
 
-.va-notification-close:active, .va-notification-close:focus {
-    color: var(--vads-color-base);
-    background-color: transparent;
-    outline: 2px solid var(--vads-color-action-focus-on-light);
-    outline-offset: 2px;
-}
+// .va-notification-close:active, .va-notification-close:focus {
+//     color: var(--vads-color-base);
+//     background-color: transparent;
+//     outline: 2px solid var(--vads-color-action-focus-on-light);
+//     outline-offset: 2px;
+// }
 
 .va-notification-close > i {
     margin-right: 8px;

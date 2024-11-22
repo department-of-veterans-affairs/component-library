@@ -1,5 +1,6 @@
 @import '../../mixins/links.css';
 @import '../../mixins/accessibility.css';
+@import '../../mixins/focusable.css';
 
 :host {
   display: inline-flex;
@@ -13,10 +14,10 @@
   font-weight: 700;
   font-size: 1.06rem;
   padding: 0.5rem 0;
-  &:active {
+  /* &:active {
     outline: 2px solid var(--vads-color-action-focus-on-light);
     outline-offset: 2px;
-  }
+  } */
 }
 
 :host a.va-link--primary,
@@ -29,7 +30,7 @@
 :host a.va-link--reverse {
   color: var(--vads-color-white);
 
-  &:hover, &:active {
+  &:hover, &:active, &:focus {
     color: var(--vads-color-action-focus-on-light);
     background-color: transparent;
   }
@@ -75,8 +76,9 @@
   color: var(--vads-color-black);
 }
 
-:host a.va-link--reverse:hover va-icon,
-:host a.va-link--reverse:active va-icon {
+:host a.va-link--reverse:not(:focus):hover va-icon,
+:host a.va-link--reverse:not(:focus):active va-icon {
+  color: var(--uswds-system-color-gray-90);
   background-color: var(--vads-color-action-focus-on-light) !important;
 }
 

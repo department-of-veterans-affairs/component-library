@@ -128,7 +128,7 @@ unclassed elements:
 ----------------------------------------
 Broswer compatibility mode
 ----------------------------------------
-When true, outputs woff and ttf font 
+When true, outputs woff and ttf font
 formats in addition to woff2
 ----------------------------------------
 */
@@ -1877,7 +1877,7 @@ body {
   display: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
-input:not([disabled]):focus,
+/* input:not([disabled]):focus,
 select:not([disabled]):focus,
 textarea:not([disabled]):focus,
 button:not([disabled]):focus {
@@ -1897,6 +1897,7 @@ iframe:focus,
   outline: 2px dotted #aeb0b5;
   outline-offset: 3px;
 }
+*/
 
 /**
   Variables ported over from Formation so that we can keep those stylesheets
@@ -4435,7 +4436,7 @@ unclassed elements:
 ----------------------------------------
 Broswer compatibility mode
 ----------------------------------------
-When true, outputs woff and ttf font 
+When true, outputs woff and ttf font
 formats in addition to woff2
 ----------------------------------------
 */

@@ -141,8 +141,8 @@ export class VaOfficialGovBanner {
     if (tld === 'gov' || tld === 'mil') {
       return (
         <Host>
-            <div class="banner">
-            <div class="accordion"  >
+          <div class="banner va-official-gov-banner">
+            <div class="accordion">
               <div id="header">
                 <div class="inner">
                   <div class="grid-col-auto">
@@ -158,6 +158,7 @@ export class VaOfficialGovBanner {
                   </div>
                   <button
                     onClick={this.handleClick}
+                    class="va-official-gov-banner__toggle"
                     type="button"
                     aria-expanded="false"
                     aria-controls="official-gov-banner">

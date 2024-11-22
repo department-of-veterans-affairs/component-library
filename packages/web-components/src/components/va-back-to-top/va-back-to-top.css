@@ -46,11 +46,11 @@ a {
   position: absolute;
   transition: background-color 0.25s ease-in;
 }
-a:not([disabled]):active, a:not([disabled]):focus {
+/* a:not([disabled]):active, a:not([disabled]):focus {
   border-radius: 5px;
   outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px;
-}
+} */
 a:not([disabled]):hover {
   border-radius: 5px;
   background-color: var(--vads-color-gray-cool-light);
@@ -60,7 +60,7 @@ a:not([disabled]):hover {
 div a {
   display: none;
 }
-  
+
 div.reveal a {
   display: inherit;
   border-bottom-left-radius: 5px;

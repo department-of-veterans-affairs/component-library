@@ -40,7 +40,7 @@ body {
   display: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
-input:not([disabled]):focus,
+/* input:not([disabled]):focus,
 select:not([disabled]):focus,
 textarea:not([disabled]):focus,
 button:not([disabled]):focus {
@@ -60,5 +60,6 @@ iframe:focus,
   outline: 2px dotted #aeb0b5;
   outline-offset: 3px;
 }
+*/
 
 /*# sourceMappingURL=base.css.map */

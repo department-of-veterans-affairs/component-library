@@ -1,6 +1,7 @@
 @forward 'settings';
 
 @use 'usa-button-group/src/styles/usa-button-group';
+@import '../../mixins/focusable.css';
 
 :host {
   display: flex;

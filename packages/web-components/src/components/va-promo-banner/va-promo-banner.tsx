@@ -165,6 +165,7 @@ export class VaPromoBanner {
           </a>
           <button
             type="button"
+            class="va-promo-banner__close"
             aria-label="Dismiss this promo banner"
             onClick={() => this.closeHandler()}
           >

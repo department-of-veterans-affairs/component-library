@@ -2,6 +2,7 @@
 @use 'usa-alert/src/styles/usa-alert';
 
 @import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
+@import '../../mixins/focusable.css';
 
 :host {
   display: block;
@@ -13,7 +14,7 @@
   font-size: 21.28px; /* 1.33rem */
   margin-top: 0;
   margin-bottom: 8px; /* 0.5rem */
-  font-family: var(--font-serif); 
+  font-family: var(--font-serif);
 }
 
 .va-alert-close:hover {
