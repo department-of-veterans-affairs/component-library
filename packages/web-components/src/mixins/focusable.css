@@ -25,7 +25,7 @@ a:not([disabled]):active,
   /* outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px; */
   color: var(--uswds-system-color-gray-90);
-  background-color: var(--uswds-system-color-gray-20);
+  background-color: var(--vads-color-action-focus-on-light);
   box-shadow: 0 4px var(--uswds-system-color-gray-90);
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -43,7 +43,7 @@ textarea:not([disabled]):active,
 .usa-checkbox [type="checkbox"]:active + [class*='__label']::before,
 .usa-radio [type="radio"]:active + [class*='__label']::before {
   box-shadow: inset 0 0 0 3px var(--uswds-system-color-gray-90);
-  outline: 3px solid var(--uswds-system-color-gray-20);
+  outline: 3px solid var(--vads-color-action-focus-on-light);
   outline-offset: 0;
 }
 
@@ -61,7 +61,7 @@ button.va-promo-banner__close:not([disabled]):focus,
 button.va-modal-close:not([disabled]):focus {
   background-color: transparent;
   box-shadow: inset 0 0 0 3px var(--uswds-system-color-gray-90);
-  outline: 2px solid var(--uswds-system-color-gray-20);
+  outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 4px;
   border-radius: 2rem;
 }
@@ -94,12 +94,12 @@ input[type="file"]:not([disabled]):focus {
 .progress-bar:focus {
   background-color: transparent;
   box-shadow: 0 0 3px 3px var(--uswds-system-color-gray-90);
-  outline: 4px solid var(--uswds-system-color-gray-20);
+  outline: 4px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px;
 }
 
 .va-official-gov-banner:focus-within {
-  background-color: var(--uswds-system-color-gray-20);
+  background-color: var(--vads-color-action-focus-on-light);
 
   .va-official-gov-banner__toggle,
   .va-official-gov-banner__toggle:before {
