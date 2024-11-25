@@ -324,6 +324,41 @@ describe('sorted va-table ', () => {
     await page.setContent(getTableMarkup());
     await checkSorts(page, 7, 'sort-4', 'sort-2');
   });
+
+  it('screen reader text on sort buttons is correct', async () => {
+    const page = await newE2EPage();
+    await page.setContent(getTableMarkup());
+    // we need to update these variables after each sort
+    
+    let buttons = null;
+
+    buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
+    // sort ascending
+    buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
+
+    // screen reader should say ascending initially
+    expect(buttons[1].getAttribute('title')).toEqual(`Click to sort by Percent in ascending order`)
+    expect(buttons[0].getAttribute('title')).toEqual(`Click to sort by Integer/Float in ascending order`)
+
+    await buttons[1].click();
+    await page.waitForChanges();
+
+    buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
+    // screen reader should say descending for clicked button
+    expect(buttons[1].getAttribute('title')).toEqual(`Click to sort by Percent in descending order`);
+    // screen reader should say ascending for non-clicked button
+    expect(buttons[0].getAttribute('title')).toEqual(`Click to sort by Integer/Float in ascending order`);
+
+    // sort descending
+    await buttons[1].click();
+    await page.waitForChanges();
+
+    buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
+    // screen reader should say ascending for twice clicked button
+    expect(buttons[1].getAttribute('title')).toEqual(`Click to sort by Percent in ascending order`);
+    // screen reader should say ascending for non-clicked button
+    expect(buttons[0].getAttribute('title')).toEqual(`Click to sort by Integer/Float in ascending order`);
+  });
 });
 
 describe('sort utilities', () => {
