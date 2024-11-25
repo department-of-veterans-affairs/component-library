@@ -1857,6 +1857,44 @@
       ]
     }
   },
+  "vads-color-feedback-foreground-success-on-light": {
+    "*": {
+      "value": "#008817",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-green-cool-vivid-50}"
+      },
+      "name": "vads-color-feedback-foreground-success-on-light",
+      "attributes": {
+        "category": "vads-color-feedback-foreground-success-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-foreground-success-on-light",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-foreground-warning-on-dark": {
+    "*": {
+      "value": "#e5a000",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gold-vivid-30}"
+      },
+      "name": "vads-color-feedback-foreground-warning-on-dark",
+      "attributes": {
+        "category": "vads-color-feedback-foreground-warning-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-foreground-warning-on-dark",
+        "*"
+      ]
+    }
+  },
   "vads-color-feedback-foreground-warning-on-light": {
     "*": {
       "value": "#c2850c",

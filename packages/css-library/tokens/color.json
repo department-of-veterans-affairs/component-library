@@ -270,6 +270,12 @@
   "vads-color-feedback-foreground-success-on-dark": {
     "*": { "value": "{uswds-system-color-green-cool-vivid-30}"}
   },
+  "vads-color-feedback-foreground-success-on-light": {
+    "*": { "value": "{uswds-system-color-green-cool-vivid-50}"}
+  },
+  "vads-color-feedback-foreground-warning-on-dark": {
+    "*": { "value": "{uswds-system-color-gold-vivid-30}"}
+  },
   "vads-color-feedback-foreground-warning-on-light": {
     "*": { "value": "{uswds-system-color-gold-vivid-40}"}
   },
