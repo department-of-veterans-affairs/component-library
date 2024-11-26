@@ -35,6 +35,18 @@
   display: none;
 }
 
+.usa-combo-box__list{
+  width: calc(100% - 2px);
+}
+
+.usa-combo-box__list-option--focused{
+  outline: 2px solid var(--vads-color-action-focus-on-light);
+}
+
+.usa-combo-box__list-option--focused:focus {
+  outline-offset: -2px;
+}
+
 .usa-combo-box__clear-input{
   right: calc(2.5rem + 3px);
 }
