@@ -167,12 +167,12 @@ export class VaAlert {
 
     const classes = classnames('usa-alert', `usa-alert--${status}`, {
       'usa-alert--success': status === 'continue',
-      'usa-alert--slim': slim,
+      'usa-alert--slim': slim && !fullWidth,
     });
 
     const classesSiteAlert = classnames('usa-site-alert', {
-      'usa-site-alert--info': status === 'info',
       'usa-site-alert--slim': slim,
+      'usa-site-alert--info': status === 'info',
     });
 
     const alertBody = (
