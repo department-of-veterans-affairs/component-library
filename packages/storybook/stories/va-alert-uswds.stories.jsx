@@ -352,3 +352,9 @@ export const WithARIARole = WithARIARoleTemplate.bind(null);
 WithARIARole.args = {
   ...defaultArgs,
 };
+
+export const FullWidthSiteAlert = Template.bind(null);
+FullWidthSiteAlert.args = {
+  ...defaultArgs,
+  'full-width': true
+};
