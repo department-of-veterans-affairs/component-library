@@ -218,7 +218,7 @@ export class VaTableInner {
     content: string,
   ) {
     const button = th.querySelector('button');
-    let spanSortInfo = `Click to sort by ${content} in ${nextSortDirection} order`;
+    let spanSortInfo = thSorted ? `Click to sort by ${content} in ${nextSortDirection} order` : `Click to sort by ${content} in ascending order`;
     button.setAttribute('title', spanSortInfo);
     if (thSorted) {
       setTimeout(() => {
