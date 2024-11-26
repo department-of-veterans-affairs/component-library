@@ -113,6 +113,9 @@
   "uswds-system-color-gold-vivid-30": {
     "value": "#e5a000"
   },
+  "uswds-system-color-gold-vivid-40": {
+    "value": "#c2850c"
+  },
   "uswds-system-color-gold-vivid-50": {
     "value": "#936f38"
   },
@@ -229,6 +232,9 @@
   },
   "uswds-system-color-green-cool-vivid-20": {
     "value": "#70e17b"
+  },
+  "uswds-system-color-green-cool-vivid-30": {
+    "value": "#21c834"
   },
   "uswds-system-color-green-cool-vivid-40": {
     "value": "#00a91c"
