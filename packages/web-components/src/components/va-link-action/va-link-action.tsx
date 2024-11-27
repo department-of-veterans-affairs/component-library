@@ -74,7 +74,7 @@ export class VaLinkAction {
 
   private linkRef?: HTMLElement;
 
-  componentDidLoad() {
+  componentWillLoad() {
     this.checkTextLines();
   }
 

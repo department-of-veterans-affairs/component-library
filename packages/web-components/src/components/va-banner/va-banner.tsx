@@ -100,6 +100,18 @@ export class VaBanner {
 
     // Add the banner ID to the list of dismissed banners. If showClose enabled
     if (this.showClose) {
+      // Track the dismiss event in Google Analytics
+      if (!this.disableAnalytics && this.el.shadowRoot) {
+        const detail = {
+          componentName: 'va-banner',
+          action: 'close',
+          details: {
+            headline: this.headline,
+          },
+        };
+        this.componentLibraryAnalytics.emit(detail);
+      }
+
       // Derive the updated dismissed banners.
       const updatedDismissedBanners = [
         ...this.dismissedBanners,
@@ -119,18 +131,6 @@ export class VaBanner {
 
       // Update dismissedBanners in state.
       this.dismissedBanners = updatedDismissedBanners;
-
-      // Track the dismiss event in Google Analytics
-      if (!this.disableAnalytics) {
-        const detail = {
-          componentName: 'va-banner',
-          action: 'close',
-          details: {
-            headline: this.headline,
-          },
-        };
-        this.componentLibraryAnalytics.emit(detail);
-      }
     }
   };
 
