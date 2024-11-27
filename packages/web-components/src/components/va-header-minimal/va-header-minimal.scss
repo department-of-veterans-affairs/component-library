@@ -1,3 +1,5 @@
+@import '../../mixins/focusable.css';
+
 .va-header {
   display: flex;
   margin-left: auto;
@@ -15,7 +17,7 @@
 }
 
 .va-logo-link:focus {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
+  // outline: 2px solid var(--vads-color-action-focus-on-light);
 }
 
 .va-logo {

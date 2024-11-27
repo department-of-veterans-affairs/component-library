@@ -1,32 +1,40 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @import '~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css';
 @import '../../mixins/links.css';
+@import '../../mixins/focusable.css';
 
 :host {
   display: inline;
 }
 
 // override formation [href]:focus style that added an outline to the host resulting in a double outline for the link
-:host([href]:focus) {
-  outline: none !important;
-}
+// :host([href]:focus) {
+//   outline: none !important;
+// }
 
 :host a {
   cursor: pointer;
   text-decoration: underline;
   font: inherit;
+
+    &:focus,
+    &:active {
+      color: var(--vads-color-gray-90) !important;
+    }
 }
 
 :host a.va-link--reverse,
 :host a.va-link--reverse .link-icon--back {
   color: var(--vads-color-white);
 
-  &:hover,
-  &:active,
+  &:not(:focus):hover,
+  &:not(:focus):active,
   &:hover .link-icon--back,
   &:active .link-icon--back {
-    color: var(--vads-color-action-focus-on-light);
-    background-color: transparent;
+    color: var(--vads-color-gray-90);
+    background-color: var(--vads-color-action-focus-on-light);
+    // color: var(--vads-color-action-focus-on-light);
+    // background-color: transparent;
   }
 }
 

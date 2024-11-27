@@ -2,6 +2,7 @@
 
 @use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
 @use 'usa-radio/src/styles/usa-radio';
+@import '../../mixins/focusable.css';
 
 va-radio-option label {
   max-width: 480px;
@@ -37,7 +38,7 @@ va-radio-option label.usa-radio__label::before {
 }
 
 va-radio-option .usa-radio__input:focus + [class*='__label']::before {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
+  // outline: 2px solid var(--vads-color-action-focus-on-light);
 }
 
 va-radio-option input[disabled='true']:focus + label.usa-radio__label::before {

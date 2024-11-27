@@ -1,3 +1,5 @@
+@import '../../mixins/focusable.css';
+
 va-breadcrumbs .va-breadcrumbs-li {
   display: inline-block;
   line-height: 1.5;
@@ -53,10 +55,10 @@ va-breadcrumbs li > a:hover {
 }
 
 
-va-breadcrumbs li > a:focus {
+/* va-breadcrumbs li > a:focus {
   outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px;
-}
+} */
 
 va-breadcrumbs li > a[aria-current='page'] {
   color: var(--vads-color-base-darker);
