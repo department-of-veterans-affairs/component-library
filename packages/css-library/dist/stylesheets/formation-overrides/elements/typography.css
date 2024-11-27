@@ -176,6 +176,10 @@ dfn {
   font-style: normal;
 }
 
+.usa-content {
+  max-width: 43.75rem;
+}
+
 .usa-content p,
 .usa-content ul:not(.usa-accordion):not(.usa-accordion-bordered),
 .usa-content ol:not(.usa-accordion):not(.usa-accordion-bordered) {

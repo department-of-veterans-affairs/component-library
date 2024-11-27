@@ -4997,6 +4997,10 @@ dfn {
   font-style: normal;
 }
 
+.usa-content {
+  max-width: 43.75rem;
+}
+
 .usa-content p,
 .usa-content ul:not(.usa-accordion):not(.usa-accordion-bordered),
 .usa-content ol:not(.usa-accordion):not(.usa-accordion-bordered) {
@@ -5514,7 +5518,7 @@ dfn {
 }
 
 .usa-banner-inner {
-  max-width: 1040px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
   padding-right: 0.9375rem;
