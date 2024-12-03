@@ -5,7 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { VariantNames } from "./components/va-alert-sign-in/VariantNames";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+export { VariantNames } from "./components/va-alert-sign-in/VariantNames";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export namespace Components {
     /**
@@ -133,6 +135,33 @@ export namespace Components {
           * The text to trigger the expansion
          */
         "trigger": string;
+    }
+    /**
+     * @componentName Alert - Sign In
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaAlertSignIn {
+        /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * For the 'optional' variant, the link to the form to complete without signing in
+         */
+        "noSignInLink"?: string;
+        /**
+          * For the 'optional' variant, how long the respondent has to submit their form
+         */
+        "timeLimit"?: string;
+        /**
+          * Determines the text content and border/background color.
+         */
+        "variant": VariantNames;
+        /**
+          * If `true`, the alert will be visible.
+         */
+        "visible"?: boolean;
     }
     /**
      * @componentName Back to top
@@ -1816,6 +1845,10 @@ export interface VaAlertExpandableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaAlertExpandableElement;
 }
+export interface VaAlertSignInCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaAlertSignInElement;
+}
 export interface VaBannerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaBannerElement;
@@ -2063,6 +2096,29 @@ declare global {
     var HTMLVaAlertExpandableElement: {
         prototype: HTMLVaAlertExpandableElement;
         new (): HTMLVaAlertExpandableElement;
+    };
+    interface HTMLVaAlertSignInElementEventMap {
+        "va-component-did-load": any;
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Alert - Sign In
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaAlertSignInElement extends Components.VaAlertSignIn, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaAlertSignInElementEventMap>(type: K, listener: (this: HTMLVaAlertSignInElement, ev: VaAlertSignInCustomEvent<HTMLVaAlertSignInElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaAlertSignInElementEventMap>(type: K, listener: (this: HTMLVaAlertSignInElement, ev: VaAlertSignInCustomEvent<HTMLVaAlertSignInElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaAlertSignInElement: {
+        prototype: HTMLVaAlertSignInElement;
+        new (): HTMLVaAlertSignInElement;
     };
     /**
      * @componentName Back to top
@@ -3015,6 +3071,7 @@ declare global {
         "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
         "va-alert-expandable": HTMLVaAlertExpandableElement;
+        "va-alert-sign-in": HTMLVaAlertSignInElement;
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
@@ -3218,6 +3275,41 @@ declare namespace LocalJSX {
           * The text to trigger the expansion
          */
         "trigger": string;
+    }
+    /**
+     * @componentName Alert - Sign In
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaAlertSignIn {
+        /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * For the 'optional' variant, the link to the form to complete without signing in
+         */
+        "noSignInLink"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: VaAlertSignInCustomEvent<any>) => void;
+        /**
+          * Fires when the component has successfully finished rendering for the first time.
+         */
+        "onVa-component-did-load"?: (event: VaAlertSignInCustomEvent<any>) => void;
+        /**
+          * For the 'optional' variant, how long the respondent has to submit their form
+         */
+        "timeLimit"?: string;
+        /**
+          * Determines the text content and border/background color.
+         */
+        "variant"?: VariantNames;
+        /**
+          * If `true`, the alert will be visible.
+         */
+        "visible"?: boolean;
     }
     /**
      * @componentName Back to top
@@ -5111,6 +5203,7 @@ declare namespace LocalJSX {
         "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
         "va-alert-expandable": VaAlertExpandable;
+        "va-alert-sign-in": VaAlertSignIn;
         "va-back-to-top": VaBackToTop;
         "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
@@ -5193,6 +5286,12 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-alert-expandable": LocalJSX.VaAlertExpandable & JSXBase.HTMLAttributes<HTMLVaAlertExpandableElement>;
+            /**
+             * @componentName Alert - Sign In
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-alert-sign-in": LocalJSX.VaAlertSignIn & JSXBase.HTMLAttributes<HTMLVaAlertSignInElement>;
             /**
              * @componentName Back to top
              * @maturityCategory use
