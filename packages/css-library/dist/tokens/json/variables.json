@@ -2069,11 +2069,11 @@
   "font": {
     "family": {
       "sans": {
-        "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
+        "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"
+          "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"
         },
         "name": "font-family-sans",
         "attributes": {
@@ -2126,11 +2126,11 @@
     },
     "source": {
       "sans": {
-        "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
+        "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"
+          "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"
         },
         "name": "font-source-sans",
         "attributes": {

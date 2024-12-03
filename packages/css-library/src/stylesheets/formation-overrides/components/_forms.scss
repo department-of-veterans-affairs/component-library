@@ -11,11 +11,12 @@
 @use '../../override-function' as *;
 @use '../../mixins' as fm;
 
-$usa-form-width: scale-rem(32rem);
-
+$usa-form-width: 32rem;
+// This actually seems to be how things were before. 
+// Leaving a comment here so it gets flagged in the PR.
 [type=submit] {
   @include fm.media(tok.$medium-screen) {
-    margin-top: scale-rule(calc(3rem - .2em)); // Label margin minus input bottom margin
+    margin-top: calc(1.875rem - .2em); // Label margin minus input bottom margin
   }
 }
 

@@ -1,4 +1,5 @@
 @use '../override-function' as *;
+@import '../core-variables';
 @import "../mixins";
 
 $lead-max-width: scale-rem(77rem);
@@ -21,9 +22,14 @@ body {
   // font-size: $base-font-size;
   font-size: 16px;
   font-family: inherit;
+  line-height: $vads-font-line-height-default;
   &.modal-open {
     overflow: hidden;
   }
+}
+
+h1 {
+  margin-top: 0;
 }
 
 // Skip link
@@ -106,7 +112,7 @@ a {
 }
 
 // ====== Headings
-@import 'headings';
+// @import 'headings';
 
 //======= Lists
 ul {
@@ -277,7 +283,11 @@ table {
   @include media($medium-screen) {
     background: $color-gray-lightest;
     .usa-banner-inner {
+      font-size: 12px;
       padding-left: scale-rem(1.5rem);
+      p {
+        font-size: 12px;
+      }
     }
 
     .usa-banner-content {
@@ -289,6 +299,10 @@ table {
   @include media($small-desktop-screen) {
     .usa-banner-inner {
       padding-left: 0;
+      font-size: 12px;
+      p {
+        font-size: 12px;
+      }
     }
   }
 
@@ -301,7 +315,6 @@ table {
 
 .va-notice--banner {
   p {
-    font-size: 16px;
     margin: 0;
   }
   a {
@@ -348,8 +361,98 @@ article > h1 {
   max-width: $lead-max-width;
 
   p, a {
+    font-family: $font-serif;
     font-size: $lead-font-size;
     font-weight: $font-weight-normal;
     line-height: $lead-line-height;
+  }
+}
+
+// Used on content-build hub pages and a couple of places in vets-website
+.va-h-ruled--stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    margin-right: scale-rem(12rem);
+  }
+
+  &::before,
+  &::after {
+    border-top: 1px solid $color-gray-light;
+    content: " ";
+    flex: 1 1 50%;
+    padding: scale-rule(1rem 0);
+  }
+
+  background: url('#{$image-path}/stars.png') no-repeat center;
+  background-size: scale-rule(11rem auto);
+  margin: scale-rule(1.6rem auto auto);
+  padding: scale-rule(2rem 0 0);
+  text-align: center;
+
+  @include media($medium-screen) {
+    padding-left: 0;
+  }
+}
+
+// DEPRECATED: Replaced with va-button web component (still used in drupal content for anchor tags)
+.va-button-primary {
+  background: $color-green !important;
+
+  &:hover,
+  &:focus {
+    background-color: $uswds-system-color-green-cool-vivid-70 !important;
+    text-decoration: none !important;
+  }
+
+  svg {
+    display: inline-block;
+    height: scale-rem(1.2rem);
+    margin-left: scale-rem(0.5rem);
+    width: scale-rem(1.2rem);
+    vertical-align: -1px;
+  }
+}
+
+// used mostly in content-build, we should consider moving this over there 
+.last-updated {
+  margin-top: 1.5em;
+  border-top: 2px solid $color-gray-light;
+  padding: 1em 0;
+  p {
+    color: $color-gray-dark !important;
+  }
+}
+
+// Feature style used on hub pages (example on /pension/how-to-apply), copied here from formation
+// ToDo - These should be replaced with web-components: 
+// https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/2338#top 
+// https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/2341#top
+
+.feature {
+  background: $color-primary-alt-lightest;
+  padding: 1em;
+  clear: both;
+  margin: 1.5em 0 1.5em 0;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+  h4 {
+    margin-top: 0;
+  }
+  ul {
+    margin: 0 0 0.5em 1.5em;
+    padding: 0;
+    li {
+      list-style: square;
+      margin: 0;
+    }
   }
 }
