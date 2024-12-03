@@ -1166,6 +1166,10 @@ export namespace Components {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
+        /**
+          * Text to display in the eyebrow of an item if active, pending, or checkmark is true. Defaults to "Active", "Pending", or "Complete"
+         */
+        "statusText"?: string;
     }
     /**
      * @componentName Progress bar - activity
@@ -4404,6 +4408,10 @@ declare namespace LocalJSX {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
+        /**
+          * Text to display in the eyebrow of an item if active, pending, or checkmark is true. Defaults to "Active", "Pending", or "Complete"
+         */
+        "statusText"?: string;
     }
     /**
      * @componentName Progress bar - activity

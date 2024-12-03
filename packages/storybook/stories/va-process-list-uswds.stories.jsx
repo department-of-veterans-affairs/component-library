@@ -80,6 +80,23 @@ const StatusTemplate = (defaultArgs) => {
   );
 };
 
+const CustomStatusTextTemplate = (defaultArgs) => {
+  return (
+    <va-process-list>
+      <va-process-list-item checkmark header='Checkmark Icon' status-text="Done">  
+        <p>Add the prop <code>checkmark</code> to make the list icon a checkmark.</p>
+      </va-process-list-item>
+      <va-process-list-item active header='Active Icon' status-text="Current">
+        <p>Add the prop <code>active</code> to make the list icon and header blue.</p>
+      </va-process-list-item>
+      <va-process-list-item pending header='Pending Icon' status-text="Incomplete">
+        <p>Add the prop <code>pending</code> to make the list item and icon grayed out.</p>
+      </va-process-list-item>
+      <va-process-list-item header='Default Icon' />
+    </va-process-list>
+  );
+};
+
 
 const HeaderSizeTemplate = (defaultArgs) => {
   return (
@@ -143,6 +160,9 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(processListDocs);
 
 export const Status = StatusTemplate.bind(null);
+Status.args = { ...defaultArgs };
+
+export const CustomStatusText = CustomStatusTextTemplate.bind(null);
 Status.args = { ...defaultArgs };
 
 export const HeaderSize = HeaderSizeTemplate.bind(null);

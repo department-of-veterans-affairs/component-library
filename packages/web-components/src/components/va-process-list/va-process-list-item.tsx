@@ -38,15 +38,20 @@ export class VaProcessListItem {
   */
   @Prop() checkmark?: boolean = false;
 
+  /**
+  * Text to display in the eyebrow of an item if active, pending, or checkmark is true. Defaults to "Active", "Pending", or "Complete"
+  */
+  @Prop() statusText?: string;
+
   render() { 
-    const {header, level, checkmark, active, pending} = this;
+    const {header, level, checkmark, active, pending, statusText} = this;
     // eslint-disable-next-line i18next/no-literal-string
     const HeaderTag = `h${level}`;
     const status = checkmark ? 'checkmark' : active ? 'active' : pending ? 'pending' : null;
     const statusTextMap = {
-      checkmark: 'Complete',
-      active: 'Active',
-      pending: 'Pending'
+      checkmark: statusText || 'Complete',
+      active: statusText || 'Active',
+      pending: statusText || 'Pending'
     }
     
     return (
