@@ -4,16 +4,18 @@
 
 @use './core-variables' as *;
 
-//============ MIXINS & OTHER FUNCTIONS ==============//
-@use './override-function' as *;
-@use'./functions' as *;
-@use './mixins' as *;
-
 //============ VENDOR PARTIALS ==============//
 @import 'lib/normalize';
 
+// Grid/columns classes
+@import "./formation-overrides/foundation-sites";
+
 //============ PORTED VARIABLES ==============//
 @import './formation-overrides/variables';
+
+// ----- VA GENERAL (MAIN FILE/OTHER) ---- //
+@import 'base/fonts';
+@import 'base/utils';
 
 //============ USWDS v1 ==============//
 @import 'formation-overrides/core/fonts';
@@ -34,7 +36,6 @@
 @import 'formation-overrides/components/media-block';
 @import 'formation-overrides/components/side-nav';
 
-// ----- VA GENERAL (MAIN FILE/OTHER) ---- //
 @import 'base/va';
 
 // ----- VA MODULES ---- //

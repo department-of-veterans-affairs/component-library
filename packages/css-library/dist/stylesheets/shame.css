@@ -18,7 +18,7 @@
 **/
 @media screen and (min-width: 768px), print and (min-width: 768px) {
   [type=submit] {
-    margin-top: calc(3rem - 0.2em);
+    margin-top: calc(1.875rem - 0.2em);
   }
 }
 
@@ -30,7 +30,7 @@ fieldset {
 
 @media screen and (min-width: 768px), print and (min-width: 768px) {
   .usa-form {
-    max-width: 20rem;
+    max-width: 32rem;
   }
 }
 
@@ -48,7 +48,7 @@ fieldset {
 
 .usa-form-note {
   float: right;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 0.9375rem;
   margin: 0 0 scale(1.5rem);
 }
@@ -152,6 +152,7 @@ fieldset {
 **/
 body .row {
   max-width: 62.5em;
+  margin: 0 auto;
 }
 body .row-padded {
   max-width: 62.5rem;
@@ -161,7 +162,7 @@ body .row-padded {
 
 @media screen and (min-width: 768px), print and (min-width: 768px) {
   .form-panel {
-    max-width: 20rem;
+    max-width: 32rem;
   }
 }
 
