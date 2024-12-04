@@ -5,8 +5,8 @@
 
 This is a monorepo containing two main packages:
 
-- `react-components`
 - `web-components`
+- `react-components`
 
 The `core` package is for bundling the two main packages into one for publishing. The `storybook` package is for the combined story files from each `*-components` package.
 The `design-system-dashboard-cli` package is used to gather metrics on design system usage.
@@ -23,6 +23,151 @@ This repo uses [`Chromatic`](https://www.chromatic.com/) to streamline reviews b
 ### Content language
 
 Our web components have linting which checks for hard-coded user-facing strings. At the moment this linting isn't integrated into CI - so you will only see it if you run `yarn lint` or if your editor has ESLint integration through a plugin.
+
+### Local testing with Verdaccio
+Contributors are encouraged to test their changes in `vets-website` using [Verdaccio](https://verdaccio.org/). What is Verdaccio? From the website:
+
+> Verdaccio is a simple, zero-config-required local private NPM registry. No need for an entire database just to get started&hellip;
+
+Verdaccio allows contributors to publish a new version of the VA Design System component library on their local machine, and preview `vets-website` with their changes.
+
+#### Before you begin
+1. VA Design System component library and vets-website require different versions of NodeJS. Be sure you have [NVM installed](https://github.com/nvm-sh/nvm#installing-and-updating) before you begin.
+1. Download Node `v14.15.0` and a current Node `v18.x.x` or `v20.x.x`
+1. Verdaccio also requires [Python3](https://www.python.org/downloads/). Ensure you have Python3 installed by opening a terminal window and typing the following command:
+
+   ```shell
+   which python3 # Should see output like /usr/bin/python3
+   ```
+   
+   You should see an execution path if Python3 is installed. If not, install it and type `which python3` again in a new terminal window.
+
+#### Installing Verdaccio
+1. Install Verdaccio using NPM or Yarn:
+
+   ```shell
+   # Ensure Verdaccio compatibility with vets-website
+   nvm use 14.15.0
+
+   # If you're using NPM
+   npm install --location=global verdaccio@5.5.0
+
+   # If you're using Yarn
+   yarn global add verdaccio@5.5.0
+   ```
+1. Verify Verdaccio was installed correctly.
+
+   ```shell
+   verdaccio --version # Should see output like v5.5.0
+   ```
+1. Start Verdaccio on your local machine. The server will be running at `localhost:4873`.
+
+   ```shell
+   verdaccio
+   ```
+1. Create a new Verdaccio user by entering this command and following the prompts.
+
+   ```shell
+   npm adduser --registry http://localhost:4873/
+   ```
+
+#### Publish your component-library changes to Verdaccio
+The next step is to update the `core` and `web-component` package versions in their respective `package.json` files. _**Note:** You must use Node `v18.x.x` or `v20.x.x` for this step._
+
+1. Navigate to `component-library` and switch to Node `[18, 20]`
+
+   ```shell
+   cd component-library/
+   nvm use 18.x.x # Or version 20
+   nvm use 20.x.x
+   ```
+1. Navigate to `packages/web-components` and update the package version. Assuming the current version is `10.1.1`, you could change the version to `10.1.2-rc1` or something similar.
+
+   ```diff
+   ! packages/web-components/package.json
+
+   - "version": "10.1.1"
+   + "version": "10.1.2-rc1"
+   ```
+2. Navigate to `packages/core` and update the package version using the same logic
+
+   ```diff
+   ! packages/core/package.json
+      
+   - "version": "15.0.1"
+   + "version": "15.0.2-rc1"
+   ```
+3. Still in the `packages/core` package.json file, update the VADS dependency entry
+
+   ```diff
+   ! packages/core/package.json
+
+   dependencies: {
+   -   "@department-of-veterans-affairs/web-components": "workspace:*"
+   +   "@department-of-veterans-affairs/web-components": "^10.2.2-rc1"
+   }
+   ```
+4. Build the components using the [Running Build via Storybook](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#running-build-via-storybook) instructions. Ignore the last step to start Storybook; you won't need it for this process.
+5. Publish the `core` package to Verdaccio
+
+   ```shell
+   cd ../packages/core/
+   npm publish --registry http://localhost:4873
+   ```
+6. Publish the `web-component` package to Veraccio
+
+   ```shell
+   cd ../packages/web-components/
+   npm publish --registry http://localhost:4873
+   ```
+
+#### Link `vets-website` to local Verdaccio registry
+You're now ready to switch to `vets-website` and update the VADS dependency. _**Note:** You must use Node `v14.15.0` for this step._
+
+1. Run the following commands to point to your local Verdaccio registry
+
+   ```shell
+   cd vets-website/
+   nvm use 14.15.0 # Ensure correct Node version
+   yarn config set registry http://localhost:4873
+   npm config set registry http://localhost:4873
+   ```
+2. Add the local `core` package to `vets-website` and start the server
+
+   ```shell
+   yarn add -W @department-of-veterans-affairs/component-library@vX.X.rc-1
+   yarn watch
+   ```
+
+#### Reverting to the default registry
+After you are finished testing, reset `vets-website` to use the standard registry. _**Note:** You must use Node `v14.15.0` for this step._
+
+   ```shell
+   # Using NPM
+   nvm use 14.15.0 # Ensure correct Node version
+   npm config set registry https://registry.yarnpkg.com/
+
+   # Or using Yarn
+   nvm use 14.15.0
+   yarn config set registry https://registry.yarnpkg.com/
+   yarn config set npmRegistryServer https://registry.yarnpkg.com/
+   ```
+
+#### Troubleshooting
+1. If you encounter Webpack errors during the `yarn watch` step in `vets-website`, try deleting the `node_modules/` folder, then reinstalling dependencies.
+
+   ```shell
+   cd vets-website/
+   rm -rf node_modules/ # Careful with this one
+   yarn install
+   yarn watch
+   ```
+2. If you encounter errors in the `component-library` or `vets-website` build or watch steps, try changing your Node version.
+
+   ```shell
+   nvm use 14.15.0
+   nvm use 18.x.x OR nvm use 20.x.x
+   ```
 
 ## Publishing
 
@@ -78,36 +223,37 @@ Releases will occur no less often than at the beginning of each sprint (every ot
 # Running Build via Storybook
 
 1. `cd packages/web-components/`
-    1. `yarn install`
-    2. `yarn build`
-    3. `yarn build-bindings` (build React bindings)
-    4. `yarn watch:stencil` (optional)
+   1. `yarn install`
+   2. `yarn build`
+   3. `yarn build-bindings` (build React bindings)
+   4. `yarn watch:stencil` (optional)
 2. `cd ../react-components/`
-    1. `yarn install`
-    2. `yarn build`
+   1. `yarn install`
+   2. `yarn build`
 3. `cd ../core/`
-    1. `yarn install`
-    2. `yarn build`
+   1. `yarn install`
+   2. `yarn build`
 4. `cd ../storybook/`
-    1. `yarn install`
-    2. `yarn storybook`
+   1. `yarn install`
+   2. `yarn storybook`
 
 This will allow you to run Storybook locally to view all components
 
 # Stencil Dev Server for Testing IE11
 
 1. Update `stencil.config.ts` line 16 to `buildEs5: true,`
-    1. [More information on buildEs5 in Stencil](https://stenciljs.com/docs/config#buildes5)
-    2. Stencil Dev Server is run in `dev` mode
+   1. [More information on buildEs5 in Stencil](https://stenciljs.com/docs/config#buildes5)
+   2. Stencil Dev Server is run in `dev` mode
 2. Within `component-library/packages/web-components/src/index.html` Web Components can be added inside of the `<body>` tag for testing
-    1. Example:
 
-    ```
-    <body>
-        <va-progress-bar label="Add a label here" percent={35}></va-progress-bar>
-        <va-segmented-progress-bar current={2} total={6}></va-segmented-progress-bar>
-    </body>
-    ```
+   1. Example:
+
+   ```
+   <body>
+       <va-progress-bar label="Add a label here" percent={35}></va-progress-bar>
+       <va-segmented-progress-bar current={2} total={6}></va-segmented-progress-bar>
+   </body>
+   ```
 
 3. Run `yarn serve` inside `packages/web-components/` to start the Stencil Dev Server
 

@@ -20,8 +20,8 @@
     margin: 8px 0;
   }
 
-  .outer-wrap va-file-input:last-child {
-    padding: 0 8px;
+  va-file-input.no-file {
+    margin: 0 8px;
   }
 
   va-file-input:not(:last-child) {

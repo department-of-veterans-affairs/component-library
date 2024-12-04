@@ -7,6 +7,10 @@
   working while we work on deprecation.
 **/
 /**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
   /uswds/dist/scss/lib/addons/_margin.scss
 **/
 /**
@@ -18,18 +22,27 @@
   border-left-style: solid;
   border-left-width: 10px;
   display: table;
-  padding: units(4) units(8) units(4) units(3);
+  padding: 2rem 4rem 2rem 1.5rem;
   width: 100%;
 }
 .usa-alert::before {
-  display: block;
-  width: auto;
-  background: none;
-  font-family: "Font Awesome 5 Free";
-  font-size: 1.25rem;
-  margin-right: units(2);
+  background-image: url("/img/info.svg");
+  background-size: 35px 35px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: unset;
+  border-radius: 50%;
+  content: "";
+  height: 31px;
+  width: 31px;
+  top: 2px;
+  left: 0;
+  font-family: unset;
+  font-weight: unset;
+  font-size: unset;
+  margin-right: 1rem;
   position: static;
-  font-weight: 900;
+  display: block;
 }
 .usa-alert .usa-alert-body {
   display: table-cell;
@@ -44,7 +57,7 @@
   padding-top: 0;
 }
 .usa-alert-text {
-  margin-top: units(2.5);
+  margin-top: 1.25rem;
 }
 .usa-alert-text:only-child {
   margin: 0;
@@ -57,16 +70,16 @@
   margin-bottom: 0;
 }
 .usa-alert-text .usa-alert-heading + p:only-of-type {
-  margin-top: units(2.5);
+  margin-top: 1.25rem;
 }
 .usa-alert-text ul {
-  padding-left: units(2.5);
+  padding-left: 1.25rem;
 }
 .usa-alert-info {
   border-left-color: #00a6d2;
 }
 .usa-alert-info::before {
-  content: "\f05a";
+  background-image: url("/img/info.svg");
 }
 .usa-alert-info.background-color-only {
   background-color: #e1f3f8;
@@ -75,8 +88,7 @@
   border-left-color: #cd2026;
 }
 .usa-alert-error::before {
-  color: #cd2026;
-  content: "\f06a";
+  background-image: url("/img/error.svg");
 }
 .usa-alert-error.background-color-only {
   background-color: #f9dede;
@@ -85,8 +97,7 @@
   border-left-color: #008817;
 }
 .usa-alert-success::before {
-  color: #008817;
-  content: "\f00c";
+  background-image: url("/img/success.svg");
 }
 .usa-alert-success.background-color-only {
   background-color: #e7f4e4;
@@ -95,17 +106,13 @@
   border-left-color: #fdb81e;
 }
 .usa-alert-warning::before {
-  content: "\f071";
+  background-image: url("/img/warning.svg");
 }
 .usa-alert-warning.background-color-only {
   background-color: #fff1d2;
 }
 .usa-alert-continue {
   border-left-color: #008817;
-}
-.usa-alert-continue::before {
-  color: #008817;
-  content: "\f023";
 }
 .usa-alert.background-color-only {
   border-left: none;
@@ -121,7 +128,7 @@
   font-size: 1.40625rem;
   padding: 0;
   position: absolute;
-  margin: units(2);
+  margin: 1rem;
   right: 0;
   top: 0;
   width: auto;
@@ -243,12 +250,7 @@ p.usa-alert-heading {
   border-top: 0.625rem solid #00a6d2;
 }
 .usa-alert-full-width-info .usa-alert:before, .usa-alert-full-width-information .usa-alert:before {
-  content: "\f05a";
   background: none;
-  font-size: 1.25rem;
-  margin-right: 0.9375rem;
-  position: static;
-  font-weight: 900;
 }
 
 /*# sourceMappingURL=m-alert.css.map */

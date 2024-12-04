@@ -49,9 +49,8 @@ $default-feature: min-width;
   }
 }
 
-$color-gray-light:#aeb0b5;
-$focus-outline: 2px dotted $color-gray-light;
-$focus-spacing: 3px;
+$focus-outline: 2px solid $vads-color-action-focus-on-light;
+$focus-spacing: 2px;
 
 // Focus state mixin
 @mixin focus {

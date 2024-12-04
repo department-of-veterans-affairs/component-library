@@ -1838,6 +1838,82 @@
       ]
     }
   },
+  "vads-color-feedback-foreground-success-on-dark": {
+    "*": {
+      "value": "#21c834",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-green-cool-vivid-30}"
+      },
+      "name": "vads-color-feedback-foreground-success-on-dark",
+      "attributes": {
+        "category": "vads-color-feedback-foreground-success-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-foreground-success-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-foreground-success-on-light": {
+    "*": {
+      "value": "#008817",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-green-cool-vivid-50}"
+      },
+      "name": "vads-color-feedback-foreground-success-on-light",
+      "attributes": {
+        "category": "vads-color-feedback-foreground-success-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-foreground-success-on-light",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-foreground-warning-on-dark": {
+    "*": {
+      "value": "#e5a000",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gold-vivid-30}"
+      },
+      "name": "vads-color-feedback-foreground-warning-on-dark",
+      "attributes": {
+        "category": "vads-color-feedback-foreground-warning-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-foreground-warning-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-foreground-warning-on-light": {
+    "*": {
+      "value": "#c2850c",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gold-vivid-40}"
+      },
+      "name": "vads-color-feedback-foreground-warning-on-light",
+      "attributes": {
+        "category": "vads-color-feedback-foreground-warning-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-foreground-warning-on-light",
+        "*"
+      ]
+    }
+  },
   "vads-color-feedback-surface-info-on-dark": {
     "*": {
       "value": "#112f4e",
@@ -1993,11 +2069,11 @@
   "font": {
     "family": {
       "sans": {
-        "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
+        "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"
+          "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"
         },
         "name": "font-family-sans",
         "attributes": {
@@ -2050,11 +2126,11 @@
     },
     "source": {
       "sans": {
-        "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
+        "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"
+          "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"
         },
         "name": "font-source-sans",
         "attributes": {
@@ -2169,23 +2245,23 @@
           "sm"
         ]
       },
-      "base": {
+      "root": {
         "value": "1rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
           "value": "1rem"
         },
-        "name": "font-size-base",
+        "name": "font-size-root",
         "attributes": {
           "category": "font",
           "type": "size",
-          "item": "base"
+          "item": "root"
         },
         "path": [
           "font",
           "size",
-          "base"
+          "root"
         ]
       },
       "md": {
@@ -2464,6 +2540,44 @@
       }
     },
     "size": {
+      "source-sans-normalized": {
+        "value": "1.06rem",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.06rem"
+        },
+        "name": "vads-font-size-source-sans-normalized",
+        "attributes": {
+          "category": "vads-font",
+          "type": "size",
+          "item": "source-sans-normalized"
+        },
+        "path": [
+          "vads-font",
+          "size",
+          "source-sans-normalized"
+        ]
+      },
+      "root": {
+        "value": "1rem",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1rem"
+        },
+        "name": "vads-font-size-root",
+        "attributes": {
+          "category": "vads-font",
+          "type": "size",
+          "item": "root"
+        },
+        "path": [
+          "vads-font",
+          "size",
+          "root"
+        ]
+      },
       "body": {
         "large": {
           "value": "20px",
@@ -2694,6 +2808,159 @@
             "size",
             "heading",
             "level-6"
+          ]
+        }
+      }
+    }
+  },
+  "vads": {
+    "size": {
+      "line-length": {
+        "1": {
+          "value": "44ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "44ex"
+          },
+          "name": "vads-size-line-length-1",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "1"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "1"
+          ]
+        },
+        "2": {
+          "value": "60ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "60ex"
+          },
+          "name": "vads-size-line-length-2",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "2"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "2"
+          ]
+        },
+        "3": {
+          "value": "64ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "64ex"
+          },
+          "name": "vads-size-line-length-3",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "3"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "3"
+          ]
+        },
+        "4": {
+          "value": "68ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "68ex"
+          },
+          "name": "vads-size-line-length-4",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "4"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "4"
+          ]
+        },
+        "5": {
+          "value": "72ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "72ex"
+          },
+          "name": "vads-size-line-length-5",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "5"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "5"
+          ]
+        },
+        "6": {
+          "value": "88ex",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "88ex"
+          },
+          "name": "vads-size-line-length-6",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "6"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "6"
+          ]
+        },
+        "none": {
+          "value": "inherit",
+          "filePath": "tokens/line-lengths.json",
+          "isSource": true,
+          "original": {
+            "value": "inherit"
+          },
+          "name": "vads-size-line-length-none",
+          "attributes": {
+            "category": "vads",
+            "type": "size",
+            "item": "line-length",
+            "subitem": "none"
+          },
+          "path": [
+            "vads",
+            "size",
+            "line-length",
+            "none"
           ]
         }
       }
@@ -3832,6 +4099,21 @@
       "uswds-system-color-gold-vivid-30"
     ]
   },
+  "uswds-system-color-gold-vivid-40": {
+    "value": "#c2850c",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#c2850c"
+    },
+    "name": "uswds-system-color-gold-vivid-40",
+    "attributes": {
+      "category": "uswds-system-color-gold-vivid-40"
+    },
+    "path": [
+      "uswds-system-color-gold-vivid-40"
+    ]
+  },
   "uswds-system-color-gold-vivid-50": {
     "value": "#936f38",
     "filePath": "tokens/uswds.json",
@@ -4415,6 +4697,21 @@
     },
     "path": [
       "uswds-system-color-green-cool-vivid-20"
+    ]
+  },
+  "uswds-system-color-green-cool-vivid-30": {
+    "value": "#21c834",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#21c834"
+    },
+    "name": "uswds-system-color-green-cool-vivid-30",
+    "attributes": {
+      "category": "uswds-system-color-green-cool-vivid-30"
+    },
+    "path": [
+      "uswds-system-color-green-cool-vivid-30"
     ]
   },
   "uswds-system-color-green-cool-vivid-40": {

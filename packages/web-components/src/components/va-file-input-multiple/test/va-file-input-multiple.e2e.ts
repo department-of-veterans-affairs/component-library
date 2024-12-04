@@ -19,6 +19,28 @@ describe('va-file-input-multiple', () => {
     expect(singleElement).not.toBeNull();
   });
 
+  it('renders the file input upload messages correctly', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input-multiple />`);
+
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input >>> .file-input-instructions');
+    expect(fileInput.innerHTML).toContain(`<span>Drag a file here or <span class="file-input-choose-text">choose from folder</span></span>`);
+
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    const secondFileInput = await page.find('va-file-input-multiple >>> va-file-input:last-child >>> .file-input-instructions');
+    expect(secondFileInput.innerHTML).toContain(`<span>Drag an additional file here or <span class="file-input-choose-text">choose from folder</span></span>`);
+  });
+
   it('renders hint text', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-file-input-multiple hint="This is hint text" />');
@@ -60,6 +82,17 @@ describe('va-file-input-multiple', () => {
     expect(fileInput.getAttribute('accept')).toBeFalsy();
   });
 
+  it('the `readOnly` attribute exists if set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input-multiple read-only />`);
+
+    const fileInputComponent = await page.find(
+      'va-file-input-multiple >>> va-file-input',
+    );
+    expect(fileInputComponent).not.toBeNull();
+    const readOnlyProp = await fileInputComponent.getProperty('readOnly');
+    expect(readOnlyProp).toBeTruthy();
+  });
 
   it('emits the vaMultipleChange event only once', async () => {
     const page = await newE2EPage();

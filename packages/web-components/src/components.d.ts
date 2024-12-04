@@ -519,6 +519,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Whether month should be optional; has no effect unless monthYearOnly is true
+         */
+        "monthOptional"?: boolean;
+        /**
           * Whether or not only the Month and Year inputs should be displayed.
          */
         "monthYearOnly"?: boolean;
@@ -579,9 +583,21 @@ export namespace Components {
          */
         "name"?: string;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Custom instructional message in the file input.
+         */
+        "uploadMessage"?: HTMLElement;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
@@ -621,9 +637,17 @@ export namespace Components {
          */
         "name"?: string;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File[];
     }
     /**
      * @componentName Header - Minimal
@@ -657,6 +681,33 @@ export namespace Components {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
+    }
+    /**
+     * @componentName Language Toggle
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaLanguageToggle {
+        /**
+          * The English language href for the page. Required.
+         */
+        "enHref": string;
+        /**
+          * The Spanish language href for the page. Optional.
+         */
+        "esHref"?: string;
+        /**
+          * The ISO language code for the page. Default is 'en'.
+         */
+        "language": string;
+        /**
+          * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
+         */
+        "routerLinks"?: boolean;
+        /**
+          * The Tagalog language href for the page. Optional.
+         */
+        "tlHref"?: string;
     }
     /**
      * @componentName Link
@@ -720,6 +771,10 @@ export namespace Components {
           * Adds an aria-label attribute to the link element.
          */
         "label"?: string;
+        /**
+          * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
+         */
+        "language"?: string;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
          */
@@ -1157,6 +1212,10 @@ export namespace Components {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
+        /**
+          * Text to display in the eyebrow of an item if active, pending, or checkmark is true. Defaults to "Active", "Pending", or "Complete"
+         */
+        "statusText"?: string;
     }
     /**
      * @componentName Progress bar - activity
@@ -1482,6 +1541,10 @@ export namespace Components {
     }
     interface VaTable {
         /**
+          * Is the table sortable
+         */
+        "sortable": boolean;
+        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -1490,7 +1553,7 @@ export namespace Components {
          */
         "tableTitle"?: string;
         /**
-          * If uswds is true, the type of table
+          * The type of table
          */
         "tableType"?: 'borderless';
     }
@@ -1505,6 +1568,10 @@ export namespace Components {
          */
         "cols"?: number;
         "rows"?: number;
+        /**
+          * Is this a sortable table
+         */
+        "sortable"?: boolean;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -1530,6 +1597,10 @@ export namespace Components {
           * Numeric string representing the contact number. Typical length is 3 or 10 digits - SMS short codes will be 5 or 6 digits.
          */
         "contact": string;
+        /**
+          * Prepends the country code to the given contact number. Do NOT include the '+'
+         */
+        "countryCode"?: string;
         /**
           * Optional numeric string phone number extension
          */
@@ -1839,6 +1910,10 @@ export interface VaFileInputMultipleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputMultipleElement;
 }
+export interface VaLanguageToggleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaLanguageToggleElement;
+}
 export interface VaLinkCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaLinkElement;
@@ -1914,6 +1989,10 @@ export interface VaSelectCustomEvent<T> extends CustomEvent<T> {
 export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaStatementOfTruthElement;
+}
+export interface VaTableInnerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTableInnerElement;
 }
 export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2364,6 +2443,29 @@ declare global {
     var HTMLVaIconElement: {
         prototype: HTMLVaIconElement;
         new (): HTMLVaIconElement;
+    };
+    interface HTMLVaLanguageToggleElementEventMap {
+        "vaLanguageToggle": any;
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Language Toggle
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaLanguageToggleElement extends Components.VaLanguageToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaLanguageToggleElementEventMap>(type: K, listener: (this: HTMLVaLanguageToggleElement, ev: VaLanguageToggleCustomEvent<HTMLVaLanguageToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaLanguageToggleElementEventMap>(type: K, listener: (this: HTMLVaLanguageToggleElement, ev: VaLanguageToggleCustomEvent<HTMLVaLanguageToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaLanguageToggleElement: {
+        prototype: HTMLVaLanguageToggleElement;
+        new (): HTMLVaLanguageToggleElement;
     };
     interface HTMLVaLinkElementEventMap {
         "component-library-analytics": any;
@@ -2881,12 +2983,23 @@ declare global {
         prototype: HTMLVaTableElement;
         new (): HTMLVaTableElement;
     };
+    interface HTMLVaTableInnerElementEventMap {
+        "sortTable": any;
+    }
     /**
      * @componentName Table
      * @maturityCategory use
      * @maturityLevel best_practice
      */
     interface HTMLVaTableInnerElement extends Components.VaTableInner, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTableInnerElementEventMap>(type: K, listener: (this: HTMLVaTableInnerElement, ev: VaTableInnerCustomEvent<HTMLVaTableInnerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTableInnerElementEventMap>(type: K, listener: (this: HTMLVaTableInnerElement, ev: VaTableInnerCustomEvent<HTMLVaTableInnerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaTableInnerElement: {
         prototype: HTMLVaTableInnerElement;
@@ -2997,6 +3110,7 @@ declare global {
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
+        "va-language-toggle": HTMLVaLanguageToggleElement;
         "va-link": HTMLVaLinkElement;
         "va-link-action": HTMLVaLinkActionElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
@@ -3618,6 +3732,10 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
+          * Whether month should be optional; has no effect unless monthYearOnly is true
+         */
+        "monthOptional"?: boolean;
+        /**
           * Whether or not only the Month and Year inputs should be displayed.
          */
         "monthYearOnly"?: boolean;
@@ -3698,9 +3816,21 @@ declare namespace LocalJSX {
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Custom instructional message in the file input.
+         */
+        "uploadMessage"?: HTMLElement;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
@@ -3740,13 +3870,21 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * Event emitted when any change to the file inputs occurs.
+          * Event emitted when any change to the file inputs occurs. Sends back an array of FileDetails
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
+        /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
         /**
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File[];
     }
     /**
      * @componentName Header - Minimal
@@ -3780,6 +3918,41 @@ declare namespace LocalJSX {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
+    }
+    /**
+     * @componentName Language Toggle
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaLanguageToggle {
+        /**
+          * The English language href for the page. Required.
+         */
+        "enHref": string;
+        /**
+          * The Spanish language href for the page. Optional.
+         */
+        "esHref"?: string;
+        /**
+          * The ISO language code for the page. Default is 'en'.
+         */
+        "language"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaLanguageToggleCustomEvent<any>) => void;
+        /**
+          * Event fired when a link is clicked. Includes the selected language's ISO code.
+         */
+        "onVaLanguageToggle"?: (event: VaLanguageToggleCustomEvent<any>) => void;
+        /**
+          * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
+         */
+        "routerLinks"?: boolean;
+        /**
+          * The Tagalog language href for the page. Optional.
+         */
+        "tlHref"?: string;
     }
     /**
      * @componentName Link
@@ -3844,8 +4017,9 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The event used to track usage of the component.
+          * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
          */
+        "language"?: string;
         "onComponent-library-analytics"?: (event: VaLinkCustomEvent<any>) => void;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
@@ -4360,6 +4534,10 @@ declare namespace LocalJSX {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
+        /**
+          * Text to display in the eyebrow of an item if active, pending, or checkmark is true. Defaults to "Active", "Pending", or "Complete"
+         */
+        "statusText"?: string;
     }
     /**
      * @componentName Progress bar - activity
@@ -4741,6 +4919,10 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
+          * Is the table sortable
+         */
+        "sortable"?: boolean;
+        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -4749,7 +4931,7 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
-          * If uswds is true, the type of table
+          * The type of table
          */
         "tableType"?: 'borderless';
     }
@@ -4763,7 +4945,15 @@ declare namespace LocalJSX {
           * The number of columns in the table
          */
         "cols"?: number;
+        /**
+          * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
+         */
+        "onSortTable"?: (event: VaTableInnerCustomEvent<any>) => void;
         "rows"?: number;
+        /**
+          * Is this a sortable table
+         */
+        "sortable"?: boolean;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -4789,6 +4979,10 @@ declare namespace LocalJSX {
           * Numeric string representing the contact number. Typical length is 3 or 10 digits - SMS short codes will be 5 or 6 digits.
          */
         "contact": string;
+        /**
+          * Prepends the country code to the given contact number. Do NOT include the '+'
+         */
+        "countryCode"?: string;
         /**
           * Optional numeric string phone number extension
          */
@@ -5067,6 +5261,7 @@ declare namespace LocalJSX {
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
+        "va-language-toggle": VaLanguageToggle;
         "va-link": VaLink;
         "va-link-action": VaLinkAction;
         "va-loading-indicator": VaLoadingIndicator;
@@ -5251,6 +5446,12 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
+            /**
+             * @componentName Language Toggle
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-language-toggle": LocalJSX.VaLanguageToggle & JSXBase.HTMLAttributes<HTMLVaLanguageToggleElement>;
             /**
              * @componentName Link
              * @maturityCategory caution

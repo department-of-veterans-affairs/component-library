@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
-import {VaFileInput} from '@department-of-veterans-affairs/web-components/react-bindings';
+import React, { useEffect, useState } from 'react';
+import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+// @ts-ignore
+import testImage from './images/search-bar.png';
 
 VaFileInput.displayName = 'VaFileInput';
 
@@ -16,6 +18,14 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={fileInputDocs} />,
     },
   },
+  argTypes: {
+    // hide the uploadMessage prop from the properties table in storybook
+    uploadMessage: {
+      table: {
+        disable: true
+      }
+    }
+  }
 };
 
 const defaultArgs = {
@@ -30,7 +40,9 @@ const defaultArgs = {
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'uswds': true,
   'header-size': null,
-  'children': null
+  'children': null,
+  'value': null,
+  'read-only': false,
 };
 
 const Template = ({
@@ -40,11 +52,12 @@ const Template = ({
   error,
   required,
   hint,
-  'enable-analytics': enableAnalytics,
+  enableAnalytics,
   vaChange,
-  uswds,
   headerSize,
-  children
+  readOnly,
+  value,
+  children,
 }) => {
   return (
     <VaFileInput
@@ -56,8 +69,9 @@ const Template = ({
       hint={hint}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
-      uswds={uswds}
       header-size={headerSize}
+      readOnly={readOnly}
+      value={value}
       children={children}
     />
   );
@@ -99,25 +113,37 @@ HeaderLabel.args = {
   ...defaultArgs,
   label: 'Header label',
   headerSize: 3,
-  required: true
-}
+  required: true,
+};
 
 const additionalFormInputsContent = (
   <div>
-    <va-select className="hydrated" uswds label='What kind of file is this?' required>
-      <option key="1" value="1">Public Document</option>
-      <option key="2" value="2">Private Document</option>
+    <va-select className="hydrated" label="What kind of file is this?" required>
+      <option key="1" value="1">
+        Public Document
+      </option>
+      <option key="2" value="2">
+        Private Document
+      </option>
     </va-select>
-  </div>);
+  </div>
+);
 
 export const AdditionalFormInputs = Template.bind(null);
 AdditionalFormInputs.args = {
   ...defaultArgs,
-  label: 'Header label',
-  children: additionalFormInputsContent
-}
+  label: 'Additional Form Inputs',
+  children: additionalFormInputsContent,
+};
 
-const CustomValidationTemplate = ({ label, name, accept, required, error, hint }) => {
+const CustomValidationTemplate = ({
+  label,
+  name,
+  accept,
+  required,
+  error,
+  hint,
+}) => {
   const [errorVal, setErrorVal] = useState(error);
 
   function validateFileContents(event) {
@@ -130,8 +156,7 @@ const CustomValidationTemplate = ({ label, name, accept, required, error, hint }
         const contents = reader.result;
         const hasX = contents.includes('X');
 
-        if (hasX)
-          setErrorVal('File contains an \'X\' character');
+        if (hasX) setErrorVal("File contains an 'X' character");
       };
 
       reader.readAsText(file);
@@ -141,7 +166,6 @@ const CustomValidationTemplate = ({ label, name, accept, required, error, hint }
   return (
     <>
       <VaFileInput
-        uswds
         label={label}
         name={name}
         accept={accept}
@@ -152,13 +176,20 @@ const CustomValidationTemplate = ({ label, name, accept, required, error, hint }
       />
       <hr />
       <div>
-        <p>The parent component captures the file from the onVaChange event, reads its contents, and validates it. The error prop is dynamically set if the validation fails.</p>
-        <p>This example validates that the file does not contain the character 'X'. The validation runs when the file changes or is removed.</p>
+        <p>
+          The parent component captures the file from the onVaChange event,
+          reads its contents, and validates it. The error prop is dynamically
+          set if the validation fails.
+        </p>
+        <p>
+          This example validates that the file does not contain the character
+          'X'. The validation runs when the file changes or is removed.
+        </p>
       </div>
       <div className="vads-u-margin-top--2">
-      <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
-        <code>
-{`const [errorVal, setErrorVal] = useState(error);
+        <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+          <code>
+            {`const [errorVal, setErrorVal] = useState(error);
 
 function validateFileContents(event) {
   setErrorVal(null);
@@ -198,17 +229,74 @@ return (
   );
 };
 
-
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {
   ...defaultArgs,
-  label: 'Upload a file which does not contain the character \'X\'',
+  label: "Upload a file which does not contain the character 'X'",
   hint: 'Select a TXT file',
-  accept: '.txt'
-}
+  accept: '.txt',
+};
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = {
   ...defaultArgs,
-  'enable-analytics': true
+  'enable-analytics': true,
+};
+
+const FileUploadedTemplate = args => {
+  const [mockFile, setMockFile] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadImage = async () => {
+      const response = await fetch(testImage);
+      const blob = await response.blob();
+      const file = new File([blob], 'test.jpg', { type: 'image/jpeg' });
+
+      if (isMounted) {
+        // @ts-ignore
+        setMockFile(file);
+      }
+    };
+    loadImage();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return <Template {...args} value={mockFile} />;
+};
+
+export const FileUploaded = FileUploadedTemplate.bind(null);
+FileUploaded.args = { ...defaultArgs, vaChange: event => event };
+
+export const ReadOnly = FileUploadedTemplate.bind(null);
+ReadOnly.args = { ...defaultArgs, vaChange: event => event, readOnly: true };
+
+const readOnlyAdditionalInfoContent = (
+  <div>
+    <va-select
+      className="hydrated"
+      label="What kind of file is this?"
+      inert
+      value="1"
+    >
+      <option key="1" value="1">
+        Public Document
+      </option>
+      <option key="2" value="2">
+        Private Document
+      </option>
+    </va-select>
+  </div>
+);
+
+export const ReadOnlyWithAdditionalInputs = FileUploadedTemplate.bind(null);
+ReadOnlyWithAdditionalInputs.args = {
+  ...defaultArgs,
+  vaChange: event => event,
+  readOnly: true,
+  children: readOnlyAdditionalInfoContent,
 };

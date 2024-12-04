@@ -8,6 +8,10 @@
   working while we work on deprecation.
 **/
 /**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
   /uswds/dist/scss/lib/addons/_margin.scss
 **/
 /**
@@ -233,7 +237,7 @@
   font-size: 15px;
 }
 .va-sidebarnav .usa-sidenav-sub_list a:focus {
-  outline: 2px dotted #aeb0b5;
+  outline: 2px solid #face00;
   outline-offset: 0px;
 }
 .va-sidebarnav .usa-sidenav-sub_list a:hover, .va-sidebarnav .usa-sidenav-sub_list a:focus {
@@ -305,13 +309,13 @@
 .va-btn-sidebarnav-trigger .button-wrapper {
   position: absolute;
   width: 100%;
-  padding: units(1) units(1) units(2);
+  padding: 0.5rem 0.5rem 1rem;
 }
 .va-btn-sidebarnav-trigger button {
   background-color: #ffffff;
   color: #005ea2;
   margin: 0;
-  padding: units(1.5);
+  padding: 0.75rem;
   border: 1px solid #005ea2;
   border-radius: 4px;
   width: 100%;
@@ -320,7 +324,7 @@
   justify-content: space-between;
 }
 .va-btn-sidebarnav-trigger button strong {
-  line-height: units(2.5);
+  line-height: 1.25rem;
 }
 .va-btn-sidebarnav-trigger button svg {
   fill: #005ea2;

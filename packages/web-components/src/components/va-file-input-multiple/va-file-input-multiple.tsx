@@ -10,6 +10,7 @@ import {
 } from '@stencil/core';
 import { i18next } from '../..';
 import { FileIndex } from "./FileIndex";
+import { FileDetails } from "./FileDetails";
 
 /**
  * A component that manages multiple file inputs, allowing users to upload several files.
@@ -69,20 +70,45 @@ export class VaFileInputMultiple {
   @Prop() headerSize?: number;
 
   /**
+   * The value attribute for the file view element.
+   */
+  @Prop() value?: File[];
+
+  /**
+   * Optionally displays the read-only view
+   */
+  @Prop() readOnly?: boolean = false;
+
+  /**
    * Event emitted when any change to the file inputs occurs.
+   * Sends back an array of FileDetails 
    */
   @Event() vaMultipleChange: EventEmitter;
 
   /**
    * Internal state to track files and their unique keys.
    */
-  @State() files: FileIndex[] = [{ key: 0, file: null , content: null}];
+  @State() files: FileIndex[] = [{ key: 0, file: null, content: null }];
+
+  /**
+   * Internal state to track whether files added via the "value" prop have already been added to the "files" state or not.
+   */
+  @State() valueAdded: boolean = false;
 
   /**
    * Counter to assign unique keys to new file inputs.
    */
   private fileKeyCounter: number = 0;
   private additionalSlot = null;
+
+  private additionalFileUploadMessage = (
+    <span>
+       Drag an additional file here or{' '}
+      <span class="file-input-choose-text">
+        choose from folder
+      </span>
+    </span>
+  )
 
   /**
    * Finds a file entry by its unique key.
@@ -91,6 +117,15 @@ export class VaFileInputMultiple {
    */
   private findFileByKey(fileKey: number) {
     return this.files.find(file => file.key === fileKey);
+  }
+
+  /**
+   * Finds a file entry by its unique key.
+   * @param {number} fileKey - The unique key of the file.
+   * @returns {FileIndex | undefined} The matching file index object or undefined if not found.
+   */
+  private findIndexByKey(fileKey: number) {
+    return this.files.indexOf(this.files.find(file => file.key === fileKey));
   }
 
   /**
@@ -124,7 +159,9 @@ export class VaFileInputMultiple {
    * @returns {Node[]} An array of cloned nodes from the additionalSlot.
    */
   private getAdditionalContent() {
-    return this.additionalSlot.map(n => n.cloneNode(true));
+    return (
+      this.additionalSlot && this.additionalSlot.map(n => n.cloneNode(true))
+    );
   }
 
   /**
@@ -135,10 +172,9 @@ export class VaFileInputMultiple {
    */
   private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
-
+    let filesArray:FileDetails[];
     if (newFile) {
-      const fileObject = this.findFileByKey(fileKey);
-
+      const fileObject = this.findFileByKey(fileKey);  
       if (fileObject.file) {
         // Change file
         fileObject.file = newFile;
@@ -153,6 +189,7 @@ export class VaFileInputMultiple {
           content: null,
         });
       }
+      filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), false, this.findIndexByKey(fileKey))
     } else {
       // Deleted file
       this.files.splice(pageIndex, 1);
@@ -162,10 +199,24 @@ export class VaFileInputMultiple {
       setTimeout(() => {
         statusMessageDiv.textContent = "File removed."
       }, 1000);
+      filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), true)
     }
-
-    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file).filter((file =>{ return !!file})) });
+    
+    this.vaMultipleChange.emit(filesArray);
     this.files = Array.of(...this.files);
+  }
+
+  public buildFilesArray (files: File[], deleted?: boolean, fileIndex?: number) {
+    // filter out null files
+    let filesArray:FileDetails[] = files.filter((file =>{ return !!file})).map((file) => {
+      return {file: file, changed: false}
+    });
+    
+    if (!deleted && filesArray[fileIndex]) {
+      // don't return a changed property on deletion
+      filesArray[fileIndex].changed = true
+    }
+    return filesArray;
   }
 
   /**
@@ -208,9 +259,43 @@ export class VaFileInputMultiple {
   };
 
   /**
+   * If an array of files is provided via the "value" prop, we have to add these to the state before the component is loaded.
+   */
+  private addValueFiles = async () => {
+    // Remove the 'dummy' file from state
+    this.files.shift();
+
+    // Add each provided file
+    this.value.forEach(file => {
+      this.files.push({
+        file: file,
+        key: this.fileKeyCounter,
+        content: this.getAdditionalContent() || null,
+      });
+      this.fileKeyCounter++;
+    });
+
+    // Add a 'dummy' file back to the end of the array, if not readonly
+    if (!this.readOnly) {
+      this.files.push({
+        file: null,
+        key: this.fileKeyCounter,
+        content: null,
+      });
+    }
+
+    // Change the valueAdded state to indicate that we added these files (prevents an infinite loop)
+    this.valueAdded = true;
+
+    return Promise.resolve();
+  };
+
+  /**
    * It first ensures that the slot content is correctly set up, then iterates over each file input in the component,
    * appending cloned additional content where applicable. This method ensures that additional content is
    * consistently rendered across multiple file inputs after updates to the DOM.
+   * 
+   * Then checks if we need to add files from the "value" prop to state
    */
   componentDidRender() {
     const theFileInputs = this.el.shadowRoot.querySelectorAll(`va-file-input`);
@@ -220,6 +305,12 @@ export class VaFileInputMultiple {
         this.files[index].content.forEach(node => fileEntry.append(node));
       }
     });
+
+    if (this.value && this.value.length && !this.valueAdded) {
+      return this.addValueFiles();
+    } else {
+      return Promise.resolve();
+    }
   }
 
   /**
@@ -228,7 +319,7 @@ export class VaFileInputMultiple {
    */
   private hasErrors = () => {
     return this.errors.some(error => !!error);
-  }
+  };
 
   /**
    * The render method to display the component structure.
@@ -245,22 +336,27 @@ export class VaFileInputMultiple {
       accept,
       errors,
       enableAnalytics,
+      readOnly,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
-    const hasError = this.hasErrors() ? 'has-error': '';
+    const hasError = this.hasErrors() ? 'has-error' : '';
 
     return (
       <Host class={hasError}>
-        {label && this.renderLabelOrHeader(label, required, headerSize)}
-        {hint && (
+        {label &&
+          !readOnly &&
+          this.renderLabelOrHeader(label, required, headerSize)}
+        {hint && !readOnly && (
           <div class="usa-hint" id="input-hint-message">
             {hint}
           </div>
         )}
         <div class={outerWrapClass}>
-          <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
+          <div class="usa-sr-only" aria-live="polite" id="statusMessage"></div>
           {!this.isEmpty() && (
-            <div class="selected-files-label">Selected files</div>
+            <div class="selected-files-label">
+              {readOnly ? 'Files you uploaded' : 'Selected files'}
+            </div>
           )}
           {files.map((fileEntry, pageIndex) => {
             return (
@@ -272,11 +368,18 @@ export class VaFileInputMultiple {
                 name={`${name}-${fileEntry.key}`}
                 accept={accept}
                 required={required}
+                // only add custom upload message after the first file input
+                {...(pageIndex > 0
+                  ? { uploadMessage: this.additionalFileUploadMessage }
+                  : {})}
                 error={errors[pageIndex]}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
                 enable-analytics={enableAnalytics}
+                value={fileEntry.file}
+                readOnly={readOnly}
+                class={fileEntry.file ? 'has-file' : 'no-file'}
               />
             );
           })}

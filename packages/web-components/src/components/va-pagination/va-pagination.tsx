@@ -240,11 +240,7 @@ export class VaPagination {
   }
 
   render() {
-    const {
-      ariaLabelSuffix,
-      page,
-      pages,
-    } = this;
+    const { ariaLabelSuffix, page, pages } = this;
 
     if (pages === 1) {
       return <div />;
@@ -276,8 +272,9 @@ export class VaPagination {
     const previousButton =
       page > 1 ? (
         <Fragment>
-          <li class={arrowClasses} aria-label={previousAriaLabel}>
+          <li class={arrowClasses}>
             <a
+              aria-label={previousAriaLabel}
               onClick={() =>
                 this.handlePageSelect(page - 1, 'nav-paginate-number')
               }
@@ -306,11 +303,11 @@ export class VaPagination {
                   1
                 </a>
               </li>
-              <li
-                class={ellipsisClasses}
-                aria-label="ellipsis indicating non-visible pages"
-              >
-                <span>…</span>
+              <li class={ellipsisClasses}>
+                <span class="usa-sr-only">
+                  Ellipsis indicating non-visible pages
+                </span>
+                <span aria-hidden="true">…</span>
               </li>
             </Fragment>
           )}
@@ -353,11 +350,11 @@ export class VaPagination {
       pageNumbersToRender.indexOf(pages) === -1 ? (
         <Fragment>
           {pages > this.SHOW_ALL_PAGES && (
-            <li
-              class={ellipsisClasses}
-              aria-label="ellipsis indicating non-visible pages"
-            >
-              <span>…</span>
+            <li class={ellipsisClasses}>
+              <span class="usa-sr-only">
+                Ellipsis indicating non-visible pages
+              </span>
+              <span aria-hidden="true">…</span>
             </li>
           )}
           {!this.unbounded && pages > this.SHOW_ALL_PAGES && (
@@ -381,8 +378,9 @@ export class VaPagination {
     const nextButton =
       page < pages ? (
         <Fragment>
-          <li class={arrowClasses} aria-label={nextAriaLabel}>
+          <li class={arrowClasses}>
             <a
+              aria-label={nextAriaLabel}
               onClick={() =>
                 this.handlePageSelect(page + 1, 'nav-paginate-number')
               }
@@ -390,9 +388,7 @@ export class VaPagination {
               class="usa-pagination__link usa-pagination__next-page"
               href="javascript:void(0)"
             >
-              <span class="usa-pagination__link-text">
-                {i18next.t('next')}
-              </span>
+              <span class="usa-pagination__link-text">{i18next.t('next')}</span>
               <div id="next-arrow-icon"></div>
             </a>
           </li>
