@@ -53,6 +53,43 @@ describe('va-process-list-item', () => {
     `);
   })
 
+  it('renders with a header slot', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-process-list-item>
+        <h2 slot="header">Header</h2>
+        <p>Some content</p>
+      </va-process-list>
+    `);
+    const element = await page.find('va-process-list-item');
+    expect(element).toEqualHtml(`
+      <va-process-list-item class="hydrated usa-process-list__item" role="listitem">
+        <!---->
+        <h2 slot="header">Header</h2>
+        <p>Some content</p>
+      </va-process-list-item>
+    `);
+  })
+
+  it('does not show header slot when header prop is defined', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-process-list-item header="header prop">
+        <h2 slot="header">Header</h2>
+        <p>Some content</p>
+      </va-process-list>
+    `);
+    const element = await page.find('va-process-list-item');
+    expect(element).toEqualHtml(`
+      <va-process-list-item class="hydrated usa-process-list__item" header="header prop" role="listitem">
+        <!---->
+        <h2 slot="header" hidden="">Header</h2>
+        <h3 class="usa-process-list__heading">header prop</h3>
+        <p>Some content</p>
+      </va-process-list-item>
+    `);
+  })
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`

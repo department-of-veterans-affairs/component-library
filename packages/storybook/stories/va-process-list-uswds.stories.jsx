@@ -111,6 +111,51 @@ const HeaderSizeTemplate = (defaultArgs) => {
   );
 };
 
+const HeaderSlotTemplate = (defaultArgs) => {
+  return (
+    <va-process-list>
+      <va-process-list-item>
+        <h4 slot="header">Check to be sure you can request a Board Appeal</h4>
+        <p>
+            You can request a Board Appeal up to 1 year from the date on your
+            decision notice. (Exception: if you have a contested claim, you have
+            only 60 days from the date on your decision notice to request a Board
+            Appeal.)
+          </p>
+          <p>You can request a Board Appeal for these claim decisions:</p>
+          <ul>
+            <li>An initial claim</li>
+            <li>A Supplemental Claim</li>
+            <li>A Higher-Level Review</li>
+          </ul>
+          <p>
+            <strong>Note: </strong>
+            You can’t request a Board Appeal if you’ve already requested one for
+            this same claim.
+          </p>
+      </va-process-list-item>
+      <va-process-list-item>
+        <h4 slot="header">Gather your information</h4>
+        <p>Here’s what you’ll need to apply:</p>
+        <ul>
+          <li>Your mailing address</li>
+          <li>
+            The VA decision date for each issue you’d like us to review (this is
+            the date on the decision notice you got in the mail)
+          </li>
+        </ul>
+      </va-process-list-item>
+      <va-process-list-item>
+        <h4 slot="header">Start your request</h4>
+        <p>
+          We’ll take you through each step of the process. It should take about
+          30 minutes.
+        </p>
+      </va-process-list-item>
+    </va-process-list>
+  );
+};
+
 const CustomSizingTemplate = (defaultArgs) => {
   return (
     <va-process-list>
@@ -166,6 +211,9 @@ export const CustomStatusText = CustomStatusTextTemplate.bind(null);
 Status.args = { ...defaultArgs };
 
 export const HeaderSize = HeaderSizeTemplate.bind(null);
+HeaderSize.args = { ...defaultArgs };
+
+export const HeaderSlot = HeaderSlotTemplate.bind(null);
 HeaderSize.args = { ...defaultArgs };
 
 export const CustomSizing = CustomSizingTemplate.bind(null);

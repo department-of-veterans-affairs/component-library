@@ -60,7 +60,7 @@ export class VaProcessListItem {
           <div class="usa-process-list__heading-eyebrow">{statusTextMap[status]}</div>
           : null
         }
-        {header ? <HeaderTag class='usa-process-list__heading'>{header}</HeaderTag> : null}
+        {header ? <HeaderTag class='usa-process-list__heading'>{header}</HeaderTag> : <slot name="header"/>}
         <slot/>
       </Host>
     )
