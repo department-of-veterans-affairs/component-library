@@ -1,4 +1,6 @@
 @use "../core-variables" as *;
+@use '../functions' as *;
+
 @import "../formation-overrides/variables";
 @import "../../../dist/tokens/scss/variables.scss";
 @import "../mixins";

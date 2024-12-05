@@ -150,6 +150,12 @@ dfn {
 
 // Custom typography
 
+// Maps to https://github.com/department-of-veterans-affairs/veteran-facing-services-tools/blob/71ee93aba315ce58ec965bb73b836e56d4e50da3/packages/formation/sass/base/_va.scss#L430-L432
+// needed for the time being until we resolve usa-content with uswds v3
+.usa-content {
+  max-width: vars.$text-max-width;
+}
+
 .usa-content {
   p,
   ul:not(.usa-accordion):not(.usa-accordion-bordered),

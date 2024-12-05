@@ -1,5 +1,6 @@
 @forward 'settings';
 @use 'usa-alert/src/styles/usa-alert';
+@use 'usa-site-alert/src/styles/usa-site-alert';
 
 @import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
 
@@ -13,7 +14,7 @@
   font-size: 21.28px; /* 1.33rem */
   margin-top: 0;
   margin-bottom: 8px; /* 0.5rem */
-  font-family: var(--font-serif); 
+  font-family: var(--font-serif);
 }
 
 .va-alert-close:hover {
@@ -65,4 +66,19 @@
   .usa-alert--continue.usa-alert--success.usa-alert--slim .va-alert__lock-icon {
     left: 12px;
   }
+}
+
+.usa-site-alert .usa-alert.usa-alert--warning {
+  background-color: var(--vads-color-warning-lighter);
+  border-left-color: var(--vads-color-warning);
+}
+
+.usa-site-alert .usa-alert.usa-alert--success {
+  background-color: var(--vads-color-success-lighter);
+  border-left-color: var(--vads-color-success);
+}
+
+.usa-site-alert .usa-alert.usa-alert--error {
+  background-color: var(--vads-color-error-lighter);
+  border-left-color: var(--vads-color-error);
 }

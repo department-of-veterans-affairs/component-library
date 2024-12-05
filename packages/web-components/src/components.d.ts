@@ -471,6 +471,52 @@ export namespace Components {
         "useFormsPattern"?: string;
     }
     /**
+     * @componentName Combo Box
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref form/combo-box
+     * @translations English
+     * @translations Spanish
+     */
+    interface VaComboBox {
+        /**
+          * The combo box component will be disabled / read-only.
+         */
+        "disabled"?: boolean;
+        /**
+          * Error message to display. When defined, this indicates an error.
+         */
+        "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
+          * Text label for the field.
+         */
+        "label": string;
+        /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name": string;
+        /**
+          * The placeholder string.
+         */
+        "placeholder"?: string;
+        /**
+          * Whether or not this is a required field.
+         */
+        "required"?: boolean;
+        /**
+          * Selected value (will get updated on select).
+         */
+        "value"?: string;
+    }
+    /**
      * @componentName Crisis Line Modal
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -1197,6 +1243,10 @@ export namespace Components {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
+        /**
+          * Text to display in the eyebrow of an item if active, pending, or checkmark is true. Defaults to "Active", "Pending", or "Complete"
+         */
+        "statusText"?: string;
     }
     /**
      * @componentName Progress bar - activity
@@ -1875,6 +1925,10 @@ export interface VaCheckboxGroupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaCheckboxGroupElement;
 }
+export interface VaComboBoxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaComboBoxElement;
+}
 export interface VaDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaDateElement;
@@ -2298,6 +2352,31 @@ declare global {
     var HTMLVaCheckboxGroupElement: {
         prototype: HTMLVaCheckboxGroupElement;
         new (): HTMLVaCheckboxGroupElement;
+    };
+    interface HTMLVaComboBoxElementEventMap {
+        "vaSelect": any;
+    }
+    /**
+     * @componentName Combo Box
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref form/combo-box
+     * @translations English
+     * @translations Spanish
+     */
+    interface HTMLVaComboBoxElement extends Components.VaComboBox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaComboBoxElementEventMap>(type: K, listener: (this: HTMLVaComboBoxElement, ev: VaComboBoxCustomEvent<HTMLVaComboBoxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaComboBoxElementEventMap>(type: K, listener: (this: HTMLVaComboBoxElement, ev: VaComboBoxCustomEvent<HTMLVaComboBoxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaComboBoxElement: {
+        prototype: HTMLVaComboBoxElement;
+        new (): HTMLVaComboBoxElement;
     };
     /**
      * @componentName Crisis Line Modal
@@ -3067,6 +3146,7 @@ declare global {
         "va-card": HTMLVaCardElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
+        "va-combo-box": HTMLVaComboBoxElement;
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-date": HTMLVaDateElement;
         "va-file-input": HTMLVaFileInputElement;
@@ -3641,6 +3721,56 @@ declare namespace LocalJSX {
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
+    }
+    /**
+     * @componentName Combo Box
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref form/combo-box
+     * @translations English
+     * @translations Spanish
+     */
+    interface VaComboBox {
+        /**
+          * The combo box component will be disabled / read-only.
+         */
+        "disabled"?: boolean;
+        /**
+          * Error message to display. When defined, this indicates an error.
+         */
+        "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
+          * Text label for the field.
+         */
+        "label": string;
+        /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name": string;
+        /**
+          * The event emitted when the selected value changes
+         */
+        "onVaSelect"?: (event: VaComboBoxCustomEvent<any>) => void;
+        /**
+          * The placeholder string.
+         */
+        "placeholder"?: string;
+        /**
+          * Whether or not this is a required field.
+         */
+        "required"?: boolean;
+        /**
+          * Selected value (will get updated on select).
+         */
+        "value"?: string;
     }
     /**
      * @componentName Crisis Line Modal
@@ -4478,6 +4608,10 @@ declare namespace LocalJSX {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
+        /**
+          * Text to display in the eyebrow of an item if active, pending, or checkmark is true. Defaults to "Active", "Pending", or "Complete"
+         */
+        "statusText"?: string;
     }
     /**
      * @componentName Progress bar - activity
@@ -5195,6 +5329,7 @@ declare namespace LocalJSX {
         "va-card": VaCard;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
+        "va-combo-box": VaComboBox;
         "va-crisis-line-modal": VaCrisisLineModal;
         "va-date": VaDate;
         "va-file-input": VaFileInput;
@@ -5341,6 +5476,15 @@ declare module "@stencil/core" {
              * @translations Tagalog
              */
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
+            /**
+             * @componentName Combo Box
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             * @guidanceHref form/combo-box
+             * @translations English
+             * @translations Spanish
+             */
+            "va-combo-box": LocalJSX.VaComboBox & JSXBase.HTMLAttributes<HTMLVaComboBoxElement>;
             /**
              * @componentName Crisis Line Modal
              * @maturityCategory caution
