@@ -5,9 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { VariantNames } from "./components/va-alert-sign-in/VariantNames";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
-export { VariantNames } from "./components/va-alert-sign-in/VariantNames";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export namespace Components {
     /**
@@ -147,6 +145,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Header level for button wrapper. Must be between 1 and 6
+         */
+        "headingLevel"?: number;
+        /**
           * For the 'optional' variant, the link to the form to complete without signing in
          */
         "noSignInLink"?: string;
@@ -155,9 +157,9 @@ export namespace Components {
          */
         "timeLimit"?: string;
         /**
-          * Determines the text content and border/background color.
+          * Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
-        "variant": VariantNames;
+        "variant"?: string;
         /**
           * If `true`, the alert will be visible.
          */
@@ -1845,10 +1847,6 @@ export interface VaAlertExpandableCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaAlertExpandableElement;
 }
-export interface VaAlertSignInCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLVaAlertSignInElement;
-}
 export interface VaBannerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaBannerElement;
@@ -2097,24 +2095,12 @@ declare global {
         prototype: HTMLVaAlertExpandableElement;
         new (): HTMLVaAlertExpandableElement;
     };
-    interface HTMLVaAlertSignInElementEventMap {
-        "va-component-did-load": any;
-        "component-library-analytics": any;
-    }
     /**
      * @componentName Alert - Sign In
      * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface HTMLVaAlertSignInElement extends Components.VaAlertSignIn, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVaAlertSignInElementEventMap>(type: K, listener: (this: HTMLVaAlertSignInElement, ev: VaAlertSignInCustomEvent<HTMLVaAlertSignInElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVaAlertSignInElementEventMap>(type: K, listener: (this: HTMLVaAlertSignInElement, ev: VaAlertSignInCustomEvent<HTMLVaAlertSignInElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaAlertSignInElement: {
         prototype: HTMLVaAlertSignInElement;
@@ -3287,25 +3273,21 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Header level for button wrapper. Must be between 1 and 6
+         */
+        "headingLevel"?: number;
+        /**
           * For the 'optional' variant, the link to the form to complete without signing in
          */
         "noSignInLink"?: string;
-        /**
-          * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
-         */
-        "onComponent-library-analytics"?: (event: VaAlertSignInCustomEvent<any>) => void;
-        /**
-          * Fires when the component has successfully finished rendering for the first time.
-         */
-        "onVa-component-did-load"?: (event: VaAlertSignInCustomEvent<any>) => void;
         /**
           * For the 'optional' variant, how long the respondent has to submit their form
          */
         "timeLimit"?: string;
         /**
-          * Determines the text content and border/background color.
+          * Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
-        "variant"?: VariantNames;
+        "variant"?: string;
         /**
           * If `true`, the alert will be visible.
          */

@@ -6,7 +6,7 @@ const alertSignInDocs = getWebComponentDocs('va-alert-sign-in');
 
 export default {
   title: 'Components/Alert - Sign-in',
-  id: 'uswds/va-alert-sign-in',
+  id: 'components/va-alert-sign-in',
   parameters: {
     componentSubtitle: 'va-alert-sign-in web component',
     docs: {
@@ -17,10 +17,11 @@ export default {
 
 const defaultArgs = {
   'variant': VariantNames.signInRequired,
-  'disable-analytics': false,
+  'disable-analytics': true,
   'visible': true,
   'time-limit': null,
   'no-sign-in-link': null,
+  'heading-level': null,
 };
 
 const SignInButton = () => <button>Sign In Button goes here</button>;
@@ -66,6 +67,7 @@ const Template = ({
   visible,
   'time-limit': timeLimit,
   'no-sign-in-link': noSignInLink,
+  'heading-level': headingLevel,
 }) => {
   return (
     <va-alert-sign-in
@@ -74,6 +76,7 @@ const Template = ({
       visible={visible}
       time-limit={timeLimit}
       no-sign-in-link={noSignInLink}
+      heading-level={headingLevel}
     >
       {SlotVariants[variant].slotNames.map((name, i) => {
         const ButtonToRender = SlotVariants[variant].buttons[i];
@@ -93,10 +96,18 @@ Default.args = {
 };
 Default.argTypes = propStructure(alertSignInDocs);
 
+export const WithCustomHeadingLevel = Template.bind(null);
+WithCustomHeadingLevel.args = {
+  ...defaultArgs,
+  'heading-level': 3,
+};
+
 export const OptionalSignIn = Template.bind(null);
 OptionalSignIn.args = {
   ...defaultArgs,
-  variant: VariantNames.signInOptional,
+  'variant': VariantNames.signInOptional,
+  'no-sign-in-link': 'https://example.com/',
+  'time-limit': '20 minutes',
 };
 
 export const VerifyWithIdMe = Template.bind(null);

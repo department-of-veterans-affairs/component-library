@@ -1,14 +1,15 @@
 import {
   Component,
   Element,
-  Event,
-  EventEmitter,
+  // Event,
+  // EventEmitter,
   Host,
   Prop,
   h,
 } from '@stencil/core';
 import classnames from 'classnames';
 import { VariantNames } from './VariantNames';
+import { getHeaderLevel } from '../../utils/utils';
 
 /**
  * @componentName Alert - Sign In
@@ -24,14 +25,19 @@ export class VaAlertSignIn {
   @Element() el!: any;
 
   /**
-   * Determines the text content and border/background color.
+   * Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
    */
-  @Prop() variant: VariantNames = VariantNames.signInRequired;
+  @Prop() variant?: string = VariantNames.signInRequired;
+
+  /**
+   * Header level for button wrapper. Must be between 1 and 6
+   */
+  @Prop() headingLevel?: number = 2;
 
   /**
    * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
-  @Prop() disableAnalytics?: boolean = false;
+  @Prop() disableAnalytics?: boolean = true;
 
   /**
    * If `true`, the alert will be visible.
@@ -49,61 +55,48 @@ export class VaAlertSignIn {
   @Prop() noSignInLink?: string;
 
   /**
-   * Fires when the component has successfully finished rendering for the first
-   * time.
-   */
-  @Event({
-    eventName: 'va-component-did-load',
-    composed: true,
-    bubbles: true,
-  })
-  vaComponentDidLoad: EventEmitter;
-
-  /**
    * The event used to track usage of the component. This is emitted when an
    * anchor link is clicked and disableAnalytics is not true.
    */
-  @Event({
-    eventName: 'component-library-analytics',
-    composed: true,
-    bubbles: true,
-  })
-  componentLibraryAnalytics: EventEmitter;
+  // @Event({
+  //   eventName: 'component-library-analytics',
+  //   composed: true,
+  //   bubbles: true,
+  // })
+  // componentLibraryAnalytics: EventEmitter;
 
-  private handleAlertBodyClick(e: MouseEvent): void {
-    if (!this.disableAnalytics) {
-      const target = e.target as HTMLElement;
+  // private handleAlertBodyClick(e: MouseEvent): void {
+  //   if (!this.disableAnalytics) {
+  //     const target = e.target as HTMLElement;
 
-      // If it's a link being clicked, dispatch an analytics event
-      if (target?.tagName === 'VA-LINK') {
-        const innerText = target.shadowRoot.querySelector('a').innerText;
-        const detail = {
-          componentName: 'va-alert-sign-in',
-          action: 'linkClick',
-          details: {
-            clickLabel: innerText,
-            variant: this.variant,
-          },
-        };
-        this.componentLibraryAnalytics.emit(detail);
-      }
-    }
-  }
-
-  componentDidLoad() {
-    this.vaComponentDidLoad.emit();
-  }
+  //     // If it's a link being clicked, dispatch an analytics event
+  //     if (target?.tagName === 'VA-LINK') {
+  //       const innerText = target.shadowRoot.querySelector('a').innerText;
+  //       const detail = {
+  //         componentName: 'va-alert-sign-in',
+  //         action: 'linkClick',
+  //         details: {
+  //           clickLabel: innerText,
+  //           variant: this.variant,
+  //         },
+  //       };
+  //       this.componentLibraryAnalytics.emit(detail);
+  //     }
+  //   }
+  // }
 
   render() {
     const { visible } = this;
     let { variant } = this;
 
     // Check that the provided variant (or null) matches a known variant name
-    if (!Object.values(VariantNames).includes(variant))
+    if (!Object.values(VariantNames).includes(variant as VariantNames))
       variant = VariantNames.signInRequired;
 
+    // Return an empty div if visible is set to false
     if (!visible) return <div aria-live="polite" />;
 
+    // Determine background and border colors
     const classes = classnames('usa-alert', `va-alert-sign-in--${variant}`, {
       'usa-alert--info':
         variant === VariantNames.signInRequired ||
@@ -113,10 +106,15 @@ export class VaAlertSignIn {
         variant !== VariantNames.signInOptional,
     });
 
+    // Create a header element
+    const HeaderLevel = getHeaderLevel(this.headingLevel);
+
     /* eslint-disable i18next/no-literal-string */
     const RequiredVariant = () => (
       <div class="va-alert-sign-in__body">
-        <h2 class="headline">Sign in with a verified account</h2>
+        <HeaderLevel class="headline">
+          Sign in with a verified account
+        </HeaderLevel>
         <p>
           You'll need to sign in with an identity-verified account through one
           of our account providers. Identity verification helps us protect all
@@ -137,7 +135,7 @@ export class VaAlertSignIn {
         </p>
         <p>
           <va-link
-            href=""
+            href="https://www.va.gov/resources/creating-an-account-for-vagov"
             text="Learn about creating an account"
             disableAnalytics={true}
           ></va-link>
@@ -147,7 +145,9 @@ export class VaAlertSignIn {
 
     const OptionalVariant = () => (
       <div class="va-alert-sign-in__body">
-        <h2 class="headline">Sign in with a verified account</h2>
+        <HeaderLevel class="headline">
+          Sign in with a verified account
+        </HeaderLevel>
         <p>
           Here's how signing in with an identity-verified account helps you:
         </p>
@@ -188,7 +188,7 @@ export class VaAlertSignIn {
 
     const IdMeVariant = () => (
       <div class="va-alert-sign-in__body">
-        <h2 class="headline">Verify your identity</h2>
+        <HeaderLevel class="headline">Verify your identity</HeaderLevel>
         <p>
           We need you to verify your identity for your <strong>ID.me</strong>{' '}
           account. This step helps us protect all Veterans' information and
@@ -203,7 +203,7 @@ export class VaAlertSignIn {
         </p>
         <p>
           <va-link
-            href=""
+            href="https://www.va.gov/resources/creating-an-account-for-vagov"
             text="Learn more about verifying your identity"
             disableAnalytics={true}
           ></va-link>
@@ -213,7 +213,7 @@ export class VaAlertSignIn {
 
     const LoginGovVariant = () => (
       <div class="va-alert-sign-in__body">
-        <h2 class="headline">Verify your identity</h2>
+        <HeaderLevel class="headline">Verify your identity</HeaderLevel>
         <p>
           We need you to verify your identity for your{' '}
           <strong>Login.gov</strong> account. This step helps us protect all
@@ -229,7 +229,7 @@ export class VaAlertSignIn {
         </p>
         <p>
           <va-link
-            href=""
+            href="https://www.va.gov/resources/creating-an-account-for-vagov"
             text="Learn more about verifying your identity"
             disableAnalytics={true}
           ></va-link>
@@ -239,7 +239,9 @@ export class VaAlertSignIn {
 
     const SignInEitherVariant = () => (
       <div class="va-alert-sign-in__body">
-        <h2 class="headline">You need to sign in with a different account</h2>
+        <HeaderLevel class="headline">
+          You need to sign in with a different account
+        </HeaderLevel>
         <p>
           We need you to sign in with an identity-verified account. This helps
           us protect all Veterans' information and prevent scammers from
@@ -264,7 +266,7 @@ export class VaAlertSignIn {
         </p>
         <p>
           <va-link
-            href=""
+            href="https://www.va.gov/resources/creating-an-account-for-vagov"
             text="Learn about creating an account"
             disableAnalytics={true}
           ></va-link>
@@ -292,7 +294,7 @@ export class VaAlertSignIn {
         >
           <div
             class="usa-alert__body"
-            onClick={this.handleAlertBodyClick.bind(this)}
+            // onClick={this.handleAlertBodyClick.bind(this)}
           >
             <div>
               <va-icon

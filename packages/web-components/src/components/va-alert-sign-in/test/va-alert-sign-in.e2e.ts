@@ -82,7 +82,7 @@ describe('va-alert-sign-in', () => {
     await axeCheck(page);
   });
 
-  it('fires an analytics event when a link is clicked', async () => {
+  it.skip('fires an analytics event when a link is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-alert-sign-in></va-alert-sign-in>');
 
@@ -101,7 +101,7 @@ describe('va-alert-sign-in', () => {
     });
   });
 
-  it('does not fire an analytics event when disableAnalytics is passed', async () => {
+  it.skip('does not fire an analytics event when disableAnalytics is passed', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-alert-sign-in disable-analytics="true"></va-alert-sign-in>',
@@ -115,7 +115,7 @@ describe('va-alert-sign-in', () => {
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
 
-  it('should set variant to required if null', async () => {
+  it('should set variant to "required" if null', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-alert-sign-in></va-alert-sign-in>');
 
@@ -128,7 +128,7 @@ describe('va-alert-sign-in', () => {
     ).toBeTruthy();
   });
 
-  it('should set variant to required if it is an empty string', async () => {
+  it('should set variant to "required" if it is an empty string', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-alert-sign-in variant=""></va-alert-sign-in>');
 
@@ -141,7 +141,7 @@ describe('va-alert-sign-in', () => {
     ).toBeTruthy();
   });
 
-  it('should set variant to required if value not in pre-defined list', async () => {
+  it('should set variant to "required" if value not in pre-defined list', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-alert-sign-in variant="Fake"></va-alert-sign-in>',
@@ -156,7 +156,7 @@ describe('va-alert-sign-in', () => {
     ).toBeTruthy();
   });
 
-  it('should set variant to optional when specified', async () => {
+  it('should set variant to "optional" when specified', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `<va-alert-sign-in variant="${VariantNames.signInOptional}"></va-alert-sign-in>`,
@@ -214,5 +214,25 @@ describe('va-alert-sign-in', () => {
         `va-alert-sign-in--${VariantNames.verifyLoginGov}`,
       ),
     ).toBeTruthy();
+  });
+
+  it('should default the heading level to H2', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-alert-sign-in></va-alert-sign-in>');
+
+    const element = await page.find('va-alert-sign-in >>> h2');
+
+    expect(element).not.toBeNull();
+  });
+
+  it('should set the heading level if provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-sign-in heading-level="3"></va-alert-sign-in>',
+    );
+
+    const element = await page.find('va-alert-sign-in >>> h3');
+
+    expect(element).not.toBeNull();
   });
 });
