@@ -107,6 +107,11 @@ export class VaCheckbox {
   @Prop() name?: string;
 
   /**
+   * When true, the checkbox can be toggled between checked and indeterminate states.
+   */
+  @Prop() indeterminate?: boolean = false;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input value changes and enableAnalytics is true.
    */
@@ -176,7 +181,8 @@ export class VaCheckbox {
       checkboxDescription,
       disabled,
       messageAriaDescribedby,
-      name
+      name,
+      indeterminate,
     } = this;
     const hasDescriptionSlot =
       !description &&
@@ -230,6 +236,7 @@ export class VaCheckbox {
             aria-describedby={ariaDescribedbyIds}
             aria-invalid={error ? 'true' : 'false'}
             disabled={disabled}
+            data-indeterminate={indeterminate}
             onChange={this.handleChange}
           />
           <label
@@ -237,7 +244,7 @@ export class VaCheckbox {
             class="usa-checkbox__label"
             part="label"
             role="checkbox"
-            aria-checked={ariaChecked}
+            aria-checked={indeterminate ? 'mixed' : ariaChecked}
           >
             {label}&nbsp;
             {required && (
