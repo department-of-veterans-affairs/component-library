@@ -236,7 +236,7 @@ export class VaCheckbox {
             aria-describedby={ariaDescribedbyIds}
             aria-invalid={error ? 'true' : 'false'}
             disabled={disabled}
-            data-indeterminate={indeterminate}
+            data-indeterminate={indeterminate && !checked}
             onChange={this.handleChange}
           />
           <label
@@ -244,7 +244,7 @@ export class VaCheckbox {
             class="usa-checkbox__label"
             part="label"
             role="checkbox"
-            aria-checked={indeterminate ? 'mixed' : ariaChecked}
+            aria-checked={indeterminate && !checked ? 'mixed' : ariaChecked}
           >
             {label}&nbsp;
             {required && (
