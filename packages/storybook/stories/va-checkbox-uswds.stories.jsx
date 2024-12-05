@@ -97,10 +97,11 @@ const I18nTemplate = args => {
 };
 
 const IndeterminateTemplate = (defaultArgs) => {
-  const [checked, setChecked] = useState([false, false, false]);
+  const [checked, setChecked] = useState([true, true, false]);
 
   useEffect(() => {
     handleIndeterminate();
+    console.log(checked);
   }, [checked]);
 
   const handleIndeterminate = () => {
@@ -121,11 +122,11 @@ const IndeterminateTemplate = (defaultArgs) => {
     }
   };
 
-  const handleCheckboxChange = (e) => {
-    const index = parseInt(e.target.getAttribute('data-id'));
-    const nextChecked= checked.map((value, i) => {
+  const handleCheckboxChange = event => {
+    const index = parseInt(event.target.getAttribute('data-index'));
+    const nextChecked = checked.map((value, i) => {
       if (i === index) {
-        return e.detail.checked;
+        return event.detail.checked;
       } else {
         return value;
       }
@@ -133,14 +134,14 @@ const IndeterminateTemplate = (defaultArgs) => {
     setChecked(nextChecked);
   }
 
-  const handleSelectAllToggle = e => {  
+  const handleSelectAllToggle = event => {  
     const checkboxes = document.querySelectorAll('.example-checkbox');
     checkboxes.forEach(checkbox => {
-      checkbox.checked = e.target.checked;
+      checkbox.checked = event.target.checked;
     });
 
     // toggle state of all checkboxes to match the "select all" checkbox
-    const nextChecked = checked.map(() => e.target.checked);
+    const nextChecked = checked.map(() => event.target.checked);
     setChecked(nextChecked)
   }
 
@@ -150,7 +151,7 @@ const IndeterminateTemplate = (defaultArgs) => {
       <VaCheckbox
         class="indeterminate-checkbox"
         label="All Historical Figures"
-        indeterminate={false}
+        indeterminate
         onVaChange={e => handleSelectAllToggle(e)}
       />
 
@@ -159,7 +160,8 @@ const IndeterminateTemplate = (defaultArgs) => {
       <VaCheckbox
         class="example-checkbox"
         id="checkbox-1"
-        data-id={0}
+        checked={checked[0]}
+        data-index={0}
         label="Sojourner Truth"
         onVaChange={e => handleCheckboxChange(e)}
       />
@@ -167,7 +169,8 @@ const IndeterminateTemplate = (defaultArgs) => {
       <VaCheckbox
         class="example-checkbox"
         id="checkbox-2"
-        data-id={1}
+        checked={checked[1]}
+        data-index={1}
         label="George Washington Carver"
         onVaChange={e => handleCheckboxChange(e)}
       />
@@ -175,7 +178,8 @@ const IndeterminateTemplate = (defaultArgs) => {
       <VaCheckbox
         class="example-checkbox"
         id="checkbox-3"
-        data-id={2}
+        checked={checked[2]}
+        data-index={2}
         label="Frederick Douglass"
         onVaChange={e => handleCheckboxChange(e)}
       />
