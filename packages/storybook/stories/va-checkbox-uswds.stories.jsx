@@ -96,7 +96,7 @@ const I18nTemplate = args => {
   );
 };
 
-const IndeterminateTemplate = () => {
+const IndeterminateTemplate = ({}) => {
   const [checked, setChecked] = useState([true, true, false]);
 
   useEffect(() => {
@@ -145,7 +145,8 @@ const IndeterminateTemplate = () => {
   }
 
   return (
-    <fieldset>
+    <>
+    <fieldset class="vads-u-margin-bottom--3">
       <legend className="vads-u-font-size--md vads-u-margin-bottom--3">Indeterminate Checkbox Example</legend>
       <VaCheckbox
         class="indeterminate-checkbox"
@@ -183,6 +184,7 @@ const IndeterminateTemplate = () => {
         onVaChange={e => handleCheckboxChange(e)}
       />
     </fieldset>
+    </>
   );
 };
 
