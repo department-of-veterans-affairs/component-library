@@ -367,6 +367,10 @@ export namespace Components {
          */
         "hint"?: string;
         /**
+          * When true, the checkbox can be toggled between checked and indeterminate states.
+         */
+        "indeterminate"?: boolean;
+        /**
           * The label for the checkbox.
          */
         "label": string;
@@ -3563,6 +3567,10 @@ declare namespace LocalJSX {
           * Optional hint text.
          */
         "hint"?: string;
+        /**
+          * When true, the checkbox can be toggled between checked and indeterminate states.
+         */
+        "indeterminate"?: boolean;
         /**
           * The label for the checkbox.
          */

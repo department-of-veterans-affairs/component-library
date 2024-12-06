@@ -257,4 +257,39 @@ describe('va-checkbox', () => {
     await checkboxLabelEl.click();
     expect(await checkboxEl.getProperty('checked')).toBeTruthy();
   });
+
+  it('sets the data-indeterminate attribute on the input element', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox indeterminate label="Just another checkbox here" />',
+    );
+    const checkboxEl = await page.find('va-checkbox >>> input');
+    expect(checkboxEl).toHaveAttribute('data-indeterminate');
+  });
+
+  it('sets aria-checked mixed for indeterminate state', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox indeterminate label="Just another checkbox here" />',
+    );
+    const checkboxEl = await page.find('va-checkbox >>> label');
+    expect(checkboxEl).toEqualAttribute('aria-checked', 'mixed');
+  });
+
+  it('does not set the data-indeterminate attribute if checked is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox indeterminate checked label="Just another checkbox here" />',
+    );
+    const checkboxEl = await page.find('va-checkbox >>> input');
+    expect(checkboxEl).not.toHaveAttribute('data-indeterminate');
+  });
+
+  it('passes aXe check when indeterminate prop is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox indeterminate label="Just another checkbox here" />',
+    );
+    await axeCheck(page, ['aria-allowed-role']);
+  });
 });
