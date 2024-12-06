@@ -163,9 +163,9 @@ export class VaCheckbox {
    * Primarily for a11y; input.indeterminate must be set with JavaScript,
    * there is no HTML attribute for this.
    */
-  private updateIndeterminateInput() {
+  private handleIndeterminateInput() {
     const input = this.el.shadowRoot.querySelector('input');
-    if (!this.checked) {
+    if (this.indeterminate && !this.checked) {
       input.indeterminate = true;
     } else {
       input.indeterminate = false;
@@ -173,15 +173,11 @@ export class VaCheckbox {
   }
 
   componentDidUpdate() {
-    if (this.indeterminate) {
-      this.updateIndeterminateInput();
-    }
+    this.handleIndeterminateInput();
   }
 
   componentDidLoad() {
-    if (this.indeterminate) {
-      this.updateIndeterminateInput();
-    }
+    this.handleIndeterminateInput();
   }
 
   connectedCallback() {
