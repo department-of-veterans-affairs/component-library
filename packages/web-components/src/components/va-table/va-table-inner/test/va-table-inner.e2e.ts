@@ -52,6 +52,32 @@ describe('va-table', () => {
     expect(table).toHaveClass('usa-table--stacked');
   });
 
+  it('is not focusable by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const table = await page.find('va-table-inner');
+    expect(table.getAttribute('is-focusable')).toEqual('false');
+  });
+
+  it('is focusable by when attribute is set to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-table is-focusable="true" table-title="this is a caption">
+        <va-table-row>
+        <span>One</span>
+        <span>Two</span>
+        <span>Three</span>
+      </va-table-row>
+
+      <va-table-row>
+        <span>Dog</span>
+        <span>Cat</span>
+        <span>Mouse</span>
+      </va-table-row>
+    </va-table>`);
+    const table = await page.find('va-table-inner >>> div');
+    expect(table.getAttribute('tabindex')).toEqual('0');
+  });
+
   it('is not stacked by when attribute is set to false', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-table stacked="false" table-title="this is a caption">
@@ -329,7 +355,7 @@ describe('sorted va-table ', () => {
     const page = await newE2EPage();
     await page.setContent(getTableMarkup());
     // we need to update these variables after each sort
-    
+
     let buttons = null;
 
     buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
@@ -337,17 +363,25 @@ describe('sorted va-table ', () => {
     buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
 
     // screen reader should say ascending initially
-    expect(buttons[1].getAttribute('title')).toEqual(`Click to sort by Percent in ascending order`)
-    expect(buttons[0].getAttribute('title')).toEqual(`Click to sort by Integer/Float in ascending order`)
+    expect(buttons[1].getAttribute('title')).toEqual(
+      `Click to sort by Percent in ascending order`,
+    );
+    expect(buttons[0].getAttribute('title')).toEqual(
+      `Click to sort by Integer/Float in ascending order`,
+    );
 
     await buttons[1].click();
     await page.waitForChanges();
 
     buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
     // screen reader should say descending for clicked button
-    expect(buttons[1].getAttribute('title')).toEqual(`Click to sort by Percent in descending order`);
+    expect(buttons[1].getAttribute('title')).toEqual(
+      `Click to sort by Percent in descending order`,
+    );
     // screen reader should say ascending for non-clicked button
-    expect(buttons[0].getAttribute('title')).toEqual(`Click to sort by Integer/Float in ascending order`);
+    expect(buttons[0].getAttribute('title')).toEqual(
+      `Click to sort by Integer/Float in ascending order`,
+    );
 
     // sort descending
     await buttons[1].click();
@@ -355,9 +389,13 @@ describe('sorted va-table ', () => {
 
     buttons = await page.findAll('va-table-inner >>> thead >>> th >>> button');
     // screen reader should say ascending for twice clicked button
-    expect(buttons[1].getAttribute('title')).toEqual(`Click to sort by Percent in ascending order`);
+    expect(buttons[1].getAttribute('title')).toEqual(
+      `Click to sort by Percent in ascending order`,
+    );
     // screen reader should say ascending for non-clicked button
-    expect(buttons[0].getAttribute('title')).toEqual(`Click to sort by Integer/Float in ascending order`);
+    expect(buttons[0].getAttribute('title')).toEqual(
+      `Click to sort by Integer/Float in ascending order`,
+    );
   });
 });
 
