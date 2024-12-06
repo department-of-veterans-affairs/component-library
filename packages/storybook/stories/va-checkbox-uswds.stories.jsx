@@ -184,6 +184,10 @@ const IndeterminateTemplate = ({}) => {
         onVaChange={e => handleCheckboxChange(e)}
       />
     </fieldset>
+    <va-link 
+      external
+      href="https://github.com/department-of-veterans-affairs/component-library/blob/df914c5d452b5e9aa3507bb8e9ccf9a739be763c/packages/storybook/stories/va-checkbox-uswds.stories.jsx#L99-L189" 
+      text="View this indeterminate code example in our repo" />
     </>
   );
 };
