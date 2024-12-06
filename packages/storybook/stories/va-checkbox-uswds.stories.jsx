@@ -96,12 +96,11 @@ const I18nTemplate = args => {
   );
 };
 
-const IndeterminateTemplate = (defaultArgs) => {
+const IndeterminateTemplate = () => {
   const [checked, setChecked] = useState([true, true, false]);
 
   useEffect(() => {
     handleIndeterminate();
-    console.log(checked);
   }, [checked]);
 
   const handleIndeterminate = () => {
