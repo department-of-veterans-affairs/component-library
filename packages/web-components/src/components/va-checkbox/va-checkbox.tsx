@@ -159,6 +159,26 @@ export class VaCheckbox {
     if (this.enableAnalytics) this.fireAnalyticsEvent();
   };
 
+  /**
+   * For a11y, input.indeterminate must be set with JavaScript, there is no HTML attribute for this.
+   */
+  private updateIndeterminateInput() {
+    const input = this.el.shadowRoot.querySelector('input');
+    if (this.indeterminate && !this.checked) {
+      input.indeterminate = true;
+    } else {
+      input.indeterminate = false;
+    }
+  }
+
+  componentDidUpdate() {
+    this.updateIndeterminateInput();
+  }
+
+  componentDidLoad() {
+    this.updateIndeterminateInput();
+  }
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
