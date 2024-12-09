@@ -210,6 +210,7 @@ export class VaAccordion {
             <button
               aria-expanded={`${this.expanded}`}
               class="va-accordion__button"
+              data-testid="expand-all-accordions"
               ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
               onClick={() => this.expandCollapseAll(!this.expanded)}
               aria-label={
