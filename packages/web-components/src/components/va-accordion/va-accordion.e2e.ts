@@ -14,7 +14,7 @@ describe('va-accordion', () => {
       <va-accordion class="hydrated">
         <mock:shadow-root>
           <div class="usa-accordion">
-            <button aria-label="expand-all-aria-label" class="va-accordion__button">
+            <button aria-expanded="false" aria-label="expand-all-aria-label" class="va-accordion__button">
               expand-all +
             </button>
             <slot></slot>

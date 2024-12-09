@@ -208,6 +208,7 @@ export class VaAccordion {
         >
           {!openSingle ? (
             <button
+              aria-expanded={`${this.expanded}`}
               class="va-accordion__button"
               ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
               onClick={() => this.expandCollapseAll(!this.expanded)}
