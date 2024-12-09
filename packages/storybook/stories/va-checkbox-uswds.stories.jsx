@@ -2,6 +2,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { VaCheckbox } from '@department-of-veterans-affairs/web-components/react-bindings';
+
+VaCheckbox.displayName = 'VaCheckbox';
 
 const checkboxDocs = getWebComponentDocs('va-checkbox');
 
@@ -26,6 +29,7 @@ const defaultArgs = {
   'hint': null,
   'tile': false,
   'message-aria-describedby': 'Optional description text for screen readers',
+  'indeterminate': false,
 };
 
 const vaCheckbox = args => {
@@ -40,6 +44,7 @@ const vaCheckbox = args => {
     hint,
     tile,
     'message-aria-describedby': messageAriaDescribedBy,
+    indeterminate,
     ...rest
   } = args;
   return (
@@ -55,6 +60,7 @@ const vaCheckbox = args => {
       tile={tile}
       onBlur={e => console.log(e)}
       message-aria-describedby={messageAriaDescribedBy}
+      indeterminate={indeterminate}
     />
   );
 };
@@ -87,6 +93,102 @@ const I18nTemplate = args => {
       />
       <div style={{ marginTop: '20px' }}>{vaCheckbox(args)}</div>
     </div>
+  );
+};
+
+const IndeterminateTemplate = ({}) => {
+  const [checked, setChecked] = useState([true, true, false]);
+
+  useEffect(() => {
+    handleIndeterminate();
+  }, [checked]);
+
+  const handleIndeterminate = () => {
+    const indeterminateCheckbox = document.querySelector('.indeterminate-checkbox');
+
+    // If all of the checkbox states are true, set indeterminate checkbox to checked.
+    if (checked.every(val => val === true)) {
+      indeterminateCheckbox.checked = true;
+      indeterminateCheckbox.indeterminate = false;
+    // If any one of the checkbox states is true, set indeterminate checkbox to indeterminate.
+    } else if (checked.some(val => val === true)) {
+      indeterminateCheckbox.checked = false;
+      indeterminateCheckbox.indeterminate = true;
+    // Otherwise, reset the indeterminate checkbox to unchecked.
+    } else {
+      indeterminateCheckbox.checked = false;
+      indeterminateCheckbox.indeterminate = false
+    }
+  };
+
+  const handleCheckboxChange = event => {
+    const index = parseInt(event.target.getAttribute('data-index'));
+    const nextChecked = checked.map((value, i) => {
+      if (i === index) {
+        return event.detail.checked;
+      } else {
+        return value;
+      }
+    });
+    setChecked(nextChecked);
+  }
+
+  const handleSelectAllToggle = event => {  
+    const checkboxes = document.querySelectorAll('.example-checkbox');
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = event.target.checked;
+    });
+
+    // toggle state of all checkboxes to match the "select all" checkbox
+    const nextChecked = checked.map(() => event.target.checked);
+    setChecked(nextChecked)
+  }
+
+  return (
+    <>
+    <fieldset class="vads-u-margin-bottom--3">
+      <legend className="vads-u-font-size--md vads-u-margin-bottom--3">Indeterminate Checkbox Example</legend>
+      <VaCheckbox
+        class="indeterminate-checkbox"
+        label="Select all historical figures"
+        indeterminate
+        onVaChange={e => handleSelectAllToggle(e)}
+      />
+
+      <hr className="vads-u-margin-y--2" />
+
+      <VaCheckbox
+        class="example-checkbox"
+        id="checkbox-1"
+        checked={checked[0]}
+        data-index={0}
+        label="Sojourner Truth"
+        onVaChange={e => handleCheckboxChange(e)}
+      />
+
+      <VaCheckbox
+        class="example-checkbox"
+        id="checkbox-2"
+        checked={checked[1]}
+        data-index={1}
+        label="George Washington Carver"
+        onVaChange={e => handleCheckboxChange(e)}
+      />
+  
+      <VaCheckbox
+        class="example-checkbox"
+        id="checkbox-3"
+        checked={checked[2]}
+        data-index={2}
+        label="Frederick Douglass"
+        onVaChange={e => handleCheckboxChange(e)}
+      />
+    </fieldset>
+    <va-link 
+      external
+      href="https://github.com/department-of-veterans-affairs/component-library/blob/df914c5d452b5e9aa3507bb8e9ccf9a739be763c/packages/storybook/stories/va-checkbox-uswds.stories.jsx#L99-L189" 
+      text="View this indeterminate code example in our repo" />
+    </>
   );
 };
 
@@ -159,3 +261,6 @@ Internationalization.args = {
   error: 'There has been a problem',
   required: true,
 };
+
+export const Indeterminate = IndeterminateTemplate.bind(null);
+Indeterminate.args = { ...defaultArgs };
