@@ -150,7 +150,7 @@ const IndeterminateTemplate = ({}) => {
       <legend className="vads-u-font-size--md vads-u-margin-bottom--3">Indeterminate Checkbox Example</legend>
       <VaCheckbox
         class="indeterminate-checkbox"
-        label="All Historical Figures"
+        label="Select all historical figures"
         indeterminate
         onVaChange={e => handleSelectAllToggle(e)}
       />
