@@ -4,6 +4,7 @@ import {
     Prop,
     h,
   } from '@stencil/core';
+import { getHeaderLevel } from '../../utils/utils';
 
 // Shadow DOM turned off so the va-process-list has visibility into component and can apply styles
 @Component({
@@ -46,7 +47,7 @@ export class VaProcessListItem {
   render() { 
     const {header, level, checkmark, active, pending, statusText} = this;
     // eslint-disable-next-line i18next/no-literal-string
-    const HeaderTag = `h${level}`;
+    const HeaderLevel = getHeaderLevel(level);
     const status = checkmark ? 'checkmark' : active ? 'active' : pending ? 'pending' : null;
     const statusTextMap = {
       checkmark: statusText || 'Complete',
@@ -60,7 +61,7 @@ export class VaProcessListItem {
           <div class="usa-process-list__heading-eyebrow">{statusTextMap[status]}</div>
           : null
         }
-        {header ? <HeaderTag class='usa-process-list__heading'>{header}</HeaderTag> : <slot name="header"/>}
+        {header ? <HeaderLevel part="header" class='usa-process-list__heading'>{header}</HeaderLevel> : null}
         <slot/>
       </Host>
     )
