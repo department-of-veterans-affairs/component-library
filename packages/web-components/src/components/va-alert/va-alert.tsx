@@ -6,6 +6,7 @@ import {
   Host,
   Prop,
   h,
+  Fragment,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -151,7 +152,7 @@ export class VaAlert {
   }
 
   render() {
-    const { visible, closeable, slim } = this;
+    const { visible, closeable, slim, fullWidth } = this;
     let status = this.status;
     /* eslint-disable i18next/no-literal-string */
 
@@ -164,23 +165,23 @@ export class VaAlert {
 
     if (!visible) return <div aria-live="polite" />;
 
-
     const classes = classnames('usa-alert', `usa-alert--${status}`, {
       'usa-alert--success': status === 'continue',
-      'usa-alert--slim': slim,
+      'usa-alert--slim': slim && !fullWidth,
     });
 
-    return (
-      <Host>
+    const classesSiteAlert = classnames('usa-site-alert', {
+      'usa-site-alert--slim': slim,
+      'usa-site-alert--info': status === 'info',
+    });
+
+    const alertBody = (
+      <Fragment>
         <div
-          role={this.el.getAttribute('data-role')}
-          class={classes}
-          aria-label={this.el.getAttribute('data-label')}
+          class="usa-alert__body"
+          onClick={this.handleAlertBodyClick.bind(this)}
         >
-          <div
-            class="usa-alert__body"
-            onClick={this.handleAlertBodyClick.bind(this)}
-          >
+          <div>
             {status === 'continue' && (
               <va-icon
                 class="va-alert__lock-icon"
@@ -202,6 +203,34 @@ export class VaAlert {
             <va-icon icon="cancel" size={4}></va-icon>
           </button>
         )}
+      </Fragment>
+    );
+
+    if (fullWidth) {
+      return (
+        <Host>
+          <section
+            class={classesSiteAlert}
+            aria-label={this.el.getAttribute('data-label')}
+            role={this.el.getAttribute('data-role')}
+          >
+            <div class={classes}>
+              {alertBody}
+            </div>
+          </section>
+        </Host>
+      );
+    }
+
+    return (
+      <Host>
+        <div
+          role={this.el.getAttribute('data-role')}
+          class={classes}
+          aria-label={this.el.getAttribute('data-label')}
+        >
+          {alertBody}
+        </div>
       </Host>
     );
   }

@@ -7,6 +7,10 @@
   working while we work on deprecation.
 **/
 /**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
   /uswds/dist/scss/lib/addons/_margin.scss
 **/
 /**
@@ -18,7 +22,7 @@
   border-left-style: solid;
   border-left-width: 10px;
   display: table;
-  padding: units(4) units(8) units(4) units(3);
+  padding: 2rem 4rem 2rem 1.5rem;
   width: 100%;
 }
 .usa-alert::before {
@@ -53,7 +57,7 @@
   padding-top: 0;
 }
 .usa-alert-text {
-  margin-top: units(2.5);
+  margin-top: 1.25rem;
 }
 .usa-alert-text:only-child {
   margin: 0;
@@ -66,10 +70,10 @@
   margin-bottom: 0;
 }
 .usa-alert-text .usa-alert-heading + p:only-of-type {
-  margin-top: units(2.5);
+  margin-top: 1.25rem;
 }
 .usa-alert-text ul {
-  padding-left: units(2.5);
+  padding-left: 1.25rem;
 }
 .usa-alert-info {
   border-left-color: #00a6d2;
@@ -124,7 +128,7 @@
   font-size: 1.40625rem;
   padding: 0;
   position: absolute;
-  margin: units(2);
+  margin: 1rem;
   right: 0;
   top: 0;
   width: auto;

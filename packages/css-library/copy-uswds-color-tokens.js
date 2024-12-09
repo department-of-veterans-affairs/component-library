@@ -57,6 +57,7 @@ const tokensToKeep = {
       'gold-vivid-10',
       'gold-vivid-20',
       'gold-vivid-30',
+      'gold-vivid-40',
       'gold-vivid-50',
       'gold-50'
     ],
@@ -116,6 +117,7 @@ const tokensToKeep = {
       'green-cool-40',
       'green-cool-50',
       'green-cool-vivid-20',
+      'green-cool-vivid-30',
       'green-cool-vivid-40',
       'green-cool-vivid-50',
       'green-cool-vivid-60',

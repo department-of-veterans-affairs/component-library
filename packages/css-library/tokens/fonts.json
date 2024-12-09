@@ -1,12 +1,12 @@
 {
   "font": {
     "family": {
-      "sans": { "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
+      "sans": { "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
       "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" }
     },
     "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" },
     "source": {
-      "sans": { "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"}
+      "sans": { "value": "'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"}
     },
     "weight": {
       "normal": { "value": "400"},
@@ -18,7 +18,7 @@
     },
     "size": {
       "sm": { "value": "0.938rem" },
-      "base": { "value": "1rem" },
+      "root": { "value": "1rem" },
       "md": { "value": "1.063rem" },
       "lg": { "value": "1.25rem" },
       "xl": { "value": "1.875rem" },
@@ -43,6 +43,8 @@
       "heading": { "value": "1.2" }
     },
     "size": {
+      "source-sans-normalized": { "value": "1.06rem" },
+      "root": { "value": "1rem" },
       "body": {
         "large": { "value": "20px" },
         "lead": { "value": "20px" },

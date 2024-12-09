@@ -5796,11 +5796,15 @@ through all possible variants
 }
 
 .vads-u-font-family--sans {
-  font-family: Source Sans Pro, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif !important;
+  font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif !important;
 }
 
 .vads-u-font-family--serif {
   font-family: Bitter, Georgia, Cambria, Times New Roman, Times, serif !important;
+}
+
+.vads-u-font-size--source-sans-normalized {
+  font-size: 1.063rem !important;
 }
 
 .vads-u-font-size--sm {
@@ -7561,6 +7565,9 @@ through all possible variants
   .mobile\:vads-u-order--initial {
     order: 0 !important;
   }
+  .mobile\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
+  }
   .mobile\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
   }
@@ -8947,6 +8954,9 @@ through all possible variants
   }
   .mobile-lg\:vads-u-order--initial {
     order: 0 !important;
+  }
+  .mobile-lg\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
   }
   .mobile-lg\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
@@ -10335,6 +10345,9 @@ through all possible variants
   .tablet\:vads-u-order--initial {
     order: 0 !important;
   }
+  .tablet\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
+  }
   .tablet\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
   }
@@ -11721,6 +11734,9 @@ through all possible variants
   }
   .desktop\:vads-u-order--initial {
     order: 0 !important;
+  }
+  .desktop\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
   }
   .desktop\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
@@ -13109,6 +13125,9 @@ through all possible variants
   .desktop-lg\:vads-u-order--initial {
     order: 0 !important;
   }
+  .desktop-lg\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
+  }
   .desktop-lg\:vads-u-font-size--sm {
     font-size: 0.938rem !important;
   }
@@ -14495,6 +14514,9 @@ through all possible variants
   }
   .medium-screen\:vads-u-order--initial {
     order: 0 !important;
+  }
+  .medium-screen\:vads-u-font-size--source-sans-normalized {
+    font-size: 1.063rem !important;
   }
   .medium-screen\:vads-u-font-size--sm {
     font-size: 0.938rem !important;

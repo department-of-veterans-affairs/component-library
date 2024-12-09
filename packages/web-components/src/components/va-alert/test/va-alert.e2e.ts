@@ -13,8 +13,10 @@ describe('va-alert', () => {
         <mock:shadow-root>
           <div class="usa-alert usa-alert--info">
             <div class="usa-alert__body">
-              <slot name="headline"></slot>
-              <slot></slot>
+              <div>
+                <slot name="headline"></slot>
+                <slot></slot>
+              </div>
             </div>
           </div>
         </mock:shadow-root>
@@ -179,5 +181,41 @@ describe('va-alert', () => {
 
     expect(element.classList.contains('usa-alert--info')).toBeFalsy();
     expect(element.classList.contains('usa-alert--continue')).toBeTruthy();
+  });
+
+  it('renders section markup when full-width prop is active', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-alert full-width></va-alert>');
+    const sectionEl = await page.find('va-alert >>> section');
+
+    expect(sectionEl).not.toBeNull();
+  });
+
+  it('does not render the section markup when full-width prop is inactive', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-alert></va-alert>');
+    const sectionEl = await page.find('va-alert >>> section');
+
+    expect(sectionEl).toBeNull();
+  });
+
+  it('has the .usa-site-alert class when the full-width prop is active', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-alert full-width></va-alert>');
+    const sectionEl = await page.find('va-alert >>> .usa-site-alert');
+
+    expect(sectionEl).not.toBeNull();
+  });
+
+  it('passes an axe check when the full-width prop is active', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-alert full-width><h3 slot="headline">Alert</h3>Alert content</va-alert>`,
+    );
+
+    await axeCheck(page);
   });
 });

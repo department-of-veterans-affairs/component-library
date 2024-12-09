@@ -440,6 +440,52 @@ export namespace Components {
         "useFormsPattern"?: string;
     }
     /**
+     * @componentName Combo Box
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref form/combo-box
+     * @translations English
+     * @translations Spanish
+     */
+    interface VaComboBox {
+        /**
+          * The combo box component will be disabled / read-only.
+         */
+        "disabled"?: boolean;
+        /**
+          * Error message to display. When defined, this indicates an error.
+         */
+        "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
+          * Text label for the field.
+         */
+        "label": string;
+        /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name": string;
+        /**
+          * The placeholder string.
+         */
+        "placeholder"?: string;
+        /**
+          * Whether or not this is a required field.
+         */
+        "required"?: boolean;
+        /**
+          * Selected value (will get updated on select).
+         */
+        "value"?: string;
+    }
+    /**
      * @componentName Crisis Line Modal
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -637,6 +683,33 @@ export namespace Components {
         "srtext"?: string;
     }
     /**
+     * @componentName Language Toggle
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaLanguageToggle {
+        /**
+          * The English language href for the page. Required.
+         */
+        "enHref": string;
+        /**
+          * The Spanish language href for the page. Optional.
+         */
+        "esHref"?: string;
+        /**
+          * The ISO language code for the page. Default is 'en'.
+         */
+        "language": string;
+        /**
+          * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
+         */
+        "routerLinks"?: boolean;
+        /**
+          * The Tagalog language href for the page. Optional.
+         */
+        "tlHref"?: string;
+    }
+    /**
      * @componentName Link
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -698,6 +771,10 @@ export namespace Components {
           * Adds an aria-label attribute to the link element.
          */
         "label"?: string;
+        /**
+          * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
+         */
+        "language"?: string;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
          */
@@ -1135,6 +1212,10 @@ export namespace Components {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
+        /**
+          * Text to display in the eyebrow of an item if active, pending, or checkmark is true. Defaults to "Active", "Pending", or "Complete"
+         */
+        "statusText"?: string;
     }
     /**
      * @componentName Progress bar - activity
@@ -1813,6 +1894,10 @@ export interface VaCheckboxGroupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaCheckboxGroupElement;
 }
+export interface VaComboBoxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaComboBoxElement;
+}
 export interface VaDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaDateElement;
@@ -1824,6 +1909,10 @@ export interface VaFileInputCustomEvent<T> extends CustomEvent<T> {
 export interface VaFileInputMultipleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputMultipleElement;
+}
+export interface VaLanguageToggleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaLanguageToggleElement;
 }
 export interface VaLinkCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2222,6 +2311,31 @@ declare global {
         prototype: HTMLVaCheckboxGroupElement;
         new (): HTMLVaCheckboxGroupElement;
     };
+    interface HTMLVaComboBoxElementEventMap {
+        "vaSelect": any;
+    }
+    /**
+     * @componentName Combo Box
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref form/combo-box
+     * @translations English
+     * @translations Spanish
+     */
+    interface HTMLVaComboBoxElement extends Components.VaComboBox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaComboBoxElementEventMap>(type: K, listener: (this: HTMLVaComboBoxElement, ev: VaComboBoxCustomEvent<HTMLVaComboBoxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaComboBoxElementEventMap>(type: K, listener: (this: HTMLVaComboBoxElement, ev: VaComboBoxCustomEvent<HTMLVaComboBoxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaComboBoxElement: {
+        prototype: HTMLVaComboBoxElement;
+        new (): HTMLVaComboBoxElement;
+    };
     /**
      * @componentName Crisis Line Modal
      * @maturityCategory caution
@@ -2329,6 +2443,29 @@ declare global {
     var HTMLVaIconElement: {
         prototype: HTMLVaIconElement;
         new (): HTMLVaIconElement;
+    };
+    interface HTMLVaLanguageToggleElementEventMap {
+        "vaLanguageToggle": any;
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Language Toggle
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaLanguageToggleElement extends Components.VaLanguageToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaLanguageToggleElementEventMap>(type: K, listener: (this: HTMLVaLanguageToggleElement, ev: VaLanguageToggleCustomEvent<HTMLVaLanguageToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaLanguageToggleElementEventMap>(type: K, listener: (this: HTMLVaLanguageToggleElement, ev: VaLanguageToggleCustomEvent<HTMLVaLanguageToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaLanguageToggleElement: {
+        prototype: HTMLVaLanguageToggleElement;
+        new (): HTMLVaLanguageToggleElement;
     };
     interface HTMLVaLinkElementEventMap {
         "component-library-analytics": any;
@@ -2966,12 +3103,14 @@ declare global {
         "va-card": HTMLVaCardElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
+        "va-combo-box": HTMLVaComboBoxElement;
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-date": HTMLVaDateElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
+        "va-language-toggle": HTMLVaLanguageToggleElement;
         "va-link": HTMLVaLinkElement;
         "va-link-action": HTMLVaLinkActionElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
@@ -3510,6 +3649,56 @@ declare namespace LocalJSX {
         "useFormsPattern"?: string;
     }
     /**
+     * @componentName Combo Box
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref form/combo-box
+     * @translations English
+     * @translations Spanish
+     */
+    interface VaComboBox {
+        /**
+          * The combo box component will be disabled / read-only.
+         */
+        "disabled"?: boolean;
+        /**
+          * Error message to display. When defined, this indicates an error.
+         */
+        "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
+          * Text label for the field.
+         */
+        "label": string;
+        /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name": string;
+        /**
+          * The event emitted when the selected value changes
+         */
+        "onVaSelect"?: (event: VaComboBoxCustomEvent<any>) => void;
+        /**
+          * The placeholder string.
+         */
+        "placeholder"?: string;
+        /**
+          * Whether or not this is a required field.
+         */
+        "required"?: boolean;
+        /**
+          * Selected value (will get updated on select).
+         */
+        "value"?: string;
+    }
+    /**
      * @componentName Crisis Line Modal
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -3731,6 +3920,41 @@ declare namespace LocalJSX {
         "srtext"?: string;
     }
     /**
+     * @componentName Language Toggle
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaLanguageToggle {
+        /**
+          * The English language href for the page. Required.
+         */
+        "enHref": string;
+        /**
+          * The Spanish language href for the page. Optional.
+         */
+        "esHref"?: string;
+        /**
+          * The ISO language code for the page. Default is 'en'.
+         */
+        "language"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaLanguageToggleCustomEvent<any>) => void;
+        /**
+          * Event fired when a link is clicked. Includes the selected language's ISO code.
+         */
+        "onVaLanguageToggle"?: (event: VaLanguageToggleCustomEvent<any>) => void;
+        /**
+          * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
+         */
+        "routerLinks"?: boolean;
+        /**
+          * The Tagalog language href for the page. Optional.
+         */
+        "tlHref"?: string;
+    }
+    /**
      * @componentName Link
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -3793,8 +4017,9 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The event used to track usage of the component.
+          * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
          */
+        "language"?: string;
         "onComponent-library-analytics"?: (event: VaLinkCustomEvent<any>) => void;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
@@ -4309,6 +4534,10 @@ declare namespace LocalJSX {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
+        /**
+          * Text to display in the eyebrow of an item if active, pending, or checkmark is true. Defaults to "Active", "Pending", or "Complete"
+         */
+        "statusText"?: string;
     }
     /**
      * @componentName Progress bar - activity
@@ -5025,12 +5254,14 @@ declare namespace LocalJSX {
         "va-card": VaCard;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
+        "va-combo-box": VaComboBox;
         "va-crisis-line-modal": VaCrisisLineModal;
         "va-date": VaDate;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
+        "va-language-toggle": VaLanguageToggle;
         "va-link": VaLink;
         "va-link-action": VaLinkAction;
         "va-loading-indicator": VaLoadingIndicator;
@@ -5165,6 +5396,15 @@ declare module "@stencil/core" {
              */
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             /**
+             * @componentName Combo Box
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             * @guidanceHref form/combo-box
+             * @translations English
+             * @translations Spanish
+             */
+            "va-combo-box": LocalJSX.VaComboBox & JSXBase.HTMLAttributes<HTMLVaComboBoxElement>;
+            /**
              * @componentName Crisis Line Modal
              * @maturityCategory caution
              * @maturityLevel candidate
@@ -5206,6 +5446,12 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
+            /**
+             * @componentName Language Toggle
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-language-toggle": LocalJSX.VaLanguageToggle & JSXBase.HTMLAttributes<HTMLVaLanguageToggleElement>;
             /**
              * @componentName Link
              * @maturityCategory caution
