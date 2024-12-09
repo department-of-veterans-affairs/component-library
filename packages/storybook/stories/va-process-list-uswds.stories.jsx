@@ -111,7 +111,6 @@ const HeaderSizeTemplate = (defaultArgs) => {
   );
 };
 
-
 const CustomSizingTemplate = (defaultArgs) => {
   return (
     <va-process-list>
