@@ -1,10 +1,10 @@
 import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import mainTag from './language-detector';
-import enTranslation from './translations/en';
-import esTranslation from './translations/es';
-import tlTranslation from './translations/tl';
+import mainTag from './language-detector.mjs';
+import enTranslation from './translations/en.mjs';
+import esTranslation from './translations/es.mjs';
+import tlTranslation from './translations/tl.mjs';
 
 const languageDetector = new LanguageDetector();
 languageDetector.addDetector(mainTag);

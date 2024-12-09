@@ -1,11 +1,3 @@
-// todo there are two issues blocking using these unit test:
-//    1. upgrade node to v20. our current version of node, 18, does not support
-//       the File type. We could also use a polyfill to get this support
-//    2. update our i18n-setup.js files. va-file-input-multiple imports i18next
-//       from core, which then imports other files, but isn't considered a module
-//       which causes Jest to fail. The simple solution is to change all the files
-//       in core/src/i18n to typescript, but there may be another solution
-
 import { VaFileInputMultiple } from '../va-file-input-multiple';
 import { FileDetails } from "../FileDetails";
 
