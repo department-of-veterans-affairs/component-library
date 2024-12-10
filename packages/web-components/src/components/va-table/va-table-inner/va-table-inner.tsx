@@ -138,8 +138,7 @@ export class VaTableInner {
   parseHTMLToString (innerHTML:string) {
     let parser = new DOMParser();
 
-     parser.parseFromString(innerHTML, 'text/html').documentElement.textContent;
-    return innerHTML
+    return parser.parseFromString(innerHTML, 'text/html').documentElement.textContent;
   }
 
   /**
