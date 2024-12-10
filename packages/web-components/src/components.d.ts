@@ -1541,9 +1541,9 @@ export namespace Components {
     }
     interface VaTable {
         /**
-          * Does this a table need focus
+          * When active, the table can be horizontally scrolled and is focusable
          */
-        "isFocusable"?: boolean;
+        "scrollable"?: boolean;
         /**
           * Is the table sortable
          */
@@ -1571,11 +1571,11 @@ export namespace Components {
           * The number of columns in the table
          */
         "cols"?: number;
-        /**
-          * Does this a table need focus
-         */
-        "isFocusable"?: boolean;
         "rows"?: number;
+        /**
+          * When active, the table can be horizontally scrolled and is focusable
+         */
+        "scrollable"?: boolean;
         /**
           * Is this a sortable table
          */
@@ -4927,9 +4927,9 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
-          * Does this a table need focus
+          * When active, the table can be horizontally scrolled and is focusable
          */
-        "isFocusable"?: boolean;
+        "scrollable"?: boolean;
         /**
           * Is the table sortable
          */
@@ -4958,14 +4958,14 @@ declare namespace LocalJSX {
          */
         "cols"?: number;
         /**
-          * Does this a table need focus
-         */
-        "isFocusable"?: boolean;
-        /**
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
         "onSortTable"?: (event: VaTableInnerCustomEvent<any>) => void;
         "rows"?: number;
+        /**
+          * When active, the table can be horizontally scrolled and is focusable
+         */
+        "scrollable"?: boolean;
         /**
           * Is this a sortable table
          */

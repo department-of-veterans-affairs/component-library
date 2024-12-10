@@ -40,9 +40,9 @@ export class VaTable {
   @Prop() stacked?: boolean = true;
 
   /**
-   * Does this a table need focus
+   * When active, the table can be horizontally scrolled and is focusable
    */
-  @Prop() isFocusable?: boolean = false;
+  @Prop() scrollable?: boolean = false;
 
   /**
    * Is the table sortable
@@ -132,7 +132,7 @@ export class VaTable {
       this.stacked && !this.sortable ? 'true' : 'false',
     );
     vaTable.setAttribute('sortable', `${this.sortable}`);
-    vaTable.setAttribute('is-focusable', this.isFocusable ? 'true' : 'false');
+    vaTable.setAttribute('scrollable', this.scrollable ? 'true' : 'false');
     // we rebuild the inner table after a sort
     if (this.sortable && sortdir && sortindex) {
       vaTable.dataset.sortdir = sortdir;

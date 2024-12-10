@@ -5,20 +5,19 @@
 :host {
   td slot::slotted(span:empty)::before,
   th slot::slotted(span:empty)::before {
-   content: "---";
-   font-weight: normal;
+    content: '---';
+    font-weight: normal;
   }
 }
 
 :host {
-  display: block;
+  display: table;
   font-family: var(--font-source-sans);
   font-size: 1.06rem;
   border-collapse: collapse;
   margin: 0;
   padding: 0;
   width: 100%;
-  overflow-x: auto;
 }
 :host thead tr th {
   button {
@@ -32,7 +31,7 @@
     top: 50%;
     transform: translate(0, -50%);
     text-align: center;
-    
+
     &:focus {
       outline: 2px solid var(--vads-color-action-focus-on-light);
     }
@@ -50,7 +49,7 @@ caption {
   font-weight: 700;
   font-size: 1.25rem;
   font-family: var(--font-serif);
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -63,7 +62,8 @@ caption {
 }
 
 @media screen and (max-width: 29.99em) {
-  .usa-table--stacked th, .usa-table--stacked td {
+  .usa-table--stacked th,
+  .usa-table--stacked td {
     width: auto;
   }
 }

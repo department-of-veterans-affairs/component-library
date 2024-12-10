@@ -61,9 +61,9 @@ export class VaTableInner {
   @Prop() sortable?: boolean = false;
 
   /**
-   * Does this a table need focus
+   * When active, the table can be horizontally scrolled and is focusable
    */
-  @Prop() isFocusable?: boolean = false;
+  @Prop() scrollable?: boolean = false;
 
   /**
    * If sortable is true, the direction of next sort for the column that was just sorted
@@ -313,14 +313,17 @@ export class VaTableInner {
   }
 
   render() {
-    const { tableTitle, tableType, stacked, isFocusable } = this;
+    const { tableTitle, tableType, stacked, scrollable } = this;
     const classes = classnames({
       'usa-table': true,
       'usa-table--stacked': stacked,
       'usa-table--borderless': tableType === 'borderless',
     });
     return (
-      <div tabIndex={isFocusable ? 0 : undefined}>
+      <div
+        tabIndex={scrollable ? 0 : undefined}
+        class={scrollable ? 'usa-table-container--scrollable' : undefined}
+      >
         <table class={classes}>
           {tableTitle && <caption>{tableTitle}</caption>}
           <thead>{this.makeRow(0)}</thead>
