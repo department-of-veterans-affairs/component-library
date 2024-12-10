@@ -130,6 +130,19 @@ export class VaTableInner {
   }
 
   /**
+   * escapes html entities and returns a string
+   * ex: 'Hall &amp; Oates' returns 'Hall & Oates'
+   * @param innerHTML string of html
+   * @returns parsed string escaped of html entities
+   */
+  parseHTMLToString (innerHTML:string) {
+    let parser = new DOMParser();
+
+     parser.parseFromString(innerHTML, 'text/html').documentElement.textContent;
+    return innerHTML
+  }
+
+  /**
    * Generate the markup for a table row where row is the zero-indexed row number
    */
   makeRow(row: number): HTMLTableRowElement {
@@ -141,9 +154,9 @@ export class VaTableInner {
         {Array.from({ length: this.cols }).map((_, i) => {
           const slotName = `va-table-slot-${row * this.cols + i}`;
           const slot = <slot name={slotName}></slot>;
-          const header = this.el.querySelector(
+          const header = this.parseHTMLToString(this.el.querySelector(
             `[slot="va-table-slot-${i}"]`,
-          ).innerHTML;
+          ).innerHTML);
           const dataSortActive = row > 0 && this.sortindex === i ? true : false;
           return i === 0 || row === 0 ? (
             <th
