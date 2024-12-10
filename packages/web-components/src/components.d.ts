@@ -141,10 +141,6 @@ export namespace Components {
      */
     interface VaAlertSignIn {
         /**
-          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-         */
-        "disableAnalytics"?: boolean;
-        /**
           * Header level for button wrapper. Must be between 1 and 6
          */
         "headingLevel"?: number;
@@ -157,9 +153,9 @@ export namespace Components {
          */
         "timeLimit"?: string;
         /**
-          * Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
-        "variant"?: string;
+        "variant": string;
         /**
           * If `true`, the alert will be visible.
          */
@@ -3349,10 +3345,6 @@ declare namespace LocalJSX {
      */
     interface VaAlertSignIn {
         /**
-          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-         */
-        "disableAnalytics"?: boolean;
-        /**
           * Header level for button wrapper. Must be between 1 and 6
          */
         "headingLevel"?: number;
@@ -3365,7 +3357,7 @@ declare namespace LocalJSX {
          */
         "timeLimit"?: string;
         /**
-          * Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
         "variant"?: string;
         /**

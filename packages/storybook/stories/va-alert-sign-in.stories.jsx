@@ -102,8 +102,14 @@ WithCustomHeadingLevel.args = {
   'heading-level': 3,
 };
 
-export const OptionalSignIn = Template.bind(null);
-OptionalSignIn.args = {
+export const RequiredSignInVerified = Template.bind(null);
+RequiredSignInVerified.args = {
+  ...defaultArgs,
+  variant: ASIVariants.signInRequired,
+};
+
+export const OptionalSignInVerified = Template.bind(null);
+OptionalSignInVerified.args = {
   ...defaultArgs,
   'variant': ASIVariants.signInOptional,
   'no-sign-in-link': 'https://example.com/',
