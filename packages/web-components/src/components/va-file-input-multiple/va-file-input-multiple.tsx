@@ -81,7 +81,7 @@ export class VaFileInputMultiple {
 
   /**
    * Event emitted when any change to the file inputs occurs.
-   * Sends back an array of FileDetails 
+   * Sends back an array of FileDetails
    */
   @Event() vaMultipleChange: EventEmitter;
 
@@ -174,7 +174,7 @@ export class VaFileInputMultiple {
     const newFile = event.detail.files[0];
     let filesArray:FileDetails[];
     if (newFile) {
-      const fileObject = this.findFileByKey(fileKey);  
+      const fileObject = this.findFileByKey(fileKey);
       if (fileObject.file) {
         // Change file
         fileObject.file = newFile;
@@ -201,7 +201,7 @@ export class VaFileInputMultiple {
       }, 1000);
       filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), true)
     }
-    
+
     this.vaMultipleChange.emit(filesArray);
     this.files = Array.of(...this.files);
   }
@@ -211,7 +211,7 @@ export class VaFileInputMultiple {
     let filesArray:FileDetails[] = files.filter((file =>{ return !!file})).map((file) => {
       return {file: file, changed: false}
     });
-    
+
     if (!deleted && filesArray[fileIndex]) {
       // don't return a changed property on deletion
       filesArray[fileIndex].changed = true
@@ -235,6 +235,7 @@ export class VaFileInputMultiple {
       <span class="required"> {i18next.t('required')}</span>
     ) : null;
     if (headerSize && headerSize >= 1 && headerSize <= 6) {
+      // eslint-disable-next-line i18next/no-literal-string
       const HeaderTag = `h${headerSize}` as keyof JSX.IntrinsicElements;
       return (
         <div class="label-header">
@@ -294,7 +295,7 @@ export class VaFileInputMultiple {
    * It first ensures that the slot content is correctly set up, then iterates over each file input in the component,
    * appending cloned additional content where applicable. This method ensures that additional content is
    * consistently rendered across multiple file inputs after updates to the DOM.
-   * 
+   *
    * Then checks if we need to add files from the "value" prop to state
    */
   componentDidRender() {
