@@ -403,3 +403,12 @@ Sortable.args = {
   'columns': sortColumns,
   'sortable': true,
 };
+
+export const Scrollable = Template.bind(null);
+Scrollable.args = {
+  'table-title': 'This is a scrollable table.',
+  'rows': data,
+  'columns': defaultColumns,
+  'scrollable': true,
+};
+Default.argTypes = propStructure(vaTableDocs);
