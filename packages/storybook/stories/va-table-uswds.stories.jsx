@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { VaPagination } from "@department-of-veterans-affairs/component-library/dist/react-bindings";
+import { VaPagination } from '@department-of-veterans-affairs/component-library/dist/react-bindings';
 
 const vaTableDocs = getWebComponentDocs('va-table');
 
@@ -11,9 +11,9 @@ export default {
     componentSubtitle: 'va-table web component',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={vaTableDocs} />,
-    }
-  }
-}
+    },
+  },
+};
 
 const defaultColumns = ['Document title', 'Description', 'Year'];
 const data = [
@@ -39,82 +39,79 @@ const data = [
   ],
 ];
 
-const Template = (args) => {
+const Template = args => {
   const {
     'table-title': tableTitle,
     'table-type': tableType,
     rows = data,
     sortable,
-    columns
+    columns,
+    scrollable,
   } = args;
 
   return (
-    <va-table table-title={tableTitle} stacked={args.stacked} table-type={tableType} sortable={!!sortable}>
+    <va-table
+      scrollable={scrollable}
+      table-title={tableTitle}
+      stacked={args.stacked}
+      table-type={tableType}
+      sortable={!!sortable}
+    >
       <va-table-row>
-          {columns.map((col, i) => (
-            <span key={`header-default-${i}`}>{col}</span>
+        {columns.map((col, i) => (
+          <span key={`header-default-${i}`}>{col}</span>
+        ))}
+      </va-table-row>
+
+      {rows.map((row, index) => (
+        <va-table-row key={`row-default-${index}`}>
+          {row.map((item, index2) => (
+            <span key={`cell-default-${index2}`}>{item}</span>
           ))}
         </va-table-row>
-
-        {rows.map((row, index) => (
-          <va-table-row key={`row-default-${index}`}>
-            {row.map((item, index2) => (
-              <span key={`cell-default-${index2}`}>{item}</span>
-            ))}
-          </va-table-row>
-        ))}
+      ))}
     </va-table>
   );
-}
+};
 
-const CustomComponentsTemplate = (args) => {
-  const {
-    'table-title': tableTitle,
-    rows,
-    columns
-  } = args;
+const CustomComponentsTemplate = args => {
+  const { 'table-title': tableTitle, rows, columns } = args;
   return (
     <va-table table-title={tableTitle}>
       <va-table-row>
-          {columns.map((col, i) => (
-            <span key={`header-default-${i}`}>{col}</span>
+        {columns.map((col, i) => (
+          <span key={`header-default-${i}`}>{col}</span>
+        ))}
+      </va-table-row>
+
+      {rows.map((row, index) => (
+        <va-table-row key={`row-default-${index}`}>
+          {row.map((item, index2) => (
+            <span key={`cell-default-${index2}`}>{item}</span>
           ))}
         </va-table-row>
+      ))}
 
-        {rows.map((row, index) => (
-          <va-table-row key={`row-default-${index}`}>
-            {row.map((item, index2) => (
-              <span key={`cell-default-${index2}`}>{item}</span>
-            ))}
-          </va-table-row>
-        ))}
-      
       <va-table-row>
-        <span><va-link text="Social Security" href="https://www.ssa.gov/history/35act.html"/></span>
+        <span>
+          <va-link
+            text="Social Security"
+            href="https://www.ssa.gov/history/35act.html"
+          />
+        </span>
         <span>
           <div>
             <div>
-              An act to provide for the general welfare by establishing a system of Federal old-age benefits. Enables provisions for:
+              An act to provide for the general welfare by establishing a system
+              of Federal old-age benefits. Enables provisions for:
             </div>
             <ul>
-              <li>
-                aged persons
-              </li>
-              <li>
-                blind persons
-              </li>
-              <li>
-                dependent and crippled children
-              </li>
-              <li>
-                maternal and child welfare
-              </li>
-              <li>
-                public health
-              </li>
-              <li>
-                unemployment compensation
-              </li>
+              <li>aged persons</li>
+              <li>blind persons</li>
+              <li>dependent and crippled children</li>
+              <li>maternal and child welfare</li>
+              <li>public health</li>
+              <li>unemployment compensation</li>
             </ul>
           </div>
         </span>
@@ -122,8 +119,7 @@ const CustomComponentsTemplate = (args) => {
       </va-table-row>
     </va-table>
   );
-}
-
+};
 
 const paginationData = [
   [
@@ -240,11 +236,8 @@ const paginationData = [
   ],
 ];
 
-const Pagination = (args) => {
-  const {
-    'table-title': tableTitle,
-    rows,
-  } = args;
+const Pagination = args => {
+  const { 'table-title': tableTitle, rows } = args;
 
   const columns = ['Date', 'Amount', 'Type', 'Method', 'Bank', 'Account'];
 
@@ -258,7 +251,6 @@ const Pagination = (args) => {
   const [currentData, setCurrentData] = useState(paginate(rows, MAX_ROWS, 1));
   const [currentPage, setCurrentPage] = useState(1);
 
-
   function onPageChange(page) {
     setCurrentData(paginate(rows, MAX_ROWS, page));
     setCurrentPage(page);
@@ -268,7 +260,7 @@ const Pagination = (args) => {
 
   return (
     <main>
-      <va-table table-title={tableTitle} >
+      <va-table table-title={tableTitle}>
         <va-table-row>
           {columns.map((col, index) => (
             <span key={`table-header-${index}`}>{col}</span>
@@ -284,7 +276,7 @@ const Pagination = (args) => {
         ))}
       </va-table>
       <VaPagination
-        onPageSelect={(e) => onPageChange(e.detail.page)}
+        onPageSelect={e => onPageChange(e.detail.page)}
         page={currentPage}
         pages={numPages}
         maxPageListLength={MAX_PAGE_LIST_LENGTH}
@@ -305,50 +297,50 @@ const missingData = [
 
 export const Default = Template.bind(null);
 Default.args = {
-  'table-title': "This is a borderless table.",
-  rows: data,
-  columns: defaultColumns
-}
+  'table-title': 'This is a borderless table.',
+  'rows': data,
+  'columns': defaultColumns,
+};
 Default.argTypes = propStructure(vaTableDocs);
-
 
 export const Bordered = Template.bind(null);
 Bordered.args = {
-  'table-title': "This is a stacked bordered table.",
+  'table-title': 'This is a stacked bordered table.',
   'table-type': 'bordered',
-  rows: data,
-  columns: defaultColumns
-}
+  'rows': data,
+  'columns': defaultColumns,
+};
 Bordered.argTypes = propStructure(vaTableDocs);
 
 export const NonStacked = Template.bind(null);
 NonStacked.args = {
-  'table-title': "This table is not stacked. It will not change on a mobile screen.",
-  stacked: false,
-  rows: data,
-  columns: defaultColumns
-}
+  'table-title':
+    'This table is not stacked. It will not change on a mobile screen.',
+  'stacked': false,
+  'rows': data,
+  'columns': defaultColumns,
+};
 NonStacked.argTypes = propStructure(vaTableDocs);
 
 export const WithCustomMarkup = CustomComponentsTemplate.bind(null);
 WithCustomMarkup.args = {
-  'table-title': "This table has custom markup in some of its cells.",
-  rows: data,
-  columns: defaultColumns
-}
+  'table-title': 'This table has custom markup in some of its cells.',
+  'rows': data,
+  'columns': defaultColumns,
+};
 
 export const WithPagination = Pagination.bind(null);
 WithPagination.args = {
-  'table-title': "This table uses pagination.",
-  rows: paginationData
-}
+  'table-title': 'This table uses pagination.',
+  'rows': paginationData,
+};
 
 export const WithMissingData = Template.bind(null);
 WithMissingData.args = {
-  'table-title': "This table has some cells without data",
-  rows: missingData,
-  columns: defaultColumns
-}
+  'table-title': 'This table has some cells without data',
+  'rows': missingData,
+  'columns': defaultColumns,
+};
 
 const sortColumns = [
   'Integer/Float',
@@ -358,8 +350,8 @@ const sortColumns = [
   'Ordinal',
   'Month only',
   'Full date',
-  'Alphabetical'
-]
+  'Alphabetical',
+];
 
 const sortData = [
   [
@@ -370,7 +362,7 @@ const sortData = [
     'Ninth',
     'August',
     'June 3, 1903',
-    "Lorem ipsum dolor sit,"
+    'Lorem ipsum dolor sit,',
   ],
   [
     '8.9',
@@ -378,36 +370,36 @@ const sortData = [
     '$17,000',
     '3rd',
     'Second',
-    "February",
+    'February',
     'October 25, 1415',
-    "amet consectetur adipisicing elit."
+    'amet consectetur adipisicing elit.',
   ],
   [
     '-5',
     '60.01%',
     '$100,000',
-    "8th",
+    '8th',
     'Fifth',
-    "November",
+    'November',
     'December 10, 1621',
-    "Alias nam eum minima",
+    'Alias nam eum minima',
   ],
   [
     '99',
     '44%',
     '$1,100',
-    "5th",
+    '5th',
     'First',
-    "April",
+    'April',
     'September 30, 1885',
-    "delectus explicabo"
-  ]
-]
+    'delectus explicabo',
+  ],
+];
 
 export const Sortable = Template.bind(null);
 Sortable.args = {
-  'table-title': "This is a sortable table",
-  rows: sortData,
-  columns: sortColumns,
-  sortable: true
-}
+  'table-title': 'This is a sortable table',
+  'rows': sortData,
+  'columns': sortColumns,
+  'sortable': true,
+};
