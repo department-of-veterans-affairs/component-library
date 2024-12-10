@@ -1,4 +1,4 @@
-export enum VariantNames {
+export enum AlertSignInVariants {
   /* eslint-disable i18next/no-literal-string */
   signInRequired = 'signInRequired',
   signInOptional = 'signInOptional',

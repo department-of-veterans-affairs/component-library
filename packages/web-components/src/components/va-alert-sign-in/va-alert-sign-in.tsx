@@ -1,14 +1,6 @@
-import {
-  Component,
-  Element,
-  // Event,
-  // EventEmitter,
-  Host,
-  Prop,
-  h,
-} from '@stencil/core';
+import { Component, Element, Host, Prop, h } from '@stencil/core';
 import classnames from 'classnames';
-import { VariantNames } from './VariantNames';
+import { AlertSignInVariants as ASIVariants } from './AlertSignInVariants';
 import { getHeaderLevel } from '../../utils/utils';
 
 /**
@@ -25,19 +17,14 @@ export class VaAlertSignIn {
   @Element() el!: any;
 
   /**
-   * Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+   * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
    */
-  @Prop() variant?: string = VariantNames.signInRequired;
+  @Prop() variant: string = ASIVariants.signInRequired;
 
   /**
    * Header level for button wrapper. Must be between 1 and 6
    */
   @Prop() headingLevel?: number = 2;
-
-  /**
-   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-   */
-  @Prop() disableAnalytics?: boolean = true;
 
   /**
    * If `true`, the alert will be visible.
@@ -54,44 +41,17 @@ export class VaAlertSignIn {
    */
   @Prop() noSignInLink?: string;
 
-  /**
-   * The event used to track usage of the component. This is emitted when an
-   * anchor link is clicked and disableAnalytics is not true.
-   */
-  // @Event({
-  //   eventName: 'component-library-analytics',
-  //   composed: true,
-  //   bubbles: true,
-  // })
-  // componentLibraryAnalytics: EventEmitter;
-
-  // private handleAlertBodyClick(e: MouseEvent): void {
-  //   if (!this.disableAnalytics) {
-  //     const target = e.target as HTMLElement;
-
-  //     // If it's a link being clicked, dispatch an analytics event
-  //     if (target?.tagName === 'VA-LINK') {
-  //       const innerText = target.shadowRoot.querySelector('a').innerText;
-  //       const detail = {
-  //         componentName: 'va-alert-sign-in',
-  //         action: 'linkClick',
-  //         details: {
-  //           clickLabel: innerText,
-  //           variant: this.variant,
-  //         },
-  //       };
-  //       this.componentLibraryAnalytics.emit(detail);
-  //     }
-  //   }
-  // }
-
   render() {
     const { visible } = this;
     let { variant } = this;
 
     // Check that the provided variant (or null) matches a known variant name
-    if (!Object.values(VariantNames).includes(variant as VariantNames))
-      variant = VariantNames.signInRequired;
+    if (!Object.values(ASIVariants).includes(variant as ASIVariants)) {
+      console.error(
+        'A non-allowed variant name was provided, please check your spelling.',
+      );
+      variant = ASIVariants.signInRequired;
+    }
 
     // Return an empty div if visible is set to false
     if (!visible) return <div aria-live="polite" />;
@@ -99,11 +59,11 @@ export class VaAlertSignIn {
     // Determine background and border colors
     const classes = classnames('usa-alert', `va-alert-sign-in--${variant}`, {
       'usa-alert--info':
-        variant === VariantNames.signInRequired ||
-        variant === VariantNames.signInOptional,
+        variant === ASIVariants.signInRequired ||
+        variant === ASIVariants.signInOptional,
       'usa-alert--warning':
-        variant !== VariantNames.signInRequired &&
-        variant !== VariantNames.signInOptional,
+        variant !== ASIVariants.signInRequired &&
+        variant !== ASIVariants.signInOptional,
     });
 
     // Create a header element
@@ -277,11 +237,11 @@ export class VaAlertSignIn {
     /* eslint-enable i18next/no-literal-string */
 
     const BodyVariants = {
-      [VariantNames.signInEither]: SignInEitherVariant,
-      [VariantNames.signInOptional]: OptionalVariant,
-      [VariantNames.signInRequired]: RequiredVariant,
-      [VariantNames.verifyIdMe]: IdMeVariant,
-      [VariantNames.verifyLoginGov]: LoginGovVariant,
+      [ASIVariants.signInEither]: SignInEitherVariant,
+      [ASIVariants.signInOptional]: OptionalVariant,
+      [ASIVariants.signInRequired]: RequiredVariant,
+      [ASIVariants.verifyIdMe]: IdMeVariant,
+      [ASIVariants.verifyLoginGov]: LoginGovVariant,
     };
     const SignInBody = BodyVariants[variant];
 
@@ -292,10 +252,7 @@ export class VaAlertSignIn {
           class={classes}
           aria-label={this.el.getAttribute('data-label')}
         >
-          <div
-            class="usa-alert__body"
-            // onClick={this.handleAlertBodyClick.bind(this)}
-          >
+          <div class="usa-alert__body">
             <div>
               <va-icon
                 class="va-alert-sign-in__lock-icon"

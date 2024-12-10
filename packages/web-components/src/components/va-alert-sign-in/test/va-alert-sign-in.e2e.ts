@@ -1,6 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
-import { VariantNames } from '../VariantNames';
+import { AlertSignInVariants as ASIVariants } from '../AlertSignInVariants';
 
 describe('va-alert-sign-in', () => {
   it('renders', async () => {
@@ -82,39 +82,6 @@ describe('va-alert-sign-in', () => {
     await axeCheck(page);
   });
 
-  it.skip('fires an analytics event when a link is clicked', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-alert-sign-in></va-alert-sign-in>');
-
-    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-
-    const link = await page.find('va-alert-sign-in >>> va-link');
-    await link.click();
-
-    expect(analyticsSpy).toHaveReceivedEventDetail({
-      action: 'linkClick',
-      componentName: 'va-alert-sign-in',
-      details: {
-        clickLabel: 'Learn about creating an account',
-        variant: VariantNames.signInRequired,
-      },
-    });
-  });
-
-  it.skip('does not fire an analytics event when disableAnalytics is passed', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-alert-sign-in disable-analytics="true"></va-alert-sign-in>',
-    );
-
-    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-
-    const link = await page.find('va-alert-sign-in >>> va-link');
-    await link.click();
-
-    expect(analyticsSpy).toHaveReceivedEventTimes(0);
-  });
-
   it('should set variant to "required" if null', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-alert-sign-in></va-alert-sign-in>');
@@ -123,7 +90,7 @@ describe('va-alert-sign-in', () => {
 
     expect(
       element.classList.contains(
-        `va-alert-sign-in--${VariantNames.signInRequired}`,
+        `va-alert-sign-in--${ASIVariants.signInRequired}`,
       ),
     ).toBeTruthy();
   });
@@ -136,7 +103,7 @@ describe('va-alert-sign-in', () => {
 
     expect(
       element.classList.contains(
-        `va-alert-sign-in--${VariantNames.signInRequired}`,
+        `va-alert-sign-in--${ASIVariants.signInRequired}`,
       ),
     ).toBeTruthy();
   });
@@ -151,7 +118,7 @@ describe('va-alert-sign-in', () => {
 
     expect(
       element.classList.contains(
-        `va-alert-sign-in--${VariantNames.signInRequired}`,
+        `va-alert-sign-in--${ASIVariants.signInRequired}`,
       ),
     ).toBeTruthy();
   });
@@ -159,14 +126,14 @@ describe('va-alert-sign-in', () => {
   it('should set variant to "optional" when specified', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert-sign-in variant="${VariantNames.signInOptional}"></va-alert-sign-in>`,
+      `<va-alert-sign-in variant="${ASIVariants.signInOptional}"></va-alert-sign-in>`,
     );
 
     const element = await page.find('va-alert-sign-in >>> .usa-alert');
 
     expect(
       element.classList.contains(
-        `va-alert-sign-in--${VariantNames.signInOptional}`,
+        `va-alert-sign-in--${ASIVariants.signInOptional}`,
       ),
     ).toBeTruthy();
   });
@@ -174,14 +141,14 @@ describe('va-alert-sign-in', () => {
   it('should set variant to "either" when specified', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert-sign-in variant="${VariantNames.signInEither}"></va-alert-sign-in>`,
+      `<va-alert-sign-in variant="${ASIVariants.signInEither}"></va-alert-sign-in>`,
     );
 
     const element = await page.find('va-alert-sign-in >>> .usa-alert');
 
     expect(
       element.classList.contains(
-        `va-alert-sign-in--${VariantNames.signInEither}`,
+        `va-alert-sign-in--${ASIVariants.signInEither}`,
       ),
     ).toBeTruthy();
   });
@@ -189,14 +156,14 @@ describe('va-alert-sign-in', () => {
   it('should set variant to "Verify with ID.me" when specified', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert-sign-in variant="${VariantNames.verifyIdMe}"></va-alert-sign-in>`,
+      `<va-alert-sign-in variant="${ASIVariants.verifyIdMe}"></va-alert-sign-in>`,
     );
 
     const element = await page.find('va-alert-sign-in >>> .usa-alert');
 
     expect(
       element.classList.contains(
-        `va-alert-sign-in--${VariantNames.verifyIdMe}`,
+        `va-alert-sign-in--${ASIVariants.verifyIdMe}`,
       ),
     ).toBeTruthy();
   });
@@ -204,14 +171,14 @@ describe('va-alert-sign-in', () => {
   it('should set variant to "Verify with Login.gov" when specified', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert-sign-in variant="${VariantNames.verifyLoginGov}"></va-alert-sign-in>`,
+      `<va-alert-sign-in variant="${ASIVariants.verifyLoginGov}"></va-alert-sign-in>`,
     );
 
     const element = await page.find('va-alert-sign-in >>> .usa-alert');
 
     expect(
       element.classList.contains(
-        `va-alert-sign-in--${VariantNames.verifyLoginGov}`,
+        `va-alert-sign-in--${ASIVariants.verifyLoginGov}`,
       ),
     ).toBeTruthy();
   });

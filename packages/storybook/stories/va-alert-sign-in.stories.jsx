@@ -1,6 +1,6 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { VariantNames } from '../../web-components/src/components/va-alert-sign-in/VariantNames';
+import { AlertSignInVariants as ASIVariants } from '@department-of-veterans-affairs/web-components/src/components/va-alert-sign-in/AlertSignInVariants';
 
 const alertSignInDocs = getWebComponentDocs('va-alert-sign-in');
 
@@ -16,7 +16,7 @@ export default {
 };
 
 const defaultArgs = {
-  'variant': VariantNames.signInRequired,
+  'variant': ASIVariants.signInRequired,
   'disable-analytics': true,
   'visible': true,
   'time-limit': null,
@@ -39,23 +39,23 @@ const LoginGovVerifyButton = () => (
 );
 
 const SlotVariants = {
-  [VariantNames.signInRequired]: {
+  [ASIVariants.signInRequired]: {
     slotNames: ['SignInButton'],
     buttons: [SignInButton],
   },
-  [VariantNames.signInOptional]: {
+  [ASIVariants.signInOptional]: {
     slotNames: ['SignInButton'],
     buttons: [SignInButton],
   },
-  [VariantNames.signInEither]: {
+  [ASIVariants.signInEither]: {
     slotNames: ['LoginGovSignInButton', 'IdMeSignInButton'],
     buttons: [LoginGovSignInButton, IdMeSignInButton],
   },
-  [VariantNames.verifyIdMe]: {
+  [ASIVariants.verifyIdMe]: {
     slotNames: ['IdMeVerifyButton'],
     buttons: [IdMeVerifyButton],
   },
-  [VariantNames.verifyLoginGov]: {
+  [ASIVariants.verifyLoginGov]: {
     slotNames: ['LoginGovVerifyButton'],
     buttons: [LoginGovVerifyButton],
   },
@@ -105,7 +105,7 @@ WithCustomHeadingLevel.args = {
 export const OptionalSignIn = Template.bind(null);
 OptionalSignIn.args = {
   ...defaultArgs,
-  'variant': VariantNames.signInOptional,
+  'variant': ASIVariants.signInOptional,
   'no-sign-in-link': 'https://example.com/',
   'time-limit': '20 minutes',
 };
@@ -113,17 +113,17 @@ OptionalSignIn.args = {
 export const VerifyWithIdMe = Template.bind(null);
 VerifyWithIdMe.args = {
   ...defaultArgs,
-  variant: VariantNames.verifyIdMe,
+  variant: ASIVariants.verifyIdMe,
 };
 
 export const VerifyWithLoginGov = Template.bind(null);
 VerifyWithLoginGov.args = {
   ...defaultArgs,
-  variant: VariantNames.verifyLoginGov,
+  variant: ASIVariants.verifyLoginGov,
 };
 
 export const SignInWithAnotherAccount = Template.bind(null);
 SignInWithAnotherAccount.args = {
   ...defaultArgs,
-  variant: VariantNames.signInEither,
+  variant: ASIVariants.signInEither,
 };
