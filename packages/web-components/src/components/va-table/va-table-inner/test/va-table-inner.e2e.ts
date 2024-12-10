@@ -52,16 +52,16 @@ describe('va-table', () => {
     expect(table).toHaveClass('usa-table--stacked');
   });
 
-  it('is not focusable by default', async () => {
+  it('is not scrollable by default', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());
     const table = await page.find('va-table-inner');
-    expect(table.getAttribute('is-focusable')).toEqual('false');
+    expect(table).not.toHaveClass('usa-table-container--scrollable');
   });
 
-  it('is focusable by when attribute is set to true', async () => {
+  it('is scrollable when attribute is set to true', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-table is-focusable="true" table-title="this is a caption">
+    await page.setContent(`<va-table scrollable="true" table-title="this is a caption">
         <va-table-row>
         <span>One</span>
         <span>Two</span>
@@ -76,6 +76,7 @@ describe('va-table', () => {
     </va-table>`);
     const table = await page.find('va-table-inner >>> div');
     expect(table.getAttribute('tabindex')).toEqual('0');
+    expect(table).toHaveClass('usa-table-container--scrollable');
   });
 
   it('is not stacked by when attribute is set to false', async () => {
