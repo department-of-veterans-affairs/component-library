@@ -1,5 +1,5 @@
 import Modal from './Modal';
 
-import './i18n-setup.mjs';
+import '../core/src/i18n-setup.mjs';
 
 export { Modal };
