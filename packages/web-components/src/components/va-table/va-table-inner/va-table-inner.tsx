@@ -321,7 +321,7 @@ export class VaTableInner {
     });
     return (
       <div
-        tabIndex={scrollable ? 0 : undefined}
+        tabIndex={scrollable ? 0 : null}
         class={scrollable ? 'usa-table-container--scrollable' : undefined}
       >
         <table class={classes}>

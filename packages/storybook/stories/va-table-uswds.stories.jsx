@@ -333,6 +333,7 @@ export const WithPagination = Pagination.bind(null);
 WithPagination.args = {
   'table-title': 'This table uses pagination.',
   'rows': paginationData,
+  'scrollable': true,
 };
 
 export const WithMissingData = Template.bind(null);
