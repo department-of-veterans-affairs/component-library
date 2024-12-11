@@ -416,6 +416,12 @@ article > h1 {
   }
 }
 
+.va-address-block {
+  margin-left: scale-rem(5rem);
+  border-left: 3px solid $color-primary;
+  padding-left: scale-rem(1rem);
+}
+
 // used mostly in content-build, we should consider moving this over there 
 .last-updated {
   margin-top: 1.5em;

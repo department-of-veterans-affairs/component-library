@@ -371,6 +371,12 @@ article > h1 {
   vertical-align: -1px;
 }
 
+.va-address-block {
+  margin-left: 3.125rem;
+  border-left: 3px solid #005ea2;
+  padding-left: 0.625rem;
+}
+
 .last-updated {
   margin-top: 1.5em;
   border-top: 2px solid #aeb0b5;
