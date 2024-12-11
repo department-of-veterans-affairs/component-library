@@ -237,7 +237,7 @@ const paginationData = [
 ];
 
 const Pagination = args => {
-  const { 'table-title': tableTitle, rows } = args;
+  const { 'table-title': tableTitle, rows, scrollable } = args;
 
   const columns = ['Date', 'Amount', 'Type', 'Method', 'Bank', 'Account'];
 
@@ -260,7 +260,7 @@ const Pagination = args => {
 
   return (
     <main>
-      <va-table table-title={tableTitle}>
+      <va-table table-title={tableTitle} scrollable={scrollable}>
         <va-table-row>
           {columns.map((col, index) => (
             <span key={`table-header-${index}`}>{col}</span>
