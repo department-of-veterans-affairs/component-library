@@ -55,6 +55,8 @@ export class VaTable {
   // the slots in the generated va-table-inner
   @State() cells: HTMLSpanElement[] = null;
 
+  @State() sortAnnouncement: string;
+
   private observer: MutationObserver;
 
   /**
@@ -130,6 +132,7 @@ export class VaTable {
     if (this.sortable && sortdir && sortindex) {
       vaTable.dataset.sortdir = sortdir;
       vaTable.dataset.sortindex = `${sortindex}`;
+      this.updateSRText(sortdir, sortindex);
     }
 
     if (this.tableTitle) {
@@ -172,6 +175,16 @@ export class VaTable {
       subtree: true,
       characterData: true,
     });
+  }
+
+  // only runs if sortable is true
+  // if a sort has occurred update the sr text to reflect this
+  updateSRText(sortdir: string, sortindex: number) {
+    const [header] = this.getRows();
+    const tableName = !!this.tableTitle
+    ? `The table named "${this.tableTitle}"`
+    : 'This table';
+    this.sortAnnouncement = `${tableName} is now sorted by ${header.childNodes[sortindex].textContent} only in ${sortdir === 'ascending' ? 'descending' : 'ascending'} order`;
   }
 
   disconnectedCallback() {
@@ -227,6 +240,7 @@ export class VaTable {
     return (
       <Host>
         <slot></slot>
+        <div class="usa-sr-only" aria-live="polite">{this.sortAnnouncement}</div>
       </Host>
     )
   }
