@@ -1545,6 +1545,10 @@ export namespace Components {
     }
     interface VaTable {
         /**
+          * When active, the table can be horizontally scrolled and is focusable
+         */
+        "scrollable"?: boolean;
+        /**
           * Is the table sortable
          */
         "sortable": boolean;
@@ -1572,6 +1576,10 @@ export namespace Components {
          */
         "cols"?: number;
         "rows"?: number;
+        /**
+          * When active, the table can be horizontally scrolled and is focusable
+         */
+        "scrollable"?: boolean;
         /**
           * Is this a sortable table
          */
@@ -4927,6 +4935,10 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
+          * When active, the table can be horizontally scrolled and is focusable
+         */
+        "scrollable"?: boolean;
+        /**
           * Is the table sortable
          */
         "sortable"?: boolean;
@@ -4958,6 +4970,10 @@ declare namespace LocalJSX {
          */
         "onSortTable"?: (event: VaTableInnerCustomEvent<any>) => void;
         "rows"?: number;
+        /**
+          * When active, the table can be horizontally scrolled and is focusable
+         */
+        "scrollable"?: boolean;
         /**
           * Is this a sortable table
          */
