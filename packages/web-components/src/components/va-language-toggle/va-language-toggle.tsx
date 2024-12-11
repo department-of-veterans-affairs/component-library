@@ -74,7 +74,7 @@ export class VaLanguageToggle {
   }
 
   // This method is fired whenever a link is clicked
-  handleToggle(e: Event, langCode: string): void {
+  handleToggle(e: Event, langCode: string, linkText: string): void {
     // don't navigate from current page but set new language
     if (this.routerLinks) {
       e.preventDefault();
@@ -82,14 +82,14 @@ export class VaLanguageToggle {
       window.history.replaceState(null, null, this.getUrl(langCode));
       this.language = langCode;
     }
-
     this.vaLanguageToggle.emit({ language: langCode });
 
     const detail = {
       componentName: 'va-language-toggle',
       action: 'linkClick',
       details: {
-        'pipe-delimited-list-header': langCode
+        'pipe-delimited-list-header': langCode,
+        label: linkText,
       },
     };
     this.componentLibraryAnalytics.emit(detail);
@@ -137,8 +137,9 @@ export class VaLanguageToggle {
                 class={anchorClass}
                 href={href}
                 language={lang}
-                onClick={(e) => this.handleToggle(e, lang)}
+                onClick={(e) => this.handleToggle(e, lang, label)}
                 text={label}
+                disableAnalytics={true}
               />
             </div>
           )
