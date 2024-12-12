@@ -403,6 +403,7 @@ Sortable.args = {
   'rows': sortData,
   'columns': sortColumns,
   'sortable': true,
+  'scrollable': true,
 };
 
 export const Scrollable = Template.bind(null);
@@ -411,5 +412,6 @@ Scrollable.args = {
   'rows': data,
   'columns': defaultColumns,
   'scrollable': true,
+  'stacked': false,
 };
 Default.argTypes = propStructure(vaTableDocs);
