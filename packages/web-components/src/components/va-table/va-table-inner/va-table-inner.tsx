@@ -61,6 +61,11 @@ export class VaTableInner {
   @Prop() sortable?: boolean = false;
 
   /**
+   * When active, the table can be horizontally scrolled and is focusable
+   */
+  @Prop() scrollable?: boolean = false;
+
+  /**
    * If sortable is true, the direction of next sort for the column that was just sorted
    */
   @State() sortdir?: string = null;
@@ -230,7 +235,9 @@ export class VaTableInner {
     content: string,
   ) {
     const button = th.querySelector('button');
-    let spanSortInfo = thSorted ? `Click to sort by ${content} in ${nextSortDirection} order` : `Click to sort by ${content} in ascending order`;
+    let spanSortInfo = thSorted
+      ? `Click to sort by ${content} in ${nextSortDirection} order`
+      : `Click to sort by ${content} in ascending order`;
     button.setAttribute('title', spanSortInfo);
     if (thSorted) {
       setTimeout(() => {
@@ -318,14 +325,17 @@ export class VaTableInner {
   }
 
   render() {
-    const { tableTitle, tableType, stacked } = this;
+    const { tableTitle, tableType, stacked, scrollable } = this;
     const classes = classnames({
       'usa-table': true,
       'usa-table--stacked': stacked,
       'usa-table--borderless': tableType === 'borderless',
     });
     return (
-      <div>
+      <div
+        tabIndex={scrollable ? 0 : null}
+        class={scrollable ? 'usa-table-container--scrollable' : undefined}
+      >
         <table class={classes}>
           {tableTitle && <caption>{tableTitle}</caption>}
           <thead>{this.makeRow(0)}</thead>
