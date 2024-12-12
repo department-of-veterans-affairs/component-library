@@ -85,7 +85,7 @@ Our web components have linting which checks for hard-coded user-facing strings.
 
 Local development can be done using Storybook by following the complete build steps outlined in [Running Build via Storybook](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#running-build-via-storybook).
 
-## Local testing in vets-website with Verdaccio
+### Local testing in vets-website with Verdaccio
 Contributors are encouraged to test their changes in `vets-website` using [Verdaccio](https://verdaccio.org/). What is Verdaccio? From the website:
 
 > Verdaccio is a simple, zero-config-required local private NPM registry. No need for an entire database just to get started&hellip;
@@ -249,11 +249,11 @@ The Design System Team will create a release minimally at the beginning of each 
 
 1. If you are unsure if a new release should be created, check with the Release Manager and/or the team first.
    - The DST Release Manager is the engineer on duty for the weekly support rotation.
-2. Create a new PR that updates the package.json version in the **packages that updates have been made**:
-   - `core` (required) - [packages/core/package.json](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4) must be updated for the workflow
-   - `web-components`
-   - `css-library`
-   - `react-components`
+2. Create a new `component-library` PR that updates the package.json version in the **packages that updates have been made**:
+   - `core` (required) - [packages/core/package.json](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4) must be updated for the publishing workflow
+     - `web-components` (if needed)
+     - `css-library` (if needed)
+     - `react-components` (if needed)
 3. From the [repo's homepage](https://github.com/department-of-veterans-affairs/component-library) click on "Releases" in the right-hand sidebar.
 4. Click on the "Draft a new release" button near the top of the page.
 5. Click on the "Choose a tag" drop-down and type the letter `v` followed by the new "core" version number. The target should remain `main`.
@@ -266,7 +266,7 @@ The Design System Team will create a release minimally at the beginning of each 
    - The release notes are intended for public use so they should be professional in tone, easily understandable, and concise.
 9. Ensure the "Set as the latest release" checkbox is checked.
 10. Take a screenshot of the release notes and post in the `#platform-design-system-team` channel on Slack. 
-    - This is to double-check that everything looks good and that there aren't any last-minute additions to the release that need to be included.
+    - This is to double-check that everything looks good, that there aren't any last-minute additions to the release that need to be included, and for general awareness of what will be released.
 11. Click the "Publish release" button. GitHub Actions will take care of any necessary build and publishing steps.
     - You can watch to make sure the release is created successfully from the [Github Actions tab](https://github.com/department-of-veterans-affairs/component-library/actions).
 12. Create a PR for the following repositories that updates the `component-library` dependency versions:
