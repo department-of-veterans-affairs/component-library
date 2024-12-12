@@ -243,7 +243,7 @@ To publish changes from the `web-components` subpackage, make sure the version n
 
 ### Releasing
 
-The Design System Team will create a release minimally at the beginning of each sprint (every other Thursday), and may additionally be performed as-needed when critical bug fixes need to go out. Reach out in #vfs-platform-support or #platform-design-system if you have a need for an unscheduled release.
+The Design System Team will create a release minimally at the beginning of each sprint (every other Thursday), and may additionally be performed as-needed when critical bug fixes need to go out. Reach out in `#vfs-platform-support` or `#platform-design-system` Slack channel if you have a need for an unscheduled release.
 
 **For Design System Team only:**
 
