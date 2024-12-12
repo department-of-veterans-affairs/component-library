@@ -55,7 +55,7 @@ describe('va-language-toggle', () => {
     const toggleSpy = await page.spyOnEvent('component-library-analytics');
     const anchor = await page.find('va-language-toggle >>> a');
     await anchor.click();
-    expect(toggleSpy).toHaveReceivedEvent();
+    expect(toggleSpy).toHaveReceivedEventTimes(1);
   });
 
   it('passes an aXe check', async () => {
