@@ -240,30 +240,10 @@ To publish changes from the `web-components` subpackage, make sure the version n
 
 [`yarn version`](https://yarnpkg.com/cli/version) is available to use to make changes in the CLI. To change the version of the package you are working on run one of the following commands: `yarn version major`, `yarn version minor`, or `yarn version patch`. For guidance on which command to use please see below.
 
-### How to choose a version number
-
-This repo follows [semantic versioning](https://semver.org/). Here are some examples of which changes correspond to which version (MAJOR, MINOR, or PATCH) increase.
-
-#### Major
-
-- Component is removed
-- Component API is changed and it causes a breaking change
-
-#### Minor
-
-- New component is added
-- New variant is added for a component
-- Non-breaking or backwards compatible component API change
-
-#### Patch
-
-- Accessibility fix
-- Styling fix
-- Functionality fix
 
 ### Releasing
 
-Releases will occur minimally at the beginning of each sprint (every other Thursday), and may additionally be performed as-needed when critical bug fixes need to go out. Reach out to via #vfs-platform-support or #platform-design-system if you have a need for an unscheduled release.
+The Design System Team will create a release minimally at the beginning of each sprint (every other Thursday), and may additionally be performed as-needed when critical bug fixes need to go out. Reach out in #vfs-platform-support or #platform-design-system if you have a need for an unscheduled release.
 
 **For Design System Team only:**
 
@@ -294,3 +274,23 @@ Releases will occur minimally at the beginning of each sprint (every other Thurs
     - [content-build](https://github.com/department-of-veterans-affairs/content-build)
     - [vets-design-system-documentation](https://github.com/department-of-veterans-affairs/vets-design-system-documentation)
 
+### How to choose a version number
+
+This repo follows [semantic versioning](https://semver.org/). Here are some examples of which changes correspond to which version (MAJOR, MINOR, or PATCH) increase.
+
+#### Major
+
+- Component is removed
+- Component API is changed and it causes a breaking change
+
+#### Minor
+
+- New component is added
+- New variant is added for a component
+- Non-breaking or backwards compatible component API change
+
+#### Patch
+
+- Accessibility fix
+- Styling fix
+- Functionality fix
