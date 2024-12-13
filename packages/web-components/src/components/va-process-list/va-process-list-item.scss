@@ -8,8 +8,11 @@
 }
 
 .usa-process-list__heading-eyebrow {
+  @extend .usa-process-list__heading; // needed for "source Sans Pro" font-family
   color: var(--vads-color-base-darker);
   text-transform: uppercase;
+  font-weight: normal;
+  font-size: var(--vads-font-size-source-sans-normalized);
 }
 
 va-process-list-item[pending='true'] .usa-process-list__heading {
