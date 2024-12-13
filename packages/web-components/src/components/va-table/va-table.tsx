@@ -6,7 +6,7 @@ import {
   h,
   State,
   Prop,
-  Listen
+  Listen,
 } from '@stencil/core';
 
 import { getCompareFunc } from './sort/utils';
@@ -18,9 +18,9 @@ import { getCompareFunc } from './sort/utils';
 })
 export class VaTable {
   /**
-  * This is a wrapper component whose job is to marshal the cells in slotted va-table-rows
-  * through DOM manipulation for projection into the slots of the va-table-inner component for rendering
-  */
+   * This is a wrapper component whose job is to marshal the cells in slotted va-table-rows
+   * through DOM manipulation for projection into the slots of the va-table-inner component for rendering
+   */
   @Element() el: HTMLElement;
 
   /**
@@ -39,6 +39,10 @@ export class VaTable {
    */
   @Prop() stacked?: boolean = true;
 
+  /**
+   * When active, the table can be horizontally scrolled and is focusable
+   */
+  @Prop() scrollable?: boolean = false;
 
   /**
    * Is the table sortable
@@ -92,7 +96,7 @@ export class VaTable {
     let count = 0;
     for (const row of rows) {
       const cellsInRow = this.getCellsInRow(row);
-      cellsInRow.forEach((cell) => {
+      cellsInRow.forEach(cell => {
         cell.setAttribute('slot', `va-table-slot-${count}`);
         count++;
       });
@@ -101,7 +105,6 @@ export class VaTable {
     }
     this.cells = cells;
   }
-
 
   /**
    * Generate a DocumentFragment that holds the cells
@@ -124,8 +127,12 @@ export class VaTable {
     vaTable.setAttribute('rows', `${this.rows}`);
     vaTable.setAttribute('cols', `${this.cols}`);
     // a sortable table should never stack
-    vaTable.setAttribute('stacked', (this.stacked && !this.sortable) ? "true" : "false");
+    vaTable.setAttribute(
+      'stacked',
+      this.stacked && !this.sortable ? 'true' : 'false',
+    );
     vaTable.setAttribute('sortable', `${this.sortable}`);
+    vaTable.setAttribute('scrollable', this.scrollable ? 'true' : 'false');
     // we rebuild the inner table after a sort
     if (this.sortable && sortdir && sortindex) {
       vaTable.dataset.sortdir = sortdir;
@@ -161,11 +168,13 @@ export class VaTable {
 
   watchForDataChanges() {
     // Watch for changes to the slot.
-    const row = this.el.querySelectorAll('va-table-row')[1] as HTMLVaTableRowElement;
+    const row = this.el.querySelectorAll(
+      'va-table-row',
+    )[1] as HTMLVaTableRowElement;
     const callback = () => {
-      this.resetVaTableInner()
+      this.resetVaTableInner();
       this.addVaTableInner();
-    }
+    };
     this.observer = new MutationObserver(callback);
     this.observer.observe(row, {
       childList: true,
@@ -219,7 +228,10 @@ export class VaTable {
       // replace children with the newly sorted va-table-row elements
       this.el.replaceChildren(...sortedDataRows);
       // render the table with details for next possible sort
-      this.addVaTableInner(sortdir === 'ascending' ? 'descending' : 'ascending', index);
+      this.addVaTableInner(
+        sortdir === 'ascending' ? 'descending' : 'ascending',
+        index,
+      );
     }
   }
 
@@ -228,6 +240,6 @@ export class VaTable {
       <Host>
         <slot></slot>
       </Host>
-    )
+    );
   }
 }
