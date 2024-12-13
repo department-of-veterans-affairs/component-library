@@ -240,6 +240,23 @@ export class VaTableInner {
   }
 
   // only runs if sortable is true
+  // if a sort has occurred update the sr text to reflect this
+  updateSRtext(
+    thSorted: boolean,
+    content: string,
+    currentSortDirection: string,
+  ) {
+    if (thSorted) {
+      const tableInfo = !!this.tableTitle
+        ? `The table named "${this.tableTitle}"`
+        : 'This table';
+      this.el.shadowRoot.querySelector(
+        'table + div',
+      ).innerHTML = `${tableInfo} is now sorted by ${content} in ${currentSortDirection} order`;
+    }
+  }
+
+  // only runs if sortable is true
   // for a given th, get the current and the next sort directions
   getSortDirections(): {
     currentSortDirection: string;
@@ -293,6 +310,11 @@ export class VaTableInner {
 
           // update title info of span inside th to reflect sort
           this.updateSpan(th, thSorted, nextSortDirection, content);
+
+          // update sr text to reflect sort
+          setTimeout(()=>{
+            this.updateSRtext(thSorted, content, currentSortDirection);
+          },100)
         });
     }
   }
@@ -311,6 +333,7 @@ export class VaTableInner {
           <thead>{this.makeRow(0)}</thead>
           <tbody id="va-table-body">{this.getBodyRows()}</tbody>
         </table>
+        <div class="usa-sr-only" aria-live="polite"></div>
       </div>
     );
   }
