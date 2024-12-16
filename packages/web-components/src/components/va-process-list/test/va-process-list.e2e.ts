@@ -49,19 +49,15 @@ describe('va-process-list', () => {
         </mock:shadow-root>
         <va-process-list-item class="hydrated usa-process-list__item" header="Step one" role="listitem">
           <!---->  
-          <h3 aria-label="Step one" class="usa-process-list__heading" part="header">
-            <span aria-hidden="true">
-              <div>Step one</div>
-            </span>
+          <h3 class="usa-process-list__heading" part="header">
+            <div>Step one</div>
           </h3>
           <p>Some content</p>
         </va-process-list-item>
         <va-process-list-item class="hydrated usa-process-list__item" header="Step two" role="listitem">
           <!---->
-          <h3 aria-label="Step two" class="usa-process-list__heading" part="header">
-            <span aria-hidden="true">
-              <div>Step two</div>
-            </span>
+          <h3 class="usa-process-list__heading" part="header">
+            <div>Step two</div>
           </h3>
           <p>Additional content</p>
           <ul>
