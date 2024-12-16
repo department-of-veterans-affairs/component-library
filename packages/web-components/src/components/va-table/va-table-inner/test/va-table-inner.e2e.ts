@@ -105,15 +105,15 @@ describe('va-table', () => {
   it('is not striped by default', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());
-    const table = await page.find('va-table-inner');
+    const table = await page.find('va-table-inner >>> .usa-table');
     expect(table).not.toHaveClass('usa-table--striped');
   });
 
   it('has the USWDS striped class when striped is true', async () => {
     const page = await newE2EPage();
-    await page.setContent(makeTable());
-    const table = await page.find('va-table-inner');
-    expect(table).not.toHaveClass('usa-table--striped');
+    await page.setContent(makeTable({striped: 'true'}));
+    const table = await page.find('va-table-inner >>> .usa-table');
+    expect(table).toHaveClass('usa-table--striped');
   });
 });
 
