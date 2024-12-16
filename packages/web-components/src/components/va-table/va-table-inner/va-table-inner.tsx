@@ -66,6 +66,11 @@ export class VaTableInner {
   @Prop() scrollable?: boolean = false;
 
   /**
+   * When active, the table will display alternating row background colors.
+   */
+  @Prop() striped: boolean = false;
+
+  /**
    * If sortable is true, the direction of next sort for the column that was just sorted
    */
   @State() sortdir?: string = null;
@@ -325,11 +330,12 @@ export class VaTableInner {
   }
 
   render() {
-    const { tableTitle, tableType, stacked, scrollable } = this;
+    const { tableTitle, tableType, stacked, scrollable, striped } = this;
     const classes = classnames({
       'usa-table': true,
       'usa-table--stacked': stacked,
       'usa-table--borderless': tableType === 'borderless',
+      'usa-table usa-table--striped': striped,
     });
     return (
       <div

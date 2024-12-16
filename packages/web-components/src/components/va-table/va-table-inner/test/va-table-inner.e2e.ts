@@ -6,8 +6,11 @@ import { dateSort } from '../../sort/date';
 import { _getCompareFunc } from '../../sort/utils';
 
 describe('va-table', () => {
-  function makeTable() {
-    return `<va-table table-title="this is a caption">
+  function makeTable(props = {}) {
+    const defaultProps = {...props, 'table-title': 'this is a caption'};
+    return `<va-table ${Object.entries(defaultProps)
+      .map(([key, value]) => `${key}="${value}"`)
+      .join(' ')}>
         <va-table-row>
         <span>One</span>
         <span>Two</span>
@@ -18,8 +21,7 @@ describe('va-table', () => {
         <span>Dog</span>
         <span>Cat</span>
         <span>Mouse</span>
-      </va-table-row>
-    </va-table>`;
+      </va-table-row>`;
   }
 
   it('renders', async () => {
@@ -61,19 +63,7 @@ describe('va-table', () => {
 
   it('is scrollable when attribute is set to true', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-table scrollable="true" table-title="this is a caption">
-        <va-table-row>
-        <span>One</span>
-        <span>Two</span>
-        <span>Three</span>
-      </va-table-row>
-
-      <va-table-row>
-        <span>Dog</span>
-        <span>Cat</span>
-        <span>Mouse</span>
-      </va-table-row>
-    </va-table>`);
+    await page.setContent(makeTable({scrollable: 'true'}));
     const table = await page.find('va-table-inner >>> div');
     expect(table.getAttribute('tabindex')).toEqual('0');
     expect(table).toHaveClass('usa-table-container--scrollable');
@@ -81,19 +71,7 @@ describe('va-table', () => {
 
   it('is not stacked by when attribute is set to false', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-table stacked="false" table-title="this is a caption">
-        <va-table-row>
-        <span>One</span>
-        <span>Two</span>
-        <span>Three</span>
-      </va-table-row>
-
-      <va-table-row>
-        <span>Dog</span>
-        <span>Cat</span>
-        <span>Mouse</span>
-      </va-table-row>
-    </va-table>`);
+    await page.setContent(makeTable({stacked: 'false'}));
     const table = await page.find('va-table-inner >>> table');
     expect(table).not.toHaveClass('usa-table--stacked');
   });
@@ -122,6 +100,20 @@ describe('va-table', () => {
     const rowHeader = await page.find('va-table-inner >>> tbody >>> th');
     expect(columnHeader.getAttribute('scope')).toEqual('col');
     expect(rowHeader.getAttribute('scope')).toEqual('row');
+  });
+
+  it('is not striped by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const table = await page.find('va-table-inner');
+    expect(table).not.toHaveClass('usa-table--striped');
+  });
+
+  it('has the USWDS striped class when striped is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const table = await page.find('va-table-inner');
+    expect(table).not.toHaveClass('usa-table--striped');
   });
 });
 

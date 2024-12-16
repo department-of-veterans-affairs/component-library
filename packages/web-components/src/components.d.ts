@@ -1584,6 +1584,10 @@ export namespace Components {
          */
         "stacked"?: boolean;
         /**
+          * When active, the table will display alternating row background colors.
+         */
+        "striped": boolean;
+        /**
           * The title of the table
          */
         "tableTitle"?: string;
@@ -1615,6 +1619,10 @@ export namespace Components {
           * If true convert to a stacked table when screen size is small
          */
         "stacked"?: boolean;
+        /**
+          * When active, the table will display alternating row background colors.
+         */
+        "striped": boolean;
         /**
           * The title of the table
          */
@@ -5013,6 +5021,10 @@ declare namespace LocalJSX {
          */
         "stacked"?: boolean;
         /**
+          * When active, the table will display alternating row background colors.
+         */
+        "striped"?: boolean;
+        /**
           * The title of the table
          */
         "tableTitle"?: string;
@@ -5048,6 +5060,10 @@ declare namespace LocalJSX {
           * If true convert to a stacked table when screen size is small
          */
         "stacked"?: boolean;
+        /**
+          * When active, the table will display alternating row background colors.
+         */
+        "striped"?: boolean;
         /**
           * The title of the table
          */

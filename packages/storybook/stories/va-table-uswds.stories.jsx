@@ -47,6 +47,7 @@ const Template = args => {
     sortable,
     columns,
     scrollable,
+    striped,
   } = args;
 
   return (
@@ -56,6 +57,7 @@ const Template = args => {
       stacked={args.stacked}
       table-type={tableType}
       sortable={!!sortable}
+      striped={striped}
     >
       <va-table-row>
         {columns.map((col, i) => (
@@ -406,6 +408,15 @@ Sortable.args = {
   'scrollable': true,
 };
 
+export const Striped = Template.bind(null);
+Striped.args = {
+  'table-title': 'This is a striped table.',
+  'rows': data,
+  'columns': defaultColumns,
+  'striped': true,
+  'table-type': 'bordered',
+};
+
 export const Scrollable = Template.bind(null);
 Scrollable.args = {
   'table-title': 'This is a scrollable table.',
@@ -414,4 +425,15 @@ Scrollable.args = {
   'scrollable': true,
   'stacked': false,
 };
+
+export const ScrollableWithStripes = Template.bind(null);
+ScrollableWithStripes.args = {
+  'table-title': 'This is a striped table.',
+  'rows': data,
+  'columns': defaultColumns,
+  'striped': true,
+  'table-type': 'bordered',
+  'scrollable': true,
+};
+
 Default.argTypes = propStructure(vaTableDocs);
