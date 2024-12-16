@@ -428,7 +428,7 @@ Scrollable.args = {
 
 export const ScrollableWithStripes = Template.bind(null);
 ScrollableWithStripes.args = {
-  'table-title': 'This is a striped table.',
+  'table-title': 'This is a striped table that is also scrollable.',
   'rows': data,
   'columns': defaultColumns,
   'striped': true,
