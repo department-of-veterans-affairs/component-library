@@ -21,7 +21,8 @@ describe('va-table', () => {
         <span>Dog</span>
         <span>Cat</span>
         <span>Mouse</span>
-      </va-table-row>`;
+      </va-table-row>
+    </va-table>`;
   }
 
   it('renders', async () => {
