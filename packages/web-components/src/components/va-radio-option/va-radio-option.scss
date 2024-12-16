@@ -3,43 +3,73 @@
 @use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
 @use 'usa-radio/src/styles/usa-radio';
 
-va-radio-option label {
-  max-width: 480px;
-  box-sizing: border-box;
-}
-
 .usa-radio {
   background: transparent;
+  display: flex;
+  margin: 0.5rem 0;
 }
 
-va-radio-option {
+.va-radio-option__container--tile {
+  border-radius: 0.25rem;
+  background-color: white;
+  border: 2px solid #c9c9c9;
+  color: #1b1b1b;
+  padding: 0.75rem 0 0.75rem 0.5rem;
+}
+
+:host {
   display: block;
   margin-top: 12px;
 }
 
-input[type=radio].usa-radio__input {
-  margin-left: unset;
+input[type="radio"].va-radio-option__input {
+  height: 20px;
+  width: 20px;
+  min-width: 20px;
+  border: 2px solid #1b1b1b;
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0.064rem 0.5rem 0 0;
   opacity: unset;
-  right: auto;
-  left: -999em;
+  position: initial;
 }
 
-va-radio-option input:focus {
+input[type="radio"].va-radio-option__input:checked {
+  background: #005ea2;
+  border: none;
+  box-shadow: 0 0 0 2px #005ea2, inset 0 0 0 2px white;
+}
+
+.usa-radio__label {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  max-width: 480px;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+
+:host input:focus {
   outline: none !important;
 }
 
-// Formation override
-va-radio-option label.usa-radio__label::before {
-  box-shadow: rgb(27, 27, 27) 0px 0px 0px 2px;
-  height: 20px;
-  width: 20px;
-  margin-left: 2px;
+// Formation overrides
+input[type=radio] + label {
+  margin-bottom: 0;
 }
 
-va-radio-option .usa-radio__input:focus + [class*='__label']::before {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
+input[type=radio] + label:before {
+  border-radius: 0;
+  box-shadow: none;
+  height: 0;
+  line-height: 0;
+  margin-left: 0;
+  margin-right: 0;
+  width: 0;
 }
 
-va-radio-option input[disabled='true']:focus + label.usa-radio__label::before {
+input[type=radio]:checked + label:before {
   outline: none;
+  box-shadow: none;
 }
