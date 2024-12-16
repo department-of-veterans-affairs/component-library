@@ -17,9 +17,17 @@
 
 va-process-list-item[pending='true'] .usa-process-list__heading {
   color: var(--vads-process-list-color-text-pending-on-light);
+
+  .usa-process-list__heading-eyebrow {
+    color: var(--vads-color-base-darker);
+  }
 }
 va-process-list-item[active='true'] .usa-process-list__heading {
   color: var(--vads-color-primary);
+
+  .usa-process-list__heading-eyebrow {
+    color: var(--vads-color-base-darker);
+  }
 }
 
 /* h6 remains as Source Sans Pro, everything else uses Bitter */
