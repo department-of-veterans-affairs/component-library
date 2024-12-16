@@ -335,7 +335,7 @@ export class VaTableInner {
       'usa-table': true,
       'usa-table--stacked': stacked,
       'usa-table--borderless': tableType === 'borderless',
-      'usa-table usa-table--striped': striped,
+      'usa-table--striped': striped,
     });
     return (
       <div
