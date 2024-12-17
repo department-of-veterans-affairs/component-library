@@ -57,11 +57,13 @@ export class VaProcessListItem {
     
     return (
       <Host role="listitem" class='usa-process-list__item'>
-        { status ?
-          <div class="usa-process-list__heading-eyebrow">{statusTextMap[status]}</div>
-          : null
-        }
-        {header ? <HeaderLevel part="header" class='usa-process-list__heading'>{header}</HeaderLevel> : null}
+        {header || status ? (
+          // aria-label hack to avoid header being read twice in voiceOver
+          <HeaderLevel part="header" class='usa-process-list__heading'>
+            {status ? <div class="usa-process-list__heading-eyebrow">{statusTextMap[status]}</div> : null}
+            {header ? <div>{header}</div> : null}
+          </HeaderLevel> 
+        ): null}
         <slot/>
       </Host>
     )
