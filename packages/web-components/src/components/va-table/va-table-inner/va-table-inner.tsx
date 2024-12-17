@@ -324,7 +324,9 @@ export class VaTableInner {
           this.updateSpan(th, thSorted, nextSortDirection, content);
 
           // update sr text to reflect sort
-          this.updateSRtext(thSorted, content, currentSortDirection);
+          setTimeout(()=>{
+            this.updateSRtext(thSorted, content, currentSortDirection);
+          }, 500)
         });
     }
   }
