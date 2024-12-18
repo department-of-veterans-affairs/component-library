@@ -209,21 +209,23 @@ export class VaCheckbox {
       !description &&
       this.el.querySelectorAll('[slot="description"]:not(:empty)').length > 0;
 
-    const inputClass = classnames({
-      'usa-checkbox__input': true,
-      'usa-checkbox__input--tile': tile,
+    const containerClass = classnames('va-checkbox__container', {
+      'va-checkbox__container--tile': tile,
     });
     const descriptionClass = classnames({
       'usa-legend': true,
-      'usa-label--error': error
+      'usa-label--error': error,
     });
-    const ariaDescribedbyIds = [
-      messageAriaDescribedby ? 'input-message' : '',
-      error ? 'checkbox-error-message' : '',
-      description || hasDescriptionSlot ? 'description' : '',
-      // Return null so we don't add the attribute if we have an empty string
-    ].filter(Boolean).join(' ').trim() || null;
-    const ariaChecked = checked ? 'true' : 'false';
+    const ariaDescribedbyIds =
+      [
+        messageAriaDescribedby ? 'input-message' : '',
+        error ? 'checkbox-error-message' : '',
+        description || hasDescriptionSlot ? 'description' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')
+        // Return null so we don't add the attribute if we have an empty string
+        .trim() || null;
 
     return (
       <Host>
@@ -247,9 +249,9 @@ export class VaCheckbox {
             </Fragment>
           )}
         </span>
-        <div class="usa-checkbox" part="checkbox">
+        <div class={containerClass} part="checkbox">
           <input
-            class={inputClass}
+            class="va-checkbox__input"
             type="checkbox"
             name={name || null}
             id="checkbox-element"
@@ -258,14 +260,13 @@ export class VaCheckbox {
             aria-invalid={error ? 'true' : 'false'}
             disabled={disabled}
             data-indeterminate={indeterminate && !checked}
+            aria-checked={indeterminate && !checked ? 'mixed' : checked}
             onChange={this.handleChange}
           />
           <label
             htmlFor="checkbox-element"
-            class="usa-checkbox__label"
+            class="va-checkbox__label"
             part="label"
-            role="checkbox"
-            aria-checked={indeterminate && !checked ? 'mixed' : ariaChecked}
           >
             {label}&nbsp;
             {required && (
