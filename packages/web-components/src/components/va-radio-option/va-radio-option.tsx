@@ -72,30 +72,22 @@ export class VaRadioOption {
   render() {
     const { checked, name, value, label, disabled, tile, description } = this;
     const id = this.el.id || name + value;
-    const ariaChecked = checked ? 'true' : 'false';
 
-    const inputClass = classnames({
-      'usa-radio__input': true,
-      'usa-radio__input--tile': tile,
+    const containerClass = classnames('usa-radio', {
+      'va-radio-option__container--tile': tile,
     });
     return (
-      <div class="usa-radio">
+      <div class={containerClass} onClick={() => this.handleChange()}>
         <input
-          class={inputClass}
+          class="va-radio-option__input"
           type="radio"
           name={name}
           value={value}
           checked={checked}
           disabled={disabled}
-          onClick={() => this.handleChange()}
           id={id + 'input'}
         />
-        <label
-          class="usa-radio__label"
-          htmlFor={id + 'input'}
-          role="radio"
-          aria-checked={ariaChecked}
-        >
+        <label class="usa-radio__label" htmlFor={id + 'input'}>
           {label}
           {description && (
             <span

@@ -8,6 +8,7 @@
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-error-message/src/styles/usa-error-message';
 
+@import '../../mixins/focusable.css';
 @import '../../mixins/uswds-error-border.scss';
 
 :host {
@@ -15,11 +16,49 @@
   max-width: 480px;
 }
 
-.usa-checkbox {
+.va-checkbox__container {
   background: transparent;
+  display: flex;
+  margin: 0.5rem 0;
 }
 
-.usa-checkbox__input:focus + [class*='__label']::before {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
-  outline-offset: 4px;
+.va-checkbox__container--tile {
+  border-radius: 0.25rem;
+  background-color: white;
+  border: 2px solid #c9c9c9;
+  color: #1b1b1b;
+  padding: 0.75rem 0 0.75rem 0.5rem;
+}
+
+.va-checkbox__input {
+  height: 1.25rem;
+  width: 1.25rem;
+  min-width: 1.25rem;
+  background: white;
+  border: 2px solid #1b1b1b;
+  border-radius: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0.064rem 0.5rem 0 0;
+  opacity: unset;
+  position: initial;
+
+  &:checked {
+    background: #005ea2;
+    background-image: url("data:image/svg+xml,%3C%3Fxml version%3D%221.0%22 encoding%3D%22UTF-8%22%3F%3E%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%2265%22 height%3D%2250%22 viewBox%3D%220 0 65 50%22%3E%3Ctitle%3Ecorrect8%3C%2Ftitle%3E%3Cpath fill%3D%22%23FFF%22 fill-rule%3D%22evenodd%22 d%3D%22M63.268 7.063l-5.616-5.61C56.882.685 55.946.3 54.845.3s-2.038.385-2.808 1.155L24.951 28.552 12.81 16.385c-.77-.77-1.707-1.155-2.808-1.155-1.1 0-2.037.385-2.807 1.154l-5.616 5.61C.81 22.764.425 23.7.425 24.8s.385 2.035 1.155 2.805l14.947 14.93 5.616 5.61c.77.77 1.706 1.154 2.807 1.154s2.038-.384 2.808-1.154l5.616-5.61 29.894-29.86c.77-.77 1.157-1.707 1.157-2.805 0-1.101-.385-2.036-1.156-2.805l-.001-.002z%22%2F%3E%3C%2Fsvg%3E"), linear-gradient(transparent, transparent);
+    background-position: center center;
+    background-size: 0.75rem auto;
+    background-repeat: no-repeat;
+    border: none;
+    box-shadow: 0 0 0 2px #005ea2;
+  }
+}
+
+.va-checkbox__label {
+  margin: 0;
+  max-width: 480px;
+  padding-left: 0;
+  box-sizing: border-box;
+  font-size: 1.06rem;
+  line-height: 1.3;
 }
