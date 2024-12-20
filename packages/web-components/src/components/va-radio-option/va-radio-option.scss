@@ -28,6 +28,7 @@ input[type="radio"].va-radio-option__input {
   min-width: 20px;
   border: 2px solid #1b1b1b;
   border-radius: 50%;
+  box-sizing: content-box;
   appearance: none;
   -webkit-appearance: none;
   margin: 0.064rem 0.5rem 0 0;
@@ -39,6 +40,13 @@ input[type="radio"].va-radio-option__input:checked {
   background: #005ea2;
   border: none;
   box-shadow: 0 0 0 2px #005ea2, inset 0 0 0 2px white;
+  height: 24px;
+  width: 24px;
+  min-width: 24px;
+}
+
+input[type="radio"].va-radio-option__input:focus {
+  outline-offset: 4px;
 }
 
 .usa-radio__label {
@@ -55,11 +63,11 @@ input[type="radio"].va-radio-option__input:checked {
 }
 
 // Formation overrides
-input[type=radio] + label {
+input[type="radio"] + label {
   margin-bottom: 0;
 }
 
-input[type=radio] + label:before {
+input[type="radio"] + label:before {
   border-radius: 0;
   box-shadow: none;
   height: 0;
@@ -69,7 +77,11 @@ input[type=radio] + label:before {
   width: 0;
 }
 
-input[type=radio]:checked + label:before {
+input[type="radio"]:checked + label:before {
   outline: none;
   box-shadow: none;
+}
+
+input[type="radio"]:focus + label::before {
+  outline: none;
 }
