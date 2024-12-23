@@ -11,7 +11,7 @@ body {
 }
 
 html {
-  font-size: $em-base;
+  font-size: 100%; // Needs to be 100% to be able to grow and shrink with browser settings
   font-weight: 500;
 }
 
@@ -422,7 +422,7 @@ article > h1 {
   padding-left: scale-rem(1rem);
 }
 
-// used mostly in content-build, we should consider moving this over there 
+// used mostly in content-build, we should consider moving this over there
 .last-updated {
   margin-top: 1.5em;
   border-top: 2px solid $color-gray-light;
@@ -433,8 +433,8 @@ article > h1 {
 }
 
 // Feature style used on hub pages (example on /pension/how-to-apply), copied here from formation
-// ToDo - These should be replaced with web-components: 
-// https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/2338#top 
+// ToDo - These should be replaced with web-components:
+// https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/2338#top
 // https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/2341#top
 
 .feature {
