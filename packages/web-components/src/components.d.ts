@@ -2056,6 +2056,7 @@ export interface VaTextareaCustomEvent<T> extends CustomEvent<T> {
 declare global {
     interface HTMLVaAccordionElementEventMap {
         "component-library-analytics": any;
+        "accordionExpandCollapseAll": any;
     }
     /**
      * @componentName Accordion
@@ -3218,6 +3219,7 @@ declare namespace LocalJSX {
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        "onAccordionExpandCollapseAll"?: (event: VaAccordionCustomEvent<any>) => void;
         /**
           * The event used to track usage of the component. This is emitted when an accordion item is toggled and disableAnalytics is not true.
          */

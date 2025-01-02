@@ -120,6 +120,26 @@ describe('va-accordion', () => {
     expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('true');
   });
 
+  it('fires accordionExpandCollapseAll event when `Expand all +` button is triggered', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">Some more content</va-accordion-item>
+      </va-accordion>`);
+
+    const analyticsSpy = await page.spyOnEvent('accordionExpandCollapseAll');
+    const expandCollapseButton = await page.find('va-accordion >>> button');
+
+    // Click to trigger expand of all accordion items collectively
+    await expandCollapseButton.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      expanded: true,
+    });
+  });
+
   it('collapses all items when `Collapse All -` button is triggered', async () => {
     const page = await newE2EPage();
     await page.setContent(`
@@ -138,6 +158,30 @@ describe('va-accordion', () => {
 
     expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('false');
     expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('false');
+  });
+
+  it('fires accordionExpandCollapseAll event when `Collapse All -` button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">Some more content</va-accordion-item>
+      </va-accordion>`);
+
+    const analyticsSpy = await page.spyOnEvent('accordionExpandCollapseAll');
+    const expandCollapseButton = await page.find('va-accordion >>> button');
+    const accordionItems = await page.findAll('va-accordion-item >>> button');
+    // Click to expand both accordion items manually
+    await accordionItems[0].click();
+    await accordionItems[1].click();
+    // Click to trigger collapse of all accordion items collectively
+    await expandCollapseButton.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    // check the detail of the event
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      expanded: false,
+    });
   });
 
   it('tracks which accordions are opened', async () => {

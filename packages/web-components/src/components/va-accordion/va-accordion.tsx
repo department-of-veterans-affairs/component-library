@@ -85,6 +85,12 @@ export class VaAccordion {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  accordionExpandCollapseAll: EventEmitter;
+
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
     // eslint-disable-next-line i18next/no-literal-string
@@ -164,6 +170,9 @@ export class VaAccordion {
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
+
+    this.accordionExpandCollapseAll.emit({ expanded });
+
     getSlottedNodes(this.el, 'va-accordion-item').forEach(
       (item: HTMLElement) => {
         item.setAttribute('open', `${expanded}`);
