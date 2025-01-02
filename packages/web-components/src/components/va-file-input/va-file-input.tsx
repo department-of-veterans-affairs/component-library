@@ -145,7 +145,7 @@ export class VaFileInput {
     }
   };
 
-  private handleFile = (file: File) => {
+  private handleFile = (file: File, emitChange: boolean = true) => {
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
@@ -156,7 +156,9 @@ export class VaFileInput {
     }
 
     this.file = file;
-    this.vaChange.emit({ files: [this.file] });
+    if (emitChange) {
+      this.vaChange.emit({ files: [this.file] });
+    }
     this.uploadStatus = 'success';
     this.internalError = null;
     this.generateFileContents(this.file);
@@ -356,7 +358,7 @@ export class VaFileInput {
     } = this;
 
     if (value) {
-      this.handleFile(value);
+      this.handleFile(value, false);
     }
 
     const displayError = this.error || this.internalError;

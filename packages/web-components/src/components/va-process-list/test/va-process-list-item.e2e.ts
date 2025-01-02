@@ -30,7 +30,9 @@ describe('va-process-list-item', () => {
     expect(element).toEqualHtml(`
       <va-process-list-item class="hydrated usa-process-list__item" role="listitem" header="Heading">
         <!---->
-        <h3 class="usa-process-list__heading" part="header">Heading</h3>
+        <h3 class="usa-process-list__heading" part="header">
+          <div>Heading</div>
+        </h3>
         <p>Some content</p>
       </va-process-list-item>
     `);
@@ -47,7 +49,9 @@ describe('va-process-list-item', () => {
     expect(element).toEqualHtml(`
       <va-process-list-item class="hydrated usa-process-list__item" role="listitem" header="Heading" level="1">
         <!---->
-        <h1 class="usa-process-list__heading" part="header">Heading</h1>
+        <h1 class="usa-process-list__heading" part="header">
+          <div>Heading</div>
+        </h1>
         <p>Some content</p>
       </va-process-list-item>
     `);

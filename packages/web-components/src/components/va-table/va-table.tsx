@@ -49,6 +49,11 @@ export class VaTable {
    */
   @Prop() sortable: boolean = false;
 
+  /**
+   * When active, the table will display alternating row background colors.
+   */
+  @Prop() striped: boolean = false;
+
   // The number of va-table-rows
   @State() rows: number;
 
@@ -133,6 +138,7 @@ export class VaTable {
     );
     vaTable.setAttribute('sortable', `${this.sortable}`);
     vaTable.setAttribute('scrollable', this.scrollable ? 'true' : 'false');
+    vaTable.setAttribute('striped', this.striped ? 'true' : 'false');
     // we rebuild the inner table after a sort
     if (this.sortable && sortdir && sortindex) {
       vaTable.dataset.sortdir = sortdir;
