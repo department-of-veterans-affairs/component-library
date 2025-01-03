@@ -31,15 +31,15 @@
 }
 
 .va-checkbox__input {
-  height: 20px;
-  width: 20px;
-  min-width: 20px;
+  height: 22px;
+  width: 22px;
+  min-width: 22px;
   background: white;
   border: 2px solid #1b1b1b;
   border-radius: 2px;
   appearance: none;
   -webkit-appearance: none;
-  margin: 0.064rem 0.5rem 0 0;
+  margin: 0.064rem 0 0 0;
   opacity: unset;
   position: initial;
 
@@ -65,7 +65,7 @@
 .va-checkbox__label {
   margin: 0;
   max-width: 480px;
-  padding-left: 0;
+  padding-left: 0.5rem;
   box-sizing: border-box;
   font-size: 1.06rem;
   line-height: 1.3;
