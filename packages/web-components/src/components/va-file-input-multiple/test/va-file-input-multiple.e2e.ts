@@ -107,6 +107,8 @@ describe('va-file-input-multiple', () => {
     await input
       .uploadFile(filePath)
       .catch(e => console.log('uploadFile error', e));
+    
+    await page.waitForChanges();
 
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);
   });
