@@ -171,7 +171,8 @@ export class VaAccordion {
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
 
-    this.accordionExpandCollapseAll.emit({ expanded });
+    const value = expanded ? 'allOpen' : 'allClosed';
+    this.accordionExpandCollapseAll.emit({ status: value });
 
     getSlottedNodes(this.el, 'va-accordion-item').forEach(
       (item: HTMLElement) => {

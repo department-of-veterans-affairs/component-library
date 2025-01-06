@@ -135,8 +135,44 @@ describe('va-accordion', () => {
     await expandCollapseButton.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(1);
+  });
+
+  it('accordionExpandCollapseAll event status says `allOpen` when all are expanded', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">Some more content</va-accordion-item>
+      </va-accordion>`);
+
+    const analyticsSpy = await page.spyOnEvent('accordionExpandCollapseAll');
+    const expandCollapseButton = await page.find('va-accordion >>> button');
+
+    // Click to trigger expand of all accordion items collectively
+    await expandCollapseButton.click(); // open all
+;
     expect(analyticsSpy).toHaveReceivedEventDetail({
-      expanded: true,
+      status: 'allOpen',
+    });
+  });
+
+  it('accordionExpandCollapseAll event status says `allClosed` when all are closed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">Some more content</va-accordion-item>
+      </va-accordion>`);
+
+    const analyticsSpy = await page.spyOnEvent('accordionExpandCollapseAll');
+    const expandCollapseButton = await page.find('va-accordion >>> button');
+
+    // Click to trigger expand of all accordion items collectively
+    await expandCollapseButton.click(); // open all
+    await expandCollapseButton.click(); // close all
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      status: 'allClosed',
     });
   });
 
@@ -178,10 +214,6 @@ describe('va-accordion', () => {
     await expandCollapseButton.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(1);
-    // check the detail of the event
-    expect(analyticsSpy).toHaveReceivedEventDetail({
-      expanded: false,
-    });
   });
 
   it('tracks which accordions are opened', async () => {
