@@ -85,6 +85,10 @@ export class VaAccordion {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * The event will fire when the Expand/Collapse All button is clicked. It will
+   * emit the status of the accordion items as either "allOpen" or "allClosed".
+   */
   @Event({
     composed: true,
     bubbles: true,
