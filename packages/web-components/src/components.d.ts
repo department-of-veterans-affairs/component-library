@@ -262,6 +262,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * If `true`, the click event will not fire.
+         */
+        "loading"?: boolean;
+        /**
           * An optional message that will be read by screen readers when the input is focused.
          */
         "messageAriaDescribedby"?: string;
@@ -3497,6 +3501,10 @@ declare namespace LocalJSX {
           * The aria-label of the component.
          */
         "label"?: string;
+        /**
+          * If `true`, the click event will not fire.
+         */
+        "loading"?: boolean;
         /**
           * An optional message that will be read by screen readers when the input is focused.
          */

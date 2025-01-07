@@ -7,6 +7,7 @@ import {
   Listen,
   Prop,
   Element,
+  Watch,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -23,6 +24,8 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaButton {
+  private showCompletedMessage: boolean = false;
+
   @Element() el: HTMLElement;
 
   /**
@@ -49,6 +52,22 @@ export class VaButton {
    * If `true`, the click event will not fire.
    */
   @Prop({ reflect: true }) disabled?: boolean = false;
+
+  /**
+   * If `true`, the click event will not fire.
+   */
+  @Prop({ reflect: true }) loading?: boolean = false;
+
+  @Watch('loading')
+  announceLoadingChange(newValue: boolean, oldValue: boolean) {
+    if (oldValue && !newValue) {
+      var me = this;
+      this.showCompletedMessage = true;
+      setTimeout(() => {
+        me.showCompletedMessage = false;
+      }, 3000);
+    }
+  }
 
   /**
    * The aria-label of the component.
@@ -111,7 +130,7 @@ export class VaButton {
   private getButtonText = (): string => {
     if (this.continue) return 'Continue';
     if (this.back) return 'Back';
-
+    if (this.loading && !this.text) return 'Loading...';
     return this.text;
   };
 
@@ -145,7 +164,7 @@ export class VaButton {
    */
   @Listen('click')
   handleClickOverride(e: MouseEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.loading) {
       e.preventDefault();
       e.stopPropagation();
       return;
@@ -159,6 +178,7 @@ export class VaButton {
       back,
       continue: _continue,
       disabled,
+      loading,
       getButtonText,
       label,
       submit,
@@ -171,7 +191,7 @@ export class VaButton {
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
 
-    const ariaDisabled = disabled ? 'true' : undefined;
+    const ariaDisabled = disabled || loading ? 'true' : undefined;
     const buttonText = getButtonText();
 
     const type = submit !== undefined ? 'submit' : 'button';
@@ -185,18 +205,27 @@ export class VaButton {
     
     return (
       <Host>
-        <button
-          class={buttonClass}
-          aria-disabled={ariaDisabled}
-          aria-label={label}
-          aria-describedby={ariaDescribedbyIds}
-          type={type}
-          part="button"
-        >
-          {back && !_continue && <va-icon icon="navigate_far_before" />}
-          {buttonText}
-          {_continue && !back && <va-icon icon="navigate_far_next" />}
-        </button>
+          {/* This span must always be present for changes to be announced for the loading prop. It will not show visually or be read without content*/}
+          <span class="loading-message" role="status">
+            {this.loading ? 'Loading' : this.showCompletedMessage ? 'Loading complete' : null}
+          </span>
+          <button
+            class={buttonClass}
+            aria-disabled={ariaDisabled}
+            aria-busy={loading ? 'true' : undefined}
+            aria-label={label}
+            aria-live={loading ? 'polite' : 'off'}
+            aria-describedby={ariaDescribedbyIds}
+            type={type}
+            part="button"
+          >
+            {back && !_continue && <va-icon icon="navigate_far_before" />}
+            {
+              loading ? <va-icon class="loading-icon" icon="autorenew" aria-hidden="true"/> : null
+            }
+            {buttonText}
+            {_continue && !back && <va-icon icon="navigate_far_next" />}
+          </button>
         {messageAriaDescribedby && (
           <span id="button-description" class="usa-sr-only">
             {messageAriaDescribedby}

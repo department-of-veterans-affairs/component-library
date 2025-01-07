@@ -24,8 +24,8 @@ const defaultArgs = {
   'secondary': undefined,
   'primary-alternate': undefined,
   'submit': undefined,
-  'text': 'Default',
   'message-aria-describedby': 'Optional description text for screen readers',
+  onClick: (e) => console.log(e)
 };
 
 const Template = ({
@@ -34,12 +34,14 @@ const Template = ({
    _continue,
   disableAnalytics,
   disabled,
+  loading,
   label,
   secondary,
   primaryAlternate,
   submit,
   text,
   messageAriaDescribedby,
+  onClick
 }) => {
   return (
     <va-button
@@ -48,12 +50,13 @@ const Template = ({
       continue={_continue}
       disable-analytics={disableAnalytics}
       disabled={disabled}
+      loading={loading}
       label={label}
       secondary={secondary}
       primary-alternate={primaryAlternate}
       submit={submit}
-      text={text}
-      onClick={e => console.log(e)}
+      text={!loading && !text ? 'Default' : text}
+      onClick= {onClick}
       message-aria-describedby={messageAriaDescribedby}
     />
   );
@@ -103,8 +106,22 @@ Back.args = {
 export const Disabled = Template.bind(null);
 Disabled.args = {
   ...defaultArgs,
-  disabled: true,
-  text: "Disabled",
+  disabled: true
+};
+
+export const Loading = Template.bind(null);
+Loading.args = {
+  ...defaultArgs,
+  text: 'Click to load',
+  onClick: (e) => {
+    e.target.setAttribute('text', '');
+    e.target.setAttribute('loading', 'true');
+    setTimeout(() => {
+      e.target.setAttribute('text', 'Click to load');
+      e.target.setAttribute('loading', 'false');
+    }, 5000)
+  }
+  
 };
 
 
