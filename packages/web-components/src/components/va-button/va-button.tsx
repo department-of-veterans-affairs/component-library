@@ -61,7 +61,7 @@ export class VaButton {
   @Watch('loading')
   announceLoadingChange(newValue: boolean, oldValue: boolean) {
     if (oldValue && !newValue) {
-      var me = this;
+      let me = this;
       this.showCompletedMessage = true;
       setTimeout(() => {
         me.showCompletedMessage = false;
