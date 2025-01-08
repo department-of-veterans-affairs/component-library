@@ -15,7 +15,7 @@
 
 html {
   font-family: tok.$font-family-sans;
-  font-size: vars.$em-base;
+  font-size: 100%; // Needs to be 100% to be able to grow and shrink with browser settings
 }
 
 body {
