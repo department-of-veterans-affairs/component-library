@@ -262,7 +262,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * If `true`, the click event will not fire.
+          * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
          */
         "loading"?: boolean;
         /**
@@ -3507,7 +3507,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * If `true`, the click event will not fire.
+          * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
          */
         "loading"?: boolean;
         /**

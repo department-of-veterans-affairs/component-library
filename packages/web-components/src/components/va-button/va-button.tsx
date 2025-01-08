@@ -54,7 +54,7 @@ export class VaButton {
   @Prop({ reflect: true }) disabled?: boolean = false;
 
   /**
-   * If `true`, the click event will not fire.
+   * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
    */
   @Prop({ reflect: true }) loading?: boolean = false;
 
