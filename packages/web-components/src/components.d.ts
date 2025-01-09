@@ -113,6 +113,7 @@ export namespace Components {
     }
     /**
      * @componentName Alert - expandable
+     * @guidanceHref alert/alert-expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -135,7 +136,8 @@ export namespace Components {
         "trigger": string;
     }
     /**
-     * @componentName Alert - Sign In
+     * @componentName Alert - Sign-in
+     * @guidanceHref alert/alert-sign-in
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -2153,6 +2155,7 @@ declare global {
     }
     /**
      * @componentName Alert - expandable
+     * @guidanceHref alert/alert-expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -2171,7 +2174,8 @@ declare global {
         new (): HTMLVaAlertExpandableElement;
     };
     /**
-     * @componentName Alert - Sign In
+     * @componentName Alert - Sign-in
+     * @guidanceHref alert/alert-sign-in
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3342,6 +3346,7 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Alert - expandable
+     * @guidanceHref alert/alert-expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3368,7 +3373,8 @@ declare namespace LocalJSX {
         "trigger": string;
     }
     /**
-     * @componentName Alert - Sign In
+     * @componentName Alert - Sign-in
+     * @guidanceHref alert/alert-sign-in
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -5444,12 +5450,14 @@ declare module "@stencil/core" {
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             /**
              * @componentName Alert - expandable
+             * @guidanceHref alert/alert-expandable
              * @maturityCategory caution
              * @maturityLevel candidate
              */
             "va-alert-expandable": LocalJSX.VaAlertExpandable & JSXBase.HTMLAttributes<HTMLVaAlertExpandableElement>;
             /**
-             * @componentName Alert - Sign In
+             * @componentName Alert - Sign-in
+             * @guidanceHref alert/alert-sign-in
              * @maturityCategory caution
              * @maturityLevel candidate
              */
