@@ -10,7 +10,7 @@ describe('va-button', () => {
     <va-button class="hydrated" text="Edit">
       <mock:shadow-root>
         <span class="loading-message" role="status"></span>
-        <button aria-live="off" class="usa-button" part="button" type="button">
+        <button class="usa-button" part="button" type="button">
           Edit
         </button>
       </mock:shadow-root>
@@ -40,7 +40,7 @@ describe('va-button', () => {
     <va-button back="" class="hydrated">
       <mock:shadow-root>
         <span class="loading-message" role="status"></span>
-        <button aria-live="off" class="usa-button usa-button--outline" type="button" part="button">
+        <button class="usa-button usa-button--outline" type="button" part="button">
           <va-icon class="hydrated"></va-icon>
           Back
         </button>
@@ -57,7 +57,7 @@ describe('va-button', () => {
     <va-button continue class="hydrated">
       <mock:shadow-root>
         <span class="loading-message" role="status"></span>
-        <button aria-live="off" class="usa-button" type="button" part="button">
+        <button class="usa-button" type="button" part="button">
           Continue
           <va-icon class="hydrated"></va-icon>
         </button>
@@ -76,7 +76,7 @@ describe('va-button', () => {
     <va-button class="hydrated" label="Edit John Smith" text="Edit">
       <mock:shadow-root>
         <span class="loading-message" role="status"></span>
-        <button aria-live="off" aria-label="Edit John Smith" class="usa-button" part="button" type="button">
+        <button aria-label="Edit John Smith" class="usa-button" part="button" type="button">
           Edit
         </button>
       </mock:shadow-root>
@@ -92,7 +92,7 @@ describe('va-button', () => {
     <va-button class="hydrated" text="Edit" submit>
       <mock:shadow-root>
         <span class="loading-message" role="status"></span>
-        <button aria-live="off" class="usa-button" type="submit" part="button">
+        <button class="usa-button" type="submit" part="button">
           Edit
         </button>
       </mock:shadow-root>
@@ -108,7 +108,7 @@ describe('va-button', () => {
     <va-button class="hydrated" text="Edit" disabled>
       <mock:shadow-root>
         <span class="loading-message" role="status"></span>
-        <button aria-live="off" class="usa-button" aria-disabled="true" type="button" part="button">
+        <button class="usa-button" aria-disabled="true" type="button" part="button">
           Edit
         </button>
       </mock:shadow-root>
@@ -124,7 +124,7 @@ describe('va-button', () => {
     <va-button class="hydrated" loading>
       <mock:shadow-root>
         <span class="loading-message" role="status">Loading</span>
-        <button aria-busy="true" aria-live="polite" class="usa-button" aria-disabled="true" type="button" part="button">
+        <button aria-busy="true" class="usa-button" aria-disabled="true" type="button" part="button">
           <va-icon aria-hidden="true" class="hydrated loading-icon"></va-icon>
           Loading...
         </button>
@@ -141,7 +141,7 @@ describe('va-button', () => {
     <va-button class="hydrated" loading text="Retrieving Data">
       <mock:shadow-root>
         <span class="loading-message" role="status">Loading</span>
-        <button aria-busy="true" aria-live="polite" class="usa-button" aria-disabled="true" type="button" part="button">
+        <button aria-busy="true" class="usa-button" aria-disabled="true" type="button" part="button">
           <va-icon aria-hidden="true" class="hydrated loading-icon"></va-icon>
           Retrieving Data
         </button>
@@ -158,7 +158,7 @@ describe('va-button', () => {
     <va-button class="hydrated" loading text="Retrieving Data">
       <mock:shadow-root>
         <span class="loading-message" role="status">Loading</span>
-        <button aria-busy="true" aria-live="polite" class="usa-button" aria-disabled="true" type="button" part="button">
+        <button aria-busy="true" class="usa-button" aria-disabled="true" type="button" part="button">
           <va-icon aria-hidden="true" class="hydrated loading-icon"></va-icon>
           Retrieving Data
         </button>
@@ -193,7 +193,7 @@ describe('va-button', () => {
     <va-button class="hydrated" back continue>
       <mock:shadow-root>
         <span class="loading-message" role="status"></span>
-        <button aria-live="off" class="usa-button usa-button--outline" type="button" part="button">
+        <button class="usa-button usa-button--outline" type="button" part="button">
           Continue
         </button>
       </mock:shadow-root>
@@ -284,7 +284,7 @@ it(`renders a default submit button variant`, async () => {
   <va-button class="hydrated" submit="" text="Submit">
     <mock:shadow-root>
       <span class="loading-message" role="status"></span>
-      <button aria-live="off" class="usa-button" type="submit" part="button">
+      <button class="usa-button" type="submit" part="button">
         Submit
       </button>
     </mock:shadow-root>
