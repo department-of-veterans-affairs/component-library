@@ -74,6 +74,19 @@
   margin-right: 32px;
 }
 
+:host([big="true"]) .usa-search__clear-input  {
+  right: calc(6rem + 6px);
+}
+
+:host([small="true"]) .usa-search__clear-input{
+  right: calc(0.5rem + 6px);
+}
+@media (max-width:29.99em) { 
+  .usa-search__clear-input  {
+    right: calc(0.5rem + 6px) !important;
+  }
+}
+
 :host([value]:not([value=""])) .usa-search__clear-input{
   display: block; 
 }
