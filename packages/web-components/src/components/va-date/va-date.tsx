@@ -267,7 +267,6 @@ export class VaDate {
               onBlur={this.handleMonthBlur}
               invalid={this.invalidMonth}
               class="select-month"
-              aria-label="Please select a month"
               error={this.monthTouched && this.invalidMonth ? error : null}
               showError={false}
             >
@@ -290,7 +289,6 @@ export class VaDate {
                 onBlur={this.handleDayBlur}
                 invalid={this.invalidDay}
                 class="select-day"
-                aria-label="Please select a day"
                 error={this.dayTouched && this.invalidDay ? this.error : null}
                 showError={false}
               >
