@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Template = ({'button-text': buttonText, value, label, suggestions, uswds, small, big }) => (
+const Template = ({'button-text': buttonText, value, label, suggestions, small, big }) => (
   <div style={{ height: '100px'}}>
     <VaSearchInput
       buttonText={buttonText}
@@ -111,7 +111,6 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
       </p>
 
       <VaSearchInput
-        value={value}
         onInput={handleInput}
         onSubmit={handleSubmit}
         suggestions={latestSuggestions}

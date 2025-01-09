@@ -245,6 +245,13 @@ export class VaSearchInput {
     this.handleSubmit();
   };
 
+  // clear the input and focus the input
+  private handleClearButtonClick = () => {
+    this.inputRef.value = "";
+    this.value = "";
+    this.inputRef.focus();
+  };
+
   // Listbox event handlers
   /**
    * Sets search input value to the suggestion clicked,
@@ -263,6 +270,7 @@ export class VaSearchInput {
     );
     this.inputRef.removeAttribute('aria-activedescendant');
     this.isListboxOpen = false;
+    this.value = suggestion.innerText;
     this.handleSubmit();
   };
 
@@ -407,6 +415,7 @@ export class VaSearchInput {
       formattedSuggestions,
       handleBlur,
       handleButtonClick,
+      handleClearButtonClick,
       handleInput,
       handleInputFocus,
       handleInputKeyDown,
@@ -471,6 +480,13 @@ export class VaSearchInput {
             role={role}
             value={value}
           />
+          <button type="button" onClick={handleClearButtonClick} class="usa-search__clear-input" aria-label="Clear the search contents">
+            <va-icon
+              class="usa-search__clear-icon"
+              icon="close"
+              size={3}
+            />
+          </button>
           <button
             class="usa-button"
             type="submit"
