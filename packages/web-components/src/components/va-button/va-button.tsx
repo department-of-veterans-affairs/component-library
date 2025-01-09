@@ -214,7 +214,6 @@ export class VaButton {
             aria-disabled={ariaDisabled}
             aria-busy={loading ? 'true' : undefined}
             aria-label={label}
-            aria-live={loading ? 'polite' : 'off'}
             aria-describedby={ariaDescribedbyIds}
             type={type}
             part="button"
