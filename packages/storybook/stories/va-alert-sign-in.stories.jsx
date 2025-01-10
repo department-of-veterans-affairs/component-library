@@ -101,11 +101,7 @@ const defaultArgs = {
   'heading-level': null,
 };
 
-const SignInButton = () => (
-  <a href="#">
-    <va-button text="Sign in or create an account" />
-  </a>
-);
+const SignInButton = () => <va-button text="Sign in or create an account" />;
 const IdMeSignInButton = () => (
   <button
     style={{
