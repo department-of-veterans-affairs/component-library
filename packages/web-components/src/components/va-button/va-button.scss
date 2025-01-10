@@ -7,7 +7,37 @@
 
 :host {
   display: inline-block;
+
+  .loading-message {
+    opacity: 0.00001;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .loading-icon {
+    animation: spin 1.5s linear infinite;
+  }
+
+  .loading-icon.chromatic:after {
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion) {
+    .loading-icon {
+      animation: none;
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
+
 :host([disabled]:not([disabled='false'])) button {
   pointer-events: none;
 }

@@ -113,6 +113,7 @@ export namespace Components {
     }
     /**
      * @componentName Alert - expandable
+     * @guidanceHref alert/alert-expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -135,7 +136,8 @@ export namespace Components {
         "trigger": string;
     }
     /**
-     * @componentName Alert - Sign In
+     * @componentName Alert - Sign-in
+     * @guidanceHref alert/alert-sign-in
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -261,6 +263,10 @@ export namespace Components {
           * The aria-label of the component.
          */
         "label"?: string;
+        /**
+          * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
+         */
+        "loading"?: boolean;
         /**
           * An optional message that will be read by screen readers when the input is focused.
          */
@@ -2056,6 +2062,7 @@ export interface VaTextareaCustomEvent<T> extends CustomEvent<T> {
 declare global {
     interface HTMLVaAccordionElementEventMap {
         "component-library-analytics": any;
+        "accordionExpandCollapseAll": any;
     }
     /**
      * @componentName Accordion
@@ -2148,6 +2155,7 @@ declare global {
     }
     /**
      * @componentName Alert - expandable
+     * @guidanceHref alert/alert-expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -2166,7 +2174,8 @@ declare global {
         new (): HTMLVaAlertExpandableElement;
     };
     /**
-     * @componentName Alert - Sign In
+     * @componentName Alert - Sign-in
+     * @guidanceHref alert/alert-sign-in
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3219,6 +3228,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * The event will fire when the Expand/Collapse All button is clicked. It will emit the status of the accordion items as either "allOpen" or "allClosed".
+         */
+        "onAccordionExpandCollapseAll"?: (event: VaAccordionCustomEvent<any>) => void;
+        /**
           * The event used to track usage of the component. This is emitted when an accordion item is toggled and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: VaAccordionCustomEvent<any>) => void;
@@ -3333,6 +3346,7 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Alert - expandable
+     * @guidanceHref alert/alert-expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3359,7 +3373,8 @@ declare namespace LocalJSX {
         "trigger": string;
     }
     /**
-     * @componentName Alert - Sign In
+     * @componentName Alert - Sign-in
+     * @guidanceHref alert/alert-sign-in
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3497,6 +3512,10 @@ declare namespace LocalJSX {
           * The aria-label of the component.
          */
         "label"?: string;
+        /**
+          * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
+         */
+        "loading"?: boolean;
         /**
           * An optional message that will be read by screen readers when the input is focused.
          */
@@ -5431,12 +5450,14 @@ declare module "@stencil/core" {
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             /**
              * @componentName Alert - expandable
+             * @guidanceHref alert/alert-expandable
              * @maturityCategory caution
              * @maturityLevel candidate
              */
             "va-alert-expandable": LocalJSX.VaAlertExpandable & JSXBase.HTMLAttributes<HTMLVaAlertExpandableElement>;
             /**
-             * @componentName Alert - Sign In
+             * @componentName Alert - Sign-in
+             * @guidanceHref alert/alert-sign-in
              * @maturityCategory caution
              * @maturityLevel candidate
              */
