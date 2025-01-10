@@ -47,14 +47,16 @@ describe('va-search-input', () => {
         <mock:shadow-root>
         <form class="usa-search" role="search">
           <label class="usa-sr-only" for="search-field">Search</label>
-          <input class="usa-input" id="search-field" name="search" type="search" aria-autocomplete="none" aria-label="Search" autocomplete="off">
-          <button aria-label="Clear the search contents" class="usa-search__clear-input  usa-search__clear-input_empty" type="button">
-            <va-icon class="hydrated usa-search__clear-icon"></va-icon>
-          </button>
-          <button class="usa-button" type="submit">
-          <span class="usa-search__submit-text">Search VA.gov</span>
-          <va-icon class="hydrated usa-search__submit-icon"></va-icon>
-          </button>
+          <div class="usa-search__input-wrapper">
+            <input class="usa-input" id="search-field" name="search" type="search" aria-autocomplete="none" aria-label="Search" autocomplete="off">
+            <button aria-label="Clear the search contents" class="usa-search__clear-input  usa-search__clear-input_empty" type="button">
+              <va-icon class="hydrated usa-search__clear-icon"></va-icon>
+            </button>
+            <button class="usa-button" type="submit">
+              <span class="usa-search__submit-text">Search VA.gov</span>
+              <va-icon class="hydrated usa-search__submit-icon"></va-icon>
+            </button>
+          </div>
         </form>
         </mock:shadow-root>
       </va-search-input>

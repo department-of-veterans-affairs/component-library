@@ -91,3 +91,8 @@
 .usa-search__clear-input_empty {
   display: none;
 }
+.usa-search__input-wrapper {
+  width: 100%;
+  max-width: 1024px;
+  position: relative;
+}
