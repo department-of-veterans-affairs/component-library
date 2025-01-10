@@ -35,7 +35,7 @@ describe('va-search-input', () => {
     await axeCheck(page);
   });
 
-  it('renders with button with text', async () => {
+  it('renders with search button with text', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-search-input button-text="Search VA.gov"></va-search-input>',
@@ -48,6 +48,9 @@ describe('va-search-input', () => {
         <form class="usa-search" role="search">
           <label class="usa-sr-only" for="search-field">Search</label>
           <input class="usa-input" id="search-field" name="search" type="search" aria-autocomplete="none" aria-label="Search" autocomplete="off">
+          <button aria-label="Clear the search contents" class="usa-search__clear-input" type="button">
+            <va-icon class="hydrated usa-search__clear-icon"></va-icon>
+          </button>
           <button class="usa-button" type="submit">
           <span class="usa-search__submit-text">Search VA.gov</span>
           <va-icon class="hydrated usa-search__submit-icon"></va-icon>
@@ -84,7 +87,7 @@ describe('va-search-input', () => {
     });
 
     const submitSpy = await page.spyOnEvent('submit');
-    const button = await page.find('va-search-input >>> button');
+    const button = await page.find('va-search-input >>> button[type="submit"]');
     await button.click();
 
     expect(submitSpy).toHaveReceivedEventTimes(1);
@@ -366,7 +369,7 @@ describe('va-search-input', () => {
     expect(suggestions.length).toEqual(5);
   });
 
-  it('fires an analytics event when button is clicked', async () => {
+  it('fires an analytics event when search button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-search-input label="Search" value="benefits""></va-search-input>',
@@ -374,7 +377,7 @@ describe('va-search-input', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const button = await page.find('va-search-input >>> button');
+    const button = await page.find('va-search-input >>> button[type="submit"]');
     await button.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -396,7 +399,8 @@ describe('va-search-input', () => {
 
     const component = await page.find('va-search-input');
     await component.press('Tab'); // on the input
-    await component.press('Tab'); // on the button
+    await component.press('Tab'); // on the clear button
+    await component.press('Tab'); // on the search button
     await component.press('Tab'); // off the component
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -408,7 +412,7 @@ describe('va-search-input', () => {
     });
   });
 
-  it('does not fire an analytics event when button is clicked if analytics are disabled with only the prop name', async () => {
+  it('does not fire an analytics event when search button is clicked if analytics are disabled with only the prop name', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-search-input disable-analytics label="Search" value="benefits""></va-search-input>',
@@ -416,13 +420,13 @@ describe('va-search-input', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const button = await page.find('va-search-input >>> button');
+    const button = await page.find('va-search-input >>> button[type="submit"]');
     await button.click();
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
-  it('does not fire an analytics event when button is clicked if analytics are disabled with the explicit "true" value', async () => {
+  it('does not fire an analytics event when search button is clicked if analytics are disabled with the explicit "true" value', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-search-input disable-analytics="true" label="Search" value="benefits""></va-search-input>',
@@ -430,7 +434,7 @@ describe('va-search-input', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const button = await page.find('va-search-input >>> button');
+    const button = await page.find('va-search-input >>> button[type="submit"]');
     await button.click();
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
@@ -446,7 +450,8 @@ describe('va-search-input', () => {
 
     const component = await page.find('va-search-input');
     await component.press('Tab'); // on the input
-    await component.press('Tab'); // on the button
+    await component.press('Tab'); // on the clear button
+    await component.press('Tab'); // on the search button
     await component.press('Tab'); // off the component
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
@@ -462,7 +467,8 @@ describe('va-search-input', () => {
 
     const component = await page.find('va-search-input');
     await component.press('Tab'); // on the input
-    await component.press('Tab'); // on the button
+    await component.press('Tab'); // on the clear button
+    await component.press('Tab'); // on the search button
     await component.press('Tab'); // off the component
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
