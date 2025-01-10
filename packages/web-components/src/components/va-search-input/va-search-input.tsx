@@ -91,6 +91,19 @@ export class VaSearchInput {
    */
   @Prop() disableAnalytics?: boolean = false;
 
+
+  /**
+   * If `true`, clear button is shown
+   */
+  @State() showClearButton?: boolean = false;
+
+  /**
+   * Set the initial showClearButton value
+   */
+  componentWillLoad() {
+    this.showClearButton = !!this.value;
+  }
+
   /**
    * If suggestions are provided, then format suggestions and open the listbox.
    * Limits suggestions to 5 and sorts them.
@@ -175,6 +188,8 @@ export class VaSearchInput {
    */
   private handleInput = (event: Event) => {
     this.value = (event.target as HTMLInputElement).value;
+    this.showClearButton = !!this.value;
+    
     if (!this.suggestions) return;
     this.updateSuggestions(this.suggestions);
   };
@@ -247,8 +262,13 @@ export class VaSearchInput {
 
   // clear the input and focus the input
   private handleClearButtonClick = () => {
-    this.inputRef.value = "";
-    this.value = "";
+    this.inputRef.value = '';
+    this.inputRef.dispatchEvent(
+      new InputEvent('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    );
     this.inputRef.focus();
   };
 
@@ -426,6 +446,7 @@ export class VaSearchInput {
       value,
       big,
       small,
+      showClearButton,
     } = this;
 
     /**
@@ -456,6 +477,10 @@ export class VaSearchInput {
       'usa-search--big': big && !small,
       'usa-search--small': small && !big,
     });
+    const clearButtonClasses = classnames({
+      'usa-search__clear-input': true,
+      'usa-search__clear-input_empty': !showClearButton
+    });
     return (
       <Host onBlur={handleBlur}>
         <form class={formClasses} role="search">
@@ -480,7 +505,7 @@ export class VaSearchInput {
             role={role}
             value={value}
           />
-          <button type="button" onClick={handleClearButtonClick} class="usa-search__clear-input" aria-label="Clear the search contents">
+          <button type="button" onClick={handleClearButtonClick} class={clearButtonClasses} aria-label="Clear the search contents">
             <va-icon
               class="usa-search__clear-icon"
               icon="close"

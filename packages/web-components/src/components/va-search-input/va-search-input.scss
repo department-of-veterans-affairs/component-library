@@ -88,10 +88,6 @@
   }
 }
 
-:host([value]:not([value=""])) .usa-search__clear-input{
-  display: block; 
-}
-
-:host([value=""]) .usa-search__clear-input{
+.usa-search__clear-input_empty {
   display: none;
 }
