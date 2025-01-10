@@ -174,6 +174,19 @@ describe('va-search-input', () => {
     expect(inputValue).toContain('');
   });
 
+  it('clears input value when clear button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search-input value="benefits"></va-search-input>');
+    
+    const button = await page.find('va-search-input >>> button.usa-search__clear-input');
+    await button.click();
+
+    const input = await page.find('va-search-input >>> input');
+    const inputValue = await input.getProperty('value');
+
+    expect(inputValue).toContain('');
+  });
+
   it('focuses next suggestion when pressing ArrowDown when suggestions are visible', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search-input></va-search-input>');
@@ -372,7 +385,7 @@ describe('va-search-input', () => {
   it('fires an analytics event when search button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-search-input label="Search" value="benefits""></va-search-input>',
+      '<va-search-input label="Search" value="benefits"></va-search-input>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
