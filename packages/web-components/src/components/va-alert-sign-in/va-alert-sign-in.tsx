@@ -4,7 +4,8 @@ import { AlertSignInVariants as ASIVariants } from './AlertSignInVariants';
 import { getHeaderLevel } from '../../utils/utils';
 
 /**
- * @componentName Alert - Sign In
+ * @componentName Alert - Sign-in
+ * @guidanceHref alert/alert-sign-in
  * @maturityCategory caution
  * @maturityLevel candidate
  */
