@@ -137,13 +137,15 @@ export class VaAlertSignIn {
         <p>
           <slot name="SignInButton"></slot>
         </p>
-        <p>
-          <va-link
-            href={this.noSignInLink}
-            text="Start your form without signing in"
-            disableAnalytics={true}
-          ></va-link>
-        </p>
+        {this.noSignInLink && (
+          <p>
+            <va-link
+              href={this.noSignInLink}
+              text="Start your form without signing in"
+              disableAnalytics={true}
+            ></va-link>
+          </p>
+        )}
       </div>
     );
 
