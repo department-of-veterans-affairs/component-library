@@ -5,15 +5,20 @@ import { AlertSignInVariants as ASIVariants } from '@department-of-veterans-affa
 const alertSignInDocs = getWebComponentDocs('va-alert-sign-in');
 
 const buttonStyles = {
+  alignItems: 'center',
   display: 'flex',
   flexWrap: 'wrap',
-  justifyContent: 'center',
-  alignItems: 'center',
   gap: 8,
+  justifyContent: 'center',
+};
+
+const fixedButtonStyles = {
+  maxWidth: 165,
+  width: '100%',
 };
 
 const svgStyles = {
-  height: '1em',
+  height: '1rem',
 };
 
 const IdMeLogo = () => (
@@ -106,30 +111,31 @@ const IdMeSignInButton = () => (
   <button
     style={{
       ...buttonStyles,
+      ...fixedButtonStyles,
       backgroundColor: 'var(--vads-color-success-dark)',
     }}
   >
-    Sign in with <IdMeLogo />
+    <IdMeLogo />
   </button>
 );
 const IdMeVerifyButton = () => (
-  <button
-    style={{
-      ...buttonStyles,
-      backgroundColor: 'var(--vads-color-success-dark)',
-    }}
-  >
-    Verify with <IdMeLogo />
-  </button>
+  <a href="#">
+    <img
+      src="https://s3.amazonaws.com/idme/developer/idme-buttons/assets/img/verify.svg"
+      alt="Verify with ID.me"
+      width="236"
+    />
+  </a>
 );
 const LoginGovSignInButton = () => (
   <button
     style={{
       ...buttonStyles,
+      ...fixedButtonStyles,
       backgroundColor: 'var(--vads-color-secondary)',
     }}
   >
-    Sign in with <LoginGovLogo />
+    <LoginGovLogo />
   </button>
 );
 const LoginGovVerifyButton = () => (
