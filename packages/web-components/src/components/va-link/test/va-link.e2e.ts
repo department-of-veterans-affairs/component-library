@@ -195,10 +195,80 @@ describe('va-link', () => {
     `);
   });
 
-  it('renders a link with a screen reader label', async () => {
+  it('renders a default link with a screen reader label', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" />`,
+    );
+
+    const label = await page.find('va-link >>> a[aria-label]');
+    expect(label.getAttribute('aria-label')).toBe('Example label');
+  });
+
+  it('renders an external link with a screen reader label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" external/>`,
+    );
+
+    const label = await page.find('va-link >>> a[aria-label]');
+    expect(label.getAttribute('aria-label')).toBe('Example label');
+  });
+
+  it('renders an icon link with a screen reader label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" icon="mail" />`,
+    );
+
+    const label = await page.find('va-link >>> a[aria-label]');
+    expect(label.getAttribute('aria-label')).toBe('Example label');
+  });
+
+  it('renders a download link with a screen reader label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" download />`,
+    );
+
+    const label = await page.find('va-link >>> a[aria-label]');
+    expect(label.getAttribute('aria-label')).toBe('Example label');
+  });
+
+  it('renders a calendar link with a screen reader label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" calendar />`,
+    );
+
+    const label = await page.find('va-link >>> a[aria-label]');
+    expect(label.getAttribute('aria-label')).toBe('Example label');
+  });
+
+  it('renders a channel link with a screen reader label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" channel />`,
+    );
+
+    const label = await page.find('va-link >>> a[aria-label]');
+    expect(label.getAttribute('aria-label')).toBe('Example label');
+  });
+
+  it('renders a video link with a screen reader label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" video />`,
+    );
+
+    const label = await page.find('va-link >>> a[aria-label]');
+    expect(label.getAttribute('aria-label')).toBe('Example label');
+  });
+
+  it('renders a back link with a screen reader label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" back />`,
     );
 
     const label = await page.find('va-link >>> a[aria-label]');
