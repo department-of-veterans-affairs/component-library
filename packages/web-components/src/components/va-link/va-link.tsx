@@ -160,7 +160,8 @@ export class VaLink {
       external,
       iconName,
       iconSize,
-      language
+      language,
+      label
     } = this;
 
     const linkClass = classNames({
@@ -176,7 +177,7 @@ export class VaLink {
             href={href}
             class={linkClass}
             onClick={handleClick}
-            aria-label={this.label}
+            aria-label={label}
           >
             {text}
             <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
@@ -202,7 +203,7 @@ export class VaLink {
               href={href}
               class={linkClass}
               onClick={handleClick}
-              aria-label={this.label}
+              aria-label={label}
             >
               {text}
             </a>
@@ -219,7 +220,7 @@ export class VaLink {
           <a
             href={href}
             class={linkClass}
-            aria-label={this.label}
+            aria-label={label}
             onClick={handleClick}
             rel="noopener"
             target="_blank"
@@ -239,7 +240,7 @@ export class VaLink {
             href={href}
             class={linkClass}
             download={filename}
-            aria-label={this.label}
+            aria-label={label}
             onClick={handleClick}
           >
             <va-icon class="link-icon--left" icon="calendar_today"></va-icon>
@@ -257,7 +258,7 @@ export class VaLink {
             href={href}
             class={linkClass}
             download={filename}
-            aria-label={this.label}
+            aria-label={label}
             onClick={handleClick}
           >
             <va-icon class="link-icon--left" icon="file_download"></va-icon>
@@ -280,7 +281,7 @@ export class VaLink {
           <a
             href={href}
             class={linkClass}
-            aria-label={this.label}
+            aria-label={label}
             onClick={handleClick}
           >
             <va-icon icon={iconName} size={iconSize} part="icon"></va-icon>
@@ -298,7 +299,7 @@ export class VaLink {
             rel="noreferrer"
             class={linkClass}
             onClick={handleClick}
-            aria-label={this.label}
+            aria-label={label}
             target="_blank"
           >
             {text} (opens in a new tab)
@@ -316,7 +317,7 @@ export class VaLink {
           href={href}
           class={linkClass}
           onClick={handleClick}
-          aria-label={this.label}
+          aria-label={label}
           part="anchor"
           lang={lang}
           hrefLang={lang}
