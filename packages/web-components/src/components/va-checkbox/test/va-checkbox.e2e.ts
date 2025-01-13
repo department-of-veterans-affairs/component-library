@@ -22,12 +22,10 @@ describe('va-checkbox', () => {
 
   it('has tile class added', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-checkbox tile label="Example label" />',
-    );
+    await page.setContent('<va-checkbox tile label="Example label" />');
 
-    const input = await page.find('va-checkbox >>> .usa-checkbox__input');
-    expect(input).toHaveClass("usa-checkbox__input--tile");
+    const input = await page.find('va-checkbox >>> .va-checkbox__container');
+    expect(input).toHaveClass('va-checkbox__container--tile');
   });
 
   it('renders with aria-invalid set to false by default', async () => {
@@ -53,7 +51,9 @@ describe('va-checkbox', () => {
     const element = await page.find('va-checkbox >>> #checkbox-error-message');
     const input = await page.find('va-checkbox >>> input');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
-    expect(input.getAttribute('aria-describedby')).toEqual('checkbox-error-message');
+    expect(input.getAttribute('aria-describedby')).toEqual(
+      'checkbox-error-message',
+    );
     expect(element.textContent).toContain('Something went horribly wrong');
   });
 
@@ -95,7 +95,7 @@ describe('va-checkbox', () => {
     const inputEl = await page.find('va-checkbox >>> input');
     const descriptionDiv = await page.find('va-checkbox >>> div#description');
     expect(element).toEqualText('This is a description!');
-    expect(descriptionDiv).not.toBeNull();;
+    expect(descriptionDiv).not.toBeNull();
     // should still add the description aria-describedby with one empty slot
     expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
   });
@@ -133,7 +133,9 @@ describe('va-checkbox', () => {
     await page.setContent('<va-checkbox error="This is a mistake" />');
 
     const inputEl = await page.find('va-checkbox >>> input');
-    expect(inputEl.getAttribute('aria-describedby')).toContain('checkbox-error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toContain(
+      'checkbox-error-message',
+    );
   });
 
   it('passes an aXe check', async () => {
@@ -156,7 +158,9 @@ describe('va-checkbox', () => {
 
     // Render the error message text
     const inputEl = await page.find('va-checkbox >>> input');
-    expect(inputEl.getAttribute('aria-describedby')).toEqual('input-message checkbox-error-message description');
+    expect(inputEl.getAttribute('aria-describedby')).toEqual(
+      'input-message checkbox-error-message description',
+    );
   });
 
   it('fires an analytics event when enableAnalytics is true', async () => {
@@ -165,7 +169,7 @@ describe('va-checkbox', () => {
       '<va-checkbox label="Just another checkbox here" enable-analytics required description="Description content"/>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await checkboxEl.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -189,7 +193,7 @@ describe('va-checkbox', () => {
        </va-checkbox`,
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await checkboxEl.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -211,7 +215,7 @@ describe('va-checkbox', () => {
       '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await checkboxEl.click();
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
@@ -223,7 +227,7 @@ describe('va-checkbox', () => {
       '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
     );
     const changeSpy = await page.spyOnEvent('vaChange');
-    const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await checkboxEl.click();
 
     expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
@@ -235,7 +239,7 @@ describe('va-checkbox', () => {
       '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
     );
     const blurSpy = await page.spyOnEvent('blur');
-    const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await checkboxEl.click(); // Focus on the element
     await checkboxEl.press('Tab'); // Blur the element
 
@@ -250,7 +254,9 @@ describe('va-checkbox', () => {
     const checkboxEl = await page.find('va-checkbox >>> input');
     expect(await checkboxEl.getProperty('checked')).toBeTruthy();
 
-    const checkboxLabelEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    const checkboxLabelEl = await page.find(
+      'va-checkbox >>> .va-checkbox__label',
+    );
     await checkboxLabelEl.click();
     expect(await checkboxEl.getProperty('checked')).toBeFalsy();
 
@@ -272,7 +278,7 @@ describe('va-checkbox', () => {
     await page.setContent(
       '<va-checkbox indeterminate label="Just another checkbox here" />',
     );
-    const checkboxEl = await page.find('va-checkbox >>> label');
+    const checkboxEl = await page.find('va-checkbox >>> input');
     expect(checkboxEl).toEqualAttribute('aria-checked', 'mixed');
   });
 

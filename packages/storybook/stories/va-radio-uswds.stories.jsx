@@ -53,26 +53,10 @@ const vaRadioConst = args => {
       label-header-level={labelHeaderLevel}
       header-aria-describedby={headerAriaDescribedby}
     >
-      <va-radio-option
-        label="Soujourner Truth"
-        name={name}
-        value="1"
-      />
-      <va-radio-option
-        label="Frederick Douglass"
-        name={name}
-        value="2"
-      />
-      <va-radio-option
-        label="Booker T. Washington"
-        name={name}
-        value="3"
-      />
-      <va-radio-option
-        label="George Washington Carver"
-        name={name}
-        value="4"
-      />
+      <va-radio-option label="Sojourner Truth" name={name} value="1" />
+      <va-radio-option label="Frederick Douglass" name={name} value="2" />
+      <va-radio-option label="Booker T. Washington" name={name} value="3" />
+      <va-radio-option label="George Washington Carver" name={name} value="4" />
     </va-radio>
   );
 };
@@ -180,8 +164,8 @@ const USWDSTiled = ({
         hint={hint}
       >
         <va-radio-option
-          id="soujourner-truth1"
-          label="Soujourner Truth"
+          id="sojourner-truth1"
+          label="Sojourner Truth"
           name="group3"
           value="1"
           tile
@@ -230,8 +214,8 @@ const USWDSTiledError = ({
         hint={hint}
       >
         <va-radio-option
-          id="soujourner-truth2"
-          label="Soujourner Truth"
+          id="sojourner-truth2"
+          label="Sojourner Truth"
           name="group4"
           value="1"
           tile
@@ -272,24 +256,12 @@ const withDescriptionMessageTemplate = ({
       message-aria-describedby={extraMessage}
     >
       <p>{extraMessage}</p>
-      <va-radio-option
-        label="Soujourner Truth"
-        name={"name"}
-        value="1"
-      />
-      <va-radio-option
-        label="Frederick Douglass"
-        name={"name"}
-        value="2"
-      />
-      <va-radio-option
-        label="Booker T. Washington"
-        name={"name"}
-        value="3"
-      />
+      <va-radio-option label="Sojourner Truth" name={'name'} value="1" />
+      <va-radio-option label="Frederick Douglass" name={'name'} value="2" />
+      <va-radio-option label="Booker T. Washington" name={'name'} value="3" />
       <va-radio-option
         label="George Washington Carver"
-        name={"name"}
+        name={'name'}
         value="4"
       />
     </va-radio>
@@ -318,8 +290,8 @@ const FormsPatternMultipleTemplate = ({ label, required }) => {
         header-aria-describedby={label}
       >
         <va-radio-option
-          label="Soujourner Truth"
-          id="soujourner-truth6"
+          label="Sojourner Truth"
+          id="sojourner-truth6"
           name="group6"
           value="1"
         />
@@ -358,7 +330,11 @@ const FormsPatternMultipleTemplate = ({ label, required }) => {
       </va-radio>
 
       <hr />
-      <va-button text="click to focus header" onClick={handleClick} uswds={false}></va-button>
+      <va-button
+        text="click to focus header"
+        onClick={handleClick}
+        uswds={false}
+      ></va-button>
     </>
   );
 };

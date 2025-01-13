@@ -86,7 +86,7 @@ describe('va-checkbox-group', () => {
       </va-checkbox-group>
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await checkboxEl.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -109,7 +109,7 @@ describe('va-checkbox-group', () => {
       `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const inputEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    const inputEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await inputEl.click();
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
