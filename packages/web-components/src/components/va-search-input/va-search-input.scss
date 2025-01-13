@@ -66,6 +66,7 @@
 .usa-search__clear-input {
   cursor: pointer;
   background-color: transparent;
+  opacity: .6;
   border: 0px;
   bottom: 1px;
   position: absolute;
@@ -73,6 +74,9 @@
   z-index: 100;
   right: calc(3rem + 3px);
   margin-right: 32px;
+}
+button.usa-search__clear-input:not([disabled]):focus {
+  outline-offset: -4px;
 }
 
 :host([big="true"]) .usa-search__clear-input  {
