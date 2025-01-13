@@ -25,7 +25,6 @@ const IdMeLogo = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    aria-labelledby="idme-title"
     viewBox="0 0 30 12"
     style={svgStyles}
   >
@@ -48,7 +47,6 @@ const LoginGovLogo = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    aria-labelledby="logingov-title"
     viewBox="0 0 114 15"
     style={svgStyles}
   >
