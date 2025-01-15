@@ -41,7 +41,7 @@ const defaultArgs = {
   'status': 'info',
   headline: (
     <h3 slot="headline">
-      We can prefill some of your information
+      We've prefilled some of your information
     </h3>
   ),
   'children': (
