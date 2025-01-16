@@ -37,4 +37,4 @@ jobs:
           workingDir: packages/storybook
           skip: 'dependabot/**'
       - name: Publish Chromatic Summary
-        run: echo -e "| Results |  |\n| --- | --- |\n| Build Results | ${{steps.chromatic.outputs.buildUrl}} |\n| Storybook Preview | ${{steps.chromatic.outputs.storybookUrl}} |\n| Change Count | ${{steps.chromatic.outputs.changeCount}} |" >> $GITHUB_STEP_SUMMARY
+        run: echo -e "| Results |  |\n| --- | --- |\n| URL | ${{steps.chromatic.outputs.url}} |\n| Build Url | ${{steps.chromatic.outputs.buildUrl}} |\n| Storybook Url | ${{steps.chromatic.outputs.storybookUrl}} |\n| Change Count | ${{steps.chromatic.outputs.changeCount}} |" >> $GITHUB_STEP_SUMMARY
