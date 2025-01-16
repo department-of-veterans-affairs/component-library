@@ -36,6 +36,7 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           skip: 'dependabot/**'
-          diagnostics: true
+      - name: Log Chromatic Diagnostics File
+        run: cat ${{ steps.chromatic.outputs.diagnosticsFile }}
       - name: Publish Chromatic Summary
         run: echo -e "| Results |  |\n| --- | --- |\n| URL | ${{steps.chromatic.outputs.url}} |\n| Build Url | ${{steps.chromatic.outputs.buildUrl}} |\n| Storybook Url | ${{steps.chromatic.outputs.storybookUrl}} |\n| Change Count | ${{steps.chromatic.outputs.changeCount}} |" >> $GITHUB_STEP_SUMMARY
