@@ -91,6 +91,19 @@ export class VaSearchInput {
    */
   @Prop() disableAnalytics?: boolean = false;
 
+
+  /**
+   * If `true`, clear button is shown
+   */
+  @State() showClearButton?: boolean = false;
+
+  /**
+   * Set the initial showClearButton value
+   */
+  componentWillLoad() {
+    this.showClearButton = !!this.value;
+  }
+
   /**
    * If suggestions are provided, then format suggestions and open the listbox.
    * Limits suggestions to 5 and sorts them.
@@ -175,6 +188,8 @@ export class VaSearchInput {
    */
   private handleInput = (event: Event) => {
     this.value = (event.target as HTMLInputElement).value;
+    this.showClearButton = !!this.value;
+    
     if (!this.suggestions) return;
     this.updateSuggestions(this.suggestions);
   };
@@ -245,6 +260,18 @@ export class VaSearchInput {
     this.handleSubmit();
   };
 
+  // clear the input and focus the input
+  private handleClearButtonClick = () => {
+    this.inputRef.value = '';
+    this.inputRef.dispatchEvent(
+      new InputEvent('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    );
+    this.inputRef.focus();
+  };
+
   // Listbox event handlers
   /**
    * Sets search input value to the suggestion clicked,
@@ -263,6 +290,7 @@ export class VaSearchInput {
     );
     this.inputRef.removeAttribute('aria-activedescendant');
     this.isListboxOpen = false;
+    this.value = suggestion.innerText;
     this.handleSubmit();
   };
 
@@ -407,6 +435,7 @@ export class VaSearchInput {
       formattedSuggestions,
       handleBlur,
       handleButtonClick,
+      handleClearButtonClick,
       handleInput,
       handleInputFocus,
       handleInputKeyDown,
@@ -417,6 +446,7 @@ export class VaSearchInput {
       value,
       big,
       small,
+      showClearButton,
     } = this;
 
     /**
@@ -447,44 +477,57 @@ export class VaSearchInput {
       'usa-search--big': big && !small,
       'usa-search--small': small && !big,
     });
+    const clearButtonClasses = classnames({
+      'usa-search__clear-input': true,
+      'usa-search__clear-input_empty': !showClearButton
+    });
     return (
       <Host onBlur={handleBlur}>
         <form class={formClasses} role="search">
           <label class="usa-sr-only" htmlFor="search-field">
             {label}
           </label>
-          <input
-            class="usa-input"
-            id="search-field"
-            name="search"
-            type="search"
-            ref={el => (this.inputRef = el as HTMLInputElement)}
-            aria-autocomplete={ariaAutoComplete}
-            aria-controls={ariaControls}
-            aria-expanded={ariaExpanded}
-            aria-haspopup={ariaHasPopup}
-            aria-label={label}
-            autocomplete="off"
-            onFocus={handleInputFocus}
-            onInput={handleInput}
-            onKeyDown={handleInputKeyDown}
-            role={role}
-            value={value}
-          />
-          <button
-            class="usa-button"
-            type="submit"
-            onClick={handleButtonClick}
-          >
-            {!small && (
-              <span class="usa-search__submit-text">{buttonText}</span>
-            )}
-            <va-icon
-              class="usa-search__submit-icon"
-              icon="search"
-              size={3}
-            ></va-icon>
-          </button>
+          <div class='usa-search__input-wrapper'>
+            <input
+              class="usa-input"
+              id="search-field"
+              name="search"
+              type="search"
+              ref={el => (this.inputRef = el as HTMLInputElement)}
+              aria-autocomplete={ariaAutoComplete}
+              aria-controls={ariaControls}
+              aria-expanded={ariaExpanded}
+              aria-haspopup={ariaHasPopup}
+              aria-label={label}
+              autocomplete="off"
+              onFocus={handleInputFocus}
+              onInput={handleInput}
+              onKeyDown={handleInputKeyDown}
+              role={role}
+              value={value}
+            />
+            <button type="button" onClick={handleClearButtonClick} class={clearButtonClasses} aria-label="Clear the search contents">
+              <va-icon
+                class="usa-search__clear-icon"
+                icon="close"
+                size={3}
+              />
+            </button>
+            <button
+              class="usa-button"
+              type="submit"
+              onClick={handleButtonClick}
+            >
+              {!small && (
+                <span class="usa-search__submit-text">{buttonText}</span>
+              )}
+              <va-icon
+                class="usa-search__submit-icon"
+                icon="search"
+                size={3}
+              ></va-icon>
+            </button>
+          </div>
           {isListboxOpen && (
             <ul
               id="va-search-listbox"
