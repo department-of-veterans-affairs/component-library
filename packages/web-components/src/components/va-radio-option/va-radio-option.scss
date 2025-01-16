@@ -7,6 +7,8 @@
   background: transparent;
   display: flex;
   margin: 0.5rem 0;
+  max-width: 480px;
+  cursor: pointer;
 }
 
 .va-radio-option__container--tile {
@@ -33,6 +35,7 @@ input[type="radio"].va-radio-option__input {
   margin: 0.064rem 0 0 0;
   opacity: unset;
   position: initial;
+  cursor: pointer;
 }
 
 input[type="radio"].va-radio-option__input:checked {
@@ -49,7 +52,7 @@ input[type="radio"].va-radio-option__input:checked:focus {
   display: flex;
   flex-direction: column;
   margin: 0;
-  max-width: 480px;
+  width: 100%;
   padding-left: 0.5rem;
   box-sizing: border-box;
 }
