@@ -682,6 +682,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
+         */
+        "slotFieldIndexes"?: Number[];
+        /**
           * The value attribute for the file view element.
          */
         "value"?: File[];
@@ -3990,6 +3994,10 @@ declare namespace LocalJSX {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+        /**
+          * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
+         */
+        "slotFieldIndexes"?: Number[];
         /**
           * The value attribute for the file view element.
          */
