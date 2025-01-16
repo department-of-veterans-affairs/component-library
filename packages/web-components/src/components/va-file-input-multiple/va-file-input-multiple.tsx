@@ -308,7 +308,7 @@ export class VaFileInputMultiple {
     this.setSlotContent();
     theFileInputs.forEach((fileEntry, index) => {
       if (this.files[index].content &&
-          (!this.slotFieldIndexes || this.slotFieldIndexes.indexOf(index) !== -1)
+          (!this.slotFieldIndexes || this.slotFieldIndexes.includes(index))
       ) {
         this.files[index].content.forEach(node => fileEntry.append(node));
       }
