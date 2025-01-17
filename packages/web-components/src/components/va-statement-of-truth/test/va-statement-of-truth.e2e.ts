@@ -62,7 +62,9 @@ describe('va-statement-of-truth', () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth />');
     const vaCheckboxChangeSpy = await page.spyOnEvent('vaCheckboxChange');
-    const checkboxEl = await page.find('va-statement-of-truth >>> va-checkbox >>> label.usa-checkbox__label');
+    const checkboxEl = await page.find(
+      'va-statement-of-truth >>> va-checkbox >>> label',
+    );
     await checkboxEl.click();
     expect(vaCheckboxChangeSpy).toHaveReceivedEvent();
   });
@@ -76,7 +78,9 @@ describe('va-statement-of-truth', () => {
 
   it('sets an input aria described by message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-statement-of-truth input-message-aria-describedby="testing one two three"/>');
+    await page.setContent(
+      '<va-statement-of-truth input-message-aria-describedby="testing one two three"/>',
+    );
     const span = await page.$('pierce/span#input-message');
     const text = await page.evaluate(element => element.textContent, span);
     expect(text).toContain('testing one two three');
@@ -84,28 +88,40 @@ describe('va-statement-of-truth', () => {
 
   it('permits prefilling the form', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-statement-of-truth input-value="John Doe" checked/>');
+    await page.setContent(
+      '<va-statement-of-truth input-value="John Doe" checked/>',
+    );
 
-    const value = await page.$eval('va-statement-of-truth >>> va-text-input >>> input', (comp: HTMLInputElement) => comp.value);
+    const value = await page.$eval(
+      'va-statement-of-truth >>> va-text-input >>> input',
+      (comp: HTMLInputElement) => comp.value,
+    );
     expect(value).toBe('John Doe');
 
-    const checked = await page.$eval('va-statement-of-truth >>> va-checkbox >>> input', (comp: HTMLInputElement) => comp.checked);
+    const checked = await page.$eval(
+      'va-statement-of-truth >>> va-checkbox >>> input',
+      (comp: HTMLInputElement) => comp.checked,
+    );
     expect(checked).toBeTruthy();
   });
 
   it('adds custom label to va-text-input', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth input-label="test label" />');
-    const labelEl = await page.$('pierce/label.usa-label');
-    const text = await page.evaluate(element => element.textContent, labelEl);
-    expect(text).toContain('test label');
+    const textInputEl = await page.find(
+      'va-statement-of-truth >>> va-text-input',
+    );
+    const textInputLabel = await textInputEl.getProperty('label');
+    expect(textInputLabel).toBe('test label');
   });
 
   it('adds custom label to va-checkbox', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-statement-of-truth checkbox-label="test label" />');
-    const labelEl = await page.$('pierce/label.usa-checkbox__label');
-    const text = await page.evaluate(element => element.textContent, labelEl);
-    expect(text).toContain('test label');
+    await page.setContent(
+      '<va-statement-of-truth checkbox-label="test label" />',
+    );
+    const checkboxEl = await page.find('va-statement-of-truth >>> va-checkbox');
+    const checkboxLabel = await checkboxEl.getProperty('label');
+    expect(checkboxLabel).toBe('test label');
   });
 })
