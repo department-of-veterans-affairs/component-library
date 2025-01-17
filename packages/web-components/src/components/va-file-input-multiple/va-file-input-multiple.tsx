@@ -80,6 +80,11 @@ export class VaFileInputMultiple {
   @Prop() readOnly?: boolean = false;
 
   /**
+   * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
+   */
+  @Prop() slotFieldIndexes?: Number[] = null; 
+
+  /**
    * Event emitted when any change to the file inputs occurs.
    * Sends back an array of FileDetails
    */
@@ -302,7 +307,9 @@ export class VaFileInputMultiple {
     const theFileInputs = this.el.shadowRoot.querySelectorAll(`va-file-input`);
     this.setSlotContent();
     theFileInputs.forEach((fileEntry, index) => {
-      if (this.files[index].content) {
+      if (this.files[index].content &&
+          (!this.slotFieldIndexes || this.slotFieldIndexes.includes(index))
+      ) {
         this.files[index].content.forEach(node => fileEntry.append(node));
       }
     });

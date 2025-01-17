@@ -53,6 +53,10 @@ export const contactsMap = Object.freeze({
     description: 'Go Direct/Direct Express (Treasury)',
   },
   HELP_DESK: { phoneNumber: '8006982411', description: 'VA Help desk' },
+  HEALTH_RESOURCE_CENTER: {
+    phoneNumber: '8664001238',
+    description: 'Health Resource Center',
+  },
   HEALTHCARE_ELIGIBILITY_CENTER: {
     phoneNumber: '8554888440',
     description: 'VA Healthcare Eligibility Center (Eligibility Division)',
