@@ -3983,7 +3983,7 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * Event emitted when any change to the file inputs occurs. Sends back an array of FileDetails
+          * Event emitted when any change to the file inputs occurs.  Sends back an object with the following data structure: `{ action: string, file: triggering file, state: files array }`  The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
