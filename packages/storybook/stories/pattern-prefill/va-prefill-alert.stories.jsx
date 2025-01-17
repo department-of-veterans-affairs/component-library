@@ -39,11 +39,16 @@ VaAlert.displayName = 'VaAlert';
 const defaultArgs = {
   'slim': false,
   'status': 'info',
+  headline: (
+    <h3 slot="headline">
+      We've prefilled some of your information
+    </h3>
+  ),
   'children': (
     <p className="vads-u-margin-y--0">
-      <strong>Note:</strong> Since you’re signed in to your account, we can
-      prefill part of your form based on your account details. You can also save
-      your form in progress and come back later to finish filling it out.
+      Since you’re signed in, we can
+      prefill part of your application based on your profile details. You can also save
+      your application in progress and come back later to finish filling it out.
     </p>
   ),
 };
@@ -109,14 +114,3 @@ UnauthenticatedPrefillAlert.args = {
   ),
 };
 
-export const PrefilledInfoAlert = Template.bind(null);
-PrefilledInfoAlert.args = {
-  ...defaultArgs,
-  children: (
-    <p className="vads-u-margin-y--0">
-      <strong>Note:</strong> We've prefilled some of your information from your
-      account. If you need to correct anything, you can select edit below. All
-      updates will be made only to this form.
-    </p>
-  ),
-};

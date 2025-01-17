@@ -1,7 +1,6 @@
 import React from 'react';
-import {
-  VaAlert,
-} from '@department-of-veterans-affairs/web-components/react-bindings';
+import { SignedInPrefillAlert } from './va-prefill-alert.stories';
+
 
 export default {
   title: 'Patterns/Prefill/Usage Examples/Signed In Prefill Alert',
@@ -12,10 +11,6 @@ export default {
 };
 
 const Template = ({
-  slim,
-  status,
-  headline,
-  children,
 }) => {
   return (
     <>
@@ -27,13 +22,7 @@ const Template = ({
         </div>
       </div>
       <div className="vads-u-padding-y--2">
-        <VaAlert
-          slim={slim}
-          status={status}
-        >
-          {headline}
-          {children}
-        </VaAlert>
+      <SignedInPrefillAlert {...SignedInPrefillAlert.args} />
       </div>
       <va-link-action
         href="#start"
@@ -45,20 +34,4 @@ const Template = ({
   );
 };
 
-const defaultArgs = {
-  'slim': true,
-  'status': 'info',
-  'children': (
-    <p className="vads-u-margin-y--0">
-      <strong>Note:</strong> Since you’re signed in to your account, we can
-      prefill part of your application based on your account details. You can
-      also save your application in progress and come back later to finish
-      filling it out.
-    </p>
-  ),
-};
-
 export const Default = Template.bind(null);
-Default.args = {
-  ...defaultArgs,
-};
