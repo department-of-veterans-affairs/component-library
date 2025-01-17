@@ -8,7 +8,6 @@ import testImage from './images/search-bar.png';
 VaFileInputMultiple.displayName = 'VaFileInputMultiple';
 
 const fileInputMultipleDocs = getWebComponentDocs('va-file-input-multiple');
-
 export default {
   title: 'Components/File input multiple USWDS',
   id: 'uswds/va-file-input-multiple',
@@ -33,6 +32,7 @@ const defaultArgs = {
   'children': null,
   'value': null,
   'read-only': false,
+  'slotFieldIndexes': null
 };
 
 const Template = ({
@@ -48,6 +48,7 @@ const Template = ({
   value,
   readOnly,
   children,
+  slotFieldIndexes,
 }) => {
   return (
     <VaFileInputMultiple
@@ -63,6 +64,7 @@ const Template = ({
       value={value}
       read-only={readOnly}
       children={children}
+      slot-field-indexes={slotFieldIndexes}
     />
   );
 };
@@ -106,6 +108,7 @@ const AdditionalFormInputsContentTemplate = ({
   'enable-analytics': enableAnalytics,
   vaMultipleChange,
   headerSize,
+  slotFieldIndexes,
   children,
 }) => {
   return (
@@ -119,6 +122,7 @@ const AdditionalFormInputsContentTemplate = ({
         hint={hint}
         enable-analytics={enableAnalytics}
         onVaMultipleChange={vaMultipleChange}
+        slot-field-indexes={slotFieldIndexes}
         header-size={headerSize}
       >
         {children}
@@ -161,6 +165,70 @@ AdditionalFormInputs.args = {
   ...defaultArgs,
   label: 'Additional Form Inputs',
   children: additionalFormInputsContent,
+};
+
+
+const AdditionalFormInputsOnSpecificFieldsContentTemplate = ({
+  label,
+  name,
+  accept,
+  errors,
+  required,
+  hint,
+  'enable-analytics': enableAnalytics,
+  vaMultipleChange,
+  headerSize,
+  slotFieldIndexes,
+  children,
+}) => {
+  return (
+    <>
+      <VaFileInputMultiple
+        label={label}
+        name={name}
+        accept={accept}
+        required={required}
+        errors={errors}
+        hint={hint}
+        enable-analytics={enableAnalytics}
+        onVaMultipleChange={vaMultipleChange}
+        slotFieldIndexes={slotFieldIndexes}
+        header-size={headerSize}
+      >
+        {children}
+      </VaFileInputMultiple>
+      <hr />
+      <div>
+        <p>This example showcases how to only render additional content for specific file input fields.</p>
+      </div>
+      <div className="vads-u-margin-top--2">
+          <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+            <code>
+  {`const additionalFormInputsContent = (
+  <div>
+    <va-select label='What kind of file is this?' required>
+      <option key="1" value="1">Public Document</option>
+      <option key="2" value="2">Private Document</option>
+    </va-select>
+  </div>
+);
+
+<VaFileInputMultiple slot-field-indexes="[1,3]" ... >
+  {additionalFormInputsContent}
+</VaFileInputMultiple>`}
+            </code>
+          </pre>
+      </div>
+    </>
+  );
+};
+
+export const AdditionalFormInputsOnSpecificFields = AdditionalFormInputsOnSpecificFieldsContentTemplate.bind(null);
+AdditionalFormInputsOnSpecificFields.args = {
+  ...defaultArgs,
+  label: 'Additional Form Inputs On Specific Inputs',
+  children: additionalFormInputsContent,
+  slotFieldIndexes: '[1,3]'
 };
 
 const ErrorsTemplate = ({ label, name, hint }) => {
