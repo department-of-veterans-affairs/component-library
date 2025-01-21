@@ -37,11 +37,11 @@ jobs:
           workingDir: packages/storybook
           skip: 'dependabot/**'
           debug: true
-          diagnosticsFile: diagnostics-file.json
+          diagnosticsFile: chromatic-diagnostics.json
       - name: Extract Branch Name
         id: extract-branch-name
         run: |
-          BRANCH_NAME=$(grep '"branchName":' diagnostics-file.json | sed -E 's/.*"branchName": "(.*)",?/\1/')
+          BRANCH_NAME=$(grep '"branchName":' chromatic-diagnostics.json | sed -E 's/.*"branchName": "(.*)",?/\1/')
           echo "Branch name is: $BRANCH_NAME"
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
       - name: Use Extracted Branch Name
