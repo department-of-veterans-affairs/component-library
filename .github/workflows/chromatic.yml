@@ -36,7 +36,15 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           skip: 'dependabot/**'
-      - name: Log Chromatic Diagnostics File
-        run: cat ${{ steps.chromatic.outputs.diagnosticsFile }}
+          debug: true
+          diagnosticsFile: diagnostics-file.json
+      - name: Extract Branch Name
+        id: extract-branch-name
+        run: |
+          BRANCH_NAME=$(grep '"branch":' diagnostics-file.json | sed -E 's/.*"branch": "(.*)",?/\1/')
+          echo "Branch name is: $BRANCH_NAME"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
+      - name: Use Extracted Branch Name
+        run: echo "The branch name is ${{ env.branch_name }}"
       - name: Publish Chromatic Summary
         run: echo -e "| Results |  |\n| --- | --- |\n| URL | ${{steps.chromatic.outputs.url}} |\n| Build Url | ${{steps.chromatic.outputs.buildUrl}} |\n| Storybook Url | ${{steps.chromatic.outputs.storybookUrl}} |\n| Change Count | ${{steps.chromatic.outputs.changeCount}} |" >> $GITHUB_STEP_SUMMARY
