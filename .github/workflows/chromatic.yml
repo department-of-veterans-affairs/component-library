@@ -38,13 +38,27 @@ jobs:
           skip: 'dependabot/**'
           debug: true
           diagnosticsFile: chromatic-diagnostics.json
-      - name: Extract Branch Name
-        id: extract-branch-name
+      - name: Upload Chromatic Diagnostics File as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: chromatic-diagnostics-file
+          path: chromatic-diagnostics.json
+
+      - name: Download Diagnostics File
+        uses: actions/download-artifact@v3
+        with:
+          name: chromatic-diagnostics-file
+          path: .
+
+      - name: Read Diagnostics File
+        id: read-diagnostics
         run: |
-          BRANCH_NAME=$(grep '"branchName":' chromatic-diagnostics.json | sed -E 's/.*"branchName": "(.*)",?/\1/')
+          BRANCH_NAME=$(python -c "import json; print(json.load(open('chromatic-diagnostics.json'))['branchName'])")
           echo "Branch name is: $BRANCH_NAME"
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
+
       - name: Use Extracted Branch Name
         run: echo "The branch name is ${{ env.branch_name }}"
-      - name: Publish Chromatic Summary
-        run: echo -e "| Results |  |\n| --- | --- |\n| URL | ${{steps.chromatic.outputs.url}} |\n| Build Url | ${{steps.chromatic.outputs.buildUrl}} |\n| Storybook Url | ${{steps.chromatic.outputs.storybookUrl}} |\n| Change Count | ${{steps.chromatic.outputs.changeCount}} |" >> $GITHUB_STEP_SUMMARY
+
+      # - name: Publish Chromatic Summary
+      #   run: echo -e "| Results |  |\n| --- | --- |\n| URL | ${{steps.chromatic.outputs.url}} |\n| Build Url | ${{steps.chromatic.outputs.buildUrl}} |\n| Storybook Url | ${{steps.chromatic.outputs.storybookUrl}} |\n| Change Count | ${{steps.chromatic.outputs.changeCount}} |" >> $GITHUB_STEP_SUMMARY
