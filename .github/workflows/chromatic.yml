@@ -41,7 +41,7 @@ jobs:
       - name: Extract Branch Name
         id: extract-branch-name
         run: |
-          BRANCH_NAME=$(grep '"branch":' diagnostics-file.json | sed -E 's/.*"branch": "(.*)",?/\1/')
+          BRANCH_NAME=$(grep '"branchName":' diagnostics-file.json | sed -E 's/.*"branchName": "(.*)",?/\1/')
           echo "Branch name is: $BRANCH_NAME"
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
       - name: Use Extracted Branch Name
