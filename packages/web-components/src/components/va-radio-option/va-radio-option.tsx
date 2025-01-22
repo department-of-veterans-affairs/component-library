@@ -75,6 +75,7 @@ export class VaRadioOption {
 
     const containerClass = classnames('usa-radio', {
       'va-radio-option__container--tile': tile,
+      'va-radio-option__container--tile--checked': tile && checked,
     });
     return (
       <div class={containerClass} onClick={() => this.handleChange()}>

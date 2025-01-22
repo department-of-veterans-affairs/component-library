@@ -29,7 +29,13 @@
   background-color: white;
   border: 2px solid #c9c9c9;
   color: #1b1b1b;
-  padding: 0.75rem 0 0.75rem 0.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.va-checkbox__container--tile--checked {
+  background-color: rgba(0,94,162,.1);
+  border-color: #005ea2;
 }
 
 .va-checkbox__input {
