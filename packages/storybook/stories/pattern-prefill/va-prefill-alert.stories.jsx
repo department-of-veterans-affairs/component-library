@@ -3,7 +3,6 @@ import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bi
 import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
 import { OptionalSignInVerified } from '../va-alert-sign-in.stories';
 
-
 const alertDocs = getWebComponentDocs('va-alert');
 // Remove backgroundOnly prop, this code and prop should be removed with the v1 version
 alertDocs.props = alertDocs.props.filter(
