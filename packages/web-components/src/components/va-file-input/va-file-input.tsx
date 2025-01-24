@@ -79,6 +79,11 @@ export class VaFileInput {
   @Prop() hint?: string;
 
   /**
+   * Optional file status, ex: "Uploading...", "Uploaded".
+   */
+  @Prop() statusText?: string;
+
+  /**
    * Custom instructional message in the file input.
    */
   @Prop() uploadMessage?: HTMLElement = (
@@ -355,6 +360,7 @@ export class VaFileInput {
       headless,
       value,
       readOnly,
+      statusText
     } = this;
 
     if (value) {
@@ -489,6 +495,13 @@ export class VaFileInput {
                     <span class="file-size-label">
                       {this.formatFileSize(file.size)}
                     </span>
+                    {
+                      statusText && (
+                        <span class="file-status-label">
+                          {statusText}
+                        </span>
+                      )
+                    }
                   </div>
                 </div>
                 {(file || value) && (

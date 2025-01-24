@@ -628,6 +628,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
@@ -3936,6 +3940,10 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
         /**
           * Custom instructional message in the file input.
          */
