@@ -43,6 +43,7 @@ const defaultArgs = {
   'children': null,
   'value': null,
   'read-only': false,
+  'uploadedFile': null
 };
 
 const Template = ({
@@ -58,6 +59,7 @@ const Template = ({
   readOnly,
   value,
   children,
+  uploadedFile,
 }) => {
   return (
     <VaFileInput
@@ -73,6 +75,7 @@ const Template = ({
       readOnly={readOnly}
       value={value}
       children={children}
+      uploadedFile={uploadedFile}
     />
   );
 };
@@ -243,6 +246,16 @@ WithAnalytics.args = {
   'enable-analytics': true,
 };
 
+export const UploadedFile = Template.bind(null);
+UploadedFile.args = { 
+  ...defaultArgs, 
+  uploadedFile: {
+    name: 'test.jpg',
+    size: 7000,
+    type: 'JPG'
+  } 
+};
+
 const FileUploadedTemplate = args => {
   const [mockFile, setMockFile] = useState(null);
 
@@ -268,9 +281,6 @@ const FileUploadedTemplate = args => {
 
   return <Template {...args} value={mockFile} />;
 };
-
-export const FileUploaded = FileUploadedTemplate.bind(null);
-FileUploaded.args = { ...defaultArgs, vaChange: event => event };
 
 export const ReadOnly = FileUploadedTemplate.bind(null);
 ReadOnly.args = { ...defaultArgs, vaChange: event => event, readOnly: true };
