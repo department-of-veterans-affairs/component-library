@@ -1,6 +1,8 @@
 import React from 'react';
 import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
+import { OptionalSignInVerified } from '../va-alert-sign-in.stories';
+
 
 const alertDocs = getWebComponentDocs('va-alert');
 // Remove backgroundOnly prop, this code and prop should be removed with the v1 version
@@ -77,40 +79,4 @@ SignedInPrefillAlert.args = {
 };
 SignedInPrefillAlert.argTypes = propStructure(alertDocs);
 
-export const UnauthenticatedPrefillAlert = Template.bind(null);
-UnauthenticatedPrefillAlert.args = {
-  ...defaultArgs,
-  headline: (
-    <h2 slot="headline">
-      Sign in now to save time and save your work in progress
-    </h2>
-  ),
-  children: (
-    <div>
-      <p className="vads-u-margin-top--2">
-        Here’s how signing in now helps you:
-      </p>
-      <ul>
-        <li>
-          We can fill in some of your information for you to save you time.
-        </li>
-        <li>
-          You can save your work in progress. You’ll have 60 days from when you
-          start or make updates to your application to come back and finish it.
-        </li>
-      </ul>
-      <p>
-        <strong>Note:</strong> You can sign in after you start your application.
-        But you'll lose any information you already filled in.
-      </p>
-      <va-button text="Sign in to start your application" />
-      <p>
-        <va-link
-          href="#start"
-          text="Start your application without signing in"
-        />
-      </p>
-    </div>
-  ),
-};
-
+export const UnauthenticatedPrefillAlert = OptionalSignInVerified;
