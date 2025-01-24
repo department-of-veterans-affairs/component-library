@@ -43,6 +43,7 @@ const defaultArgs = {
   'children': null,
   'value': null,
   'read-only': false,
+  'status-text': null
 };
 
 const Template = ({
@@ -56,6 +57,7 @@ const Template = ({
   vaChange,
   headerSize,
   readOnly,
+  statusText,
   value,
   children,
 }) => {
@@ -71,6 +73,7 @@ const Template = ({
       onVaChange={vaChange}
       header-size={headerSize}
       readOnly={readOnly}
+      statusText={statusText}
       value={value}
       children={children}
     />
@@ -268,6 +271,9 @@ const FileUploadedTemplate = args => {
 
   return <Template {...args} value={mockFile} />;
 };
+
+export const UploadStatus = FileUploadedTemplate.bind(null);
+UploadStatus.args = { ...defaultArgs, vaChange: event => event, statusText: 'Uploading...' };
 
 export const FileUploaded = FileUploadedTemplate.bind(null);
 FileUploaded.args = { ...defaultArgs, vaChange: event => event };
