@@ -2988,6 +2988,7 @@ declare global {
     interface HTMLVaSelectElementEventMap {
         "vaKeyDown": any;
         "vaSelect": any;
+        "vaSelectBlur": any;
         "component-library-analytics": any;
     }
     /**
@@ -4955,6 +4956,10 @@ declare namespace LocalJSX {
           * The event emitted when the selected value changes
          */
         "onVaSelect"?: (event: VaSelectCustomEvent<any>) => void;
+        /**
+          * The event emitted when the select element is blurred
+         */
+        "onVaSelectBlur"?: (event: VaSelectCustomEvent<any>) => void;
         /**
           * Whether or not to add usa-input--error as class if error message is outside of component
          */
