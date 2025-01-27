@@ -222,7 +222,7 @@ OptionalSignInVerified.args = {
   ...defaultArgs,
   'variant': ASIVariants.signInOptional,
   'no-sign-in-link': 'https://example.com/',
-  'time-limit': '20 minutes',
+  'time-limit': '60 days',
 };
 
 export const VerifyWithIdMe = Template.bind(null);
