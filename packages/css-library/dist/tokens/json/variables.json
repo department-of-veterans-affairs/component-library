@@ -3529,6 +3529,962 @@
       ]
     }
   },
+  "vads-spacing": {
+    "0": {
+      "value": "0",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-special-0}"
+      },
+      "name": "vads-spacing-0",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "0"
+      },
+      "path": [
+        "vads-spacing",
+        "0"
+      ]
+    },
+    "1": {
+      "value": "8px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-1}"
+      },
+      "name": "vads-spacing-1",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "1"
+      },
+      "path": [
+        "vads-spacing",
+        "1"
+      ]
+    },
+    "2": {
+      "value": "16px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-2}"
+      },
+      "name": "vads-spacing-2",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "2"
+      },
+      "path": [
+        "vads-spacing",
+        "2"
+      ]
+    },
+    "3": {
+      "value": "24px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-3}"
+      },
+      "name": "vads-spacing-3",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "3"
+      },
+      "path": [
+        "vads-spacing",
+        "3"
+      ]
+    },
+    "4": {
+      "value": "32px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-4}"
+      },
+      "name": "vads-spacing-4",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "4"
+      },
+      "path": [
+        "vads-spacing",
+        "4"
+      ]
+    },
+    "5": {
+      "value": "40px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-5}"
+      },
+      "name": "vads-spacing-5",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "5"
+      },
+      "path": [
+        "vads-spacing",
+        "5"
+      ]
+    },
+    "6": {
+      "value": "48px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-6}"
+      },
+      "name": "vads-spacing-6",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "6"
+      },
+      "path": [
+        "vads-spacing",
+        "6"
+      ]
+    },
+    "7": {
+      "value": "56px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-7}"
+      },
+      "name": "vads-spacing-7",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "7"
+      },
+      "path": [
+        "vads-spacing",
+        "7"
+      ]
+    },
+    "8": {
+      "value": "64px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-8}"
+      },
+      "name": "vads-spacing-8",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "8"
+      },
+      "path": [
+        "vads-spacing",
+        "8"
+      ]
+    },
+    "9": {
+      "value": "72px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-9}"
+      },
+      "name": "vads-spacing-9",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "9"
+      },
+      "path": [
+        "vads-spacing",
+        "9"
+      ]
+    },
+    "10": {
+      "value": "80px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-10}"
+      },
+      "name": "vads-spacing-10",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "10"
+      },
+      "path": [
+        "vads-spacing",
+        "10"
+      ]
+    },
+    "15": {
+      "value": "120px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-15}"
+      },
+      "name": "vads-spacing-15",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "15"
+      },
+      "path": [
+        "vads-spacing",
+        "15"
+      ]
+    },
+    "1px": {
+      "value": "1px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-1px}"
+      },
+      "name": "vads-spacing-1px",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "1px"
+      },
+      "path": [
+        "vads-spacing",
+        "1px"
+      ]
+    },
+    "2px": {
+      "value": "2px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-2px}"
+      },
+      "name": "vads-spacing-2px",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "2px"
+      },
+      "path": [
+        "vads-spacing",
+        "2px"
+      ]
+    },
+    "0p5": {
+      "value": "4px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-05}"
+      },
+      "name": "vads-spacing-0p5",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "0p5"
+      },
+      "path": [
+        "vads-spacing",
+        "0p5"
+      ]
+    },
+    "1p5": {
+      "value": "12px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-105}"
+      },
+      "name": "vads-spacing-1p5",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "1p5"
+      },
+      "path": [
+        "vads-spacing",
+        "1p5"
+      ]
+    },
+    "2p5": {
+      "value": "20px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-205}"
+      },
+      "name": "vads-spacing-2p5",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "2p5"
+      },
+      "path": [
+        "vads-spacing",
+        "2p5"
+      ]
+    },
+    "neg-1px": {
+      "value": "-1px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-1px}"
+      },
+      "name": "vads-spacing-neg-1px",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-1px"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-1px"
+      ]
+    },
+    "neg-2px": {
+      "value": "-2px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-2px}"
+      },
+      "name": "vads-spacing-neg-2px",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-2px"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-2px"
+      ]
+    },
+    "neg-0p5": {
+      "value": "-4px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-05}"
+      },
+      "name": "vads-spacing-neg-0p5",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-0p5"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-0p5"
+      ]
+    },
+    "neg-1": {
+      "value": "-8px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-1}"
+      },
+      "name": "vads-spacing-neg-1",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-1"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-1"
+      ]
+    },
+    "neg-1p5": {
+      "value": "-12px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-105}"
+      },
+      "name": "vads-spacing-neg-1p5",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-1p5"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-1p5"
+      ]
+    },
+    "neg-2": {
+      "value": "-16px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-2}"
+      },
+      "name": "vads-spacing-neg-2",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-2"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-2"
+      ]
+    },
+    "neg-2p5": {
+      "value": "-20px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-205}"
+      },
+      "name": "vads-spacing-neg-2p5",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-2p5"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-2p5"
+      ]
+    },
+    "neg-3": {
+      "value": "-24px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-3}"
+      },
+      "name": "vads-spacing-neg-3",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-3"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-3"
+      ]
+    },
+    "neg-4": {
+      "value": "-32px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-4}"
+      },
+      "name": "vads-spacing-neg-4",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-4"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-4"
+      ]
+    },
+    "neg-5": {
+      "value": "-40px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-5}"
+      },
+      "name": "vads-spacing-neg-5",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-5"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-5"
+      ]
+    },
+    "neg-6": {
+      "value": "-48px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-6}"
+      },
+      "name": "vads-spacing-neg-6",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-6"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-6"
+      ]
+    },
+    "neg-7": {
+      "value": "-56px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-7}"
+      },
+      "name": "vads-spacing-neg-7",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-7"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-7"
+      ]
+    },
+    "neg-8": {
+      "value": "-64px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-8}"
+      },
+      "name": "vads-spacing-neg-8",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-8"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-8"
+      ]
+    },
+    "neg-9": {
+      "value": "-72px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-9}"
+      },
+      "name": "vads-spacing-neg-9",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-9"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-9"
+      ]
+    },
+    "neg-10": {
+      "value": "-80px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-10}"
+      },
+      "name": "vads-spacing-neg-10",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-10"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-10"
+      ]
+    },
+    "neg-15": {
+      "value": "-120px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "-{uswds-system-spacing-15}"
+      },
+      "name": "vads-spacing-neg-15",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "neg-15"
+      },
+      "path": [
+        "vads-spacing",
+        "neg-15"
+      ]
+    },
+    "inset-l": {
+      "value": "32px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{vads-spacing.4}"
+      },
+      "name": "vads-spacing-inset-l",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "inset-l"
+      },
+      "path": [
+        "vads-spacing",
+        "inset-l"
+      ]
+    },
+    "inset-m": {
+      "value": "24px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{vads-spacing.3}"
+      },
+      "name": "vads-spacing-inset-m",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "inset-m"
+      },
+      "path": [
+        "vads-spacing",
+        "inset-m"
+      ]
+    },
+    "inset-s": {
+      "value": "16px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{vads-spacing.2}"
+      },
+      "name": "vads-spacing-inset-s",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "inset-s"
+      },
+      "path": [
+        "vads-spacing",
+        "inset-s"
+      ]
+    },
+    "vertical-stack-l": {
+      "value": "32px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{vads-spacing.4}"
+      },
+      "name": "vads-spacing-vertical-stack-l",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "vertical-stack-l"
+      },
+      "path": [
+        "vads-spacing",
+        "vertical-stack-l"
+      ]
+    },
+    "vertical-stack-m": {
+      "value": "24px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{vads-spacing.3}"
+      },
+      "name": "vads-spacing-vertical-stack-m",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "vertical-stack-m"
+      },
+      "path": [
+        "vads-spacing",
+        "vertical-stack-m"
+      ]
+    },
+    "vertical-stack-s": {
+      "value": "16px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{vads-spacing.2}"
+      },
+      "name": "vads-spacing-vertical-stack-s",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "vertical-stack-s"
+      },
+      "path": [
+        "vads-spacing",
+        "vertical-stack-s"
+      ]
+    },
+    "vertical-stack-default": {
+      "value": "16px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{vads-spacing.vertical-stack-s}"
+      },
+      "name": "vads-spacing-vertical-stack-default",
+      "attributes": {
+        "category": "vads-spacing",
+        "type": "vertical-stack-default"
+      },
+      "path": [
+        "vads-spacing",
+        "vertical-stack-default"
+      ]
+    }
+  },
+  "vads-forms-spacing": {
+    "vertical-stack-default": {
+      "value": "32px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{vads-spacing.vertical-stack-l}"
+      },
+      "name": "vads-forms-spacing-vertical-stack-default",
+      "attributes": {
+        "category": "vads-forms-spacing",
+        "type": "vertical-stack-default"
+      },
+      "path": [
+        "vads-forms-spacing",
+        "vertical-stack-default"
+      ]
+    }
+  },
+  "uswds-system-spacing-special-0": {
+    "value": "0",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "0"
+    },
+    "name": "uswds-system-spacing-special-0",
+    "attributes": {
+      "category": "uswds-system-spacing-special-0"
+    },
+    "path": [
+      "uswds-system-spacing-special-0"
+    ]
+  },
+  "uswds-system-spacing-1px": {
+    "value": "1px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "1px"
+    },
+    "name": "uswds-system-spacing-1px",
+    "attributes": {
+      "category": "uswds-system-spacing-1px"
+    },
+    "path": [
+      "uswds-system-spacing-1px"
+    ]
+  },
+  "uswds-system-spacing-2px": {
+    "value": "2px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "2px"
+    },
+    "name": "uswds-system-spacing-2px",
+    "attributes": {
+      "category": "uswds-system-spacing-2px"
+    },
+    "path": [
+      "uswds-system-spacing-2px"
+    ]
+  },
+  "uswds-system-spacing-05": {
+    "value": "4px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "4px"
+    },
+    "name": "uswds-system-spacing-05",
+    "attributes": {
+      "category": "uswds-system-spacing-05"
+    },
+    "path": [
+      "uswds-system-spacing-05"
+    ]
+  },
+  "uswds-system-spacing-1": {
+    "value": "8px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "8px"
+    },
+    "name": "uswds-system-spacing-1",
+    "attributes": {
+      "category": "uswds-system-spacing-1"
+    },
+    "path": [
+      "uswds-system-spacing-1"
+    ]
+  },
+  "uswds-system-spacing-105": {
+    "value": "12px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "12px"
+    },
+    "name": "uswds-system-spacing-105",
+    "attributes": {
+      "category": "uswds-system-spacing-105"
+    },
+    "path": [
+      "uswds-system-spacing-105"
+    ]
+  },
+  "uswds-system-spacing-2": {
+    "value": "16px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "16px"
+    },
+    "name": "uswds-system-spacing-2",
+    "attributes": {
+      "category": "uswds-system-spacing-2"
+    },
+    "path": [
+      "uswds-system-spacing-2"
+    ]
+  },
+  "uswds-system-spacing-205": {
+    "value": "20px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "20px"
+    },
+    "name": "uswds-system-spacing-205",
+    "attributes": {
+      "category": "uswds-system-spacing-205"
+    },
+    "path": [
+      "uswds-system-spacing-205"
+    ]
+  },
+  "uswds-system-spacing-3": {
+    "value": "24px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "24px"
+    },
+    "name": "uswds-system-spacing-3",
+    "attributes": {
+      "category": "uswds-system-spacing-3"
+    },
+    "path": [
+      "uswds-system-spacing-3"
+    ]
+  },
+  "uswds-system-spacing-4": {
+    "value": "32px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "32px"
+    },
+    "name": "uswds-system-spacing-4",
+    "attributes": {
+      "category": "uswds-system-spacing-4"
+    },
+    "path": [
+      "uswds-system-spacing-4"
+    ]
+  },
+  "uswds-system-spacing-5": {
+    "value": "40px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "40px"
+    },
+    "name": "uswds-system-spacing-5",
+    "attributes": {
+      "category": "uswds-system-spacing-5"
+    },
+    "path": [
+      "uswds-system-spacing-5"
+    ]
+  },
+  "uswds-system-spacing-6": {
+    "value": "48px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "48px"
+    },
+    "name": "uswds-system-spacing-6",
+    "attributes": {
+      "category": "uswds-system-spacing-6"
+    },
+    "path": [
+      "uswds-system-spacing-6"
+    ]
+  },
+  "uswds-system-spacing-7": {
+    "value": "56px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "56px"
+    },
+    "name": "uswds-system-spacing-7",
+    "attributes": {
+      "category": "uswds-system-spacing-7"
+    },
+    "path": [
+      "uswds-system-spacing-7"
+    ]
+  },
+  "uswds-system-spacing-8": {
+    "value": "64px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "64px"
+    },
+    "name": "uswds-system-spacing-8",
+    "attributes": {
+      "category": "uswds-system-spacing-8"
+    },
+    "path": [
+      "uswds-system-spacing-8"
+    ]
+  },
+  "uswds-system-spacing-9": {
+    "value": "72px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "72px"
+    },
+    "name": "uswds-system-spacing-9",
+    "attributes": {
+      "category": "uswds-system-spacing-9"
+    },
+    "path": [
+      "uswds-system-spacing-9"
+    ]
+  },
+  "uswds-system-spacing-10": {
+    "value": "80px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "80px"
+    },
+    "name": "uswds-system-spacing-10",
+    "attributes": {
+      "category": "uswds-system-spacing-10"
+    },
+    "path": [
+      "uswds-system-spacing-10"
+    ]
+  },
+  "uswds-system-spacing-15": {
+    "value": "120px",
+    "filePath": "tokens/uswds-spacing.json",
+    "isSource": true,
+    "original": {
+      "value": "120px"
+    },
+    "name": "uswds-system-spacing-15",
+    "attributes": {
+      "category": "uswds-system-spacing-15"
+    },
+    "path": [
+      "uswds-system-spacing-15"
+    ]
+  },
   "uswds-system-color-blue-5": {
     "value": "#eff6fb",
     "filePath": "tokens/uswds.json",
