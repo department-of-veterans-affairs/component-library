@@ -157,6 +157,9 @@ export class VaCheckbox {
     e.preventDefault();
     e.stopImmediatePropagation();
     this.checked = !this.checked;
+    const checkbox: HTMLInputElement =
+      this.el.shadowRoot.querySelector('#checkbox-element');
+    checkbox.focus();
     this.vaChange.emit({ checked: this.checked });
     if (this.enableAnalytics) this.fireAnalyticsEvent();
   };

@@ -25,14 +25,15 @@
   --vads-input-tile-background-active-on-light: rgba(0, 94, 162, 0.1);
   --vads-input-tile-border-active-on-light: #005ea2;
   --vads-input-tile-border-on-light: rgba(27, 27, 27, 0.03);
+  --vads-input-tile-border-override: #c9c9c9; // Matches USWDS
 }
 
 .va-radio-option__container--tile {
   border-radius: 0.25rem;
   background-color: var(--vads-input-background-color-on-light);;
-  border: 2px solid var(--vads-input-tile-border-on-light);
+  border: 2px solid var(--vads-input-tile-border-override);
   color: var(--vads-color-base);
-  padding: 0.5rem;
+  padding: 0.75rem 1rem .75rem .5rem;
   margin: 0.5rem 0;
 }
 
