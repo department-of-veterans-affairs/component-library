@@ -196,15 +196,17 @@ export class VaTextarea {
       charcount && maxlength ? 'charcount-message' : ''} ${
       messageAriaDescribedby ? 'input-message' : ''}`.trim() || null;
 
-    const ariaLabeledByIds = 
-      `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
-        useFormsPattern ? 'form-description' : ''} ${
-        useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
-    
-    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
-    const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
+    const ariaLabeledByIds =
+      `${useFormsPattern && formHeading ? 'form-question' : ''} ${
+        useFormsPattern ? 'form-description' : ''
+      } ${useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
 
-    const charCountTooHigh = charcount && (value?.length > maxlength);
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
+    const headerAriaDescribedbyId = headerAriaDescribedby
+      ? 'header-message'
+      : null;
+
+    const charCountTooHigh = charcount && value?.length > maxlength;
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
@@ -216,51 +218,70 @@ export class VaTextarea {
     const messageClass = classnames({
       'usa-hint': true,
       'usa-character-count__status': charcount,
-      'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
+      'usa-character-count__status--invalid':
+        charcount && maxlength && value?.length > maxlength,
     });
-    const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+
+    const isFormsPattern =
+      useFormsPattern === 'single' || useFormsPattern === 'multiple'
+        ? true
+        : false;
     let formsHeading = null;
     if (isFormsPattern) {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
       formsHeading = (
         <Fragment>
-          {formHeading &&
+          {formHeading && (
             <HeaderLevel id="form-question" part="form-header">
               {formHeading}
             </HeaderLevel>
-          }
+          )}
           <div id="form-description">
             <slot name="form-description"></slot>
           </div>
         </Fragment>
-      )
+      );
     }
+
+    const InnerLabelPart = label ? (
+      <label
+        htmlFor="input-type-textarea"
+        id="input-label"
+        class={labelClass}
+        part="label"
+      >
+        {label}
+
+        {useFormsPattern === 'multiple' && (
+          <span id="header-message" class="usa-sr-only">
+            {label}
+          </span>
+        )}
+        {headerAriaDescribedby && (
+          <span id="header-message" class="usa-sr-only">
+            {headerAriaDescribedby}
+          </span>
+        )}
+        {required && (
+          <span class="usa-label--required">{i18next.t('required')}</span>
+        )}
+        {hint && <div class="usa-hint">{hint}</div>}
+      </label>
+    ) : null;
+
     return (
       <Host>
         {formsHeading}
         <div class="input-wrap">
-          {label && (
-            <label htmlFor="input-type-textarea" id="input-label" class={labelClass} part="label">
-              {HeaderLevel ? (
-                <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
-              ) : (
-                label
-              )}&nbsp;
-              {
-                useFormsPattern === 'multiple' && (
-                  <span id="header-message" class="usa-sr-only">
-                    {label}
-                  </span>
-                )
-              }
-              {headerAriaDescribedby && (
-                <span id="header-message" class="usa-sr-only">
-                  {headerAriaDescribedby}
-                </span>
-              )}
-              {required && <span class="usa-label--required">{i18next.t('required')}</span>}
-              {hint && <div class="usa-hint">{hint}</div>}
-            </label>
+          {HeaderLevel ? (
+            <HeaderLevel
+              part="header"
+              aria-describedby={headerAriaDescribedbyId}
+            >
+              <InnerLabelPart></InnerLabelPart>
+            </HeaderLevel>
+          ) : (
+            <InnerLabelPart></InnerLabelPart>
           )}
           <slot></slot>
           <span id="input-error-message" role="alert">
@@ -286,12 +307,16 @@ export class VaTextarea {
             part="input-type-textarea"
           />
           {!charcount && maxlength && value?.length >= maxlength && (
-              <span class={messageClass} aria-live="polite">
+            <span class={messageClass} aria-live="polite">
               {i18next.t('max-chars', { length: maxlength })}
-              </span>
+            </span>
           )}
           {charcount && maxlength && (
-            <span id="charcount-message" class={messageClass} aria-live="polite">
+            <span
+              id="charcount-message"
+              class={messageClass}
+              aria-live="polite"
+            >
               {getCharacterMessage(value, maxlength)}
             </span>
           )}
