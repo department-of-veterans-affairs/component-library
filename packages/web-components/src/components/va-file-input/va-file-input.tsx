@@ -13,6 +13,7 @@ import {
 import { i18next } from '../..';
 import { fileInput } from './va-file-input-upgrader';
 import { extensionToMimeType } from './fileExtensionToMimeType';
+import { UploadedFile } from './uploadedFile';
 
 /**
  * @componentName File input
@@ -43,6 +44,8 @@ export class VaFileInput {
   @State() internalError?: string;
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
+
+  
 
   /**
    * The label for the file input.
@@ -113,6 +116,11 @@ export class VaFileInput {
   @Prop() readOnly?: boolean = false;
 
   /**
+   * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
+   */
+  @Prop() uploadedFile?: UploadedFile;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -155,7 +163,7 @@ export class VaFileInput {
         return;
       }
     }
-
+    this.uploadedFile = null;
     this.file = file;
     if (emitChange) {
       this.vaChange.emit({ files: [this.file] });
@@ -185,6 +193,7 @@ export class VaFileInput {
       this.vaChange.emit({ files: [] });
     }
     this.file = null;
+    this.uploadedFile = null;
     this.updateStatusMessage(`File removed. No file selected.`);
     this.el.focus();
   };
@@ -356,6 +365,7 @@ export class VaFileInput {
       headless,
       value,
       readOnly,
+      uploadedFile
     } = this;
 
     if (value) {
@@ -440,7 +450,7 @@ export class VaFileInput {
             id="fileInputField"
             class="file-input"
             style={{
-              visibility: this.uploadStatus === 'success' ? 'hidden' : 'unset',
+              visibility: (this.uploadStatus === 'success' || uploadedFile) ? 'hidden' : 'unset',
             }}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
@@ -449,7 +459,7 @@ export class VaFileInput {
             aria-describedby={ariaDescribedbyIds}
             onChange={this.handleChange}
           />
-          {uploadStatus === 'idle' && (
+          {(uploadStatus === 'idle' && !uploadedFile) && (
             <div>
               <span id="file-input-error-alert" role="alert">
                 {displayError && (
@@ -470,7 +480,7 @@ export class VaFileInput {
               </div>
             </div>
           )}
-          {uploadStatus !== 'idle' && (
+          {(uploadStatus !== 'idle' || uploadedFile) && (
             <div class={selectedFileClassName}>
               {!headless && (
                 <div class="selected-files-label">
@@ -486,7 +496,7 @@ export class VaFileInput {
                 <div class="file-info-section">
                   {fileThumbnail}
                   <div class="file-info-group vads-u-line-height--2">
-                    <span class="file-label">{file.name}</span>
+                    <span class="file-label">{file ? file.name : uploadedFile.name}</span>
                     {displayError && (
                       <span id="input-error-message" role="alert">
                         <span class="usa-sr-only">{i18next.t('error')}</span>
@@ -494,11 +504,11 @@ export class VaFileInput {
                       </span>
                     )}
                     <span class="file-size-label">
-                      {this.formatFileSize(file.size)}
+                      {this.formatFileSize(file ? file.size : uploadedFile.size)}
                     </span>
                   </div>
                 </div>
-                {(file || value) && (
+                {(file || value || uploadedFile) && (
                   <div>
                     {this.showSeparator && <hr class="separator" />}
 
@@ -513,12 +523,12 @@ export class VaFileInput {
                             buttonType="change-file"
                             onClick={this.changeFile}
                             label="Change file"
-                            aria-label={'change file ' + file.name}
+                            aria-label={`change file ${file ? file.name : uploadedFile.name}`}
                           ></va-button-icon>
                           <va-button-icon
                             buttonType="delete"
                             onClick={this.openModal}
-                            aria-label={'delete file ' + file.name}
+                            aria-label={`delete file ${file ? file.name : uploadedFile.name}`}
                             label="Delete"
                           ></va-button-icon>
                         </div>
@@ -532,7 +542,7 @@ export class VaFileInput {
                           onSecondaryButtonClick={this.closeModal}
                         >
                           We'll remove the uploaded document{' '}
-                          <span class="file-label">{file.name}</span>
+                          <span class="file-label">{file ? file.name : uploadedFile.name}</span>
                         </va-modal>
                       </Fragment>
                     )}
