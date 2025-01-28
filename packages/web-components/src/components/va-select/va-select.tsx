@@ -95,6 +95,11 @@ export class VaSelect {
   @Event() vaSelect: EventEmitter;
 
   /**
+   * The event emitted when the select element is blurred
+   */
+  @Event() vaSelectBlur: EventEmitter;
+
+  /**
    * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
    */
   @Prop() width?: string;
@@ -130,6 +135,13 @@ export class VaSelect {
 
   private handleKeyDown() {
     this.vaKeyDown.emit();
+  }
+
+  private handleBlur(e: Event) {
+    const target: HTMLSelectElement = e.target as HTMLSelectElement;
+    this.value = target.value;
+
+    this.vaSelectBlur.emit({ value: this.value });
   }
 
   private handleChange(e: Event) {
@@ -265,6 +277,7 @@ export class VaSelect {
           required={required || null}
           onKeyDown={() => this.handleKeyDown()}
           onChange={e => this.handleChange(e)}
+          onBlur={e => this.handleBlur(e)}
           part="select"
         >
           <option key="0" value="" selected>
