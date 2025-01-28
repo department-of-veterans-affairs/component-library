@@ -6,7 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+import { UploadedFile } from "./components/va-file-input/uploadedFile";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+export { UploadedFile } from "./components/va-file-input/uploadedFile";
 export namespace Components {
     /**
      * @componentName Accordion
@@ -631,6 +633,10 @@ export namespace Components {
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
+        /**
+          * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
+         */
+        "uploadedFile"?: UploadedFile;
         /**
           * The value attribute for the file view element.
          */
@@ -3941,6 +3947,10 @@ declare namespace LocalJSX {
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
+        /**
+          * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
+         */
+        "uploadedFile"?: UploadedFile;
         /**
           * The value attribute for the file view element.
          */
