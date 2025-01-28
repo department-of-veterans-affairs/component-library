@@ -273,7 +273,7 @@ const FileUploadedTemplate = args => {
 };
 
 export const UploadStatus = FileUploadedTemplate.bind(null);
-UploadStatus.args = { ...defaultArgs, vaChange: event => event, statusText: 'Uploading...' };
+UploadStatus.args = { ...defaultArgs, label: 'Select a file to upload (status text will show on file change)', vaChange: event => {event.target.setAttribute('status-text', 'Uploading...');}};
 
 export const FileUploaded = FileUploadedTemplate.bind(null);
 FileUploaded.args = { ...defaultArgs, vaChange: event => event };
