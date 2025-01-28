@@ -1,17 +1,17 @@
 import {
+  Build,
   Component,
   Element,
   Event,
   EventEmitter,
+  Fragment,
   forceUpdate,
   Host,
   h,
   Prop,
-  Fragment,
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
-import { Build } from '@stencil/core';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -49,7 +49,7 @@ export class VaCheckbox {
   /**
    * The error message to render.
    */
-   @Prop({ reflect: true }) error?: string;
+  @Prop({ reflect: true }) error?: string;
 
   /**
    * The description to render. If this prop exists, va-checkbox will render it
@@ -79,7 +79,7 @@ export class VaCheckbox {
   /**
    * Optional hint text.
    */
-   @Prop() hint?: string;
+  @Prop() hint?: string;
 
   /**
    * Whether or not the component will display as a tile.
@@ -153,8 +153,13 @@ export class VaCheckbox {
     });
   };
 
-  private handleChange = (e: Event) => {
-    this.checked = (e.target as HTMLInputElement).checked;
+  private handleClick = (e: Event) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    this.checked = !this.checked;
+    const checkbox: HTMLInputElement =
+      this.el.shadowRoot.querySelector('#checkbox-element');
+    checkbox.focus();
     this.vaChange.emit({ checked: this.checked });
     if (this.enableAnalytics) this.fireAnalyticsEvent();
   };
@@ -209,21 +214,24 @@ export class VaCheckbox {
       !description &&
       this.el.querySelectorAll('[slot="description"]:not(:empty)').length > 0;
 
-    const inputClass = classnames({
-      'usa-checkbox__input': true,
-      'usa-checkbox__input--tile': tile,
+    const containerClass = classnames('va-checkbox__container', {
+      'va-checkbox__container--tile': tile,
+      'va-checkbox__container--tile--checked': tile && checked,
     });
     const descriptionClass = classnames({
       'usa-legend': true,
-      'usa-label--error': error
+      'usa-label--error': error,
     });
-    const ariaDescribedbyIds = [
-      messageAriaDescribedby ? 'input-message' : '',
-      error ? 'checkbox-error-message' : '',
-      description || hasDescriptionSlot ? 'description' : '',
-      // Return null so we don't add the attribute if we have an empty string
-    ].filter(Boolean).join(' ').trim() || null;
-    const ariaChecked = checked ? 'true' : 'false';
+    const ariaDescribedbyIds =
+      [
+        messageAriaDescribedby ? 'input-message' : '',
+        error ? 'checkbox-error-message' : '',
+        description || hasDescriptionSlot ? 'description' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')
+        // Return null so we don't add the attribute if we have an empty string
+        .trim() || null;
 
     return (
       <Host>
@@ -247,9 +255,9 @@ export class VaCheckbox {
             </Fragment>
           )}
         </span>
-        <div class="usa-checkbox" part="checkbox">
+        <div class={containerClass} part="checkbox" onClick={this.handleClick}>
           <input
-            class={inputClass}
+            class="va-checkbox__input"
             type="checkbox"
             name={name || null}
             id="checkbox-element"
@@ -258,14 +266,12 @@ export class VaCheckbox {
             aria-invalid={error ? 'true' : 'false'}
             disabled={disabled}
             data-indeterminate={indeterminate && !checked}
-            onChange={this.handleChange}
+            aria-checked={indeterminate && !checked ? 'mixed' : checked}
           />
           <label
             htmlFor="checkbox-element"
-            class="usa-checkbox__label"
+            class="va-checkbox__label"
             part="label"
-            role="checkbox"
-            aria-checked={indeterminate && !checked ? 'mixed' : ariaChecked}
           >
             {label}&nbsp;
             {required && (
