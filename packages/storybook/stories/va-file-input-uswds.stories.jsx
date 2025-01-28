@@ -43,7 +43,8 @@ const defaultArgs = {
   'children': null,
   'value': null,
   'read-only': false,
-  'status-text': null
+  'status-text': null,
+  'uploadedFile': null
 };
 
 const Template = ({
@@ -60,6 +61,7 @@ const Template = ({
   statusText,
   value,
   children,
+  uploadedFile,
 }) => {
   return (
     <VaFileInput
@@ -76,6 +78,7 @@ const Template = ({
       statusText={statusText}
       value={value}
       children={children}
+      uploadedFile={uploadedFile}
     />
   );
 };
@@ -244,6 +247,16 @@ export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = {
   ...defaultArgs,
   'enable-analytics': true,
+};
+
+export const UploadedFile = Template.bind(null);
+UploadedFile.args = { 
+  ...defaultArgs, 
+  uploadedFile: {
+    name: 'test.jpg',
+    size: 7000,
+    type: 'JPG'
+  } 
 };
 
 const FileUploadedTemplate = args => {
