@@ -31,6 +31,12 @@ export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
   private uploadStatus: 'idle' | 'success' = 'idle';
   private fileType?: string;
+  private defaultUploadMessage: HTMLElement = (
+    <span>
+      Drag a file here or{' '}
+      <span class="file-input-choose-text">choose from folder</span>
+    </span>
+  )
 
   @Element() el: HTMLElement;
   @State() file?: File;
@@ -84,12 +90,7 @@ export class VaFileInput {
   /**
    * Custom instructional message in the file input.
    */
-  @Prop() uploadMessage?: HTMLElement = (
-    <span>
-      Drag a file here or{' '}
-      <span class="file-input-choose-text">choose from folder</span>
-    </span>
-  );
+  @Prop() uploadMessage?: HTMLElement = this.defaultUploadMessage;
 
   /**
    * Emit component-library-analytics events on the file input change event.
@@ -426,6 +427,12 @@ export class VaFileInput {
       ? 'headless-selected-files-wrapper'
       : 'selected-files-wrapper';
     const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
+
+    // Check if there is an upload message and set it back to the default if not.
+    if (!this.uploadMessage) {
+      this.uploadMessage = this.defaultUploadMessage;
+    }
+    
     return (
       <Host class={{ 'has-error': !!displayError }}>
         {!readOnly && (
