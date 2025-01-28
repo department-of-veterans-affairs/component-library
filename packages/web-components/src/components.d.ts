@@ -6,7 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+import { UploadedFile } from "./components/va-file-input/uploadedFile";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+export { UploadedFile } from "./components/va-file-input/uploadedFile";
 export namespace Components {
     /**
      * @componentName Accordion
@@ -631,6 +633,10 @@ export namespace Components {
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
+        /**
+          * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
+         */
+        "uploadedFile"?: UploadedFile;
         /**
           * The value attribute for the file view element.
          */
@@ -2988,6 +2994,7 @@ declare global {
     interface HTMLVaSelectElementEventMap {
         "vaKeyDown": any;
         "vaSelect": any;
+        "vaSelectBlur": any;
         "component-library-analytics": any;
     }
     /**
@@ -3941,6 +3948,10 @@ declare namespace LocalJSX {
          */
         "uploadMessage"?: HTMLElement;
         /**
+          * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
+         */
+        "uploadedFile"?: UploadedFile;
+        /**
           * The value attribute for the file view element.
          */
         "value"?: File;
@@ -3983,7 +3994,7 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * Event emitted when any change to the file inputs occurs. Sends back an array of FileDetails
+          * Event emitted when any change to the file inputs occurs.  Sends back an object with the following data structure: `{ action: string, file: triggering file, state: files array }`  The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
@@ -4955,6 +4966,10 @@ declare namespace LocalJSX {
           * The event emitted when the selected value changes
          */
         "onVaSelect"?: (event: VaSelectCustomEvent<any>) => void;
+        /**
+          * The event emitted when the select element is blurred
+         */
+        "onVaSelectBlur"?: (event: VaSelectCustomEvent<any>) => void;
         /**
           * Whether or not to add usa-input--error as class if error message is outside of component
          */
