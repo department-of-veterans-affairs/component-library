@@ -17,10 +17,6 @@
   font-family: var(--font-serif);
 }
 
-.va-alert-close:hover {
-  color: var(--vads-color-base);
-}
-
 .va-alert-close {
   margin: 1rem;
   padding: 0;
@@ -35,6 +31,15 @@
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.va-alert-close:hover {
+  color: var(--vads-color-base);
+}
+
+// shrink the close button's margins when 'slim' so it doesn't overflow
+.usa-alert--slim .va-alert-close {
+  margin: 0.2em;
 }
 
 :host([closeable]:not([closeable='false'])) .usa-alert .usa-alert__body {
