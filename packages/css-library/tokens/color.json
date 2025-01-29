@@ -243,6 +243,9 @@
   "vads-color-black": {
     "*": { "value": "{uswds-system-color-gray-100}" }
   },
+  "vads-color-orange": {
+    "*": { "value": "{uswds-system-color-orange-40}"}
+  },
   "vads-color-green-lighter": {
     "*": { "value": "{uswds-system-color-green-cool-20}" }
   },

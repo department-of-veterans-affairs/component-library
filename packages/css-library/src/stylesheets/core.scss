@@ -1,6 +1,7 @@
 @use "../../dist/tokens/scss/variables" as *;
 
 @forward 'uswds-theme';
+@use 'uswds-fonts';
 
 @use './core-variables' as *;
 
