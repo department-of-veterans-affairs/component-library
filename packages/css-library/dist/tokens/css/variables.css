@@ -15,11 +15,11 @@
   --desktop: 1024px;
   --desktop-lg: 1201px;
   --color-link-default-hover: rgba(#000000, 0.05);
+  --vads-button-color-background-primary-on-light: #005ea2;
   --vads-button-color-background-primary-alt-active-on-light: #154c21;
   --vads-button-color-background-secondary-on-light: #ffffff;
   --vads-button-color-text-primary-alt-on-light: #ffffff;
   --vads-button-color-text-primary-on-light: #ffffff;
-  --vads-input-background-color-on-light: #ffffff;
   --vads-color-white: #ffffff;
   --vads-label-hint-text-color-on-light: #757575;
   --vads-process-list-color-text-pending-on-light: #757575;
@@ -115,6 +115,14 @@
   --vads-color-background-default-on-dark: #171716;
   --vads-color-forms-surface-active-on-light: #ecf1f7;
   --vads-color-forms-surface-active-on-dark: #252f3e;
+  --vads-input-background-color-on-light: #ffffff;
+  --vads-input-border-color-on-light: #565c65;
+  --vads-input-prefix-color-fill-on-light: #757575;
+  --vads-input-prefix-color-text-on-light: #757575;
+  --vads-input-suffix-color-text-on-light: #757575;
+  --vads-input-tile-background-active-on-light: rgba(0, 94, 162, 0.1);
+  --vads-input-tile-border-active-on-light: #005ea2;
+  --vads-input-tile-border-on-light: rgba(27, 27, 27, 0.03);
   --font-family-sans: 'Source Sans Pro Web', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
   --font-family-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
