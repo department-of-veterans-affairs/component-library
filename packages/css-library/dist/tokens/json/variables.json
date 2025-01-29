@@ -166,6 +166,25 @@
       "color-link-default-hover"
     ]
   },
+  "vads-button-color-background-primary-on-light": {
+    "*": {
+      "value": "#005ea2",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-vivid-60}"
+      },
+      "name": "vads-button-color-background-primary-on-light",
+      "attributes": {
+        "category": "vads-button-color-background-primary-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-button-color-background-primary-on-light",
+        "*"
+      ]
+    }
+  },
   "vads-button-color-background-primary-alt-active-on-light": {
     "*": {
       "value": "#154c21",
@@ -238,25 +257,6 @@
       },
       "path": [
         "vads-button-color-text-primary-on-light",
-        "*"
-      ]
-    }
-  },
-  "vads-input-background-color-on-light": {
-    "*": {
-      "value": "#ffffff",
-      "filePath": "tokens/color.json",
-      "isSource": true,
-      "original": {
-        "value": "#ffffff"
-      },
-      "name": "vads-input-background-color-on-light",
-      "attributes": {
-        "category": "vads-input-background-color-on-light",
-        "type": "*"
-      },
-      "path": [
-        "vads-input-background-color-on-light",
         "*"
       ]
     }
@@ -2083,6 +2083,180 @@
         "vads-color-forms-surface-active-on-dark",
         "*"
       ]
+    }
+  },
+  "vads-input": {
+    "background-color": {
+      "on-light": {
+        "value": "#ffffff",
+        "filePath": "tokens/color.json",
+        "isSource": true,
+        "original": {
+          "value": "#ffffff"
+        },
+        "name": "vads-input-background-color-on-light",
+        "attributes": {
+          "category": "vads-input",
+          "type": "background-color",
+          "item": "on-light"
+        },
+        "path": [
+          "vads-input",
+          "background-color",
+          "on-light"
+        ]
+      }
+    },
+    "border-color": {
+      "on-light": {
+        "value": "#565c65",
+        "filePath": "tokens/color.json",
+        "isSource": true,
+        "original": {
+          "value": "{uswds-system-color-gray-cool-60}"
+        },
+        "name": "vads-input-border-color-on-light",
+        "attributes": {
+          "category": "vads-input",
+          "type": "border-color",
+          "item": "on-light"
+        },
+        "path": [
+          "vads-input",
+          "border-color",
+          "on-light"
+        ]
+      }
+    },
+    "prefix-color": {
+      "fill-on-light": {
+        "value": "#757575",
+        "filePath": "tokens/color.json",
+        "isSource": true,
+        "original": {
+          "value": "{uswds-system-color-gray-50}"
+        },
+        "name": "vads-input-prefix-color-fill-on-light",
+        "attributes": {
+          "category": "vads-input",
+          "type": "prefix-color",
+          "item": "fill-on-light"
+        },
+        "path": [
+          "vads-input",
+          "prefix-color",
+          "fill-on-light"
+        ]
+      },
+      "text-on-light": {
+        "value": "#757575",
+        "filePath": "tokens/color.json",
+        "isSource": true,
+        "original": {
+          "value": "{uswds-system-color-gray-50}"
+        },
+        "name": "vads-input-prefix-color-text-on-light",
+        "attributes": {
+          "category": "vads-input",
+          "type": "prefix-color",
+          "item": "text-on-light"
+        },
+        "path": [
+          "vads-input",
+          "prefix-color",
+          "text-on-light"
+        ]
+      }
+    },
+    "suffix-color": {
+      "text-on-light": {
+        "value": "#757575",
+        "filePath": "tokens/color.json",
+        "isSource": true,
+        "original": {
+          "value": "{uswds-system-color-gray-50}"
+        },
+        "name": "vads-input-suffix-color-text-on-light",
+        "attributes": {
+          "category": "vads-input",
+          "type": "suffix-color",
+          "item": "text-on-light"
+        },
+        "path": [
+          "vads-input",
+          "suffix-color",
+          "text-on-light"
+        ]
+      }
+    },
+    "tile": {
+      "background": {
+        "active-on-light": {
+          "value": "rgba(0, 94, 162, 0.1)",
+          "filePath": "tokens/color.json",
+          "isSource": true,
+          "original": {
+            "value": "rgba(0, 94, 162, 0.1)"
+          },
+          "name": "vads-input-tile-background-active-on-light",
+          "attributes": {
+            "category": "vads-input",
+            "type": "tile",
+            "item": "background",
+            "subitem": "active-on-light"
+          },
+          "path": [
+            "vads-input",
+            "tile",
+            "background",
+            "active-on-light"
+          ]
+        }
+      },
+      "border": {
+        "active-on-light": {
+          "value": "#005ea2",
+          "filePath": "tokens/color.json",
+          "isSource": true,
+          "original": {
+            "value": "{uswds-system-color-blue-vivid-60}"
+          },
+          "name": "vads-input-tile-border-active-on-light",
+          "attributes": {
+            "category": "vads-input",
+            "type": "tile",
+            "item": "border",
+            "subitem": "active-on-light"
+          },
+          "path": [
+            "vads-input",
+            "tile",
+            "border",
+            "active-on-light"
+          ]
+        },
+        "on-light": {
+          "value": "rgba(27, 27, 27, 0.03)",
+          "filePath": "tokens/color.json",
+          "isSource": true,
+          "original": {
+            "value": "rgba(27, 27, 27, 0.03)"
+          },
+          "name": "vads-input-tile-border-on-light",
+          "attributes": {
+            "category": "vads-input",
+            "type": "tile",
+            "item": "border",
+            "subitem": "on-light"
+          },
+          "path": [
+            "vads-input",
+            "tile",
+            "border",
+            "on-light"
+          ]
+        }
+      }
     }
   },
   "font": {
