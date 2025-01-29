@@ -243,7 +243,7 @@ export class VaTextarea {
       );
     }
 
-    const InnerLabelPart = label ? (
+    const InnerLabelPart = (
       <label
         htmlFor="input-type-textarea"
         id="input-label"
@@ -267,21 +267,21 @@ export class VaTextarea {
         )}
         {hint && <div class="usa-hint">{hint}</div>}
       </label>
-    ) : null;
+    );
 
     return (
       <Host>
         {formsHeading}
         <div class="input-wrap">
-          {HeaderLevel ? (
+          {label && HeaderLevel ? (
             <HeaderLevel
               part="header"
               aria-describedby={headerAriaDescribedbyId}
             >
-              <InnerLabelPart></InnerLabelPart>
+              {InnerLabelPart}
             </HeaderLevel>
           ) : (
-            <InnerLabelPart></InnerLabelPart>
+            <Fragment>{InnerLabelPart}</Fragment>
           )}
           <slot></slot>
           <span id="input-error-message" role="alert">
