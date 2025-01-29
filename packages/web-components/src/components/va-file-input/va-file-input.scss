@@ -128,12 +128,16 @@
     width: 100%;
   }
 
-  .file-size-label {
+  .file-size-label, .file-status-label {
     color: var(--vads-color-base-dark);
     font-weight: var(--font-weight-normal);
     font-size: 1.06rem;
     padding: 0 8px;
     display: block;
+  }
+
+  .file-status-label {
+    font-style: italic;
   }
 
   .file-info-section {
