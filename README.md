@@ -253,9 +253,9 @@ The Design System Team will create a release minimally at the beginning of each 
 2. Create a new `component-library` PR by doing the following: 
    - Update the `package.json` version in the **packages that updates have been made**.
       - `core` (required) - [packages/core/package.json](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4) must be updated for the publishing workflow
-      - `web-components` (if needed)
-      - `css-library` (if needed)
-      - `react-components` (if needed)
+         - `web-components` (if needed)
+         - `css-library` (if needed)
+         - `react-components` (if needed)
    - Run `yarn install` on the top-level directory of the repo to update `yarn.lock`.
    - Create the PR with the tag `ignore-for-release`.
    - Get approval and merge the PR.
