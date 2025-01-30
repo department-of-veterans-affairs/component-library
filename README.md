@@ -249,7 +249,7 @@ The Design System Team will create a release minimally at the beginning of each 
 
 1. If you are unsure if a new release should be created, check with the Release Manager and/or the team first.
    - The DST Release Manager is the engineer on duty for the weekly support rotation.
-2. Create a new `component-library` PR that updates the package.json version in the **packages that updates have been made**:
+2. Create a new `component-library` PR by updating the `package.json` version in the **packages that updates have been made**, then run `yarn install` on the top-level directory of the repo to update `yarn.lock`:
    - `core` (required) - [packages/core/package.json](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4) must be updated for the publishing workflow
      - `web-components` (if needed)
      - `css-library` (if needed)
