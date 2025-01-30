@@ -263,7 +263,7 @@ export class VaTextarea {
           </span>
         )}
         {required && (
-          <span class="usa-label--required">{i18next.t('required')}</span>
+          <span class="usa-label--required">&nbsp;{i18next.t('required')}</span>
         )}
         {hint && <div class="usa-hint">{hint}</div>}
       </label>
