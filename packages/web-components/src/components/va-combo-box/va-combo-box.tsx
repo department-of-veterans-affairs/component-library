@@ -105,12 +105,13 @@ export class VaComboBox {
     }
 
     const errorID = 'input-error-message';
-    const ariaDescribedbyIds =
-      `${this.messageAriaDescribedby ? 'input-message' : ''} ${
-        this.error ? errorID : ''
-      } ${this.hint ? 'input-hint' : ''} ${inputElement.getAttribute('aria-describedby')}`.trim() ; 
-      // need to append to existing attribute which is set during initialization and contains USWDS "options--assistiveHint"
-      inputElement.setAttribute('aria-describedby', ariaDescribedbyIds);
+    const ariaDescribedbyIds = `${
+      this.messageAriaDescribedby ? 'input-message' : ''
+    } ${this.error ? errorID : ''} ${
+      this.hint ? 'input-hint' : ''
+    } ${inputElement.getAttribute('aria-describedby')}`.trim();
+    // need to append to existing attribute which is set during initialization and contains USWDS "options--assistiveHint"
+    inputElement.setAttribute('aria-describedby', ariaDescribedbyIds);
   }
 
   disconnectedCallback() {
@@ -129,15 +130,39 @@ export class VaComboBox {
    * but this solves that problem.
    */
   private populateOptions() {
-    const allNodes = this.el.querySelectorAll('option');
+    const { value } = this;
+    const allNodes = this.el.querySelectorAll('option, optgroup')
 
-    return Array.from(allNodes).map(
+    
+    const nodes = Array.from(allNodes);
+    return nodes.map(
       (node: HTMLOptionElement | HTMLOptGroupElement) => {
-        return (
-          <option value={(node as HTMLOptionElement).value}>
-            {node.textContent}
-          </option>
-        );
+        if (node.nodeName.toLowerCase() === 'optgroup') {
+          return (
+            <Fragment>
+            <option data-optgroup="true" value={node.label}>{node.label}</option>
+
+            {Array.from(node.children).map((child: HTMLOptionElement) => {
+              return (
+                <option value={child.value} selected={value === child.value} data-optgroup-option="true">
+                  {child.text}
+                </option>
+              );
+            })}
+            </Fragment>
+          
+          );
+        } else if (node.nodeName.toLowerCase() === 'option' && 
+                    node.parentElement.nodeName.toLowerCase() !== 'optgroup') {
+          return (
+            <option
+              value={(node as HTMLOptionElement).value}
+              selected={value === (node as HTMLOptionElement).value}
+            >
+              {node.textContent}
+            </option>
+          );
+        }
       },
     );
   }
