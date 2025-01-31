@@ -670,9 +670,12 @@ const noop = () => {};
    */
   const handleDownFromListOption = event => {
     const focusedOptionEl = event.target;
-    const nextOptionEl = focusedOptionEl.nextSibling;
+    let nextOptionEl = focusedOptionEl.nextSibling;
 
     if (nextOptionEl) {
+      if (nextOptionEl.getAttribute('role') === 'group') {
+        nextOptionEl = nextOptionEl.nextSibling
+      } 
       highlightOption(focusedOptionEl, nextOptionEl);
     }
 
@@ -708,10 +711,15 @@ const noop = () => {};
     const { comboBoxEl, listEl, focusedOptionEl } = getComboBoxContext(
       event.target,
     );
-    const nextOptionEl = focusedOptionEl && focusedOptionEl.previousSibling;
+    let nextOptionEl = focusedOptionEl && focusedOptionEl.previousSibling;
     const listShown = !listEl.hidden;
 
-    highlightOption(comboBoxEl, nextOptionEl);
+    if (nextOptionEl) {
+      if (nextOptionEl.getAttribute('role') === 'group') {
+        nextOptionEl = nextOptionEl.previousSibling
+      } 
+      highlightOption(focusedOptionEl, nextOptionEl);
+    }
 
     if (listShown) {
       event.preventDefault();
