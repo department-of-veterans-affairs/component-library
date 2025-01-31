@@ -11,7 +11,7 @@ legend.legend-label + .form-radio-buttons {
 
 .form-radio-buttons {
   label {
-    margin-top: 12px;
+    // margin-top: 12px; Commenting out as it's messing up new styles
 
     // Make links in radio button labels clickable
     a {
@@ -20,7 +20,7 @@ legend.legend-label + .form-radio-buttons {
   }
 
   [type="radio"] {
-    height: scale-rem(4.8rem) !important;
+    // height: scale-rem(4.8rem) !important; Commenting out as it's messing up new styles
     margin: 0;
     border: 0;
     cursor: pointer;
@@ -108,9 +108,9 @@ button.form-button-disabled {
   // See 18F/web-design-standards#1490
   // This fixes things in the meantime.
   [type="checkbox"] {
-    height: scale-rem(1.8rem) !important;
+    // height: scale-rem(1.8rem) !important; Commenting out as it's messing up new styles
     margin: 0;
-    width: scale-rem(1.8rem) !important;
+    // width: scale-rem(1.8rem) !important; Commenting out as it's messing up new styles
     cursor: pointer;
   }
   > input[type="checkbox"] + label::before {
@@ -133,8 +133,8 @@ legend.legend-label + .form-checkbox-buttons {
 
 .form-checkbox-buttons {
   [type="checkbox"] {
-    height: scale-rem(1.8rem) !important;
-    width: scale-rem(1.8rem) !important;
+    // height: scale-rem(1.8rem) !important; Commenting out as it's messing up new styles
+    // width: scale-rem(1.8rem) !important; Commenting out as it's messing up new styles
     cursor: pointer;
     margin: scale-rule(1.2rem 0 0 2.4rem);
   }
