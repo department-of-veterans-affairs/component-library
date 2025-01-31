@@ -418,6 +418,7 @@ const noop = () => {};
     }
 
     const numOptions = options.length;
+    let isFocused = false;
     const optionHtml = options.map((option, index) => {
       const isOptGroup = option.getAttribute('data-optgroup') !== null;
       const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
@@ -432,9 +433,10 @@ const noop = () => {};
         ariaSelected = 'true';
       }
 
-      if (!selectedItemId && index === 0) {
+      if (!selectedItemId && !isFocused && !isOptGroup) {
         classes.push(LIST_OPTION_FOCUSED_CLASS);
         tabindex = '0';
+        isFocused = true;
       }
 
       if (isOptGroup) {
