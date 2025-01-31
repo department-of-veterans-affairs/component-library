@@ -17,6 +17,8 @@ const TOGGLE_LIST_BUTTON_CLASS = `${COMBO_BOX_CLASS}__toggle-list`;
 const TOGGLE_LIST_BUTTON_WRAPPER_CLASS = `${TOGGLE_LIST_BUTTON_CLASS}__wrapper`;
 const LIST_CLASS = `${COMBO_BOX_CLASS}__list`;
 const LIST_OPTION_CLASS = `${COMBO_BOX_CLASS}__list-option`;
+const LIST_OPTION_GROUP_CLASS = `${LIST_OPTION_CLASS}--group`;
+const LIST_OPTION_GROUP_OPTION_CLASS = `${LIST_OPTION_CLASS}--group-option`;
 const LIST_OPTION_FOCUSED_CLASS = `${LIST_OPTION_CLASS}--focused`;
 const LIST_OPTION_SELECTED_CLASS = `${LIST_OPTION_CLASS}--selected`;
 const STATUS_CLASS = `${COMBO_BOX_CLASS}__status`;
@@ -417,8 +419,10 @@ const noop = () => {};
 
     const numOptions = options.length;
     const optionHtml = options.map((option, index) => {
+      const isOptGroup = option.getAttribute('data-optgroup') !== null;
+      const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
       const optionId = `${listOptionBaseId}${index}`;
-      const classes = [LIST_OPTION_CLASS];
+      const classes = !isOptGroup ? [LIST_OPTION_CLASS] : [];
       let tabindex = '-1';
       let ariaSelected = 'false';
 
@@ -433,6 +437,12 @@ const noop = () => {};
         tabindex = '0';
       }
 
+      if (isOptGroup) {
+        classes.push(LIST_OPTION_GROUP_CLASS);
+      } else if (isOptgroupOption) {
+        classes.push(LIST_OPTION_GROUP_OPTION_CLASS);
+      }
+
       const li = document.createElement('li');
 
       li.setAttribute('aria-setsize', options.length);
@@ -441,7 +451,7 @@ const noop = () => {};
       li.setAttribute('id', optionId);
       li.setAttribute('class', classes.join(' '));
       li.setAttribute('tabindex', tabindex);
-      li.setAttribute('role', 'option');
+      li.setAttribute('role', isOptGroup ? 'group' : 'option');
       li.setAttribute('data-value', option.value);
       li.textContent = option.text;
 
