@@ -47,6 +47,19 @@
   outline-offset: -2px;
 }
 
+.usa-combo-box__list-option--group{
+  font-weight: bold;
+  background-color: var(--vads-color-base-lightest);
+  cursor: not-allowed;
+  display: block;
+  padding: 0.5rem;
+}
+
+.usa-combo-box__list-option--group-option{
+  padding-left: 16px;
+
+}
+
 .usa-combo-box__clear-input{
   right: calc(2.5rem + 3px);
 }
