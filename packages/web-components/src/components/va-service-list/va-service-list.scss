@@ -1,0 +1,57 @@
+@use '../../../css-library/src/stylesheets/formation-overrides/elements/labels' as *;
+@import '../../mixins/uswds-error-border.scss';
+@import '../../mixins/focusable.css';
+@import '../../mixins/headers.css';
+
+:host {
+  display: block;
+}
+.service-list{
+padding: 1rem 2rem 2rem 1rem;
+border: 1px solid #757575;
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .icon {
+    // color: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    color: #ffffff !important;
+    background-color: #162e51 !important;
+  }
+
+  .service-name {
+    margin-left: 1rem;
+    color: #005ea2;
+  }
+  .chevron-icon {
+    margin-left: auto;
+    font-size: 24px;
+  }
+}
+.status {
+  margin-top: 1rem;
+}
+.action-bar {
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  background-color: $vads-color-error-lighter;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+}

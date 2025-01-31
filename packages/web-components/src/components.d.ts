@@ -1545,6 +1545,19 @@ export namespace Components {
         "width"?: string;
     }
     /**
+     * @componentName Service List
+     * @maturityCategory use with caution
+     * @maturityLevel candidate
+     */
+    interface VaServiceList {
+        "action": any;
+        "icon": string;
+        "optionalLink": string;
+        "serviceDetails": any;
+        "serviceName": string;
+        "serviceStatus": string;
+    }
+    /**
      * @componentName Statement of truth
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -3032,6 +3045,17 @@ declare global {
         prototype: HTMLVaSelectElement;
         new (): HTMLVaSelectElement;
     };
+    /**
+     * @componentName Service List
+     * @maturityCategory use with caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaServiceListElement extends Components.VaServiceList, HTMLStencilElement {
+    }
+    var HTMLVaServiceListElement: {
+        prototype: HTMLVaServiceListElement;
+        new (): HTMLVaServiceListElement;
+    };
     interface HTMLVaStatementOfTruthElementEventMap {
         "vaInputChange": any;
         "vaInputBlur": any;
@@ -3225,6 +3249,7 @@ declare global {
         "va-search-input": HTMLVaSearchInputElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
+        "va-service-list": HTMLVaServiceListElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
         "va-table": HTMLVaTableElement;
@@ -5008,6 +5033,19 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     /**
+     * @componentName Service List
+     * @maturityCategory use with caution
+     * @maturityLevel candidate
+     */
+    interface VaServiceList {
+        "action"?: any;
+        "icon"?: string;
+        "optionalLink"?: string;
+        "serviceDetails"?: any;
+        "serviceName"?: string;
+        "serviceStatus"?: string;
+    }
+    /**
      * @componentName Statement of truth
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -5458,6 +5496,7 @@ declare namespace LocalJSX {
         "va-search-input": VaSearchInput;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
+        "va-service-list": VaServiceList;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
         "va-table": VaTable;
@@ -5782,6 +5821,12 @@ declare module "@stencil/core" {
              * @translations Spanish
              */
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
+            /**
+             * @componentName Service List
+             * @maturityCategory use with caution
+             * @maturityLevel candidate
+             */
+            "va-service-list": LocalJSX.VaServiceList & JSXBase.HTMLAttributes<HTMLVaServiceListElement>;
             /**
              * @componentName Statement of truth
              * @maturityCategory caution
