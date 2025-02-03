@@ -53,9 +53,11 @@ jobs:
       - name: Read Diagnostics File
         id: read-diagnostics
         run: |
-          BRANCH_NAME=$(python -c "import json; print(json.load(open('packages/storybook/chromatic-diagnostics.json'))['branchName'])")
-          echo "Branch name is: $BRANCH_NAME"
-          echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "Contents of diagnostics file:"
+          cat packages/storybook/chromatic-diagnostics.json
+          echo ""
+          echo "Parsed JSON structure:"
+          python -c "import json; print(json.dumps(json.load(open('packages/storybook/chromatic-diagnostics.json')), indent=2))"
 
       - name: Use Extracted Branch Name
         run: echo "The branch name is ${{ env.branch_name }}"
