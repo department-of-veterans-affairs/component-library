@@ -53,7 +53,7 @@ jobs:
       - name: Read Diagnostics File
         id: read-diagnostics
         run: |
-          BRANCH_NAME=$(python -c "import json; print(json.load(open('chromatic-diagnostics.json'))['branchName'])")
+          BRANCH_NAME=$(python -c "import json; print(json.load(open('packages/storybook/chromatic-diagnostics.json'))['branchName'])")
           echo "Branch name is: $BRANCH_NAME"
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
 
