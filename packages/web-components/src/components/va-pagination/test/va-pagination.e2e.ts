@@ -143,4 +143,32 @@ describe('va-pagination', () => {
     // should be 8, 6 as set by the max-page-list-length, and 2 prev/next buttons
     expect(paginationItems).toHaveLength(8);
   });
+
+  it('renders the correct number of links on small screens', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({
+      // iPhone X
+      width: 375,
+      height: 812,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="1" pages="24" />`);
+    const paginationItems = await page.findAll(
+      'va-pagination >>> li.usa-pagination__item',
+    );
+    // should be 6, 5 as set by the max-page-list-length, and 1 ellipsis
+    expect(paginationItems).toHaveLength(6);
+  });
+
+  it('passes an axe check on small screens', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({
+      // iPhone X
+      width: 375,
+      height: 812,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="1" pages="24" />`);
+    await axeCheck(page);
+  });
 });
