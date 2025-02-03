@@ -2,7 +2,10 @@
 name: 'Chromatic'
 
 # Event for the workflow
-on: push
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 # List of jobs
 jobs:
@@ -36,30 +39,36 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           skip: 'dependabot/**'
-          debug: true
+          # debug: true
           # diagnosticsFile: chromatic-diagnostics.json
-          storybookLogFile: storybook-build.log
-          branchName: "hello-world-123"
-      - name: Upload Storybook Build Log
-        uses: actions/upload-artifact@v4
-        with:
-          name: storybook-build-log
-          path: packages/storybook/storybook-build.log
+          # storybookLogFile: storybook-build.log
+          branchName: ${{ env.FORMATTED_BRANCH_NAME }}
+      # - name: Upload Storybook Build Log
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: storybook-build-log
+      #     path: packages/storybook/storybook-build.log
 
-      - name: Download Storybook Build Log
-        uses: actions/download-artifact@v4
-        with:
-          name: storybook-build-log
-          path: packages/storybook
+      # - name: Download Storybook Build Log
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: storybook-build-log
+      #     path: packages/storybook
 
-      - name: Read Build Log File
-        id: read-log
-        run: |
-          echo "Contents of build log file:"
-          cat packages/storybook/storybook-build.log
+      # - name: Read Build Log File
+      #   id: read-log
+      #   run: |
+      #     echo "==================== STORYBOOK BUILD LOG ==================="
+      #     if [ -f "packages/storybook/storybook-build.log" ]; then
+      #       cat packages/storybook/storybook-build.log
+      #     else
+      #       echo "Error: storybook-build.log file not found!"
+      #       ls -la packages/storybook/
+      #     fi
+      #     echo "=========================================================="
 
-      - name: Use Extracted Branch Name
-        run: echo "The branch name is ${{ env.branch_name }}"
+      # - name: Use Extracted Branch Name
+      #   run: echo "The branch name is ${{ env.branch_name }}"
 
       # - name: Publish Chromatic Summary
       #   run: echo -e "| Results |  |\n| --- | --- |\n| URL | ${{steps.chromatic.outputs.url}} |\n| Build Url | ${{steps.chromatic.outputs.buildUrl}} |\n| Storybook Url | ${{steps.chromatic.outputs.storybookUrl}} |\n| Change Count | ${{steps.chromatic.outputs.changeCount}} |" >> $GITHUB_STEP_SUMMARY
