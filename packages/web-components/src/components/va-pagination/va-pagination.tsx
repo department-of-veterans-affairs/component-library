@@ -6,6 +6,7 @@ import {
   Host,
   h,
   Prop,
+  State,
   Element,
   forceUpdate,
   getAssetPath,
@@ -86,13 +87,56 @@ export class VaPagination {
    * Don't show last page when the page count exceeds
    * `maxPageListLength` (but do show the ellipsis).
    */
-
   @Prop() unbounded?: boolean = false;
 
   /**
-   * If the page total is less than or equal to this limit, show all pages.
+   * Will be true when va-pagination is 641 pixes or wider
+   * as measured by this.handleResizeEvent().
    */
-  SHOW_ALL_PAGES: number = 7;
+  @State() isMobileViewport: Boolean = false;
+
+  /**
+   * Local state to manage max page numbers on small screens
+   * and zoomed layouts.
+   */
+  @State() maxPageListLengthState: number = this.maxPageListLength;
+
+  /**
+   * If the page total is less than or equal to this limit, show all pages.
+   * Number was reduced to 5 (from 7) to better handle small screens and
+   * zoomed browser layouts.
+   */
+  SHOW_ALL_PAGES: number = 5;
+
+  /**
+   * Small pagination width chosen based on USWDS "tablet" spacing unit.
+   * See https://designsystem.digital.gov/design-tokens/spacing-units/
+   */
+  SMALL_PAGINATION_WIDTH: number = 640;
+
+  /**
+   * =========================================
+   * SCRATCHPAD!
+   * =========================================
+   */
+  resizeObserver = new ResizeObserver(entries => {
+    this.handleResizeEvent(entries);
+  });
+
+  handleResizeEvent(entries: ResizeObserverEntry[]): void {
+    // TODO: Add a debounce?
+    const { SMALL_PAGINATION_WIDTH } = this;
+
+    for (let entry of entries) {
+      if (entry.contentRect.width <= SMALL_PAGINATION_WIDTH) {
+        this.isMobileViewport = true;
+      }
+
+      if (entry.contentRect.width > SMALL_PAGINATION_WIDTH) {
+        this.isMobileViewport = false;
+      }
+    }
+  }
 
   private handlePageSelect = (page, eventID) => {
     this.pageSelect.emit({ page });
@@ -123,6 +167,7 @@ export class VaPagination {
       page: currentPage,
       pages: totalPages,
       unbounded,
+      SHOW_ALL_PAGES,
     } = this;
 
     // radius is half the length of the visible pages
@@ -135,6 +180,13 @@ export class VaPagination {
 
     let start;
     let end;
+    let { isMobileViewport, maxPageListLengthState } = this;
+
+    // move max page list length into state so we can override the
+    // count using observed resize events
+    maxPageListLengthState = isMobileViewport
+      ? SHOW_ALL_PAGES
+      : maxPageListLength;
 
     if (totalPages <= this.SHOW_ALL_PAGES) {
       return makeArray(1, totalPages);
@@ -144,9 +196,9 @@ export class VaPagination {
     if (currentPage <= radius + 1) {
       start = 1;
       end =
-        maxPageListLength >= totalPages
+        maxPageListLengthState >= totalPages
           ? totalPages
-          : maxPageListLength - 1 - unboundedChar;
+          : maxPageListLengthState - 1 - unboundedChar;
       if (end === currentPage) {
         // make sure the next page is showing
         end++;
@@ -158,9 +210,9 @@ export class VaPagination {
     if (currentPage + radius >= totalPages) {
       end = totalPages;
       start =
-        totalPages - maxPageListLength > 0
+        totalPages - maxPageListLengthState > 0
           ? //subtract 2 to account for having to add ellipsis and first page
-            totalPages - (maxPageListLength - 2 - 1)
+            totalPages - (maxPageListLengthState - 2 - 1)
           : 1;
       if (start === currentPage) {
         // make sure the previous page is showing
@@ -233,10 +285,12 @@ export class VaPagination {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
+    this.resizeObserver.observe(this.el);
   }
 
   disconnectedCallback() {
     i18next.off('languageChanged');
+    this.resizeObserver.disconnect();
   }
 
   render() {
