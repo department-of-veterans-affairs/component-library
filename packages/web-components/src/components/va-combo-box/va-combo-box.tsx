@@ -136,15 +136,20 @@ export class VaComboBox {
     
     const nodes = Array.from(allNodes);
     return nodes.map(
-      (node: HTMLOptionElement | HTMLOptGroupElement) => {
+      (node: HTMLOptionElement | HTMLOptGroupElement, index) => {
         if (node.nodeName.toLowerCase() === 'optgroup') {
           return (
             <Fragment>
-            <option data-optgroup="true" value={node.label}>{node.label}</option>
+            <option data-optgroup="true" id={"optgroup-" + index}>{node.label}</option>
 
             {Array.from(node.children).map((child: HTMLOptionElement) => {
               return (
-                <option value={child.value} selected={value === child.value} data-optgroup-option="true">
+                <option 
+                  value={child.value} 
+                  selected={value === child.value} 
+                  data-optgroup-option="true"
+                  aria-describedby={"optgroup-" + index}
+                >
                   {child.text}
                 </option>
               );

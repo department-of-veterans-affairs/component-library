@@ -370,6 +370,8 @@ const noop = () => {};
     return new RegExp(find, 'i');
   };
 
+  const isDataOptGroup = option => option.getAttribute('data-optgroup') !== null;
+
   /**
    * Display the option list of a combo box component.
    *
@@ -418,10 +420,15 @@ const noop = () => {};
     }
 
     const numOptions = options.length;
+    const optionsLength = options.filter(option => !isDataOptGroup(option)).length;
     let isFocused = false;
+    let optionIndex = 0;
     const optionHtml = options.map((option, index) => {
-      const isOptGroup = option.getAttribute('data-optgroup') !== null;
+      const isOptGroup = isDataOptGroup(option);
       const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
+      if (!isOptGroup) {
+        optionIndex += 1;
+      }
       const optionId = `${listOptionBaseId}${index}`;
       const classes = !isOptGroup ? [LIST_OPTION_CLASS] : [];
       let tabindex = '-1';
@@ -447,10 +454,13 @@ const noop = () => {};
 
       const li = document.createElement('li');
 
-      li.setAttribute('aria-setsize', options.length);
-      li.setAttribute('aria-posinset', index + 1);
+      if (!isOptGroup) {
+        li.setAttribute('aria-setsize', optionsLength);
+        li.setAttribute('aria-posinset', optionIndex);
+        li.setAttribute('aria-describedby', option.getAttribute('aria-describedby'));
+      }
       li.setAttribute('aria-selected', ariaSelected);
-      li.setAttribute('id', optionId);
+      li.setAttribute('id', !isOptGroup ? optionId : option.id);
       li.setAttribute('class', classes.join(' '));
       li.setAttribute('tabindex', tabindex);
       li.setAttribute('role', isOptGroup ? 'group' : 'option');
