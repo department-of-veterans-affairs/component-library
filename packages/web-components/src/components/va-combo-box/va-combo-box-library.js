@@ -397,6 +397,7 @@ const noop = () => {};
     const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
 
     const options = [];
+    let parentOptGroupId = '';
     for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
@@ -415,7 +416,29 @@ const noop = () => {};
         if (disableFiltering && !firstFoundId && regex.test(optionEl.text)) {
           firstFoundId = optionId;
         }
-        options.push(optionEl);
+
+        if (!inputValue){
+          options.push(optionEl);
+          continue;
+        }
+
+        if (
+          inputValue &&
+          regex.test(optionEl.text) &&
+          optionEl.getAttribute('data-optgroup') !== 'true' 
+        ) {
+          if (
+            optionEl.getAttribute('data-optgroup-option') === 'true' &&
+            parentOptGroupId !== optionEl.getAttribute('aria-describedby')
+          ) {
+            parentOptGroupId = optionEl.getAttribute('aria-describedby');
+            const parentOptgroupEl = selectEl.querySelector(
+              '#' + parentOptGroupId,
+            );
+            options.push(parentOptgroupEl);
+          }
+          options.push(optionEl);
+        }
       }
     }
 
@@ -434,7 +457,7 @@ const noop = () => {};
       let tabindex = '-1';
       let ariaSelected = 'false';
 
-      if (optionId === selectedItemId) {
+      if (selectEl.value && option.value === selectEl.value) {
         classes.push(LIST_OPTION_SELECTED_CLASS, LIST_OPTION_FOCUSED_CLASS);
         tabindex = '0';
         ariaSelected = 'true';
@@ -488,8 +511,8 @@ const noop = () => {};
 
     inputEl.setAttribute('aria-expanded', 'true');
 
-    statusEl.textContent = numOptions
-      ? `${numOptions} result${numOptions > 1 ? 's' : ''} available.`
+    statusEl.textContent = optionsLength
+      ? `${optionsLength} result${optionsLength > 1 ? 's' : ''} available.`
       : 'No results.';
 
     let itemToFocus;
@@ -646,11 +669,14 @@ const noop = () => {};
       displayList(comboBoxEl);
     }
 
-    const nextOptionEl =
+    let nextOptionEl =
       listEl.querySelector(LIST_OPTION_FOCUSED) ||
       listEl.querySelector(LIST_OPTION);
 
     if (nextOptionEl) {
+      if (nextOptionEl.getAttribute('role') === 'group') {
+        nextOptionEl = nextOptionEl.nextSibling
+      } 
       highlightOption(comboBoxEl, nextOptionEl);
     }
 
