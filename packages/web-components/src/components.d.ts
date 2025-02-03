@@ -1595,6 +1595,7 @@ export namespace Components {
           * When active, forces the table to expand to the full-width of its container
          */
         "fullWidth"?: boolean;
+        "rightAlignCols"?: string[];
         /**
           * When active, the table can be horizontally scrolled and is focusable
          */
@@ -5070,6 +5071,7 @@ declare namespace LocalJSX {
           * When active, forces the table to expand to the full-width of its container
          */
         "fullWidth"?: boolean;
+        "rightAlignCols"?: string[];
         /**
           * When active, the table can be horizontally scrolled and is focusable
          */

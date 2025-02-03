@@ -59,6 +59,8 @@ export class VaTable {
    */
   @Prop() fullWidth?: boolean = false;
 
+  @Prop() rightAlignCols?: string[];
+
   // The number of va-table-rows
   @State() rows: number;
 
