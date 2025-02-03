@@ -110,17 +110,6 @@ Uneditable.args = {
             Mar 4, 1949
           </dd>
         </div>
-        <div>
-          <dt class="vads-u-display--inline-block vads-u-margin-right--0p5 vads-u-font-weight--bold vads-u-margin-top--2">
-            Gender:
-          </dt>
-          <dd
-            class="vads-u-display--inline-block dd-privacy-mask"
-            data-dd-action-name="Gender"
-          >
-            Male
-          </dd>
-        </div>
       </dl>
     </div>
   ),
