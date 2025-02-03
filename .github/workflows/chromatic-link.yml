@@ -13,42 +13,4 @@ jobs:
     #   - uses: luigibertaco/dynamic-template-action@1.0.0
     #     with:
     #       token: '${{ secrets.GITHUB_TOKEN }}'
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Chromatic Preview Format Branch Name
-        id: chromatic-format-branch-name
-        run: |
-          # Get the current branch name
-          BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
-          # Convert to lowercase
-          BRANCH_NAME=$(echo "$BRANCH_NAME" | tr '[:upper:]' '[:lower:]')
-          # Replace unsupported characters with dashes
-          BRANCH_NAME=$(echo "$BRANCH_NAME" | sed 's/[^a-z-]/-/g')
-          # Replace multiple dashes with single dash
-          BRANCH_NAME=$(echo "$BRANCH_NAME" | sed 's/-\+/-/g')
-          # Truncate to 37 characters
-          BRANCH_NAME=$(echo "$BRANCH_NAME" | cut -c1-37)
-          # Remove trailing dash if present
-          BRANCH_NAME=$(echo "$BRANCH_NAME" | sed 's/-$//g')
-          # Set as output and environment variable
-          echo "FORMATTED_BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
-          echo "formatted_branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
-          echo "Formatted branch name: $BRANCH_NAME"
-
-      - name: Update PR Description with Formatted Branch Name
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          PR_NUMBER=$(echo $GITHUB_REF | cut -d '/' -f 3)
-          PR_DESCRIPTION=$(gh pr view $PR_NUMBER --json body -q .body)
-          
-          # Check if STORYBOOK_PREVIEW_BRANCH exists in the description
-          if echo "$PR_DESCRIPTION" | grep -q "STORYBOOK_PREVIEW_BRANCH"; then
-            # Update existing STORYBOOK_PREVIEW_BRANCH line
-            NEW_DESCRIPTION=$(echo "$PR_DESCRIPTION" | sed "s/STORYBOOK_PREVIEW_BRANCH.*/STORYBOOK_PREVIEW_BRANCH=${{ env.FORMATTED_BRANCH_NAME }}/")
-            # Update the PR description
-            echo "$NEW_DESCRIPTION" | gh pr edit $PR_NUMBER --body-file -
-          fi
 
