@@ -6,6 +6,7 @@ import {
   Host,
   h,
   Prop,
+  State,
   Element,
   forceUpdate,
   getAssetPath,
@@ -86,13 +87,48 @@ export class VaPagination {
    * Don't show last page when the page count exceeds
    * `maxPageListLength` (but do show the ellipsis).
    */
-
   @Prop() unbounded?: boolean = false;
+
+  /**
+   * Local state to manage max page numbers on mobile
+   * devices and zoomed layouts.
+   */
+  @State() testMaxNum: number = this.maxPageListLength;
+
+  /**
+   * Viewport width is greater or lesser than 640px
+   */
+  @State() isMobileViewport: Boolean = false;
 
   /**
    * If the page total is less than or equal to this limit, show all pages.
    */
   SHOW_ALL_PAGES: number = 7;
+
+  /**
+   * =========================================
+   * SCRATCHPAD!
+   * =========================================
+   */
+  resizeObserver = new ResizeObserver(entries => {
+    this.handleResizeEvent(entries);
+  });
+
+  handleResizeEvent(entries: ResizeObserverEntry[]) {
+    for (let entry of entries) {
+      if (entry.contentRect.width <= 640) {
+        console.log('This.el is less than 640px wide!');
+        this.isMobileViewport = true;
+        console.log(this.isMobileViewport);
+      }
+
+      if (entry.contentRect.width > 640) {
+        console.log('This.el is more than 640px wide!');
+        this.isMobileViewport = false;
+        console.log(this.isMobileViewport);
+      }
+    }
+  }
 
   private handlePageSelect = (page, eventID) => {
     this.pageSelect.emit({ page });
@@ -135,6 +171,10 @@ export class VaPagination {
 
     let start;
     let end;
+    let { isMobileViewport, testMaxNum } = this;
+
+    testMaxNum = isMobileViewport ? 5 : maxPageListLength;
+    console.log(testMaxNum);
 
     if (totalPages <= this.SHOW_ALL_PAGES) {
       return makeArray(1, totalPages);
@@ -144,9 +184,7 @@ export class VaPagination {
     if (currentPage <= radius + 1) {
       start = 1;
       end =
-        maxPageListLength >= totalPages
-          ? totalPages
-          : maxPageListLength - 1 - unboundedChar;
+        testMaxNum >= totalPages ? totalPages : testMaxNum - 1 - unboundedChar;
       if (end === currentPage) {
         // make sure the next page is showing
         end++;
@@ -158,9 +196,9 @@ export class VaPagination {
     if (currentPage + radius >= totalPages) {
       end = totalPages;
       start =
-        totalPages - maxPageListLength > 0
+        totalPages - testMaxNum > 0
           ? //subtract 2 to account for having to add ellipsis and first page
-            totalPages - (maxPageListLength - 2 - 1)
+            totalPages - (testMaxNum - 2 - 1)
           : 1;
       if (start === currentPage) {
         // make sure the previous page is showing
@@ -233,10 +271,12 @@ export class VaPagination {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
+    this.resizeObserver.observe(this.el);
   }
 
   disconnectedCallback() {
     i18next.off('languageChanged');
+    this.resizeObserver.disconnect();
   }
 
   render() {
