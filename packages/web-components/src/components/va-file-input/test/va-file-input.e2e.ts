@@ -132,6 +132,33 @@ describe('va-file-input', () => {
     expect(fileChangeButton).toBeNull();
   });
 
+
+  it('Renders status text', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-file-input status-text="Uploading..."/>`,
+    );
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (await page.$(
+      'pierce/#fileInputField',
+    )) as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    const fileInfoCard = await page.find('va-file-input >>> va-card');
+    const statusTextCont = await fileInfoCard.find(
+      '.file-info-group .file-status-label',
+    );
+    expect(statusTextCont).toEqualText('Uploading...');
+  });
+
+
   it('emits the vaChange event only once', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input buttonText="Upload a file" />`);
@@ -158,6 +185,27 @@ describe('va-file-input', () => {
 
     await axeCheck(page);
   });
+
+  it('Renders file summary when uploadedFile prop is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input buttonText="Upload a file"/>`);
+
+    await page.$eval('va-file-input', (elm: any) => {
+      // within the browser's context
+      // let's set new property values on the component
+      elm.uploadedFile = {name: 'test.jpg', size: 7000, type: 'jpg'};
+    });
+    await page.waitForChanges();
+
+    const fileInput = await page.find('va-file-input');
+    expect(fileInput).not.toBeNull();
+    const input = await fileInput.shadowRoot.querySelector('input[type=file]');
+    expect(input.getAttribute('style')).toEqual('visibility: hidden;');
+    const summaryCard = await page.find('va-file-input >>> va-card');
+    expect(summaryCard).not.toBeNull();
+    expect(await summaryCard.find('.file-label')).toEqualText('test.jpg');
+    expect(await summaryCard.find('.file-size-label')).toEqualHtml('<span class="file-size-label">7&nbsp;KB</span>');
+  })
 
   // this test usually passes but it is too flaky to enable
   it.skip('opens a modal when delete button clicked and lets user remove or keep file', async () => {

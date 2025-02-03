@@ -86,7 +86,11 @@ export class VaFileInputMultiple {
 
   /**
    * Event emitted when any change to the file inputs occurs.
-   * Sends back an array of FileDetails
+   * 
+   * Sends back an object with the following data structure:
+   * `{ action: string, file: triggering file, state: files array }`
+   * 
+   * The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
    */
   @Event() vaMultipleChange: EventEmitter;
 
@@ -178,13 +182,19 @@ export class VaFileInputMultiple {
   private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
     let filesArray:FileDetails[];
+    let action,
+        actionFile;
     if (newFile) {
       const fileObject = this.findFileByKey(fileKey);
       if (fileObject.file) {
         // Change file
+        action = 'FILE_UPDATED';
+        actionFile = newFile;
         fileObject.file = newFile;
       } else {
         // New file
+        action = 'FILE_ADDED';
+        actionFile = newFile;
         fileObject.file = newFile;
         fileObject.content = this.getAdditionalContent();
         this.fileKeyCounter++;
@@ -197,6 +207,8 @@ export class VaFileInputMultiple {
       filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), false, this.findIndexByKey(fileKey))
     } else {
       // Deleted file
+      action = 'FILE_REMOVED';
+      actionFile = this.files[pageIndex].file;
       this.files.splice(pageIndex, 1);
       const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
       // empty status message so it is read when updated
@@ -204,11 +216,16 @@ export class VaFileInputMultiple {
       setTimeout(() => {
         statusMessageDiv.textContent = "File removed."
       }, 1000);
-      filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), true)
+      filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), true);
     }
-
-    this.vaMultipleChange.emit(filesArray);
+    const result = {
+      action,
+      file: actionFile,
+      state: filesArray
+    }
+    this.vaMultipleChange.emit(result);
     this.files = Array.of(...this.files);
+    return;
   }
 
   public buildFilesArray (files: File[], deleted?: boolean, fileIndex?: number) {
