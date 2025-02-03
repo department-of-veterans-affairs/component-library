@@ -42,13 +42,13 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: chromatic-diagnostics-file
-          path: chromatic-diagnostics.json
+          path: packages/storybook/chromatic-diagnostics.json
 
       - name: Download Diagnostics File
         uses: actions/download-artifact@v3
         with:
           name: chromatic-diagnostics-file
-          path: .
+          path: packages/storybook
 
       - name: Read Diagnostics File
         id: read-diagnostics
