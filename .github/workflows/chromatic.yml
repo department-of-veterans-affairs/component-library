@@ -40,26 +40,23 @@ jobs:
           # diagnosticsFile: chromatic-diagnostics.json
           storybookLogFile: storybook-build.log
           branchName: "hello-world-123"
-      - name: Upload Chromatic Diagnostics File as Artifact
+      - name: Upload Storybook Build Log
         uses: actions/upload-artifact@v4
         with:
-          name: chromatic-diagnostics-file
+          name: storybook-build-log
           path: packages/storybook/storybook-build.log
 
-      - name: Download Diagnostics File
+      - name: Download Storybook Build Log
         uses: actions/download-artifact@v4
         with:
-          name: chromatic-diagnostics-file
+          name: storybook-build-log
           path: packages/storybook
 
-      - name: Read Diagnostics File
-        id: read-diagnostics
+      - name: Read Build Log File
+        id: read-log
         run: |
-          echo "Contents of diagnostics file:"
+          echo "Contents of build log file:"
           cat packages/storybook/storybook-build.log
-          echo ""
-          echo "Parsed JSON structure:"
-          python -c "import json; print(json.dumps(json.load(open('packages/storybook/storybook-build.log')), indent=2))"
 
       - name: Use Extracted Branch Name
         run: echo "The branch name is ${{ env.branch_name }}"
