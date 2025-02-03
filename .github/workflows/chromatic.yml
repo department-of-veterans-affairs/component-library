@@ -38,6 +38,7 @@ jobs:
           skip: 'dependabot/**'
           debug: true
           diagnosticsFile: chromatic-diagnostics.json
+          branchName: "hello-world-123"
       - name: Upload Chromatic Diagnostics File as Artifact
         uses: actions/upload-artifact@v4
         with:
