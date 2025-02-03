@@ -103,6 +103,7 @@ export const propStructure = comp => {
         type: prop.values[0].type === 'string' ? 'text' : prop.values[0].type,
       },
     };
+    console.log('obj', propObj)
     return propObj;
   }, {});
   const events = getEventObj(comp.events);

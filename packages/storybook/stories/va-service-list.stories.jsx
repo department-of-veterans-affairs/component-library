@@ -54,4 +54,6 @@ Default.args = {
   action: { href: 'https://www.va.gov/education', text: 'Verify income' },
   optionalLink: 'https://www.va.gov',
 };
+
 Default.argTypes = propStructure(serviceListDocs);
+console.log(propStructure(serviceListDocs))
