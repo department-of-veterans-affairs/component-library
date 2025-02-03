@@ -1542,7 +1542,7 @@ export namespace Components {
     }
     /**
      * @componentName Service List
-     * @maturityCategory use with caution
+     * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface VaServiceList {
@@ -1550,7 +1550,13 @@ export namespace Components {
         "icon": string;
         "optionalLink": string;
         "serviceDetails": any;
+        /**
+          * The name of the service
+         */
         "serviceName": string;
+        /**
+          * The status of the service
+         */
         "serviceStatus": string;
     }
     /**
@@ -3035,7 +3041,7 @@ declare global {
     };
     /**
      * @componentName Service List
-     * @maturityCategory use with caution
+     * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface HTMLVaServiceListElement extends Components.VaServiceList, HTMLStencilElement {
@@ -5018,7 +5024,7 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Service List
-     * @maturityCategory use with caution
+     * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface VaServiceList {
@@ -5026,7 +5032,13 @@ declare namespace LocalJSX {
         "icon"?: string;
         "optionalLink"?: string;
         "serviceDetails"?: any;
+        /**
+          * The name of the service
+         */
         "serviceName"?: string;
+        /**
+          * The status of the service
+         */
         "serviceStatus"?: string;
     }
     /**
@@ -5799,7 +5811,7 @@ declare module "@stencil/core" {
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             /**
              * @componentName Service List
-             * @maturityCategory use with caution
+             * @maturityCategory caution
              * @maturityLevel candidate
              */
             "va-service-list": LocalJSX.VaServiceList & JSXBase.HTMLAttributes<HTMLVaServiceListElement>;

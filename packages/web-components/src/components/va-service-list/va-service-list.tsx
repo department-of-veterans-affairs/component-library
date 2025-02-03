@@ -1,9 +1,10 @@
 /* eslint-disable i18next/no-literal-string */
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
+import { consoleDevError } from '../../utils/utils';
 
 /**
  * @componentName Service List
- * @maturityCategory use with caution
+ * @maturityCategory caution
  * @maturityLevel candidate
  */
 @Component({
@@ -12,9 +13,14 @@ import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
   shadow: true,
 })
 export class VaServiceList {
-  @Prop() serviceDetails: any;  
+  /** The name of the service */
   @Prop() serviceName: string;
+
+  /**
+    * The status of the service
+    */
   @Prop() serviceStatus: string;
+  @Prop() serviceDetails: any;  
   @Prop() icon: string;
   @Prop() action: any;
   @Prop() optionalLink: string;
@@ -28,7 +34,7 @@ export class VaServiceList {
     try {
       this.parsedServiceDetails = typeof newValue === 'string' ? JSON.parse(newValue) : newValue;
     } catch (error) {
-      console.error('Error parsing serviceDetails:', error);
+      consoleDevError('Error parsing serviceDetails:');
       this.parsedServiceDetails = {};
     }
   }
