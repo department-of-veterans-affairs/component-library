@@ -9,8 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
     name: Update PR Chromatic link
-    # steps:
-    #   - uses: luigibertaco/dynamic-template-action@1.0.0
-    #     with:
-    #       token: '${{ secrets.GITHUB_TOKEN }}'
-
+    steps:
+      - name: Update PR Description with Preview URL
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          PR_DESCRIPTION=$(gh pr view $PR_NUMBER --json body -q .body)
+          
+          # Replace STORYBOOK_PREVIEW_URL with the PR number
+          NEW_DESCRIPTION=$(echo "$PR_DESCRIPTION" | sed "s/STORYBOOK_PREVIEW_URL/pr-${{ github.event.pull_request.number }}/g")
+          
+          # Update the PR description
+          echo "$NEW_DESCRIPTION" | gh pr edit $PR_NUMBER --body-file -
