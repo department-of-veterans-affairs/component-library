@@ -2,10 +2,7 @@
 name: 'Chromatic'
 
 # Event for the workflow
-on:
-  push:
-  pull_request:
-    types: [opened, synchronize, reopened]
+on: push
 
 # List of jobs
 jobs:
