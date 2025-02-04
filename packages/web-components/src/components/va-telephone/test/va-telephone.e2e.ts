@@ -92,7 +92,7 @@ describe('va-telephone', () => {
     expect(element).toEqualHtml(`
       <va-telephone class="hydrated" contact="8779551234" not-clickable>
         <mock:shadow-root>
-          <span aria-hidden="true">
+          <span>
             877-955-1234
           </span>
         </mock:shadow-root>
@@ -110,7 +110,7 @@ describe('va-telephone', () => {
     expect(element).toEqualHtml(`
       <va-telephone class="hydrated" contact="8779551234" extension="123" not-clickable>
         <mock:shadow-root>
-          <span aria-hidden="true">
+          <span>
             877-955-1234, ext. 123
           </span>
         </mock:shadow-root>
@@ -169,7 +169,9 @@ describe('va-telephone', () => {
 
   it('handles a vanity number as a contact prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-telephone contact="8772228387" vanity="VETS"></va-telephone>');
+    await page.setContent(
+      '<va-telephone contact="8772228387" vanity="VETS"></va-telephone>',
+    );
 
     const link = await page.find('va-telephone >>> a');
     expect(link.getAttribute('href')).toEqual('tel:+18772228387');
@@ -199,7 +201,9 @@ describe('va-telephone', () => {
 
   it('when messageAriaDescribedby exists, the message is added to the dom', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-telephone contact="8772228387" message-aria-describedby="main number"></va-telephone>');
+    await page.setContent(
+      '<va-telephone contact="8772228387" message-aria-describedby="main number"></va-telephone>',
+    );
 
     const messageSpan = await page.find('va-telephone >>> #number-description');
     expect(messageSpan).not.toBeNull();
@@ -208,7 +212,9 @@ describe('va-telephone', () => {
 
   it('passes an axe check when messageAriaDescribedby is set', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-telephone contact="8772228387" messageAriaDescribedby="main number"></va-telephone>');
+    await page.setContent(
+      '<va-telephone contact="8772228387" messageAriaDescribedby="main number"></va-telephone>',
+    );
 
     await axeCheck(page);
   });
