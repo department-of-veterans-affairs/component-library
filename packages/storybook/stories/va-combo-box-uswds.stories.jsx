@@ -46,6 +46,26 @@ const defaultArgs = {
   ],
 };
 
+const optGroupArgs = {
+  ...defaultArgs,
+  options: [
+    <>
+      <optgroup label="Fruits">
+        <option value="apple">Apple</option>
+        <option value="apricot">Apricot</option>
+        <option value="cantaloupe">Cantaloupe</option>
+      </optgroup>
+      <optgroup label="Vegetables">
+        <option value="cabbage">Cabbage</option>
+        <option value="Potatoes">Potatoes</option>
+      </optgroup>
+      <option value="sweet-potatoes">Sweet Potatoes</option>
+      <option value="cherry">Cherry</option>
+      <option value="clementine">Clementine</option>
+    </>
+  ],
+};
+
 const Template = ({
   label,
   name,
@@ -114,4 +134,9 @@ export const WithMessageAriaDescribedBy = Template.bind({});
 WithMessageAriaDescribedBy.args = {
   ...defaultArgs,
   messageAriaDescribedby: 'This is example aria message',
+};
+
+export const OptGroups = Template.bind({});
+OptGroups.args = {
+  ...optGroupArgs,
 };
