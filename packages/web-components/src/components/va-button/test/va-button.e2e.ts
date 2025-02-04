@@ -274,30 +274,30 @@ describe('va-button', () => {
     expect(descriptionSpan).not.toBeNull();
     expect(descriptionSpan.textContent).toBe('Button description.');
   });
-});
 
-it(`renders a default submit button variant`, async () => {
-  const page = await newE2EPage();
-  await page.setContent('<va-button submit text="Submit"></va-button>');
-  const element = await page.find('va-button');
-  expect(element).toEqualHtml(`
-  <va-button class="hydrated" submit="" text="Submit">
-    <mock:shadow-root>
-      <span class="loading-message" role="status"></span>
-      <button class="usa-button" type="submit" part="button">
-        Submit
-      </button>
-    </mock:shadow-root>
-  </va-button>
-  `);
-});
-
-it('submits form when clicked', async () => {
-  const page = await newE2EPage();
-  await page.setContent('<form onsubmit="e=>{e.preventDefault();}"><va-button submit text="Submit"  ></va-button></form>');
-  const submitSpy = await page.spyOnEvent('submit');
-  const button = await page.find('va-button >>> button');
-  await button.click();
-  await page.waitForChanges();
-  expect(submitSpy).toHaveReceivedEventTimes(1);
+  it('renders a default submit button variant', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button submit text="Submit"></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button class="hydrated" submit="" text="Submit">
+      <mock:shadow-root>
+        <span class="loading-message" role="status"></span>
+        <button class="usa-button" type="submit" part="button">
+          Submit
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+  
+  it('submits form when clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<form onsubmit="e=>{e.preventDefault();}"><va-button submit text="Submit"></va-button></form>');
+    const submitSpy = await page.spyOnEvent('submit');
+    const button = await page.find('va-button >>> button');
+    await button.click();
+    await page.waitForChanges();
+    expect(submitSpy).toHaveReceivedEventTimes(1);
+  });  
 });
