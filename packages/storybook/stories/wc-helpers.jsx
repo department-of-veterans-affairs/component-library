@@ -103,7 +103,6 @@ export const propStructure = comp => {
         type: prop.values[0].type === 'string' ? 'text' : prop.values[0].type,
       },
     };
-    console.log('obj', propObj)
     return propObj;
   }, {});
   const events = getEventObj(comp.events);
@@ -258,8 +257,7 @@ export function StoryDocs({ storyDefault, componentName, data, children }) {
   // tag name where possible
   const guidanceHref = getDocsTagValue('guidanceHref', data?.docsTags)[0] ?? (componentDocs?.guidanceHref ?? _componentName);
   const guidanceName = componentDocs?.guidanceName ?? capitalize(_componentName)?.replaceAll('-', ' ');
-
-
+ console.log("scale", maturityScale, maturityLevel)
   return (
     <>
       <Title />
