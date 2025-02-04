@@ -48,6 +48,7 @@ const defaultArgs = {
 
 const optGroupArgs = {
   ...defaultArgs,
+  label: 'Select a fruit or vegetable',
   options: [
     <>
       <optgroup label="Fruits">
