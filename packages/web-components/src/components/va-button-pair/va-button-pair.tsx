@@ -48,7 +48,7 @@ export class VaButtonPair {
    * `skip` will submit the form but not trigger the form onsubmit callback.
    * All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
    */
-  @Prop() submit?: 'prevent' | 'skip' | string = '';
+  @Prop() submit?: string;
 
   /**
    * If `true`, button pair will use Update and Cancel for button text.
