@@ -630,6 +630,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
@@ -1607,6 +1611,10 @@ export namespace Components {
     }
     interface VaTable {
         /**
+          * When active, forces the table to expand to the full-width of its container
+         */
+        "fullWidth"?: boolean;
+        /**
           * When active, the table can be horizontally scrolled and is focusable
          */
         "scrollable"?: boolean;
@@ -1641,6 +1649,10 @@ export namespace Components {
           * The number of columns in the table
          */
         "cols"?: number;
+        /**
+          * When active, the table will expand to the full width of its container
+         */
+        "fullWidth": boolean;
         "rows"?: number;
         /**
           * When active, the table can be horizontally scrolled and is focusable
@@ -3975,6 +3987,10 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
@@ -5101,6 +5117,10 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
+          * When active, forces the table to expand to the full-width of its container
+         */
+        "fullWidth"?: boolean;
+        /**
           * When active, the table can be horizontally scrolled and is focusable
          */
         "scrollable"?: boolean;
@@ -5135,6 +5155,10 @@ declare namespace LocalJSX {
           * The number of columns in the table
          */
         "cols"?: number;
+        /**
+          * When active, the table will expand to the full width of its container
+         */
+        "fullWidth"?: boolean;
         /**
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */

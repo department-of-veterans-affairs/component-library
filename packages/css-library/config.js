@@ -1,5 +1,7 @@
 const { transform } = require('@divriots/style-dictionary-to-figma');
 
+const filtersUswdsTokens = token => !token.name.includes('uswds');
+
 module.exports = {
   source: ['tokens/**/*.json'],
   format: {
@@ -17,6 +19,7 @@ module.exports = {
         {
           destination: 'variables.json',
           format: 'figmaTokensPlugin',
+          filter: filtersUswdsTokens
         },
       ],
     },
@@ -26,7 +29,8 @@ module.exports = {
       files: [
         {
           destination: 'variables.css',
-          format: 'css/variables'
+          format: 'css/variables',
+          filter: filtersUswdsTokens
         }
       ]
     },
@@ -36,7 +40,8 @@ module.exports = {
       files: [
         {
           destination: 'variables.scss',
-          format: 'scss/variables'
+          format: 'scss/variables',
+          filter: filtersUswdsTokens
         }
       ]
     },
@@ -46,7 +51,8 @@ module.exports = {
       files: [
         {
           destination: 'variables.json',
-          format: 'json'
+          format: 'json',
+          filter: filtersUswdsTokens
         }
       ]
     },

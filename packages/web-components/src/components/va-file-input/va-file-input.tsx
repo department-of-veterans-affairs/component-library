@@ -9,6 +9,7 @@ import {
   Event,
   EventEmitter,
   State,
+  Watch,
 } from '@stencil/core';
 import { i18next } from '../..';
 import { fileInput } from './va-file-input-upgrader';
@@ -88,6 +89,11 @@ export class VaFileInput {
   @Prop() hint?: string;
 
   /**
+   * Optional file status, ex: "Uploading...", "Uploaded".
+   */
+  @Prop() statusText?: string;
+
+  /**
    * Custom instructional message in the file input.
    */
   @Prop() uploadMessage?: HTMLElement = this.defaultUploadMessage;
@@ -135,6 +141,12 @@ export class VaFileInput {
     bubbles: true,
   })
   componentLibraryAnalytics: EventEmitter;
+
+  @Watch('statusText')
+    handleValueChange(value) {
+      //This won't be read if its not in a timeout due to other messages being read.
+      setTimeout(() => {this.updateStatusMessage(value)});
+    }
 
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
@@ -365,10 +377,11 @@ export class VaFileInput {
       headless,
       value,
       readOnly,
+      statusText,
       uploadedFile
     } = this;
 
-    if (value) {
+    if (value && !this.file) {
       this.handleFile(value, false);
     }
 
@@ -506,6 +519,9 @@ export class VaFileInput {
                     <span class="file-size-label">
                       {this.formatFileSize(file ? file.size : uploadedFile.size)}
                     </span>
+                      <span class="file-status-label" aria-live="polite">
+                        {statusText}
+                      </span>
                   </div>
                 </div>
                 {(file || value || uploadedFile) && (

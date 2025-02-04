@@ -26,3 +26,18 @@
 .usa-hint {
   display: block;
 }
+
+// Overrides for when label is wrapped with a header
+h1, h2, h3, h4, h5, h6 {
+  .usa-label {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+
+    .usa-label--required {
+      font-family: var(--font-source-sans);
+      font-size: initial;
+      font-weight: initial;
+    }
+  }
+}

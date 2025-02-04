@@ -249,11 +249,16 @@ The Design System Team will create a release minimally at the beginning of each 
 
 1. If you are unsure if a new release should be created, check with the Release Manager and/or the team first.
    - The DST Release Manager is the engineer on duty for the weekly support rotation.
-2. Create a new `component-library` PR that updates the package.json version in the **packages that updates have been made**:
-   - `core` (required) - [packages/core/package.json](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4) must be updated for the publishing workflow
-     - `web-components` (if needed)
-     - `css-library` (if needed)
-     - `react-components` (if needed)
+2. Determine if the releases should be major, minor, or patch releases. To view what has changed since the last release, go to the [repo home page](https://github.com/department-of-veterans-affairs/component-library), **Releases** > release with **Latest** tag > **X commits to main since this release**. This will show the commits, but you will need to look at the PRs themselves for the `major`, `minor`, and `patch` tags that will go into this release. 
+2. Create a new `component-library` PR by doing the following: 
+   - Update the `package.json` version in the **packages that updates have been made**.
+      - `core` (required) - [packages/core/package.json](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4) must be updated for the publishing workflow
+         - `web-components` (if needed)
+         - `css-library` (if needed)
+         - `react-components` (if needed)
+   - Run `yarn install` on the top-level directory of the repo to update `yarn.lock`.
+   - Create the PR with the tag `ignore-for-release`.
+   - Get approval and merge the PR.
 3. From the [repo's homepage](https://github.com/department-of-veterans-affairs/component-library) click on "Releases" in the right-hand sidebar.
 4. Click on the "Draft a new release" button near the top of the page.
 5. Click on the "Choose a tag" drop-down and type the letter `v` followed by the new "core" version number. The target should remain `main`.
