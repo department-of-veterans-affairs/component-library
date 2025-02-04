@@ -1,0 +1,109 @@
+@use '../../../css-library/src/stylesheets/formation-overrides/elements/labels' as *;
+@import '../../mixins/uswds-error-border.scss';
+@import '../../mixins/focusable.css';
+@import '../../mixins/headers.css';
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
+
+:host {
+  display: block;
+}
+
+.service-list{
+padding: 1rem 2rem 2rem 1rem;
+border: 1px solid var(--vads-color-gray-medium);
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+.service-title-row {
+  &:focus .service-name,
+  &:hover .service-name {
+    text-decoration: underline;
+    color: $vads-color-link-active;
+  }
+
+  &:focus .chevron-icon,
+  &:hover .chevron-icon {
+    margin-left: 17rem;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-property: margin;
+    color: $vads-color-link-active;
+  }
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    color: #ffffff !important;
+
+    &.star {
+      background-color:$vads-color-hub-burials;
+    }
+    &.work {
+      background-color:$vads-color-hub-careers;
+    }
+    &.description {
+      background-color:$vads-color-hub-disability;
+    }
+    &.school {
+      background-color: $vads-color-hub-education;
+    }
+    &.groups {
+      background-color: $vads-color-hub-family-member;
+    }
+    &.medical_services {
+      background-color:$vads-color-hub-health-care;
+    }
+    &.home {
+      background-color:$vads-color-hub-housing;
+    }
+    &.shield {
+      background-color:$vads-color-hub-life-insurance;
+    }
+    &.handshake {
+      background-color:$vads-color-hub-pension;
+    }
+    &.identification {
+      background-color:$vads-color-hub-records;
+    }
+    &.flag {
+      background-color:$vads-color-hub-service-member;
+    }
+  }
+
+  .service-name {
+    margin-left: 1rem;
+    margin-top: 0;
+    color: $vads-color-link;
+  }
+  .chevron-icon {
+    margin-left: auto;
+    font-size: 24px;
+    color: $vads-color-link;
+  }
+}
+.status {
+  margin-top: 1rem;
+}
+.action-bar {
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+  background-color: $vads-color-warning;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+}

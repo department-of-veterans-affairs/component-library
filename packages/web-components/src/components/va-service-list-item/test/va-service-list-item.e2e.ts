@@ -1,6 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-describe('va-service-list', () => {
+describe('va-service-list-item', () => {
   /**
    * Helper function to set up the component with dynamic props
    */
@@ -20,9 +20,9 @@ describe('va-service-list', () => {
     optionalLink = "https://va.gov",
   } = {}) {
     const page = await newE2EPage();
-    await page.setContent(`<va-service-list></va-service-list>`);
+    await page.setContent(`<va-service-list-item></va-service-list-item>`);
 
-    const elementHandle = await page.$('va-service-list');
+    const elementHandle = await page.$('va-service-list-item');
 
     await page.evaluate(
       (el, props) => {
