@@ -1,14 +1,28 @@
+/*
+ __          __     _____  _   _ _____ _   _  _____
+ \ \        / /\   |  __ \| \ | |_   _| \ | |/ ____|
+  \ \  /\  / /  \  | |__) |  \| | | | |  \| | |  __
+   \ \/  \/ / /\ \ |  _  /| . ` | | | | . ` | | |_ |
+    \  /\  / ____ \| | \ \| |\  |_| |_| |\  | |__| |
+     \/  \/_/    \_\_|  \_\_| \_|_____|_| \_|\_____|
+
+  This web component does not make use of the Shadow DOM,
+  so prefix all style rules with va-radio-option and make sure to test at
+  http://localhost:3001/burials-and-memorials/pre-need-integration/preparer and
+  http://localhost:3001/ds-playground/
+*/
+
 @forward 'settings';
 
 @use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
 @use 'usa-radio/src/styles/usa-radio';
 
-:host {
+va-radio-option {
   display: block;
   margin-top: 12px;
 }
 
-.usa-radio {
+va-radio-option .usa-radio {
   background: transparent;
   display: flex;
   margin: 0.75rem 0;
@@ -28,7 +42,7 @@
   --vads-input-tile-border-override: #c9c9c9; // Matches USWDS
 }
 
-.va-radio-option__container--tile {
+va-radio-option .va-radio-option__container--tile {
   border-radius: 0.25rem;
   background-color: var(--vads-input-background-color-on-light);;
   border: 2px solid var(--vads-input-tile-border-override);
@@ -37,13 +51,13 @@
   margin: 0.5rem 0;
 }
 
-.va-radio-option__container--tile--checked {
+va-radio-option .va-radio-option__container--tile--checked {
   background-color: var(--vads-input-tile-background-active-on-light);
   border-color: var(--vads-input-tile-border-active-on-light);
 }
 
-input[type="radio"].va-radio-option__input {
-  height: 1.25rem;
+va-radio-option input[type="radio"].va-radio-option__input {
+  height: 1.25rem !important; // Important is needed to overcome legacy styling
   width: 1.25rem;
   min-width: 1.25rem;
   border: none;
@@ -52,38 +66,34 @@ input[type="radio"].va-radio-option__input {
   appearance: none;
   margin: 0.064rem 0 0 4px;
   opacity: unset;
-  position: initial;
+  position: static;
   cursor: pointer;
 }
 
-input[type="radio"].va-radio-option__input:checked {
+va-radio-option input[type="radio"].va-radio-option__input:checked {
   background: var(--vads-button-color-background-primary-on-light);
   box-shadow: 0 0 0 2px var(--vads-button-color-background-primary-on-light), inset 0 0 0 2px var(--vads-input-background-color-on-light);
 }
 
-input[type="radio"].va-radio-option__input:checked:focus {
+va-radio-option input[type="radio"].va-radio-option__input:checked:focus {
   outline-offset: 4px;
 }
 
-.usa-radio__label {
+va-radio-option .usa-radio__label {
   display: flex;
   flex-direction: column;
-  margin: 0;
+  margin: 0 !important; // Important is needed to overcome legacy styling
   width: 100%;
   padding-left: 0.6rem;
   box-sizing: border-box;
 }
 
-:host input:focus {
-  outline: none !important;
-}
-
 // Formation overrides
-input[type="radio"] + label {
+va-radio-option input[type="radio"] + label {
   margin-bottom: 0;
 }
 
-input[type="radio"] + label:before {
+va-radio-option input[type="radio"] + label:before {
   border-radius: 0;
   box-shadow: none;
   height: 0;
@@ -93,11 +103,11 @@ input[type="radio"] + label:before {
   width: 0;
 }
 
-input[type="radio"]:checked + label:before {
+va-radio-option input[type="radio"]:checked + label:before {
   outline: none;
   box-shadow: none;
 }
 
-input[type="radio"]:focus + label::before {
+va-radio-option input[type="radio"]:focus + label::before {
   outline: none;
 }
