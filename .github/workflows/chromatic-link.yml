@@ -10,6 +10,9 @@ jobs:
     if: github.actor != 'dependabot[bot]'
     name: Update PR Chromatic link
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Set PR number
         run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
