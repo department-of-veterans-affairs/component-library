@@ -1,8 +1,5 @@
 # Workflow name
 name: 'Chromatic'
-env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  PR_NUMBER: ${{ github.event.pull_request.number }}
 
 # Event for the workflow
 on: push
