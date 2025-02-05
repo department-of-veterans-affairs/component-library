@@ -36,6 +36,4 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           skip: 'dependabot/**'
-          branchName: pr-${{ github.event.pull_request.number }}
-      # - name: Publish Chromatic Summary
-      #   run: echo -e "| Results |  |\n| --- | --- |\n| Build Results | ${{steps.chromatic.outputs.buildUrl}} |\n| Storybook Preview | ${{steps.chromatic.outputs.storybookUrl}} |\n| Change Count | ${{steps.chromatic.outputs.changeCount}} |" >> $GITHUB_STEP_SUMMARY
+          branchName: pr-${{ env.PR_NUMBER}}
