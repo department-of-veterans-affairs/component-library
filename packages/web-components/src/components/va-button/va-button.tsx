@@ -141,8 +141,8 @@ export class VaButton {
     }
 
     // Find the form element by walking up through shadow roots
-    let element: Element = this.el;
-    let formElement: HTMLFormElement | null = null;
+    let element = this.el as Element;
+    let formElement = null as HTMLFormElement | null;
     
     while (element && !formElement) {
       // Try to find form in the current root
