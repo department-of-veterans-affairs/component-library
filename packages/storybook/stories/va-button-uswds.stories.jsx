@@ -55,7 +55,7 @@ const Template = ({
       secondary={secondary}
       primary-alternate={primaryAlternate}
       submit={submit}
-      text={!loading && !text ? 'Default' : text}
+      text={!loading && !text ? null : text}
       onClick= {onClick}
       message-aria-describedby={messageAriaDescribedby}
     />
@@ -65,6 +65,7 @@ const Template = ({
 export const Primary = Template.bind(null);
 Primary.args = {
   ...defaultArgs,
+  text: "Default"
 };
 Primary.argTypes = propStructure(buttonDocs);
 
@@ -93,20 +94,19 @@ export const Continue = Template.bind(null);
 Continue.args = {
   ...defaultArgs,
   _continue: true,
-  text: undefined,
 };
 
 export const Back = Template.bind(null);
 Back.args = {
   ...defaultArgs,
   back: true,
-  text: undefined,
 };
 
 export const Disabled = Template.bind(null);
 Disabled.args = {
   ...defaultArgs,
-  disabled: true
+  disabled: true,
+  text: "Default",
 };
 
 export const Loading = Template.bind(null);
@@ -137,12 +137,12 @@ const TemplateWithForm = ({
   submit,
   text,
   messageAriaDescribedby,
-  onsub,
-  onclk,
+  handleSubmit,
+  handleClick,
 }) => {
   return (
-    <form onSubmit={onsub}>
-      <p>This is inside a form, which has an onsubmit() that displays an alert when the form is submitted</p>
+    <form onSubmit={handleSubmit}>
+      <p>This is inside a form element, which has a callback for onSubmit() and onClick() that displays an alert when the form is submitted</p>
       <va-button
         back={back}
         big={big}
@@ -154,7 +154,7 @@ const TemplateWithForm = ({
         primary-alternate={primaryAlternate}
         submit={submit}
         text={text}
-        onClick={e => onclk(e) }
+        onClick={e => handleClick(e) }
         message-aria-describedby={messageAriaDescribedby}
       />
     </form>
@@ -164,15 +164,14 @@ const TemplateWithForm = ({
 export const Submitted = TemplateWithForm.bind(null);
 Submitted.args = {
   ...defaultArgs,
-  onsub : (e)=>{ 
-    console.log(e.target, "I am submitted!");
-    alert ("form onsubmit method fired!--on form");
+  handleSubmit : (event)=>{ 
+    console.log("Form onSubmit callback fired!", event);
+    alert ("Form onSubmit callback fired!");
   },
-  onclk : (e)=>{ 
-    console.log("called the on click method-on button", e.target);
-    alert( "onclick happened on button"); 
-
+  handleClick : (event)=>{ 
+    console.log("Form onClick callback fired!", event);
+    alert( "Button onClick callback fired!"); 
 },
-  submit: 'prevent',
-  text: "Submit me",
+  submit: "prevent",
+  text: "Submit",
 };

@@ -129,7 +129,7 @@ export class VaButton {
   };
 
   private getButtonText = (): string => {
-    if (this.continue) return 'Continue';
+    if (this.continue) return this.text || 'Continue';
     if (this.back) return 'Back';
     if (this.loading && !this.text) return 'Loading...';
     return this.text;

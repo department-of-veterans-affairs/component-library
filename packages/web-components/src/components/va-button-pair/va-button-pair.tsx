@@ -132,26 +132,19 @@ export class VaButtonPair {
 
 
   // get text for the left button; custom text takes precedence
-  private getLeftButtonText = () => {
-    let text: string;
-    if (this.leftButtonText) {
-      text = this.leftButtonText;
-    } else {
-      text = this.update ? 'Update' : 'Yes';
-    }
-    return text;
+  private getLeftButtonText = (): string => {
+    if (this.leftButtonText) return this.leftButtonText;
+    if (this.update) return 'Update';
+    return 'Yes';
   }
 
 
   // get text for the right button; custom text takes precedence
-  private getRightButtonText = () => {
-    let text: string;
-    if (this.rightButtonText) {
-      text = this.rightButtonText;
-    } else {
-      text = this.update ? 'Cancel' : 'No';
-    }
-    return text;
+  private getRightButtonText = (): string => {
+    if (this.rightButtonText) return this.rightButtonText;
+    if (this.continue) return this.rightButtonText || 'Continue';
+    if (this.update) return 'Cancel';
+    return 'No';
   }
 
   render() {
@@ -175,6 +168,7 @@ export class VaButtonPair {
                 disable-analytics={disableAnalytics}
                 label={secondaryLabel}
                 onClick={handleSecondaryClick}
+                text={this.getLeftButtonText()}
               />
             </li>
             <li class="usa-button-group__item">
@@ -183,6 +177,7 @@ export class VaButtonPair {
                 disable-analytics={disableAnalytics}
                 label={primaryLabel}
                 onClick={handlePrimaryClick}
+                text={this.getRightButtonText()}
                 submit={submit}
               />
             </li>
