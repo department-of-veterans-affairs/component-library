@@ -293,6 +293,140 @@ export class VaPagination {
     this.resizeObserver.disconnect();
   }
 
+  /**
+   * =========================================
+   * RENDER SCRATCHPAD!
+   * =========================================
+   */
+  renderPreviousButton(arrowClasses: string, previousAriaLabel: string): void {
+    // Skip rendering if the viewport is too narrow to show Previous button
+    if (this.isMobileViewport) return null;
+
+    // No previous page
+    if (this.page === 1) return null;
+
+    return (
+      <Fragment>
+        <li class={arrowClasses}>
+          <a
+            aria-label={previousAriaLabel}
+            onClick={() =>
+              this.handlePageSelect(this.page - 1, 'nav-paginate-number')
+            }
+            onKeyDown={e => this.handleKeyDown(e, this.page - 1)}
+            class="usa-pagination__link usa-pagination__previous-page"
+            href="javascript:void(0)"
+          >
+            <div id="previous-arrow-icon"></div>
+            <span class="usa-pagination__link-text">
+              {i18next.t('previous')}
+            </span>
+          </a>
+        </li>
+      </Fragment>
+    );
+  }
+
+  renderFirstPage(itemClasses: string, ellipsisClasses: string): void {
+    // Return early if [1] is in the pageNumbers array.
+    // This also prevents the first [...] being rendered.
+    if (this.pageNumbers().includes(1)) return null;
+
+    return (
+      <Fragment>
+        <li class={itemClasses}>
+          <a
+            onClick={() => this.handlePageSelect(1, 'nav-paginate-number')}
+            onKeyDown={e => this.handleKeyDown(e, 1)}
+            href="javascript:void(0)"
+            class="usa-pagination__button"
+            aria-label="page 1, first page"
+          >
+            1
+          </a>
+        </li>
+        <li class={ellipsisClasses}>
+          <span class="usa-sr-only">Ellipsis indicating non-visible pages</span>
+          <span aria-hidden="true">…</span>
+        </li>
+      </Fragment>
+    );
+  }
+
+  renderLastPage(ellipsisClasses: string, itemClasses: string): void {
+    if (this.pageNumbers().includes(this.pages)) return null;
+
+    let lastEllipsis = null;
+    let lastPageButton = null;
+
+    if (this.pages > this.SHOW_ALL_PAGES) {
+      lastEllipsis = (
+        <li class={ellipsisClasses}>
+          <span class="usa-sr-only">Ellipsis indicating non-visible pages</span>
+          <span aria-hidden="true">…</span>
+        </li>
+      );
+    }
+
+    if (!this.unbounded && this.pages > this.SHOW_ALL_PAGES) {
+      lastPageButton = (
+        <li class={itemClasses}>
+          <a
+            onClick={() =>
+              this.handlePageSelect(this.pages, 'nav-paginate-number')
+            }
+            onKeyDown={e => this.handleKeyDown(e, this.pages)}
+            href="javascript:void(0)"
+            class="usa-pagination__button"
+            aria-label={`page ${this.pages}, last page`}
+          >
+            {this.pages}
+          </a>
+        </li>
+      );
+    }
+
+    return (
+      <Fragment>
+        {lastEllipsis}
+        {lastPageButton}
+      </Fragment>
+    );
+  }
+
+  renderNextPageButton(arrowClasses: string, nextAriaLabel: string): void {
+    // Skip rendering if the viewport is too narrow to show Next button
+    if (this.isMobileViewport) return null;
+
+    // Return early if we're on the last page or current page was entered incorrectly
+    if (this.page >= this.pages) return null;
+
+    return (
+      <Fragment>
+        <li class={arrowClasses}>
+          <a
+            aria-label={nextAriaLabel}
+            onClick={() =>
+              this.handlePageSelect(this.page + 1, 'nav-paginate-number')
+            }
+            onKeyDown={e => this.handleKeyDown(e, this.page + 1)}
+            class="usa-pagination__link usa-pagination__next-page"
+            href="javascript:void(0)"
+          >
+            <span class="usa-pagination__link-text">{i18next.t('next')}</span>
+            <div id="next-arrow-icon"></div>
+          </a>
+        </li>
+      </Fragment>
+    );
+  }
+
+  /**
+   * =========================================
+   * END RENDER SCRATCHPAD!
+   * =========================================
+   */
+
   render() {
     const { ariaLabelSuffix, page, pages } = this;
 
@@ -323,50 +457,50 @@ export class VaPagination {
       'usa-pagination__arrow': true,
     });
 
-    const previousButton =
-      page > 1 ? (
-        <Fragment>
-          <li class={arrowClasses}>
-            <a
-              aria-label={previousAriaLabel}
-              onClick={() =>
-                this.handlePageSelect(page - 1, 'nav-paginate-number')
-              }
-              onKeyDown={e => this.handleKeyDown(e, page - 1)}
-              class="usa-pagination__link usa-pagination__previous-page"
-              href="javascript:void(0)"
-            >
-              <div id="previous-arrow-icon"></div>
-              <span class="usa-pagination__link-text">
-                {i18next.t('previous')}
-              </span>
-            </a>
-          </li>
-          {!pageNumbersToRender.includes(1) && (
-            <Fragment>
-              <li class={itemClasses}>
-                <a
-                  onClick={() =>
-                    this.handlePageSelect(1, 'nav-paginate-number')
-                  }
-                  onKeyDown={e => this.handleKeyDown(e, 1)}
-                  href="javascript:void(0)"
-                  class="usa-pagination__button"
-                  aria-label="page 1, first page"
-                >
-                  1
-                </a>
-              </li>
-              <li class={ellipsisClasses}>
-                <span class="usa-sr-only">
-                  Ellipsis indicating non-visible pages
-                </span>
-                <span aria-hidden="true">…</span>
-              </li>
-            </Fragment>
-          )}
-        </Fragment>
-      ) : null;
+    // const previousButton =
+    //   page > 1 ? (
+    //     <Fragment>
+    //       <li class={arrowClasses}>
+    //         <a
+    //           aria-label={previousAriaLabel}
+    //           onClick={() =>
+    //             this.handlePageSelect(page - 1, 'nav-paginate-number')
+    //           }
+    //           onKeyDown={e => this.handleKeyDown(e, page - 1)}
+    //           class="usa-pagination__link usa-pagination__previous-page"
+    //           href="javascript:void(0)"
+    //         >
+    //           <div id="previous-arrow-icon"></div>
+    //           <span class="usa-pagination__link-text">
+    //             {i18next.t('previous')}
+    //           </span>
+    //         </a>
+    //       </li>
+    //       {!pageNumbersToRender.includes(1) && (
+    //         <Fragment>
+    //           <li class={itemClasses}>
+    //             <a
+    //               onClick={() =>
+    //                 this.handlePageSelect(1, 'nav-paginate-number')
+    //               }
+    //               onKeyDown={e => this.handleKeyDown(e, 1)}
+    //               href="javascript:void(0)"
+    //               class="usa-pagination__button"
+    //               aria-label="page 1, first page"
+    //             >
+    //               1
+    //             </a>
+    //           </li>
+    //           <li class={ellipsisClasses}>
+    //             <span class="usa-sr-only">
+    //               Ellipsis indicating non-visible pages
+    //             </span>
+    //             <span aria-hidden="true">…</span>
+    //           </li>
+    //         </Fragment>
+    //       )}
+    //     </Fragment>
+    //   ) : null;
 
     const renderPages = pageNumbersToRender.map(pageNumber => {
       const anchorClasses = classnames({
@@ -400,63 +534,67 @@ export class VaPagination {
         </li>
       );
     });
-    const endEllipsisAndLastPage =
-      pageNumbersToRender.indexOf(pages) === -1 ? (
-        <Fragment>
-          {pages > this.SHOW_ALL_PAGES && (
-            <li class={ellipsisClasses}>
-              <span class="usa-sr-only">
-                Ellipsis indicating non-visible pages
-              </span>
-              <span aria-hidden="true">…</span>
-            </li>
-          )}
-          {!this.unbounded && pages > this.SHOW_ALL_PAGES && (
-            <li class={itemClasses}>
-              <a
-                onClick={() =>
-                  this.handlePageSelect(pages, 'nav-paginate-number')
-                }
-                onKeyDown={e => this.handleKeyDown(e, pages)}
-                href="javascript:void(0)"
-                class="usa-pagination__button"
-                aria-label={`page ${pages}, last page`}
-              >
-                {pages}
-              </a>
-            </li>
-          )}
-        </Fragment>
-      ) : null;
+    // const endEllipsisAndLastPage =
+    //   pageNumbersToRender.indexOf(pages) === -1 ? (
+    //     <Fragment>
+    //       {pages > this.SHOW_ALL_PAGES && (
+    //         <li class={ellipsisClasses}>
+    //           <span class="usa-sr-only">
+    //             Ellipsis indicating non-visible pages
+    //           </span>
+    //           <span aria-hidden="true">…</span>
+    //         </li>
+    //       )}
+    //       {!this.unbounded && pages > this.SHOW_ALL_PAGES && (
+    //         <li class={itemClasses}>
+    //           <a
+    //             onClick={() =>
+    //               this.handlePageSelect(pages, 'nav-paginate-number')
+    //             }
+    //             onKeyDown={e => this.handleKeyDown(e, pages)}
+    //             href="javascript:void(0)"
+    //             class="usa-pagination__button"
+    //             aria-label={`page ${pages}, last page`}
+    //           >
+    //             {pages}
+    //           </a>
+    //         </li>
+    //       )}
+    //     </Fragment>
+    //   ) : null;
 
-    const nextButton =
-      page < pages ? (
-        <Fragment>
-          <li class={arrowClasses}>
-            <a
-              aria-label={nextAriaLabel}
-              onClick={() =>
-                this.handlePageSelect(page + 1, 'nav-paginate-number')
-              }
-              onKeyDown={e => this.handleKeyDown(e, page + 1)}
-              class="usa-pagination__link usa-pagination__next-page"
-              href="javascript:void(0)"
-            >
-              <span class="usa-pagination__link-text">{i18next.t('next')}</span>
-              <div id="next-arrow-icon"></div>
-            </a>
-          </li>
-        </Fragment>
-      ) : null;
+    // const nextButton =
+    //   page < pages ? (
+    //     <Fragment>
+    //       <li class={arrowClasses}>
+    //         <a
+    //           aria-label={nextAriaLabel}
+    //           onClick={() =>
+    //             this.handlePageSelect(page + 1, 'nav-paginate-number')
+    //           }
+    //           onKeyDown={e => this.handleKeyDown(e, page + 1)}
+    //           class="usa-pagination__link usa-pagination__next-page"
+    //           href="javascript:void(0)"
+    //         >
+    //           <span class="usa-pagination__link-text">{i18next.t('next')}</span>
+    //           <div id="next-arrow-icon"></div>
+    //         </a>
+    //       </li>
+    //     </Fragment>
+    //   ) : null;
 
     return (
       <Host>
         <nav class="usa-pagination" aria-label="Pagination">
           <ul class="usa-pagination__list">
-            {previousButton}
+            {this.renderPreviousButton(arrowClasses, previousAriaLabel)}
+            {this.renderFirstPage(itemClasses, ellipsisClasses)}
+            {/* {previousButton} */}
             {renderPages}
-            {endEllipsisAndLastPage}
-            {nextButton}
+            {/* {endEllipsisAndLastPage} */}
+            {/* {nextButton} */}
+            {this.renderLastPage(ellipsisClasses, itemClasses)}
+            {this.renderNextPageButton(arrowClasses, nextAriaLabel)}
           </ul>
         </nav>
       </Host>
