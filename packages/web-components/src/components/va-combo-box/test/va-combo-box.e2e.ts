@@ -68,6 +68,127 @@ describe('va-combo-box', () => {
     expect(combobox).toEqualAttribute('data-default-value', 'bar');
   });
 
+  it('renders opt groups', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+          <va-combo-box label="A label">
+            <optgroup label="group 1">
+              <option value="foo">Foo</option>
+              <option value="bar">Bar</option>
+            </optgroup>
+          </va-select>
+        `);
+        const element = await page.find('va-combo-box');
+        expect(element).toEqualHtml(`
+          <va-combo-box class="hydrated" label="A label">
+                <mock:shadow-root>
+                    <label class="usa-label" for="options" id="options-label">
+                    A label
+                    </label>
+                    <span id="input-error-message" role="alert"></span>
+                    <slot></slot>
+                    <div class="usa-combo-box" data-enhanced="true">
+                    <select aria-hidden="true" class="usa-combo-box__select usa-select usa-sr-only" tabindex="-1">
+                        <option data-optgroup="true" id="optgroup-0">
+                        group 1
+                        </option>
+                        <option aria-describedby="optgroup-0" data-optgroup-option="true" value="foo">
+                        Foo
+                        </option>
+                        <option aria-describedby="optgroup-0" data-optgroup-option="true" value="bar">
+                        Bar
+                        </option>
+                    </select>
+                    <input aria-autocomplete="list" aria-controls="options--list" aria-describedby="options--assistiveHint" aria-expanded="false" aria-owns="options--list" autocapitalize="off" autocomplete="off" class="usa-combo-box__input" id="options" role="combobox" type="text">
+                    <span class="usa-combo-box__clear-input__wrapper" tabindex="-1">
+                        <button aria-label="Clear the select contents" class="usa-combo-box__clear-input" type="button"></button>
+                    </span>
+                    <span class="usa-combo-box__input-button-separator"></span>
+                    <span class="usa-combo-box__toggle-list__wrapper" tabindex="-1">
+                        <button aria-label="Toggle the dropdown list" class="usa-combo-box__toggle-list" tabindex="-1" type="button"></button>
+                    </span>
+                    <ul aria-labelledby="options-label" class="usa-combo-box__list" hidden="" id="options--list" role="listbox" tabindex="-1"></ul>
+                    <div class="usa-combo-box__status usa-sr-only" role="status"></div>
+                    <span class="usa-sr-only" id="options--assistiveHint">
+                        When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.
+                    </span>
+                    </div>
+                </mock:shadow-root>
+                <optgroup label="group 1">
+                  <option value="foo">
+                      Foo
+                  </option>
+                  <option value="bar">
+                    Bar
+                  </option>
+                </optgroup>
+            </va-combo-box>`);
+
+      const input = await page.find('va-combo-box >>> input');
+      await input.click();
+      const listOptions = await page.findAll('va-combo-box >>> li');
+      expect(listOptions.length).toBe(3);
+      expect(listOptions[0].getAttribute('data-value')).toBe('group 1');
+      expect(listOptions[0].innerText).toBe('group 1');
+      expect(listOptions[0].getAttribute('class')).toContain('usa-combo-box__list-option--group');
+      expect(listOptions[0].getAttribute('id')).toBe('optgroup-0');
+
+      expect(listOptions[1].innerText).toBe('Foo');
+      expect(listOptions[1].getAttribute('data-value')).toBe('foo');
+      expect(listOptions[1].getAttribute('aria-describedby')).toBe('optgroup-0');
+      expect(listOptions[1].getAttribute('aria-setsize')).toBe('2');
+      expect(listOptions[1].getAttribute('aria-posinset')).toBe('1');
+      expect(listOptions[1].getAttribute('aria-selected')).toBe('false');
+      expect(listOptions[1].getAttribute('class')).toContain('usa-combo-box__list-option');
+      expect(listOptions[1].getAttribute('class')).toContain('usa-combo-box__list-option--group-option');
+
+      expect(listOptions[1].getAttribute('id')).toBe('options--list--option-1');
+  });
+
+  it('emits change event on selection', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+          <va-combo-box label="A label">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-select>
+        `);
+    const input = await page.find('va-combo-box >>> input');
+    const changeEvent = await page.spyOnEvent('vaSelect');
+
+    await input.click();
+    await page.keyboard.press('ArrowDown'); 
+    await page.keyboard.press('Enter'); 
+    const vaSelectEvent = changeEvent.events[0];
+    expect(vaSelectEvent.detail.value).toEqual('foo');
+    expect(vaSelectEvent.type).toEqual('vaSelect');
+  });
+
+  it('emits change event on selection with opt groups', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+          <va-combo-box label="A label">
+            <optgroup label="group 1">
+              <option value="foo">Foo</option>
+              <option value="bar">Bar</option>
+            </optgroup>
+          </va-select>
+        `);
+
+    const input = await page.find('va-combo-box >>> input');
+    const changeEvent = await page.spyOnEvent('vaSelect');
+
+    await input.click();
+    await page.keyboard.press('ArrowDown'); 
+    await page.keyboard.press('Enter'); 
+    const vaSelectEvent = changeEvent.events[0];
+    expect(vaSelectEvent.detail.value).toEqual('foo');
+    expect(vaSelectEvent.type).toEqual('vaSelect');
+  });
+
   it('renders error message', async () => {
     const page = await newE2EPage();
 
