@@ -8,8 +8,8 @@
   display: block;
 }
 
-.service-list{
-padding: 1rem 2rem 2rem 1rem;
+.service-list-item{
+padding: 1.25rem 2rem 2rem 1rem;
 border: 1px solid var(--vads-color-gray-medium);
 
 a {
@@ -47,6 +47,7 @@ a {
     min-width: 40px !important;
     max-width: 40px !important;
     color: #ffffff !important;
+    margin-right: 0.625rem;
 
     &.star {
       background-color:$vads-color-hub-burials;
@@ -84,7 +85,6 @@ a {
   }
 
   .service-name {
-    margin-left: 1rem;
     margin-top: 0;
     color: $vads-color-link;
   }
@@ -95,15 +95,41 @@ a {
   }
 }
 .status {
-  margin-top: 1rem;
+  margin-top: .75rem;
 }
 .action-bar {
   padding: 1rem 1.25rem;
   margin-top: 1rem;
   background-color: $vads-color-warning;
+  position: relative;
+  left: -2rem;
+  width: calc(100% + 2rem);
+
 }
+  .action-link {
+ color: $vads-color-base;
+ text-decoration: underline;
+ font-weight: 700;
+ font-size: 1.06rem;
+  }
+.link-icon {
+  border-radius: 50%;
+  margin: 0 0.5rem 0 1.25rem;
+  color: $vads-color-warning;
+  background-color: $vads-color-base;
+}
+
 ul {
   list-style-type: none;
   padding-left: 0;
+  font-size: 1.06rem;
+  padding: 1.5rem 0 1.5rem 0;
+  margin: 0;
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+.optional-link {
+  margin-top: 1.5rem;
 }
 }

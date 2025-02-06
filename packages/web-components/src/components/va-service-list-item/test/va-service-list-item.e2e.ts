@@ -5,61 +5,92 @@ describe('va-service-list-item', () => {
    * Helper function to set up the component with dynamic props
    */
   async function setupComponent({
-    serviceDetails = `{
-      "Approved on": "May 11, 2011",
-      "Program": "Post-9/11 GI Bill",
-      "Eligibility": "70%"
-    }`,
-    action = `{
-      "href": "https://www.va.gov/education",
-      "text": "Verify income"
-    }`,
-    icon = "school",
-    serviceName = "Education",
-    serviceStatus = "Eligible",
-    optionalLink = "https://va.gov",
+    serviceDetails = {
+      'Approved on': 'May 11, 2011',
+      'Program': 'Post-9/11 GI Bill',
+      'Eligibility': '70%',
+    },
+    action = undefined,
+    icon = 'school',
+    serviceName = 'Education',
+    serviceLink = 'https://www.va.gov/education',
+    serviceStatus = 'Eligible',
+    optionalLink = {
+      href: 'https://www.va.gov',
+      text: 'Optional link (to a page other than the detail page)',
+    },
   } = {}) {
     const page = await newE2EPage();
+
     await page.setContent(`<va-service-list-item></va-service-list-item>`);
 
     const elementHandle = await page.$('va-service-list-item');
 
+    const assignedProps = {
+      serviceDetails,
+      optionalLink,
+      icon,
+      serviceName,
+      serviceLink,
+      serviceStatus,
+      action,
+    };
+
     await page.evaluate(
       (el, props) => {
-        el.serviceDetails = props.serviceDetails;
-        el.action = props.action;
+        el.serviceDetails = JSON.stringify(props.serviceDetails);
+        el.action = JSON.stringify(props.action);
+        el.optionalLink = JSON.stringify(props.optionalLink);
         el.icon = props.icon;
         el.serviceName = props.serviceName;
+        el.serviceLink = props.serviceLink;
         el.serviceStatus = props.serviceStatus;
-        el.optionalLink = props.optionalLink;
       },
       elementHandle,
-      { serviceDetails, action, icon, serviceName, serviceStatus, optionalLink }
+      assignedProps,
     );
 
     await page.waitForChanges();
-    await page.evaluate(() => new Promise((resolve) => setTimeout(resolve, 5000)));
+    await page.evaluate(
+      () => new Promise(resolve => setTimeout(resolve, 2000)),
+    );
 
+    const shadowRootExists = await page.evaluate(
+      el => !!el.shadowRoot,
+      elementHandle,
+    );
+    expect(shadowRootExists).toBe(true);
     return { page, elementHandle };
   }
 
-  it('renders correctly with action bar when serviceStatus is Eligible', async () => {
-    const { page, elementHandle } = await setupComponent({ serviceStatus: "Eligible" });
+  it('renders correctly with action bar when an action is needed and exists', async () => {
+    const { page, elementHandle } = await setupComponent({
+      action: {
+        href: 'https://www.va.gov/education',
+        text: 'Take some urgent action',
+      },
+    });
 
-    const shadowRootExists = await page.evaluate((el) => !!el.shadowRoot, elementHandle);
-    expect(shadowRootExists).toBe(true);
+    await page.waitForSelector('va-service-list-item');
+    await page.waitForChanges();
 
-    const shadowInnerHTML = await page.evaluate((el) => el.shadowRoot.innerHTML, elementHandle);
+    const isHydrated = await page.evaluate(
+      el => el.classList.contains('hydrated'),
+      elementHandle,
+    );
+    expect(isHydrated).toBe(true);
+
+    const shadowInnerHTML = await page.evaluate(
+      el => el.shadowRoot.innerHTML,
+      elementHandle,
+    );
+
     expect(shadowInnerHTML.replace(/\s+/g, ' ')).toEqualHtml(`
-      <div class="service-list">
-        <a href="/">
+      <div class="service-list-item">
+        <a href="https://www.va.gov/education" class="service-title-row">
           <div class="header">
-            <slot name="icon">
-              <va-icon class="icon hydrated"></va-icon>
-            </slot>
-            <slot name="service-name">
-              <h3 class="service-name">Education</h3>
-            </slot>
+            <va-icon class="icon school hydrated"></va-icon>
+            <h3 class="service-name">Education</h3>
             <va-icon class="chevron-icon hydrated"></va-icon>
           </div>
         </a>
@@ -69,50 +100,53 @@ describe('va-service-list-item', () => {
         <div class="status">
           <span class="usa-label">Eligible</span>
         </div>
-        <ul class="service-list-items">
+        <ul class="service-details-list">
           <li>
             <div>
-              <strong>APPROVED ON:</strong> May 11, 2011
+              <strong>Approved on:</strong> May 11, 2011
             </div>
           </li>
           <li>
             <div>
-              <strong>PROGRAM:</strong> Post-9/11 GI Bill
+              <strong>Program:</strong> Post-9/11 GI Bill
             </div>
           </li>
           <li>
             <div>
-              <strong>ELIGIBILITY:</strong> 70%
+              <strong>Eligibility:</strong> 70%
             </div>
           </li>
         </ul>
-        <slot name="optional-link">
-          <va-link class="hydrated"></va-link>
-        </slot>
+        <va-link class="hydrated"></va-link>
       </div>
     `);
   });
 
-  it('does NOT render action bar when serviceStatus is NOT Eligible"', async () => {
-    const { page, elementHandle } = await setupComponent({ serviceStatus: "Ineligible" });
+  it('does NOT render action bar when action prop is completely missing', async () => {
+    // Pass all props EXCEPT action
+    const { page, elementHandle } = await setupComponent({
+      serviceDetails: {
+        'Approved on': 'May 11, 2011',
+        'Program': 'Post-9/11 GI Bill',
+        'Eligibility': '70%',
+      },
+      icon: 'school',
+      serviceName: 'Education',
+      serviceLink: 'https://www.va.gov/education',
+      serviceStatus: 'Eligible',
+      optionalLink: {
+        href: 'https://www.va.gov',
+        text: 'Optional link (to a page other than the detail page)',
+      },
+    });
 
-    const shadowInnerHTML = await page.evaluate((el) => el.shadowRoot.innerHTML, elementHandle);
+    await page.waitForSelector('va-service-list-item');
+    await page.waitForChanges();
 
+    const shadowInnerHTML = await page.evaluate(
+      el => el.shadowRoot.innerHTML,
+      elementHandle,
+    );
     expect(shadowInnerHTML).not.toContain('<div class="action-bar">');
   });
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
