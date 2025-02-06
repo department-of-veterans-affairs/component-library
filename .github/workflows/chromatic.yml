@@ -36,4 +36,10 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           skip: 'dependabot/**'
-          branchName: pr-${{ env.PR_NUMBER}}
+          # branchName: pr-${{ env.PR_NUMBER}}
+
+      - name: Output Chromatic Results
+        run: |
+          echo "Storybook URL: ${{ steps.chromatic.outputs.storybookUrl }}"
+          echo "Build URL: ${{ steps.chromatic.outputs.buildUrl }}"
+          echo "Branch URL: ${{ steps.chromatic.outputs.branchUrl }}"
