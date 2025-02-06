@@ -31,7 +31,7 @@ jobs:
         uses: chromaui/action@latest
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
+          # Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
           workingDir: packages/storybook
@@ -39,7 +39,26 @@ jobs:
           # branchName: pr-${{ env.PR_NUMBER}}
 
       - name: Output Chromatic Results
+        id: chromatic_urls
         run: |
-          echo "Storybook URL: ${{ steps.chromatic.outputs.storybookUrl }}"
-          echo "Build URL: ${{ steps.chromatic.outputs.buildUrl }}"
-          echo "Branch URL: ${{ steps.chromatic.outputs.branchUrl }}"
+          echo "=== Debug Information ==="
+          echo "Original Storybook URL: ${{ steps.chromatic.outputs.storybookUrl }}"
+          echo "Original Build URL: ${{ steps.chromatic.outputs.buildUrl }}"
+          echo "Current branch name: ${{ github.ref_name }}"
+          
+          # Extract the project URL and branch slug from Storybook URL
+          PROJECT_URL=$(echo "${{ steps.chromatic.outputs.storybookUrl }}" | sed -E 's/--.*\.chromatic\.com.*//')
+          BRANCH_SLUG=$(echo "${{ steps.chromatic.outputs.storybookUrl }}" | grep -o -- "--.*\." | sed 's/--\(.*\)\./\1/')
+          
+          echo "=== Extracted Components ==="
+          echo "Project URL: ${PROJECT_URL}"
+          echo "Branch Slug: ${BRANCH_SLUG}"
+          
+          # Construct the final branch URL
+          BRANCH_URL="${PROJECT_URL}.chromatic.com/branch/${BRANCH_SLUG}"
+          
+          echo "=== Final URLs ==="
+          echo "Branch permalink: ${BRANCH_URL}"
+          
+          # Set output for use in other steps if needed
+          echo "branch_url=${BRANCH_URL}" >> $GITHUB_OUTPUT
