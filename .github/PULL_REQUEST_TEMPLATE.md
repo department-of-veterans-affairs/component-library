@@ -2,6 +2,8 @@
 <!-- This `{{head.ref}}` is a placeholder for a CI job - it will be updated automatically -->
 https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
 
+https://STORYBOOK_PREVIEW_BRANCH--65a6e2ed2314f7b8f98609d8.chromatic.com
+
 ---
 ## Configuring this pull request
 - [ ] Link to any related issues in the description so they can be cross-referenced.
