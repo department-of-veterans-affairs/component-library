@@ -12,7 +12,7 @@ describe('va-language-toggle', () => {
   it('English is the default language', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-language-toggle en-href="#" es-href="#" tl-href="#" />`);
-    const anchor = await page.find('va-language-toggle >>> va-link');
+    const anchor = await page.find('va-language-toggle >>> a');
     expect(anchor).toHaveClass('is-current-lang');
   });
 
@@ -26,7 +26,7 @@ describe('va-language-toggle', () => {
   it('if language prop is set the matching language is bolded', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-language-toggle language="es" en-href="#" es-href="#" tl-href="#" />`);
-    const [_, anchor] = await page.findAll('va-language-toggle >>> va-link');
+    const [_, anchor] = await page.findAll('va-language-toggle >>> a');
     expect(anchor).toHaveClass('is-current-lang');
   });
 

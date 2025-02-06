@@ -123,7 +123,7 @@ export class VaLanguageToggle {
     const { language, urls } = this;
     return (
       <Host>
-        <div>
+        <div role="group" aria-label="Language selection">
         {urls.map(({href, lang, label}, i) => {
           const anchorClass = classNames({
             'is-current-lang': lang === language
@@ -131,6 +131,21 @@ export class VaLanguageToggle {
           const divClass = classNames({
             'inner-div': (i < urls.length - 1)
           })
+          if (lang === language) {
+          return (
+            <div class={divClass}>
+              <a
+                class={anchorClass}
+                href={href}
+                hrefLang={lang}
+                onClick={(e) => this.handleToggle(e, lang, label)}
+                aria-current={"language"}
+              >
+                {label}
+              </a>
+            </div>
+          )
+        } else {
           return (
             <div class={divClass}>
               <va-link
@@ -143,6 +158,7 @@ export class VaLanguageToggle {
               />
             </div>
           )
+        }
         })}
         </div>
       </Host>
