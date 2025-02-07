@@ -95,7 +95,10 @@ describe('va-service-list-item', () => {
           </div>
         </a>
         <div class="action-bar">
-          <va-link-action class="hydrated"></va-link-action>
+           <a class="action-link" href="https://www.va.gov/education">
+          <va-icon class="hydrated link-icon"></va-icon>
+        Take some urgent action
+         </a>
         </div>
         <div class="status">
           <span class="usa-label">Eligible</span>
@@ -117,7 +120,7 @@ describe('va-service-list-item', () => {
             </div>
           </li>
         </ul>
-        <va-link class="hydrated"></va-link>
+        <va-link class="hydrated optional-link"></va-link>
       </div>
     `);
   });
