@@ -50,7 +50,6 @@ export class VaServiceListItem {
   /** An optional link related to the service */
   @Prop() optionalLink?: OptionalLink | string;
 
-  // @State() parsedServiceDetails: ServiceDetails = {};
   @State() parsedServiceDetails: ServiceDetails;
   @State() parsedAction?: ServiceAction;
   @State() parsedOptionalLink?: OptionalLink;

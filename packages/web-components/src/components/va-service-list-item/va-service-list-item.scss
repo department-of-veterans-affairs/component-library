@@ -123,6 +123,10 @@ a {
   left: -2rem;
   width: calc(100% + 2rem);
 
+  @media (min-width: $medium-screen) {
+    left: 0;
+    width: auto;
+  }
 }
   .action-link {
  color: $vads-color-base;
