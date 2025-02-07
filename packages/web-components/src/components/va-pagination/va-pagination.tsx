@@ -96,10 +96,7 @@ export class VaPagination {
   @State() isMobileViewport: Boolean = false;
 
   /**
-   * Local state to manage max page numbers on small screens
-   * and zoomed layouts. Six seems to be the sweet spot, so we will
-   * use that as a magic number on mobile viewports where two ellises
-   * are required.
+   * Manage max page length on small screens and zoomed layouts
    */
   @State() maxPageListLengthState: number = this.maxPageListLength;
 
@@ -186,12 +183,12 @@ export class VaPagination {
 
     // Use cases
     if (totalPages <= this.SHOW_ALL_PAGES) {
-      // Use case #1 - 6 or less total pages.
+      // Use case #1: 6 or less total pages.
       // This use case will override all other functions.
 
       return makeArray(1, totalPages);
     } else if (currentPage <= radius + 1) {
-      // Use case #2 - Current page is less than radius + 1.
+      // Use case #2: Current page is less than radius + 1.
       // This use case always renders [1] in pageNumbers array.
 
       start = 1;
@@ -207,7 +204,7 @@ export class VaPagination {
 
       return makeArray(start, end);
     } else if (currentPage + radius >= totalPages) {
-      // Use case #3 - Current page is greater than radius
+      // Use case #3: Current page is greater than radius
       start =
         totalPages - maxPageListLengthState > 0
           ? // Subtract 2 to account for having to add ellipsis and first page
@@ -222,7 +219,7 @@ export class VaPagination {
 
       return makeArray(start, end);
     } else {
-      // Use case #4 - Continuous pages don't start at 1 or end at last page.
+      // Use case #4: Continuous pages don't start at 1 or end at last page.
       // start must subtract 2 to account for showing the first page and ellipsis.
       start = currentPage - (radius - 2);
 
@@ -236,7 +233,7 @@ export class VaPagination {
       }
 
       if (this.isMobileViewport) {
-        // Reduce the middle range to ensure first, last, and ellipses don't overflow
+        // Reduce the middle array length to ensure first, last, and ellipses don't overflow
         start = start + 2;
         end = end - 2;
       }
@@ -245,7 +242,7 @@ export class VaPagination {
     }
   };
 
-  private handleKeyDown = (e, pageNumber) => {
+  private handleKeyDown = (e: KeyboardEvent, pageNumber: number) => {
     const keyCode = e.key;
     if (keyCode === 'Enter' || keyCode === ' ') {
       e.preventDefault();
@@ -310,7 +307,7 @@ export class VaPagination {
   private renderPreviousButton(
     arrowClasses: string,
     previousAriaLabel: string,
-  ): void {
+  ): JSX.Element {
     // Skip rendering if the viewport is too narrow to show Previous button
     if (this.isMobileViewport) return null;
 
@@ -335,7 +332,10 @@ export class VaPagination {
     );
   }
 
-  private renderFirstPage(itemClasses: string, ellipsisClasses: string): void {
+  private renderFirstPage(
+    itemClasses: string,
+    ellipsisClasses: string,
+  ): JSX.Element {
     // Return early if [1] is in the pageNumbers array.
     // This also prevents the first ellipsis being rendered.
     if (this.pageNumbers().includes(1)) return null;
@@ -364,7 +364,7 @@ export class VaPagination {
   private renderMiddlePages(
     ariaLabelSuffix: string,
     itemClasses: string,
-  ): Array<number> {
+  ): Array<JSX.Element> {
     const renderedMiddlePages = this.pageNumbers().map(pageNumber => {
       const anchorClasses = classnames({
         'usa-pagination__button': true,
@@ -404,7 +404,10 @@ export class VaPagination {
     return renderedMiddlePages;
   }
 
-  private renderLastPage(ellipsisClasses: string, itemClasses: string): void {
+  private renderLastPage(
+    ellipsisClasses: string,
+    itemClasses: string,
+  ): JSX.Element {
     // Last page has already been rendered with renderMiddlePages
     if (this.pageNumbers().includes(this.pages)) return null;
 
@@ -449,7 +452,7 @@ export class VaPagination {
   private renderNextPageButton(
     arrowClasses: string,
     nextAriaLabel: string,
-  ): void {
+  ): JSX.Element {
     // Skip rendering if the viewport is too narrow to show Next button
     if (this.isMobileViewport) return null;
 
