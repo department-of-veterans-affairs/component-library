@@ -19,7 +19,6 @@ const getMaturityCategory = (componentName) => {
   return maturityScale['category'];
 }
 
-
 addons.setConfig({
   enableShortcuts: false,
   sidebar: {
