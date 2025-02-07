@@ -122,7 +122,7 @@ describe('va-button-pair', () => {
 
   it('continue button displays custom text when the continue prop is set and custom text is provided', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button-pair continue text="Save and continue"></va-button-pair>');
+    await page.setContent('<va-button-pair continue right-button-text="Save and continue"></va-button-pair>');
     const button = await page.find('va-button-pair >>> va-button[continue] >>> button');
     expect(button.textContent).toEqual('Save and continue');
   });
