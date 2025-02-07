@@ -31,7 +31,7 @@ const defaultArgs = {
 const Template = ({
   back,
   big,
-   _continue,
+   _continue, // "continue" is a reserved word and it doesn't seem to work here as-is.
   disableAnalytics,
   disabled,
   loading,
