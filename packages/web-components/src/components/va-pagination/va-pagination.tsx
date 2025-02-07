@@ -97,14 +97,18 @@ export class VaPagination {
 
   /**
    * Local state to manage max page numbers on small screens
-   * and zoomed layouts.
+   * and zoomed layouts. Six seems to be the sweet spot, so we will
+   * use that as a magic number on mobile viewports where two ellises
+   * are required.
    */
   @State() maxPageListLengthState: number = this.maxPageListLength;
 
   /**
    * If the page total is less than or equal to this limit, show all pages.
+   * The number has been reduced from 7 to 6 to show all more consistently
+   * on small screens and zoomed in browser windows.
    */
-  SHOW_ALL_PAGES: number = 7;
+  SHOW_ALL_PAGES: number = 6;
 
   /**
    * Small pagination width chosen based on USWDS "tablet" spacing unit.
@@ -113,16 +117,15 @@ export class VaPagination {
   SMALL_PAGINATION_WIDTH: number = 640;
 
   /**
-   * =========================================
-   * SCRATCHPAD!
-   * =========================================
+   * Observe the host component so we can accurately
+   * determine a mobile viewport or a zoomed in
+   * browser window.
    */
   resizeObserver = new ResizeObserver(entries => {
     this.handleResizeEvent(entries);
   });
 
-  handleResizeEvent(entries: ResizeObserverEntry[]): void {
-    // console.log('Fired resize observer!');
+  private handleResizeEvent(entries: ResizeObserverEntry[]): void {
     // TODO: Add a debounce?
     const { SMALL_PAGINATION_WIDTH } = this;
 
@@ -137,7 +140,7 @@ export class VaPagination {
     }
   }
 
-  private handlePageSelect = (page, eventID) => {
+  private handlePageSelect = (page: number, eventID: string) => {
     this.pageSelect.emit({ page });
 
     // Reset focus to the active page button.
@@ -166,73 +169,80 @@ export class VaPagination {
       page: currentPage,
       pages: totalPages,
       unbounded,
-      SHOW_ALL_PAGES,
     } = this;
 
-    // radius is half the length of the visible pages
-    // use as a reference from the selected page to find
-    // start and end of the pages to render
+    // Radius is half the length of the visible pages
     const radius = Math.floor(maxPageListLength / 2);
 
-    //if the unbounded flag is set we don't include the last page
+    // If the unbounded flag is set we don't include the last page
     const unboundedChar = unbounded ? 0 : 1;
 
-    let start;
-    let end;
-    let { isMobileViewport, maxPageListLengthState } = this;
+    let { isMobileViewport, maxPageListLengthState, SHOW_ALL_PAGES } = this;
+    let start: number;
+    let end: number;
 
-    // move max page list length into state so we can override the
-    // count using observed resize events
-    maxPageListLengthState = isMobileViewport
-      ? SHOW_ALL_PAGES
-      : maxPageListLength;
+    // The smallest breakpoint can show at most 6 pages, including ellipses
+    if (isMobileViewport) maxPageListLengthState = SHOW_ALL_PAGES;
 
+    // Use cases
     if (totalPages <= this.SHOW_ALL_PAGES) {
-      return makeArray(1, totalPages);
-    }
+      // Use case #1 - 6 or less total pages.
+      // This use case will override all other functions.
 
-    // continuous pages start at 1
-    if (currentPage <= radius + 1) {
+      return makeArray(1, totalPages);
+    } else if (currentPage <= radius + 1) {
+      // Use case #2 - Current page is less than radius + 1.
+      // This use case always renders [1] in pageNumbers array.
+
       start = 1;
       end =
         maxPageListLengthState >= totalPages
           ? totalPages
           : maxPageListLengthState - 1 - unboundedChar;
+
+      // Make sure the next page is showing
       if (end === currentPage) {
-        // make sure the next page is showing
         end++;
       }
-      return makeArray(start, end);
-    }
 
-    // continuous pages end at last page
-    if (currentPage + radius >= totalPages) {
-      end = totalPages;
+      return makeArray(start, end);
+    } else if (currentPage + radius >= totalPages) {
+      // Use case #3 - Current page is greater than radius
       start =
         totalPages - maxPageListLengthState > 0
-          ? //subtract 2 to account for having to add ellipsis and first page
+          ? // Subtract 2 to account for having to add ellipsis and first page
             totalPages - (maxPageListLengthState - 2 - 1)
           : 1;
+      end = totalPages;
+
+      // Make sure the previous page is showing
       if (start === currentPage) {
-        // make sure the previous page is showing
         start--;
       }
-      return makeArray(start, end);
 
-      // continuous pages don't start at 1 or end at last page
+      return makeArray(start, end);
     } else {
-      // subtract 2 to account for having to show the ellipsis and the "first" page
+      // Use case #4 - Continuous pages don't start at 1 or end at last page.
+      // start must subtract 2 to account for showing the first page and ellipsis.
       start = currentPage - (radius - 2);
+
+      // Assume end is the last page
       if (currentPage + radius > totalPages) {
         end = totalPages;
       } else {
-        // subtract 1 to account for having to show the ellipsis
-        // and subtract another 1 if showing the "last" page (unbounded = false)
+        // Assume end is not the last page. Subtract 1 to account for showing the
+        // ellipsis and subtract another 1 if showing the last page (unbounded = false).
         end = currentPage + (radius - 1 - unboundedChar);
       }
-    }
 
-    return makeArray(start, end);
+      if (this.isMobileViewport) {
+        // Reduce the middle range to ensure first, last, and ellipses don't overflow
+        start = start + 2;
+        end = end - 2;
+      }
+
+      return makeArray(start, end);
+    }
   };
 
   private handleKeyDown = (e, pageNumber) => {
@@ -294,7 +304,7 @@ export class VaPagination {
 
   /**
    * =========================================
-   * RENDER SCRATCHPAD!
+   * Pagination render functions
    * =========================================
    */
   private renderPreviousButton(
@@ -308,30 +318,26 @@ export class VaPagination {
     if (this.page === 1) return null;
 
     return (
-      <Fragment>
-        <li class={arrowClasses}>
-          <a
-            aria-label={previousAriaLabel}
-            onClick={() =>
-              this.handlePageSelect(this.page - 1, 'nav-paginate-number')
-            }
-            onKeyDown={e => this.handleKeyDown(e, this.page - 1)}
-            class="usa-pagination__link usa-pagination__previous-page"
-            href="javascript:void(0)"
-          >
-            <div id="previous-arrow-icon"></div>
-            <span class="usa-pagination__link-text">
-              {i18next.t('previous')}
-            </span>
-          </a>
-        </li>
-      </Fragment>
+      <li class={arrowClasses}>
+        <a
+          aria-label={previousAriaLabel}
+          onClick={() =>
+            this.handlePageSelect(this.page - 1, 'nav-paginate-number')
+          }
+          onKeyDown={e => this.handleKeyDown(e, this.page - 1)}
+          class="usa-pagination__link usa-pagination__previous-page"
+          href="javascript:void(0)"
+        >
+          <div id="previous-arrow-icon"></div>
+          <span class="usa-pagination__link-text">{i18next.t('previous')}</span>
+        </a>
+      </li>
     );
   }
 
   private renderFirstPage(itemClasses: string, ellipsisClasses: string): void {
     // Return early if [1] is in the pageNumbers array.
-    // This also prevents the first [...] being rendered.
+    // This also prevents the first ellipsis being rendered.
     if (this.pageNumbers().includes(1)) return null;
 
     return (
@@ -355,11 +361,11 @@ export class VaPagination {
     );
   }
 
-  private renderPages(
+  private renderMiddlePages(
     ariaLabelSuffix: string,
     itemClasses: string,
   ): Array<number> {
-    const renderedPageNumbers = this.pageNumbers().map(pageNumber => {
+    const renderedMiddlePages = this.pageNumbers().map(pageNumber => {
       const anchorClasses = classnames({
         'usa-pagination__button': true,
         'usa-current': this.page === pageNumber,
@@ -368,12 +374,15 @@ export class VaPagination {
       let pageAriaLabel = ariaLabelSuffix
         ? `page ${pageNumber} ${ariaLabelSuffix}`
         : `page ${pageNumber}`;
+
       if (pageNumber === 1) {
         pageAriaLabel = `${pageAriaLabel}, first page`;
       }
+
       if (pageNumber === this.pages) {
         pageAriaLabel = `${pageAriaLabel}, last page`;
       }
+
       return (
         <li class={itemClasses}>
           <a
@@ -392,10 +401,11 @@ export class VaPagination {
       );
     });
 
-    return renderedPageNumbers;
+    return renderedMiddlePages;
   }
 
   private renderLastPage(ellipsisClasses: string, itemClasses: string): void {
+    // Last page has already been rendered with renderMiddlePages
     if (this.pageNumbers().includes(this.pages)) return null;
 
     let lastEllipsis = null;
@@ -447,93 +457,58 @@ export class VaPagination {
     if (this.page >= this.pages) return null;
 
     return (
-      <Fragment>
-        <li class={arrowClasses}>
-          <a
-            aria-label={nextAriaLabel}
-            onClick={() =>
-              this.handlePageSelect(this.page + 1, 'nav-paginate-number')
-            }
-            onKeyDown={e => this.handleKeyDown(e, this.page + 1)}
-            class="usa-pagination__link usa-pagination__next-page"
-            href="javascript:void(0)"
-          >
-            <span class="usa-pagination__link-text">{i18next.t('next')}</span>
-            <div id="next-arrow-icon"></div>
-          </a>
-        </li>
-      </Fragment>
+      <li class={arrowClasses}>
+        <a
+          aria-label={nextAriaLabel}
+          onClick={() =>
+            this.handlePageSelect(this.page + 1, 'nav-paginate-number')
+          }
+          onKeyDown={e => this.handleKeyDown(e, this.page + 1)}
+          class="usa-pagination__link usa-pagination__next-page"
+          href="javascript:void(0)"
+        >
+          <span class="usa-pagination__link-text">{i18next.t('next')}</span>
+          <div id="next-arrow-icon"></div>
+        </a>
+      </li>
     );
   }
-
   /**
    * =========================================
-   * END RENDER SCRATCHPAD!
+   * End pagination render functions
    * =========================================
    */
 
   render() {
     const { ariaLabelSuffix, pages } = this;
 
-    if (pages === 1) {
-      return <div />;
-    }
+    // Return early if there's no need to render pagination
+    if (pages === 1) return null;
 
     const previousAriaLabel = ariaLabelSuffix
       ? `Previous page ${ariaLabelSuffix}`
       : 'Previous page';
+
     const nextAriaLabel = ariaLabelSuffix
       ? `Next page ${ariaLabelSuffix}`
       : 'Next page';
 
-    // const pageNumbersToRender = this.pageNumbers();
     const itemClasses = classnames({
       'usa-pagination__item': true,
       'usa-pagination__page-no': true,
       'va-pagination__item': true,
     });
+
     const ellipsisClasses = classnames({
       'usa-pagination__item': true,
       'usa-pagination__overflow': true,
       'va-pagination__item': true,
     });
+
     const arrowClasses = classnames({
       'usa-pagination__item': true,
       'usa-pagination__arrow': true,
     });
-
-    // const renderPages = pageNumbersToRender.map(pageNumber => {
-    //   const anchorClasses = classnames({
-    //     'usa-pagination__button': true,
-    //     'usa-current': page === pageNumber,
-    //   });
-
-    //   let pageAriaLabel = ariaLabelSuffix
-    //     ? `page ${pageNumber} ${ariaLabelSuffix}`
-    //     : `page ${pageNumber}`;
-    //   if (pageNumber === 1) {
-    //     pageAriaLabel = `${pageAriaLabel}, first page`;
-    //   }
-    //   if (pageNumber === pages) {
-    //     pageAriaLabel = `${pageAriaLabel}, last page`;
-    //   }
-    //   return (
-    //     <li class={itemClasses}>
-    //       <a
-    //         onClick={() =>
-    //           this.handlePageSelect(pageNumber, 'nav-paginate-number')
-    //         }
-    //         onKeyDown={e => this.handleKeyDown(e, pageNumber)}
-    //         href="javascript:void(0)"
-    //         class={anchorClasses}
-    //         aria-current={page === pageNumber ? 'page' : null}
-    //         aria-label={pageAriaLabel}
-    //       >
-    //         {pageNumber}
-    //       </a>
-    //     </li>
-    //   );
-    // });
 
     return (
       <Host>
@@ -541,11 +516,7 @@ export class VaPagination {
           <ul class="usa-pagination__list">
             {this.renderPreviousButton(arrowClasses, previousAriaLabel)}
             {this.renderFirstPage(itemClasses, ellipsisClasses)}
-            {/* {previousButton} */}
-            {/* {renderPages} */}
-            {this.renderPages(ariaLabelSuffix, itemClasses)}
-            {/* {endEllipsisAndLastPage} */}
-            {/* {nextButton} */}
+            {this.renderMiddlePages(ariaLabelSuffix, itemClasses)}
             {this.renderLastPage(ellipsisClasses, itemClasses)}
             {this.renderNextPageButton(arrowClasses, nextAriaLabel)}
           </ul>
