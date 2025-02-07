@@ -2,9 +2,10 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const serviceListItemDocs = getWebComponentDocs('va-service-list-item');
+console.log(serviceListItemDocs);
 
 export default {
-  title: 'Components/Service List Item',
+  title: 'Components/Service list item',
   id: 'components/va-service-list-item',
   parameters: {
     componentSubtitle: 'va-service-list-item web component',
