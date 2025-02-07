@@ -51,13 +51,14 @@
   padding-right: 0;
 }
 
+// Defining here since it's not currently being "included" by Storybook
+:host .vads-u-text-align--right {
+  text-align: right;
+}
+
 ::slotted([slot='headers']) {
   background: var(--vads-color-base-lightest);
   font-weight: 700;
-}
-
-:host .text-align-right {
-  text-align: right;
 }
 
 caption {

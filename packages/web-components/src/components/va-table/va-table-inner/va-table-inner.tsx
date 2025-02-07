@@ -183,7 +183,7 @@ export class VaTableInner {
           let rightAlignClass = '';
           // Checks if this cell should be right-aligned and adds a class to make it so
           if (this.colsToAlign !== undefined && this.colsToAlign.includes(i)) {
-            rightAlignClass = 'text-align-right';
+            rightAlignClass = 'vads-u-text-align--right';
           }
           const dataSortActive = row > 0 && this.sortindex === i ? true : false;
           return i === 0 || row === 0 ? (

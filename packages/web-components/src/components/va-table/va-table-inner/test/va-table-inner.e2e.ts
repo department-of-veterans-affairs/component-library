@@ -5,9 +5,9 @@ import { numSort } from '../../sort/numerical';
 import { dateSort } from '../../sort/date';
 import { _getCompareFunc } from '../../sort/utils';
 
-describe('va-table', () => {
+describe('va-table-inner', () => {
   function makeTable(props = {}) {
-    const defaultProps = {...props, 'table-title': 'this is a caption'};
+    const defaultProps = { ...props, 'table-title': 'this is a caption' };
     return `<va-table ${Object.entries(defaultProps)
       .map(([key, value]) => `${key}="${value}"`)
       .join(' ')}>
@@ -64,7 +64,7 @@ describe('va-table', () => {
 
   it('is scrollable when attribute is set to true', async () => {
     const page = await newE2EPage();
-    await page.setContent(makeTable({scrollable: 'true'}));
+    await page.setContent(makeTable({ scrollable: 'true' }));
     const table = await page.find('va-table-inner >>> div');
     expect(table.getAttribute('tabindex')).toEqual('0');
     expect(table).toHaveClass('usa-table-container--scrollable');
@@ -72,7 +72,7 @@ describe('va-table', () => {
 
   it('is not stacked by when attribute is set to false', async () => {
     const page = await newE2EPage();
-    await page.setContent(makeTable({stacked: 'false'}));
+    await page.setContent(makeTable({ stacked: 'false' }));
     const table = await page.find('va-table-inner >>> table');
     expect(table).not.toHaveClass('usa-table--stacked');
   });
@@ -112,7 +112,7 @@ describe('va-table', () => {
 
   it('has the USWDS striped class when striped is true', async () => {
     const page = await newE2EPage();
-    await page.setContent(makeTable({striped: 'true'}));
+    await page.setContent(makeTable({ striped: 'true' }));
     const table = await page.find('va-table-inner >>> .usa-table');
     expect(table).toHaveClass('usa-table--striped');
   });
@@ -134,14 +134,18 @@ describe('va-table', () => {
   it('does not have any right-aligned columns by default', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());
-    const rightEl = await page.find('va-table-inner >>> .text-right-align');
+    const rightEl = await page.find(
+      'va-table-inner >>> .vads-u-text-align--right',
+    );
     expect(rightEl).toBeNull();
   });
 
   it('has the text-right-align class when right-align-cols is set', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable({ 'right-align-cols': '2' }));
-    const rightEl = await page.find('va-table-inner >>> .text-right-align');
+    const rightEl = await page.find(
+      'va-table-inner >>> .vads-u-text-align--right',
+    );
     expect(rightEl).toBeDefined();
   });
 });
