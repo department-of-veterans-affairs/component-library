@@ -10,7 +10,8 @@
 
 .service-list-item{
 padding: 1.25rem 2rem 2rem 1rem;
-border: 1px solid var(--vads-color-gray-medium);
+border-top: 1px solid var(--vads-color-gray-medium);
+border-bottom: 1px solid var(--vads-color-gray-medium);
 
 a {
   text-decoration: none;
@@ -25,10 +26,7 @@ a {
 
   &:focus .chevron-icon,
   &:hover .chevron-icon {
-    margin-left: 17rem;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-in-out;
-    transition-property: margin;
+    transform: translateX(0.25rem);
     color: $vads-color-link-active;
   }
 }
@@ -36,12 +34,14 @@ a {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 
   .icon {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    flex-shrink: 0;
     height: 40px !important;
     width: 40px !important;
     min-width: 40px !important;
@@ -84,14 +84,32 @@ a {
     }
   }
 
+  &:not(:has(.icon)) {
+    .service-name {
+      width: auto;
+    }
+    .chevron-icon {
+      @media (min-width: $medium-screen) {
+      margin-left: 0.938rem;
+    }
+   }
+  }
+
   .service-name {
     margin-top: 0;
+    width: 11.875rem;
     color: $vads-color-link;
+    @media (min-width: $medium-screen) {
+      width: auto;
+    }
   }
   .chevron-icon {
     margin-left: auto;
     font-size: 24px;
     color: $vads-color-link;
+    @media (min-width: $medium-screen) {
+      margin-left: .938rem;
+    }
   }
 }
 .status {
@@ -114,7 +132,7 @@ a {
   }
 .link-icon {
   border-radius: 50%;
-  margin: 0 0.5rem 0 1.25rem;
+  margin: 0 0.5rem 0 1rem;
   color: $vads-color-warning;
   background-color: $vads-color-base;
 }

@@ -24,6 +24,7 @@ export interface OptionalLink {
   styleUrl: 'va-service-list-item.scss',
   shadow: true,
 })
+
 export class VaServiceListItem {
   /** The name of the service */
   @Prop() serviceName: string;
