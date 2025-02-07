@@ -90,7 +90,7 @@ export class VaPagination {
   @Prop() unbounded?: boolean = false;
 
   /**
-   * Will be true when va-pagination is 641 pixes or wider
+   * Will be true when va-pagination is 641 pixes or narrower
    * as measured by this.handleResizeEvent().
    */
   @State() isMobileViewport: Boolean = false;
@@ -506,6 +506,7 @@ export class VaPagination {
       'usa-pagination__item': true,
       'usa-pagination__overflow': true,
       'va-pagination__item': true,
+      'va-pagination__overflow--isMobile': this.isMobileViewport,
     });
 
     const arrowClasses = classnames({

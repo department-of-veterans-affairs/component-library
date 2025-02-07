@@ -38,6 +38,10 @@ li {
   display: inline-flex;
 }
 
+li.va-pagination__overflow--isMobile {
+  margin: 0;
+}
+
 button {
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
