@@ -113,6 +113,20 @@ describe('va-button-pair', () => {
     expect(rightText).toEqual('world');
   });
 
+  it('continue button displays the text "Continue" when the continue prop is set and no custom text is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button-pair continue></va-button-pair>');
+    const button = await page.find('va-button-pair >>> va-button[continue] >>> button');
+    expect(button.textContent).toEqual('Continue');
+  });
+
+  it('continue button displays custom text when the continue prop is set and custom text is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button-pair continue text="Save and continue"></va-button-pair>');
+    const button = await page.find('va-button-pair >>> va-button[continue] >>> button');
+    expect(button.textContent).toEqual('Save and continue');
+  });
+
   it('submits form when submit prop is set and "continue" button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent('<form onsubmit="e=>{e.preventDefault();}"><va-button-pair submit continue></va-button-pair></form>');

@@ -95,7 +95,7 @@ export class VaButton {
   @Prop() submit?: string;
 
   /**
-   * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+   * The text displayed on the button.
    */
   @Prop() text?: string;
 

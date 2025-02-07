@@ -171,14 +171,14 @@ describe('va-button', () => {
     expect(loadingMessageEl.innerHTML).toEqual('Loading complete');
   });
 
-  it('displays Continue when continue is true and text is not provided', async () => {
+  it('displays "Continue" text when continue prop set and text is not provided', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button continue></va-button>');
     const button = await page.find('va-button >>> button');
     expect(button.textContent).toEqual('Continue');
   });
 
-  it('displays custom text value when continue is true and text is provided', async () => {
+  it('displays custom text when continue is true and text is provided', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button text="Save and continue" continue></va-button>');
     const button = await page.find('va-button >>> button');
