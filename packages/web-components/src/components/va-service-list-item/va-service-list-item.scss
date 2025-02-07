@@ -89,7 +89,7 @@ a {
       width: auto;
     }
     .chevron-icon {
-      @media (min-width: $medium-screen) {
+      @media (min-width: 767px) {
       margin-left: 0.938rem;
     }
    }
@@ -99,7 +99,7 @@ a {
     margin-top: 0;
     width: 11.875rem;
     color: $vads-color-link;
-    @media (min-width: $medium-screen) {
+    @media (min-width: 767px) {
       width: auto;
     }
   }
@@ -107,7 +107,7 @@ a {
     margin-left: auto;
     font-size: 24px;
     color: $vads-color-link;
-    @media (min-width: $medium-screen) {
+    @media (min-width: 767px) {
       margin-left: .938rem;
     }
   }
@@ -123,7 +123,7 @@ a {
   left: -2rem;
   width: calc(100% + 2rem);
 
-  @media (min-width: $medium-screen) {
+  @media (min-width: 767px) {
     left: 0;
     width: auto;
   }
@@ -139,6 +139,10 @@ a {
   margin: 0 0.5rem 0 1rem;
   color: $vads-color-warning;
   background-color: $vads-color-base;
+
+  @media (min-width: 767px) {
+  margin: 0 0.5rem 0 0;
+  }
 }
 
 ul {
