@@ -269,3 +269,47 @@ Internationalization.args = {
 
 export const Indeterminate = IndeterminateTemplate.bind(null);
 Indeterminate.args = { ...defaultArgs };
+
+export const WithChildren = () => (
+  <>
+    <va-checkbox label="Issue 1" tile onBlur={e => console.log(e)}>
+      <div slot="internal-description">
+        <div>
+          <strong>Detail</strong>: Internal description slot for issue 1
+        </div>
+        <div className="vads-u-margin-top--1">
+          <strong>Date</strong> Jan 2, 2025
+        </div>
+      </div>
+    </va-checkbox>
+    <va-checkbox label="Issue 2" tile onBlur={e => console.log(e)}>
+      <div slot="internal-description">
+        <div>
+          <strong>Detail</strong>: Internal description slot for issue 2
+        </div>
+        <div className="vads-u-margin-top--1">
+          <strong>Date</strong> Jan 4, 2025
+        </div>
+      </div>
+    </va-checkbox>
+
+    <hr className="vads-u-margin-y--2" />
+
+    <va-checkbox
+      description='Example with main description (this blocks &lt;slot="description"&gt; from rendering)'
+      checkbox-description="Checkbox description property"
+      label="Issue X"
+      hint="This is example hint text"
+      tile
+      onBlur={e => console.log(e)}
+    >
+      <p slot="description">
+        External description for issue X - this won't render if
+        <code>description</code> is defined
+      </p>
+      <div slot="internal-description">
+        <p>Description for issue X (larger font in paragraph?)</p>
+      </div>
+    </va-checkbox>
+  </>
+);
