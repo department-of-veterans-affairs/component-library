@@ -47,9 +47,17 @@
   }
 }
 
+:host .usa-table th[data-sortable="false"] {
+  padding-right: 0;
+}
+
 ::slotted([slot='headers']) {
   background: var(--vads-color-base-lightest);
   font-weight: 700;
+}
+
+:host .text-align-right {
+  text-align: right;
 }
 
 caption {

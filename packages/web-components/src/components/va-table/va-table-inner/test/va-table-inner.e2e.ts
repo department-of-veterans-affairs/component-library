@@ -130,6 +130,20 @@ describe('va-table', () => {
     const divEl = await page.find('va-table-inner >>> div');
     expect(divEl).toHaveClass('va-table--full-width');
   });
+
+  it('does not have any right-aligned columns by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const rightEl = await page.find('va-table-inner >>> .text-right-align');
+    expect(rightEl).toBeNull();
+  });
+
+  it('has the text-right-align class when right-align-cols is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable({ 'right-align-cols': '2' }));
+    const rightEl = await page.find('va-table-inner >>> .text-right-align');
+    expect(rightEl).toBeDefined();
+  });
 });
 
 describe('sorted va-table ', () => {
