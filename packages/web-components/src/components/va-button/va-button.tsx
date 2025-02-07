@@ -134,7 +134,7 @@ export class VaButton {
     if (this.continue) return 'Continue';
     if (this.back) return 'Back';
     if (this.loading && !this.text) return 'Loading...';
-    return '';
+    return;
   };
 
   private handleSubmit() {
