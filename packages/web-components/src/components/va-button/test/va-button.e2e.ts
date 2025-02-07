@@ -185,11 +185,11 @@ describe('va-button', () => {
     expect(button.textContent).toEqual('Save and continue');
   });
 
-  it('ignores text value and displays Back when back is true', async () => {
+  it('displays custom text when text prop is set and Back is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" back></va-button>');
+    await page.setContent('<va-button text="Navigate back" back></va-button>');
     const button = await page.find('va-button >>> button');
-    expect(button.textContent).toEqual('Back');
+    expect(button.textContent).toEqual('Navigate back');
   });
 
   it(`doesn't display icons if both continue and back are true`, async () => {
