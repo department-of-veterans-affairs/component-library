@@ -15,7 +15,7 @@ import classnames from 'classnames';
 import { i18next } from '../..';
 import { Build } from '@stencil/core';
 
-import { makeArray } from '../../utils/utils';
+import { debounce, makeArray } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -108,10 +108,10 @@ export class VaPagination {
   SHOW_ALL_PAGES: number = 6;
 
   /**
-   * Small pagination width chosen based on USWDS "tablet" spacing unit.
+   * Small viewport width chosen based on USWDS "tablet" spacing unit.
    * See https://designsystem.digital.gov/design-tokens/spacing-units/
    */
-  SMALL_PAGINATION_WIDTH: number = 640;
+  SMALL_VIEWPORT_WIDTH: number = 640;
 
   /**
    * Observe the host component so we can accurately
@@ -119,19 +119,18 @@ export class VaPagination {
    * browser window.
    */
   resizeObserver = new ResizeObserver(entries => {
-    this.handleResizeEvent(entries);
+    debounce(this.handleResizeEvent(entries));
   });
 
   private handleResizeEvent(entries: ResizeObserverEntry[]): void {
-    // TODO: Add a debounce?
-    const { SMALL_PAGINATION_WIDTH } = this;
+    const { SMALL_VIEWPORT_WIDTH } = this;
 
     for (let entry of entries) {
-      if (entry.contentRect.width <= SMALL_PAGINATION_WIDTH) {
+      if (entry.contentRect.width <= SMALL_VIEWPORT_WIDTH) {
         this.isMobileViewport = true;
       }
 
-      if (entry.contentRect.width > SMALL_PAGINATION_WIDTH) {
+      if (entry.contentRect.width > SMALL_VIEWPORT_WIDTH) {
         this.isMobileViewport = false;
       }
     }
