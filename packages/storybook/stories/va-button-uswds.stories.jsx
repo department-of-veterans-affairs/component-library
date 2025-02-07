@@ -65,7 +65,7 @@ const Template = ({
 export const Primary = Template.bind(null);
 Primary.args = {
   ...defaultArgs,
-  text: "Default"
+  text: "Default",
 };
 Primary.argTypes = propStructure(buttonDocs);
 
@@ -94,6 +94,13 @@ export const Continue = Template.bind(null);
 Continue.args = {
   ...defaultArgs,
   _continue: true,
+};
+
+export const ContinueCustomText = Template.bind(null);
+ContinueCustomText.args = {
+  ...defaultArgs,
+  _continue: true,
+  text: "Save and continue",
 };
 
 export const Back = Template.bind(null);

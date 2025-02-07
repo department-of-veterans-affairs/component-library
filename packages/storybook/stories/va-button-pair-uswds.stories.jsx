@@ -75,6 +75,13 @@ Continue.args = {
   continue: true,
 };
 
+export const ContinueCustomText = Template.bind(null);
+ContinueCustomText.args = {
+  ...defaultArgs,
+  continue: true,
+  'right-button-text': 'Save and continue',
+};
+
 export const CustomButtonText = Template.bind(null);
 CustomButtonText.args = {
   ...defaultArgs,
