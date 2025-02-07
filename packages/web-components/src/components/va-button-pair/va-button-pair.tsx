@@ -134,6 +134,7 @@ export class VaButtonPair {
   // get text for the left button; custom text takes precedence
   private getLeftButtonText = (): string => {
     if (this.leftButtonText) return this.leftButtonText;
+    if (this.continue) return 'Back';
     if (this.update) return 'Update';
     return 'Yes';
   }
