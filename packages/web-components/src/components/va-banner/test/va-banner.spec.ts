@@ -23,7 +23,7 @@ describe('va-banner', () => {
     );
   });
 
-  it('prepareBannerID should return back dismissedBannerId string when proivided', () => {
+  it('prepareBannerID should return back dismissedBannerId string when provided', () => {
     let cmp = new VaBanner();
     cmp.dismissedBannerId = 'Test dismissedBannerId';
     expect(cmp['prepareBannerID']()).toEqual('Test dismissedBannerId');
