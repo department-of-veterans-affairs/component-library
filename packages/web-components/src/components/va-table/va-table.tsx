@@ -54,6 +54,11 @@ export class VaTable {
    */
   @Prop() striped: boolean = false;
 
+  /**
+   * When active, forces the table to expand to the full-width of its container
+   */
+  @Prop() fullWidth?: boolean = false;
+
   // The number of va-table-rows
   @State() rows: number;
 
@@ -151,6 +156,10 @@ export class VaTable {
 
     if (this.tableType) {
       vaTable.setAttribute('table-type', this.tableType);
+    }
+
+    if (this.fullWidth) {
+      vaTable.setAttribute('full-width', String(this.fullWidth));
     }
 
     //make a fragment containing all the cells, one for each slot

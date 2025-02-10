@@ -116,6 +116,20 @@ describe('va-table', () => {
     const table = await page.find('va-table-inner >>> .usa-table');
     expect(table).toHaveClass('usa-table--striped');
   });
+
+  it('is not full-width by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const divEl = await page.find('va-table-inner >>> div');
+    expect(divEl).not.toHaveClass('va-table--full-width');
+  });
+
+  it('has the full-width class when full-width is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable({ 'full-width': true }));
+    const divEl = await page.find('va-table-inner >>> div');
+    expect(divEl).toHaveClass('va-table--full-width');
+  });
 });
 
 describe('sorted va-table ', () => {

@@ -19,6 +19,15 @@
   padding: 0;
   width: 100%;
 }
+
+:host .va-table--full-width {
+  display: flex;
+
+  table {
+    flex: auto;
+  }
+}
+
 :host thead tr th {
   button {
     background-color: transparent;

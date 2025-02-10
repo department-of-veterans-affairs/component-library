@@ -71,6 +71,11 @@ export class VaTableInner {
   @Prop() striped: boolean = false;
 
   /**
+   * When active, the table will expand to the full width of its container
+   */
+  @Prop() fullWidth: boolean = false;
+
+  /**
    * If sortable is true, the direction of next sort for the column that was just sorted
    */
   @State() sortdir?: string = null;
@@ -145,10 +150,11 @@ export class VaTableInner {
    * @param innerHTML string of html
    * @returns parsed string escaped of html entities
    */
-  parseHTMLToString (innerHTML:string) {
+  parseHTMLToString(innerHTML: string) {
     let parser = new DOMParser();
 
-    return parser.parseFromString(innerHTML, 'text/html').documentElement.textContent;
+    return parser.parseFromString(innerHTML, 'text/html').documentElement
+      .textContent;
   }
 
   /**
@@ -163,9 +169,9 @@ export class VaTableInner {
         {Array.from({ length: this.cols }).map((_, i) => {
           const slotName = `va-table-slot-${row * this.cols + i}`;
           const slot = <slot name={slotName}></slot>;
-          const header = this.parseHTMLToString(this.el.querySelector(
-            `[slot="va-table-slot-${i}"]`,
-          ).innerHTML);
+          const header = this.parseHTMLToString(
+            this.el.querySelector(`[slot="va-table-slot-${i}"]`).innerHTML,
+          );
           const dataSortActive = row > 0 && this.sortindex === i ? true : false;
           return i === 0 || row === 0 ? (
             <th
@@ -324,27 +330,29 @@ export class VaTableInner {
           this.updateSpan(th, thSorted, nextSortDirection, content);
 
           // update sr text to reflect sort
-          setTimeout(()=>{
+          setTimeout(() => {
             this.updateSRtext(thSorted, content, currentSortDirection);
-          }, 500)
+          }, 500);
         });
     }
   }
 
   render() {
-    const { tableTitle, tableType, stacked, scrollable, striped } = this;
-    const classes = classnames({
+    const { tableTitle, tableType, stacked, scrollable, striped, fullWidth } =
+      this;
+    const containerClasses = classnames({
+      'usa-table-container--scrollable': scrollable,
+      'va-table--full-width': fullWidth,
+    });
+    const tableClasses = classnames({
       'usa-table': true,
       'usa-table--stacked': stacked,
       'usa-table--borderless': tableType === 'borderless',
       'usa-table--striped': striped,
     });
     return (
-      <div
-        tabIndex={scrollable ? 0 : null}
-        class={scrollable ? 'usa-table-container--scrollable' : undefined}
-      >
-        <table class={classes}>
+      <div tabIndex={scrollable ? 0 : null} class={containerClasses}>
+        <table class={tableClasses}>
           {tableTitle && <caption>{tableTitle}</caption>}
           <thead>{this.makeRow(0)}</thead>
           <tbody id="va-table-body">{this.getBodyRows()}</tbody>
