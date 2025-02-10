@@ -187,6 +187,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Optional dissmissedBannerId to allow setting specfic id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
+        /**
           * The headline of the banner.
          */
         "headline": string;
@@ -3444,6 +3448,10 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Optional dissmissedBannerId to allow setting specfic id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
         /**
           * The headline of the banner.
          */

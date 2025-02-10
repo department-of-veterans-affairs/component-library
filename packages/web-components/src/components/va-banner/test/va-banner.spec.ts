@@ -8,7 +8,7 @@ describe('va-banner', () => {
     cmp.el.innerHTML = 'This is test content';
     cmp.showClose = true;
     expect(cmp.dismissedBanners).toEqual([]);
-    cmp["dismiss"]();
+    cmp['dismiss']();
     expect(cmp.dismissedBanners).toEqual([
       'Test headline:This is test content',
     ]);
@@ -18,6 +18,14 @@ describe('va-banner', () => {
     let cmp = new VaBanner();
     cmp.headline = 'Test headline';
     cmp.el.innerHTML = 'This is test content';
-    expect(cmp["prepareBannerID"]()).toEqual('Test headline:This is test content');
+    expect(cmp['prepareBannerID']()).toEqual(
+      'Test headline:This is test content',
+    );
+  });
+
+  it('prepareBannerID should return back dismissedBannerId string when proivided', () => {
+    let cmp = new VaBanner();
+    cmp.dismissedBannerId = 'Test dismissedBannerId';
+    expect(cmp['prepareBannerID']()).toEqual('Test dismissedBannerId');
   });
 });
