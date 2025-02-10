@@ -180,7 +180,7 @@ export class VaTableInner {
           const header = this.parseHTMLToString(
             this.el.querySelector(`[slot="va-table-slot-${i}"]`).innerHTML,
           );
-          let rightAlignClass = '';
+          let rightAlignClass: string;
           // Checks if this cell should be right-aligned and adds a class to make it so
           if (this.colsToAlign !== undefined && this.colsToAlign.includes(i)) {
             rightAlignClass = 'vads-u-text-align--right';
@@ -319,7 +319,14 @@ export class VaTableInner {
   componentWillRender() {
     // If there are right-aligned columns, split and format them and save in memory for performance reasons
     if (this.rightAlignCols !== undefined) {
-      this.colsToAlign = this.rightAlignCols.split(',').map(val => Number(val));
+      const cols = this.rightAlignCols.split(',').map(val => Number(val));
+      if (cols.some(col => isNaN(col))) {
+        console.warn(
+          'There was a non-number detected in the right-align-cols/rightAlignCols prop, please ensure that this value is a comma-separated string of zero-indexed numbers, where each number represents a column you wish to right-align.',
+        );
+      } else {
+        this.colsToAlign = cols;
+      }
     }
   }
 
