@@ -618,6 +618,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Maximum allowed file size in bytes.
+         */
+        "maxFileSize"?: number;
+        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -3935,6 +3939,10 @@ declare namespace LocalJSX {
           * The label for the file input.
          */
         "label"?: string;
+        /**
+          * Maximum allowed file size in bytes.
+         */
+        "maxFileSize"?: number;
         /**
           * The name for the input element.
          */

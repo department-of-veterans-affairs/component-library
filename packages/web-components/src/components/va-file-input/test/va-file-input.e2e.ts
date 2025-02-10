@@ -308,4 +308,24 @@ describe('va-file-input', () => {
     // buttons are gone because file has been deleted
     expect(btns).toHaveLength(0);
   });
+
+  it('displays an error if the file size exceeds max allowed file size', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input max-file-size="1" />`);
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (await page.$(
+      'pierce/#fileInputField',
+    )) as ElementHandle<HTMLInputElement>;
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessage = await fileInfoCard.find('span.usa-error-message');
+    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too large. File size must be less than 1 B.");
+  });
 });
