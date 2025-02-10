@@ -71,7 +71,7 @@ export class VaBanner {
   @Prop() dataLabel?: string;
 
   /**
-   * Optional dissmissedBannerId to allow setting specfic id to be stored in DISMISSED_BANNERS
+   * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS
    * if not set it will default to the headline and innerHTML of the banner
    */
   @Prop() dismissedBannerId?: string;
