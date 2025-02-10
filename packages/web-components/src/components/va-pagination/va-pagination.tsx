@@ -505,7 +505,6 @@ export class VaPagination {
       'usa-pagination__item': true,
       'usa-pagination__overflow': true,
       'va-pagination__item': true,
-      'va-pagination__overflow--isMobile': this.isMobileViewport,
     });
 
     const arrowClasses = classnames({

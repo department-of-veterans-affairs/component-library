@@ -20,6 +20,7 @@
 :host {
   background-color: var(--vads-color-white);
   border-top: 1px solid var(--vads-color-base-lightest);
+  container-type: inline-size;
   display: flex;
   font-family: var(--font-source-sans);
   justify-content: center;
@@ -38,10 +39,6 @@ li {
   display: inline-flex;
 }
 
-li.va-pagination__overflow--isMobile {
-  margin: 0;
-}
-
 button {
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
@@ -58,4 +55,10 @@ button {
   padding: 0;
   transition: all 0.3s ease-in-out;
   transition-property: color, background-color;
+}
+
+@container (max-width: 640px) { // Variables won't compile. Matching TSX file for now.
+  .usa-pagination__overflow {
+    margin: 0;
+  }
 }
