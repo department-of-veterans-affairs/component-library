@@ -77,15 +77,15 @@ export class VaServiceListItem {
 
   private parseJsonProp<T>(prop: any): T | undefined {
     if (!prop || prop === '{}' || prop === 'null') return undefined;
+  
     try {
-      const parsed = typeof prop === 'string' ? JSON.parse(prop) : prop;
-      return Object.keys(parsed).length ? parsed : undefined;
+      return typeof prop === 'string' ? JSON.parse(prop) : prop;
     } catch (error) {
       consoleDevError(`Error parsing prop: ${prop}`);
       return undefined;
     }
   }
-
+  
   render() {
     const {
       parsedServiceDetails,
@@ -114,7 +114,7 @@ export class VaServiceListItem {
     return (
       <Host>
         <div class="service-list-item">
-          <a href={serviceLink} class="service-title-row">
+          <a href={serviceLink} class="service-title-row" aria-label={`Go to ${serviceName}`}>
             <div class="header">
               {icon && <va-icon class={`icon ${icon}`} icon={icon}></va-icon>}
               <HeadingTag class="service-name">{serviceName}</HeadingTag>
@@ -124,7 +124,7 @@ export class VaServiceListItem {
 
           {actionNeeded && (
             <div class="action-bar">
-              <a href={parsedAction?.href} class="action-link">
+              <a href={parsedAction?.href} class="action-link" aria-label={`Action required: ${parsedAction?.text}`}>
                 <va-icon
                   class="link-icon hydrated"
                   icon="chevron_right"
