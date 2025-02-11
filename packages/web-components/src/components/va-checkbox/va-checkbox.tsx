@@ -214,6 +214,10 @@ export class VaCheckbox {
       !description &&
       this.el.querySelectorAll('[slot="description"]:not(:empty)').length > 0;
 
+    const hasInternalDescriptionSlot =
+      this.el.querySelectorAll('[slot="internal-description"]:not(:empty)')
+        .length > 0;
+
     const containerClass = classnames('va-checkbox__container', {
       'va-checkbox__container--tile': tile,
       'va-checkbox__container--tile--checked': tile && checked,
@@ -268,12 +272,8 @@ export class VaCheckbox {
             data-indeterminate={indeterminate && !checked}
             aria-checked={indeterminate && !checked ? 'mixed' : checked}
           />
-          <label
-            htmlFor="checkbox-element"
-            class="va-checkbox__label"
-            part="label"
-          >
-            {label}&nbsp;
+          <label htmlFor="checkbox-element" class="va-checkbox__label">
+            <span part="label">{label}</span>&nbsp;
             {required && (
               <span class="usa-label--required">{i18next.t('required')}</span>
             )}
@@ -281,6 +281,14 @@ export class VaCheckbox {
               <span class="usa-checkbox__label-description" part="description">
                 {checkboxDescription}
               </span>
+            )}
+            {hasInternalDescriptionSlot && (
+              <div
+                class="usa-checkbox__label-description"
+                part="internal-description"
+              >
+                <slot name="internal-description" />
+              </div>
             )}
           </label>
           {messageAriaDescribedby && (
