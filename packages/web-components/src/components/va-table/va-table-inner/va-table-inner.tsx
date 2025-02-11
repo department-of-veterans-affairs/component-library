@@ -189,7 +189,6 @@ export class VaTableInner {
           return i === 0 || row === 0 ? (
             <th
               scope={scopeDimension}
-              class={rightAlignClass}
               data-sortable={this.sortable}
               data-sort-active={dataSortActive}
               data-label={header}
