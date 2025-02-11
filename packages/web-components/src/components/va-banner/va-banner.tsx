@@ -99,7 +99,7 @@ export class VaBanner {
    */
   private prepareBannerID = () =>
     /* eslint-disable-next-line i18next/no-literal-string */
-    this.dismissedBannerId || `${this.headline}:${this.el.innerHTML}`;
+    this.dismissedBannerId && this.dismissedBannerId.length ? this.dismissedBannerId : `${this.headline}:${this.el.innerHTML}`;
 
   private dismiss = () => {
     // Derive the current banner ID.
