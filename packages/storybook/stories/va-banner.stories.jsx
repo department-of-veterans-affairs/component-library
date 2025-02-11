@@ -30,6 +30,7 @@ const Template = ({
   visible,
   'window-session': windowSession,
   'data-label': dataLabel,
+  'dismissed-banner-id': dismissedBannerId,
 }) => {
   return (
     <va-banner
@@ -40,6 +41,7 @@ const Template = ({
       visible={visible}
       window-session={windowSession}
       data-label={dataLabel}
+      dismissed-banner-id={dismissedBannerId}
     >
       <p>
         We have temporarily closed our Acute Psychiatry at our Lyons Campus. All
@@ -58,7 +60,7 @@ const defaultArgs = {
   'type': 'info',
   'visible': true,
   'window-session': false,
-  'data-label': "Info banner"
+  'data-label': 'Info banner',
 };
 
 export const Default = Template.bind(null);
@@ -71,4 +73,11 @@ export const Dismissible = Template.bind(null);
 Dismissible.args = {
   ...defaultArgs,
   'show-close': true,
+};
+
+export const DismissibleWithSpecificBannerId = Template.bind(null);
+DismissibleWithSpecificBannerId.args = {
+  ...defaultArgs,
+  'show-close': true,
+  'dismissed-banner-id': 'specific-banner-id',
 };

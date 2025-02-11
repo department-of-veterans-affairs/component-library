@@ -187,6 +187,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Optional dismissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
+        /**
           * The headline of the banner.
          */
         "headline": string;
@@ -286,7 +290,7 @@ export namespace Components {
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
@@ -3449,6 +3453,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Optional dismissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
+        /**
           * The headline of the banner.
          */
         "headline"?: string;
@@ -3564,7 +3572,7 @@ declare namespace LocalJSX {
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
