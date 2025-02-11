@@ -90,7 +90,7 @@ export class VaPagination {
   @Prop() unbounded?: boolean = false;
 
   /**
-   * Will be true when va-pagination is 641 pixes or narrower
+   * Will be true when va-pagination is 641 pixels or narrower
    * as measured by this.handleResizeEvent().
    */
   @State() isMobileViewport: Boolean = false;
