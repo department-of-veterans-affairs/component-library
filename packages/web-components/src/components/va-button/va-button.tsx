@@ -85,11 +85,12 @@ export class VaButton {
   @Prop({ reflect: true }) secondary?: boolean = false;
 
   /**
-   * Having this attribute present will set the type of this button as 'submit'.
-   * The va-button element must be within a `form` element for this functionality to take place
-   * A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form;
-   * `skip` will submit the form but not trigger the onsubmit callback;
-   * All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+   * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`.
+   * The va-button component must be within a `form` element.
+   * **Prop options:**
+   * `prevent` will trigger the onsubmit callback on the form, but won't submit the form.
+   * `skip` will submit the form but not trigger the form onsubmit callback.
+   * All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
    */
   @Prop() submit?: string;
 
@@ -138,9 +139,25 @@ export class VaButton {
     if (this.submit === undefined) {
       return;
     }
-    // eslint-disable-next-line i18next/no-literal-string
-    const theForm = this.el.closest('form');
-    if (!theForm) {
+
+    // Find the form element by walking up through shadow roots
+    let element = this.el as Element;
+    let formElement = null as HTMLFormElement | null;
+    
+    while (element && !formElement) {
+      // Try to find form in the current root
+      formElement = element.closest('form');
+      
+      // If no form found and we're in a shadow root, move up to the host element
+      if (!formElement && element.getRootNode() instanceof ShadowRoot) {
+        element = (element.getRootNode() as ShadowRoot).host;
+      } else if (!formElement) {
+        // If we're in the light DOM and still no form, break
+        break;
+      }
+    }
+
+    if (!formElement) {
       return;
     }
     const submitEvent = new CustomEvent('submit', {
@@ -149,10 +166,10 @@ export class VaButton {
       composed: true,
     });
     if (this.submit !== 'skip') {
-      theForm.dispatchEvent(submitEvent);
+      formElement.dispatchEvent(submitEvent);
     }
     if (this.submit !== 'prevent') {
-      theForm.submit();
+      formElement.submit();
     }
   }
 
