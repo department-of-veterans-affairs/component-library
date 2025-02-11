@@ -370,7 +370,7 @@ const noop = () => {};
     return new RegExp(find, 'i');
   };
 
-  const isDataOptGroup = option => option.getAttribute('data-optgroup') !== null;
+  const isDataOptGroup = option => option.getAttribute('data-optgroup') === 'true';
 
   /**
    * Display the option list of a combo box component.
@@ -422,21 +422,29 @@ const noop = () => {};
           continue;
         }
 
+        // handle filtering when input contains a value
         if (
           inputValue &&
           regex.test(optionEl.text) &&
           optionEl.getAttribute('data-optgroup') !== 'true' 
         ) {
+
+          // Check if the option element is not a header optgroup 
+          // and has a header optgroup associated with it
           if (
             optionEl.getAttribute('data-optgroup-option') === 'true' &&
             parentOptGroupId !== optionEl.getAttribute('aria-describedby')
           ) {
+            // Get an associated header optgroup element
             parentOptGroupId = optionEl.getAttribute('aria-describedby');
             const parentOptgroupEl = selectEl.querySelector(
               '#' + parentOptGroupId,
             );
+            // Add the header optgroup element first
             options.push(parentOptgroupEl);
           }
+
+          // Add the option element
           options.push(optionEl);
         }
       }

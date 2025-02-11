@@ -46,27 +46,6 @@ const defaultArgs = {
   ],
 };
 
-const optGroupArgs = {
-  ...defaultArgs,
-  label: 'Select a fruit or vegetable',
-  options: [
-    <>
-      <optgroup label="Fruits">
-        <option value="apple">Apple</option>
-        <option value="apricot">Apricot</option>
-        <option value="cantaloupe">Cantaloupe</option>
-      </optgroup>
-      <optgroup label="Vegetables">
-        <option value="cabbage">Cabbage</option>
-        <option value="Potatoes">Potatoes</option>
-      </optgroup>
-      <option value="sweet-potatoes">Sweet Potatoes</option>
-      <option value="cherry">Cherry</option>
-      <option value="clementine">Clementine</option>
-    </>
-  ],
-};
-
 const Template = ({
   label,
   name,
@@ -137,7 +116,32 @@ WithMessageAriaDescribedBy.args = {
   messageAriaDescribedby: 'This is example aria message',
 };
 
-export const OptGroups = Template.bind({});
-OptGroups.args = {
+const optGroupArgs = {
+  ...defaultArgs,
+  label: 'Select a plant',
+  options: [
+    <>
+      <optgroup label="Fruits">
+        <option value="apple">Apple</option>
+        <option value="apricot">Apricot</option>
+        <option value="cantaloupe">Cantaloupe</option>
+        <option value="cherry">Cherry</option>
+        <option value="peach">Peach</option>
+      </optgroup>
+      <optgroup label="Vegetables">
+        <option value="bok-choy">Bok Choy</option>
+        <option value="cabbage">Cabbage</option>
+        <option value="chard">Chard</option>
+        <option value="Potatoes">Potatoes</option>
+      </optgroup>
+      <option value="basil">Basil</option>
+      <option value="chives">Chives</option>
+      <option value="parsley">Parsley</option>
+    </>
+  ],
+};
+
+export const OptionGroups = Template.bind({});
+OptionGroups.args = {
   ...optGroupArgs,
 };
