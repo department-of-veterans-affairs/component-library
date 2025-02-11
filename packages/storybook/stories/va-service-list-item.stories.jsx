@@ -2,7 +2,6 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const serviceListItemDocs = getWebComponentDocs('va-service-list-item');
-console.log(serviceListItemDocs);
 
 export default {
   title: 'Components/Service list item',
@@ -76,8 +75,8 @@ MaximalBase.args = {
 MaximalBase.argTypes = {
   ...propStructure(serviceListItemDocs),
   action: {
-    ...propStructure(serviceListItemDocs).action,
     control: { type: 'object' },
+    type: { name: 'object', required: false },
   },
 };
 
