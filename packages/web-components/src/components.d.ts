@@ -290,7 +290,7 @@ export namespace Components {
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
@@ -3568,7 +3568,7 @@ declare namespace LocalJSX {
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
