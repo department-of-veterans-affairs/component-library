@@ -298,11 +298,6 @@ export class VaPagination {
     this.resizeObserver.disconnect();
   }
 
-  /**
-   * =========================================
-   * Pagination render functions
-   * =========================================
-   */
   private renderPreviousButton(
     arrowClasses: string,
     previousAriaLabel: string,
@@ -475,11 +470,6 @@ export class VaPagination {
       </li>
     );
   }
-  /**
-   * =========================================
-   * End pagination render functions
-   * =========================================
-   */
 
   render() {
     const { ariaLabelSuffix, pages } = this;
