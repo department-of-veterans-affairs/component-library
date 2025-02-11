@@ -177,3 +177,21 @@ export function getHeaderLevel(headerInput: number | string): string | null {
   }
   return headerLevel >= 1 && headerLevel <= 6 ? `h${headerLevel}` : null;
 }
+
+/**
+ * See https://dev.to/jeetvora331/javascript-debounce-easiest-explanation--29hc
+ * for inspiration in developing this utility.
+ *
+ * See https://dev.to/pubnub/how-fast-is-real-time-human-perception-and-technology-1308
+ * for how the 100ms default was selected.
+ */
+export function debounce(callbackFn: any, delay: number = 100) {
+  let timer: ReturnType<typeof setTimeout>;
+
+  return (...args: Array<typeof arguments>) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      callbackFn.apply(this, ...args);
+    }, delay);
+  };
+}
