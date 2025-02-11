@@ -63,7 +63,7 @@ describe('va-service-list-item', () => {
     return { page, elementHandle };
   }
 
-  it('renders correctly with action bar when an action is needed and exists', async () => {
+  it('renders with all elements and an action bar when an action prop is provided', async () => {
     const { page, elementHandle } = await setupComponent({
       action: {
         href: 'https://www.va.gov/education',
@@ -125,7 +125,7 @@ describe('va-service-list-item', () => {
     `);
   });
 
-  it('does NOT render action bar when action prop is completely missing', async () => {
+  it('does NOT render action bar when action prop is not passed', async () => {
     // Pass all props EXCEPT action
     const { page, elementHandle } = await setupComponent({
       serviceDetails: {
@@ -151,5 +151,63 @@ describe('va-service-list-item', () => {
       elementHandle,
     );
     expect(shadowInnerHTML).not.toContain('<div class="action-bar">');
+  });
+
+  it('does NOT render icon when icon prop is not passed', async () => {
+    // Pass all props EXCEPT icon
+    const { page, elementHandle } = await setupComponent({
+      serviceDetails: {
+        'Approved on': 'May 11, 2011',
+        'Program': 'Post-9/11 GI Bill',
+        'Eligibility': '70%',
+      },
+      serviceName: 'Education',
+      serviceLink: 'https://www.va.gov/education',
+      serviceStatus: 'Eligible',
+      action: {
+        href: 'https://www.va.gov/education',
+        text: 'Take some urgent action',
+      },
+      optionalLink: {
+        href: 'https://www.va.gov',
+        text: 'Optional link (to a page other than the detail page)',
+      },
+    });
+
+    await page.waitForSelector('va-service-list-item');
+    await page.waitForChanges();
+
+    const shadowInnerHTML = await page.evaluate(
+      el => el.shadowRoot.innerHTML,
+      elementHandle,
+    );
+    expect(shadowInnerHTML).not.toContain('<va-icon class="icon hydrated"></va-icon>');
+  });
+
+  it('does NOT render optionalLink when optionalLink prop is not passed', async () => {
+    // Pass all props EXCEPT optionalLink
+    const { page, elementHandle } = await setupComponent({
+      serviceDetails: {
+        'Approved on': 'May 11, 2011',
+        'Program': 'Post-9/11 GI Bill',
+        'Eligibility': '70%',
+      },
+      serviceName: 'Education',
+      serviceLink: 'https://www.va.gov/education',
+      serviceStatus: 'Eligible',
+      action: {
+        href: 'https://www.va.gov/education',
+        text: 'Take some urgent action',
+      },
+    });
+
+    await page.waitForSelector('va-service-list-item');
+    await page.waitForChanges();
+
+    const shadowInnerHTML = await page.evaluate(
+      el => el.shadowRoot.innerHTML,
+      elementHandle,
+    );
+    expect(shadowInnerHTML).not.toContain('<va-link class="hydrated optional-link"></va-link>');
   });
 });
