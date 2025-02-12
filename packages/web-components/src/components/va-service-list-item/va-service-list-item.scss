@@ -11,7 +11,6 @@
 .service-list-item{
 padding: 1.25rem 2rem 2rem 1rem;
 border-top: 1px solid var(--vads-color-base-light);
-border-bottom: 1px solid var(--vads-color-base-light);
 
 a {
   text-decoration: none;
@@ -107,6 +106,9 @@ a {
     margin-left: auto;
     font-size: 24px;
     color: $vads-color-link;
+    &.top {
+      align-self: flex-start;
+    }
     @media (min-width: 767px) {
       margin-left: .938rem;
     }

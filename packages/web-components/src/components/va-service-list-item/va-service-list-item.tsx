@@ -1,5 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
-import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
+import { Component, Host, h, Prop, Watch, State, Element } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
 
 export interface ServiceDetails {
@@ -24,8 +24,9 @@ export interface OptionalLink {
   styleUrl: 'va-service-list-item.scss',
   shadow: true,
 })
-
 export class VaServiceListItem {
+  @Element() el: HTMLElement;
+
   /** The name of the service */
   @Prop() serviceName: string;
 
@@ -75,9 +76,13 @@ export class VaServiceListItem {
     this.parsedOptionalLink = this.parseJsonProp(this.optionalLink);
   }
 
+  componentDidLoad() {
+    this.adjustChevronPosition();
+  }
+
   private parseJsonProp<T>(prop: any): T | undefined {
     if (!prop || prop === '{}' || prop === 'null') return undefined;
-  
+
     try {
       return typeof prop === 'string' ? JSON.parse(prop) : prop;
     } catch (error) {
@@ -85,7 +90,22 @@ export class VaServiceListItem {
       return undefined;
     }
   }
-  
+
+  private adjustChevronPosition() {
+    setTimeout(() => {
+      const serviceNameElement =
+        this.el.shadowRoot.querySelector('.service-name');
+      const isMultiLine = serviceNameElement.clientHeight > 24;
+      const chevron = this.el.shadowRoot.querySelector(
+        '.chevron-icon',
+      ) as HTMLElement;
+
+      if (chevron) {
+        chevron.classList.toggle('top', isMultiLine);
+      }
+    }, 0);
+  }
+
   render() {
     const {
       parsedServiceDetails,
@@ -114,7 +134,11 @@ export class VaServiceListItem {
     return (
       <Host>
         <div class="service-list-item">
-          <a href={serviceLink} class="service-title-row" aria-label={`Go to ${serviceName}`}>
+          <a
+            href={serviceLink}
+            class="service-title-row"
+            aria-label={`Go to ${serviceName}`}
+          >
             <div class="header">
               {icon && <va-icon class={`icon ${icon}`} icon={icon}></va-icon>}
               <HeadingTag class="service-name">{serviceName}</HeadingTag>
@@ -124,7 +148,11 @@ export class VaServiceListItem {
 
           {actionNeeded && (
             <div class="action-bar">
-              <a href={parsedAction?.href} class="action-link" aria-label={`Action required: ${parsedAction?.text}`}>
+              <a
+                href={parsedAction?.href}
+                class="action-link"
+                aria-label={`Action required: ${parsedAction?.text}`}
+              >
                 <va-icon
                   class="link-icon hydrated"
                   icon="chevron_right"

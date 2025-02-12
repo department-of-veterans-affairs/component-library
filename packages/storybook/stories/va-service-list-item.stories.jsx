@@ -123,3 +123,40 @@ BaseWithCriticalInformation.args = {
     text: 'Take some urgent action',
   },
 };
+
+export const ServiceListWithMultipleServiceListItems = ({}) => {
+  return (
+    <div>
+      <MaximalBase {...MaximalBase.args} />
+      <MinimalBase
+        {...MinimalBase.args}
+        serviceDetails={{
+          'Approved on': 'May 5, 2011',
+          'Combined disability rating': '90%',
+          'Monthly compensation': '$2,345.67',
+          'Payment start date': 'November 1, 2011',
+        }}
+        serviceName="Disability compensation"
+        icon="description"
+      />
+      <BaseWithOptionalLink
+        {...BaseWithOptionalLink.args}
+        serviceDetails={{ 'Application submission date': 'September 14, 2012' }}
+        serviceName="Pension"
+        icon="handshake"
+        serviceStatus="In Progress"
+      />
+      <BaseWithCriticalInformation
+        {...BaseWithCriticalInformation.args}
+        serviceDetails={{
+          'Enrolled on:': 'February 9, 2010',
+          'Policy': 'FSGLI',
+          'Accelerated payments': 'Approved',
+        }}
+        serviceName="Life insurance"
+        icon="shield"
+        serviceStatus="Active"
+      />
+    </div>
+  );
+};
