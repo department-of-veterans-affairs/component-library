@@ -115,3 +115,33 @@ WithMessageAriaDescribedBy.args = {
   ...defaultArgs,
   messageAriaDescribedby: 'This is example aria message',
 };
+
+const optGroupArgs = {
+  ...defaultArgs,
+  label: 'Select produce',
+  options: [
+    <>
+      <option value="basil">Basil</option>
+      <option value="chives">Chives</option>
+      <option value="parsley">Parsley</option>
+      <optgroup label="Fruits">
+        <option value="apple">Apple</option>
+        <option value="apricot">Apricot</option>
+        <option value="cantaloupe">Cantaloupe</option>
+        <option value="cherry">Cherry</option>
+        <option value="peach">Peach</option>
+      </optgroup>
+      <optgroup label="Vegetables">
+        <option value="bok-choy">Bok Choy</option>
+        <option value="cabbage">Cabbage</option>
+        <option value="chard">Chard</option>
+        <option value="Potatoes">Potatoes</option>
+      </optgroup>
+    </>
+  ],
+};
+
+export const OptionGroups = Template.bind({});
+OptionGroups.args = {
+  ...optGroupArgs,
+};
