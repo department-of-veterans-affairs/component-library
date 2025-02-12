@@ -183,12 +183,14 @@ export class VaPagination {
 
     // Use cases
     if (totalPages <= this.SHOW_ALL_PAGES) {
+      // totalPages <= 6
       // Use case #1: 6 or less total pages.
       // This use case will override all other functions.
 
       console.log('Use case 1');
       return makeArray(1, totalPages);
     } else if (currentPage <= radius - 1) {
+      // currentPage <= 4, assuming 24 pages
       // Use case #2: Current page is one less than half the visible
       // pages. This case always renders [1] in pageNumbers array.
 
@@ -219,7 +221,8 @@ export class VaPagination {
       }
 
       return makeArray(start, end);
-    } else if (currentPage + radius >= totalPages) {
+    } else if (currentPage + radius - 1 > totalPages) {
+      // currentPage is > 20, assuming 24 pages
       // Use case #3: Current page plus half total pages is greater than
       // or equal to the total number of pages
       // start =
@@ -258,7 +261,7 @@ export class VaPagination {
       start = currentPage - (radius - 2);
 
       // Assume end is the last page
-      if (currentPage + radius > totalPages) {
+      if (currentPage + radius - 1 > totalPages) {
         end = totalPages;
       } else {
         // Assume end is not the last page. Subtract 1 to account for showing the
