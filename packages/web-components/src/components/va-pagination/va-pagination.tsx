@@ -173,34 +173,52 @@ export class VaPagination {
     // If the unbounded flag is set we don't include the last page
     const unboundedChar = unbounded ? 0 : 1;
 
-    let { isMobileViewport, maxPageListLengthState, SHOW_ALL_PAGES } = this;
+    // let { isMobileViewport, maxPageListLengthState, SHOW_ALL_PAGES } = this;
+    let { maxPageListLengthState } = this;
     let start: number;
     let end: number;
 
     // The smallest breakpoint can show at most 6 pages, including ellipses
-    if (isMobileViewport) maxPageListLengthState = SHOW_ALL_PAGES;
+    // if (isMobileViewport) maxPageListLengthState = SHOW_ALL_PAGES;
 
     // Use cases
     if (totalPages <= this.SHOW_ALL_PAGES) {
       // Use case #1: 6 or less total pages.
       // This use case will override all other functions.
 
+      console.log('Use case 1');
       return makeArray(1, totalPages);
-    } else if (currentPage <= radius + 1) {
-      // Use case #2: Current page is less than radius + 1.
-      // This use case always renders [1] in pageNumbers array.
+    } else if (currentPage <= radius - 1) {
+      // Use case #2: Current page is one less than half the visible
+      // pages. This case always renders [1] in pageNumbers array.
+      console.log('Use case 2');
 
       start = 1;
-      end =
-        maxPageListLengthState >= totalPages
-          ? totalPages
-          : maxPageListLengthState - 1 - unboundedChar;
+      // end =
+      //   maxPageListLengthState >= totalPages
+      //     ? totalPages
+      //     : maxPageListLengthState - 1 - unboundedChar;
+
+      switch (true) {
+        case maxPageListLengthState < totalPages && this.isMobileViewport:
+          end = maxPageListLengthState - 4 - unboundedChar;
+          console.log('Use case 2a');
+          break;
+        case maxPageListLengthState < totalPages:
+          end = maxPageListLengthState - 1 - unboundedChar;
+          console.log('Use case 2b');
+          break;
+        default:
+          console.log('Use case 2c');
+          end = totalPages;
+      }
 
       // Make sure the next page is showing
       if (end === currentPage) {
         end++;
       }
 
+      console.log([start, end]);
       return makeArray(start, end);
     } else if (currentPage + radius >= totalPages) {
       // Use case #3: Current page is greater than radius
@@ -216,6 +234,7 @@ export class VaPagination {
         start--;
       }
 
+      console.log('Use case 3');
       return makeArray(start, end);
     } else {
       // Use case #4: Continuous pages don't start at 1 or end at last page.
@@ -237,6 +256,7 @@ export class VaPagination {
         end = end - 2;
       }
 
+      console.log('Use case 4');
       return makeArray(start, end);
     }
   };
