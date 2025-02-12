@@ -96,11 +96,6 @@ export class VaPagination {
   @State() isMobileViewport: Boolean = false;
 
   /**
-   * Manage max page length on small screens and zoomed layouts
-   */
-  @State() maxPageListLengthState: number = this.maxPageListLength;
-
-  /**
    * If the page total is less than or equal to this limit, show all pages.
    * The number has been reduced from 7 to 6 to show all more consistently
    * on small screens and zoomed in browser windows.
@@ -173,13 +168,9 @@ export class VaPagination {
     // If the unbounded flag is set we don't include the last page
     const unboundedChar = unbounded ? 0 : 1;
 
-    // let { isMobileViewport, maxPageListLengthState, SHOW_ALL_PAGES } = this;
-    let { isMobileViewport, maxPageListLengthState } = this;
+    let { isMobileViewport } = this;
     let start: number;
     let end: number;
-
-    // The smallest breakpoint can show at most 6 pages, including ellipses
-    // if (isMobileViewport) maxPageListLengthState = SHOW_ALL_PAGES;
 
     // Use cases
     if (totalPages <= this.SHOW_ALL_PAGES) {
@@ -195,19 +186,14 @@ export class VaPagination {
       // pages. This case always renders [1] in pageNumbers array.
 
       start = 1;
-      // end =
-      //   maxPageListLengthState >= totalPages
-      //     ? totalPages
-      //     : maxPageListLengthState - 1 - unboundedChar;
-
       // End has three use cases with the isMobileViewport adjustment
       switch (true) {
-        case maxPageListLengthState < totalPages && isMobileViewport:
-          end = maxPageListLengthState - 4 - unboundedChar;
+        case maxPageListLength < totalPages && isMobileViewport:
+          end = maxPageListLength - 4 - unboundedChar;
           console.log('Use case 2a');
           break;
-        case maxPageListLengthState < totalPages:
-          end = maxPageListLengthState - 1 - unboundedChar;
+        case maxPageListLength < totalPages:
+          end = maxPageListLength - 1 - unboundedChar;
           console.log('Use case 2b');
           break;
         default:
@@ -225,20 +211,15 @@ export class VaPagination {
       // currentPage is > 20, assuming 24 pages
       // Use case #3: Current page plus half total pages is greater than
       // or equal to the total number of pages
-      // start =
-      //   totalPages - maxPageListLengthState > 0
-      //     ? // Subtract 2 to account for having to add ellipsis and first page
-      //       totalPages - (maxPageListLengthState - 2 - 1)
-      //     : 1;
 
       // Start has three use cases with the isMobileViewport adjustment
       switch (true) {
-        case totalPages - maxPageListLengthState > 0 && isMobileViewport:
-          start = totalPages - maxPageListLengthState + this.SHOW_ALL_PAGES;
+        case totalPages - maxPageListLength > 0 && isMobileViewport:
+          start = totalPages - maxPageListLength + this.SHOW_ALL_PAGES;
           console.log('Use case 3a');
           break;
-        case totalPages - maxPageListLengthState > 0:
-          start = totalPages - (maxPageListLengthState - 2 - 1);
+        case totalPages - maxPageListLength > 0:
+          start = totalPages - (maxPageListLength - 2 - 1);
           console.log('Use case 3b');
           break;
         default:
