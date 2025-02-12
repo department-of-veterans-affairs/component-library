@@ -189,6 +189,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
+        /**
           * The headline of the banner.
          */
         "headline": string;
@@ -284,11 +288,11 @@ export namespace Components {
          */
         "secondary"?: boolean;
         /**
-          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+          * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`. The va-button component must be within a `form` element. **Prop options:** `prevent` will trigger the onsubmit callback on the form, but won't submit the form. `skip` will submit the form but not trigger the form onsubmit callback. All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
@@ -341,7 +345,7 @@ export namespace Components {
          */
         "secondaryLabel"?: string;
         /**
-          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+          * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`. The va-button component must be within a `form` element. **Prop options:** `prevent` will trigger the onsubmit callback on the form, but won't submit the form. `skip` will submit the form but not trigger the form onsubmit callback. All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
          */
         "submit"?: string;
         /**
@@ -3498,6 +3502,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
+        /**
           * The headline of the banner.
          */
         "headline"?: string;
@@ -3609,11 +3617,11 @@ declare namespace LocalJSX {
          */
         "secondary"?: boolean;
         /**
-          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+          * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`. The va-button component must be within a `form` element. **Prop options:** `prevent` will trigger the onsubmit callback on the form, but won't submit the form. `skip` will submit the form but not trigger the form onsubmit callback. All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
@@ -3682,7 +3690,7 @@ declare namespace LocalJSX {
          */
         "secondaryLabel"?: string;
         /**
-          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+          * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`. The va-button component must be within a `form` element. **Prop options:** `prevent` will trigger the onsubmit callback on the form, but won't submit the form. `skip` will submit the form but not trigger the form onsubmit callback. All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
          */
         "submit"?: string;
         /**

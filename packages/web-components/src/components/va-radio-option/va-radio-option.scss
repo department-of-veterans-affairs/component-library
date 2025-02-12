@@ -88,10 +88,6 @@ va-radio-option .usa-radio__label {
   box-sizing: border-box;
 }
 
-va-radio-option input:focus {
-  outline: none !important;
-}
-
 // Formation overrides
 va-radio-option input[type="radio"] + label {
   margin-bottom: 0;

@@ -71,6 +71,12 @@ export class VaBanner {
   @Prop() dataLabel?: string;
 
   /**
+   * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS
+   * if not set it will default to the headline and innerHTML of the banner
+   */
+  @Prop() dismissedBannerId?: string;
+
+  /**
    * Keep track of locally dismissed Banners
    * */
   @State() dismissedBanners: Array<String> = [];
@@ -86,8 +92,14 @@ export class VaBanner {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  /* eslint-disable-next-line i18next/no-literal-string */
-  private prepareBannerID = () => `${this.headline}:${this.el.innerHTML}`;
+  /**
+   * Prepares the BannerID to be used for identifying and labeling dismissed banners in
+   * DIMISSED_BANNERS localStorage. If dismissedBannerID is provided that will be returned,
+   * otherwise it will default to contents of the banner
+   */
+  private prepareBannerID = () =>
+    /* eslint-disable-next-line i18next/no-literal-string */
+    this.dismissedBannerId && this.dismissedBannerId.length ? this.dismissedBannerId : `${this.headline}:${this.el.innerHTML}`;
 
   private dismiss = () => {
     // Derive the current banner ID.
