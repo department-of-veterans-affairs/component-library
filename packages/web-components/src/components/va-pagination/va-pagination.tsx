@@ -160,6 +160,7 @@ export class VaPagination {
       page: currentPage,
       pages: totalPages,
       unbounded,
+      SHOW_ALL_PAGES,
     } = this;
 
     // Radius is half the length of the visible pages
@@ -173,31 +174,46 @@ export class VaPagination {
     let end: number;
 
     // Use cases
-    if (totalPages <= this.SHOW_ALL_PAGES) {
-      // totalPages <= 6
+    if (totalPages <= SHOW_ALL_PAGES) {
       // Use case #1: 6 or less total pages.
       // This use case will override all other functions.
 
-      console.log('Use case 1');
       return makeArray(1, totalPages);
+    } else if (SHOW_ALL_PAGES < totalPages && totalPages < maxPageListLength) {
+      // Use case #2: totalPages is greater than 6 and less than 10, so [7, 8, 9]
+      // is the default set included in this use case. Logic assumes the entire array
+      // of pages will be rendered unless we are in a mobile viewport.
+
+      start = 1;
+      end = totalPages;
+
+      // Recalculating radius for the smaller totalPages count
+      const localRadius = Math.floor(totalPages / 2);
+
+      if (currentPage <= localRadius) {
+        end = start + 4;
+      }
+
+      if (currentPage > localRadius) {
+        start = start + 3;
+      }
+
+      return makeArray(start, end);
     } else if (currentPage <= radius - 1) {
-      // currentPage <= 4, assuming 24 pages
-      // Use case #2: Current page is one less than half the visible
+      // Use case #3: Current page is one less than half the visible
       // pages. This case always renders [1] in pageNumbers array.
 
       start = 1;
+
       // End has three use cases with the isMobileViewport adjustment
       switch (true) {
         case maxPageListLength < totalPages && isMobileViewport:
           end = maxPageListLength - 4 - unboundedChar;
-          console.log('Use case 2a');
           break;
         case maxPageListLength < totalPages:
           end = maxPageListLength - 1 - unboundedChar;
-          console.log('Use case 2b');
           break;
         default:
-          console.log('Use case 2c');
           end = totalPages;
       }
 
@@ -209,21 +225,18 @@ export class VaPagination {
       return makeArray(start, end);
     } else if (currentPage + radius - 1 > totalPages) {
       // currentPage is > 20, assuming 24 pages
-      // Use case #3: Current page plus half total pages is greater than
+      // Use case #4: Current page plus half total pages is greater than
       // or equal to the total number of pages
 
       // Start has three use cases with the isMobileViewport adjustment
       switch (true) {
         case totalPages - maxPageListLength > 0 && isMobileViewport:
           start = totalPages - maxPageListLength + this.SHOW_ALL_PAGES;
-          console.log('Use case 3a');
           break;
         case totalPages - maxPageListLength > 0:
           start = totalPages - (maxPageListLength - 2 - 1);
-          console.log('Use case 3b');
           break;
         default:
-          console.log('Use case 3c');
           start = 1;
       }
 
@@ -237,7 +250,7 @@ export class VaPagination {
 
       return makeArray(start, end);
     } else {
-      // Use case #4: Continuous pages don't start at 1 or end at last page.
+      // Use case #5: Continuous pages don't start at 1 or end at last page.
       // start must subtract 2 to account for showing the first page and ellipsis.
       start = currentPage - (radius - 2);
 
@@ -256,7 +269,6 @@ export class VaPagination {
         end = end - 2;
       }
 
-      console.log('Use case 4');
       return makeArray(start, end);
     }
   };
@@ -353,7 +365,6 @@ export class VaPagination {
     // Return early if [1] is in the pageNumbers array.
     // This also prevents the first ellipsis being rendered.
     if (this.pageNumbers().includes(1)) return null;
-
     return (
       <Fragment>
         <li class={itemClasses}>
