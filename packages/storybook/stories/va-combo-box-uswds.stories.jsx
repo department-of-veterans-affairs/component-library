@@ -118,9 +118,12 @@ WithMessageAriaDescribedBy.args = {
 
 const optGroupArgs = {
   ...defaultArgs,
-  label: 'Select a plant',
+  label: 'Select produce',
   options: [
     <>
+      <option value="basil">Basil</option>
+      <option value="chives">Chives</option>
+      <option value="parsley">Parsley</option>
       <optgroup label="Fruits">
         <option value="apple">Apple</option>
         <option value="apricot">Apricot</option>
@@ -134,9 +137,6 @@ const optGroupArgs = {
         <option value="chard">Chard</option>
         <option value="Potatoes">Potatoes</option>
       </optgroup>
-      <option value="basil">Basil</option>
-      <option value="chives">Chives</option>
-      <option value="parsley">Parsley</option>
     </>
   ],
 };
