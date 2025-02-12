@@ -174,7 +174,7 @@ export class VaPagination {
     const unboundedChar = unbounded ? 0 : 1;
 
     // let { isMobileViewport, maxPageListLengthState, SHOW_ALL_PAGES } = this;
-    let { maxPageListLengthState } = this;
+    let { isMobileViewport, maxPageListLengthState } = this;
     let start: number;
     let end: number;
 
@@ -191,7 +191,6 @@ export class VaPagination {
     } else if (currentPage <= radius - 1) {
       // Use case #2: Current page is one less than half the visible
       // pages. This case always renders [1] in pageNumbers array.
-      console.log('Use case 2');
 
       start = 1;
       // end =
@@ -199,8 +198,9 @@ export class VaPagination {
       //     ? totalPages
       //     : maxPageListLengthState - 1 - unboundedChar;
 
+      // End has three use cases with the isMobileViewport adjustment
       switch (true) {
-        case maxPageListLengthState < totalPages && this.isMobileViewport:
+        case maxPageListLengthState < totalPages && isMobileViewport:
           end = maxPageListLengthState - 4 - unboundedChar;
           console.log('Use case 2a');
           break;
@@ -218,23 +218,39 @@ export class VaPagination {
         end++;
       }
 
-      console.log([start, end]);
       return makeArray(start, end);
     } else if (currentPage + radius >= totalPages) {
-      // Use case #3: Current page is greater than radius
-      start =
-        totalPages - maxPageListLengthState > 0
-          ? // Subtract 2 to account for having to add ellipsis and first page
-            totalPages - (maxPageListLengthState - 2 - 1)
-          : 1;
-      end = totalPages;
+      // Use case #3: Current page plus half total pages is greater than
+      // or equal to the total number of pages
+      // start =
+      //   totalPages - maxPageListLengthState > 0
+      //     ? // Subtract 2 to account for having to add ellipsis and first page
+      //       totalPages - (maxPageListLengthState - 2 - 1)
+      //     : 1;
+
+      // Start has three use cases with the isMobileViewport adjustment
+      switch (true) {
+        case totalPages - maxPageListLengthState > 0 && isMobileViewport:
+          start = totalPages - maxPageListLengthState + this.SHOW_ALL_PAGES;
+          console.log('Use case 3a');
+          break;
+        case totalPages - maxPageListLengthState > 0:
+          start = totalPages - (maxPageListLengthState - 2 - 1);
+          console.log('Use case 3b');
+          break;
+        default:
+          console.log('Use case 3c');
+          start = 1;
+      }
 
       // Make sure the previous page is showing
       if (start === currentPage) {
         start--;
       }
 
-      console.log('Use case 3');
+      // End will always be the last page
+      end = totalPages;
+
       return makeArray(start, end);
     } else {
       // Use case #4: Continuous pages don't start at 1 or end at last page.
