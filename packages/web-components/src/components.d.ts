@@ -187,7 +187,7 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * Optional dismissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+          * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
          */
         "dismissedBannerId"?: string;
         /**
@@ -3449,7 +3449,7 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
-          * Optional dismissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+          * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
          */
         "dismissedBannerId"?: string;
         /**
