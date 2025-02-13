@@ -127,6 +127,11 @@ export class VaFileInput {
   @Prop() uploadedFile?: UploadedFile;
 
   /**
+   * Maximum allowed file size in bytes.
+   */
+  @Prop() maxFileSize?: number = Infinity;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -175,6 +180,16 @@ export class VaFileInput {
         return;
       }
     }
+
+    if (file.size > this.maxFileSize) {
+      this.internalError = `
+        We can't upload your file because it's too big. Files must be less than ${this.formatFileSize(this.maxFileSize)}.`;
+      // in case the file was added by clicking the "change file" button do a reset
+      this.fileContents = null;
+      this.uploadStatus = 'idle';
+      return;
+    }
+
     this.uploadedFile = null;
     this.file = file;
     if (emitChange) {
@@ -513,7 +528,7 @@ export class VaFileInput {
                     {displayError && (
                       <span id="input-error-message" role="alert">
                         <span class="usa-sr-only">{i18next.t('error')}</span>
-                        <span class="usa-error-message">{displayError}</span>
+                        <span aria-live="polite" class="usa-error-message">{displayError}</span>
                       </span>
                     )}
                     <span class="file-size-label">
