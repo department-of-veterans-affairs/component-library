@@ -209,6 +209,31 @@ Tile.args = {
     'This is optional text that can be used to describe the label in more detail.',
 };
 
+export const TitleWithCustomContent = () => (
+  <>
+    <va-checkbox label="Issue 1" tile onBlur={e => console.log(e)}>
+      <div slot="internal-description">
+        <div>
+          <strong>Detail</strong>: Internal description slot for issue 1
+        </div>
+        <div className="vads-u-margin-top--1">
+          <strong>Date</strong> Jan 2, 2025
+        </div>
+      </div>
+    </va-checkbox>
+    <va-checkbox label="Issue 2" tile onBlur={e => console.log(e)}>
+      <div slot="internal-description">
+        <div>
+          <strong>Detail</strong>: Internal description slot for issue 2
+        </div>
+        <div className="vads-u-margin-top--1">
+          <strong>Date</strong> Jan 4, 2025
+        </div>
+      </div>
+    </va-checkbox>
+  </>
+);
+
 export const Checked = Template.bind(null);
 Checked.args = { ...defaultArgs, checked: true };
 
@@ -226,14 +251,21 @@ WithDescriptionString.args = {
 };
 
 export const WithDescriptionJSX = props => (
-  <va-checkbox {...props} onBlur={e => console.log(e)}>
-    <p slot="description">
-      I'm a paragraph tag with <code>slot="description"</code>
+  <>
+    <p>
+      <strong>Note:</strong> Adding a <code>description</code> prop will block
+      rendering of the <code>slot="description"</code> content.
     </p>
-    <p slot="description">
-      I'm another paragraph tag with <code>slot="description"</code>
-    </p>
-  </va-checkbox>
+    <hr />
+    <va-checkbox {...props} onBlur={e => console.log(e)}>
+      <p slot="description">
+        I'm a paragraph tag with <code>slot="description"</code>
+      </p>
+      <p slot="description">
+        I'm another paragraph tag with <code>slot="description"</code>
+      </p>
+    </va-checkbox>
+  </>
 );
 WithDescriptionJSX.args = { ...defaultArgs };
 
@@ -269,47 +301,3 @@ Internationalization.args = {
 
 export const Indeterminate = IndeterminateTemplate.bind(null);
 Indeterminate.args = { ...defaultArgs };
-
-export const WithChildren = () => (
-  <>
-    <va-checkbox label="Issue 1" tile onBlur={e => console.log(e)}>
-      <div slot="internal-description">
-        <div>
-          <strong>Detail</strong>: Internal description slot for issue 1
-        </div>
-        <div className="vads-u-margin-top--1">
-          <strong>Date</strong> Jan 2, 2025
-        </div>
-      </div>
-    </va-checkbox>
-    <va-checkbox label="Issue 2" tile onBlur={e => console.log(e)}>
-      <div slot="internal-description">
-        <div>
-          <strong>Detail</strong>: Internal description slot for issue 2
-        </div>
-        <div className="vads-u-margin-top--1">
-          <strong>Date</strong> Jan 4, 2025
-        </div>
-      </div>
-    </va-checkbox>
-
-    <hr className="vads-u-margin-y--2" />
-
-    <va-checkbox
-      description='Example with main description (this blocks &lt;slot="description"&gt; from rendering)'
-      checkbox-description="Checkbox description property"
-      label="Issue X"
-      hint="This is example hint text"
-      tile
-      onBlur={e => console.log(e)}
-    >
-      <p slot="description">
-        External description for issue X - this won't render if
-        <code>description</code> is defined
-      </p>
-      <div slot="internal-description">
-        <p>Description for issue X (larger font in paragraph?)</p>
-      </div>
-    </va-checkbox>
-  </>
-);
