@@ -79,5 +79,10 @@ caption {
   .usa-table--stacked th,
   .usa-table--stacked td {
     width: auto;
+
+    // Ensures table headers stay left-aligned even when stacked
+    &::before {
+      text-align: left;
+    }
   }
 }
