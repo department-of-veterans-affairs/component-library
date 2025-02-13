@@ -105,12 +105,13 @@ export class VaComboBox {
     }
 
     const errorID = 'input-error-message';
-    const ariaDescribedbyIds =
-      `${this.messageAriaDescribedby ? 'input-message' : ''} ${
-        this.error ? errorID : ''
-      } ${this.hint ? 'input-hint' : ''} ${inputElement.getAttribute('aria-describedby')}`.trim() ; 
-      // need to append to existing attribute which is set during initialization and contains USWDS "options--assistiveHint"
-      inputElement.setAttribute('aria-describedby', ariaDescribedbyIds);
+    const ariaDescribedbyIds = `${
+      this.messageAriaDescribedby ? 'input-message' : ''
+    } ${this.error ? errorID : ''} ${
+      this.hint ? 'input-hint' : ''
+    } ${inputElement.getAttribute('aria-describedby')}`.trim();
+    // need to append to existing attribute which is set during initialization and contains USWDS "options--assistiveHint"
+    inputElement.setAttribute('aria-describedby', ariaDescribedbyIds);
   }
 
   disconnectedCallback() {
@@ -123,21 +124,58 @@ export class VaComboBox {
   }
 
   /**
-   * This function is for taking the slotted content and rendering
-   * it inside the `<select>` element. Putting the `<slot>` directly
-   * inside the `<select>` doesn't actually show the `<option>` elements,
-   * but this solves that problem.
+   * This function is pulling all <option> and <optgroup> elements from the light DOM
+   * and creating a new array of <option> elements to be rendered in the shadow DOM.
+   * It also creates <option> elements for each <optgroup> element to act as a label.
+   * @returns List of <option> elements
    */
   private populateOptions() {
-    const allNodes = this.el.querySelectorAll('option');
+    const { value } = this;
+    const allNodes = this.el.querySelectorAll('option, optgroup')
 
-    return Array.from(allNodes).map(
-      (node: HTMLOptionElement | HTMLOptGroupElement) => {
-        return (
-          <option value={(node as HTMLOptionElement).value}>
-            {node.textContent}
-          </option>
-        );
+    
+    const nodes = Array.from(allNodes);
+    return nodes.map(
+      (node: HTMLOptionElement | HTMLOptGroupElement, index) => {
+        if (node.nodeName.toLowerCase() === 'optgroup') {
+          return (
+            <Fragment>
+              {/* adding data-optgroup attribute to identify this element as an optgroup header
+               * assigning unique id to reference in va-combo-box-library.js while transforming options to <li> elements
+               */}
+              <option data-optgroup="true" id={'optgroup-' + index}>
+                {node.label}
+              </option>
+
+              {/* iterate through all children <option> elements within an <optgroup>
+               * assign specific attributes
+               * add aria-described bto associate <option> with an <optgroup> for SR */}
+              {Array.from(node.children).map((child: HTMLOptionElement) => {
+                return (
+                  <option
+                    value={child.value}
+                    selected={value === child.value}
+                    data-optgroup-option="true"
+                    aria-describedby={'optgroup-' + index}
+                  >
+                    {child.text}
+                  </option>
+                );
+              })}
+            </Fragment>
+          );
+        } else if (node.nodeName.toLowerCase() === 'option' && 
+                    node.parentElement.nodeName.toLowerCase() !== 'optgroup') {
+          {/* handling <option> elements that are not nested within <optgroup> element */}
+          return (
+            <option
+              value={(node as HTMLOptionElement).value}
+              selected={value === (node as HTMLOptionElement).value}
+            >
+              {node.textContent}
+            </option>
+          );
+        }
       },
     );
   }
