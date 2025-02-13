@@ -76,6 +76,14 @@ export class VaTableInner {
   @Prop() fullWidth: boolean = false;
 
   /**
+   * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+   */
+  @Prop() rightAlignCols?: string;
+
+  // Internal 'holder' for the array of columns to right-align, updated in componentWillRender
+  colsToAlign: Array<number>;
+
+  /**
    * If sortable is true, the direction of next sort for the column that was just sorted
    */
   @State() sortdir?: string = null;
@@ -172,11 +180,16 @@ export class VaTableInner {
           const header = this.parseHTMLToString(
             this.el.querySelector(`[slot="va-table-slot-${i}"]`).innerHTML,
           );
+          let rightAlignClass: string;
+          // Checks if this cell should be right-aligned and adds a class to make it so
+          if (this.colsToAlign !== undefined && this.colsToAlign.includes(i)) {
+            rightAlignClass = 'vads-u-text-align--right';
+          }
           const dataSortActive = row > 0 && this.sortindex === i ? true : false;
           return i === 0 || row === 0 ? (
             <th
               scope={scopeDimension}
-              data-sortable
+              data-sortable={this.sortable}
               data-sort-active={dataSortActive}
               data-label={header}
               data-rowindex={i}
@@ -186,7 +199,11 @@ export class VaTableInner {
               {this.getSortIcon(i, row)}
             </th>
           ) : (
-            <td data-label={header} data-sort-active={dataSortActive}>
+            <td
+              class={rightAlignClass}
+              data-label={header}
+              data-sort-active={dataSortActive}
+            >
               {slot}
             </td>
           );
@@ -295,6 +312,20 @@ export class VaTableInner {
       this.sortdir = this.el.dataset.sortdir
         ? this.el.dataset.sortdir
         : this.sortdir;
+    }
+  }
+
+  componentWillRender() {
+    // If there are right-aligned columns, split and format them and save in memory for performance reasons
+    if (this.rightAlignCols !== undefined) {
+      const cols = this.rightAlignCols.split(',').map(val => Number(val));
+      if (cols.some(col => isNaN(col))) {
+        console.warn(
+          'There was a non-number detected in the right-align-cols/rightAlignCols prop, please ensure that this value is a comma-separated string of zero-indexed numbers, where each number represents a column you wish to right-align.',
+        );
+      } else {
+        this.colsToAlign = cols;
+      }
     }
   }
 

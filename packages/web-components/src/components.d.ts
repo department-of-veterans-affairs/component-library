@@ -1604,6 +1604,10 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+         */
+        "rightAlignCols"?: string;
+        /**
           * When active, the table can be horizontally scrolled and is focusable
          */
         "scrollable"?: boolean;
@@ -1642,6 +1646,10 @@ export namespace Components {
           * When active, the table will expand to the full width of its container
          */
         "fullWidth": boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+         */
+        "rightAlignCols"?: string;
         "rows"?: number;
         /**
           * When active, the table can be horizontally scrolled and is focusable
@@ -5087,6 +5095,10 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+         */
+        "rightAlignCols"?: string;
+        /**
           * When active, the table can be horizontally scrolled and is focusable
          */
         "scrollable"?: boolean;
@@ -5129,6 +5141,10 @@ declare namespace LocalJSX {
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
         "onSortTable"?: (event: VaTableInnerCustomEvent<any>) => void;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+         */
+        "rightAlignCols"?: string;
         "rows"?: number;
         /**
           * When active, the table can be horizontally scrolled and is focusable

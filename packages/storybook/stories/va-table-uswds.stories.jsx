@@ -49,6 +49,7 @@ const Template = args => {
     scrollable,
     striped,
     'full-width': fullWidth,
+    'right-align-cols': rightAlignCols,
   } = args;
 
   return (
@@ -60,6 +61,7 @@ const Template = args => {
       sortable={!!sortable}
       striped={striped}
       full-width={fullWidth}
+      right-align-cols={rightAlignCols}
     >
       <va-table-row>
         {columns.map((col, i) => (
@@ -460,4 +462,11 @@ FullWidth.args = {
   'full-width': true,
 };
 
-Default.argTypes = propStructure(vaTableDocs);
+export const RightAlignedColumns = Template.bind(null);
+RightAlignedColumns.args = {
+  'table-title':
+    'This is a regular table with the second and third column right-aligned.',
+  'rows': FullWidthRows,
+  'columns': FullWidthColumns,
+  'right-align-cols': '1,2',
+};

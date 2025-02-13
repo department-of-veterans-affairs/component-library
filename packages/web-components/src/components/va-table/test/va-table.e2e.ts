@@ -63,7 +63,7 @@ function getTableMarkup(props = {}): string {
 </va-table>`;
 }
 
-describe('renders header row', () => {
+describe('va-table', () => {
   it('renders a va-table-inner with va-table-rows inside', async () => {
     const page = await newE2EPage();
     await page.setContent(getTableMarkup());
@@ -71,9 +71,7 @@ describe('renders header row', () => {
     const headerRow = await page.find('va-table-inner >>> va-table-row');
     expect(headerRow).toBeDefined();
   });
-});
 
-describe('renders table element', () => {
   it('renders a va-table-inner with an HTML table inside', async () => {
     const page = await newE2EPage();
     await page.setContent(getTableMarkup());
@@ -84,7 +82,7 @@ describe('renders table element', () => {
 
   it('is not stacked by when attribute is set to false', async () => {
     const page = await newE2EPage();
-    await page.setContent(getTableMarkup({stacked: 'false'}));
+    await page.setContent(getTableMarkup({ stacked: 'false' }));
     const element = await page.find('va-table-inner >>> table');
 
     expect(element).not.toHaveClass('usa-table--stacked');
@@ -97,4 +95,4 @@ describe('renders table element', () => {
 
     expect(element).toHaveClass('usa-table--stacked');
   });
-})
+});

@@ -59,6 +59,11 @@ export class VaTable {
    */
   @Prop() fullWidth?: boolean = false;
 
+  /**
+   * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+   */
+  @Prop() rightAlignCols?: string;
+
   // The number of va-table-rows
   @State() rows: number;
 
@@ -160,6 +165,10 @@ export class VaTable {
 
     if (this.fullWidth) {
       vaTable.setAttribute('full-width', String(this.fullWidth));
+    }
+
+    if (this.rightAlignCols) {
+      vaTable.setAttribute('right-align-cols', this.rightAlignCols);
     }
 
     //make a fragment containing all the cells, one for each slot
