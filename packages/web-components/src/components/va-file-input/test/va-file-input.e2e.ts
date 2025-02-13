@@ -326,6 +326,6 @@ describe('va-file-input', () => {
 
     const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
-    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too large. File size must be less than 1 B.");
+    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too big. Files must be less than 1 B.");
   });
 });
