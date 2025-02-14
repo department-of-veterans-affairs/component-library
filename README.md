@@ -196,7 +196,7 @@ You're now ready to switch to `vets-website` and update the VADS dependency. _**
 2. Add the local `core` package to `vets-website` and start the server
 
    ```shell
-   yarn add -W @department-of-veterans-affairs/component-library@vX.X.rc-1
+   yarn add -W @department-of-veterans-affairs/component-library@vX.X.X-rc1
    yarn watch
    ```
 

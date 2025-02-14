@@ -210,3 +210,11 @@
   color: var(--vads-color-secondary-dark);
   margin-left: 0.25rem;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  .required {
+    font-family: var(--font-source-sans);
+    font-size: initial;
+    font-weight: initial;
+  }
+}

@@ -1,3 +1,16 @@
+/*
+ __          __     _____  _   _ _____ _   _  _____
+ \ \        / /\   |  __ \| \ | |_   _| \ | |/ ____|
+  \ \  /\  / /  \  | |__) |  \| | | | |  \| | |  __
+   \ \/  \/ / /\ \ |  _  /| . ` | | | | . ` | | |_ |
+    \  /\  / ____ \| | \ \| |\  |_| |_| |\  | |__| |
+     \/  \/_/    \_\_|  \_\_| \_|_____|_| \_|\_____|
+
+  This web component does not make use of the Shadow DOM,
+  so prefix all new style rules with va-process-list-item
+  and make sure to test for global style bleeds
+*/
+
 @forward 'settings';
 
 @use 'uswds-helpers/src/styles/usa-sr-only';

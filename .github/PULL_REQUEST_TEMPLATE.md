@@ -35,4 +35,4 @@ Closes <ticket>
 
 ## Definition of done
 - [ ] Documentation has been updated, if applicable
-- [ ] A link has been provided to the originating GitHub issue (or connected to it via ZenHub)
+- [ ] A link has been provided to the originating GitHub issue
