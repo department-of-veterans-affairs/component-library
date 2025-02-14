@@ -187,6 +187,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
+        /**
           * The headline of the banner.
          */
         "headline": string;
@@ -286,7 +290,7 @@ export namespace Components {
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
@@ -617,6 +621,10 @@ export namespace Components {
           * The label for the file input.
          */
         "label"?: string;
+        /**
+          * Maximum allowed file size in bytes.
+         */
+        "maxFileSize"?: number;
         /**
           * The name for the input element.
          */
@@ -3445,6 +3453,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
+        /**
           * The headline of the banner.
          */
         "headline"?: string;
@@ -3560,7 +3572,7 @@ declare namespace LocalJSX {
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
@@ -3935,6 +3947,10 @@ declare namespace LocalJSX {
           * The label for the file input.
          */
         "label"?: string;
+        /**
+          * Maximum allowed file size in bytes.
+         */
+        "maxFileSize"?: number;
         /**
           * The name for the input element.
          */

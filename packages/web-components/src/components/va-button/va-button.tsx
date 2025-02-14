@@ -95,7 +95,7 @@ export class VaButton {
   @Prop() submit?: string;
 
   /**
-   * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+   * The text displayed on the button.
    */
   @Prop() text?: string;
 
@@ -128,11 +128,13 @@ export class VaButton {
     }
   };
 
+  // button text; custom text takes precedence
   private getButtonText = (): string => {
+    if (this.text) return this.text;
     if (this.continue) return 'Continue';
     if (this.back) return 'Back';
     if (this.loading && !this.text) return 'Loading...';
-    return this.text;
+    return;
   };
 
   private handleSubmit() {
