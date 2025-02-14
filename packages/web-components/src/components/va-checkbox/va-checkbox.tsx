@@ -268,12 +268,8 @@ export class VaCheckbox {
             data-indeterminate={indeterminate && !checked}
             aria-checked={indeterminate && !checked ? 'mixed' : checked}
           />
-          <label
-            htmlFor="checkbox-element"
-            class="va-checkbox__label"
-            part="label"
-          >
-            {label}&nbsp;
+          <label htmlFor="checkbox-element" class="va-checkbox__label">
+            <span part="label">{label}</span>&nbsp;
             {required && (
               <span class="usa-label--required">{i18next.t('required')}</span>
             )}
@@ -282,6 +278,9 @@ export class VaCheckbox {
                 {checkboxDescription}
               </span>
             )}
+            <div class="usa-checkbox__label-description">
+              <slot name="internal-description" />
+            </div>
           </label>
           {messageAriaDescribedby && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">
