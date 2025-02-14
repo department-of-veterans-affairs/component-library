@@ -16,6 +16,6 @@ va-table > va-table-row[slot] button svg {
 
 @media screen and (min-width: 768px) {
   va-table-row span.text-align-right {
-    text-align: right!important;
+    text-align: right !important;
   }
 }

@@ -1,6 +1,7 @@
 @forward 'settings';
 @use 'usa-table/src/styles/usa-table';
 @use 'uswds-helpers/src/styles/usa-sr-only';
+@import '~@department-of-veterans-affairs/css-library/dist/stylesheets/utilities.css';
 
 :host {
   td slot::slotted(span:empty)::before,
@@ -47,6 +48,10 @@
   }
 }
 
+:host .usa-table th[data-sortable="false"] {
+  padding-right: 0;
+}
+
 ::slotted([slot='headers']) {
   background: var(--vads-color-base-lightest);
   font-weight: 700;
@@ -74,5 +79,10 @@ caption {
   .usa-table--stacked th,
   .usa-table--stacked td {
     width: auto;
+
+    // Ensures table headers stay left-aligned even when stacked
+    &::before {
+      text-align: left;
+    }
   }
 }
