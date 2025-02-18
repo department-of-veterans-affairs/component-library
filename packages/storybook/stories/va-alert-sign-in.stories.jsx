@@ -156,6 +156,10 @@ const SlotVariants = {
     slotNames: ['SignInButton'],
     buttons: [SignInButton],
   },
+  [ASIVariants.signInOptionalNoPrefill]: {
+    slotNames: ['SignInButton'],
+    buttons: [SignInButton],
+  },
   [ASIVariants.signInEither]: {
     slotNames: ['LoginGovSignInButton', 'IdMeSignInButton'],
     buttons: [LoginGovSignInButton, IdMeSignInButton],
@@ -221,6 +225,14 @@ export const OptionalSignInVerified = Template.bind(null);
 OptionalSignInVerified.args = {
   ...defaultArgs,
   'variant': ASIVariants.signInOptional,
+  'no-sign-in-link': 'https://example.com/',
+  'time-limit': '60 days',
+};
+
+export const OptionalSignInVerifiedNoPrefill = Template.bind(null);
+OptionalSignInVerifiedNoPrefill.args = {
+  ...defaultArgs,
+  'variant': ASIVariants.signInOptionalNoPrefill,
   'no-sign-in-link': 'https://example.com/',
   'time-limit': '60 days',
 };

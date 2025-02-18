@@ -5,6 +5,7 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "static-storybook-server": "yarn build-storybook && npx http-server storybook-static",
     "build-storybook-chromatic": "chromatic storybook build --project-token=${env.projectToken}"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "babel-plugin-react-native-web": "^0.19.12",
     "chromatic": "^11.5.1",
     "css-loader": "^5.2.4",
+    "http-server": "^14.1.1",
     "node-sass": "^9.0.0",
     "null-loader": "^4.0.1",
     "react": "^18.3.1",
