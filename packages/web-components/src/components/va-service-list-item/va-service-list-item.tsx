@@ -140,7 +140,7 @@ export class VaServiceListItem {
             aria-label={`Go to ${serviceName}`}
           >
             <div class="header">
-              {icon && <va-icon class={`icon ${icon}`} icon={icon}></va-icon>}
+              {icon && <va-icon class={`icon ${icon}`} icon={icon} size={3}></va-icon>}
               <HeadingTag class="service-name">{serviceName}</HeadingTag>
               <va-icon class="chevron-icon" icon="chevron_right"></va-icon>
             </div>

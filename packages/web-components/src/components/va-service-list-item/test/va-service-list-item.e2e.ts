@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-service-list-item', () => {
   /**
@@ -209,5 +210,10 @@ describe('va-service-list-item', () => {
       elementHandle,
     );
     expect(shadowInnerHTML).not.toContain('<va-link class="hydrated optional-link"></va-link>');
+  });
+
+  it('passes an axe check', async () => {
+    const { page } = await setupComponent();
+    await axeCheck(page);
   });
 });
