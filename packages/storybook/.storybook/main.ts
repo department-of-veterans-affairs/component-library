@@ -34,6 +34,7 @@ const config: StorybookConfig = {
     });
 
     // Add TypeScript handling for both .ts and .tsx files
+    // Exclude node_modules except packages that start with @department-of-veterans-affairs/
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       use: [
@@ -48,7 +49,6 @@ const config: StorybookConfig = {
       exclude: /node_modules\/(?!@department-of-veterans-affairs)/
     });
 
-    // Make whatever fine-grained changes you need
     config.module.rules.push({
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader'],
@@ -83,15 +83,7 @@ const config: StorybookConfig = {
   core: {
     builder: '@storybook/builder-webpack5',
     disableWhatsNewNotifications: true,
-    // disableTelemetry: true, // 👈 Disables telemetry
   },
-  // refs: {
-  //   "va-mobile": {
-  //     title: "VA Mobile Design System",
-  //     url: "https://department-of-veterans-affairs.github.io/va-mobile-library",
-  //     expanded: false
-  //   }
-  // },
   docs: {
     autodocs: true
   }
