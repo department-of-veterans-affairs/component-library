@@ -33,16 +33,20 @@ const config: StorybookConfig = {
       include: path.resolve(__dirname, '../')
     });
 
-    // config.module.rules.push({
-    //   test: /\.ts?$/,
-    //   exclude: /node_modules/,
-    //   use: {
-    //     loader: 'ts-loader',
-    //     options: {
-    //       transpileOnly: true
-    //     }
-    //   }
-    // });
+    // Add TypeScript handling for both .ts and .tsx files
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      use: [
+        {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+            configFile: path.resolve(__dirname, '../tsconfig.json')
+          }
+        }
+      ],
+      exclude: /node_modules\/(?!@department-of-veterans-affairs)/
+    });
 
     // Make whatever fine-grained changes you need
     config.module.rules.push({
