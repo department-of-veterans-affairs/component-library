@@ -138,6 +138,21 @@ describe('va-alert-sign-in', () => {
     ).toBeTruthy();
   });
 
+  it('should set variant to "optional no prefill" when specified', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-alert-sign-in variant="${ASIVariants.signInOptionalNoPrefill}"></va-alert-sign-in>`,
+    );
+
+    const element = await page.find('va-alert-sign-in >>> .usa-alert');
+
+    expect(
+      element.classList.contains(
+        `va-alert-sign-in--${ASIVariants.signInOptionalNoPrefill}`,
+      ),
+    ).toBeTruthy();
+  });
+
   it('should set variant to "either" when specified', async () => {
     const page = await newE2EPage();
     await page.setContent(
