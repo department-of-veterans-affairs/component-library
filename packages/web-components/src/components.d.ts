@@ -157,7 +157,7 @@ export namespace Components {
          */
         "timeLimit"?: string;
         /**
-          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInOptionalNoPrefill", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
         "variant": string;
         /**
@@ -3431,7 +3431,7 @@ declare namespace LocalJSX {
          */
         "timeLimit"?: string;
         /**
-          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInOptionalNoPrefill", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
         "variant"?: string;
         /**
