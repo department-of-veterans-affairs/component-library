@@ -1,5 +1,6 @@
 import { StorybookConfig } from "@storybook/react-webpack5";
-import type { Configuration as WebpackConfig } from 'webpack';
+import type { Configuration as WebpackConfiguration } from 'webpack';
+import CopyPlugin from 'copy-webpack-plugin';
 const path = require('path');
 
 const config: StorybookConfig = {
@@ -13,7 +14,7 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
     '@storybook/addon-react-native-web',
   ],
-  webpackFinal: async (config: WebpackConfig) => {
+  webpackFinal: async (config: WebpackConfiguration) => {
     // Initialize module if it doesn't exist
     if (!config.module) {
       config.module = {
@@ -24,6 +25,11 @@ const config: StorybookConfig = {
     // Initialize rules if they don't exist
     if (!config.module.rules) {
       config.module.rules = [];
+    }
+
+    // Initialize plugins array if it doesn't exist
+    if (!config.plugins) {
+      config.plugins = [];
     }
 
     // Add rule to silence log files
@@ -48,6 +54,18 @@ const config: StorybookConfig = {
       ],
       exclude: /node_modules\/(?!@department-of-veterans-affairs)/
     });
+
+    // Copies fonts from mobile-assets to storybook static folder
+    config.plugins.push(
+      new CopyPlugin({
+        patterns: [
+          {
+            from: '../../node_modules/@department-of-veterans-affairs/mobile-assets/fonts',
+            to: 'fonts',
+          },
+        ],
+      }),
+    )
 
     config.module.rules.push({
       test: /\.scss$/,

@@ -35,6 +35,7 @@
     "babel-plugin-react-docgen-typescript": "^1.5.1",
     "babel-plugin-react-native-web": "^0.19.12",
     "chromatic": "^11.5.1",
+    "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^5.2.4",
     "http-server": "^14.1.1",
     "node-sass": "^9.0.0",
