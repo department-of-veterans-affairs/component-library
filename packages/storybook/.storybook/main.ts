@@ -33,6 +33,17 @@ const config: StorybookConfig = {
       include: path.resolve(__dirname, '../')
     });
 
+    // config.module.rules.push({
+    //   test: /\.ts?$/,
+    //   exclude: /node_modules/,
+    //   use: {
+    //     loader: 'ts-loader',
+    //     options: {
+    //       transpileOnly: true
+    //     }
+    //   }
+    // });
+
     // Make whatever fine-grained changes you need
     config.module.rules.push({
       test: /\.scss$/,
@@ -59,20 +70,24 @@ const config: StorybookConfig = {
   },
   framework: {
     name: '@storybook/react-webpack5',
-    options: {}
-  },
-  refs: {
-    "va-mobile": {
-      title: "VA Mobile Design System",
-      url: "https://department-of-veterans-affairs.github.io/va-mobile-library",
-      expanded: false
+    options: {
+      builder: {
+        useSWC: true
+      }
     }
   },
   core: {
     builder: '@storybook/builder-webpack5',
     disableWhatsNewNotifications: true,
+    // disableTelemetry: true, // 👈 Disables telemetry
   },
-  options: { builder: { useSWC: true } }, // improves build performance
+  // refs: {
+  //   "va-mobile": {
+  //     title: "VA Mobile Design System",
+  //     url: "https://department-of-veterans-affairs.github.io/va-mobile-library",
+  //     expanded: false
+  //   }
+  // },
   docs: {
     autodocs: true
   }
