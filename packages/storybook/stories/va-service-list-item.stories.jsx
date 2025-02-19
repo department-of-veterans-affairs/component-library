@@ -83,6 +83,10 @@ MaximalBase.argTypes = {
   serviceName: {
     description: 'The name of the service',
   },
+  serviceNameHeadingLevel: {
+    description: 'The heading level for the service name (defaults to h3)',
+    control: { type: 'number', min:2, max:6, },
+  },
   serviceLink: {
     description: 'The link to the service page',
   },

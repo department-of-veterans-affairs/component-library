@@ -31,7 +31,7 @@ export class VaServiceListItem {
   @Prop() serviceName: string;
 
   /** The heading level for the service name (defaults to h3) */
-  @Prop() serviceNameHeadingLevel: string = 'h3';
+  @Prop() serviceNameHeadingLevel: number = 3;
 
   /** The link to the service page */
   @Prop() serviceLink: string;
@@ -92,7 +92,6 @@ export class VaServiceListItem {
   }
 
   private adjustChevronPosition() {
-    setTimeout(() => {
       const serviceNameElement =
         this.el.shadowRoot.querySelector('.service-name');
       const isMultiLine = serviceNameElement.clientHeight > 24;
@@ -103,7 +102,6 @@ export class VaServiceListItem {
       if (chevron) {
         chevron.classList.toggle('top', isMultiLine);
       }
-    }, 0);
   }
 
   render() {
@@ -129,7 +127,7 @@ export class VaServiceListItem {
       : null;
 
     const actionNeeded = !!parsedAction?.href && !!parsedAction?.text;
-    const HeadingTag = serviceNameHeadingLevel as keyof JSX.IntrinsicElements;
+    const HeadingTag = `h${serviceNameHeadingLevel}` as keyof JSX.IntrinsicElements;
 
     return (
       <Host>
@@ -139,7 +137,7 @@ export class VaServiceListItem {
             class="service-title-row"
             aria-label={`Go to ${serviceName}`}
           >
-            <div class="header">
+            <div class="header" tabIndex={0}>
               {icon && <va-icon class={`icon ${icon}`} icon={icon} size={3}></va-icon>}
               <HeadingTag class="service-name">{serviceName}</HeadingTag>
               <va-icon class="chevron-icon" icon="chevron_right"></va-icon>

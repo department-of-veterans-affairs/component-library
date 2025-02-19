@@ -1583,7 +1583,7 @@ export namespace Components {
         /**
           * The heading level for the service name (defaults to h3)
          */
-        "serviceNameHeadingLevel": string;
+        "serviceNameHeadingLevel": number;
         /**
           * The status of the service
          */
@@ -5101,7 +5101,7 @@ declare namespace LocalJSX {
         /**
           * The heading level for the service name (defaults to h3)
          */
-        "serviceNameHeadingLevel"?: string;
+        "serviceNameHeadingLevel"?: number;
         /**
           * The status of the service
          */

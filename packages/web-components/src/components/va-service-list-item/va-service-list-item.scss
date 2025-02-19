@@ -16,7 +16,6 @@
   }
 
   .service-title-row {
-    &:focus .service-name,
     &:hover .service-name {
       text-decoration: underline;
       color: var(--vads-color-link-active);
@@ -24,7 +23,6 @@
 
     &:focus .chevron-icon,
     &:hover .chevron-icon {
-      transform: translateX(0.25rem);
       color: var(--vads-color-link-active);
     }
   }
@@ -41,11 +39,9 @@
       justify-content: center;
       border-radius: 50%;
       flex-shrink: 0;
-      height: 40px !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      color: #ffffff !important;
+      height: 40px;
+      width: 40px;
+      color: var(--vads-color-white);
       margin-right: 0.625rem;
 
       &.star {
@@ -89,7 +85,7 @@
       }
 
       .chevron-icon {
-        @media (min-width: 767px) {
+        @media (min-width: 768px) {
           margin-left: 0.938rem;
         }
       }
@@ -97,11 +93,15 @@
 
     .service-name {
       margin-top: 0;
-      width: 11.875rem;
+      max-width: 11.875rem;
       color: var(--vads-color-link);
-      @media (min-width: 767px) {
+      @media (min-width: 768px) {
         width: auto;
       }
+    }
+
+    .service-name:has(+ .chevron-icon:only-child) + .chevron-icon {
+      align-self: flex-start;
     }
 
     .chevron-icon {
@@ -111,7 +111,7 @@
       &.top {
         align-self: flex-start;
       }
-      @media (min-width: 767px) {
+      @media (min-width: 768px) {
         margin-left: .938rem;
       }
     }
@@ -129,7 +129,7 @@
     left: -2rem;
     width: calc(100% + 2rem);
 
-    @media (min-width: 767px) {
+    @media (min-width: 768px) {
       left: 0;
       width: auto;
     }
@@ -148,7 +148,7 @@
     color: var(--vads-color-warning);
     background-color: var(--vads-color-base);
 
-    @media (min-width: 767px) {
+    @media (min-width: 768px) {
       margin: 0 0.5rem 0 0;
     }
   }
