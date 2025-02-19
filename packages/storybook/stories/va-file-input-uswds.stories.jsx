@@ -46,6 +46,7 @@ const defaultArgs = {
   'status-text': null,
   'uploadedFile': null,
   'maxFileSize': Infinity,
+  'percentUploaded': null
 };
 
 const Template = ({
@@ -63,7 +64,8 @@ const Template = ({
   value,
   children,
   uploadedFile,
-  maxFileSize
+  maxFileSize,
+  percentUploaded
 }) => {
   return (
     <VaFileInput
@@ -82,12 +84,13 @@ const Template = ({
       children={children}
       uploadedFile={uploadedFile}
       maxFileSize={maxFileSize}
+      percentUploaded={percentUploaded}
     />
   );
 };
 
 export const Default = Template.bind(null);
-Default.args = { ...defaultArgs };
+Default.args = { ...defaultArgs, percentUploaded: 75 };
 Default.argTypes = propStructure(fileInputDocs);
 
 export const Required = Template.bind(null);
@@ -330,3 +333,25 @@ ReadOnlyWithAdditionalInputs.args = {
   readOnly: true,
   children: readOnlyAdditionalInfoContent,
 };
+
+const PercentUploadedTemplate = args => {
+  const [percent, setPercent] = useState(null);
+  function handleUpload() {
+    const intervalId = setInterval(() => {
+      setPercent(_prev => {
+        if (_prev === 100) {
+          clearInterval(intervalId);
+          return null;
+        }
+        return _prev + 5;
+      })
+    }, 250);
+  }
+
+  return(
+    <VaFileInput {...args} percentUploaded={percent} onVaChange={handleUpload} />
+  )
+}
+
+export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
+WithPercentUploaded.args = { ...defaultArgs }
