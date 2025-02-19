@@ -32,6 +32,18 @@ const config: StorybookConfig = {
       config.plugins = [];
     }
 
+    // Add rule to handle HTML files
+    config.module.rules.push({
+      test: /\.html$/,
+      use: ['html-loader'],
+    });
+
+    // Add rule to handle license and other text files
+    config.module.rules.push({
+      test: /\.(txt|md|license)$/i,
+      type: 'asset/source',
+    });
+
     // Add rule to silence log files
     config.module.rules.push({
       test: /\.log$/,
