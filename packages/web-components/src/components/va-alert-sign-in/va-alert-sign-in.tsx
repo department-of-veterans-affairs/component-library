@@ -18,7 +18,7 @@ export class VaAlertSignIn {
   @Element() el!: any;
 
   /**
-   * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+   * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInOptionalNoPrefill", "signInEither", "verifyIdMe", or "verifyLoginGov".
    */
   @Prop() variant: string = ASIVariants.signInRequired;
 
@@ -61,10 +61,12 @@ export class VaAlertSignIn {
     const classes = classnames('usa-alert', `va-alert-sign-in--${variant}`, {
       'usa-alert--info':
         variant === ASIVariants.signInRequired ||
-        variant === ASIVariants.signInOptional,
+        variant === ASIVariants.signInOptional ||
+        variant === ASIVariants.signInOptionalNoPrefill,
       'usa-alert--warning':
         variant !== ASIVariants.signInRequired &&
-        variant !== ASIVariants.signInOptional,
+        variant !== ASIVariants.signInOptional &&
+        variant !== ASIVariants.signInOptionalNoPrefill,
     });
 
     // Create a header element
@@ -121,6 +123,44 @@ export class VaAlertSignIn {
             from when you start or make changes to submit your form.
           </li>
         </ul>
+        <p>
+          <strong>Don't yet have a verified account?</strong> Create a{' '}
+          <strong>Login.gov</strong> or <strong>ID.me</strong> account. We'll
+          help you verify your identity for your account now.
+        </p>
+        <p>
+          <strong>Not sure if your account is verified?</strong> Sign in here.
+          If you still need to verify your identity, we'll help you do that now.
+        </p>
+        <p>
+          <strong>Note:</strong> You can sign in after you start filling out
+          your form. But you'll lose any information you already filled in.
+        </p>
+        <p>
+          <slot name="SignInButton"></slot>
+        </p>
+        {this.noSignInLink && (
+          <p>
+            <va-link
+              href={this.noSignInLink}
+              text="Start your form without signing in"
+              disableAnalytics={true}
+            ></va-link>
+          </p>
+        )}
+      </div>
+    );
+
+    const OptionalNoPrefillVariant = () => (
+      <div class="va-alert-sign-in__body">
+        <HeaderLevel class="headline">
+          Sign in with a verified account
+        </HeaderLevel>
+        <p>
+          When you sign in with an identity-verified account, you can save your
+          work in progress. You'll have 60 days from when you start or make
+          changes to submit your form.
+        </p>
         <p>
           <strong>Don't yet have a verified account?</strong> Create a{' '}
           <strong>Login.gov</strong> or <strong>ID.me</strong> account. We'll
@@ -242,6 +282,7 @@ export class VaAlertSignIn {
     const BodyVariants = {
       [ASIVariants.signInEither]: SignInEitherVariant,
       [ASIVariants.signInOptional]: OptionalVariant,
+      [ASIVariants.signInOptionalNoPrefill]: OptionalNoPrefillVariant,
       [ASIVariants.signInRequired]: RequiredVariant,
       [ASIVariants.verifyIdMe]: IdMeVariant,
       [ASIVariants.verifyLoginGov]: LoginGovVariant,
