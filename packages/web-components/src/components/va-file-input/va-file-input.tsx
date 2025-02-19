@@ -45,6 +45,7 @@ export class VaFileInput {
   @State() internalError?: string;
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
+  @State() internalPercent: number = null;
 
   
 
@@ -132,6 +133,11 @@ export class VaFileInput {
   @Prop() maxFileSize?: number = Infinity;
 
   /**
+   * Percent upload completed. For use with va-progress-bar component
+   */
+  @Prop() percentUploaded?: number = null;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -151,7 +157,18 @@ export class VaFileInput {
     handleValueChange(value) {
       //This won't be read if its not in a timeout due to other messages being read.
       setTimeout(() => {this.updateStatusMessage(value)});
+  }
+  
+  @Watch('percentUploaded') 
+  syncPercent(value) {
+    if (value === 100) {
+      this.fileContents = null;
+      this.uploadStatus = 'idle';
+      this.internalPercent = null;
+    } else {
+      this.internalPercent = value;
     }
+  }
 
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
@@ -393,7 +410,9 @@ export class VaFileInput {
       value,
       readOnly,
       statusText,
-      uploadedFile
+      uploadedFile,
+      percentUploaded,
+      internalPercent
     } = this;
 
     if (value && !this.file) {
@@ -461,6 +480,8 @@ export class VaFileInput {
       this.uploadMessage = this.defaultUploadMessage;
     }
     
+    const showProgBar = internalPercent !== null && internalPercent < 100;
+
     return (
       <Host class={{ 'has-error': !!displayError }}>
         {!readOnly && (
@@ -546,8 +567,18 @@ export class VaFileInput {
                     <div class="additional-info-slot">
                       <slot></slot>
                     </div>
-
-                    {!readOnly && (
+                    {(!readOnly && showProgBar) && (
+                      <Fragment>
+                        <va-progress-bar percent={percentUploaded} />
+                        <va-button-icon buttonType="cancel" onClick={() => {
+                          this.internalPercent = null;
+                          this.fileContents = null;
+                          this.uploadStatus = 'idle';
+                          }
+                        } />
+                      </Fragment>
+                    )}
+                    {(!readOnly && !showProgBar) && (
                       <Fragment>
                         <div class="file-button-section">
                           <va-button-icon
