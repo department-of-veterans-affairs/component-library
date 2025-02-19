@@ -213,7 +213,7 @@ export const TitleWithCustomContent = () => (
   <>
     <va-checkbox label="Issue 1" tile onBlur={e => console.log(e)}>
       <div slot="internal-description">
-        <div>
+        <div className="vads-u-margin-top--0p5">
           <strong>Detail</strong>: Internal description slot for issue 1
         </div>
         <div className="vads-u-margin-top--1">
@@ -223,7 +223,7 @@ export const TitleWithCustomContent = () => (
     </va-checkbox>
     <va-checkbox label="Issue 2" tile onBlur={e => console.log(e)}>
       <div slot="internal-description">
-        <div>
+        <div className="vads-u-margin-top--0p5">
           <strong>Detail</strong>: Internal description slot for issue 2
         </div>
         <div className="vads-u-margin-top--1">

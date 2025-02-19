@@ -319,9 +319,7 @@ describe('va-checkbox', () => {
           <input aria-invalid="false" class="va-checkbox__input" id="checkbox-element" type="checkbox">
           <label class="va-checkbox__label" for="checkbox-element">
             <span part="label">test</span>
-            <div class="usa-checkbox__label-description">
-              <slot name="internal-description"></slot>
-            </div>
+            <slot name="internal-description"></slot>
           </label>
           </div>
         </mock:shadow-root>

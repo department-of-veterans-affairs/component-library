@@ -278,9 +278,7 @@ export class VaCheckbox {
                 {checkboxDescription}
               </span>
             )}
-            <div class="usa-checkbox__label-description">
-              <slot name="internal-description" />
-            </div>
+            <slot name="internal-description" />
           </label>
           {messageAriaDescribedby && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">
