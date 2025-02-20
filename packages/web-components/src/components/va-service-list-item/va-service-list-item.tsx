@@ -128,6 +128,12 @@ export class VaServiceListItem {
 
     const actionNeeded = !!parsedAction?.href && !!parsedAction?.text;
     const HeadingTag = `h${serviceNameHeadingLevel}` as keyof JSX.IntrinsicElements;
+    const validIcons = new Set([
+      "star", "work", "description", "school", "groups", 
+      "medical_services", "home", "shield", "handshake", 
+      "identification", "flag"
+    ]);
+    const iconClass = validIcons.has(icon) ? `icon ${icon}` : "icon default";
 
     return (
       <Host>
@@ -138,7 +144,7 @@ export class VaServiceListItem {
             aria-label={`Go to ${serviceName}`}
           >
             <div class="header" tabIndex={0}>
-              {icon && <va-icon class={`icon ${icon}`} icon={icon} size={3}></va-icon>}
+              {icon && <va-icon class={iconClass} icon={icon} size={3}></va-icon>}
               <HeadingTag class="service-name">{serviceName}</HeadingTag>
               <va-icon class="chevron-icon" icon="chevron_right"></va-icon>
             </div>

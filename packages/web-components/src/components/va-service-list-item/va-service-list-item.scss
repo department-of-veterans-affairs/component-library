@@ -77,6 +77,10 @@
       &.flag {
         background-color:var(--vads-color-hub-service-member);
       }
+
+      &.default {
+        background-color: var(--vads-color-primary);
+      }
     }
 
     &:not(:has(.icon)) {
@@ -93,7 +97,7 @@
 
     .service-name {
       margin-top: 0;
-      max-width: 11.875rem;
+      width: 11.875rem;
       color: var(--vads-color-link);
       @media (min-width: 768px) {
         width: auto;
