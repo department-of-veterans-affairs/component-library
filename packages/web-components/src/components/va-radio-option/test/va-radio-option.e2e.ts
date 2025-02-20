@@ -17,8 +17,8 @@ describe('va-radio-option', () => {
     expect(element).toEqualHtml(`
     <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" class="hydrated">
         <div class="usa-radio">
-          <input class="usa-radio__input" id="yes2input" type="radio" name="yes" value="2">
-          <label aria-checked="false" class="usa-radio__label" for="yes2input" role="radio">
+          <input class="va-radio-option__input" id="yes2input" type="radio" name="yes" value="2">
+          <label class="usa-radio__label" for="yes2input">
             Yes - Any Veteran
           </label>
         </div>
@@ -73,4 +73,11 @@ describe('va-radio-option', () => {
     expect(description.getAttribute('data-dd-action-name')).toEqual('description');
   });
 
+  it('institutes the tile class if the tile prop is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio-option tile></va-radio-option>');
+
+    const element = await page.find('va-radio-option .usa-radio');
+    expect(element).toHaveClass('va-radio-option__container--tile');
+  });
 });

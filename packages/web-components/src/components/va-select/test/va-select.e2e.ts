@@ -140,4 +140,21 @@ describe('va-select', () => {
     const selectValue = await select.getProperty('value');
     expect(selectValue).toBe('bar');
   });
+
+  it('emits the vaSelectBlur event', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="bar">
+        <option value="">Please choose an option</option>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+    const blurSpy = await page.spyOnEvent('vaSelectBlur');
+    const selectEl = await page.find('va-select >>> select');
+    await selectEl.focus();
+    await selectEl.press('Tab');
+
+    expect(blurSpy).toHaveReceivedEvent();
+  });
 });

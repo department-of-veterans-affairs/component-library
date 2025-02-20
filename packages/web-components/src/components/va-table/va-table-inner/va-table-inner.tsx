@@ -71,6 +71,19 @@ export class VaTableInner {
   @Prop() striped: boolean = false;
 
   /**
+   * When active, the table will expand to the full width of its container
+   */
+  @Prop() fullWidth: boolean = false;
+
+  /**
+   * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+   */
+  @Prop() rightAlignCols?: string;
+
+  // Internal 'holder' for the array of columns to right-align, updated in componentWillRender
+  colsToAlign: Array<number>;
+
+  /**
    * If sortable is true, the direction of next sort for the column that was just sorted
    */
   @State() sortdir?: string = null;
@@ -145,10 +158,11 @@ export class VaTableInner {
    * @param innerHTML string of html
    * @returns parsed string escaped of html entities
    */
-  parseHTMLToString (innerHTML:string) {
+  parseHTMLToString(innerHTML: string) {
     let parser = new DOMParser();
 
-    return parser.parseFromString(innerHTML, 'text/html').documentElement.textContent;
+    return parser.parseFromString(innerHTML, 'text/html').documentElement
+      .textContent;
   }
 
   /**
@@ -163,14 +177,19 @@ export class VaTableInner {
         {Array.from({ length: this.cols }).map((_, i) => {
           const slotName = `va-table-slot-${row * this.cols + i}`;
           const slot = <slot name={slotName}></slot>;
-          const header = this.parseHTMLToString(this.el.querySelector(
-            `[slot="va-table-slot-${i}"]`,
-          ).innerHTML);
+          const header = this.parseHTMLToString(
+            this.el.querySelector(`[slot="va-table-slot-${i}"]`).innerHTML,
+          );
+          let rightAlignClass: string;
+          // Checks if this cell should be right-aligned and adds a class to make it so
+          if (this.colsToAlign !== undefined && this.colsToAlign.includes(i)) {
+            rightAlignClass = 'vads-u-text-align--right';
+          }
           const dataSortActive = row > 0 && this.sortindex === i ? true : false;
           return i === 0 || row === 0 ? (
             <th
               scope={scopeDimension}
-              data-sortable
+              data-sortable={this.sortable}
               data-sort-active={dataSortActive}
               data-label={header}
               data-rowindex={i}
@@ -180,7 +199,11 @@ export class VaTableInner {
               {this.getSortIcon(i, row)}
             </th>
           ) : (
-            <td data-label={header} data-sort-active={dataSortActive}>
+            <td
+              class={rightAlignClass}
+              data-label={header}
+              data-sort-active={dataSortActive}
+            >
               {slot}
             </td>
           );
@@ -292,6 +315,20 @@ export class VaTableInner {
     }
   }
 
+  componentWillRender() {
+    // If there are right-aligned columns, split and format them and save in memory for performance reasons
+    if (this.rightAlignCols !== undefined) {
+      const cols = this.rightAlignCols.split(',').map(val => Number(val));
+      if (cols.some(col => isNaN(col))) {
+        console.warn(
+          'There was a non-number detected in the right-align-cols/rightAlignCols prop, please ensure that this value is a comma-separated string of zero-indexed numbers, where each number represents a column you wish to right-align.',
+        );
+      } else {
+        this.colsToAlign = cols;
+      }
+    }
+  }
+
   /**
    * we must update the table after render due to content being projected into slots
    * 1. add aria-labels to the th elements in the theader
@@ -324,27 +361,29 @@ export class VaTableInner {
           this.updateSpan(th, thSorted, nextSortDirection, content);
 
           // update sr text to reflect sort
-          setTimeout(()=>{
+          setTimeout(() => {
             this.updateSRtext(thSorted, content, currentSortDirection);
-          }, 500)
+          }, 500);
         });
     }
   }
 
   render() {
-    const { tableTitle, tableType, stacked, scrollable, striped } = this;
-    const classes = classnames({
+    const { tableTitle, tableType, stacked, scrollable, striped, fullWidth } =
+      this;
+    const containerClasses = classnames({
+      'usa-table-container--scrollable': scrollable,
+      'va-table--full-width': fullWidth,
+    });
+    const tableClasses = classnames({
       'usa-table': true,
       'usa-table--stacked': stacked,
       'usa-table--borderless': tableType === 'borderless',
       'usa-table--striped': striped,
     });
     return (
-      <div
-        tabIndex={scrollable ? 0 : null}
-        class={scrollable ? 'usa-table-container--scrollable' : undefined}
-      >
-        <table class={classes}>
+      <div tabIndex={scrollable ? 0 : null} class={containerClasses}>
+        <table class={tableClasses}>
           {tableTitle && <caption>{tableTitle}</caption>}
           <thead>{this.makeRow(0)}</thead>
           <tbody id="va-table-body">{this.getBodyRows()}</tbody>

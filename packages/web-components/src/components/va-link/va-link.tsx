@@ -84,7 +84,7 @@ export class VaLink {
   @Prop() reverse?: boolean = false;
 
   /**
-   * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+   * If 'true', will open in a new tab and will have the text "opens in a new tab" appended to the link text in screen reader only span
    */
   @Prop() external?: boolean = false;
 
@@ -160,7 +160,8 @@ export class VaLink {
       external,
       iconName,
       iconSize,
-      language
+      language,
+      label
     } = this;
 
     const linkClass = classNames({
@@ -176,7 +177,7 @@ export class VaLink {
             href={href}
             class={linkClass}
             onClick={handleClick}
-            aria-label={this.label}
+            aria-label={label}
           >
             {text}
             <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
@@ -202,7 +203,7 @@ export class VaLink {
               href={href}
               class={linkClass}
               onClick={handleClick}
-              aria-label={this.label}
+              aria-label={label}
             >
               {text}
             </a>
@@ -219,6 +220,7 @@ export class VaLink {
           <a
             href={href}
             class={linkClass}
+            aria-label={label}
             onClick={handleClick}
             rel="noopener"
             target="_blank"
@@ -238,6 +240,7 @@ export class VaLink {
             href={href}
             class={linkClass}
             download={filename}
+            aria-label={label}
             onClick={handleClick}
           >
             <va-icon class="link-icon--left" icon="calendar_today"></va-icon>
@@ -255,6 +258,7 @@ export class VaLink {
             href={href}
             class={linkClass}
             download={filename}
+            aria-label={label}
             onClick={handleClick}
           >
             <va-icon class="link-icon--left" icon="file_download"></va-icon>
@@ -274,7 +278,12 @@ export class VaLink {
     if (iconName) {
       return (
         <Host>
-          <a href={href} class={linkClass} onClick={handleClick}>
+          <a
+            href={href}
+            class={linkClass}
+            aria-label={label}
+            onClick={handleClick}
+          >
             <va-icon icon={iconName} size={iconSize} part="icon"></va-icon>
             {text}
           </a>
@@ -290,6 +299,7 @@ export class VaLink {
             rel="noreferrer"
             class={linkClass}
             onClick={handleClick}
+            aria-label={label}
             target="_blank"
           >
             {text} (opens in a new tab)
@@ -307,7 +317,7 @@ export class VaLink {
           href={href}
           class={linkClass}
           onClick={handleClick}
-          aria-label={this.label}
+          aria-label={label}
           part="anchor"
           lang={lang}
           hrefLang={lang}

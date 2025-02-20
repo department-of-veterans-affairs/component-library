@@ -60,7 +60,7 @@ describe('va-button-pair', () => {
     })
   });
 
-  it(`doesn't fire analytics event when disableAnalytics is true`, async () => {
+  it("doesn't fire analytics event when disableAnalytics is true", async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-button-pair disable-analytics></va-button-pair>',
@@ -111,5 +111,49 @@ describe('va-button-pair', () => {
 
     const rightText = await rightButton.evaluate(element => element.innerHTML);
     expect(rightText).toEqual('world');
-  })
+  });
+
+  it('continue button displays the text "Continue" when the continue prop is set and no custom text is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button-pair continue></va-button-pair>');
+    const button = await page.find('va-button-pair >>> va-button[continue] >>> button');
+    expect(button.textContent).toEqual('Continue');
+  });
+
+  it('continue button displays custom text when the continue prop is set and custom text is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button-pair continue right-button-text="Save and continue"></va-button-pair>');
+    const button = await page.find('va-button-pair >>> va-button[continue] >>> button');
+    expect(button.textContent).toEqual('Save and continue');
+  });
+
+  it('submits form when submit prop is set and "continue" button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<form onsubmit="e=>{e.preventDefault();}"><va-button-pair submit continue></va-button-pair></form>');
+    const submitSpy = await page.spyOnEvent('submit');
+    const button = await page.find('va-button-pair >>> va-button[continue]');
+    await button.click();
+    await page.waitForChanges();
+    expect(submitSpy).toHaveReceivedEventTimes(1);
+  });
+
+  it('submit is not triggered when submit=skip is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<form><va-button-pair submit="skip" continue></va-button-pair></form>');
+    const submitSpy = await page.spyOnEvent('submit');
+    const button = await page.find('va-button-pair >>> va-button[continue]');
+    await button.click();
+    await page.waitForChanges();
+    expect(submitSpy).toHaveReceivedEventTimes(0);
+  });
+
+  it('submit is triggered when submit=prevent is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<form onsubmit="e=>{e.preventDefault();}"><va-button-pair submit="prevent" continue></va-button-pair></form>');
+    const submitSpy = await page.spyOnEvent('submit');
+    const button = await page.find('va-button-pair >>> va-button[continue]');
+    await button.click();
+    await page.waitForChanges();
+    expect(submitSpy).toHaveReceivedEventTimes(1);
+  });
 });

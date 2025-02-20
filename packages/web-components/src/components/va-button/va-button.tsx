@@ -7,6 +7,7 @@ import {
   Listen,
   Prop,
   Element,
+  Watch,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -23,6 +24,8 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaButton {
+  private showCompletedMessage: boolean = false;
+
   @Element() el: HTMLElement;
 
   /**
@@ -51,6 +54,22 @@ export class VaButton {
   @Prop({ reflect: true }) disabled?: boolean = false;
 
   /**
+   * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
+   */
+  @Prop({ reflect: true }) loading?: boolean = false;
+
+  @Watch('loading')
+  announceLoadingChange(newValue: boolean, oldValue: boolean) {
+    if (oldValue && !newValue) {
+      let me = this;
+      this.showCompletedMessage = true;
+      setTimeout(() => {
+        me.showCompletedMessage = false;
+      }, 3000);
+    }
+  }
+
+  /**
    * The aria-label of the component.
    */
   @Prop() label?: string; // could use this.el.getAttribute('aria-label') but this is more explicit
@@ -66,16 +85,17 @@ export class VaButton {
   @Prop({ reflect: true }) secondary?: boolean = false;
 
   /**
-   * Having this attribute present will set the type of this button as 'submit'.
-   * The va-button element must be within a `form` element for this functionality to take place
-   * A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form;
-   * `skip` will submit the form but not trigger the onsubmit callback;
-   * All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+   * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`.
+   * The va-button component must be within a `form` element.
+   * **Prop options:**
+   * `prevent` will trigger the onsubmit callback on the form, but won't submit the form.
+   * `skip` will submit the form but not trigger the form onsubmit callback.
+   * All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
    */
   @Prop() submit?: string;
 
   /**
-   * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+   * The text displayed on the button.
    */
   @Prop() text?: string;
 
@@ -108,20 +128,38 @@ export class VaButton {
     }
   };
 
+  // button text; custom text takes precedence
   private getButtonText = (): string => {
+    if (this.text) return this.text;
     if (this.continue) return 'Continue';
     if (this.back) return 'Back';
-
-    return this.text;
+    if (this.loading && !this.text) return 'Loading...';
+    return;
   };
 
   private handleSubmit() {
     if (this.submit === undefined) {
       return;
     }
-    // eslint-disable-next-line i18next/no-literal-string
-    const theForm = this.el.closest('form');
-    if (!theForm) {
+
+    // Find the form element by walking up through shadow roots
+    let element = this.el as Element;
+    let formElement = null as HTMLFormElement | null;
+    
+    while (element && !formElement) {
+      // Try to find form in the current root
+      formElement = element.closest('form');
+      
+      // If no form found and we're in a shadow root, move up to the host element
+      if (!formElement && element.getRootNode() instanceof ShadowRoot) {
+        element = (element.getRootNode() as ShadowRoot).host;
+      } else if (!formElement) {
+        // If we're in the light DOM and still no form, break
+        break;
+      }
+    }
+
+    if (!formElement) {
       return;
     }
     const submitEvent = new CustomEvent('submit', {
@@ -130,10 +168,10 @@ export class VaButton {
       composed: true,
     });
     if (this.submit !== 'skip') {
-      theForm.dispatchEvent(submitEvent);
+      formElement.dispatchEvent(submitEvent);
     }
     if (this.submit !== 'prevent') {
-      theForm.submit();
+      formElement.submit();
     }
   }
 
@@ -145,7 +183,7 @@ export class VaButton {
    */
   @Listen('click')
   handleClickOverride(e: MouseEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.loading) {
       e.preventDefault();
       e.stopPropagation();
       return;
@@ -159,6 +197,7 @@ export class VaButton {
       back,
       continue: _continue,
       disabled,
+      loading,
       getButtonText,
       label,
       submit,
@@ -171,7 +210,7 @@ export class VaButton {
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
 
-    const ariaDisabled = disabled ? 'true' : undefined;
+    const ariaDisabled = disabled || loading ? 'true' : undefined;
     const buttonText = getButtonText();
 
     const type = submit !== undefined ? 'submit' : 'button';
@@ -185,18 +224,26 @@ export class VaButton {
     
     return (
       <Host>
-        <button
-          class={buttonClass}
-          aria-disabled={ariaDisabled}
-          aria-label={label}
-          aria-describedby={ariaDescribedbyIds}
-          type={type}
-          part="button"
-        >
-          {back && !_continue && <va-icon icon="navigate_far_before" />}
-          {buttonText}
-          {_continue && !back && <va-icon icon="navigate_far_next" />}
-        </button>
+          {/* This span must always be present for changes to be announced for the loading prop. It will not show visually or be read without content*/}
+          <span class="loading-message" role="status">
+            {this.loading ? 'Loading' : this.showCompletedMessage ? 'Loading complete' : null}
+          </span>
+          <button
+            class={buttonClass}
+            aria-disabled={ariaDisabled}
+            aria-busy={loading ? 'true' : undefined}
+            aria-label={label}
+            aria-describedby={ariaDescribedbyIds}
+            type={type}
+            part="button"
+          >
+            {back && !_continue && <va-icon icon="navigate_far_before" />}
+            {
+              loading ? <va-icon class="loading-icon" icon="autorenew" aria-hidden="true"/> : null
+            }
+            {buttonText}
+            {_continue && !back && <va-icon icon="navigate_far_next" />}
+          </button>
         {messageAriaDescribedby && (
           <span id="button-description" class="usa-sr-only">
             {messageAriaDescribedby}

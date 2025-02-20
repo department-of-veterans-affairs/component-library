@@ -24,22 +24,24 @@ const defaultArgs = {
   'secondary': undefined,
   'primary-alternate': undefined,
   'submit': undefined,
-  'text': 'Default',
   'message-aria-describedby': 'Optional description text for screen readers',
+  onClick: (e) => console.log(e)
 };
 
 const Template = ({
   back,
   big,
-   _continue,
+   _continue, // "continue" is a reserved word and it doesn't seem to work here as-is.
   disableAnalytics,
   disabled,
+  loading,
   label,
   secondary,
   primaryAlternate,
   submit,
   text,
   messageAriaDescribedby,
+  onClick
 }) => {
   return (
     <va-button
@@ -48,12 +50,13 @@ const Template = ({
       continue={_continue}
       disable-analytics={disableAnalytics}
       disabled={disabled}
+      loading={loading}
       label={label}
       secondary={secondary}
       primary-alternate={primaryAlternate}
       submit={submit}
-      text={text}
-      onClick={e => console.log(e)}
+      text={!loading && !text ? null : text}
+      onClick= {onClick}
       message-aria-describedby={messageAriaDescribedby}
     />
   );
@@ -62,6 +65,7 @@ const Template = ({
 export const Primary = Template.bind(null);
 Primary.args = {
   ...defaultArgs,
+  text: "Default",
 };
 Primary.argTypes = propStructure(buttonDocs);
 
@@ -90,21 +94,41 @@ export const Continue = Template.bind(null);
 Continue.args = {
   ...defaultArgs,
   _continue: true,
-  text: undefined,
+};
+
+export const ContinueCustomText = Template.bind(null);
+ContinueCustomText.args = {
+  ...defaultArgs,
+  _continue: true,
+  text: "Save and continue",
 };
 
 export const Back = Template.bind(null);
 Back.args = {
   ...defaultArgs,
   back: true,
-  text: undefined,
 };
 
 export const Disabled = Template.bind(null);
 Disabled.args = {
   ...defaultArgs,
   disabled: true,
-  text: "Disabled",
+  text: "Default",
+};
+
+export const Loading = Template.bind(null);
+Loading.args = {
+  ...defaultArgs,
+  text: 'Click to load',
+  onClick: (e) => {
+    e.target.setAttribute('text', '');
+    e.target.setAttribute('loading', 'true');
+    setTimeout(() => {
+      e.target.setAttribute('text', 'Click to load');
+      e.target.setAttribute('loading', 'false');
+    }, 5000)
+  }
+  
 };
 
 
@@ -120,12 +144,12 @@ const TemplateWithForm = ({
   submit,
   text,
   messageAriaDescribedby,
-  onsub,
-  onclk,
+  handleSubmit,
+  handleClick,
 }) => {
   return (
-    <form onSubmit={onsub}>
-      <p>This is inside a form, which has an onsubmit() that displays an alert when the form is submitted</p>
+    <form onSubmit={handleSubmit}>
+      <p>This is inside a form element, which has a callback for onSubmit() and onClick() that displays an alert when the form is submitted</p>
       <va-button
         back={back}
         big={big}
@@ -137,7 +161,7 @@ const TemplateWithForm = ({
         primary-alternate={primaryAlternate}
         submit={submit}
         text={text}
-        onClick={e => onclk(e) }
+        onClick={e => handleClick(e) }
         message-aria-describedby={messageAriaDescribedby}
       />
     </form>
@@ -147,15 +171,14 @@ const TemplateWithForm = ({
 export const Submitted = TemplateWithForm.bind(null);
 Submitted.args = {
   ...defaultArgs,
-  onsub : (e)=>{ 
-    console.log(e.target, "I am submitted!");
-    alert ("form onsubmit method fired!--on form");
+  handleSubmit : (event)=>{ 
+    console.log("Form onSubmit callback fired!", event);
+    alert ("Form onSubmit callback fired!");
   },
-  onclk : (e)=>{ 
-    console.log("called the on click method-on button", e.target);
-    alert( "onclick happened on button"); 
-
+  handleClick : (event)=>{ 
+    console.log("Form onClick callback fired!", event);
+    alert( "Button onClick callback fired!"); 
 },
-  submit: 'prevent',
-  text: "Submit me",
+  submit: "prevent",
+  text: "Submit",
 };

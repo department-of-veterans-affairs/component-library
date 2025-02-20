@@ -128,12 +128,16 @@
     width: 100%;
   }
 
-  .file-size-label {
+  .file-size-label, .file-status-label {
     color: var(--vads-color-base-dark);
     font-weight: var(--font-weight-normal);
     font-size: 1.06rem;
     padding: 0 8px;
     display: block;
+  }
+
+  .file-status-label {
+    font-style: italic;
   }
 
   .file-info-section {
@@ -205,4 +209,12 @@
 .required {
   color: var(--vads-color-secondary-dark);
   margin-left: 0.25rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  .required {
+    font-family: var(--font-source-sans);
+    font-size: initial;
+    font-weight: initial;
+  }
 }

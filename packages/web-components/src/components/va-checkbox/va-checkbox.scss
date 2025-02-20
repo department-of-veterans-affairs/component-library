@@ -8,6 +8,7 @@
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-error-message/src/styles/usa-error-message';
 
+@import '../../mixins/focusable.css';
 @import '../../mixins/uswds-error-border.scss';
 
 :host {
@@ -15,11 +16,87 @@
   max-width: 480px;
 }
 
-.usa-checkbox {
+.va-checkbox__container {
   background: transparent;
+  display: flex;
+  margin: 0.75rem 0;
+  max-width: 480px;
+  cursor: pointer;
+
+  // Temporarily adding vars manually until Storybook is setup to make use of CSS-Library
+  --vads-button-color-background-primary-on-light: #005ea2;
+  --vads-input-background-color-on-light: #ffffff;
+  --vads-input-border-color-on-light: #565c65;
+  --vads-input-prefix-color-fill-on-light: #757575;
+  --vads-input-prefix-color-text-on-light: #757575;
+  --vads-input-suffix-color-text-on-light: #757575;
+  --vads-input-tile-background-active-on-light: rgba(0, 94, 162, 0.1);
+  --vads-input-tile-border-active-on-light: #005ea2;
+  --vads-input-tile-border-on-light: rgba(27, 27, 27, 0.03);
+  --vads-input-tile-border-override: #c9c9c9; // Matches USWDS
 }
 
-.usa-checkbox__input:focus + [class*='__label']::before {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
-  outline-offset: 4px;
+.va-checkbox__container--tile {
+  border-radius: 0.25rem;
+  background-color: var(--vads-input-background-color-on-light);
+  border: 2px solid var(--vads-input-tile-border-override);
+  color: var(--vads-color-base);
+  padding: 0.75rem 1rem .75rem .5rem;
+  margin: 0.5rem 0;
+}
+
+.va-checkbox__container--tile--checked {
+  background-color: var(--vads-input-tile-background-active-on-light);
+  border-color: var(--vads-input-tile-border-active-on-light);
+}
+
+.va-checkbox__input {
+  height: 1.25rem;
+  width: 1.25rem;
+  min-width: 1.25rem;
+  background: var(--vads-input-background-color-on-light);
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px var(--vads-color-base);
+  appearance: none;
+  margin: 0.064rem 0 0 4px;
+  opacity: unset;
+  position: initial;
+  cursor: pointer;
+
+  &:not([disabled]):focus {
+    outline-offset: 4px;
+  }
+
+  &:checked {
+    background: var(--vads-button-color-background-primary-on-light);
+    background-image: url("data:image/svg+xml,%3C%3Fxml version%3D%221.0%22 encoding%3D%22UTF-8%22%3F%3E%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%2265%22 height%3D%2250%22 viewBox%3D%220 0 65 50%22%3E%3Ctitle%3Ecorrect8%3C%2Ftitle%3E%3Cpath fill%3D%22%23FFF%22 fill-rule%3D%22evenodd%22 d%3D%22M63.268 7.063l-5.616-5.61C56.882.685 55.946.3 54.845.3s-2.038.385-2.808 1.155L24.951 28.552 12.81 16.385c-.77-.77-1.707-1.155-2.808-1.155-1.1 0-2.037.385-2.807 1.154l-5.616 5.61C.81 22.764.425 23.7.425 24.8s.385 2.035 1.155 2.805l14.947 14.93 5.616 5.61c.77.77 1.706 1.154 2.807 1.154s2.038-.384 2.808-1.154l5.616-5.61 29.894-29.86c.77-.77 1.157-1.707 1.157-2.805 0-1.101-.385-2.036-1.156-2.805l-.001-.002z%22%2F%3E%3C%2Fsvg%3E"), linear-gradient(transparent, transparent);
+    background-position: center center;
+    background-size: 0.75rem auto;
+    background-repeat: no-repeat;
+    border: none;
+    box-shadow: 0 0 0 2px var(--vads-button-color-background-primary-on-light);
+
+    &:focus {
+      outline-offset: 4px;
+    }
+  }
+
+  &[data-indeterminate]:not([data-indeterminate=false]) {
+    background: var(--vads-button-color-background-primary-on-light);
+    background-image: url("data:image/svg+xml,%3C%3Fxml version%3D%221.0%22 encoding%3D%22utf-8%22%3F%3E%3C!-- Generator%3A Adobe Illustrator 26.3.1%2C SVG Export Plug-In . SVG Version%3A 6.00 Build 0)  --%3E%3Csvg version%3D%221.1%22 id%3D%22Layer_1%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22 x%3D%220px%22 y%3D%220px%22%09 viewBox%3D%220 0 64 64%22 style%3D%22enable-background%3Anew 0 0 64 64%3B%22 xml%3Aspace%3D%22preserve%22%3E%3Cstyle type%3D%22text%2Fcss%22%3E%09.st0%7Bfill-rule%3Aevenodd%3Bclip-rule%3Aevenodd%3Bfill%3A%23FFFFFF%3B%7D%3C%2Fstyle%3E%3Cpath class%3D%22st0%22 d%3D%22M2.9%2C35.9c0%2C1.1%2C0.4%2C2%2C1.2%2C2.8c0.8%2C0.8%2C1.7%2C1.2%2C2.8%2C1.2h7.9h42.3c1.1%2C0%2C2-0.4%2C2.8-1.2s1.2-1.7%2C1.2-2.8l0%2C0V28%09c0-1.1-0.4-2-1.2-2.8S58.2%2C24%2C57.1%2C24H6.9c-1.1%2C0-2%2C0.4-2.8%2C1.2S2.9%2C26.9%2C2.9%2C28V35.9z%22%2F%3E%3C%2Fsvg%3E"), linear-gradient(transparent, transparent);
+    background-position: center center;
+    background-size: 0.75rem auto;
+    background-repeat: no-repeat;
+    border: none;
+
+    &:focus {
+      outline-offset: 4px;
+    }
+  }
+}
+
+.va-checkbox__label {
+  padding-left: 0.6rem;
+  cursor: pointer;
 }

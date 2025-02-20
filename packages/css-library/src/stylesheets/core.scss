@@ -1,6 +1,7 @@
 @use "../../dist/tokens/scss/variables" as *;
 
 @forward 'uswds-theme';
+@use 'uswds-fonts';
 
 @use './core-variables' as *;
 
@@ -27,7 +28,6 @@
 @import 'formation-overrides/elements/inputs';
 @import 'formation-overrides/elements/labels';
 @import 'formation-overrides/elements/lists';
-@import 'formation-overrides/elements/table';
 @import 'formation-overrides/elements/typography';
 @import 'formation-overrides/components/accordions';
 @import 'formation-overrides/components/alerts';

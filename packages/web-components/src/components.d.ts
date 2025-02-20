@@ -6,7 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+import { UploadedFile } from "./components/va-file-input/uploadedFile";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+export { UploadedFile } from "./components/va-file-input/uploadedFile";
 export namespace Components {
     /**
      * @componentName Accordion
@@ -113,6 +115,7 @@ export namespace Components {
     }
     /**
      * @componentName Alert - expandable
+     * @guidanceHref alert/alert-expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -135,7 +138,8 @@ export namespace Components {
         "trigger": string;
     }
     /**
-     * @componentName Alert - Sign In
+     * @componentName Alert - Sign-in
+     * @guidanceHref alert/alert-sign-in
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -153,7 +157,7 @@ export namespace Components {
          */
         "timeLimit"?: string;
         /**
-          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInOptionalNoPrefill", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
         "variant": string;
         /**
@@ -182,6 +186,10 @@ export namespace Components {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
         /**
           * The headline of the banner.
          */
@@ -262,6 +270,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
+         */
+        "loading"?: boolean;
+        /**
           * An optional message that will be read by screen readers when the input is focused.
          */
         "messageAriaDescribedby"?: string;
@@ -274,11 +286,11 @@ export namespace Components {
          */
         "secondary"?: boolean;
         /**
-          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+          * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`. The va-button component must be within a `form` element. **Prop options:** `prevent` will trigger the onsubmit callback on the form, but won't submit the form. `skip` will submit the form but not trigger the form onsubmit callback. All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
@@ -331,7 +343,7 @@ export namespace Components {
          */
         "secondaryLabel"?: string;
         /**
-          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+          * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`. The va-button component must be within a `form` element. **Prop options:** `prevent` will trigger the onsubmit callback on the form, but won't submit the form. `skip` will submit the form but not trigger the form onsubmit callback. All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
          */
         "submit"?: string;
         /**
@@ -610,6 +622,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Maximum allowed file size in bytes.
+         */
+        "maxFileSize"?: number;
+        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -622,9 +638,17 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
+        /**
+          * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
+         */
+        "uploadedFile"?: UploadedFile;
         /**
           * The value attribute for the file view element.
          */
@@ -675,6 +699,10 @@ export namespace Components {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+        /**
+          * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
+         */
+        "slotFieldIndexes"?: Number[];
         /**
           * The value attribute for the file view element.
          */
@@ -775,7 +803,7 @@ export namespace Components {
          */
         "download"?: boolean;
         /**
-          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+          * If 'true', will open in a new tab and will have the text "opens in a new tab" appended to the link text in screen reader only span
          */
         "external"?: boolean;
         /**
@@ -1572,6 +1600,14 @@ export namespace Components {
     }
     interface VaTable {
         /**
+          * When active, forces the table to expand to the full-width of its container
+         */
+        "fullWidth"?: boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+         */
+        "rightAlignCols"?: string;
+        /**
           * When active, the table can be horizontally scrolled and is focusable
          */
         "scrollable"?: boolean;
@@ -1606,6 +1642,14 @@ export namespace Components {
           * The number of columns in the table
          */
         "cols"?: number;
+        /**
+          * When active, the table will expand to the full width of its container
+         */
+        "fullWidth": boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+         */
+        "rightAlignCols"?: string;
         "rows"?: number;
         /**
           * When active, the table can be horizontally scrolled and is focusable
@@ -2056,6 +2100,7 @@ export interface VaTextareaCustomEvent<T> extends CustomEvent<T> {
 declare global {
     interface HTMLVaAccordionElementEventMap {
         "component-library-analytics": any;
+        "accordionExpandCollapseAll": any;
     }
     /**
      * @componentName Accordion
@@ -2148,6 +2193,7 @@ declare global {
     }
     /**
      * @componentName Alert - expandable
+     * @guidanceHref alert/alert-expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -2166,7 +2212,8 @@ declare global {
         new (): HTMLVaAlertExpandableElement;
     };
     /**
-     * @componentName Alert - Sign In
+     * @componentName Alert - Sign-in
+     * @guidanceHref alert/alert-sign-in
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -2975,6 +3022,7 @@ declare global {
     interface HTMLVaSelectElementEventMap {
         "vaKeyDown": any;
         "vaSelect": any;
+        "vaSelectBlur": any;
         "component-library-analytics": any;
     }
     /**
@@ -3219,6 +3267,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * The event will fire when the Expand/Collapse All button is clicked. It will emit the status of the accordion items as either "allOpen" or "allClosed".
+         */
+        "onAccordionExpandCollapseAll"?: (event: VaAccordionCustomEvent<any>) => void;
+        /**
           * The event used to track usage of the component. This is emitted when an accordion item is toggled and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: VaAccordionCustomEvent<any>) => void;
@@ -3333,6 +3385,7 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Alert - expandable
+     * @guidanceHref alert/alert-expandable
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3359,7 +3412,8 @@ declare namespace LocalJSX {
         "trigger": string;
     }
     /**
-     * @componentName Alert - Sign In
+     * @componentName Alert - Sign-in
+     * @guidanceHref alert/alert-sign-in
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3377,7 +3431,7 @@ declare namespace LocalJSX {
          */
         "timeLimit"?: string;
         /**
-          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInOptionalNoPrefill", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
         "variant"?: string;
         /**
@@ -3406,6 +3460,10 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Optional dissmissedBannerId to allow setting specific id to be stored in DISMISSED_BANNERS if not set it will default to the headline and innerHTML of the banner
+         */
+        "dismissedBannerId"?: string;
         /**
           * The headline of the banner.
          */
@@ -3498,6 +3556,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
+         */
+        "loading"?: boolean;
+        /**
           * An optional message that will be read by screen readers when the input is focused.
          */
         "messageAriaDescribedby"?: string;
@@ -3514,11 +3576,11 @@ declare namespace LocalJSX {
          */
         "secondary"?: boolean;
         /**
-          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+          * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`. The va-button component must be within a `form` element. **Prop options:** `prevent` will trigger the onsubmit callback on the form, but won't submit the form. `skip` will submit the form but not trigger the form onsubmit callback. All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
          */
         "submit"?: string;
         /**
-          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+          * The text displayed on the button.
          */
         "text"?: string;
     }
@@ -3587,7 +3649,7 @@ declare namespace LocalJSX {
          */
         "secondaryLabel"?: string;
         /**
-          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
+          * Having this attribute present will set the [button type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit) to `submit`. The va-button component must be within a `form` element. **Prop options:** `prevent` will trigger the onsubmit callback on the form, but won't submit the form. `skip` will submit the form but not trigger the form onsubmit callback. All other values will trigger the onsubmit and onclick callbacks, then submit the form, in that order.
          */
         "submit"?: string;
         /**
@@ -3894,6 +3956,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * Maximum allowed file size in bytes.
+         */
+        "maxFileSize"?: number;
+        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -3914,9 +3980,17 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
           * Custom instructional message in the file input.
          */
         "uploadMessage"?: HTMLElement;
+        /**
+          * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
+         */
+        "uploadedFile"?: UploadedFile;
         /**
           * The value attribute for the file view element.
          */
@@ -3960,7 +4034,7 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * Event emitted when any change to the file inputs occurs. Sends back an array of FileDetails
+          * Event emitted when any change to the file inputs occurs.  Sends back an object with the following data structure: `{ action: string, file: triggering file, state: files array }`  The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
@@ -3971,6 +4045,10 @@ declare namespace LocalJSX {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+        /**
+          * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
+         */
+        "slotFieldIndexes"?: Number[];
         /**
           * The value attribute for the file view element.
          */
@@ -4079,7 +4157,7 @@ declare namespace LocalJSX {
          */
         "download"?: boolean;
         /**
-          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+          * If 'true', will open in a new tab and will have the text "opens in a new tab" appended to the link text in screen reader only span
          */
         "external"?: boolean;
         /**
@@ -4929,6 +5007,10 @@ declare namespace LocalJSX {
          */
         "onVaSelect"?: (event: VaSelectCustomEvent<any>) => void;
         /**
+          * The event emitted when the select element is blurred
+         */
+        "onVaSelectBlur"?: (event: VaSelectCustomEvent<any>) => void;
+        /**
           * Whether or not to add usa-input--error as class if error message is outside of component
          */
         "reflectInputError"?: boolean;
@@ -5009,6 +5091,14 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
+          * When active, forces the table to expand to the full-width of its container
+         */
+        "fullWidth"?: boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+         */
+        "rightAlignCols"?: string;
+        /**
           * When active, the table can be horizontally scrolled and is focusable
          */
         "scrollable"?: boolean;
@@ -5044,9 +5134,17 @@ declare namespace LocalJSX {
          */
         "cols"?: number;
         /**
+          * When active, the table will expand to the full width of its container
+         */
+        "fullWidth"?: boolean;
+        /**
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
         "onSortTable"?: (event: VaTableInnerCustomEvent<any>) => void;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
+         */
+        "rightAlignCols"?: string;
         "rows"?: number;
         /**
           * When active, the table can be horizontally scrolled and is focusable
@@ -5431,12 +5529,14 @@ declare module "@stencil/core" {
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             /**
              * @componentName Alert - expandable
+             * @guidanceHref alert/alert-expandable
              * @maturityCategory caution
              * @maturityLevel candidate
              */
             "va-alert-expandable": LocalJSX.VaAlertExpandable & JSXBase.HTMLAttributes<HTMLVaAlertExpandableElement>;
             /**
-             * @componentName Alert - Sign In
+             * @componentName Alert - Sign-in
+             * @guidanceHref alert/alert-sign-in
              * @maturityCategory caution
              * @maturityLevel candidate
              */

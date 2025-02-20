@@ -85,6 +85,16 @@ export class VaAccordion {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * The event will fire when the Expand/Collapse All button is clicked. It will
+   * emit the status of the accordion items as either "allOpen" or "allClosed".
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  accordionExpandCollapseAll: EventEmitter;
+
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
     // eslint-disable-next-line i18next/no-literal-string
@@ -164,6 +174,10 @@ export class VaAccordion {
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
+
+    const value = expanded ? 'allOpen' : 'allClosed';
+    this.accordionExpandCollapseAll.emit({ status: value });
+
     getSlottedNodes(this.el, 'va-accordion-item').forEach(
       (item: HTMLElement) => {
         item.setAttribute('open', `${expanded}`);

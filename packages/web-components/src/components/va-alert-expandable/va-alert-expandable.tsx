@@ -13,6 +13,7 @@ import classnames from 'classnames';
 
 /**
  * @componentName Alert - expandable
+ * @guidanceHref alert/alert-expandable
  * @maturityCategory caution
  * @maturityLevel candidate
  */

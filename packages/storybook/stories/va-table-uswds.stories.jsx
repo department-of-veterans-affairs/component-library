@@ -48,6 +48,8 @@ const Template = args => {
     columns,
     scrollable,
     striped,
+    'full-width': fullWidth,
+    'right-align-cols': rightAlignCols,
   } = args;
 
   return (
@@ -58,6 +60,8 @@ const Template = args => {
       table-type={tableType}
       sortable={!!sortable}
       striped={striped}
+      full-width={fullWidth}
+      right-align-cols={rightAlignCols}
     >
       <va-table-row>
         {columns.map((col, i) => (
@@ -436,4 +440,33 @@ ScrollableWithStripes.args = {
   'scrollable': true,
 };
 
-Default.argTypes = propStructure(vaTableDocs);
+const FullWidthColumns = [
+  'Letter of the Alphabet',
+  'Number Position',
+  'ROT13 (Rotate by 13 places)',
+];
+const FullWidthRows = [
+  ['A', '1', 'N'],
+  ['E', '5', 'R'],
+  ['I', '9', 'V'],
+  ['O', '15', 'B'],
+  ['U', '21', 'H'],
+];
+
+export const FullWidth = Template.bind(null);
+FullWidth.args = {
+  'table-title':
+    'This is a table with minimal content that has been set to be "full width".',
+  'rows': FullWidthRows,
+  'columns': FullWidthColumns,
+  'full-width': true,
+};
+
+export const RightAlignedColumns = Template.bind(null);
+RightAlignedColumns.args = {
+  'table-title':
+    'This is a regular table with the second and third column right-aligned.',
+  'rows': FullWidthRows,
+  'columns': FullWidthColumns,
+  'right-align-cols': '1,2',
+};

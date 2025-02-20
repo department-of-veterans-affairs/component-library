@@ -43,6 +43,9 @@ const defaultArgs = {
   'children': null,
   'value': null,
   'read-only': false,
+  'status-text': null,
+  'uploadedFile': null,
+  'maxFileSize': Infinity,
 };
 
 const Template = ({
@@ -56,8 +59,11 @@ const Template = ({
   vaChange,
   headerSize,
   readOnly,
+  statusText,
   value,
   children,
+  uploadedFile,
+  maxFileSize
 }) => {
   return (
     <VaFileInput
@@ -71,8 +77,11 @@ const Template = ({
       onVaChange={vaChange}
       header-size={headerSize}
       readOnly={readOnly}
+      statusText={statusText}
       value={value}
       children={children}
+      uploadedFile={uploadedFile}
+      maxFileSize={maxFileSize}
     />
   );
 };
@@ -107,6 +116,14 @@ ErrorMessage.args = {
   hint: 'Select any valid file',
   error: 'Display a helpful error message',
 };
+
+export const WithMaxFileSize = Template.bind(null);
+WithMaxFileSize.args = {
+  ...defaultArgs,
+  label: 'Input has a file-size restriction (specified in bytes)',
+  hint: 'An error will be thrown if the selected file is greater than 1 KB',
+  maxFileSize: 1024,
+}
 
 export const HeaderLabel = Template.bind(null);
 HeaderLabel.args = {
@@ -243,6 +260,16 @@ WithAnalytics.args = {
   'enable-analytics': true,
 };
 
+export const UploadedFile = Template.bind(null);
+UploadedFile.args = { 
+  ...defaultArgs, 
+  uploadedFile: {
+    name: 'test.jpg',
+    size: 7000,
+    type: 'JPG'
+  } 
+};
+
 const FileUploadedTemplate = args => {
   const [mockFile, setMockFile] = useState(null);
 
@@ -268,6 +295,9 @@ const FileUploadedTemplate = args => {
 
   return <Template {...args} value={mockFile} />;
 };
+
+export const UploadStatus = FileUploadedTemplate.bind(null);
+UploadStatus.args = { ...defaultArgs, label: 'Select a file to upload (status text will show on file change)', vaChange: event => {event.target.setAttribute('status-text', 'Uploading...');}};
 
 export const FileUploaded = FileUploadedTemplate.bind(null);
 FileUploaded.args = { ...defaultArgs, vaChange: event => event };

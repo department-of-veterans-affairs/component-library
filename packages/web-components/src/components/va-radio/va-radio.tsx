@@ -230,11 +230,11 @@ export class VaRadio {
   }
 
   render() {
-    const { 
-      label, 
-      hint, 
-      required, 
-      error, 
+    const {
+      label,
+      hint,
+      required,
+      error,
       headerAriaDescribedby,
       messageAriaDescribedby,
       useFormsPattern,
@@ -244,7 +244,7 @@ export class VaRadio {
     const HeaderLevel = this.getHeaderLevel();
     const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
     const messageAriaDescribedbyId = messageAriaDescribedby ? 'description-message' : null;
-    const ariaLabeledByIds = 
+    const ariaLabeledByIds =
     `${useFormsPattern && formHeading ? 'form-question' : ''} ${
       useFormsPattern ? 'form-description' : ''} ${
       useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() || null;
@@ -303,18 +303,18 @@ export class VaRadio {
               {required && <span class="usa-label--required" part="required">{i18next.t('required')}</span>}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            <span class="usa-error-message" role="alert">
-              {error && (
+            {error && (
+              <span class="usa-error-message" role="alert">
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span> {error}
                 </Fragment>
-              )}
-            </span>
+              </span>
+            )}
             <slot></slot>
           </fieldset>
         </div>
       </Host>
     );
-    
+
   }
 }

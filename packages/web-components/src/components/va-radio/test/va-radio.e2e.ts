@@ -62,10 +62,7 @@ describe('va-radio', () => {
     expect(await options[0].getProperty('checked')).toBeTruthy();
     expect(await options[1].getProperty('checked')).toBeFalsy();
 
-    //without specifying center of element with this offset the click has no effect
-    await options[1].click({
-      offset: { x: 0, y: 0 }
-    });
+    await options[1].click();
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
     expect(await options[1].getProperty('checked')).toBeTruthy();

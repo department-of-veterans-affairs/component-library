@@ -1,0 +1,53 @@
+{
+    "uswds-system-spacing-special-0": {
+        "value": "0"
+    },
+    "uswds-system-spacing-1px": {
+        "value": "1px"
+    },
+    "uswds-system-spacing-2px": {
+        "value": "2px"
+    },
+    "uswds-system-spacing-05": {
+        "value": "4px"
+    },
+    "uswds-system-spacing-1": {
+        "value": "8px"
+    },
+    "uswds-system-spacing-105": {
+        "value": "12px"
+    },
+    "uswds-system-spacing-2": {
+        "value": "16px"
+    },
+    "uswds-system-spacing-205": {
+        "value": "20px"
+    },
+    "uswds-system-spacing-3": {
+        "value": "24px"
+    },
+    "uswds-system-spacing-4": {
+        "value": "32px"
+    },
+    "uswds-system-spacing-5": {
+        "value": "40px"
+    },
+    "uswds-system-spacing-6": {
+        "value": "48px"
+    },
+    "uswds-system-spacing-7": {
+        "value": "56px"
+    },
+    "uswds-system-spacing-8": {
+        "value": "64px"
+    },
+    "uswds-system-spacing-9": {
+        "value": "72px"
+    },
+    "uswds-system-spacing-10": {
+        "value": "80px"
+    },
+    "uswds-system-spacing-15": {
+        "value": "120px"
+    }
+}

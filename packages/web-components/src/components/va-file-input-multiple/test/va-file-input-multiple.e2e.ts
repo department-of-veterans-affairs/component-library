@@ -41,6 +41,73 @@ describe('va-file-input-multiple', () => {
     expect(secondFileInput.innerHTML).toContain(`<span>Drag an additional file here or <span class="file-input-choose-text">choose from folder</span></span>`);
   });
 
+  it('renders the file input additional info slot when slot-field-indexes is null', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input-multiple><span class="additional_info">additional info</span></va-file-input-multiple>`);
+
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+    
+    const additionalInfo = await page.find('va-file-input-multiple >>> va-file-input span.additional_info');
+    expect(additionalInfo.textContent).toEqual('additional info');
+  });
+
+  it('renders the file input additional info slot only for indexes in slot-field-indexes', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input-multiple slot-field-indexes="[1,2]"><span class="additional_info">additional info</span></va-file-input-multiple>`);
+
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    const additionalInfo = await page.find('va-file-input-multiple >>> va-file-input span.additional_info');
+    expect(additionalInfo).toBeNull;
+
+    let inputs = await page.$$('pierce/#fileInputField');
+    const input2 = inputs[1] as ElementHandle<HTMLInputElement>;
+    expect(inputs).not.toBeNull();
+    expect(input2).not.toBeNull();
+    await input2
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    let inputEls= await page.findAll('va-file-input-multiple >>> va-file-input');
+    const additionalInfo2 = await inputEls[1].find('span.additional_info');
+    expect(additionalInfo2.textContent).toEqual('additional info');
+
+
+    inputs = await page.$$('pierce/#fileInputField');
+    const input3 = inputs[2] as ElementHandle<HTMLInputElement>;
+    expect(inputs).not.toBeNull();
+    expect(input3).not.toBeNull();
+    await input3
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    inputEls= await page.findAll('va-file-input-multiple >>> va-file-input');
+    const additionalInfo3 = await inputEls[2].find('span.additional_info');
+    expect(additionalInfo3.textContent).toEqual('additional info');
+  });
+
   it('renders hint text', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-file-input-multiple hint="This is hint text" />');

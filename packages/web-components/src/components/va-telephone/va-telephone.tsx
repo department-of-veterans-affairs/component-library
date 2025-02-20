@@ -223,9 +223,7 @@ export class VaTelephone {
       <Host>
         {notClickable ? (
           <Fragment>
-            <span aria-hidden="true" aria-describedby={ariaDescribedbyIds}>
-              {formattedNumber}
-            </span>
+            <span aria-describedby={ariaDescribedbyIds}>{formattedNumber}</span>
           </Fragment>
         ) : (
           <a
