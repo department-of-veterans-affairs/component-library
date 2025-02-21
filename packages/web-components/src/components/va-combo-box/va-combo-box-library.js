@@ -17,6 +17,8 @@ const TOGGLE_LIST_BUTTON_CLASS = `${COMBO_BOX_CLASS}__toggle-list`;
 const TOGGLE_LIST_BUTTON_WRAPPER_CLASS = `${TOGGLE_LIST_BUTTON_CLASS}__wrapper`;
 const LIST_CLASS = `${COMBO_BOX_CLASS}__list`;
 const LIST_OPTION_CLASS = `${COMBO_BOX_CLASS}__list-option`;
+const LIST_OPTION_GROUP_CLASS = `${LIST_OPTION_CLASS}--group`;
+const LIST_OPTION_GROUP_OPTION_CLASS = `${LIST_OPTION_CLASS}--group-option`;
 const LIST_OPTION_FOCUSED_CLASS = `${LIST_OPTION_CLASS}--focused`;
 const LIST_OPTION_SELECTED_CLASS = `${LIST_OPTION_CLASS}--selected`;
 const STATUS_CLASS = `${COMBO_BOX_CLASS}__status`;
@@ -368,6 +370,8 @@ const noop = () => {};
     return new RegExp(find, 'i');
   };
 
+  const isDataOptGroup = option => option.getAttribute('data-optgroup') === 'true';
+
   /**
    * Display the option list of a combo box component.
    *
@@ -393,6 +397,7 @@ const noop = () => {};
     const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
 
     const options = [];
+    let parentOptGroupId = '';
     for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
@@ -411,37 +416,85 @@ const noop = () => {};
         if (disableFiltering && !firstFoundId && regex.test(optionEl.text)) {
           firstFoundId = optionId;
         }
-        options.push(optionEl);
+
+        if (!inputValue){
+          options.push(optionEl);
+          continue;
+        }
+
+        // handle filtering when input contains a value
+        if (
+          inputValue &&
+          regex.test(optionEl.text) &&
+          optionEl.getAttribute('data-optgroup') !== 'true' 
+        ) {
+
+          // Check if the option element is not a header optgroup 
+          // and has a header optgroup associated with it
+          if (
+            optionEl.getAttribute('data-optgroup-option') === 'true' &&
+            parentOptGroupId !== optionEl.getAttribute('aria-describedby')
+          ) {
+            // Get an associated header optgroup element
+            parentOptGroupId = optionEl.getAttribute('aria-describedby');
+            const parentOptgroupEl = selectEl.querySelector(
+              '#' + parentOptGroupId,
+            );
+            // Add the header optgroup element first
+            options.push(parentOptgroupEl);
+          }
+
+          // Add the option element
+          options.push(optionEl);
+        }
       }
     }
 
     const numOptions = options.length;
+    const optionsLength = options.filter(option => !isDataOptGroup(option)).length;
+    let isFocused = false;
+    let optionIndex = 0;
     const optionHtml = options.map((option, index) => {
+      const isOptGroup = isDataOptGroup(option);
+      const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
+      if (!isOptGroup) {
+        optionIndex += 1;
+      }
       const optionId = `${listOptionBaseId}${index}`;
-      const classes = [LIST_OPTION_CLASS];
+      const classes = !isOptGroup ? [LIST_OPTION_CLASS] : [];
       let tabindex = '-1';
       let ariaSelected = 'false';
 
-      if (optionId === selectedItemId) {
+      if (selectEl.value && option.value === selectEl.value) {
         classes.push(LIST_OPTION_SELECTED_CLASS, LIST_OPTION_FOCUSED_CLASS);
         tabindex = '0';
         ariaSelected = 'true';
       }
 
-      if (!selectedItemId && index === 0) {
+      if (!selectedItemId && !isFocused && !isOptGroup) {
         classes.push(LIST_OPTION_FOCUSED_CLASS);
         tabindex = '0';
+        isFocused = true;
+      }
+
+      if (isOptGroup) {
+        classes.push(LIST_OPTION_GROUP_CLASS);
+      } else if (isOptgroupOption) {
+        classes.push(LIST_OPTION_GROUP_OPTION_CLASS);
       }
 
       const li = document.createElement('li');
 
-      li.setAttribute('aria-setsize', options.length);
-      li.setAttribute('aria-posinset', index + 1);
+      if (!isOptGroup) {
+        li.setAttribute('aria-setsize', optionsLength);
+        li.setAttribute('aria-posinset', optionIndex);
+        li.setAttribute('aria-describedby', option.getAttribute('aria-describedby'));
+      }
       li.setAttribute('aria-selected', ariaSelected);
-      li.setAttribute('id', optionId);
+      li.setAttribute('id', !isOptGroup ? optionId : option.id);
       li.setAttribute('class', classes.join(' '));
       li.setAttribute('tabindex', tabindex);
-      li.setAttribute('role', 'option');
+      li.setAttribute('role', isOptGroup ? 'group' : 'option');
       li.setAttribute('data-value', option.value);
       li.textContent = option.text;
 
@@ -466,8 +519,8 @@ const noop = () => {};
 
     inputEl.setAttribute('aria-expanded', 'true');
 
-    statusEl.textContent = numOptions
-      ? `${numOptions} result${numOptions > 1 ? 's' : ''} available.`
+    statusEl.textContent = optionsLength
+      ? `${optionsLength} result${optionsLength > 1 ? 's' : ''} available.`
       : 'No results.';
 
     let itemToFocus;
@@ -624,11 +677,14 @@ const noop = () => {};
       displayList(comboBoxEl);
     }
 
-    const nextOptionEl =
+    let nextOptionEl =
       listEl.querySelector(LIST_OPTION_FOCUSED) ||
       listEl.querySelector(LIST_OPTION);
 
     if (nextOptionEl) {
+      if (nextOptionEl.getAttribute('role') === 'group') {
+        nextOptionEl = nextOptionEl.nextSibling
+      } 
       highlightOption(comboBoxEl, nextOptionEl);
     }
 
@@ -660,9 +716,12 @@ const noop = () => {};
    */
   const handleDownFromListOption = event => {
     const focusedOptionEl = event.target;
-    const nextOptionEl = focusedOptionEl.nextSibling;
+    let nextOptionEl = focusedOptionEl.nextSibling;
 
     if (nextOptionEl) {
+      if (nextOptionEl.getAttribute('role') === 'group') {
+        nextOptionEl = nextOptionEl.nextSibling
+      } 
       highlightOption(focusedOptionEl, nextOptionEl);
     }
 
@@ -698,10 +757,15 @@ const noop = () => {};
     const { comboBoxEl, listEl, focusedOptionEl } = getComboBoxContext(
       event.target,
     );
-    const nextOptionEl = focusedOptionEl && focusedOptionEl.previousSibling;
+    let nextOptionEl = focusedOptionEl && focusedOptionEl.previousSibling;
     const listShown = !listEl.hidden;
 
-    highlightOption(comboBoxEl, nextOptionEl);
+    if (nextOptionEl) {
+      if (nextOptionEl.getAttribute('role') === 'group') {
+        nextOptionEl = nextOptionEl.previousSibling
+      } 
+      highlightOption(focusedOptionEl, nextOptionEl);
+    }
 
     if (listShown) {
       event.preventDefault();
