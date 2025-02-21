@@ -91,8 +91,10 @@ describe('va-service-list-item', () => {
         <a aria-label="Go to Education" href="https://www.va.gov/education" class="service-title-row">
           <div class="header" tabindex="0">
             <va-icon class="icon school hydrated"></va-icon>
+             <div class="name-and-chevron">
             <h3 class="service-name">Education</h3>
             <va-icon class="chevron-icon hydrated"></va-icon>
+            </div>
           </div>
         </a>
         <div class="action-bar">
@@ -182,7 +184,9 @@ describe('va-service-list-item', () => {
       el => el.shadowRoot.innerHTML,
       elementHandle,
     );
-    expect(shadowInnerHTML).not.toContain('<va-icon class="icon hydrated"></va-icon>');
+    expect(shadowInnerHTML).not.toContain(
+      '<va-icon class="icon hydrated"></va-icon>',
+    );
   });
 
   it('does NOT render optionalLink when optionalLink prop is not passed', async () => {
@@ -209,7 +213,9 @@ describe('va-service-list-item', () => {
       el => el.shadowRoot.innerHTML,
       elementHandle,
     );
-    expect(shadowInnerHTML).not.toContain('<va-link class="hydrated optional-link"></va-link>');
+    expect(shadowInnerHTML).not.toContain(
+      '<va-link class="hydrated optional-link"></va-link>',
+    );
   });
 
   it('passes an axe check', async () => {

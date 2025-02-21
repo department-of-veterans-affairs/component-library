@@ -29,14 +29,20 @@
 
   .header {
     display: flex;
-    flex-direction: row;
     align-items: center;
     width: 100%;
+
+    .name-and-chevron {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+    }    
 
     .icon {
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
       border-radius: 50%;
       flex-shrink: 0;
       height: 40px;
@@ -104,19 +110,12 @@
       }
     }
 
-    .service-name:has(+ .chevron-icon:only-child) + .chevron-icon {
-      align-self: flex-start;
-    }
-
     .chevron-icon {
       margin-left: auto;
       font-size: 24px;
-      color: var(--vads-color-link);
-      &.top {
-        align-self: flex-start;
-      }
+      color: var(--vads-color-link);  
       @media (min-width: 768px) {
-        margin-left: .938rem;
+        margin-left: 0.938rem;
       }
     }
   }

@@ -76,10 +76,6 @@ export class VaServiceListItem {
     this.parsedOptionalLink = this.parseJsonProp(this.optionalLink);
   }
 
-  componentDidLoad() {
-    this.adjustChevronPosition();
-  }
-
   private parseJsonProp<T>(prop: any): T | undefined {
     if (!prop || prop === '{}' || prop === 'null') return undefined;
 
@@ -89,19 +85,6 @@ export class VaServiceListItem {
       consoleDevError(`Error parsing prop: ${prop}`);
       return undefined;
     }
-  }
-
-  private adjustChevronPosition() {
-      const serviceNameElement =
-        this.el.shadowRoot.querySelector('.service-name');
-      const isMultiLine = serviceNameElement.clientHeight > 24;
-      const chevron = this.el.shadowRoot.querySelector(
-        '.chevron-icon',
-      ) as HTMLElement;
-
-      if (chevron) {
-        chevron.classList.toggle('top', isMultiLine);
-      }
   }
 
   render() {
@@ -127,13 +110,22 @@ export class VaServiceListItem {
       : null;
 
     const actionNeeded = !!parsedAction?.href && !!parsedAction?.text;
-    const HeadingTag = `h${serviceNameHeadingLevel}` as keyof JSX.IntrinsicElements;
+    const HeadingTag =
+      `h${serviceNameHeadingLevel}` as keyof JSX.IntrinsicElements;
     const validIcons = new Set([
-      "star", "work", "description", "school", "groups", 
-      "medical_services", "home", "shield", "handshake", 
-      "identification", "flag"
+      'star',
+      'work',
+      'description',
+      'school',
+      'groups',
+      'medical_services',
+      'home',
+      'shield',
+      'handshake',
+      'identification',
+      'flag',
     ]);
-    const iconClass = validIcons.has(icon) ? `icon ${icon}` : "icon default";
+    const iconClass = validIcons.has(icon) ? `icon ${icon}` : 'icon default';
 
     return (
       <Host>
@@ -144,9 +136,13 @@ export class VaServiceListItem {
             aria-label={`Go to ${serviceName}`}
           >
             <div class="header" tabIndex={0}>
-              {icon && <va-icon class={iconClass} icon={icon} size={3}></va-icon>}
-              <HeadingTag class="service-name">{serviceName}</HeadingTag>
-              <va-icon class="chevron-icon" icon="chevron_right"></va-icon>
+              {icon && (
+                <va-icon class={iconClass} icon={icon} size={3}></va-icon>
+              )}
+              <div class="name-and-chevron">
+                <HeadingTag class="service-name">{serviceName}</HeadingTag>
+                <va-icon class="chevron-icon" icon="chevron_right"></va-icon>
+              </div>
             </div>
           </a>
 
