@@ -7,8 +7,10 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
+import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
+export { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export namespace Components {
     /**
      * @componentName Accordion
@@ -1553,6 +1555,45 @@ export namespace Components {
         "width"?: string;
     }
     /**
+     * @componentName Service list item
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaServiceListItem {
+        /**
+          * Action associated with the service
+         */
+        "action"?: ServiceAction | string;
+        /**
+          * The icon associated with the service
+         */
+        "icon"?: string;
+        /**
+          * An optional link related to the service
+         */
+        "optionalLink"?: OptionalLink | string;
+        /**
+          * Details about the service
+         */
+        "serviceDetails": ServiceDetails | string;
+        /**
+          * The link to the service page
+         */
+        "serviceLink": string;
+        /**
+          * The name of the service
+         */
+        "serviceName": string;
+        /**
+          * The heading level for the service name (defaults to h3)
+         */
+        "serviceNameHeadingLevel": number;
+        /**
+          * The status of the service
+         */
+        "serviceStatus": string;
+    }
+    /**
      * @componentName Statement of truth
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -3048,6 +3089,17 @@ declare global {
         prototype: HTMLVaSelectElement;
         new (): HTMLVaSelectElement;
     };
+    /**
+     * @componentName Service list item
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaServiceListItemElement extends Components.VaServiceListItem, HTMLStencilElement {
+    }
+    var HTMLVaServiceListItemElement: {
+        prototype: HTMLVaServiceListItemElement;
+        new (): HTMLVaServiceListItemElement;
+    };
     interface HTMLVaStatementOfTruthElementEventMap {
         "vaInputChange": any;
         "vaInputBlur": any;
@@ -3241,6 +3293,7 @@ declare global {
         "va-search-input": HTMLVaSearchInputElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
+        "va-service-list-item": HTMLVaServiceListItemElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
         "va-table": HTMLVaTableElement;
@@ -5032,6 +5085,45 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     /**
+     * @componentName Service list item
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaServiceListItem {
+        /**
+          * Action associated with the service
+         */
+        "action"?: ServiceAction | string;
+        /**
+          * The icon associated with the service
+         */
+        "icon"?: string;
+        /**
+          * An optional link related to the service
+         */
+        "optionalLink"?: OptionalLink | string;
+        /**
+          * Details about the service
+         */
+        "serviceDetails"?: ServiceDetails | string;
+        /**
+          * The link to the service page
+         */
+        "serviceLink"?: string;
+        /**
+          * The name of the service
+         */
+        "serviceName"?: string;
+        /**
+          * The heading level for the service name (defaults to h3)
+         */
+        "serviceNameHeadingLevel"?: number;
+        /**
+          * The status of the service
+         */
+        "serviceStatus"?: string;
+    }
+    /**
      * @componentName Statement of truth
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -5490,6 +5582,7 @@ declare namespace LocalJSX {
         "va-search-input": VaSearchInput;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
+        "va-service-list-item": VaServiceListItem;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
         "va-table": VaTable;
@@ -5814,6 +5907,12 @@ declare module "@stencil/core" {
              * @translations Spanish
              */
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
+            /**
+             * @componentName Service list item
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-service-list-item": LocalJSX.VaServiceListItem & JSXBase.HTMLAttributes<HTMLVaServiceListItemElement>;
             /**
              * @componentName Statement of truth
              * @maturityCategory caution
