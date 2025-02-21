@@ -11,7 +11,7 @@
     color: var(--vads-color-black);
     text-decoration: none;
     padding-top: 10px;
-    padding-bottom: 12px;
+    padding-bottom: 16px;
     &:focus {
       outline: 2px solid var(--vads-color-action-focus-on-light);
       outline-offset: 2px;
@@ -21,7 +21,7 @@
     &::part(anchor) {
       text-decoration: none;
       padding-top: 10px;
-      padding-bottom: 12px;
+      padding-bottom: 16px;
     }
     color: var(--vads-color-link);
     padding-bottom: 2px;
