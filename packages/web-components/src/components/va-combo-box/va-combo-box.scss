@@ -40,11 +40,24 @@
 }
 
 .usa-combo-box__list-option--focused{
-  outline: 2px solid var(--vads-color-action-focus-on-light);
+  outline: 2px solid var(--vads-color-action-border-base-active-on-light);
 }
 
 .usa-combo-box__list-option--focused:focus {
   outline-offset: -2px;
+}
+
+.usa-combo-box__list-option--group{
+  font-weight: bold;
+  background-color: var(--vads-color-base-lightest);
+  cursor: not-allowed;
+  display: block;
+  padding: 0.5rem;
+}
+
+.usa-combo-box__list-option--group-option{
+  padding-left: 24px;
+
 }
 
 .usa-combo-box__clear-input{

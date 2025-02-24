@@ -44,7 +44,8 @@ const defaultArgs = {
   'value': null,
   'read-only': false,
   'status-text': null,
-  'uploadedFile': null
+  'uploadedFile': null,
+  'maxFileSize': Infinity,
 };
 
 const Template = ({
@@ -62,6 +63,7 @@ const Template = ({
   value,
   children,
   uploadedFile,
+  maxFileSize
 }) => {
   return (
     <VaFileInput
@@ -79,6 +81,7 @@ const Template = ({
       value={value}
       children={children}
       uploadedFile={uploadedFile}
+      maxFileSize={maxFileSize}
     />
   );
 };
@@ -113,6 +116,14 @@ ErrorMessage.args = {
   hint: 'Select any valid file',
   error: 'Display a helpful error message',
 };
+
+export const WithMaxFileSize = Template.bind(null);
+WithMaxFileSize.args = {
+  ...defaultArgs,
+  label: 'Input has a file-size restriction (specified in bytes)',
+  hint: 'An error will be thrown if the selected file is greater than 1 KB',
+  maxFileSize: 1024,
+}
 
 export const HeaderLabel = Template.bind(null);
 HeaderLabel.args = {
