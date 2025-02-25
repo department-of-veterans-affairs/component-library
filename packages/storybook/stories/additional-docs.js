@@ -28,6 +28,13 @@ export const additionalDocs = {
     maturityLevel: DEPRECATED,
   },
   // MDX
+  'Eyebrow': {
+    guidanceHref: 'eyebrow',
+    guidanceTag: 'Eyebrow',
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
+  // MDX
   'Link - Action': {
     guidanceHref: 'link/action',
     guidanceName: 'Action link',
