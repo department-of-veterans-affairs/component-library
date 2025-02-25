@@ -29,6 +29,18 @@
   }
 }
 
+// Using 29.99em instead of 480px because it matches USWDS' styles
+@media screen and (max-width: 29.99em) {
+  :host div {
+    display: flex;
+    width: 100%;
+
+    table {
+      flex: auto;
+    }
+  }
+}
+
 :host thead tr th {
   button {
     background-color: transparent;
