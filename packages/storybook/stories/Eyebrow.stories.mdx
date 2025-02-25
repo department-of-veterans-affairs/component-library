@@ -1,0 +1,27 @@
+import { Canvas, Meta, Story, Subtitle, Title } from '@storybook/addon-docs';
+import { Guidance, MaturityScale } from './wc-helpers';
+import { additionalDocs } from './additional-docs';
+
+<Meta title="Components/Eyebrow" id="components/eyebrow" />
+
+<Title>Eyebrow</Title>
+<Subtitle>Eyebrow component class</Subtitle>
+<MaturityScale
+  category={additionalDocs['Eyebrow'].maturityCategory}
+  level={additionalDocs['Eyebrow'].maturityLevel}
+/>
+<Guidance
+  href={additionalDocs['Eyebrow'].guidanceHref}
+  name={additionalDocs['Eyebrow'].guidanceName}
+/>
+
+## Stories
+
+### Default
+
+<Canvas>
+  <Story name="Default">
+    <h2 className="vads-m-eyebrow">Eyebrow Title</h2>
+    <h1>Main Headline</h1>
+  </Story>
+</Canvas>
