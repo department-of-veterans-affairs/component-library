@@ -7,6 +7,7 @@ import {
   applyPolyfills,
   defineCustomElements,
 } from '@department-of-veterans-affairs/component-library';
+import { themes } from '@storybook/theming';
 
 applyPolyfills().then(() => {
   defineCustomElements();
@@ -81,6 +82,11 @@ const viewports = {
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
+  darkMode: {
+    dark: { ...themes.dark },
+    light: { ...themes.light },
+    stylePreview: true,
+  },
   options: {
     storySort: {
       method: 'alphabetical',
