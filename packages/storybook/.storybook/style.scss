@@ -65,13 +65,3 @@ button {
 .docblock-argstable a {
   font-size: 14px;
 }
-
-// Dark Mode Styles
-
-body.dark #storybook-docs .sbdocs-wrapper {
-  background: black;
-
-  h1, h2, h3, p {
-    color: white;
-  }
-}
