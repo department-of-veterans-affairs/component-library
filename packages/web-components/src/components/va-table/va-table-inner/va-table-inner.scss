@@ -29,6 +29,17 @@
   }
 }
 
+@media screen and (max-width: var(--mobile-lg)) {
+  :host div {
+    display: flex;
+    width: 100%;
+
+    table {
+      flex: auto;
+    }
+  }
+}
+
 :host thead tr th {
   button {
     background-color: transparent;
