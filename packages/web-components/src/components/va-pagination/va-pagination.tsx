@@ -183,6 +183,7 @@ export class VaPagination {
     } else if (SHOW_ALL_PAGES < totalPages && totalPages < maxPageListLength) {
       // Use case #2: totalPages is greater than 6 and less than 10, so [7, 8, 9]
       // is the default set included in this use case
+      // TODO: Fix this on extra small screens and medium screens where it adds ellipses
 
       start = 1;
       end = totalPages;
@@ -212,7 +213,7 @@ export class VaPagination {
           end = maxPageListLength - 2 - unboundedChar;
           console.log('Use case 3a');
           break;
-        case maxPageListLength < totalPages && isMobileViewport:
+        case maxPageListLength <= totalPages && isMobileViewport:
           end = maxPageListLength - 4 - unboundedChar;
           console.log('Use case 3b');
           break;
@@ -238,10 +239,12 @@ export class VaPagination {
 
       // Start has three use cases with the isMobileViewport adjustment
       switch (true) {
-        case totalPages - maxPageListLength > 0 && isMobileViewport:
+        case totalPages - maxPageListLength >= 0 && isMobileViewport:
+          console.log('Use case 4a');
           start = totalPages - maxPageListLength + this.SHOW_ALL_PAGES;
           break;
-        case totalPages - maxPageListLength > 0:
+        case totalPages - maxPageListLength >= 0:
+          console.log('Use case 4b');
           start = totalPages - (maxPageListLength - 2 - 1);
           break;
         default:
@@ -256,7 +259,6 @@ export class VaPagination {
       // End will always be the last page
       end = totalPages;
 
-      console.log('Use case 4');
       return makeArray(start, end);
     } else {
       // Use case #5: Continuous pages don't start at 1 or end at last page.
