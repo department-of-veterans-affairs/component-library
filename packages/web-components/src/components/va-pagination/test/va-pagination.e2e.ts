@@ -100,13 +100,13 @@ describe('va-pagination', () => {
     expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual('6');
   });
 
-  it('renders all page numbers if total pages is less than or equal to 7', async () => {
+  it('renders all page numbers if total pages is less than or equal to 6', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-pagination page="3" pages="7" max-page-list-length="7"/>`,
+      `<va-pagination page="3" pages="6" max-page-list-length="6"/>`,
     );
 
-    const pageNumbers = [1, 2, 3, 4, 5, 6, 7];
+    const pageNumbers = [1, 2, 3, 4, 5, 6];
 
     const anchors = await page.findAll(
       'va-pagination >>> a.usa-pagination__button',
@@ -141,7 +141,7 @@ describe('va-pagination', () => {
       'va-pagination >>> li.usa-pagination__item',
     );
     // should be 8, 6 as set by the max-page-list-length, and 2 prev/next buttons
-    expect(paginationItems).toHaveLength(8);
+    expect(paginationItems).toHaveLength(9);
   });
 
   it('renders the correct number of links on small screens', async () => {
@@ -156,7 +156,22 @@ describe('va-pagination', () => {
     const paginationItems = await page.findAll(
       'va-pagination >>> li.usa-pagination__item',
     );
-    expect(paginationItems).toHaveLength(6);
+    expect(paginationItems).toHaveLength(7);
+  });
+
+  it('renders the correct number of links on tablet screens below 640px width', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({
+      // Storybook small screen mode
+      width: 481,
+      height: 896,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="1" pages="24" />`);
+    const paginationItems = await page.findAll(
+      'va-pagination >>> li.usa-pagination__item',
+    );
+    expect(paginationItems).toHaveLength(7);
   });
 
   it('renders one ellipse correctly on small screens', async () => {
@@ -183,6 +198,21 @@ describe('va-pagination', () => {
       deviceScaleFactor: 1,
     });
     await page.setContent(`<va-pagination page="9" pages="24" />`);
+    const paginationOverflowItems = await page.findAll(
+      'va-pagination >>> li.usa-pagination__overflow',
+    );
+    expect(paginationOverflowItems).toHaveLength(2);
+  });
+
+  it('renders two ellipses correctly on tablet screens below 640px width', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({
+      // Storybook small screen mode
+      width: 481,
+      height: 896,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="10" pages="24" />`);
     const paginationOverflowItems = await page.findAll(
       'va-pagination >>> li.usa-pagination__overflow',
     );
