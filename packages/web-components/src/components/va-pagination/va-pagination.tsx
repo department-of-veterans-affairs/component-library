@@ -193,19 +193,17 @@ export class VaPagination {
     // If the unbounded flag is set we don't include the last page
     const unboundedChar = unbounded ? 0 : 1;
 
-    let { isMobileViewport } = this;
+    let { isMobileViewport, isTabletViewport } = this;
     let start: number;
     let end: number;
 
     if (totalPages <= SHOW_ALL_PAGES) {
       // Use case #1: 6 or fewer pages
-      console.log('Use case 1');
       return makeArray(1, totalPages);
     } else if (SHOW_ALL_PAGES < totalPages && totalPages <= maxPageListLength) {
       // Use case #2: Total pages is greater than 6 and less than or equal to
       // maxPageListLength. The logic has made affordances for max page list
       // lengths of 8 and below, and the default 10.
-
       start = 1;
       end = totalPages;
 
@@ -229,27 +227,21 @@ export class VaPagination {
           end = totalPages;
       }
 
-      console.log('Use case 2');
       return makeArray(start, end);
     } else if (currentPage <= radius - 1) {
       // Use case #3: Current page is less than or equal to
       // half the visible pages minus one. This case always renders
       // [1] in pageNumbers array.
-
       start = 1;
 
-      // End has three use cases with the isMobileViewport adjustment
       switch (true) {
         case maxPageListLength <= totalPages && isMobileViewport:
           end = maxPageListLength - 4 - unboundedChar;
-          console.log('Use case 3b');
           break;
         case maxPageListLength < totalPages:
           end = maxPageListLength - 1 - unboundedChar;
-          console.log('Use case 3c');
           break;
         default:
-          console.log('Use case 3d');
           end = totalPages;
       }
 
@@ -266,11 +258,9 @@ export class VaPagination {
 
       switch (true) {
         case totalPages - maxPageListLength >= 0 && isMobileViewport:
-          console.log('Use case 4a');
           start = totalPages - (SHOW_ALL_PAGES - 2 - 1);
           break;
         case totalPages - maxPageListLength >= 0:
-          console.log('Use case 4b');
           start = totalPages - (maxPageListLength - 2 - 1);
           break;
         default:
@@ -294,22 +284,18 @@ export class VaPagination {
 
       switch (true) {
         case maxPageListLength <= 8 && isMobileViewport:
-          console.log('Case 1');
           start = start + 1;
           end = end - 1;
           break;
         case maxPageListLength <= 10 && isMobileViewport:
-          console.log('Case 2');
           start = start + 2;
           end = end - 2;
           break;
-        case this.isTabletViewport:
-          console.log('Case 3');
+        case isTabletViewport:
           start = currentPage - (radius - 3);
           end = currentPage + (radius - 2 - unboundedChar);
           break;
         default:
-          console.log('Case default');
           start = currentPage - (radius - 2);
           end = currentPage + (radius - 1 - unboundedChar);
       }
