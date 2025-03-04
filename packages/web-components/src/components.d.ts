@@ -7,8 +7,10 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
+import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
+export { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export namespace Components {
     /**
      * @componentName Accordion
@@ -157,7 +159,7 @@ export namespace Components {
          */
         "timeLimit"?: string;
         /**
-          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInOptionalNoPrefill", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
         "variant": string;
         /**
@@ -807,7 +809,7 @@ export namespace Components {
          */
         "download"?: boolean;
         /**
-          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+          * If 'true', will open in a new tab and will have the text "opens in a new tab" appended to the link text in screen reader only span
          */
         "external"?: boolean;
         /**
@@ -1555,6 +1557,45 @@ export namespace Components {
           * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
          */
         "width"?: string;
+    }
+    /**
+     * @componentName Service list item
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaServiceListItem {
+        /**
+          * Action associated with the service
+         */
+        "action"?: ServiceAction | string;
+        /**
+          * The icon associated with the service
+         */
+        "icon"?: string;
+        /**
+          * An optional link related to the service
+         */
+        "optionalLink"?: OptionalLink | string;
+        /**
+          * Details about the service
+         */
+        "serviceDetails": ServiceDetails | string;
+        /**
+          * The link to the service page
+         */
+        "serviceLink": string;
+        /**
+          * The name of the service
+         */
+        "serviceName": string;
+        /**
+          * The heading level for the service name (defaults to h3)
+         */
+        "serviceNameHeadingLevel": number;
+        /**
+          * The status of the service
+         */
+        "serviceStatus": string;
     }
     /**
      * @componentName Statement of truth
@@ -3052,6 +3093,17 @@ declare global {
         prototype: HTMLVaSelectElement;
         new (): HTMLVaSelectElement;
     };
+    /**
+     * @componentName Service list item
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaServiceListItemElement extends Components.VaServiceListItem, HTMLStencilElement {
+    }
+    var HTMLVaServiceListItemElement: {
+        prototype: HTMLVaServiceListItemElement;
+        new (): HTMLVaServiceListItemElement;
+    };
     interface HTMLVaStatementOfTruthElementEventMap {
         "vaInputChange": any;
         "vaInputBlur": any;
@@ -3245,6 +3297,7 @@ declare global {
         "va-search-input": HTMLVaSearchInputElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
+        "va-service-list-item": HTMLVaServiceListItemElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
         "va-table": HTMLVaTableElement;
@@ -3435,7 +3488,7 @@ declare namespace LocalJSX {
          */
         "timeLimit"?: string;
         /**
-          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInEither", "verifyIdMe", or "verifyLoginGov".
+          * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInOptionalNoPrefill", "signInEither", "verifyIdMe", or "verifyLoginGov".
          */
         "variant"?: string;
         /**
@@ -4165,7 +4218,7 @@ declare namespace LocalJSX {
          */
         "download"?: boolean;
         /**
-          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+          * If 'true', will open in a new tab and will have the text "opens in a new tab" appended to the link text in screen reader only span
          */
         "external"?: boolean;
         /**
@@ -5040,6 +5093,45 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     /**
+     * @componentName Service list item
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaServiceListItem {
+        /**
+          * Action associated with the service
+         */
+        "action"?: ServiceAction | string;
+        /**
+          * The icon associated with the service
+         */
+        "icon"?: string;
+        /**
+          * An optional link related to the service
+         */
+        "optionalLink"?: OptionalLink | string;
+        /**
+          * Details about the service
+         */
+        "serviceDetails"?: ServiceDetails | string;
+        /**
+          * The link to the service page
+         */
+        "serviceLink"?: string;
+        /**
+          * The name of the service
+         */
+        "serviceName"?: string;
+        /**
+          * The heading level for the service name (defaults to h3)
+         */
+        "serviceNameHeadingLevel"?: number;
+        /**
+          * The status of the service
+         */
+        "serviceStatus"?: string;
+    }
+    /**
      * @componentName Statement of truth
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -5498,6 +5590,7 @@ declare namespace LocalJSX {
         "va-search-input": VaSearchInput;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
+        "va-service-list-item": VaServiceListItem;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
         "va-table": VaTable;
@@ -5822,6 +5915,12 @@ declare module "@stencil/core" {
              * @translations Spanish
              */
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
+            /**
+             * @componentName Service list item
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-service-list-item": LocalJSX.VaServiceListItem & JSXBase.HTMLAttributes<HTMLVaServiceListItemElement>;
             /**
              * @componentName Statement of truth
              * @maturityCategory caution
