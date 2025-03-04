@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
 
@@ -249,3 +249,121 @@ const WidthsTemplate = ({
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = { ...defaultArgs };
+
+
+const FormsPatternSingleTemplate = args => {
+  const { options, error, ...rest } = args;
+  const _id = Math.floor(Math.random() * 10) + 1;
+  const id = `form-pattern-single-input-${error}-${_id}`
+
+    const handleClick = () => {
+      const header = document
+        .getElementById(id)
+        ?.shadowRoot?.getElementById('form-question');
+  
+      applyFocus(header);
+    };
+  return (
+    <>
+      <va-select
+        id={id}
+        error={error}
+        {...rest}
+      >
+        <div slot="form-description">
+          <p>HTML passed into the form-description slot:</p>
+          <ul>
+            <li>Navy</li>
+            <li>Army</li>
+            <li>Marines</li>
+            <li>Air Force</li>
+            <li>Coast Guard</li>
+          </ul>
+        </div>
+        {options}
+      </va-select>
+
+      <hr />
+
+      <va-button
+        text="click to focus header"
+        onClick={handleClick}
+        uswds={false}
+      ></va-button>
+    </>
+  )
+}
+
+export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingle.args = {
+  ...defaultArgs,
+  'use-forms-pattern': 'single',
+  'form-heading-level': 1,
+  'form-heading': 'Select a branch of the armed forces'
+}
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  'error': 'This is an error',
+  'use-forms-pattern': 'single',
+  'form-heading-level': 1,
+  'form-heading': 'Select a branch of the armed forces'
+}
+
+
+
+const FormsPatternMultipleTemplate = args => {
+  const { options, ...rest } = args;
+  const _id = Math.floor(Math.random() * 10) + 1;
+  const id = `form-pattern-multiple-input-${_id}`
+
+    const handleClick = () => {
+      const header = document
+        .getElementById(id)
+        ?.shadowRoot?.getElementById('form-question');
+  
+      applyFocus(header);
+    };
+  return (
+    <>
+      <va-select id={id} {...rest}>
+        <div slot="form-description">
+          <p>HTML passed into the form-description slot:</p>
+          <ul>
+            <li>Navy</li>
+            <li>Army</li>
+            <li>Marines</li>
+            <li>Air Force</li>
+            <li>Coast Guard</li>
+          </ul>
+        </div>
+        {options}
+      </va-select>
+      
+      <va-select label="Branch of Service II" name="options2">
+        {options}
+      </va-select >
+
+      <va-select label="Branch of Service III" name="options3">
+        {options}
+      </va-select>
+        
+      <hr/>
+
+      <va-button
+        text="click to focus header"
+        onClick={handleClick}
+        uswds={false}
+      ></va-button>
+    </>
+  )
+}
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
+  ...defaultArgs,
+  'use-forms-pattern': 'multiple',
+  'form-heading-level': 1,
+  'form-heading': 'Select a branch of the armed forces'
+}
