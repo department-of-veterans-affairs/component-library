@@ -101,6 +101,13 @@ export class VaAccordion {
     const clickedItem = (event.target as HTMLElement).closest(
       'va-accordion-item',
     );
+    
+    if(this.el !== clickedItem.parentElement) {
+      // ignore if this item is not a direct child of this va-accordion
+      // this is to prevent issues with nested accordions
+      return;
+    }
+    
     // Usage for slot to provide context to analytics for header and level
     const header = clickedItem.querySelector('[slot="headline"]');
     // using the slot to provide context to analytics for header and level
