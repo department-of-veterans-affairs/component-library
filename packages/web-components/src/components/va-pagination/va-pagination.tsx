@@ -96,6 +96,12 @@ export class VaPagination {
   @State() isMobileViewport: Boolean = false;
 
   /**
+   * Will be true when va-pagination is 640 pixels or narrower
+   * as measured by this.handleResizeEvent().
+   */
+  @State() isTabletViewport: Boolean = false;
+
+  /**
    * If the page total is less than or equal to this limit, show all pages.
    * The number has been reduced from 7 to 6 to show all more consistently
    * on small screens and zoomed in browser windows.
@@ -103,10 +109,16 @@ export class VaPagination {
   SHOW_ALL_PAGES: number = 6;
 
   /**
-   * Small viewport width chosen based on USWDS "mobile-lg" spacing unit.
+   * Mobile viewport width chosen based on USWDS "mobile-lg" spacing unit.
    * See https://designsystem.digital.gov/design-tokens/spacing-units/
    */
-  SMALL_VIEWPORT_WIDTH: number = 480;
+  MOBILE_VIEWPORT_WIDTH: number = 480;
+
+  /**
+   * Tabllet viewport width chosen based on USWDS "tablet" spacing unit.
+   * See https://designsystem.digital.gov/design-tokens/spacing-units/
+   */
+  TABLET_VIEWPORT_WIDTH: number = 640;
 
   /**
    * Observe the host component so we can accurately
@@ -118,15 +130,25 @@ export class VaPagination {
   });
 
   private handleResizeEvent(entries: ResizeObserverEntry[]): void {
-    const { SMALL_VIEWPORT_WIDTH } = this;
+    const { MOBILE_VIEWPORT_WIDTH, TABLET_VIEWPORT_WIDTH } = this;
 
     for (let entry of entries) {
-      if (entry.contentRect.width <= SMALL_VIEWPORT_WIDTH) {
+      if (entry.contentRect.width <= MOBILE_VIEWPORT_WIDTH) {
         this.isMobileViewport = true;
+        this.isTabletViewport = false;
       }
 
-      if (entry.contentRect.width > SMALL_VIEWPORT_WIDTH) {
+      if (
+        entry.contentRect.width > MOBILE_VIEWPORT_WIDTH &&
+        entry.contentRect.width <= TABLET_VIEWPORT_WIDTH
+      ) {
         this.isMobileViewport = false;
+        this.isTabletViewport = true;
+      }
+
+      if (entry.contentRect.width > TABLET_VIEWPORT_WIDTH) {
+        this.isMobileViewport = false;
+        this.isTabletViewport = false;
       }
     }
   }
@@ -183,7 +205,6 @@ export class VaPagination {
       // Use case #2: Total pages is greater than 6 and less than or equal to
       // maxPageListLength. The logic has made affordances for max page list
       // lengths of 8 and below, and the default 10.
-      // TODO: Fix this for cases where Pages: 10, MaxPages: 10, Page 6
 
       start = 1;
       end = totalPages;
@@ -219,10 +240,6 @@ export class VaPagination {
 
       // End has three use cases with the isMobileViewport adjustment
       switch (true) {
-        // case maxPageListLength === SHOW_ALL_PAGES && isMobileViewport:
-        //   end = maxPageListLength - 2 - unboundedChar;
-        //   console.log('Use case 3a');
-        //   break;
         case maxPageListLength <= totalPages && isMobileViewport:
           end = maxPageListLength - 4 - unboundedChar;
           console.log('Use case 3b');
@@ -275,31 +292,6 @@ export class VaPagination {
       start = currentPage - (radius - 2);
       end = currentPage + (radius - 1 - unboundedChar);
 
-      // Assume end is the last page
-      // if (currentPage + radius - 1 > totalPages) {
-      //   console.log('Use case 5a');
-      //   end = totalPages;
-      // } else {
-      //   // Assume end is not the last page. Subtract 1 to account for showing the
-      //   // ellipsis and subtract another 1 if showing the last page (unbounded = false).
-      //   console.log('Use case 5b');
-      //   end = currentPage + (radius - 1 - unboundedChar);
-      // }
-
-      // if (maxPageListLength <= 10 && isMobileViewport) {
-      //   // Reduce the middle array length to ensure first, last, and ellipses don't overflow
-      //   console.log('Use case 5c');
-      //   start = start + 2;
-      //   end = end - 2;
-      // }
-
-      // if (maxPageListLength <= 8 && isMobileViewport) {
-      //   // Reduce the middle array length to ensure first, last, and ellipses don't overflow
-      //   console.log('Use case 5d');
-      //   start = start + 1;
-      //   end = end - 1;
-      // }
-
       switch (true) {
         case maxPageListLength <= 8 && isMobileViewport:
           console.log('Case 1');
@@ -311,19 +303,17 @@ export class VaPagination {
           start = start + 2;
           end = end - 2;
           break;
-        // case currentPage + radius - 1 > totalPages:
-        //   console.log('Case 3');
-        //   console.log({ start, end });
-        //   end = totalPages;
-        //   break;
+        case this.isTabletViewport:
+          console.log('Case 3');
+          start = currentPage - (radius - 3);
+          end = currentPage + (radius - 2 - unboundedChar);
+          break;
         default:
           console.log('Case default');
-          // start = currentPage - (radius - 3);
-          // end = currentPage + (radius - 2 - unboundedChar);
-          console.log({ start, end });
+          start = currentPage - (radius - 2);
+          end = currentPage + (radius - 1 - unboundedChar);
       }
 
-      // console.log('Use case 5');
       return makeArray(start, end);
     }
   };
