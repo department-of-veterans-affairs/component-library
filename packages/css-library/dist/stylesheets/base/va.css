@@ -103,23 +103,6 @@ a:visited, a:visited abbr {
   color: #54278f;
 }
 
-ul {
-  padding: 0 0 0 1.5em;
-  list-style: square;
-}
-
-ol {
-  margin: 0 0 0 1.25em;
-  list-style-position: outside;
-}
-
-ul > ul,
-ul ol,
-ol > ul,
-ol ol {
-  margin: 0.5em 0 0.5em 1.2em;
-}
-
 dd {
   margin-left: 0;
 }
