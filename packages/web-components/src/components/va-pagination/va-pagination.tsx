@@ -243,15 +243,15 @@ export class VaPagination {
 
       return makeArray(start, end);
     } else if (currentPage + radius - 1 > totalPages) {
-      // TODO: Fix this at smaller maxPageListLength like 6, 8
-      // Use case #4: Current page radius minus one is greater than
-      // than the total number of pages
+      // Use case #4: Current page plus radius minus one is greater than
+      // than the total number of pages. This use case will appear as
+      // current page gets close to the end.
 
       // Start has three use cases with the isMobileViewport adjustment
       switch (true) {
         case totalPages - maxPageListLength >= 0 && isMobileViewport:
           console.log('Use case 4a');
-          start = totalPages - maxPageListLength + this.SHOW_ALL_PAGES;
+          start = totalPages - (SHOW_ALL_PAGES - 2 - 1);
           break;
         case totalPages - maxPageListLength >= 0:
           console.log('Use case 4b');
