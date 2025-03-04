@@ -77,6 +77,37 @@ describe('va-accordion', () => {
     expect(buttons[0].getAttribute('aria-expanded')).toEqual('false');
     expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
   });
+  
+  it('can open nested open-single item', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">
+          A bit more
+          <va-accordion open-single>
+            <va-accordion-item header="Nested Item">Deep content</va-accordion-item>
+          </va-accordion>
+        </va-accordion-item>
+      </va-accordion>`);
+
+    const buttons = await page.findAll(
+      'va-accordion-item >>> button[aria-expanded="false"]',
+    );
+    expect(buttons.length).toEqual(3);
+
+    // Click the second button
+    await buttons[1].click();
+
+    expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
+
+    // Click the nested button
+    await buttons[2].click();
+
+    // Nested item is open
+    expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
+    expect(buttons[2].getAttribute('aria-expanded')).toEqual('true');
+  });
 
   it('allows multiple items to be open by default', async () => {
     const page = await newE2EPage();
