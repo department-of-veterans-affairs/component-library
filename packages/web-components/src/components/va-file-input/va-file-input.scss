@@ -194,6 +194,10 @@
   .thumbnail-error {
     color: $vads-color-error-dark;
   }
+
+  va-progress-bar {
+    font-size: var(--v3-font-base-size);
+  }
 }
 
 :host(.has-error) {

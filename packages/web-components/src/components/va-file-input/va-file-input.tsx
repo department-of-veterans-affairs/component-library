@@ -10,6 +10,7 @@ import {
   EventEmitter,
   State,
   Watch,
+  forceUpdate
 } from '@stencil/core';
 import { i18next } from '../..';
 import { fileInput } from './va-file-input-upgrader';
@@ -32,12 +33,6 @@ export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
   private uploadStatus: 'idle' | 'success' = 'idle';
   private fileType?: string;
-  private defaultUploadMessage: HTMLElement = (
-    <span>
-      Drag a file here or{' '}
-      <span class="file-input-choose-text">choose from folder</span>
-    </span>
-  )
 
   @Element() el: HTMLElement;
   @State() file?: File;
@@ -45,9 +40,6 @@ export class VaFileInput {
   @State() internalError?: string;
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
-  @State() internalPercent: number = null;
-
-  
 
   /**
    * The label for the file input.
@@ -97,7 +89,7 @@ export class VaFileInput {
   /**
    * Custom instructional message in the file input.
    */
-  @Prop() uploadMessage?: HTMLElement = this.defaultUploadMessage;
+  @Prop() uploadMessage?: HTMLElement = null;
 
   /**
    * Emit component-library-analytics events on the file input change event.
@@ -135,7 +127,7 @@ export class VaFileInput {
   /**
    * Percent upload completed. For use with va-progress-bar component
    */
-  @Prop() percentUploaded?: number = null;
+  @Prop({ mutable: true}) percentUploaded?: number = null;
 
   /**
    * The event emitted when the file input value changes.
@@ -160,14 +152,22 @@ export class VaFileInput {
   }
   
   @Watch('percentUploaded') 
-  syncPercent(value) {
-    if (value === 100) {
-      this.fileContents = null;
-      this.uploadStatus = 'idle';
-      this.internalPercent = null;
-    } else {
-      this.internalPercent = value;
+    percentHandler(value: number) {
+      if (value >= 100) {
+        this.resetState();
+      }
     }
+
+  /**
+   * called when file has been uploaded 
+   * or file upload has been cancelled
+   * only relevant when percentUploaded specified
+   */
+  private resetState() {
+    this.fileContents = null;
+    this.uploadStatus = 'idle';
+    this.percentUploaded = null;
+    forceUpdate(this.el);
   }
 
   private handleChange = (e: Event) => {
@@ -393,6 +393,15 @@ export class VaFileInput {
     this.el.removeEventListener('change', this.handleChange);
   }
 
+  private getDefaultUploadMessage() {
+    return (
+      <span>
+        Drag a file here or{' '}
+        <span class="file-input-choose-text">choose from folder</span>
+      </span>
+    )
+  }
+
   render() {
     const {
       label,
@@ -403,6 +412,7 @@ export class VaFileInput {
       hint,
       file,
       uploadStatus,
+      uploadMessage,
       headerSize,
       fileContents,
       fileType,
@@ -412,7 +422,6 @@ export class VaFileInput {
       statusText,
       uploadedFile,
       percentUploaded,
-      internalPercent
     } = this;
 
     if (value && !this.file) {
@@ -474,13 +483,8 @@ export class VaFileInput {
       ? 'headless-selected-files-wrapper'
       : 'selected-files-wrapper';
     const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
-
-    // Check if there is an upload message and set it back to the default if not.
-    if (!this.uploadMessage) {
-      this.uploadMessage = this.defaultUploadMessage;
-    }
     
-    const showProgBar = internalPercent !== null && internalPercent < 100;
+    const showProgBar = percentUploaded !== null && percentUploaded < 100;
 
     return (
       <Host class={{ 'has-error': !!displayError }}>
@@ -525,7 +529,9 @@ export class VaFileInput {
               ></div>
               <div class={fileInputTargetClasses}>
                 <div class="file-input-box"></div>
-                <div class="file-input-instructions">{this.uploadMessage}</div>
+                <div class="file-input-instructions">
+                  {!!uploadMessage ? uploadMessage : this.getDefaultUploadMessage()}
+                </div>
               </div>
             </div>
           )}
@@ -567,19 +573,12 @@ export class VaFileInput {
                     <div class="additional-info-slot">
                       <slot></slot>
                     </div>
-                    {(!readOnly && showProgBar) && (
-                      <Fragment>
+                    {!readOnly ? (showProgBar
+                      ? <Fragment>
                         <va-progress-bar percent={percentUploaded} />
-                        <va-button-icon buttonType="cancel" onClick={() => {
-                          this.internalPercent = null;
-                          this.fileContents = null;
-                          this.uploadStatus = 'idle';
-                          }
-                        } />
+                        <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
                       </Fragment>
-                    )}
-                    {(!readOnly && !showProgBar) && (
-                      <Fragment>
+                      : <Fragment>
                         <div class="file-button-section">
                           <va-button-icon
                             buttonType="change-file"
@@ -607,7 +606,8 @@ export class VaFileInput {
                           <span class="file-label">{file ? file.name : uploadedFile.name}</span>
                         </va-modal>
                       </Fragment>
-                    )}
+                    )
+                      : null}
                   </div>
                 )}
               </va-card>

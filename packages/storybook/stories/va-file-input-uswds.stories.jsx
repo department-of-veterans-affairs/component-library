@@ -46,7 +46,6 @@ const defaultArgs = {
   'status-text': null,
   'uploadedFile': null,
   'maxFileSize': Infinity,
-  'percentUploaded': null
 };
 
 const Template = ({
@@ -65,7 +64,6 @@ const Template = ({
   children,
   uploadedFile,
   maxFileSize,
-  percentUploaded
 }) => {
   return (
     <VaFileInput
@@ -84,13 +82,11 @@ const Template = ({
       children={children}
       uploadedFile={uploadedFile}
       maxFileSize={maxFileSize}
-      percentUploaded={percentUploaded}
     />
   );
 };
 
 export const Default = Template.bind(null);
-Default.args = { ...defaultArgs, percentUploaded: 75 };
 Default.argTypes = propStructure(fileInputDocs);
 
 export const Required = Template.bind(null);
@@ -339,13 +335,13 @@ const PercentUploadedTemplate = args => {
   function handleUpload() {
     const intervalId = setInterval(() => {
       setPercent(_prev => {
-        if (_prev === 100) {
+        if (_prev >= 100) {
           clearInterval(intervalId);
           return null;
         }
-        return _prev + 5;
+        return _prev + (Math.random() * 10);
       })
-    }, 250);
+    }, 350);
   }
 
   return(
