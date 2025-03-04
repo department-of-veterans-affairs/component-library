@@ -173,12 +173,8 @@ export class VaPagination {
     let start: number;
     let end: number;
 
-    // Use cases
     if (totalPages <= SHOW_ALL_PAGES) {
-      // Use case #1: 6 or less total pages.
-      // This use case will override all other functions.
-
-      console.log('Use case 1');
+      // Use case #1: 6 or fewer pages
       return makeArray(1, totalPages);
     } else if (SHOW_ALL_PAGES < totalPages && totalPages < maxPageListLength) {
       // Use case #2: totalPages is greater than 6 and less than 10, so [7, 8, 9]
