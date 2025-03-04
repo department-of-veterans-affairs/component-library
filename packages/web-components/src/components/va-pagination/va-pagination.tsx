@@ -90,7 +90,7 @@ export class VaPagination {
   @Prop() unbounded?: boolean = false;
 
   /**
-   * Will be true when va-pagination is 641 pixels or narrower
+   * Will be true when va-pagination is 480 pixels or narrower
    * as measured by this.handleResizeEvent().
    */
   @State() isMobileViewport: Boolean = false;
@@ -103,10 +103,10 @@ export class VaPagination {
   SHOW_ALL_PAGES: number = 6;
 
   /**
-   * Small viewport width chosen based on USWDS "tablet" spacing unit.
+   * Small viewport width chosen based on USWDS "mobile-lg" spacing unit.
    * See https://designsystem.digital.gov/design-tokens/spacing-units/
    */
-  SMALL_VIEWPORT_WIDTH: number = 640;
+  SMALL_VIEWPORT_WIDTH: number = 480;
 
   /**
    * Observe the host component so we can accurately
@@ -163,7 +163,9 @@ export class VaPagination {
       SHOW_ALL_PAGES,
     } = this;
 
-    // Radius is half the length of the visible pages
+    // Radius is half the length of the visible pages.
+    // Use it as a reference from the selected page to find
+    // start and end of the pages to render.
     const radius = Math.floor(maxPageListLength / 2);
 
     // If the unbounded flag is set we don't include the last page
@@ -175,40 +177,52 @@ export class VaPagination {
 
     if (totalPages <= SHOW_ALL_PAGES) {
       // Use case #1: 6 or fewer pages
+      console.log('Use case 1');
       return makeArray(1, totalPages);
-    } else if (SHOW_ALL_PAGES < totalPages && totalPages < maxPageListLength) {
-      // Use case #2: totalPages is greater than 6 and less than 10, so [7, 8, 9]
-      // is the default set included in this use case
-      // TODO: Fix this on extra small screens and medium screens where it adds ellipses
+    } else if (SHOW_ALL_PAGES < totalPages && totalPages <= maxPageListLength) {
+      // Use case #2: Total pages is greater than 6 and less than or equal to
+      // maxPageListLength. The logic has made affordances for max page list
+      // lengths of 8 and below, and the default 10.
+      // TODO: Fix this for cases where Pages: 10, MaxPages: 10, Page 6
 
       start = 1;
       end = totalPages;
 
-      // Recalculating radius for the smaller totalPages count
-      const localRadius = Math.floor(totalPages / 2);
-
-      if (currentPage <= localRadius) {
-        end = start + 4;
-      }
-
-      if (currentPage > localRadius) {
-        start = start + 3;
+      switch (true) {
+        case isMobileViewport &&
+          maxPageListLength <= 8 &&
+          currentPage <= radius:
+          end = start + 3;
+          break;
+        case isMobileViewport && maxPageListLength <= 8 && currentPage > radius:
+          start = start + 4;
+          break;
+        case isMobileViewport && currentPage <= radius:
+          end = start + 4;
+          break;
+        case isMobileViewport && currentPage > radius:
+          start = start + 3;
+          break;
+        default:
+          start = 1;
+          end = totalPages;
       }
 
       console.log('Use case 2');
       return makeArray(start, end);
     } else if (currentPage <= radius - 1) {
-      // Use case #3: Current page is one less than half the visible
-      // pages. This case always renders [1] in pageNumbers array.
+      // Use case #3: Current page is less than or equal to
+      // half the visible pages minus one. This case always renders
+      // [1] in pageNumbers array.
 
       start = 1;
 
       // End has three use cases with the isMobileViewport adjustment
       switch (true) {
-        case maxPageListLength === SHOW_ALL_PAGES && isMobileViewport:
-          end = maxPageListLength - 2 - unboundedChar;
-          console.log('Use case 3a');
-          break;
+        // case maxPageListLength === SHOW_ALL_PAGES && isMobileViewport:
+        //   end = maxPageListLength - 2 - unboundedChar;
+        //   console.log('Use case 3a');
+        //   break;
         case maxPageListLength <= totalPages && isMobileViewport:
           end = maxPageListLength - 4 - unboundedChar;
           console.log('Use case 3b');
@@ -230,8 +244,8 @@ export class VaPagination {
       return makeArray(start, end);
     } else if (currentPage + radius - 1 > totalPages) {
       // TODO: Fix this at smaller maxPageListLength like 6, 8
-      // Use case #4: Current page plus half total pages is greater than
-      // or equal to the total number of pages
+      // Use case #4: Current page radius minus one is greater than
+      // than the total number of pages
 
       // Start has three use cases with the isMobileViewport adjustment
       switch (true) {
