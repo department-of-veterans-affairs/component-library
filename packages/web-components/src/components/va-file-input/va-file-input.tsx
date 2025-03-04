@@ -573,40 +573,41 @@ export class VaFileInput {
                     <div class="additional-info-slot">
                       <slot></slot>
                     </div>
-                    {!readOnly ? (showProgBar
-                      ? <div class="progress-bar-container">
-                          <va-progress-bar percent={percentUploaded} />
-                          <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
-                        </div>
-                      : <Fragment>
-                        <div class="file-button-section">
-                          <va-button-icon
-                            buttonType="change-file"
-                            onClick={this.changeFile}
-                            label="Change file"
-                            aria-label={`change file ${file ? file.name : uploadedFile.name}`}
-                          ></va-button-icon>
-                          <va-button-icon
-                            buttonType="delete"
-                            onClick={this.openModal}
-                            aria-label={`delete file ${file ? file.name : uploadedFile.name}`}
-                            label="Delete"
-                          ></va-button-icon>
-                        </div>
-                        <va-modal
-                          modalTitle="Delete this file?"
-                          visible={this.showModal}
-                          primaryButtonText="Yes, remove this"
-                          secondaryButtonText="No, keep this"
-                          onCloseEvent={this.closeModal}
-                          onPrimaryButtonClick={() => this.removeFile(true)}
-                          onSecondaryButtonClick={this.closeModal}
-                        >
-                          We'll remove the uploaded document{' '}
-                          <span class="file-label">{file ? file.name : uploadedFile.name}</span>
-                        </va-modal>
-                      </Fragment>
-                    )
+                    {!readOnly ?
+                      (showProgBar
+                        ? <div class="progress-bar-container">
+                            <va-progress-bar percent={percentUploaded} />
+                            <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
+                          </div>
+                        : <Fragment>
+                          <div class="file-button-section">
+                            <va-button-icon
+                              buttonType="change-file"
+                              onClick={this.changeFile}
+                              label="Change file"
+                              aria-label={`change file ${file ? file.name : uploadedFile.name}`}
+                            ></va-button-icon>
+                            <va-button-icon
+                              buttonType="delete"
+                              onClick={this.openModal}
+                              aria-label={`delete file ${file ? file.name : uploadedFile.name}`}
+                              label="Delete"
+                            ></va-button-icon>
+                          </div>
+                          <va-modal
+                            modalTitle="Delete this file?"
+                            visible={this.showModal}
+                            primaryButtonText="Yes, remove this"
+                            secondaryButtonText="No, keep this"
+                            onCloseEvent={this.closeModal}
+                            onPrimaryButtonClick={() => this.removeFile(true)}
+                            onSecondaryButtonClick={this.closeModal}
+                          >
+                            We'll remove the uploaded document{' '}
+                            <span class="file-label">{file ? file.name : uploadedFile.name}</span>
+                          </va-modal>
+                        </Fragment>
+                      )
                       : null}
                   </div>
                 )}
