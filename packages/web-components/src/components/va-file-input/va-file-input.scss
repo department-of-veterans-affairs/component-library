@@ -198,6 +198,10 @@
   va-progress-bar {
     font-size: var(--v3-font-base-size);
   }
+
+  .progress-bar-container {
+    padding-left: 8px;
+  }
 }
 
 :host(.has-error) {

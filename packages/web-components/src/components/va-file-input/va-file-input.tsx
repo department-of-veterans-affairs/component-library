@@ -574,10 +574,10 @@ export class VaFileInput {
                       <slot></slot>
                     </div>
                     {!readOnly ? (showProgBar
-                      ? <Fragment>
-                        <va-progress-bar percent={percentUploaded} />
-                        <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
-                      </Fragment>
+                      ? <div class="progress-bar-container">
+                          <va-progress-bar percent={percentUploaded} />
+                          <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
+                        </div>
                       : <Fragment>
                         <div class="file-button-section">
                           <va-button-icon
