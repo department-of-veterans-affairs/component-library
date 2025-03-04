@@ -163,7 +163,7 @@ export class VaPagination {
       SHOW_ALL_PAGES,
     } = this;
 
-    // Radius is half the length of the visible pages.
+    // Radius is half the length of the maxPageLength prop.
     // Use it as a reference from the selected page to find
     // start and end of the pages to render.
     const radius = Math.floor(maxPageListLength / 2);
@@ -201,7 +201,7 @@ export class VaPagination {
           end = start + 4;
           break;
         case isMobileViewport && currentPage > radius:
-          start = start + 3;
+          start = start + 5;
           break;
         default:
           start = 1;
@@ -247,7 +247,6 @@ export class VaPagination {
       // than the total number of pages. This use case will appear as
       // current page gets close to the end.
 
-      // Start has three use cases with the isMobileViewport adjustment
       switch (true) {
         case totalPages - maxPageListLength >= 0 && isMobileViewport:
           console.log('Use case 4a');
@@ -304,25 +303,24 @@ export class VaPagination {
       switch (true) {
         case maxPageListLength <= 8 && isMobileViewport:
           console.log('Case 1');
-          console.log({ start, end });
           start = start + 1;
           end = end - 1;
           break;
         case maxPageListLength <= 10 && isMobileViewport:
           console.log('Case 2');
-          console.log({ start, end });
           start = start + 2;
           end = end - 2;
           break;
-        case currentPage + radius - 1 > totalPages:
-          console.log('Case 3');
-          console.log({ start, end });
-          end = totalPages;
-          break;
+        // case currentPage + radius - 1 > totalPages:
+        //   console.log('Case 3');
+        //   console.log({ start, end });
+        //   end = totalPages;
+        //   break;
         default:
           console.log('Case default');
+          // start = currentPage - (radius - 3);
+          // end = currentPage + (radius - 2 - unboundedChar);
           console.log({ start, end });
-          end = currentPage + (radius - 1 - unboundedChar);
       }
 
       // console.log('Use case 5');
