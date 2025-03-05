@@ -3,7 +3,7 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 /**
  * @componentName Progress bar - activity
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  */
 
 @Component({

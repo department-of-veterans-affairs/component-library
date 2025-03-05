@@ -12,7 +12,7 @@ import vaSeal from '../../assets/va-seal.svg';
 /**
  * @componentName Header - Minimal
  * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityLevel available
  * @guidanceHref header/header-minimal
  */
 
@@ -73,7 +73,7 @@ export class VaHeaderMinimal {
             <img class="va-logo" src={vaSeal} alt="VA logo and Seal, U.S. Department of Veterans Affairs" />
           </a>
           <div class="header-container">
-            
+
             {enableHeadings ? <h1>{header}</h1> : <div class="header">{header}</div>}
 
             {subheader && (

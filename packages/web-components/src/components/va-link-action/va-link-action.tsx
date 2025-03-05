@@ -3,8 +3,10 @@ import classNames from 'classnames';
 
 /**
  * @componentName Link - Action
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref link/action
+ * @guidanceName Action link
  */
 
 @Component({

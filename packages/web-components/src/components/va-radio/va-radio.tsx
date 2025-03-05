@@ -26,7 +26,7 @@ if (Build.isTesting) {
  * @radioOptionSelected The event emitted when the selected option value changes.
  * @componentName Radio button
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  * @guidanceHref form/radio-button
  * @translations English
  * @translations Spanish
