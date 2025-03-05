@@ -288,7 +288,6 @@ const FormsPatternSingleTemplate = args => {
       <va-button
         text="click to focus header"
         onClick={handleClick}
-        uswds={false}
       ></va-button>
     </>
   )
@@ -352,9 +351,8 @@ const FormsPatternMultipleTemplate = args => {
       <hr/>
 
       <va-button
-        text="click to focus header"
+        text="Click to focus header"
         onClick={handleClick}
-        uswds={false}
       ></va-button>
     </>
   )

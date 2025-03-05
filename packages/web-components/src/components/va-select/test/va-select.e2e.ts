@@ -85,7 +85,7 @@ describe('va-select', () => {
     expect(span).toBeNull()
   });
 
-  it.only('renders options within optgroup', async () => {
+  it('renders options within optgroup', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-select label="A label" value="bar">
