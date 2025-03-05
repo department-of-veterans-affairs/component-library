@@ -57,7 +57,7 @@ button {
   transition-property: color, background-color;
 }
 
-@container (max-width: 640px) { // Variables won't compile. Matching TSX file for now.
+@container (max-width: 640px) { // This value matches the USWDS --tablet custom property
   .usa-pagination__overflow {
     margin: 0;
   }
