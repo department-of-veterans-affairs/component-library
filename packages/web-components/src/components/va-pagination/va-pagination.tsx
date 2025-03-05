@@ -201,6 +201,7 @@ export class VaPagination {
       // Use case #1: 6 or fewer pages
       return makeArray(1, totalPages);
     } else if (SHOW_ALL_PAGES < totalPages && totalPages <= maxPageListLength) {
+      console.log('Use case 2');
       // Use case #2: Total pages is greater than 6 and less than or equal to
       // maxPageListLength. The logic has made affordances for max page list
       // lengths of 8 and below, and the default 10.
@@ -229,16 +230,18 @@ export class VaPagination {
 
       return makeArray(start, end);
     } else if (currentPage <= radius - 1) {
+      console.log('Use case 3');
+
       // Use case #3: Current page is less than or equal to
       // half the visible pages minus one. This case always renders
       // [1] in pageNumbers array.
       start = 1;
 
       switch (true) {
-        case maxPageListLength <= totalPages && isMobileViewport:
-          end = maxPageListLength - 4 - unboundedChar;
+        case isMobileViewport && maxPageListLength <= totalPages:
+          end = maxPageListLength - 5 - unboundedChar;
           break;
-        case maxPageListLength < totalPages:
+        case maxPageListLength <= totalPages:
           end = maxPageListLength - 1 - unboundedChar;
           break;
         default:
@@ -257,7 +260,7 @@ export class VaPagination {
       // current page gets close to the end.
 
       switch (true) {
-        case totalPages - maxPageListLength >= 0 && isMobileViewport:
+        case isMobileViewport && totalPages - maxPageListLength >= 0:
           start = totalPages - (SHOW_ALL_PAGES - 2 - 1);
           break;
         case totalPages - maxPageListLength >= 0:
