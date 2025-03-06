@@ -1516,6 +1516,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` is true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` is true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1547,6 +1555,10 @@ export namespace Components {
           * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
+         */
+        "useFormsPattern"?: string;
         /**
           * Selected value (will get updated on select).
          */
@@ -5044,6 +5056,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` is true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` is true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -5091,6 +5111,10 @@ declare namespace LocalJSX {
           * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
+         */
+        "useFormsPattern"?: string;
         /**
           * Selected value (will get updated on select).
          */

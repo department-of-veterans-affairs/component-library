@@ -20,9 +20,11 @@ export function isNumeric(value: string): boolean {
 export function getSlottedNodes(
   root: HTMLElement,
   nodeName: string | null,
+  query: string = 'slot'
 ): Array<Node> {
-  // This will only get the first slot on a component
-  const children = root.shadowRoot.querySelector('slot').assignedNodes();
+  // This will only get the first slot on a component unless the component sets a query value
+  const slot = root.shadowRoot.querySelector(query) as HTMLSlotElement;
+  const children = slot.assignedNodes();
 
   return nodeName !== null
     ? Array.from(children).filter(
