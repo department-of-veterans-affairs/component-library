@@ -46,6 +46,10 @@
   cursor: not-allowed;
 }
 
+:host([full-width]:not([full-width='false'])) {
+  width: 100%;
+}
+
 
 :host([big]:not([big="false"]):is([back], [continue])) {
   .usa-button--big {
@@ -75,3 +79,6 @@
   }
 }
 
+:host .va-button--full-width {
+  width: 100%;
+}

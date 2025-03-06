@@ -268,6 +268,10 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
+          * If `true`, the button will expand to the full available width of its container.
+         */
+        "fullWidth"?: boolean;
+        /**
           * The aria-label of the component.
          */
         "label"?: string;
@@ -3630,6 +3634,10 @@ declare namespace LocalJSX {
           * If `true`, the click event will not fire.
          */
         "disabled"?: boolean;
+        /**
+          * If `true`, the button will expand to the full available width of its container.
+         */
+        "fullWidth"?: boolean;
         /**
           * The aria-label of the component.
          */

@@ -208,6 +208,22 @@ describe('va-button', () => {
     `);
   });
 
+  it(`adds a full-width class when full-width is true`, async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" full-width></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button class="hydrated" full-width text="Edit">
+      <mock:shadow-root>
+        <span class="loading-message" role="status"></span>
+        <button class="usa-button va-button--full-width" type="button" part="button">
+          Edit
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button text="Edit"></va-button>');
@@ -297,14 +313,16 @@ describe('va-button', () => {
     </va-button>
     `);
   });
-  
+
   it('submits form when clicked', async () => {
     const page = await newE2EPage();
-    await page.setContent('<form onsubmit="e=>{e.preventDefault();}"><va-button submit text="Submit"></va-button></form>');
+    await page.setContent(
+      '<form onsubmit="e=>{e.preventDefault();}"><va-button submit text="Submit"></va-button></form>',
+    );
     const submitSpy = await page.spyOnEvent('submit');
     const button = await page.find('va-button >>> button');
     await button.click();
     await page.waitForChanges();
     expect(submitSpy).toHaveReceivedEventTimes(1);
-  });  
+  });
 });
