@@ -21,8 +21,8 @@ if (Build.isTesting) {
 
 /**
  * @componentName Banner - Official Gov
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel best_practice
  */
 
 @Component({
