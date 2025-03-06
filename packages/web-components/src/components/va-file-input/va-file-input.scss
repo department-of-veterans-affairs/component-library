@@ -197,10 +197,12 @@
 
   va-progress-bar {
     font-size: var(--v3-font-base-size);
+    display: block;
+    margin-left: 16px;
   }
 
-  .progress-bar-container {
-    padding-left: 8px;
+  .uploading-status {
+    font-style: var(--font-style-italic);
   }
 }
 

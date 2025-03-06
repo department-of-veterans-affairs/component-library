@@ -331,7 +331,7 @@ ReadOnlyWithAdditionalInputs.args = {
 };
 
 const PercentUploadedTemplate = args => {
-  const [percent, setPercent] = useState(null);
+  const [percent, setPercent] = useState(0);
   function handleUpload() {
     const intervalId = setInterval(() => {
       setPercent(_prev => {
@@ -339,9 +339,9 @@ const PercentUploadedTemplate = args => {
           clearInterval(intervalId);
           return null;
         }
-        return _prev + (Math.random() * 10);
+        return _prev + (Math.random() * 4);
       })
-    }, 350);
+    }, 100);
   }
 
   return(

@@ -483,8 +483,14 @@ export class VaFileInput {
       ? 'headless-selected-files-wrapper'
       : 'selected-files-wrapper';
     const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
+
     
     const showProgBar = percentUploaded !== null && percentUploaded < 100;
+
+    let statusClassNames = 'file-status-label'
+    if (showProgBar) {
+      statusClassNames = `${statusClassNames} uploading-status`;
+    }
 
     return (
       <Host class={{ 'has-error': !!displayError }}>
@@ -558,11 +564,11 @@ export class VaFileInput {
                         <span aria-live="polite" class="usa-error-message">{displayError}</span>
                       </span>
                     )}
-                    <span class="file-size-label">
+                    {!showProgBar && <span class="file-size-label">
                       {this.formatFileSize(file ? file.size : uploadedFile.size)}
-                    </span>
-                      <span class="file-status-label" aria-live="polite">
-                        {statusText}
+                    </span>}
+                      <span class={statusClassNames} aria-live="polite">
+                        {showProgBar ? 'Uploading...' : statusText}
                       </span>
                   </div>
                 </div>
@@ -575,10 +581,10 @@ export class VaFileInput {
                     </div>
                     {!readOnly ?
                       (showProgBar
-                        ? <div class="progress-bar-container">
+                        ? <Fragment>
                             <va-progress-bar percent={percentUploaded} />
                             <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
-                          </div>
+                          </Fragment>
                         : <Fragment>
                           <div class="file-button-section">
                             <va-button-icon
