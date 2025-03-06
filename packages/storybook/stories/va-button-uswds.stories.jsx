@@ -136,8 +136,8 @@ Loading.args = {
 export const FullWidth = Template.bind(null);
 FullWidth.args = {
   ...defaultArgs,
-  fullWidth: true,
-  text: 'Default',
+  'full-width': true,
+  'text': 'Default',
 };
 
 const TemplateWithForm = ({

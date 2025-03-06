@@ -56,7 +56,7 @@ export class VaButton {
   /**
    * If `true`, the button will expand to the full available width of its container.
    */
-  @Prop({ reflect: true }) fullWidth?: boolean = false;
+  @Prop() fullWidth?: boolean = false;
 
   /**
    * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
@@ -231,26 +231,30 @@ export class VaButton {
 
     return (
       <Host>
-          {/* This span must always be present for changes to be announced for the loading prop. It will not show visually or be read without content*/}
-          <span class="loading-message" role="status">
-            {this.loading ? 'Loading' : this.showCompletedMessage ? 'Loading complete' : null}
-          </span>
-          <button
-            class={buttonClass}
-            aria-disabled={ariaDisabled}
-            aria-busy={loading ? 'true' : undefined}
-            aria-label={label}
-            aria-describedby={ariaDescribedbyIds}
-            type={type}
-            part="button"
-          >
-            {back && !_continue && <va-icon icon="navigate_far_before" />}
-            {
-              loading ? <va-icon class="loading-icon" icon="autorenew" aria-hidden="true"/> : null
-            }
-            {buttonText}
-            {_continue && !back && <va-icon icon="navigate_far_next" />}
-          </button>
+        {/* This span must always be present for changes to be announced for the loading prop. It will not show visually or be read without content*/}
+        <span class="loading-message" role="status">
+          {this.loading
+            ? 'Loading'
+            : this.showCompletedMessage
+            ? 'Loading complete'
+            : null}
+        </span>
+        <button
+          class={buttonClass}
+          aria-disabled={ariaDisabled}
+          aria-busy={loading ? 'true' : undefined}
+          aria-label={label}
+          aria-describedby={ariaDescribedbyIds}
+          type={type}
+          part="button"
+        >
+          {back && !_continue && <va-icon icon="navigate_far_before" />}
+          {loading ? (
+            <va-icon class="loading-icon" icon="autorenew" aria-hidden="true" />
+          ) : null}
+          {buttonText}
+          {_continue && !back && <va-icon icon="navigate_far_next" />}
+        </button>
         {messageAriaDescribedby && (
           <span id="button-description" class="usa-sr-only">
             {messageAriaDescribedby}
