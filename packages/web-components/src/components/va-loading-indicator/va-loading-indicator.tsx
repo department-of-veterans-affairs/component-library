@@ -12,7 +12,7 @@ import isChromatic from "chromatic/isChromatic";
 /**
  * @componentName Loading indicator
  * @maturityCategory use
- * @maturityLevel best_practice
+ * @maturityLevel deployed
  */
 
 @Component({

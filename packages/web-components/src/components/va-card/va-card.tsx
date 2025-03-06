@@ -1,14 +1,9 @@
-import { 
-  Component,
-  Host, 
-  Prop, 
-  h 
-} from '@stencil/core';
+import { Component, Host, Prop, h } from '@stencil/core';
 
 /**
  * @componentName Card
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 
 @Component({

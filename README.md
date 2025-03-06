@@ -11,7 +11,7 @@ This is a monorepo containing the following packages:
 - `storybook`
 - `design-system-dashboard-cli`
 
-The `core` package is for bundling the `web-components` and `react-components` packages into one for publishing. 
+The `core` package is for bundling the `web-components` and `react-components` packages into one for publishing.
 
 The `storybook` package is for the combined story files from each `*-components` package.
 
@@ -81,7 +81,7 @@ This repo uses [`Chromatic`](https://www.chromatic.com/) to streamline reviews b
 
 Our web components have linting which checks for hard-coded user-facing strings. At the moment this linting isn't integrated into CI - so you will only see it if you run `yarn lint` or if your editor has ESLint integration through a plugin.
 
-### Local development 
+### Local development
 
 Local development can be done using Storybook by following the complete build steps outlined in [Running Build via Storybook](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#running-build-via-storybook).
 
@@ -100,7 +100,7 @@ Verdaccio allows contributors to publish a new version of the VA Design System c
    ```shell
    which python3 # Should see output like /usr/bin/python3
    ```
-   
+
    You should see an execution path if Python3 is installed. If not, install it and type `which python3` again in a new terminal window.
 
 #### Installing Verdaccio
@@ -154,7 +154,7 @@ The next step is to update the `core` and `web-component` package versions in th
 
    ```diff
    ! packages/core/package.json
-      
+
    - "version": "15.0.1"
    + "version": "15.0.2-rc1"
    ```
@@ -230,6 +230,63 @@ After you are finished testing, reset `vets-website` to use the standard registr
    nvm use 18.x.x OR nvm use 20.x.x
    ```
 
+#### Using Verdaccio on GitHub Codespaces
+
+This is useful if you want to test changes to the `component-library` in a Codespace and get a public URL to share with others. See [Using GitHub Codespaces](https://depo-platform-documentation.scrollhelp.site/developer-docs/using-github-codespaces) for more information on how to set up a Codespaces for vets-website.
+
+1. Start a Codespace within the `vets-website` repo
+2. Clone the `component-library` repo in the Codespace filesystem, and change to your desired branch
+   ```shell
+   git clone https://github.com/department-of-veterans-affairs/component-library.git
+   cd component-library
+   git checkout your-branch-name
+   ```
+3. Verdaccio may work better in it's own folder, so it can be installed in a new folder.
+   ```shell
+   cd /workspaces
+   mkdir local-npm-registry
+   cd local-npm-registry
+   npm init -y
+   # make sure to use node v14 for this step
+   nvm use 14.15.0
+   npm install verdaccio@5.5.0
+   ```
+4. Optionally, add a start script to package.json
+   ```shell
+   "verdaccio": "verdaccio"
+   ```
+5. Start Verdaccio
+   ```shell
+   npm run verdaccio
+   ```
+6. Verify Verdaccio is running
+   ```shell
+   curl -X GET http://localhost:4873/
+   # or expose this port publicly in GitHub Codespaces and visit URL in browser
+   ```
+7. Add npm user to the local registry
+   ```shell
+   npm adduser --registry http://localhost:4873/
+   ```
+8. Add the local Verdaccio registry to your project
+   ```shell
+   cd ../vets-website/
+   yarn config set registry http://localhost:4873
+   npm config set registry http://localhost:4873
+   ```
+9. Install the local `component-library` package
+    ```shell
+    yarn add -W @department-of-veterans-affairs/component-library@vX.X.X-rc1
+    ```
+10. Follow steps to [Publish your component-library changes to Verdaccio](#publish-your-component-library-changes-to-verdaccio) and [Link `vets-website` to local Verdaccio registry](#link-vets-website-to-local-verdaccio-registry) If at any point you see a connection refused error, make sure you are using node v14.15.0
+11. Run the local watch script for vets-website to start FE dev server, mock API server script, and any other local commands to prepare your environment.
+    ```shell
+    yarn watch --env entry=your-app-here
+    yarn mock-api --responses=path/to/your/mock-api-responses.js
+    ```
+12. Continue the [Set up Codespaces for development workflow](https://depo-platform-documentation.scrollhelp.site/developer-docs/using-github-codespaces) steps to finish setting up your Codespace and expose a public port for your use case.
+
+
 ## Publishing
 
 ### Updating the version
@@ -249,8 +306,8 @@ The Design System Team will create a release minimally at the beginning of each 
 
 1. If you are unsure if a new release should be created, check with the Release Manager and/or the team first.
    - The DST Release Manager is the engineer on duty for the weekly support rotation.
-2. Determine if the releases should be major, minor, or patch releases. To view what has changed since the last release, go to the [repo home page](https://github.com/department-of-veterans-affairs/component-library), **Releases** > release with **Latest** tag > **X commits to main since this release**. This will show the commits, but you will need to look at the PRs themselves for the `major`, `minor`, and `patch` tags that will go into this release. 
-2. Create a new `component-library` PR by doing the following: 
+2. Determine if the releases should be major, minor, or patch releases. To view what has changed since the last release, go to the [repo home page](https://github.com/department-of-veterans-affairs/component-library), **Releases** > release with **Latest** tag > **X commits to main since this release**. This will show the commits, but you will need to look at the PRs themselves for the `major`, `minor`, and `patch` tags that will go into this release.
+2. Create a new `component-library` PR by doing the following:
    - Update the `package.json` version in the **packages that updates have been made**.
       - `core` (required) - [packages/core/package.json](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4) must be updated for the publishing workflow
          - `web-components` (if needed)
@@ -265,12 +322,12 @@ The Design System Team will create a release minimally at the beginning of each 
    - Example: `v16.1.0`
 6. For the release title, type the same thing you entered for the tag.
    - Example: `v16.1.0`
-7. Click on the "Generate release notes" button. 
+7. Click on the "Generate release notes" button.
    - If the button is disabled, double-check that the tag/version number is correct and hasn't been released before.
-8. Review the release notes for any typos and/or unneeded notes. 
+8. Review the release notes for any typos and/or unneeded notes.
    - The release notes are intended for public use so they should be professional in tone, easily understandable, and concise.
 9. Ensure the "Set as the latest release" checkbox is checked.
-10. Take a screenshot of the release notes and post in the `#platform-design-system-team` channel on Slack. 
+10. Take a screenshot of the release notes and post in the `#platform-design-system-team` channel on Slack.
     - This is to double-check that everything looks good, that there aren't any last-minute additions to the release that need to be included, and for general awareness of what will be released.
 11. Click the "Publish release" button. GitHub Actions will take care of any necessary build and publishing steps.
     - You can watch to make sure the release is created successfully from the [Github Actions tab](https://github.com/department-of-veterans-affairs/component-library/actions).

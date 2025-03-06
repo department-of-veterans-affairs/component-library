@@ -171,18 +171,25 @@ describe('va-button', () => {
     expect(loadingMessageEl.innerHTML).toEqual('Loading complete');
   });
 
-  it('ignores text value and displays Continue when continue is true', async () => {
+  it('displays "Continue" text when continue prop set and text is not provided', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" continue></va-button>');
+    await page.setContent('<va-button continue></va-button>');
     const button = await page.find('va-button >>> button');
     expect(button.textContent).toEqual('Continue');
   });
 
-  it('ignores text value and displays Back when back is true', async () => {
+  it('displays custom text when continue is true and text is provided', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" back></va-button>');
+    await page.setContent('<va-button text="Save and continue" continue></va-button>');
     const button = await page.find('va-button >>> button');
-    expect(button.textContent).toEqual('Back');
+    expect(button.textContent).toEqual('Save and continue');
+  });
+
+  it('displays custom text when text prop is set and Back is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Navigate back" back></va-button>');
+    const button = await page.find('va-button >>> button');
+    expect(button.textContent).toEqual('Navigate back');
   });
 
   it(`doesn't display icons if both continue and back are true`, async () => {

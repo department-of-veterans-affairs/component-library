@@ -14,8 +14,8 @@ import classnames from 'classnames';
 /**
  * @componentName Alert - expandable
  * @guidanceHref alert/alert-expandable
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 @Component({
   tag: 'va-alert-expandable',

@@ -3,8 +3,8 @@ import classNames from 'classnames';
 
 /**
  * @componentName Link
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 
 @Component({
@@ -84,7 +84,7 @@ export class VaLink {
   @Prop() reverse?: boolean = false;
 
   /**
-   * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+   * If 'true', will open in a new tab and will have the text "opens in a new tab" appended to the link text in screen reader only span
    */
   @Prop() external?: boolean = false;
 

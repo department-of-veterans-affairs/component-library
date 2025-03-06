@@ -1,0 +1,10 @@
+@import '../../../dist/tokens/scss/variables.scss';
+
+.vads-c-eyebrow {
+  font-family: $font-family-sans;
+  font-size: $font-size-root;
+  font-style: $font-style-normal;
+  font-weight: $font-weight-normal;
+  color: $vads-color-base-darker;
+  text-transform: uppercase;
+}

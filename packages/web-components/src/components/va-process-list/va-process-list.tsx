@@ -3,7 +3,7 @@ import { Component, h } from '@stencil/core';
 /**
  * @componentName Process list
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  */
 @Component({
   tag: 'va-process-list',
