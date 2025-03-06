@@ -2,8 +2,8 @@ import { Component, Host, h } from '@stencil/core';
 
 /**
  * @componentName Need help?
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
  * @guidanceHref form/need-help
  */
 

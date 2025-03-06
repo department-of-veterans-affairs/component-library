@@ -3,8 +3,8 @@ import classNames from 'classnames';
 
 /**
  * @componentName Link
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 
 @Component({

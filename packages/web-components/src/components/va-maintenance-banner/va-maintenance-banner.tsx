@@ -9,8 +9,8 @@ import {
 
 /**
  * @componentName Banner - Maintenance
- * @maturityCategory caution
- * @maturityLevel available
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 
 @Component({

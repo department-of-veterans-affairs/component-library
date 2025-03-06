@@ -4,7 +4,7 @@ import { CONTACTS } from '../../contacts';
 /**
  * @componentName Crisis Line Modal
  * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityLevel available
  */
 
 @Component({

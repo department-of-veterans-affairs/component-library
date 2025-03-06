@@ -25,7 +25,7 @@ if (Build.isTesting) {
  * @nativeHandler onBlur
  * @componentName Text input
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  * @guidanceHref form/text-input
  * @translations English
  * @translations Spanish
