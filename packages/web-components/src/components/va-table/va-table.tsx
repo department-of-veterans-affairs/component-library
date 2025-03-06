@@ -11,6 +11,12 @@ import {
 
 import { getCompareFunc } from './sort/utils';
 
+/**
+ * @componentName Table
+ * @maturityCategory caution
+ * @maturityLevel available
+ */
+
 @Component({
   tag: 'va-table',
   styleUrl: 'va-table.scss',

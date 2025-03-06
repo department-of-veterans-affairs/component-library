@@ -24,7 +24,7 @@ if (Build.isTesting) {
  * @nativeHandler onBlur
  * @componentName Textarea
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  * @guidanceHref form/textarea
  * @translations English
  * @translations Spanish

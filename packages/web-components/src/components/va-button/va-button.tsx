@@ -14,8 +14,8 @@ import classnames from 'classnames';
 /**
  * @componentName Button
  * @nativeHandler onClick
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 
 @Component({
@@ -145,11 +145,11 @@ export class VaButton {
     // Find the form element by walking up through shadow roots
     let element = this.el as Element;
     let formElement = null as HTMLFormElement | null;
-    
+
     while (element && !formElement) {
       // Try to find form in the current root
       formElement = element.closest('form');
-      
+
       // If no form found and we're in a shadow root, move up to the host element
       if (!formElement && element.getRootNode() instanceof ShadowRoot) {
         element = (element.getRootNode() as ShadowRoot).host;
@@ -221,7 +221,7 @@ export class VaButton {
       'usa-button--outline': back || secondary,
       'va-button-primary--alternate': primaryAlternate,
     });
-    
+
     return (
       <Host>
           {/* This span must always be present for changes to be announced for the loading prop. It will not show visually or be read without content*/}

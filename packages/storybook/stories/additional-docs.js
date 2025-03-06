@@ -10,7 +10,7 @@ export const additionalDocs = {
     guidanceHref: 'address-block',
     guidanceName: 'Address block',
     maturityCategory: USE,
-    maturityLevel: DEPLOYED,
+    maturityLevel: BEST_PRACTICE,
   },
   // MDX
   'Divider': {
@@ -30,7 +30,7 @@ export const additionalDocs = {
   // MDX
   'Eyebrow': {
     guidanceHref: 'eyebrow',
-    guidanceTag: 'Eyebrow',
+    guidanceName: 'Eyebrow',
     maturityCategory: CAUTION,
     maturityLevel: CANDIDATE,
   },
@@ -40,10 +40,6 @@ export const additionalDocs = {
     guidanceName: 'Action link',
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-  },
-  'va-link-action': {
-    guidanceHref: 'link/action',
-    guidanceName: 'Action link',
   },
   'Modal - React': {
     maturityCategory: DONT_USE,
@@ -57,8 +53,8 @@ export const additionalDocs = {
   'Sidenav': {
     guidanceHref: 'sidenav',
     guidanceName: 'Sidenav',
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
+    maturityCategory: DONT_USE,
+    maturityLevel: PROPOSED,
   },
   // MDX
   'Tag': {
