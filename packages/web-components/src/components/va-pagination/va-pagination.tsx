@@ -103,10 +103,8 @@ export class VaPagination {
 
   /**
    * If the page total is less than or equal to this limit, show all pages.
-   * The number has been reduced from 7 to 6 to show all more consistently
-   * on small screens and zoomed in browser windows.
    */
-  SHOW_ALL_PAGES: number = 6;
+  SHOW_ALL_PAGES: number = 7;
 
   /**
    * Mobile viewport width chosen based on USWDS "mobile-lg" spacing unit.
@@ -197,8 +195,9 @@ export class VaPagination {
     let start: number;
     let end: number;
 
-    if (totalPages <= SHOW_ALL_PAGES) {
+    if (totalPages <= SHOW_ALL_PAGES - 1) {
       // Use case #1: 6 or fewer pages
+      console.log('Use case 1');
       return makeArray(1, totalPages);
     } else if (SHOW_ALL_PAGES < totalPages && totalPages <= maxPageListLength) {
       console.log('Use case 2');
@@ -239,10 +238,12 @@ export class VaPagination {
 
       switch (true) {
         case isMobileViewport && maxPageListLength <= totalPages:
-          end = maxPageListLength - 5 - unboundedChar;
+          end = start + SHOW_ALL_PAGES - 3 - unboundedChar;
           break;
-        case maxPageListLength <= totalPages:
-          end = maxPageListLength - 1 - unboundedChar;
+        case maxPageListLength > 6 && maxPageListLength <= totalPages:
+          console.log('Use case 3b');
+          end = start + SHOW_ALL_PAGES - 2 - unboundedChar;
+          console.log({ start, end });
           break;
         default:
           end = totalPages;
