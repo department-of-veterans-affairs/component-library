@@ -3,8 +3,8 @@ import classnames from 'classnames';
 
 /**
  * @componentName Privacy agreement
- * @maturityCategory caution
- * @maturityLevel available
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 @Component({
   tag: 'va-privacy-agreement',

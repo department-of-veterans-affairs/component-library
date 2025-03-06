@@ -19,7 +19,7 @@ import { getSlottedNodes } from '../../utils/utils';
  * @nativeHandler onKeyDown
  * @componentName Select
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  * @guidanceHref form/select
  * @translations English
  * @translations Spanish

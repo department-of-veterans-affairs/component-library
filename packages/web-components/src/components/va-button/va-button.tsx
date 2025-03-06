@@ -14,8 +14,8 @@ import classnames from 'classnames';
 /**
  * @componentName Button
  * @nativeHandler onClick
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 
 @Component({

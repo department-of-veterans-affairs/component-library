@@ -15,7 +15,7 @@ import classnames from 'classnames';
 /**
  * @componentName Search input
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  */
 
 @Component({
@@ -170,7 +170,7 @@ export class VaSearchInput {
         composed: true,
       }),
     );
-    
+
     if (!this.disableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-search-input',
@@ -189,7 +189,7 @@ export class VaSearchInput {
   private handleInput = (event: Event) => {
     this.value = (event.target as HTMLInputElement).value;
     this.showClearButton = !!this.value;
-    
+
     if (!this.suggestions) return;
     this.updateSuggestions(this.suggestions);
   };
