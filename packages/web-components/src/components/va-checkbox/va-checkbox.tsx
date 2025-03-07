@@ -282,7 +282,7 @@ export class VaCheckbox {
             aria-invalid={error ? 'true' : 'false'}
             disabled={disabled}
             data-indeterminate={indeterminate && !checked}
-            aria-checked={indeterminate && !checked ? 'mixed' : this.checked}
+            aria-checked={indeterminate && !checked ? 'mixed' : checked}
           />
           {console.log("ariaChecked 2", indeterminate && !checked ? 'mixed' : checked)}
           <label htmlFor="checkbox-element" class="va-checkbox__label">
