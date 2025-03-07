@@ -1,0 +1,15 @@
+@import 'uswds-core/src/styles/mixins/typography/usa-list';
+@import 'uswds-core/src/styles/mixins/typography/unstyled-list';
+
+ul, ol {
+    @include usa-list;
+
+    li {
+        @include usa-list-item;
+    }
+}
+
+// Unstyled lists
+.usa-unstyled-list {
+    @include unstyled-list;
+}
