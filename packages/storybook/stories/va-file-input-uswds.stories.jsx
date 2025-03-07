@@ -87,6 +87,7 @@ const Template = ({
 };
 
 export const Default = Template.bind(null);
+Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(fileInputDocs);
 
 export const Required = Template.bind(null);
