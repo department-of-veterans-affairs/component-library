@@ -229,11 +229,11 @@ export const TitleWithCustomContent = () => {
         onCloseEvent={onCloseEvent}
         onPrimaryButtonClick={onCloseEvent}
         onSecondaryButtonClick={onCloseEvent}
-        modalTitle="Delete entry"
+        modalTitle="Remove entry"
         primaryButtonText="Pretend"
         secondaryButtonText="Cancel"
       >
-        <p>This is supposed to delete the entry</p>
+        <p>This is supposed to remove the entry</p>
       </VaModal>
       <va-checkbox label="Issue 1" tile>
         <div slot="internal-description">
@@ -257,7 +257,8 @@ export const TitleWithCustomContent = () => {
             <va-link href="#title-with-custom-content" text="Edit" />
             <va-button
               onClick={openModal}
-              text="Delete"
+              secondary
+              text="Remove"
               class="vads-u-margin-left--2"
             />
           </div>
