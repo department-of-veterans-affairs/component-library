@@ -12,6 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
+import { isInteractiveElement } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -154,14 +155,17 @@ export class VaCheckbox {
   };
 
   private handleClick = (e: Event) => {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    this.checked = !this.checked;
-    const checkbox: HTMLInputElement =
-      this.el.shadowRoot.querySelector('#checkbox-element');
-    checkbox.focus();
-    this.vaChange.emit({ checked: this.checked });
-    if (this.enableAnalytics) this.fireAnalyticsEvent();
+    // Ignore interative elements in the internal description slot
+    if (!isInteractiveElement(e.target as HTMLElement)) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      this.checked = !this.checked;
+      const checkbox: HTMLInputElement =
+        this.el.shadowRoot.querySelector('#checkbox-element');
+      checkbox.focus();
+      this.vaChange.emit({ checked: this.checked });
+      if (this.enableAnalytics) this.fireAnalyticsEvent();
+    }
   };
 
   /**
