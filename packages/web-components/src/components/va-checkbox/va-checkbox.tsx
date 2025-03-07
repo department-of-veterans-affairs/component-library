@@ -232,6 +232,15 @@ export class VaCheckbox {
         .join(' ')
         // Return null so we don't add the attribute if we have an empty string
         .trim() || null;
+    
+    let ariaChecked: boolean | string | null;
+    if (indeterminate && !checked) {
+      ariaChecked = 'mixed';
+    } else if (!indeterminate && !checked) {
+      ariaChecked = null;
+    } else {
+      ariaChecked = checked;
+    }
 
     return (
       <Host>
@@ -266,7 +275,7 @@ export class VaCheckbox {
             aria-invalid={error ? 'true' : 'false'}
             disabled={disabled}
             data-indeterminate={indeterminate && !checked}
-            aria-checked={indeterminate && !checked ? 'mixed' : checked}
+            aria-checked={ariaChecked}
           />
           <label htmlFor="checkbox-element" class="va-checkbox__label">
             <span part="label">{label}</span>&nbsp;

@@ -284,6 +284,16 @@ describe('va-checkbox', () => {
     expect(checkboxEl).toEqualAttribute('aria-checked', 'mixed');
   });
 
+  it('does not set aria-checked when toggled off', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox label="Just another checkbox here" />',
+    );
+    const checkboxEl = await page.find('va-checkbox >>> input');
+
+    expect(checkboxEl).not.toHaveAttribute('aria-checked');
+  });
+
   it('does not set the data-indeterminate attribute if checked is set', async () => {
     const page = await newE2EPage();
     await page.setContent(
