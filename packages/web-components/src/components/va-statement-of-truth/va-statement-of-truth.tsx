@@ -10,8 +10,8 @@ import {
 
 /**
  * @componentName Statement of truth
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 
 @Component({
