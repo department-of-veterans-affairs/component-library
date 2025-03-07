@@ -2,7 +2,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { VaCheckbox } from '@department-of-veterans-affairs/web-components/react-bindings';
+import {
+  VaCheckbox,
+  VaModal,
+} from '@department-of-veterans-affairs/web-components/react-bindings';
 
 VaCheckbox.displayName = 'VaCheckbox';
 
@@ -209,30 +212,60 @@ Tile.args = {
     'This is optional text that can be used to describe the label in more detail.',
 };
 
-export const TitleWithCustomContent = () => (
-  <>
-    <va-checkbox label="Issue 1" tile onBlur={e => console.log(e)}>
-      <div slot="internal-description">
-        <div className="vads-u-margin-top--0p5">
-          <strong>Detail</strong>: Internal description slot for issue 1
+export const TitleWithCustomContent = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const onCloseEvent = () => setIsVisible(!isVisible);
+  const openModal = e => {
+    // Stop checkbox from toggling when clicking the button
+    e.preventDefault();
+    e.stopPropagation();
+    setIsVisible(true);
+  };
+  return (
+    <>
+      <VaModal
+        clickToClose
+        visible={isVisible}
+        onCloseEvent={onCloseEvent}
+        onPrimaryButtonClick={onCloseEvent}
+        onSecondaryButtonClick={onCloseEvent}
+        modalTitle="Delete entry"
+        primaryButtonText="Pretend"
+        secondaryButtonText="Cancel"
+      >
+        <p>This is supposed to delete the entry</p>
+      </VaModal>
+      <va-checkbox label="Issue 1" tile>
+        <div slot="internal-description">
+          <div className="vads-u-margin-top--0p5">
+            <strong>Detail</strong>: Internal description slot for issue 1
+          </div>
+          <div className="vads-u-margin-top--1">
+            <strong>Date</strong> Jan 2, 2025
+          </div>
         </div>
-        <div className="vads-u-margin-top--1">
-          <strong>Date</strong> Jan 2, 2025
+      </va-checkbox>
+      <va-checkbox label="Issue 2" tile>
+        <div slot="internal-description">
+          <div className="vads-u-margin-top--0p5">
+            <strong>Detail</strong>: Internal description slot for issue 2
+          </div>
+          <div className="vads-u-margin-top--1">
+            <strong>Date</strong> Jan 4, 2025
+          </div>
+          <div className="vads-u-margin-top--1">
+            <va-link href="#title-with-custom-content" text="Edit" />
+            <va-button
+              onClick={openModal}
+              text="Delete"
+              class="vads-u-margin-left--2"
+            />
+          </div>
         </div>
-      </div>
-    </va-checkbox>
-    <va-checkbox label="Issue 2" tile onBlur={e => console.log(e)}>
-      <div slot="internal-description">
-        <div className="vads-u-margin-top--0p5">
-          <strong>Detail</strong>: Internal description slot for issue 2
-        </div>
-        <div className="vads-u-margin-top--1">
-          <strong>Date</strong> Jan 4, 2025
-        </div>
-      </div>
-    </va-checkbox>
-  </>
-);
+      </va-checkbox>
+    </>
+  );
+};
 
 export const Checked = Template.bind(null);
 Checked.args = { ...defaultArgs, checked: true };
