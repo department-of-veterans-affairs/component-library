@@ -109,7 +109,6 @@ const IndeterminateTemplate = ({}) => {
     );
 
     // If all of the checkbox states are true, set indeterminate checkbox to checked.
-    // TODO: 
     if (checked.every(val => val === true)) {
       indeterminateCheckbox.checked = true;
       indeterminateCheckbox.indeterminate = false;
