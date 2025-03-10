@@ -31,3 +31,8 @@
 ::slotted(optgroup) {
   display: none;
 }
+
+.va-select--full-width {
+  max-width: 100%; // Needed in order to override USWDS default max-width of 30rem
+  width: 100%;
+}

@@ -42,6 +42,7 @@ const defaultArgs = {
     </option>,
   ],
   'use-add-button': false,
+  'full-width': false,
 };
 
 const Template = ({
@@ -55,6 +56,7 @@ const Template = ({
   'aria-describedby-message': ariaDescribedbyMessage,
   options,
   'use-add-button': useAddButton,
+  'full-width': fullWidth,
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
 
@@ -70,7 +72,7 @@ const Template = ({
               </option>,
             ]);
           }}
-          text="Add &quot;Something new&quot;"
+          text='Add "Something new"'
         />
       )}
       <va-select
@@ -83,6 +85,7 @@ const Template = ({
         aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
+        full-width={fullWidth}
       >
         {modifiedOptions}
       </va-select>
@@ -119,7 +122,7 @@ const InertTemplate = ({
               </option>,
             ]);
           }}
-          text="Add &quot;Something new&quot;"
+          text='Add "Something new"'
         />
       )}
       <va-select
@@ -202,8 +205,8 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <va-button onClick={e => setLang('es')} text="Español"/>
-      <va-button onClick={e => setLang('en')} text="English"/>
+      <va-button onClick={e => setLang('es')} text="Español" />
+      <va-button onClick={e => setLang('en')} text="English" />
       <va-select {...rest}>{options}</va-select>
     </div>
   );
@@ -221,7 +224,8 @@ const WidthsTemplate = ({
   hint,
   'aria-live-region-text': ariaLiveRegionText,
   'aria-describedby-message': ariaDescribedbyMessage,
-  options, }) => {
+  options,
+}) => {
   function getSelect(width) {
     return (
       <va-select
@@ -237,15 +241,20 @@ const WidthsTemplate = ({
       >
         {options}
       </va-select>
-    )
+    );
   }
-  const widths = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"];
+  const widths = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
   return (
     <>
-      {widths.map(width => <div key={width}>{getSelect(width)}</div>)}
+      {widths.map(width => (
+        <div key={width}>{getSelect(width)}</div>
+      ))}
     </>
   );
 };
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = { ...defaultArgs };
+
+export const FullWidth = Template.bind(null);
+FullWidth.args = { ...defaultArgs, 'full-width': true };
