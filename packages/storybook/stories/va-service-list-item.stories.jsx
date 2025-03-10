@@ -57,6 +57,8 @@ MaximalBase.args = {
     'Approved on': 'May 5, 2011',
     'Program': 'Post-9/11 GI Bill',
     'Eligibility': '70%',
+    "Fourth item": 'Here is a fourth item',
+    "Fifth item": 'Here is a fifth item',
   },
   icon: 'school',
   serviceName: 'Education',
@@ -91,7 +93,7 @@ MaximalBase.argTypes = {
   },
   serviceNameHeadingLevel: {
     description: 'The heading level for the service name (defaults to h3)',
-    control: { type: 'number', min:2, max:6, },
+    control: { type: 'number', min: 2, max: 6, },
     table: { category: 'Properties', type: { summary: 'number' }, defaultValue: { summary: 3 } },
   },
   serviceLink: {
@@ -179,7 +181,7 @@ BaseWithCriticalInformation.args = {
   },
 };
 
-export const ServiceListWithMultipleServiceListItems = ({}) => {
+export const ServiceListWithMultipleServiceListItems = ({ }) => {
   return (
     <div>
       <MaximalBase {...MaximalBase.args} />
