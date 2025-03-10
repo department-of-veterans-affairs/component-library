@@ -214,7 +214,15 @@ Tile.args = {
 
 export const TitleWithCustomContent = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const onCloseEvent = () => setIsVisible(!isVisible);
+  const onCloseEvent = () => {
+    setIsVisible(false);
+    // Make sure to move focus back to the remove button on cancel; when
+    // removing, focus should go to the button or link to add a new entry
+    document
+      .querySelector('va-checkbox va-button')
+      .shadowRoot.querySelector('button')
+      .focus();
+  };
   const openModal = e => {
     // Stop checkbox from toggling when clicking the button
     e.preventDefault();
