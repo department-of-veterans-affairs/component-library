@@ -136,10 +136,10 @@ textarea {
 select {
   appearance: none;
   background-color: tok.$vads-color-white;
-  background-image: url('#{core-vars.$image-path}/arrow-both.png');
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/arrow-both.png);
   // Ensure browsers that don't support SVG in background-image (IE 11 and below) fall back to PNG.
   // See https://www.broken-links.com/2010/06/14/using-svg-in-backgrounds-with-png-fallback/
-  background-image: none, url('#{core-vars.$image-path}/arrow-both.svg'), url('#{core-vars.$image-path}/arrow-both.png');
+  background-image: none, url(~@department-of-veterans-affairs/css-library/dist/img/arrow-both.svg), url(~@department-of-veterans-affairs/css-library/dist/img/arrow-both.png);
   background-position: right scale-rem(1.3rem) center;
   background-repeat: no-repeat;
   background-size: scale-rem(1rem);
@@ -249,8 +249,8 @@ legend {
 
 [type=checkbox]:checked + label::before,
 [type=checkbox]:checked:disabled + label::before {
-  background-image: url('#{core-vars.$image-path}/correct8.png');
-  background-image: url('#{core-vars.$image-path}/correct8.svg');
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/correct8.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/correct8.svg);
   background-position: 50%;
   background-repeat: no-repeat;
 }
@@ -281,8 +281,8 @@ legend {
   [type=checkbox]:checked:disabled + label::before {
     background-image: none;
     background-color: tok.$vads-color-white;
-    content: url('#{core-vars.$image-path}/correct8-alt.png');
-    content: url('#{core-vars.$image-path}/correct8-alt.svg');
+    content: url(~@department-of-veterans-affairs/css-library/dist/img/correct8-alt.png);
+    content: url(~@department-of-veterans-affairs/css-library/dist/img/correct8-alt.svg);
     text-indent: 0;
   }
 

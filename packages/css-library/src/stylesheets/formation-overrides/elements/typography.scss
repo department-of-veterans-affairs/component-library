@@ -48,8 +48,8 @@ a {
 
 @mixin external-link($external-link, $external-link-hover) {
   &::after {
-    background: url('#{core-vars.$image-path}/#{$external-link}.png') no-repeat 0 0;
-    background: url('#{core-vars.$image-path}/#{$external-link}.svg') no-repeat 0 0;
+    background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.png) no-repeat 0 0;
+    background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.svg) no-repeat 0 0;
     background-size: 100%;
     content: '';
     display: inline-block;
@@ -60,8 +60,8 @@ a {
   }
 
   &:hover::after {
-    background-image: url('#{core-vars.$image-path}/#{$external-link-hover}.png');
-    background-image: url('#{core-vars.$image-path}/#{$external-link-hover}.svg');
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.png);
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.svg);
   }
 }
 

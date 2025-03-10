@@ -17,7 +17,7 @@
   width: 100%;
 
   &::before {
-    background-image: url("#{$image-path}/info.svg");
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/info.svg);
     background-size: 35px 35px;
     background-repeat: no-repeat;
     background-position: center;
@@ -81,7 +81,7 @@
     border-left-color: $color-primary-alt-dark;
 
     &::before {
-      background-image: url("#{$image-path}/info.svg");
+      background-image: url(~@department-of-veterans-affairs/css-library/dist/img/info.svg);
     }
 
     &.background-color-only {
@@ -93,7 +93,7 @@
     border-left-color: $color-secondary-dark;
 
     &::before {
-      background-image: url("#{$image-path}/error.svg");
+      background-image: url(~@department-of-veterans-affairs/css-library/dist/img/error.svg);
     }
 
     &.background-color-only {
@@ -105,7 +105,7 @@
     border-left-color: $color-green;
 
     &::before {
-      background-image: url("#{$image-path}/success.svg");
+      background-image: url(~@department-of-veterans-affairs/css-library/dist/img/success.svg);
     }
 
     &.background-color-only {
@@ -117,7 +117,7 @@
     border-left-color: $color-gold;
 
     &::before {
-      background-image: url("#{$image-path}/warning.svg");
+      background-image: url(~@department-of-veterans-affairs/css-library/dist/img/warning.svg);
     }
 
     &.background-color-only {

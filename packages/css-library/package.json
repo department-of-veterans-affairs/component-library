@@ -15,11 +15,12 @@
     "build:stylesheets": "sass --load-path=./node_modules/@uswds/uswds/packages/ src/stylesheets:dist/stylesheets",
     "build:minify": "yarn build:stylesheets --style compressed",
     "build:minify-core": "sass --style compressed dist/core.css:dist/core.min.css",
-    "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn copy:scss-files",
+    "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn copy:scss-files && yarn clean-css-urls",
     "clean-dist": "rimraf dist/*",
     "copy:scss-files": "cp -rv src/stylesheets/_override-function.scss dist/stylesheets/_override-function.scss && cp -rv src/stylesheets/_mixins.scss dist/stylesheets/_mixins.scss && cp -rv src/stylesheets/_functions.scss dist/stylesheets/_functions.scss && cp -rv src/stylesheets/formation-overrides/_variables.scss dist/stylesheets/formation-overrides/_variables.scss",
     "copy-assets": "cp -rv src/assets/fonts dist/fonts/ && cp -rv src/assets/img dist/img/",
-    "copy": "node ./copy-uswds-color-tokens.js && yarn run copy-assets"
+    "copy": "node ./copy-uswds-color-tokens.js && yarn run copy-assets",
+    "clean-css-urls": "sed -i ''  -e 's|\"/img/info.png\"|~@department-of-veterans-affairs/css-library/dist/img/info.png|g' ./dist/stylesheets/{,**/}*.css && sed -i ''  -e 's|\"/img/info.svg\"|~@department-of-veterans-affairs/css-library/dist/img/info.svg|g' ./dist/stylesheets/{,**/}*.css && sed -i ''  -e 's|\"/img/success.png\"|~@department-of-veterans-affairs/css-library/dist/img/success.png|g' ./dist/stylesheets/{,**/}*.css && sed -i ''  -e 's|\"/img/success.svg\"|~@department-of-veterans-affairs/css-library/dist/img/success.svg|g' ./dist/stylesheets/{,**/}*.css && sed -i ''  -e 's|\"/img/warning.png\"|~@department-of-veterans-affairs/css-library/dist/img/warning.png|g' ./dist/stylesheets/{,**/}*.css && sed -i ''  -e 's|\"/img/warning.svg\"|~@department-of-veterans-affairs/css-library/dist/img/warning.svg|g' ./dist/stylesheets/{,**/}*.css && sed -i ''  -e 's|\"/img/error.png\"|~@department-of-veterans-affairs/css-library/dist/img/error.png|g' ./dist/stylesheets/{,**/}*.css && sed -i ''  -e 's|\"/img/error.svg\"|~@department-of-veterans-affairs/css-library/dist/img/error.svg|g' ./dist/stylesheets/{,**/}*.css" 
   },
   "devDependencies": {
     "sass": "^1.64.1",

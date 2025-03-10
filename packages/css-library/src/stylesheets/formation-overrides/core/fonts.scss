@@ -8,35 +8,34 @@
 @import "../../mixins";
 
 /* stylelint-disable at-rule-empty-line-before */
-@include font-face(
-  'Merriweather',
-  '#{$font-path}/merriweather-light-webfont',
-  300,
-  normal,
-  $file-formats: eot woff2 woff ttf
-);
+@font-face {
+  font-family: "Merriweather";
+  font-style: normal;
+  font-weight: 300;
+  font-display: fallback;
+  src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Light.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Merriweather";
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Regular.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Merriweather";
+  font-style: normal;
+  font-weight: 700;
+  font-display: fallback;
+  src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Bold.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Merriweather";
+  font-style: italic;
+  font-weight: 400;
+  font-display: fallback;
+  src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Italic.woff2) format("woff2");
+}
 
-@include font-face(
-  'Merriweather',
-  '#{$font-path}/merriweather-regular-webfont',
-  400,
-  normal,
-  $file-formats: eot woff2 woff ttf
-);
 
-@include font-face(
-  'Merriweather',
-  '#{$font-path}/merriweather-italic-webfont',
-  400,
-  italic,
-  $file-formats: eot woff2 woff ttf
-);
-
-@include font-face(
-  'Merriweather',
-  '#{$font-path}/merriweather-bold-webfont',
-  700,
-  normal,
-  $file-formats: eot woff2 woff ttf
-);
 /* stylelint-enable */
