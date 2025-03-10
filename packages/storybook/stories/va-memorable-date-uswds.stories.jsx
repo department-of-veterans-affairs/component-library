@@ -173,9 +173,8 @@ const FormsPatternSingleTemplate = ({ label, name, hint, required, error, value,
       <hr />
 
       <va-button 
-        text="click to focus header" 
-        onClick={handleClick}
-        uswds={false}>
+        text="Click to focus header" 
+        onClick={handleClick}>
       </va-button>
     </>
   );
@@ -224,9 +223,8 @@ const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, valu
       <hr />
 
       <va-button 
-        text="click to focus header" 
-        onClick={handleClick}
-        uswds={false}>
+        text="Click to focus header" 
+        onClick={handleClick}>
       </va-button>
     </>
   );
