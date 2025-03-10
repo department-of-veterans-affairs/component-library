@@ -286,7 +286,7 @@ const FormsPatternSingleTemplate = args => {
       <hr />
 
       <va-button
-        text="click to focus header"
+        text="Click to focus header"
         onClick={handleClick}
       ></va-button>
     </>
