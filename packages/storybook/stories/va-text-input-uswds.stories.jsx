@@ -259,9 +259,8 @@ const FormsPatternMultipleTemplate = ({ name, value, uswds }) => {
       <va-text-input name={name} label="Email address" value={value} />
       <hr />
       <va-button
-        text="click to focus header"
+        text="Click to focus header"
         onClick={handleClick}
-        uswds={false}
       ></va-button>
     </>
   );
@@ -304,9 +303,8 @@ const FormsPatternSingleTemplate = ({ name, value, error }) => {
       <hr />
 
       <va-button
-        text="click to focus header"
+        text="Click to focus header"
         onClick={handleClick}
-        uswds={false}
       ></va-button>
     </>
   );
