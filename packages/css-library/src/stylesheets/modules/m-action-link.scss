@@ -8,7 +8,7 @@
 
 a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--white {
   &:before {
-    background-image: url("#{$image-path}/arrow-right-white.svg");
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/arrow-right-white.svg);
     background-size: 18px 18px;
     background-repeat: no-repeat;
     background-position: center;
@@ -41,7 +41,7 @@ a.vads-c-action-link--white {
   color: $vads-color-white;
 
   &:before {
-    background-image: url("#{$image-path}/arrow-right.svg");
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/arrow-right.svg);
     background-color: $vads-color-white;
     @include color-transition;
   }
