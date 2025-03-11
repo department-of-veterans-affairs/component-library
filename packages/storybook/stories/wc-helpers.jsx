@@ -148,15 +148,19 @@ export function MaturityScale({ category, level }) {
   if (!category || !level) return null;
 
   let colors;
+  let backgroundColor;
   switch (category) {
     case 'USE':
       colors = 'vads-u-background-color--green-darker';
+      backgroundColor = null;
       break;
     case 'USE WITH CAUTION':
-      colors = 'vads-u-background-color--orange';
+      colors = 'vads-u-color--base';
+      backgroundColor = 'vads-color-orange';
       break;
     case "DON'T USE":
       colors = 'vads-u-background-color--secondary-darkest';
+      backgroundColor = null;
       break;
   }
 
@@ -164,7 +168,10 @@ export function MaturityScale({ category, level }) {
 
   return (
     <div className="vads-u-margin-bottom--3">
-      <span className={`usa-label ${colors}`}>
+      <span 
+        className={`usa-label ${colors}`}
+        {...(backgroundColor && { style: { backgroundColor: `var(--${backgroundColor})` } })}
+      >
         {category}: {level}
       </span>
     </div>
