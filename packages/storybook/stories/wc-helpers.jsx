@@ -153,7 +153,7 @@ export function MaturityScale({ category, level }) {
       colors = 'vads-u-background-color--green-darker';
       break;
     case 'USE WITH CAUTION':
-      colors = 'storybook-background-color-orange vads-u-color--base';
+      colors = 'vads-u-background-color--orange';
       break;
     case "DON'T USE":
       colors = 'vads-u-background-color--secondary-darkest';
