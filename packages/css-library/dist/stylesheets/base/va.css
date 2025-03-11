@@ -335,7 +335,7 @@ article > h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("/img/stars.png") no-repeat center;
+  background: url(~@department-of-veterans-affairs/css-library/dist/img/stars.png) no-repeat center;
   background-size: 6.875rem auto;
   margin: 1rem auto auto;
   padding: 1.25rem 0 0;
