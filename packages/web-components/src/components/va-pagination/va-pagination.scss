@@ -57,8 +57,12 @@ button {
   transition-property: color, background-color;
 }
 
-@container (max-width: 640px) { // This value matches the USWDS --tablet custom property
+@container (max-width: 480px) {
+  // This value matches the USWDS --mobile-lg custom property
+  // See https://designsystem.digital.gov/design-tokens/spacing-units/#spacing-unit-tokens
   .usa-pagination__overflow {
     margin: 0;
+    min-width: 2rem;
+    padding: 0;
   }
 }

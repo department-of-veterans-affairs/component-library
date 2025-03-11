@@ -156,7 +156,7 @@ describe('va-pagination', () => {
     const paginationItems = await page.findAll(
       'va-pagination >>> li.usa-pagination__item',
     );
-    expect(paginationItems).toHaveLength(6);
+    expect(paginationItems).toHaveLength(8);
   });
 
   it('renders the correct number of links on tablet screens below 640px width', async () => {
@@ -171,7 +171,7 @@ describe('va-pagination', () => {
     const paginationItems = await page.findAll(
       'va-pagination >>> li.usa-pagination__item',
     );
-    expect(paginationItems).toHaveLength(6);
+    expect(paginationItems).toHaveLength(8);
   });
 
   it('renders one ellipse correctly on small screens', async () => {
