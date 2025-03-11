@@ -15,7 +15,7 @@ import classnames from 'classnames';
 import { i18next } from '../..';
 import { Build } from '@stencil/core';
 
-import { debounce, makeArray } from '../../utils/utils';
+import { makeArray } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -63,11 +63,6 @@ export class VaPagination {
   @Prop() enableAnalytics?: boolean = true;
 
   /**
-   * The maximum number of pages to show at once
-   */
-  @Prop() maxPageListLength?: number = 10;
-
-  /**
    * The current page number
    */
   @Prop() page: number;
@@ -81,7 +76,7 @@ export class VaPagination {
    * Display last page number when the page count exceeds
    * `maxPageListLength`
    */
-  @Prop() showLastPage?: boolean = false;
+  // @Prop() showLastPage?: boolean = false;
 
   /**
    * Don't show last page when the page count exceeds
@@ -105,51 +100,6 @@ export class VaPagination {
    * If the page total is less than or equal to this limit, show all pages.
    */
   SHOW_ALL_PAGES: number = 7;
-
-  /**
-   * Mobile viewport width chosen based on USWDS "mobile-lg" spacing unit.
-   * See https://designsystem.digital.gov/design-tokens/spacing-units/
-   */
-  MOBILE_VIEWPORT_WIDTH: number = 480;
-
-  /**
-   * Tabllet viewport width chosen based on USWDS "tablet" spacing unit.
-   * See https://designsystem.digital.gov/design-tokens/spacing-units/
-   */
-  TABLET_VIEWPORT_WIDTH: number = 640;
-
-  /**
-   * Observe the host component so we can accurately
-   * determine a mobile viewport or a zoomed in
-   * browser window.
-   */
-  resizeObserver = new ResizeObserver(entries => {
-    debounce(this.handleResizeEvent(entries));
-  });
-
-  private handleResizeEvent(entries: ResizeObserverEntry[]): void {
-    const { MOBILE_VIEWPORT_WIDTH, TABLET_VIEWPORT_WIDTH } = this;
-
-    for (let entry of entries) {
-      if (entry.contentRect.width <= MOBILE_VIEWPORT_WIDTH) {
-        this.isMobileViewport = true;
-        this.isTabletViewport = false;
-      }
-
-      if (
-        entry.contentRect.width > MOBILE_VIEWPORT_WIDTH &&
-        entry.contentRect.width <= TABLET_VIEWPORT_WIDTH
-      ) {
-        this.isMobileViewport = false;
-        this.isTabletViewport = true;
-      }
-
-      if (entry.contentRect.width > TABLET_VIEWPORT_WIDTH) {
-        this.isMobileViewport = false;
-        this.isTabletViewport = false;
-      }
-    }
-  }
 
   private handlePageSelect = (page: number, eventID: string) => {
     this.pageSelect.emit({ page });
@@ -176,7 +126,7 @@ export class VaPagination {
    */
   private pageNumbers = () => {
     const {
-      maxPageListLength,
+      // maxPageListLength,
       page: currentPage,
       pages: totalPages,
       unbounded,
@@ -186,68 +136,73 @@ export class VaPagination {
     // Radius is half the length of the maxPageLength prop.
     // Use it as a reference from the selected page to find
     // start and end of the pages to render.
-    const radius = Math.floor(maxPageListLength / 2);
+    // const radius = Math.floor(maxPageListLength / 2);
+    const radius = 5;
 
     // If the unbounded flag is set we don't include the last page
     const unboundedChar = unbounded ? 0 : 1;
 
-    let { isMobileViewport, isTabletViewport } = this;
+    // let { isMobileViewport, isTabletViewport } = this;
     let start: number;
     let end: number;
 
     if (totalPages <= SHOW_ALL_PAGES - 1) {
-      // Use case #1: 6 or fewer pages
+      // Use case #1: 6 or fewer pages. Although the USWDS spec allows for up to 7,
+      // some mobile displays or high zoom rates could cause the first and last slot
+      // to overflow the container.
       console.log('Use case 1');
       return makeArray(1, totalPages);
-    } else if (SHOW_ALL_PAGES < totalPages && totalPages <= maxPageListLength) {
-      console.log('Use case 2');
-      // Use case #2: Total pages is greater than 6 and less than or equal to
-      // maxPageListLength. The logic has made affordances for max page list
-      // lengths of 8 and below, and the default 10.
-      start = 1;
-      end = totalPages;
+      // } else if (SHOW_ALL_PAGES < totalPages && totalPages <= maxPageListLength) {
+      //   console.log('Use case 2');
+      //   // Use case #2: Total pages is greater than 6 and less than or equal to
+      //   // maxPageListLength. The logic has made affordances for max page list
+      //   // lengths of 8 and below, and the default 10.
+      //   start = 1;
+      //   end = totalPages;
 
-      switch (true) {
-        case isMobileViewport &&
-          maxPageListLength <= 8 &&
-          currentPage <= radius:
-          end = start + 3;
-          break;
-        case isMobileViewport && maxPageListLength <= 8 && currentPage > radius:
-          start = start + 4;
-          break;
-        case isMobileViewport && currentPage <= radius:
-          end = start + 4;
-          break;
-        case isMobileViewport && currentPage > radius:
-          start = start + 5;
-          break;
-        default:
-          start = 1;
-          end = totalPages;
-      }
+      //   switch (true) {
+      //     case isMobileViewport &&
+      //       maxPageListLength <= 8 &&
+      //       currentPage <= radius:
+      //       end = start + 3;
+      //       break;
+      //     case isMobileViewport && maxPageListLength <= 8 && currentPage > radius:
+      //       start = start + 4;
+      //       break;
+      //     case isMobileViewport && currentPage <= radius:
+      //       end = start + 4;
+      //       break;
+      //     case isMobileViewport && currentPage > radius:
+      //       start = start + 5;
+      //       break;
+      //     default:
+      //       start = 1;
+      //       end = totalPages;
+      //   }
 
-      return makeArray(start, end);
+      //   return makeArray(start, end);
     } else if (currentPage <= radius - 1) {
-      console.log('Use case 3');
-
       // Use case #3: Current page is less than or equal to
-      // half the visible pages minus one. This case always renders
-      // [1] in pageNumbers array.
+      // half the maxPageListLength prop minus one. This case
+      // always renders [1] in pageNumbers array.
+      console.log('Use case 3');
       start = 1;
+      end = start + SHOW_ALL_PAGES - 2 - unboundedChar;
 
-      switch (true) {
-        case isMobileViewport && maxPageListLength <= totalPages:
-          end = start + SHOW_ALL_PAGES - 3 - unboundedChar;
-          break;
-        case maxPageListLength > 6 && maxPageListLength <= totalPages:
-          console.log('Use case 3b');
-          end = start + SHOW_ALL_PAGES - 2 - unboundedChar;
-          console.log({ start, end });
-          break;
-        default:
-          end = totalPages;
-      }
+      // switch (true) {
+      //   case isMobileViewport && end !== currentPage:
+      //     console.log('Use case 3a');
+      //     end = start + SHOW_ALL_PAGES - 3 - unboundedChar;
+      //     break;
+      //   case maxPageListLength > 6 && maxPageListLength <= totalPages:
+      //     console.log('Use case 3b');
+      //     end = start + SHOW_ALL_PAGES - 2 - unboundedChar;
+      //     console.log({ start, end });
+      //     break;
+      //   default:
+      //     console.log('Use case 3 default');
+      //     end = start + SHOW_ALL_PAGES - 2 - unboundedChar;
+      // }
 
       // Make sure the next page is showing
       if (end === currentPage) {
@@ -259,17 +214,27 @@ export class VaPagination {
       // Use case #4: Current page plus radius minus one is greater than
       // than the total number of pages. This use case will appear as
       // current page gets close to the end.
+      console.log('Use case 4');
 
-      switch (true) {
-        case isMobileViewport && totalPages - maxPageListLength >= 0:
-          start = totalPages - (SHOW_ALL_PAGES - 2 - 1);
-          break;
-        case totalPages - maxPageListLength >= 0:
-          start = totalPages - (maxPageListLength - 2 - 1);
-          break;
-        default:
-          start = 1;
-      }
+      // switch (true) {
+      //   case isMobileViewport:
+      //     console.log('Use case 4a');
+      //     start = totalPages - (SHOW_ALL_PAGES - 2 - 1);
+      //     break;
+      //   case totalPages - maxPageListLength >= 0:
+      //     start = totalPages - (maxPageListLength - 2 - 1);
+      //     break;
+      //   default:
+      //     start = 1;
+      // }
+
+      start = totalPages - (SHOW_ALL_PAGES - 2 - 1);
+
+      // Mobile viewport override
+      // if (isMobileViewport) {
+      //   console.log('Use case 4a');
+      //   start = totalPages - (SHOW_ALL_PAGES - 2 - 1);
+      // }
 
       // Make sure the previous page is showing
       if (start === currentPage) {
@@ -283,26 +248,28 @@ export class VaPagination {
     } else {
       // Use case #5: Continuous pages don't start at 1 or end at last page.
       // start must subtract 2 to account for showing the first page and ellipsis.
-      start = currentPage - (radius - 2);
-      end = currentPage + (radius - 1 - unboundedChar);
+      console.log('Use case 5');
+      start = currentPage - 1;
+      end = unbounded ? currentPage + 2 : currentPage + 1;
+      console.log({ start, end });
 
-      switch (true) {
-        case maxPageListLength <= 8 && isMobileViewport:
-          start = start + 1;
-          end = end - 1;
-          break;
-        case maxPageListLength <= 10 && isMobileViewport:
-          start = start + 2;
-          end = end - 2;
-          break;
-        case isTabletViewport:
-          start = currentPage - (radius - 3);
-          end = currentPage + (radius - 2 - unboundedChar);
-          break;
-        default:
-          start = currentPage - (radius - 2);
-          end = currentPage + (radius - 1 - unboundedChar);
-      }
+      // switch (true) {
+      //   case maxPageListLength <= 8 && isMobileViewport:
+      //     start = start + 1;
+      //     end = end - 1;
+      //     break;
+      //   case maxPageListLength <= 10 && isMobileViewport:
+      //     start = start + 2;
+      //     end = end - 2;
+      //     break;
+      //   case isTabletViewport:
+      //     start = currentPage - (radius - 3);
+      //     end = currentPage + (radius - 2 - unboundedChar);
+      //     break;
+      //   default:
+      //     start = currentPage - (radius - 2);
+      //     end = currentPage + (radius - 1 - unboundedChar);
+      // }
 
       return makeArray(start, end);
     }
@@ -357,21 +324,16 @@ export class VaPagination {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
-    this.resizeObserver.observe(this.el);
   }
 
   disconnectedCallback() {
     i18next.off('languageChanged');
-    this.resizeObserver.disconnect();
   }
 
   private renderPreviousButton(
     arrowClasses: string,
     previousAriaLabel: string,
   ): JSX.Element {
-    // Skip rendering if the viewport is too narrow to show Previous button
-    if (this.isMobileViewport) return null;
-
     // No previous page
     if (this.page === 1) return null;
 
@@ -513,9 +475,6 @@ export class VaPagination {
     arrowClasses: string,
     nextAriaLabel: string,
   ): JSX.Element {
-    // Skip rendering if the viewport is too narrow to show Next button
-    if (this.isMobileViewport) return null;
-
     // Return early if we're on the last page or current page was entered incorrectly
     if (this.page >= this.pages) return null;
 
