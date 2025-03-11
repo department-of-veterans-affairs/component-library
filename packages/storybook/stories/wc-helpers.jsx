@@ -150,13 +150,13 @@ export function MaturityScale({ category, level }) {
   let colors;
   switch (category) {
     case 'USE':
-      colors = 'vads-u-background-color--green-darker';
+      colors = 'usa-label--use';
       break;
     case 'USE WITH CAUTION':
-      colors = 'storybook-background-color-orange vads-u-color--base';
+      colors = 'usa-label--caution';
       break;
     case "DON'T USE":
-      colors = 'vads-u-background-color--secondary-darkest';
+      colors = 'usa-label--dont-use';
       break;
   }
 

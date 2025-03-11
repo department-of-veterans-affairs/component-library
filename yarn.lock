@@ -3428,7 +3428,6 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.23.3"
     "@department-of-veterans-affairs/component-library": "workspace:packages/core"
     "@department-of-veterans-affairs/css-library": "workspace:^"
-    "@department-of-veterans-affairs/formation": "npm:^11.0.6"
     "@mdx-js/react": "npm:^1.6.22"
     "@storybook/addon-a11y": "npm:7.6.19"
     "@storybook/addon-actions": "npm:^7.6.10"
