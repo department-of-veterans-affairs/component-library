@@ -38,7 +38,8 @@
   "devDependencies": {
     "@axe-core/puppeteer": "^4.10.0",
     "@babel/core": "^7.12.13",
-    "@department-of-veterans-affairs/css-library": "^0.20.0-rc1",
+    "@department-of-veterans-affairs/css-library": "^0.20.0",
+    "@department-of-veterans-affairs/formation": "^11.0.6",
     "@stencil/postcss": "^2.0.0",
     "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^2.0.0",
@@ -62,6 +63,7 @@
     "typescript": "^5.5.4"
   },
   "peerDependencies": {
+    "@department-of-veterans-affairs/formation": "^11.0.6",
     "i18next": "*",
     "i18next-browser-languagedetector": "*"
   }
