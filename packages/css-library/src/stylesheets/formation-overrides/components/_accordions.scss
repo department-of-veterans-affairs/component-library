@@ -38,8 +38,8 @@ $v-padding: $spacing-md-small;
 @mixin accordion-button-styles {
   @include button-unstyled;
   background-color: $vads-color-base-lightest;
-  background-image: url('#{$image-path}/minus.png');
-  background-image: url('#{$image-path}/minus.svg');
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/minus.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/minus.svg);
   background-position: right $h-padding center;
   background-repeat: no-repeat;
   background-size: $icon-size;
@@ -69,8 +69,8 @@ $v-padding: $spacing-md-small;
 // scss-lint:enable PropertyCount
 
 @mixin accordion-button-unopened-styles {
-  background-image: url('#{$image-path}/plus.png');
-  background-image: url('#{$image-path}/plus.svg');
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/plus.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/plus.svg);
   background-repeat: no-repeat;
   background-size: $icon-size;
 }
