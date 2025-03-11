@@ -9,7 +9,7 @@
 
   // This should always be a button element
   &-trigger {
-    background: transparent url('#{$image-path}/arrow-down-white.svg') no-repeat;
+    background: transparent url(~@department-of-veterans-affairs/css-library/dist/img/arrow-down-white.svg) no-repeat;
     background-position: right 8px center;
     background-size: 10px 10px;
     border-radius: 0;
@@ -24,7 +24,7 @@
     &[aria-expanded=true] {
       border-top-color: $vads-color-va-accent;
       background-color: $vads-color-white;
-      background-image: url('#{$image-path}/arrow-up.svg') !important;
+      background-image: url(~@department-of-veterans-affairs/css-library/dist/img/arrow-up.svg) !important;
       color: $vads-color-base;
 
       path {
