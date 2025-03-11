@@ -326,11 +326,11 @@ describe('va-checkbox', () => {
         <mock:shadow-root>
           <span id="checkbox-error-message" role="alert"></span>
           <div class="va-checkbox__container" part="checkbox">
-          <input aria-invalid="false" class="va-checkbox__input" id="checkbox-element" type="checkbox">
-          <label class="va-checkbox__label" for="checkbox-element">
-            <span part="label">test</span>
-            <slot name="internal-description"></slot>
-          </label>
+            <input aria-invalid="false" class="va-checkbox__input" id="checkbox-element" type="checkbox">
+            <label class="va-checkbox__label" for="checkbox-element">
+              <span part="label">test</span>
+              <slot name="internal-description"></slot>
+            </label>
           </div>
         </mock:shadow-root>
         <p slot="internal-description">
