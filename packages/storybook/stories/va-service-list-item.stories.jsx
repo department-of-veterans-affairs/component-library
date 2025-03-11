@@ -57,8 +57,6 @@ MaximalBase.args = {
     'Approved on': 'May 5, 2011',
     'Program': 'Post-9/11 GI Bill',
     'Eligibility': '70%',
-    "Fourth item": 'Here is a fourth item',
-    "Fifth item": 'Here is a fifth item',
   },
   icon: 'school',
   serviceName: 'Education',
