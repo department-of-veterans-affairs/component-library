@@ -284,6 +284,16 @@ describe('va-checkbox', () => {
     expect(checkboxEl).toEqualAttribute('aria-checked', 'mixed');
   });
 
+  it('does not set aria-checked when toggled off', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox label="Just another checkbox here" />',
+    );
+    const checkboxEl = await page.find('va-checkbox >>> input');
+
+    expect(checkboxEl).not.toHaveAttribute('aria-checked');
+  });
+
   it('does not set the data-indeterminate attribute if checked is set', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -316,11 +326,11 @@ describe('va-checkbox', () => {
         <mock:shadow-root>
           <span id="checkbox-error-message" role="alert"></span>
           <div class="va-checkbox__container" part="checkbox">
-          <input aria-invalid="false" class="va-checkbox__input" id="checkbox-element" type="checkbox">
-          <label class="va-checkbox__label" for="checkbox-element">
-            <span part="label">test</span>
-            <slot name="internal-description"></slot>
-          </label>
+            <input aria-invalid="false" class="va-checkbox__input" id="checkbox-element" type="checkbox">
+            <label class="va-checkbox__label" for="checkbox-element">
+              <span part="label">test</span>
+              <slot name="internal-description"></slot>
+            </label>
           </div>
         </mock:shadow-root>
         <p slot="internal-description">

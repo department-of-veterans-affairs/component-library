@@ -268,6 +268,10 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
+          * If `true`, the button will expand to the full available width of its container.
+         */
+        "fullWidth"?: boolean;
+        /**
           * The aria-label of the component.
          */
         "label"?: string;
@@ -631,6 +635,10 @@ export namespace Components {
           * The name for the input element.
          */
         "name"?: string;
+        /**
+          * Percent upload completed. For use with va-progress-bar component
+         */
+        "percentUploaded"?: number;
         /**
           * Optionally displays the read-only view
          */
@@ -1516,6 +1524,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` is true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` is true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * If true, sets the select to take the full-width of its container
          */
         "fullWidth"?: boolean;
@@ -1551,6 +1567,10 @@ export namespace Components {
           * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
+         */
+        "useFormsPattern"?: string;
         /**
           * Selected value (will get updated on select).
          */
@@ -3623,6 +3643,10 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * If `true`, the button will expand to the full available width of its container.
+         */
+        "fullWidth"?: boolean;
+        /**
           * The aria-label of the component.
          */
         "label"?: string;
@@ -4042,6 +4066,10 @@ declare namespace LocalJSX {
           * The event emitted when the file input value changes.
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * Percent upload completed. For use with va-progress-bar component
+         */
+        "percentUploaded"?: number;
         /**
           * Optionally displays the read-only view
          */
@@ -5048,6 +5076,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` is true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` is true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * If true, sets the select to take the full-width of its container
          */
         "fullWidth"?: boolean;
@@ -5099,6 +5135,10 @@ declare namespace LocalJSX {
           * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
+         */
+        "useFormsPattern"?: string;
         /**
           * Selected value (will get updated on select).
          */

@@ -19,7 +19,7 @@
       &:focus {
         .all-link-arrow {
           margin-left: 10px;
-          content: url('#{$image-path}/arrow-right.svg');
+          content: url(~@department-of-veterans-affairs/css-library/dist/img/arrow-right.svg);
         }
 
         .hub-page-link-list__header {

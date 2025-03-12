@@ -63,7 +63,7 @@ const Template = ({
   value,
   children,
   uploadedFile,
-  maxFileSize
+  maxFileSize,
 }) => {
   return (
     <VaFileInput
@@ -330,3 +330,25 @@ ReadOnlyWithAdditionalInputs.args = {
   readOnly: true,
   children: readOnlyAdditionalInfoContent,
 };
+
+const PercentUploadedTemplate = args => {
+  const [percent, setPercent] = useState(0);
+  function handleUpload() {
+    const intervalId = setInterval(() => {
+      setPercent(_prev => {
+        if (_prev >= 100) {
+          clearInterval(intervalId);
+          return null;
+        }
+        return _prev + (Math.random() * 4);
+      })
+    }, 100);
+  }
+
+  return(
+    <VaFileInput {...args} percentUploaded={percent} onVaChange={handleUpload} />
+  )
+}
+
+export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
+WithPercentUploaded.args = { ...defaultArgs }
