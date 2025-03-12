@@ -141,7 +141,11 @@ export class VaServiceListItem {
               )}
               <div class="name-and-chevron">
                 <HeadingTag class="service-name">{serviceName}</HeadingTag>
-                <va-icon class="chevron-icon" icon="chevron_right"></va-icon>
+                <va-icon
+                  class="chevron-icon"
+                  icon="chevron_right"
+                  size={4}
+                ></va-icon>
               </div>
             </div>
           </a>
