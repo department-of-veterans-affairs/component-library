@@ -179,14 +179,3 @@ export function getHeaderLevel(headerInput: number | string): string | null {
   }
   return headerLevel >= 1 && headerLevel <= 6 ? `h${headerLevel}` : null;
 }
-
-/**
- * Checks if an element is interactive
- */
-export function isInteractiveElement(el: HTMLElement): boolean {
-  const { tagName } = el;
-  return (
-    tagName.startsWith('VA-') ||
-    ['INPUT', 'BUTTON', 'A', 'DETAILS', 'TEXTAREA', 'SELECT'].includes(tagName)
-  );
-}
