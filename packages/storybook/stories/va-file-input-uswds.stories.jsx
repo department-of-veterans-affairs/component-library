@@ -135,7 +135,12 @@ HeaderLabel.args = {
 
 const additionalFormInputsContent = (
   <div>
-    <va-select className="hydrated" label="What kind of file is this?" required>
+    <va-select
+      className="hydrated"
+      label="What kind of file is this?"
+      name="fileType"
+      required
+    >
       <option key="1" value="1">
         Public Document
       </option>
@@ -170,7 +175,7 @@ const CustomValidationTemplate = ({
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        const contents = reader.result;
+        const contents = /** @type {string} */ (reader.result);
         const hasX = contents.includes('X');
 
         if (hasX) setErrorVal("File contains an 'X' character");
@@ -261,13 +266,13 @@ WithAnalytics.args = {
 };
 
 export const UploadedFile = Template.bind(null);
-UploadedFile.args = { 
-  ...defaultArgs, 
+UploadedFile.args = {
+  ...defaultArgs,
   uploadedFile: {
     name: 'test.jpg',
     size: 7000,
-    type: 'JPG'
-  } 
+    type: 'JPG',
+  },
 };
 
 const FileUploadedTemplate = args => {
@@ -297,7 +302,13 @@ const FileUploadedTemplate = args => {
 };
 
 export const UploadStatus = FileUploadedTemplate.bind(null);
-UploadStatus.args = { ...defaultArgs, label: 'Select a file to upload (status text will show on file change)', vaChange: event => {event.target.setAttribute('status-text', 'Uploading...');}};
+UploadStatus.args = {
+  ...defaultArgs,
+  label: 'Select a file to upload (status text will show on file change)',
+  vaChange: event => {
+    event.target.setAttribute('status-text', 'Uploading...');
+  },
+};
 
 export const FileUploaded = FileUploadedTemplate.bind(null);
 FileUploaded.args = { ...defaultArgs, vaChange: event => event };
@@ -310,6 +321,7 @@ const readOnlyAdditionalInfoContent = (
     <va-select
       className="hydrated"
       label="What kind of file is this?"
+      name="fileType"
       inert
       value="1"
     >
@@ -338,17 +350,21 @@ const PercentUploadedTemplate = args => {
       setPercent(_prev => {
         if (_prev >= 100) {
           clearInterval(intervalId);
-          return null;
+          return 100;
         }
-        return _prev + (Math.random() * 4);
-      })
+        return _prev + Math.random() * 4;
+      });
     }, 100);
   }
 
-  return(
-    <VaFileInput {...args} percentUploaded={percent} onVaChange={handleUpload} />
-  )
-}
+  return (
+    <VaFileInput
+      {...args}
+      percentUploaded={percent}
+      onVaChange={handleUpload}
+    />
+  );
+};
 
 export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
 WithPercentUploaded.args = { ...defaultArgs }

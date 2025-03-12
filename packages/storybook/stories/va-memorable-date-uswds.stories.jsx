@@ -43,7 +43,14 @@ const Template = ({ label, name, hint, required, error, value, monthSelect }) =>
   );
 };
 
-const CustomValidationTemplate = ({ label, name, hint, required, error, value }) => {
+const CustomValidationTemplate = ({
+  label,
+  name,
+  hint,
+  required,
+  error,
+  value,
+}) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
   const today = new Date();
@@ -70,7 +77,7 @@ const CustomValidationTemplate = ({ label, name, hint, required, error, value })
         hint={hint}
         required={required}
         error={errorVal}
-        invalidYear={!!errorVal || null}
+        invalidYear={!!errorVal || undefined}
         value={dateVal}
         onDateBlur={() => handleDateBlur()}
         onDateChange={e => setDateVal(e.target.value)}
@@ -83,20 +90,35 @@ const CustomValidationTemplate = ({ label, name, hint, required, error, value })
         error prop to be dynamically set if the parameters are not met.
       </div>
       <div className="vads-u-margin-top--2">
-      <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2"><code>
-const [dateVal, setDateVal] = useState(value);<br/>
-const [errorVal, setErrorVal] = useState(error);<br/>
-const today = new Date();<br/>
-// new Date as YYYY-MM-DD is giving the day prior to the day select<br/>
-// new Date as YYYY MM DD is giving the correct day selected<br/>
-const dateInput = new Date(dateVal.split('-').join(' '));<br/>
-function handleDateBlur() &#x7b;<br/>
-  if (dateInput &lt;= today) &#x7b;<br/>
-    setErrorVal('Date must be in the future');<br/>
-  &#x7d; else &#x7b;<br/>
-    setErrorVal('');<br/>
-  &#x7d;<br/>
-&#x7d;</code></pre>
+        <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+          <code>
+            const [dateVal, setDateVal] = useState(value);
+            <br />
+            const [errorVal, setErrorVal] = useState(error);
+            <br />
+            const today = new Date();
+            <br />
+            // new Date as YYYY-MM-DD is giving the day prior to the day select
+            <br />
+            // new Date as YYYY MM DD is giving the correct day selected
+            <br />
+            const dateInput = new Date(dateVal.split('-').join(' '));
+            <br />
+            function handleDateBlur() &#x7b;
+            <br />
+              if (dateInput &lt;= today) &#x7b;
+            <br />
+                setErrorVal('Date must be in the future');
+            <br />
+              &#x7d; else &#x7b;
+            <br />
+                setErrorVal('');
+            <br />
+              &#x7d;
+            <br />
+            &#x7d;
+          </code>
+        </pre>
         <a
           href="https://github.com/department-of-veterans-affairs/component-library/tree/main/packages/storybook/stories"
           target="_blank"
@@ -108,18 +130,30 @@ function handleDateBlur() &#x7b;<br/>
   );
 };
 
-const I18nTemplate = ({ label, name, required, error, value }) => {
+const I18nTemplate = ({ label, name, required, hint, error, value }) => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
+    document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
 
   return (
     <div>
-      <va-button style={{fontSize: '16px'}} onClick={e => setLang('es')} text="Español"/>
-      <va-button style={{fontSize: '16px'}} onClick={e => setLang('en')} text="English"/>
-      <va-button style={{fontSize: '16px'}} onClick={e => setLang('tl')} text="Tagalog"/>
+      <va-button
+        style={{ fontSize: '16px' }}
+        onClick={e => setLang('es')}
+        text="Español"
+      />
+      <va-button
+        style={{ fontSize: '16px' }}
+        onClick={e => setLang('en')}
+        text="English"
+      />
+      <va-button
+        style={{ fontSize: '16px' }}
+        onClick={e => setLang('tl')}
+        text="Tagalog"
+      />
       <VaMemorableDate
         label={label}
         name={name}
@@ -131,18 +165,26 @@ const I18nTemplate = ({ label, name, required, error, value }) => {
         onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
       />
     </div>
-)};
+  );
+};
 
-const FormsPatternSingleTemplate = ({ label, name, hint, required, error, value, monthSelect }) => {
-
-  const id = (Math.floor(Math.random() * 100) + 1);
+const FormsPatternSingleTemplate = ({
+  label,
+  name,
+  hint,
+  required,
+  error,
+  value,
+  monthSelect,
+}) => {
+  const id = Math.floor(Math.random() * 100) + 1;
   const handleClick = () => {
-    const header = document.getElementById(`form-pattern-single-input-${id}`)
-      ?.shadowRoot
-      ?.getElementById('form-question');
+    const header = document
+      .getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot?.getElementById('form-question');
 
     applyFocus(header);
-  }
+  };
   return (
     <>
       <VaMemorableDate
@@ -172,24 +214,27 @@ const FormsPatternSingleTemplate = ({ label, name, hint, required, error, value,
       </VaMemorableDate>
       <hr />
 
-      <va-button 
-        text="Click to focus header" 
-        onClick={handleClick}>
-      </va-button>
+      <va-button text="Click to focus header" onClick={handleClick}></va-button>
     </>
   );
 };
 
-
-const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, value, monthSelect }) => {
-
+const FormsPatternMultipleTemplate = ({
+  label,
+  name,
+  hint,
+  required,
+  error,
+  value,
+  monthSelect,
+}) => {
   const handleClick = () => {
-    const header = document.getElementById(`form-pattern-single-input-multiple`)
-      ?.shadowRoot
-      ?.getElementById('form-question');
+    const header = document
+      .getElementById(`form-pattern-single-input-multiple`)
+      ?.shadowRoot?.getElementById('form-question');
 
     applyFocus(header);
-  }
+  };
   return (
     <>
       <VaMemorableDate
@@ -222,35 +267,40 @@ const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, valu
       />
       <hr />
 
-      <va-button 
-        text="Click to focus header" 
-        onClick={handleClick}>
-      </va-button>
+      <va-button text="Click to focus header" onClick={handleClick}></va-button>
     </>
   );
 };
 
-
-const CustomErrorMessageTemplate = ({ label, name, hint, required, error, value }) => {
+const CustomErrorMessageTemplate = ({
+  label,
+  name,
+  hint,
+  required,
+  error,
+  value,
+}) => {
   return (
     <>
-    <VaMemorableDate
-      id="custom-error-message"
-      label={label}
-      name={name}
-      hint={hint}
-      required={required}
-      error={error}
-      invalidDay={true}
-      value={value}
-      onDateBlur={() => {}}
-      onDateChange={() => {}}
-      customDayErrorMessage='This is a custom error message for an invalid day'
+      <VaMemorableDate
+        id="custom-error-message"
+        label={label}
+        name={name}
+        hint={hint}
+        required={required}
+        error={error}
+        invalidDay={true}
+        value={value}
+        onDateBlur={() => {}}
+        onDateChange={() => {}}
+        customDayErrorMessage="This is a custom error message for an invalid day"
       />
       <hr />
       <div>
-        To display a custom error message when a day, month, or year is invalid, use the   
-        &nbsp;<code>customDayErrorMessage</code>, <code>customMonthErrorMessage</code>, or <code>customYearErrorMessage</code>, prop respectively.
+        To display a custom error message when a day, month, or year is invalid,
+        use the &nbsp;<code>customDayErrorMessage</code>,{' '}
+        <code>customMonthErrorMessage</code>, or{' '}
+        <code>customYearErrorMessage</code>, prop respectively.
       </div>
     </>
   );

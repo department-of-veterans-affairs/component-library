@@ -120,7 +120,12 @@ const Template = ({
       success={success}
       pattern={pattern}
       onBlur={e => console.log('blur event', e)}
-      onInput={e => console.log('input event value', e.target.value)}
+      onInput={e =>
+        console.log(
+          'input event value',
+          /** @type {HTMLInputElement} */ (e.target).value,
+        )
+      }
       message-aria-describedby={messageAriaDescribedby}
       charcount={charcount}
       min={min}
@@ -146,12 +151,11 @@ const I18nTemplate = ({
   value,
   inputmode,
   type,
-  uswds,
   'message-aria-describedby': messageAriaDescribedby,
 }) => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
+    document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
   return (
     <>

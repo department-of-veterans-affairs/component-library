@@ -60,7 +60,7 @@ const Template = ({
   return (
     <div>
       <h1>Testing h1 heading</h1>
-      <va-button uswds onClick={openModal} text="Click here to open modal"/>
+      <va-button onClick={openModal} text="Click here to open modal" />
       <VaModal
         forcedModal={forcedModal}
         clickToClose={clickToClose}
@@ -76,9 +76,7 @@ const Template = ({
         status={status}
         visible={isVisible}
       >
-        <p>
-          This is a succinct, helpful {status} message
-        </p>
+        <p>This is a succinct, helpful {status} message</p>
       </VaModal>
     </div>
   );
@@ -187,7 +185,7 @@ export const WithNestedWebComponents = ({
   return (
     <div>
       <h1>Testing h1 heading</h1>
-      <va-button uswds onClick={openModal} text="Click here to open modal"/>
+      <va-button onClick={openModal} text="Click here to open modal" />
       <input id="pre-modal-input" type="checkbox" />
       <label htmlFor="pre-modal-input">Checkbox before the modal</label>
       <VaModal

@@ -30,6 +30,7 @@ const defaultArgs = {
   'tile': false,
   'message-aria-describedby': 'Optional description text for screen readers',
   'indeterminate': false,
+  'value': 'Test',
 };
 
 const vaCheckbox = args => {
@@ -61,6 +62,7 @@ const vaCheckbox = args => {
       onBlur={e => console.log(e)}
       message-aria-describedby={messageAriaDescribedBy}
       indeterminate={indeterminate}
+      value={rest.value}
     />
   );
 };
@@ -71,7 +73,7 @@ const I18nTemplate = args => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
+    document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
 
   return (
@@ -104,12 +106,12 @@ const IndeterminateTemplate = ({}) => {
   }, [checked]);
 
   const handleIndeterminate = () => {
-    const indeterminateCheckbox = document.querySelector(
-      '.indeterminate-checkbox',
+    const indeterminateCheckbox = /** @type {HTMLInputElement} */ (
+      document.querySelector('.indeterminate-checkbox')
     );
 
     // If all of the checkbox states are true, set indeterminate checkbox to checked.
-    if (checked.every(val => val === true)) {
+    if (indeterminateCheckbox && checked.every(val => val === true)) {
       indeterminateCheckbox.checked = true;
       indeterminateCheckbox.indeterminate = false;
       // If any one of the checkbox states is true, set indeterminate checkbox to indeterminate.
@@ -136,7 +138,9 @@ const IndeterminateTemplate = ({}) => {
   };
 
   const handleSelectAllToggle = event => {
-    const checkboxes = document.querySelectorAll('.example-checkbox');
+    const checkboxes = /** @type {HTMLInputElement[]} */ (
+      /** @type {unknown} */ (document.querySelectorAll('.example-checkbox'))
+    );
     checkboxes.forEach(checkbox => {
       checkbox.checked = event.target.checked;
     });

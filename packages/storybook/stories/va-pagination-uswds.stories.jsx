@@ -90,7 +90,7 @@ export const Internationalization = () => {
   const [page2, setPage2] = useState(10);
 
   useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
+    document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
 
   return (

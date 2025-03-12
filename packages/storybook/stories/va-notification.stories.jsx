@@ -81,7 +81,7 @@ const MultipleTemplate = ({
   return (
     <>
       <va-notification
-        visible="true"
+        visible={true}
         symbol="action-required"
         headline="You have a new education debt."
         href="https://www.va.gov/"
@@ -90,11 +90,10 @@ const MultipleTemplate = ({
         closeable={closeable}
         has-border={hasBorder}
         closeBtnAriaLabel={closeBtnAriaLabel}
-        class="vads-u-margin-bottom--1p5"
-      >
-      </va-notification>
+        className="vads-u-margin-bottom--1p5"
+      ></va-notification>
       <va-notification
-        visible="true"
+        visible={true}
         symbol="update"
         headline="Your claim status has been updated."
         href="https://www.va.gov/"
@@ -103,10 +102,9 @@ const MultipleTemplate = ({
         closeable={closeable}
         has-border={hasBorder}
         closeBtnAriaLabel={closeBtnAriaLabel}
-      >
-      </va-notification>
+      ></va-notification>
     </>
-  )
+  );
 };
 
 export const Default = Template.bind(null);

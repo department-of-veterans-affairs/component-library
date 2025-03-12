@@ -19,34 +19,32 @@ const defaultArgs = {
   'tld': 'gov'
 };
 
-const Template = ({
-  'disable-analytics': disableAnalytics,
-  'tld': tld
-}) => {
+const Template = ({ 'disable-analytics': disableAnalytics, 'tld': tld }) => {
   return (
-    <va-official-gov-banner 
-      disable-analytics={disableAnalytics} tld={tld}>
-    </va-official-gov-banner>
+    <va-official-gov-banner
+      disable-analytics={disableAnalytics}
+      tld={tld}
+    ></va-official-gov-banner>
   );
 };
 
 const I18nTemplate = ({
   'disable-analytics': disableAnalytics,
-  'tld': tld
+  'tld': tld,
 }) => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
+    document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
   return (
     <>
-      <button onClick={e => setLang('es')}>Español</button>
-      <button onClick={e => setLang('en')}>English</button>
-      <div style={{marginTop: '20px'}}>
-        <va-official-gov-banner 
+      <button onClick={_ => setLang('es')}>Español</button>
+      <button onClick={_ => setLang('en')}>English</button>
+      <div style={{ marginTop: '20px' }}>
+        <va-official-gov-banner
           tld={tld}
-          disable-analytics={disableAnalytics}>
-        </va-official-gov-banner>
+          disable-analytics={disableAnalytics}
+        ></va-official-gov-banner>
       </div>
     </>
   );

@@ -63,68 +63,96 @@ const Template = ({}) => {
 };
 
 
-const StatusTemplate = (defaultArgs) => {
+const StatusTemplate = defaultArgs => {
   return (
     <va-process-list>
-      <va-process-list-item checkmark header='Checkmark Icon'>  
-        <p>Add the prop <code>checkmark</code> to make the list icon a checkmark.</p>
+      <va-process-list-item checkmark header="Checkmark Icon">
+        <p>
+          Add the prop <code>checkmark</code> to make the list icon a checkmark.
+        </p>
       </va-process-list-item>
-      <va-process-list-item active header='Active Icon'>
-        <p>Add the prop <code>active</code> to make the list icon and header blue.</p>
+      <va-process-list-item active header="Active Icon">
+        <p>
+          Add the prop <code>active</code> to make the list icon and header
+          blue.
+        </p>
       </va-process-list-item>
-      <va-process-list-item pending header='Pending Icon'>
-        <p>Add the prop <code>pending</code> to make the list item and icon grayed out.</p>
+      <va-process-list-item pending header="Pending Icon">
+        <p>
+          Add the prop <code>pending</code> to make the list item and icon
+          grayed out.
+        </p>
       </va-process-list-item>
-      <va-process-list-item header='Default Icon' />
+      <va-process-list-item header="Default Icon" />
     </va-process-list>
   );
 };
 
-const CustomStatusTextTemplate = (defaultArgs) => {
+const CustomStatusTextTemplate = defaultArgs => {
   return (
     <va-process-list>
-      <va-process-list-item checkmark header='Checkmark Icon' status-text="Done">  
-        <p>Add the prop <code>checkmark</code> to make the list icon a checkmark.</p>
+      <va-process-list-item
+        checkmark
+        header="Checkmark Icon"
+        status-text="Done"
+      >
+        <p>
+          Add the prop <code>checkmark</code> to make the list icon a checkmark.
+        </p>
       </va-process-list-item>
-      <va-process-list-item active header='Active Icon' status-text="Current">
-        <p>Add the prop <code>active</code> to make the list icon and header blue.</p>
+      <va-process-list-item active header="Active Icon" status-text="Current">
+        <p>
+          Add the prop <code>active</code> to make the list icon and header
+          blue.
+        </p>
       </va-process-list-item>
-      <va-process-list-item pending header='Pending Icon' status-text="Incomplete">
-        <p>Add the prop <code>pending</code> to make the list item and icon grayed out.</p>
+      <va-process-list-item
+        pending
+        header="Pending Icon"
+        status-text="Incomplete"
+      >
+        <p>
+          Add the prop <code>pending</code> to make the list item and icon
+          grayed out.
+        </p>
       </va-process-list-item>
-      <va-process-list-item header='Default Icon' />
+      <va-process-list-item header="Default Icon" />
     </va-process-list>
   );
 };
 
-
-const HeaderSizeTemplate = (defaultArgs) => {
+const HeaderSizeTemplate = defaultArgs => {
   return (
     <va-process-list>
-      <va-process-list-item header='Size h1' level='1'/>
-      <va-process-list-item header='Size h2' level='2'/>
-      <va-process-list-item header='Size h3' level='3'/>
-      <va-process-list-item header='Size h4' level='4'/>
-      <va-process-list-item header='Size h5' level='5'/>
-      <va-process-list-item header='Size h6' level='6'/>
+      <va-process-list-item header="Size h1" level={1} />
+      <va-process-list-item header="Size h2" level={2} />
+      <va-process-list-item header="Size h3" level={3} />
+      <va-process-list-item header="Size h4" level={4} />
+      <va-process-list-item header="Size h5" level={5} />
+      <va-process-list-item header="Size h6" level={6} />
     </va-process-list>
   );
 };
 
-const CustomSizingTemplate = (defaultArgs) => {
+const CustomSizingTemplate = defaultArgs => {
   return (
     <va-process-list>
-      
-      <va-process-list-item header='Step One' level='2'>
-        <p class="vads-u-font-size--lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+      <va-process-list-item header="Step One" level={2}>
+        <p className="vads-u-font-size--lg">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.{' '}
+        </p>
       </va-process-list-item>
-      <va-process-list-item header='Step Two' level='2'>
-        <p class="vads-u-font-size--lg">Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui.</p>
+      <va-process-list-item header="Step Two" level={2}>
+        <p className="vads-u-font-size--lg">
+          Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui.
+        </p>
       </va-process-list-item>
-      <va-process-list-item header='Step Three' level='2'>
-        <p class="vads-u-font-size--lg">Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.</p>
+      <va-process-list-item header="Step Three" level={2}>
+        <p className="vads-u-font-size--lg">
+          Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit
+          sem. Cras sollicitudin auctor mattis.
+        </p>
       </va-process-list-item>
-      
     </va-process-list>
   );
 };
@@ -136,9 +164,12 @@ const UtilityStyling = (defaultArgs) => {
         <p>Look at me in mobile view</p>
         <va-additional-info
           trigger="Show more"
-          class="medium-screen:vads-u-display--none"
+          className="medium-screen:vads-u-display--none"
         >
-          <img src="https://via.placeholder.com/350" alt="a placeholder image that displays the text 350 x 350" />
+          <img
+            src="https://via.placeholder.com/350"
+            alt="a placeholder image that displays the text 350 x 350"
+          />
         </va-additional-info>
       </va-process-list-item>
       <va-process-list-item>

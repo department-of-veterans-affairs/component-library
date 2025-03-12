@@ -241,6 +241,7 @@ function CanvasLink() {
 /**
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
+ * @param {{storyDefault: any, componentName?: string, data: any, children?: any}} arg
  */
 export function StoryDocs({ storyDefault, componentName, data, children }) {
   const component = componentName || data?.tag;
@@ -283,7 +284,7 @@ StoryDocs.propTypes = {
 /**
  * This utility function will help us focus on an element in a web component for Storybook examples.
  * A similar utility is used in vets-website.
- * 
+ *
  * https://github.com/department-of-veterans-affairs/vets-website/pull/23416
  */
 export function applyFocus(el) {

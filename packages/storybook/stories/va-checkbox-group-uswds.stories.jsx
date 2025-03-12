@@ -118,7 +118,7 @@ const I18nTemplate = args => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
+    document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
 
   return (
@@ -316,6 +316,7 @@ const FormsPatternSingleTemplate = ({
         form-heading-level={1}
         form-heading="What's your relationship to the Veteran?"
         form-description="This is the additional form-description prop"
+        label={label}
       >
         <va-checkbox
           label="I'm responsible for the care of the Veteran."

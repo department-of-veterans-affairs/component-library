@@ -25,7 +25,7 @@ const Template = ({
       <div className="usa-grid usa-grid-full">
         <div className="usa-width-three-fourths">
           <h1>The top</h1>
-          {[...Array(displayAmount)].map(i => (
+          {[...Array(displayAmount)].map((_, i) => (
             <div
               key={i}
               style={{

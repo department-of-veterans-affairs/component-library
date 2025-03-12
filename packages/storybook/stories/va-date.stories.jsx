@@ -61,7 +61,7 @@ const Template = ({
 const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
-  const [invalidYear, setInvalidYear] = useState(null);
+  const [invalidYear, setInvalidYear] = useState(false);
   const today = new Date();
   // new Date as YYYY-MM-DD is giving the day prior to the day select
   // new Date as YYYY MM DD is giving the correct day selected

@@ -67,7 +67,7 @@ const I18nTemplate = args => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
+    document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
 
   return (
@@ -316,7 +316,7 @@ const FormsPatternMultipleTemplate = ({ label, required }) => {
       </va-radio>
 
       <va-radio
-        required="true"
+        required={true}
         label="Burn pit S2.1, did you serve in any of these locations?"
       >
         <va-radio-option label="Yes" name="group7" id="yes7" value="1" />
@@ -330,10 +330,7 @@ const FormsPatternMultipleTemplate = ({ label, required }) => {
       </va-radio>
 
       <hr />
-      <va-button
-        text="Click to focus header"
-        onClick={handleClick}
-      ></va-button>
+      <va-button text="Click to focus header" onClick={handleClick}></va-button>
     </>
   );
 };

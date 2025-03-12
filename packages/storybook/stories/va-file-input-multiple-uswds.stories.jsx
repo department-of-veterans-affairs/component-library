@@ -91,9 +91,13 @@ HeaderSize.args = {
 
 const additionalFormInputsContent = (
   <div>
-    <va-select label='What kind of file is this?' required>
-      <option key="1" value="1">Public Document</option>
-      <option key="2" value="2">Private Document</option>
+    <va-select label="What kind of file is this?" name="fileType" required>
+      <option key="1" value="1">
+        Public Document
+      </option>
+      <option key="2" value="2">
+        Private Document
+      </option>
     </va-select>
   </div>
 );
@@ -129,13 +133,20 @@ const AdditionalFormInputsContentTemplate = ({
       </VaFileInputMultiple>
       <hr />
       <div>
-        <p>You can collect additional information about an uploaded file by passing inputs to the slot of this component. The slot content will render after a file is uploaded.</p>
-        <p>This example showcases how to include custom content, such as dropdowns, within the file input component.</p>
+        <p>
+          You can collect additional information about an uploaded file by
+          passing inputs to the slot of this component. The slot content will
+          render after a file is uploaded.
+        </p>
+        <p>
+          This example showcases how to include custom content, such as
+          dropdowns, within the file input component.
+        </p>
       </div>
       <div className="vads-u-margin-top--2">
-          <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
-            <code>
-  {`const additionalFormInputsContent = (
+        <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+          <code>
+            {`const additionalFormInputsContent = (
   <div>
     <va-select label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
@@ -147,8 +158,8 @@ const AdditionalFormInputsContentTemplate = ({
 <VaFileInputMultiple ... >
   {additionalFormInputsContent}
 </VaFileInputMultiple>`}
-            </code>
-          </pre>
+          </code>
+        </pre>
         <a
           href="https://github.com/department-of-veterans-affairs/component-library/tree/main/packages/storybook/stories"
           target="_blank"
@@ -160,13 +171,13 @@ const AdditionalFormInputsContentTemplate = ({
   );
 };
 
-export const AdditionalFormInputs = AdditionalFormInputsContentTemplate.bind(null);
+export const AdditionalFormInputs =
+  AdditionalFormInputsContentTemplate.bind(null);
 AdditionalFormInputs.args = {
   ...defaultArgs,
   label: 'Additional Form Inputs',
   children: additionalFormInputsContent,
 };
-
 
 const AdditionalFormInputsOnSpecificFieldsContentTemplate = ({
   label,
@@ -199,12 +210,15 @@ const AdditionalFormInputsOnSpecificFieldsContentTemplate = ({
       </VaFileInputMultiple>
       <hr />
       <div>
-        <p>This example showcases how to only render additional content for specific file input fields.</p>
+        <p>
+          This example showcases how to only render additional content for
+          specific file input fields.
+        </p>
       </div>
       <div className="vads-u-margin-top--2">
-          <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
-            <code>
-  {`const additionalFormInputsContent = (
+        <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+          <code>
+            {`const additionalFormInputsContent = (
   <div>
     <va-select label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
@@ -216,19 +230,20 @@ const AdditionalFormInputsOnSpecificFieldsContentTemplate = ({
 <VaFileInputMultiple slot-field-indexes="[1,3]" ... >
   {additionalFormInputsContent}
 </VaFileInputMultiple>`}
-            </code>
-          </pre>
+          </code>
+        </pre>
       </div>
     </>
   );
 };
 
-export const AdditionalFormInputsOnSpecificFields = AdditionalFormInputsOnSpecificFieldsContentTemplate.bind(null);
+export const AdditionalFormInputsOnSpecificFields =
+  AdditionalFormInputsOnSpecificFieldsContentTemplate.bind(null);
 AdditionalFormInputsOnSpecificFields.args = {
   ...defaultArgs,
   label: 'Additional Form Inputs On Specific Inputs',
   children: additionalFormInputsContent,
-  slotFieldIndexes: '[1,3]'
+  slotFieldIndexes: '[1,3]',
 };
 
 const ErrorsTemplate = ({ label, name, hint }) => {
@@ -256,12 +271,18 @@ const ErrorsTemplate = ({ label, name, hint }) => {
       />
       <hr />
       <div>
-        <p>Parent components are responsible for managing error states through a dedicated error array. Each index in this array corresponds to a file input, with the value at each index representing the error state for that specific file. This setup allows for the dynamic display of errors based on real-time validation of each file as it is processed.</p>
+        <p>
+          Parent components are responsible for managing error states through a
+          dedicated error array. Each index in this array corresponds to a file
+          input, with the value at each index representing the error state for
+          that specific file. This setup allows for the dynamic display of
+          errors based on real-time validation of each file as it is processed.
+        </p>
       </div>
       <div className="vads-u-margin-top--2">
-          <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
-            <code>
-  {`const [errorsList, setErrorsList] = useState([]);
+        <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+          <code>
+            {`const [errorsList, setErrorsList] = useState([]);
 
   function setErrorForEachFile(event) {
     const fileEntries = event.detail.files;
@@ -280,8 +301,8 @@ const ErrorsTemplate = ({ label, name, hint }) => {
       errors={errorsList}
       onVaMultipleChange={setErrorForEachFile}
     />`}
-            </code>
-          </pre>
+          </code>
+        </pre>
         <a
           href="https://github.com/department-of-veterans-affairs/component-library/tree/main/packages/storybook/stories"
           target="_blank"
@@ -321,6 +342,7 @@ const CustomValidationTemplate = ({ label, name, accept, hint }) => {
       }
     });
 
+    // @ts-ignore
     setErrorsList(errors);
   }
 
@@ -336,13 +358,22 @@ const CustomValidationTemplate = ({ label, name, accept, hint }) => {
       />
       <hr />
       <div>
-        <p>The parent component can capture the files from the onVaMultipleChange event, validate the files, and dynamically set errors. Each file must have a corresponding entry in the errors array prop, even if the entry is an empty string indicating no errors.</p>
-        <p>This example demonstrates custom validation logic to show an error if the file size exceeds 2MB. Validation occurs when a file is added or removed. </p>
+        <p>
+          The parent component can capture the files from the onVaMultipleChange
+          event, validate the files, and dynamically set errors. Each file must
+          have a corresponding entry in the errors array prop, even if the entry
+          is an empty string indicating no errors.
+        </p>
+        <p>
+          This example demonstrates custom validation logic to show an error if
+          the file size exceeds 2MB. Validation occurs when a file is added or
+          removed.{' '}
+        </p>
       </div>
       <div className="vads-u-margin-top--2">
-      <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
-        <code>
-{`const [errorsList, setErrorsList] = useState([]);
+        <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+          <code>
+            {`const [errorsList, setErrorsList] = useState([]);
 
 function validateFileContents(event) {
   let errors = [];
@@ -429,7 +460,13 @@ ReadOnly.args = {
 
 const readOnlyAdditionalInfoContent = (
   <div>
-    <va-select label="What kind of file is this?" required inert value="1">
+    <va-select
+      label="What kind of file is this?"
+      name="fileType"
+      required
+      inert
+      value="1"
+    >
       <option key="1" value="1">
         Public Document
       </option>

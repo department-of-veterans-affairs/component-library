@@ -4,7 +4,6 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
 // Remove backgroundOnly prop, this code and prop should be removed with the v1 version
-alertDocs.props = alertDocs.props.filter((prop) => prop.name !== 'backgroundOnly');
 
 export default {
   title: 'Components/Alert USWDS',
@@ -109,29 +108,31 @@ const SlimTemplate = ({
         slim={slim}
         status="info"
         disable-analytics="false"
-        visible="true"
+        visible={true}
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        class="vads-u-margin-bottom--1"
+        className="vads-u-margin-bottom--1"
       >
         <p className="vads-u-margin-y--0">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod.
         </p>
       </va-alert>
       <va-alert
         slim={slim}
         status="error"
         disable-analytics="false"
-        visible="true"
+        visible={true}
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        class="vads-u-margin-bottom--1"
+        className="vads-u-margin-bottom--1"
       >
         <>
           <p className="vads-u-margin-y--0">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod.
           </p>
         </>
       </va-alert>
@@ -139,29 +140,31 @@ const SlimTemplate = ({
         slim={slim}
         status="success"
         disable-analytics="false"
-        visible="true"
+        visible={true}
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        class="vads-u-margin-bottom--1"
+        className="vads-u-margin-bottom--1"
       >
         <p className="vads-u-margin-y--0">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod.
         </p>
       </va-alert>
       <va-alert
         slim={slim}
         status="warning"
         disable-analytics="false"
-        visible="true"
+        visible={true}
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        class="vads-u-margin-bottom--1"
+        className="vads-u-margin-bottom--1"
       >
         <>
           <p className="vads-u-margin-y--0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod.
           </p>
         </>
       </va-alert>
@@ -169,15 +172,16 @@ const SlimTemplate = ({
         slim={slim}
         status="continue"
         disable-analytics="false"
-        visible="true"
+        visible={true}
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        class="vads-u-margin-bottom--1"
+        className="vads-u-margin-bottom--1"
       >
         <>
           <p className="vads-u-margin-y--0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod.
           </p>
         </>
       </va-alert>
@@ -191,34 +195,36 @@ const WithARIARoleTemplate = ({}) => {
       <va-alert
         status="error"
         disable-analytics="false"
-        visible="true"
-        closeable="false"
+        visible={true}
+        closeable={false}
         full-width="false"
-        class="vads-u-margin-bottom--1"
+        className="vads-u-margin-bottom--1"
         role="alert"
       >
         <h2 id="track-your-status-on-mobile" slot="headline">
           Alert Role
         </h2>
         <p className="vads-u-margin-y--0">
-          Important messages that demand the user's immediate attention, such as an error message.
+          Important messages that demand the user's immediate attention, such as
+          an error message.
         </p>
       </va-alert>
 
       <va-alert
         status="success"
         disable-analytics="false"
-        visible="true"
-        closeable="false"
+        visible={true}
+        closeable={false}
         full-width="false"
-        class="vads-u-margin-bottom--1"
+        className="vads-u-margin-bottom--1"
         role="status"
       >
         <h2 id="track-your-status-on-mobile" slot="headline">
           Status Role
         </h2>
         <p className="vads-u-margin-y--0">
-          Messages that provide advisory information but do not have the same urgency as alerts, such as a success message.
+          Messages that provide advisory information but do not have the same
+          urgency as alerts, such as a success message.
         </p>
       </va-alert>
     </>
@@ -241,7 +247,7 @@ SignInOrToolPrompt.args = {
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
-      <va-button uswds primary-alternate text="Sign-in to VA.gov"/>
+      <va-button primary-alternate text="Sign-in to VA.gov" />
     </>
   ),
   status: 'continue',
