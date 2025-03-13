@@ -36,8 +36,8 @@ if (Build.isTesting) {
 
 /**
  * @componentName Memorable date
- * @maturityCategory caution
- * @maturityLevel available
+ * @maturityCategory use
+ * @maturityLevel deployed
  * @guidanceHref form/memorable-date
  * @translations English
  * @translations Spanish
@@ -306,10 +306,10 @@ export class VaMemorableDate {
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
-      const ariaLabeledByIds = 
-      `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
-        useFormsPattern ? 'form-description' : ''} ${
-        useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+      const ariaLabeledByIds =
+        `${useFormsPattern && formHeading ? 'form-question' : ''} ${
+          useFormsPattern ? 'form-description' : ''
+        } ${useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
         const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
         let formsHeading = null;
         if (isFormsPattern) {

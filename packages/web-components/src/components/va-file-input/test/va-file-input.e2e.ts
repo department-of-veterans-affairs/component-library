@@ -308,4 +308,64 @@ describe('va-file-input', () => {
     // buttons are gone because file has been deleted
     expect(btns).toHaveLength(0);
   });
+
+  it('displays an error if the file size exceeds max allowed file size', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input max-file-size="1" />`);
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (await page.$(
+      'pierce/#fileInputField',
+    )) as ElementHandle<HTMLInputElement>;
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessage = await fileInfoCard.find('span.usa-error-message');
+    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too big. Files must be less than 1 B.");
+  });
+
+  it('renders a progress bar if percent-uploaded prop is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input percent-uploaded="12" />`);
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (await page.$(
+      'pierce/#fileInputField',
+    )) as ElementHandle<HTMLInputElement>;
+
+    await input
+      .uploadFile(filePath);
+
+    await page.waitForChanges();
+
+    const progBar = await page.find('va-file-input >>> va-progress-bar');
+
+    expect(progBar).not.toBeNull();
+
+  });
+  it('resets the component if the cancel button is clicked during upload', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input percent-uploaded="12" />`);
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (await page.$(
+      'pierce/#fileInputField',
+    )) as ElementHandle<HTMLInputElement>;
+
+    await input
+      .uploadFile(filePath);
+
+    await page.waitForChanges();
+
+    const button = await page.find('va-file-input >>> va-button-icon');
+    button.click();
+    await page.waitForChanges();
+    const progBar = await page.find('va-file-input >>> va-progress-bar');
+    expect(progBar).toBeNull();
+  });
 });

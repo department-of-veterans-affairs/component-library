@@ -20,7 +20,7 @@ import { focusableQueryString } from '../../utils/modal';
  * @keydown Used to detect Escape key to close modal.
  * @componentName Modal
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  */
 @Component({
   tag: 'va-modal',
@@ -351,12 +351,12 @@ export class VaModal {
 
     // find all focusable children within the modal, but maintain tab order
     this.focusableChildren = this.getFocusableChildren();
-    
+
     // find first focusable item so that focus can be redirected there when needed
     const firstFocusChild = this.focusableChildren[0];
     firstFocusChild.classList.add('first-focusable-child');
     firstFocusChild.onkeydown = (e)=> this.handleFirstElementFocus(e);
-    
+
     // find last focusable item so that focus can be redirected there when needed
     const lastFocusChild =
       this.focusableChildren[this.focusableChildren.length - 1];

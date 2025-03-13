@@ -119,12 +119,10 @@ export function Guidance({ href, name }) {
 
   return (
     <div className="vads-u-margin-bottom--5">
-      <a
-        className="vads-c-action-link--green"
+      <va-link-action
         href={`https://design.va.gov/components/${href}`}
-      >
-        View guidance for the {name} component in the Design System
-      </a>
+        text={`View guidance for the ${name} component in the Design System`}
+      />
     </div>
   );
 }
@@ -148,15 +146,19 @@ export function MaturityScale({ category, level }) {
   if (!category || !level) return null;
 
   let colors;
+  let backgroundColor;
   switch (category) {
     case 'USE':
       colors = 'vads-u-background-color--green-darker';
+      backgroundColor = null;
       break;
     case 'USE WITH CAUTION':
-      colors = 'storybook-background-color-orange vads-u-color--base';
+      colors = 'vads-u-color--base';
+      backgroundColor = 'vads-color-orange';
       break;
     case "DON'T USE":
       colors = 'vads-u-background-color--secondary-darkest';
+      backgroundColor = null;
       break;
   }
 
@@ -164,7 +166,10 @@ export function MaturityScale({ category, level }) {
 
   return (
     <div className="vads-u-margin-bottom--3">
-      <span className={`usa-label ${colors}`}>
+      <span 
+        className={`usa-label ${colors}`}
+        {...(backgroundColor && { style: { backgroundColor: `var(--${backgroundColor})` } })}
+      >
         {category}: {level}
       </span>
     </div>
@@ -257,7 +262,6 @@ export function StoryDocs({ storyDefault, componentName, data, children }) {
   // tag name where possible
   const guidanceHref = getDocsTagValue('guidanceHref', data?.docsTags)[0] ?? (componentDocs?.guidanceHref ?? _componentName);
   const guidanceName = componentDocs?.guidanceName ?? capitalize(_componentName)?.replaceAll('-', ' ');
-
 
   return (
     <>

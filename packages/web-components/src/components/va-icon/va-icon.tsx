@@ -5,7 +5,7 @@ import { consoleDevError } from '../../utils/utils';
 /**
  * @componentName Icon
  * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityLevel available
  */
 
 @Component({
