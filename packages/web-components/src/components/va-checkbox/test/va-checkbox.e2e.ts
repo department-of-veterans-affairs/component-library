@@ -235,6 +235,18 @@ describe('va-checkbox', () => {
     expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
   });
 
+  it('emits the vaChange event when checkbox is directly clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
+    );
+    const changeSpy = await page.spyOnEvent('vaChange');
+    const checkboxEl = await page.find('va-checkbox >>> #checkbox-element');
+    await checkboxEl.click();
+
+    expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
+  });
+
   it('emits blur event', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -286,9 +298,7 @@ describe('va-checkbox', () => {
 
   it('does not set aria-checked when toggled off', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-checkbox label="Just another checkbox here" />',
-    );
+    await page.setContent('<va-checkbox label="Just another checkbox here" />');
     const checkboxEl = await page.find('va-checkbox >>> input');
 
     expect(checkboxEl).not.toHaveAttribute('aria-checked');
@@ -326,11 +336,11 @@ describe('va-checkbox', () => {
         <mock:shadow-root>
           <span id="checkbox-error-message" role="alert"></span>
           <div class="va-checkbox__container" part="checkbox">
-          <input aria-invalid="false" class="va-checkbox__input" id="checkbox-element" type="checkbox">
-          <label class="va-checkbox__label" for="checkbox-element">
-            <span part="label">test</span>
-            <slot name="internal-description"></slot>
-          </label>
+            <input aria-invalid="false" class="va-checkbox__input" id="checkbox-element" type="checkbox">
+            <label class="va-checkbox__label" for="checkbox-element">
+              <span part="label">test</span>
+              <slot name="internal-description"></slot>
+            </label>
           </div>
         </mock:shadow-root>
         <p slot="internal-description">
