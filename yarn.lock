@@ -3449,7 +3449,6 @@ __metadata:
     "@axe-core/puppeteer": "npm:^4.10.0"
     "@babel/core": "npm:^7.12.13"
     "@department-of-veterans-affairs/css-library": "npm:^0.20.0"
-    "@department-of-veterans-affairs/formation": "npm:^11.0.6"
     "@stencil/core": "npm:4.20.0"
     "@stencil/postcss": "npm:^2.0.0"
     "@stencil/react-output-target": "npm:^0.5.3"
