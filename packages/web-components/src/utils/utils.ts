@@ -20,7 +20,7 @@ export function isNumeric(value: string): boolean {
 export function getSlottedNodes(
   root: HTMLElement,
   nodeName: string | null,
-  query: string = 'slot'
+  query: string = 'slot',
 ): Array<Node> {
   // This will only get the first slot on a component unless the component sets a query value
   const slot = root.shadowRoot.querySelector(query) as HTMLSlotElement;
@@ -183,10 +183,7 @@ export function getHeaderLevel(headerInput: number | string): string | null {
 /**
  * Checks if an element is interactive
  */
-export function isInteractiveElement(el: HTMLElement): boolean {
-  const { tagName } = el;
-  return (
-    tagName.startsWith('VA-') ||
-    ['INPUT', 'BUTTON', 'A', 'DETAILS', 'TEXTAREA', 'SELECT'].includes(tagName)
-  );
+export function isInteractiveLinkOrButton(el: HTMLElement): boolean {
+  // eslint-disable-next-line i18next/no-literal-string
+  return ['VA-BUTTON', 'VA-LINK', 'BUTTON', 'A'].includes(el.tagName);
 }
