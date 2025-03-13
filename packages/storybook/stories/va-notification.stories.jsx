@@ -90,7 +90,7 @@ const MultipleTemplate = ({
         closeable={closeable}
         has-border={hasBorder}
         closeBtnAriaLabel={closeBtnAriaLabel}
-        className="vads-u-margin-bottom--1p5"
+        class="vads-u-margin-bottom--1p5"
       ></va-notification>
       <va-notification
         visible={true}

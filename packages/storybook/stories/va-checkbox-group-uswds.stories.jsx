@@ -382,11 +382,13 @@ Internationalization.args = {
 export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
 FormsPatternSingle.args = {
   ...defaultArgs,
+  label: 'Select one:',
 };
 
 export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
 FormsPatternSingleError.args = {
   ...defaultArgs,
+  label: 'Select one:',
   error: 'This is an error message',
 };
 

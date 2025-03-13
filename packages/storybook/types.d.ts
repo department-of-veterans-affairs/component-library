@@ -1,5 +1,5 @@
 import { HTMLAttributes, Key } from 'react';
-import { Components as WCTypes } from '@department-of-veterans-affairs/component-library/dist/components/types';
+import { Components as WCTypes } from '../web-components/dist/types/components';
 
 // Applies the component's type plus HTMLAttributes<HTMLElement> from React in order to satisfy the JSX "children" prop
 

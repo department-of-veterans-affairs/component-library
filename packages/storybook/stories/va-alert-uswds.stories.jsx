@@ -45,8 +45,12 @@ const defaultArgs = {
     </h2>
   ),
   'children': (
-    <p className="vads-u-margin-y--0">
-      Lorem ipsum dolor sit amet <a className="usa-link" href="javascript:void(0);">consectetur adipiscing</a> elit sed do eiusmod.
+    <p class="vads-u-margin-y--0">
+      Lorem ipsum dolor sit amet{' '}
+      <a class="usa-link" href="javascript:void(0);">
+        consectetur adipiscing
+      </a>{' '}
+      elit sed do eiusmod.
     </p>
   ),
 };
@@ -112,9 +116,9 @@ const SlimTemplate = ({
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        className="vads-u-margin-bottom--1"
+        class="vads-u-margin-bottom--1"
       >
-        <p className="vads-u-margin-y--0">
+        <p class="vads-u-margin-y--0">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod.
         </p>
@@ -127,10 +131,10 @@ const SlimTemplate = ({
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        className="vads-u-margin-bottom--1"
+        class="vads-u-margin-bottom--1"
       >
         <>
-          <p className="vads-u-margin-y--0">
+          <p class="vads-u-margin-y--0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod.
           </p>
@@ -144,9 +148,9 @@ const SlimTemplate = ({
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        className="vads-u-margin-bottom--1"
+        class="vads-u-margin-bottom--1"
       >
-        <p className="vads-u-margin-y--0">
+        <p class="vads-u-margin-y--0">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod.
         </p>
@@ -159,10 +163,10 @@ const SlimTemplate = ({
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        className="vads-u-margin-bottom--1"
+        class="vads-u-margin-bottom--1"
       >
         <>
-          <p className="vads-u-margin-y--0">
+          <p class="vads-u-margin-y--0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod.
           </p>
@@ -176,10 +180,10 @@ const SlimTemplate = ({
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
-        className="vads-u-margin-bottom--1"
+        class="vads-u-margin-bottom--1"
       >
         <>
-          <p className="vads-u-margin-y--0">
+          <p class="vads-u-margin-y--0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod.
           </p>
@@ -198,13 +202,13 @@ const WithARIARoleTemplate = ({}) => {
         visible={true}
         closeable={false}
         full-width="false"
-        className="vads-u-margin-bottom--1"
+        class="vads-u-margin-bottom--1"
         role="alert"
       >
         <h2 id="track-your-status-on-mobile" slot="headline">
           Alert Role
         </h2>
-        <p className="vads-u-margin-y--0">
+        <p class="vads-u-margin-y--0">
           Important messages that demand the user's immediate attention, such as
           an error message.
         </p>
@@ -216,13 +220,13 @@ const WithARIARoleTemplate = ({}) => {
         visible={true}
         closeable={false}
         full-width="false"
-        className="vads-u-margin-bottom--1"
+        class="vads-u-margin-bottom--1"
         role="status"
       >
         <h2 id="track-your-status-on-mobile" slot="headline">
           Status Role
         </h2>
-        <p className="vads-u-margin-y--0">
+        <p class="vads-u-margin-y--0">
           Messages that provide advisory information but do not have the same
           urgency as alerts, such as a success message.
         </p>
@@ -242,7 +246,7 @@ SignInOrToolPrompt.args = {
   ...defaultArgs,
   children: (
     <>
-      <p className="vads-u-margin-y--0">
+      <p class="vads-u-margin-y--0">
         You can use our new mobile app to check the status of your claims or
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
@@ -256,28 +260,35 @@ SignInOrToolPrompt.args = {
 export const SignInToStartYourApplication = Template.bind(null);
 SignInToStartYourApplication.args = {
   ...defaultArgs,
-  headline: (
-    <h2 slot="headline">
-      Sign in with a verified account
-    </h2>
-  ),
+  headline: <h2 slot="headline">Sign in with a verified account</h2>,
   children: (
     <div>
-      <p className="vads-u-margin-top--0">
-      Here’s how signing in with an identity-verified account helps you:
+      <p class="vads-u-margin-top--0">
+        Here’s how signing in with an identity-verified account helps you:
       </p>
       <ul>
-        <li>We can fill in some of your information for you to save you time.</li>
-        <li>You can save your work in progress. You'll have (input time limit) from when you start or make changes to submit your form.</li>
+        <li>
+          We can fill in some of your information for you to save you time.
+        </li>
+        <li>
+          You can save your work in progress. You'll have (input time limit)
+          from when you start or make changes to submit your form.
+        </li>
       </ul>
-      <p>After you sign in, we’ll tell you if you need to verify your identity for your account.</p>
-      <p><strong>Note:</strong> You can sign in after you start filling out your form. But you'll lose any information you already filled in.</p>
-      <va-button text="Sign in or create an account"/>
+      <p>
+        After you sign in, we’ll tell you if you need to verify your identity
+        for your account.
+      </p>
+      <p>
+        <strong>Note:</strong> You can sign in after you start filling out your
+        form. But you'll lose any information you already filled in.
+      </p>
+      <va-button text="Sign in or create an account" />
       <p>
         <a href="#start">Start your form without signing in</a>
       </p>
     </div>
-  )
+  ),
 };
 
 export const Success = Template.bind(null);
@@ -290,9 +301,7 @@ Success.args = {
     </h2>
   ),
   children: (
-    <p className="vads-u-margin-y--0">
-      You can now access health tools on VA.gov.
-    </p>
+    <p class="vads-u-margin-y--0">You can now access health tools on VA.gov.</p>
   ),
   status: 'success',
 };
@@ -300,13 +309,11 @@ Success.args = {
 export const Warning = Template.bind(null);
 Warning.args = {
   ...defaultArgs,
-  headline: (
-    <h2 slot="headline">Warning status</h2>
-  ),
+  headline: <h2 slot="headline">Warning status</h2>,
   children: (
     <>
-      <p className="vads-u-margin-y--0">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+      <p class="vads-u-margin-y--0">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
       </p>
     </>
   ),
@@ -316,11 +323,14 @@ Warning.args = {
 export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
-  headline: <h2 slot="headline">Sorry, we couldn't find any eligible issues</h2>,
+  headline: (
+    <h2 slot="headline">Sorry, we couldn't find any eligible issues</h2>
+  ),
   children: (
     <>
-      <p className="vads-u-margin-y--0">
-        If you’d like to add an issue for review, select "Add a new issue" to get started.
+      <p class="vads-u-margin-y--0">
+        If you’d like to add an issue for review, select "Add a new issue" to
+        get started.
       </p>
     </>
   ),
