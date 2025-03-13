@@ -57,16 +57,6 @@ a.sbdocs-a:hover {
 /** Global styles for USWDS 3 integration into Storybook **/
 .usa-label {
   font-size: 15px !important;
-
-  &--use {
-    background-color: var(--vads-button-color-background-primary-alt-active-on-light) !important;
-  }
-  &--caution {
-    background-color: var(--vads-color-error-darker) !important;
-  }
-  &--dont-use {
-    background-color: var(--vads-color-secondary-darkest) !important;
-  }
 }
 
 button {

@@ -1,5 +1,4 @@
 import './style.scss';
-import '@department-of-veterans-affairs/css-library/dist/stylesheets/core.css';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
 import {
