@@ -219,7 +219,6 @@ export class VaCheckbox {
       'va-checkbox__container--tile--checked': tile && checked,
     });
     const descriptionClass = classnames({
-      'vads-u-margin-top--1p5': true,
       'usa-label--error': error,
     });
     const ariaDescribedbyIds =
