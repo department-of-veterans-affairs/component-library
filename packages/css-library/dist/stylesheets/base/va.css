@@ -410,4 +410,12 @@ article > h1 {
   margin: 0;
 }
 
+img {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
 /*# sourceMappingURL=va.css.map */
