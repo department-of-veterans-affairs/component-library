@@ -34,9 +34,9 @@
 
     .name-and-chevron {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       width: 100%;
-    }    
+    }
 
     .icon {
       display: flex;
@@ -113,11 +113,12 @@
     .chevron-icon {
       margin-left: auto;
       font-size: 24px;
-      color: var(--vads-color-link);  
+      color: var(--vads-color-link);
       @media (min-width: 768px) {
         margin-left: 0.938rem;
       }
     }
+
   }
 
   .status {
@@ -125,7 +126,7 @@
   }
 
   .action-bar {
-    padding: 1rem 1.25rem;
+    padding: 1.25rem;
     margin-top: 1rem;
     background-color: var(--vads-color-warning);
     position: relative;
@@ -156,16 +157,21 @@
     }
   }
 
+  li {
+    padding-bottom: 0.25rem;
+  }
+
   ul {
     list-style-type: none;
     padding-left: 0;
     font-size: 1.06rem;
-    padding: 1.5rem 0 1.5rem 0;
+    padding: 1.25rem 0 1.25rem 0;
     margin: 0;
     &:last-child {
       padding-bottom: 0;
     }
   }
+
 
   .optional-link {
     margin-top: 1.5rem;

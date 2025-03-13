@@ -73,6 +73,18 @@ describe('va-select', () => {
     expect(select.classList.contains('usa-input--md')).toBeTruthy();
   });
 
+  it('adds a full-width class when full-width is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo" full-width>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+    const select = await page.find('va-select >>> select');
+    expect(select.classList.contains('va-select--full-width')).toBeTruthy();
+  });
+
   it('does not render the error if showError is false', async () => {
     const page = await newE2EPage();
     await page.setContent(`

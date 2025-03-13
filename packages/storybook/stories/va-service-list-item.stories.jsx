@@ -91,7 +91,7 @@ MaximalBase.argTypes = {
   },
   serviceNameHeadingLevel: {
     description: 'The heading level for the service name (defaults to h3)',
-    control: { type: 'number', min:2, max:6, },
+    control: { type: 'number', min: 2, max: 6, },
     table: { category: 'Properties', type: { summary: 'number' }, defaultValue: { summary: 3 } },
   },
   serviceLink: {
@@ -179,7 +179,7 @@ BaseWithCriticalInformation.args = {
   },
 };
 
-export const ServiceListWithMultipleServiceListItems = ({}) => {
+export const ServiceListWithMultipleServiceListItems = ({ }) => {
   return (
     <div>
       <MaximalBase {...MaximalBase.args} />

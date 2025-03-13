@@ -1532,6 +1532,10 @@ export namespace Components {
          */
         "formHeadingLevel"?: number;
         /**
+          * If true, sets the select to take the full-width of its container
+         */
+        "fullWidth"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1572,7 +1576,7 @@ export namespace Components {
          */
         "value"?: string;
         /**
-          * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+          * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex). Defined in USWDS here: https://github.com/uswds/uswds/blob/develop/packages/uswds-core/src/styles/tokens/units/input-widths.scss
          */
         "width"?: string;
     }
@@ -5080,6 +5084,10 @@ declare namespace LocalJSX {
          */
         "formHeadingLevel"?: number;
         /**
+          * If true, sets the select to take the full-width of its container
+         */
+        "fullWidth"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -5136,7 +5144,7 @@ declare namespace LocalJSX {
          */
         "value"?: string;
         /**
-          * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+          * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex). Defined in USWDS here: https://github.com/uswds/uswds/blob/develop/packages/uswds-core/src/styles/tokens/units/input-widths.scss
          */
         "width"?: string;
     }

@@ -119,12 +119,10 @@ export function Guidance({ href, name }) {
 
   return (
     <div className="vads-u-margin-bottom--5">
-      <a
-        className="vads-c-action-link--green"
+      <va-link-action
         href={`https://design.va.gov/components/${href}`}
-      >
-        View guidance for the {name} component in the Design System
-      </a>
+        text={`View guidance for the ${name} component in the Design System`}
+      />
     </div>
   );
 }

@@ -101,8 +101,14 @@ export class VaSelect {
 
   /**
    * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+   * Defined in USWDS here: https://github.com/uswds/uswds/blob/develop/packages/uswds-core/src/styles/tokens/units/input-widths.scss
    */
   @Prop() width?: string;
+
+  /**
+   * If true, sets the select to take the full-width of its container
+   */
+  @Prop() fullWidth?: boolean = false;
 
   /**
    * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date
@@ -240,6 +246,7 @@ export class VaSelect {
       hint,
       messageAriaDescribedby,
       width,
+      fullWidth,
       showError,
       useFormsPattern,
       formHeadingLevel,
@@ -260,6 +267,7 @@ export class VaSelect {
       'usa-select': true,
       'usa-input--error': error || reflectInputError,
       [`usa-input--${width}`]: width,
+      'va-select--full-width': fullWidth,
     });
 
     const isFormsPattern = ['single', 'multiple'].includes(useFormsPattern);
