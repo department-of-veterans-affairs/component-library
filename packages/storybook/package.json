@@ -19,7 +19,6 @@
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@department-of-veterans-affairs/css-library": "workspace:^",
-    "@department-of-veterans-affairs/formation": "^11.0.6",
     "@mdx-js/react": "^1.6.22",
     "@storybook/addon-a11y": "7.6.19",
     "@storybook/addon-actions": "^7.6.10",
