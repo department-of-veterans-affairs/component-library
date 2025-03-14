@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import {
   getWebComponentDocs,
@@ -6,7 +5,6 @@ import {
   StoryDocs,
   applyFocus,
 } from './wc-helpers';
-
 import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const textInputDocs = getWebComponentDocs('va-text-input');

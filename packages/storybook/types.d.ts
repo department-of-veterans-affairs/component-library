@@ -3,7 +3,7 @@ import { Components as WCTypes } from '../web-components/dist/types/components';
 
 // Applies the component's type plus HTMLAttributes<HTMLElement> from React in order to satisfy the JSX "children" prop
 
-type IsElement = HTMLAttributes<HTMLElement>;
+type IsElement = HTMLAttributes<HTMLElement> & { class?: string };
 
 declare global {
   namespace JSX {
@@ -46,7 +46,7 @@ declare global {
       'va-segmented-progress-bar': WCTypes.VaSegmentedProgressBar & IsElement;
       'va-select': WCTypes.VaSelect & IsElement & { inert?: boolean };
       'va-service-list-item': WCTypes.VaServiceListItem &
-        IsElement & { ref?: any };
+        IsElement & { ref?: any } & { key?: Key };
       'va-summary-box': WCTypes.VaSummaryBox & IsElement;
       'va-table': WCTypes.VaTable & IsElement;
       'va-table-row': WCTypes.VaTableRow & IsElement & { key?: Key };

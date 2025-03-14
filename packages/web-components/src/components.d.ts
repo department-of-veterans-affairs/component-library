@@ -1613,7 +1613,7 @@ export namespace Components {
         /**
           * The heading level for the service name (defaults to h3)
          */
-        "serviceNameHeadingLevel": number;
+        "serviceNameHeadingLevel"?: number;
         /**
           * The status of the service
          */

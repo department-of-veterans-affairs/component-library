@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
     "checkJs": true,
+    "esModuleInterop": true,
     "jsx": "react-jsx",
+    "lib": ["ES2024"],
     "outDir": "build",
+    "resolveJsonModule": true,
     "types": ["./types"]
   }
 }
