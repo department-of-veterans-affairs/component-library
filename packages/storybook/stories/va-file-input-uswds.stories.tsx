@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 // @ts-ignore
@@ -22,10 +21,10 @@ export default {
     // hide the uploadMessage prop from the properties table in storybook
     uploadMessage: {
       table: {
-        disable: true
-      }
-    }
-  }
+        disable: true,
+      },
+    },
+  },
 };
 
 const defaultArgs = {
@@ -123,7 +122,7 @@ WithMaxFileSize.args = {
   label: 'Input has a file-size restriction (specified in bytes)',
   hint: 'An error will be thrown if the selected file is greater than 1 KB',
   maxFileSize: 1024,
-}
+};
 
 export const HeaderLabel = Template.bind(null);
 HeaderLabel.args = {
@@ -175,7 +174,7 @@ const CustomValidationTemplate = ({
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        const contents = /** @type {string} */ (reader.result);
+        const contents = reader.result as String;
         const hasX = contents.includes('X');
 
         if (hasX) setErrorVal("File contains an 'X' character");
@@ -367,4 +366,4 @@ const PercentUploadedTemplate = args => {
 };
 
 export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
-WithPercentUploaded.args = { ...defaultArgs }
+WithPercentUploaded.args = { ...defaultArgs };

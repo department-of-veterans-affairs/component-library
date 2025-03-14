@@ -1,6 +1,9 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure,
+  StoryDocs,
+  applyFocus,
+} from './wc-helpers';
 
 const textareaDocs = getWebComponentDocs('va-textarea');
 
@@ -32,7 +35,7 @@ const defaultArgs = {
   'form-heading': null,
   'form-description': null,
   'label-header-level': null,
-  'header-aria-describedby': null
+  'header-aria-describedby': null,
 };
 
 const Template = ({
@@ -63,10 +66,7 @@ const Template = ({
       placeholder={placeholder}
       onBlur={e => console.log('blur event', e)}
       onInput={e =>
-        console.log(
-          'input event value',
-          /** @type {HTMLInputElement} */ (e.target).value,
-        )
+        console.log('input event value', (e.target as HTMLInputElement).value)
       }
       charcount={charcount}
       message-aria-describedby={messageAriaDescribedby}
@@ -102,10 +102,7 @@ const ResizableTemplate = ({
       placeholder={placeholder}
       onBlur={e => console.log('blur event', e)}
       onInput={e =>
-        console.log(
-          'input event value',
-          /** @type {HTMLInputElement} */ (e.target).value,
-        )
+        console.log('input event value', (e.target as HTMLInputElement).value)
       }
     />
   );
@@ -146,10 +143,7 @@ const FormsPatternSingleTemplate = ({
         placeholder={placeholder}
         onBlur={e => console.log('blur event', e)}
         onInput={e =>
-          console.log(
-            'input event value',
-            /** @type {HTMLInputElement} */ (e.target).value,
-          )
+          console.log('input event value', (e.target as HTMLInputElement).value)
         }
         use-forms-pattern="single"
         form-heading-level={1}
@@ -207,10 +201,7 @@ const FormsPatternMultipleTemplate = ({
         placeholder={placeholder}
         onBlur={e => console.log('blur event', e)}
         onInput={e =>
-          console.log(
-            'input event value',
-            /** @type {HTMLInputElement} */ (e.target).value,
-          )
+          console.log('input event value', (e.target as HTMLInputElement).value)
         }
         use-forms-pattern="multiple"
         form-heading-level={1}
@@ -228,10 +219,7 @@ const FormsPatternMultipleTemplate = ({
         placeholder={placeholder}
         onBlur={e => console.log('blur event', e)}
         onInput={e =>
-          console.log(
-            'input event value',
-            /** @type {HTMLInputElement} */ (e.target).value,
-          )
+          console.log('input event value', (e.target as HTMLInputElement).value)
         }
       />
       <va-textarea
@@ -246,10 +234,7 @@ const FormsPatternMultipleTemplate = ({
         placeholder={placeholder}
         onBlur={e => console.log('blur event', e)}
         onInput={e =>
-          console.log(
-            'input event value',
-            /** @type {HTMLInputElement} */ (e.target).value,
-          )
+          console.log('input event value', (e.target as HTMLInputElement).value)
         }
       />
       <hr />

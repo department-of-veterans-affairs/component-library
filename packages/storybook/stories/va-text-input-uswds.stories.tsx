@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   getWebComponentDocs,
   propStructure,
@@ -8,7 +8,6 @@ import {
 } from './wc-helpers';
 
 import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
-
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
@@ -121,10 +120,7 @@ const Template = ({
       pattern={pattern}
       onBlur={e => console.log('blur event', e)}
       onInput={e =>
-        console.log(
-          'input event value',
-          /** @type {HTMLInputElement} */ (e.target).value,
-        )
+        console.log('input event value', (e.target as HTMLInputElement).value)
       }
       message-aria-describedby={messageAriaDescribedby}
       charcount={charcount}
@@ -262,10 +258,7 @@ const FormsPatternMultipleTemplate = ({ name, value, uswds }) => {
 
       <va-text-input name={name} label="Email address" value={value} />
       <hr />
-      <va-button
-        text="Click to focus header"
-        onClick={handleClick}
-      ></va-button>
+      <va-button text="Click to focus header" onClick={handleClick}></va-button>
     </>
   );
 };
@@ -306,10 +299,7 @@ const FormsPatternSingleTemplate = ({ name, value, error }) => {
 
       <hr />
 
-      <va-button
-        text="Click to focus header"
-        onClick={handleClick}
-      ></va-button>
+      <va-button text="Click to focus header" onClick={handleClick}></va-button>
     </>
   );
 };
@@ -351,49 +341,65 @@ ValidRange.args = {
 };
 
 export const Autocomplete = ({ name, label, autocomplete }) => {
-  function handleSubmit() { };
-  function handleKeyPress() { }
+  function handleSubmit() {}
+  function handleKeyPress() {}
   return (
     <>
-      <form onSubmit={handleSubmit} >
-        <VaTextInput label={label} onKeyPress={handleKeyPress} name={name} autocomplete={autocomplete} />
+      <form onSubmit={handleSubmit}>
+        <VaTextInput
+          label={label}
+          onKeyPress={handleKeyPress}
+          name={name}
+          autocomplete={autocomplete}
+        />
       </form>
-      <div className='vads-u-margin-top--2'>
-        Note: on Safari (Mac or iOS), when using "Shift + Command + A" to autofill a field,
-        no <code>input</code>&nbsp;event is fired, which means that any handler passed to <code>onInput</code> will not fire. This can result in
-        errors on form submission, because from the component's perspective the autofilled field is empty. A suggested
-        workaround is to synchronize field state with component state on submit by passing handlers
-        to <code>VaTextInput</code>&nbsp;such as:
-
+      <div className="vads-u-margin-top--2">
+        Note: on Safari (Mac or iOS), when using "Shift + Command + A" to
+        autofill a field, no <code>input</code>&nbsp;event is fired, which means
+        that any handler passed to <code>onInput</code> will not fire. This can
+        result in errors on form submission, because from the component's
+        perspective the autofilled field is empty. A suggested workaround is to
+        synchronize field state with component state on submit by passing
+        handlers to <code>VaTextInput</code>&nbsp;such as:
         <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
           <code>
-            function onSubmit(e) &#x7b;<br/>
-            &nbsp;&nbsp;e.preventDefault()<br/>
-            &nbsp;&nbsp;// check if the "value" passed to VaTextInput is <br/>
+            function onSubmit(e) &#x7b;
+            <br />
+            &nbsp;&nbsp;e.preventDefault()
+            <br />
+            &nbsp;&nbsp;// check if the "value" passed to VaTextInput is <br />
             &nbsp;&nbsp;// the same as e.target.value, <br />
             &nbsp;&nbsp;// then proceed with submission <br />
-            &#x7d;<br/><br/>
-
-            function handleKeyPress(e) &#x7b;<br/>
-              &nbsp;&nbsp;if (e.key === 'Enter') &#x7b;<br/>
-              &nbsp;&nbsp;// the user wants to submit the form<br/>
-              &nbsp;&nbsp;// synchronize element and component state before<br/>
-              &nbsp;&nbsp;// continuing with submission<br/>
-              &nbsp;&#x7d;<br/>
-            &#x7d;<br />
-        </code>
-      </pre>
+            &#x7d;
+            <br />
+            <br />
+            function handleKeyPress(e) &#x7b;
+            <br />
+            &nbsp;&nbsp;if (e.key === 'Enter') &#x7b;
+            <br />
+            &nbsp;&nbsp;// the user wants to submit the form
+            <br />
+            &nbsp;&nbsp;// synchronize element and component state before
+            <br />
+            &nbsp;&nbsp;// continuing with submission
+            <br />
+            &nbsp;&#x7d;
+            <br />
+            &#x7d;
+            <br />
+          </code>
+        </pre>
       </div>
     </>
-  )
-}
+  );
+};
 
 Autocomplete.args = {
   ...defaultArgs,
   name: 'email',
   autocomplete: 'email',
-  label: 'This va-text-input is configured for email autocompletion'
-}
+  label: 'This va-text-input is configured for email autocompletion',
+};
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
@@ -402,7 +408,13 @@ export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
 
 export const WithStep = Template.bind(null);
-WithStep.args = { ...defaultArgs, type: 'number', inputmode: 'decimal', step: '.2', hint: 'step=".2" (only even values in tenth position valid)' };
+WithStep.args = {
+  ...defaultArgs,
+  type: 'number',
+  inputmode: 'decimal',
+  step: '.2',
+  hint: 'step=".2" (only even values in tenth position valid)',
+};
 
 const WithInlineHintTextTemplate = ({ name, label }) => {
   return (
@@ -467,7 +479,7 @@ export const WithIconSuffix = Template.bind(null);
 WithIconSuffix.args = {
   ...defaultArgs,
   'input-icon-suffix': 'comment',
-}
+};
 
 export const WithIconAndSuffix = Template.bind(null);
 WithIconAndSuffix.args = {
@@ -482,8 +494,8 @@ export const WithPrefixAndIconSuffix = Template.bind(null);
 WithPrefixAndIconSuffix.args = {
   ...defaultArgs,
   'input-icon-suffix': 'comment',
-  'input-prefix': 'Pre'
-}
+  'input-prefix': 'Pre',
+};
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
@@ -496,7 +508,6 @@ hideInputError.args = {
   'show-input-error': false,
   'error': 'This is an error message',
 };
-
 
 export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
 FormsPatternSingle.args = {

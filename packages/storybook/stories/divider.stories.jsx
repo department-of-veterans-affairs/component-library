@@ -1,4 +1,3 @@
-import React from 'react';
 import { StoryDocs } from './wc-helpers';
 
 export default {
@@ -12,10 +11,6 @@ export default {
   },
 };
 
-
-const Template = ({
-}) => (
-  <div className="va-h-ruled--stars"></div>
-);
+const Template = ({}) => <div className="va-h-ruled--stars"></div>;
 
 export const Default = Template.bind(null);

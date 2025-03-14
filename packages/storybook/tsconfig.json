@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "jsx": "react-jsx",
+    "outDir": "build",
+    "types": ["./types"]
+  }
+}

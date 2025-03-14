@@ -79,17 +79,17 @@ const I18nTemplate = args => {
   return (
     <div>
       <va-button
-        onClick={e => setLang('es')}
+        onClick={_ => setLang('es')}
         style={{ fontSize: '16px' }}
         text="Español"
       />
       <va-button
-        onClick={e => setLang('en')}
+        onClick={_ => setLang('en')}
         style={{ fontSize: '16px' }}
         text="English"
       />
       <va-button
-        onClick={e => setLang('tl')}
+        onClick={_ => setLang('tl')}
         style={{ fontSize: '16px' }}
         text="Tagalog"
       />
@@ -106,9 +106,9 @@ const IndeterminateTemplate = ({}) => {
   }, [checked]);
 
   const handleIndeterminate = () => {
-    const indeterminateCheckbox = /** @type {HTMLInputElement} */ (
-      document.querySelector('.indeterminate-checkbox')
-    );
+    const indeterminateCheckbox = document.querySelector(
+      '.indeterminate-checkbox',
+    ) as HTMLInputElement;
 
     // If all of the checkbox states are true, set indeterminate checkbox to checked.
     if (indeterminateCheckbox && checked.every(val => val === true)) {
@@ -138,9 +138,9 @@ const IndeterminateTemplate = ({}) => {
   };
 
   const handleSelectAllToggle = event => {
-    const checkboxes = /** @type {HTMLInputElement[]} */ (
-      /** @type {unknown} */ (document.querySelectorAll('.example-checkbox'))
-    );
+    const checkboxes = document.querySelectorAll(
+      '.example-checkbox',
+    ) as unknown as HTMLInputElement[];
     checkboxes.forEach(checkbox => {
       checkbox.checked = event.target.checked;
     });
