@@ -211,7 +211,7 @@ Tile.args = {
     'This is optional text that can be used to describe the label in more detail.',
 };
 
-export const TitleWithCustomContent = () => (
+export const TileWithCustomContent = () => (
   <>
     <va-checkbox label="Issue 1" tile onBlur={e => console.log(e)}>
       <div slot="internal-description">
