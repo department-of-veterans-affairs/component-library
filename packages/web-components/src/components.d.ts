@@ -542,6 +542,21 @@ export namespace Components {
     interface VaCrisisLineModal {
     }
     /**
+     * @componentName Critical information
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaCriticalInformation {
+        /**
+          * The link to a page where the user can take action
+         */
+        "link": string;
+        /**
+          * Text describing what critical action the user needs to take
+         */
+        "text": string;
+    }
+    /**
      * @componentName Date input
      * @maturityCategory use
      * @maturityLevel deployed
@@ -2524,6 +2539,17 @@ declare global {
         prototype: HTMLVaCrisisLineModalElement;
         new (): HTMLVaCrisisLineModalElement;
     };
+    /**
+     * @componentName Critical information
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaCriticalInformationElement extends Components.VaCriticalInformation, HTMLStencilElement {
+    }
+    var HTMLVaCriticalInformationElement: {
+        prototype: HTMLVaCriticalInformationElement;
+        new (): HTMLVaCriticalInformationElement;
+    };
     interface HTMLVaDateElementEventMap {
         "dateChange": any;
         "dateBlur": any;
@@ -3302,6 +3328,7 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-combo-box": HTMLVaComboBoxElement;
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
+        "va-critical-information": HTMLVaCriticalInformationElement;
         "va-date": HTMLVaDateElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
@@ -3951,6 +3978,21 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+    }
+    /**
+     * @componentName Critical information
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaCriticalInformation {
+        /**
+          * The link to a page where the user can take action
+         */
+        "link"?: string;
+        /**
+          * Text describing what critical action the user needs to take
+         */
+        "text"?: string;
     }
     /**
      * @componentName Date input
@@ -5622,6 +5664,7 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-combo-box": VaComboBox;
         "va-crisis-line-modal": VaCrisisLineModal;
+        "va-critical-information": VaCriticalInformation;
         "va-date": VaDate;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
@@ -5785,6 +5828,12 @@ declare module "@stencil/core" {
              * @maturityLevel available
              */
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
+            /**
+             * @componentName Critical information
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-critical-information": LocalJSX.VaCriticalInformation & JSXBase.HTMLAttributes<HTMLVaCriticalInformationElement>;
             /**
              * @componentName Date input
              * @maturityCategory use
