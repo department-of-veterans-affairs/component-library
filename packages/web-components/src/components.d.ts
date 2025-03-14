@@ -551,7 +551,7 @@ export namespace Components {
         /**
           * Whether or not an analytics event will be fired.
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
@@ -560,9 +560,9 @@ export namespace Components {
           * Optional hint text.
          */
         "hint"?: string;
-        "invalidDay": boolean;
-        "invalidMonth": boolean;
-        "invalidYear": boolean;
+        "invalidDay"?: boolean;
+        "invalidMonth"?: boolean;
+        "invalidYear"?: boolean;
         /**
           * Label for the field.
          */
@@ -892,7 +892,7 @@ export namespace Components {
         /**
           * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
          */
-        "type": 'primary' | 'secondary' | 'reverse';
+        "type"?: 'primary' | 'secondary' | 'reverse';
     }
     /**
      * @componentName Loading indicator
@@ -997,9 +997,9 @@ export namespace Components {
           * Hint text string
          */
         "hint"?: string;
-        "invalidDay": boolean;
-        "invalidMonth": boolean;
-        "invalidYear": boolean;
+        "invalidDay"?: boolean;
+        "invalidMonth"?: boolean;
+        "invalidYear"?: boolean;
         /**
           * Label for the field.
          */
@@ -1613,7 +1613,7 @@ export namespace Components {
         /**
           * The heading level for the service name (defaults to h3)
          */
-        "serviceNameHeadingLevel": number;
+        "serviceNameHeadingLevel"?: number;
         /**
           * The status of the service
          */
@@ -1686,7 +1686,7 @@ export namespace Components {
         /**
           * Is the table sortable
          */
-        "sortable": boolean;
+        "sortable"?: boolean;
         /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
@@ -1694,7 +1694,7 @@ export namespace Components {
         /**
           * When active, the table will display alternating row background colors.
          */
-        "striped": boolean;
+        "striped"?: boolean;
         /**
           * The title of the table
          */
