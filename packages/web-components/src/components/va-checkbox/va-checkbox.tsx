@@ -219,7 +219,6 @@ export class VaCheckbox {
       'va-checkbox__container--tile--checked': tile && checked,
     });
     const descriptionClass = classnames({
-      'usa-legend': true,
       'usa-label--error': error,
     });
     const ariaDescribedbyIds =
@@ -245,9 +244,9 @@ export class VaCheckbox {
     return (
       <Host>
         {description && (
-          <legend id="description" class={descriptionClass}>
+          <div id="description" class={descriptionClass}>
             {description}
-          </legend>
+          </div>
         )}
         {hasDescriptionSlot && (
           <div id="description">
