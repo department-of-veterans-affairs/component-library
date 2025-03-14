@@ -38,219 +38,224 @@ const DEFAULT_FILTER = '.*{{query}}.*';
 
 const noop = () => {};
 
-  /**
-   * set the value of the element and dispatch a change event
-   *
-   * @param {HTMLInputElement|HTMLSelectElement} el The element to update
-   * @param {string} value The new value of the element
-   */
-  const changeElementValue = (el, value = '') => {
-    const elementToChange = el;
-    elementToChange.value = value;
+/**
+ * set the value of the element and dispatch a change event
+ *
+ * @param {HTMLInputElement|HTMLSelectElement} el The element to update
+ * @param {string} value The new value of the element
+ */
+const changeElementValue = (el, value = '') => {
+  const elementToChange = el;
+  elementToChange.value = value;
 
-    const event = new CustomEvent('change', {
-      bubbles: true,
-      cancelable: true,
-      detail: { value },
-    });
-    elementToChange.dispatchEvent(event);
+  const event = new CustomEvent('change', {
+    bubbles: true,
+    cancelable: true,
+    detail: { value },
+  });
+  elementToChange.dispatchEvent(event);
+};
+
+/**
+ * The elements within the combo box.
+ * @typedef {Object} ComboBoxContext
+ * @property {HTMLElement} comboBoxEl
+ * @property {HTMLSelectElement} selectEl
+ * @property {HTMLInputElement} inputEl
+ * @property {HTMLUListElement} listEl
+ * @property {HTMLDivElement} statusEl
+ * @property {HTMLLIElement} focusedOptionEl
+ * @property {HTMLLIElement} selectedOptionEl
+ * @property {HTMLButtonElement} toggleListBtnEl
+ * @property {HTMLButtonElement} clearInputBtnEl
+ * @property {boolean} isPristine
+ * @property {boolean} disableFiltering
+ */
+
+/**
+ * Get an object of elements belonging directly to the given
+ * combo box component.
+ *
+ * @param {HTMLElement} el the element within the combo box
+ * @returns {ComboBoxContext} elements
+ */
+const getComboBoxContext = el => {
+  const comboBoxEl = el.closest(COMBO_BOX);
+
+  if (!comboBoxEl) {
+    throw new Error(`Element is missing outer ${COMBO_BOX}`);
+  }
+
+  const selectEl = comboBoxEl.querySelector(SELECT);
+  const inputEl = comboBoxEl.querySelector(INPUT);
+  const listEl = comboBoxEl.querySelector(LIST);
+  const statusEl = comboBoxEl.querySelector(STATUS);
+  const focusedOptionEl = comboBoxEl.querySelector(LIST_OPTION_FOCUSED);
+  const selectedOptionEl = comboBoxEl.querySelector(LIST_OPTION_SELECTED);
+  const toggleListBtnEl = comboBoxEl.querySelector(TOGGLE_LIST_BUTTON);
+  const clearInputBtnEl = comboBoxEl.querySelector(CLEAR_INPUT_BUTTON);
+
+  const isPristine = comboBoxEl.classList.contains(COMBO_BOX_PRISTINE_CLASS);
+  const disableFiltering = comboBoxEl.dataset.disableFiltering === 'true';
+
+  return {
+    comboBoxEl,
+    selectEl,
+    inputEl,
+    listEl,
+    statusEl,
+    focusedOptionEl,
+    selectedOptionEl,
+    toggleListBtnEl,
+    clearInputBtnEl,
+    isPristine,
+    disableFiltering,
   };
+};
 
-  /**
-   * The elements within the combo box.
-   * @typedef {Object} ComboBoxContext
-   * @property {HTMLElement} comboBoxEl
-   * @property {HTMLSelectElement} selectEl
-   * @property {HTMLInputElement} inputEl
-   * @property {HTMLUListElement} listEl
-   * @property {HTMLDivElement} statusEl
-   * @property {HTMLLIElement} focusedOptionEl
-   * @property {HTMLLIElement} selectedOptionEl
-   * @property {HTMLButtonElement} toggleListBtnEl
-   * @property {HTMLButtonElement} clearInputBtnEl
-   * @property {boolean} isPristine
-   * @property {boolean} disableFiltering
-   */
+/**
+ * Disable the combo-box component
+ *
+ * @param {HTMLInputElement} el An element within the combo box component
+ */
+const disable = el => {
+  const { inputEl, toggleListBtnEl, clearInputBtnEl } = getComboBoxContext(el);
 
-  /**
-   * Get an object of elements belonging directly to the given
-   * combo box component.
-   *
-   * @param {HTMLElement} el the element within the combo box
-   * @returns {ComboBoxContext} elements
-   */
-  const getComboBoxContext = el => {
-    const comboBoxEl = el.closest(COMBO_BOX);
+  clearInputBtnEl.hidden = true;
+  clearInputBtnEl.disabled = true;
+  toggleListBtnEl.disabled = true;
+  inputEl.disabled = true;
+};
 
-    if (!comboBoxEl) {
-      throw new Error(`Element is missing outer ${COMBO_BOX}`);
-    }
+/**
+ * Check for aria-disabled on initialization
+ *
+ * @param {HTMLInputElement} el An element within the combo box component
+ */
+const ariaDisable = el => {
+  const { inputEl, toggleListBtnEl, clearInputBtnEl } = getComboBoxContext(el);
 
-    const selectEl = comboBoxEl.querySelector(SELECT);
-    const inputEl = comboBoxEl.querySelector(INPUT);
-    const listEl = comboBoxEl.querySelector(LIST);
-    const statusEl = comboBoxEl.querySelector(STATUS);
-    const focusedOptionEl = comboBoxEl.querySelector(LIST_OPTION_FOCUSED);
-    const selectedOptionEl = comboBoxEl.querySelector(LIST_OPTION_SELECTED);
-    const toggleListBtnEl = comboBoxEl.querySelector(TOGGLE_LIST_BUTTON);
-    const clearInputBtnEl = comboBoxEl.querySelector(CLEAR_INPUT_BUTTON);
+  clearInputBtnEl.hidden = true;
+  clearInputBtnEl.setAttribute('aria-disabled', true);
+  toggleListBtnEl.setAttribute('aria-disabled', true);
+  inputEl.setAttribute('aria-disabled', true);
+};
 
-    const isPristine = comboBoxEl.classList.contains(COMBO_BOX_PRISTINE_CLASS);
-    const disableFiltering = comboBoxEl.dataset.disableFiltering === 'true';
+/**
+ * Enable the combo-box component
+ *
+ * @param {HTMLInputElement} el An element within the combo box component
+ */
+const enable = el => {
+  const { inputEl, toggleListBtnEl, clearInputBtnEl } = getComboBoxContext(el);
 
-    return {
-      comboBoxEl,
-      selectEl,
-      inputEl,
-      listEl,
-      statusEl,
-      focusedOptionEl,
-      selectedOptionEl,
-      toggleListBtnEl,
-      clearInputBtnEl,
-      isPristine,
-      disableFiltering,
-    };
-  };
+  clearInputBtnEl.hidden = false;
+  clearInputBtnEl.disabled = false;
+  toggleListBtnEl.disabled = false;
+  inputEl.disabled = false;
+};
 
-  /**
-   * Disable the combo-box component
-   *
-   * @param {HTMLInputElement} el An element within the combo box component
-   */
-  const disable = el => {
-    const { inputEl, toggleListBtnEl, clearInputBtnEl } =
-      getComboBoxContext(el);
+const handleMouseUp = (event) => {
+  const target = event.target;
+  if (target.selectionStart === target.selectionEnd) {
+    target.select(); // Select all text if nothing is selected
+  }
+};
 
-    clearInputBtnEl.hidden = true;
-    clearInputBtnEl.disabled = true;
-    toggleListBtnEl.disabled = true;
-    inputEl.disabled = true;
-  };
+/**
+ * Enhance a select element into a combo box component.
+ *
+ * @param {HTMLElement} _comboBoxEl The initial element of the combo box component
+ */
+const enhanceComboBox = (_comboBoxEl, _labelEl) => {
+  const comboBoxEl = _comboBoxEl.closest(COMBO_BOX);
 
-  /**
-   * Check for aria-disabled on initialization
-   *
-   * @param {HTMLInputElement} el An element within the combo box component
-   */
-  const ariaDisable = el => {
-    const { inputEl, toggleListBtnEl, clearInputBtnEl } =
-      getComboBoxContext(el);
+  if (comboBoxEl.dataset.enhanced) return;
 
-    clearInputBtnEl.hidden = true;
-    clearInputBtnEl.setAttribute('aria-disabled', true);
-    toggleListBtnEl.setAttribute('aria-disabled', true);
-    inputEl.setAttribute('aria-disabled', true);
-  };
+  const selectEl = comboBoxEl.querySelector('select');
 
-  /**
-   * Enable the combo-box component
-   *
-   * @param {HTMLInputElement} el An element within the combo box component
-   */
-  const enable = el => {
-    const { inputEl, toggleListBtnEl, clearInputBtnEl } =
-      getComboBoxContext(el);
+  if (!selectEl) {
+    throw new Error(`${COMBO_BOX} is missing inner select`);
+  }
 
-    clearInputBtnEl.hidden = false;
-    clearInputBtnEl.disabled = false;
-    toggleListBtnEl.disabled = false;
-    inputEl.disabled = false;
-  };
+  const selectId = selectEl.id;
+  const selectLabel = _labelEl;
+  const listId = `${selectId}--list`;
+  const listIdLabel = `${selectId}-label`;
+  const assistiveHintID = `${selectId}--assistiveHint`;
+  const additionalAttributes = [];
+  const { defaultValue } = comboBoxEl.dataset;
+  const { placeholder } = comboBoxEl.dataset;
+  let selectedOption;
 
-  /**
-   * Enhance a select element into a combo box component.
-   *
-   * @param {HTMLElement} _comboBoxEl The initial element of the combo box component
-   */
-  const enhanceComboBox = (_comboBoxEl, _labelEl) => {
-    const comboBoxEl = _comboBoxEl.closest(COMBO_BOX);
+  if (placeholder) {
+    additionalAttributes.push({ placeholder });
+  }
 
-    if (comboBoxEl.dataset.enhanced) return;
+  if (defaultValue) {
+    for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
+      const optionEl = selectEl.options[i];
 
-    const selectEl = comboBoxEl.querySelector('select');
-
-    if (!selectEl) {
-      throw new Error(`${COMBO_BOX} is missing inner select`);
-    }
-
-    const selectId = selectEl.id;
-    const selectLabel = _labelEl;
-    const listId = `${selectId}--list`;
-    const listIdLabel = `${selectId}-label`;
-    const assistiveHintID = `${selectId}--assistiveHint`;
-    const additionalAttributes = [];
-    const { defaultValue } = comboBoxEl.dataset;
-    const { placeholder } = comboBoxEl.dataset;
-    let selectedOption;
-
-    if (placeholder) {
-      additionalAttributes.push({ placeholder });
-    }
-
-    if (defaultValue) {
-      for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
-        const optionEl = selectEl.options[i];
-
-        if (optionEl.value === defaultValue) {
-          selectedOption = optionEl;
-          break;
-        }
+      if (optionEl.value === defaultValue) {
+        selectedOption = optionEl;
+        break;
       }
     }
+  }
 
-    /**
-     * Throw error if combobox is missing a label or label is missing
-     * `for` attribute. Otherwise, set the ID to match the <ul> aria-labelledby
-     */
-    if (!selectLabel || !selectLabel.matches(`label[for="${selectId}"]`)) {
-      throw new Error(
-        `${COMBO_BOX} for ${selectId} is either missing a label or a "for" attribute`,
-      );
-    } else {
-      selectLabel.setAttribute('id', listIdLabel);
-    }
-
-    selectLabel.setAttribute('id', listIdLabel);
-    selectEl.setAttribute('aria-hidden', 'true');
-    selectEl.setAttribute('tabindex', '-1');
-    selectEl.classList.add('usa-sr-only', SELECT_CLASS);
-    selectEl.id = '';
-    selectEl.value = '';
-
-    ['required', 'aria-label', 'aria-labelledby'].forEach(name => {
-      if (selectEl.hasAttribute(name)) {
-        const value = selectEl.getAttribute(name);
-        additionalAttributes.push({ [name]: value });
-        selectEl.removeAttribute(name);
-      }
-    });
-
-    // sanitize doesn't like functions in template literals
-    const input = document.createElement('input');
-    input.setAttribute('id', selectId);
-    input.setAttribute('aria-owns', listId);
-    input.setAttribute('aria-controls', listId);
-    input.setAttribute('aria-autocomplete', 'list');
-    input.setAttribute('aria-describedby', assistiveHintID);
-    input.setAttribute('aria-expanded', 'false');
-    input.setAttribute('autocapitalize', 'off');
-    input.setAttribute('autocomplete', 'off');
-    input.setAttribute('class', INPUT_CLASS);
-    input.setAttribute('type', 'text');
-    input.setAttribute('role', 'combobox');
-    additionalAttributes.forEach(attr =>
-      Object.keys(attr).forEach(key => {
-        const value = Sanitizer.escapeHTML`${attr[key]}`;
-        input.setAttribute(key, value);
-      }),
+  /**
+   * Throw error if combobox is missing a label or label is missing
+   * `for` attribute. Otherwise, set the ID to match the <ul> aria-labelledby
+   */
+  if (!selectLabel || !selectLabel.matches(`label[for="${selectId}"]`)) {
+    throw new Error(
+      `${COMBO_BOX} for ${selectId} is either missing a label or a "for" attribute`,
     );
+  } else {
+    selectLabel.setAttribute('id', listIdLabel);
+  }
 
-    comboBoxEl.insertAdjacentElement('beforeend', input);
+  selectLabel.setAttribute('id', listIdLabel);
+  selectEl.setAttribute('aria-hidden', 'true');
+  selectEl.setAttribute('tabindex', '-1');
+  selectEl.classList.add('usa-sr-only', SELECT_CLASS);
+  selectEl.id = '';
+  selectEl.value = '';
 
-    comboBoxEl.insertAdjacentHTML(
-      'beforeend',
-      Sanitizer.escapeHTML`
+  ['required', 'aria-label', 'aria-labelledby'].forEach(name => {
+    if (selectEl.hasAttribute(name)) {
+      const value = selectEl.getAttribute(name);
+      additionalAttributes.push({ [name]: value });
+      selectEl.removeAttribute(name);
+    }
+  });
+
+  // sanitize doesn't like functions in template literals
+  const input = document.createElement('input');
+  input.setAttribute('id', selectId);
+  input.setAttribute('aria-owns', listId);
+  input.setAttribute('aria-controls', listId);
+  input.setAttribute('aria-autocomplete', 'list');
+  input.setAttribute('aria-describedby', assistiveHintID);
+  input.setAttribute('aria-expanded', 'false');
+  input.setAttribute('autocapitalize', 'off');
+  input.setAttribute('autocomplete', 'off');
+  input.setAttribute('class', INPUT_CLASS);
+  input.setAttribute('type', 'text');
+  input.setAttribute('role', 'combobox');
+  input.onmouseup = handleMouseUp;
+  additionalAttributes.forEach(attr =>
+    Object.keys(attr).forEach(key => {
+      const value = Sanitizer.escapeHTML`${attr[key]}`;
+      input.setAttribute(key, value);
+    }),
+  );
+
+  comboBoxEl.insertAdjacentElement('beforeend', input);
+
+  comboBoxEl.insertAdjacentHTML(
+    'beforeend',
+    Sanitizer.escapeHTML`
     <span class="${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}" tabindex="-1">
         <button type="button" class="${CLEAR_INPUT_BUTTON_CLASS}" aria-label="Clear the select contents">&nbsp;</button>
       </span>
@@ -271,634 +276,636 @@ const noop = () => {};
         When autocomplete results are available use up and down arrows to review and enter to select.
         Touch device users, explore by touch or with swipe gestures.
       </span>`,
-    );
+  );
 
-    if (selectedOption) {
-      const { inputEl } = getComboBoxContext(comboBoxEl);
-      changeElementValue(selectEl, selectedOption.value);
-      changeElementValue(inputEl, selectedOption.text);
-      comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
-    }
+  if (selectedOption) {
+    const { inputEl } = getComboBoxContext(comboBoxEl);
+    changeElementValue(selectEl, selectedOption.value);
+    changeElementValue(inputEl, selectedOption.text);
+    comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
+  }
 
-    if (selectEl.disabled) {
-      disable(comboBoxEl);
-      selectEl.disabled = false;
-    }
+  if (selectEl.disabled) {
+    disable(comboBoxEl);
+    selectEl.disabled = false;
+  }
 
-    if (selectEl.hasAttribute('aria-disabled')) {
-      ariaDisable(comboBoxEl);
-      selectEl.removeAttribute('aria-disabled');
-    }
+  if (selectEl.hasAttribute('aria-disabled')) {
+    ariaDisable(comboBoxEl);
+    selectEl.removeAttribute('aria-disabled');
+  }
 
-    comboBoxEl.dataset.enhanced = 'true';
-  };
+  comboBoxEl.dataset.enhanced = 'true';
+};
 
-  /**
-   * Manage the focused element within the list options when
-   * navigating via keyboard.
-   *
-   * @param {HTMLElement} el An anchor element within the combo box component
-   * @param {HTMLElement} nextEl An element within the combo box component
-   * @param {Object} options options
-   * @param {boolean} options.skipFocus skip focus of highlighted item
-   * @param {boolean} options.preventScroll should skip procedure to scroll to element
-   */
-  const highlightOption = (el, nextEl, { skipFocus, preventScroll } = {}) => {
-    const { inputEl, listEl, focusedOptionEl } = getComboBoxContext(el);
+/**
+ * Manage the focused element within the list options when
+ * navigating via keyboard.
+ *
+ * @param {HTMLElement} el An anchor element within the combo box component
+ * @param {HTMLElement} nextEl An element within the combo box component
+ * @param {Object} options options
+ * @param {boolean} options.skipFocus skip focus of highlighted item
+ * @param {boolean} options.preventScroll should skip procedure to scroll to element
+ */
+const highlightOption = (el, nextEl, { skipFocus, preventScroll } = {}) => {
+  const { inputEl, listEl, focusedOptionEl } = getComboBoxContext(el);
 
-    if (focusedOptionEl) {
-      focusedOptionEl.classList.remove(LIST_OPTION_FOCUSED_CLASS);
-      focusedOptionEl.setAttribute('tabIndex', '-1');
-    }
+  if (focusedOptionEl) {
+    focusedOptionEl.classList.remove(LIST_OPTION_FOCUSED_CLASS);
+    focusedOptionEl.setAttribute('tabIndex', '-1');
+  }
 
-    if (nextEl) {
-      inputEl.setAttribute('aria-activedescendant', nextEl.id);
-      nextEl.setAttribute('tabIndex', '0');
-      nextEl.classList.add(LIST_OPTION_FOCUSED_CLASS);
+  if (nextEl) {
+    inputEl.setAttribute('aria-activedescendant', nextEl.id);
+    nextEl.setAttribute('tabIndex', '0');
+    nextEl.classList.add(LIST_OPTION_FOCUSED_CLASS);
 
-      if (!preventScroll) {
-        const optionBottom = nextEl.offsetTop + nextEl.offsetHeight;
-        const currentBottom = listEl.scrollTop + listEl.offsetHeight;
+    if (!preventScroll) {
+      const optionBottom = nextEl.offsetTop + nextEl.offsetHeight;
+      const currentBottom = listEl.scrollTop + listEl.offsetHeight;
 
-        if (optionBottom > currentBottom) {
-          listEl.scrollTop = optionBottom - listEl.offsetHeight;
-        }
-
-        if (nextEl.offsetTop < listEl.scrollTop) {
-          listEl.scrollTop = nextEl.offsetTop;
-        }
+      if (optionBottom > currentBottom) {
+        listEl.scrollTop = optionBottom - listEl.offsetHeight;
       }
 
-      if (!skipFocus) {
-        nextEl.focus({ preventScroll });
+      if (nextEl.offsetTop < listEl.scrollTop) {
+        listEl.scrollTop = nextEl.offsetTop;
       }
-    } else {
-      inputEl.setAttribute('aria-activedescendant', '');
-      inputEl.focus();
     }
-  };
 
-  /**
-   * Generate a dynamic regular expression based off of a replaceable and possibly filtered value.
-   *
-   * @param {string} el An element within the combo box component
-   * @param {string} query The value to use in the regular expression
-   * @param {object} extras An object of regular expressions to replace and filter the query
-   */
-  const generateDynamicRegExp = (filter, query = '', extras = {}) => {
-    const escapeRegExp = text =>
-      text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+    if (!skipFocus) {
+      nextEl.focus({ preventScroll });
+    }
+  } else {
+    inputEl.setAttribute('aria-activedescendant', '');
+    inputEl.focus();
+  }
+};
 
-    let find = filter.replace(/{{(.*?)}}/g, (m, $1) => {
-      const key = $1.trim();
-      const queryFilter = extras[key];
-      if (key !== 'query' && queryFilter) {
-        const matcher = new RegExp(queryFilter, 'i');
-        const matches = query.match(matcher);
+/**
+ * Generate a dynamic regular expression based off of a replaceable and possibly filtered value.
+ *
+ * @param {string} el An element within the combo box component
+ * @param {string} query The value to use in the regular expression
+ * @param {object} extras An object of regular expressions to replace and filter the query
+ */
+const generateDynamicRegExp = (filter, query = '', extras = {}) => {
+  const escapeRegExp = text => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 
-        if (matches) {
-          return escapeRegExp(matches[1]);
+  let find = filter.replace(/{{(.*?)}}/g, (m, $1) => {
+    const key = $1.trim();
+    const queryFilter = extras[key];
+    if (key !== 'query' && queryFilter) {
+      const matcher = new RegExp(queryFilter, 'i');
+      const matches = query.match(matcher);
+
+      if (matches) {
+        return escapeRegExp(matches[1]);
+      }
+
+      return '';
+    }
+    return escapeRegExp(query);
+  });
+
+  find = `^(?:${find})$`;
+
+  return new RegExp(find, 'i');
+};
+
+const isDataOptGroup = option =>
+  option.getAttribute('data-optgroup') === 'true';
+
+/**
+ * Display the option list of a combo box component.
+ *
+ * @param {HTMLElement} el An element within the combo box component
+ */
+const displayList = el => {
+  const {
+    comboBoxEl,
+    selectEl,
+    inputEl,
+    listEl,
+    statusEl,
+    isPristine,
+    disableFiltering,
+  } = getComboBoxContext(el);
+  let selectedItemId;
+  let firstFoundId;
+
+  const listOptionBaseId = `${listEl.id}--option-`;
+
+  const inputValue = (inputEl.value || '').toLowerCase();
+  const filter = comboBoxEl.dataset.filter || DEFAULT_FILTER;
+  const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
+
+  const options = [];
+  let parentOptGroupId = '';
+  for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
+    const optionEl = selectEl.options[i];
+    const optionId = `${listOptionBaseId}${options.length}`;
+
+    if (
+      optionEl.value &&
+      (disableFiltering ||
+        isPristine ||
+        !inputValue ||
+        regex.test(optionEl.text))
+    ) {
+      if (selectEl.value && optionEl.value === selectEl.value) {
+        selectedItemId = optionId;
+      }
+
+      if (disableFiltering && !firstFoundId && regex.test(optionEl.text)) {
+        firstFoundId = optionId;
+      }
+
+      if (!inputValue) {
+        options.push(optionEl);
+        continue;
+      }
+
+      // handle filtering when input contains a value
+      if (
+        inputValue &&
+        regex.test(optionEl.text) &&
+        optionEl.getAttribute('data-optgroup') !== 'true'
+      ) {
+        // Check if the option element is not a header optgroup
+        // and has a header optgroup associated with it
+        if (
+          optionEl.getAttribute('data-optgroup-option') === 'true' &&
+          parentOptGroupId !== optionEl.getAttribute('aria-describedby')
+        ) {
+          // Get an associated header optgroup element
+          parentOptGroupId = optionEl.getAttribute('aria-describedby');
+          const parentOptgroupEl = selectEl.querySelector(
+            '#' + parentOptGroupId,
+          );
+          // Add the header optgroup element first
+          options.push(parentOptgroupEl);
         }
 
-        return '';
+        // Add the option element
+        options.push(optionEl);
       }
-      return escapeRegExp(query);
+    }
+  }
+
+  const numOptions = options.length;
+  const optionsLength = options.filter(
+    option => !isDataOptGroup(option),
+  ).length;
+  let isFocused = false;
+  let optionIndex = 0;
+  const optionHtml = options.map((option, index) => {
+    const isOptGroup = isDataOptGroup(option);
+    const isOptgroupOption =
+      option.getAttribute('data-optgroup-option') !== null;
+    if (!isOptGroup) {
+      optionIndex += 1;
+    }
+    const optionId = `${listOptionBaseId}${index}`;
+    const classes = !isOptGroup ? [LIST_OPTION_CLASS] : [];
+    let tabindex = '-1';
+    let ariaSelected = 'false';
+
+    if (selectEl.value && option.value === selectEl.value) {
+      classes.push(LIST_OPTION_SELECTED_CLASS, LIST_OPTION_FOCUSED_CLASS);
+      tabindex = '0';
+      ariaSelected = 'true';
+    }
+
+    if (!selectedItemId && !isFocused && !isOptGroup) {
+      classes.push(LIST_OPTION_FOCUSED_CLASS);
+      tabindex = '0';
+      isFocused = true;
+    }
+
+    if (isOptGroup) {
+      classes.push(LIST_OPTION_GROUP_CLASS);
+    } else if (isOptgroupOption) {
+      classes.push(LIST_OPTION_GROUP_OPTION_CLASS);
+    }
+
+    const li = document.createElement('li');
+
+    if (!isOptGroup) {
+      li.setAttribute('aria-setsize', optionsLength);
+      li.setAttribute('aria-posinset', optionIndex);
+      li.setAttribute(
+        'aria-describedby',
+        option.getAttribute('aria-describedby'),
+      );
+    }
+    li.setAttribute('aria-selected', ariaSelected);
+    li.setAttribute('id', !isOptGroup ? optionId : option.id);
+    li.setAttribute('class', classes.join(' '));
+    li.setAttribute('tabindex', tabindex);
+    li.setAttribute('role', isOptGroup ? 'group' : 'option');
+    li.setAttribute('data-value', option.value);
+    li.textContent = option.text;
+
+    return li;
+  });
+
+  const noResults = document.createElement('li');
+  noResults.setAttribute('class', `${LIST_OPTION_CLASS}--no-results`);
+  noResults.textContent = 'No results found';
+
+  listEl.hidden = false;
+
+  if (numOptions) {
+    listEl.innerHTML = '';
+    optionHtml.forEach(item => listEl.insertAdjacentElement('beforeend', item));
+  } else {
+    listEl.innerHTML = '';
+    listEl.insertAdjacentElement('beforeend', noResults);
+  }
+
+  inputEl.setAttribute('aria-expanded', 'true');
+
+  statusEl.textContent = optionsLength
+    ? `${optionsLength} result${optionsLength > 1 ? 's' : ''} available.`
+    : 'No results.';
+
+  let itemToFocus;
+
+  if (isPristine && selectedItemId) {
+    itemToFocus = listEl.querySelector(`#${selectedItemId}`);
+  } else if (disableFiltering && firstFoundId) {
+    itemToFocus = listEl.querySelector(`#${firstFoundId}`);
+  }
+
+  if (itemToFocus) {
+    highlightOption(listEl, itemToFocus, {
+      skipFocus: true,
     });
+  }
+};
 
-    find = `^(?:${find})$`;
+/**
+ * Hide the option list of a combo box component.
+ *
+ * @param {HTMLElement} el An element within the combo box component
+ */
+const hideList = el => {
+  const { inputEl, listEl, statusEl, focusedOptionEl } = getComboBoxContext(el);
 
-    return new RegExp(find, 'i');
-  };
+  statusEl.innerHTML = '';
 
-  const isDataOptGroup = option => option.getAttribute('data-optgroup') === 'true';
+  inputEl.setAttribute('aria-expanded', 'false');
+  inputEl.setAttribute('aria-activedescendant', '');
 
-  /**
-   * Display the option list of a combo box component.
-   *
-   * @param {HTMLElement} el An element within the combo box component
-   */
-  const displayList = el => {
-    const {
-      comboBoxEl,
-      selectEl,
-      inputEl,
-      listEl,
-      statusEl,
-      isPristine,
-      disableFiltering,
-    } = getComboBoxContext(el);
-    let selectedItemId;
-    let firstFoundId;
+  if (focusedOptionEl) {
+    focusedOptionEl.classList.remove(LIST_OPTION_FOCUSED_CLASS);
+  }
 
-    const listOptionBaseId = `${listEl.id}--option-`;
+  listEl.scrollTop = 0;
+  listEl.hidden = true;
+};
 
-    const inputValue = (inputEl.value || '').toLowerCase();
-    const filter = comboBoxEl.dataset.filter || DEFAULT_FILTER;
-    const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
+/**
+ * Select an option list of the combo box component.
+ *
+ * @param {HTMLElement} listOptionEl The list option being selected
+ */
+const selectItem = listOptionEl => {
+  const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(listOptionEl);
 
-    const options = [];
-    let parentOptGroupId = '';
+  changeElementValue(selectEl, listOptionEl.dataset.value);
+  changeElementValue(inputEl, listOptionEl.textContent);
+  comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
+  hideList(comboBoxEl);
+  inputEl.focus();
+};
+
+/**
+ * Clear the input of the combo box
+ *
+ * @param {HTMLButtonElement} clearButtonEl The clear input button
+ */
+const clearInput = clearButtonEl => {
+  const { comboBoxEl, listEl, selectEl, inputEl } =
+    getComboBoxContext(clearButtonEl);
+  const listShown = !listEl.hidden;
+
+  if (selectEl.value) changeElementValue(selectEl);
+  if (inputEl.value) changeElementValue(inputEl);
+  comboBoxEl.classList.remove(COMBO_BOX_PRISTINE_CLASS);
+
+  if (listShown) displayList(comboBoxEl);
+  inputEl.focus();
+};
+
+/**
+ * Reset the select based off of currently set select value
+ *
+ * @param {HTMLElement} el An element within the combo box component
+ */
+const resetSelection = el => {
+  const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(el);
+
+  const selectValue = selectEl.value;
+  const inputValue = (inputEl.value || '').toLowerCase();
+
+  if (selectValue) {
     for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
       const optionEl = selectEl.options[i];
-      const optionId = `${listOptionBaseId}${options.length}`;
-
-      if (
-        optionEl.value &&
-        (disableFiltering ||
-          isPristine ||
-          !inputValue ||
-          regex.test(optionEl.text))
-      ) {
-        if (selectEl.value && optionEl.value === selectEl.value) {
-          selectedItemId = optionId;
-        }
-
-        if (disableFiltering && !firstFoundId && regex.test(optionEl.text)) {
-          firstFoundId = optionId;
-        }
-
-        if (!inputValue){
-          options.push(optionEl);
-          continue;
-        }
-
-        // handle filtering when input contains a value
-        if (
-          inputValue &&
-          regex.test(optionEl.text) &&
-          optionEl.getAttribute('data-optgroup') !== 'true' 
-        ) {
-
-          // Check if the option element is not a header optgroup 
-          // and has a header optgroup associated with it
-          if (
-            optionEl.getAttribute('data-optgroup-option') === 'true' &&
-            parentOptGroupId !== optionEl.getAttribute('aria-describedby')
-          ) {
-            // Get an associated header optgroup element
-            parentOptGroupId = optionEl.getAttribute('aria-describedby');
-            const parentOptgroupEl = selectEl.querySelector(
-              '#' + parentOptGroupId,
-            );
-            // Add the header optgroup element first
-            options.push(parentOptgroupEl);
-          }
-
-          // Add the option element
-          options.push(optionEl);
-        }
-      }
-    }
-
-    const numOptions = options.length;
-    const optionsLength = options.filter(option => !isDataOptGroup(option)).length;
-    let isFocused = false;
-    let optionIndex = 0;
-    const optionHtml = options.map((option, index) => {
-      const isOptGroup = isDataOptGroup(option);
-      const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
-      if (!isOptGroup) {
-        optionIndex += 1;
-      }
-      const optionId = `${listOptionBaseId}${index}`;
-      const classes = !isOptGroup ? [LIST_OPTION_CLASS] : [];
-      let tabindex = '-1';
-      let ariaSelected = 'false';
-
-      if (selectEl.value && option.value === selectEl.value) {
-        classes.push(LIST_OPTION_SELECTED_CLASS, LIST_OPTION_FOCUSED_CLASS);
-        tabindex = '0';
-        ariaSelected = 'true';
-      }
-
-      if (!selectedItemId && !isFocused && !isOptGroup) {
-        classes.push(LIST_OPTION_FOCUSED_CLASS);
-        tabindex = '0';
-        isFocused = true;
-      }
-
-      if (isOptGroup) {
-        classes.push(LIST_OPTION_GROUP_CLASS);
-      } else if (isOptgroupOption) {
-        classes.push(LIST_OPTION_GROUP_OPTION_CLASS);
-      }
-
-      const li = document.createElement('li');
-
-      if (!isOptGroup) {
-        li.setAttribute('aria-setsize', optionsLength);
-        li.setAttribute('aria-posinset', optionIndex);
-        li.setAttribute('aria-describedby', option.getAttribute('aria-describedby'));
-      }
-      li.setAttribute('aria-selected', ariaSelected);
-      li.setAttribute('id', !isOptGroup ? optionId : option.id);
-      li.setAttribute('class', classes.join(' '));
-      li.setAttribute('tabindex', tabindex);
-      li.setAttribute('role', isOptGroup ? 'group' : 'option');
-      li.setAttribute('data-value', option.value);
-      li.textContent = option.text;
-
-      return li;
-    });
-
-    const noResults = document.createElement('li');
-    noResults.setAttribute('class', `${LIST_OPTION_CLASS}--no-results`);
-    noResults.textContent = 'No results found';
-
-    listEl.hidden = false;
-
-    if (numOptions) {
-      listEl.innerHTML = '';
-      optionHtml.forEach(item =>
-        listEl.insertAdjacentElement('beforeend', item),
-      );
-    } else {
-      listEl.innerHTML = '';
-      listEl.insertAdjacentElement('beforeend', noResults);
-    }
-
-    inputEl.setAttribute('aria-expanded', 'true');
-
-    statusEl.textContent = optionsLength
-      ? `${optionsLength} result${optionsLength > 1 ? 's' : ''} available.`
-      : 'No results.';
-
-    let itemToFocus;
-
-    if (isPristine && selectedItemId) {
-      itemToFocus = listEl.querySelector(`#${selectedItemId}`);
-    } else if (disableFiltering && firstFoundId) {
-      itemToFocus = listEl.querySelector(`#${firstFoundId}`);
-    }
-
-    if (itemToFocus) {
-      highlightOption(listEl, itemToFocus, {
-        skipFocus: true,
-      });
-    }
-  };
-
-  /**
-   * Hide the option list of a combo box component.
-   *
-   * @param {HTMLElement} el An element within the combo box component
-   */
-  const hideList = el => {
-    const { inputEl, listEl, statusEl, focusedOptionEl } =
-      getComboBoxContext(el);
-
-    statusEl.innerHTML = '';
-
-    inputEl.setAttribute('aria-expanded', 'false');
-    inputEl.setAttribute('aria-activedescendant', '');
-
-    if (focusedOptionEl) {
-      focusedOptionEl.classList.remove(LIST_OPTION_FOCUSED_CLASS);
-    }
-
-    listEl.scrollTop = 0;
-    listEl.hidden = true;
-  };
-
-  /**
-   * Select an option list of the combo box component.
-   *
-   * @param {HTMLElement} listOptionEl The list option being selected
-   */
-  const selectItem = listOptionEl => {
-    const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(listOptionEl);
-
-    changeElementValue(selectEl, listOptionEl.dataset.value);
-    changeElementValue(inputEl, listOptionEl.textContent);
-    comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
-    hideList(comboBoxEl);
-    inputEl.focus();
-  };
-
-  /**
-   * Clear the input of the combo box
-   *
-   * @param {HTMLButtonElement} clearButtonEl The clear input button
-   */
-  const clearInput = clearButtonEl => {
-    const { comboBoxEl, listEl, selectEl, inputEl } =
-      getComboBoxContext(clearButtonEl);
-    const listShown = !listEl.hidden;
-
-    if (selectEl.value) changeElementValue(selectEl);
-    if (inputEl.value) changeElementValue(inputEl);
-    comboBoxEl.classList.remove(COMBO_BOX_PRISTINE_CLASS);
-
-    if (listShown) displayList(comboBoxEl);
-    inputEl.focus();
-  };
-
-  /**
-   * Reset the select based off of currently set select value
-   *
-   * @param {HTMLElement} el An element within the combo box component
-   */
-  const resetSelection = el => {
-    const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(el);
-
-    const selectValue = selectEl.value;
-    const inputValue = (inputEl.value || '').toLowerCase();
-
-    if (selectValue) {
-      for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
-        const optionEl = selectEl.options[i];
-        if (optionEl.value === selectValue) {
-          if (inputValue !== optionEl.text) {
-            changeElementValue(inputEl, optionEl.text);
-          }
-          comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
-          return;
-        }
-      }
-    }
-
-    if (inputValue) {
-      changeElementValue(inputEl);
-    }
-  };
-
-  /**
-   * Select an option list of the combo box component based off of
-   * having a current focused list option or
-   * having test that completely matches a list option.
-   * Otherwise it clears the input and select.
-   *
-   * @param {HTMLElement} el An element within the combo box component
-   */
-  const completeSelection = el => {
-    const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
-
-    statusEl.textContent = '';
-
-    const inputValue = (inputEl.value || '').toLowerCase();
-
-    if (inputValue) {
-      for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
-        const optionEl = selectEl.options[i];
-        if (optionEl.text.toLowerCase() === inputValue) {
-          changeElementValue(selectEl, optionEl.value);
+      if (optionEl.value === selectValue) {
+        if (inputValue !== optionEl.text) {
           changeElementValue(inputEl, optionEl.text);
-          comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
-          return;
         }
+        comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
+        return;
       }
     }
+  }
 
-    resetSelection(comboBoxEl);
-  };
+  if (inputValue) {
+    changeElementValue(inputEl);
+  }
+};
 
-  /**
-   * Handle the escape event within the combo box component.
-   *
-   * @param {KeyboardEvent} event An event within the combo box component
-   */
-  const handleEscape = event => {
-    const { comboBoxEl, inputEl } = getComboBoxContext(event.target);
+/**
+ * Select an option list of the combo box component based off of
+ * having a current focused list option or
+ * having test that completely matches a list option.
+ * Otherwise it clears the input and select.
+ *
+ * @param {HTMLElement} el An element within the combo box component
+ */
+const completeSelection = el => {
+  const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
 
+  statusEl.textContent = '';
+
+  const inputValue = (inputEl.value || '').toLowerCase();
+
+  if (inputValue) {
+    for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
+      const optionEl = selectEl.options[i];
+      if (optionEl.text.toLowerCase() === inputValue) {
+        changeElementValue(selectEl, optionEl.value);
+        changeElementValue(inputEl, optionEl.text);
+        comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
+        return;
+      }
+    }
+  }
+
+  resetSelection(comboBoxEl);
+};
+
+/**
+ * Handle the escape event within the combo box component.
+ *
+ * @param {KeyboardEvent} event An event within the combo box component
+ */
+const handleEscape = event => {
+  const { comboBoxEl, inputEl } = getComboBoxContext(event.target);
+
+  hideList(comboBoxEl);
+  resetSelection(comboBoxEl);
+  inputEl.focus();
+};
+
+/**
+ * Handle the down event within the combo box component.
+ *
+ * @param {KeyboardEvent} event An event within the combo box component
+ */
+const handleDownFromInput = event => {
+  const { comboBoxEl, listEl } = getComboBoxContext(event.target);
+
+  if (listEl.hidden) {
+    displayList(comboBoxEl);
+  }
+
+  let nextOptionEl =
+    listEl.querySelector(LIST_OPTION_FOCUSED) ||
+    listEl.querySelector(LIST_OPTION);
+
+  if (nextOptionEl) {
+    if (nextOptionEl.getAttribute('role') === 'group') {
+      nextOptionEl = nextOptionEl.nextSibling;
+    }
+    highlightOption(comboBoxEl, nextOptionEl);
+  }
+
+  event.preventDefault();
+};
+
+/**
+ * Handle the enter event from an input element within the combo box component.
+ *
+ * @param {KeyboardEvent} event An event within the combo box component
+ */
+const handleEnterFromInput = event => {
+  const { comboBoxEl, listEl } = getComboBoxContext(event.target);
+  const listShown = !listEl.hidden;
+
+  completeSelection(comboBoxEl);
+
+  if (listShown) {
     hideList(comboBoxEl);
-    resetSelection(comboBoxEl);
-    inputEl.focus();
-  };
+  }
 
-  /**
-   * Handle the down event within the combo box component.
-   *
-   * @param {KeyboardEvent} event An event within the combo box component
-   */
-  const handleDownFromInput = event => {
-    const { comboBoxEl, listEl } = getComboBoxContext(event.target);
+  event.preventDefault();
+};
 
-    if (listEl.hidden) {
-      displayList(comboBoxEl);
+/**
+ * Handle the down event within the combo box component.
+ *
+ * @param {KeyboardEvent} event An event within the combo box component
+ */
+const handleDownFromListOption = event => {
+  const focusedOptionEl = event.target;
+  let nextOptionEl = focusedOptionEl.nextSibling;
+
+  if (nextOptionEl) {
+    if (nextOptionEl.getAttribute('role') === 'group') {
+      nextOptionEl = nextOptionEl.nextSibling;
     }
+    highlightOption(focusedOptionEl, nextOptionEl);
+  }
 
-    let nextOptionEl =
-      listEl.querySelector(LIST_OPTION_FOCUSED) ||
-      listEl.querySelector(LIST_OPTION);
+  event.preventDefault();
+};
 
-    if (nextOptionEl) {
-      if (nextOptionEl.getAttribute('role') === 'group') {
-        nextOptionEl = nextOptionEl.nextSibling
-      } 
-      highlightOption(comboBoxEl, nextOptionEl);
+/**
+ * Handle the space event from an list option element within the combo box component.
+ *
+ * @param {KeyboardEvent} event An event within the combo box component
+ */
+const handleSpaceFromListOption = event => {
+  selectItem(event.target);
+  event.preventDefault();
+};
+
+/**
+ * Handle the enter event from list option within the combo box component.
+ *
+ * @param {KeyboardEvent} event An event within the combo box component
+ */
+const handleEnterFromListOption = event => {
+  selectItem(event.target);
+  event.preventDefault();
+};
+
+/**
+ * Handle the up event from list option within the combo box component.
+ *
+ * @param {KeyboardEvent} event An event within the combo box component
+ */
+const handleUpFromListOption = event => {
+  const { comboBoxEl, listEl, focusedOptionEl } = getComboBoxContext(
+    event.target,
+  );
+  let nextOptionEl = focusedOptionEl && focusedOptionEl.previousSibling;
+  const listShown = !listEl.hidden;
+
+  if (nextOptionEl) {
+    if (nextOptionEl.getAttribute('role') === 'group') {
+      nextOptionEl = nextOptionEl.previousSibling;
     }
+    highlightOption(focusedOptionEl, nextOptionEl);
+  }
 
+  if (listShown) {
     event.preventDefault();
-  };
+  }
 
-  /**
-   * Handle the enter event from an input element within the combo box component.
-   *
-   * @param {KeyboardEvent} event An event within the combo box component
-   */
-  const handleEnterFromInput = event => {
-    const { comboBoxEl, listEl } = getComboBoxContext(event.target);
-    const listShown = !listEl.hidden;
+  if (!nextOptionEl) {
+    hideList(comboBoxEl);
+  }
+};
 
-    completeSelection(comboBoxEl);
+/**
+ * Select list option on the mouseover event.
+ *
+ * @param {MouseEvent} event The mouseover event
+ * @param {HTMLLIElement} listOptionEl An element within the combo box component
+ */
+const handleMouseover = listOptionEl => {
+  const isCurrentlyFocused = listOptionEl.classList.contains(
+    LIST_OPTION_FOCUSED_CLASS,
+  );
 
-    if (listShown) {
-      hideList(comboBoxEl);
-    }
+  if (isCurrentlyFocused) return;
 
-    event.preventDefault();
-  };
+  highlightOption(listOptionEl, listOptionEl, {
+    preventScroll: true,
+  });
+};
 
-  /**
-   * Handle the down event within the combo box component.
-   *
-   * @param {KeyboardEvent} event An event within the combo box component
-   */
-  const handleDownFromListOption = event => {
-    const focusedOptionEl = event.target;
-    let nextOptionEl = focusedOptionEl.nextSibling;
+/**
+ * Toggle the list when the button is clicked
+ *
+ * @param {HTMLElement} el An element within the combo box component
+ */
+const toggleList = el => {
+  const { comboBoxEl, listEl, inputEl } = getComboBoxContext(el);
 
-    if (nextOptionEl) {
-      if (nextOptionEl.getAttribute('role') === 'group') {
-        nextOptionEl = nextOptionEl.nextSibling
-      } 
-      highlightOption(focusedOptionEl, nextOptionEl);
-    }
+  if (listEl.hidden) {
+    displayList(comboBoxEl);
+  } else {
+    hideList(comboBoxEl);
+  }
 
-    event.preventDefault();
-  };
+  inputEl.focus();
+};
 
-  /**
-   * Handle the space event from an list option element within the combo box component.
-   *
-   * @param {KeyboardEvent} event An event within the combo box component
-   */
-  const handleSpaceFromListOption = event => {
-    selectItem(event.target);
-    event.preventDefault();
-  };
+/**
+ * Handle click from input
+ *
+ * @param {HTMLInputElement} el An element within the combo box component
+ */
+const handleClickFromInput = el => {
+  const { comboBoxEl, listEl } = getComboBoxContext(el);
 
-  /**
-   * Handle the enter event from list option within the combo box component.
-   *
-   * @param {KeyboardEvent} event An event within the combo box component
-   */
-  const handleEnterFromListOption = event => {
-    selectItem(event.target);
-    event.preventDefault();
-  };
+  if (listEl.hidden) {
+    displayList(comboBoxEl);
+  }
+};
 
-  /**
-   * Handle the up event from list option within the combo box component.
-   *
-   * @param {KeyboardEvent} event An event within the combo box component
-   */
-  const handleUpFromListOption = event => {
-    const { comboBoxEl, listEl, focusedOptionEl } = getComboBoxContext(
-      event.target,
-    );
-    let nextOptionEl = focusedOptionEl && focusedOptionEl.previousSibling;
-    const listShown = !listEl.hidden;
-
-    if (nextOptionEl) {
-      if (nextOptionEl.getAttribute('role') === 'group') {
-        nextOptionEl = nextOptionEl.previousSibling
-      } 
-      highlightOption(focusedOptionEl, nextOptionEl);
-    }
-
-    if (listShown) {
-      event.preventDefault();
-    }
-
-    if (!nextOptionEl) {
-      hideList(comboBoxEl);
-    }
-  };
-
-  /**
-   * Select list option on the mouseover event.
-   *
-   * @param {MouseEvent} event The mouseover event
-   * @param {HTMLLIElement} listOptionEl An element within the combo box component
-   */
-  const handleMouseover = listOptionEl => {
-    const isCurrentlyFocused = listOptionEl.classList.contains(
-      LIST_OPTION_FOCUSED_CLASS,
-    );
-
-    if (isCurrentlyFocused) return;
-
-    highlightOption(listOptionEl, listOptionEl, {
-      preventScroll: true,
-    });
-  };
-
-  /**
-   * Toggle the list when the button is clicked
-   *
-   * @param {HTMLElement} el An element within the combo box component
-   */
-  const toggleList = el => {
-    const { comboBoxEl, listEl, inputEl } = getComboBoxContext(el);
-
-    if (listEl.hidden) {
-      displayList(comboBoxEl);
-    } else {
-      hideList(comboBoxEl);
-    }
-
-    inputEl.focus();
-  };
-
-  /**
-   * Handle click from input
-   *
-   * @param {HTMLInputElement} el An element within the combo box component
-   */
-  const handleClickFromInput = el => {
-    const { comboBoxEl, listEl } = getComboBoxContext(el);
-
-    if (listEl.hidden) {
-      displayList(comboBoxEl);
-    }
-  };
-
-  export const comboBox = behavior(
-    {
-      [CLICK]: {
-        [INPUT]() {
-          if (this.disabled) return;
-          handleClickFromInput(this);
-        },
-        [TOGGLE_LIST_BUTTON]() {
-          if (this.disabled) return;
-          toggleList(this);
-        },
-        [LIST_OPTION]() {
-          if (this.disabled) return;
-          selectItem(this);
-        },
-        [CLEAR_INPUT_BUTTON]() {
-          if (this.disabled) return;
-          clearInput(this);
-        },
+export const comboBox = behavior(
+  {
+    [CLICK]: {
+      [INPUT]() {
+        if (this.disabled) return;
+        handleClickFromInput(this);
       },
-      focusout: {
-        [COMBO_BOX](event) {
-          if (!this.contains(event.relatedTarget)) {
-            resetSelection(this);
-            hideList(this);
-          }
-        },
+      [TOGGLE_LIST_BUTTON]() {
+        if (this.disabled) return;
+        toggleList(this);
       },
-      keydown: {
-        [COMBO_BOX]: keymap({
-          Escape: handleEscape,
-        }),
-        [INPUT]: keymap({
-          Enter: handleEnterFromInput,
-          ArrowDown: handleDownFromInput,
-          Down: handleDownFromInput,
-        }),
-        [LIST_OPTION]: keymap({
-          'ArrowUp': handleUpFromListOption,
-          'Up': handleUpFromListOption,
-          'ArrowDown': handleDownFromListOption,
-          'Down': handleDownFromListOption,
-          'Enter': handleEnterFromListOption,
-          ' ': handleSpaceFromListOption,
-          'Shift+Tab': noop,
-        }),
+      [LIST_OPTION]() {
+        if (this.disabled) return;
+        selectItem(this);
       },
-      input: {
-        [INPUT]() {
-          const comboBoxEl = this.closest(COMBO_BOX);
-          comboBoxEl.classList.remove(COMBO_BOX_PRISTINE_CLASS);
-          displayList(this);
-        },
-      },
-      mouseover: {
-        [LIST_OPTION]() {
-          handleMouseover(this);
-        },
+      [CLEAR_INPUT_BUTTON]() {
+        if (this.disabled) return;
+        clearInput(this);
       },
     },
-    {
-      init(root, labelEl) {
-        selectOrMatches(COMBO_BOX, root).forEach(comboBoxEl => {
-          enhanceComboBox(comboBoxEl, labelEl);
-        });
+    focusout: {
+      [COMBO_BOX](event) {
+        if (!this.contains(event.relatedTarget)) {
+          resetSelection(this);
+          hideList(this);
+        }
       },
-      getComboBoxContext,
-      enhanceComboBox,
-      generateDynamicRegExp,
-      disable,
-      enable,
-      displayList,
-      hideList,
-      COMBO_BOX_CLASS,
     },
-  )
+    keydown: {
+      [COMBO_BOX]: keymap({
+        Escape: handleEscape,
+      }),
+      [INPUT]: keymap({
+        Enter: handleEnterFromInput,
+        ArrowDown: handleDownFromInput,
+        Down: handleDownFromInput,
+      }),
+      [LIST_OPTION]: keymap({
+        'ArrowUp': handleUpFromListOption,
+        'Up': handleUpFromListOption,
+        'ArrowDown': handleDownFromListOption,
+        'Down': handleDownFromListOption,
+        'Enter': handleEnterFromListOption,
+        ' ': handleSpaceFromListOption,
+        'Shift+Tab': noop,
+      }),
+    },
+    input: {
+      [INPUT]() {
+        const comboBoxEl = this.closest(COMBO_BOX);
+        comboBoxEl.classList.remove(COMBO_BOX_PRISTINE_CLASS);
+        displayList(this);
+      },
+    },
+    mouseover: {
+      [LIST_OPTION]() {
+        handleMouseover(this);
+      },
+    },
+  },
+  {
+    init(root, labelEl) {
+      selectOrMatches(COMBO_BOX, root).forEach(comboBoxEl => {
+        enhanceComboBox(comboBoxEl, labelEl);
+      });
+    },
+    getComboBoxContext,
+    enhanceComboBox,
+    generateDynamicRegExp,
+    disable,
+    enable,
+    displayList,
+    hideList,
+    COMBO_BOX_CLASS,
+  },
+);
 
-  // module.exports = comboBox;
+// module.exports = comboBox;
