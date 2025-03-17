@@ -39,9 +39,6 @@ describe('va-combo-box', () => {
                     </span>
                     <ul aria-labelledby="options-label" class="usa-combo-box__list" hidden="" id="options--list" role="listbox" tabindex="-1"></ul>
                     <div class="usa-combo-box__status usa-sr-only" role="status"></div>
-                    <span class="usa-sr-only" id="options--assistiveHint">
-                        When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.
-                    </span>
                     </div>
                 </mock:shadow-root>
                 <option value="foo">
@@ -79,8 +76,8 @@ describe('va-combo-box', () => {
             </optgroup>
           </va-select>
         `);
-    const element = await page.find('va-combo-box');
-    expect(element).toEqualHtml(`
+        const element = await page.find('va-combo-box');
+        expect(element).toEqualHtml(`
           <va-combo-box class="hydrated" label="A label">
                 <mock:shadow-root>
                     <label class="usa-label" for="options" id="options-label">
@@ -110,9 +107,6 @@ describe('va-combo-box', () => {
                     </span>
                     <ul aria-labelledby="options-label" class="usa-combo-box__list" hidden="" id="options--list" role="listbox" tabindex="-1"></ul>
                     <div class="usa-combo-box__status usa-sr-only" role="status"></div>
-                    <span class="usa-sr-only" id="options--assistiveHint">
-                        When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.
-                    </span>
                     </div>
                 </mock:shadow-root>
                 <optgroup label="group 1">
@@ -125,31 +119,25 @@ describe('va-combo-box', () => {
                 </optgroup>
             </va-combo-box>`);
 
-    const input = await page.find('va-combo-box >>> input');
-    await input.click();
-    const listOptions = await page.findAll('va-combo-box >>> li');
-    expect(listOptions.length).toBe(3);
-    expect(listOptions[0].getAttribute('data-value')).toBe('group 1');
-    expect(listOptions[0].innerText).toBe('group 1');
-    expect(listOptions[0].getAttribute('class')).toContain(
-      'usa-combo-box__list-option--group',
-    );
-    expect(listOptions[0].getAttribute('id')).toBe('optgroup-0');
+      const input = await page.find('va-combo-box >>> input');
+      await input.click();
+      const listOptions = await page.findAll('va-combo-box >>> li');
+      expect(listOptions.length).toBe(3);
+      expect(listOptions[0].getAttribute('data-value')).toBe('group 1');
+      expect(listOptions[0].innerText).toBe('group 1');
+      expect(listOptions[0].getAttribute('class')).toContain('usa-combo-box__list-option--group');
+      expect(listOptions[0].getAttribute('id')).toBe('optgroup-0');
 
-    expect(listOptions[1].innerText).toBe('Foo');
-    expect(listOptions[1].getAttribute('data-value')).toBe('foo');
-    expect(listOptions[1].getAttribute('aria-describedby')).toBe('optgroup-0');
-    expect(listOptions[1].getAttribute('aria-setsize')).toBe('2');
-    expect(listOptions[1].getAttribute('aria-posinset')).toBe('1');
-    expect(listOptions[1].getAttribute('aria-selected')).toBe('false');
-    expect(listOptions[1].getAttribute('class')).toContain(
-      'usa-combo-box__list-option',
-    );
-    expect(listOptions[1].getAttribute('class')).toContain(
-      'usa-combo-box__list-option--group-option',
-    );
+      expect(listOptions[1].innerText).toBe('Foo');
+      expect(listOptions[1].getAttribute('data-value')).toBe('foo');
+      expect(listOptions[1].getAttribute('aria-describedby')).toBe('optgroup-0');
+      expect(listOptions[1].getAttribute('aria-setsize')).toBe('2');
+      expect(listOptions[1].getAttribute('aria-posinset')).toBe('1');
+      expect(listOptions[1].getAttribute('aria-selected')).toBe('false');
+      expect(listOptions[1].getAttribute('class')).toContain('usa-combo-box__list-option');
+      expect(listOptions[1].getAttribute('class')).toContain('usa-combo-box__list-option--group-option');
 
-    expect(listOptions[1].getAttribute('id')).toBe('options--list--option-1');
+      expect(listOptions[1].getAttribute('id')).toBe('options--list--option-1');
   });
 
   it('emits change event on selection', async () => {
@@ -165,8 +153,8 @@ describe('va-combo-box', () => {
     const changeEvent = await page.spyOnEvent('vaSelect');
 
     await input.click();
-    await page.keyboard.press('ArrowDown');
-    await page.keyboard.press('Enter');
+    await page.keyboard.press('ArrowDown'); 
+    await page.keyboard.press('Enter'); 
     const vaSelectEvent = changeEvent.events[0];
     expect(vaSelectEvent.detail.value).toEqual('foo');
     expect(vaSelectEvent.type).toEqual('vaSelect');
@@ -188,8 +176,8 @@ describe('va-combo-box', () => {
     const changeEvent = await page.spyOnEvent('vaSelect');
 
     await input.click();
-    await page.keyboard.press('ArrowDown');
-    await page.keyboard.press('Enter');
+    await page.keyboard.press('ArrowDown'); 
+    await page.keyboard.press('Enter'); 
     const vaSelectEvent = changeEvent.events[0];
     expect(vaSelectEvent.detail.value).toEqual('foo');
     expect(vaSelectEvent.type).toEqual('vaSelect');
@@ -210,10 +198,7 @@ describe('va-combo-box', () => {
             <span class="usa-sr-only">Error</span>
             <span class="usa-error-message">test error message</span>
             </span>`);
-    expect(input).toEqualAttribute(
-      'aria-describedby',
-      'input-error-message  options--assistiveHint',
-    );
+    expect(input).toEqualAttribute('aria-describedby', 'input-error-message  options--assistiveHint');
   });
 
   it('renders label with required', async () => {
@@ -313,13 +298,8 @@ describe('va-combo-box', () => {
         `);
     const input = await page.find('va-combo-box >>> input');
     const element = await page.find('va-combo-box >>> #input-message');
-    expect(element).toEqualHtml(
-      '<span id="input-message" class="usa-sr-only dd-privacy-hidden">test aria text</span>',
-    );
-    expect(input).toEqualAttribute(
-      'aria-describedby',
-      'input-message   options--assistiveHint',
-    );
+    expect(element).toEqualHtml('<span id="input-message" class="usa-sr-only dd-privacy-hidden">test aria text</span>');
+    expect(input).toEqualAttribute('aria-describedby', 'input-message   options--assistiveHint');
   });
 
   it('selects all text with one click in input field', async () => {
