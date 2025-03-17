@@ -184,7 +184,7 @@ export class VaOfficialGovBanner {
               <div class="content" id="official-gov-banner" hidden>
                 <div class="grid-row">
                   <div class="col">
-                    <img src={iconHttpsSvg} role="presentation" alt="" />
+                    <img src={iconDotGovSvg} role="presentation" alt="" />
                     <div class="media-block">
                       <p>
                         <strong>
@@ -198,7 +198,7 @@ export class VaOfficialGovBanner {
                     </div>
                   </div>
                   <div class="col">
-                    <img src={iconDotGovSvg} role="presentation" alt="" />
+                    <img src={iconHttpsSvg} role="presentation" alt="" />
                     <div class="media-block">
                       <p>
                         <strong>{i18next.t('gov-site-https', { tld })}</strong>
