@@ -212,7 +212,7 @@ Tile.args = {
     'This is optional text that can be used to describe the label in more detail.',
 };
 
-export const TitleWithCustomContent = () => {
+export const TileWithCustomContent = () => {
   const [isVisible, setIsVisible] = useState(false);
   const onCloseEvent = () => {
     setIsVisible(false);
