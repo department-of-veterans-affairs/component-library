@@ -157,7 +157,6 @@ export class VaAlert {
   }
 
   componentDidRender() {
-    // If the close button aria label is not set, update the text to contain the headline text.
     if (!this.closeBtnAriaLabel) {
       this.updateCloseAriaLabelWithHeadlineText();
     }
