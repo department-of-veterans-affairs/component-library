@@ -12,10 +12,10 @@ import { Component, Host, h, Prop } from '@stencil/core';
 })
 export class VaCriticalInformation {
   /** The link to a page where the user can take action */
-  @Prop() link: string;
+  @Prop() link!: string;
 
   /** Text describing what critical action the user needs to take */
-  @Prop() text: string;
+  @Prop() text!: string;
 
   render() {
     const { link, text } = this;

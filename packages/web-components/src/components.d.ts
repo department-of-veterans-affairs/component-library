@@ -3988,11 +3988,11 @@ declare namespace LocalJSX {
         /**
           * The link to a page where the user can take action
          */
-        "link"?: string;
+        "link": string;
         /**
           * Text describing what critical action the user needs to take
          */
-        "text"?: string;
+        "text": string;
     }
     /**
      * @componentName Date input

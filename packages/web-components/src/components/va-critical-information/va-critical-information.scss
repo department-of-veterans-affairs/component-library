@@ -32,7 +32,7 @@
   color: var(--vads-color-base);
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.06rem;
+  font-size: var(--vads-font-size-source-sans-normalized);
   line-height: 1.528rem;
   width: 100%;
   display: flex;
@@ -58,6 +58,15 @@
 
   &:visited .link-icon {
     background-color: var(--vads-color-link-visited);
+    color: var(--vads-color-feedback-border-warning-on-dark)
+  }
+
+  &:hover {
+    color: var(--vads-button-color-background-primary-on-light);
+  }
+
+  &:hover .link-icon {
+    background-color: var(--vads-button-color-background-primary-on-light);
     color: var(--vads-color-feedback-border-warning-on-dark)
   }
 }
