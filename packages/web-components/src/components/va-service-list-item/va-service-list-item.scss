@@ -34,7 +34,7 @@
 
     .name-and-chevron {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       width: 100%;
     }
 
@@ -103,10 +103,14 @@
     .service-name {
       margin-top: 0;
       width: 11.875rem;
-      color: var(--vads-color-link);
+      color: var(--vads-color-link); 
       @media (min-width: 768px) {
         width: auto;
       }
+    }
+
+    .service-name:has(+ .chevron-icon) + .chevron-icon {
+      align-self: flex-start;
     }
 
     .chevron-icon {
@@ -117,7 +121,6 @@
         margin-left: 0.938rem;
       }
     }
-
   }
 
   .status {
@@ -138,7 +141,6 @@
       padding-bottom: 0;
     }
   }
-
 
   .optional-link {
     margin-top: 1.5rem;
