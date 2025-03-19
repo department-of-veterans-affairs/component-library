@@ -59,7 +59,7 @@ button {
 
 @container (max-width: 480px) {
   // This value matches the USWDS --mobile-lg custom property
-  // See https://designsystem.digital.gov/design-tokens/spacing-units/#spacing-unit-tokens
+  // See https://design.va.gov/foundation/breakpoints
   .usa-pagination__overflow {
     margin: 0;
     min-width: 2rem;
