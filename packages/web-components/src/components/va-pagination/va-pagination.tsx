@@ -107,7 +107,6 @@ export class VaPagination {
    */
   private pageNumbers = () => {
     const {
-      // maxPageListLength,
       page: currentPage,
       pages: totalPages,
       unbounded,
@@ -128,11 +127,9 @@ export class VaPagination {
 
     if (totalPages <= SHOW_ALL_PAGES) {
       // Use case #1: 7 or fewer total pages
-      console.log('Use case 1');
       return makeArray(1, totalPages);
     } else if (currentPage <= radius - 1) {
       // Use case #2: Current page is less than or equal to 4
-      console.log('Use case 2');
       start = 1;
       end = start + SHOW_ALL_PAGES - 2 - unboundedChar;
 
@@ -144,7 +141,6 @@ export class VaPagination {
       return makeArray(start, end);
     } else if (currentPage + radius - 1 > totalPages) {
       // Use case #3: Current page plus 4 is greater than total pages
-      console.log('Use case 3');
       start = totalPages - (SHOW_ALL_PAGES - 2 - 1);
 
       // Make sure the previous page is showing
@@ -158,10 +154,8 @@ export class VaPagination {
       return makeArray(start, end);
     } else {
       // Use case #4: Continuous pages don't start at 1 or end at last page
-      console.log('Use case 4');
       start = currentPage - 1;
       end = unbounded ? currentPage + 2 : currentPage + 1;
-      console.log({ start, end });
 
       return makeArray(start, end);
     }
