@@ -35,5 +35,3 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           skip: 'dependabot/**'
-        env: 
-          delay: 5000
