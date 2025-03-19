@@ -13,7 +13,6 @@ describe('va-notification', () => {
         <mock:shadow-root>
           <va-card show-shadow="true" class="hydrated">
             <div class="va-notification none has-border">
-              <i aria-hidden="true" role="img" class="none"></i>
               <div class="body" role="presentation">
                 <h3 part="headline" aria-describedby="Notification heading Tuesday, July 18">Notification heading</h3>
                 <time datetime="Tuesday, July 18">Tuesday, July 18</time>
