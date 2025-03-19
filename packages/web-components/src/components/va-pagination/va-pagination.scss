@@ -20,6 +20,7 @@
 :host {
   background-color: var(--vads-color-white);
   border-top: 1px solid var(--vads-color-base-lightest);
+  container-type: inline-size;
   display: flex;
   font-family: var(--font-source-sans);
   justify-content: center;
@@ -54,4 +55,14 @@ button {
   padding: 0;
   transition: all 0.3s ease-in-out;
   transition-property: color, background-color;
+}
+
+@container (max-width: 480px) {
+  // This value matches the USWDS --mobile-lg custom property
+  // See https://design.va.gov/foundation/breakpoints
+  .usa-pagination__overflow {
+    margin: 0;
+    min-width: 2rem;
+    padding: 0;
+  }
 }

@@ -51,9 +51,7 @@ describe('va-pagination', () => {
 
   it('only selected "page" has selected class', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      `<va-pagination page="1" pages="24" max-page-list-length="7"/>`,
-    );
+    await page.setContent(`<va-pagination page="1" pages="24" />`);
     const firstPage = await page.findAll(
       'va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button.usa-current',
     );
@@ -61,39 +59,27 @@ describe('va-pagination', () => {
     expect(firstPage[0].innerHTML).toEqual('1');
   });
 
-  it('renders first and last page with ellipses when middle pages do not contain them', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `<va-pagination page="10" pages="24" max-page-list-length="7"/>`,
-    );
-    const ellipses = await page.findAll(
-      'va-pagination >>> li.usa-pagination__overflow',
-    );
-    expect(ellipses).toHaveLength(2);
-
-    const pageNumbers = await page.findAll(
-      'va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button',
-    );
-    expect(pageNumbers[0].innerHTML).toEqual('1');
-    expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual('24');
-  });
-
   it('does not render a "Next" button when on last page', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      `<va-pagination page="24" pages="24" max-page-list-length="7"/>`,
-    );
+    await page.setContent(`<va-pagination page="24" pages="24" />`);
     const next = await page.find(
       'va-pagination >>> a.usa-pagination__next-page',
     );
     expect(next).toBeNull();
   });
 
+  it('does not render a "Previous" button when on first page', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="1" pages="24" />`);
+    const previous = await page.find(
+      'va-pagination >>> a.usa-pagination__previous-page',
+    );
+    expect(previous).toBeNull();
+  });
+
   it('does not show last page number if unbounded flag is set', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      `<va-pagination page="1" pages="24" max-page-list-length="7" unbounded/>`,
-    );
+    await page.setContent(`<va-pagination page="1" pages="24" unbounded/>`);
     const pageNumbers = await page.findAll(
       'va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button',
     );
@@ -102,9 +88,7 @@ describe('va-pagination', () => {
 
   it('renders all page numbers if total pages is less than or equal to 7', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      `<va-pagination page="3" pages="7" max-page-list-length="7"/>`,
-    );
+    await page.setContent(`<va-pagination page="3" pages="7" />`);
 
     const pageNumbers = [1, 2, 3, 4, 5, 6, 7];
 
@@ -116,31 +100,140 @@ describe('va-pagination', () => {
     }
   });
 
-  it('renders an extra pagination item when the max-page-list-length is 6 and the page is 4', async () => {
-    // this is an edge case where even though it is set to 6 items, 7 items is the minimum needed to display everything needed
-    // [first page] [second page] [third/previous page] [fourth/current page] [fifth/next page] [ellipsis] [last page]
+  it('renders the next pagination item when the current page is four from the beginning', async () => {
+    // Want to make sure [7] is showing when [6] is the current page and total page
+    // count is greater than 7.
     const page = await newE2EPage();
-    await page.setContent(
-      `<va-pagination page="4" pages="24" max-page-list-length="6"/>`,
+    await page.setContent(`<va-pagination page="5" pages="24" />`);
+    const pageNumbers = await page.findAll(
+      'va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button',
     );
+    expect(pageNumbers[0].innerHTML).toEqual('1');
+    expect(pageNumbers[pageNumbers.length - 2].innerHTML).toEqual('6');
+    expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual('24');
+  });
+
+  it('renders the previous pagination item when the current page is three from the end', async () => {
+    // Want to make sure [20] is showing when [21] is the current page and total page
+    // count is 24.
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="21" pages="24" />`);
+    const pageNumbers = await page.findAll(
+      'va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button',
+    );
+    expect(pageNumbers[0].innerHTML).toEqual('1');
+    expect(pageNumbers[1].innerHTML).toEqual('20');
+    expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual('24');
+  });
+
+  it('renders the first, last, and middle pagination items when the current page is in the middle', async () => {
+    // Want to make sure [1, ... 14, 15, 16, ... 24] are shown
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="15" pages="24" />`);
+    const pageNumbers = await page.findAll(
+      'va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button',
+    );
+    expect(pageNumbers[0].innerHTML).toEqual('1');
+    expect(pageNumbers[1].innerHTML).toEqual('14');
+    expect(pageNumbers[3].innerHTML).toEqual('16');
+    expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual('24');
+  });
+
+  it('renders the correct number of items when current page is greater than 1 and total pages is more than 7', async () => {
+    // a check to make sure the above edge case doesn't
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="3" pages="24" />`);
     const paginationItems = await page.findAll(
       'va-pagination >>> li.usa-pagination__item',
     );
-
-    // should be 9, the 6 page items, one ellipsis and 2 prev/next buttons
+    // should be 9, 7 pagination buttons, and 2 prev/next buttons
     expect(paginationItems).toHaveLength(9);
   });
 
-  it('renders an does not render an extra pagination item when the max-page-list-length is 6', async () => {
-    // a check to make sure the above edge case doesn't
+  it('renders the correct number of links on small screens', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      `<va-pagination page="3" pages="24" max-page-list-length="6"/>`,
-    );
+    await page.setViewport({
+      // iPhone first gen
+      width: 320,
+      height: 480,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="1" pages="24" />`);
     const paginationItems = await page.findAll(
       'va-pagination >>> li.usa-pagination__item',
     );
-    // should be 8, 6 as set by the max-page-list-length, and 2 prev/next buttons
     expect(paginationItems).toHaveLength(8);
+  });
+
+  it('renders the correct number of links on tablet screens below 640px width', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({
+      // Storybook small screen mode
+      width: 481,
+      height: 896,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="1" pages="24" />`);
+    const paginationItems = await page.findAll(
+      'va-pagination >>> li.usa-pagination__item',
+    );
+    expect(paginationItems).toHaveLength(8);
+  });
+
+  it('renders one ellipse correctly on small screens', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({
+      // iPhone first gen
+      width: 320,
+      height: 480,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="2" pages="24" unbounded/>`);
+    const paginationOverflowItems = await page.findAll(
+      'va-pagination >>> li.usa-pagination__overflow',
+    );
+    expect(paginationOverflowItems).toHaveLength(1);
+  });
+
+  it('renders two ellipses correctly on small screens', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({
+      // iPhone first gen
+      width: 320,
+      height: 480,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="9" pages="24" />`);
+    const paginationOverflowItems = await page.findAll(
+      'va-pagination >>> li.usa-pagination__overflow',
+    );
+    expect(paginationOverflowItems).toHaveLength(2);
+  });
+
+  it('renders two ellipses correctly on tablet screens below 640px width', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({
+      // Storybook small screen mode
+      width: 481,
+      height: 896,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="10" pages="24" />`);
+    const paginationOverflowItems = await page.findAll(
+      'va-pagination >>> li.usa-pagination__overflow',
+    );
+    expect(paginationOverflowItems).toHaveLength(2);
+  });
+
+  it('passes an axe check on small screens', async () => {
+    const page = await newE2EPage();
+    await page.setViewport({
+      // iPhone first gen
+      width: 320,
+      height: 480,
+      deviceScaleFactor: 1,
+    });
+    await page.setContent(`<va-pagination page="1" pages="24" />`);
+    await axeCheck(page);
   });
 });
