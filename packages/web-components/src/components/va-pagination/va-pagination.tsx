@@ -72,12 +72,6 @@ export class VaPagination {
   @Prop() pages: number;
 
   /**
-   * Display last page number when the page count exceeds
-   * `maxPageListLength`
-   */
-  // @Prop() showLastPage?: boolean = false;
-
-  /**
    * Don't show the last page if the unbounded flag is set
    */
   @Prop() unbounded?: boolean = false;
