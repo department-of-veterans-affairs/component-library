@@ -177,7 +177,12 @@ export class VaNotification {
       <Host>
         <va-card show-shadow="true">
           <div class={classes}>
-            <i aria-hidden="true" role="img" class={symbol}></i>
+            {
+              symbol && symbol !== 'none' ? (
+                <va-icon aria-hidden="true" role="img" size={5} icon={symbol === 'action-required' ? 'error' : symbol === 'update' ? 'info' : null} class={symbol}/>
+              ) : null
+            }
+            
             <div class="body" role="presentation">
               {headline ? <HeadlineLevel part="headline" aria-describedby={ariaDescribedByLabel}>{headline}</HeadlineLevel> : null}
               {dateTime ? <time dateTime={dateTime}>{dateTime}</time> : null}
@@ -194,7 +199,7 @@ export class VaNotification {
               aria-label={this.closeBtnAriaLabel}
               onClick={this.closeHandler.bind(this)}
             >
-              <i aria-hidden="true" class="fas fa-times-circle" role="presentation" />
+              <va-icon icon="close"/>
               {hasCloseText && (
                 <span>CLOSE</span>
               )}

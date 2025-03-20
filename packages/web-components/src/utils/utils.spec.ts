@@ -2,7 +2,7 @@ import {
   format,
   getSlottedNodes,
   isNumeric,
-  isInteractiveElement,
+  isInteractiveLinkOrButton,
 } from './utils';
 
 describe('format', () => {
@@ -100,35 +100,32 @@ describe('getSlottedNodes()', () => {
   });
 });
 
-describe('isInteractiveElement()', () => {
+describe('isInteractiveLinkOrButton()', () => {
   const testElement = tag => {
     const el = document.createElement(tag);
-    return isInteractiveElement(el);
+    return isInteractiveLinkOrButton(el);
   };
-  it('returns true for an anchor element', () => {
-    expect(testElement('va-test')).toEqual(true);
+
+  it('returns true for a va-button element', () => {
+    expect(testElement('va-button')).toEqual(true);
+  });
+  it('returns true for a va-link element', () => {
+    expect(testElement('va-link')).toEqual(true);
+  });
+  it('returns true for a button element', () => {
+    expect(testElement('button')).toEqual(true);
   });
   it('returns true for an anchor element', () => {
     expect(testElement('a')).toEqual(true);
   });
 
-  it('returns true for a button element', () => {
-    expect(testElement('button')).toEqual(true);
+  it('returns false for a label element', () => {
+    expect(testElement('label')).toEqual(false);
   });
-
-  it('returns true for an input element', () => {
-    expect(testElement('input')).toEqual(true);
-  });
-
-  it('returns true for a select element', () => {
-    expect(testElement('select')).toEqual(true);
-  });
-
-  it('returns true for a textarea element', () => {
-    expect(testElement('textarea')).toEqual(true);
-  });
-
   it('returns false for a div element', () => {
     expect(testElement('div')).toEqual(false);
+  });
+  it('returns false for a span element', () => {
+    expect(testElement('span')).toEqual(false);
   });
 });

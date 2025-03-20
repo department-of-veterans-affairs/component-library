@@ -51,9 +51,9 @@ export class VaAlert {
   @Prop() visible?: boolean = true;
 
   /**
-   * Aria-label text for the close button.
+   * Aria-label text for the close button. If not provided, the text will be "Close {headline} notification".
    */
-  @Prop() closeBtnAriaLabel?: string = 'Close notification';
+  @Prop({ mutable: true }) closeBtnAriaLabel?: string;
 
   /**
    * If `true`, a close button will be displayed.
@@ -107,6 +107,11 @@ export class VaAlert {
     this.closeEvent.emit(e);
   }
 
+  private updateCloseAriaLabelWithHeadlineText(): void {
+    const headline = this.el.shadowRoot.querySelector('slot[name="headline"]');
+    this.closeBtnAriaLabel = `Close ${headline.assignedNodes()[0].textContent} notification`;
+  }
+
   private handleAlertBodyClick(e: MouseEvent): void {
     let headlineText = null;
 
@@ -149,6 +154,12 @@ export class VaAlert {
 
   componentDidLoad() {
     this.vaComponentDidLoad.emit();
+  }
+
+  componentDidRender() {
+    if (!this.closeBtnAriaLabel) {
+      this.updateCloseAriaLabelWithHeadlineText();
+    }
   }
 
   render() {
