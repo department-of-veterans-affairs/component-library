@@ -3,6 +3,7 @@ import {
   getSlottedNodes,
   isNumeric,
   isInteractiveLinkOrButton,
+  isMessageAriaDescribedbySet,
 } from './utils';
 
 describe('format', () => {
@@ -127,5 +128,23 @@ describe('isInteractiveLinkOrButton()', () => {
   });
   it('returns false for a span element', () => {
     expect(testElement('span')).toEqual(false);
+  });
+});
+
+describe('isMessageAriaDescribedbySet()', () => {
+  it('returns true if messageAriaDescribedby is set', () => {
+    const el = document.createElement('va-button');
+    el.setAttribute('messageAriaDescribedby', 'test');
+    expect(isMessageAriaDescribedbySet(el)).toEqual(true);
+  });
+
+  it('returns false if messageAriaDescribedby is not set', () => {
+    const el = document.createElement('va-text-input');
+    expect(isMessageAriaDescribedbySet(el)).toEqual(false);
+  });
+  it('returns false if messageAriaDescribedby is set to "false"', () => {
+    const el = document.createElement('va-textarea');
+    el.setAttribute('messageAriaDescribedby', 'false');
+    expect(isMessageAriaDescribedbySet(el)).toEqual(false);
   });
 });

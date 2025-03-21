@@ -10,6 +10,7 @@ import {
   Watch,
 } from '@stencil/core';
 import classnames from 'classnames';
+import { isMessageAriaDescribedbySet } from '../../utils/utils';
 
 /**
  * @componentName Button
@@ -255,7 +256,7 @@ export class VaButton {
           {buttonText}
           {_continue && !back && <va-icon icon="navigate_far_next" />}
         </button>
-        {messageAriaDescribedby && (
+        {isMessageAriaDescribedbySet(messageAriaDescribedby) && (
           <span id="button-description" class="usa-sr-only">
             {messageAriaDescribedby}
           </span>
