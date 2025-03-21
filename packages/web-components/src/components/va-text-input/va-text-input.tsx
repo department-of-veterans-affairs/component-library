@@ -17,6 +17,7 @@ import {
   consoleDevError,
   getCharacterMessage,
   getHeaderLevel,
+  isMessageAriaDescribedbySet,
 } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -547,7 +548,7 @@ export class VaTextInput {
               </div>
             )}
           </div>
-          {messageAriaDescribedby && (
+          {isMessageAriaDescribedbySet(messageAriaDescribedby) && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>

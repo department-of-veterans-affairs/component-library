@@ -13,7 +13,7 @@ import {
 import classnames from 'classnames';
 import { i18next } from '../..';
 import { Build } from '@stencil/core';
-import { getHeaderLevel } from '../../utils/utils';
+import { getHeaderLevel, isMessageAriaDescribedbySet } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -197,7 +197,7 @@ export class VaCheckboxGroup {
                   {label}
                 </span>
               )}
-              {messageAriaDescribedby && (
+              {isMessageAriaDescribedbySet(messageAriaDescribedby) && (
                 <span id="description-message" class="usa-sr-only">
                   {messageAriaDescribedby}
                 </span>

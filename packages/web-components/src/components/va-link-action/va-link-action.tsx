@@ -9,6 +9,7 @@ import {
   Watch,
 } from '@stencil/core';
 import classNames from 'classnames';
+import { isMessageAriaDescribedbySet } from '../../utils/utils';
 
 /**
  * @componentName Link - Action
@@ -131,7 +132,7 @@ export class VaLinkAction {
           <va-icon class={iconClass} icon="chevron_right" size={3}></va-icon>
           <span class="link-text">{text}</span>
         </a>
-        {messageAriaDescribedby && (
+        {isMessageAriaDescribedbySet(messageAriaDescribedby) && (
           <span id="link-description" class="sr-only">
             {messageAriaDescribedby}
           </span>

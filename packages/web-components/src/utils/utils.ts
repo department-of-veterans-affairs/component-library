@@ -187,3 +187,13 @@ export function isInteractiveLinkOrButton(el: HTMLElement): boolean {
   // eslint-disable-next-line i18next/no-literal-string
   return ['VA-BUTTON', 'VA-LINK', 'BUTTON', 'A'].includes(el.tagName);
 }
+
+/**
+ * Checks if a messageAriaDescribedby is set;
+ * if set to 'false' an aria-describedby attribute will be added
+ * leading to assistive tech reading out a value of 'false'
+ * (see vets-design-system-documentation/issues/3885)
+ */
+export function isMessageAriaDescribedbySet(message: string): boolean {
+  return message && mesage !== 'false';
+}

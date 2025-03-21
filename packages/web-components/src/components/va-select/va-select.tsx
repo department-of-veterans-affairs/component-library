@@ -13,8 +13,11 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
-import { getSlottedNodes, getHeaderLevel } from '../../utils/utils';
-
+import {
+  getSlottedNodes,
+  getHeaderLevel,
+  isMessageAriaDescribedbySet,
+} from '../../utils/utils';
 /**
  * @nativeHandler onKeyDown
  * @componentName Select
@@ -332,7 +335,7 @@ export class VaSelect {
             {this.options}
           </select>
         </div>
-        {messageAriaDescribedby && (
+        {isMessageAriaDescribedbySet(messageAriaDescribedby) && (
           <span id="input-message" class="usa-sr-only dd-privacy-hidden">
             {messageAriaDescribedby}
           </span>
