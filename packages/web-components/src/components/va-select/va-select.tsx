@@ -250,7 +250,7 @@ export class VaSelect {
       showError,
       useFormsPattern,
       formHeadingLevel,
-      formHeading
+      formHeading,
     } = this;
 
     const errorID = 'input-error-message';
@@ -276,16 +276,16 @@ export class VaSelect {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
       formsHeading = (
         <Fragment>
-          {formHeading &&
-          <HeaderLevel id="form-question" part="form-header">
-            {formHeading}
-          </HeaderLevel>
-          }
+          {formHeading && (
+            <HeaderLevel id="form-question" part="form-header">
+              {formHeading}
+            </HeaderLevel>
+          )}
           <div id="form-description">
             <slot name="form-description"></slot>
           </div>
         </Fragment>
-      )
+      );
     }
 
     return (

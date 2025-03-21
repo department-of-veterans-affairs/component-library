@@ -85,7 +85,6 @@ export class VaComboBox {
    */
   @Event() vaSelect: EventEmitter;
 
-
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -131,53 +130,54 @@ export class VaComboBox {
    */
   private populateOptions() {
     const { value } = this;
-    const allNodes = this.el.querySelectorAll('option, optgroup')
+    const allNodes = this.el.querySelectorAll('option, optgroup');
 
-    
     const nodes = Array.from(allNodes);
-    return nodes.map(
-      (node: HTMLOptionElement | HTMLOptGroupElement, index) => {
-        if (node.nodeName.toLowerCase() === 'optgroup') {
-          return (
-            <Fragment>
-              {/* adding data-optgroup attribute to identify this element as an optgroup header
-               * assigning unique id to reference in va-combo-box-library.js while transforming options to <li> elements
-               */}
-              <option data-optgroup="true" id={'optgroup-' + index}>
-                {node.label}
-              </option>
-
-              {/* iterate through all children <option> elements within an <optgroup>
-               * assign specific attributes
-               * add aria-described bto associate <option> with an <optgroup> for SR */}
-              {Array.from(node.children).map((child: HTMLOptionElement) => {
-                return (
-                  <option
-                    value={child.value}
-                    selected={value === child.value}
-                    data-optgroup-option="true"
-                    aria-describedby={'optgroup-' + index}
-                  >
-                    {child.text}
-                  </option>
-                );
-              })}
-            </Fragment>
-          );
-        } else if (node.nodeName.toLowerCase() === 'option' && 
-                    node.parentElement.nodeName.toLowerCase() !== 'optgroup') {
-          {/* handling <option> elements that are not nested within <optgroup> element */}
-          return (
-            <option
-              value={(node as HTMLOptionElement).value}
-              selected={value === (node as HTMLOptionElement).value}
-            >
-              {node.textContent}
+    return nodes.map((node: HTMLOptionElement | HTMLOptGroupElement, index) => {
+      if (node.nodeName.toLowerCase() === 'optgroup') {
+        return (
+          <Fragment>
+            {/* adding data-optgroup attribute to identify this element as an optgroup header
+             * assigning unique id to reference in va-combo-box-library.js while transforming options to <li> elements
+             */}
+            <option data-optgroup="true" id={'optgroup-' + index}>
+              {node.label}
             </option>
-          );
+
+            {/* iterate through all children <option> elements within an <optgroup>
+             * assign specific attributes
+             * add aria-described bto associate <option> with an <optgroup> for SR */}
+            {Array.from(node.children).map((child: HTMLOptionElement) => {
+              return (
+                <option
+                  value={child.value}
+                  selected={value === child.value}
+                  data-optgroup-option="true"
+                  aria-describedby={'optgroup-' + index}
+                >
+                  {child.text}
+                </option>
+              );
+            })}
+          </Fragment>
+        );
+      } else if (
+        node.nodeName.toLowerCase() === 'option' &&
+        node.parentElement.nodeName.toLowerCase() !== 'optgroup'
+      ) {
+        {
+          /* handling <option> elements that are not nested within <optgroup> element */
         }
-      },
-    );
+        return (
+          <option
+            value={(node as HTMLOptionElement).value}
+            selected={value === (node as HTMLOptionElement).value}
+          >
+            {node.textContent}
+          </option>
+        );
+      }
+    });
   }
 
   private handleChange(e: Event) {

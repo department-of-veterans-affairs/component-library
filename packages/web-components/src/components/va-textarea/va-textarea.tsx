@@ -12,7 +12,11 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
-import { consoleDevError, getCharacterMessage, getHeaderLevel } from '../../utils/utils';
+import {
+  consoleDevError,
+  getCharacterMessage,
+  getHeaderLevel,
+} from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -98,7 +102,7 @@ export class VaTextarea {
    * An optional message that will be read by screen readers when the header is focused. The label-header-level
    * prop must be set for this to be active.
    */
-    @Prop() headerAriaDescribedby?: string;
+  @Prop() headerAriaDescribedby?: string;
 
   /**
    * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
@@ -192,9 +196,10 @@ export class VaTextarea {
     } = this;
 
     const maxlength = this.getMaxlength();
-    const ariaDescribedbyIds = `${error ? 'input-error-message' : ''} ${
-      charcount && maxlength ? 'charcount-message' : ''} ${
-      messageAriaDescribedby ? 'input-message' : ''}`.trim() || null;
+    const ariaDescribedbyIds =
+      `${error ? 'input-error-message' : ''} ${
+        charcount && maxlength ? 'charcount-message' : ''
+      } ${messageAriaDescribedby ? 'input-message' : ''}`.trim() || null;
 
     const ariaLabeledByIds =
       `${useFormsPattern && formHeading ? 'form-question' : ''} ${
