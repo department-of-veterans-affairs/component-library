@@ -137,15 +137,21 @@ export class VaMemorableDate {
   @Prop({ mutable: true }) invalidMonth: boolean = false;
   @Prop({ mutable: true }) invalidYear: boolean = false;
 
+  private currentDay: string;
+  private currentMonth: string;
+  private currentYear: string;
+
   private dayTouched: boolean = false;
   private monthTouched: boolean = false;
   private yearTouched: boolean = false;
 
   private handleDateBlur = (event: FocusEvent) => {
-    const [year, month, day] = (this.value || '').split('-');
-    const yearNum = Number(year);
-    const monthNum = Number(month);
-    const dayNum = Number(day);
+    let undef;
+    const { currentYear, currentMonth, currentDay } = this;
+    // Fallback to undefined to preserve validation of empty strings
+    const yearNum = Number(currentYear || undef);
+    const monthNum = Number(currentMonth || undef);
+    const dayNum = Number(currentDay || undef);
 
     validate({
       component: this,
@@ -164,10 +170,12 @@ export class VaMemorableDate {
 
     /* eslint-disable i18next/no-literal-string */
     this.value =
-      year || month || day
-        ? `${year}-${month ? zeroPadStart(monthNum) : ''}-${
-            day ? zeroPadStart(dayNum) : ''
-          }`
+      currentYear || currentMonth || currentDay
+        ? [
+            currentYear,
+            currentMonth ? zeroPadStart(monthNum) : '',
+            currentDay ? zeroPadStart(dayNum) : '',
+          ].join('-')
         : '';
     /* eslint-enable i18next/no-literal-string */
 
@@ -191,39 +199,29 @@ export class VaMemorableDate {
   };
 
   private handleMonthChange = event => {
-    this.handleDateChange(event as InputEvent);
+    const target = event.target as HTMLInputElement;
+    this.currentMonth = target.value;
+    this.handleDateChange(event);
+  };
+
+  private handleDayChange = event => {
+    const target = event.target as HTMLInputElement;
+    this.currentDay = target.value;
+    this.handleDateChange(event);
+  };
+
+  private handleYearChange = event => {
+    const target = event.target as HTMLInputElement;
+    this.currentYear = target.value;
+    this.handleDateChange(event);
   };
 
   private handleDateChange = (event: InputEvent) => {
-    const target = event.target as HTMLInputElement;
-
-    let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
-    if (
-      target.classList.contains('input-month') ||
-      target.classList.contains('usa-form-group--month-input') ||
-      target.classList.contains('usa-form-group--month-select')
-    ) {
-      currentMonth = target.value;
-    }
-    if (
-      target.classList.contains('input-day') ||
-      target.classList.contains('usa-form-group--day-input')
-    ) {
-      currentDay = target.value;
-    }
-    if (
-      target.classList.contains('input-year') ||
-      target.classList.contains('usa-form-group--year-input')
-    ) {
-      currentYear = target.value;
-    }
-
+    const { currentYear, currentMonth, currentDay } = this;
     /* eslint-disable i18next/no-literal-string */
     this.value =
       currentYear || currentMonth || currentDay
-        ? `${currentYear}-${currentMonth ? currentMonth : ''}-${
-            currentDay ? currentDay : ''
-          }`
+        ? [currentYear || '', currentMonth || '', currentDay || ''].join('-')
         : '';
     /* eslint-enable i18next/no-literal-string */
 
@@ -269,6 +267,13 @@ export class VaMemorableDate {
     i18next.off('languageChanged');
   }
 
+  componentDidLoad() {
+    const [year, month, day] = (this.value || '').split('-');
+    this.currentYear = year;
+    this.currentMonth = month;
+    this.currentDay = day;
+  }
+
   render() {
     const {
       required,
@@ -277,15 +282,13 @@ export class VaMemorableDate {
       hint,
       error,
       handleDateBlur,
-      handleDateChange,
-      value,
       monthSelect,
       useFormsPattern,
       formHeadingLevel,
       formHeading,
     } = this;
 
-    const [year, month, day] = (value || '').split('-');
+    const { currentYear, currentMonth, currentDay } = this;
     const describedbyIds = ['dateHint', hint ? 'hint' : '']
       .filter(Boolean)
       .join(' ');
@@ -295,8 +298,8 @@ export class VaMemorableDate {
       : i18next.t('date-hint');
 
     const errorParameters = (error: string) => {
-      const yearNum = parseInt(year);
-      const monthNum = parseInt(month);
+      const yearNum = parseInt(currentYear, 10);
+      const monthNum = parseInt(currentMonth, 10);
       return getErrorParameters(error, yearNum, monthNum);
     };
 
@@ -359,7 +362,9 @@ export class VaMemorableDate {
           onBlur={this.handleMonthBlur}
           class="usa-form-group--month-select"
           reflectInputError={error === 'month-range' ? true : false}
-          value={month ? String(parseInt(month)) : month}
+          value={
+            currentMonth ? String(parseInt(currentMonth, 10)) : currentMonth
+          }
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           showError={false}
         >
@@ -367,7 +372,7 @@ export class VaMemorableDate {
             months.map(monthOption => (
               <option
                 value={monthOption.value}
-                selected={monthOption.value === parseInt(month)}
+                selected={monthOption.value === parseInt(currentMonth, 10)}
               >
                 {monthOption.label}
               </option>
@@ -386,8 +391,8 @@ export class VaMemorableDate {
           invalid={this.invalidMonth}
           // Value must be a string
           // if NaN provide empty string
-          value={month?.toString()}
-          onInput={handleDateChange}
+          value={currentMonth?.toString()}
+          onInput={this.handleMonthChange}
           onBlur={this.handleMonthBlur}
           class="usa-form-group--month-input memorable-date-input"
           reflectInputError={error === 'month-range' ? true : false}
@@ -448,8 +453,8 @@ export class VaMemorableDate {
                   invalid={this.invalidDay}
                   // Value must be a string
                   // if NaN provide empty string
-                  value={day?.toString()}
-                  onInput={handleDateChange}
+                  value={currentDay?.toString()}
+                  onInput={this.handleDayChange}
                   onBlur={this.handleDayBlur}
                   class="usa-form-group--day-input memorable-date-input"
                   reflectInputError={error === 'day-range' ? true : false}
@@ -471,8 +476,8 @@ export class VaMemorableDate {
                   invalid={this.invalidYear}
                   // Value must be a string
                   // if NaN provide empty string
-                  value={year?.toString()}
-                  onInput={handleDateChange}
+                  value={currentYear?.toString()}
+                  onInput={this.handleYearChange}
                   onBlur={this.handleYearBlur}
                   class="usa-form-group--year-input memorable-date-input"
                   reflectInputError={error === 'year-range' ? true : false}
