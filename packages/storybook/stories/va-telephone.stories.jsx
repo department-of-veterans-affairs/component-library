@@ -14,14 +14,16 @@ const columns = [
   { label: 'Phone number', value: 'phone' },
   { label: 'Description', value: 'description' },
 ];
-const data = Object.entries(contactsMap).map(c => (
-  {key: c[0], phoneNumber: c[1].phoneNumber, description: c[1].description}
-));
+const data = Object.entries(contactsMap).map(c => ({
+  key: c[0],
+  phoneNumber: c[1].phoneNumber,
+  description: c[1].description,
+}));
 
 const Contacts = () => (
   <va-table>
     <va-table-row slot="headers">
-      {columns.map((col) => (
+      {columns.map(col => (
         <span key={col.value}>{col.label}</span>
       ))}
     </va-table-row>
@@ -29,7 +31,9 @@ const Contacts = () => (
     {data.map(row => (
       <va-table-row key={row.key}>
         <span>{row.key}</span>
-        <span><va-telephone contact={row.phoneNumber}></va-telephone></span>
+        <span>
+          <va-telephone contact={row.phoneNumber}></va-telephone>
+        </span>
         <span>{row.description}</span>
       </va-table-row>
     ))}
@@ -68,7 +72,9 @@ const Template = ({
 }) => {
   return (
     <div>
-      {messageAriaDescribedBy && <span>Main number to facility </span>}
+      {messageAriaDescribedBy && messageAriaDescribedBy !== 'false' && (
+        <span>Main number to facility </span>
+      )}
       <va-telephone
         contact={contact}
         extension={extension}
@@ -143,7 +149,7 @@ export const SMS = Template.bind(null);
 SMS.args = {
   ...defaultArgs,
   sms: true,
-  contact: '838255'
+  contact: '838255',
 };
 
 export const AriaDescribedBy = Template.bind(null);
