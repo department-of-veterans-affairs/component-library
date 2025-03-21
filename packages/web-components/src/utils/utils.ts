@@ -195,5 +195,5 @@ export function isInteractiveLinkOrButton(el: HTMLElement): boolean {
  * (see vets-design-system-documentation/issues/3885)
  */
 export function isMessageAriaDescribedbySet(message: string): boolean {
-  return message && mesage !== 'false';
+  return message && message !== 'false';
 }
