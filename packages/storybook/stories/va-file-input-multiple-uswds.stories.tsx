@@ -343,7 +343,6 @@ const CustomValidationTemplate = ({ label, name, accept, hint }) => {
       }
     });
 
-    // @ts-ignore
     setErrorsList(errors);
   }
 

@@ -254,7 +254,17 @@ function CanvasLink() {
  * Accepts a JSON object as a prop representing component information
  * @param {{storyDefault: any, componentName?: string, data: any, children?: any}} arg
  */
-export function StoryDocs({ storyDefault, componentName, data, children }) {
+export function StoryDocs({
+  storyDefault,
+  componentName,
+  data,
+  children,
+}: {
+  storyDefault: any;
+  componentName?: string;
+  data: any;
+  children?: any;
+}) {
   const component = componentName || data?.tag;
   const componentDocs = additionalDocs?.[component];
   const componentData =

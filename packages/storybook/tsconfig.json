@@ -3,7 +3,7 @@
     "checkJs": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "lib": ["ES2024"],
+    "lib": ["ES2024", "DOM"],
     "outDir": "build",
     "resolveJsonModule": true,
     "types": ["./types"]

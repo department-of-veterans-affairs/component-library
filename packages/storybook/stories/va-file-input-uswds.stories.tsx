@@ -174,7 +174,7 @@ const CustomValidationTemplate = ({
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        const contents = reader.result as String;
+        const contents = reader.result.toString();
         const hasX = contents.includes('X');
 
         if (hasX) setErrorVal("File contains an 'X' character");

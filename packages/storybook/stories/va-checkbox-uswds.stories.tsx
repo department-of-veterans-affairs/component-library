@@ -139,9 +139,8 @@ const IndeterminateTemplate = ({}) => {
   };
 
   const handleSelectAllToggle = event => {
-    const checkboxes = document.querySelectorAll(
-      '.example-checkbox',
-    ) as unknown as HTMLInputElement[];
+    const checkboxes =
+      document.querySelectorAll<HTMLInputElement>('.example-checkbox');
     checkboxes.forEach(checkbox => {
       checkbox.checked = event.target.checked;
     });
