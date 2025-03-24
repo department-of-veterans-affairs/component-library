@@ -13,14 +13,14 @@ describe('va-additional-info', () => {
     expect(element).toEqualHtml(`
       <va-additional-info trigger="More info" class="hydrated">
         <mock:shadow-root>
-          <a aria-controls="info" aria-expanded="false" role="button" tabindex="0">
+          <button aria-controls="info" aria-expanded="false" type="button">
             <div>
               <span class="additional-info-title">
                 More info
               </span>
               <va-icon class="additional-info-icon hydrated"></va-icon>
             </div>
-          </a>
+          </button>
           <div class="closed" id="info" style="--calc-max-height:calc(0px + 1.125rem);">
             <slot></slot>
           </div>
@@ -48,12 +48,12 @@ describe('va-additional-info', () => {
       `<va-additional-info trigger="Additional information"></va-additional-info>`,
     );
 
-    const anchorEl = await page.find('va-additional-info >>> a');
-    await anchorEl.click();
+    const buttonEl = await page.find('va-additional-info >>> button');
+    await buttonEl.click();
 
     await axeCheck(page);
 
-    expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
+    expect(buttonEl.getAttribute('aria-expanded')).toEqual('true');
   });
 
   it('expands when clicked', async () => {
@@ -72,13 +72,13 @@ describe('va-additional-info', () => {
     );
 
     // Use click to expand
-    const anchorEl = await page.find('va-additional-info >>> a');
-    expect(anchorEl.getAttribute('aria-expanded')).toEqual('false');
+    const buttonEl = await page.find('va-additional-info >>> button');
+    expect(buttonEl.getAttribute('aria-expanded')).toEqual('false');
 
-    await anchorEl.click();
+    await buttonEl.click();
     // Allow the transition to complete
     await page.waitForTimeout(600);
-    expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
+    expect(buttonEl.getAttribute('aria-expanded')).toEqual('true');
 
     const postOpacity = await handle.evaluate(
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,
@@ -107,8 +107,8 @@ describe('va-additional-info', () => {
     );
 
     // Use keyboard to expand
-    const anchorEl = await page.find('va-additional-info >>> a');
-    await anchorEl.press(' ');
+    const buttonEl = await page.find('va-additional-info >>> button');
+    await buttonEl.press(' ');
     // Allow the transition to complete
     await page.waitForTimeout(600);
 
@@ -139,8 +139,8 @@ describe('va-additional-info', () => {
     );
 
     // Use keyboard to expand
-    const anchorEl = await page.find('va-additional-info >>> a');
-    await anchorEl.press('Enter');
+    const buttonEl = await page.find('va-additional-info >>> button');
+    await buttonEl.press('Enter');
     // Allow the transition to complete
     await page.waitForTimeout(600);
 
@@ -166,8 +166,8 @@ describe('va-additional-info', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorEl = await page.find('va-additional-info >>> a');
-    await anchorEl.click();
+    const buttonEl = await page.find('va-additional-info >>> button');
+    await buttonEl.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'expand',
@@ -189,11 +189,11 @@ describe('va-additional-info', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorEl = await page.find('va-additional-info >>> a');
+    const buttonEl = await page.find('va-additional-info >>> button');
 
     // Click once to expand, again to collapse
-    await anchorEl.click();
-    await anchorEl.click();
+    await buttonEl.click();
+    await buttonEl.click();
 
     const secondEvent = analyticsSpy.events[1];
     expect(secondEvent.detail.action).toEqual('collapse');
@@ -210,8 +210,8 @@ describe('va-additional-info', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorEl = await page.find('va-additional-info >>> a');
-    await anchorEl.click();
+    const buttonEl = await page.find('va-additional-info >>> button');
+    await buttonEl.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
@@ -224,8 +224,8 @@ describe('va-additional-info', () => {
       </va-additional-info>
     `);
     const handle = await page.waitForSelector('pierce/#info');
-    const anchorEl = await page.find('va-additional-info >>> a');
-    await anchorEl.click();
+    const buttonEl = await page.find('va-additional-info >>> button');
+    await buttonEl.click();
     await page.waitForSelector('pierce/#info.open');
     const calcMaxHeight = await handle.evaluate((domElement: HTMLElement) =>
       domElement.style.getPropertyValue('--calc-max-height'),

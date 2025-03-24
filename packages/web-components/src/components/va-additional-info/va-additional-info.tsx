@@ -98,16 +98,15 @@ export class VaAdditionalInfo {
 
   render() {
     const infoClass = classnames({
-      'open': this.open,
-      'closed': !this.open
+      open: this.open,
+      closed: !this.open,
     });
     return (
       <Host>
-        <a
-          role="button"
+        <button
+          type="button"
           aria-controls="info"
           aria-expanded={this.open ? 'true' : 'false'}
-          tabIndex={0}
           onClick={this.toggleOpen.bind(this)}
           onKeyDown={this.handleKeydown.bind(this)}
         >
@@ -119,7 +118,7 @@ export class VaAdditionalInfo {
               size={3}
             ></va-icon>
           </div>
-        </a>
+        </button>
         <div id="info" class={infoClass}>
           <slot></slot>
         </div>
