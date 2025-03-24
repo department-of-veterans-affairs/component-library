@@ -1,4 +1,9 @@
-import { format, getSlottedNodes, isNumeric } from './utils';
+import {
+  format,
+  getSlottedNodes,
+  isNumeric,
+  isInteractiveLinkOrButton,
+} from './utils';
 
 describe('format', () => {
   it('returns empty string for no names defined', () => {
@@ -45,7 +50,6 @@ describe('getSlottedNodes()', () => {
   }
 
   it('gathers slot nodes in the shadow DOM if slot is used', async () => {
-    
     var mockObject = {
       assignedNodes: () => {
         return ['h2', 'a', 'a'];
@@ -57,15 +61,14 @@ describe('getSlottedNodes()', () => {
 
     const defElement_shadowRoot_querySelector =
       defaultElement.shadowRoot.querySelector;
-      
-    const spy = jest
-      .spyOn(defaultElement.shadowRoot, 'querySelector');
+
+    const spy = jest.spyOn(defaultElement.shadowRoot, 'querySelector');
     spy.mockImplementation(selectors => {
-        if (selectors === 'slot') {
-          return mockObject as unknown as Element;
-        }
-        return defElement_shadowRoot_querySelector(selectors);
-      });
+      if (selectors === 'slot') {
+        return mockObject as unknown as Element;
+      }
+      return defElement_shadowRoot_querySelector(selectors);
+    });
 
     const slottedNodes = getSlottedNodes(defaultElement, null);
     expect(slottedNodes).toEqual(['h2', 'a', 'a']);
@@ -94,5 +97,35 @@ describe('getSlottedNodes()', () => {
 
     const slottedNodes = getSlottedNodes(defaultElement, 'a');
     expect(slottedNodes).toEqual([{ nodeName: 'A' }]);
+  });
+});
+
+describe('isInteractiveLinkOrButton()', () => {
+  const testElement = tag => {
+    const el = document.createElement(tag);
+    return isInteractiveLinkOrButton(el);
+  };
+
+  it('returns true for a va-button element', () => {
+    expect(testElement('va-button')).toEqual(true);
+  });
+  it('returns true for a va-link element', () => {
+    expect(testElement('va-link')).toEqual(true);
+  });
+  it('returns true for a button element', () => {
+    expect(testElement('button')).toEqual(true);
+  });
+  it('returns true for an anchor element', () => {
+    expect(testElement('a')).toEqual(true);
+  });
+
+  it('returns false for a label element', () => {
+    expect(testElement('label')).toEqual(false);
+  });
+  it('returns false for a div element', () => {
+    expect(testElement('div')).toEqual(false);
+  });
+  it('returns false for a span element', () => {
+    expect(testElement('span')).toEqual(false);
   });
 });
