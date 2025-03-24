@@ -83,7 +83,7 @@ export namespace Components {
      */
     interface VaAlert {
         /**
-          * Aria-label text for the close button.
+          * Aria-label text for the close button. If not provided, the text will be "Close {headline} notification".
          */
         "closeBtnAriaLabel"?: string;
         /**
@@ -3430,7 +3430,7 @@ declare namespace LocalJSX {
      */
     interface VaAlert {
         /**
-          * Aria-label text for the close button.
+          * Aria-label text for the close button. If not provided, the text will be "Close {headline} notification".
          */
         "closeBtnAriaLabel"?: string;
         /**

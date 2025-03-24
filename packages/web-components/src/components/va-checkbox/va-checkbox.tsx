@@ -12,6 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
+import { isInteractiveLinkOrButton } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -154,14 +155,19 @@ export class VaCheckbox {
   };
 
   private handleClick = (e: Event) => {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    this.checked = !this.checked;
-    const checkbox: HTMLInputElement =
-      this.el.shadowRoot.querySelector('#checkbox-element');
-    checkbox.focus();
-    this.vaChange.emit({ checked: this.checked });
-    if (this.enableAnalytics) this.fireAnalyticsEvent();
+    const el = e.target as HTMLElement;
+    // Ignore interactive links or buttons in the internal description slot, but
+    // make sure that the actual checkbox isn't blocked
+    if (el.id === 'checkbox-element' || !isInteractiveLinkOrButton(el)) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      this.checked = !this.checked;
+      const checkbox: HTMLInputElement =
+        this.el.shadowRoot.querySelector('#checkbox-element');
+      checkbox.focus();
+      this.vaChange.emit({ checked: this.checked });
+      if (this.enableAnalytics) this.fireAnalyticsEvent();
+    }
   };
 
   /**
@@ -231,7 +237,7 @@ export class VaCheckbox {
         .join(' ')
         // Return null so we don't add the attribute if we have an empty string
         .trim() || null;
-    
+
     let ariaChecked: boolean | string | null;
     if (indeterminate && !checked) {
       ariaChecked = 'mixed';
