@@ -158,6 +158,13 @@ const noop = () => {};
     inputEl.disabled = false;
   };
 
+  const handleMouseUp = (event) => {
+    const target = event.target;
+    if (target.selectionStart === target.selectionEnd) {
+      target.select(); // Select all text if nothing is selected
+    }
+  };
+
   /**
    * Enhance a select element into a combo box component.
    *
@@ -239,6 +246,7 @@ const noop = () => {};
     input.setAttribute('class', INPUT_CLASS);
     input.setAttribute('type', 'text');
     input.setAttribute('role', 'combobox');
+    input.onmouseup = handleMouseUp;
     additionalAttributes.forEach(attr =>
       Object.keys(attr).forEach(key => {
         const value = Sanitizer.escapeHTML`${attr[key]}`;
@@ -266,11 +274,7 @@ const noop = () => {};
         aria-labelledby="${listIdLabel}"
         hidden>
       </ul>
-      <div class="${STATUS_CLASS} usa-sr-only" role="status"></div>
-      <span id="${assistiveHintID}" class="usa-sr-only">
-        When autocomplete results are available use up and down arrows to review and enter to select.
-        Touch device users, explore by touch or with swipe gestures.
-      </span>`,
+      <div class="${STATUS_CLASS} usa-sr-only" role="status"></div>`,
     );
 
     if (selectedOption) {
