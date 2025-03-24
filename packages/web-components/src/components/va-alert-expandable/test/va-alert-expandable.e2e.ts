@@ -14,7 +14,7 @@ describe('va-alert-expandable', () => {
       <va-alert-expandable status="warning" trigger="Limited services and hours" class="hydrated">
         <mock:shadow-root>
         <div class="alert-expandable warning">
-          <a role="button" aria-controls="alert-body" aria-expanded="false" tabindex="0" class="alert-expandable-trigger">
+          <button type="button" aria-controls="alert-body" aria-expanded="false" class="alert-expandable-trigger">
             <va-icon class="alert-expandable__status-icon hydrated"></va-icon>
             <div>
               <span class="alert-expandable-title">
@@ -23,7 +23,7 @@ describe('va-alert-expandable', () => {
               </span>
               <va-icon class="alert-expandable-icon hydrated"></va-icon>
             </div>
-          </a>
+          </button>
           <div id="alert-body" class="alert-expandable-body closed" style="--calc-max-height:calc(12px + 2rem);"><div id="slot-wrap"><slot></slot></div></div>
         </div>
         </mock:shadow-root>
@@ -50,12 +50,12 @@ describe('va-alert-expandable', () => {
       `<va-alert-expandable status="warning" trigger="Limited services and hours"></va-alert-expandable>`,
     );
 
-    const anchorEl = await page.find('va-alert-expandable >>> a');
-    await anchorEl.click();
+    const buttonEl = await page.find('va-alert-expandable >>> button');
+    await buttonEl.click();
 
     await axeCheck(page);
 
-    expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
+    expect(buttonEl.getAttribute('aria-expanded')).toEqual('true');
   });
 
   it('expands when clicked', async () => {
@@ -74,13 +74,13 @@ describe('va-alert-expandable', () => {
     );
 
     // Use click to expand
-    const anchorEl = await page.find('va-alert-expandable >>> a');
-    expect(anchorEl.getAttribute('aria-expanded')).toEqual('false');
+    const buttonEl = await page.find('va-alert-expandable >>> button');
+    expect(buttonEl.getAttribute('aria-expanded')).toEqual('false');
 
-    await anchorEl.click();
+    await buttonEl.click();
     // Allow the transition to complete
     await page.waitForTimeout(600);
-    expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
+    expect(buttonEl.getAttribute('aria-expanded')).toEqual('true');
 
     const postOpacity = await handle.evaluate(
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,
@@ -109,8 +109,8 @@ describe('va-alert-expandable', () => {
     );
 
     // Use keyboard to expand
-    const anchorEl = await page.find('va-alert-expandable >>> a');
-    await anchorEl.press(' ');
+    const buttonEl = await page.find('va-alert-expandable >>> button');
+    await buttonEl.press(' ');
     // Allow the transition to complete
     await page.waitForTimeout(600);
 
@@ -141,8 +141,8 @@ describe('va-alert-expandable', () => {
     );
 
     // Use keyboard to expand
-    const anchorEl = await page.find('va-alert-expandable >>> a');
-    await anchorEl.press('Enter');
+    const buttonEl = await page.find('va-alert-expandable >>> button');
+    await buttonEl.press('Enter');
     // Allow the transition to complete
     await page.waitForTimeout(600);
 
@@ -168,8 +168,8 @@ describe('va-alert-expandable', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorEl = await page.find('va-alert-expandable >>> a');
-    await anchorEl.click();
+    const buttonEl = await page.find('va-alert-expandable >>> button');
+    await buttonEl.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'expand',
@@ -191,11 +191,11 @@ describe('va-alert-expandable', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorEl = await page.find('va-alert-expandable >>> a');
+    const buttonEl = await page.find('va-alert-expandable >>> button');
 
     // Click once to expand, again to collapse
-    await anchorEl.click();
-    await anchorEl.click();
+    await buttonEl.click();
+    await buttonEl.click();
 
     const secondEvent = analyticsSpy.events[1];
     expect(secondEvent.detail.action).toEqual('collapse');
@@ -212,8 +212,8 @@ describe('va-alert-expandable', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorEl = await page.find('va-alert-expandable >>> a');
-    await anchorEl.click();
+    const buttonEl = await page.find('va-alert-expandable >>> button');
+    await buttonEl.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
@@ -226,8 +226,8 @@ describe('va-alert-expandable', () => {
       </va-alert-expandable>
     `);
     const handle = await page.waitForSelector('pierce/#alert-body');
-    const anchorEl = await page.find('va-alert-expandable >>> a');
-    await anchorEl.click();
+    const buttonEl = await page.find('va-alert-expandable >>> button');
+    await buttonEl.click();
     await page.waitForSelector('pierce/#alert-body.open');
     const calcMaxHeight = await handle.evaluate((domElement: HTMLElement) =>
       domElement.style.getPropertyValue('--calc-max-height'),
