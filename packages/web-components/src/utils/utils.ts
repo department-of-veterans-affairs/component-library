@@ -195,5 +195,5 @@ export function isInteractiveLinkOrButton(el: HTMLElement): boolean {
  * (see vets-design-system-documentation/issues/3885)
  */
 export function isMessageSet(message: string): boolean {
-  return message && message !== 'false';
+  return (message && message !== 'false') || false;
 }
