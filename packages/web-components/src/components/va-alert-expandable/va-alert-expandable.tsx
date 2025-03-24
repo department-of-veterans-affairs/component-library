@@ -79,13 +79,6 @@ export class VaAlertExpandable {
     this.open = !this.open;
   }
 
-  handleKeydown(event): void {
-    if (event.key === ' ' || event.key === 'Enter') {
-      event.preventDefault();
-      this.toggleOpen();
-    }
-  }
-
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
   /* eslint-disable i18next/no-literal-string */
   updateAlertBodyMaxHeight() {
@@ -132,7 +125,6 @@ export class VaAlertExpandable {
             aria-controls="alert-body"
             aria-expanded={this.open ? 'true' : 'false'}
             onClick={this.toggleOpen.bind(this)}
-            onKeyDown={this.handleKeydown.bind(this)}
             class="alert-expandable-trigger"
           >
             {!iconless && (

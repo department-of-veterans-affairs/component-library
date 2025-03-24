@@ -72,13 +72,6 @@ export class VaAdditionalInfo {
     this.open = !this.open;
   }
 
-  handleKeydown(event): void {
-    if (event.key === ' ' || event.key === 'Enter') {
-      event.preventDefault();
-      this.toggleOpen();
-    }
-  }
-
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
   updateInfoMaxHeight() {
     const infoElm = this.el.shadowRoot.getElementById('info');
@@ -108,7 +101,6 @@ export class VaAdditionalInfo {
           aria-controls="info"
           aria-expanded={this.open ? 'true' : 'false'}
           onClick={this.toggleOpen.bind(this)}
-          onKeyDown={this.handleKeydown.bind(this)}
         >
           <div>
             <span class="additional-info-title">{this.trigger}</span>
