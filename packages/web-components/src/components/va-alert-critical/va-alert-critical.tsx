@@ -1,16 +1,17 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 
 /**
- * @componentName Critical information
+ * @componentName Alert - Critical
+ * @guidanceHref alert/alert-critical
  * @maturityCategory caution
  * @maturityLevel candidate
  */
 @Component({
-  tag: 'va-critical-information',
-  styleUrl: 'va-critical-information.scss',
+  tag: 'va-alert-critical',
+  styleUrl: 'va-alert-critical.scss',
   shadow: true,
 })
-export class VaCriticalInformation {
+export class VaAlertCritical {
   /** The link to a page where the user can take action */
   @Prop() link!: string;
 
