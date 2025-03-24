@@ -14,7 +14,7 @@ import classnames from 'classnames';
 import { getSlottedNodes } from '../../utils/utils';
 import { i18next } from '../..';
 import { Build } from '@stencil/core';
-import { getHeaderLevel, isMessageAriaDescribedbySet } from '../../utils/utils';
+import { getHeaderLevel, isMessageSet } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -312,7 +312,7 @@ export class VaRadio {
                   {headerAriaDescribedby}
                 </span>
               )}
-              {isMessageAriaDescribedbySet(messageAriaDescribedby) && (
+              {isMessageSet(messageAriaDescribedby) && (
                 <span id="description-message" class="usa-sr-only">
                   {messageAriaDescribedby}
                 </span>

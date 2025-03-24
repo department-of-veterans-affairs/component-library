@@ -7,7 +7,7 @@ import {
   h,
   Host,
 } from '@stencil/core';
-import { isMessageAriaDescribedbySet } from '../../utils/utils';
+import { isMessageSet } from '../../utils/utils';
 
 /**
  * @componentName Telephone
@@ -214,7 +214,7 @@ export class VaTelephone {
       countryCode,
     });
 
-    const hasDescription = isMessageAriaDescribedbySet(messageAriaDescribedby);
+    const hasDescription = isMessageSet(messageAriaDescribedby);
 
     // Null so we don't add the attribute if we have an empty string
     const ariaDescribedbyIds = hasDescription

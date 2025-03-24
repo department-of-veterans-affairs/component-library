@@ -12,10 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
-import {
-  isInteractiveLinkOrButton,
-  isMessageAriaDescribedbySet,
-} from '../../utils/utils';
+import { isInteractiveLinkOrButton, isMessageSet } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -297,7 +294,7 @@ export class VaCheckbox {
             )}
             <slot name="internal-description" />
           </label>
-          {isMessageAriaDescribedbySet(messageAriaDescribedby) && (
+          {isMessageSet(messageAriaDescribedby) && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>

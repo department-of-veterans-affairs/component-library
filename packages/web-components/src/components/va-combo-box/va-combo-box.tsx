@@ -13,7 +13,7 @@ import {
 import classnames from 'classnames';
 import { i18next } from '../..';
 import { comboBox } from './va-combo-box-library.js';
-import { isMessageAriaDescribedbySet } from '../../utils/utils';
+import { isMessageSet } from '../../utils/utils';
 
 /**
  * @componentName Combo Box
@@ -241,7 +241,7 @@ export class VaComboBox {
             {this.populateOptions()}
           </select>
         </div>
-        {isMessageAriaDescribedbySet(messageAriaDescribedby) && (
+        {isMessageSet(messageAriaDescribedby) && (
           <span id="input-message" class="usa-sr-only dd-privacy-hidden">
             {messageAriaDescribedby}
           </span>

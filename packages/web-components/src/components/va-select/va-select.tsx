@@ -16,7 +16,7 @@ import { i18next } from '../..';
 import {
   getSlottedNodes,
   getHeaderLevel,
-  isMessageAriaDescribedbySet,
+  isMessageSet,
 } from '../../utils/utils';
 /**
  * @nativeHandler onKeyDown
@@ -335,7 +335,7 @@ export class VaSelect {
             {this.options}
           </select>
         </div>
-        {isMessageAriaDescribedbySet(messageAriaDescribedby) && (
+        {isMessageSet(messageAriaDescribedby) && (
           <span id="input-message" class="usa-sr-only dd-privacy-hidden">
             {messageAriaDescribedby}
           </span>

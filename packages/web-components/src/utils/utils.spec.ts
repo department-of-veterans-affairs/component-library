@@ -3,7 +3,7 @@ import {
   getSlottedNodes,
   isNumeric,
   isInteractiveLinkOrButton,
-  isMessageAriaDescribedbySet,
+  isMessageSet,
 } from './utils';
 
 describe('format', () => {
@@ -131,20 +131,18 @@ describe('isInteractiveLinkOrButton()', () => {
   });
 });
 
-describe('isMessageAriaDescribedbySet()', () => {
-  it('returns true if messageAriaDescribedby is set', () => {
-    const el = document.createElement('va-button');
-    el.setAttribute('messageAriaDescribedby', 'test');
-    expect(isMessageAriaDescribedbySet(el)).toEqual(true);
+describe('isMessageSet()', () => {
+  it('returns true if message is set', () => {
+    expect(isMessageSet('test')).toEqual(true);
+    expect(isMessageSet(' ')).toEqual(true);
   });
 
-  it('returns false if messageAriaDescribedby is not set', () => {
-    const el = document.createElement('va-text-input');
-    expect(isMessageAriaDescribedbySet(el)).toEqual(false);
+  it('returns false if message is not set', () => {
+    expect(isMessageSet('')).toEqual(false);
+    expect(isMessageSet(null)).toEqual(false);
+    expect(isMessageSet(undefined)).toEqual(false);
   });
-  it('returns false if messageAriaDescribedby is set to "false"', () => {
-    const el = document.createElement('va-textarea');
-    el.setAttribute('messageAriaDescribedby', 'false');
-    expect(isMessageAriaDescribedbySet(el)).toEqual(false);
+  it('returns false if message is set to "false"', () => {
+    expect(isMessageSet('false')).toEqual(false);
   });
 });

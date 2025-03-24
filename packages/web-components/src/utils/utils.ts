@@ -194,6 +194,6 @@ export function isInteractiveLinkOrButton(el: HTMLElement): boolean {
  * leading to assistive tech reading out a value of 'false'
  * (see vets-design-system-documentation/issues/3885)
  */
-export function isMessageAriaDescribedbySet(message: string): boolean {
+export function isMessageSet(message: string): boolean {
   return message && message !== 'false';
 }
