@@ -64,8 +64,9 @@ export class VaDate {
    */
   @Prop({
     mutable: true,
-    reflect: true
-  }) error?: string;
+    reflect: true,
+  })
+  error?: string;
 
   /**
    * Whether or not only the Month and Year inputs should be displayed.
@@ -82,8 +83,9 @@ export class VaDate {
    */
   @Prop({
     mutable: true,
-    reflect: true
-  }) value?: string;
+    reflect: true,
+  })
+  value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -136,9 +138,9 @@ export class VaDate {
     // Ternary to prevent NaN displaying as value for Year
     // Ternary to prevent Month or Day from displaying as single digit
     /* eslint-disable i18next/no-literal-string */
-    const val = `${year ? year : ''}-${
-      month ? zeroPadStart(month) : ''
-    }-${day ? zeroPadStart(day) : ''}`.replace(/-+$/, '');
+    const val = `${year ? year : ''}-${month ? zeroPadStart(month) : ''}-${
+      day ? zeroPadStart(day) : ''
+    }`.replace(/-+$/, '');
     /* eslint-enable i18next/no-literal-string */
 
     this.value = val ? val : null;
@@ -150,17 +152,17 @@ export class VaDate {
       .map(val => Number(val));
 
     validate({
-               component: this,
-               year,
-               month,
-               day,
-               yearTouched: this.yearTouched,
-               monthTouched: this.monthTouched,
-               dayTouched: this.dayTouched,
-               monthSelect: true,
-               monthYearOnly: this.monthYearOnly,
-               monthOptional: this.monthOptional
-             });
+      component: this,
+      year,
+      month,
+      day,
+      yearTouched: this.yearTouched,
+      monthTouched: this.monthTouched,
+      dayTouched: this.dayTouched,
+      monthSelect: true,
+      monthYearOnly: this.monthYearOnly,
+      monthOptional: this.monthOptional,
+    });
 
     if (this.error) {
       return;
@@ -210,15 +212,15 @@ export class VaDate {
 
   private handleMonthBlur = () => {
     this.monthTouched = true;
-  }
+  };
 
   private handleDayBlur = () => {
     this.dayTouched = true;
-  }
+  };
 
   private handleYearBlur = () => {
     this.yearTouched = true;
-  }
+  };
 
   render() {
     const {
@@ -239,7 +241,7 @@ export class VaDate {
     const daysForSelectedMonth = month > 0 ? days[month] : [];
     const errorParameters = (error: string) => {
       return getErrorParameters(error, year, month);
-    }
+    };
     // Fieldset has an implicit aria role of group
     return (
       <Host onBlur={handleDateBlur}>
@@ -252,7 +254,8 @@ export class VaDate {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">Error</span> {i18next.t(error, errorParameters(error))}
+                <span class="sr-only">Error</span>{' '}
+                {i18next.t(error, errorParameters(error))}
               </Fragment>
             )}
           </span>
