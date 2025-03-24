@@ -12,15 +12,26 @@ describe('va-date', () => {
 
   it('renders all inputs for date fields', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-date></va-date>');
+    await page.setContent('<va-date name="test"></va-date>');
 
     const monthInput = await page.find('va-date >>> va-select.select-month');
     const dayInput = await page.find('va-date >>> va-select.select-day');
     const yearInput = await page.find('va-date >>> va-text-input.input-year');
+    const monthOptions = await page.findAll(
+      'va-date >>> va-select.select-month >>> select >>> option',
+    );
 
     expect(monthInput).not.toBeNull();
     expect(dayInput).not.toBeNull();
     expect(yearInput).not.toBeNull();
+    expect(monthOptions).toHaveLength(13); // 12 + one empty option
+
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    await handleMonth.select('1');
+    const dayOptions = await page.findAll(
+      'va-date >>> va-select.select-day >>> select >>> option',
+    );
+    expect(dayOptions).toHaveLength(32); // 31 + one empty option
   });
 
   it('passes an axe check', async () => {
