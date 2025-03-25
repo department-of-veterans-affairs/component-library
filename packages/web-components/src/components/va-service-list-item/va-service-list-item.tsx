@@ -31,7 +31,7 @@ export class VaServiceListItem {
   @Prop() serviceName: string;
 
   /** The heading level for the service name (defaults to h3) */
-  @Prop() serviceNameHeadingLevel: number = 3;
+  @Prop() serviceNameHeadingLevel?: number = 3;
 
   /** The link to the service page */
   @Prop() serviceLink: string;
