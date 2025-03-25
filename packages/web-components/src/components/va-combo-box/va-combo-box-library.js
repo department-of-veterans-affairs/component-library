@@ -598,35 +598,6 @@ const noop = () => {};
   };
 
   /**
-   * Reset the select based off of currently set select value
-   *
-   * @param {HTMLElement} el An element within the combo box component
-   */
-  const resetSelection = el => {
-    const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(el);
-
-    const selectValue = selectEl.value;
-    const inputValue = (inputEl.value || '').trim().toLowerCase();
-
-    if (selectValue) {
-      for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
-        const optionEl = selectEl.options[i];
-        if (optionEl.value === selectValue) {
-          if (inputValue !== optionEl.text) {
-            changeElementValue(inputEl, optionEl.text);
-          }
-          comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
-          return;
-        }
-      }
-    }
-
-    if (inputValue) {
-      changeElementValue(inputEl);
-    }
-  };
-
-  /**
    * Select an option list of the combo box component based off of
    * having a current focused list option or
    * having test that completely matches a list option.
@@ -650,11 +621,16 @@ const noop = () => {};
           changeElementValue(inputEl, optionEl.text);
           comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
           return;
+        } else {
+            // If no match is found, clear the select value but maintain the input value
+            // This allows the user to type a value that doesn't exist in the options
+            // and still have it displayed in the input.
+            // error handling should be added per unique team requirements
+            changeElementValue(selectEl, '');
+            comboBoxEl.classList.remove(COMBO_BOX_PRISTINE_CLASS);
         }
       }
     }
-
-    resetSelection(comboBoxEl);
   };
 
   /**
@@ -666,7 +642,7 @@ const noop = () => {};
     const { comboBoxEl, inputEl } = getComboBoxContext(event.target);
 
     hideList(comboBoxEl);
-    resetSelection(comboBoxEl);
+    completeSelection(comboBoxEl);
     inputEl.focus();
   };
 
