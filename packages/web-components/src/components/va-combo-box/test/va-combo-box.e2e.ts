@@ -322,4 +322,33 @@ describe('va-combo-box', () => {
     expect(selectionStart).toBe(0);
     expect(selectionEnd).toBe(value.length);
   });
+
+  it('selects matching option on focusout if user-typed text is identical', async () => {
+    const page = await newE2EPage();
+  
+    // Initialize 2 combo boxes, the first with a value of ""
+    await page.setContent(`
+          <va-combo-box label="label 1" value="">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-select>
+          <va-combo-box label="label 2" value="bar">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-select>
+        `);
+  
+    const firstCombo = await page.find('va-combo-box:first-of-type >>> input');
+    const secondCombo = await page.find('va-combo-box:last-of-type >>> input');
+  
+    // Type into the first combo box
+    await firstCombo.type('foo');
+  
+    // Click into the second combo box to focus away from the first
+    await secondCombo.click();
+  
+    // Verify the value of the first combo box has changed to the value of the typed text
+    const firstComboValue = await firstCombo.getProperty('value');
+    expect(firstComboValue).toBe('foo');
+  });
 });
