@@ -105,9 +105,9 @@ export class VaDate {
   })
   dateBlur: EventEmitter;
 
-  @Prop({ mutable: true }) invalidDay: boolean = false;
-  @Prop({ mutable: true }) invalidMonth: boolean = false;
-  @Prop({ mutable: true }) invalidYear: boolean = false;
+  @Prop({ mutable: true }) invalidDay?: boolean = false;
+  @Prop({ mutable: true }) invalidMonth?: boolean = false;
+  @Prop({ mutable: true }) invalidYear?: boolean = false;
 
   private dayTouched: boolean = false;
   private monthTouched: boolean = false;
@@ -116,7 +116,7 @@ export class VaDate {
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics: boolean = false;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
