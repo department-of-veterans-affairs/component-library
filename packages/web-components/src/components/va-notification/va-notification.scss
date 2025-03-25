@@ -19,29 +19,16 @@ va-link {
     margin-top: 3px;
 }
 
-:host i {
-    font-family: 'Font Awesome 5 Free';
-    font-style: normal;
-    font-weight: 900;
-    line-height: 1;
+:host va-icon {
     margin-right: 16px;
 }
 
-i.fa-times-circle::before {
-    content: '\F057'; /* fa-times-circle*/
-    font-size: 20px;
-} 
-
-i.action-required::before {
-    content: '\F06A'; /* fa-exclamation-circle */
+va-icon.action-required {
     color: var(--vads-color-secondary-dark);
-    font-size: 32px;
 }
 
-i.update::before {
-    content: '\F05A'; /* fa-circle-info */
+va-icon.update {
     color: var(--vads-color-primary);
-    font-size: 32px;
 }
 
 /** .va-notification is the div inside of va-card slot **/

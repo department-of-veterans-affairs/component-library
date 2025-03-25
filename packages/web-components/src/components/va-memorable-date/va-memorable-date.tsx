@@ -133,9 +133,9 @@ export class VaMemorableDate {
   })
   dateBlur: EventEmitter;
 
-  @Prop({ mutable: true }) invalidDay: boolean = false;
-  @Prop({ mutable: true }) invalidMonth: boolean = false;
-  @Prop({ mutable: true }) invalidYear: boolean = false;
+  @Prop({ mutable: true }) invalidDay?: boolean = false;
+  @Prop({ mutable: true }) invalidMonth?: boolean = false;
+  @Prop({ mutable: true }) invalidYear?: boolean = false;
 
   private currentDay: string;
   private currentMonth: string;

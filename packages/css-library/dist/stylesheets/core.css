@@ -2090,7 +2090,7 @@ template {
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
-  text-transform: uppercase;
+  text-transform: none;
   font-family: "Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 
@@ -3454,14 +3454,14 @@ h6 {
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
-  text-transform: uppercase;
+  text-transform: none;
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 h6 a {
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
-  text-transform: uppercase;
+  text-transform: none;
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
