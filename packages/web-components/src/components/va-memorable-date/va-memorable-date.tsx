@@ -267,7 +267,7 @@ export class VaMemorableDate {
     i18next.off('languageChanged');
   }
 
-  componentDidLoad() {
+  componentWillRender() {
     // Set initial values
     const [year, month, day] = (this.value || '').split('-');
     this.currentYear = year;
