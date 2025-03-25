@@ -49,7 +49,7 @@ export class VaLinkAction {
    * The type of the link, which determines its style.
    * Can be 'primary', 'secondary', or 'reverse'.
    */
-  @Prop() type: 'primary' | 'secondary' | 'reverse' = 'primary';
+  @Prop() type?: 'primary' | 'secondary' | 'reverse' = 'primary';
 
   /**
    * This provides an aria-label to the link, if present
