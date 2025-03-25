@@ -116,6 +116,22 @@ export namespace Components {
         "visible"?: boolean;
     }
     /**
+     * @componentName Alert - Critical
+     * @guidanceHref alert/alert-critical
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaAlertCritical {
+        /**
+          * The link to a page where the user can take action
+         */
+        "link": string;
+        /**
+          * Text describing what critical action the user needs to take
+         */
+        "text": string;
+    }
+    /**
      * @componentName Alert - expandable
      * @guidanceHref alert/alert-expandable
      * @maturityCategory use
@@ -2252,6 +2268,18 @@ declare global {
         prototype: HTMLVaAlertElement;
         new (): HTMLVaAlertElement;
     };
+    /**
+     * @componentName Alert - Critical
+     * @guidanceHref alert/alert-critical
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaAlertCriticalElement extends Components.VaAlertCritical, HTMLStencilElement {
+    }
+    var HTMLVaAlertCriticalElement: {
+        prototype: HTMLVaAlertCriticalElement;
+        new (): HTMLVaAlertCriticalElement;
+    };
     interface HTMLVaAlertExpandableElementEventMap {
         "component-library-analytics": any;
     }
@@ -3281,6 +3309,7 @@ declare global {
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
+        "va-alert-critical": HTMLVaAlertCriticalElement;
         "va-alert-expandable": HTMLVaAlertExpandableElement;
         "va-alert-sign-in": HTMLVaAlertSignInElement;
         "va-back-to-top": HTMLVaBackToTopElement;
@@ -3465,6 +3494,22 @@ declare namespace LocalJSX {
           * If `true`, the alert will be visible.
          */
         "visible"?: boolean;
+    }
+    /**
+     * @componentName Alert - Critical
+     * @guidanceHref alert/alert-critical
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaAlertCritical {
+        /**
+          * The link to a page where the user can take action
+         */
+        "link": string;
+        /**
+          * Text describing what critical action the user needs to take
+         */
+        "text": string;
     }
     /**
      * @componentName Alert - expandable
@@ -5593,6 +5638,7 @@ declare namespace LocalJSX {
         "va-accordion-item": VaAccordionItem;
         "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
+        "va-alert-critical": VaAlertCritical;
         "va-alert-expandable": VaAlertExpandable;
         "va-alert-sign-in": VaAlertSignIn;
         "va-back-to-top": VaBackToTop;
@@ -5673,6 +5719,13 @@ declare module "@stencil/core" {
              * @maturityLevel best_practice
              */
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
+            /**
+             * @componentName Alert - Critical
+             * @guidanceHref alert/alert-critical
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-alert-critical": LocalJSX.VaAlertCritical & JSXBase.HTMLAttributes<HTMLVaAlertCriticalElement>;
             /**
              * @componentName Alert - expandable
              * @guidanceHref alert/alert-expandable
