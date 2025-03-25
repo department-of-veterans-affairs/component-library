@@ -35,6 +35,10 @@
   display: none;
 }
 
+.usa-combo-box {
+  max-width: auto;
+}
+
 .usa-combo-box__list{
   width: calc(100% - 2px);
 }
