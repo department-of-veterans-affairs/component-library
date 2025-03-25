@@ -396,7 +396,7 @@ const noop = () => {};
 
     const listOptionBaseId = `${listEl.id}--option-`;
 
-    const inputValue = (inputEl.value || '').toLowerCase();
+    const inputValue = (inputEl.value || '').trim().toLowerCase();
     const filter = comboBoxEl.dataset.filter || DEFAULT_FILTER;
     const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
 
@@ -606,7 +606,7 @@ const noop = () => {};
     const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(el);
 
     const selectValue = selectEl.value;
-    const inputValue = (inputEl.value || '').toLowerCase();
+    const inputValue = (inputEl.value || '').trim().toLowerCase();
 
     if (selectValue) {
       for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
@@ -639,11 +639,12 @@ const noop = () => {};
 
     statusEl.textContent = '';
 
-    const inputValue = (inputEl.value || '').toLowerCase();
+    const inputValue = (inputEl.value || '').trim().toLowerCase();
 
     if (inputValue) {
       for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
         const optionEl = selectEl.options[i];
+        // If a match is found, update the input and select values
         if (optionEl.text.toLowerCase() === inputValue) {
           changeElementValue(selectEl, optionEl.value);
           changeElementValue(inputEl, optionEl.text);
@@ -851,7 +852,7 @@ const noop = () => {};
       focusout: {
         [COMBO_BOX](event) {
           if (!this.contains(event.relatedTarget)) {
-            resetSelection(this);
+            completeSelection(this);
             hideList(this);
           }
         },
