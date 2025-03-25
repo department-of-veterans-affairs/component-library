@@ -268,6 +268,7 @@ export class VaMemorableDate {
   }
 
   componentDidLoad() {
+    // Set initial values
     const [year, month, day] = (this.value || '').split('-');
     this.currentYear = year;
     this.currentMonth = month;
