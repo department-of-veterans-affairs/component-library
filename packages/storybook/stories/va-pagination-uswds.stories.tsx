@@ -16,18 +16,12 @@ export default {
 };
 
 const defaultArgs = {
-  'page': 1,
-  'pages': 24,
-  'max-page-list-length': 7,
-  'unbounded': false,
+  page: 1,
+  pages: 24,
+  unbounded: false,
 };
 
-const Template = ({
-  'page': currentPage,
-  pages,
-  'max-page-list-length': maxPageListLength,
-  unbounded,
-}) => {
+const Template = ({ page: currentPage, pages, unbounded }) => {
   const [page, setPage] = useState(currentPage);
   const handlePageSelect = event => {
     setPage(event.detail.page);
@@ -36,7 +30,6 @@ const Template = ({
     <VaPagination
       page={page}
       pages={pages}
-      max-page-list-length={maxPageListLength}
       unbounded={unbounded}
       onPageSelect={handlePageSelect}
     />
@@ -84,7 +77,7 @@ export const WithSevenOrLessMiddle = Template.bind(null);
 WithSevenOrLessMiddle.args = {
   ...defaultArgs,
   pages: 7,
-  page: 3,
+  page: 4,
 };
 
 export const WithSevenOrLessLast = Template.bind(null);
@@ -112,14 +105,12 @@ export const Internationalization = () => {
         <VaPagination
           page={page1}
           pages={24}
-          maxPageListLength={7}
           onPageSelect={event => setPage1(event.detail.page)}
         />
         <h4>Unbounded</h4>
         <VaPagination
           page={page2}
           pages={24}
-          maxPageListLength={7}
           unbounded
           onPageSelect={event => setPage2(event.detail.page)}
         />
