@@ -83,7 +83,7 @@ export namespace Components {
      */
     interface VaAlert {
         /**
-          * Aria-label text for the close button.
+          * Aria-label text for the close button. If not provided, the text will be "Close {headline} notification".
          */
         "closeBtnAriaLabel"?: string;
         /**
@@ -267,6 +267,10 @@ export namespace Components {
           * If `true`, the click event will not fire.
          */
         "disabled"?: boolean;
+        /**
+          * If `true`, the button will expand to the full available width of its container.
+         */
+        "fullWidth"?: boolean;
         /**
           * The aria-label of the component.
          */
@@ -547,7 +551,7 @@ export namespace Components {
         /**
           * Whether or not an analytics event will be fired.
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
@@ -556,9 +560,9 @@ export namespace Components {
           * Optional hint text.
          */
         "hint"?: string;
-        "invalidDay": boolean;
-        "invalidMonth": boolean;
-        "invalidYear": boolean;
+        "invalidDay"?: boolean;
+        "invalidMonth"?: boolean;
+        "invalidYear"?: boolean;
         /**
           * Label for the field.
          */
@@ -631,6 +635,10 @@ export namespace Components {
           * The name for the input element.
          */
         "name"?: string;
+        /**
+          * Percent upload completed. For use with va-progress-bar component
+         */
+        "percentUploaded"?: number;
         /**
           * Optionally displays the read-only view
          */
@@ -884,7 +892,7 @@ export namespace Components {
         /**
           * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
          */
-        "type": 'primary' | 'secondary' | 'reverse';
+        "type"?: 'primary' | 'secondary' | 'reverse';
     }
     /**
      * @componentName Loading indicator
@@ -989,9 +997,9 @@ export namespace Components {
           * Hint text string
          */
         "hint"?: string;
-        "invalidDay": boolean;
-        "invalidMonth": boolean;
-        "invalidYear": boolean;
+        "invalidDay"?: boolean;
+        "invalidMonth"?: boolean;
+        "invalidYear"?: boolean;
         /**
           * Label for the field.
          */
@@ -1516,6 +1524,10 @@ export namespace Components {
          */
         "formHeadingLevel"?: number;
         /**
+          * If true, sets the select to take the full-width of its container
+         */
+        "fullWidth"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1556,7 +1568,7 @@ export namespace Components {
          */
         "value"?: string;
         /**
-          * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+          * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex). Defined in USWDS here: https://github.com/uswds/uswds/blob/develop/packages/uswds-core/src/styles/tokens/units/input-widths.scss
          */
         "width"?: string;
     }
@@ -1593,7 +1605,7 @@ export namespace Components {
         /**
           * The heading level for the service name (defaults to h3)
          */
-        "serviceNameHeadingLevel": number;
+        "serviceNameHeadingLevel"?: number;
         /**
           * The status of the service
          */
@@ -1666,7 +1678,7 @@ export namespace Components {
         /**
           * Is the table sortable
          */
-        "sortable": boolean;
+        "sortable"?: boolean;
         /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
@@ -1674,7 +1686,7 @@ export namespace Components {
         /**
           * When active, the table will display alternating row background colors.
          */
-        "striped": boolean;
+        "striped"?: boolean;
         /**
           * The title of the table
          */
@@ -3410,7 +3422,7 @@ declare namespace LocalJSX {
      */
     interface VaAlert {
         /**
-          * Aria-label text for the close button.
+          * Aria-label text for the close button. If not provided, the text will be "Close {headline} notification".
          */
         "closeBtnAriaLabel"?: string;
         /**
@@ -3622,6 +3634,10 @@ declare namespace LocalJSX {
           * If `true`, the click event will not fire.
          */
         "disabled"?: boolean;
+        /**
+          * If `true`, the button will expand to the full available width of its container.
+         */
+        "fullWidth"?: boolean;
         /**
           * The aria-label of the component.
          */
@@ -4042,6 +4058,10 @@ declare namespace LocalJSX {
           * The event emitted when the file input value changes.
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * Percent upload completed. For use with va-progress-bar component
+         */
+        "percentUploaded"?: number;
         /**
           * Optionally displays the read-only view
          */
@@ -5048,6 +5068,10 @@ declare namespace LocalJSX {
          */
         "formHeadingLevel"?: number;
         /**
+          * If true, sets the select to take the full-width of its container
+         */
+        "fullWidth"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -5104,7 +5128,7 @@ declare namespace LocalJSX {
          */
         "value"?: string;
         /**
-          * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+          * Displays the select at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex). Defined in USWDS here: https://github.com/uswds/uswds/blob/develop/packages/uswds-core/src/styles/tokens/units/input-widths.scss
          */
         "width"?: string;
     }

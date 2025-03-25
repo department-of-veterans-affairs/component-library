@@ -39,9 +39,6 @@ describe('va-combo-box', () => {
                     </span>
                     <ul aria-labelledby="options-label" class="usa-combo-box__list" hidden="" id="options--list" role="listbox" tabindex="-1"></ul>
                     <div class="usa-combo-box__status usa-sr-only" role="status"></div>
-                    <span class="usa-sr-only" id="options--assistiveHint">
-                        When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.
-                    </span>
                     </div>
                 </mock:shadow-root>
                 <option value="foo">
@@ -110,9 +107,6 @@ describe('va-combo-box', () => {
                     </span>
                     <ul aria-labelledby="options-label" class="usa-combo-box__list" hidden="" id="options--list" role="listbox" tabindex="-1"></ul>
                     <div class="usa-combo-box__status usa-sr-only" role="status"></div>
-                    <span class="usa-sr-only" id="options--assistiveHint">
-                        When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.
-                    </span>
                     </div>
                 </mock:shadow-root>
                 <optgroup label="group 1">
@@ -306,5 +300,55 @@ describe('va-combo-box', () => {
     const element = await page.find('va-combo-box >>> #input-message');
     expect(element).toEqualHtml('<span id="input-message" class="usa-sr-only dd-privacy-hidden">test aria text</span>');
     expect(input).toEqualAttribute('aria-describedby', 'input-message   options--assistiveHint');
+  });
+
+  it('selects all text with one click in input field', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+          <va-combo-box label="A label" value="bar">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-select>
+        `);
+
+    const input = await page.find('va-combo-box >>> input');
+    await input.click();
+
+    const selectionStart = await input.getProperty('selectionStart');
+    const selectionEnd = await input.getProperty('selectionEnd');
+    const value = await input.getProperty('value');
+
+    expect(selectionStart).toBe(0);
+    expect(selectionEnd).toBe(value.length);
+  });
+
+  it('selects matching option on focusout if user-typed text is identical', async () => {
+    const page = await newE2EPage();
+  
+    // Initialize 2 combo boxes, the first with a value of ""
+    await page.setContent(`
+          <va-combo-box label="label 1" value="">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-select>
+          <va-combo-box label="label 2" value="bar">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-select>
+        `);
+  
+    const firstCombo = await page.find('va-combo-box:first-of-type >>> input');
+    const secondCombo = await page.find('va-combo-box:last-of-type >>> input');
+  
+    // Type into the first combo box
+    await firstCombo.type('foo');
+  
+    // Click into the second combo box to focus away from the first
+    await secondCombo.click();
+  
+    // Verify the value of the first combo box has changed to the value of the typed text
+    const firstComboValue = await firstCombo.getProperty('value');
+    expect(firstComboValue).toBe('foo');
   });
 });
