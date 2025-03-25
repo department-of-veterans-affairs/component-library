@@ -1232,10 +1232,6 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
-          * The maximum number of pages to show at once
-         */
-        "maxPageListLength"?: number;
-        /**
           * The current page number
          */
         "page": number;
@@ -1244,11 +1240,7 @@ export namespace Components {
          */
         "pages": number;
         /**
-          * Display last page number when the page count exceeds `maxPageListLength`
-         */
-        "showLastPage"?: boolean;
-        /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
+          * Don't show the last page if the unbounded flag is set
          */
         "unbounded"?: boolean;
     }
@@ -4765,10 +4757,6 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
-          * The maximum number of pages to show at once
-         */
-        "maxPageListLength"?: number;
-        /**
           * The event used to track usage of the component. Fires when a a page is selected if enable-analytics is true.
          */
         "onComponent-library-analytics"?: (event: VaPaginationCustomEvent<any>) => void;
@@ -4785,11 +4773,7 @@ declare namespace LocalJSX {
          */
         "pages"?: number;
         /**
-          * Display last page number when the page count exceeds `maxPageListLength`
-         */
-        "showLastPage"?: boolean;
-        /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
+          * Don't show the last page if the unbounded flag is set
          */
         "unbounded"?: boolean;
     }
