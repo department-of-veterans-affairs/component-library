@@ -1,5 +1,15 @@
-import { Component, Event, EventEmitter, Host, h, Prop, State, Watch } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  h,
+  Prop,
+  State,
+  Watch,
+} from '@stencil/core';
 import classNames from 'classnames';
+import { isMessageSet } from '../../utils/utils';
 
 /**
  * @componentName Link - Action
@@ -122,7 +132,7 @@ export class VaLinkAction {
           <va-icon class={iconClass} icon="chevron_right" size={3}></va-icon>
           <span class="link-text">{text}</span>
         </a>
-        {messageAriaDescribedby && (
+        {isMessageSet(messageAriaDescribedby) && (
           <span id="link-description" class="sr-only">
             {messageAriaDescribedby}
           </span>
