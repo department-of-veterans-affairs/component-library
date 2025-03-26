@@ -31,7 +31,7 @@ export class VaServiceListItem {
   @Prop() serviceName: string;
 
   /** The heading level for the service name (defaults to h3) */
-  @Prop() serviceNameHeadingLevel: number = 3;
+  @Prop() serviceNameHeadingLevel?: number = 3;
 
   /** The link to the service page */
   @Prop() serviceLink: string;
@@ -141,26 +141,20 @@ export class VaServiceListItem {
               )}
               <div class="name-and-chevron">
                 <HeadingTag class="service-name">{serviceName}</HeadingTag>
-                <va-icon class="chevron-icon" icon="chevron_right"></va-icon>
+                <va-icon
+                  class="chevron-icon"
+                  icon="chevron_right"
+                  size={4}
+                ></va-icon>
               </div>
             </div>
           </a>
 
           {actionNeeded && (
-            <div class="action-bar">
-              <a
-                href={parsedAction?.href}
-                class="action-link"
-                aria-label={`Action required: ${parsedAction?.text}`}
-              >
-                <va-icon
-                  class="link-icon hydrated"
-                  icon="chevron_right"
-                  size={3}
-                ></va-icon>
-                {parsedAction?.text}
-              </a>
-            </div>
+            <va-alert-critical
+              link={parsedAction.href}
+              text={parsedAction.text}
+            ></va-alert-critical>
           )}
 
           <div class="status">

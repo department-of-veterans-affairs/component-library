@@ -44,7 +44,7 @@
   font-size: vars.$h6-font-size;
   font-weight: tok.$font-weight-normal;
   line-height: vars.$base-line-height;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 // Focus state mixin
@@ -158,8 +158,8 @@
 
 @mixin display-icon($icon, $direction, $size, $margin, $hover) {
   &::#{$direction} {
-    background-image: url('#{$image-path}/#{$icon}.png');
-    background-image: url('#{$image-path}/#{$icon}.svg');
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/#{$icon}.png);
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/#{$icon}.svg);
     background-size: 100%;
     content: '';
     display: inline-block;
@@ -177,8 +177,8 @@
 
   @if $hover == 'hover' {
     &:hover::#{$direction} {
-      background-image: url('#{$image-path}/#{$icon}-hover.png');
-      background-image: url('#{$image-path}/#{$icon}-hover.svg');
+      background-image: url(~@department-of-veterans-affairs/css-library/dist/img/#{$icon}-hover.png);
+      background-image: url(~@department-of-veterans-affairs/css-library/dist/img/#{$icon}-hover.svg);
     }
   }
 }

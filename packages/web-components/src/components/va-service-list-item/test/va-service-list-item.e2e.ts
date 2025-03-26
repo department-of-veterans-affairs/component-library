@@ -64,7 +64,7 @@ describe('va-service-list-item', () => {
     return { page, elementHandle };
   }
 
-  it('renders with all elements and an action bar when an action prop is provided', async () => {
+  it('renders with all elements and the alert critical component when an action prop is provided', async () => {
     const { page, elementHandle } = await setupComponent({
       action: {
         href: 'https://www.va.gov/education',
@@ -97,12 +97,7 @@ describe('va-service-list-item', () => {
             </div>
           </div>
         </a>
-        <div class="action-bar">
-           <a aria-label="Action required: Take some urgent action" class="action-link" href="https://www.va.gov/education">
-          <va-icon class="hydrated link-icon"></va-icon>
-        Take some urgent action
-         </a>
-        </div>
+      <va-alert-critical class="hydrated"></va-alert-critical>
         <div class="status">
           <span class="usa-label">Eligible</span>
         </div>
@@ -128,7 +123,7 @@ describe('va-service-list-item', () => {
     `);
   });
 
-  it('does NOT render action bar when action prop is not passed', async () => {
+  it('does NOT render the alert critical component when action prop is not passed', async () => {
     // Pass all props EXCEPT action
     const { page, elementHandle } = await setupComponent({
       serviceDetails: {
@@ -153,7 +148,7 @@ describe('va-service-list-item', () => {
       el => el.shadowRoot.innerHTML,
       elementHandle,
     );
-    expect(shadowInnerHTML).not.toContain('<div class="action-bar">');
+    expect(shadowInnerHTML).not.toContain('<va-alert-critical');
   });
 
   it('does NOT render icon when icon prop is not passed', async () => {

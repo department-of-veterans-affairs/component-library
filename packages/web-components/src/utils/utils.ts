@@ -20,9 +20,11 @@ export function isNumeric(value: string): boolean {
 export function getSlottedNodes(
   root: HTMLElement,
   nodeName: string | null,
+  query: string = 'slot',
 ): Array<Node> {
-  // This will only get the first slot on a component
-  const children = root.shadowRoot.querySelector('slot').assignedNodes();
+  // This will only get the first slot on a component unless the component sets a query value
+  const slot = root.shadowRoot.querySelector(query) as HTMLSlotElement;
+  const children = slot.assignedNodes();
 
   return nodeName !== null
     ? Array.from(children).filter(
@@ -176,4 +178,22 @@ export function getHeaderLevel(headerInput: number | string): string | null {
     headerLevel = Math.floor(headerInput);
   }
   return headerLevel >= 1 && headerLevel <= 6 ? `h${headerLevel}` : null;
+}
+
+/**
+ * Checks if an element is interactive
+ */
+export function isInteractiveLinkOrButton(el: HTMLElement): boolean {
+  // eslint-disable-next-line i18next/no-literal-string
+  return ['VA-BUTTON', 'VA-LINK', 'BUTTON', 'A'].includes(el.tagName);
+}
+
+/**
+ * Checks if a messageAriaDescribedby is set;
+ * if set to 'false' an aria-describedby attribute will be added
+ * leading to assistive tech reading out a value of 'false'
+ * (see vets-design-system-documentation/issues/3885)
+ */
+export function isMessageSet(message: string): boolean {
+  return (message && message !== 'false') || false;
 }

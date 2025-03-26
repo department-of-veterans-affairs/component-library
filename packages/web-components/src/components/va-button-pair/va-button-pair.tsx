@@ -10,8 +10,8 @@ import {
 
 /**
  * @componentName Button pair
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel deployed
  * @guidanceHref button/button-pair
  */
 @Component({

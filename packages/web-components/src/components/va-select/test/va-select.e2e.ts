@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-select', () => {
   it('renders', async () => {
@@ -20,13 +21,15 @@ describe('va-select', () => {
             A label
           </label>
           <span id="input-error-message" role="alert"></span>
-          <slot></slot>
-          <select id="options" part="select" aria-invalid="false" class="usa-select">
-            <option value="">- Select -</option>
-            <option value="">Please choose an option</option>
-            <option value="foo">Foo</option>
-            <option value="bar">Bar</option>
-          </select>
+          <div id="select-container">
+            <slot></slot>
+            <select id="options" part="select" aria-invalid="false" class="usa-select">
+              <option value="">- Select -</option>
+              <option value="">Please choose an option</option>
+              <option value="foo">Foo</option>
+              <option value="bar">Bar</option>
+            </select>
+          </div>
         </mock:shadow-root>
         <option value="">Please choose an option</option>
         <option value="foo">Foo</option>
@@ -70,6 +73,18 @@ describe('va-select', () => {
     expect(select.classList.contains('usa-input--md')).toBeTruthy();
   });
 
+  it('adds a full-width class when full-width is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo" full-width>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+    const select = await page.find('va-select >>> select');
+    expect(select.classList.contains('va-select--full-width')).toBeTruthy();
+  });
+
   it('does not render the error if showError is false', async () => {
     const page = await newE2EPage();
     await page.setContent(`
@@ -103,16 +118,18 @@ describe('va-select', () => {
             A label
           </label>
           <span id="input-error-message" role="alert"></span>
-          <slot></slot>
-          <select id="options" part="select" aria-invalid="false" class="usa-select">
-            <option value="">- Select -</option>
-            <optgroup label="Group 1">
-              <option value="foo">Foo</option>
-            </optgroup>
-            <optgroup label="Group 2">
-              <option value="bar">Bar</option>
-            </optgroup>
-          </select>
+          <div id="select-container">
+            <slot></slot>
+            <select id="options" part="select" aria-invalid="false" class="usa-select">
+              <option value="">- Select -</option>
+              <optgroup label="Group 1">
+                <option value="foo">Foo</option>
+              </optgroup>
+              <optgroup label="Group 2">
+                <option value="bar">Bar</option>
+              </optgroup>
+            </select>
+          </div>
         </mock:shadow-root>
         <optgroup label="Group 1">
           <option value="foo">Foo</option>
@@ -156,5 +173,36 @@ describe('va-select', () => {
     await selectEl.press('Tab');
 
     expect(blurSpy).toHaveReceivedEvent();
+  });
+
+  it('useFormsPattern displays header for the single field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-select name="options" label="This is a label" use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-select >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('useFormsPattern displays header for the multiple fields pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-select name="options" label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-select >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-select name="options" label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-select >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('useFormsPattern passes an aXe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-select name="options" label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    await axeCheck(page);
   });
 });

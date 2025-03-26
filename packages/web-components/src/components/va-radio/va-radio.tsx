@@ -14,7 +14,7 @@ import classnames from 'classnames';
 import { getSlottedNodes } from '../../utils/utils';
 import { i18next } from '../..';
 import { Build } from '@stencil/core';
-import { getHeaderLevel } from '../../utils/utils';
+import { getHeaderLevel, isMessageSet } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -26,7 +26,7 @@ if (Build.isTesting) {
  * @radioOptionSelected The event emitted when the selected option value changes.
  * @componentName Radio button
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  * @guidanceHref form/radio-button
  * @translations English
  * @translations Spanish
@@ -120,8 +120,9 @@ export class VaRadio {
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
-    const radioOptionNodes = (getSlottedNodes(this.el, 'va-radio-option') as HTMLVaRadioOptionElement[])
-      .filter(node => !node.disabled);
+    const radioOptionNodes = (
+      getSlottedNodes(this.el, 'va-radio-option') as HTMLVaRadioOptionElement[]
+    ).filter(node => !node.disabled);
 
     if (!radioOptionNodes.length) return;
 
@@ -239,68 +240,88 @@ export class VaRadio {
       messageAriaDescribedby,
       useFormsPattern,
       formHeadingLevel,
-      formHeading
+      formHeading,
     } = this;
     const HeaderLevel = this.getHeaderLevel();
-    const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
-    const messageAriaDescribedbyId = messageAriaDescribedby ? 'description-message' : null;
+    const headerAriaDescribedbyId = headerAriaDescribedby
+      ? 'header-message'
+      : null;
+    const messageAriaDescribedbyId = messageAriaDescribedby
+      ? 'description-message'
+      : null;
     const ariaLabeledByIds =
-    `${useFormsPattern && formHeading ? 'form-question' : ''} ${
-      useFormsPattern ? 'form-description' : ''} ${
-      useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() || null;
+      `${useFormsPattern && formHeading ? 'form-question' : ''} ${
+        useFormsPattern ? 'form-description' : ''
+      } ${useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() ||
+      null;
 
     const legendClass = classnames({
       'usa-legend': true,
-      'usa-label--error': error
+      'usa-label--error': error,
     });
 
-    const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+    const isFormsPattern =
+      useFormsPattern === 'single' || useFormsPattern === 'multiple'
+        ? true
+        : false;
 
     let formsHeading = null;
     if (isFormsPattern) {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
       formsHeading = (
         <Fragment>
-          {formHeading &&
-          <HeaderLevel id="form-question" part="form-header">
-            {formHeading}
-          </HeaderLevel>
-          }
+          {formHeading && (
+            <HeaderLevel id="form-question" part="form-header">
+              {formHeading}
+            </HeaderLevel>
+          )}
           <div id="form-description">
             <slot name="form-description"></slot>
           </div>
         </Fragment>
-      )
+      );
     }
     return (
-      <Host aria-invalid={error ? 'true' : 'false'} >
+      <Host aria-invalid={error ? 'true' : 'false'}>
         {formsHeading}
         <div class="input-wrap">
           <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
-            <legend class={legendClass} part="legend" aria-describedby={messageAriaDescribedbyId} >
+            <legend
+              class={legendClass}
+              part="legend"
+              aria-describedby={messageAriaDescribedbyId}
+            >
               {HeaderLevel ? (
-                <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
+                <HeaderLevel
+                  part="header"
+                  aria-describedby={headerAriaDescribedbyId}
+                >
+                  {label}
+                </HeaderLevel>
               ) : (
                 label
-              )}&nbsp;
-              {
-                useFormsPattern === 'multiple' && (
-                  <span id="header-message" class="usa-sr-only">
-                    {label}
-                  </span>
-                )
-              }
+              )}
+              &nbsp;
+              {useFormsPattern === 'multiple' && (
+                <span id="header-message" class="usa-sr-only">
+                  {label}
+                </span>
+              )}
               {headerAriaDescribedby && (
                 <span id="header-message" class="usa-sr-only">
                   {headerAriaDescribedby}
                 </span>
               )}
-              {messageAriaDescribedby && (
+              {isMessageSet(messageAriaDescribedby) && (
                 <span id="description-message" class="usa-sr-only">
                   {messageAriaDescribedby}
                 </span>
               )}
-              {required && <span class="usa-label--required" part="required">{i18next.t('required')}</span>}
+              {required && (
+                <span class="usa-label--required" part="required">
+                  {i18next.t('required')}
+                </span>
+              )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
             {error && (
@@ -315,6 +336,5 @@ export class VaRadio {
         </div>
       </Host>
     );
-
   }
 }

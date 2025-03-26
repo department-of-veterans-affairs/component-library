@@ -194,6 +194,16 @@
   .thumbnail-error {
     color: $vads-color-error-dark;
   }
+
+  va-progress-bar {
+    font-size: var(--vads-font-size-root);
+    display: block;
+    margin-left: 16px;
+  }
+
+  .uploading-status {
+    font-style: var(--font-style-italic);
+  }
 }
 
 :host(.has-error) {

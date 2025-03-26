@@ -4,7 +4,7 @@ import vaSeal from '../../assets/va-logo-white.svg';
 /**
  * @componentName Minimal Footer
  * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityLevel available
  */
 
 @Component({

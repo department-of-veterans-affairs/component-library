@@ -369,7 +369,7 @@ article > h1 {
     padding: scale-rule(1rem 0);
   }
 
-  background: url('#{$image-path}/stars.png') no-repeat center;
+  background: url(~@department-of-veterans-affairs/css-library/dist/img/stars.png) no-repeat center;
   background-size: scale-rule(11rem auto);
   margin: scale-rule(1.6rem auto auto);
   padding: scale-rule(2rem 0 0);

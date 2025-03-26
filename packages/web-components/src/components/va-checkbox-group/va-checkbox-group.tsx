@@ -13,7 +13,7 @@ import {
 import classnames from 'classnames';
 import { i18next } from '../..';
 import { Build } from '@stencil/core';
-import { getHeaderLevel } from '../../utils/utils';
+import { getHeaderLevel, isMessageSet } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -71,20 +71,20 @@ export class VaCheckboxGroup {
    * An optional message that will be read by screen readers when a checkbox is focused.
    */
   @Prop() messageAriaDescribedby?: string;
-   /**
+  /**
    * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
    */
-   @Prop() useFormsPattern?: string;
+  @Prop() useFormsPattern?: string;
 
-   /**
-    * The heading level for the heading if `useFormsPattern` is true.
-    */
-   @Prop() formHeadingLevel?: number = 3;
+  /**
+   * The heading level for the heading if `useFormsPattern` is true.
+   */
+  @Prop() formHeadingLevel?: number = 3;
 
-   /**
-    * The content of the heading if `useFormsPattern` is true.
-    */
-   @Prop() formHeading?: string;
+  /**
+   * The content of the heading if `useFormsPattern` is true.
+   */
+  @Prop() formHeading?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -139,35 +139,42 @@ export class VaCheckboxGroup {
       messageAriaDescribedby,
       useFormsPattern,
       formHeadingLevel,
-      formHeading, } = this;
+      formHeading,
+    } = this;
     const HeaderLevel = this.getHeaderLevel();
     const ariaLabeledByIds =
-        `${useFormsPattern && formHeading ? 'form-question' : ''} ${
-        useFormsPattern ? 'form-description' : ''} ${
-        useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() || null;
-    const messageAriaDescribedbyId = messageAriaDescribedby ? 'description-message' : null;
+      `${useFormsPattern && formHeading ? 'form-question' : ''} ${
+        useFormsPattern ? 'form-description' : ''
+      } ${useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() ||
+      null;
+    const messageAriaDescribedbyId = messageAriaDescribedby
+      ? 'description-message'
+      : null;
 
     const legendClass = classnames({
       'usa-legend': true,
-      'usa-label--error': error
+      'usa-label--error': error,
     });
-    const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+    const isFormsPattern =
+      useFormsPattern === 'single' || useFormsPattern === 'multiple'
+        ? true
+        : false;
 
     let formsHeading = null;
     if (isFormsPattern) {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
       formsHeading = (
         <Fragment>
-          {formHeading &&
+          {formHeading && (
             <HeaderLevel id="form-question" part="form-header">
               {formHeading}
             </HeaderLevel>
-          }
+          )}
           <div id="form-description">
             <slot name="form-description"></slot>
           </div>
         </Fragment>
-      )
+      );
     }
 
     return (
@@ -175,25 +182,29 @@ export class VaCheckboxGroup {
         {formsHeading}
         <div class="input-wrap">
           <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
-            <legend class={legendClass} aria-describedby={messageAriaDescribedbyId}>
+            <legend
+              class={legendClass}
+              aria-describedby={messageAriaDescribedbyId}
+            >
               {HeaderLevel ? (
                 <HeaderLevel part="header">{label}</HeaderLevel>
               ) : (
                 label
-              )}&nbsp;
-              {
-                useFormsPattern === 'multiple' && (
-                  <span id="header-message" class="usa-sr-only">
-                    {label}
-                  </span>
-                )
-              }
-              {messageAriaDescribedby && (
+              )}
+              &nbsp;
+              {useFormsPattern === 'multiple' && (
+                <span id="header-message" class="usa-sr-only">
+                  {label}
+                </span>
+              )}
+              {isMessageSet(messageAriaDescribedby) && (
                 <span id="description-message" class="usa-sr-only">
                   {messageAriaDescribedby}
                 </span>
               )}
-              {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+              {required && (
+                <span class="usa-label--required">{i18next.t('required')}</span>
+              )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
             <span id="checkbox-error-message" role="alert">
@@ -208,6 +219,6 @@ export class VaCheckboxGroup {
           </fieldset>
         </div>
       </Host>
-    )
+    );
   }
 }

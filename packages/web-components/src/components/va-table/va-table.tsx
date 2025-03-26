@@ -11,6 +11,12 @@ import {
 
 import { getCompareFunc } from './sort/utils';
 
+/**
+ * @componentName Table
+ * @maturityCategory caution
+ * @maturityLevel available
+ */
+
 @Component({
   tag: 'va-table',
   styleUrl: 'va-table.scss',
@@ -47,12 +53,12 @@ export class VaTable {
   /**
    * Is the table sortable
    */
-  @Prop() sortable: boolean = false;
+  @Prop() sortable?: boolean = false;
 
   /**
    * When active, the table will display alternating row background colors.
    */
-  @Prop() striped: boolean = false;
+  @Prop() striped?: boolean = false;
 
   /**
    * When active, forces the table to expand to the full-width of its container

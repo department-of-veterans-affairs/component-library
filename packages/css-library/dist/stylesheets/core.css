@@ -2090,7 +2090,7 @@ template {
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
-  text-transform: uppercase;
+  text-transform: none;
   font-family: "Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 }
 
@@ -2117,25 +2117,29 @@ template {
   font-family: "Merriweather";
   font-style: normal;
   font-weight: 300;
-  src: url("/assets/fonts/merriweather-light-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/merriweather-light-webfont.woff2") format("woff2"), url("/assets/fonts/merriweather-light-webfont.woff") format("woff"), url("/assets/fonts/merriweather-light-webfont.ttf") format("truetype"), url("/assets/fonts/merriweather-light-webfont.svg#Merriweather") format("svg");
+  font-display: fallback;
+  src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Light.woff2) format("woff2");
 }
 @font-face {
   font-family: "Merriweather";
   font-style: normal;
   font-weight: 400;
-  src: url("/assets/fonts/merriweather-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/merriweather-regular-webfont.woff2") format("woff2"), url("/assets/fonts/merriweather-regular-webfont.woff") format("woff"), url("/assets/fonts/merriweather-regular-webfont.ttf") format("truetype"), url("/assets/fonts/merriweather-regular-webfont.svg#Merriweather") format("svg");
-}
-@font-face {
-  font-family: "Merriweather";
-  font-style: italic;
-  font-weight: 400;
-  src: url("/assets/fonts/merriweather-italic-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/merriweather-italic-webfont.woff2") format("woff2"), url("/assets/fonts/merriweather-italic-webfont.woff") format("woff"), url("/assets/fonts/merriweather-italic-webfont.ttf") format("truetype"), url("/assets/fonts/merriweather-italic-webfont.svg#Merriweather") format("svg");
+  font-display: fallback;
+  src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Regular.woff2) format("woff2");
 }
 @font-face {
   font-family: "Merriweather";
   font-style: normal;
   font-weight: 700;
-  src: url("/assets/fonts/merriweather-bold-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/merriweather-bold-webfont.woff2") format("woff2"), url("/assets/fonts/merriweather-bold-webfont.woff") format("woff"), url("/assets/fonts/merriweather-bold-webfont.ttf") format("truetype"), url("/assets/fonts/merriweather-bold-webfont.svg#Merriweather") format("svg");
+  font-display: fallback;
+  src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Bold.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Merriweather";
+  font-style: italic;
+  font-weight: 400;
+  font-display: fallback;
+  src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Italic.woff2) format("woff2");
 }
 /* stylelint-enable */
 /**
@@ -2933,8 +2937,8 @@ textarea {
 select {
   appearance: none;
   background-color: #ffffff;
-  background-image: url("/img/arrow-both.png");
-  background-image: none, url("/img/arrow-both.svg"), url("/img/arrow-both.png");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/arrow-both.png);
+  background-image: none, url(~@department-of-veterans-affairs/css-library/dist/img/arrow-both.svg), url(~@department-of-veterans-affairs/css-library/dist/img/arrow-both.png);
   background-position: right 0.8125rem center;
   background-repeat: no-repeat;
   background-size: 0.625rem;
@@ -3032,8 +3036,8 @@ legend {
 
 [type=checkbox]:checked + label::before,
 [type=checkbox]:checked:disabled + label::before {
-  background-image: url("/img/correct8.png");
-  background-image: url("/img/correct8.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/correct8.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/correct8.svg);
   background-position: 50%;
   background-repeat: no-repeat;
 }
@@ -3064,8 +3068,8 @@ legend {
   [type=checkbox]:checked:disabled + label::before {
     background-image: none;
     background-color: #ffffff;
-    content: url("/img/correct8-alt.png");
-    content: url("/img/correct8-alt.svg");
+    content: url(~@department-of-veterans-affairs/css-library/dist/img/correct8-alt.png);
+    content: url(~@department-of-veterans-affairs/css-library/dist/img/correct8-alt.svg);
     text-indent: 0;
   }
   [type=radio]:checked:disabled + label::before,
@@ -6049,8 +6053,8 @@ a:visited {
 }
 
 .usa-external_link::after {
-  background: url("/img/external-link.png") no-repeat 0 0;
-  background: url("/img/external-link.svg") no-repeat 0 0;
+  background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.png) no-repeat 0 0;
+  background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.svg) no-repeat 0 0;
   background-size: 100%;
   content: "";
   display: inline-block;
@@ -6060,13 +6064,13 @@ a:visited {
   width: 0.65em;
 }
 .usa-external_link:hover::after {
-  background-image: url("/img/external-link-hover.png");
-  background-image: url("/img/external-link-hover.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.svg);
 }
 
 .usa-external_link-alt::after {
-  background: url("/img/external-link-alt.png") no-repeat 0 0;
-  background: url("/img/external-link-alt.svg") no-repeat 0 0;
+  background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.png) no-repeat 0 0;
+  background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.svg) no-repeat 0 0;
   background-size: 100%;
   content: "";
   display: inline-block;
@@ -6076,8 +6080,8 @@ a:visited {
   width: 0.65em;
 }
 .usa-external_link-alt:hover::after {
-  background-image: url("/img/external-link-alt-hover.png");
-  background-image: url("/img/external-link-alt-hover.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.svg);
 }
 
 h1,
@@ -6147,14 +6151,14 @@ h6 {
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
-  text-transform: uppercase;
+  text-transform: none;
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 h6 a {
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
-  text-transform: uppercase;
+  text-transform: none;
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
@@ -6375,8 +6379,8 @@ dfn {
   text-align: left;
   -webkit-font-smoothing: auto;
   background-color: #f0f0f0;
-  background-image: url("/img/minus.png");
-  background-image: url("/img/minus.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/minus.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/minus.svg);
   background-position: right 1.25rem center;
   background-repeat: no-repeat;
   background-size: 0.9375rem;
@@ -6414,8 +6418,8 @@ dfn {
 }
 .usa-accordion > ul [aria-expanded=false],
 .usa-accordion-bordered > ul [aria-expanded=false] {
-  background-image: url("/img/plus.png");
-  background-image: url("/img/plus.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/plus.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/plus.svg);
   background-repeat: no-repeat;
   background-size: 0.9375rem;
 }
@@ -6463,8 +6467,8 @@ dfn {
   text-align: left;
   -webkit-font-smoothing: auto;
   background-color: #f0f0f0;
-  background-image: url("/img/minus.png");
-  background-image: url("/img/minus.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/minus.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/minus.svg);
   background-position: right 1.25rem center;
   background-repeat: no-repeat;
   background-size: 0.9375rem;
@@ -6494,8 +6498,8 @@ dfn {
 }
 
 .usa-accordion-button[aria-expanded=false] {
-  background-image: url("/img/plus.png");
-  background-image: url("/img/plus.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/plus.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/plus.svg);
   background-repeat: no-repeat;
   background-size: 0.9375rem;
 }
@@ -6574,8 +6578,8 @@ dfn {
 
 .usa-alert-success {
   background-color: #ecf3ec;
-  background-image: url("/img/success.png");
-  background-image: url("/img/success.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/success.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/success.svg);
 }
 .usa-alert-success::before {
   background-color: #008817;
@@ -6586,8 +6590,8 @@ dfn {
 
 .usa-alert-warning {
   background-color: #fef0c8;
-  background-image: url("/img/warning.png");
-  background-image: url("/img/warning.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/warning.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/warning.svg);
 }
 .usa-alert-warning::before {
   background-color: #ffbe2e;
@@ -6598,8 +6602,8 @@ dfn {
 
 .usa-alert-error {
   background-color: #f8dfe2;
-  background-image: url("/img/error.png");
-  background-image: url("/img/error.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/error.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/error.svg);
 }
 .usa-alert-error::before {
   background-color: #d83933;
@@ -6610,8 +6614,8 @@ dfn {
 
 .usa-alert-info {
   background-color: #e1f3f8;
-  background-image: url("/img/info.png");
-  background-image: url("/img/info.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/info.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/info.svg);
 }
 .usa-alert-info::before {
   background-color: #00bde3;
@@ -6837,8 +6841,8 @@ dfn {
   background-image: none;
 }
 .usa-banner-button[aria-expanded=false]::after {
-  background-image: url("/img/angle-arrow-down-primary.png");
-  background-image: url("/img/angle-arrow-down-primary.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/angle-arrow-down-primary.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/angle-arrow-down-primary.svg);
   background-size: 100%;
   content: "";
   display: inline-block;
@@ -6849,8 +6853,8 @@ dfn {
   /* stylelint-enable */
 }
 .usa-banner-button[aria-expanded=false]:hover::after {
-  background-image: url("/img/angle-arrow-down-primary-hover.png");
-  background-image: url("/img/angle-arrow-down-primary-hover.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/angle-arrow-down-primary-hover.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/angle-arrow-down-primary-hover.svg);
 }
 .usa-banner-button[aria-expanded=false]::after {
   background-position-y: 1px;
@@ -6860,8 +6864,8 @@ dfn {
   height: 3.5rem;
 }
 .usa-banner-button[aria-expanded=true]::after {
-  background-image: url("/img/close.png");
-  background-image: url("/img/close.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/close.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/close.svg);
   background-size: 100%;
   content: "";
   display: inline-block;
@@ -6878,8 +6882,8 @@ dfn {
     position: relative;
   }
   .usa-banner-button[aria-expanded=true]::after {
-    background-image: url("/img/angle-arrow-up-primary.png");
-    background-image: url("/img/angle-arrow-up-primary.svg");
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/angle-arrow-up-primary.png);
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/angle-arrow-up-primary.svg);
     background-size: 100%;
     content: "";
     display: inline-block;
@@ -6890,8 +6894,8 @@ dfn {
     /* stylelint-enable */
   }
   .usa-banner-button[aria-expanded=true]:hover::after {
-    background-image: url("/img/angle-arrow-up-primary-hover.png");
-    background-image: url("/img/angle-arrow-up-primary-hover.svg");
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/angle-arrow-up-primary-hover.png);
+    background-image: url(~@department-of-veterans-affairs/css-library/dist/img/angle-arrow-up-primary-hover.svg);
   }
   .usa-banner-button[aria-expanded=true]::after {
     background-position-y: 1px;
@@ -7065,8 +7069,8 @@ fieldset {
 }
 
 .usa-checklist-checked::before {
-  background-image: url("/img/correct9.png");
-  background-image: url("/img/correct9.svg");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/correct9.png);
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/correct9.svg);
   background-position: 100%;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -7524,7 +7528,7 @@ article > h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("/img/stars.png") no-repeat center;
+  background: url(~@department-of-veterans-affairs/css-library/dist/img/stars.png) no-repeat center;
   background-size: 6.875rem auto;
   margin: 1rem auto auto;
   padding: 1.25rem 0 0;
@@ -7604,7 +7608,7 @@ article > h1 {
   working while we work on deprecation.
 **/
 .external-link-icon-black {
-  background-image: url("/img/exit-icon.png");
+  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/exit-icon.png);
   background-position: 100% 50%;
   background-repeat: no-repeat;
   background-size: 1em auto;

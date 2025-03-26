@@ -13,7 +13,12 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
-import { consoleDevError, getCharacterMessage, getHeaderLevel } from '../../utils/utils';
+import {
+  consoleDevError,
+  getCharacterMessage,
+  getHeaderLevel,
+  isMessageSet,
+} from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -25,7 +30,7 @@ if (Build.isTesting) {
  * @nativeHandler onBlur
  * @componentName Text input
  * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityLevel best_practice
  * @guidanceHref form/text-input
  * @translations English
  * @translations Spanish
@@ -174,31 +179,30 @@ export class VaTextInput {
    */
   @Prop() charcount?: boolean = false;
 
-   /**
+  /**
    * Whether this component will be used to accept a currency value.
    */
   @Prop() currency?: boolean = false;
 
-   /**
+  /**
    * Displays a fixed prefix string at the start of the input field.
    */
-   @Prop() inputPrefix?: string;
+  @Prop() inputPrefix?: string;
 
-   /**
+  /**
    * This property displays a prefix that accepts a string which represents icon name.
    */
-   @Prop() inputIconPrefix?: string;
+  @Prop() inputIconPrefix?: string;
 
-   /**
+  /**
    * Displays a fixed suffix string at the end of the input field.
    */
   @Prop() inputSuffix?: string;
 
-
-   /**
+  /**
    * A string that represents the name of an icon passed to va-icon, which will be applied as a suffix to the input.
    */
-   @Prop() inputIconSuffix?: string;
+  @Prop() inputIconSuffix?: string;
 
   /**
    * The min attribute specifies the minimum value for an input element
@@ -241,14 +245,18 @@ export class VaTextInput {
       // eslint-disable-next-line i18next/no-literal-string
       this.paddingLeftValue = '2.5rem';
     } else if (this.inputPrefix) {
-      const textLength = this.inputPrefix ? Math.min(this.inputPrefix.length, 25) : null;
+      const textLength = this.inputPrefix
+        ? Math.min(this.inputPrefix.length, 25)
+        : null;
       // eslint-disable-next-line i18next/no-literal-string
       this.paddingLeftValue = `${textLength * 0.5 + 1}rem`;
     }
   };
 
   private updatePaddingRight = () => {
-    const textLength = this.inputSuffix ? Math.min(this.inputSuffix.length, 25) : null;
+    const textLength = this.inputSuffix
+      ? Math.min(this.inputSuffix.length, 25)
+      : null;
     // eslint-disable-next-line i18next/no-literal-string
     this.paddingRightValue = `${textLength * 0.5 + 1}rem`;
   };
@@ -297,7 +305,11 @@ export class VaTextInput {
       });
     }
 
-    if (this.inputmode === 'decimal' || this.inputmode === 'numeric' || this.currency) {
+    if (
+      this.inputmode === 'decimal' ||
+      this.inputmode === 'numeric' ||
+      this.currency
+    ) {
       let defaultError = i18next.t('number-error');
       const target = e.target as HTMLInputElement;
       const valid = target.checkValidity();
@@ -315,13 +327,14 @@ export class VaTextInput {
   private getPattern(): string {
     // currency should have its own pattern
     if (this.currency) {
-      return '^[0-9]+(\.[0-9]{2})?$';
+      return '^[0-9]+(.[0-9]{2})?$';
     }
 
     const isNumericWithNoPattern =
-      this.pattern === undefined && (this.inputmode === 'decimal' || this.inputmode === 'numeric');
+      this.pattern === undefined &&
+      (this.inputmode === 'decimal' || this.inputmode === 'numeric');
     // if input will hold a number then set the pattern to a default
-    return isNumericWithNoPattern ? "[0-9]+(\.[0-9]{1,})?" : this.pattern;
+    return isNumericWithNoPattern ? '[0-9]+(.[0-9]{1,})?' : this.pattern;
   }
 
   // get the inputmode for the component. if currency is true always use 'numeric'
@@ -329,7 +342,7 @@ export class VaTextInput {
     if (this.currency) {
       return 'numeric';
     }
-    return this.inputmode ? this.inputmode : undefined
+    return this.inputmode ? this.inputmode : undefined;
   }
 
   // get the step for the input, if inputMode is decimal default to .01
@@ -377,7 +390,7 @@ export class VaTextInput {
       inputPrefix,
       inputIconPrefix,
       inputSuffix,
-      inputIconSuffix
+      inputIconSuffix,
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
@@ -386,19 +399,20 @@ export class VaTextInput {
 
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
-        error ? 'input-error-message' : ''} ${
-        charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+        error ? 'input-error-message' : ''
+      } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
     const ariaLabeledByIds =
-    `${useFormsPattern && formHeading ? 'form-question' : ''} ${
-      useFormsPattern ? 'form-description' : ''} ${
-        useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+      `${useFormsPattern && formHeading ? 'form-question' : ''} ${
+        useFormsPattern ? 'form-description' : ''
+      } ${useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
 
     const pattern = this.getPattern();
 
     const currencyWrapper = classnames({
       'currency-wrapper': currency,
-      'usa-input-group': inputSuffix || inputPrefix || inputIconPrefix || inputIconSuffix
+      'usa-input-group':
+        inputSuffix || inputPrefix || inputIconPrefix || inputIconSuffix,
     });
 
     const getInputStyle = () => {
@@ -409,11 +423,11 @@ export class VaTextInput {
       } else {
         return {};
       }
-    }
+    };
 
     const style = getInputStyle();
 
-    const charCountTooHigh = maxlength && (value?.length > maxlength);
+    const charCountTooHigh = maxlength && value?.length > maxlength;
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
@@ -427,29 +441,33 @@ export class VaTextInput {
     const messageClass = classnames({
       'usa-hint': true,
       'usa-character-count__status': maxlength,
-      'usa-character-count__status--invalid': maxlength && value?.length > maxlength
+      'usa-character-count__status--invalid':
+        maxlength && value?.length > maxlength,
     });
 
     const errorClass = classnames({
       'usa-sr-only': !showInputError,
     });
 
-    const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+    const isFormsPattern =
+      useFormsPattern === 'single' || useFormsPattern === 'multiple'
+        ? true
+        : false;
     let formsHeading = null;
     if (isFormsPattern) {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
       formsHeading = (
         <Fragment>
-          {formHeading &&
+          {formHeading && (
             <HeaderLevel id="form-question" part="form-header">
               {formHeading}
             </HeaderLevel>
-          }
+          )}
           <div id="form-description">
             <slot name="form-description"></slot>
           </div>
         </Fragment>
-      )
+      );
     }
 
     return (
@@ -484,8 +502,16 @@ export class VaTextInput {
           </span>
           <div class={currencyWrapper}>
             {currency && <div id="symbol">$</div>}
-            {inputPrefix && <div class="usa-input-prefix" part="input-prefix">{inputPrefix.substring(0, 25)}</div>}
-            {inputIconPrefix && <div class="usa-input-prefix" part="input-prefix"><va-icon icon={inputIconPrefix} size={3} part="icon"></va-icon></div>}
+            {inputPrefix && (
+              <div class="usa-input-prefix" part="input-prefix">
+                {inputPrefix.substring(0, 25)}
+              </div>
+            )}
+            {inputIconPrefix && (
+              <div class="usa-input-prefix" part="input-prefix">
+                <va-icon icon={inputIconPrefix} size={3} part="icon"></va-icon>
+              </div>
+            )}
 
             <input
               class={inputClass}
@@ -511,10 +537,18 @@ export class VaTextInput {
               max={max}
               value={value}
             />
-            {inputSuffix && <div class="usa-input-suffix" part="suffix" aria-hidden="true">{inputSuffix.substring(0, 25)}</div>}
-            {inputIconSuffix && <div class="usa-input-suffix" part="input-suffix"><va-icon icon={inputIconSuffix} size={3} part="icon"></va-icon></div>}
+            {inputSuffix && (
+              <div class="usa-input-suffix" part="suffix" aria-hidden="true">
+                {inputSuffix.substring(0, 25)}
+              </div>
+            )}
+            {inputIconSuffix && (
+              <div class="usa-input-suffix" part="input-suffix">
+                <va-icon icon={inputIconSuffix} size={3} part="icon"></va-icon>
+              </div>
+            )}
           </div>
-          {messageAriaDescribedby && (
+          {isMessageSet(messageAriaDescribedby) && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>

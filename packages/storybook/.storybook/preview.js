@@ -1,6 +1,26 @@
-import '@department-of-veterans-affairs/formation/dist/formation.min.css';
 import './style.scss';
-import '@department-of-veterans-affairs/formation/dist/formation';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/core.css';
+
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/utilities.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-alert.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-breadcrumbs.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-button.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-form-elements.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-megamenu.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-loading-indicator.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-print.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-dropdown.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-overlay.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-additional-info.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-hub-page-link-list.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-action-link.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/mobile-typography.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-modal.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-process-list.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-nav-sidebar.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-nav-linklist.css';
+import '@department-of-veterans-affairs/css-library/dist/stylesheets/shame.css';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
 import {
