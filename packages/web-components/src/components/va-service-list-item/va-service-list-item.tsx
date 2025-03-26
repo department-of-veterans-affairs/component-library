@@ -151,20 +151,10 @@ export class VaServiceListItem {
           </a>
 
           {actionNeeded && (
-            <div class="action-bar">
-              <a
-                href={parsedAction?.href}
-                class="action-link"
-                aria-label={`Action required: ${parsedAction?.text}`}
-              >
-                <va-icon
-                  class="link-icon hydrated"
-                  icon="chevron_right"
-                  size={3}
-                ></va-icon>
-                {parsedAction?.text}
-              </a>
-            </div>
+            <va-alert-critical
+              link={parsedAction.href}
+              text={parsedAction.text}
+            ></va-alert-critical>
           )}
 
           <div class="status">

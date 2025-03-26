@@ -13,8 +13,11 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
-import { getSlottedNodes, getHeaderLevel } from '../../utils/utils';
-
+import {
+  getSlottedNodes,
+  getHeaderLevel,
+  isMessageSet,
+} from '../../utils/utils';
 /**
  * @nativeHandler onKeyDown
  * @componentName Select
@@ -250,7 +253,7 @@ export class VaSelect {
       showError,
       useFormsPattern,
       formHeadingLevel,
-      formHeading
+      formHeading,
     } = this;
 
     const errorID = 'input-error-message';
@@ -276,16 +279,16 @@ export class VaSelect {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
       formsHeading = (
         <Fragment>
-          {formHeading &&
-          <HeaderLevel id="form-question" part="form-header">
-            {formHeading}
-          </HeaderLevel>
-          }
+          {formHeading && (
+            <HeaderLevel id="form-question" part="form-header">
+              {formHeading}
+            </HeaderLevel>
+          )}
           <div id="form-description">
             <slot name="form-description"></slot>
           </div>
         </Fragment>
-      )
+      );
     }
 
     return (
@@ -332,7 +335,7 @@ export class VaSelect {
             {this.options}
           </select>
         </div>
-        {messageAriaDescribedby && (
+        {isMessageSet(messageAriaDescribedby) && (
           <span id="input-message" class="usa-sr-only dd-privacy-hidden">
             {messageAriaDescribedby}
           </span>
