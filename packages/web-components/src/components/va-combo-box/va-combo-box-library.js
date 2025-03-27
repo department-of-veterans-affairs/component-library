@@ -605,32 +605,35 @@ const noop = () => {};
    *
    * @param {HTMLElement} el An element within the combo box component
    */
-  const completeSelection = el => {
+const completeSelection = el => {
     const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
-
+  
     statusEl.textContent = '';
-
+  
     const inputValue = (inputEl.value || '').trim().toLowerCase();
-
+  
     if (inputValue) {
-      for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
-        const optionEl = selectEl.options[i];
+      // Find a matching option
+      const matchingOption = Array.from(selectEl.options).find(
+        option => option.text.toLowerCase() === inputValue
+      );
+  
+      if (matchingOption) {
         // If a match is found, update the input and select values
-        if (optionEl.text.toLowerCase() === inputValue) {
-          changeElementValue(selectEl, optionEl.value);
-          changeElementValue(inputEl, optionEl.text);
-          comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
-          return;
-        } else {
-            // If no match is found, clear the select value but maintain the input value
-            // This allows the user to type a value that doesn't exist in the options
-            // and still have it displayed in the input.
-            // error handling should be added per unique team requirements
-            changeElementValue(selectEl, '');
-            comboBoxEl.classList.remove(COMBO_BOX_PRISTINE_CLASS);
-        }
+        changeElementValue(selectEl, matchingOption.value);
+        changeElementValue(inputEl, matchingOption.text);
+        comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
+        return;
       }
     }
+  
+    // If no match is found or input value is empty,
+    // clear the select value but maintain the input value.
+    // This allows the user to type a value that doesn't exist in the options
+    // and still have it displayed in the input.
+    // error handling should be added per unique team requirements
+    changeElementValue(selectEl, '');
+    comboBoxEl.classList.remove(COMBO_BOX_PRISTINE_CLASS);
   };
 
   /**
