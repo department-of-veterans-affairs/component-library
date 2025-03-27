@@ -21,12 +21,33 @@ export default {
   },
 };
 
-const defaultArgs = {};
+const defaultArgs = {
+  active: false,
+  checkmark: false,
+  header: 'Check to be sure you can request a Board Appeal',
+  level: 3,
+  pending: false,
+  statusText: undefined,
+};
 
-const Template = ({}) => {
+const Template = ({
+  active,
+  checkmark,
+  header,
+  level,
+  pending,
+  statusText,
+}) => {
   return (
     <va-process-list>
-      <va-process-list-item header="Check to be sure you can request a Board Appeal">
+      <va-process-list-item
+        active={active}
+        checkmark={checkmark}
+        header={header}
+        level={level}
+        pending={pending}
+        statusText={statusText}
+      >
         <p>
           You can request a Board Appeal up to 1 year from the date on your
           decision notice. (Exception: if you have a contested claim, you have
@@ -141,18 +162,21 @@ const CustomSizingTemplate = defaultArgs => {
     <va-process-list>
       <va-process-list-item header="Step One" level={2}>
         <p className="vads-u-font-size--lg">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.{' '}
+          Turn the water on and wet your hands. Turn the water back off to
+          reduce waste.
         </p>
       </va-process-list-item>
       <va-process-list-item header="Step Two" level={2}>
         <p className="vads-u-font-size--lg">
-          Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui.
+          Apply soap to hands and scrub vigorously for at least 20 seconds. If
+          it helps, hum the "Happy Birthday" song twice.
         </p>
       </va-process-list-item>
       <va-process-list-item header="Step Three" level={2}>
         <p className="vads-u-font-size--lg">
-          Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit
-          sem. Cras sollicitudin auctor mattis.
+          Turn the water back on and rinse the soap from your hands. Get a paper
+          towel and use it to turn the water back off, and then dry your hands
+          with another paper towel.
         </p>
       </va-process-list-item>
     </va-process-list>
@@ -169,7 +193,7 @@ const UtilityStyling = defaultArgs => {
           className="medium-screen:vads-u-display--none"
         >
           <img
-            src="https://via.placeholder.com/350"
+            src="https://placehold.co/350"
             alt="a placeholder image that displays the text 350 x 350"
           />
         </va-additional-info>
