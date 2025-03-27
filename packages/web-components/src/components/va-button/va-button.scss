@@ -26,6 +26,10 @@
   .usa-button {
     line-height: 1.15;
     padding: .60rem 1.25rem;
+
+    &--big {
+      padding: .8rem 1.5rem;
+    }
   }
 
   @media (prefers-reduced-motion) {
