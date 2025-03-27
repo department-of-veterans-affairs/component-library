@@ -42,6 +42,7 @@ const defaultArgs = {
   'children': null,
   'value': null,
   'read-only': false,
+  'encrypted': false,
   'status-text': null,
   'uploadedFile': null,
   'maxFileSize': Infinity,
@@ -58,6 +59,7 @@ const Template = ({
   vaChange,
   headerSize,
   readOnly,
+  encrypted,
   statusText,
   value,
   children,
@@ -76,6 +78,7 @@ const Template = ({
       onVaChange={vaChange}
       header-size={headerSize}
       readOnly={readOnly}
+      encrypted={encrypted}
       statusText={statusText}
       value={value}
       children={children}
@@ -91,6 +94,10 @@ Default.argTypes = propStructure(fileInputDocs);
 
 export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
+
+
+export const AcceptsFilePassword = Template.bind(null);
+AcceptsFilePassword.args = { ...defaultArgs, encrypted: true };
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {

@@ -3,6 +3,25 @@ import { axeCheck } from '../../../testing/test-helpers';
 import { ElementHandle } from 'puppeteer';
 const path = require('path');
 
+async function setUpPageWithUploadedFile(content:string) {
+  const page = await newE2EPage();
+  await page.setContent(content);
+  const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+  const input = (await page.$(
+    'pierce/#fileInputField',
+  )) as ElementHandle<HTMLInputElement>;
+  expect(input).not.toBeNull();
+
+  await input
+    .uploadFile(filePath)
+    .catch(e => console.log('uploadFile error', e));
+
+  await page.waitForChanges();
+
+  return page;
+}
+
 describe('va-file-input', () => {
   it('renders', async () => {
     const page = await newE2EPage();
@@ -84,20 +103,7 @@ describe('va-file-input', () => {
   });
 
   it('renders a "Change File" button if there is a file', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttonText="Upload a file" />`);
-    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
-
-    const input = (await page.$(
-      'pierce/#fileInputField',
-    )) as ElementHandle<HTMLInputElement>;
-    expect(input).not.toBeNull();
-
-    await input
-      .uploadFile(filePath)
-      .catch(e => console.log('uploadFile error', e));
-
-    await page.waitForChanges();
+    const page = await setUpPageWithUploadedFile(`<va-file-input buttonText="Upload a file" />`);
 
     const fileInfoCard = await page.find('va-file-input >>> va-card');
     const fileChangeButton = await fileInfoCard.find(
@@ -108,22 +114,7 @@ describe('va-file-input', () => {
   });
 
   it('does not render a "Change File" button if read-only', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `<va-file-input buttonText="Upload a file" read-only />`,
-    );
-    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
-
-    const input = (await page.$(
-      'pierce/#fileInputField',
-    )) as ElementHandle<HTMLInputElement>;
-    expect(input).not.toBeNull();
-
-    await input
-      .uploadFile(filePath)
-      .catch(e => console.log('uploadFile error', e));
-
-    await page.waitForChanges();
+    const page = await setUpPageWithUploadedFile(`<va-file-input buttonText="Upload a file" read-only />`);
 
     const fileInfoCard = await page.find('va-file-input >>> va-card');
     const fileChangeButton = await fileInfoCard.find(
@@ -134,22 +125,7 @@ describe('va-file-input', () => {
 
 
   it('Renders status text', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `<va-file-input status-text="Uploading..."/>`,
-    );
-    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
-
-    const input = (await page.$(
-      'pierce/#fileInputField',
-    )) as ElementHandle<HTMLInputElement>;
-    expect(input).not.toBeNull();
-
-    await input
-      .uploadFile(filePath)
-      .catch(e => console.log('uploadFile error', e));
-
-    await page.waitForChanges();
+    const page = await setUpPageWithUploadedFile(`<va-file-input status-text="Uploading..."/>`);
 
     const fileInfoCard = await page.find('va-file-input >>> va-card');
     const statusTextCont = await fileInfoCard.find(
@@ -310,19 +286,7 @@ describe('va-file-input', () => {
   });
 
   it('displays an error if the file size exceeds max allowed file size', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-file-input max-file-size="1" />`);
-    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
-
-    const input = (await page.$(
-      'pierce/#fileInputField',
-    )) as ElementHandle<HTMLInputElement>;
-
-    await input
-      .uploadFile(filePath)
-      .catch(e => console.log('uploadFile error', e));
-
-    await page.waitForChanges();
+    const page = await setUpPageWithUploadedFile(`<va-file-input max-file-size="1" />`);
 
     const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
@@ -330,18 +294,7 @@ describe('va-file-input', () => {
   });
 
   it('renders a progress bar if percent-uploaded prop is set', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-file-input percent-uploaded="12" />`);
-    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
-
-    const input = (await page.$(
-      'pierce/#fileInputField',
-    )) as ElementHandle<HTMLInputElement>;
-
-    await input
-      .uploadFile(filePath);
-
-    await page.waitForChanges();
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="12" />`);
 
     const progBar = await page.find('va-file-input >>> va-progress-bar');
 
@@ -349,23 +302,29 @@ describe('va-file-input', () => {
 
   });
   it('resets the component if the cancel button is clicked during upload', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-file-input percent-uploaded="12" />`);
-    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
-
-    const input = (await page.$(
-      'pierce/#fileInputField',
-    )) as ElementHandle<HTMLInputElement>;
-
-    await input
-      .uploadFile(filePath);
-
-    await page.waitForChanges();
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="12" />`);
 
     const button = await page.find('va-file-input >>> va-button-icon');
     button.click();
     await page.waitForChanges();
     const progBar = await page.find('va-file-input >>> va-progress-bar');
     expect(progBar).toBeNull();
+  });
+
+  it('renders file password field if encrypted is true upload', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
+
+    const textInput = await page.find('va-file-input >>> va-text-input');
+    expect(textInput).not.toBeNull();
+    const label = await textInput.find(' >>> label');
+    expect(label).toEqualText('File password required')
+    
+  });
+  
+  it('does not render file password field if encrypted is unset', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`);
+
+    const textInput = await page.find('va-file-input >>> va-text-input');
+    expect(textInput).toBeNull();
   });
 });
