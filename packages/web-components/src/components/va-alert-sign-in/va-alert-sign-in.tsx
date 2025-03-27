@@ -206,7 +206,7 @@ export class VaAlertSignIn {
         </p>
         <p>
           <va-link
-            href="https://www.va.gov/resources/creating-an-account-for-vagov"
+            href="https://www.va.gov/resources/verifying-your-identity-on-vagov/"
             text="Learn more about verifying your identity"
             disableAnalytics={true}
           ></va-link>
@@ -232,7 +232,7 @@ export class VaAlertSignIn {
         </p>
         <p>
           <va-link
-            href="https://www.va.gov/resources/creating-an-account-for-vagov"
+            href="https://www.va.gov/resources/verifying-your-identity-on-vagov/"
             text="Learn more about verifying your identity"
             disableAnalytics={true}
           ></va-link>
