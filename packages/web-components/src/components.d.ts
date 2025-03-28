@@ -1797,7 +1797,7 @@ export namespace Components {
          */
         "tty"?: boolean;
         /**
-          * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
+          * Optional vanity phone number. Replaces the last 4 digits or the entire text with the vanity text input
          */
         "vanity"?: string;
     }
@@ -5406,7 +5406,7 @@ declare namespace LocalJSX {
          */
         "tty"?: boolean;
         /**
-          * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
+          * Optional vanity phone number. Replaces the last 4 digits or the entire text with the vanity text input
          */
         "vanity"?: string;
     }
