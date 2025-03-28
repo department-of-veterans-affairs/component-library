@@ -40,6 +40,24 @@ const Template = ({}) => {
   );
 };
 
+const TwoLanguagesTemplate = ({}) => {
+  let lang = 'en'; // Default to English
+  sessionStorage.setItem('va-language-toggle-lang', lang);
+  function handleLanguageToggle(e) {
+    const { language } = e.detail;
+    sessionStorage.setItem('va-language-toggle-lang', language);
+  }
+
+  return (
+    <VaLanguageToggle
+      language={lang}
+      enHref={url.href}
+      esHref={url.href}
+      onVaLanguageToggle={handleLanguageToggle}
+    />
+  );
+};
+
 const WithRouterLinksTemplate = ({}) => {
   function handleLanguageToggle(e) {
     console.log(`the language has been toggled to ${e.detail.language}`);
@@ -70,4 +88,5 @@ const WithRouterLinksTemplate = ({}) => {
 export const Default = Template.bind(null);
 Default.argTypes = propStructure(languageToggleDocs);
 
+export const TwoLanguages = TwoLanguagesTemplate.bind(null);
 export const WithRouterLinks = WithRouterLinksTemplate.bind(null);
