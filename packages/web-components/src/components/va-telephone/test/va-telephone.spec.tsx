@@ -51,13 +51,22 @@ describe('formatPhoneNumber', () => {
     ).toBe('911');
   });
 
-  it('formats a contact number with vanity prop', () => {
+  it('formats a contact number with 4 character vanity prop', () => {
     expect(
       VaTelephone.formatPhoneNumber({
         contact,
         vanity,
       }),
     ).toBe('888-555-ABCD (1234)');
+  });
+
+  it('formats a contact number with full vanity prop', () => {
+    expect(
+      VaTelephone.formatPhoneNumber({
+        contact: '8884424551',
+        vanity: '888-GIBILL-1',
+      }),
+    ).toBe('888-GIBILL-1 (888-442-4551)');
   });
 
   it('formats a TTY number', () => {

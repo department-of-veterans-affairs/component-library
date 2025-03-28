@@ -61,7 +61,7 @@ export class VaTelephone {
 
   /**
    * Optional vanity phone number.
-   * Replaces the last 4 digits with the vanity text input
+   * Replaces the last 4 digits or the entire text with the vanity text input
    */
   @Prop() vanity?: string;
 
@@ -130,7 +130,10 @@ export class VaTelephone {
       if (international) formattedNum = `+1-${formattedNum}`;
       if (extension) formattedNum = `${formattedNum}, ext. ${extension}`;
       if (vanity) {
-        formattedNum = `${area}-${local}-${vanity} (${last4})`;
+        formattedNum =
+          vanity.length === 4
+            ? `${area}-${local}-${vanity} (${last4})`
+            : `${vanity} (${formattedNum})`;
       }
     }
 
