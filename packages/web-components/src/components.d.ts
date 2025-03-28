@@ -624,6 +624,10 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
+          * When true shows a password field
+         */
+        "encrypted"?: boolean;
+        /**
           * The error message to render.
          */
         "error"?: string;
@@ -697,6 +701,10 @@ export namespace Components {
           * If enabled, emits custom analytics events when file changes occur.
          */
         "enableAnalytics"?: boolean;
+        /**
+          * Array of booleans, displays file password field for corresponding file input.
+         */
+        "encrypted": boolean[];
         /**
           * Array of error messages corresponding to each file input. The length and order match the files array.
          */
@@ -4068,6 +4076,10 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
+          * When true shows a password field
+         */
+        "encrypted"?: boolean;
+        /**
           * The error message to render.
          */
         "error"?: string;
@@ -4149,6 +4161,10 @@ declare namespace LocalJSX {
           * If enabled, emits custom analytics events when file changes occur.
          */
         "enableAnalytics"?: boolean;
+        /**
+          * Array of booleans, displays file password field for corresponding file input.
+         */
+        "encrypted"?: boolean[];
         /**
           * Array of error messages corresponding to each file input. The length and order match the files array.
          */
