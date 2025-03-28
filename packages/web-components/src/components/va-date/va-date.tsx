@@ -273,7 +273,6 @@ export class VaDate {
               error={this.monthTouched && this.invalidMonth ? error : null}
               showError={false}
             >
-              <option value=""></option>
               {months &&
                 months.map(month => (
                   <option value={month.value}>{month.label}</option>
@@ -295,7 +294,6 @@ export class VaDate {
                 error={this.dayTouched && this.invalidDay ? this.error : null}
                 showError={false}
               >
-                <option value=""></option>
                 {daysForSelectedMonth &&
                   daysForSelectedMonth.map(day => (
                     <option value={day}>{day}</option>
