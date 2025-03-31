@@ -26,6 +26,7 @@ const defaultArgs = {
   'accept': null,
   'required': false,
   'errors': [],
+  'encrypted': [],
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaMultipleChange': null,
@@ -41,6 +42,7 @@ const Template = ({
   name,
   accept,
   errors,
+  encrypted,
   required,
   hint,
   enableAnalytics,
@@ -58,6 +60,7 @@ const Template = ({
       accept={accept}
       required={required}
       errors={errors}
+      encrypted={encrypted}
       hint={hint}
       enable-analytics={enableAnalytics}
       onVaMultipleChange={vaMultipleChange}
@@ -251,9 +254,9 @@ const ErrorsTemplate = ({ label, name, hint }) => {
   const [errorsList, setErrorsList] = useState([]);
 
   function setErrorForEachFile(event) {
-    const fileEntries = event.detail.files;
+    const fileEntries = event.detail.state;
     const errors = fileEntries.map((file, index) => {
-      if (!file) {
+      if (!file.file) {
         return '';
       }
       return 'Error for index ' + index;
@@ -286,9 +289,9 @@ const ErrorsTemplate = ({ label, name, hint }) => {
             {`const [errorsList, setErrorsList] = useState([]);
 
   function setErrorForEachFile(event) {
-    const fileEntries = event.detail.files;
+    const fileEntries = event.detail.state;
     const errors = fileEntries.map((file, index) => {
-      if (!file) {
+      if (!file.file) {
         return '';
       }
       return 'Error for index ' + index;
@@ -326,13 +329,14 @@ const CustomValidationTemplate = ({ label, name, accept, hint }) => {
 
   function validateFileContents(event) {
     let errors = [];
-    const fileEntries = event.detail.files;
+    const fileEntries = event.detail.state;
 
     fileEntries.forEach(fileEntry => {
-      if (fileEntry) {
+      const file = fileEntry.file;
+      if (file) {
         let error = '';
 
-        if (fileEntry.size > 2 * 1024 * 1024) {
+        if (file.size > 2 * 1024 * 1024) {
           // 2MB = 2 * 1024 * 1024 bytes
           error = 'File size cannot be greater than 2MB';
         }
@@ -376,24 +380,26 @@ const CustomValidationTemplate = ({ label, name, accept, hint }) => {
             {`const [errorsList, setErrorsList] = useState([]);
 
 function validateFileContents(event) {
-  let errors = [];
-  const fileEntries = event.detail.files;
+    let errors = [];
+    const fileEntries = event.detail.state;
 
-  fileEntries.forEach(fileEntry => {
-    if (fileEntry) {
-      let error = '';
+    fileEntries.forEach(fileEntry => {
+      const file = fileEntry.file;
+      if (file) {
+        let error = '';
 
-      if (fileEntry.size > 2 * 1024 * 1024) { // 2MB = 2 * 1024 * 1024 bytes
-        error = "File size cannot be greater than 2MB";
+        if (file.size > 2 * 1024 * 1024) {
+          // 2MB = 2 * 1024 * 1024 bytes
+          error = 'File size cannot be greater than 2MB';
+        }
+
+        errors.push(error);
+      } else {
+        errors.push(''); // Add an empty error if no fileEntry
       }
+    });
 
-      errors.push(error);
-    } else {
-      errors.push(''); // Add an empty error if no fileEntry
-    }
-  });
-
-  setErrorsList(errors);
+    setErrorsList(errors);
   }
 
 <VaFileInputMultiple
@@ -420,6 +426,74 @@ CustomValidation.args = {
   label: 'Upload files which are smaller than 2 MB',
   hint: 'Select any file type',
 };
+
+const EncryptedTemplate = ({ label, name, hint }) => {
+  const [encryptedList, setEncryptedList] = useState([]);
+
+  function setEncrpytedForEachFile(event) {
+    const fileEntries = event.detail.state;
+    const pdfFiles = fileEntries.map((file, index) => {
+      return file.file.type === 'application/pdf'
+    });
+    setEncryptedList(pdfFiles);
+  }
+
+  return (
+    <>
+      <VaFileInputMultiple
+        label={label}
+        name={name}
+        hint={"This example shows a password field when a .pdf file is uploaded."}
+        encrypted={encryptedList}
+        onVaMultipleChange={setEncrpytedForEachFile}
+      />
+      <hr />
+      <div>
+        <p>
+          Parent components are responsible for managing if a password
+          needs to be requested for the file through a dedicated encryted
+          array. Each index in this array corresponds to a file input, 
+          with the value at each index being true if a password should
+          be requested for that specific file, or false if no password is
+          needed. By default, no password field will be displayed. This
+          setup allows for the dynamic display of a password field based
+          on real-time validation of each file as it is processed.
+        </p>
+      </div>
+      <div className="vads-u-margin-top--2">
+        <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+          <code>
+            {`const [encryptedList, setEncryptedList] = useState([]);
+
+  function setEncrpytedForEachFile(event) {
+    const fileEntries = event.detail.state;
+    const pdfFiles = fileEntries.map((file, index) => {
+      return file.file.type === 'application/pdf'
+    });
+    setEncryptedList(pdfFiles);
+  }
+
+  return (
+    <VaFileInputMultiple
+      ...
+      encrypted={encryptedList}
+      onVaMultipleChange={setEncrpytedForEachFile}
+    />`}
+          </code>
+        </pre>
+        <a
+          href="https://github.com/department-of-veterans-affairs/component-library/tree/main/packages/storybook/stories"
+          target="_blank"
+        >
+          View validation code in our repo
+        </a>
+      </div>
+    </>
+  );
+};
+
+export const AcceptsFilePassword = EncryptedTemplate.bind(null);
+AcceptsFilePassword.args = {...defaultArgs};
 
 const FilesUploadedTemplate = args => {
   const [mockFiles, setMockFiles] = useState(null);
