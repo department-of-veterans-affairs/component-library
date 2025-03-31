@@ -455,12 +455,15 @@ const noop = () => {};
     }
 
     const numOptions = options.length;
-    const optionsLength = options.filter(option => !isDataOptGroup(option)).length;
     let isFocused = false;
+    let groupLength = 0;
     let optionIndex = 0;
     const optionHtml = options.map((option, index) => {
       const isOptGroup = isDataOptGroup(option);
       const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
+      if (isOptGroup) 
+        groupLength += 1;
+
       if (!isOptGroup) {
         optionIndex += 1;
       }
@@ -490,7 +493,7 @@ const noop = () => {};
       const li = document.createElement('li');
 
       if (!isOptGroup) {
-        li.setAttribute('aria-setsize', optionsLength);
+        li.setAttribute('aria-setsize', optionIndex);
         li.setAttribute('aria-posinset', optionIndex);
         li.setAttribute('aria-describedby', option.getAttribute('aria-describedby'));
       }
@@ -523,8 +526,14 @@ const noop = () => {};
 
     inputEl.setAttribute('aria-expanded', 'true');
 
-    statusEl.textContent = optionsLength
-      ? `${optionsLength} result${optionsLength > 1 ? 's' : ''} available.`
+    const getPluralizedMessage = (count, singular, plural) => 
+      count ? `${count} ${count > 1 ? plural : singular} available.` : '';
+  
+    const groupsStatus = getPluralizedMessage(groupLength, 'group', 'groups');
+    const optionsStatus = getPluralizedMessage(optionIndex, 'result', 'results');
+
+    statusEl.textContent = optionIndex
+      ? `${groupsStatus} ${optionsStatus}`
       : 'No results.';
 
     let itemToFocus;
