@@ -1,5 +1,15 @@
-import { Component, Event, EventEmitter, Host, h, Prop, State, Watch } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  h,
+  Prop,
+  State,
+  Watch,
+} from '@stencil/core';
 import classNames from 'classnames';
+import { isMessageSet } from '../../utils/utils';
 
 /**
  * @componentName Link - Action
@@ -39,7 +49,7 @@ export class VaLinkAction {
    * The type of the link, which determines its style.
    * Can be 'primary', 'secondary', or 'reverse'.
    */
-  @Prop() type: 'primary' | 'secondary' | 'reverse' = 'primary';
+  @Prop() type?: 'primary' | 'secondary' | 'reverse' = 'primary';
 
   /**
    * This provides an aria-label to the link, if present
@@ -122,7 +132,7 @@ export class VaLinkAction {
           <va-icon class={iconClass} icon="chevron_right" size={3}></va-icon>
           <span class="link-text">{text}</span>
         </a>
-        {messageAriaDescribedby && (
+        {isMessageSet(messageAriaDescribedby) && (
           <span id="link-description" class="sr-only">
             {messageAriaDescribedby}
           </span>
