@@ -3,6 +3,7 @@ import {
   getSlottedNodes,
   isNumeric,
   isInteractiveLinkOrButton,
+  isMessageSet,
 } from './utils';
 
 describe('format', () => {
@@ -127,5 +128,21 @@ describe('isInteractiveLinkOrButton()', () => {
   });
   it('returns false for a span element', () => {
     expect(testElement('span')).toEqual(false);
+  });
+});
+
+describe('isMessageSet()', () => {
+  it('returns true if message is set', () => {
+    expect(isMessageSet('test')).toEqual(true);
+    expect(isMessageSet(' ')).toEqual(true);
+  });
+
+  it('returns false if message is not set', () => {
+    expect(isMessageSet('')).toEqual(false);
+    expect(isMessageSet(null)).toEqual(false);
+    expect(isMessageSet(undefined)).toEqual(false);
+  });
+  it('returns false if message is set to "false"', () => {
+    expect(isMessageSet('false')).toEqual(false);
   });
 });

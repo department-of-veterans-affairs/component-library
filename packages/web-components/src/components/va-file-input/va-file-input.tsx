@@ -115,6 +115,11 @@ export class VaFileInput {
   @Prop() readOnly?: boolean = false;
 
   /**
+   * When true shows a password field
+   */
+  @Prop() encrypted?: boolean = false;
+
+  /**
    * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
    */
   @Prop() uploadedFile?: UploadedFile;
@@ -419,6 +424,7 @@ export class VaFileInput {
       headless,
       value,
       readOnly,
+      encrypted,
       statusText,
       uploadedFile,
       percentUploaded,
@@ -575,7 +581,9 @@ export class VaFileInput {
                 {(file || value || uploadedFile) && (
                   <div>
                     {this.showSeparator && <hr class="separator" />}
-
+                    {encrypted && (
+                      <va-text-input label="File password" required />
+                    )}
                     <div class="additional-info-slot">
                       <slot></slot>
                     </div>

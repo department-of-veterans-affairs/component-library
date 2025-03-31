@@ -36,19 +36,24 @@ describe('va-text-input', () => {
     expect(error.innerText).toContain('This is a mistake');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
     expect(input.getAttribute('aria-describedby')).toBe('input-error-message');
-    const errorMesage = await page.find('va-text-input >>> #input-error-message');
+    const errorMessage = await page.find(
+      'va-text-input >>> #input-error-message',
+    );
     // verify showInputError isn't set to false
-    expect(errorMesage).not.toHaveClass('usa-sr-only');
+    expect(errorMessage).not.toHaveClass('usa-sr-only');
   });
 
   it('renders an with a hidden error message when showInputError is false', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="Hello, world" error="This is a mistake" show-input-error="false"/>');
+    await page.setContent(
+      '<va-text-input label="Hello, world" error="This is a mistake" show-input-error="false"/>',
+    );
 
     // Render the error message text
-    const errorMesage = await page.find('va-text-input >>> #input-error-message');
-    expect(errorMesage).toHaveClass('usa-sr-only');
-    
+    const errorMessage = await page.find(
+      'va-text-input >>> #input-error-message',
+    );
+    expect(errorMessage).toHaveClass('usa-sr-only');
   });
 
   it('sets aria-invalid based on invalid prop', async () => {
@@ -74,12 +79,16 @@ describe('va-text-input', () => {
     el.setProperty('error', 'Testing Error');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
-    expect(inputEl.getAttribute('aria-describedby')).toBe('input-error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toBe(
+      'input-error-message',
+    );
   });
 
   it('adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input message-aria-describedby="example message" />');
+    await page.setContent(
+      '<va-text-input message-aria-describedby="example message" />',
+    );
     const el = await page.find('va-text-input');
     const inputEl = await page.find('va-text-input >>> input');
 
@@ -93,14 +102,14 @@ describe('va-text-input', () => {
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
-    expect(inputEl.getAttribute('aria-describedby')).not.toContain('charcount-message');
+    expect(inputEl.getAttribute('aria-describedby')).not.toContain(
+      'charcount-message',
+    );
   });
 
   it('renders a required span', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-text-input label="This is a field" required />',
-    );
+    await page.setContent('<va-text-input label="This is a field" required />');
 
     const requiredSpan = await page.find(
       'va-text-input >>> label > span.usa-label--required',
@@ -111,7 +120,9 @@ describe('va-text-input', () => {
 
   it('renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input hint="This is hint text" label="hello, world" />');
+    await page.setContent(
+      '<va-text-input hint="This is hint text" label="hello, world" />',
+    );
 
     // Render the hint text
     const hintTextElement = await page.find('va-text-input >>> .usa-hint');
@@ -206,54 +217,62 @@ describe('va-text-input', () => {
 
   it('adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input maxlength="3" charcount value="22" />');
+    await page.setContent(
+      '<va-text-input maxlength="3" charcount value="22" />',
+    );
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
     expect(await inputEl.getProperty('value')).toBe('22');
-    const message = await page.find('va-text-input >>> span.usa-character-count__status')
+    const message = await page.find(
+      'va-text-input >>> span.usa-character-count__status',
+    );
     expect(message.innerText).toBe('1 character left');
 
     // Test the functionality
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('222');
-    expect((await page.find('va-text-input >>> span.usa-character-count__status')).innerText).toContain(
-      '0 characters left',
-    );
+    expect(
+      (await page.find('va-text-input >>> span.usa-character-count__status'))
+        .innerText,
+    ).toContain('0 characters left');
 
     // Click three times to select all text in input
     await inputEl.click({ clickCount: 3 });
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('2');
-    expect((await page.find('va-text-input >>> span.usa-character-count__status')).innerText).toContain(
-      '2 characters left',
-    );
+    expect(
+      (await page.find('va-text-input >>> span.usa-character-count__status'))
+        .innerText,
+    ).toContain('2 characters left');
 
     expect(inputEl.getAttribute('aria-describedby')).toBe('charcount-message');
   });
 
-   it('respects the maxlength character limit', async () => {
-     const page = await newE2EPage();
-     await page.setContent('<va-text-input maxlength="2" charcount value="22" />');
+  it('respects the maxlength character limit', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-text-input maxlength="2" charcount value="22" />',
+    );
 
-     // Level-setting expectations
-     const inputEl = await page.find('va-text-input >>> input');
-     expect(await inputEl.getProperty('value')).toBe('22');
-     const message = await page.find(
-       'va-text-input >>> span.usa-character-count__status',
-     );
-     expect(message.innerText).toBe('0 characters left');
+    // Level-setting expectations
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(await inputEl.getProperty('value')).toBe('22');
+    const message = await page.find(
+      'va-text-input >>> span.usa-character-count__status',
+    );
+    expect(message.innerText).toBe('0 characters left');
 
-     // Test the functionality
-     await inputEl.press('2');
-     expect(await inputEl.getProperty('value')).toBe('22');
-     expect(
-       (await page.find('va-text-input >>> span.usa-character-count__status'))
-         .innerText,
-     ).toContain('0 characters left');
+    // Test the functionality
+    await inputEl.press('2');
+    expect(await inputEl.getProperty('value')).toBe('22');
+    expect(
+      (await page.find('va-text-input >>> span.usa-character-count__status'))
+        .innerText,
+    ).toContain('0 characters left');
 
-     expect(inputEl.getAttribute('aria-describedby')).toBe('charcount-message');
-   });
+    expect(inputEl.getAttribute('aria-describedby')).toBe('charcount-message');
+  });
 
   it('ignores negative maxlength values', async () => {
     const page = await newE2EPage();
@@ -261,12 +280,16 @@ describe('va-text-input', () => {
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
-    expect(await page.find('va-text-input >>> span.usa-character-count__status')).toBeNull();
+    expect(
+      await page.find('va-text-input >>> span.usa-character-count__status'),
+    ).toBeNull();
 
     // Test the functionality
     await inputEl.type('Hello, nice to meet you');
     expect(await inputEl.getProperty('value')).toBe('Hello, nice to meet you');
-    expect(await page.find('va-text-input >>> span.usa-character-count__status')).toBeNull();
+    expect(
+      await page.find('va-text-input >>> span.usa-character-count__status'),
+    ).toBeNull();
   });
 
   it('ignores a maxlength of zero', async () => {
@@ -275,12 +298,16 @@ describe('va-text-input', () => {
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
-    expect(await page.find('va-text-input >>> span.usa-character-count__status')).toBeNull();
+    expect(
+      await page.find('va-text-input >>> span.usa-character-count__status'),
+    ).toBeNull();
 
     // Test the functionality
     await inputEl.type('Hello, nice to meet you');
     expect(await inputEl.getProperty('value')).toBe('Hello, nice to meet you');
-    expect(await page.find('va-text-input >>> span.usa-character-count__status')).toBeNull();
+    expect(
+      await page.find('va-text-input >>> span.usa-character-count__status'),
+    ).toBeNull();
   });
 
   it('allows manually setting the type attribute', async () => {
@@ -350,9 +377,7 @@ describe('va-text-input', () => {
 
   it('checks for autocomplete attribute', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-text-input autocomplete="email" />',
-    );
+    await page.setContent('<va-text-input autocomplete="email" />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -376,29 +401,38 @@ describe('va-text-input', () => {
 
     const inputEl = await page.find('va-text-input >>> input');
     await inputEl.type('Hello');
-    const span = await page.find('va-text-input >>> span.usa-character-count__status')
+    const span = await page.find(
+      'va-text-input >>> span.usa-character-count__status',
+    );
 
     expect(span.innerText).toEqual('5 characters left');
-
   });
 
   it('charcount and maxlength text does not display on memorable date', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" />');
+    await page.setContent(
+      '<va-text-input class="memorable-date-input" label="This is a label" />',
+    );
 
     const inputEl = await page.find('va-text-input >>> input');
     expect(inputEl.getAttribute('aria-describedby')).toBeNull();
 
-    const charcountMessageEl = await page.find('va-text-input >>> #charcount-message');
+    const charcountMessageEl = await page.find(
+      'va-text-input >>> #charcount-message',
+    );
     expect(charcountMessageEl).toBeNull();
 
-    const maxlengthMessageEl = await page.find('va-text-input >>> #maxlength-message');
+    const maxlengthMessageEl = await page.find(
+      'va-text-input >>> #maxlength-message',
+    );
     expect(maxlengthMessageEl).toBeNull();
   });
 
   it('useFormsPattern displays header for the single field pattern', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a label" use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent(
+      '<va-text-input label="This is a label" use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>',
+    );
 
     const formHeader = await page.find('va-text-input >>> h1');
     expect(formHeader.innerText).toEqual('This is a form header');
@@ -406,7 +440,9 @@ describe('va-text-input', () => {
 
   it('useFormsPattern displays header for the multiple fields pattern', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent(
+      '<va-text-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>',
+    );
 
     const formHeader = await page.find('va-text-input >>> h1');
     expect(formHeader.innerText).toEqual('This is a form header');
@@ -414,7 +450,9 @@ describe('va-text-input', () => {
 
   it('useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent(
+      '<va-text-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>',
+    );
 
     const formHeader = await page.find('va-text-input >>> h1');
     expect(formHeader.innerText).toEqual('This is a form header');
@@ -422,7 +460,9 @@ describe('va-text-input', () => {
 
   it('useFormsPattern passes an aXe check', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent(
+      '<va-text-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>',
+    );
 
     await axeCheck(page);
   });
@@ -439,45 +479,53 @@ describe('va-text-input', () => {
   it('renders a "$" if currency flag set to true', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input currency />');
-    const currencyTextElement = await page.find('va-text-input >>> div > div > div');
+    const currencyTextElement = await page.find(
+      'va-text-input >>> div > div > div',
+    );
     expect(currencyTextElement.innerText).toContain('$');
   });
 
   it('renders an icon if inputIconPrefix is set', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input input-icon-prefix=\'credit_card\'></va-text-input>');
+    await page.setContent(
+      "<va-text-input input-icon-prefix='credit_card'></va-text-input>",
+    );
     const vaIconEl = await page.find('va-text-input >>> va-icon');
     expect(vaIconEl).toHaveClass('hydrated');
   });
 
   it('renders prefix text if inputPrefix is set', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input input-prefix=\'Pre\'></va-text-input>');
+    await page.setContent("<va-text-input input-prefix='Pre'></va-text-input>");
     const el = await page.find('va-text-input >>> div > div > div');
     expect(el).toHaveClass('usa-input-prefix');
   });
 
   it('renders suffix text if inputSufix is set', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input input-suffix=\'lbs.\'></va-text-input>');
+    await page.setContent(
+      "<va-text-input input-suffix='lbs.'></va-text-input>",
+    );
     const el = await page.find('va-text-input >>> div > div> div');
     expect(el).toHaveClass('usa-input-suffix');
   });
-  
+
   it('renders an icon if input-icon-suffix is set', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input input-icon-suffix=\'credit_card\'></va-text-input>');
+    await page.setContent(
+      "<va-text-input input-icon-suffix='credit_card'></va-text-input>",
+    );
     const vaIconEl = await page.find('va-text-input >>> va-icon');
     const iconProp = await vaIconEl.getProperty('icon');
     expect(iconProp).toMatch('credit_card');
-  })
+  });
 
   it('sets the input mode to a default pattern if inputmode is numerical or decimal', async () => {
     for (const inputMode of ['numeric', 'decimal']) {
       const page = await newE2EPage();
       await page.setContent(`<va-text-input inputmode="${inputMode}" />`);
       const inputEl = await page.find('va-text-input >>> input');
-      expect(inputEl.getAttribute('pattern')).toEqual("[0-9]+(\.[0-9]{1,})?");
+      expect(inputEl.getAttribute('pattern')).toEqual('[0-9]+(.[0-9]{1,})?');
     }
   });
 
@@ -485,27 +533,29 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input currency />');
     const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('pattern')).toEqual("^[0-9]+(\.[0-9]{2})?$");
-    expect(inputEl.getAttribute('inputmode')).toEqual("numeric");
+    expect(inputEl.getAttribute('pattern')).toEqual('^[0-9]+(.[0-9]{2})?$');
+    expect(inputEl.getAttribute('inputmode')).toEqual('numeric');
   });
 
   it('sets type to be number if max or min set', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input max="5" min="1" />');
     const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('type')).toEqual("number");
+    expect(inputEl.getAttribute('type')).toEqual('number');
   });
 
   it('sets the step attribute to .01 if inputmode is decimal', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input type="number" inputmode="decimal"/>');
     const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('step')).toEqual(".01");
+    expect(inputEl.getAttribute('step')).toEqual('.01');
   });
   it('does not set the step attribute when step is defined', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input type="number" inputmode="decimal" step="any"/>');
+    await page.setContent(
+      '<va-text-input type="number" inputmode="decimal" step="any"/>',
+    );
     const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('step')).toEqual("any");
+    expect(inputEl.getAttribute('step')).toEqual('any');
   });
 });
