@@ -351,4 +351,36 @@ describe('va-combo-box', () => {
     const firstComboValue = await firstCombo.getProperty('value');
     expect(firstComboValue).toBe('foo');
   });
+
+  it.only('handles search result status aria', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+          <va-combo-box label="A label">
+            <optgroup label="group 1">
+              <option value="foo">Foo</option>
+              <option value="bar">Bar</option>
+            </optgroup>
+            <optgroup label="group 2">
+              <option value="baz">Baz</option>
+              <option value="qux">Qux</option>
+            </optgroup>
+            <option value="quux">Quux</option>
+          </va-select>
+        `);
+
+    const input = await page.find('va-combo-box >>> input');
+
+    await input.click();
+
+    await page.keyboard.type('Ba');
+    const ariaElement = async () => await page.find('va-combo-box >>> .usa-combo-box__status.usa-sr-only');
+
+    const element = await ariaElement();
+    expect(element.textContent).toEqualText('2 groups available. 2 results available.');
+
+    await page.keyboard.type('z');
+    const updatedElement = await ariaElement();
+    expect(updatedElement.textContent).toEqualText('1 group available. 1 result available.');
+  });
 });
