@@ -458,6 +458,7 @@ const noop = () => {};
     let isFocused = false;
     let groupLength = 0;
     let optionIndex = 0;
+    const optionsLength = options.filter(option => !isDataOptGroup(option)).length;
     const optionHtml = options.map((option, index) => {
       const isOptGroup = isDataOptGroup(option);
       const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
@@ -493,7 +494,7 @@ const noop = () => {};
       const li = document.createElement('li');
 
       if (!isOptGroup) {
-        li.setAttribute('aria-setsize', optionIndex);
+        li.setAttribute('aria-setsize', optionsLength);
         li.setAttribute('aria-posinset', optionIndex);
         li.setAttribute('aria-describedby', option.getAttribute('aria-describedby'));
       }
