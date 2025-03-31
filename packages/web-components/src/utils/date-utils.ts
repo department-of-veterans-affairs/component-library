@@ -306,10 +306,12 @@ export function getErrorParameters(error: string, year: number, month: number) {
 
 // Get last day of the month (month is zero based, so we're +1 month, day 0);
 // new Date() will recalculate and go back to last day of the previous month.
-// Return 31 for undefined month or year to not invalidate the day with
-// partial data (this used to be set to zero by default)
+// Return expected days for month, or 31 for undefined month or year to not
+// invalidate the day with partial data (this used to be set to zero by default)
 export const daysForSelectedMonth = (year: number, month: number): number =>
-  year && month ? new Date(year, month, 0).getDate() : 31;
+  year && month
+    ? new Date(year, month, 0).getDate()
+    : days[month]?.length || 31;
 
 // Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field
 export const validKeys = [
