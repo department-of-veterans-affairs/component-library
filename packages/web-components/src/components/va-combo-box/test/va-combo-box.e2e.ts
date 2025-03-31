@@ -352,7 +352,7 @@ describe('va-combo-box', () => {
     expect(firstComboValue).toBe('foo');
   });
 
-  it.only('handles search result status aria', async () => {
+  it('handles search result status aria', async () => {
     const page = await newE2EPage();
 
     await page.setContent(`
