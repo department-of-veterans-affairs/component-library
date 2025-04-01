@@ -58,7 +58,7 @@ button {
   color: var(--vads-color-link);
   border: none;
   padding: 10px;
-  margin: 0 1rem;
+  margin: 0 .5rem 0 1rem;
 }
 
 button:hover {
