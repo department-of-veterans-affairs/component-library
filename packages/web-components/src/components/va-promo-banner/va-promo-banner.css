@@ -57,8 +57,8 @@ button {
   background-color: transparent;
   color: var(--vads-color-link);
   border: none;
-  font-size: 1.25rem;
-  padding: 0 1rem;
+  padding: 10px;
+  margin: 0 1rem;
 }
 
 button:hover {

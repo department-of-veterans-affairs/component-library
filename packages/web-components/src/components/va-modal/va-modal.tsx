@@ -458,7 +458,7 @@ export class VaModal {
         ref={el => (this.closeButton = el as HTMLButtonElement)}
         type="button"
       >
-        <va-icon icon="cancel" size={4}></va-icon>
+        <va-icon icon="close" size={4}></va-icon>
       </button>
     );
     /* eslint-disable i18next/no-literal-string */
