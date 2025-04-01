@@ -4422,5 +4422,77 @@
         "vertical-stack-default"
       ]
     }
+  },
+  "vads-site-margins": {
+    "mobile-width": {
+      "value": "16px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-2}"
+      },
+      "name": "vads-site-margins-mobile-width",
+      "attributes": {
+        "category": "vads-site-margins",
+        "type": "mobile-width"
+      },
+      "path": [
+        "vads-site-margins",
+        "mobile-width"
+      ]
+    },
+    "width": {
+      "value": "32px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-spacing-4}"
+      },
+      "name": "vads-site-margins-width",
+      "attributes": {
+        "category": "vads-site-margins",
+        "type": "width"
+      },
+      "path": [
+        "vads-site-margins",
+        "width"
+      ]
+    },
+    "breakpoint": {
+      "value": "1024px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{desktop}"
+      },
+      "name": "vads-site-margins-breakpoint",
+      "attributes": {
+        "category": "vads-site-margins",
+        "type": "breakpoint"
+      },
+      "path": [
+        "vads-site-margins",
+        "breakpoint"
+      ]
+    }
+  },
+  "vads-grid-container": {
+    "max-width": {
+      "value": "1024px",
+      "filePath": "tokens/spacing.json",
+      "isSource": true,
+      "original": {
+        "value": "{desktop}"
+      },
+      "name": "vads-grid-container-max-width",
+      "attributes": {
+        "category": "vads-grid-container",
+        "type": "max-width"
+      },
+      "path": [
+        "vads-grid-container",
+        "max-width"
+      ]
+    }
   }
 }
