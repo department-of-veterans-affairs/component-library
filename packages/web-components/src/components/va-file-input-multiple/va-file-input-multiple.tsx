@@ -55,6 +55,11 @@ export class VaFileInputMultiple {
   @Prop() errors: string[] = [];
 
   /**
+   * Array of booleans, displays file password field for corresponding file input.
+   */
+  @Prop() encrypted: boolean[] = [];
+
+  /**
    * Hint text provided to guide users on the expected format or type of files.
    */
   @Prop() hint?: string;
@@ -360,6 +365,7 @@ export class VaFileInputMultiple {
       name,
       accept,
       errors,
+      encrypted,
       enableAnalytics,
       readOnly,
     } = this;
@@ -398,6 +404,7 @@ export class VaFileInputMultiple {
                   ? { uploadMessage: this.additionalFileUploadMessage }
                   : {})}
                 error={errors[pageIndex]}
+                encrypted={encrypted[pageIndex]}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
