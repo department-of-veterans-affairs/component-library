@@ -14,10 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 20.x
           cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
       - run: yarn install
 
       - name: Test react-components
@@ -25,13 +26,13 @@ jobs:
           yarn install
           yarn test
         working-directory: packages/react-components
-      
+
       - name: Test design-system-dashboard-cli
         run: |
           yarn install
           yarn test
         working-directory: packages/design-system-dashboard-cli
-     
+
       - name: Test web-components
         run: |
           yarn install
