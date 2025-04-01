@@ -7599,7 +7599,7 @@ article > h1 {
   padding: 0;
 }
 .feature ul li {
-  list-style: square;
+  list-style: disc;
   margin: 0;
 }
 
