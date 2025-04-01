@@ -24,7 +24,7 @@
 
   // override USWDS to solve issue with multi-line decenders touching (increase line-height and decrease padding top/bottom)
   .usa-button {
-    line-height: 1.15;
+    line-height: var(--vads-font-line-height-2);
     padding: .60rem 1.25rem;
 
     &--big {
