@@ -1,0 +1,7 @@
+/* .usa-alert__heading */
+:is(va-alert) > :is(h1, h2, h3, h4, h5, h6) {
+    font-size: 1.33rem;
+    margin-top: -2px;
+    margin-bottom: 8px;
+    line-height: var(--vads-font-line-height-2);
+  }
