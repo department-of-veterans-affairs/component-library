@@ -302,7 +302,7 @@ export class VaLink {
             aria-label={label}
             target="_blank"
           >
-            {text} <span class="screen-only">(opens in a new tab)</span>
+            {text}&nbsp;<span class="screen-only">(opens in a new tab)</span>
           </a>
         </Host>
       );
