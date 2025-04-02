@@ -161,7 +161,7 @@ export class VaLink {
       iconName,
       iconSize,
       language,
-      label
+      label,
     } = this;
 
     const linkClass = classNames({
@@ -302,8 +302,7 @@ export class VaLink {
             aria-label={label}
             target="_blank"
           >
-            {text} (opens in a new tab)
-            <span class="usa-sr-only">opens in a new tab</span>
+            {text}&nbsp;<span class="screen-only">(opens in a new tab)</span>
           </a>
         </Host>
       );

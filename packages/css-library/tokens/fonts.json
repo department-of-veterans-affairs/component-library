@@ -38,6 +38,12 @@
   },
   "vads-font": {
     "line-height": {
+      "-1": { "value": "1"},
+      "-2": { "value": "1.15"},
+      "-3": { "value": "1.35"},
+      "-4": { "value": "1.5"},
+      "-5": { "value": "1.62"},
+      "-6": { "value": "1.75"},
       "body-lead": { "value": "1.75" },
       "default": { "value": "1.5" },
       "heading": { "value": "1.2" }

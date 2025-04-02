@@ -351,4 +351,41 @@ describe('va-combo-box', () => {
     const firstComboValue = await firstCombo.getProperty('value');
     expect(firstComboValue).toBe('foo');
   });
+
+  it('sets value to empty when user-typed text does not match any valid options', async () => {
+    const page = await newE2EPage();
+  
+    // Initialize 2 combo boxes, the first with a value of "foo"
+    await page.setContent(`
+          <va-combo-box label="label 1" value="foo">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-combo-box>
+          <va-combo-box label="label 2" value="bar">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-combo-box>
+        `);
+  
+    // Get the entire first va-combo-box element
+    const firstComboBox = await page.find('va-combo-box:first-of-type');
+    const initialFirstComboBoxValue = await firstComboBox.getProperty('value');
+    expect(initialFirstComboBoxValue).toBe('foo');
+  
+    // Get the input inside the first va-combo-box
+    const firstComboInput = await firstComboBox.find('va-combo-box:first-of-type >>> input');
+  
+    // Type into the first combo boxm input
+    await firstComboInput.type('faa');
+  
+    // Get the second va-combo-box and its input
+    const secondComboInput = await page.find('va-combo-box:last-of-type >>> input');
+  
+    // Click into the second combo box to focus away from the first
+    await secondComboInput.click();
+  
+    // Verify the value of the first combo box has been cleared
+    const firstComboValue = await firstComboBox.getProperty('value');
+    expect(firstComboValue).toBe('');
+  });  
 });
