@@ -45,11 +45,6 @@
   margin: 0 0 1em 1.25em !important;
   padding: 0;
 }
-.process ul li {
-  list-style: square;
-  margin: 0;
-  padding: 0.1em 0;
-}
 
 .process-step {
   border-left: 8px solid #aeb0b5;

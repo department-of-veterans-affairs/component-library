@@ -160,3 +160,10 @@ VanityNumber.args = {
   contact: '8772228387',
   vanity: 'VETS',
 };
+
+export const FullVanityNumber = Template.bind(null);
+FullVanityNumber.args = {
+  ...defaultArgs,
+  contact: '8884424551',
+  vanity: '888-GIBILL-1',
+};

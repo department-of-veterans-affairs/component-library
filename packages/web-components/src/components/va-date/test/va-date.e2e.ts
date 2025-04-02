@@ -34,6 +34,42 @@ describe('va-date', () => {
     expect(dayOptions).toHaveLength(32); // 31 + one empty option
   });
 
+  it('renders day options when no month is selected, nd updates when month is selected', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-date name="test"></va-date>');
+
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+
+    // No month selected
+    const dayOptions = await page.findAll(
+      'va-date >>> va-select.select-day >>> select >>> option',
+    );
+    expect(dayOptions).toHaveLength(32); // 31 + one empty option
+
+    // February selected, with no year
+    await handleMonth.select('2');
+    await page.waitForChanges();
+    const febDayOptions = await page.findAll(
+      'va-date >>> va-select.select-day >>> select >>> option',
+    );
+    expect(febDayOptions).toHaveLength(30); // 29 + one empty option
+
+    // Click three times to select all text in input
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('1');
+    await page.waitForChanges();
+
+    // February selected, with non-leap year
+    const nonLeapYearDayOptions = await page.findAll(
+      'va-date >>> va-select.select-day >>> select >>> option',
+    );
+    expect(nonLeapYearDayOptions).toHaveLength(29); // 28 + one empty option
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -344,7 +380,7 @@ describe('va-date', () => {
     await handleMonth.select('2');
     await page.waitForChanges();
     expect(elementMonth.getAttribute('value')).toBe('2');
-    expect(elementDay.getAttribute('value')).toBe('');
+    expect(elementDay.getAttribute('value')).toBe('31');
   });
 
   it('year input only allows for 4 characters to be used', async () => {
