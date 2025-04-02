@@ -176,8 +176,8 @@ BaseWithOptionalLink.args = {
   },
 };
 
-export const BaseWithCriticalInformation = Template.bind({});
-BaseWithCriticalInformation.args = {
+export const BaseWithCriticalAction = Template.bind({});
+BaseWithCriticalAction.args = {
   serviceDetails: {
     'Approved on': 'May 5, 2011',
     'Program': 'Post-9/11 GI Bill',
