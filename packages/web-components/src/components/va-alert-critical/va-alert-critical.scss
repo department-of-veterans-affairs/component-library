@@ -43,6 +43,7 @@
     background-color: var( --vads-color-warning-lighter);
     border-bottom: 4px solid var(--vads-color-base);
     color: var(--vads-color-base);
+    padding: 0 6px;
   }
 
   &:focus .link-icon {
@@ -56,6 +57,7 @@
     background-color: var( --vads-color-warning-lighter);
     border-bottom: 4px solid var(--vads-color-base);
     color: var(--vads-color-base);
+    padding: 0 6px;
   }
 
   &:active .link-icon {
