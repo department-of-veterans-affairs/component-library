@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 01 Apr 2025 19:06:46 GMT
+ * Generated on Tue, 01 Apr 2025 20:48:53 GMT
  */
 
 :root {
@@ -145,6 +145,12 @@
   --font-size-h5: 0.938rem;
   --font-size-h6: 0.938rem;
   --v3-font-base-size: 16px;
+  --vads-font-line-height-1: 1;
+  --vads-font-line-height-2: 1.15;
+  --vads-font-line-height-3: 1.35;
+  --vads-font-line-height-4: 1.5;
+  --vads-font-line-height-5: 1.62;
+  --vads-font-line-height-6: 1.75;
   --vads-font-line-height-body-lead: 1.75;
   --vads-font-line-height-default: 1.5;
   --vads-font-line-height-heading: 1.2;
