@@ -1,17 +1,17 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
-describe('va-alert-critical', () => {
+describe('va-critical-action', () => {
   async function setupComponent({
     link = 'https://www.va.gov/disability',
     text = 'Submit your documents by July 25, 2025',
   } = {}) {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert-critical></va-alert-critical>`,
+      `<va-critical-action></va-critical-action>`,
     );
 
-    const elementHandle = await page.$('va-alert-critical');
+    const elementHandle = await page.$('va-critical-action');
 
     await page.evaluate(
       (el, props) => {
@@ -29,7 +29,7 @@ describe('va-alert-critical', () => {
   it('renders correctly with required props', async () => {
     const { page, elementHandle } = await setupComponent();
 
-    await page.waitForSelector('va-alert-critical');
+    await page.waitForSelector('va-critical-action');
     await page.waitForChanges();
 
     const isHydrated = await page.evaluate(
@@ -62,10 +62,10 @@ describe('va-alert-critical', () => {
   it('does not render if no link or text is provided', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert-critical></va-alert-critical>`,
+      `<va-critical-action></va-critical-action>`,
     );
 
-    const elementHandle = await page.$('va-alert-critical');
+    const elementHandle = await page.$('va-critical-action');
     await page.evaluate(el => {
       el.link = null;
       el.text = null;
