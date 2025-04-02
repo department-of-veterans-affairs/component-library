@@ -22,6 +22,16 @@
     animation: none;
   }
 
+  // override USWDS to solve issue with multi-line decenders touching (increase line-height and decrease padding top/bottom)
+  .usa-button {
+    line-height: var(--vads-font-line-height-2);
+    padding: .60rem 1.25rem;
+
+    &--big {
+      padding: .8rem 1.5rem;
+    }
+  }
+
   @media (prefers-reduced-motion) {
     .loading-icon {
       animation: none;
