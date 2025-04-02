@@ -80,3 +80,9 @@ abbr {
 .external-link-icon {
   margin-left: 4px;
 }
+
+@media print {
+  .screen-only {
+    display: none;
+  }
+}
