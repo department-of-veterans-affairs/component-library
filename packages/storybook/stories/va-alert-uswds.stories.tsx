@@ -235,56 +235,6 @@ Default.args = {
 };
 Default.argTypes = propStructure(alertDocs);
 
-export const SignInOrToolPrompt = Template.bind(null);
-SignInOrToolPrompt.args = {
-  ...defaultArgs,
-  children: (
-    <>
-      <p className="vads-u-margin-y--0">
-        You can use our new mobile app to check the status of your claims or
-        appeals on your mobile device. Download the{' '}
-        <strong>VA: Health and Benefits</strong> mobile app to get started.
-      </p>
-      <va-button primary-alternate text="Sign-in to VA.gov" />
-    </>
-  ),
-  status: 'continue',
-};
-
-export const SignInToStartYourApplication = Template.bind(null);
-SignInToStartYourApplication.args = {
-  ...defaultArgs,
-  headline: <h2 slot="headline">Sign in with a verified account</h2>,
-  children: (
-    <div>
-      <p className="vads-u-margin-top--0">
-        Here’s how signing in with an identity-verified account helps you:
-      </p>
-      <ul>
-        <li>
-          We can fill in some of your information for you to save you time.
-        </li>
-        <li>
-          You can save your work in progress. You'll have (input time limit)
-          from when you start or make changes to submit your form.
-        </li>
-      </ul>
-      <p>
-        After you sign in, we’ll tell you if you need to verify your identity
-        for your account.
-      </p>
-      <p>
-        <strong>Note:</strong> You can sign in after you start filling out your
-        form. But you'll lose any information you already filled in.
-      </p>
-      <va-button text="Sign in or create an account" />
-      <p>
-        <va-link href="#start" text="Start your form without signing in" />
-      </p>
-    </div>
-  ),
-};
-
 export const Success = Template.bind(null);
 Success.args = {
   ...defaultArgs,
@@ -367,4 +317,75 @@ export const FullWidthSiteAlert = Template.bind(null);
 FullWidthSiteAlert.args = {
   ...defaultArgs,
   'full-width': true,
+};
+
+export const WithActionLink = Template.bind(null);
+WithActionLink.args = {
+  ...defaultArgs,
+  headline: (
+    <h4 slot="headline">We closed your claim on October 18, 2024</h4>
+  ),
+  children: (
+    <>
+      <p>
+        You can download your decision letter online now. You can also get other{' '}
+        letters related to your claims.
+      </p>
+      <p>
+        We'll also send you a copy of your decision letter by mail. It should arrive {' '}
+        within 10 days after the date we closed your claim, but it may take longer.
+      </p>
+      <va-link-action href="#" text="Get your claim letters" type="secondary" />
+    </>
+  ),
+};
+
+export const SignInOrToolPrompt = Template.bind(null);
+SignInOrToolPrompt.args = {
+  ...defaultArgs,
+  children: (
+    <>
+      <p className="vads-u-margin-y--0">
+        You can use our new mobile app to check the status of your claims or
+        appeals on your mobile device. Download the{' '}
+        <strong>VA: Health and Benefits</strong> mobile app to get started.
+      </p>
+      <va-button primary-alternate text="Sign-in to VA.gov" />
+    </>
+  ),
+  status: 'continue',
+};
+
+export const SignInToStartYourApplication = Template.bind(null);
+SignInToStartYourApplication.args = {
+  ...defaultArgs,
+  headline: <h2 slot="headline">Sign in with a verified account</h2>,
+  children: (
+    <div>
+      <p className="vads-u-margin-top--0">
+        Here’s how signing in with an identity-verified account helps you:
+      </p>
+      <ul>
+        <li>
+          We can fill in some of your information for you to save you time.
+        </li>
+        <li>
+          You can save your work in progress. You'll have (input time limit)
+          from when you start or make changes to submit your form.
+        </li>
+      </ul>
+      <p>
+        After you sign in, we’ll tell you if you need to verify your identity
+        for your account.
+      </p>
+      <p>
+        <strong>Note:</strong> You can sign in after you start filling out your
+        form. But you'll lose any information you already filled in.
+      </p>
+      <va-button text="Sign in or create an account" />
+      <p>
+        <va-link href="#start" text="Start your form without signing in" />
+      </p>
+    </div>
+  ),
 };
