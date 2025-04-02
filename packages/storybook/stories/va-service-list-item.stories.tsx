@@ -216,8 +216,8 @@ export const ServiceListWithMultipleServiceListItems = ({}) => {
         icon="handshake"
         serviceStatus="In Progress"
       />
-      <BaseWithCriticalInformation
-        {...BaseWithCriticalInformation.args}
+      <BaseWithCriticalAction
+        {...BaseWithCriticalAction.args}
         serviceDetails={{
           'Enrolled on': 'February 9, 2010',
           'Policy': 'FSGLI',
