@@ -44,12 +44,8 @@ const defaultArgs = {
     </h2>
   ),
   'children': (
-    <p class="vads-u-margin-y--0">
-      Lorem ipsum dolor sit amet{' '}
-      <a class="usa-link" href="javascript:void(0);">
-        consectetur adipiscing
-      </a>{' '}
-      elit sed do eiusmod.
+    <p className="vads-u-margin-y--0">
+      Lorem ipsum dolor sit amet <va-link text="consectetur adipiscing" href="javascript:void(0);" /> elit sed do eiusmod.
     </p>
   ),
 };
@@ -103,7 +99,6 @@ const SlimTemplate = ({
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   slim,
-  uswds,
 }) => {
   return (
     <>
@@ -117,7 +112,7 @@ const SlimTemplate = ({
         full-width="false"
         class="vads-u-margin-bottom--1"
       >
-        <p class="vads-u-margin-y--0">
+        <p className="vads-u-margin-y--0">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod.
         </p>
@@ -133,7 +128,7 @@ const SlimTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         <>
-          <p class="vads-u-margin-y--0">
+          <p className="vads-u-margin-y--0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod.
           </p>
@@ -149,7 +144,7 @@ const SlimTemplate = ({
         full-width="false"
         class="vads-u-margin-bottom--1"
       >
-        <p class="vads-u-margin-y--0">
+        <p className="vads-u-margin-y--0">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod.
         </p>
@@ -165,7 +160,7 @@ const SlimTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         <>
-          <p class="vads-u-margin-y--0">
+          <p className="vads-u-margin-y--0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod.
           </p>
@@ -182,7 +177,7 @@ const SlimTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         <>
-          <p class="vads-u-margin-y--0">
+          <p className="vads-u-margin-y--0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod.
           </p>
@@ -207,7 +202,7 @@ const WithARIARoleTemplate = ({}) => {
         <h2 id="track-your-status-on-mobile" slot="headline">
           Alert Role
         </h2>
-        <p class="vads-u-margin-y--0">
+        <p className="vads-u-margin-y--0">
           Important messages that demand the user's immediate attention, such as
           an error message.
         </p>
@@ -225,7 +220,7 @@ const WithARIARoleTemplate = ({}) => {
         <h2 id="track-your-status-on-mobile" slot="headline">
           Status Role
         </h2>
-        <p class="vads-u-margin-y--0">
+        <p className="vads-u-margin-y--0">
           Messages that provide advisory information but do not have the same
           urgency as alerts, such as a success message.
         </p>
@@ -240,56 +235,6 @@ Default.args = {
 };
 Default.argTypes = propStructure(alertDocs);
 
-export const SignInOrToolPrompt = Template.bind(null);
-SignInOrToolPrompt.args = {
-  ...defaultArgs,
-  children: (
-    <>
-      <p class="vads-u-margin-y--0">
-        You can use our new mobile app to check the status of your claims or
-        appeals on your mobile device. Download the{' '}
-        <strong>VA: Health and Benefits</strong> mobile app to get started.
-      </p>
-      <va-button primary-alternate text="Sign-in to VA.gov" />
-    </>
-  ),
-  status: 'continue',
-};
-
-export const SignInToStartYourApplication = Template.bind(null);
-SignInToStartYourApplication.args = {
-  ...defaultArgs,
-  headline: <h2 slot="headline">Sign in with a verified account</h2>,
-  children: (
-    <div>
-      <p class="vads-u-margin-top--0">
-        Here’s how signing in with an identity-verified account helps you:
-      </p>
-      <ul>
-        <li>
-          We can fill in some of your information for you to save you time.
-        </li>
-        <li>
-          You can save your work in progress. You'll have (input time limit)
-          from when you start or make changes to submit your form.
-        </li>
-      </ul>
-      <p>
-        After you sign in, we’ll tell you if you need to verify your identity
-        for your account.
-      </p>
-      <p>
-        <strong>Note:</strong> You can sign in after you start filling out your
-        form. But you'll lose any information you already filled in.
-      </p>
-      <va-button text="Sign in or create an account" />
-      <p>
-        <a href="#start">Start your form without signing in</a>
-      </p>
-    </div>
-  ),
-};
-
 export const Success = Template.bind(null);
 Success.args = {
   ...defaultArgs,
@@ -300,7 +245,7 @@ Success.args = {
     </h2>
   ),
   children: (
-    <p class="vads-u-margin-y--0">You can now access health tools on VA.gov.</p>
+    <p className="vads-u-margin-y--0">You can now access health tools on VA.gov.</p>
   ),
   status: 'success',
 };
@@ -311,7 +256,7 @@ Warning.args = {
   headline: <h2 slot="headline">Warning status</h2>,
   children: (
     <>
-      <p class="vads-u-margin-y--0">
+      <p className="vads-u-margin-y--0">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
       </p>
     </>
@@ -327,7 +272,7 @@ Error.args = {
   ),
   children: (
     <>
-      <p class="vads-u-margin-y--0">
+      <p className="vads-u-margin-y--0">
         If you’d like to add an issue for review, select "Add a new issue" to
         get started.
       </p>
@@ -372,4 +317,75 @@ export const FullWidthSiteAlert = Template.bind(null);
 FullWidthSiteAlert.args = {
   ...defaultArgs,
   'full-width': true,
+};
+
+export const WithActionLink = Template.bind(null);
+WithActionLink.args = {
+  ...defaultArgs,
+  headline: (
+    <h4 slot="headline">We closed your claim on October 18, 2024</h4>
+  ),
+  children: (
+    <>
+      <p>
+        You can download your decision letter online now. You can also get other{' '}
+        letters related to your claims.
+      </p>
+      <p>
+        We'll also send you a copy of your decision letter by mail. It should arrive {' '}
+        within 10 days after the date we closed your claim, but it may take longer.
+      </p>
+      <va-link-action href="#" text="Get your claim letters" type="secondary" />
+    </>
+  ),
+};
+
+export const SignInOrToolPrompt = Template.bind(null);
+SignInOrToolPrompt.args = {
+  ...defaultArgs,
+  children: (
+    <>
+      <p className="vads-u-margin-y--0">
+        You can use our new mobile app to check the status of your claims or
+        appeals on your mobile device. Download the{' '}
+        <strong>VA: Health and Benefits</strong> mobile app to get started.
+      </p>
+      <va-button primary-alternate text="Sign-in to VA.gov" />
+    </>
+  ),
+  status: 'continue',
+};
+
+export const SignInToStartYourApplication = Template.bind(null);
+SignInToStartYourApplication.args = {
+  ...defaultArgs,
+  headline: <h2 slot="headline">Sign in with a verified account</h2>,
+  children: (
+    <div>
+      <p className="vads-u-margin-top--0">
+        Here’s how signing in with an identity-verified account helps you:
+      </p>
+      <ul>
+        <li>
+          We can fill in some of your information for you to save you time.
+        </li>
+        <li>
+          You can save your work in progress. You'll have (input time limit)
+          from when you start or make changes to submit your form.
+        </li>
+      </ul>
+      <p>
+        After you sign in, we’ll tell you if you need to verify your identity
+        for your account.
+      </p>
+      <p>
+        <strong>Note:</strong> You can sign in after you start filling out your
+        form. But you'll lose any information you already filled in.
+      </p>
+      <va-button text="Sign in or create an account" />
+      <p>
+        <va-link href="#start" text="Start your form without signing in" />
+      </p>
+    </div>
+  ),
 };
