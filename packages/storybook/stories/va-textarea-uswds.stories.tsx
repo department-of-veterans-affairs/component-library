@@ -151,7 +151,7 @@ const FormsPatternSingleTemplate = ({
       >
         <div slot="form-description">
           <p>HTML passed into the form-description slot:</p>
-          <ul>
+          <ul className="vads-u-margin-bottom--2">
             <li>Sojourner Truth</li>
             <li>Frederick Douglass</li>
             <li>Booker T. Washington</li>

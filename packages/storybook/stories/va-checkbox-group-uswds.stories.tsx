@@ -332,7 +332,7 @@ const FormsPatternSingleTemplate = ({
         />
         <div slot="form-description">
           <p>HTML passed into the forms-pattern slot:</p>
-          <ul>
+          <ul className="vads-u-margin-bottom--2">
             <li>Social security number</li>
             <li>VA file number</li>
             <li>Service number</li>
