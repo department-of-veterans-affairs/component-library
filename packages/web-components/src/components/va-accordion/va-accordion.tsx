@@ -233,6 +233,7 @@ export class VaAccordion {
             (this.accordionContainer = accordionContainer)
           }
         >
+          <h1>Hello world!</h1>
           {!openSingle ? (
             <button
               aria-expanded={`${this.expanded}`}
