@@ -8,3 +8,9 @@
 *, ::after, ::before {
   box-sizing: border-box;
 }
+
+:host {
+  .usa-step-indicator__heading:focus-visible {
+    outline: 2px solid var(--vads-color-action-focus-on-light);
+  }
+}
