@@ -59,6 +59,8 @@
 .va-modal-alert__icon {
   color: var(--vads-color-base-darker);
   padding-top: 1.25rem;
+  position: relative;
+  top: 0.25rem;
 }
 
 :host([status='continue']) .usa-modal {
