@@ -455,12 +455,16 @@ const noop = () => {};
     }
 
     const numOptions = options.length;
-    const optionsLength = options.filter(option => !isDataOptGroup(option)).length;
     let isFocused = false;
+    let groupLength = 0;
     let optionIndex = 0;
+    const optionsLength = options.filter(option => !isDataOptGroup(option)).length;
     const optionHtml = options.map((option, index) => {
       const isOptGroup = isDataOptGroup(option);
       const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
+      if (isOptGroup) 
+        groupLength += 1;
+
       if (!isOptGroup) {
         optionIndex += 1;
       }
@@ -523,8 +527,14 @@ const noop = () => {};
 
     inputEl.setAttribute('aria-expanded', 'true');
 
-    statusEl.textContent = optionsLength
-      ? `${optionsLength} result${optionsLength > 1 ? 's' : ''} available.`
+    const getPluralizedMessage = (count, singular, plural) => 
+      count ? `${count} ${count > 1 ? plural : singular} available.` : '';
+  
+    const groupsStatus = getPluralizedMessage(groupLength, 'group', 'groups');
+    const optionsStatus = getPluralizedMessage(optionIndex, 'result', 'results');
+
+    statusEl.textContent = optionIndex
+      ? `${groupsStatus} ${optionsStatus}`
       : 'No results.';
 
     let itemToFocus;

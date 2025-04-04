@@ -352,6 +352,38 @@ describe('va-combo-box', () => {
     expect(firstComboValue).toBe('foo');
   });
 
+  it('handles search result status aria', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+          <va-combo-box label="A label">
+            <optgroup label="group 1">
+              <option value="foo">Foo</option>
+              <option value="bar">Bar</option>
+            </optgroup>
+            <optgroup label="group 2">
+              <option value="baz">Baz</option>
+              <option value="qux">Qux</option>
+            </optgroup>
+            <option value="quux">Quux</option>
+          </va-select>
+        `);
+
+    const input = await page.find('va-combo-box >>> input');
+
+    await input.click();
+
+    await page.keyboard.type('Ba');
+    const ariaElement = async () => await page.find('va-combo-box >>> .usa-combo-box__status.usa-sr-only');
+
+    const element = await ariaElement();
+    expect(element.textContent).toEqualText('2 groups available. 2 results available.');
+
+    await page.keyboard.type('z');
+    const updatedElement = await ariaElement();
+    expect(updatedElement.textContent).toEqualText('1 group available. 1 result available.');
+  });
+  
   it('sets value to empty when user-typed text does not match any valid options', async () => {
     const page = await newE2EPage();
   
