@@ -51,11 +51,14 @@
   box-sizing: border-box;
 }
 
+.va-modal__content {
+  flex-direction: row;
+  align-items: baseline;
+}
+
 .va-modal-alert__icon {
   color: var(--vads-color-base-darker);
-  position: absolute;
-  top: 32px;
-  left: 16px;
+  padding-top: 1.25rem;
 }
 
 :host([status='continue']) .usa-modal {

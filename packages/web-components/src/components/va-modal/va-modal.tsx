@@ -438,6 +438,7 @@ export class VaModal {
     const contentClass = classnames({
       'usa-modal__content': true,
       'usa-modal-alert': status,
+      'va-modal__content': true
     });
     const bodyClass = classnames({
       'usa-modal__main': true,

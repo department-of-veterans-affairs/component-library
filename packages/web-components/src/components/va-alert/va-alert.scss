@@ -19,10 +19,9 @@
 }
 
 .va-alert-close {
-  margin: .5rem;
   padding: 6px;
   width: auto;
-  color: var(--vads-color-base-darker);
+  color: var(--vads-color-base-darkest);
   font-size: 1.40625rem;
   appearance: none;
   border: 0;
@@ -40,7 +39,7 @@
 
 // shrink the close button's margins when 'slim' so it doesn't overflow
 .usa-alert--slim .va-alert-close {
-  margin: 0.2em;
+  margin: -0.25rem 0;
 }
 
 :host([closeable]:not([closeable='false'])) .usa-alert .usa-alert__body {
