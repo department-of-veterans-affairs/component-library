@@ -6,8 +6,8 @@
 }
 
 /* Add left side blue border if disable border prop disabled or not present */
-:host(:not([disable-border])) a[aria-expanded='true'] ~ #info,
-:host([disable-border='false']) a[aria-expanded='true'] ~ #info {
+:host(:not([disable-border])) button[aria-expanded='true'] ~ #info,
+:host([disable-border='false']) button[aria-expanded='true'] ~ #info {
   padding-left: calc(20px - 7px);
   border-left: 7px solid transparent;
   border-left-color: var(--vads-color-primary-alt-darkest);
@@ -21,10 +21,19 @@
   visibility: hidden;
 }
 
-a {
+button {
   align-items: flex-start;
   cursor: pointer;
   display: flex;
+  background: transparent;
+  border: none;
+  width: 100%;
+  padding: 0;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: inherit;
+  }
 }
 
 .additional-info-title {
@@ -58,7 +67,7 @@ a {
   vertical-align: bottom;
 }
 
-a[aria-expanded='true'] .additional-info-icon {
+button[aria-expanded='true'] .additional-info-icon {
   transform: rotate(270deg);
   transition: transform 0.15s linear;
 }
