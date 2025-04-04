@@ -211,7 +211,7 @@ export class VaAlert {
             aria-label={this.closeBtnAriaLabel}
             onClick={this.closeHandler.bind(this)}
           >
-            <va-icon icon="cancel" size={4}></va-icon>
+            <va-icon icon="close" size={4}></va-icon>
           </button>
         )}
       </Fragment>

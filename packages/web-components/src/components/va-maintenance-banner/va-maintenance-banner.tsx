@@ -197,7 +197,7 @@ export class VaMaintenanceBanner {
               onClick={this.onCloseAlert}
               type="button"
             >
-              <va-icon icon="cancel" size={4}></va-icon>
+              <va-icon icon="close" size={4}></va-icon>
             </button>
           </div>
         </Host>

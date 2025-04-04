@@ -438,6 +438,7 @@ export class VaModal {
     const contentClass = classnames({
       'usa-modal__content': true,
       'usa-modal-alert': status,
+      'va-modal__content': true
     });
     const bodyClass = classnames({
       'usa-modal__main': true,
@@ -458,7 +459,7 @@ export class VaModal {
         ref={el => (this.closeButton = el as HTMLButtonElement)}
         type="button"
       >
-        <va-icon icon="cancel" size={4}></va-icon>
+        <va-icon icon="close" size={4}></va-icon>
       </button>
     );
     /* eslint-disable i18next/no-literal-string */

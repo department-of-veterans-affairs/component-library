@@ -51,11 +51,16 @@
   box-sizing: border-box;
 }
 
+.va-modal__content {
+  flex-direction: row;
+  align-items: baseline;
+}
+
 .va-modal-alert__icon {
   color: var(--vads-color-base-darker);
-  position: absolute;
-  top: 32px;
-  left: 16px;
+  padding-top: 1.25rem;
+  position: relative;
+  top: 0.25rem;
 }
 
 :host([status='continue']) .usa-modal {
@@ -137,9 +142,9 @@
   background-color: transparent;
   color: var(--vads-color-base-darker);
   font-size: 1.4rem;
-  padding: 0;
+  padding: 6px;
   position: absolute;
-  margin: 1rem;
+  margin: 0 0 0 auto;
   right: 0;
   top: 0;
   width: auto;
@@ -216,6 +221,7 @@ h1 {
   padding-right: 0;
   width: 100%;
   vertical-align: middle;
+  margin: inherit;
 }
 
 .va-modal-alert-title {

@@ -168,7 +168,7 @@ export class VaPromoBanner {
             aria-label="Dismiss this promo banner"
             onClick={() => this.closeHandler()}
           >
-            <va-icon icon="cancel" size={3}></va-icon>
+            <va-icon icon="close" size={3}></va-icon>
           </button>
         </div>
       </Host>
