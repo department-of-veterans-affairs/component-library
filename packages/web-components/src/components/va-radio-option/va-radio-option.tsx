@@ -71,8 +71,9 @@ export class VaRadioOption {
 
   render() {
     const { checked, name, value, label, disabled, tile, description } = this;
-    const id = this.el.id || name + value;
-
+    const randomInt = Math.floor(Math.random() * 1000000);
+    const id = this.el.id || name + value + randomInt;
+    
     const containerClass = classnames('usa-radio', {
       'va-radio-option__container--tile': tile,
       'va-radio-option__container--tile--checked': tile && checked,

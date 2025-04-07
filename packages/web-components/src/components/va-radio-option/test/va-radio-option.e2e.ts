@@ -33,8 +33,9 @@ describe('va-radio-option', () => {
     );
 
     const inputEl = await page.find('va-radio-option input');
-
-    expect(await inputEl.getProperty('id')).toEqual('test1input');
+    const id = await inputEl.getProperty('id');
+    const randomInt = id.match(/\d+/g);
+    expect(await inputEl.getProperty('id')).toEqual(`test${randomInt}input`);
   });
 
   it('sets checked to true based on prop', async () => {
