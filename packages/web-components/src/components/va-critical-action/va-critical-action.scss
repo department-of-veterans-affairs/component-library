@@ -41,8 +41,8 @@
   &:focus {
     outline: none;
     background-color: var( --vads-color-warning-lighter);
-    border-bottom: 4px solid var(--vads-color-base);
     color: var(--vads-color-base);
+    box-shadow: 0px 4px 0px var(--vads-color-base)
   }
 
   &:focus .link-icon {
@@ -54,8 +54,8 @@
   &:active {
     outline: none;
     background-color: var( --vads-color-warning-lighter);
-    border-bottom: 4px solid var(--vads-color-base);
     color: var(--vads-color-base);
+    box-shadow: 0px 4px 0px var(--vads-color-base)
   }
 
   &:active .link-icon {
