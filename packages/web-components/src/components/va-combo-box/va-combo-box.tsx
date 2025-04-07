@@ -134,7 +134,7 @@ export class VaComboBox {
     const allNodes = this.el.querySelectorAll('option, optgroup');
 
     const nodes = Array.from(allNodes);
-    return nodes.map((node: HTMLOptionElement | HTMLOptGroupElement, index) => {
+    this.options = nodes.map((node: HTMLOptionElement | HTMLOptGroupElement, index) => {
       if (node.nodeName.toLowerCase() === 'optgroup') {
         return (
           <Fragment>
@@ -225,7 +225,7 @@ export class VaComboBox {
             </Fragment>
           )}
         </span>
-        <slot></slot>
+        <slot onSlotchange={() => this.populateOptions()}></slot>
         <div
           class="usa-combo-box"
           data-default-value={value}
@@ -238,7 +238,7 @@ export class VaComboBox {
             onChange={e => this.handleChange(e)}
             disabled={disabled}
           >
-            {this.populateOptions()}
+            {this.options}
           </select>
         </div>
         {isMessageSet(messageAriaDescribedby) && (
