@@ -32,7 +32,7 @@ Default.argTypes = {
   ...propStructure(criticalActionDocs),
 };
 
-export const CardWithAlertCritical = ({}) => {
+export const CardWithCriticalAction = ({}) => {
   return (
     <va-card>
       <h3 className="claim-list-item-header vads-u-margin-bottom--2">
