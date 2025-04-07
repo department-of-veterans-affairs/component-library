@@ -151,10 +151,10 @@ export class VaServiceListItem {
           </a>
 
           {actionNeeded && (
-            <va-alert-critical
+            <va-critical-action
               link={parsedAction.href}
               text={parsedAction.text}
-            ></va-alert-critical>
+            ></va-critical-action>
           )}
 
           <div class="status">

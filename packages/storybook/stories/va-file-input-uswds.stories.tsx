@@ -103,7 +103,7 @@ export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {
   ...defaultArgs,
   label: 'Input accepts only specific file types',
-  hint: 'Select PDF or TXT files',
+  hint: 'You can upload a .pdf or .txt file',
   accept: '.pdf,.txt',
 };
 
@@ -261,7 +261,7 @@ export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {
   ...defaultArgs,
   label: "Upload a file which does not contain the character 'X'",
-  hint: 'Select a TXT file',
+  hint: 'Select a .txt file',
   accept: '.txt',
 };
 

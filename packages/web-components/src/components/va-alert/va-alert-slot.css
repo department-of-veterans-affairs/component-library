@@ -1,9 +1,10 @@
 
 /* .usa-alert__heading */
 :is(va-alert) > :is(h1, h2, h3, h4, h5, h6) {
-  font-size: 21.28px; /* 1.33rem */
-  margin-top: 0;
-  margin-bottom: 8px; /* 0.5rem */
+  font-size: 1.33rem;
+  margin-top: -2px;
+  margin-bottom: 8px;
+  line-height: var(--vads-font-line-height-2);
 }
 
 va-alert p {

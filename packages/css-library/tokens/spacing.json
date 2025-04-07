@@ -78,5 +78,13 @@
   },
   "vads-forms-spacing": {
     "vertical-stack-default": {"value": "{vads-spacing.vertical-stack-l}"}
+  },
+  "vads-site-margins": {
+    "mobile-width": {"value": "{uswds-system-spacing-2}"},
+    "width": {"value": "{uswds-system-spacing-4}"},
+    "breakpoint": {"value": "{desktop}"}
+  },
+  "vads-grid-container": {
+    "max-width": {"value": "{desktop}"}
   }
 }
