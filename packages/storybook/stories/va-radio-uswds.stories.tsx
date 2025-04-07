@@ -44,20 +44,22 @@ const vaRadioConst = args => {
   } = args;
 
   return (
-    <va-radio
-      enable-analytics={enableAnalytics}
-      error={error}
-      label={label}
-      required={required}
-      hint={hint}
-      label-header-level={labelHeaderLevel}
-      header-aria-describedby={headerAriaDescribedby}
-    >
-      <va-radio-option label="Sojourner Truth" name={name} value="1" />
-      <va-radio-option label="Frederick Douglass" name={name} value="2" />
-      <va-radio-option label="Booker T. Washington" name={name} value="3" />
-      <va-radio-option label="George Washington Carver" name={name} value="4" />
-    </va-radio>
+    <form name="test-form">
+      <va-radio
+        enable-analytics={enableAnalytics}
+        error={error}
+        label={label}
+        required={required}
+        hint={hint}
+        label-header-level={labelHeaderLevel}
+        header-aria-describedby={headerAriaDescribedby}
+      >
+        <va-radio-option label="Sojourner Truth" name={name} value="1" />
+        <va-radio-option label="Frederick Douglass" name={name} value="2" />
+        <va-radio-option label="Booker T. Washington" name={name} value="3" />
+        <va-radio-option label="George Washington Carver" name={name} value="4" />
+      </va-radio>
+    </form>
   );
 };
 
