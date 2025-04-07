@@ -133,7 +133,6 @@ export class VaServiceListItem {
           <a
             href={serviceLink}
             class="service-title-row"
-            aria-label={`Go to ${serviceName}`}
           >
             <div class="header" tabIndex={0}>
               {icon && (
