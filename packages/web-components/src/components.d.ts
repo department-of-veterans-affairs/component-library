@@ -224,6 +224,10 @@ export namespace Components {
          */
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
+          * When true, the current page link will use the last href value provided in the breadcrumb list instead of the #content hash.
+         */
+        "currentPageRedirect"?: boolean;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -3617,6 +3621,10 @@ declare namespace LocalJSX {
           * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
          */
         "breadcrumbList"?: Breadcrumb[] | string;
+        /**
+          * When true, the current page link will use the last href value provided in the breadcrumb list instead of the #content hash.
+         */
+        "currentPageRedirect"?: boolean;
         /**
           * Analytics tracking function(s) will not be called
          */
