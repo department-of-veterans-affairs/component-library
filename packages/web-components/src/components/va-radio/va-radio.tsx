@@ -135,12 +135,14 @@ export class VaRadio {
 
     switch (event.key) {
       case ' ':
+        event.preventDefault();
         if (currentNode.checked) return;
         nextNode = currentNode;
         this.selectNextNode(currentNode);
         break;
       case 'ArrowDown':
       case 'ArrowRight':
+        event.preventDefault();
         if (currentNodeIndex === radioOptionNodes.length - 1) {
           nextNode = radioOptionNodes[0];
           this.deselectCurrentNode(currentNode);
@@ -153,6 +155,7 @@ export class VaRadio {
         break;
       case 'ArrowUp':
       case 'ArrowLeft':
+        event.preventDefault();
         if (currentNodeIndex === 0) {
           nextNode = radioOptionNodes[radioOptionNodes.length - 1];
           this.deselectCurrentNode(currentNode);
@@ -209,6 +212,7 @@ export class VaRadio {
 
   private selectNextNode(node: HTMLVaRadioOptionElement): void {
     node.setAttribute('checked', '');
+    node.focus();
   }
 
   private getHeaderLevel() {
