@@ -17,7 +17,7 @@ describe('va-modal', () => {
       <va-modal class="hydrated" modal-title="Example Title" visible="">
         <mock:shadow-root>
         <div aria-label="Example Title modal" aria-modal="true" class="usa-modal" role="dialog">
-            <div class="usa-modal__content">
+            <div class="usa-modal__content va-modal__content">
               <button aria-label="Close Example Title modal" class="first-focusable-child last-focusable-child va-modal-close" type="button">
                 <va-icon class="hydrated"></va-icon>
               </button>

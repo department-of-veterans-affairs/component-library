@@ -88,7 +88,7 @@ describe('va-service-list-item', () => {
 
     expect(shadowInnerHTML.replace(/\s+/g, ' ')).toEqualHtml(`
       <div class="service-list-item">
-        <a aria-label="Go to Education" href="https://www.va.gov/education" class="service-title-row">
+        <a href="https://www.va.gov/education" class="service-title-row">
           <div class="header" tabindex="0">
             <va-icon class="icon school hydrated"></va-icon>
              <div class="name-and-chevron">

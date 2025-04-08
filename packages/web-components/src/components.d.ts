@@ -546,7 +546,7 @@ export namespace Components {
     interface VaCrisisLineModal {
     }
     /**
-     * @componentName Critical action
+     * @componentName Critical Action
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -1600,7 +1600,7 @@ export namespace Components {
         "width"?: string;
     }
     /**
-     * @componentName Service list item
+     * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -2544,7 +2544,7 @@ declare global {
         new (): HTMLVaCrisisLineModalElement;
     };
     /**
-     * @componentName Critical action
+     * @componentName Critical Action
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3153,7 +3153,7 @@ declare global {
         new (): HTMLVaSelectElement;
     };
     /**
-     * @componentName Service list item
+     * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3988,7 +3988,7 @@ declare namespace LocalJSX {
     interface VaCrisisLineModal {
     }
     /**
-     * @componentName Critical action
+     * @componentName Critical Action
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -5199,7 +5199,7 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     /**
-     * @componentName Service list item
+     * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -5837,7 +5837,7 @@ declare module "@stencil/core" {
              */
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             /**
-             * @componentName Critical action
+             * @componentName Critical Action
              * @maturityCategory caution
              * @maturityLevel candidate
              */
@@ -6036,7 +6036,7 @@ declare module "@stencil/core" {
              */
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             /**
-             * @componentName Service list item
+             * @componentName Service List Item
              * @maturityCategory caution
              * @maturityLevel candidate
              */
