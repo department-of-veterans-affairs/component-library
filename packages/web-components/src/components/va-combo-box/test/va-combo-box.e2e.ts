@@ -5,7 +5,7 @@ describe('va-combo-box', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-          <va-combo-box label="A label" value="bar">
+          <va-combo-box label="A label">
             <option value="foo">Foo</option>
             <option value="bar">Bar</option>
           </va-select>
@@ -13,14 +13,14 @@ describe('va-combo-box', () => {
     const element = await page.find('va-combo-box');
     await page.find('va-combo-box >>> input');
     expect(element).toEqualHtml(`
-            <va-combo-box class="hydrated" label="A label" value="bar">
+            <va-combo-box class="hydrated" label="A label" >
                 <mock:shadow-root>
                     <label class="usa-label" for="options" id="options-label">
                     A label
                     </label>
                     <span id="input-error-message" role="alert"></span>
                     <slot></slot>
-                    <div class="usa-combo-box usa-combo-box--pristine" data-default-value="bar" data-enhanced="true">
+                    <div class="usa-combo-box"  data-enhanced="true">
                     <select aria-hidden="true" class="usa-combo-box__select usa-select usa-sr-only" tabindex="-1">
                         <option value="foo">
                         Foo
