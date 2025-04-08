@@ -23,13 +23,13 @@ describe('va-link', () => {
   it('adds a lang attribute if the language prop set on default va-link', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-link href="https://www.va.gov" text="Share your VA medical records" language="en" />'
+      '<va-link href="https://www.va.gov" text="Share your VA medical records" language="en" />',
     );
 
     const element = await page.find('va-link >>> a');
     expect(element.getAttribute('lang')).toBe('en');
     expect(element.getAttribute('hrefLang')).toBe('en');
-  })
+  });
 
   it('renders active link', async () => {
     const page = await newE2EPage();
@@ -185,9 +185,9 @@ describe('va-link', () => {
     <va-link class="hydrated" external="" href="https://www.va.gov" text="Veteran's Affairs">
       <mock:shadow-root>
         <a href="https://www.va.gov" rel="noreferrer" class="link--center" target="_blank">
-          Veteran's Affairs (opens in a new tab)
-          <span class="usa-sr-only">
-            opens in a new tab
+          Veteran's Affairs
+          <span class="screen-only">
+            (opens in a new tab)
           </span>
         </a>
       </mock:shadow-root>

@@ -1,9 +1,7 @@
 import i18next from 'i18next';
 import { Components } from '../components';
 
-import {
-  Build,
-} from '@stencil/core';
+import { Build } from '@stencil/core';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -158,43 +156,42 @@ export const internalErrors = [
   'day-range',
   'month-range',
   'date-error',
-  'month-select'
+  'month-select',
 ];
 
 /**
- the month error key for a va-select instance varies if 
+ the month error key for a va-select instance varies if
  the instance is inside va-date or va-memorable-date
  */
 function getMonthErrorKey(monthSelect: boolean): string {
   return monthSelect ? 'month-select' : 'month-range';
 }
 
-
 interface ValidateConfig {
-  component: Components.VaDate | Components.VaMemorableDate,
-  year: number,
-  month: number,
-  day: number,
-  monthYearOnly?: boolean,
-  yearTouched?: boolean,
-  monthTouched?: boolean,
-  dayTouched?: boolean,
-  monthSelect?: boolean,
-  monthOptional?: boolean
+  component: Components.VaDate | Components.VaMemorableDate;
+  year: number;
+  month: number;
+  day: number;
+  monthYearOnly?: boolean;
+  yearTouched?: boolean;
+  monthTouched?: boolean;
+  dayTouched?: boolean;
+  monthSelect?: boolean;
+  monthOptional?: boolean;
 }
 
 export function validate({
-                           component,
-                           year,
-                           month,
-                           day,
-                           monthYearOnly,
-                           yearTouched,
-                           monthTouched,
-                           dayTouched,
-                           monthSelect,
-                           monthOptional
-                         }: ValidateConfig): void {
+  component,
+  year,
+  month,
+  day,
+  monthYearOnly,
+  yearTouched,
+  monthTouched,
+  dayTouched,
+  monthSelect,
+  monthOptional,
+}: ValidateConfig): void {
   const maxDays = daysForSelectedMonth(year, month);
 
   // Reset previous invalid states
@@ -222,18 +219,19 @@ export function validate({
   }
 
   // Validate required fields
-  if (component.required && (!year || (monthRequired && !month) || (!monthYearOnly && !day))) {
+  if (
+    component.required &&
+    (!year || (monthRequired && !month) || (!monthYearOnly && !day))
+  ) {
     if (monthRequired && monthTouched && !month) {
       component.invalidMonth = true;
       component.error = 'date-error';
       return;
-    }
-    else if (dayTouched && !day && !monthYearOnly) {
+    } else if (dayTouched && !day && !monthYearOnly) {
       component.invalidDay = true;
       component.error = 'date-error';
       return;
-    }
-    else if (yearTouched && !year) {
+    } else if (yearTouched && !year) {
       component.invalidYear = true;
       component.error = 'date-error';
       return;
@@ -258,7 +256,12 @@ export function validate({
   }
 
   // Validate year, month, and day ranges if they have a value regardless of whether they are required
-  if (monthRequired && month && (month < minMonths || month > maxMonths) && monthTouched) {
+  if (
+    monthRequired &&
+    month &&
+    (month < minMonths || month > maxMonths) &&
+    monthTouched
+  ) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
     return;
@@ -275,20 +278,20 @@ export function validate({
   }
 
   // Remove any error message if none of the fields are invalid
-  if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
+  if (
+    !component.invalidYear &&
+    !component.invalidMonth &&
+    !component.invalidDay
+  ) {
     if (!component.error || internalErrors.includes(component.error)) {
       component.error = null;
     }
   }
 }
 
-export function getErrorParameters(
-  error: string,
-  year: number,
-  month: number) {
-
+export function getErrorParameters(error: string, year: number, month: number) {
   const maxDay = daysForSelectedMonth(year, month);
-  switch(error) {
+  switch (error) {
     case 'month-range':
     case 'month-select':
       return { start: 1, end: maxMonths };
@@ -303,10 +306,12 @@ export function getErrorParameters(
 
 // Get last day of the month (month is zero based, so we're +1 month, day 0);
 // new Date() will recalculate and go back to last day of the previous month.
-// Return 31 for undefined month or year to not invalidate the day with
-// partial data (this used to be set to zero by default)
+// Return expected days for month, or 31 for undefined month or year to not
+// invalidate the day with partial data (this used to be set to zero by default)
 export const daysForSelectedMonth = (year: number, month: number): number =>
-  year && month ? new Date(year, month, 0).getDate() : 31;
+  year && month
+    ? new Date(year, month, 0).getDate()
+    : days[month]?.length || 31;
 
 // Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field
 export const validKeys = [
@@ -379,4 +384,4 @@ export const isDateSameDay = (date1: Date, date2: Date) => {
 export const zeroPadStart = (number: number | string) =>
   `00${(number || '').toString()}`.slice(-2);
 
-  /* eslint-enable i18next/no-literal-string */
+/* eslint-enable i18next/no-literal-string */

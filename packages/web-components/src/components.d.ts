@@ -116,22 +116,6 @@ export namespace Components {
         "visible"?: boolean;
     }
     /**
-     * @componentName Alert - Critical
-     * @guidanceHref alert/alert-critical
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface VaAlertCritical {
-        /**
-          * The link to a page where the user can take action
-         */
-        "link": string;
-        /**
-          * Text describing what critical action the user needs to take
-         */
-        "text": string;
-    }
-    /**
      * @componentName Alert - expandable
      * @guidanceHref alert/alert-expandable
      * @maturityCategory use
@@ -556,6 +540,21 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+    }
+    /**
+     * @componentName Critical action
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaCriticalAction {
+        /**
+          * The link to a page where the user can take action
+         */
+        "link": string;
+        /**
+          * Text describing what critical action the user needs to take
+         */
+        "text": string;
     }
     /**
      * @componentName Date input
@@ -1805,7 +1804,7 @@ export namespace Components {
          */
         "tty"?: boolean;
         /**
-          * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
+          * Optional vanity phone number. Replaces the last 4 digits or the entire text with the vanity text input
          */
         "vanity"?: string;
     }
@@ -2276,18 +2275,6 @@ declare global {
         prototype: HTMLVaAlertElement;
         new (): HTMLVaAlertElement;
     };
-    /**
-     * @componentName Alert - Critical
-     * @guidanceHref alert/alert-critical
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface HTMLVaAlertCriticalElement extends Components.VaAlertCritical, HTMLStencilElement {
-    }
-    var HTMLVaAlertCriticalElement: {
-        prototype: HTMLVaAlertCriticalElement;
-        new (): HTMLVaAlertCriticalElement;
-    };
     interface HTMLVaAlertExpandableElementEventMap {
         "component-library-analytics": any;
     }
@@ -2551,6 +2538,17 @@ declare global {
     var HTMLVaCrisisLineModalElement: {
         prototype: HTMLVaCrisisLineModalElement;
         new (): HTMLVaCrisisLineModalElement;
+    };
+    /**
+     * @componentName Critical action
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaCriticalActionElement extends Components.VaCriticalAction, HTMLStencilElement {
+    }
+    var HTMLVaCriticalActionElement: {
+        prototype: HTMLVaCriticalActionElement;
+        new (): HTMLVaCriticalActionElement;
     };
     interface HTMLVaDateElementEventMap {
         "dateChange": any;
@@ -3317,7 +3315,6 @@ declare global {
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
-        "va-alert-critical": HTMLVaAlertCriticalElement;
         "va-alert-expandable": HTMLVaAlertExpandableElement;
         "va-alert-sign-in": HTMLVaAlertSignInElement;
         "va-back-to-top": HTMLVaBackToTopElement;
@@ -3331,6 +3328,7 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-combo-box": HTMLVaComboBoxElement;
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
+        "va-critical-action": HTMLVaCriticalActionElement;
         "va-date": HTMLVaDateElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
@@ -3502,22 +3500,6 @@ declare namespace LocalJSX {
           * If `true`, the alert will be visible.
          */
         "visible"?: boolean;
-    }
-    /**
-     * @componentName Alert - Critical
-     * @guidanceHref alert/alert-critical
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface VaAlertCritical {
-        /**
-          * The link to a page where the user can take action
-         */
-        "link": string;
-        /**
-          * Text describing what critical action the user needs to take
-         */
-        "text": string;
     }
     /**
      * @componentName Alert - expandable
@@ -3996,6 +3978,21 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+    }
+    /**
+     * @componentName Critical action
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaCriticalAction {
+        /**
+          * The link to a page where the user can take action
+         */
+        "link": string;
+        /**
+          * Text describing what critical action the user needs to take
+         */
+        "text": string;
     }
     /**
      * @componentName Date input
@@ -5422,7 +5419,7 @@ declare namespace LocalJSX {
          */
         "tty"?: boolean;
         /**
-          * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
+          * Optional vanity phone number. Replaces the last 4 digits or the entire text with the vanity text input
          */
         "vanity"?: string;
     }
@@ -5654,7 +5651,6 @@ declare namespace LocalJSX {
         "va-accordion-item": VaAccordionItem;
         "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
-        "va-alert-critical": VaAlertCritical;
         "va-alert-expandable": VaAlertExpandable;
         "va-alert-sign-in": VaAlertSignIn;
         "va-back-to-top": VaBackToTop;
@@ -5668,6 +5664,7 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-combo-box": VaComboBox;
         "va-crisis-line-modal": VaCrisisLineModal;
+        "va-critical-action": VaCriticalAction;
         "va-date": VaDate;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
@@ -5735,13 +5732,6 @@ declare module "@stencil/core" {
              * @maturityLevel best_practice
              */
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
-            /**
-             * @componentName Alert - Critical
-             * @guidanceHref alert/alert-critical
-             * @maturityCategory caution
-             * @maturityLevel candidate
-             */
-            "va-alert-critical": LocalJSX.VaAlertCritical & JSXBase.HTMLAttributes<HTMLVaAlertCriticalElement>;
             /**
              * @componentName Alert - expandable
              * @guidanceHref alert/alert-expandable
@@ -5838,6 +5828,12 @@ declare module "@stencil/core" {
              * @maturityLevel available
              */
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
+            /**
+             * @componentName Critical action
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-critical-action": LocalJSX.VaCriticalAction & JSXBase.HTMLAttributes<HTMLVaCriticalActionElement>;
             /**
              * @componentName Date input
              * @maturityCategory use

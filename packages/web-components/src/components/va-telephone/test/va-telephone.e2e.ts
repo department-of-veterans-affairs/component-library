@@ -167,7 +167,7 @@ describe('va-telephone', () => {
     expect(link.innerText).toEqual('123456');
   });
 
-  it('handles a vanity number as a contact prop', async () => {
+  it('handles a 4 character vanity number as a contact prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-telephone contact="8772228387" vanity="VETS"></va-telephone>',
@@ -176,6 +176,17 @@ describe('va-telephone', () => {
     const link = await page.find('va-telephone >>> a');
     expect(link.getAttribute('href')).toEqual('tel:+18772228387');
     expect(link.innerText).toEqual('877-222-VETS (8387)');
+  });
+
+  it('handles a full vanity number as a contact prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone contact="8884424551" vanity="888-GIBILL-1"></va-telephone>',
+    );
+
+    const link = await page.find('va-telephone >>> a');
+    expect(link.getAttribute('href')).toEqual('tel:+18884424551');
+    expect(link.innerText).toEqual('888-GIBILL-1 (888-442-4551)');
   });
 
   it('fires an analytics event when clicked', async () => {

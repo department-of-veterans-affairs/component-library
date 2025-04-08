@@ -12,10 +12,10 @@ import { i18next } from '../..';
 
 import {
   months,
-  days,
   validate,
   getErrorParameters,
   zeroPadStart,
+  daysForSelectedMonth,
 } from '../../utils/date-utils';
 
 /**
@@ -238,7 +238,12 @@ export class VaDate {
     const [year, month, day] = (value || '')
       .split('-')
       .map(val => parseInt(val));
-    const daysForSelectedMonth = month > 0 ? days[month] : [];
+    // Build array of days for the selected month
+    // If month is not selected, use 31 days
+    const arrayDaysForSelectedMonth = Array.from(
+      { length: daysForSelectedMonth(year, month) },
+      (_, index) => index + 1,
+    );
     const errorParameters = (error: string) => {
       return getErrorParameters(error, year, month);
     };
@@ -286,7 +291,7 @@ export class VaDate {
                 // If day value set is greater than amount of days in the month
                 // set to empty string instead
                 // Value must be a string
-                value={daysForSelectedMonth.length < day ? '' : day?.toString()}
+                value={day?.toString()}
                 onVaSelect={handleDateChange}
                 onBlur={this.handleDayBlur}
                 invalid={this.invalidDay}
@@ -294,10 +299,9 @@ export class VaDate {
                 error={this.dayTouched && this.invalidDay ? this.error : null}
                 showError={false}
               >
-                {daysForSelectedMonth &&
-                  daysForSelectedMonth.map(day => (
-                    <option value={day}>{day}</option>
-                  ))}
+                {arrayDaysForSelectedMonth.map(day => (
+                  <option value={day}>{day}</option>
+                ))}
               </va-select>
             )}
             <va-text-input
