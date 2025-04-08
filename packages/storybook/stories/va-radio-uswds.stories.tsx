@@ -54,10 +54,25 @@ const vaRadioConst = args => {
         label-header-level={labelHeaderLevel}
         header-aria-describedby={headerAriaDescribedby}
       >
-        <va-radio-option label="Sojourner Truth" name={name} value="1" />
-        <va-radio-option label="Frederick Douglass" name={name} value="2" />
-        <va-radio-option label="Booker T. Washington" name={name} value="3" />
-        <va-radio-option label="George Washington Carver" name={name} value="4" />
+        <div className="usa-radio">
+        <input type="radio" name="group" value="1" id="item1" className="va-radio-option__input"/>
+        <label htmlFor="item1" className="usa-radio__label">Sojourner Truth</label>
+        </div>
+
+        <div className="usa-radio">
+        <input type="radio" name="group" value="2" id="item2" className="va-radio-option__input"/>
+        <label htmlFor="item1" className="usa-radio__label">Frederick Douglass</label>
+        </div>
+
+        <div className="usa-radio">
+        <input type="radio" name="group" value="3" id="item3" className="va-radio-option__input"/>
+        <label htmlFor="item3" className="usa-radio__label">Booker T. Washington</label>
+        </div>
+
+        <div className="usa-radio">
+        <input type="radio" name="group" value="4" id="item4" className="va-radio-option__input"/>
+        <label htmlFor="item3" className="usa-radio__label">George Washington Carver</label>
+        </div>
       </va-radio>
     </form>
   );
