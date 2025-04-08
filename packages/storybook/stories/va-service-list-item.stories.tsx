@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const serviceListItemDocs = getWebComponentDocs('va-service-list-item');
 
 export default {
-  title: 'Components/Service list item',
+  title: 'Components/Service List Item',
   id: 'components/va-service-list-item',
   parameters: {
     componentSubtitle: 'va-service-list-item web component',

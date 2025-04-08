@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const criticalActionDocs = getWebComponentDocs('va-critical-action');
 
 export default {
-  title: 'Components/Critical action',
+  title: 'Components/Critical Action',
   id: 'components/va-critical-action',
   parameters: {
     componentSubtitle: 'va-critical-action web component',

@@ -15,7 +15,7 @@ export interface OptionalLink {
 }
 
 /**
- * @componentName Service list item
+ * @componentName Service List Item
  * @maturityCategory caution
  * @maturityLevel candidate
  */
