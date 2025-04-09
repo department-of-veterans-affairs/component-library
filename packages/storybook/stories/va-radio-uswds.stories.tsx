@@ -42,9 +42,9 @@ const vaRadioConst = args => {
     'header-aria-describedby': headerAriaDescribedby,
     ...rest
   } = args;
-  const randomInt = Math.floor(Math.random() * 1000000)
+
   return (
-    <form name="test-form">
+    <form name="test">
       <va-radio
         enable-analytics={enableAnalytics}
         error={error}
@@ -54,25 +54,10 @@ const vaRadioConst = args => {
         label-header-level={labelHeaderLevel}
         header-aria-describedby={headerAriaDescribedby}
       >
-        <div className="usa-radio">
-        <input type="radio" name="group" value="1" id={`item1-${randomInt}`} className="va-radio-option__input"/>
-        <label htmlFor={`item1-${randomInt}`} className="usa-radio__label">Sojourner Truth</label>
-        </div>
-
-        <div className="usa-radio">
-        <input type="radio" name="group" value="2" id={`item2-${randomInt}`} className="va-radio-option__input"/>
-        <label htmlFor={`item2-${randomInt}`} className="usa-radio__label">Frederick Douglass</label>
-        </div>
-
-        <div className="usa-radio">
-        <input type="radio" name="group" value="3" id={`item3-${randomInt}`} className="va-radio-option__input"/>
-        <label htmlFor={`item3-${randomInt}`} className="usa-radio__label">Booker T. Washington</label>
-        </div>
-
-        <div className="usa-radio">
-        <input type="radio" name="group" value="4" id={`item4-${randomInt}`} className="va-radio-option__input"/>
-        <label htmlFor={`item4-${randomInt}`} className="usa-radio__label">George Washington Carver</label>
-        </div>
+        <va-radio-option label="Sojourner Truth" name={name} value="1" />
+        <va-radio-option label="Frederick Douglass" name={name} value="2" />
+        <va-radio-option label="Booker T. Washington" name={name} value="3" />
+        <va-radio-option label="George Washington Carver" name={name} value="4" />
       </va-radio>
     </form>
   );

@@ -208,8 +208,7 @@ legend {
   margin-bottom: 0.65em;
 }
 
-[type=checkbox] + label::before,
-[type=radio] + label::before {
+[type=checkbox] + label::before{
   background: tok.$vads-color-white;
   content: '\a0';
   display: inline-block;
@@ -227,24 +226,9 @@ legend {
   width: vars.$spacing-medium;
 }
 
-[type=radio] + label::before {
-  border-radius: 100%;
-  box-shadow: 0 0 0 2px tok.$vads-color-white, 0 0 0 3px vars.$color-gray-medium;
-  height: scale-rem(1.4rem); // Size overrides to account for shape + checked styling
-  line-height: scale-rem(1.4rem);
-  margin-left: 3px;
-  margin-right: scale-rem(0.75em);
-  width: scale-rem(1.4rem);
-}
-
-[type=checkbox]:checked + label::before,
-[type=radio]:checked + label::before {
+[type=checkbox]:checked + label::before {
   background-color: vars.$color-primary;
   box-shadow: 0 0 0 1px vars.$color-primary;
-}
-
-[type=radio]:checked + label::before {
-  box-shadow: 0 0 0 2px tok.$vads-color-white, 0 0 0 4px vars.$color-primary;
 }
 
 [type=checkbox]:checked + label::before,
@@ -253,11 +237,6 @@ legend {
   background-image: url(~@department-of-veterans-affairs/css-library/dist/img/correct8.svg);
   background-position: 50%;
   background-repeat: no-repeat;
-}
-
-[type=radio]:focus + label::before {
-  outline: mix.$focus-outline;
-  outline-offset: mix.$focus-spacing * 2; // Double the offset to account for circular shape
 }
 
 [type=checkbox]:disabled + label {
@@ -269,8 +248,7 @@ legend {
   outline-offset: mix.$focus-spacing;
 }
 
-[type=checkbox]:disabled + label::before,
-[type=radio]:disabled + label::before {
+[type=checkbox]:disabled + label::before {
   background: vars.$color-gray-lightest;
   box-shadow: 0 0 0 1px vars.$color-gray-light;
   cursor: not-allowed;
