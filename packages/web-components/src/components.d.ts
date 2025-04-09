@@ -116,22 +116,6 @@ export namespace Components {
         "visible"?: boolean;
     }
     /**
-     * @componentName Alert - Critical
-     * @guidanceHref alert/alert-critical
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface VaAlertCritical {
-        /**
-          * The link to a page where the user can take action
-         */
-        "link": string;
-        /**
-          * Text describing what critical action the user needs to take
-         */
-        "text": string;
-    }
-    /**
      * @componentName Alert - expandable
      * @guidanceHref alert/alert-expandable
      * @maturityCategory use
@@ -239,6 +223,10 @@ export namespace Components {
           * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
          */
         "breadcrumbList"?: Breadcrumb[] | string;
+        /**
+          * When true, the current page link will use the last href value provided in the breadcrumb list instead of the #content hash.
+         */
+        "currentPageRedirect"?: boolean;
         /**
           * Analytics tracking function(s) will not be called
          */
@@ -556,6 +544,21 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+    }
+    /**
+     * @componentName Critical Action
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaCriticalAction {
+        /**
+          * The link to a page where the user can take action
+         */
+        "link": string;
+        /**
+          * Text describing what critical action the user needs to take
+         */
+        "text": string;
     }
     /**
      * @componentName Date input
@@ -1597,7 +1600,7 @@ export namespace Components {
         "width"?: string;
     }
     /**
-     * @componentName Service list item
+     * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -2276,18 +2279,6 @@ declare global {
         prototype: HTMLVaAlertElement;
         new (): HTMLVaAlertElement;
     };
-    /**
-     * @componentName Alert - Critical
-     * @guidanceHref alert/alert-critical
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface HTMLVaAlertCriticalElement extends Components.VaAlertCritical, HTMLStencilElement {
-    }
-    var HTMLVaAlertCriticalElement: {
-        prototype: HTMLVaAlertCriticalElement;
-        new (): HTMLVaAlertCriticalElement;
-    };
     interface HTMLVaAlertExpandableElementEventMap {
         "component-library-analytics": any;
     }
@@ -2551,6 +2542,17 @@ declare global {
     var HTMLVaCrisisLineModalElement: {
         prototype: HTMLVaCrisisLineModalElement;
         new (): HTMLVaCrisisLineModalElement;
+    };
+    /**
+     * @componentName Critical Action
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaCriticalActionElement extends Components.VaCriticalAction, HTMLStencilElement {
+    }
+    var HTMLVaCriticalActionElement: {
+        prototype: HTMLVaCriticalActionElement;
+        new (): HTMLVaCriticalActionElement;
     };
     interface HTMLVaDateElementEventMap {
         "dateChange": any;
@@ -3151,7 +3153,7 @@ declare global {
         new (): HTMLVaSelectElement;
     };
     /**
-     * @componentName Service list item
+     * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3317,7 +3319,6 @@ declare global {
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
-        "va-alert-critical": HTMLVaAlertCriticalElement;
         "va-alert-expandable": HTMLVaAlertExpandableElement;
         "va-alert-sign-in": HTMLVaAlertSignInElement;
         "va-back-to-top": HTMLVaBackToTopElement;
@@ -3331,6 +3332,7 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-combo-box": HTMLVaComboBoxElement;
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
+        "va-critical-action": HTMLVaCriticalActionElement;
         "va-date": HTMLVaDateElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
@@ -3504,22 +3506,6 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     /**
-     * @componentName Alert - Critical
-     * @guidanceHref alert/alert-critical
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface VaAlertCritical {
-        /**
-          * The link to a page where the user can take action
-         */
-        "link": string;
-        /**
-          * Text describing what critical action the user needs to take
-         */
-        "text": string;
-    }
-    /**
      * @componentName Alert - expandable
      * @guidanceHref alert/alert-expandable
      * @maturityCategory use
@@ -3635,6 +3621,10 @@ declare namespace LocalJSX {
           * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
          */
         "breadcrumbList"?: Breadcrumb[] | string;
+        /**
+          * When true, the current page link will use the last href value provided in the breadcrumb list instead of the #content hash.
+         */
+        "currentPageRedirect"?: boolean;
         /**
           * Analytics tracking function(s) will not be called
          */
@@ -3996,6 +3986,21 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+    }
+    /**
+     * @componentName Critical Action
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaCriticalAction {
+        /**
+          * The link to a page where the user can take action
+         */
+        "link": string;
+        /**
+          * Text describing what critical action the user needs to take
+         */
+        "text": string;
     }
     /**
      * @componentName Date input
@@ -5194,7 +5199,7 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     /**
-     * @componentName Service list item
+     * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -5654,7 +5659,6 @@ declare namespace LocalJSX {
         "va-accordion-item": VaAccordionItem;
         "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
-        "va-alert-critical": VaAlertCritical;
         "va-alert-expandable": VaAlertExpandable;
         "va-alert-sign-in": VaAlertSignIn;
         "va-back-to-top": VaBackToTop;
@@ -5668,6 +5672,7 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-combo-box": VaComboBox;
         "va-crisis-line-modal": VaCrisisLineModal;
+        "va-critical-action": VaCriticalAction;
         "va-date": VaDate;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
@@ -5735,13 +5740,6 @@ declare module "@stencil/core" {
              * @maturityLevel best_practice
              */
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
-            /**
-             * @componentName Alert - Critical
-             * @guidanceHref alert/alert-critical
-             * @maturityCategory caution
-             * @maturityLevel candidate
-             */
-            "va-alert-critical": LocalJSX.VaAlertCritical & JSXBase.HTMLAttributes<HTMLVaAlertCriticalElement>;
             /**
              * @componentName Alert - expandable
              * @guidanceHref alert/alert-expandable
@@ -5838,6 +5836,12 @@ declare module "@stencil/core" {
              * @maturityLevel available
              */
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
+            /**
+             * @componentName Critical Action
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-critical-action": LocalJSX.VaCriticalAction & JSXBase.HTMLAttributes<HTMLVaCriticalActionElement>;
             /**
              * @componentName Date input
              * @maturityCategory use
@@ -6032,7 +6036,7 @@ declare module "@stencil/core" {
              */
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             /**
-             * @componentName Service list item
+             * @componentName Service List Item
              * @maturityCategory caution
              * @maturityLevel candidate
              */

@@ -1,16 +1,16 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-const alertCriticalDocs = getWebComponentDocs('va-alert-critical');
+const criticalActionDocs = getWebComponentDocs('va-critical-action');
 
 export default {
-  title: 'Components/Alert - Critical',
-  id: 'components/va-alert-critical',
+  title: 'Components/Critical Action',
+  id: 'components/va-critical-action',
   parameters: {
-    componentSubtitle: 'va-alert-critical web component',
+    componentSubtitle: 'va-critical-action web component',
     docs: {
       page: () => (
-        <StoryDocs storyDefault={Default} data={alertCriticalDocs} />
+        <StoryDocs storyDefault={Default} data={criticalActionDocs} />
       ),
     },
   },
@@ -19,7 +19,7 @@ export default {
 const Template = args => {
   const { link, text } = args;
 
-  return <va-alert-critical link={link} text={text} />;
+  return <va-critical-action link={link} text={text} />;
 };
 
 export const Default = Template.bind({});
@@ -29,10 +29,10 @@ Default.args = {
 };
 
 Default.argTypes = {
-  ...propStructure(alertCriticalDocs),
+  ...propStructure(criticalActionDocs),
 };
 
-export const CardWithAlertCritical = ({}) => {
+export const CardWithCriticalAction = ({}) => {
   return (
     <va-card>
       <h3 className="claim-list-item-header vads-u-margin-bottom--2">
@@ -49,7 +49,7 @@ export const CardWithAlertCritical = ({}) => {
           </span>
         </div>
       </h3>
-      <va-alert-critical
+      <va-critical-action
         link="https://www.va.gov/claim-or-appeal-status/"
         text="We requested more information from you. Submit by May 21, 2025."
       />

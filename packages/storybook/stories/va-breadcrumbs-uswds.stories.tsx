@@ -15,17 +15,12 @@ export default {
     },
   },
 };
-const dataArray = [
-  { label: 'VA.gov home', href: '#one' },
-  { label: 'Level two', href: '#two' },
-  { label: 'Level three', href: '#three' },
-];
-
-const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
+const Template = ({ label, 'disable-analytics': disableAnalytics, 'current-page-redirect': currentPageRedirect, 'breadcrumb-list': breadcrumbList }) => (
   <VaBreadcrumbs
     label={label}
     disableAnalytics={disableAnalytics}
-    breadcrumbList={dataArray}
+    breadcrumbList={breadcrumbList}
+    currentPageRedirect={currentPageRedirect}
   ></VaBreadcrumbs>
 );
 
@@ -223,6 +218,12 @@ const WithRouterTemplate = ({
   );
 };
 
+const dataArray = [
+  { label: 'VA.gov home', href: '#one' },
+  { label: 'Level two', href: '#two' },
+  { label: 'Level three', href: '#three' },
+];
+
 const defaultArgs = {
   'label': 'Breadcrumb',
   'breadcrumb-list':
@@ -234,6 +235,7 @@ const defaultArgs = {
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
+  'breadcrumb-list': dataArray,
 };
 Default.argTypes = propStructure(breadcrumbsDocs);
 
@@ -248,3 +250,14 @@ MultipleLanguages.args = { ...defaultArgs };
 
 export const WithRouterLinkSupport = WithRouterTemplate.bind(null);
 WithRouterLinkSupport.args = { ...defaultArgs };
+
+export const CurrentPageRedirect = Template.bind(null);
+CurrentPageRedirect.args = { 
+  ...defaultArgs, 
+  'current-page-redirect': true, 
+  'breadcrumb-list': [
+    { "label": "VA.gov home", "href": "/" }, 
+    { "label": "Last Page", "href": "/example-last-page" }, 
+    { "label": "Current Page", "href": "/introduction" }
+  ] 
+};

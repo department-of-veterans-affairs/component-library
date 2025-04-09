@@ -29,7 +29,7 @@ describe('va-button', () => {
     const page = await newE2EPage();
     await page.setContent('<va-button text="Edit" big></va-button>');
     const button = await page.find('va-button >>> button');
-    expect((await button.getComputedStyle()).padding).toEqual('16px 24px');
+    expect((await button.getComputedStyle()).padding).toEqual('12.8px 24px');
   });
 
   it('renders an icon before the button text when back is true', async () => {

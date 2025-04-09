@@ -15,7 +15,7 @@ export interface OptionalLink {
 }
 
 /**
- * @componentName Service list item
+ * @componentName Service List Item
  * @maturityCategory caution
  * @maturityLevel candidate
  */
@@ -133,7 +133,6 @@ export class VaServiceListItem {
           <a
             href={serviceLink}
             class="service-title-row"
-            aria-label={`Go to ${serviceName}`}
           >
             <div class="header" tabIndex={0}>
               {icon && (
@@ -151,10 +150,10 @@ export class VaServiceListItem {
           </a>
 
           {actionNeeded && (
-            <va-alert-critical
+            <va-critical-action
               link={parsedAction.href}
               text={parsedAction.text}
-            ></va-alert-critical>
+            ></va-critical-action>
           )}
 
           <div class="status">
