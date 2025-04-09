@@ -18,7 +18,7 @@ const Template = ({}) => (
     <span className="vads-c-eyebrow">
       Eyebrow Title
     </span>
-    Main Headline
+    Headline H1
   </h1>
 );
 
