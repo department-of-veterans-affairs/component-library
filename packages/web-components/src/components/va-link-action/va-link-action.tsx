@@ -47,9 +47,9 @@ export class VaLinkAction {
 
   /**
    * The type of the link, which determines its style.
-   * Can be 'primary', 'secondary', or 'reverse'.
+   * Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
    */
-  @Prop() type?: 'primary' | 'secondary' | 'reverse' = 'primary';
+  @Prop() type?: 'primary' | 'secondary' | 'reverse' | 'primary-entry' = 'primary';
 
   /**
    * This provides an aria-label to the link, if present
@@ -104,10 +104,15 @@ export class VaLinkAction {
     const { handleClick, href, text, messageAriaDescribedby, type, label } =
       this;
 
+    const hostClass = classNames({
+      'host--primary-entry': type === 'primary-entry',
+    });
+
     const linkClass = classNames({
       'va-link--reverse': type === 'reverse',
       'va-link--primary': type === 'primary',
       'va-link--secondary': type === 'secondary',
+      'va-link--primary-entry': type === 'primary-entry',
     });
 
     // eslint-disable-next-line i18next/no-literal-string
@@ -120,7 +125,7 @@ export class VaLinkAction {
       : null;
 
     return (
-      <Host>
+      <Host class={hostClass}>
         <a
           href={href}
           class={linkClass}
@@ -129,7 +134,11 @@ export class VaLinkAction {
           onClick={handleClick}
           ref={el => (this.linkRef = el as HTMLElement)}
         >
-          <va-icon class={iconClass} icon="chevron_right" size={3}></va-icon>
+          <va-icon 
+            class={iconClass} 
+            icon="chevron_right"
+            size={3}
+          ></va-icon>
           <span class="link-text">{text}</span>
         </a>
         {isMessageSet(messageAriaDescribedby) && (
