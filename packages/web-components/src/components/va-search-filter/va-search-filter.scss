@@ -1,0 +1,17 @@
+@import '../../mixins/headers.css';
+
+:host {
+  display: block;
+}
+
+#header {
+  margin-bottom: 20px;
+}
+
+va-accordion-item::part(accordion-content) {
+  padding-top: 0;
+}
+
+va-checkbox-group {
+  margin-top: 10px;
+}
