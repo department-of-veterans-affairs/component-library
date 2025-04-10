@@ -220,7 +220,7 @@ const FormsPatternSingleTemplate = ({
       >
         <div slot="form-description">
           <p>HTML passed into the form-description slot:</p>
-          <ul>
+          <ul className="vads-u-margin-bottom--2">
             <li>Month</li>
             <li>Day</li>
             <li>Year</li>
