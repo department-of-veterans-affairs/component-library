@@ -20,6 +20,11 @@ interface FilterChangeParams {
   active: boolean;
 }
 
+/**
+ * @componentName Search Filter
+ * @maturityCategory caution
+ * @maturityLevel candidate
+ */
 @Component({
   tag: 'va-search-filter',
   styleUrl: 'va-search-filter.scss',

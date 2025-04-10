@@ -1439,6 +1439,11 @@ export namespace Components {
          */
         "value": string;
     }
+    /**
+     * @componentName Search Filter
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
     interface VaSearchFilter {
         /**
           * Represents a list of filter facets and their categories. Use a JSON array of objects with label properties.
@@ -3097,6 +3102,11 @@ declare global {
     interface HTMLVaSearchFilterElementEventMap {
         "vaFilterChange": Filter[];
     }
+    /**
+     * @componentName Search Filter
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
     interface HTMLVaSearchFilterElement extends Components.VaSearchFilter, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaSearchFilterElementEventMap>(type: K, listener: (this: HTMLVaSearchFilterElement, ev: VaSearchFilterCustomEvent<HTMLVaSearchFilterElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -5046,6 +5056,11 @@ declare namespace LocalJSX {
          */
         "value": string;
     }
+    /**
+     * @componentName Search Filter
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
     interface VaSearchFilter {
         /**
           * Represents a list of filter facets and their categories. Use a JSON array of objects with label properties.
@@ -6061,6 +6076,11 @@ declare module "@stencil/core" {
              */
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
+            /**
+             * @componentName Search Filter
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
             "va-search-filter": LocalJSX.VaSearchFilter & JSXBase.HTMLAttributes<HTMLVaSearchFilterElement>;
             /**
              * @componentName Search input
