@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Event, EventEmitter, Listen, forceUpdate } from '@stencil/core';
+import { Component, Host, h, Prop, Event, EventEmitter, Listen, forceUpdate, State } from '@stencil/core';
 
 export type FilterFacet = {
   label: string;
@@ -8,9 +8,16 @@ export type FilterFacet = {
 
 export type FilterCategory = {
   label: string;
+  active?: boolean;
 };
 
 export type Filter = FilterFacet;
+
+interface FilterChangeParams {
+  facetLabel: string;
+  categoryLabel: string;
+  active: boolean;
+}
 
 @Component({
   tag: 'va-search-filter',
@@ -27,9 +34,8 @@ export class VaSearchFilter {
   /**
    * Represents a list of filter facets and their categories.
    * Use a JSON array of objects with label properties.
-   * Wrap in a string if not using the React-binding version of the web component.
    */
-  @Prop() filterOptions: Filter[] = [];
+  @Prop({ mutable: true }) filterOptions: Filter[] = [];
 
   /**
    * A custom event emitted when the filter changes. The payload will provide all active categories.
@@ -46,25 +52,81 @@ export class VaSearchFilter {
 
   private isDesktop: boolean = window.innerWidth > 640;
 
+  /**
+   * The total number of active filters which is updated when the filter changes.
+   */
+  @State() totalActiveFilters: number = 0;
+
+  private handleFilterChange = ({ facetLabel, categoryLabel, active }: FilterChangeParams) => {
+    // find the matching facetLabel and categoryLabel then update the active state of the category
+    this.filterOptions = this.filterOptions.map((facet) => {
+      if (facet.label === facetLabel) {
+        return {
+          ...facet,
+          category: facet.category.map((category) => {
+            if (category.label === categoryLabel) {
+              return { ...category, active };
+            }
+            return category;
+          }),
+        };
+      }
+      return facet;
+    });
+
+    this.totalActiveFilters = this.getTotalActiveFilters()
+
+    const allActiveFilters = this.getActiveFiltersWithCategories();
+    this.vaFilterChange.emit(allActiveFilters);
+  };
+
+  /**
+   * Get the total number of active filters across all categories.
+   * @returns {number} The total number of active filters.
+   */
+  getTotalActiveFilters(): number {
+    return this.getActiveFiltersWithCategories().reduce((acc: number, facet: FilterFacet) => acc + facet.category.length, 0);
+  }
+
+  /**
+   * Get the active filters with their categories.
+   * @returns {Filter[]} The active filters with their categories.
+   */
+  getActiveFiltersWithCategories(): Filter[] {
+    return this.filterOptions
+      .map(facet => ({
+        ...facet,
+        category: facet.category.filter(category => category.active === true)
+      }))
+      .filter(facet => facet.category.length > 0);
+  }
+
   render() {
     const {
       header,
       filterOptions,
       isDesktop,
+      totalActiveFilters,
+      handleFilterChange,
     } = this;
 
     if (isDesktop) {
       return (
         <Host>
-          <h2 id="header">{header}</h2>
+          <h2 id="header">{header}{totalActiveFilters > 0 ? ` (${totalActiveFilters})` : ''}</h2>
           <va-accordion class="va-search-filter__accordion">
             {filterOptions.map((facet: FilterFacet, index: number) => (
-              <va-accordion-item header={facet.label} key={index}>
+              <va-accordion-item header={facet.label} key={index} open>
                 <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
                   {facet.category.map((category: FilterCategory, index: number) => (
                     <va-checkbox
                       label={category.label}
                       key={index}
+                      onVaChange={(e) => handleFilterChange({
+                        facetLabel: facet.label,
+                        categoryLabel: category.label,
+                        active: e.target.checked,
+                      })}
                     />
                   ))}
                 </va-checkbox-group>
@@ -78,13 +140,18 @@ export class VaSearchFilter {
     return (
       <Host>
         <va-accordion class="va-search-filter__accordion">
-          <va-accordion-item header={header}>
+          <va-accordion-item header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')}>
             {filterOptions.map((facet: FilterFacet, index: number) => (
               <va-checkbox-group label={facet.label} key={index}>
                 {facet.category.map((category: FilterCategory, index: number) => (
                   <va-checkbox
                     label={category.label}
                     key={index}
+                    onVaChange={(e) => handleFilterChange({
+                      facetLabel: facet.label,
+                      categoryLabel: category.label,
+                      active: e.target.checked,
+                    })}
                   />
                 ))}
               </va-checkbox-group>

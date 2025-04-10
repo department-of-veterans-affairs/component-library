@@ -1441,7 +1441,7 @@ export namespace Components {
     }
     interface VaSearchFilter {
         /**
-          * Represents a list of filter facets and their categories. Use a JSON array of objects with label properties. Wrap in a string if not using the React-binding version of the web component.
+          * Represents a list of filter facets and their categories. Use a JSON array of objects with label properties.
          */
         "filterOptions": Filter[];
         /**
@@ -5048,7 +5048,7 @@ declare namespace LocalJSX {
     }
     interface VaSearchFilter {
         /**
-          * Represents a list of filter facets and their categories. Use a JSON array of objects with label properties. Wrap in a string if not using the React-binding version of the web component.
+          * Represents a list of filter facets and their categories. Use a JSON array of objects with label properties.
          */
         "filterOptions"?: Filter[];
         /**
