@@ -116,7 +116,7 @@ describe('va-link-action', () => {
 
     const element = await page.find('va-link-action');
     expect(element).toEqualHtml(`
-    <va-link-action class="hydrated" href="https://www.va.gov" text="Access your health records" type="primary-entry">
+    <va-link-action class="host--primary-entry hydrated" href="https://www.va.gov" text="Access your health records" type="primary-entry">
       <mock:shadow-root>
         <a href="https://www.va.gov" class="va-link--primary-entry">
           <va-icon class="link-icon--left link-icon hydrated"></va-icon>
