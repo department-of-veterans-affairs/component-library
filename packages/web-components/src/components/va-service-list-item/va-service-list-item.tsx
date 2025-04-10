@@ -1,7 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 import { Component, Host, h, Prop, Watch, State, Element } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
-import { VaLinkProps } from '../va-link/va-link';
+import { Components } from '../../components';
 
 export interface ServiceDetails {
   [key: string]: string;
@@ -10,7 +10,7 @@ export interface ServiceAction {
   href: string;
   text: string;
 }
-export type OptionalLink = VaLinkProps;
+export type OptionalLink = Components.VaLink;
 
 /**
  * @componentName Service List Item
@@ -158,28 +158,7 @@ export class VaServiceListItem {
           <ul class="service-details-list">{serviceDetailsList}</ul>
 
           {parsedOptionalLink?.href && parsedOptionalLink?.text && (
-            <va-link
-              class="optional-link"
-              href={parsedOptionalLink.href}
-              text={parsedOptionalLink.text}
-              abbr-title={parsedOptionalLink.abbrTitle}
-              active={parsedOptionalLink.active}
-              back={parsedOptionalLink.back}
-              calendar={parsedOptionalLink.calendar}
-              channel={parsedOptionalLink.channel}
-              disable-analytics={parsedOptionalLink.disableAnalytics}
-              download={parsedOptionalLink.download}
-              filename={parsedOptionalLink.filename}
-              filetype={parsedOptionalLink.filetype}
-              pages={parsedOptionalLink.pages}
-              video={parsedOptionalLink.video}
-              reverse={parsedOptionalLink.reverse}
-              external={parsedOptionalLink.external}
-              label={parsedOptionalLink.label}
-              icon-name={parsedOptionalLink.iconName}
-              icon-size={parsedOptionalLink.iconSize}
-              language={parsedOptionalLink.language}
-            ></va-link>
+            <va-link class="optional-link" {...parsedOptionalLink}></va-link>
           )}
         </div>
       </Host>
