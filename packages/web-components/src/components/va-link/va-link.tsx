@@ -7,12 +7,35 @@ import classNames from 'classnames';
  * @maturityLevel deployed
  */
 
+export interface VaLinkProps {
+  href: string;
+  text: string;
+  abbrTitle?: string;
+  active?: boolean;
+  back?: boolean;
+  calendar?: boolean;
+  channel?: boolean;
+  disableAnalytics?: boolean;
+  download?: boolean;
+  filename?: string;
+  filetype?: string;
+  pages?: number;
+  video?: boolean;
+  reverse?: boolean;
+  external?: boolean;
+  label?: string;
+  iconName?: string;
+  iconSize?: number;
+  language?: string;
+  componentLibraryAnalytics: EventEmitter;
+}
+
 @Component({
   tag: 'va-link',
   styleUrl: 'va-link.scss',
   shadow: true,
 })
-export class VaLink {
+export class VaLink implements VaLinkProps {
   /**
    * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
    */
@@ -103,15 +126,15 @@ export class VaLink {
    * an integer between 3 and 9 inclusive.
    */
   @Prop() iconSize?: number = 3;
-  /**
-   * The event used to track usage of the component.
-   */
 
   /**
    * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
    */
   @Prop() language?: string;
 
+  /**
+   * The event used to track usage of the component.
+   */
   @Event({
     bubbles: true,
     composed: true,

@@ -1,6 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 import { Component, Host, h, Prop, Watch, State, Element } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
+import { VaLinkProps } from '../va-link/va-link';
 
 export interface ServiceDetails {
   [key: string]: string;
@@ -9,10 +10,7 @@ export interface ServiceAction {
   href: string;
   text: string;
 }
-export interface OptionalLink {
-  href: string;
-  text: string;
-}
+export type OptionalLink = VaLinkProps;
 
 /**
  * @componentName Service List Item
@@ -130,10 +128,7 @@ export class VaServiceListItem {
     return (
       <Host>
         <div class="service-list-item">
-          <a
-            href={serviceLink}
-            class="service-title-row"
-          >
+          <a href={serviceLink} class="service-title-row">
             <div class="header" tabIndex={0}>
               {icon && (
                 <va-icon class={iconClass} icon={icon} size={3}></va-icon>
@@ -167,6 +162,23 @@ export class VaServiceListItem {
               class="optional-link"
               href={parsedOptionalLink.href}
               text={parsedOptionalLink.text}
+              abbr-title={parsedOptionalLink.abbrTitle}
+              active={parsedOptionalLink.active}
+              back={parsedOptionalLink.back}
+              calendar={parsedOptionalLink.calendar}
+              channel={parsedOptionalLink.channel}
+              disable-analytics={parsedOptionalLink.disableAnalytics}
+              download={parsedOptionalLink.download}
+              filename={parsedOptionalLink.filename}
+              filetype={parsedOptionalLink.filetype}
+              pages={parsedOptionalLink.pages}
+              video={parsedOptionalLink.video}
+              reverse={parsedOptionalLink.reverse}
+              external={parsedOptionalLink.external}
+              label={parsedOptionalLink.label}
+              icon-name={parsedOptionalLink.iconName}
+              icon-size={parsedOptionalLink.iconSize}
+              language={parsedOptionalLink.language}
             ></va-link>
           )}
         </div>
