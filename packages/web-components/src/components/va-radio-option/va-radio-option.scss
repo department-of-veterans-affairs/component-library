@@ -63,7 +63,6 @@ va-radio-option input[type="radio"].va-radio-option__input {
   border: none;
   box-shadow: 0 0 0 2px var(--vads-color-base);
   border-radius: 50%;
-  appearance: none;
   margin: 0.064rem 0 0 4px;
   opacity: unset;
   position: static;
@@ -93,21 +92,6 @@ va-radio-option input[type="radio"] + label {
   margin-bottom: 0;
 }
 
-va-radio-option input[type="radio"] + label:before {
-  border-radius: 0;
-  box-shadow: none;
-  height: 0;
-  line-height: 0;
-  margin-left: 0;
-  margin-right: 0;
-  width: 0;
-}
-
-va-radio-option input[type="radio"]:checked + label:before {
-  outline: none;
-  box-shadow: none;
-}
-
-va-radio-option input[type="radio"]:focus + label::before {
-  outline: none;
+va-radio-option .usa-radio__label::before {
+  content: none;
 }

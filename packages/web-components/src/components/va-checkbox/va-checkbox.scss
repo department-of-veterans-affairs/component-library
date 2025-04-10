@@ -46,11 +46,11 @@
   border: none;
   border-radius: 2px;
   box-shadow: 0 0 0 2px var(--vads-color-base);
-  appearance: none;
   margin: 0.064rem 0 0 4px;
   opacity: unset;
-  position: initial;
+  position: static;
   cursor: pointer;
+  appearance: unset;
 
   &:not([disabled]):focus {
     outline-offset: 4px;
@@ -64,6 +64,7 @@
     background-repeat: no-repeat;
     border: none;
     box-shadow: 0 0 0 2px var(--vads-button-color-background-primary-on-light);
+    appearance: none; // There isn't another way to style the checkmark other than to hide the built-in one
 
     &:focus {
       outline-offset: 4px;

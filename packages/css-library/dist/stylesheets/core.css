@@ -2995,8 +2995,7 @@ legend {
   margin-bottom: 0.65em;
 }
 
-[type=checkbox] + label::before,
-[type=radio] + label::before {
+[type=checkbox] + label::before {
   background: #ffffff;
   content: " ";
   display: inline-block;
@@ -3014,24 +3013,9 @@ legend {
   width: 1.25rem;
 }
 
-[type=radio] + label::before {
-  border-radius: 100%;
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px #757575;
-  height: 0.875rem;
-  line-height: 0.875rem;
-  margin-left: 3px;
-  margin-right: 0.75em;
-  width: 0.875rem;
-}
-
-[type=checkbox]:checked + label::before,
-[type=radio]:checked + label::before {
+[type=checkbox]:checked + label::before {
   background-color: #005ea2;
   box-shadow: 0 0 0 1px #005ea2;
-}
-
-[type=radio]:checked + label::before {
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #005ea2;
 }
 
 [type=checkbox]:checked + label::before,
@@ -3040,11 +3024,6 @@ legend {
   background-image: url(~@department-of-veterans-affairs/css-library/dist/img/correct8.svg);
   background-position: 50%;
   background-repeat: no-repeat;
-}
-
-[type=radio]:focus + label::before {
-  outline: 2px solid #face00;
-  outline-offset: 4px;
 }
 
 [type=checkbox]:disabled + label {
@@ -3056,8 +3035,7 @@ legend {
   outline-offset: 2px;
 }
 
-[type=checkbox]:disabled + label::before,
-[type=radio]:disabled + label::before {
+[type=checkbox]:disabled + label::before {
   background: #f1f1f1;
   box-shadow: 0 0 0 1px #aeb0b5;
   cursor: not-allowed;
