@@ -917,9 +917,9 @@ export namespace Components {
          */
         "text": string;
         /**
-          * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
+          * The type of the link, which determines its style. Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
          */
-        "type"?: 'primary' | 'secondary' | 'reverse';
+        "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
     }
     /**
      * @componentName Loading indicator
@@ -4396,9 +4396,9 @@ declare namespace LocalJSX {
          */
         "text": string;
         /**
-          * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
+          * The type of the link, which determines its style. Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
          */
-        "type"?: 'primary' | 'secondary' | 'reverse';
+        "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
     }
     /**
      * @componentName Loading indicator
