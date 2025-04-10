@@ -4,6 +4,7 @@ export type FilterFacet = {
   label: string;
   category: FilterCategory[];
   index?: number;
+  activeFiltersCount?: number;
 };
 
 export type FilterCategory = {
@@ -76,6 +77,15 @@ export class VaSearchFilter {
 
     this.totalActiveFilters = this.getTotalActiveFilters()
 
+    // update filterOptions with getTotalActiveFiltersByFacet for each facet
+    this.filterOptions = this.filterOptions.map((facet) => {
+      return {
+        ...facet,
+        activeFiltersCount: this.getTotalActiveFiltersByFacet(facet),
+      };
+    });
+
+    // Emit the event with all active filters
     const allActiveFilters = this.getActiveFiltersWithCategories();
     this.vaFilterChange.emit(allActiveFilters);
   };
@@ -101,6 +111,14 @@ export class VaSearchFilter {
       .filter(facet => facet.category.length > 0);
   }
 
+  /**
+   * Get the total number of active filters by category.
+   * @returns {number} The total number of active filters by category.
+   */
+  getTotalActiveFiltersByFacet(facet: FilterFacet): number {
+    return facet.category.filter(category => category.active === true).length;
+  }
+
   render() {
     const {
       header,
@@ -116,7 +134,7 @@ export class VaSearchFilter {
           <h2 id="header">{header}{totalActiveFilters > 0 ? ` (${totalActiveFilters})` : ''}</h2>
           <va-accordion class="va-search-filter__accordion">
             {filterOptions.map((facet: FilterFacet, index: number) => (
-              <va-accordion-item header={facet.label} key={index} open>
+              <va-accordion-item header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={index} open>
                 <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
                   {facet.category.map((category: FilterCategory, index: number) => (
                     <va-checkbox
@@ -142,7 +160,7 @@ export class VaSearchFilter {
         <va-accordion class="va-search-filter__accordion">
           <va-accordion-item header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')}>
             {filterOptions.map((facet: FilterFacet, index: number) => (
-              <va-checkbox-group label={facet.label} key={index}>
+              <va-checkbox-group label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={index}>
                 {facet.category.map((category: FilterCategory, index: number) => (
                   <va-checkbox
                     label={category.label}
