@@ -6,36 +6,12 @@ import classNames from 'classnames';
  * @maturityCategory use
  * @maturityLevel deployed
  */
-
-export interface VaLinkProps {
-  href: string;
-  text: string;
-  abbrTitle?: string;
-  active?: boolean;
-  back?: boolean;
-  calendar?: boolean;
-  channel?: boolean;
-  disableAnalytics?: boolean;
-  download?: boolean;
-  filename?: string;
-  filetype?: string;
-  pages?: number;
-  video?: boolean;
-  reverse?: boolean;
-  external?: boolean;
-  label?: string;
-  iconName?: string;
-  iconSize?: number;
-  language?: string;
-  componentLibraryAnalytics: EventEmitter;
-}
-
 @Component({
   tag: 'va-link',
   styleUrl: 'va-link.scss',
   shadow: true,
 })
-export class VaLink implements VaLinkProps {
+export class VaLink {
   /**
    * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
    */
