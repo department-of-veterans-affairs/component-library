@@ -213,4 +213,39 @@ describe('va-breadcrumbs', () => {
     expect(firstAnchorText).toBe('home');
   });
 
+  it('does not use #content for the last link when currentPageRedirect is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs breadcrumb-list='[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two" }, { "label": "Three", "href": "/three" }]' current-page-redirect></va-breadcrumbs>
+    `);
+
+    const anchorElements = await page.findAll('va-breadcrumbs >>> a');
+    const lastAnchorHref = await anchorElements[2].getProperty('href');
+
+    expect(lastAnchorHref).not.toContain('#content');
+  });
+
+  it('uses #content for the last link when currentPageRedirect is false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs breadcrumb-list='[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two" }, { "label": "Three", "href": "/three" }]'></va-breadcrumbs>
+    `);
+
+    const anchorElements = await page.findAll('va-breadcrumbs >>> a');
+    const lastAnchorHref = await anchorElements[2].getProperty('href');
+
+    expect(lastAnchorHref).toContain('#content');
+  });
+
+  it('uses the href value from the last breadcrumb when currentPageRedirect is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs breadcrumb-list='[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two" }, { "label": "Three", "href": "/three" }]' current-page-redirect></va-breadcrumbs>
+    `);
+
+    const anchorElements = await page.findAll('va-breadcrumbs >>> a');
+    const lastAnchorHref = await anchorElements[2].getProperty('href');
+
+    expect(lastAnchorHref).toContain('/three');
+  });
 });

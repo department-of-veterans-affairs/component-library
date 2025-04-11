@@ -50,6 +50,11 @@ export class VaBreadcrumbs {
   @Prop() homeVeteransAffairs?: boolean = true;
 
   /**
+   * When true, the current page link will use the last href value provided in the breadcrumb list instead of the #content hash.
+   */
+  @Prop() currentPageRedirect?: boolean = false;
+
+  /**
    *
    * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop.
    * Each breadcrumb is represented as an object with at least two properties: 'label' and 'href'.
@@ -331,7 +336,7 @@ export class VaBreadcrumbs {
                     : undefined
                 }
               >
-                {index === this.formattedBreadcrumbs.length - 1 ? (
+                {(!this.currentPageRedirect && index === this.formattedBreadcrumbs.length - 1) ? (
                   <a
                     class="usa-breadcrumb__link"
                     href="#content"
