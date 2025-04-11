@@ -180,7 +180,7 @@ export const BaseWithOptionalExternalVaLinkProp = Template.bind({});
 BaseWithOptionalExternalVaLinkProp.args = {
   ...BaseWithOptionalLink.args,
   optionalLink: {
-    href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    href: 'https://www.va.gov',
     text: 'Optional link to external url',
     external: true,
   },
