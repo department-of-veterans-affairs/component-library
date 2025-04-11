@@ -14,7 +14,19 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={searchFilterDocs} />,
     },
   },
-};
+  argTypes: {
+    resize: {
+      table: {
+        disable: true,
+      },
+    },
+    'filter-options': {
+      table: {
+        disable: true,    
+      },
+    },
+  },
+}
 
 const defaultArgs = {
   'header': 'Filters',
@@ -49,6 +61,9 @@ const Template = ({
     header={header}
     filterOptions={filterOptions}
     style={styles}
+    onVaFilterChange={(e) => console.log('VaFilterChange', e.detail)}
+    onVaFilterClearAll={(e) => console.log('VaFilterClearAll', e.detail)}
+    onVaFilterApply={(e) => console.log('VaFilterApply', e.detail)}
   />
 );
 

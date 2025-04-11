@@ -3101,6 +3101,8 @@ declare global {
     };
     interface HTMLVaSearchFilterElementEventMap {
         "vaFilterChange": Filter[];
+        "vaFilterApply": Filter[];
+        "vaFilterClearAll": void;
     }
     /**
      * @componentName Search Filter
@@ -5071,9 +5073,17 @@ declare namespace LocalJSX {
          */
         "header"?: string;
         /**
+          * A custom event emitted when the apply filters button is clicked.
+         */
+        "onVaFilterApply"?: (event: VaSearchFilterCustomEvent<Filter[]>) => void;
+        /**
           * A custom event emitted when the filter changes. The payload will provide all active categories.
          */
         "onVaFilterChange"?: (event: VaSearchFilterCustomEvent<Filter[]>) => void;
+        /**
+          * A custom event emitted when the clear all filters button is clicked.
+         */
+        "onVaFilterClearAll"?: (event: VaSearchFilterCustomEvent<void>) => void;
     }
     /**
      * @componentName Search input

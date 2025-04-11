@@ -48,6 +48,16 @@ export class VaSearchFilter {
    */
   @Event() vaFilterChange : EventEmitter<Filter[]>;
 
+  /**
+   * A custom event emitted when the apply filters button is clicked.
+   */
+  @Event() vaFilterApply : EventEmitter<Filter[]>;
+
+  /**
+   * A custom event emitted when the clear all filters button is clicked.
+   */
+  @Event() vaFilterClearAll : EventEmitter<void>;
+
   @Listen('resize', { target: 'window' })
   handleResize() {
     // Corresponds with the --tablet breakpoint size.
@@ -91,8 +101,7 @@ export class VaSearchFilter {
     });
 
     // Emit the event with all active filters
-    const allActiveFilters = this.getActiveFiltersWithCategories();
-    this.vaFilterChange.emit(allActiveFilters);
+    this.vaFilterChange.emit(this.getActiveFiltersWithCategories());
   };
 
   handleClearAllFilters = () => {
@@ -109,9 +118,12 @@ export class VaSearchFilter {
 
     this.totalActiveFilters = 0;
 
-    // Emit the event with all active filters
-    const allActiveFilters = this.getActiveFiltersWithCategories();
-    this.vaFilterChange.emit(allActiveFilters);
+    // Emit event to signal that all filters have been cleared.
+    this.vaFilterClearAll.emit();
+  };
+
+  handleApplyFilters = () => {
+    this.vaFilterApply.emit(this.getActiveFiltersWithCategories());
   };
 
   /**
@@ -151,17 +163,18 @@ export class VaSearchFilter {
       totalActiveFilters,
       handleFilterChange,
       handleClearAllFilters,
+      handleApplyFilters,
     } = this;
 
     const filterButtons = (
       <div id="filter-buttons">
         <va-button
-          onClick={() => {}}
+          onClick={handleApplyFilters}
           text="Apply filters"
           full-width
         />
         <va-button
-          onClick={() => handleClearAllFilters()}
+          onClick={handleClearAllFilters}
           text="Clear all filters"
           secondary
           full-width
