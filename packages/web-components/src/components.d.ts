@@ -4345,6 +4345,9 @@ declare namespace LocalJSX {
           * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
          */
         "language"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
         "onComponent-library-analytics"?: (event: VaLinkCustomEvent<any>) => void;
         /**
           * The number of pages of the file. Only displayed if download is `true`.

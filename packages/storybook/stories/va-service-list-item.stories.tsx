@@ -176,6 +176,15 @@ BaseWithOptionalLink.args = {
   },
 };
 
+export const BaseWithOptionalExternalVaLinkProp = Template.bind({});
+BaseWithOptionalExternalVaLinkProp.args = {
+  ...BaseWithOptionalLink.args,
+  optionalLink: {
+    href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    text: 'Optional link to external url',
+    external: true,
+  },
+};
 export const BaseWithCriticalAction = Template.bind({});
 BaseWithCriticalAction.args = {
   serviceDetails: {
