@@ -36,6 +36,11 @@ const defaultArgs = {
   ],
 };
 
+const styles = {
+  width: '100%',
+  maxWidth: '481px',
+};
+
 const Template = ({
   'header': header,
   'filter-options': filterOptions,
@@ -43,6 +48,7 @@ const Template = ({
   <VaSearchFilter 
     header={header}
     filterOptions={filterOptions}
+    style={styles}
   />
 );
 

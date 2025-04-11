@@ -95,6 +95,25 @@ export class VaSearchFilter {
     this.vaFilterChange.emit(allActiveFilters);
   };
 
+  handleClearAllFilters = () => {
+    this.filterOptions = this.filterOptions.map((facet) => {
+      const updatedFacet = {
+        ...facet,
+        category: facet.category.map((category) => ({ ...category, active: false })),
+      };
+      return {
+        ...updatedFacet,
+        activeFiltersCount: 0,
+      };
+    });
+
+    this.totalActiveFilters = 0;
+
+    // Emit the event with all active filters
+    const allActiveFilters = this.getActiveFiltersWithCategories();
+    this.vaFilterChange.emit(allActiveFilters);
+  };
+
   /**
    * Get the total number of active filters across all categories.
    * @returns {number} The total number of active filters.
@@ -131,7 +150,24 @@ export class VaSearchFilter {
       isDesktop,
       totalActiveFilters,
       handleFilterChange,
+      handleClearAllFilters,
     } = this;
+
+    const filterButtons = (
+      <div id="filter-buttons">
+        <va-button
+          onClick={() => {}}
+          text="Apply filters"
+          full-width
+        />
+        <va-button
+          onClick={() => handleClearAllFilters()}
+          text="Clear all filters"
+          secondary
+          full-width
+        />
+      </div>
+    );
 
     if (isDesktop) {
       return (
@@ -145,6 +181,7 @@ export class VaSearchFilter {
                     <va-checkbox
                       label={category.label}
                       key={index}
+                      checked={category.active}
                       onVaChange={(e) => handleFilterChange({
                         facetLabel: facet.label,
                         categoryLabel: category.label,
@@ -156,6 +193,7 @@ export class VaSearchFilter {
               </va-accordion-item>
             ))}
           </va-accordion>
+          {filterButtons}
         </Host>
       );
     }
@@ -163,13 +201,15 @@ export class VaSearchFilter {
     return (
       <Host>
         <va-accordion class="va-search-filter__accordion">
-          <va-accordion-item header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')}>
+          <va-accordion-item header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')} open>
+            <span slot="icon"><va-icon icon="filter_list" /></span>
             {filterOptions.map((facet: FilterFacet, index: number) => (
               <va-checkbox-group label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={index}>
                 {facet.category.map((category: FilterCategory, index: number) => (
                   <va-checkbox
                     label={category.label}
                     key={index}
+                    checked={category.active}
                     onVaChange={(e) => handleFilterChange({
                       facetLabel: facet.label,
                       categoryLabel: category.label,
@@ -179,6 +219,7 @@ export class VaSearchFilter {
                 ))}
               </va-checkbox-group>
             ))}
+            {filterButtons}
           </va-accordion-item>
         </va-accordion>
       </Host>

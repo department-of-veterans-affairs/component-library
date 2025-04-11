@@ -15,3 +15,10 @@ va-accordion-item::part(accordion-content) {
 va-checkbox-group {
   margin-top: 10px;
 }
+
+#filter-buttons {
+  margin-top: 25px;
+  va-button {
+    margin-bottom: 15px;
+  }
+}
