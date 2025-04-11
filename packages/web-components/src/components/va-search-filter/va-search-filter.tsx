@@ -3,20 +3,21 @@ import { Component, Host, h, Prop, Event, EventEmitter, Listen, forceUpdate, Sta
 export type FilterFacet = {
   label: string;
   category: FilterCategory[];
-  index?: number;
+  id?: number | string;
   activeFiltersCount?: number;
 };
 
 export type FilterCategory = {
   label: string;
   active?: boolean;
+  id?: number | string;
 };
 
 export type Filter = FilterFacet;
 
 interface FilterChangeParams {
-  facetLabel: string;
-  categoryLabel: string;
+  facetId: number | string;
+  categoryId: number | string;
   active: boolean;
 }
 
@@ -73,14 +74,14 @@ export class VaSearchFilter {
    */
   @State() totalActiveFilters: number = 0;
 
-  private handleFilterChange = ({ facetLabel, categoryLabel, active }: FilterChangeParams) => {
-    // find the matching facetLabel and categoryLabel then update the active state of the category
+  private handleFilterChange = ({ facetId, categoryId, active }: FilterChangeParams) => {
+    // find the matching facet and category by ID and update the active state
     this.filterOptions = this.filterOptions.map((facet) => {
-      if (facet.label === facetLabel) {
+      if (facet.id === facetId) {
         return {
           ...facet,
           category: facet.category.map((category) => {
-            if (category.label === categoryLabel) {
+            if (category.id === categoryId) {
               return { ...category, active };
             }
             return category;
@@ -187,17 +188,17 @@ export class VaSearchFilter {
         <Host>
           <h2 id="header">{header}{totalActiveFilters > 0 ? ` (${totalActiveFilters})` : ''}</h2>
           <va-accordion class="va-search-filter__accordion">
-            {filterOptions.map((facet: FilterFacet, index: number) => (
-              <va-accordion-item header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={index} open>
+            {filterOptions.map((facet: FilterFacet) => (
+              <va-accordion-item header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={facet.id} open>
                 <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
-                  {facet.category.map((category: FilterCategory, index: number) => (
+                  {facet.category.map((category: FilterCategory) => (
                     <va-checkbox
                       label={category.label}
-                      key={index}
+                      key={category.id}
                       checked={category.active}
                       onVaChange={(e) => handleFilterChange({
-                        facetLabel: facet.label,
-                        categoryLabel: category.label,
+                        facetId: facet.id,
+                        categoryId: category.id,
                         active: e.target.checked,
                       })}
                     />
@@ -216,16 +217,16 @@ export class VaSearchFilter {
         <va-accordion class="va-search-filter__accordion">
           <va-accordion-item header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')} open>
             <span slot="icon"><va-icon icon="filter_list" /></span>
-            {filterOptions.map((facet: FilterFacet, index: number) => (
-              <va-checkbox-group label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={index}>
-                {facet.category.map((category: FilterCategory, index: number) => (
+            {filterOptions.map((facet: FilterFacet) => (
+              <va-checkbox-group label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={facet.id}>
+                {facet.category.map((category: FilterCategory) => (
                   <va-checkbox
                     label={category.label}
-                    key={index}
+                    key={category.id}
                     checked={category.active}
                     onVaChange={(e) => handleFilterChange({
-                      facetLabel: facet.label,
-                      categoryLabel: category.label,
+                      facetId: facet.id,
+                      categoryId: category.id,
                       active: e.target.checked,
                     })}
                   />

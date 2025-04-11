@@ -32,17 +32,25 @@ const defaultArgs = {
   'header': 'Filters',
   'filter-options': [ 
     { 
-      label: "Facet 1",
+      id: 1,
+      label: "Benefits",
       category: [
-        { label: "Category 1" },
-        { label: "Category 2"} 
+        { label: "Health Care", id: 2 },
+        { label: "Education", id: 3 },
+        { label: "Housing", id: 4 }
       ]
     },
     { 
-      label:"Facet 2",
+      label:"Service Status",
+      id: 5,
       category: [
-        { label: "Category 3"},
-        { label: "Category 4"}
+        { label: "Veteran", id: 6 },
+        { label: "Active Duty", id: 7 },
+        { label: "Reservist", id: 8 },
+        { label: "National Guard", id: 9 },
+        { label: "Retired", id: 10 },
+        { label: "Disabled", id: 11 },
+        { label: "Other", id: 12 }
       ]
     }
   ],
