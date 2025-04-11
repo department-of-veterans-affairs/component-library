@@ -22,6 +22,7 @@ const LIST_OPTION_GROUP_OPTION_CLASS = `${LIST_OPTION_CLASS}--group-option`;
 const LIST_OPTION_FOCUSED_CLASS = `${LIST_OPTION_CLASS}--focused`;
 const LIST_OPTION_SELECTED_CLASS = `${LIST_OPTION_CLASS}--selected`;
 const STATUS_CLASS = `${COMBO_BOX_CLASS}__status`;
+const ERROR_CLASS = `usa-input--error`;
 
 const COMBO_BOX = `.${COMBO_BOX_CLASS}`;
 const SELECT = `.${SELECT_CLASS}`;
@@ -253,6 +254,11 @@ const noop = () => {};
         input.setAttribute(key, value);
       }),
     );
+
+    // Check for the error state and add the error class if needed
+    if (comboBoxEl.dataset.error === 'true') {
+      input.classList.add(ERROR_CLASS);
+    }
 
     comboBoxEl.insertAdjacentElement('beforeend', input);
 
