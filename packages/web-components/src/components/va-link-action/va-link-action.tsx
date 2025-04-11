@@ -21,7 +21,7 @@ import { isMessageSet } from '../../utils/utils';
 
 @Component({
   tag: 'va-link-action',
-  styleUrl: 'va-link-action.css',
+  styleUrl: 'va-link-action.scss',
   shadow: true,
 })
 export class VaLinkAction {

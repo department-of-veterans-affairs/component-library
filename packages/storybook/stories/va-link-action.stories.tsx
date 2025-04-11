@@ -26,7 +26,7 @@ const Template = ({
   'disable-analytics': disableAnalytics,
   href,
   text,
-  type, // Add the type parameter here
+  type,
   'message-aria-describedby': messageAriaDescribedBy,
   label,
 }) => {
@@ -35,7 +35,7 @@ const Template = ({
       disable-analytics={disableAnalytics}
       href={href}
       text={text}
-      type={type} // Add the type attribute here
+      type={type}
       label={label}
       message-aria-describedby={messageAriaDescribedBy}
     />
@@ -89,7 +89,6 @@ Reverse.parameters = {
   backgrounds: { default: 'dark' },
 };
 
-// Add these new story exports for the primary-entry variation
 export const PrimaryEntry = Template.bind({});
 PrimaryEntry.args = {
   text: 'Access my health records',

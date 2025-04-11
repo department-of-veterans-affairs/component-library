@@ -1,5 +1,7 @@
+@forward 'settings';
 @import '../../mixins/links.css';
 @import '../../mixins/accessibility.css';
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
 :host {
   display: inline-flex;
@@ -106,7 +108,7 @@
   min-height: 24px;
   max-width: var(--vads-size-line-length-5);
 
-  @media (min-width: 768px) {
+  @media (min-width: $medium-screen) {
     width: 75%;
   }
 
@@ -143,6 +145,7 @@
     background-color: var(--vads-color-action-focus-on-light);
     text-decoration: none;
     outline: none;
+    transition: none;
 
     & va-icon.link-icon {
       background-color: var(--vads-color-black);
