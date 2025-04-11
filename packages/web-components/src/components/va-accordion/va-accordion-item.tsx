@@ -44,7 +44,7 @@ export class VaAccordionItem {
   /**
    * True if the item is open
   */
-  @Prop() open?: boolean = false;
+  @Prop({ reflect: true }) open?: boolean = false;
 
   /**
    * Header level for button wrapper. Must be between 1 and 6

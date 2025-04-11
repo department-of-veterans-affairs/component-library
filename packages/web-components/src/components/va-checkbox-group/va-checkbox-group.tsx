@@ -103,6 +103,11 @@ export class VaCheckboxGroup {
     if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
   }
 
+  @Listen('resize', { target: 'window' })
+  handleResize() {
+    forceUpdate(this);
+  }
+
   private fireAnalyticsEvent(optionLabel) {
     this.componentLibraryAnalytics.emit({
       componentName: 'va-checkbox-group',
@@ -154,6 +159,7 @@ export class VaCheckboxGroup {
     const legendClass = classnames({
       'usa-legend': true,
       'usa-label--error': error,
+      'usa-sr-only': this.el.classList.contains('va-search-filter__checkbox-group')
     });
     const isFormsPattern =
       useFormsPattern === 'single' || useFormsPattern === 'multiple'
