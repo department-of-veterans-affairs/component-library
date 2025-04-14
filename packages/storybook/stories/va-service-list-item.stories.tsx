@@ -121,7 +121,8 @@ MaximalBase.argTypes = {
     },
   },
   'optionalLink': {
-    description: 'An optional link related to the service',
+    description:
+      'An optional link related to the service. All props of the va-link component are supported as properties of this object.',
     control: { type: 'object' },
     table: {
       category: 'Properties',
