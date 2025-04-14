@@ -343,3 +343,17 @@ export function applyFocus(el) {
     el.focus();
   }
 }
+
+/**
+ * This utility will expand the vertical space of the viewport when a web
+ * component is active or expanded (e.g. modal, accordion, etc.)
+ * @param wrap
+ * @param isVisible
+ * @returns
+ */
+export function resizeViewPorts(wrap, isVisible) {
+  if (!wrap) return;
+  const story = wrap.closest('.sb-anchor');
+  story.scrollIntoView();
+  story.classList.toggle('expand', isVisible);
+}

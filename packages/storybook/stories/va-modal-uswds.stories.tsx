@@ -1,6 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { VaModal } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure,
+  StoryDocs,
+  resizeViewPorts,
+} from './wc-helpers';
 
 VaModal.displayName = 'VaModal';
 
@@ -55,10 +60,17 @@ const Template = ({
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
-  const onCloseEvent = () => setIsVisible(!isVisible);
-  const openModal = () => setIsVisible(true);
+  const wrapRef = useRef(null);
+  const onCloseEvent = () => {
+    setIsVisible(!isVisible);
+    resizeViewPorts(wrapRef?.current, false);
+  };
+  const openModal = () => {
+    setIsVisible(true);
+    resizeViewPorts(wrapRef?.current, true);
+  };
   return (
-    <div>
+    <div ref={wrapRef}>
       <h1>Testing h1 heading</h1>
       <va-button onClick={openModal} text="Click here to open modal" />
       <VaModal
@@ -95,10 +107,17 @@ const ForcedTemplate = ({
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
-  const openModal = () => setIsVisible(true);
-  const closeModal = () => setIsVisible(false);
+  const wrapRef = useRef(null);
+  const openModal = () => {
+    setIsVisible(true);
+    resizeViewPorts(wrapRef?.current, true);
+  };
+  const closeModal = () => {
+    setIsVisible(false);
+    resizeViewPorts(wrapRef?.current, false);
+  };
   return (
-    <div>
+    <div ref={wrapRef}>
       <h1>Testing h1 heading</h1>
       <va-button onClick={openModal} text="Click here to open modal" />
       <VaModal
@@ -194,10 +213,17 @@ export const WithNestedWebComponents = ({
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
-  const onCloseEvent = () => setIsVisible(!isVisible);
-  const openModal = () => setIsVisible(true);
+  const wrapRef = useRef(null);
+  const onCloseEvent = () => {
+    setIsVisible(!isVisible);
+    resizeViewPorts(wrapRef?.current, false);
+  };
+  const openModal = () => {
+    setIsVisible(true);
+    resizeViewPorts(wrapRef?.current, true);
+  };
   return (
-    <div>
+    <div ref={wrapRef}>
       <h1>Testing h1 heading</h1>
       <va-button onClick={openModal} text="Click here to open modal" />
       <input id="pre-modal-input" type="checkbox" />
