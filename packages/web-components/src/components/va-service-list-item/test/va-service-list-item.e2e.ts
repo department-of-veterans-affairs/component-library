@@ -182,7 +182,7 @@ describe('va-service-list-item', () => {
     );
   });
 
-  it.only('renders optionalLink as external link', async () => {
+  it('renders optionalLink as external link', async () => {
     const optionalLinkAsExternal = {
       href: 'https://custom-link.com',
       text: 'External link',
