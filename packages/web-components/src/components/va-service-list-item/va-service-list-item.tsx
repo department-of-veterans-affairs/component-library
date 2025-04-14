@@ -46,7 +46,7 @@ export class VaServiceListItem {
   /** Action associated with the service  */
   @Prop() action?: ServiceAction | string;
 
-  /** An optional link related to the service */
+  /** An optional link related to the service. All props of the va-link component are supported as properties of this object. */
   @Prop() optionalLink?: OptionalLink | string;
 
   @State() parsedServiceDetails: ServiceDetails;

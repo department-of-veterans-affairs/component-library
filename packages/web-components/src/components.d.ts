@@ -1614,7 +1614,7 @@ export namespace Components {
          */
         "icon"?: string;
         /**
-          * An optional link related to the service
+          * An optional link related to the service. All props of the va-link component are supported as properties of this object.
          */
         "optionalLink"?: OptionalLink | string;
         /**
@@ -5216,7 +5216,7 @@ declare namespace LocalJSX {
          */
         "icon"?: string;
         /**
-          * An optional link related to the service
+          * An optional link related to the service. All props of the va-link component are supported as properties of this object.
          */
         "optionalLink"?: OptionalLink | string;
         /**
