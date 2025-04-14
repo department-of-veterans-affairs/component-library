@@ -280,7 +280,7 @@ const FormsPatternSingleTemplate = args => {
       <va-select id={id} error={error} {...rest}>
         <div slot="form-description">
           <p>HTML passed into the form-description slot:</p>
-          <ul>
+          <ul className="vads-u-margin-bottom--2">
             <li>Navy</li>
             <li>Army</li>
             <li>Marines</li>
