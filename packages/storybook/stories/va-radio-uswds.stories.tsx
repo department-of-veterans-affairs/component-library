@@ -364,7 +364,7 @@ const FormsPatternSingleTemplate = ({ required, error, label, name }) => {
 
         <div slot="form-description">
           <p>HTML passed into the form-description slot:</p>
-          <ul>
+          <ul className="vads-u-margin-bottom--2">
             <li>Bahrain</li>
             <li>Iraq</li>
             <li>Kuwait</li>
