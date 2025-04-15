@@ -61,6 +61,10 @@ div.continue .alert-expandable-trigger:hover {
   font-weight: 600;
 }
 
+.alert-expandable:not(.hide-icon) .alert-expandable-body {
+  padding-left: 32px;  /* 24px | 1.5rem (icon width) + 8px (icon margin) */
+}
+
 .alert-expandable-body {
   overflow: hidden;
 }
