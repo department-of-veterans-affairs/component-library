@@ -230,6 +230,7 @@ export class VaComboBox {
           class="usa-combo-box"
           data-default-value={value}
           data-placeholder={placeholder}
+          data-error={!!error}
         >
           <select
             class="usa-select"

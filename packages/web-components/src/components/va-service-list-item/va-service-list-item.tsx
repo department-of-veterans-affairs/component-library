@@ -1,6 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 import { Component, Host, h, Prop, Watch, State, Element } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
+import { Components } from '../../components';
 
 export interface ServiceDetails {
   [key: string]: string;
@@ -9,10 +10,7 @@ export interface ServiceAction {
   href: string;
   text: string;
 }
-export interface OptionalLink {
-  href: string;
-  text: string;
-}
+export type OptionalLink = Components.VaLink;
 
 /**
  * @componentName Service List Item
@@ -48,7 +46,7 @@ export class VaServiceListItem {
   /** Action associated with the service  */
   @Prop() action?: ServiceAction | string;
 
-  /** An optional link related to the service */
+  /** An optional link related to the service. All props of the va-link component are supported as properties of this object. */
   @Prop() optionalLink?: OptionalLink | string;
 
   @State() parsedServiceDetails: ServiceDetails;
@@ -130,10 +128,7 @@ export class VaServiceListItem {
     return (
       <Host>
         <div class="service-list-item">
-          <a
-            href={serviceLink}
-            class="service-title-row"
-          >
+          <a href={serviceLink} class="service-title-row">
             <div class="header" tabIndex={0}>
               {icon && (
                 <va-icon class={iconClass} icon={icon} size={3}></va-icon>
@@ -163,11 +158,7 @@ export class VaServiceListItem {
           <ul class="service-details-list">{serviceDetailsList}</ul>
 
           {parsedOptionalLink?.href && parsedOptionalLink?.text && (
-            <va-link
-              class="optional-link"
-              href={parsedOptionalLink.href}
-              text={parsedOptionalLink.text}
-            ></va-link>
+            <va-link class="optional-link" {...parsedOptionalLink}></va-link>
           )}
         </div>
       </Host>
