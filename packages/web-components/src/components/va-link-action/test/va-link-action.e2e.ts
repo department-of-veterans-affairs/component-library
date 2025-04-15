@@ -107,4 +107,23 @@ describe('va-link-action', () => {
     await anchor.click();
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
+
+  it('renders primary-entry link', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-link-action href="https://www.va.gov" text="Access your health records" type="primary-entry"></va-link-action>',
+    );
+
+    const element = await page.find('va-link-action');
+    expect(element).toEqualHtml(`
+    <va-link-action class="host--primary-entry hydrated" href="https://www.va.gov" text="Access your health records" type="primary-entry">
+      <mock:shadow-root>
+        <a href="https://www.va.gov" class="va-link--primary-entry">
+          <va-icon class="link-icon--left link-icon hydrated"></va-icon>
+          <span class="link-text">Access your health records</span>
+        </a>
+      </mock:shadow-root>
+    </va-link-action>
+    `);
+  });
 });
