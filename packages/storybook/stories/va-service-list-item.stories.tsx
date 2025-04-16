@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const serviceListItemDocs = getWebComponentDocs('va-service-list-item');
 
 export default {
-  title: 'Components/Service list item',
+  title: 'Components/Service List Item',
   id: 'components/va-service-list-item',
   parameters: {
     componentSubtitle: 'va-service-list-item web component',
@@ -121,7 +121,8 @@ MaximalBase.argTypes = {
     },
   },
   'optionalLink': {
-    description: 'An optional link related to the service',
+    description:
+      'An optional link related to the service. All props of the va-link component are supported as properties of this object.',
     control: { type: 'object' },
     table: {
       category: 'Properties',
@@ -176,6 +177,15 @@ BaseWithOptionalLink.args = {
   },
 };
 
+export const BaseWithOptionalExternalVaLinkProp = Template.bind({});
+BaseWithOptionalExternalVaLinkProp.args = {
+  ...BaseWithOptionalLink.args,
+  optionalLink: {
+    href: 'https://www.va.gov',
+    text: 'Optional link to external url',
+    external: true,
+  },
+};
 export const BaseWithCriticalAction = Template.bind({});
 BaseWithCriticalAction.args = {
   serviceDetails: {
@@ -194,41 +204,51 @@ BaseWithCriticalAction.args = {
 
 export const ServiceListWithMultipleServiceListItems = ({}) => {
   return (
-    <div>
-      <MaximalBase {...MaximalBase.args} />
-      <MinimalBase
-        {...MinimalBase.args}
-        serviceDetails={{
-          'Approved on': 'May 5, 2011',
-          'Combined disability rating': '90%',
-          'Monthly compensation': '$2,345.67',
-          'Payment start date': 'November 1, 2011',
-        }}
-        serviceName="Disability compensation"
-        serviceLink="https://www.va.gov/disability"
-        icon="description"
-      />
-      <BaseWithOptionalLink
-        {...BaseWithOptionalLink.args}
-        serviceDetails={{ 'Application submission date': 'September 14, 2012' }}
-        serviceName="Pension"
-        serviceLink="https://www.va.gov/pension"
-        icon="handshake"
-        serviceStatus="In Progress"
-      />
-      <BaseWithCriticalAction
-        {...BaseWithCriticalAction.args}
-        serviceDetails={{
-          'Enrolled on': 'February 9, 2010',
-          'Policy': 'FSGLI',
-          'Accelerated payments': 'Approved',
-        }}
-        serviceName="Life insurance"
-        serviceLink="https://www.va.gov/life-insurance"
-        icon="shield"
-        serviceStatus="Active"
-      />
-    </div>
+    <ul className="usa-unstyled-list">
+      <li>
+        <MaximalBase {...MaximalBase.args} />
+      </li>
+      <li>
+        <MinimalBase
+          {...MinimalBase.args}
+          serviceDetails={{
+            'Approved on': 'May 5, 2011',
+            'Combined disability rating': '90%',
+            'Monthly compensation': '$2,345.67',
+            'Payment start date': 'November 1, 2011',
+          }}
+          serviceName="Disability compensation"
+          serviceLink="https://www.va.gov/disability"
+          icon="description"
+        />
+      </li>
+      <li>
+        <BaseWithOptionalLink
+          {...BaseWithOptionalLink.args}
+          serviceDetails={{
+            'Application submission date': 'September 14, 2012',
+          }}
+          serviceName="Pension"
+          serviceLink="https://www.va.gov/pension"
+          icon="handshake"
+          serviceStatus="In Progress"
+        />
+      </li>
+      <li>
+        <BaseWithCriticalAction
+          {...BaseWithCriticalAction.args}
+          serviceDetails={{
+            'Enrolled on': 'February 9, 2010',
+            'Policy': 'FSGLI',
+            'Accelerated payments': 'Approved',
+          }}
+          serviceName="Life insurance"
+          serviceLink="https://www.va.gov/life-insurance"
+          icon="shield"
+          serviceStatus="Active"
+        />
+      </li>
+    </ul>
   );
 };
 
@@ -236,43 +256,51 @@ ServiceListWithMultipleServiceListItems.parameters = {
   docs: {
     source: {
       code: `
-<div>
-  <va-service-list-item
-    serviceDetails='{"Approved on": "May 5, 2011", "Program": "Post-9/11 GI Bill", "Eligibility": "70%"}'
-    icon="school"
-    serviceName="Education"
-    serviceLink="https://www.va.gov/education"
-    serviceStatus="Eligible"
-    action='{"href": "https://www.va.gov/education", "text": "Take some urgent action"}'
-    optionalLink='{"href": "https://www.va.gov", "text": "Optional link (to a page other than the detail page)"}'
-  ></va-service-list-item>
+<ul className='usa-unstyled-list'>
+  <li>
+    <va-service-list-item
+      serviceDetails='{"Approved on": "May 5, 2011", "Program": "Post-9/11 GI Bill", "Eligibility": "70%"}'
+      icon="school"
+      serviceName="Education"
+      serviceLink="https://www.va.gov/education"
+      serviceStatus="Eligible"
+      action='{"href": "https://www.va.gov/education", "text": "Take some urgent action"}'
+      optionalLink='{"href": "https://www.va.gov", "text": "Optional link (to a page other than the detail page)"}'
+    ></va-service-list-item>
+  </li>
 
-  <va-service-list-item
-    serviceDetails='{"Approved on": "May 5, 2011", "Combined disability rating": "90%", "Monthly compensation": "$2,345.67", "Payment start date": "November 1, 2011"}'
-    icon="description"
-    serviceName="Disability compensation"
-    serviceLink="https://www.va.gov/disability"
-    serviceStatus="Eligible"
-  ></va-service-list-item>
+  <li>
+    <va-service-list-item
+      serviceDetails='{"Approved on": "May 5, 2011", "Combined disability rating": "90%", "Monthly compensation": "$2,345.67", "Payment start date": "November 1, 2011"}'
+      icon="description"
+      serviceName="Disability compensation"
+      serviceLink="https://www.va.gov/disability"
+      serviceStatus="Eligible"
+    ></va-service-list-item>
+  </li>
 
-  <va-service-list-item
-    serviceDetails='{"Application submission date": "September 14, 2012"}'
-    icon="handshake"
-    serviceName="Pension"
-    serviceLink="https://www.va.gov/pension"
-    serviceStatus="In Progress"
-    optionalLink='{"href": "https://www.va.gov", "text": "Optional link (to a page other than the detail page)"}'
-  ></va-service-list-item>
+  <li>
+    <va-service-list-item
+      serviceDetails='{"Application submission date": "September 14, 2012"}'
+      icon="handshake"
+      serviceName="Pension"
+      serviceLink="https://www.va.gov/pension"
+      serviceStatus="In Progress"
+      optionalLink='{"href": "https://www.va.gov", "text": "Optional link (to a page other than the detail page)"}'
+    ></va-service-list-item>
+  </li>
 
-  <va-service-list-item
-    serviceDetails='{"Enrolled on": "February 9, 2010", "Policy": "FSGLI", "Accelerated payments": "Approved"}'
-    icon="shield"
-    serviceName="Life insurance"
-    serviceLink="https://www.va.gov/life-insurance"
-    serviceStatus="Active"
-    action='{"href": "https://www.va.gov/education", "text": "Take some urgent action"}'
-  ></va-service-list-item>
-</div>
+  <li>
+    <va-service-list-item
+      serviceDetails='{"Enrolled on": "February 9, 2010", "Policy": "FSGLI", "Accelerated payments": "Approved"}'
+      icon="shield"
+      serviceName="Life insurance"
+      serviceLink="https://www.va.gov/life-insurance"
+      serviceStatus="Active"
+      action='{"href": "https://www.va.gov/education", "text": "Take some urgent action"}'
+    ></va-service-list-item>
+  </li>
+</ul>
       `,
     },
   },

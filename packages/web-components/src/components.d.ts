@@ -224,6 +224,10 @@ export namespace Components {
          */
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
+          * When true, the current page link will use the last href value provided in the breadcrumb list instead of the #content hash.
+         */
+        "currentPageRedirect"?: boolean;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -542,7 +546,7 @@ export namespace Components {
     interface VaCrisisLineModal {
     }
     /**
-     * @componentName Critical action
+     * @componentName Critical Action
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -913,9 +917,9 @@ export namespace Components {
          */
         "text": string;
         /**
-          * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
+          * The type of the link, which determines its style. Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
          */
-        "type"?: 'primary' | 'secondary' | 'reverse';
+        "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
     }
     /**
      * @componentName Loading indicator
@@ -1596,7 +1600,7 @@ export namespace Components {
         "width"?: string;
     }
     /**
-     * @componentName Service list item
+     * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -1610,7 +1614,7 @@ export namespace Components {
          */
         "icon"?: string;
         /**
-          * An optional link related to the service
+          * An optional link related to the service. All props of the va-link component are supported as properties of this object.
          */
         "optionalLink"?: OptionalLink | string;
         /**
@@ -2540,7 +2544,7 @@ declare global {
         new (): HTMLVaCrisisLineModalElement;
     };
     /**
-     * @componentName Critical action
+     * @componentName Critical Action
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3149,7 +3153,7 @@ declare global {
         new (): HTMLVaSelectElement;
     };
     /**
-     * @componentName Service list item
+     * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3618,6 +3622,10 @@ declare namespace LocalJSX {
          */
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
+          * When true, the current page link will use the last href value provided in the breadcrumb list instead of the #content hash.
+         */
+        "currentPageRedirect"?: boolean;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -3980,7 +3988,7 @@ declare namespace LocalJSX {
     interface VaCrisisLineModal {
     }
     /**
-     * @componentName Critical action
+     * @componentName Critical Action
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -4337,6 +4345,9 @@ declare namespace LocalJSX {
           * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
          */
         "language"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
         "onComponent-library-analytics"?: (event: VaLinkCustomEvent<any>) => void;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
@@ -4388,9 +4399,9 @@ declare namespace LocalJSX {
          */
         "text": string;
         /**
-          * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
+          * The type of the link, which determines its style. Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
          */
-        "type"?: 'primary' | 'secondary' | 'reverse';
+        "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
     }
     /**
      * @componentName Loading indicator
@@ -5191,7 +5202,7 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     /**
-     * @componentName Service list item
+     * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -5205,7 +5216,7 @@ declare namespace LocalJSX {
          */
         "icon"?: string;
         /**
-          * An optional link related to the service
+          * An optional link related to the service. All props of the va-link component are supported as properties of this object.
          */
         "optionalLink"?: OptionalLink | string;
         /**
@@ -5829,7 +5840,7 @@ declare module "@stencil/core" {
              */
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             /**
-             * @componentName Critical action
+             * @componentName Critical Action
              * @maturityCategory caution
              * @maturityLevel candidate
              */
@@ -6028,7 +6039,7 @@ declare module "@stencil/core" {
              */
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             /**
-             * @componentName Service list item
+             * @componentName Service List Item
              * @maturityCategory caution
              * @maturityLevel candidate
              */
