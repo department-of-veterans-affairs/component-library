@@ -97,7 +97,7 @@ export class VaSearchFilter {
     this.filterOptions = this.filterOptions.map((facet) => {
       return {
         ...facet,
-        activeFiltersCount: this.getTotalActiveFiltersByFacet(facet),
+        activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
       };
     });
 
@@ -152,8 +152,70 @@ export class VaSearchFilter {
    * Get the total number of active filters by category.
    * @returns {number} The total number of active filters by category.
    */
-  getTotalActiveFiltersByFacet(facet: FilterFacet): number {
+  static getTotalActiveFiltersByFacet(facet: FilterFacet): number {
     return facet.category.filter(category => category.active === true).length;
+  }
+
+  /**
+   * Validates the filter options structure
+   */
+  static validateFilterOptions(options: Filter[] | string): Filter[] | null {
+    if (typeof options === 'string') {
+      try {
+        options = JSON.parse(options);
+      } catch (e) {
+        console.error('Error parsing filterOptions:', e);
+        return null;
+      }
+    }
+
+    if (!Array.isArray(options)) {
+      console.error('filterOptions must be an array');
+      return null;
+    }
+
+/**
+ * Checks the top-level facet:
+ * - Has a valid label (string and non-empty)
+ * - Has a valid ID (number or string)
+ * - Has a category array
+ * Checks each category item:
+ * - Has a valid label (string and non-empty)
+ * - Has a valid ID (number or string)
+ */
+    const validOptions = options.every(option => {
+      const hasValidLabel = typeof option.label === 'string' && option.label.length > 0;
+      const hasValidCategory = Array.isArray(option.category) && option.category.every(cat => 
+        typeof cat.label === 'string' && cat.label.length > 0
+      );
+      const hasValidId = typeof option.id === 'number' || typeof option.id === 'string';
+      return hasValidLabel && hasValidCategory && hasValidId;
+    });
+
+    return validOptions ? options : null;
+  }
+
+  /**
+   * This method is invoked once before the component is first rendered.
+   * Its main purpose is to validate and format the filterOptions prop, if present.
+   */
+  componentWillLoad() {
+    if (!this.filterOptions?.length) return;
+
+    const validatedOptions = VaSearchFilter.validateFilterOptions(this.filterOptions);
+
+    if (validatedOptions) {
+      // update filterOptions with validated options and initial active filter counts.
+      this.totalActiveFilters = this.getTotalActiveFilters();
+      this.filterOptions = validatedOptions.map((facet) => {
+        return {
+          ...facet,
+          activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
+        };
+      }); 
+    } else {
+      this.filterOptions = [];
+    }
   }
 
   render() {
@@ -187,11 +249,12 @@ export class VaSearchFilter {
       return (
         <Host>
           <h2 id="header">{header}{totalActiveFilters > 0 ? ` (${totalActiveFilters})` : ''}</h2>
-          <va-accordion class="va-search-filter__accordion">
-            {filterOptions.map((facet: FilterFacet) => (
-              <va-accordion-item header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={facet.id} open>
-                <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
-                  {facet.category.map((category: FilterCategory) => (
+          {filterOptions.length > 0 && (
+            <va-accordion class="va-search-filter__accordion">
+              {filterOptions.map((facet: FilterFacet) => (
+                <va-accordion-item header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={facet.id} open>
+                  <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
+                    {facet.category.map((category: FilterCategory) => (
                     <va-checkbox
                       label={category.label}
                       key={category.id}
@@ -207,6 +270,7 @@ export class VaSearchFilter {
               </va-accordion-item>
             ))}
           </va-accordion>
+          )}
           {filterButtons}
         </Host>
       );
@@ -214,28 +278,30 @@ export class VaSearchFilter {
 
     return (
       <Host>
-        <va-accordion class="va-search-filter__accordion">
-          <va-accordion-item header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')} open>
-            <span slot="icon"><va-icon icon="filter_list" /></span>
-            {filterOptions.map((facet: FilterFacet) => (
-              <va-checkbox-group label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={facet.id}>
-                {facet.category.map((category: FilterCategory) => (
-                  <va-checkbox
-                    label={category.label}
-                    key={category.id}
-                    checked={category.active}
-                    onVaChange={(e) => handleFilterChange({
-                      facetId: facet.id,
-                      categoryId: category.id,
-                      active: e.target.checked,
-                    })}
-                  />
-                ))}
-              </va-checkbox-group>
-            ))}
-            {filterButtons}
-          </va-accordion-item>
-        </va-accordion>
+        {filterOptions.length > 0 && (
+          <va-accordion class="va-search-filter__accordion">
+            <va-accordion-item header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')} open>
+              <span slot="icon"><va-icon icon="filter_list" /></span>
+              {filterOptions.map((facet: FilterFacet) => (
+                <va-checkbox-group label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} key={facet.id}>
+                  {facet.category.map((category: FilterCategory) => (
+                    <va-checkbox
+                      label={category.label}
+                      key={category.id}
+                      checked={category.active}
+                      onVaChange={(e) => handleFilterChange({
+                        facetId: facet.id,
+                        categoryId: category.id,
+                        active: e.target.checked,
+                      })}
+                    />
+                  ))}
+                </va-checkbox-group>
+              ))}
+              {filterButtons}
+            </va-accordion-item>
+          </va-accordion>
+        )}
       </Host>
     );
   }
