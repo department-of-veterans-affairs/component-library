@@ -191,6 +191,7 @@ export class VaCheckboxGroup {
             <legend
               class={legendClass}
               aria-describedby={messageAriaDescribedbyId}
+              part="legend"
             >
               {HeaderLevel ? (
                 <HeaderLevel part="header">{label}</HeaderLevel>
