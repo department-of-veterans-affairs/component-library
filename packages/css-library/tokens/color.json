@@ -18,6 +18,18 @@
   "vads-button-color-text-primary-on-light": {
     "*": { "value": "#ffffff" }
   },
+  "vads-alert-color-background-info-on-light": {
+    "*": { "value": "{uswds-system-color-cyan-5}" }
+  },
+  "vads-alert-color-background-success-on-light": {
+    "*": { "value": "{uswds-system-color-green-cool-5}" }
+  },
+  "vads-alert-color-background-warning-on-light": {
+    "*": { "value": "{uswds-system-color-yellow-5}" }
+  },
+  "vads-alert-color-background-error-on-light": {
+    "*": { "value": "{uswds-system-color-red-warm-10}" }
+  },
   "vads-color-white": {
     "*": { "value": "#ffffff" }
   },

@@ -7,19 +7,19 @@
 }
 
 :host([status='warning']) {
-  background-color: var(--vads-color-gold-lightest);
+  background-color: var(--vads-alert-color-background-warning-on-light);
 }
 
 :host([status='info']) {
-  background-color: var(--vads-color-primary-alt-lightest);
+  background-color: var(--vads-alert-color-background-info-on-light);
 }
 
 :host([status='error']) {
-  background-color: var(--vads-color-secondary-lightest);
+  background-color: var(--vads-alert-color-background-error-on-light);
 }
 
 :host([status='success']) {
-  background-color: var(--vads-color-success-lighter);
+  background-color: var(--vads-alert-color-background-success-on-light);
 }
 
 :host([status='continue']) {
@@ -31,6 +31,10 @@
   cursor: pointer;
   display: flex;
   padding: 0.75rem;
+}
+
+.alert-expandable-trigger[aria-expanded='true'] {
+  padding-bottom: 0.25rem;
 }
 
 div.warning .alert-expandable-trigger:hover {
@@ -84,7 +88,7 @@ div.continue .alert-expandable-trigger:hover {
 }
 
 #slot-wrap {
-  margin: 0.75rem;
+  margin: 0.25rem 0.75rem 0.75rem 0.75rem;
 }
 
 .alert-expandable-icon {
