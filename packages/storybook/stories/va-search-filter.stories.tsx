@@ -80,4 +80,33 @@ Default.args = {
   ...defaultArgs,
 };
 
+export const ActiveFilters = Template.bind(null);
+ActiveFilters.args = {
+  ...defaultArgs,
+  'filter-options': [ 
+    { 
+      id: 1,
+      label: "Benefits",
+      category: [
+        { label: "Health Care", id: 2, active: true },
+        { label: "Education", id: 3 },
+        { label: "Housing", id: 4 }
+      ]
+    },
+    { 
+      label:"Service Status",
+      id: 5,
+      category: [
+        { label: "Veteran", id: 6 },
+        { label: "Active Duty", id: 7 },
+        { label: "Reservist", id: 8, active: true },
+        { label: "National Guard", id: 9 },
+        { label: "Retired", id: 10 },
+        { label: "Disabled", id: 11, active: true },
+        { label: "Other", id: 12 }
+      ]
+    }
+  ],
+};
+
 Default.argTypes = propStructure(searchFilterDocs);

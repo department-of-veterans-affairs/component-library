@@ -6,9 +6,9 @@ const filterOptions = JSON.stringify([
     id: 1,
     label: "Benefits",
     category: [
-      { label: "Health Care", id: 2 },
+      { label: "Health Care", id: 2, active: true },
       { label: "Education", id: 3 },
-      { label: "Housing", id: 4 }
+      { label: "Housing", id: 4, active: true }
     ]
   },
   { 
@@ -16,7 +16,7 @@ const filterOptions = JSON.stringify([
     id: 5,
     category: [
       { label: "Veteran", id: 6 },
-      { label: "Active Duty", id: 7 },
+      { label: "Active Duty", id: 7, active: true },
       { label: "Reservist", id: 8 },
       { label: "National Guard", id: 9 },
       { label: "Retired", id: 10 },
@@ -165,5 +165,124 @@ describe('va-search-filter', () => {
     // expect only one va-accordion-item to be rendered for mobile web
     const accordionItems = await page.findAll('va-search-filter >>> va-accordion-item');
     expect(accordionItems.length).toBe(1);
+  });
+
+  it('displays the total active filter count in the header when the component initially loads - desktop', async () => {
+    const page = await newE2EPage();
+
+    // Set viewport to desktop size
+    await page.setViewport({  
+      width: 1024,
+      height: 768
+    });
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filter"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+    
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+    
+    // Verify that the active filter count is displayed in the header
+    const header = await page.find('va-search-filter >>> #header');
+    const text = await header.getProperty('textContent');
+    expect(text).toContain('3');
+  });
+
+  it('displays the total active filter count in the header when the component initially loads - mobile web', async () => {
+    const page = await newE2EPage();
+
+    // Set viewport to mobile size
+    await page.setViewport({
+      width: 480,
+      height: 768
+    });
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filter"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+    
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+    
+    // Verify that the va-accordion-item header prop contains the active filter count
+    const accordionItem = await page.find('va-search-filter >>> va-accordion-item');
+    const header = await accordionItem?.getProperty('header');
+    expect(header).toContain('3');
+  });
+
+  it ('displays the total active categories for each facet - desktop', async () => {
+    const page = await newE2EPage();
+
+    // Set viewport to desktop size
+    await page.setViewport({
+      width: 1024,
+      height: 768
+    });
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filter"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+    
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+    
+    // Get the accordion items which display the active filter counts in their headers
+    const accordionItems = await page.findAll('va-search-filter >>> va-accordion-item');
+    
+    // Check that the first accordion item header contains the active filter count (2)
+    const firstAccordionItem = accordionItems[0];
+    const firstHeader = await firstAccordionItem.getProperty('header');
+    expect(firstHeader).toContain('2');
+
+    // Check that the second accordion item header contains the active filter count (1)
+    const secondAccordionItem = accordionItems[1];
+    const secondHeader = await secondAccordionItem.getProperty('header');
+    expect(secondHeader).toContain('1');
+  })
+
+  it ('displays the total active categories for each facet - mobile web', async () => { 
+    const page = await newE2EPage();
+
+    // Set viewport to mobile size
+    await page.setViewport({
+      width: 480,
+      height: 768
+    });
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filter"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+    
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+
+    // Get all checkbox groups
+    const checkboxGroups = await page.findAll('va-search-filter >>> va-checkbox-group');
+
+    // Check that we have at least one checkbox group
+    expect(checkboxGroups.length).toBeGreaterThan(0);
+
+    // Check the first checkbox group label
+    if (checkboxGroups.length > 0) {
+      const firstCheckboxGroup = checkboxGroups[0];
+      const firstLabel = await firstCheckboxGroup.getProperty('label');
+      expect(firstLabel).toContain('2');
+    }
+
+    // Check the second checkbox group label if it exists
+    if (checkboxGroups.length > 1) {
+      const secondCheckboxGroup = checkboxGroups[1];
+      const secondLabel = await secondCheckboxGroup.getProperty('label');
+      expect(secondLabel).toContain('1');
+    }
   });
 });
