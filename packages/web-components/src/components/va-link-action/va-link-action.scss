@@ -1,0 +1,168 @@
+@forward 'settings';
+@import '../../mixins/links.css';
+@import '../../mixins/accessibility.css';
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
+
+:host {
+  display: inline-flex;
+}
+
+:host a {
+  display: inline-flex;
+  align-items: flex-start;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 1.06rem;
+  padding: 0.5rem 0;
+  &:active {
+    outline: 2px solid var(--vads-color-action-focus-on-light);
+    outline-offset: 2px;
+  }
+}
+
+:host a.va-link--primary,
+:host a.va-link--secondary {
+  &:hover, &:active {
+    color: var(--vads-color-link) !important;
+  }
+}
+
+:host a.va-link--reverse {
+  color: var(--vads-color-white);
+
+  &:hover, &:active {
+    color: var(--vads-color-action-focus-on-light);
+    background-color: transparent;
+  }
+}
+
+:host a.va-link--reverse va-icon {
+  &:hover, &:active {
+    background-color: var(--vads-color-action-focus-on-light);
+  }
+}
+
+.link-icon--left {
+  margin-right: 8px;
+  vertical-align: baseline;
+  position: relative;
+}
+
+.link-icon {
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.va-link--primary {
+  va-icon {
+    background-color: var(--vads-color-success-dark);
+  }
+}
+
+.va-link--secondary {
+  va-icon {
+    background-color: var(--vads-color-primary);
+  }
+}
+
+.link-icon--reverse {
+  background-color: var(--vads-color-white);
+  color: var(--vads-color-black);
+}
+
+:host a.va-link--reverse:hover va-icon,
+:host a.va-link--reverse:active va-icon {
+  background-color: var(--vads-color-action-focus-on-light) !important;
+}
+
+.link-text {
+  display: inline-block;
+  vertical-align: top;
+  max-width: calc(100% - 24px);
+  white-space: pre-wrap;
+}
+
+:host(.host--primary-entry) {
+  width: 100%;
+}
+
+:host a.va-link--primary-entry {
+  position: relative;
+  display: inline-block;
+  background-color: var(--vads-color-primary);
+  color: var(--vads-color-white);
+  text-decoration: none;
+  padding: 15px 15px 15px 45px;
+  margin: 0 1.5rem 0 0;
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%);
+  transition: all 0.2s ease-in-out;
+  width: 95%;
+  line-height: 1.4;
+  min-height: 24px;
+  max-width: var(--vads-size-line-length-5);
+
+  @media (min-width: $medium-screen) {
+    width: 75%;
+  }
+
+  & va-icon.link-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--vads-color-primary);
+    background-color: var(--vads-color-white);
+  }
+
+  & .link-text {
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* Hover state */
+  &:hover:not(:focus) {
+    text-decoration: none;
+
+    & va-icon.link-icon {
+      background-color: var(--vads-color-action-focus-on-light);
+    }
+    & .link-text {
+      color: var(--vads-color-action-focus-on-light)
+    }
+  }
+
+  /* Focus & Active state */
+  &:focus,
+  &:active {
+    background-color: var(--vads-color-action-focus-on-light);
+    text-decoration: none;
+    outline: none;
+    transition: none;
+
+    & va-icon.link-icon {
+      background-color: var(--vads-color-black);
+      color: var(--vads-color-action-focus-on-light)
+    }
+    & .link-text {
+      color: var(--vads-color-black)
+    }
+  }
+
+  /* Focus + Hover state */
+  &:focus:hover {
+    background-color: var(--vads-color-action-focus-on-light);
+
+    & va-icon.link-icon,
+    & .link-text {
+      text-decoration: underline;
+      text-decoration-color: var(--vads-color-black);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+  }
+}

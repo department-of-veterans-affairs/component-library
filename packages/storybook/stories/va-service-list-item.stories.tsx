@@ -121,7 +121,8 @@ MaximalBase.argTypes = {
     },
   },
   'optionalLink': {
-    description: 'An optional link related to the service',
+    description:
+      'An optional link related to the service. All props of the va-link component are supported as properties of this object.',
     control: { type: 'object' },
     table: {
       category: 'Properties',
@@ -176,6 +177,15 @@ BaseWithOptionalLink.args = {
   },
 };
 
+export const BaseWithOptionalExternalVaLinkProp = Template.bind({});
+BaseWithOptionalExternalVaLinkProp.args = {
+  ...BaseWithOptionalLink.args,
+  optionalLink: {
+    href: 'https://www.va.gov',
+    text: 'Optional link to external url',
+    external: true,
+  },
+};
 export const BaseWithCriticalAction = Template.bind({});
 BaseWithCriticalAction.args = {
   serviceDetails: {

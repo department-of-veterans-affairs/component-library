@@ -26,6 +26,7 @@ const Template = ({
   'disable-analytics': disableAnalytics,
   href,
   text,
+  type,
   'message-aria-describedby': messageAriaDescribedBy,
   label,
 }) => {
@@ -34,6 +35,7 @@ const Template = ({
       disable-analytics={disableAnalytics}
       href={href}
       text={text}
+      type={type}
       label={label}
       message-aria-describedby={messageAriaDescribedBy}
     />
@@ -85,4 +87,32 @@ Reverse.args = {
 };
 Reverse.parameters = {
   backgrounds: { default: 'dark' },
+};
+
+export const PrimaryEntry = Template.bind({});
+PrimaryEntry.args = {
+  text: 'Access my health records',
+  href: 'https://va.gov/records',
+  type: 'primary-entry',
+};
+PrimaryEntry.parameters = {
+  docs: {
+    description: {
+      story: 'The primary-entry variation provides a distinct entry point style with an arrow shape.',
+    },
+  },
+};
+
+export const PrimaryEntryLongText = Template.bind({});
+PrimaryEntryLongText.args = {
+  text: 'Access my health records with a much longer text that will wrap to multiple lines to demonstrate the arrow shape behavior',
+  href: 'https://va.gov/records',
+  type: 'primary-entry',
+};
+PrimaryEntryLongText.parameters = {
+  docs: {
+    description: {
+      story: 'Primary-entry variation with longer text to demonstrate text wrapping behavior.',
+    },
+  },
 };

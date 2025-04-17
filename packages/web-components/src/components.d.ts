@@ -919,9 +919,9 @@ export namespace Components {
          */
         "text": string;
         /**
-          * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
+          * The type of the link, which determines its style. Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
          */
-        "type"?: 'primary' | 'secondary' | 'reverse';
+        "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
     }
     /**
      * @componentName Loading indicator
@@ -1631,7 +1631,7 @@ export namespace Components {
          */
         "icon"?: string;
         /**
-          * An optional link related to the service
+          * An optional link related to the service. All props of the va-link component are supported as properties of this object.
          */
         "optionalLink"?: OptionalLink | string;
         /**
@@ -4391,6 +4391,9 @@ declare namespace LocalJSX {
           * The lang attribute for the anchor tag in the Default va-link. Also used for hreflang.
          */
         "language"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
         "onComponent-library-analytics"?: (event: VaLinkCustomEvent<any>) => void;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
@@ -4442,9 +4445,9 @@ declare namespace LocalJSX {
          */
         "text": string;
         /**
-          * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
+          * The type of the link, which determines its style. Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
          */
-        "type"?: 'primary' | 'secondary' | 'reverse';
+        "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
     }
     /**
      * @componentName Loading indicator
@@ -5286,7 +5289,7 @@ declare namespace LocalJSX {
          */
         "icon"?: string;
         /**
-          * An optional link related to the service
+          * An optional link related to the service. All props of the va-link component are supported as properties of this object.
          */
         "optionalLink"?: OptionalLink | string;
         /**
