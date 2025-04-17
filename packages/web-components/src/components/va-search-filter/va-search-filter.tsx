@@ -211,9 +211,11 @@ export class VaSearchFilter {
  */
     const validOptions = options.every(option => {
       const hasValidLabel = typeof option.label === 'string' && option.label.length > 0;
-      const hasValidCategory = Array.isArray(option.category) && option.category.every(cat => 
-        typeof cat.label === 'string' && cat.label.length > 0
-      );
+      const hasValidCategory = Array.isArray(option.category) && option.category.length > 0 && option.category.every(cat => {
+        const hasValidCatLabel = typeof cat.label === 'string' && cat.label.length > 0;
+        const hasValidCatId = typeof cat.id === 'number' || typeof cat.id === 'string';
+        return hasValidCatLabel && hasValidCatId;
+      });
       const hasValidId = typeof option.id === 'number' || typeof option.id === 'string';
       return hasValidLabel && hasValidCategory && hasValidId;
     });

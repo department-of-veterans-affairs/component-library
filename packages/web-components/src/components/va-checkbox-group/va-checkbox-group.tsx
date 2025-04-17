@@ -190,7 +190,6 @@ export class VaCheckboxGroup {
           <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
             <legend
               class={legendClass}
-              part="legend"
               aria-describedby={messageAriaDescribedbyId}
             >
               {HeaderLevel ? (
