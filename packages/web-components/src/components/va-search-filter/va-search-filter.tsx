@@ -200,15 +200,15 @@ export class VaSearchFilter {
       return null;
     }
 
-/**
- * Checks that the top-level facet:
- * - Has a valid label (string and non-empty)
- * - Has a valid ID (number or string)
- * - Has a category array
- * Checks that each category item:
- * - Has a valid label (string and non-empty)
- * - Has a valid ID (number or string)
- */
+  /**
+   * Checks that the top-level facet:
+   * - Has a valid label (string and non-empty)
+   * - Has a valid ID (number or string)
+   * - Has a category array
+   * Checks that each facet category item:
+   * - Has a valid label (string and non-empty)
+   * - Has a valid ID (number or string)
+   */
     const validOptions = options.every(option => {
       const hasValidLabel = typeof option.label === 'string' && option.label.length > 0;
       const hasValidCategory = Array.isArray(option.category) && option.category.length > 0 && option.category.every(cat => {
