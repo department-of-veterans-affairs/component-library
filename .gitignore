@@ -22,3 +22,4 @@ yarn-error.log*
 .pnp.*
 componentUsage-*.csv
 packages/storybook/storybook-static/
+packages/css-library/dist/
