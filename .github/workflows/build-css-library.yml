@@ -16,5 +16,6 @@ jobs:
           node-version: 20.x
           cache: 'yarn'
       - run: yarn install
+        working-directory: packages/css-library
       - run: yarn build
         working-directory: packages/css-library
