@@ -5983,6 +5983,10 @@ ul li:last-child, ol li:last-child {
   max-width: unset;
 }
 
+.test {
+  background: blue;
+}
+
 /**
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.

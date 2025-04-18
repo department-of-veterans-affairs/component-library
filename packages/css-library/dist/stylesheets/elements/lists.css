@@ -2783,4 +2783,8 @@ ul li:last-child, ol li:last-child {
   max-width: unset;
 }
 
+.test {
+  background: blue;
+}
+
 /*# sourceMappingURL=lists.css.map */
