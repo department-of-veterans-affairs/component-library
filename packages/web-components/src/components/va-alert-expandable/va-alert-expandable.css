@@ -33,10 +33,6 @@
   padding: 0.75rem;
 }
 
-.alert-expandable-trigger[aria-expanded='true'] {
-  padding-bottom: 0.25rem;
-}
-
 div.warning .alert-expandable-trigger:hover {
   background-color: var(--vads-color-gold-lighter);
 }
@@ -88,7 +84,7 @@ div.continue .alert-expandable-trigger:hover {
 }
 
 #slot-wrap {
-  margin: 0.25rem 0.75rem 0.75rem 0.75rem;
+  margin: 0.75rem;
 }
 
 .alert-expandable-icon {
