@@ -37,6 +37,7 @@ const defaultArgs = {
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
+  'vaPasswordChange': null,
   'uswds': true,
   'header-size': null,
   'children': null,
@@ -57,6 +58,7 @@ const Template = ({
   hint,
   enableAnalytics,
   vaChange,
+  vaPasswordChange,
   headerSize,
   readOnly,
   encrypted,
@@ -76,6 +78,7 @@ const Template = ({
       hint={hint}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
+      onVaPasswordChange={vaPasswordChange}
       header-size={headerSize}
       readOnly={readOnly}
       encrypted={encrypted}
@@ -97,7 +100,7 @@ Required.args = { ...defaultArgs, required: true };
 
 
 export const AcceptsFilePassword = Template.bind(null);
-AcceptsFilePassword.args = { ...defaultArgs, encrypted: true };
+AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, label: 'Password info emitted through the onVaPasswordChange event' };
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {

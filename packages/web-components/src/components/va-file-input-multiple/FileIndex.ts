@@ -13,4 +13,5 @@ export interface FileIndex {
   file: File | null;
   key: number;
   content: Node[];
+  password?: string;
 }
