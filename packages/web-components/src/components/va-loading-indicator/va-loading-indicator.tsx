@@ -65,7 +65,10 @@ export class VaLoadingIndicator {
 
     this.loadingStartTime = Date.now();
 
-    const parentNode = this.el.parentNode;
+    const parentNode = this.el?.parentNode;
+
+    // don't run the observer if parentNode is null/undefined
+    if (!(parentNode instanceof Node)) return;
 
     const callback = mutationsList => {
       // Use traditional 'for loops' for IE 11
