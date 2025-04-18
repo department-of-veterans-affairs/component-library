@@ -1,8 +1,0 @@
-#!/bin/sh
-
-CHANGED_FILES=$(git diff --name-only HEAD~1)
-
-if echo "$CHANGED_FILES" | grep -q "packages/css-library/"; then
-  npm run build
-  git add packages/css-library/dist/*
-fi
