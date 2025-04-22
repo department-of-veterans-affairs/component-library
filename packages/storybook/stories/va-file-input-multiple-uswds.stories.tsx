@@ -440,6 +440,10 @@ const EncryptedTemplate = ({ label, name }) => {
 
   return (
     <>
+      To learn how to check for an encrypted PDF <va-link 
+        text='see platform documentation'
+        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted' 
+      />.
       <VaFileInputMultiple
         label={label}
         name={name}
