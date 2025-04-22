@@ -7,19 +7,19 @@
 }
 
 :host([status='warning']) {
-  background-color: var(--vads-color-gold-lightest);
+  background-color: var(--vads-alert-color-background-warning-on-light);
 }
 
 :host([status='info']) {
-  background-color: var(--vads-color-primary-alt-lightest);
+  background-color: var(--vads-alert-color-background-info-on-light);
 }
 
 :host([status='error']) {
-  background-color: var(--vads-color-secondary-lightest);
+  background-color: var(--vads-alert-color-background-error-on-light);
 }
 
 :host([status='success']) {
-  background-color: var(--vads-color-success-lighter);
+  background-color: var(--vads-alert-color-background-success-on-light);
 }
 
 :host([status='continue']) {
@@ -59,6 +59,10 @@ div.continue .alert-expandable-trigger:hover {
   color: var(--vads-color-base-darker);
   cursor: pointer;
   font-weight: 600;
+}
+
+.alert-expandable:not(.hide-icon) .alert-expandable-body {
+  padding-left: 32px;  /* 24px | 1.5rem (icon width) + 8px (icon margin) */
 }
 
 .alert-expandable-body {

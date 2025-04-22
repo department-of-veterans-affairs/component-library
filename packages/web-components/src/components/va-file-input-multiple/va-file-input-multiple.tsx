@@ -209,7 +209,7 @@ export class VaFileInputMultiple {
           content: null,
         });
       }
-      filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), false, this.findIndexByKey(fileKey))
+      filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
     } else {
       // Deleted file
       action = 'FILE_REMOVED';
@@ -221,7 +221,7 @@ export class VaFileInputMultiple {
       setTimeout(() => {
         statusMessageDiv.textContent = "File removed."
       }, 1000);
-      filesArray = this.buildFilesArray(this.files.map(fileObj => fileObj.file), true);
+      filesArray = this.buildFilesArray(this.files, true);
     }
     const result = {
       action,
@@ -233,15 +233,34 @@ export class VaFileInputMultiple {
     return;
   }
 
-  public buildFilesArray (files: File[], deleted?: boolean, fileIndex?: number) {
+  /**
+   * Handles file input changes by updating, adding, or removing files based on user interaction.
+   * @param {any} event - The event object containing file details.
+   * @param {number} fileKey - The key of the file being changed.
+   * @param {number} pageIndex - The index of the file in the files array.
+   */
+  private handlePasswordChange(event: any, fileKey: number) {
+    const fileObject = this.findFileByKey(fileKey);
+    fileObject.password = event.detail.password;
+    const filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
+    const result = {
+      action: "PASSWORD_UPDATE",
+      file: fileObject.file,
+      state: filesArray
+    }
+    this.vaMultipleChange.emit(result);
+
+  }
+
+  public buildFilesArray (fileIndexes: FileIndex[], deleted?: boolean, changedFileIndex?: number) {
     // filter out null files
-    let filesArray:FileDetails[] = files.filter((file =>{ return !!file})).map((file) => {
-      return {file: file, changed: false}
+    let filesArray:FileDetails[] = fileIndexes.filter((fileIndex =>{ return !!fileIndex.file})).map((fileIndex) => {
+      return {file: fileIndex.file, changed: false, password: fileIndex.password}
     });
 
-    if (!deleted && filesArray[fileIndex]) {
+    if (!deleted && filesArray[changedFileIndex]) {
       // don't return a changed property on deletion
-      filesArray[fileIndex].changed = true
+      filesArray[changedFileIndex].changed = true;
     }
     return filesArray;
   }
@@ -407,6 +426,9 @@ export class VaFileInputMultiple {
                 encrypted={encrypted[pageIndex]}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
+                }
+                onVaPasswordChange={event =>
+                  this.handlePasswordChange(event, fileEntry.key)
                 }
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}

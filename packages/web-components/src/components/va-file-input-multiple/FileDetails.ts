@@ -9,5 +9,6 @@
 
 export interface FileDetails {
   file: File,
-  changed: Boolean
+  changed: Boolean,
+  password?: string
 }
