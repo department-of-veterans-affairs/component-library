@@ -107,19 +107,14 @@ export class VaAlert {
     this.closeEvent.emit(e);
   }
 
-  private updateCloseAriaLabelWithHeadlineText(): void {
-    const headline = this.el.shadowRoot.querySelector('slot[name="headline"]');
-    this.closeBtnAriaLabel = `Close ${headline.assignedNodes()[0].textContent} notification`;
-  }
-
-  private handleAlertBodyClick(e: MouseEvent): void {
+  private getHeadlineText(): string {
     let headlineText = null;
 
     // This is the happy path, meaning the user isn't using IE11
-    try {
-      const children = this.el.shadowRoot.querySelector('slot').assignedNodes();
+    try { 
+      const headline = this.el.shadowRoot.querySelector('slot').assignedNodes();
       // An empty array means that there isn't a node with `slot="headline"`
-      headlineText = children.length > 0 ? children[0].textContent : null;
+      headlineText = headline.length > 0 ? headline[0].textContent : null;
     } catch (e) {
       // This is where we handle the edge case of the user being on IE11
       const children = this.el.shadowRoot.childNodes;
@@ -129,9 +124,19 @@ export class VaAlert {
           node.tagName.toLowerCase(),
         ),
       );
-
       headlineText = headerList.length > 0 ? headerList[0].textContent : null;
+    } finally {
+      return headlineText;
     }
+  }
+
+  private updateCloseAriaLabelWithHeadlineText(): void {
+    const headlineText = this.getHeadlineText();
+    this.closeBtnAriaLabel = `Close ${headlineText ?? 'this'} notification`
+  }
+
+  private handleAlertBodyClick(e: MouseEvent): void {
+    const headlineText = this.getHeadlineText();
 
     if (!this.disableAnalytics) {
       const target = e.target as HTMLElement;
