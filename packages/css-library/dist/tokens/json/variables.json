@@ -261,6 +261,82 @@
       ]
     }
   },
+  "vads-alert-color-background-info-on-light": {
+    "*": {
+      "value": "#e7f6f8",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-cyan-5}"
+      },
+      "name": "vads-alert-color-background-info-on-light",
+      "attributes": {
+        "category": "vads-alert-color-background-info-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-alert-color-background-info-on-light",
+        "*"
+      ]
+    }
+  },
+  "vads-alert-color-background-success-on-light": {
+    "*": {
+      "value": "#ecf3ec",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-green-cool-5}"
+      },
+      "name": "vads-alert-color-background-success-on-light",
+      "attributes": {
+        "category": "vads-alert-color-background-success-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-alert-color-background-success-on-light",
+        "*"
+      ]
+    }
+  },
+  "vads-alert-color-background-warning-on-light": {
+    "*": {
+      "value": "#faf3d1",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-yellow-5}"
+      },
+      "name": "vads-alert-color-background-warning-on-light",
+      "attributes": {
+        "category": "vads-alert-color-background-warning-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-alert-color-background-warning-on-light",
+        "*"
+      ]
+    }
+  },
+  "vads-alert-color-background-error-on-light": {
+    "*": {
+      "value": "#f4e3db",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-red-warm-10}"
+      },
+      "name": "vads-alert-color-background-error-on-light",
+      "attributes": {
+        "category": "vads-alert-color-background-error-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-alert-color-background-error-on-light",
+        "*"
+      ]
+    }
+  },
   "vads-color-white": {
     "*": {
       "value": "#ffffff",
