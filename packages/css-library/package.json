@@ -13,10 +13,12 @@
   "scripts": {
     "build:tokens": "style-dictionary build",
     "build:stylesheets": "sass --load-path=./node_modules/@uswds/uswds/packages/ src/stylesheets:dist/stylesheets",
-    "build:minify": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets --style compressed && yarn copy:scss-files",
+    "build:minify-rename": "find dist/stylesheets/min -type f -name '*.css' -exec bash -c 'mv \"$0\" \"${0%.css}.min.css\"' {} \\; && cp -r ./dist/stylesheets/min/* ./dist/stylesheets/ && rm -rf ./dist/stylesheets/min",
+    "build:minify-stylesheets": "sass --style compressed --embed-source-map --load-path=./node_modules/@uswds/uswds/packages/ src/stylesheets:dist/stylesheets/min && yarn run build:minify-rename",
+    "build:minify": "yarn build:minify-stylesheets && yarn copy:scss-files",
     "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn copy:scss-files",
     "clean-dist": "rimraf dist/*",
-    "copy:scss-files": "cp -rv src/stylesheets/_override-function.scss dist/stylesheets/_override-function.scss && cp -rv src/stylesheets/_mixins.scss dist/stylesheets/_mixins.scss && cp -rv src/stylesheets/_functions.scss dist/stylesheets/_functions.scss && cp -rv src/stylesheets/formation-overrides/_variables.scss dist/stylesheets/formation-overrides/_variables.scss && mkdir dist/stylesheets/site && cp -rv src/stylesheets/site/* dist/stylesheets/site",
+    "copy:scss-files": "cp -rv src/stylesheets/_override-function.scss dist/stylesheets/_override-function.scss && cp -rv src/stylesheets/_mixins.scss dist/stylesheets/_mixins.scss && cp -rv src/stylesheets/_functions.scss dist/stylesheets/_functions.scss && cp -rv src/stylesheets/formation-overrides/_variables.scss dist/stylesheets/formation-overrides/_variables.scss && mkdir -p dist/stylesheets/site && cp -rv src/stylesheets/site/* dist/stylesheets/site",
     "copy-assets": "cp -rv src/assets/fonts dist/fonts/ && cp -rv src/assets/img dist/img/",
     "copy": "node ./copy-uswds-color-tokens.js && yarn run copy-assets"
   },
