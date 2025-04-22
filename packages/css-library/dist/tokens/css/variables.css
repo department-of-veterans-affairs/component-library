@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 14 Apr 2025 15:04:48 GMT
+ * Generated on Thu, 17 Apr 2025 20:55:58 GMT
  */
 
 :root {
@@ -20,6 +20,10 @@
   --vads-button-color-background-secondary-on-light: #ffffff;
   --vads-button-color-text-primary-alt-on-light: #ffffff;
   --vads-button-color-text-primary-on-light: #ffffff;
+  --vads-alert-color-background-info-on-light: #e7f6f8;
+  --vads-alert-color-background-success-on-light: #ecf3ec;
+  --vads-alert-color-background-warning-on-light: #faf3d1;
+  --vads-alert-color-background-error-on-light: #f4e3db;
   --vads-color-white: #ffffff;
   --vads-label-hint-text-color-on-light: #757575;
   --vads-process-list-color-text-pending-on-light: #757575;
