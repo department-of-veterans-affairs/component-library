@@ -427,12 +427,12 @@ CustomValidation.args = {
   hint: 'Select any file type',
 };
 
-const EncryptedTemplate = ({ label, name, hint }) => {
+const EncryptedTemplate = ({ label, name }) => {
   const [encryptedList, setEncryptedList] = useState([]);
 
   function setEncrpytedForEachFile(event) {
     const fileEntries = event.detail.state;
-    const pdfFiles = fileEntries.map((file, index) => {
+    const pdfFiles = fileEntries.map((file) => {
       return file.file.type === 'application/pdf'
     });
     setEncryptedList(pdfFiles);
@@ -440,6 +440,10 @@ const EncryptedTemplate = ({ label, name, hint }) => {
 
   return (
     <>
+      To learn how to check for an encrypted PDF <va-link 
+        text='see platform documentation'
+        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted' 
+      />.
       <VaFileInputMultiple
         label={label}
         name={name}
@@ -457,7 +461,8 @@ const EncryptedTemplate = ({ label, name, hint }) => {
           be requested for that specific file, or false if no password is
           needed. By default, no password field will be displayed. This
           setup allows for the dynamic display of a password field based
-          on real-time validation of each file as it is processed.
+          on real-time validation of each file as it is processed. Passwords
+          are passed through the <code>onVaMultipleChange</code> event.
         </p>
       </div>
       <div className="vads-u-margin-top--2">

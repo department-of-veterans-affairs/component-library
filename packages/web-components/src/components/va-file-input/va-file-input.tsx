@@ -140,6 +140,11 @@ export class VaFileInput {
   @Event() vaChange: EventEmitter;
 
   /**
+   * The event emitted when the file input password value changes.
+   */
+  @Event() vaPasswordChange: EventEmitter;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * file input changes and enableAnalytics is true.
    */
@@ -407,6 +412,10 @@ export class VaFileInput {
     )
   }
 
+  private handlePasswordChange(e) {
+    this.vaPasswordChange.emit( {password: e.target.value} );
+  }
+
   render() {
     const {
       label,
@@ -582,7 +591,7 @@ export class VaFileInput {
                   <div>
                     {this.showSeparator && <hr class="separator" />}
                     {encrypted && (
-                      <va-text-input label="File password" required />
+                      <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required />
                     )}
                     <div class="additional-info-slot">
                       <slot></slot>
