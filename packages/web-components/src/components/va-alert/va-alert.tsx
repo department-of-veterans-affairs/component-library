@@ -107,24 +107,25 @@ export class VaAlert {
     this.closeEvent.emit(e);
   }
 
-  private getHeadlineText(): string {
-    let headlineText = null;
+  private getHeadlineText(): string | null {
+    let headlineText: string | null = null;
 
-    // This is the happy path, meaning the user isn't using IE11
     try { 
-      const children = this.el.shadowRoot.querySelector('slot').assignedNodes();
-      // An empty array means that there isn't a node with `slot="headline"`
-      headlineText = children.length > 0 ? children[0].textContent : null;
+      // This is the happy path, meaning the user isn't using IE11
+    const slot = this.el.shadowRoot?.querySelector('slot');
+    const children = slot ? (slot as HTMLSlotElement).assignedNodes() : [];
+    headlineText = children.length > 0 ? children[0].textContent : null;
     } catch (e) {
       // This is where we handle the edge case of the user being on IE11
-      const children = this.el.shadowRoot.childNodes;
-      const headerList = children.filter((node: any) =>
-        /* eslint-disable-next-line i18next/no-literal-string */
-        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(
-          node.tagName.toLowerCase(),
+    const children = Array.from(this.el.shadowRoot?.childNodes || []);
+    const headerList = children.filter(
+      (node: Node) =>
+        node.nodeType === Node.ELEMENT_NODE &&
+        ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(
+          (node as HTMLElement).tagName,
         ),
-      );
-      headlineText = headerList.length > 0 ? headerList[0].textContent : null;
+    );
+    headlineText = headerList.length > 0 ? (headerList[0] as HTMLElement).textContent : null;
     } finally {
       return headlineText;
     }
