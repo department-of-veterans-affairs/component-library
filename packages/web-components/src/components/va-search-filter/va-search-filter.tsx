@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop, Event, EventEmitter, Listen, forceUpdate, State, Watch } from '@stencil/core';
+import { deepEquals } from '../../utils/utils';
 
 export type FilterFacet = {
   label: string;
@@ -66,7 +67,7 @@ export class VaSearchFilter {
       });
       
       // Only update if there's a difference to avoid infinite recursion
-      const needsUpdate = JSON.stringify(updatedOptions) !== JSON.stringify(this.filterOptions);
+      const needsUpdate = !deepEquals(updatedOptions, this.filterOptions);
       if (needsUpdate) {
         this.filterOptions = updatedOptions;
       }
