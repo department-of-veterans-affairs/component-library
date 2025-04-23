@@ -1,8 +1,8 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
-const filterOptions = JSON.stringify([ 
-  { 
+const filterOptions = JSON.stringify([
+  {
     id: 1,
     label: "Benefits",
     category: [
@@ -11,7 +11,7 @@ const filterOptions = JSON.stringify([
       { label: "Housing", id: 4, active: true }
     ]
   },
-  { 
+  {
     label:"Service Status",
     id: 5,
     category: [
@@ -171,7 +171,7 @@ describe('va-search-filter', () => {
     const page = await newE2EPage();
 
     // Set viewport to desktop size
-    await page.setViewport({  
+    await page.setViewport({
       width: 1024,
       height: 768
     });
@@ -179,12 +179,12 @@ describe('va-search-filter', () => {
     // Create the component
     await page.setContent('<va-search-filter header="Filter"></va-search-filter>');
     const element = await page.find('va-search-filter');
-    
+
     // Set the filter options
     const options = JSON.parse(filterOptions);
     element.setProperty('filterOptions', options);
     await page.waitForChanges();
-    
+
     // Verify that the active filter count is displayed in the header
     const header = await page.find('va-search-filter >>> #header');
     const text = await header.getProperty('textContent');
@@ -203,12 +203,12 @@ describe('va-search-filter', () => {
     // Create the component
     await page.setContent('<va-search-filter header="Filter"></va-search-filter>');
     const element = await page.find('va-search-filter');
-    
+
     // Set the filter options
     const options = JSON.parse(filterOptions);
     element.setProperty('filterOptions', options);
     await page.waitForChanges();
-    
+
     // Verify that the va-accordion-item header prop contains the active filter count
     const accordionItem = await page.find('va-search-filter >>> va-accordion-item');
     const header = await accordionItem?.getProperty('header');
@@ -227,15 +227,15 @@ describe('va-search-filter', () => {
     // Create the component
     await page.setContent('<va-search-filter header="Filter"></va-search-filter>');
     const element = await page.find('va-search-filter');
-    
+
     // Set the filter options
     const options = JSON.parse(filterOptions);
     element.setProperty('filterOptions', options);
     await page.waitForChanges();
-    
+
     // Get the accordion items which display the active filter counts in their headers
     const accordionItems = await page.findAll('va-search-filter >>> va-accordion-item');
-    
+
     // Check that the first accordion item header contains the active filter count (2)
     const firstAccordionItem = accordionItems[0];
     const firstHeader = await firstAccordionItem.getProperty('header');
@@ -247,7 +247,7 @@ describe('va-search-filter', () => {
     expect(secondHeader).toContain('1');
   })
 
-  it ('displays the total active categories for each facet - mobile web', async () => { 
+  it ('displays the total active categories for each facet - mobile web', async () => {
     const page = await newE2EPage();
 
     // Set viewport to mobile size
@@ -259,7 +259,7 @@ describe('va-search-filter', () => {
     // Create the component
     await page.setContent('<va-search-filter header="Filter"></va-search-filter>');
     const element = await page.find('va-search-filter');
-    
+
     // Set the filter options
     const options = JSON.parse(filterOptions);
     element.setProperty('filterOptions', options);

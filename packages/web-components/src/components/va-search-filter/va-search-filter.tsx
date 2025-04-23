@@ -63,7 +63,7 @@ export class VaSearchFilter {
   filterOptionsChanged(newValue: Filter[]) {
     if (newValue && newValue.length > 0) {
       this.totalActiveFilters = this.getTotalActiveFilters();
-      
+
       // Update activeFiltersCount for each facet without triggering the watcher again
       const updatedOptions = newValue.map((facet) => {
         return {
@@ -71,7 +71,7 @@ export class VaSearchFilter {
           activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
         };
       });
-      
+
       // Only update if there's a difference to avoid infinite recursion
       const needsUpdate = !deepEquals(updatedOptions, this.filterOptions);
       if (needsUpdate) {
@@ -245,7 +245,7 @@ export class VaSearchFilter {
           ...facet,
           activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
         };
-      }); 
+      });
     } else {
       this.filterOptions = [];
     }
@@ -300,13 +300,13 @@ export class VaSearchFilter {
           {filterOptions.length > 0 && (
             <va-accordion class="va-search-filter__accordion">
               {filterOptions.map((facet: FilterFacet) => (
-                <va-accordion-item 
-                  header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} 
-                  key={facet.id} 
+                <va-accordion-item
+                  header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
+                  key={facet.id}
                   open
                 >
                   <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
-                    {facet.category.map((category: FilterCategory) => 
+                    {facet.category.map((category: FilterCategory) =>
                       renderCheckbox(facet, category)
                     )}
                   </va-checkbox-group>
@@ -323,17 +323,17 @@ export class VaSearchFilter {
       <Host>
         {filterOptions.length > 0 && (
           <va-accordion class="va-search-filter__accordion">
-            <va-accordion-item 
-              header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')} 
+            <va-accordion-item
+              header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')}
               open
             >
               <span slot="icon"><va-icon icon="filter_list" /></span>
               {filterOptions.map((facet: FilterFacet) => (
-                <va-checkbox-group 
-                  label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} 
+                <va-checkbox-group
+                  label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
                   key={facet.id}
                 >
-                  {facet.category.map((category: FilterCategory) => 
+                  {facet.category.map((category: FilterCategory) =>
                     renderCheckbox(facet, category)
                   )}
                 </va-checkbox-group>

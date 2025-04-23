@@ -36,7 +36,7 @@ describe('validateFilterOptions', () => {
     const invalidOptions3 = [
         {
             label: "Benefits",
-            id: 1, 
+            id: 1,
             category: [] // missing categories
         }
     ];
