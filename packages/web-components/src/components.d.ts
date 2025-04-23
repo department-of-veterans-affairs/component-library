@@ -2602,6 +2602,7 @@ declare global {
     };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
+        "vaPasswordChange": any;
         "component-library-analytics": any;
     }
     /**
@@ -4166,6 +4167,10 @@ declare namespace LocalJSX {
           * The event emitted when the file input value changes.
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * The event emitted when the file input password value changes.
+         */
+        "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * Percent upload completed. For use with va-progress-bar component
          */
