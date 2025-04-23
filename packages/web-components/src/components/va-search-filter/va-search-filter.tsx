@@ -23,6 +23,12 @@ interface FilterChangeParams {
 }
 
 /**
+ * Value corresponds with the --tablet breakpoint size.
+ * https://design.va.gov/foundation/breakpoints
+ */
+const TABLET_BREAKPOINT = 640;
+
+/**
  * @componentName Search Filter
  * @maturityCategory caution
  * @maturityLevel candidate
@@ -91,13 +97,11 @@ export class VaSearchFilter {
 
   @Listen('resize', { target: 'window' })
   handleResize() {
-    // Corresponds with the --tablet breakpoint size.
-    // https://design.va.gov/foundation/breakpoints
-    this.isDesktop = window.innerWidth > 640;
+    this.isDesktop = window.innerWidth > TABLET_BREAKPOINT;
     forceUpdate(this);
   }
 
-  private isDesktop: boolean = window.innerWidth > 640;
+  private isDesktop: boolean = window.innerWidth > TABLET_BREAKPOINT;
 
   private handleFilterChange = ({ facetId, categoryId, active }: FilterChangeParams) => {
     // find the matching facet and category by ID and update the active state
@@ -258,6 +262,7 @@ export class VaSearchFilter {
       handleApplyFilters,
     } = this;
 
+    // Helper method to render filter buttons for both mobile and desktop views
     const filterButtons = (
       <div id="filter-buttons">
         <va-button
@@ -274,6 +279,20 @@ export class VaSearchFilter {
       </div>
     );
 
+    // Helper method to render checkbox for both mobile and desktop views
+    const renderCheckbox = (facet: FilterFacet, category: FilterCategory) => (
+      <va-checkbox
+        label={category.label}
+        key={category.id}
+        checked={category.active}
+        onVaChange={(e) => handleFilterChange({
+          facetId: facet.id,
+          categoryId: category.id,
+          active: e.target.checked,
+        })}
+      />
+    );
+
     if (isDesktop) {
       return (
         <Host>
@@ -287,22 +306,13 @@ export class VaSearchFilter {
                   open
                 >
                   <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
-                    {facet.category.map((category: FilterCategory) => (
-                    <va-checkbox
-                      label={category.label}
-                      key={category.id}
-                      checked={category.active}
-                      onVaChange={(e) => handleFilterChange({
-                        facetId: facet.id,
-                        categoryId: category.id,
-                        active: e.target.checked,
-                      })}
-                    />
-                  ))}
-                </va-checkbox-group>
-              </va-accordion-item>
-            ))}
-          </va-accordion>
+                    {facet.category.map((category: FilterCategory) => 
+                      renderCheckbox(facet, category)
+                    )}
+                  </va-checkbox-group>
+                </va-accordion-item>
+              ))}
+            </va-accordion>
           )}
           {filterButtons}
         </Host>
@@ -323,18 +333,9 @@ export class VaSearchFilter {
                   label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')} 
                   key={facet.id}
                 >
-                  {facet.category.map((category: FilterCategory) => (
-                    <va-checkbox
-                      label={category.label}
-                      key={category.id}
-                      checked={category.active}
-                      onVaChange={(e) => handleFilterChange({
-                        facetId: facet.id,
-                        categoryId: category.id,
-                        active: e.target.checked,
-                      })}
-                    />
-                  ))}
+                  {facet.category.map((category: FilterCategory) => 
+                    renderCheckbox(facet, category)
+                  )}
                 </va-checkbox-group>
               ))}
               {filterButtons}
