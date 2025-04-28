@@ -99,8 +99,31 @@ export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
 
-export const AcceptsFilePassword = Template.bind(null);
-AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, label: 'Password info emitted through the onVaPasswordChange event' };
+const AcceptsFilePasswordTemplate = ({
+  label,
+  name,
+  hint,
+  vaChange,
+  encrypted,
+}) => {
+  return (
+    <>
+      To learn how to check for an encrypted PDF <va-link 
+        text='see platform documentation'
+        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted' 
+      />.
+      <VaFileInput
+        label={label}
+        name={name}
+        hint={hint}
+        onVaChange={vaChange}
+        encrypted={encrypted}
+      />
+    </>
+  );
+};
+export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
+AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {

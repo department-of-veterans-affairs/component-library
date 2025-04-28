@@ -137,7 +137,7 @@ describe('va-checkbox-group', () => {
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
-    <legend class="usa-legend">
+    <legend class="usa-legend" part="legend">
       <h3 part="header">Testing H3</h3>
     </legend>
   `);
@@ -149,7 +149,7 @@ describe('va-checkbox-group', () => {
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
-      <legend class="usa-legend">
+      <legend class="usa-legend" part="legend">
         <h5 part="header">Testing H5</h5>
         <span class="usa-label--required">
           required
@@ -164,7 +164,7 @@ describe('va-checkbox-group', () => {
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
-      <legend class="usa-legend">
+      <legend class="usa-legend" part="legend">
         Testing
         <span class="usa-label--required">
           required
