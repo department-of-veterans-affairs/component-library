@@ -95,9 +95,7 @@ export class VaAdditionalInfo {
   }
 
   componentDidRender() {
-    requestAnimationFrame
-      ? requestAnimationFrame(() => this.updateInfoMaxHeight())
-      : setTimeout(() => this.updateInfoMaxHeight(), 0);
+    requestAnimationFrame(() => this.updateInfoMaxHeight());
   }
 
   render() {
