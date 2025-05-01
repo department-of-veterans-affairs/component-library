@@ -81,7 +81,9 @@ export class VaAdditionalInfo {
 
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
   updateInfoMaxHeight() {
-    const infoElm = this.el.shadowRoot.getElementById('info');
+    const infoElm = this.el.shadowRoot?.getElementById('info');
+    if (!infoElm) return;
+
     /* eslint-disable i18next/no-literal-string */
     const contentHeight = infoElm.scrollHeight + 'px';
     // the additional 2em is #info margin-top and margin-bottom when open
@@ -93,7 +95,7 @@ export class VaAdditionalInfo {
   }
 
   componentDidRender() {
-    this.updateInfoMaxHeight();
+    requestAnimationFrame(() => this.updateInfoMaxHeight());
   }
 
   render() {
