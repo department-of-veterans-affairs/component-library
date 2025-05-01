@@ -82,6 +82,15 @@ describe('va-alert', () => {
     expect(button.getAttribute('aria-label')).toEqual('Close this notification');
   });
 
+  it('uses generic text for the close button ARIA label, if no custom text is provided and no headline slot exists', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-alert closeable="true"><p>Some alert content</p></va-alert>');
+
+    let button = await page.find('va-alert >>> button');
+
+    expect(button.getAttribute('aria-label')).toEqual('Close this notification');
+  });
+
   it('fires a custom "close" event when the close button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(

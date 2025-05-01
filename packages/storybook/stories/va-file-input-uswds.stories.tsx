@@ -37,6 +37,7 @@ const defaultArgs = {
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
+  'vaPasswordChange': null,
   'uswds': true,
   'header-size': null,
   'children': null,
@@ -57,6 +58,7 @@ const Template = ({
   hint,
   enableAnalytics,
   vaChange,
+  vaPasswordChange,
   headerSize,
   readOnly,
   encrypted,
@@ -76,6 +78,7 @@ const Template = ({
       hint={hint}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
+      onVaPasswordChange={vaPasswordChange}
       header-size={headerSize}
       readOnly={readOnly}
       encrypted={encrypted}
@@ -96,8 +99,31 @@ export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
 
-export const AcceptsFilePassword = Template.bind(null);
-AcceptsFilePassword.args = { ...defaultArgs, encrypted: true };
+const AcceptsFilePasswordTemplate = ({
+  label,
+  name,
+  hint,
+  vaChange,
+  encrypted,
+}) => {
+  return (
+    <>
+      To learn how to check for an encrypted PDF <va-link 
+        text='see platform documentation'
+        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted' 
+      />.
+      <VaFileInput
+        label={label}
+        name={name}
+        hint={hint}
+        onVaChange={vaChange}
+        encrypted={encrypted}
+      />
+    </>
+  );
+};
+export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
+AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {

@@ -7,9 +7,11 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
+import { Filter } from "./components/va-search-filter/va-search-filter";
 import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
+export { Filter } from "./components/va-search-filter/va-search-filter";
 export { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export namespace Components {
     /**
@@ -1438,6 +1440,21 @@ export namespace Components {
         "value": string;
     }
     /**
+     * @componentName Search Filter
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaSearchFilter {
+        /**
+          * Represents a list of filter facets and their categories. Use a JSON array of objects with label and id properties.
+         */
+        "filterOptions": Filter[];
+        /**
+          * The filter header text.
+         */
+        "header": string;
+    }
+    /**
      * @componentName Search input
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -2156,6 +2173,10 @@ export interface VaRadioOptionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaRadioOptionElement;
 }
+export interface VaSearchFilterCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSearchFilterElement;
+}
 export interface VaSearchInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaSearchInputElement;
@@ -2581,6 +2602,7 @@ declare global {
     };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
+        "vaPasswordChange": any;
         "component-library-analytics": any;
     }
     /**
@@ -3078,6 +3100,30 @@ declare global {
         prototype: HTMLVaRadioOptionElement;
         new (): HTMLVaRadioOptionElement;
     };
+    interface HTMLVaSearchFilterElementEventMap {
+        "vaFilterChange": Filter[];
+        "vaFilterApply": Filter[];
+        "vaFilterClearAll": void;
+    }
+    /**
+     * @componentName Search Filter
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaSearchFilterElement extends Components.VaSearchFilter, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaSearchFilterElementEventMap>(type: K, listener: (this: HTMLVaSearchFilterElement, ev: VaSearchFilterCustomEvent<HTMLVaSearchFilterElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaSearchFilterElementEventMap>(type: K, listener: (this: HTMLVaSearchFilterElement, ev: VaSearchFilterCustomEvent<HTMLVaSearchFilterElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaSearchFilterElement: {
+        prototype: HTMLVaSearchFilterElement;
+        new (): HTMLVaSearchFilterElement;
+    };
     interface HTMLVaSearchInputElementEventMap {
         "component-library-analytics": any;
     }
@@ -3359,6 +3405,7 @@ declare global {
         "va-promo-banner": HTMLVaPromoBannerElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
+        "va-search-filter": HTMLVaSearchFilterElement;
         "va-search-input": HTMLVaSearchInputElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
@@ -4120,6 +4167,10 @@ declare namespace LocalJSX {
           * The event emitted when the file input value changes.
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * The event emitted when the file input password value changes.
+         */
+        "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * Percent upload completed. For use with va-progress-bar component
          */
@@ -5016,6 +5067,33 @@ declare namespace LocalJSX {
         "value": string;
     }
     /**
+     * @componentName Search Filter
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaSearchFilter {
+        /**
+          * Represents a list of filter facets and their categories. Use a JSON array of objects with label and id properties.
+         */
+        "filterOptions"?: Filter[];
+        /**
+          * The filter header text.
+         */
+        "header"?: string;
+        /**
+          * A custom event emitted when the apply filters button is clicked.
+         */
+        "onVaFilterApply"?: (event: VaSearchFilterCustomEvent<Filter[]>) => void;
+        /**
+          * A custom event emitted when the filter changes. The payload will provide all active categories.
+         */
+        "onVaFilterChange"?: (event: VaSearchFilterCustomEvent<Filter[]>) => void;
+        /**
+          * A custom event emitted when the clear all filters button is clicked.
+         */
+        "onVaFilterClearAll"?: (event: VaSearchFilterCustomEvent<void>) => void;
+    }
+    /**
      * @componentName Search input
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -5702,6 +5780,7 @@ declare namespace LocalJSX {
         "va-promo-banner": VaPromoBanner;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
+        "va-search-filter": VaSearchFilter;
         "va-search-input": VaSearchInput;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
@@ -6015,6 +6094,12 @@ declare module "@stencil/core" {
              */
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
+            /**
+             * @componentName Search Filter
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-search-filter": LocalJSX.VaSearchFilter & JSXBase.HTMLAttributes<HTMLVaSearchFilterElement>;
             /**
              * @componentName Search input
              * @maturityCategory use
