@@ -207,7 +207,7 @@ export class VaModal {
   handleLastElementFocus(e: KeyboardEvent) {
     if (this.visible) {
       // The focus is outside the modal
-      if (e.key === "Tab" && !this.shifted) {
+      if (e.key === 'Tab' && !this.shifted) {
         e.preventDefault();
         const focusIndex = 0;
         this.focusableChildren[focusIndex]?.focus();
@@ -219,9 +219,9 @@ export class VaModal {
   handleFirstElementFocus(e: KeyboardEvent) {
     if (this.visible) {
       // The focus is outside the modal
-      if (e.key === "Tab" && this.shifted) {
+      if (e.key === 'Tab' && this.shifted) {
         e.preventDefault();
-        const focusIndex =  this.focusableChildren.length - 1;
+        const focusIndex = this.focusableChildren.length - 1;
         this.focusableChildren[focusIndex]?.focus();
       }
     }
@@ -236,7 +236,9 @@ export class VaModal {
   }
 
   componentDidLoad() {
-    if (this.visible) this.setupModal();
+    if (this.visible) {
+      requestAnimationFrame(() => this.setupModal());
+    }
   }
 
   // Stencil's componentDidUpdate doesn't provide us with previous props to compare
@@ -248,7 +250,7 @@ export class VaModal {
 
     this.isVisibleDirty = false;
     if (this.visible) {
-      this.setupModal();
+      requestAnimationFrame(() => this.setupModal());
     } else {
       this.teardownModal();
     }
@@ -354,21 +356,25 @@ export class VaModal {
 
     // find first focusable item so that focus can be redirected there when needed
     const firstFocusChild = this.focusableChildren[0];
-    firstFocusChild.classList.add('first-focusable-child');
-    firstFocusChild.onkeydown = (e)=> this.handleFirstElementFocus(e);
+    if (firstFocusChild) {
+      firstFocusChild.classList.add('first-focusable-child');
+      firstFocusChild.onkeydown = e => this.handleFirstElementFocus(e);
+    }
 
     // find last focusable item so that focus can be redirected there when needed
     const lastFocusChild =
       this.focusableChildren[this.focusableChildren.length - 1];
-    lastFocusChild.classList.add('last-focusable-child');
-    lastFocusChild.onkeydown = (e)=> this.handleLastElementFocus(e);
+    if (lastFocusChild) {
+      lastFocusChild.classList.add('last-focusable-child');
+      lastFocusChild.onkeydown = e => this.handleLastElementFocus(e);
+    }
 
     // If an initialFocusSelector is provided, the element will be focused on modal open
     // if it exists. You are able to focus elements in both light and shadow DOM.
     const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
-      this.el.shadowRoot.querySelector(this.initialFocusSelector) ||
+      this.el.shadowRoot?.querySelector(this.initialFocusSelector) ||
       this.closeButton) as HTMLElement;
-    initialFocus.focus();
+    initialFocus?.focus();
 
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
@@ -438,7 +444,7 @@ export class VaModal {
     const contentClass = classnames({
       'usa-modal__content': true,
       'usa-modal-alert': status,
-      'va-modal__content': true
+      'va-modal__content': true,
     });
     const bodyClass = classnames({
       'usa-modal__main': true,
