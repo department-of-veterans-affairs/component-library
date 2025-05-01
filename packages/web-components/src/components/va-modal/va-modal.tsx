@@ -237,9 +237,7 @@ export class VaModal {
 
   componentDidLoad() {
     if (this.visible) {
-      requestAnimationFrame
-        ? requestAnimationFrame(() => this.setupModal())
-        : setTimeout(() => this.setupModal(), 0);
+      requestAnimationFrame(() => this.setupModal());
     }
   }
 
@@ -252,9 +250,7 @@ export class VaModal {
 
     this.isVisibleDirty = false;
     if (this.visible) {
-      requestAnimationFrame
-        ? requestAnimationFrame(() => this.setupModal())
-        : setTimeout(() => this.setupModal(), 0);
+      requestAnimationFrame(() => this.setupModal());
     } else {
       this.teardownModal();
     }
