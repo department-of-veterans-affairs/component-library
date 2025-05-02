@@ -36,8 +36,6 @@ const LIST_OPTION_SELECTED = `.${LIST_OPTION_SELECTED_CLASS}`;
 const STATUS = `.${STATUS_CLASS}`;
 
 const DEFAULT_FILTER = '.*{{query}}.*';
-const FILTER_BY_TEXT = 'text';
-const FILTER_BY_VALUE = 'value';
 
 const noop = () => {};
 
@@ -282,8 +280,7 @@ const noop = () => {};
         aria-labelledby="${listIdLabel}"
         hidden>
       </ul>
-      <div class="${STATUS_CLASS} usa-sr-only" role="status"></div>
-      <span class="fi fi-us"></span>`,
+      <div class="${STATUS_CLASS} usa-sr-only" role="status"></div>`,
     );
 
     if (selectedOption) {
@@ -415,16 +412,12 @@ const noop = () => {};
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
 
-      // Determine which attribute to use for filtering
-      const filterTarget = comboBoxEl.dataset.filterBy || FILTER_BY_TEXT;
-      const filterValue = filterTarget === FILTER_BY_VALUE ? optionEl.value : optionEl.text;
-
       if (
         optionEl.value &&
         (disableFiltering ||
           isPristine ||
           !inputValue ||
-          regex.test(filterValue))
+          regex.test(optionEl.text))
       ) {
         if (selectEl.value && optionEl.value === selectEl.value) {
           selectedItemId = optionId;
@@ -517,13 +510,7 @@ const noop = () => {};
       li.setAttribute('tabindex', tabindex);
       li.setAttribute('role', isOptGroup ? 'group' : 'option');
       li.setAttribute('data-value', option.value);
-      
-      // Support HTML markup in options if enabled through data-use-html attribute
-      if (comboBoxEl.dataset.useHtml === 'true') {
-        li.innerHTML = option.innerHTML;
-      } else {
-        li.textContent = option.text;
-      }
+      li.textContent = option.text;
 
       return li;
     });
