@@ -235,4 +235,26 @@ describe('va-modal', () => {
       },
     });
   });
+
+  it('should handle empty focusableChildren array gracefully when no focusable content exists', async () => {
+    const page = await newE2EPage();
+  
+    // the `forced-modal` removes the close button
+    await page.setContent(`
+      <va-modal modal-title="No Focusable Content" forced-modal visible>
+        <div aria-hidden="true">Non-focusable content</div>
+      </va-modal>
+    `);
+  
+    await page.waitForChanges();
+  
+    // Try to find any focused element inside the modal
+    const activeTagName = await page.evaluate(() => {
+      const modal = document.querySelector('va-modal');
+      return modal.shadowRoot.activeElement?.tagName || modal.shadowRoot.querySelector(':focus')?.tagName;
+    });
+  
+    // Expect that nothing is focused
+    expect(activeTagName).toBeFalsy();
+  });
 });
