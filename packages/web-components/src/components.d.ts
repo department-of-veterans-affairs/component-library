@@ -7,10 +7,12 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
+import { CountryCode } from "libphonenumber-js/min";
 import { Filter } from "./components/va-search-filter/va-search-filter";
 import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
+export { CountryCode } from "libphonenumber-js/min";
 export { Filter } from "./components/va-search-filter/va-search-filter";
 export { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export namespace Components {
@@ -779,6 +781,23 @@ export namespace Components {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
+    }
+    /**
+     * @componentName International Telephone
+     * @maturityCategory caution
+     * @maturityLevel proposal
+     * @guidanceHref form/international-telephone
+     * @translations English
+     */
+    interface VaInputTelephone {
+        /**
+          * The telephone contact information
+         */
+        "contact"?: string;
+        /**
+          * The country code
+         */
+        "country"?: CountryCode;
     }
     /**
      * @componentName Language Toggle
@@ -2673,6 +2692,19 @@ declare global {
         prototype: HTMLVaIconElement;
         new (): HTMLVaIconElement;
     };
+    /**
+     * @componentName International Telephone
+     * @maturityCategory caution
+     * @maturityLevel proposal
+     * @guidanceHref form/international-telephone
+     * @translations English
+     */
+    interface HTMLVaInputTelephoneElement extends Components.VaInputTelephone, HTMLStencilElement {
+    }
+    var HTMLVaInputTelephoneElement: {
+        prototype: HTMLVaInputTelephoneElement;
+        new (): HTMLVaInputTelephoneElement;
+    };
     interface HTMLVaLanguageToggleElementEventMap {
         "vaLanguageToggle": any;
         "component-library-analytics": any;
@@ -3384,6 +3416,7 @@ declare global {
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
+        "va-input-telephone": HTMLVaInputTelephoneElement;
         "va-language-toggle": HTMLVaLanguageToggleElement;
         "va-link": HTMLVaLinkElement;
         "va-link-action": HTMLVaLinkActionElement;
@@ -4294,6 +4327,23 @@ declare namespace LocalJSX {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
+    }
+    /**
+     * @componentName International Telephone
+     * @maturityCategory caution
+     * @maturityLevel proposal
+     * @guidanceHref form/international-telephone
+     * @translations English
+     */
+    interface VaInputTelephone {
+        /**
+          * The telephone contact information
+         */
+        "contact"?: string;
+        /**
+          * The country code
+         */
+        "country"?: CountryCode;
     }
     /**
      * @componentName Language Toggle
@@ -5759,6 +5809,7 @@ declare namespace LocalJSX {
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
+        "va-input-telephone": VaInputTelephone;
         "va-language-toggle": VaLanguageToggle;
         "va-link": VaLink;
         "va-link-action": VaLinkAction;
@@ -5960,6 +6011,14 @@ declare module "@stencil/core" {
              * @maturityLevel available
              */
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
+            /**
+             * @componentName International Telephone
+             * @maturityCategory caution
+             * @maturityLevel proposal
+             * @guidanceHref form/international-telephone
+             * @translations English
+             */
+            "va-input-telephone": LocalJSX.VaInputTelephone & JSXBase.HTMLAttributes<HTMLVaInputTelephoneElement>;
             /**
              * @componentName Language Toggle
              * @maturityCategory caution

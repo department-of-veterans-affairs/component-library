@@ -1,0 +1,31 @@
+/* Import flags styles directly - no need for @import in Stencil */
+/* Styles for flags will be automatically included from va-input-telephone.scss */
+
+:host {
+  display: block;
+}
+
+:host > div {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+}
+
+:host va-combo-box {
+  margin-right: 8px;
+}
+
+/* We don't need this class anymore since we're using .flag and .flag-xx from flags.scss */
+/* .va-flag-icon {
+  width: 1.33em;
+  height: 1em;
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 0.5em;
+} */
+
+.va-international-telephone-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
