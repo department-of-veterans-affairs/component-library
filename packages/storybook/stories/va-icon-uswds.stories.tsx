@@ -53,12 +53,10 @@ const IconsTemplate = ({ size }) => {
   return (
     <div className="container">
       <div className="filter">
-        <label htmlFor="filter-term">Type to filter icons</label>
-        <input
-          id="filter-term"
-          className="usa-input"
-          type="text"
-          onChange={handleChange}
+        <va-text-input
+          label="Type to filter icons"
+          name="filter-term"
+          onInput={handleChange}
         />
         <span id="icon-count">{icons.length} icons.</span>
       </div>
