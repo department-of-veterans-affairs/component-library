@@ -16,7 +16,7 @@ export default {
 
 const defaultArgs = {
   icon: 'alarm',
-  size: 4,
+  size: 3,
   srtext: null,
 };
 
@@ -33,14 +33,44 @@ Default.args = {
 Default.argTypes = propStructure(iconDocs);
 
 const IconsTemplate = ({ size }) => {
+  const handleChange = event => {
+    const search = event.target.value.toLowerCase();
+    const iconExamples = document.querySelectorAll('.icon-example');
+
+    iconExamples.forEach(row => {
+      const text = row.getAttribute('data-icon') || ''; // Ensure text is not null or undefined
+      const isVisible = text.toLowerCase().includes(search);
+      row.classList.toggle('vads-u-display--none', !isVisible);
+    });
+
+    const iconCount = document.querySelectorAll(
+      '.icon-example:not(.vads-u-display--none)',
+    ).length;
+    const word = iconCount === 1 ? 'icon' : 'icons';
+    document.getElementById('icon-count').textContent = `${iconCount} ${word}.`;
+  };
+
   return (
-    <div className="wrapper">
-      {icons.map(icon => (
-        <div key={icon}>
-          <va-icon icon={icon} size={size} />
-          <p>{icon}</p>
-        </div>
-      ))}
+    <div className="container">
+      <div className="filter">
+        <label htmlFor="filter-term">Type to filter icons</label>
+        <input
+          id="filter-term"
+          className="usa-input"
+          type="text"
+          onChange={handleChange}
+        />
+        <span id="icon-count">{icons.length} icons.</span>
+      </div>
+
+      <div className="icons">
+        {icons.map(icon => (
+          <div key={icon} className="icon-example" data-icon={icon}>
+            <va-icon icon={icon} size={size} />
+            <code className="icon__label">{icon}</code>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
