@@ -45,10 +45,9 @@ const noop = () => {};
    * @param {HTMLInputElement|HTMLSelectElement} el The element to update
    * @param {string} value The new value of the element
    */
-  const changeElementValue = (el, value = '') => {
+const changeElementValue = (el, value = '') => {
     const elementToChange = el;
     elementToChange.value = value;
-
     const event = new CustomEvent('change', {
       bubbles: true,
       cancelable: true,
@@ -171,7 +170,7 @@ const noop = () => {};
    *
    * @param {HTMLElement} _comboBoxEl The initial element of the combo box component
    */
-  const enhanceComboBox = (_comboBoxEl, _labelEl) => {
+  const enhanceComboBox = (_comboBoxEl, _labelEl, initValue) => {
     const comboBoxEl = _comboBoxEl.closest(COMBO_BOX);
 
     if (comboBoxEl.dataset.enhanced) return;
@@ -248,6 +247,8 @@ const noop = () => {};
     input.setAttribute('type', 'text');
     input.setAttribute('role', 'combobox');
     input.onmouseup = handleMouseUp;
+    // input.value = initValue;
+
     additionalAttributes.forEach(attr =>
       Object.keys(attr).forEach(key => {
         const value = Sanitizer.escapeHTML`${attr[key]}`;
@@ -261,13 +262,16 @@ const noop = () => {};
     }
 
     comboBoxEl.insertAdjacentElement('beforeend', input);
+    const clearButton = comboBox.isInVaInputTelephone
+      ? '' : ''
+      // `<span class="${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}" tabindex="-1">
+      //   <button type="button" class="${CLEAR_INPUT_BUTTON_CLASS}" aria-label="Clear the select contents">&nbsp;</button>
+      // </span>`;
 
     comboBoxEl.insertAdjacentHTML(
       'beforeend',
       Sanitizer.escapeHTML`
-    <span class="${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}" tabindex="-1">
-        <button type="button" class="${CLEAR_INPUT_BUTTON_CLASS}" aria-label="Clear the select contents">&nbsp;</button>
-      </span>
+      ${clearButton}
       <span class="${INPUT_BUTTON_SEPARATOR_CLASS}">&nbsp;</span>
       <span class="${TOGGLE_LIST_BUTTON_WRAPPER_CLASS}" tabindex="-1">
         <button type="button" tabindex="-1" class="${TOGGLE_LIST_BUTTON_CLASS}" aria-label="Toggle the dropdown list">&nbsp;</button>
@@ -412,18 +416,20 @@ const noop = () => {};
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
 
+      const filterKey = comboBox.isInVaInputTelephone ? 'innerHTML' : 'text';
+      const filterValue = optionEl[filterKey];
       if (
         optionEl.value &&
         (disableFiltering ||
           isPristine ||
           !inputValue ||
-          regex.test(optionEl.text))
+          regex.test(filterValue))
       ) {
         if (selectEl.value && optionEl.value === selectEl.value) {
           selectedItemId = optionId;
         }
 
-        if (disableFiltering && !firstFoundId && regex.test(optionEl.text)) {
+        if (disableFiltering && !firstFoundId && regex.test(filterValue)) {
           firstFoundId = optionId;
         }
 
@@ -435,7 +441,7 @@ const noop = () => {};
         // handle filtering when input contains a value
         if (
           inputValue &&
-          regex.test(optionEl.text) &&
+          regex.test(filterValue) &&
           optionEl.getAttribute('data-optgroup') !== 'true' 
         ) {
 
@@ -510,8 +516,13 @@ const noop = () => {};
       li.setAttribute('tabindex', tabindex);
       li.setAttribute('role', isOptGroup ? 'group' : 'option');
       li.setAttribute('data-value', option.value);
-      li.textContent = option.text;
-
+      
+      if (comboBox.isInVaInputTelephone) {
+        const flag = `<span class="flag flag-${option.value.toLowerCase()}"></span>`
+        li.innerHTML = `${flag} ${option.text}`;
+      } else {
+        li.textContent = option.text;
+      }
       return li;
     });
 
@@ -623,21 +634,28 @@ const noop = () => {};
    */
 const completeSelection = el => {
     const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
-  
     statusEl.textContent = '';
   
     const inputValue = (inputEl.value || '').trim().toLowerCase();
   
     if (inputValue) {
       // Find a matching option
-      const matchingOption = Array.from(selectEl.options).find(
-        option => option.text.toLowerCase() === inputValue
-      );
+      const matchingFunc = comboBox.isInVaInputTelephone
+        ? (option => {
+          const [name, _] = inputValue.split('...');
+          return option.text.toLowerCase().startsWith(name.toLowerCase());
+        })
+        : (option => option.text.toLowerCase() === inputValue)
+      // const matchingOption = Array.from(selectEl.options).find(
+      //   option => option.text.toLowerCase() === inputValue
+      // );
+      const matchingOption = Array.from(selectEl.options).find(matchingFunc)
   
       if (matchingOption) {
         // If a match is found, update the input and select values
         changeElementValue(selectEl, matchingOption.value);
-        changeElementValue(inputEl, matchingOption.text);
+        const _text = comboBox.isInVaInputTelephone ? inputEl.value : matchingOption.text;
+        changeElementValue(inputEl, _text);
         comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
         return;
       }
@@ -885,9 +903,12 @@ const completeSelection = el => {
       },
     },
     {
-      init(root, labelEl) {
+      init(root, labelEl, value, isInVaInputTelephone = false) {
+        if (this.isInVaInputTelephone === undefined) {
+          this.isInVaInputTelephone = isInVaInputTelephone;
+        }
         selectOrMatches(COMBO_BOX, root).forEach(comboBoxEl => {
-          enhanceComboBox(comboBoxEl, labelEl);
+          enhanceComboBox(comboBoxEl, labelEl, value);
         });
       },
       getComboBoxContext,

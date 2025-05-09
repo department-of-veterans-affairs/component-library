@@ -73,6 +73,17 @@
   right: calc(2.5rem + 2px);
 }
 
-  .usa-combo-box__clear-input {
+.usa-combo-box__clear-input {
     display: block !important;
+}
+
+.dynamic-flag {
+  position: absolute;
+  bottom: 12px;
+  left: 10px;
+}
+
+input.usa-combo-box__input {
+  padding-left: 35px;
+  padding-right: 15px !important;
 }

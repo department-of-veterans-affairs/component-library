@@ -8,9 +8,9 @@ import {
   State
 } from '@stencil/core';
 
-import { AsYouType, isValidPhoneNumber, CountryCode, getExampleNumber, getCountries } from 'libphonenumber-js/min'; 
+import { AsYouType, isValidPhoneNumber, CountryCode, getExampleNumber, getCountries, getCountryCallingCode } from 'libphonenumber-js/min'; 
 import examples from 'libphonenumber-js/examples.mobile.json';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 /**
  * @componentName International Telephone
@@ -22,7 +22,7 @@ import classnames from 'classnames';
 
 @Component({
   tag: 'va-input-telephone',
-  styleUrls: ['va-input-telephone.scss', 'flags.scss'],
+  styleUrl: 'va-input-telephone.scss',
   shadow: true,
 })
 export class VaInternationalTelephone {
@@ -37,26 +37,70 @@ export class VaInternationalTelephone {
   /**
    * The country code
    */
-  @Prop() country?: CountryCode = 'US';
+  @Prop({ reflect: true, mutable: true }) country?: CountryCode = 'US';
 
-  @State() formattedContact: string;
-  @State() error: string = '';
+  @Prop() header?: string = 'Primary phone number';
+
+  @Prop() hint?: string;
+
+  @Prop({ reflect: true, mutable: true }) error?: string = '';
+
+  @State() formattedContact: string = '';
   @State() countries: string[] = null;
+  @State() countryError: string = '';
+  @State() contactError: string = '';
 
-  @Listen('input')
-  hack() {
-    const { value } = this.textInputRef;
-    this.formattedContact = new AsYouType(this.country).input(value);
+  resetErrors() {
+    this.countryError = '';
+    this.contactError = '';
+    this.error = '';
   }
 
-  @Listen('blur')
-  hacker() {
-    if (!isValidPhoneNumber(this.formattedContact, this.country)) {
-      const example = getExampleNumber(this.country, examples).format('NATIONAL');
-      this.error = `Wrong format, dude! Try something like: ${example}`;
+  updateContact(event: InputEvent) {
+    const target = event.target as HTMLInputElement;
+    const { value } = target;
+    this.formattedContact = value ? this.formatContact(value) : '';
+  }
+
+  getErrorMessageForCountry() {
+    let example = getExampleNumber(this.country, examples).format('NATIONAL');
+    const asYouType = new AsYouType(this.country);
+    asYouType.input(example);
+    const msg = asYouType.getTemplate();
+    return `Enter a ${this.getCountryName(this.country)} phone number in a valid format, for example, ${msg}`;
+  }
+
+  validateContact() {
+    this.resetErrors();
+    if (this.country) {
+      if (this.formattedContact) {
+        const isValid = isValidPhoneNumber(this.formattedContact, this.country);
+        this.error = isValid ? '' : this.getErrorMessageForCountry()
+      } else {
+        this.error = 'Please enter a phone number';
+      }
+      this.contactError = this.error;
     } else {
-      this.error = '';
+      this.validateCountry();
     }
+  }
+
+  validateCountry() {
+    this.resetErrors();
+    if (!this.country) {
+      this.error = 'Please choose a country';
+      this.countryError = this.error;
+    } else {
+      this.validateContact();
+    }
+  }
+
+  @Listen('vaSelect')
+  countryChange(event: CustomEvent<{ value: CountryCode }>) {
+    const { value } = event.detail;
+    this.country = value;
+    console.log('va select....', event);
+    this.validateCountry();
   }
 
   formatContact(value: string) {
@@ -69,8 +113,9 @@ export class VaInternationalTelephone {
     return ['US', ...allButUS];
   }
 
-  renderFlag(country: string) {
-    return <span class={`flag flag-${country.toLowerCase()}`} aria-hidden="true"></span>;
+  getCountryName(countryCode: string) {
+    const name = new Intl.DisplayNames(['en'], { type: 'region' });
+    return name.of(countryCode.toUpperCase());
   }
 
   componentWillLoad() {
@@ -80,23 +125,54 @@ export class VaInternationalTelephone {
     this.countries = this.buildCountryList();
   }
 
+  getOptionText(country: string) {
+    let optionText = '';
+    if (country) {
+      optionText = `${this.getCountryName(country)} +${getCountryCallingCode(country as CountryCode)}`;
+    }
+    return optionText;
+  }
+
   render() {
+    const { header, hint, countries, error, country, formattedContact, countryError, contactError } = this;
+    const legendClasses = classNames({
+      'usa-legend': true,
+      'usa-label--error': !!error
+    });
+
     return (
       <Host>
-        {this.error && <span class="usa-error-message">{this.error}</span>}
-        <div class="va-international-telephone-wrapper" tabIndex={0}>
-          <va-combo-box label="Country code" name="test" data-use-html="true">
-            {this.countries.map(country => (
-              <option value={country} key={country}>
-                {this.renderFlag(country)} +{new AsYouType(country as CountryCode).getCallingCode()} ({country})
-              </option>
-            ))}
-          </va-combo-box>
-          <va-text-input
-            label="Phone number"
-            ref={(el) => this.textInputRef = el}
-            value={this.formattedContact}
-          />
+        <div class="input-wrap">
+          <fieldset class="usa-form usa-fieldset">
+            <legend class={legendClasses}>
+              {header}
+              {hint && <div class="usa-hint">{hint}</div>}
+            </legend>
+            {error && <span id="error-message" role="alert">{error}</span>}
+            <div class="va-input-telephone-wrapper" tabIndex={0}>
+              <va-combo-box
+                label="Country code"
+                name="country-codes"
+                // value={this.getOptionText(country)}
+                show-input-error="false"
+                error={countryError}
+              >
+                {countries.map(country => (
+                  <option value={country} key={country}>
+                    {this.getOptionText(country)}
+                  </option>
+                ))}
+              </va-combo-box>
+              <va-text-input
+                label="Phone number"
+                value={formattedContact}
+                show-input-error="false"
+                error={contactError}
+                onInput={(e) => this.updateContact(e)}
+                onBlur={() => this.validateContact()}
+              />
+            </div>
+          </fieldset>
         </div>
       </Host>
     );

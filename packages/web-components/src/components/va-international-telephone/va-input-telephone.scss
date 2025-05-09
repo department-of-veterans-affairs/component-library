@@ -1,31 +1,67 @@
-/* Import flags styles directly - no need for @import in Stencil */
-/* Styles for flags will be automatically included from va-input-telephone.scss */
+@forward 'settings';
+
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-form/src/styles/usa-form';
+@use 'usa-fieldset/src/styles/usa-fieldset';
+@use 'usa-legend/src/styles/usa-legend';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'usa-form-group/src/styles/usa-form-group';
+@use 'usa-error-message/src/styles/usa-error-message';
+
+@import '../../mixins/uswds-error-border.scss';
+@import '../../mixins/focusable.css';
+@import '../../mixins/form-field-error.css';
 
 :host {
   display: block;
 }
 
-:host > div {
-  display: flex;
-  flex-direction: row;
-  align-items: end;
+va-text-input::part(label), 
+va-combo-box::part(label) {
+  margin-top: 0;
 }
 
-:host va-combo-box {
-  margin-right: 8px;
+div.input-wrap {
+  max-width: 480px !important;
 }
 
-/* We don't need this class anymore since we're using .flag and .flag-xx from flags.scss */
-/* .va-flag-icon {
-  width: 1.33em;
-  height: 1em;
-  vertical-align: middle;
-  display: inline-block;
-  margin-right: 0.5em;
-} */
+fieldset {
+  max-width: 480px !important;
+}
 
-.va-international-telephone-wrapper {
+va-combo-box {
+  flex: 1;
+  min-width: 216px;
+  max-width: 236px;
+}
+
+va-text-input {
+ max-width: 236px;
+ flex: 5;
+}
+
+.va-input-telephone-wrapper {
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 8px;
+  margin-top: 8px;
+  width: 100%;
+  max-width: 480px;
+}
+
+@media (max-width: 360px) {
+  :host, .va-input-telephone-wrapper {
+    width: 288px;
+  }
+  va-combo-box, va-text-input {
+    width: 100%;
+    max-width: 100% !important;
+    margin-top: 16px;
+  }
+
+  .va-input-telephone-wrapper {
+    display: block;
+  }
 }

@@ -9,11 +9,14 @@ import {
   h,
   State,
   Fragment,
+  Watch, 
+  Listen
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
 import { comboBox } from './va-combo-box-library.js';
-import { isMessageSet } from '../../utils/utils';
+import { isMessageSet, truncate } from '../../utils/utils';
+import { getInteriorWidth } from './utils';
 
 /**
  * @componentName Combo Box
@@ -26,7 +29,7 @@ import { isMessageSet } from '../../utils/utils';
 
 @Component({
   tag: 'va-combo-box',
-  styleUrl: 'va-combo-box.scss',
+  styleUrls: ['va-combo-box.scss', 'flags.scss'],
   shadow: true,
 })
 export class VaComboBox {
@@ -35,6 +38,8 @@ export class VaComboBox {
   @State() options: Array<Node>;
 
   @State() labelNode: HTMLLabelElement;
+
+  private isInVaInputTelephone: boolean;
 
   /**
    * Whether or not this is a required field.
@@ -81,6 +86,20 @@ export class VaComboBox {
    */
   @Prop() messageAriaDescribedby?: string;
 
+  @Prop({ reflect: true }) showInputError?: boolean = true;
+
+  @Watch('error')
+  updateErrorClass(newValue: string) {
+    const input = this.el.shadowRoot.querySelector('input');
+    if (input) {
+      if (newValue) {
+        input.classList.add('usa-input--error');
+      } else {
+        input.classList.remove('usa-input--error')
+      }
+    }
+  }
+
   /**
    * The event emitted when the selected value changes
    */
@@ -95,13 +114,21 @@ export class VaComboBox {
   componentDidLoad() {
     const comboBoxElement = this.el.shadowRoot.querySelector('.usa-combo-box');
     const labelElement = this.el.shadowRoot.querySelector('label');
+    this.isInVaInputTelephone = this.el.parentElement?.classList.contains('va-input-telephone-wrapper');
+    
+    
     if (comboBoxElement) {
-      comboBox.init(comboBoxElement, labelElement);
+      comboBox.init(comboBoxElement, labelElement, this.value, this.isInVaInputTelephone);
       comboBox.on(comboBoxElement);
     }
     const inputElement = this.el.shadowRoot.querySelector('input');
     if (inputElement && this.error) {
       inputElement.classList.add('usa-input--error');
+    }
+
+    if (this.isInVaInputTelephone) {
+      this.value = 'US';
+      // inputElement.value = "mega cool"
     }
 
     const errorID = 'input-error-message';
@@ -187,6 +214,63 @@ export class VaComboBox {
     this.vaSelect.emit({ value: this.value });
   }
 
+  // remove the flag icon inside the input 
+  // @Listen('input')
+  check() {
+    if (this.isInVaInputTelephone) {
+      const input = this.el.shadowRoot.querySelector('input');
+      if (input.value === '') {
+        const flagSpan = this.el.shadowRoot.querySelector('span.dynamic-flag');
+        if (flagSpan) {
+          flagSpan.className = '';
+        }
+      };
+    }
+  }
+
+  private handleTruncation(text: string, input: HTMLInputElement) {
+    const [country, _prefix] = text.split('+');
+    const prefix = ` +${_prefix}`;
+    // find available space
+    const interiorWidth = getInteriorWidth(input);
+    const availableWidth = interiorWidth - 45; // subtract space devoted to button and separator
+
+    //find length of prefix
+    const computedStyle = window.getComputedStyle(input);
+    const fontStyle = `${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    context.font = fontStyle;
+    const prefixLength = Math.ceil(context.measureText(prefix).width);
+
+    // get truncated country name
+    const truncatedCountry = truncate(country, availableWidth - prefixLength, fontStyle);
+    return `${truncatedCountry}${prefix}`;
+  }
+
+  componentDidRender() {
+    if (this.isInVaInputTelephone) {
+
+      const options = this.el.shadowRoot.querySelectorAll('option');
+      if (options && options.length !== 0) {
+        let country = this.value !== undefined ? this.value : 'US';
+
+        const [option] = Array.from(options).filter((option: HTMLOptionElement) => option.value === country);
+
+        if (!!option) {
+          const { text } = option as HTMLOptionElement;
+          const input = this.el.shadowRoot.querySelector('input');
+          const truncatedText = this.handleTruncation(text, input);
+          input.value = truncatedText;
+          const comboBoxEl = this.el.shadowRoot.querySelector('div.usa-combo-box');
+          const flagSpan = document.createElement('span');
+          flagSpan.classList.add('flag', `flag-${country.toLowerCase()}`, 'dynamic-flag');
+          comboBoxEl.appendChild(flagSpan);
+        }
+      }
+    }
+  }
+
   render() {
     const {
       error,
@@ -198,15 +282,16 @@ export class VaComboBox {
       name,
       hint,
       messageAriaDescribedby,
+      showInputError,
     } = this;
-
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
     });
+
     return (
       <Host>
-        <label htmlFor="options" class={labelClass} id="options-label">
+        <label htmlFor="options" class={labelClass} id="options-label" part="label">
           {label}
           {required && (
             <span class="usa-label--required"> {i18next.t('required')}</span>
@@ -218,7 +303,7 @@ export class VaComboBox {
           </span>
         )}
         <span id="input-error-message" role="alert">
-          {error && (
+          {showInputError && error && (
             <Fragment>
               <span class="usa-sr-only">{i18next.t('error')}</span>
               <span class="usa-error-message">{error}</span>

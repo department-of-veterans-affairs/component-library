@@ -537,6 +537,7 @@ export namespace Components {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
+        "showInputError"?: boolean;
         /**
           * Selected value (will get updated on select).
          */
@@ -798,6 +799,9 @@ export namespace Components {
           * The country code
          */
         "country"?: CountryCode;
+        "error"?: string;
+        "header"?: string;
+        "hint"?: string;
     }
     /**
      * @componentName Language Toggle
@@ -4055,6 +4059,7 @@ declare namespace LocalJSX {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
+        "showInputError"?: boolean;
         /**
           * Selected value (will get updated on select).
          */
@@ -4344,6 +4349,9 @@ declare namespace LocalJSX {
           * The country code
          */
         "country"?: CountryCode;
+        "error"?: string;
+        "header"?: string;
+        "hint"?: string;
     }
     /**
      * @componentName Language Toggle
