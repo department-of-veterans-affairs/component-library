@@ -15,8 +15,8 @@ import {
 import classnames from 'classnames';
 import { i18next } from '../..';
 import { comboBox } from './va-combo-box-library.js';
-import { isMessageSet, truncate } from '../../utils/utils';
-import { getInteriorWidth } from './utils';
+import { isMessageSet } from '../../utils/utils';
+import { manageFlagIcon, handleRerender } from './utils';
 
 /**
  * @componentName Combo Box
@@ -86,7 +86,11 @@ export class VaComboBox {
    */
   @Prop() messageAriaDescribedby?: string;
 
-  @Prop({ reflect: true }) showInputError?: boolean = true;
+
+  /**
+   * Whether to show error message text 
+   */
+  @Prop() showInputError?: boolean = true;
 
   @Watch('error')
   updateErrorClass(newValue: string) {
@@ -115,7 +119,14 @@ export class VaComboBox {
     const comboBoxElement = this.el.shadowRoot.querySelector('.usa-combo-box');
     const labelElement = this.el.shadowRoot.querySelector('label');
     this.isInVaInputTelephone = this.el.parentElement?.classList.contains('va-input-telephone-wrapper');
-    
+    // create span that will hold flag in the input
+    if (this.isInVaInputTelephone) {
+      const comboBoxEl = this.el.shadowRoot.querySelector('div.usa-combo-box');
+      const flagSpan = document.createElement('span');
+      this.value = 'US';
+      flagSpan.classList.add('flag', `flag-us`, 'dynamic-flag');
+      comboBoxEl.appendChild(flagSpan);
+    }
     
     if (comboBoxElement) {
       comboBox.init(comboBoxElement, labelElement, this.value, this.isInVaInputTelephone);
@@ -124,11 +135,6 @@ export class VaComboBox {
     const inputElement = this.el.shadowRoot.querySelector('input');
     if (inputElement && this.error) {
       inputElement.classList.add('usa-input--error');
-    }
-
-    if (this.isInVaInputTelephone) {
-      this.value = 'US';
-      // inputElement.value = "mega cool"
     }
 
     const errorID = 'input-error-message';
@@ -214,60 +220,16 @@ export class VaComboBox {
     this.vaSelect.emit({ value: this.value });
   }
 
-  // remove the flag icon inside the input 
-  // @Listen('input')
-  check() {
-    if (this.isInVaInputTelephone) {
-      const input = this.el.shadowRoot.querySelector('input');
-      if (input.value === '') {
-        const flagSpan = this.el.shadowRoot.querySelector('span.dynamic-flag');
-        if (flagSpan) {
-          flagSpan.className = '';
-        }
-      };
-    }
-  }
-
-  private handleTruncation(text: string, input: HTMLInputElement) {
-    const [country, _prefix] = text.split('+');
-    const prefix = ` +${_prefix}`;
-    // find available space
-    const interiorWidth = getInteriorWidth(input);
-    const availableWidth = interiorWidth - 45; // subtract space devoted to button and separator
-
-    //find length of prefix
-    const computedStyle = window.getComputedStyle(input);
-    const fontStyle = `${computedStyle.fontSize} ${computedStyle.fontFamily}`;
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    context.font = fontStyle;
-    const prefixLength = Math.ceil(context.measureText(prefix).width);
-
-    // get truncated country name
-    const truncatedCountry = truncate(country, availableWidth - prefixLength, fontStyle);
-    return `${truncatedCountry}${prefix}`;
+  @Listen('input')
+  handleInput() {
+    // remove the flag icon inside the input when the country changes
+    manageFlagIcon.bind(this)();
   }
 
   componentDidRender() {
+    // update the input with truncated country name and matching flag after country is chosen
     if (this.isInVaInputTelephone) {
-
-      const options = this.el.shadowRoot.querySelectorAll('option');
-      if (options && options.length !== 0) {
-        let country = this.value !== undefined ? this.value : 'US';
-
-        const [option] = Array.from(options).filter((option: HTMLOptionElement) => option.value === country);
-
-        if (!!option) {
-          const { text } = option as HTMLOptionElement;
-          const input = this.el.shadowRoot.querySelector('input');
-          const truncatedText = this.handleTruncation(text, input);
-          input.value = truncatedText;
-          const comboBoxEl = this.el.shadowRoot.querySelector('div.usa-combo-box');
-          const flagSpan = document.createElement('span');
-          flagSpan.classList.add('flag', `flag-${country.toLowerCase()}`, 'dynamic-flag');
-          comboBoxEl.appendChild(flagSpan);
-        }
-      }
+      handleRerender.bind(this)();
     }
   }
 

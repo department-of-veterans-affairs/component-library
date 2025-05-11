@@ -537,6 +537,9 @@ export namespace Components {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
+        /**
+          * Whether to show error message text
+         */
         "showInputError"?: boolean;
         /**
           * Selected value (will get updated on select).
@@ -802,6 +805,10 @@ export namespace Components {
         "error"?: string;
         "header"?: string;
         "hint"?: string;
+        /**
+          * Whether the country select should be included. Set to true to exclude it.
+         */
+        "noCountry"?: boolean;
     }
     /**
      * @componentName Language Toggle
@@ -2132,6 +2139,10 @@ export interface VaFileInputMultipleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputMultipleElement;
 }
+export interface VaInputTelephoneCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaInputTelephoneElement;
+}
 export interface VaLanguageToggleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaLanguageToggleElement;
@@ -2696,6 +2707,10 @@ declare global {
         prototype: HTMLVaIconElement;
         new (): HTMLVaIconElement;
     };
+    interface HTMLVaInputTelephoneElementEventMap {
+        "vaContact": any;
+        "vaCountryCode": any;
+    }
     /**
      * @componentName International Telephone
      * @maturityCategory caution
@@ -2704,6 +2719,14 @@ declare global {
      * @translations English
      */
     interface HTMLVaInputTelephoneElement extends Components.VaInputTelephone, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaInputTelephoneElementEventMap>(type: K, listener: (this: HTMLVaInputTelephoneElement, ev: VaInputTelephoneCustomEvent<HTMLVaInputTelephoneElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaInputTelephoneElementEventMap>(type: K, listener: (this: HTMLVaInputTelephoneElement, ev: VaInputTelephoneCustomEvent<HTMLVaInputTelephoneElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaInputTelephoneElement: {
         prototype: HTMLVaInputTelephoneElement;
@@ -4059,6 +4082,9 @@ declare namespace LocalJSX {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
+        /**
+          * Whether to show error message text
+         */
         "showInputError"?: boolean;
         /**
           * Selected value (will get updated on select).
@@ -4352,6 +4378,18 @@ declare namespace LocalJSX {
         "error"?: string;
         "header"?: string;
         "hint"?: string;
+        /**
+          * Whether the country select should be included. Set to true to exclude it.
+         */
+        "noCountry"?: boolean;
+        /**
+          * The event emitted when the contact changes
+         */
+        "onVaContact"?: (event: VaInputTelephoneCustomEvent<any>) => void;
+        /**
+          * The event emitted when the country code changes
+         */
+        "onVaCountryCode"?: (event: VaInputTelephoneCustomEvent<any>) => void;
     }
     /**
      * @componentName Language Toggle

@@ -262,16 +262,10 @@ const changeElementValue = (el, value = '') => {
     }
 
     comboBoxEl.insertAdjacentElement('beforeend', input);
-    const clearButton = comboBox.isInVaInputTelephone
-      ? '' : ''
-      // `<span class="${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}" tabindex="-1">
-      //   <button type="button" class="${CLEAR_INPUT_BUTTON_CLASS}" aria-label="Clear the select contents">&nbsp;</button>
-      // </span>`;
 
     comboBoxEl.insertAdjacentHTML(
       'beforeend',
       Sanitizer.escapeHTML`
-      ${clearButton}
       <span class="${INPUT_BUTTON_SEPARATOR_CLASS}">&nbsp;</span>
       <span class="${TOGGLE_LIST_BUTTON_WRAPPER_CLASS}" tabindex="-1">
         <button type="button" tabindex="-1" class="${TOGGLE_LIST_BUTTON_CLASS}" aria-label="Toggle the dropdown list">&nbsp;</button>
@@ -286,6 +280,16 @@ const changeElementValue = (el, value = '') => {
       </ul>
       <div class="${STATUS_CLASS} usa-sr-only" role="status"></div>`,
     );
+
+    //add clear button when component used alone;
+    if (!comboBox.isInVaInputTelephone) {
+      comboBoxEl.insertAdjacentHTML('beforeend',
+        Sanitizer.escapeHTML`
+        <span class="${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}" tabindex="-1">
+          <button type="button" class="${CLEAR_INPUT_BUTTON_CLASS}" aria-label="Clear the select contents">&nbsp;</button>
+        </span>
+        `);
+    }
 
     if (selectedOption) {
       const { inputEl } = getComboBoxContext(comboBoxEl);
@@ -519,7 +523,8 @@ const changeElementValue = (el, value = '') => {
       
       if (comboBox.isInVaInputTelephone) {
         const flag = `<span class="flag flag-${option.value.toLowerCase()}"></span>`
-        li.innerHTML = `${flag} ${option.text}`;
+        const content = `<div class="flag-wrapper">${flag}<span class="flag-text">${option.text}</span></div>`;
+        li.innerHTML = content;
       } else {
         li.textContent = option.text;
       }
@@ -904,6 +909,7 @@ const completeSelection = el => {
     },
     {
       init(root, labelEl, value, isInVaInputTelephone = false) {
+        // only set this variable once
         if (this.isInVaInputTelephone === undefined) {
           this.isInVaInputTelephone = isInVaInputTelephone;
         }

@@ -83,6 +83,14 @@
   left: 10px;
 }
 
+.flag-wrapper {
+  display: flex;
+  align-items: center;
+  & > span {
+    margin-right: 8px;
+  }
+}
+
 input.usa-combo-box__input {
   padding-left: 35px;
   padding-right: 15px !important;

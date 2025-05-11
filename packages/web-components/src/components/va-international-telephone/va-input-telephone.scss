@@ -13,6 +13,20 @@
 @import '../../mixins/focusable.css';
 @import '../../mixins/form-field-error.css';
 
+@mixin small-screen {
+  va-combo-box, va-text-input {
+    width: 100%;
+    max-width: 100% !important;
+    margin-top: 16px;
+    flex: 0;
+    width: 288px;
+  }
+
+  .va-input-telephone-wrapper {
+    display: block;
+  }
+}
+
 :host {
   display: block;
 }
@@ -28,6 +42,8 @@ div.input-wrap {
 
 fieldset {
   max-width: 480px !important;
+  container-name: component-wrapper;
+  container-type: inline-size;
 }
 
 va-combo-box {
@@ -51,17 +67,12 @@ va-text-input {
   max-width: 480px;
 }
 
-@media (max-width: 360px) {
-  :host, .va-input-telephone-wrapper {
-    width: 288px;
-  }
-  va-combo-box, va-text-input {
-    width: 100%;
-    max-width: 100% !important;
-    margin-top: 16px;
-  }
+// use container query if possible
+@container component-wrapper (max-width: 360px) {
+  @include small-screen;
+}
 
-  .va-input-telephone-wrapper {
-    display: block;
-  }
+// fall back if container query not supported
+@media (max-width: 360px) {
+  @include small-screen;
 }
