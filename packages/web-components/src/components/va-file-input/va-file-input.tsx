@@ -524,7 +524,7 @@ export class VaFileInput {
           <input
             id="fileInputField"
             class="file-input"
-            aria-label={fileInputString}
+            aria-label={`Select a file to upload. Drag file here or ${fileInputString}`}
             style={{
               visibility: (this.uploadStatus === 'success' || uploadedFile) ? 'hidden' : 'unset',
             }}
