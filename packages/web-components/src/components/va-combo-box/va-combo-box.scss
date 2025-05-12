@@ -79,7 +79,8 @@
 
 .dynamic-flag {
   position: absolute;
-  bottom: 12px;
+  // center the flag
+  bottom: calc((2.5rem - 16px) * 0.5);
   left: 10px;
 }
 
