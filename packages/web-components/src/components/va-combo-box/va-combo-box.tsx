@@ -123,8 +123,8 @@ export class VaComboBox {
     if (this.isInVaInputTelephone) {
       const comboBoxEl = this.el.shadowRoot.querySelector('div.usa-combo-box');
       const flagSpan = document.createElement('span');
-      this.value = 'US';
-      flagSpan.classList.add('flag', `flag-us`, 'dynamic-flag');
+      this.value = this.value ?? 'US';
+      flagSpan.classList.add('flag', `flag-${this.value.toLowerCase()}`, 'dynamic-flag');
       comboBoxEl.appendChild(flagSpan);
     }
     

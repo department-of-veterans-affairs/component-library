@@ -38,14 +38,24 @@ export class VaInternationalTelephone {
   @Prop() contact?: string;
 
   /**
-   * The country code
+   * The 2 letter ISO country code for a country
    */
   @Prop({ reflect: true, mutable: true }) country?: CountryCode = this.DEFAULT_COUNTRY;
 
+
+  /**
+   * Header text for the component
+   */
   @Prop() header?: string = 'Primary phone number';
 
+  /**
+   * Hint string text
+   */
   @Prop() hint?: string;
 
+  /**
+   * The error for the component
+   */
   @Prop({ reflect: true, mutable: true }) error?: string = '';
 
   /**
@@ -63,9 +73,24 @@ export class VaInternationalTelephone {
    */
   @Event() vaCountryCode: EventEmitter
 
+  /**
+   * The contact formatted according to the selected country
+   */
   @State() formattedContact: string = '';
+
+  /**
+   * List of sorted countries used in the country combo-box
+   */
   @State() countries: string[] = null;
+
+  /**
+   * Error for the country combo-box
+   */
   @State() countryError: string = '';
+
+  /**
+   * Error for the contact input
+   */
   @State() contactError: string = '';
 
   resetErrors() {
@@ -172,6 +197,7 @@ export class VaInternationalTelephone {
       countries,
       error,
       formattedContact,
+      country,
       countryError,
       contactError,
       noCountry
@@ -198,6 +224,7 @@ export class VaInternationalTelephone {
                 name="country-codes"
                 show-input-error="false"
                 error={countryError}
+                value={country}
               >
                 {countries.map(country => (
                   <option value={country} key={country}>

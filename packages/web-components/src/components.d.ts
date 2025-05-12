@@ -799,11 +799,20 @@ export namespace Components {
          */
         "contact"?: string;
         /**
-          * The country code
+          * The 2 letter ISO country code for a country
          */
         "country"?: CountryCode;
+        /**
+          * The error for the component
+         */
         "error"?: string;
+        /**
+          * Header text for the component
+         */
         "header"?: string;
+        /**
+          * Hint string text
+         */
         "hint"?: string;
         /**
           * Whether the country select should be included. Set to true to exclude it.
@@ -4372,11 +4381,20 @@ declare namespace LocalJSX {
          */
         "contact"?: string;
         /**
-          * The country code
+          * The 2 letter ISO country code for a country
          */
         "country"?: CountryCode;
+        /**
+          * The error for the component
+         */
         "error"?: string;
+        /**
+          * Header text for the component
+         */
         "header"?: string;
+        /**
+          * Hint string text
+         */
         "hint"?: string;
         /**
           * Whether the country select should be included. Set to true to exclude it.
