@@ -34,7 +34,7 @@ export class VaFileInput {
   private uploadStatus: 'idle' | 'success' = 'idle';
   private fileType?: string;
   private chooseFileString: string ='choose from folder';
-  private dragFileString: string = 'Drag file here or ';
+  private dragFileString: string = 'Drag a file here or ';
 
   @Element() el: HTMLElement;
   @State() file?: File;
