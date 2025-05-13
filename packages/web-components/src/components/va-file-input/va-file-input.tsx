@@ -33,7 +33,8 @@ export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
   private uploadStatus: 'idle' | 'success' = 'idle';
   private fileType?: string;
-  private fileInputString: string ='choose from folder';
+  private chooseFileString: string ='choose from folder';
+  private dragFileString: string = 'Drag file here or ';
 
   @Element() el: HTMLElement;
   @State() file?: File;
@@ -403,11 +404,11 @@ export class VaFileInput {
   disconnectedCallback() {
     this.el.removeEventListener('change', this.handleChange);
   }
-  private getDefaultUploadMessage(fileInputString: string) {
+  private getDefaultUploadMessage(chooseFileString: string) {
     return (
       <span>
-        Drag a file here or{' '}
-        <span class="file-input-choose-text">{fileInputString}</span>
+        {this.dragFileString}
+        <span class="file-input-choose-text">{chooseFileString}</span>
       </span>
     )
   }
@@ -426,7 +427,8 @@ export class VaFileInput {
       hint,
       file,
       uploadStatus,
-      fileInputString,
+      dragFileString,
+      chooseFileString,
       uploadMessage,
       headerSize,
       fileContents,
@@ -524,7 +526,7 @@ export class VaFileInput {
           <input
             id="fileInputField"
             class="file-input"
-            aria-label={`Select a file to upload. Drag file here or ${fileInputString}`}
+            aria-label={`${label}. ${dragFileString}${chooseFileString}`}
             style={{
               visibility: (this.uploadStatus === 'success' || uploadedFile) ? 'hidden' : 'unset',
             }}
@@ -553,7 +555,7 @@ export class VaFileInput {
               <div class={fileInputTargetClasses}>
                 <div class="file-input-box"></div>
                 <div class="file-input-instructions">
-                  {!!uploadMessage ? uploadMessage : this.getDefaultUploadMessage(fileInputString)}
+                  {!!uploadMessage ? uploadMessage : this.getDefaultUploadMessage(chooseFileString)}
                 </div>
               </div>
             </div>
