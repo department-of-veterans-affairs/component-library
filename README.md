@@ -10,12 +10,15 @@ This is a monorepo containing the following packages:
 - `css-library`
 - `storybook`
 - `design-system-dashboard-cli`
+- `integration-examples`
 
 The `core` package is for bundling the `web-components` and `react-components` packages into one for publishing.
 
 The `storybook` package is for the combined story files from each `*-components` package.
 
 The `design-system-dashboard-cli` package is used to gather metrics on design system usage.
+
+The `integration-examples` package is for examples of how to integrate the VA Design System into different frameworks and build tools outside of vets-website ([VA.gov](https://VA.gov)).
 
 # Running Build via Storybook
 
