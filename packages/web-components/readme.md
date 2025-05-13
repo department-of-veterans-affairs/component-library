@@ -4,9 +4,9 @@
 
 This package contains all of the actively maintained web components used by the Veterans Affairs Design System (VADS). 
 
-For more information about the VADS, checkout [design.va.gov](design.va.gov). 
+For more information about the VADS, checkout [https://design.va.gov](design.va.gov). 
 
-For component documentation, checkout [our storybook](design.va.gov/storybook). 
+For component documentation, checkout [our storybook](https://design.va.gov/storybook). 
 
 Need to submit a bug or request a feature? [File an issue with us](https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/new/choose)
 

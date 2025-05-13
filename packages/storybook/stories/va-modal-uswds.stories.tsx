@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { VaModal } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
@@ -17,8 +17,50 @@ export default {
   parameters: {
     componentSubtitle: 'va-modal web component',
     docs: {
-      page: () => <StoryDocs storyDefault={Default} data={modalDocs} />,
+      page: () => {
+        // Use effect to control scroll position
+        useEffect(() => {
+          // Function to scroll to top
+          const scrollToTop = () => window.scrollTo(0, 0);
+          
+          // Immediate scroll
+          scrollToTop();
+          
+          // Schedule multiple scroll attempts with increasing delays
+          // This helps ensure scrolling works even if Storybook does additional rendering
+          const timers = [50, 100, 300, 500, 1000].map(delay => 
+            setTimeout(scrollToTop, delay)
+          );
+          
+          // Clean up timers on unmount
+          return () => timers.forEach(clearTimeout);
+        }, []);
+        
+        return (
+          <>
+            <style>
+              {`
+                body {
+                  overflow: auto !important;
+                  position: static !important;
+                }
+                body.modal-open {
+                  overflow: auto !important;
+                  position: static !important;
+                  height: auto !important;
+                  padding-right: 0 !important;
+                }
+              `}
+            </style>
+            <StoryDocs storyDefault={Default} data={modalDocs} />
+          </>
+        );
+      },
     },
+    // This tells Storybook to scroll to the top when this story loads
+    viewport: {
+      scrollTop: 0
+    }
   },
   argTypes: {
     status: {
@@ -37,7 +79,7 @@ const defaultArgs = {
   'modal-title': 'Title',
   'initial-focus-selector': undefined,
   'status': undefined,
-  'visible': false,
+  'visible': true,
   'primaryButtonClick': () => window.alert('Primary button clicked!'),
   'primary-button-text': 'Primary',
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
@@ -69,6 +111,11 @@ const Template = ({
     setIsVisible(true);
     resizeViewPorts(wrapRef?.current, true);
   };
+
+  useEffect(() => {
+    resizeViewPorts(wrapRef?.current, isVisible);
+  }, [isVisible]);
+
   return (
     <div ref={wrapRef}>
       <h1>Testing h1 heading</h1>
@@ -116,6 +163,11 @@ const ForcedTemplate = ({
     setIsVisible(false);
     resizeViewPorts(wrapRef?.current, false);
   };
+
+  useEffect(() => {
+    resizeViewPorts(wrapRef?.current, isVisible);
+  }, [isVisible]);
+
   return (
     <div ref={wrapRef}>
       <h1>Testing h1 heading</h1>
@@ -222,6 +274,10 @@ export const WithNestedWebComponents = ({
     setIsVisible(true);
     resizeViewPorts(wrapRef?.current, true);
   };
+
+  useEffect(() => {
+    resizeViewPorts(wrapRef?.current, isVisible);
+  }, [isVisible]);
   return (
     <div ref={wrapRef}>
       <h1>Testing h1 heading</h1>
@@ -247,10 +303,6 @@ export const WithNestedWebComponents = ({
           A modal may pass any React nodes as children to be displayed within
           it.
         </p>
-        <blockquote>
-          <input id="plain-checkbox" type="checkbox" />
-          <label htmlFor="plain-checkbox">Plain checkbox</label>
-        </blockquote>
         <va-checkbox label="va-checkbox" />
       </VaModal>
       <input id="post-modal-input" type="checkbox" />
