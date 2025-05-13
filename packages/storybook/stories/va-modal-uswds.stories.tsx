@@ -28,7 +28,7 @@ export default {
           
           // Schedule multiple scroll attempts with increasing delays
           // This helps ensure scrolling works even if Storybook does additional rendering
-          const timers = [50, 100, 300, 500].map(delay => 
+          const timers = [50, 100, 300, 500, 1000].map(delay => 
             setTimeout(scrollToTop, delay)
           );
           
