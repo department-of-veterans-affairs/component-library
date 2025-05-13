@@ -53,6 +53,18 @@ WithCountry.args = {
   country: "MX"
 }
 
+export const WithCustomHeader = Template.bind(null);
+WithCustomHeader.args = {
+  ...defaultArgs,
+  header: 'Secondary phone number'
+}
+
+export const WithCustomError = Template.bind(null);
+WithCustomError.args = {
+  ...defaultArgs,
+  error: 'This is a custom error message'
+}
+
 export const WithHint = Template.bind(null);
 WithHint.args = {
   ...defaultArgs,

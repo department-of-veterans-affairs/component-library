@@ -294,7 +294,7 @@ export function deepEquals(a: any, b: any): boolean {
  * @param fontStyle - Optional font style string (e.g. "14px Arial")
  * @returns The truncated string or original if it fits
  */
-export function truncate(text: string, maxWidth: number, fontStyle?: string): string {
+export function truncate(text: string, maxWidth: number, fontStyle: string): string {
   if (!text) return text;
 
   // Create a canvas to measure text width

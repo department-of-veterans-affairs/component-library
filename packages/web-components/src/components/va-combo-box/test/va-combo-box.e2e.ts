@@ -13,9 +13,9 @@ describe('va-combo-box', () => {
     const element = await page.find('va-combo-box');
     await page.find('va-combo-box >>> input');
     expect(element).toEqualHtml(`
-            <va-combo-box class="hydrated" label="A label" >
+            <va-combo-box class="hydrated" label="A label">
                 <mock:shadow-root>
-                    <label class="usa-label" for="options" id="options-label">
+                    <label class="usa-label" for="options" id="options-label" part="label">
                     A label
                     </label>
                     <span id="input-error-message" role="alert"></span>
@@ -80,7 +80,7 @@ describe('va-combo-box', () => {
         expect(element).toEqualHtml(`
           <va-combo-box class="hydrated" label="A label">
                 <mock:shadow-root>
-                    <label class="usa-label" for="options" id="options-label">
+                    <label class="usa-label" for="options" id="options-label" part="label">
                     A label
                     </label>
                     <span id="input-error-message" role="alert"></span>
@@ -213,7 +213,7 @@ describe('va-combo-box', () => {
     await page.find('va-combo-box >>> input');
     const element = await page.find('va-combo-box >>> label');
     expect(element)
-      .toEqualHtml(`<label class="usa-label" for="options" id="options-label">
+      .toEqualHtml(`<label class="usa-label" for="options" id="options-label" part="label">
             A label
             <span class="usa-label--required">  (*Required)</span>
             </label>`);
@@ -255,7 +255,7 @@ describe('va-combo-box', () => {
 
     // validate that the label is followed by the hint
     expect(element.shadowRoot.innerHTML).toContain(
-      `<label for="options" class="usa-label" id="options-label">${labelText}</label><span class="usa-hint" id="input-hint">${hintText}</span>`,
+      `<label for="options" class="usa-label" id="options-label" part="label">${labelText}</label><span class="usa-hint" id="input-hint">${hintText}</span>`,
     );
   });
 

@@ -266,6 +266,9 @@ const changeElementValue = (el, value = '') => {
     comboBoxEl.insertAdjacentHTML(
       'beforeend',
       Sanitizer.escapeHTML`
+      <span class="${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}" tabindex="-1">
+        <button type="button" class="${CLEAR_INPUT_BUTTON_CLASS}" aria-label="Clear the select contents">&nbsp;</button>
+      </span>
       <span class="${INPUT_BUTTON_SEPARATOR_CLASS}">&nbsp;</span>
       <span class="${TOGGLE_LIST_BUTTON_WRAPPER_CLASS}" tabindex="-1">
         <button type="button" tabindex="-1" class="${TOGGLE_LIST_BUTTON_CLASS}" aria-label="Toggle the dropdown list">&nbsp;</button>
@@ -281,14 +284,10 @@ const changeElementValue = (el, value = '') => {
       <div class="${STATUS_CLASS} usa-sr-only" role="status"></div>`,
     );
 
-    //add clear button when component used alone;
-    if (!comboBox.isInVaInputTelephone) {
-      comboBoxEl.insertAdjacentHTML('beforeend',
-        Sanitizer.escapeHTML`
-        <span class="${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}" tabindex="-1">
-          <button type="button" class="${CLEAR_INPUT_BUTTON_CLASS}" aria-label="Clear the select contents">&nbsp;</button>
-        </span>
-        `);
+    //Sanitizer does not allow conditional rendering of elements
+    // this approach allows tests to pass
+    if (comboBox.isInVaInputTelephone) {
+      comboBoxEl.querySelector(`:scope > span.${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}`).remove();
     }
 
     if (selectedOption) {

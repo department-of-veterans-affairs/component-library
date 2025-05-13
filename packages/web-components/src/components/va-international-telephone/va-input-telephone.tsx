@@ -15,10 +15,10 @@ import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
 
 /**
- * @componentName International Telephone
+ * @componentName Input Telephone
  * @maturityCategory caution
  * @maturityLevel proposal
- * @guidanceHref form/international-telephone
+ * @guidanceHref form/input-telephone
  * @translations English
  */
 
@@ -105,7 +105,7 @@ export class VaInternationalTelephone {
     this.formattedContact = value ? this.formatContact(value) : '';
   }
 
-  // get an error message for a country that includes the template of a valid phone number
+  // get an error message for a country that includes the template of a valid phone number for that country
   getErrorMessageForCountry() {
     let example = getExampleNumber(this.country, examples).format('NATIONAL');
     const asYouType = new AsYouType(this.country);

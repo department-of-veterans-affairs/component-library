@@ -75,9 +75,19 @@ export function handleRerender() {
       const { text } = option as HTMLOptionElement;
       const input = this.el.shadowRoot.querySelector('input');
       input.value = handleTruncation(text, input);
-      // add matching flag class
       const flagSpan = this.el.shadowRoot.querySelector('span.dynamic-flag');
+      // remove old flag class
+      removeClassByPrefix(flagSpan, 'flag-');
+      // add new flag clas
       flagSpan.classList.add('flag', `flag-${country.toLowerCase()}`);
     }
   }
+}
+
+function removeClassByPrefix(element: HTMLElement, prefix: string) {
+  element.classList.forEach(className => {
+    if (className.startsWith(prefix)) {
+      element.classList.remove(className);
+    }
+  });
 }

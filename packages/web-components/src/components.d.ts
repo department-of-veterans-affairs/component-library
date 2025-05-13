@@ -787,10 +787,10 @@ export namespace Components {
         "srtext"?: string;
     }
     /**
-     * @componentName International Telephone
+     * @componentName Input Telephone
      * @maturityCategory caution
      * @maturityLevel proposal
-     * @guidanceHref form/international-telephone
+     * @guidanceHref form/input-telephone
      * @translations English
      */
     interface VaInputTelephone {
@@ -2721,10 +2721,10 @@ declare global {
         "vaCountryCode": any;
     }
     /**
-     * @componentName International Telephone
+     * @componentName Input Telephone
      * @maturityCategory caution
      * @maturityLevel proposal
-     * @guidanceHref form/international-telephone
+     * @guidanceHref form/input-telephone
      * @translations English
      */
     interface HTMLVaInputTelephoneElement extends Components.VaInputTelephone, HTMLStencilElement {
@@ -4369,10 +4369,10 @@ declare namespace LocalJSX {
         "srtext"?: string;
     }
     /**
-     * @componentName International Telephone
+     * @componentName Input Telephone
      * @maturityCategory caution
      * @maturityLevel proposal
-     * @guidanceHref form/international-telephone
+     * @guidanceHref form/input-telephone
      * @translations English
      */
     interface VaInputTelephone {
@@ -6076,10 +6076,10 @@ declare module "@stencil/core" {
              */
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             /**
-             * @componentName International Telephone
+             * @componentName Input Telephone
              * @maturityCategory caution
              * @maturityLevel proposal
-             * @guidanceHref form/international-telephone
+             * @guidanceHref form/input-telephone
              * @translations English
              */
             "va-input-telephone": LocalJSX.VaInputTelephone & JSXBase.HTMLAttributes<HTMLVaInputTelephoneElement>;
