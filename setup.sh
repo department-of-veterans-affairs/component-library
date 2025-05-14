@@ -7,6 +7,7 @@ sleep .5
 echo "Building web-components"
 cd packages/web-components
 yarn build
+yarn build-bindings
 sleep .5
 
 echo "Building core package"

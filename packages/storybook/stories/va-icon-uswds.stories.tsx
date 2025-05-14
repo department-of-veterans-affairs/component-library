@@ -16,7 +16,7 @@ export default {
 
 const defaultArgs = {
   icon: 'alarm',
-  size: 4,
+  size: 3,
   srtext: null,
 };
 
@@ -33,14 +33,42 @@ Default.args = {
 Default.argTypes = propStructure(iconDocs);
 
 const IconsTemplate = ({ size }) => {
+  const handleChange = event => {
+    const search = event.target.value.toLowerCase();
+    const iconExamples = document.querySelectorAll('.icon-example');
+
+    iconExamples.forEach(row => {
+      const text = row.getAttribute('data-icon') || ''; // Ensure text is not null or undefined
+      const isVisible = text.toLowerCase().includes(search);
+      row.classList.toggle('vads-u-display--none', !isVisible);
+    });
+
+    const iconCount = document.querySelectorAll(
+      '.icon-example:not(.vads-u-display--none)',
+    ).length;
+    const word = iconCount === 1 ? 'icon' : 'icons';
+    document.getElementById('icon-count').textContent = `${iconCount} ${word}.`;
+  };
+
   return (
-    <div className="wrapper">
-      {icons.map(icon => (
-        <div key={icon}>
-          <va-icon icon={icon} size={size} />
-          <p>{icon}</p>
-        </div>
-      ))}
+    <div className="container">
+      <div className="filter">
+        <va-text-input
+          label="Type to filter icons"
+          name="filter-term"
+          onInput={handleChange}
+        />
+        <span id="icon-count">{icons.length} icons.</span>
+      </div>
+
+      <div className="icons">
+        {icons.map(icon => (
+          <div key={icon} className="icon-example" data-icon={icon}>
+            <va-icon icon={icon} size={size} />
+            <code className="icon__label">{icon}</code>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -111,8 +139,10 @@ const icons = [
   'content_copy',
   'coronavirus',
   'credit_card',
+  'crop_square',
   'deck',
   'delete',
+  'description_outlined',
   'description',
   'device_thermostat',
   'directions',
@@ -169,6 +199,7 @@ const icons = [
   'highlight_off',
   'history',
   'home',
+  'home_outlined',
   'hospital',
   'hotel',
   'hourglass_empty',
@@ -177,6 +208,7 @@ const icons = [
   'identification',
   'image',
   'inbox',
+  'indeterminate_check_box',
   'info',
   'info_outline',
   'insights',
@@ -219,6 +251,7 @@ const icons = [
   'map',
   'masks',
   'medical_services',
+  'medical_services_outlined',
   'medication',
   'menu',
   'military_tech',
@@ -248,6 +281,7 @@ const icons = [
   'priority_high',
   'public',
   'push_pin',
+  'radio_button_checked',
   'radio_button_unchecked',
   'rain',
   'reduce_capacity',
@@ -256,6 +290,7 @@ const icons = [
   'remove_circle',
   'report',
   'request_quote',
+  'request_quote_outlined',
   'restaurant',
   'rss_feed',
   'safety_divider',
