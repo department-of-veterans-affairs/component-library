@@ -354,6 +354,5 @@ export function applyFocus(el) {
 export function resizeViewPorts(wrap, isVisible) {
   if (!wrap) return;
   const story = wrap.closest('.sb-anchor');
-  story.scrollIntoView();
-  story.classList.toggle('expand', isVisible);
+  story?.classList.toggle('expand', isVisible);
 }
