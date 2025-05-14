@@ -129,8 +129,6 @@ describe('va-input-telephone', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-input-telephone/>');
-
     await axeCheck(page);
   });
-
 });

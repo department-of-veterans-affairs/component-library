@@ -521,9 +521,9 @@ const changeElementValue = (el, value = '') => {
       li.setAttribute('data-value', option.value);
       
       if (comboBox.isInVaInputTelephone) {
-        const flag = `<span class="flag flag-${option.value.toLowerCase()}"></span>`
-        const content = `<div class="flag-wrapper">${flag}<span class="flag-text">${option.text}</span></div>`;
-        li.innerHTML = content;
+        li.innerHTML = Sanitizer.escapeHTML`<div class="flag-wrapper">
+        <span class="flag flag-${option.value.toLowerCase()}"></span>
+        <span class="flag-text">${option.text}</span></div>`;
       } else {
         li.textContent = option.text;
       }
