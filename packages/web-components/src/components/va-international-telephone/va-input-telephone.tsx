@@ -183,11 +183,9 @@ export class VaInternationalTelephone {
 
   // get the text for an option which includes name of country + calling prefix
   getOptionText(country: string) {
-    let optionText = '';
-    if (country) {
-      optionText = `${this.getCountryName(country)} +${getCountryCallingCode(country as CountryCode)}`;
-    }
-    return optionText;
+    return country
+      ? `${this.getCountryName(country)} +${getCountryCallingCode(country as CountryCode)}`
+      : '';
   }
 
   render() {
