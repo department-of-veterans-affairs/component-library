@@ -427,12 +427,6 @@ const noop = () => {};
           firstFoundId = optionId;
         }
 
-        // options.push(optionEl);
-        if (false && !inputValue){
-          options.push(optionEl);
-          continue;
-        }
-
         // handle filtering when input contains a value
         if (
           inputValue &&
@@ -454,7 +448,8 @@ const noop = () => {};
             // Add the header optgroup element first
             options.push(parentOptgroupEl);
           }
-        } 
+        }
+        
         options.push(optionEl);
       }
     }
