@@ -449,7 +449,7 @@ const noop = () => {};
             options.push(parentOptgroupEl);
           }
         }
-        
+        // Add the option element
         options.push(optionEl);
       }
     }
