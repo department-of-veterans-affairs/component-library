@@ -110,7 +110,7 @@ describe('va-file-input', () => {
       '.file-button-section va-button-icon',
     );
     const buttonLabel = await fileChangeButton.getProperty('label');
-    expect(buttonLabel).toBe('Change file');
+    expect(buttonLabel).toBe('change file 1x1.png');
   });
 
   it('does not render a "Change File" button if read-only', async () => {
