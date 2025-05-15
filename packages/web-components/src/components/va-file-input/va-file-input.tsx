@@ -33,6 +33,8 @@ export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
   private uploadStatus: 'idle' | 'success' = 'idle';
   private fileType?: string;
+  private chooseFileString: string ='choose from folder';
+  private dragFileString: string = 'Drag a file here or ';
 
   @Element() el: HTMLElement;
   @State() file?: File;
@@ -402,12 +404,11 @@ export class VaFileInput {
   disconnectedCallback() {
     this.el.removeEventListener('change', this.handleChange);
   }
-
   private getDefaultUploadMessage() {
     return (
       <span>
-        Drag a file here or{' '}
-        <span class="file-input-choose-text">choose from folder</span>
+        {this.dragFileString}
+        <span class="file-input-choose-text">{this.chooseFileString}</span>
       </span>
     )
   }
@@ -426,6 +427,8 @@ export class VaFileInput {
       hint,
       file,
       uploadStatus,
+      dragFileString,
+      chooseFileString,
       uploadMessage,
       headerSize,
       fileContents,
@@ -523,6 +526,7 @@ export class VaFileInput {
           <input
             id="fileInputField"
             class="file-input"
+            aria-label={`${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`}
             style={{
               visibility: (this.uploadStatus === 'success' || uploadedFile) ? 'hidden' : 'unset',
             }}
