@@ -216,6 +216,12 @@ export class VaTextInput {
    */
   @Prop() max?: number | string;
 
+  /**
+   * Add Datadog privacy class to error for va-statement-of-truth because it
+   * includes sensitive information.
+   */
+  @Prop() errorHasPii?: boolean = false;
+
   @State() paddingLeftValue: string = '0';
   @State() paddingRightValue: string = '0';
 
@@ -391,6 +397,7 @@ export class VaTextInput {
       inputIconPrefix,
       inputSuffix,
       inputIconSuffix,
+      errorHasPii = false,
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
@@ -449,6 +456,11 @@ export class VaTextInput {
       'usa-sr-only': !showInputError,
     });
 
+    const errorMessageClass = classnames({
+      'usa-error-message': true,
+      'dd-privacy-hidden': errorHasPii,
+    });
+
     const isFormsPattern =
       useFormsPattern === 'single' || useFormsPattern === 'multiple'
         ? true
@@ -496,7 +508,12 @@ export class VaTextInput {
             {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{error}</span>
+                <span
+                  class={errorMessageClass}
+                  data-dd-action-name="input error"
+                >
+                  {error}
+                </span>
               </Fragment>
             )}
           </span>
