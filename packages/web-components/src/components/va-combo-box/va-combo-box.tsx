@@ -250,7 +250,10 @@ export class VaComboBox {
       'usa-label': true,
       'usa-label--error': error,
     });
-
+    const comboBoxContainerClass = classnames({
+      'usa-combo-box': true,
+      'input-telephone-wrapper': this.isInVaInputTelephone
+    })
     return (
       <Host>
         <label htmlFor="options" class={labelClass} id="options-label" part="label">
@@ -274,7 +277,7 @@ export class VaComboBox {
         </span>
         <slot onSlotchange={() => this.populateOptions()}></slot>
         <div
-          class="usa-combo-box"
+          class={comboBoxContainerClass}
           data-default-value={value}
           data-placeholder={placeholder}
           data-error={!!error}
