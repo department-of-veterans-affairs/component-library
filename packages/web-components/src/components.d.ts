@@ -1862,6 +1862,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Add Datadog privacy class to error for va-statement-of-truth because it includes sensitive information.
+         */
+        "errorHasPii"?: boolean;
+        /**
           * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
@@ -5544,6 +5548,10 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * Add Datadog privacy class to error for va-statement-of-truth because it includes sensitive information.
+         */
+        "errorHasPii"?: boolean;
         /**
           * The content of the heading if `useFormsPattern` is true.
          */

@@ -1,5 +1,5 @@
-import { newE2EPage } from "@stencil/core/testing";
-import { axeCheck } from "../../../testing/test-helpers";
+import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-statement-of-truth', () => {
   it('renders', async () => {
@@ -17,23 +17,40 @@ describe('va-statement-of-truth', () => {
 
   it('correctly sets the error props as attributes', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-statement-of-truth input-error="Please enter your full name" checkbox-error="Please certify"/>');
-    const inputElem = await page.find('va-statement-of-truth >>> va-text-input');
-    const checkboxElem = await page.find('va-statement-of-truth >>> va-checkbox');
-    expect(inputElem.getAttribute('error')).toEqual('Please enter your full name');
+    await page.setContent(
+      '<va-statement-of-truth input-error="Please enter your full name" checkbox-error="Please certify"/>',
+    );
+    const inputElem = await page.find(
+      'va-statement-of-truth >>> va-text-input',
+    );
+    const checkboxElem = await page.find(
+      'va-statement-of-truth >>> va-checkbox',
+    );
+    expect(inputElem.getAttribute('error')).toEqual(
+      'Please enter your full name',
+    );
+    expect(inputElem).toHaveAttribute('error-has-pii');
     expect(checkboxElem.getAttribute('error')).toEqual('Please certify');
   });
 
   it('renders errors when error props set', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-statement-of-truth input-error="Please enter your full name" checkbox-error="Please certify"/>');
+    await page.setContent(
+      '<va-statement-of-truth input-error="Please enter your full name" checkbox-error="Please certify"/>',
+    );
 
     const inputSpanEl = await page.$('pierce/span#input-error-message');
-    const inputErrorText = await page.evaluate(element => element.textContent, inputSpanEl);
+    const inputErrorText = await page.evaluate(
+      element => element.textContent,
+      inputSpanEl,
+    );
     expect(inputErrorText).toContain('Please enter your full name');
 
     const checkboxSpanEl = await page.$('pierce/span#checkbox-error-message');
-    const checkboxErrorText = await page.evaluate(element => element.textContent, checkboxSpanEl);
+    const checkboxErrorText = await page.evaluate(
+      element => element.textContent,
+      checkboxSpanEl,
+    );
     expect(checkboxErrorText).toContain('Please certify');
   });
 
@@ -41,7 +58,9 @@ describe('va-statement-of-truth', () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth />');
     const vaInputBlurSpy = await page.spyOnEvent('vaInputBlur');
-    const inputEl = await page.find('va-statement-of-truth >>> va-text-input >>> input');
+    const inputEl = await page.find(
+      'va-statement-of-truth >>> va-text-input >>> input',
+    );
     await inputEl.click();
     await page.keyboard.press('Tab');
     expect(vaInputBlurSpy).toHaveReceivedEvent();
@@ -124,4 +143,4 @@ describe('va-statement-of-truth', () => {
     const checkboxLabel = await checkboxEl.getProperty('label');
     expect(checkboxLabel).toBe('test label');
   });
-})
+});
