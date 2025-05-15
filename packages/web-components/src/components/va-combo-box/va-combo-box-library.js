@@ -427,7 +427,8 @@ const noop = () => {};
           firstFoundId = optionId;
         }
 
-        if (!inputValue){
+        // options.push(optionEl);
+        if (false && !inputValue){
           options.push(optionEl);
           continue;
         }
@@ -453,10 +454,8 @@ const noop = () => {};
             // Add the header optgroup element first
             options.push(parentOptgroupEl);
           }
-
-          // Add the option element
-          options.push(optionEl);
-        }
+        } 
+        options.push(optionEl);
       }
     }
 
