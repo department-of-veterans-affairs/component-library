@@ -129,7 +129,8 @@ export class VaAccordion {
         .forEach(item => (item as Element).setAttribute('open', 'false'));
     }
 
-    const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
+    // setAttribute to "true" will only add the attribute name to the DOM, so we need to use "hasAttribute"
+    const prevAttr = clickedItem.getAttribute('open') === 'false' ? false : clickedItem.hasAttribute('open');
 
     if (!this.disableAnalytics) {
       const detail = {
