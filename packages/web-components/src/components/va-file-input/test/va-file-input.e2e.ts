@@ -42,6 +42,15 @@ describe('va-file-input', () => {
     expect(hintTextElement.innerText).toContain('This is hint text');
   });
 
+  it('renders an aria-label', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input label="Select a file to upload"/>');
+
+    const fileInput = await page.find('va-file-input >>> input');
+    const ariaLabel = await fileInput.getAttribute('aria-label');
+    expect(ariaLabel).toBe('Select a file to upload. Drag a file here or choose from folder');
+  });
+
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
