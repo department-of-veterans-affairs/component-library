@@ -611,12 +611,14 @@ export class VaFileInput {
                             <va-button-icon
                               buttonType="change-file"
                               onClick={this.changeFile}
-                              label={`change file ${file ? file.name : uploadedFile.name}`}
+                              title={`change file ${file ? file.name : uploadedFile.name}`}
+                              label={`Change file`}
                             ></va-button-icon>
                             <va-button-icon
                               buttonType="delete"
                               onClick={this.openModal}
-                              label={`delete file ${file ? file.name : uploadedFile.name}`}
+                              title={`delete file ${file ? file.name : uploadedFile.name}`}
+                              label={`Delete`}
                             ></va-button-icon>
                           </div>
                           <va-modal
