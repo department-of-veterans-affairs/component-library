@@ -56,7 +56,7 @@ export class VaTableInner {
   @Prop() stacked?: boolean = false;
 
   /**
-   * Is this a sortable table
+   * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
    */
   @Prop() sortable?: boolean = false;
 
