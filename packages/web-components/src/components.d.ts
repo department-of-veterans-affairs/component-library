@@ -1720,7 +1720,7 @@ export namespace Components {
          */
         "scrollable"?: boolean;
         /**
-          * Is the table sortable
+          * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
         /**
@@ -1764,7 +1764,7 @@ export namespace Components {
          */
         "scrollable"?: boolean;
         /**
-          * Is this a sortable table
+          * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
         /**
@@ -5395,7 +5395,7 @@ declare namespace LocalJSX {
          */
         "scrollable"?: boolean;
         /**
-          * Is the table sortable
+          * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
         /**
@@ -5443,7 +5443,7 @@ declare namespace LocalJSX {
          */
         "scrollable"?: boolean;
         /**
-          * Is this a sortable table
+          * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
         /**

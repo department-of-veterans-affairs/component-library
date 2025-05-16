@@ -285,68 +285,67 @@ const Pagination = args => {
         onPageSelect={e => onPageChange(e.detail.page)}
         page={currentPage}
         pages={numPages}
-        maxPageListLength={MAX_PAGE_LIST_LENGTH}
-        showLastPage
       />
     </main>
   );
 };
 
-const missingData = [
-  ['A document', '', ''],
-  [
-    'Bill of Rights',
-    'The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms',
-    '1791',
-  ],
-];
-
-export const Default = Template.bind(null);
-Default.args = {
-  'table-title': 'This is a borderless table.',
-  'rows': data,
-  'columns': defaultColumns,
-};
-Default.argTypes = propStructure(vaTableDocs);
-
-export const Bordered = Template.bind(null);
-Bordered.args = {
-  'table-title': 'This is a stacked bordered table.',
-  'table-type': 'bordered',
-  'rows': data,
-  'columns': defaultColumns,
-};
-Bordered.argTypes = propStructure(vaTableDocs);
-
-export const NonStacked = Template.bind(null);
-NonStacked.args = {
-  'table-title':
-    'This table is not stacked. It will not change on a mobile screen.',
-  'stacked': false,
-  'rows': data,
-  'columns': defaultColumns,
-};
-NonStacked.argTypes = propStructure(vaTableDocs);
-
-export const WithCustomMarkup = CustomComponentsTemplate.bind(null);
-WithCustomMarkup.args = {
-  'table-title': 'This table has custom markup in some of its cells.',
-  'rows': data,
-  'columns': defaultColumns,
-};
-
-export const WithPagination = Pagination.bind(null);
-WithPagination.args = {
-  'table-title': 'This table uses pagination.',
-  'rows': paginationData,
-  'scrollable': true,
-};
-
-export const WithMissingData = Template.bind(null);
-WithMissingData.args = {
-  'table-title': 'This table has some cells without data',
-  'rows': missingData,
-  'columns': defaultColumns,
+const SortWithDataAttributeTemplate = args => {
+  const { 'table-title': tableTitle } = args;
+  return (
+    <va-table table-title={tableTitle} sortable scrollable>
+      <va-table-row>
+        <span>Integer/Float</span>
+        <span>Percent</span>
+        <span>Currency</span>
+        <span>Ordinal mixed</span>
+        <span>Ordinal</span>
+        <span>Month only</span>
+        <span>Full date</span>
+        <span>Alphabetical</span>
+      </va-table-row>
+      <va-table-row>
+        <span data-sort-value="3">3</span>
+        <span data-sort-value="60">60%</span>
+        <span data-sort-value="2500"><strong>$2,500</strong></span>
+        <span data-sort-value="4">4th</span>
+        <span data-sort-value="9">Ninth</span>
+        <span data-sort-value="8">August</span>
+        <span data-sort-value="19030603">June 3, 1903</span>
+        <span>Lorem ipsum dolor sit,</span>
+      </va-table-row>
+      <va-table-row>
+        <span data-sort-value="8.9">8.9</span>
+        <span data-sort-value="1">1%</span>
+        <span data-sort-value="17000">$17,000</span>
+        <span data-sort-value="3">3rd</span>
+        <span data-sort-value="2">Second</span>
+        <span data-sort-value="2">February</span>
+        <span data-sort-value="14151025">October 25, 1415</span>
+        <span>amet consectetur adipisicing elit.</span>
+      </va-table-row>
+      <va-table-row>
+        <span data-sort-value="-5">-5</span>
+        <span data-sort-value="60.01">60.01%</span>
+        <span data-sort-value="100000">$100,000</span>
+        <span data-sort-value="8">8th</span>
+        <span data-sort-value="5">Fifth</span>
+        <span data-sort-value="11">November</span>
+        <span data-sort-value="16211210">December 10, 1621</span>
+        <span>Alias nam eum minima</span>
+      </va-table-row>
+      <va-table-row>
+        <span data-sort-value="99">99</span>
+        <span data-sort-value="100">100%</span>
+        <span data-sort-value="0">$0</span>
+        <span data-sort-value="1">1st</span>
+        <span data-sort-value="10">Tenth</span>
+        <span data-sort-value="6">June</span>
+        <span data-sort-value="17890714">July 14, 1789</span>
+        <span>Beatae, eum.</span>
+      </va-table-row>
+    </va-table>
+  );
 };
 
 const sortColumns = [
@@ -403,6 +402,61 @@ const sortData = [
   ],
 ];
 
+export const Default = Template.bind(null);
+Default.args = {
+  'table-title': 'This is a borderless table.',
+  'rows': data,
+  'columns': defaultColumns,
+};
+Default.argTypes = propStructure(vaTableDocs);
+
+export const Bordered = Template.bind(null);
+Bordered.args = {
+  'table-title': 'This is a stacked bordered table.',
+  'table-type': 'bordered',
+  'rows': data,
+  'columns': defaultColumns,
+};
+Bordered.argTypes = propStructure(vaTableDocs);
+
+export const NonStacked = Template.bind(null);
+NonStacked.args = {
+  'table-title':
+    'This table is not stacked. It will not change on a mobile screen.',
+  'stacked': false,
+  'rows': data,
+  'columns': defaultColumns,
+};
+NonStacked.argTypes = propStructure(vaTableDocs);
+
+export const WithCustomMarkup = CustomComponentsTemplate.bind(null);
+WithCustomMarkup.args = {
+  'table-title': 'This table has custom markup in some of its cells.',
+  'rows': data,
+  'columns': defaultColumns,
+};
+
+export const WithPagination = Pagination.bind(null);
+WithPagination.args = {
+  'table-title': 'This table uses pagination.',
+  'rows': paginationData,
+  'scrollable': true,
+};
+
+export const WithMissingData = Template.bind(null);
+WithMissingData.args = {
+  'table-title': 'This table has some cells without data',
+  'rows': [
+    ['A document', '', ''],
+    [
+      'Bill of Rights',
+      'The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms',
+      '1791',
+    ],
+  ],
+  'columns': defaultColumns,
+};
+
 export const Sortable = Template.bind(null);
 Sortable.args = {
   'table-title': 'This is a sortable table',
@@ -410,6 +464,11 @@ Sortable.args = {
   'columns': sortColumns,
   'sortable': true,
   'scrollable': true,
+};
+
+export const SortWithDataAttribute = SortWithDataAttributeTemplate.bind(null);
+SortWithDataAttribute.args = {
+  'table-title': 'This is a sortable table using data-sort-value',
 };
 
 export const Striped = Template.bind(null);
