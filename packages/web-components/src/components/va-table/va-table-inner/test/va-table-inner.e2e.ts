@@ -423,6 +423,67 @@ describe('sorted va-table ', () => {
       `Click to sort by Integer/Float in ascending order`,
     );
   });
+
+  it('correctly uses data-sort-value attribute for sorting', async () => {
+    const dataSortTableMarkup = `<va-table sortable="true" table-title="Sort with data-sort-value">
+      <va-table-row>
+        <span>Numbers</span>
+      </va-table-row>
+      <va-table-row id="row1">
+        <span data-sort-value="3"><strong>12,345</strong></span>
+      </va-table-row>
+      <va-table-row id="row2">
+        <span data-sort-value="1">5,290</span>
+      </va-table-row>
+      <va-table-row id="row3">
+        <span data-sort-value="2">290</span>
+      </va-table-row>
+    </va-table>`;
+    
+    const page = await newE2EPage();
+    await page.setContent(dataSortTableMarkup);
+    await page.waitForChanges();
+    
+    // Verify initial order of rows
+    let rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    expect(rowOrder).toEqual(['row1', 'row2', 'row3']);
+    
+    // Trigger a sort on the column by clicking the sort button
+    // The sort button is inside the table header cell in the shadow DOM
+    let sortButton = await page.find('va-table-inner >>> th button');
+    expect(sortButton).not.toBeNull();
+    await sortButton.click();
+    await page.waitForChanges();
+    
+    // Check if rows are sorted by data-sort-value after clicking header
+    rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    
+    // Verify rows are sorted by data-sort-value (1, 2, 3) not by displayed text
+    expect(rowOrder).toEqual(['row2', 'row3', 'row1']);
+    
+    // Find the button again after the DOM has been updated
+    sortButton = await page.find('va-table-inner >>> th button');
+    expect(sortButton).not.toBeNull();
+    
+    // Click again to test descending sort
+    await sortButton.click();
+    await page.waitForChanges();
+    
+    // Check if rows are sorted in descending order
+    rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    
+    // Verify rows are sorted by data-sort-value in descending order (3, 2, 1)
+    expect(rowOrder).toEqual(['row1', 'row3', 'row2']);
+  });
 });
 
 describe('sort utilities', () => {

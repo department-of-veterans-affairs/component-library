@@ -248,8 +248,22 @@ export class VaTable {
     // only do sort if sortable data in column
     if (compareFunc !== null) {
       rows.sort((a: Element, b: Element) => {
-        const _a = a.children[index].innerHTML.trim();
-        const _b = b.children[index].innerHTML.trim();
+        const cellA = a.children[index];
+        const cellB = b.children[index];
+        
+        // Check for data-sort-value attribute first
+        const sortValueA = cellA.getAttribute('data-sort-value');
+        const sortValueB = cellB.getAttribute('data-sort-value');
+        
+        // If both cells have data-sort-value attributes, use those
+        if (sortValueA !== null && sortValueB !== null) {
+          return compareFunc(sortValueA, sortValueB);
+        }
+        
+        // If only one cell has data-sort-value, or neither has it, fall back to innerHTML
+        const _a = sortValueA !== null ? sortValueA : cellA.innerHTML.trim();
+        const _b = sortValueB !== null ? sortValueB : cellB.innerHTML.trim();
+        
         return compareFunc(_a, _b);
       });
       const sortedDataRows = [header, ...rows];
