@@ -217,8 +217,8 @@ export class VaTextInput {
   @Prop() max?: number | string;
 
   /**
-   * Add Datadog privacy class to error for va-statement-of-truth because it
-   * includes sensitive information.
+   * Adds a Datadog privacy class to the error message for cases when sensitive
+   * information is included, such as in va-statement-of-truth.
    */
   @Prop() errorHasPii?: boolean = false;
 
@@ -510,7 +510,7 @@ export class VaTextInput {
                 <span class="usa-sr-only">{i18next.t('error')}</span>
                 <span
                   class={errorMessageClass}
-                  data-dd-action-name="input error"
+                  data-dd-action-name={errorHasPii ? 'input error' : undefined}
                 >
                   {error}
                 </span>

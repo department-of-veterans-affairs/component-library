@@ -1862,7 +1862,7 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * Add Datadog privacy class to error for va-statement-of-truth because it includes sensitive information.
+          * Adds a Datadog privacy class to the error message for cases when sensitive information is included, such as in va-statement-of-truth.
          */
         "errorHasPii"?: boolean;
         /**
@@ -5549,7 +5549,7 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * Add Datadog privacy class to error for va-statement-of-truth because it includes sensitive information.
+          * Adds a Datadog privacy class to the error message for cases when sensitive information is included, such as in va-statement-of-truth.
          */
         "errorHasPii"?: boolean;
         /**
