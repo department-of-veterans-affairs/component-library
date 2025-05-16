@@ -5,6 +5,7 @@ import {
   isInteractiveLinkOrButton,
   isMessageSet,
   deepEquals,
+  truncate
 } from './utils';
 
 describe('format', () => {
@@ -300,3 +301,39 @@ describe('deepEquals()', () => {
     expect(deepEquals(args3, args4)).toEqual(false);
   });
 });
+
+describe('truncate()', () => {
+  let originalGetContext: any;
+  beforeAll(() => {
+    originalGetContext = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = jest.fn().mockImplementation(() => ({
+    measureText: (text) => ({
+      // Return a width proportional to text length for testing
+      width: text.length * 5
+    }),
+    font: ''
+  }));
+  })
+
+  afterAll(() => {
+    HTMLCanvasElement.prototype.getContext = originalGetContext;
+  });
+
+  const FONT = '16.96px "Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans';
+  it.only('should truncate text that is too long', async () => {
+  
+  
+    const startingText = 'This text is too long and needs to be truncated';
+    const truncatedText = truncate(startingText, 100, FONT);
+  
+    // Verify text was actually truncated
+    expect(truncatedText.length).toBeLessThan(startingText.length);
+    expect(truncatedText).toContain('...');
+  });
+
+  it('should not truncate text that is shorter than limit', () => {
+    const startingText = 'This text is short';
+    const truncatedText = truncate(startingText, 200, FONT);
+    expect(truncatedText).toEqual(startingText);
+  })
+})
