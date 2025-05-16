@@ -5,7 +5,7 @@ import {
   h,
   Element,
   Event,
-  EventEmitter
+  EventEmitter,
 } from '@stencil/core';
 
 /**
@@ -94,7 +94,7 @@ export class VaStatementOfTruth {
   @Element() el: HTMLElement;
 
   private handleInputChange = (event: InputEvent) => {
-    const { value } = event.currentTarget as HTMLInputElement
+    const { value } = event.currentTarget as HTMLInputElement;
     this.vaInputChange.emit({ value });
   };
 
@@ -103,7 +103,7 @@ export class VaStatementOfTruth {
   };
 
   private handleCheckboxChange = (event: Event) => {
-    const { checked } = event.currentTarget as HTMLInputElement
+    const { checked } = event.currentTarget as HTMLInputElement;
     this.vaCheckboxChange.emit({ checked });
   };
 
@@ -143,6 +143,7 @@ export class VaStatementOfTruth {
             error={inputError}
             onInput={this.handleInputChange}
             onBlur={this.handleInputBlur}
+            error-has-pii
           />
           <va-checkbox
             id="veteran-certify"
