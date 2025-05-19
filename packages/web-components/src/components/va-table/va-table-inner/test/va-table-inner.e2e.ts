@@ -451,38 +451,84 @@ describe('sorted va-table ', () => {
     });
     expect(rowOrder).toEqual(['row1', 'row2', 'row3']);
     
-    // Trigger a sort on the column by clicking the sort button
-    // The sort button is inside the table header cell in the shadow DOM
-    let sortButton = await page.find('va-table-inner >>> th button');
-    expect(sortButton).not.toBeNull();
-    await sortButton.click();
+    // Click the header to sort
+    const button = await page.find('va-table-inner >>> thead >>> th >>> button');
+    await button.click();
     await page.waitForChanges();
     
-    // Check if rows are sorted by data-sort-value after clicking header
+    // Verify sorted order (ascending by data-sort-value)
     rowOrder = await page.evaluate(() => {
       const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
       return rows.map(row => row.id);
     });
-    
-    // Verify rows are sorted by data-sort-value (1, 2, 3) not by displayed text
     expect(rowOrder).toEqual(['row2', 'row3', 'row1']);
     
-    // Find the button again after the DOM has been updated
-    sortButton = await page.find('va-table-inner >>> th button');
-    expect(sortButton).not.toBeNull();
-    
-    // Click again to test descending sort
-    await sortButton.click();
+    // Click the header again to sort in descending order
+    await button.click();
     await page.waitForChanges();
     
-    // Check if rows are sorted in descending order
+    // Verify sorted order (descending by data-sort-value)
     rowOrder = await page.evaluate(() => {
       const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
       return rows.map(row => row.id);
     });
-    
-    // Verify rows are sorted by data-sort-value in descending order (3, 2, 1)
     expect(rowOrder).toEqual(['row1', 'row3', 'row2']);
+  });
+
+  it('correctly handles mixed data-sort-value and innerHTML for sorting', async () => {
+    const mixedSortTableMarkup = `<va-table sortable="true" table-title="Mixed sort values">
+      <va-table-row>
+        <span>Numbers</span>
+      </va-table-row>
+      <va-table-row id="row1">
+        <span data-sort-value="30">30 (with attribute)</span>
+      </va-table-row>
+      <va-table-row id="row2">
+        <span>20 (no attribute)</span>
+      </va-table-row>
+      <va-table-row id="row3">
+        <span data-sort-value="10">10 (with attribute)</span>
+      </va-table-row>
+      <va-table-row id="row4">
+        <span>40 (no attribute)</span>
+      </va-table-row>
+    </va-table>`;
+    
+    const page = await newE2EPage();
+    await page.setContent(mixedSortTableMarkup);
+    await page.waitForChanges();
+    
+    // Verify initial order of rows
+    let rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    expect(rowOrder).toEqual(['row1', 'row2', 'row3', 'row4']);
+    
+    // Click the header to sort
+    const button = await page.find('va-table-inner >>> thead >>> th >>> button');
+    await button.click();
+    await page.waitForChanges();
+    
+    // Verify sorted order (ascending by data-sort-value or innerHTML)
+    rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    // Expected order: row3 (10), row2 (20), row1 (30), row4 (40)
+    expect(rowOrder).toEqual(['row3', 'row2', 'row1', 'row4']);
+    
+    // Click the header again to sort in descending order
+    await button.click();
+    await page.waitForChanges();
+    
+    // Verify sorted order (descending by data-sort-value or innerHTML)
+    rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    // Expected order: row4 (40), row1 (30), row2 (20), row3 (10)
+    expect(rowOrder).toEqual(['row4', 'row1', 'row2', 'row3']);
   });
 });
 

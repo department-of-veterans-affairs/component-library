@@ -307,7 +307,7 @@ const SortWithDataAttributeTemplate = args => {
       <va-table-row>
         <span data-sort-value="3">3</span>
         <span data-sort-value="60">60%</span>
-        <span data-sort-value="2500"><strong>$2,500</strong></span>
+        <span data-sort-value="2500">$2,500</span>
         <span data-sort-value="4">4th</span>
         <span data-sort-value="9">Ninth</span>
         <span data-sort-value="8">August</span>
