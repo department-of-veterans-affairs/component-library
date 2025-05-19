@@ -181,6 +181,13 @@ export class VaInternationalTelephone {
     this.countries = this.buildCountryList();
   }
 
+  componentDidLoad() {
+    // if a contact was provided, check if it's valid for the country
+    if (this.formattedContact) {
+      this.validateContact();
+    }
+  }
+
   // get the text for an option which includes name of country + calling prefix
   getOptionText(country: string) {
     return country
