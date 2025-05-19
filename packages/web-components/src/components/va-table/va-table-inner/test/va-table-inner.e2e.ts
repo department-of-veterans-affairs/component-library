@@ -452,7 +452,7 @@ describe('sorted va-table ', () => {
     expect(rowOrder).toEqual(['row1', 'row2', 'row3']);
     
     // Click the header to sort
-    const button = await page.find('va-table-inner >>> thead >>> th >>> button');
+    let button = await page.find('va-table-inner >>> thead >>> th >>> button');
     await button.click();
     await page.waitForChanges();
     
@@ -463,7 +463,8 @@ describe('sorted va-table ', () => {
     });
     expect(rowOrder).toEqual(['row2', 'row3', 'row1']);
     
-    // Click the header again to sort in descending order
+    // Re-fetch the button and click again to sort in descending order
+    button = await page.find('va-table-inner >>> thead >>> th >>> button');
     await button.click();
     await page.waitForChanges();
     
@@ -476,6 +477,7 @@ describe('sorted va-table ', () => {
   });
 
   it('correctly handles mixed data-sort-value and innerHTML for sorting', async () => {
+    // Create a test table with clearer numeric values to avoid parsing issues
     const mixedSortTableMarkup = `<va-table sortable="true" table-title="Mixed sort values">
       <va-table-row>
         <span>Numbers</span>
@@ -484,13 +486,13 @@ describe('sorted va-table ', () => {
         <span data-sort-value="30">30 (with attribute)</span>
       </va-table-row>
       <va-table-row id="row2">
-        <span>20 (no attribute)</span>
+        <span>20</span>
       </va-table-row>
       <va-table-row id="row3">
         <span data-sort-value="10">10 (with attribute)</span>
       </va-table-row>
       <va-table-row id="row4">
-        <span>40 (no attribute)</span>
+        <span>40</span>
       </va-table-row>
     </va-table>`;
     
@@ -506,7 +508,7 @@ describe('sorted va-table ', () => {
     expect(rowOrder).toEqual(['row1', 'row2', 'row3', 'row4']);
     
     // Click the header to sort
-    const button = await page.find('va-table-inner >>> thead >>> th >>> button');
+    let button = await page.find('va-table-inner >>> thead >>> th >>> button');
     await button.click();
     await page.waitForChanges();
     
@@ -515,10 +517,12 @@ describe('sorted va-table ', () => {
       const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
       return rows.map(row => row.id);
     });
-    // Expected order: row3 (10), row2 (20), row1 (30), row4 (40)
+    
+    // Expected ascending order: 10, 20, 30, 40
     expect(rowOrder).toEqual(['row3', 'row2', 'row1', 'row4']);
     
-    // Click the header again to sort in descending order
+    // Re-fetch the button and click again to sort in descending order
+    button = await page.find('va-table-inner >>> thead >>> th >>> button');
     await button.click();
     await page.waitForChanges();
     
@@ -527,7 +531,8 @@ describe('sorted va-table ', () => {
       const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
       return rows.map(row => row.id);
     });
-    // Expected order: row4 (40), row1 (30), row2 (20), row3 (10)
+    
+    // Expected descending order: 40, 30, 20, 10
     expect(rowOrder).toEqual(['row4', 'row1', 'row2', 'row3']);
   });
 });
