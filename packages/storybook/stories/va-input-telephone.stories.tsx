@@ -14,6 +14,13 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={inputTelephoneDocs} />,
     },
+  },
+  argTypes: {
+    vaSelect: {
+      table: {
+        disable: true // Hide this internal event from va-combo-box
+      }
+    }
   }
 };
 
@@ -22,6 +29,7 @@ const defaultArgs = {
   country: null,
   'no-country': false,
   hint: "",
+  error: ""
 };
 
 const Template = ({
@@ -29,9 +37,16 @@ const Template = ({
   'no-country': noCountry,
   contact,
   country,
+  error
 }) => {
   return (
-    <va-input-telephone hint={hint} country={country} contact={contact} no-country={noCountry} />
+    <va-input-telephone
+      hint={hint}
+      country={country}
+      contact={contact}
+      no-country={noCountry}
+      error={error}
+    />
   );
 };
 
@@ -63,6 +78,12 @@ export const WithCustomError = Template.bind(null);
 WithCustomError.args = {
   ...defaultArgs,
   error: 'This is a custom error message'
+}
+
+export const WithPhoneFormatError = Template.bind(null);
+WithPhoneFormatError.args = {
+  ...defaultArgs,
+  contact: "234"
 }
 
 export const WithHint = Template.bind(null);

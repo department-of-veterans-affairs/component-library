@@ -10,7 +10,7 @@ import {
   Event
 } from '@stencil/core';
 
-import { AsYouType, isValidPhoneNumber, CountryCode, getExampleNumber, getCountries, getCountryCallingCode } from 'libphonenumber-js/min'; 
+import { AsYouType, isPossiblePhoneNumber, CountryCode, getExampleNumber, getCountries, getCountryCallingCode } from 'libphonenumber-js/min'; 
 import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
 
@@ -120,7 +120,7 @@ export class VaInternationalTelephone {
     let isValid = false;
     if (this.country) {
       if (this.formattedContact) {
-        isValid = isValidPhoneNumber(this.formattedContact, this.country);
+        isValid = isPossiblePhoneNumber(this.formattedContact, this.country);
         this.error = isValid ? '' : this.getErrorMessageForCountry()
       } else {
         this.error = 'Please enter a phone number';

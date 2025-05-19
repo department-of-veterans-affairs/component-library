@@ -43,14 +43,11 @@ export function handleTruncation(text: string, input: HTMLInputElement) {
 // when user is changing country, remove the flag icon in the input
 export function manageFlagIcon() {
   if (this.isInVaInputTelephone) {
-    const input = this.el.shadowRoot.querySelector('input');
-    if (input.value === '') {
-      const flagSpan = this.el.shadowRoot.querySelector('span.dynamic-flag');
-      if (flagSpan) {
-        // reset base class, remove country specific class
-        flagSpan.className = 'dynamic-flag';
-      }
-    };
+    const flagSpan = this.el.shadowRoot.querySelector('span.dynamic-flag');
+    if (flagSpan) {
+      // reset base class, remove country specific class
+      flagSpan.className = 'dynamic-flag';
+    }
   }
 }
 
