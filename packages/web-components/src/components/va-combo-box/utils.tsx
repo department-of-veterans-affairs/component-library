@@ -12,21 +12,10 @@ export function getInteriorWidth(element: HTMLElement): number | null {
   if (!element) return null;
 
   const computedStyle = window.getComputedStyle(element);
+  const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
+  const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
 
-  // Get total width including padding and border
-  const totalWidth = element.clientWidth;
-
-  // Subtract padding
-  const paddingLeft = parseFloat(computedStyle.paddingLeft);
-  const paddingRight = parseFloat(computedStyle.paddingRight);
-
-  // Subtract border
-  const borderLeft = parseFloat(computedStyle.borderLeftWidth);
-  const borderRight = parseFloat(computedStyle.borderRightWidth);
-
-  const interiorWidth = totalWidth - paddingLeft - paddingRight - borderLeft - borderRight;
-
-  return interiorWidth;
+  return element.clientWidth - paddingLeft - paddingRight;
 }
 
 // get the truncated (if necessary) country name for the input

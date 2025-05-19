@@ -247,7 +247,6 @@ const changeElementValue = (el, value = '') => {
     input.setAttribute('type', 'text');
     input.setAttribute('role', 'combobox');
     input.onmouseup = handleMouseUp;
-    // input.value = initValue;
 
     additionalAttributes.forEach(attr =>
       Object.keys(attr).forEach(key => {
@@ -414,7 +413,6 @@ const changeElementValue = (el, value = '') => {
     const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
 
     const options = [];
-    let parentOptGroupId = '';
     for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
@@ -435,38 +433,8 @@ const changeElementValue = (el, value = '') => {
         if (disableFiltering && !firstFoundId && regex.test(filterValue)) {
           firstFoundId = optionId;
         }
-
-        if (!inputValue){
-          options.push(optionEl);
-          continue;
-        }
-
-        // handle filtering when input contains a value
-        if (
-          inputValue &&
-          regex.test(filterValue) &&
-          optionEl.getAttribute('data-optgroup') !== 'true' 
-        ) {
-
-          // Check if the option element is not a header optgroup 
-          // and has a header optgroup associated with it
-          if (
-            optionEl.getAttribute('data-optgroup-option') === 'true' &&
-            parentOptGroupId !== optionEl.getAttribute('aria-describedby')
-          ) {
-            // Get an associated header optgroup element
-            parentOptGroupId = optionEl.getAttribute('aria-describedby');
-            const parentOptgroupEl = selectEl.querySelector(
-              '#' + parentOptGroupId,
-            );
-            // Add the header optgroup element first
-            options.push(parentOptgroupEl);
-          }
-
-          // Add the option element
-          options.push(optionEl);
-        }
       }
+      options.push(optionEl);
     }
 
     const numOptions = options.length;
@@ -488,7 +456,7 @@ const changeElementValue = (el, value = '') => {
       let tabindex = '-1';
       let ariaSelected = 'false';
 
-      if (selectEl.value && option.value === selectEl.value) {
+      if (selectEl.value && option.value === selectEl.value && !isOptGroup) {
         classes.push(LIST_OPTION_SELECTED_CLASS, LIST_OPTION_FOCUSED_CLASS);
         tabindex = '0';
         ariaSelected = 'true';
@@ -650,9 +618,6 @@ const completeSelection = el => {
           return option.text.toLowerCase().startsWith(name.toLowerCase());
         })
         : (option => option.text.toLowerCase() === inputValue)
-      // const matchingOption = Array.from(selectEl.options).find(
-      //   option => option.text.toLowerCase() === inputValue
-      // );
       const matchingOption = Array.from(selectEl.options).find(matchingFunc)
   
       if (matchingOption) {

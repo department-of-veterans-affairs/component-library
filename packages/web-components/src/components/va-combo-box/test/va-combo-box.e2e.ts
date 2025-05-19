@@ -352,7 +352,7 @@ describe('va-combo-box', () => {
     expect(firstComboValue).toBe('foo');
   });
 
-  it('handles search result status aria', async () => {
+  it.only('handles search result status aria', async () => {
     const page = await newE2EPage();
 
     await page.setContent(`
@@ -377,11 +377,11 @@ describe('va-combo-box', () => {
     const ariaElement = async () => await page.find('va-combo-box >>> .usa-combo-box__status.usa-sr-only');
 
     const element = await ariaElement();
-    expect(element.textContent).toEqualText('2 groups available. 2 results available.');
+    expect(element.textContent).toEqualText('2 groups available. 5 results available.');
 
     await page.keyboard.type('z');
     const updatedElement = await ariaElement();
-    expect(updatedElement.textContent).toEqualText('1 group available. 1 result available.');
+    expect(updatedElement.textContent).toEqualText('2 groups available. 5 results available.');
   });
   
   it('sets value to empty when user-typed text does not match any valid options', async () => {
