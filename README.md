@@ -21,7 +21,7 @@ The `design-system-dashboard-cli` package is used to gather metrics on design sy
 
 To install dependencies in the component packages and run a local build of the component library in Storybook, run the following in the command line:
 ```
-yarn dev
+npm run dev
 ```
 
 This setup script automates the following tasks:
