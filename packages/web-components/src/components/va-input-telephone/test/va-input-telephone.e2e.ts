@@ -80,6 +80,7 @@ describe('va-input-telephone', () => {
     await input.click();
     await page.keyboard.press('Delete');
     await page.keyboard.press('Enter');
+    await page.waitForChanges();
     const error = await page.find('va-input-telephone >>> span#error-message');
     expect(error.innerText).toContain('Please choose a country');
   });
@@ -89,12 +90,11 @@ describe('va-input-telephone', () => {
     await page.setContent('<va-input-telephone />');
     const input = await page.find('va-input-telephone >>> va-combo-box >>> input');
     await input.click();
-    await page.keyboard.press('Delete');
-
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    const flagSpan = await input.find('span.flag-af');
+    await page.waitForChanges();
+    const flagSpan = await page.find('va-input-telephone >>> va-combo-box >>> span.flag-af');
     expect(flagSpan).not.toBeNull();
   })
 
