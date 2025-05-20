@@ -43,6 +43,19 @@ describe('va-text-input', () => {
     expect(errorMessage).not.toHaveClass('usa-sr-only');
   });
 
+  it('renders an error message with a Datadog privacy class ', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-text-input error="This is a mistake" error-has-pii />',
+    );
+
+    // Render the error message text
+    const error = await page.find('va-text-input >>> .usa-error-message');
+    expect(error.innerText).toContain('This is a mistake');
+    expect(error).toHaveClass('dd-privacy-hidden');
+    expect(error).toHaveAttribute('data-dd-action-name');
+  });
+
   it('renders an with a hidden error message when showInputError is false', async () => {
     const page = await newE2EPage();
     await page.setContent(
