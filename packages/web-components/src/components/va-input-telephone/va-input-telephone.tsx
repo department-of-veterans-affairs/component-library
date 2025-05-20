@@ -187,7 +187,7 @@ export class VaInternationalTelephone {
     const nameUtil = new Intl.DisplayNames(['en'], { type: 'region' });
     const name = nameUtil.of(countryCode.toUpperCase());
     // make name conform to iso standards
-    return name.replace('&', 'and').replace('St.', 'Saint');
+    return name.replace(/&/g, 'and').replace(/St\./, 'Saint');
   }
 
   componentWillLoad() {
