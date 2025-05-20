@@ -19,6 +19,13 @@ The `design-system-dashboard-cli` package is used to gather metrics on design sy
 
 # Running Build via Storybook
 
+To install dependencies in the component packages and run a local build of the component library in Storybook, run the following in the command line:
+```
+yarn dev
+```
+
+This setup script automates the following tasks:
+
 1. `cd packages/web-components/`
    1. `yarn install`
    2. `yarn build`
@@ -33,8 +40,6 @@ The `design-system-dashboard-cli` package is used to gather metrics on design sy
 4. `cd ../storybook/`
    1. `yarn install`
    2. `yarn storybook`
-
-This will allow you to run Storybook locally to view all components
 
 ## Running tests for web components
 
@@ -306,7 +311,7 @@ The Design System Team will create a release minimally at the beginning of each 
 
 1. If you are unsure if a new release should be created, check with the Release Manager and/or the team first.
    - The DST Release Manager is the engineer on duty for the weekly support rotation.
-2. Determine if the releases should be major, minor, or patch releases. 
+2. Determine if the releases should be major, minor, or patch releases.
    - Review the PR labels on the [merged PRs since the last release](https://github.com/department-of-veterans-affairs/component-library/pulls?q=is%3Apr+is%3Aclosed+is%3Amerged+sort%3Aupdated-desc) to check which is the highest level of change (major, minor, or patch) for each package changed. This will determine the new package.json version.
 3. Create a PR for the `component-library` that does the following:
    - Update the `package.json` version in the **packages that updates have been made**.
