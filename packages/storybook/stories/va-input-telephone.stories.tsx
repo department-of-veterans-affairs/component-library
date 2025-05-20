@@ -15,13 +15,6 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={inputTelephoneDocs} />,
     },
   },
-  argTypes: {
-    vaSelect: {
-      table: {
-        disable: true // Hide this internal event from va-combo-box
-      }
-    }
-  }
 };
 
 const defaultArgs = {
@@ -37,11 +30,13 @@ const Template = ({
   'no-country': noCountry,
   contact,
   country,
-  error
+  error,
+  header
 }) => {
   return (
     <va-input-telephone
       hint={hint}
+      header={header}
       country={country}
       contact={contact}
       no-country={noCountry}

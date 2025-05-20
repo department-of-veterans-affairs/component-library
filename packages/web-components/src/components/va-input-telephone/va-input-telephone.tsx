@@ -4,7 +4,6 @@ import {
   Host,
   Prop,
   h,
-  Listen,
   State,
   EventEmitter,
   Event
@@ -147,7 +146,6 @@ export class VaInternationalTelephone {
   }
 
   // when country is selected, do validation
-  @Listen('vaSelect')
   countryChange(event: CustomEvent<{ value: CountryCode }>) {
     const { value } = event.detail;
     this.country = value;
@@ -201,6 +199,18 @@ export class VaInternationalTelephone {
     // if a contact was provided, check if it's valid for the country
     if (this.formattedContact) {
       this.validateContact();
+    }
+    const comboBox = this.el.shadowRoot.querySelector('va-combo-box');
+    if (comboBox) {
+      // add listener manually (instead of via @Listen) to prevent this event from appearing in storybook
+      comboBox.addEventListener('vaSelect', this.countryChange.bind(this));
+    }
+  }
+
+  disconnectedCallback() {
+    const comboBox = this.el.shadowRoot.querySelector('va-combo-box');
+    if (comboBox) {
+      comboBox.removeEventListener('vaSelect', this.countryChange.bind(this));
     }
   }
 
