@@ -119,7 +119,7 @@ describe('va-input-telephone', () => {
     expect(contactSpy).toHaveReceivedEventDetail({ contact: '(234) 567-8910', isValid: true });
   });
 
-  it.only('does not render render country select when no-country is true', async () => {
+  it('does not render render country select when no-country is true', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-input-telephone no-country />');
     const country = await page.find('va-input-telephone >>> va-combo-box');
