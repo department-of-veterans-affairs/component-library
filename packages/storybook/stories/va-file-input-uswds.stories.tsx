@@ -8,6 +8,7 @@ VaFileInput.displayName = 'VaFileInput';
 
 const fileInputDocs = getWebComponentDocs('va-file-input');
 
+
 export default {
   title: 'Components/File input USWDS',
   id: 'uswds/va-file-input',
