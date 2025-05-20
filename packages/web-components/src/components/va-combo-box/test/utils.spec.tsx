@@ -75,16 +75,13 @@ describe('manageFlagIcon', () => {
   });
 
   it('should reset flag class when no country selected', () => {
-    const mockInput = { value: '' };
     const mockFlagSpan = { className: 'dynamic-flag flag-us' };
     
     mockThis.el.shadowRoot.querySelector
-      .mockReturnValueOnce(mockInput)
       .mockReturnValueOnce(mockFlagSpan);
     
     manageFlagIcon.call(mockThis);
     expect(mockFlagSpan.className).toBe('dynamic-flag');
-    expect(mockThis.el.shadowRoot.querySelector).toHaveBeenCalledWith('input');
     expect(mockThis.el.shadowRoot.querySelector).toHaveBeenCalledWith('span.dynamic-flag');
   });
 

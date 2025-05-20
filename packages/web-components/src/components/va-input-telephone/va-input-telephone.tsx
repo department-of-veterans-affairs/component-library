@@ -13,6 +13,7 @@ import {
 import { AsYouType, isPossiblePhoneNumber, CountryCode, getExampleNumber, getCountries, getCountryCallingCode } from 'libphonenumber-js/min'; 
 import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
+import { DATA_MAP, mapCountry } from './utils';
 
 /**
  * @componentName Input Telephone
@@ -107,11 +108,12 @@ export class VaInternationalTelephone {
 
   // get an error message for a country that includes the template of a valid phone number for that country
   getErrorMessageForCountry() {
-    let example = getExampleNumber(this.country, examples).format('NATIONAL');
-    const asYouType = new AsYouType(this.country);
+    const _country = mapCountry(this.country);
+    let example = getExampleNumber(_country, examples).format('NATIONAL');
+    const asYouType = new AsYouType(_country);
     asYouType.input(example);
     const msg = asYouType.getTemplate();
-    return `Enter a ${this.getCountryName(this.country)} phone number in a valid format, for example, [${msg}]`;
+    return `Enter a ${this.getCountryName(_country)} phone number in a valid format, for example, [${msg}]`;
   }
 
   // validate the contact and emit the contact and validation state
@@ -120,7 +122,8 @@ export class VaInternationalTelephone {
     let isValid = false;
     if (this.country) {
       if (this.formattedContact) {
-        isValid = isPossiblePhoneNumber(this.formattedContact, this.country);
+        const _country = mapCountry(this.country);
+        isValid = isPossiblePhoneNumber(this.formattedContact, _country);
         this.error = isValid ? '' : this.getErrorMessageForCountry()
       } else {
         this.error = 'Please enter a phone number';
@@ -153,25 +156,38 @@ export class VaInternationalTelephone {
   }
 
   formatContact(value: string) {
-    return new AsYouType(this.country).input(value);
+    // some territories are formatted / validated as if they were a different, larger country
+    const _country = mapCountry(this.country);
+    return new AsYouType(_country).input(value);
   }
 
   // get list of country codes alphabetized by name with US in front
+  // add some territories not in library
   buildCountryList() {
-    const allButUS = getCountries().filter(country => country !== this.DEFAULT_COUNTRY);
+    const allButUS = getCountries()
+      .filter(country => country !== this.DEFAULT_COUNTRY);
+    allButUS.push(...Object.keys(DATA_MAP.countries) as CountryCode[]);
+    
     const sortedAllButUs = allButUS.sort((a, b) => {
       const one = this.getCountryName(a);
       const two = this.getCountryName(b);
       return one.localeCompare(two);
-    })
+    });
     // put US in front
     return [this.DEFAULT_COUNTRY, ...sortedAllButUs];
   }
 
   // return the name of a country using the country code
   getCountryName(countryCode: string) {
-    const name = new Intl.DisplayNames(['en'], { type: 'region' });
-    return name.of(countryCode.toUpperCase());
+    // some country names must be handled explicitly
+    if (countryCode in DATA_MAP.names) {
+      return DATA_MAP.names[countryCode];
+    }
+
+    const nameUtil = new Intl.DisplayNames(['en'], { type: 'region' });
+    const name = nameUtil.of(countryCode.toUpperCase());
+    // make name conform to iso standards
+    return name.replace('&', 'and').replace('St.', 'Saint');
   }
 
   componentWillLoad() {
@@ -189,9 +205,10 @@ export class VaInternationalTelephone {
   }
 
   // get the text for an option which includes name of country + calling prefix
-  getOptionText(country: string) {
+  getOptionText(country: CountryCode) {
+    const _country = mapCountry(country);
     return country
-      ? `${this.getCountryName(country)} +${getCountryCallingCode(country as CountryCode)}`
+      ? `${this.getCountryName(country)} +${getCountryCallingCode(_country)}`
       : '';
   }
 
@@ -231,7 +248,7 @@ export class VaInternationalTelephone {
                 error={countryError}
                 value={country}
               >
-                {countries.map(country => (
+                {countries.map((country: CountryCode) => (
                   <option value={country} key={country}>
                     {this.getOptionText(country)}
                   </option>
