@@ -206,22 +206,24 @@ ManyAccordions.args = {
   ],
 };
 
-const PrintTemplate = args => (
-  <va-accordion {...args}>
-    <va-accordion-item id="first" header="First Item">
-      <p>
-        This story is for the Design System Team to be able to test the
-        accordion items being opened when the page they're on is being printed.
-      </p>
-    </va-accordion-item>
-    <va-accordion-item id="second" header="Second Item">
-      <p>Accordion items will always open when being printed.</p>
-    </va-accordion-item>
-  </va-accordion>
-);
-
 // todo: after upgrading to storybook 8 we can hide this story from the sidebar: https://storybook.js.org/docs/writing-stories/tags
-export const PrintAccordion = PrintTemplate.bind(null);
+export const PrintAccordion = Template.bind(null);
+PrintAccordion.args = {
+  accordionItems: [
+    {
+      ...defaultValues,
+      id: 'first',
+      header: 'First Item',
+      body: 'This story is for the Design System Team to be able to test the accordion items being opened when the page they\'re on is being printed.',
+    },
+    {
+      ...defaultValues,
+      id: 'second',
+      header: 'Second Item',
+      body: 'Accordion items will always open when being printed.',
+    },
+  ],
+};
 PrintAccordion.parameters = {
   chromatic: {
     media: 'print',
