@@ -10,6 +10,7 @@ const accordionDocs = getWebComponentDocs('va-accordion');
 const defaultValues = {
   bordered: false,
   headerIconSlot: false,
+  subheaderIconSlot: false,
   headlineSlot: false,
   level: undefined,
   open: false,
@@ -94,15 +95,15 @@ const Template = args => {
             open={accordion.open}
           >
             {accordion.headerIconSlot && (
-              <>
                 <span slot="icon" className="vads-u-color--green">
                   <va-icon icon="info" />
                 </span>
+            )}
+            {accordion.subheaderIconSlot && (
                 <va-icon
                   icon="mail"
                   slot="subheader-icon"
                 />
-              </>
             )}
             {accordion.headlineSlot && (
               <h3 slot="headline">Slotted {accordion.header}</h3>
@@ -146,6 +147,7 @@ IconHeaders.args = {
   accordionItems: accordionContent.map(item => ({
     ...item,
     headerIconSlot: true,
+    subheaderIconSlot: true,
   })),
 };
 
