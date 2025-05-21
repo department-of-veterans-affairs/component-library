@@ -303,6 +303,7 @@ export class VaSearchFilter {
                 <va-accordion-item
                   header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
                   key={facet.id}
+                  level={3}
                   open
                 >
                   <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
