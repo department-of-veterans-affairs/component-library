@@ -2,39 +2,14 @@ name: Chromatic Link
 
 on:
   pull_request:
-    types: [edited, opened, reopened, synchronize]
-
-permissions:
-  contents: read
+    types: [edited, opened, reopened]
 
 jobs:
-  generate_chromatic_link:
+  update_pr_chromatic_link:
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
-    name: Generate Chromatic Link
+    name: Update PR Chromatic link
     steps:
-      - name: Generate Chromatic link
-        id: generate_link
-        run: |
-          # Get the branch name from GitHub context
-          BRANCH_NAME="${{ github.head_ref }}"
-          
-          # Format branch name according to Chromatic requirements
-          # 1. Only letters and dashes allowed
-          # 2. Multiple dashes replaced with one
-          # 3. Max length of 37 characters
-          FORMATTED_BRANCH=$(echo "$BRANCH_NAME" | sed -E 's/[^a-zA-Z0-9-]/-/g' | sed -E 's/-+/-/g' | sed -E 's/^-|-$//g' | cut -c1-37)
-          
-          # Generate Chromatic link
-          CHROMATIC_PROJECT_ID="65a6e2ed2314f7b8f98609d8"
-          CHROMATIC_LINK="https://${FORMATTED_BRANCH}--${CHROMATIC_PROJECT_ID}.chromatic.com"
-          
-          echo "=============================================="
-          echo " Chromatic Preview Link "
-          echo "=============================================="
-          echo ""
-          echo " [View Storybook on Chromatic]: $CHROMATIC_LINK"
-          echo ""
-          echo "=============================================="
-          echo "Copy this link to view your Storybook preview"
-          echo "=============================================="
+      - uses: luigibertaco/dynamic-template-action@1.0.0
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
