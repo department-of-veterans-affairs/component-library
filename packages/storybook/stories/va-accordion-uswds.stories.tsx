@@ -76,7 +76,7 @@ const Template = args => {
 
   return (
     <>
-      {args.internationalization && (
+      {args.i18n && (
         <div>
           <va-button onClick={e => setLang('es')} text="Español" />
           <va-button onClick={e => setLang('en')} text="English" />
@@ -89,21 +89,28 @@ const Template = args => {
             id={accordion.id}
             header={accordion.headlineSlot ? undefined : accordion.header}
             bordered={accordion.bordered}
-            subheader={accordion.subheader ? accordion.subheader : undefined}
+            subheader={accordion.subheader ? accordion.subheader : accordion.headerIconSlot ? 'Subheader' : undefined}
             level={accordion.level ? accordion.level : undefined}
             open={accordion.open}
           >
             {accordion.headerIconSlot && (
-              <span slot="icon" className="vads-u-color--green">
-                <va-icon icon="info" />
-              </span>
+              <>
+                <span slot="icon" className="vads-u-color--green">
+                  <va-icon icon="info" />
+                </span>
+                <va-icon
+                  icon="mail"
+                  slot="subheader-icon"
+                />
+              </>
             )}
             {accordion.headlineSlot && (
               <h3 slot="headline">Slotted {accordion.header}</h3>
             )}
             <p>{accordion.body}</p>
           </va-accordion-item>
-        ))}
+        )
+      )}
       </va-accordion>
     </>
   );
@@ -202,6 +209,12 @@ ManyAccordions.args = {
       id: 'Ninth',
       header: 'Ninth Amendment',
       body: 'The enumeration in the Constitution, of certain rights, shall not be construed to deny or disparage others retained by the people.',
+    },
+    {
+      ...defaultValues,
+      id: 'Tenth',
+      header: 'Tenth Amendment',
+      body: 'The powers not delegated to the United States by the Constitution, nor prohibited by it to the States, are reserved to the States respectively, or to the people.',
     },
   ],
 };
