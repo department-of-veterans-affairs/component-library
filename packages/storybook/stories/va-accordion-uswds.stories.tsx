@@ -6,15 +6,17 @@ import {
 } from './wc-helpers';
 
 const accordionDocs = getWebComponentDocs('va-accordion');
+const accordionItemDocs = getWebComponentDocs('va-accordion-item');
+const accordionItemProps = propStructure(accordionItemDocs);
 
 const defaultValues = {
-  bordered: false,
+  bordered: JSON.parse(accordionItemProps.bordered.defaultValue.value),
   headerIconSlot: false,
-  subheaderIconSlot: false,
   headlineSlot: false,
-  level: undefined,
-  open: false,
-  subheader: '',
+  level: JSON.parse(accordionItemProps.level.defaultValue.value),
+  open: JSON.parse(accordionItemProps.open.defaultValue.value),
+  subheader: JSON.parse(accordionItemProps.subheader.defaultValue.value),
+  subheaderIconSlot: false,
 };
 
 const accordionContent = [
