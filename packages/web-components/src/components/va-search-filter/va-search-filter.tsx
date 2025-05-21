@@ -308,7 +308,6 @@ export class VaSearchFilter {
                   <va-checkbox-group 
                     label={facet.label} 
                     class="va-search-filter__checkbox-group"
-                    label-header-level="3"
                   >
                     {facet.category.map((category: FilterCategory) =>
                       renderCheckbox(facet, category)
