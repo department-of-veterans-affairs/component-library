@@ -305,7 +305,11 @@ export class VaSearchFilter {
                   key={facet.id}
                   open
                 >
-                  <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
+                  <va-checkbox-group 
+                    label={facet.label} 
+                    class="va-search-filter__checkbox-group"
+                    label-header-level="3"
+                  >
                     {facet.category.map((category: FilterCategory) =>
                       renderCheckbox(facet, category)
                     )}
@@ -332,6 +336,7 @@ export class VaSearchFilter {
                 <va-checkbox-group
                   label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
                   key={facet.id}
+                  label-header-level="3"
                 >
                   {facet.category.map((category: FilterCategory) =>
                     renderCheckbox(facet, category)
