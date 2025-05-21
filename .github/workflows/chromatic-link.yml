@@ -4,8 +4,8 @@ on:
   pull_request:
     types: [edited, opened, reopened, synchronize]
 
-# Add permissions block to request write access to pull requests
 permissions:
+  contents: read
   pull-requests: write
 
 jobs:
@@ -20,56 +20,63 @@ jobs:
       - name: Update PR with Chromatic link
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Use the CHROMATIC_PR_TOKEN if available, otherwise fallback to GITHUB_TOKEN
+          github-token: ${{ secrets.CHROMATIC_PR_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = context.payload.pull_request.number;
-            const prTitle = context.payload.pull_request.title;
-            const prBody = context.payload.pull_request.body || '';
-            const rawBranchName = context.payload.pull_request.head.ref;
-            
-            // Format branch name according to Chromatic requirements:
-            // https://www.chromatic.com/docs/permalinks/#build-your-own-permalink
-            // 1. Only letters and dashes allowed
-            // 2. Multiple dashes replaced with one
-            // 3. Max length of 37 characters
-            const formattedBranchName = rawBranchName
-              .replace(/[^a-zA-Z0-9-]/g, '-')  // Replace unsupported chars with dashes
-              .replace(/-+/g, '-')             // Replace multiple dashes with one
-              .replace(/^-|-$/g, '')           // Remove leading/trailing dashes
-              .substring(0, 37);               // Truncate to 37 chars
-            
-            // Generate Chromatic link using the formatted branch name and your project ID
-            const chromaticProjectId = '65a6e2ed2314f7b8f98609d8'; // Your Chromatic project ID
-            const chromaticLink = `https://${formattedBranchName}--${chromaticProjectId}.chromatic.com`;
-            
-            // Check if PR body already contains a Chromatic link placeholder or existing link
-            const chromaticPlaceholderRegex = /https:\/\/\{\{head\.ref\}\}--[a-zA-Z0-9]+\.chromatic\.com/;
-            const chromaticLinkRegex = /https:\/\/[a-zA-Z0-9_-]+--[a-zA-Z0-9]+\.chromatic\.com/;
-            
-            let updatedBody = prBody;
-            if (chromaticPlaceholderRegex.test(prBody)) {
-              // Replace the placeholder with the actual link
-              updatedBody = prBody.replace(
-                chromaticPlaceholderRegex,
-                chromaticLink
-              );
-            } else if (chromaticLinkRegex.test(prBody)) {
-              // Update existing link
-              updatedBody = prBody.replace(
-                chromaticLinkRegex,
-                chromaticLink
-              );
-            } else {
-              // If no placeholder or existing link found, add the link to the top
-              updatedBody = `[View Storybook on Chromatic](${chromaticLink})\n\n${prBody}`;
+            try {
+              const prNumber = context.payload.pull_request.number;
+              const prTitle = context.payload.pull_request.title;
+              const prBody = context.payload.pull_request.body || '';
+              const rawBranchName = context.payload.pull_request.head.ref;
+              
+              // Format branch name according to Chromatic requirements:
+              // https://www.chromatic.com/docs/permalinks/#build-your-own-permalink
+              // 1. Only letters and dashes allowed
+              // 2. Multiple dashes replaced with one
+              // 3. Max length of 37 characters
+              const formattedBranchName = rawBranchName
+                .replace(/[^a-zA-Z0-9-]/g, '-')  // Replace unsupported chars with dashes
+                .replace(/-+/g, '-')             // Replace multiple dashes with one
+                .replace(/^-|-$/g, '')           // Remove leading/trailing dashes
+                .substring(0, 37);               // Truncate to 37 chars
+              
+              // Generate Chromatic link using the formatted branch name and your project ID
+              const chromaticProjectId = '65a6e2ed2314f7b8f98609d8'; // Your Chromatic project ID
+              const chromaticLink = `https://${formattedBranchName}--${chromaticProjectId}.chromatic.com`;
+              
+              // Check if PR body already contains a Chromatic link placeholder or existing link
+              const chromaticPlaceholderRegex = /https:\/\/\{\{head\.ref\}\}--[a-zA-Z0-9]+\.chromatic\.com/;
+              const chromaticLinkRegex = /https:\/\/[a-zA-Z0-9_-]+--[a-zA-Z0-9]+\.chromatic\.com/;
+              
+              let updatedBody = prBody;
+              if (chromaticPlaceholderRegex.test(prBody)) {
+                // Replace the placeholder with the actual link
+                updatedBody = prBody.replace(
+                  chromaticPlaceholderRegex,
+                  chromaticLink
+                );
+              } else if (chromaticLinkRegex.test(prBody)) {
+                // Update existing link
+                updatedBody = prBody.replace(
+                  chromaticLinkRegex,
+                  chromaticLink
+                );
+              } else {
+                // If no placeholder or existing link found, add the link to the top
+                updatedBody = `[View Storybook on Chromatic](${chromaticLink})\n\n${prBody}`;
+              }
+              
+              // Update PR with new body
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prNumber,
+                body: updatedBody
+              });
+              
+              console.log(`Updated PR #${prNumber} with Chromatic link: ${chromaticLink}`);
+            } catch (error) {
+              console.error(`Error updating PR: ${error.message}`);
+              // Continue workflow even if PR update fails
+              core.warning(`Could not update PR description: ${error.message}`);
             }
-            
-            // Update PR with new body
-            await github.rest.pulls.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: prNumber,
-              body: updatedBody
-            });
-            
-            console.log(`Updated PR #${prNumber} with Chromatic link: ${chromaticLink}`);
