@@ -6,17 +6,13 @@ on:
 
 permissions:
   contents: read
-  pull-requests: write
 
 jobs:
-  update_pr_chromatic_link:
+  generate_chromatic_link:
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
-    name: Update PR Chromatic link
+    name: Generate Chromatic Link
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        
       - name: Generate Chromatic link
         id: generate_link
         run: |
@@ -33,27 +29,12 @@ jobs:
           CHROMATIC_PROJECT_ID="65a6e2ed2314f7b8f98609d8"
           CHROMATIC_LINK="https://${FORMATTED_BRANCH}--${CHROMATIC_PROJECT_ID}.chromatic.com"
           
-          echo "CHROMATIC_LINK=$CHROMATIC_LINK" >> $GITHUB_OUTPUT
-          echo "Generated Chromatic link: $CHROMATIC_LINK"
-      
-      - name: Add PR comment with Chromatic link
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            try {
-              const chromaticLink = '${{ steps.generate_link.outputs.CHROMATIC_LINK }}';
-              
-              // Add a comment to the PR with the Chromatic link
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: `## Chromatic Preview\n\n[View Storybook on Chromatic](${chromaticLink})`
-              });
-              
-              console.log(`Added comment to PR #${context.issue.number} with Chromatic link: ${chromaticLink}`);
-            } catch (error) {
-              console.error(`Error adding PR comment: ${error.message}`);
-              core.warning(`Could not add PR comment: ${error.message}`);
-            }
+          echo "=============================================="
+          echo " Chromatic Preview Link "
+          echo "=============================================="
+          echo ""
+          echo " [View Storybook on Chromatic]: $CHROMATIC_LINK"
+          echo ""
+          echo "=============================================="
+          echo "Copy this link to view your Storybook preview"
+          echo "=============================================="
