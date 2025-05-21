@@ -2,7 +2,10 @@
 name: 'Chromatic'
 
 # Event for the workflow
-on: push
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 # List of jobs
 jobs:
@@ -11,22 +14,67 @@ jobs:
     runs-on: ubuntu-latest
     # Job steps
     steps:
+      - name: Log workflow trigger event
+        run: |
+          echo "=============================================="
+          echo "Workflow triggered by: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "=============================================="
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      
+      - name: Log Git info
+        run: |
+          echo "=============================================="
+          echo "Git info:"
+          echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
+          echo "Commit hash: $(git rev-parse HEAD)"
+          echo "Commit message: $(git log -1 --pretty=%B)"
+          echo "=============================================="
+      
       - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
           node-version: 20.x
           cache: 'yarn'
-      - run: yarn install
+      
+      - name: Install dependencies
+        run: |
+          echo "Installing root dependencies..."
+          yarn install
+          echo "Root dependencies installed successfully"
+      
       - name: Install dependencies in react-components
-        run: yarn install
+        run: |
+          echo "Installing react-components dependencies..."
+          yarn install
+          echo "react-components dependencies installed successfully"
         working-directory: packages/react-components
-      - run: yarn workspace @department-of-veterans-affairs/react-components run build
-      - run: yarn workspace @department-of-veterans-affairs/web-components run build
-      - run: yarn workspace @department-of-veterans-affairs/component-library run build
+      
+      - name: Build react-components
+        run: |
+          echo "Building react-components..."
+          yarn workspace @department-of-veterans-affairs/react-components run build
+          echo "react-components build completed"
+      
+      - name: Build web-components
+        run: |
+          echo "Building web-components..."
+          yarn workspace @department-of-veterans-affairs/web-components run build
+          echo "web-components build completed"
+      
+      - name: Build component-library
+        run: |
+          echo "Building component-library..."
+          yarn workspace @department-of-veterans-affairs/component-library run build
+          echo "component-library build completed"
+      
       - name: Publish to Chromatic
+        id: chromatic
         uses: chromaui/action@latest
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -35,3 +83,13 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           skip: 'dependabot/**'
+      
+      - name: Log Chromatic results
+        if: always()
+        run: |
+          echo "=============================================="
+          echo "Chromatic Results:"
+          echo "Storybookurl: ${{ steps.chromatic.outputs.storybookUrl || 'Not available' }}"
+          echo "Build URL: ${{ steps.chromatic.outputs.buildUrl || 'Not available' }}"
+          echo "Code: ${{ steps.chromatic.outputs.code || 'Not available' }}"
+          echo "=============================================="
