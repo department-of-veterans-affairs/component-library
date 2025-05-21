@@ -76,10 +76,11 @@ jobs:
       - name: Publish to Chromatic
         id: chromatic
         uses: chromaui/action@latest
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          # No need to specify projectToken here as it's in the environment
           onlyChanged: true
           workingDir: packages/storybook
           skip: 'dependabot/**'
