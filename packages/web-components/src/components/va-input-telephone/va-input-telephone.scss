@@ -37,11 +37,11 @@ va-combo-box::part(label) {
 }
 
 div.input-wrap {
-  max-width: 480px !important;
+  max-width: var(--mobile-lg) !important;
 }
 
 fieldset {
-  max-width: 480px !important;
+  max-width: var(--mobile-lg) !important;
   container-name: component-wrapper;
   container-type: inline-size;
 }
@@ -64,7 +64,7 @@ va-text-input {
   gap: 8px;
   margin-top: 8px;
   width: 100%;
-  max-width: 480px;
+  max-width: var(--mobile-lg);
 }
 
 // use container query if possible
