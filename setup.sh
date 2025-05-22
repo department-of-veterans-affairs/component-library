@@ -10,6 +10,11 @@ yarn build
 yarn build-bindings
 sleep .5
 
+echo "Building react-components"
+cd ../react-components
+yarn build
+sleep .5
+
 echo "Building core package"
 cd ../core
 yarn build
