@@ -9,11 +9,14 @@ import {
   h,
   State,
   Fragment,
+  Watch, 
+  Listen
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
 import { comboBox } from './va-combo-box-library.js';
 import { isMessageSet } from '../../utils/utils';
+import { manageFlagIcon, handleRerender } from './utils';
 
 /**
  * @componentName Combo Box
@@ -26,7 +29,7 @@ import { isMessageSet } from '../../utils/utils';
 
 @Component({
   tag: 'va-combo-box',
-  styleUrl: 'va-combo-box.scss',
+  styleUrls: ['va-combo-box.scss', 'flags.scss'],
   shadow: true,
 })
 export class VaComboBox {
@@ -35,6 +38,8 @@ export class VaComboBox {
   @State() options: Array<Node>;
 
   @State() labelNode: HTMLLabelElement;
+
+  private isInVaInputTelephone: boolean;
 
   /**
    * Whether or not this is a required field.
@@ -81,6 +86,24 @@ export class VaComboBox {
    */
   @Prop() messageAriaDescribedby?: string;
 
+
+  /**
+   * Whether to show error message text 
+   */
+  @Prop() showInputError?: boolean = true;
+
+  @Watch('error')
+  updateErrorClass(newValue: string) {
+    const input = this.el.shadowRoot.querySelector('input');
+    if (input) {
+      if (newValue) {
+        input.classList.add('usa-input--error');
+      } else {
+        input.classList.remove('usa-input--error')
+      }
+    }
+  }
+
   /**
    * The event emitted when the selected value changes
    */
@@ -99,8 +122,18 @@ export class VaComboBox {
   componentDidLoad() {
     const comboBoxElement = this.el.shadowRoot.querySelector('.usa-combo-box');
     const labelElement = this.el.shadowRoot.querySelector('label');
+    this.isInVaInputTelephone = this.el.parentElement?.classList.contains('va-input-telephone-wrapper');
+    // create span that will hold flag in the input
+    if (this.isInVaInputTelephone) {
+      const comboBoxEl = this.el.shadowRoot.querySelector('div.usa-combo-box');
+      const flagSpan = document.createElement('span');
+      this.value = !!this.value ? this.value : 'US';
+      flagSpan.classList.add('flag', `flag-${this.value.toLowerCase()}`, 'dynamic-flag');
+      comboBoxEl.appendChild(flagSpan);
+    }
+    
     if (comboBoxElement) {
-      comboBox.init(comboBoxElement, labelElement);
+      comboBox.init(comboBoxElement, labelElement, this.value, this.isInVaInputTelephone);
       comboBox.on(comboBoxElement);
     }
     const inputElement = this.el.shadowRoot.querySelector('input');
@@ -191,6 +224,19 @@ export class VaComboBox {
     this.vaSelect.emit({ value: this.value });
   }
 
+  @Listen('input')
+  handleInput() {
+    // remove the flag icon inside the input when the country changes
+    manageFlagIcon.bind(this)();
+  }
+
+  componentDidRender() {
+    // update the input with truncated country name and matching flag after country is chosen
+    if (this.isInVaInputTelephone) {
+      handleRerender.bind(this)();
+    }
+  }
+
   render() {
     const {
       error,
@@ -202,15 +248,19 @@ export class VaComboBox {
       name,
       hint,
       messageAriaDescribedby,
+      showInputError,
     } = this;
-
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
     });
+    const comboBoxContainerClass = classnames({
+      'usa-combo-box': true,
+      'input-telephone-wrapper': this.isInVaInputTelephone
+    })
     return (
       <Host>
-        <label htmlFor="options" class={labelClass} id="options-label">
+        <label htmlFor="options" class={labelClass} id="options-label" part="label">
           {label}
           {required && (
             <span class="usa-label--required"> {i18next.t('required')}</span>
@@ -222,7 +272,7 @@ export class VaComboBox {
           </span>
         )}
         <span id="input-error-message" role="alert">
-          {error && (
+          {showInputError && error && (
             <Fragment>
               <span class="usa-sr-only">{i18next.t('error')}</span>
               <span class="usa-error-message">{error}</span>
@@ -231,7 +281,7 @@ export class VaComboBox {
         </span>
         <slot onSlotchange={() => this.populateOptions()}></slot>
         <div
-          class="usa-combo-box"
+          class={comboBoxContainerClass}
           data-default-value={value}
           data-placeholder={placeholder}
           data-error={!!error}
