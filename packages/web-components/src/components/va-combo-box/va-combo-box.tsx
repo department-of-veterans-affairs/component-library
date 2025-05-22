@@ -86,6 +86,10 @@ export class VaComboBox {
    */
   @Event() vaSelect: EventEmitter;
 
+  componentWillLoad() {
+    this.populateOptions();
+  }
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);

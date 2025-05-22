@@ -63,6 +63,9 @@ describe('va-combo-box', () => {
     await page.find('va-combo-box >>> input');
     const combobox = await page.find('va-combo-box >>> .usa-combo-box');
     expect(combobox).toEqualAttribute('data-default-value', 'bar');
+    const input = await page.find('va-combo-box >>> input');
+    const value = await input.getProperty('value');
+    expect(value).toBe('Bar');
   });
 
   it('renders opt groups', async () => {
