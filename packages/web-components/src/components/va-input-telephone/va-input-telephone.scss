@@ -1,0 +1,78 @@
+@forward 'settings';
+
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-form/src/styles/usa-form';
+@use 'usa-fieldset/src/styles/usa-fieldset';
+@use 'usa-legend/src/styles/usa-legend';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'usa-form-group/src/styles/usa-form-group';
+@use 'usa-error-message/src/styles/usa-error-message';
+
+@import '../../mixins/uswds-error-border.scss';
+@import '../../mixins/focusable.css';
+@import '../../mixins/form-field-error.css';
+
+@mixin small-screen {
+  va-combo-box, va-text-input {
+    width: 100%;
+    max-width: 100% !important;
+    margin-top: 16px;
+    flex: 0;
+    width: 288px;
+  }
+
+  .va-input-telephone-wrapper {
+    display: block;
+  }
+}
+
+:host {
+  display: block;
+}
+
+va-text-input::part(label), 
+va-combo-box::part(label) {
+  margin-top: 0;
+}
+
+div.input-wrap {
+  max-width: var(--mobile-lg) !important;
+}
+
+fieldset {
+  max-width: var(--mobile-lg) !important;
+  container-name: component-wrapper;
+  container-type: inline-size;
+}
+
+va-combo-box {
+  flex: 1;
+  min-width: 216px;
+  max-width: 236px;
+}
+
+va-text-input {
+ max-width: 236px;
+ flex: 5;
+}
+
+.va-input-telephone-wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  width: 100%;
+  max-width: var(--mobile-lg);
+}
+
+// use container query if possible
+@container component-wrapper (max-width: 360px) {
+  @include small-screen;
+}
+
+// fall back if container query not supported
+@media (max-width: 360px) {
+  @include small-screen;
+}
