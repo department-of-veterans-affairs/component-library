@@ -320,7 +320,7 @@ describe('truncate()', () => {
   });
 
   const FONT = '16.96px "Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans';
-  it.only('should truncate text that is too long', async () => {
+  it('should truncate text that is too long', async () => {
   
   
     const startingText = 'This text is too long and needs to be truncated';

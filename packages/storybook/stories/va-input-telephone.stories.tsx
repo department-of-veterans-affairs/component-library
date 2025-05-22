@@ -7,8 +7,8 @@ import {
 const inputTelephoneDocs = getWebComponentDocs('va-input-telephone');
 
 export default {
-  title: 'Components/Input Telephone USWDS',
-  id: 'uswds/va-input-telephone',
+  title: 'Components/Input Telephone',
+  id: 'components/va-input-telephone',
   parameters: {
     componentSubtitle: 'va-input-telephone web component',
     docs: {

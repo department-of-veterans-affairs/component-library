@@ -352,7 +352,7 @@ describe('va-combo-box', () => {
     expect(firstComboValue).toBe('foo');
   });
 
-  it.only('handles search result status aria', async () => {
+  it('handles search result status aria', async () => {
     const page = await newE2EPage();
 
     await page.setContent(`
@@ -393,29 +393,21 @@ describe('va-combo-box', () => {
             <option value="foo">Foo</option>
             <option value="bar">Bar</option>
           </va-combo-box>
-          <va-combo-box label="label 2" value="bar">
-            <option value="foo">Foo</option>
-            <option value="bar">Bar</option>
-          </va-combo-box>
         `);
   
     // Get the entire first va-combo-box element
-    const firstComboBox = await page.find('va-combo-box:first-of-type');
+    const firstComboBox = await page.find('va-combo-box');
     const initialFirstComboBoxValue = await firstComboBox.getProperty('value');
     expect(initialFirstComboBoxValue).toBe('foo');
   
     // Get the input inside the first va-combo-box
-    const firstComboInput = await firstComboBox.find('va-combo-box:first-of-type >>> input');
+    const firstComboInput = await firstComboBox.find('va-combo-box >>> input');
   
-    // Type into the first combo boxm input
+    // Type into the combo box input
     await firstComboInput.type('faa');
+    await page.keyboard.press('Enter'); 
   
-    // Get the second va-combo-box and its input
-    const secondComboInput = await page.find('va-combo-box:last-of-type >>> input');
-  
-    // Click into the second combo box to focus away from the first
-    await secondComboInput.click();
-  
+    await page.waitForChanges();
     // Verify the value of the first combo box has been cleared
     const firstComboValue = await firstComboBox.getProperty('value');
     expect(firstComboValue).toBe('');
