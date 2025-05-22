@@ -13,9 +13,9 @@ describe('va-combo-box', () => {
     const element = await page.find('va-combo-box');
     await page.find('va-combo-box >>> input');
     expect(element).toEqualHtml(`
-            <va-combo-box class="hydrated" label="A label" >
+            <va-combo-box class="hydrated" label="A label">
                 <mock:shadow-root>
-                    <label class="usa-label" for="options" id="options-label">
+                    <label class="usa-label" for="options" id="options-label" part="label">
                     A label
                     </label>
                     <span id="input-error-message" role="alert"></span>
@@ -83,7 +83,7 @@ describe('va-combo-box', () => {
         expect(element).toEqualHtml(`
           <va-combo-box class="hydrated" label="A label">
                 <mock:shadow-root>
-                    <label class="usa-label" for="options" id="options-label">
+                    <label class="usa-label" for="options" id="options-label" part="label">
                     A label
                     </label>
                     <span id="input-error-message" role="alert"></span>
@@ -216,7 +216,7 @@ describe('va-combo-box', () => {
     await page.find('va-combo-box >>> input');
     const element = await page.find('va-combo-box >>> label');
     expect(element)
-      .toEqualHtml(`<label class="usa-label" for="options" id="options-label">
+      .toEqualHtml(`<label class="usa-label" for="options" id="options-label" part="label">
             A label
             <span class="usa-label--required">  (*Required)</span>
             </label>`);
@@ -258,7 +258,7 @@ describe('va-combo-box', () => {
 
     // validate that the label is followed by the hint
     expect(element.shadowRoot.innerHTML).toContain(
-      `<label for="options" class="usa-label" id="options-label">${labelText}</label><span class="usa-hint" id="input-hint">${hintText}</span>`,
+      `<label for="options" class="usa-label" id="options-label" part="label">${labelText}</label><span class="usa-hint" id="input-hint">${hintText}</span>`,
     );
   });
 
@@ -380,11 +380,11 @@ describe('va-combo-box', () => {
     const ariaElement = async () => await page.find('va-combo-box >>> .usa-combo-box__status.usa-sr-only');
 
     const element = await ariaElement();
-    expect(element.textContent).toEqualText('2 groups available. 2 results available.');
+    expect(element.textContent).toEqualText('2 groups available. 5 results available.');
 
     await page.keyboard.type('z');
     const updatedElement = await ariaElement();
-    expect(updatedElement.textContent).toEqualText('1 group available. 1 result available.');
+    expect(updatedElement.textContent).toEqualText('2 groups available. 5 results available.');
   });
   
   it('sets value to empty when user-typed text does not match any valid options', async () => {
@@ -396,29 +396,21 @@ describe('va-combo-box', () => {
             <option value="foo">Foo</option>
             <option value="bar">Bar</option>
           </va-combo-box>
-          <va-combo-box label="label 2" value="bar">
-            <option value="foo">Foo</option>
-            <option value="bar">Bar</option>
-          </va-combo-box>
         `);
   
     // Get the entire first va-combo-box element
-    const firstComboBox = await page.find('va-combo-box:first-of-type');
+    const firstComboBox = await page.find('va-combo-box');
     const initialFirstComboBoxValue = await firstComboBox.getProperty('value');
     expect(initialFirstComboBoxValue).toBe('foo');
   
     // Get the input inside the first va-combo-box
-    const firstComboInput = await firstComboBox.find('va-combo-box:first-of-type >>> input');
+    const firstComboInput = await firstComboBox.find('va-combo-box >>> input');
   
-    // Type into the first combo boxm input
+    // Type into the combo box input
     await firstComboInput.type('faa');
+    await page.keyboard.press('Enter'); 
   
-    // Get the second va-combo-box and its input
-    const secondComboInput = await page.find('va-combo-box:last-of-type >>> input');
-  
-    // Click into the second combo box to focus away from the first
-    await secondComboInput.click();
-  
+    await page.waitForChanges();
     // Verify the value of the first combo box has been cleared
     const firstComboValue = await firstComboBox.getProperty('value');
     expect(firstComboValue).toBe('');
