@@ -266,6 +266,9 @@ export class VaInternationalTelephone {
               </va-combo-box> }
               <va-text-input
                 label="Phone number"
+                type="tel"
+                autocomplete="tel"
+                inputmode="tel"
                 value={formattedContact}
                 show-input-error="false"
                 error={contactError}
