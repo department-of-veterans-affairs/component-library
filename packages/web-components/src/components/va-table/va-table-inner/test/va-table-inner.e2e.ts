@@ -423,6 +423,118 @@ describe('sorted va-table ', () => {
       `Click to sort by Integer/Float in ascending order`,
     );
   });
+
+  it('correctly uses data-sort-value attribute for sorting', async () => {
+    const dataSortTableMarkup = `<va-table sortable="true" table-title="Sort with data-sort-value">
+      <va-table-row>
+        <span>Numbers</span>
+      </va-table-row>
+      <va-table-row id="row1">
+        <span data-sort-value="3"><strong>12,345</strong></span>
+      </va-table-row>
+      <va-table-row id="row2">
+        <span data-sort-value="1">5,290</span>
+      </va-table-row>
+      <va-table-row id="row3">
+        <span data-sort-value="2">290</span>
+      </va-table-row>
+    </va-table>`;
+    
+    const page = await newE2EPage();
+    await page.setContent(dataSortTableMarkup);
+    await page.waitForChanges();
+    
+    // Verify initial order of rows
+    let rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    expect(rowOrder).toEqual(['row1', 'row2', 'row3']);
+    
+    // Click the header to sort
+    let button = await page.find('va-table-inner >>> thead >>> th >>> button');
+    await button.click();
+    await page.waitForChanges();
+    
+    // Verify sorted order (ascending by data-sort-value)
+    rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    expect(rowOrder).toEqual(['row2', 'row3', 'row1']);
+    
+    // Re-fetch the button and click again to sort in descending order
+    button = await page.find('va-table-inner >>> thead >>> th >>> button');
+    await button.click();
+    await page.waitForChanges();
+    
+    // Verify sorted order (descending by data-sort-value)
+    rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    expect(rowOrder).toEqual(['row1', 'row3', 'row2']);
+  });
+
+  it('correctly handles mixed data-sort-value and innerHTML for sorting', async () => {
+    // Create a test table with clearer numeric values to avoid parsing issues
+    const mixedSortTableMarkup = `<va-table sortable="true" table-title="Mixed sort values">
+      <va-table-row>
+        <span>Numbers</span>
+      </va-table-row>
+      <va-table-row id="row1">
+        <span data-sort-value="30">30 (with attribute)</span>
+      </va-table-row>
+      <va-table-row id="row2">
+        <span>20</span>
+      </va-table-row>
+      <va-table-row id="row3">
+        <span data-sort-value="10">10 (with attribute)</span>
+      </va-table-row>
+      <va-table-row id="row4">
+        <span>40</span>
+      </va-table-row>
+    </va-table>`;
+    
+    const page = await newE2EPage();
+    await page.setContent(mixedSortTableMarkup);
+    await page.waitForChanges();
+    
+    // Verify initial order of rows
+    let rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    expect(rowOrder).toEqual(['row1', 'row2', 'row3', 'row4']);
+    
+    // Click the header to sort
+    let button = await page.find('va-table-inner >>> thead >>> th >>> button');
+    await button.click();
+    await page.waitForChanges();
+    
+    // Verify sorted order (ascending by data-sort-value or innerHTML)
+    rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    
+    // Expected ascending order: 10, 20, 30, 40
+    expect(rowOrder).toEqual(['row3', 'row2', 'row1', 'row4']);
+    
+    // Re-fetch the button and click again to sort in descending order
+    button = await page.find('va-table-inner >>> thead >>> th >>> button');
+    await button.click();
+    await page.waitForChanges();
+    
+    // Verify sorted order (descending by data-sort-value or innerHTML)
+    rowOrder = await page.evaluate(() => {
+      const rows = Array.from(document.querySelectorAll('va-table-row')).slice(1);
+      return rows.map(row => row.id);
+    });
+    
+    // Expected descending order: 40, 30, 20, 10
+    expect(rowOrder).toEqual(['row4', 'row1', 'row2', 'row3']);
+  });
 });
 
 describe('sort utilities', () => {
