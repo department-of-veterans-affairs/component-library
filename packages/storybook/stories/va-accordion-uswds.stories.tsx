@@ -9,17 +9,20 @@ const accordionDocs = getWebComponentDocs('va-accordion');
 const accordionItemDocs = getWebComponentDocs('va-accordion-item');
 const accordionItemProps = propStructure(accordionItemDocs);
 
-const defaultValues = {
-  bordered: JSON.parse(accordionItemProps.bordered.defaultValue.value),
-  headerIconSlot: false,
-  headlineSlot: false,
-  level: JSON.parse(accordionItemProps.level.defaultValue.value),
-  open: JSON.parse(accordionItemProps.open.defaultValue.value),
-  subheader: JSON.parse(accordionItemProps.subheader.defaultValue.value),
-  subheaderIconSlot: false,
+const defaultArgs = {
+  itemBordered: JSON.parse(accordionItemProps.bordered.defaultValue.value),
+  itemLevel: JSON.parse(accordionItemProps.level.defaultValue.value),
+  itemHeadlineSlot: false,
+  itemIcon: false,
+  itemSubheaderIconSlot: false,
 };
 
-const accordionContent = [
+const defaultValues ={
+  open: JSON.parse(accordionItemProps.open.defaultValue.value),
+  subheader: JSON.parse(accordionItemProps.subheader.defaultValue.value),
+}
+
+const items = [
   {
     ...defaultValues,
     id: 'first',
@@ -38,7 +41,7 @@ const accordionContent = [
     header: 'Third Amendment',
     body: 'No Soldier shall, in time of peace be quartered in any house, without the consent of the Owner, nor in time of war, but in a manner to be prescribed by law.',
   },
-];
+]
 
 export default {
   title: 'Components/Accordion USWDS',
@@ -51,23 +54,47 @@ export default {
   },
   argTypes: {
     ...propStructure(accordionDocs),
-    accordionItems: {
-      name: 'Accordion items',
-      description: 'Array of accordion items to be displayed',
-      control: { type: 'object' },
-      table: { category: 'Extras' },
-    },
     i18n: {
-      name: 'Internationalization',
+      name: 'Add internationalization buttons',
       description: 'Adds buttons to change the language of the component',
       control: { type: 'boolean' },
-      table: { category: 'Extras' },
+      table: { category: 'Additional variants' },
+    },
+    accordionItems: {
+      name: 'va-accordion-item: items',
+      description: 'Content and props for the accordion items',
+      control: { type: 'object' },
+      table: { category: 'Subcomponent controls' },
+    },
+    itemBordered: {
+      name: 'va-accordion-item: bordered',
+      description: 'Add the `bordered` prop to the accordion items',
+      control: { type: 'boolean' },
+      table: { category: 'Subcomponent controls' },
+    },
+    itemLevel: {
+      name: 'va-accordion-item: level',
+      description: 'Set heading level for the accordion items',
+      control: { type: 'number', min:1, max:6 },
+      table: { category: 'Subcomponent controls' },
+    },
+    itemHeadlineSlot: {
+      table: { disable:true },
+    },
+    itemSubheaderIconSlot: {
+      table: { disable: true },
+    },
+    itemIcon: {
+      name: 'va-accordion-item: add header icons',
+      description: 'Add header and subheader icons via a slot',
+      control: { type: 'boolean' },
+      table: { category: 'Subcomponent controls' },
     },
   },
   args: {
-    accordionItems: accordionContent,
+    ...defaultArgs,
+    accordionItems: items,
     i18n: false,
-    'section-heading': undefined,
   },
 };
 
@@ -90,24 +117,24 @@ const Template = args => {
         {args.accordionItems.map(accordion => (
           <va-accordion-item
             id={accordion.id}
-            header={accordion.headlineSlot ? undefined : accordion.header}
-            bordered={accordion.bordered}
-            subheader={accordion.subheader ? accordion.subheader : accordion.headerIconSlot ? 'Subheader' : undefined}
-            level={accordion.level ? accordion.level : undefined}
+            header={args.itemHeadlineSlot ? undefined : accordion.header}
+            bordered={args.itemBordered}
+            subheader={accordion.subheader ? accordion.subheader : accordion.itemIcon ? 'Subheader' : undefined}
+            level={args.itemLevel ? args.itemLevel : undefined}
             open={accordion.open}
           >
-            {accordion.headerIconSlot && (
+            {args.itemIcon && (
                 <span slot="icon" className="vads-u-color--green">
                   <va-icon icon="info" />
                 </span>
             )}
-            {accordion.subheaderIconSlot && (
+            {args.itemIcon && (
                 <va-icon
                   icon="mail"
                   slot="subheader-icon"
                 />
             )}
-            {accordion.headlineSlot && (
+            {args.itemHeadlineSlot && (
               <h3 slot="headline">Slotted {accordion.header}</h3>
             )}
             <p>{accordion.body}</p>
@@ -130,15 +157,12 @@ SingleSelect.args = {
 
 export const Bordered = Template.bind(null);
 Bordered.args = {
-  accordionItems: accordionContent.map(item => ({
-    ...item,
-    bordered: true,
-  })),
+  itemBordered: true,
 };
 
 export const Subheader = Template.bind(null);
 Subheader.args = {
-  accordionItems: accordionContent.map(item => ({
+  accordionItems: items.map(item => ({
     ...item,
     subheader: 'Subheader',
   })),
@@ -146,16 +170,24 @@ Subheader.args = {
 
 export const IconHeaders = Template.bind(null);
 IconHeaders.args = {
-  accordionItems: accordionContent.map(item => ({
+  accordionItems: items.map(item => ({
     ...item,
-    headerIconSlot: true,
-    subheaderIconSlot: true,
+    itemIcon: true,
+    itemSubheaderIconSlot: true,
   })),
 };
 
 export const HeadlineSlot = Template.bind(null);
+HeadlineSlot.argTypes = {
+  itemHeadlineSlot: {
+    name: 'va-accordion-item: use headline slot',
+    description: 'Add the header via a slot',
+    control: { type: 'boolean' },
+    table: { disable:false, category: 'Subcomponent controls' },
+  },
+}
 HeadlineSlot.args = {
-  accordionItems: accordionContent.map(item => ({
+  accordionItems: items.map(item => ({
     ...item,
     headlineSlot: true,
   })),
@@ -163,7 +195,7 @@ HeadlineSlot.args = {
 
 export const CustomHeaderLevel = Template.bind(null);
 CustomHeaderLevel.args = {
-  accordionItems: accordionContent.map(item => ({
+  accordionItems: items.map(item => ({
     ...item,
     level: 4,
   })),
@@ -177,7 +209,7 @@ Internationalization.args = {
 export const ManyAccordions = Template.bind(null);
 ManyAccordions.args = {
   accordionItems: [
-    ...accordionContent,
+    ...items,
     {
       ...defaultValues,
       id: 'fourth',
