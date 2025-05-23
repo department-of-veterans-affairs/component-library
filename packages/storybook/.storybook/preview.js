@@ -27,7 +27,7 @@ import React from 'react';
 import {
   applyPolyfills,
   defineCustomElements,
-} from '@department-of-veterans-affairs/component-library/src/main';
+} from '@department-of-veterans-affairs/component-library';
 import { themes } from '@storybook/theming';
 import { withThemeByClassName } from '@storybook/addon-themes'; 
 
@@ -105,9 +105,6 @@ const viewports = {
 export default {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
-    docs: {
-      theme: themes.light
-    },
     options: {
       storySort: {
         method: 'alphabetical',
@@ -128,13 +125,14 @@ export default {
     viewMode: 'docs',
   },
   decorators: [
+    Story => ( <div><Story /></div>),
     withThemeByClassName({
       themes: {
         light: 'light',
         dark: 'dark',
       },
       defaultTheme: 'light',
-    }),
+    })
   ]
 }
 

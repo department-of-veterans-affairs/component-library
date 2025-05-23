@@ -41,10 +41,6 @@ export default {
         {
           loader: require.resolve('@storybook/source-loader'),
           options: {
-            inputSourceMap: {
-              content: false
-            },
-            parseMap: true,
             sourceLoaderOptions: {
               injectStoryParameters: false,
             },
