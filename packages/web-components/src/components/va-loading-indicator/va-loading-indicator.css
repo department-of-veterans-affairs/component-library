@@ -23,14 +23,14 @@
   animation: spin 1.5s linear infinite;
 }
 
-.loading-indicator.loading-indicator-inline {
+.loading-indicator-inline {
   display: inline-block;
   height: unset;
   vertical-align: middle;
   margin: 0 .3rem;
 }
 
-.loading-indicator.loading-indicator-inline:after {
+.loading-indicator-inline:after {
   width: .8rem;
   height: .8rem;
   border-width: .2rem;
