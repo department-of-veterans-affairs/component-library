@@ -43,7 +43,7 @@ export class VaLoadingIndicator {
   @Prop() setFocus?: boolean = false;
 
   /**
-   * Set to true if the loading indicator should capture focus
+   * Set to true if the loading indicator should be displayed inline
    */
   @Prop() inline?: boolean = false;
 
