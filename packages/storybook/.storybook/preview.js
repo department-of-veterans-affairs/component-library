@@ -22,7 +22,6 @@ import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-n
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-nav-linklist.css';
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/shame.css';
 import '@department-of-veterans-affairs/component-library/dist/main.css';
-import React from 'react';
 import {
   applyPolyfills,
   defineCustomElements,
