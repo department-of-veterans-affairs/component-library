@@ -934,7 +934,7 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Set to true if the loading indicator should capture focus
+          * Set to true if the loading indicator should be displayed inline
          */
         "inline"?: boolean;
         /**
