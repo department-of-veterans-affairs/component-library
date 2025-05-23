@@ -79,19 +79,18 @@ export class VaAlertSignIn {
           Sign in with a verified account
         </HeaderLevel>
         <p>
-          You'll need to sign in with an identity-verified account through one
+          You’ll need to sign in with an identity-verified account through one
           of our account providers. Identity verification helps us protect all
-          Veterans' information and prevent scammers from stealing your
           benefits.
         </p>
         <p>
-          <strong>Don't yet have a verified account?</strong> Create a{' '}
-          <strong>Login.gov</strong> or <strong>ID.me</strong> account. We'll
+          <strong>Don’t yet have a verified account?</strong> Create a{' '}
+          <strong>Login.gov</strong> or <strong>ID.me</strong> account. We’ll
           help you verify your identity for your account now.
         </p>
         <p>
           <strong>Not sure if your account is verified?</strong> Sign in here.
-          If you still need to verify your identity, we'll help you do that now.
+          If you still need to verify your identity, we’ll help you do that now.
         </p>
         <p>
           <slot name="SignInButton"></slot>
@@ -112,29 +111,29 @@ export class VaAlertSignIn {
           Sign in with a verified account
         </HeaderLevel>
         <p>
-          Here's how signing in with an identity-verified account helps you:
+          Here’s how signing in with an identity-verified account helps you:
         </p>
         <ul>
           <li>
             We can fill in some of your information for you to save you time.
           </li>
           <li>
-            You can save your work in progress. You'll have {this.timeLimit}{' '}
+            You can save your work in progress. You’ll have {this.timeLimit}{' '}
             from when you start or make changes to submit your form.
           </li>
         </ul>
         <p>
-          <strong>Don't yet have a verified account?</strong> Create a{' '}
-          <strong>Login.gov</strong> or <strong>ID.me</strong> account. We'll
+          <strong>Don’t yet have a verified account?</strong> Create a{' '}
+          <strong>Login.gov</strong> or <strong>ID.me</strong> account. We’ll
           help you verify your identity for your account now.
         </p>
         <p>
           <strong>Not sure if your account is verified?</strong> Sign in here.
-          If you still need to verify your identity, we'll help you do that now.
+          If you still need to verify your identity, we’ll help you do that now.
         </p>
         <p>
           <strong>Note:</strong> You can sign in after you start filling out
-          your form. But you'll lose any information you already filled in.
+          your form. But you’ll lose any information you already filled in.
         </p>
         <p>
           <slot name="SignInButton"></slot>
@@ -158,21 +157,21 @@ export class VaAlertSignIn {
         </HeaderLevel>
         <p>
           When you sign in with an identity-verified account, you can save your
-          work in progress. You'll have 60 days from when you start or make
+          work in progress. You’ll have 60 days from when you start or make
           changes to submit your form.
         </p>
         <p>
-          <strong>Don't yet have a verified account?</strong> Create a{' '}
-          <strong>Login.gov</strong> or <strong>ID.me</strong> account. We'll
+          <strong>Don’t yet have a verified account?</strong> Create a{' '}
+          <strong>Login.gov</strong> or <strong>ID.me</strong> account. We’ll
           help you verify your identity for your account now.
         </p>
         <p>
           <strong>Not sure if your account is verified?</strong> Sign in here.
-          If you still need to verify your identity, we'll help you do that now.
+          If you still need to verify your identity, we’ll help you do that now.
         </p>
         <p>
           <strong>Note:</strong> You can sign in after you start filling out
-          your form. But you'll lose any information you already filled in.
+          your form. But you’ll lose any information you already filled in.
         </p>
         <p>
           <slot name="SignInButton"></slot>
@@ -194,11 +193,11 @@ export class VaAlertSignIn {
         <HeaderLevel class="headline">Verify your identity</HeaderLevel>
         <p>
           We need you to verify your identity for your <strong>ID.me</strong>{' '}
-          account. This step helps us protect all Veterans' information and
+          account. This step helps us protect all Veterans’ information and
           prevent scammers from stealing your benefits.
         </p>
         <p>
-          This one-time process often takes about 10 minutes. You'll need to
+          This one-time process often takes about 10 minutes. You’ll need to
           provide certain personal information and identification.
         </p>
         <p>
@@ -220,11 +219,11 @@ export class VaAlertSignIn {
         <p>
           We need you to verify your identity for your{' '}
           <strong>Login.gov</strong> account. This step helps us protect all
-          Veterans' information and prevent scammers from stealing your
+          Veterans’ information and prevent scammers from stealing your
           benefits.
         </p>
         <p>
-          This one-time process often takes about 10 minutes. You'll need to
+          This one-time process often takes about 10 minutes. You’ll need to
           provide certain personal information and identification.
         </p>
         <p>
@@ -247,7 +246,7 @@ export class VaAlertSignIn {
         </HeaderLevel>
         <p>
           We need you to sign in with an identity-verified account. This helps
-          us protect all Veterans' information and prevent scammers from
+          us protect all Veterans’ information and prevent scammers from
           stealing your benefits. You have 2 options: a verified{' '}
           <strong>Login.gov</strong> or a verified <strong>ID.me</strong>{' '}
           account.
@@ -255,11 +254,11 @@ export class VaAlertSignIn {
         <p>
           <strong>If you already have a Login.gov or ID.me account,</strong>{' '}
           sign in with that account. If you still need to verify your identity
-          for your account, we'll help you do that now.
+          for your account, we’ll help you do that now.
         </p>
         <p>
-          <strong>If you don't have a Login.gov or ID.me account,</strong>{' '}
-          create one now. We'll help you verify your identity.
+          <strong>If you don’t have a Login.gov or ID.me account,</strong>{' '}
+          create one now. We’ll help you verify your identity.
         </p>
         <p>
           <slot name="LoginGovSignInButton"></slot>
