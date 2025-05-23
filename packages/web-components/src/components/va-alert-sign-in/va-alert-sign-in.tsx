@@ -81,7 +81,7 @@ export class VaAlertSignIn {
         <p>
           You’ll need to sign in with an identity-verified account through one
           of our account providers. Identity verification helps us protect all
-          benefits.
+          Veterans’ information and prevent scammers from stealing your benefits.
         </p>
         <p>
           <strong>Don’t yet have a verified account?</strong> Create a{' '}
