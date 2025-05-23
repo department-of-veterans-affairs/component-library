@@ -35,6 +35,7 @@ export class VaAlertSignIn {
   /**
    * For the 'optional' variant, how long the respondent has to submit their form
    */
+  // eslint-disable-next-line i18next/no-literal-string
   @Prop() timeLimit?: string = '15 minutes';
 
   /**
