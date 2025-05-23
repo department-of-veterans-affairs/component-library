@@ -21,7 +21,6 @@ import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-p
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-nav-sidebar.css';
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-nav-linklist.css';
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/shame.css';
-import './themes.css';
 import '@department-of-veterans-affairs/component-library/dist/main.css';
 import React from 'react';
 import {
@@ -104,6 +103,11 @@ const viewports = {
 
 export default {
   parameters: {
+    darkMode: {
+      dark: { ...themes.dark },
+      light: { ...themes.light },
+      stylePreview: false,
+    },
     actions: { argTypesRegex: '^on[A-Z].*' },
     options: {
       storySort: {
