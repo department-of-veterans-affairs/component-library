@@ -101,7 +101,7 @@ const viewports = {
 };
 
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
+  // actions: { argTypesRegex: '^on[A-Z].*' },
   darkMode: {
     dark: { ...themes.dark },
     light: { ...themes.light },
@@ -164,3 +164,4 @@ const observeDocsRoot = () => {
 document.body.onload = function () {
   observeDocsRoot();
 };
+export const tags = ['autodocs'];

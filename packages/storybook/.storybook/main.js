@@ -3,26 +3,20 @@ const path = require('path');
 module.exports = {
   stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   staticDirs: ['../public'],
-  addons: [
-    {
-      name: '@storybook/addon-docs',
+
+  addons: [{
+    name: '@storybook/addon-docs',
+  }, {
+    name: '@storybook/addon-essentials',
+    options: {
+      // disabled docs because we need to configure it to allow storysource
+      // to display full story in Canvas tab
+      // disabling it allows us to continue to use addon-essentials and not have
+      // to individually list its addons
+      docs: false,
     },
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        // disabled docs because we need to configure it to allow storysource
-        // to display full story in Canvas tab
-        // disabling it allows us to continue to use addon-essentials and not have
-        // to individually list its addons
-        docs: false,
-      },
-    },
-    getAbsolutePath('storybook-dark-mode'),
-    getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-storysource'),
-    getAbsolutePath('@storybook/addon-a11y'),
-    getAbsolutePath('@storybook/addon-mdx-gfm'),
-  ],
+  }, getAbsolutePath('storybook-dark-mode'), getAbsolutePath('@storybook/addon-links'), getAbsolutePath('@storybook/addon-storysource'), getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-mdx-gfm'), getAbsolutePath("@storybook/addon-webpack5-compiler-babel")],
+
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.
@@ -53,10 +47,23 @@ module.exports = {
     // Return the altered config
     return config;
   },
+  babel: async (options) => ({
+    ...options,
+    presets: [
+      ...(options.presets || []),
+      [
+    '@babel/preset-react', {
+      runtime: 'automatic',
+    },
+        'preset-react-jsx-transform'
+      ],
+    ],
+  }),
   framework: {
-    name: getAbsolutePath('@storybook/react-webpack5'),
+    name: getAbsolutePath("@storybook/react-webpack5"),
     options: {},
   },
+
   refs: {
     'va-mobile': {
       title: 'VA Mobile Design System',
@@ -64,9 +71,12 @@ module.exports = {
       expanded: 'false',
     },
   },
-  docs: {
-    autodocs: true,
-  },
+
+  docs: {},
+
+  typescript: {
+    reactDocgen: 'react-docgen-typescript'
+  }
 };
 
 function getAbsolutePath(value) {

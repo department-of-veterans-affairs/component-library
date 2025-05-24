@@ -16,9 +16,9 @@ export default {
   subcomponents: componentStructure(checkbox),
   parameters: {
     componentSubtitle: 'va-checkbox-group web component',
-    actions: {
-      handles: ['component-library-analytics'],
-    },
+    // actions: {
+    //   handles: ['component-library-analytics'],
+    // },
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={checkBoxGroupDocs} />,
     },

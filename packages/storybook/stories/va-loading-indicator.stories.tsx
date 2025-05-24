@@ -13,9 +13,9 @@ export default {
         <StoryDocs storyDefault={Default} data={loadingIndicatorDocs} />
       ),
     },
-    actions: {
-      handles: ['component-library-analytics'],
-    },
+    // actions: {
+    //   handles: ['component-library-analytics'],
+    // },
   },
 };
 

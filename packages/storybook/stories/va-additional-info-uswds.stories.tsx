@@ -12,9 +12,9 @@ export default {
         <StoryDocs storyDefault={Default} data={additionalInfoDocs} />
       ),
     },
-    actions: {
-      handles: ['component-library-analytics'],
-    },
+    // actions: {
+    //   handles: ['component-library-analytics'],
+    // },
   },
 };
 

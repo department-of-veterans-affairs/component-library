@@ -41,9 +41,9 @@ export default {
   id: 'components/va-telephone',
   parameters: {
     componentSubtitle: 'va-telephone web component',
-    actions: {
-      handles: ['component-library-analytics'],
-    },
+    // actions: {
+    //   handles: ['component-library-analytics'],
+    // },
     docs: {
       page: () => (
         <StoryDocs storyDefault={Default} data={telephoneDocs}>
