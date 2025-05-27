@@ -26,7 +26,7 @@ Add a description even if it's just a short summary. Try not to make the reviewe
 ## Related Tickets or Links
 
 <!-- 
-Link to any related tickets or links that are relevant to the PR.
+Link to any related issues, PRs, Slack conversations, or anything else relevant to documenting the changes.
 -->
 
 Closes <ticket>
@@ -49,7 +49,7 @@ If there are any visual changes, screenshots should be added here.
 - [ ] Component behaves as expected across breakpoints 🔅
 - [ ] Tab order and focus state work as expected 🔅
 - [ ] Changes have been tested against screen readers 🔅
-- [ ] Changes have been tested in vets-website using Verdaccio 🔅
+- [ ] Changes have been tested in vets-website using [Verdaccio](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#local-testing-in-vets-website-with-verdaccio) 🔅
 
 ## Acceptance criteria
 - [ ] QA checklist has been completed
