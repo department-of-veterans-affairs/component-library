@@ -1,7 +1,7 @@
 import { dirname, join } from "path";
 const path = require('path');
 module.exports = {
-  stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  stories: ['../@(src|stories)/**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
   staticDirs: ['../public'],
 
   addons: [{
