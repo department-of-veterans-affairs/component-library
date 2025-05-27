@@ -365,25 +365,19 @@ export namespace Components {
          */
         "update"?: boolean;
     }
-    /**
-     * @componentName Button Segmented
-     * @nativeHandler onClick
-     * @maturityCategory use
-     * @maturityLevel alpha
-     */
     interface VaButttonSegmented {
-        /**
-          * If `true`, the segment is disabled.
-         */
-        "disabled"?: boolean;
-        /**
-          * If `true`, the segment is selected.
-         */
-        "selected"?: boolean;
         /**
           * The text displayed on the button segment.
          */
-        "text"?: string;
+        "buttons": Array<Button>;
+        /**
+          * If `true`, the segment is disabled.
+         */
+        "fullWidth"?: boolean;
+        /**
+          * If `true`, the segment is selected.
+         */
+        "selected": number;
     }
     /**
      * @componentName Card
@@ -2536,12 +2530,6 @@ declare global {
     interface HTMLVaButttonSegmentedElementEventMap {
         "component-library-analytics": any;
     }
-    /**
-     * @componentName Button Segmented
-     * @nativeHandler onClick
-     * @maturityCategory use
-     * @maturityLevel alpha
-     */
     interface HTMLVaButttonSegmentedElement extends Components.VaButttonSegmented, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaButttonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButttonSegmentedElement, ev: VaButttonSegmentedCustomEvent<HTMLVaButttonSegmentedElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3955,17 +3943,15 @@ declare namespace LocalJSX {
          */
         "update"?: boolean;
     }
-    /**
-     * @componentName Button Segmented
-     * @nativeHandler onClick
-     * @maturityCategory use
-     * @maturityLevel alpha
-     */
     interface VaButttonSegmented {
+        /**
+          * The text displayed on the button segment.
+         */
+        "buttons"?: Array<Button>;
         /**
           * If `true`, the segment is disabled.
          */
-        "disabled"?: boolean;
+        "fullWidth"?: boolean;
         /**
           * The event used to track usage of the component.
          */
@@ -3973,11 +3959,7 @@ declare namespace LocalJSX {
         /**
           * If `true`, the segment is selected.
          */
-        "selected"?: boolean;
-        /**
-          * The text displayed on the button segment.
-         */
-        "text"?: string;
+        "selected"?: number;
     }
     /**
      * @componentName Card
@@ -6071,12 +6053,6 @@ declare module "@stencil/core" {
              * @guidanceHref button/button-pair
              */
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
-            /**
-             * @componentName Button Segmented
-             * @nativeHandler onClick
-             * @maturityCategory use
-             * @maturityLevel alpha
-             */
             "va-buttton-segmented": LocalJSX.VaButttonSegmented & JSXBase.HTMLAttributes<HTMLVaButttonSegmentedElement>;
             /**
              * @componentName Card

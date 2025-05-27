@@ -16,29 +16,35 @@ import classnames from 'classnames';
  * @maturityCategory use
  * @maturityLevel alpha
  */
-
+interface Button {
+  text: string;
+  value: string;
+}  
 @Component({
   tag: 'va-buttton-segmented',
   styleUrl: 'va-buttton-segmented.scss',
   shadow: true,
 })
+
+
 export class VaButttonSegmented {
   @Element() el: HTMLElement;
 
   /**
    * The text displayed on the button segment.
    */
-  @Prop() text?: string;
+ 
+  @Prop() buttons: Array<Button>;
 
   /**
    * If `true`, the segment is selected.
    */
-  @Prop({ reflect: true }) selected?: boolean = false;
+  @Prop({ reflect: true }) selected: number = 0;
 
   /**
    * If `true`, the segment is disabled.
    */
-  @Prop({ reflect: true }) disabled?: boolean = false;
+  @Prop() fullWidth?: boolean = false;
 
   /**
    * The event used to track usage of the component.
