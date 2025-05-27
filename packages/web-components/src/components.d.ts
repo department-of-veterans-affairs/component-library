@@ -366,6 +366,26 @@ export namespace Components {
         "update"?: boolean;
     }
     /**
+     * @componentName Button Segmented
+     * @nativeHandler onClick
+     * @maturityCategory use
+     * @maturityLevel alpha
+     */
+    interface VaButttonSegmented {
+        /**
+          * If `true`, the segment is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * If `true`, the segment is selected.
+         */
+        "selected"?: boolean;
+        /**
+          * The text displayed on the button segment.
+         */
+        "text"?: string;
+    }
+    /**
      * @componentName Card
      * @maturityCategory use
      * @maturityLevel deployed
@@ -2128,6 +2148,10 @@ export interface VaButtonPairCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaButtonPairElement;
 }
+export interface VaButttonSegmentedCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaButttonSegmentedElement;
+}
 export interface VaCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaCheckboxElement;
@@ -2508,6 +2532,29 @@ declare global {
     var HTMLVaButtonPairElement: {
         prototype: HTMLVaButtonPairElement;
         new (): HTMLVaButtonPairElement;
+    };
+    interface HTMLVaButttonSegmentedElementEventMap {
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Button Segmented
+     * @nativeHandler onClick
+     * @maturityCategory use
+     * @maturityLevel alpha
+     */
+    interface HTMLVaButttonSegmentedElement extends Components.VaButttonSegmented, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaButttonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButttonSegmentedElement, ev: VaButttonSegmentedCustomEvent<HTMLVaButttonSegmentedElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaButttonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButttonSegmentedElement, ev: VaButttonSegmentedCustomEvent<HTMLVaButttonSegmentedElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaButttonSegmentedElement: {
+        prototype: HTMLVaButttonSegmentedElement;
+        new (): HTMLVaButttonSegmentedElement;
     };
     /**
      * @componentName Card
@@ -3445,6 +3492,7 @@ declare global {
         "va-button": HTMLVaButtonElement;
         "va-button-icon": HTMLVaButtonIconElement;
         "va-button-pair": HTMLVaButtonPairElement;
+        "va-buttton-segmented": HTMLVaButttonSegmentedElement;
         "va-card": HTMLVaCardElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
@@ -3906,6 +3954,30 @@ declare namespace LocalJSX {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
+    }
+    /**
+     * @componentName Button Segmented
+     * @nativeHandler onClick
+     * @maturityCategory use
+     * @maturityLevel alpha
+     */
+    interface VaButttonSegmented {
+        /**
+          * If `true`, the segment is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaButttonSegmentedCustomEvent<any>) => void;
+        /**
+          * If `true`, the segment is selected.
+         */
+        "selected"?: boolean;
+        /**
+          * The text displayed on the button segment.
+         */
+        "text"?: string;
     }
     /**
      * @componentName Card
@@ -5870,6 +5942,7 @@ declare namespace LocalJSX {
         "va-button": VaButton;
         "va-button-icon": VaButtonIcon;
         "va-button-pair": VaButtonPair;
+        "va-buttton-segmented": VaButttonSegmented;
         "va-card": VaCard;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
@@ -5998,6 +6071,13 @@ declare module "@stencil/core" {
              * @guidanceHref button/button-pair
              */
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
+            /**
+             * @componentName Button Segmented
+             * @nativeHandler onClick
+             * @maturityCategory use
+             * @maturityLevel alpha
+             */
+            "va-buttton-segmented": LocalJSX.VaButttonSegmented & JSXBase.HTMLAttributes<HTMLVaButttonSegmentedElement>;
             /**
              * @componentName Card
              * @maturityCategory use
