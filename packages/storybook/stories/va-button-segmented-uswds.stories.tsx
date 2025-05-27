@@ -1,12 +1,12 @@
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-const segmentedButtonDocs = getWebComponentDocs('va-buttton-segmented');
+const segmentedButtonDocs = getWebComponentDocs('va-button-segmented');
 
 export default {
   title: 'Components/Button Segmented',
   id: 'uswds/va-button-segmented',
   parameters: {
-    componentSubtitle: 'va-buttton-segmented web component',
+    componentSubtitle: 'va-button-segmented web component',
     docs: {
       page: () => <StoryDocs storyDefault={Primary} data={segmentedButtonDocs} />,
     },
@@ -22,7 +22,7 @@ const defaultArgs = {
 
 const Template = ({ text, selected, disabled, onClick }) => {
   return (
-    <va-buttton-segmented
+    <va-button-segmented
       text={text}
       selected={selected}
       disabled={disabled}

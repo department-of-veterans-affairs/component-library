@@ -19,21 +19,20 @@ import classnames from 'classnames';
 interface Button {
   text: string;
   value: string;
-}  
+}
 @Component({
-  tag: 'va-buttton-segmented',
-  styleUrl: 'va-buttton-segmented.scss',
+  tag: 'va-button-segmented',
+  styleUrl: 'va-button-segmented.scss',
   shadow: true,
 })
 
 
-export class VaButttonSegmented {
+export class VaButtonSegmented {
   @Element() el: HTMLElement;
 
   /**
    * The text displayed on the button segment.
    */
- 
   @Prop() buttons: Array<Button>;
 
   /**
@@ -57,45 +56,32 @@ export class VaButttonSegmented {
   componentLibraryAnalytics: EventEmitter;
 
   private handleClick = (): void => {
-    if (!this.disabled) {
-      const detail = {
-        componentName: 'va-buttton-segmented',
-        action: 'click',
-        details: {
-          selected: this.selected,
-          label: this.text,
-        },
-      };
-      this.componentLibraryAnalytics.emit(detail);
-    }
+    const detail = {
+      componentName: 'va-button-segmented',
+      action: 'click',
+      details: {
+        selected: this.selected,
+      },
+    };
+
+    this.componentLibraryAnalytics.emit(detail);
   };
 
-  @Listen('click')
-  handleClickOverride(e: MouseEvent) {
-    if (this.disabled) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-    this.handleClick();
-  }
-
   render() {
-    const { selected, disabled, text } = this;
+    const { selected } = this;
     const buttonClass = classnames({
       'va-segmented-button': true,
       'va-segmented-button--selected': selected,
-      'va-segmented-button--disabled': disabled,
     });
+
     return (
       <Host>
         <button
           class={buttonClass}
           aria-pressed={selected ? 'true' : 'false'}
-          aria-disabled={disabled ? 'true' : undefined}
           part="button"
         >
-          {text}
+          Text
         </button>
       </Host>
     );
