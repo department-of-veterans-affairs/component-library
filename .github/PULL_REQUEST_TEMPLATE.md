@@ -9,21 +9,25 @@ https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
         - `web-components`
         - `react-components`
         - `core`
+- [ ] Add additional review groups as needed:
+    - Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
+    - Designer: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
 - [ ] Complete all sections below.
 - [ ] Delete this section once complete
 
 <!--
-See also the Code Review Guiding Principles and Review guide for the component-library (internal link):
+Code Review Guiding Principles and Review Guide for the component-library (internal link):
     https://vfs.atlassian.net/wiki/spaces/DST/pages/3509026855/Code+Review+Guiding+Principles+and+Review+guide+for+the+component-library
 -->
 
 ## Description
 
 <!-- 
-Add a description even if it's just a short summary. Try not to make the reviewer figure out what the PR is trying to accomplish and don’t make assumptions about their understanding of the changes.
+Add a description even if it's just a short summary. Try not to make the reviewer figure out what the PR 
+is trying to accomplish and don’t make assumptions about their understanding of the changes.
 -->
 
-## Related Tickets or Links
+## Related Tickets and Links
 
 <!-- 
 Link to any related issues, PRs, Slack conversations, or anything else relevant to documenting the changes.
@@ -45,10 +49,10 @@ If there are any visual changes, screenshots should be added here.
 ## QA Checklist
 - [ ] Design maintains 1:1 parity with [Figma](https://www.figma.com/files/1499394822283304153/project/105082786?fuid=1192586511403544015). 
 - [ ] New features are covered by e2e and/or unit tests; updates to existing components are covered by existing test suite
-- [ ] Chromatic has been run and any changes have been approved
+- [ ] Chromatic UI Tests have run and any changes have been approved
+- [ ] Changes have been tested against screen readers 🔅
 - [ ] Component behaves as expected across breakpoints 🔅
 - [ ] Tab order and focus state work as expected 🔅
-- [ ] Changes have been tested against screen readers 🔅
 - [ ] Changes have been tested in vets-website using [Verdaccio](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#local-testing-in-vets-website-with-verdaccio) 🔅
 
 ## Acceptance criteria
@@ -56,7 +60,8 @@ If there are any visual changes, screenshots should be added here.
 - [ ] Screenshots have been attached that cover desktop and mobile screens
 
 ## Definition of done
+- [ ] A link has been provided to the originating GitHub issue or conversation
+- [ ] All approvals have been received (engineering, accessibility, designer)
 - [ ] Documentation has been updated 🔅
-- [ ] A link has been provided to the originating GitHub issue
 
 🔅 If applicable to the changes. If not applicable, provide reason why.
