@@ -1,4 +1,4 @@
-import { addons } from '@storybook/addons';
+import { addons } from '@storybook/manager-api';
 import React from 'react';
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
 import { additionalDocs } from '../stories/additional-docs';
@@ -12,9 +12,9 @@ const getMaturityCategory = (componentName) => {
   // remove USWDS from the componentName for matching in component-docs.json
   componentName = componentName.replace(' USWDS', '');
 
-  const componentDocs = webComponentDocs.components.filter(comp => 
+  const componentDocs = webComponentDocs.components.filter(comp =>
     comp.docsTags.some(tag => tag.text === componentName))[0];
-  
+
   const maturityScale = getMaturityScale(componentDocs?.docsTags);
   return maturityScale['category'];
 }
@@ -31,8 +31,8 @@ addons.setConfig({
         item.parent === 'under-development' ||
         item.parent === 'v1-components'
       ) {
-        const maturityCategory = 
-          maturityCategoryFromDocs ?? 
+        const maturityCategory =
+          maturityCategoryFromDocs ??
           additionalDocs[item.name]?.maturityCategory;
 
         let backgroundColor;

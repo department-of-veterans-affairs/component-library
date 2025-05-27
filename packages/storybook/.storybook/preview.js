@@ -164,3 +164,5 @@ const observeDocsRoot = () => {
 document.body.onload = function () {
   observeDocsRoot();
 };
+
+export const tags = ['autodocs'];

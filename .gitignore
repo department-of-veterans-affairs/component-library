@@ -22,3 +22,6 @@ yarn-error.log*
 .pnp.*
 componentUsage-*.csv
 packages/storybook/storybook-static/
+
+# Ignore VS code directories
+.vscode/
