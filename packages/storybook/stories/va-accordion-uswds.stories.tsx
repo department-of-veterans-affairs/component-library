@@ -10,11 +10,10 @@ const accordionItemDocs = getWebComponentDocs('va-accordion-item');
 const accordionItemProps = propStructure(accordionItemDocs);
 
 const defaultArgs = {
-  itemBordered: JSON.parse(accordionItemProps.bordered.defaultValue.value),
-  itemLevel: JSON.parse(accordionItemProps.level.defaultValue.value),
-  itemHeadlineSlot: false,
-  itemIcon: false,
-  itemSubheaderIconSlot: false,
+  itemsBordered: JSON.parse(accordionItemProps.bordered.defaultValue.value),
+  itemsLevel: JSON.parse(accordionItemProps.level.defaultValue.value),
+  itemsHeadlineSlot: false,
+  itemsIcon: false,
 };
 
 const defaultValues ={
@@ -66,25 +65,22 @@ export default {
       control: { type: 'object' },
       table: { category: 'Subcomponent controls' },
     },
-    itemBordered: {
+    itemsBordered: {
       name: 'va-accordion-item: bordered',
       description: 'Add the `bordered` prop to the accordion items',
       control: { type: 'boolean' },
       table: { category: 'Subcomponent controls' },
     },
-    itemLevel: {
+    itemsLevel: {
       name: 'va-accordion-item: level',
       description: 'Set heading level for the accordion items',
       control: { type: 'number', min:1, max:6 },
       table: { category: 'Subcomponent controls' },
     },
-    itemHeadlineSlot: {
+    itemsHeadlineSlot: {
       table: { disable:true },
     },
-    itemSubheaderIconSlot: {
-      table: { disable: true },
-    },
-    itemIcon: {
+    itemsIcon: {
       name: 'va-accordion-item: add header icons',
       description: 'Add header and subheader icons via a slot',
       control: { type: 'boolean' },
@@ -117,24 +113,24 @@ const Template = args => {
         {args.accordionItems.map(accordion => (
           <va-accordion-item
             id={accordion.id}
-            header={args.itemHeadlineSlot ? undefined : accordion.header}
-            bordered={args.itemBordered}
-            subheader={accordion.subheader ? accordion.subheader : accordion.itemIcon ? 'Subheader' : undefined}
-            level={args.itemLevel ? args.itemLevel : undefined}
+            header={args.itemsHeadlineSlot ? undefined : accordion.header}
+            bordered={args.itemsBordered}
+            subheader={accordion.subheader ? accordion.subheader : args.itemsIcon ? 'Subheader' : undefined}
+            level={args.itemsLevel ? args.itemsLevel : undefined}
             open={accordion.open}
           >
-            {args.itemIcon && (
+            {args.itemsIcon && (
                 <span slot="icon" className="vads-u-color--green">
                   <va-icon icon="info" />
                 </span>
             )}
-            {args.itemIcon && (
+            {args.itemsIcon && (
                 <va-icon
                   icon="mail"
                   slot="subheader-icon"
                 />
             )}
-            {args.itemHeadlineSlot && (
+            {args.itemsHeadlineSlot && (
               <h3 slot="headline">Slotted {accordion.header}</h3>
             )}
             <p>{accordion.body}</p>
@@ -157,7 +153,7 @@ SingleSelect.args = {
 
 export const Bordered = Template.bind(null);
 Bordered.args = {
-  itemBordered: true,
+  itemsBordered: true,
 };
 
 export const Subheader = Template.bind(null);
@@ -170,16 +166,12 @@ Subheader.args = {
 
 export const IconHeaders = Template.bind(null);
 IconHeaders.args = {
-  accordionItems: items.map(item => ({
-    ...item,
-    itemIcon: true,
-    itemSubheaderIconSlot: true,
-  })),
+  itemsIcon: true
 };
 
 export const HeadlineSlot = Template.bind(null);
 HeadlineSlot.argTypes = {
-  itemHeadlineSlot: {
+  itemsHeadlineSlot: {
     name: 'va-accordion-item: use headline slot',
     description: 'Add the header via a slot',
     control: { type: 'boolean' },
@@ -187,18 +179,12 @@ HeadlineSlot.argTypes = {
   },
 }
 HeadlineSlot.args = {
-  accordionItems: items.map(item => ({
-    ...item,
-    headlineSlot: true,
-  })),
+  itemsHeadlineSlot: true,
 };
 
 export const CustomHeaderLevel = Template.bind(null);
 CustomHeaderLevel.args = {
-  accordionItems: items.map(item => ({
-    ...item,
-    level: 4,
-  })),
+  itemsLevel: 4,
 };
 
 export const Internationalization = Template.bind(null);
