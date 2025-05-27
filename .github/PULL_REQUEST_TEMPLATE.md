@@ -43,13 +43,13 @@ If there are any visual changes, screenshots should be added here.
 
 ## Required Approvals Before Merging
 - [ ] **Engineer** has approved the PR
-- [ ] **Accessibility** has approved the PR 🔅
+- [ ] **Accessibility** has approved the PR 🔅 
 - [ ] **Designer** has approved the PR 🔅
 
 ## QA Checklist
 - [ ] Design maintains 1:1 parity with [Figma](https://www.figma.com/files/1499394822283304153/project/105082786?fuid=1192586511403544015). 
 - [ ] New features are covered by e2e and/or unit tests; updates to existing components are covered by existing test suite
-- [ ] Chromatic UI Tests have run and any changes have been approved
+- [ ] Chromatic UI Tests have run and any snapshot changes have been accepted
 - [ ] Changes have been tested against screen readers 🔅
 - [ ] Component behaves as expected across breakpoints 🔅
 - [ ] Tab order and focus state work as expected 🔅
@@ -61,7 +61,7 @@ If there are any visual changes, screenshots should be added here.
 
 ## Definition of done
 - [ ] A link has been provided to the originating GitHub issue or conversation
-- [ ] All approvals have been received (engineering, accessibility, designer)
+- [ ] All required approvals have been received (engineering, accessibility, designer)
 - [ ] Documentation has been updated 🔅
 
 🔅 If applicable to the changes. If not applicable, provide reason why.
