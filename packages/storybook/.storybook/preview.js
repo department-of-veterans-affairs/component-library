@@ -21,13 +21,13 @@ import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-p
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-nav-sidebar.css';
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-nav-linklist.css';
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/shame.css';
-
 import '@department-of-veterans-affairs/component-library/dist/main.css';
 import {
   applyPolyfills,
   defineCustomElements,
 } from '@department-of-veterans-affairs/component-library';
 import { themes } from '@storybook/theming';
+import { withThemeByClassName } from '@storybook/addon-themes'; 
 
 applyPolyfills().then(() => {
   defineCustomElements();
@@ -100,40 +100,44 @@ const viewports = {
   },
 };
 
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  darkMode: {
-    dark: { ...themes.dark },
-    light: { ...themes.light },
-    stylePreview: true,
-  },
-  options: {
-    storySort: {
-      method: 'alphabetical',
-      order: [
-        'About',
-        ['Introduction'],
-        'Components',
-        'V1 Components',
-        'Under development',
-        'Deprecated',
-      ],
+export default {
+  parameters: {
+    darkMode: {
+      dark: { ...themes.dark },
+      light: { ...themes.light },
+      stylePreview: false,
     },
+    actions: { argTypesRegex: '^on[A-Z].*' },
+    options: {
+      storySort: {
+        method: 'alphabetical',
+        order: [
+          'About',
+          ['Introduction'],
+          'Components',
+          'V1 Components',
+          'Under development',
+          'Deprecated',
+        ],
+      },
+    },
+    viewport: {
+      viewports,
+      defaultViewport: 'small',
+    },
+    viewMode: 'docs',
   },
-  viewport: {
-    viewports,
-    defaultViewport: 'small',
-  },
-  viewMode: 'docs',
-};
-
-export const decorators = [
-  Story => (
-    <div>
-      <Story />
-    </div>
-  ),
-];
+  decorators: [
+    Story => ( <div><Story /></div>),
+    withThemeByClassName({
+      themes: {
+        light: 'light',
+        dark: 'dark',
+      },
+      defaultTheme: 'light',
+    })
+  ]
+}
 
 // Sets up a mutation observer to ensure that the storybook docs-root container doesn't get hidden by modals
 const observeDocsRoot = () => {
