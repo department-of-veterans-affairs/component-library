@@ -17,6 +17,10 @@ va-checkbox-group {
   &::part(legend) {
     font-weight: bold;
   }
+  &::part(header) {
+    font-family: var(--font-source-sans);
+    font-size: var(--font-size-md);
+  }
 }
 
 #filter-buttons {

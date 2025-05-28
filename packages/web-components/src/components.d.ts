@@ -7,10 +7,12 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
+import { CountryCode } from "libphonenumber-js/min";
 import { Filter } from "./components/va-search-filter/va-search-filter";
 import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
+export { CountryCode } from "libphonenumber-js/min";
 export { Filter } from "./components/va-search-filter/va-search-filter";
 export { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export namespace Components {
@@ -536,6 +538,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Whether to show error message text
+         */
+        "showInputError"?: boolean;
+        /**
           * Selected value (will get updated on select).
          */
         "value"?: string;
@@ -779,6 +785,39 @@ export namespace Components {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
+    }
+    /**
+     * @componentName Input Telephone
+     * @maturityCategory caution
+     * @maturityLevel proposal
+     * @guidanceHref form/input-telephone
+     * @translations English
+     */
+    interface VaInputTelephone {
+        /**
+          * The telephone contact information
+         */
+        "contact"?: string;
+        /**
+          * The 2 letter ISO country code for a country
+         */
+        "country"?: CountryCode;
+        /**
+          * The error for the component
+         */
+        "error"?: string;
+        /**
+          * Header text for the component
+         */
+        "header"?: string;
+        /**
+          * Hint string text
+         */
+        "hint"?: string;
+        /**
+          * Whether the country select should be included. Set to true to exclude it.
+         */
+        "noCountry"?: boolean;
     }
     /**
      * @componentName Language Toggle
@@ -1720,7 +1759,7 @@ export namespace Components {
          */
         "scrollable"?: boolean;
         /**
-          * Is the table sortable
+          * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
         /**
@@ -1764,7 +1803,7 @@ export namespace Components {
          */
         "scrollable"?: boolean;
         /**
-          * Is this a sortable table
+          * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
         /**
@@ -2112,6 +2151,10 @@ export interface VaFileInputCustomEvent<T> extends CustomEvent<T> {
 export interface VaFileInputMultipleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputMultipleElement;
+}
+export interface VaInputTelephoneCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaInputTelephoneElement;
 }
 export interface VaLanguageToggleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2676,6 +2719,31 @@ declare global {
     var HTMLVaIconElement: {
         prototype: HTMLVaIconElement;
         new (): HTMLVaIconElement;
+    };
+    interface HTMLVaInputTelephoneElementEventMap {
+        "vaContact": any;
+        "vaCountryCode": any;
+    }
+    /**
+     * @componentName Input Telephone
+     * @maturityCategory caution
+     * @maturityLevel proposal
+     * @guidanceHref form/input-telephone
+     * @translations English
+     */
+    interface HTMLVaInputTelephoneElement extends Components.VaInputTelephone, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaInputTelephoneElementEventMap>(type: K, listener: (this: HTMLVaInputTelephoneElement, ev: VaInputTelephoneCustomEvent<HTMLVaInputTelephoneElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaInputTelephoneElementEventMap>(type: K, listener: (this: HTMLVaInputTelephoneElement, ev: VaInputTelephoneCustomEvent<HTMLVaInputTelephoneElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaInputTelephoneElement: {
+        prototype: HTMLVaInputTelephoneElement;
+        new (): HTMLVaInputTelephoneElement;
     };
     interface HTMLVaLanguageToggleElementEventMap {
         "vaLanguageToggle": any;
@@ -3388,6 +3456,7 @@ declare global {
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
+        "va-input-telephone": HTMLVaInputTelephoneElement;
         "va-language-toggle": HTMLVaLanguageToggleElement;
         "va-link": HTMLVaLinkElement;
         "va-link-action": HTMLVaLinkActionElement;
@@ -4027,6 +4096,10 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Whether to show error message text
+         */
+        "showInputError"?: boolean;
+        /**
           * Selected value (will get updated on select).
          */
         "value"?: string;
@@ -4298,6 +4371,47 @@ declare namespace LocalJSX {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
+    }
+    /**
+     * @componentName Input Telephone
+     * @maturityCategory caution
+     * @maturityLevel proposal
+     * @guidanceHref form/input-telephone
+     * @translations English
+     */
+    interface VaInputTelephone {
+        /**
+          * The telephone contact information
+         */
+        "contact"?: string;
+        /**
+          * The 2 letter ISO country code for a country
+         */
+        "country"?: CountryCode;
+        /**
+          * The error for the component
+         */
+        "error"?: string;
+        /**
+          * Header text for the component
+         */
+        "header"?: string;
+        /**
+          * Hint string text
+         */
+        "hint"?: string;
+        /**
+          * Whether the country select should be included. Set to true to exclude it.
+         */
+        "noCountry"?: boolean;
+        /**
+          * The event emitted when the contact changes
+         */
+        "onVaContact"?: (event: VaInputTelephoneCustomEvent<any>) => void;
+        /**
+          * The event emitted when the country code changes
+         */
+        "onVaCountryCode"?: (event: VaInputTelephoneCustomEvent<any>) => void;
     }
     /**
      * @componentName Language Toggle
@@ -5399,7 +5513,7 @@ declare namespace LocalJSX {
          */
         "scrollable"?: boolean;
         /**
-          * Is the table sortable
+          * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
         /**
@@ -5447,7 +5561,7 @@ declare namespace LocalJSX {
          */
         "scrollable"?: boolean;
         /**
-          * Is this a sortable table
+          * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
         /**
@@ -5767,6 +5881,7 @@ declare namespace LocalJSX {
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
+        "va-input-telephone": VaInputTelephone;
         "va-language-toggle": VaLanguageToggle;
         "va-link": VaLink;
         "va-link-action": VaLinkAction;
@@ -5968,6 +6083,14 @@ declare module "@stencil/core" {
              * @maturityLevel available
              */
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
+            /**
+             * @componentName Input Telephone
+             * @maturityCategory caution
+             * @maturityLevel proposal
+             * @guidanceHref form/input-telephone
+             * @translations English
+             */
+            "va-input-telephone": LocalJSX.VaInputTelephone & JSXBase.HTMLAttributes<HTMLVaInputTelephoneElement>;
             /**
              * @componentName Language Toggle
              * @maturityCategory caution
