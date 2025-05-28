@@ -27,7 +27,7 @@ export class VaButtonSegmented {
   /**
    * An array of objects defining the labels and values for each button.
    */
-  @Prop() buttons: Array<ButtonItem>;
+  @Prop() buttons!: Array<ButtonItem>;
 
   /**
    * If `true`, the component-library-analytics event is disabled.
@@ -94,6 +94,11 @@ export class VaButtonSegmented {
     const buttonClass = classnames({
       'va-segmented-button__button': true,
     });
+
+    // Do not render if no buttons are provided
+    if (!buttons || !buttons.length) {
+      return null;
+    }
 
     return (
       <Host>
