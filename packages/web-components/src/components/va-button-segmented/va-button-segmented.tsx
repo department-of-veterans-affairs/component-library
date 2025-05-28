@@ -35,11 +35,6 @@ export class VaButtonSegmented {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * If `true`, the segmented button will span the viewport width.
-   */
-  @Prop({ reflect: true }) fullWidth?: boolean = false;
-
-  /**
    * The index of the selected button.
    */
   @Prop() selected: number = 0;

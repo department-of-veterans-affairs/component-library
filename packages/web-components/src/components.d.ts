@@ -383,10 +383,6 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * If `true`, the segmented button will span the viewport width.
-         */
-        "fullWidth"?: boolean;
-        /**
           * The index of the selected button.
          */
         "selected": number;
@@ -3977,10 +3973,6 @@ declare namespace LocalJSX {
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
-        /**
-          * If `true`, the segmented button will span the viewport width.
-         */
-        "fullWidth"?: boolean;
         /**
           * Event emitted when a button is clicked.
          */

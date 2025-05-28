@@ -25,14 +25,12 @@ const defaultArgs = {
 
 const Template = ({ 
   buttons, 
-  selected, 
-  fullWidth,
+  selected,
 }) => {
   return (
     <VaButtonSegmented
       buttons={buttons}
       selected={selected}
-      full-width={fullWidth}
       onButtonClick={(e: Event) => console.log(e)}
     />
   );
@@ -48,10 +46,4 @@ export const Selected = Template.bind(null);
 Selected.args = {
   ...defaultArgs,
   selected: 1,
-};
-
-export const FullWidth = Template.bind(null);
-FullWidth.args = {
-  ...defaultArgs,
-  FullWidth: true
 };
