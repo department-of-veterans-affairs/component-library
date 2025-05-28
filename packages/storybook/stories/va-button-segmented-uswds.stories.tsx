@@ -1,3 +1,4 @@
+import { VaButtonSegmented } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const segmentedButtonDocs = getWebComponentDocs('va-button-segmented');
@@ -8,45 +9,48 @@ export default {
   parameters: {
     componentSubtitle: 'va-button-segmented web component',
     docs: {
-      page: () => <StoryDocs storyDefault={Primary} data={segmentedButtonDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={segmentedButtonDocs} />,
     },
   },
 };
 
 const defaultArgs = {
-  'text': 'Segment',
-  'selected': false,
-  'disabled': false,
-  'onClick': e => console.log(e),
+  'selected': 0,
+  'buttons': [
+    { label: 'Segment 1', value: 'segment1' },
+    { label: 'Segment 2', value: 'segment2' },
+    { label: 'Segment 3', value: 'segment3' }
+  ],
 };
 
-const Template = ({ text, selected, disabled, onClick }) => {
+const Template = ({ 
+  buttons, 
+  selected, 
+  fullWidth 
+}) => {
   return (
-    <va-button-segmented
-      text={text}
+    <VaButtonSegmented
+      buttons={buttons}
       selected={selected}
-      disabled={disabled}
-      onClick={onClick}
+      full-width={fullWidth}
     />
   );
 };
 
-export const Primary = Template.bind(null);
-Primary.args = {
+export const Default = Template.bind(null);
+Default.args = {
   ...defaultArgs,
 };
-Primary.argTypes = propStructure(segmentedButtonDocs);
+Default.argTypes = propStructure(segmentedButtonDocs);
 
 export const Selected = Template.bind(null);
 Selected.args = {
   ...defaultArgs,
-  selected: true,
-  text: 'Selected Segment',
+  selected: 1,
 };
 
-export const Disabled = Template.bind(null);
-Disabled.args = {
+export const FullWidth = Template.bind(null);
+FullWidth.args = {
   ...defaultArgs,
-  disabled: true,
-  text: 'Disabled Segment',
+  FullWidth: true
 };

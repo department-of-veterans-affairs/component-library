@@ -4,11 +4,11 @@ import {
   EventEmitter,
   Host,
   h,
-  Listen,
   Prop,
   Element,
 } from '@stencil/core';
 import classnames from 'classnames';
+import { ButtonItem } from './va-button-segmented.types';
 
 /**
  * @componentName Button Segmented
@@ -16,10 +16,7 @@ import classnames from 'classnames';
  * @maturityCategory use
  * @maturityLevel alpha
  */
-interface Button {
-  text: string;
-  value: string;
-}
+
 @Component({
   tag: 'va-button-segmented',
   styleUrl: 'va-button-segmented.scss',
@@ -31,17 +28,17 @@ export class VaButtonSegmented {
   @Element() el: HTMLElement;
 
   /**
-   * The text displayed on the button segment.
+   * An array of objects defining the labels and values for each button.
    */
-  @Prop() buttons: Array<Button>;
+  @Prop() buttons: Array<ButtonItem>;
 
   /**
-   * If `true`, the segment is selected.
+   * The index of the selected button.
    */
   @Prop({ reflect: true }) selected: number = 0;
 
   /**
-   * If `true`, the segment is disabled.
+   * If `true`, the segmented button will span the viewport width.
    */
   @Prop() fullWidth?: boolean = false;
 
@@ -68,21 +65,27 @@ export class VaButtonSegmented {
   };
 
   render() {
-    const { selected } = this;
+    const { buttons } = this;
     const buttonClass = classnames({
       'va-segmented-button': true,
-      'va-segmented-button--selected': selected,
     });
 
     return (
       <Host>
-        <button
-          class={buttonClass}
-          aria-pressed={selected ? 'true' : 'false'}
-          part="button"
-        >
-          Text
-        </button>
+        {buttons.map((buttonItem, index) => (
+          <button
+            class={buttonClass}
+            onClick={() => {
+              this.selected = index;
+              this.handleClick();
+            }}
+            aria-pressed={this.selected === index ? 'true' : 'false'}
+            part="button"
+          >
+            {buttonItem.label}
+          </button>
+        ))}
+        
       </Host>
     );
   }

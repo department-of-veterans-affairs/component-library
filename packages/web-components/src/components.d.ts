@@ -6,11 +6,13 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+import { ButtonItem } from "./components/va-button-segmented/va-button-segmented.types";
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
 import { CountryCode } from "libphonenumber-js/min";
 import { Filter } from "./components/va-search-filter/va-search-filter";
 import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+export { ButtonItem } from "./components/va-button-segmented/va-button-segmented.types";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
 export { CountryCode } from "libphonenumber-js/min";
 export { Filter } from "./components/va-search-filter/va-search-filter";
@@ -365,17 +367,23 @@ export namespace Components {
          */
         "update"?: boolean;
     }
+    /**
+     * @componentName Button Segmented
+     * @nativeHandler onClick
+     * @maturityCategory use
+     * @maturityLevel alpha
+     */
     interface VaButtonSegmented {
         /**
-          * The text displayed on the button segment.
+          * An array of objects defining the labels and values for each button.
          */
-        "buttons": Array<Button>;
+        "buttons": Array<ButtonItem>;
         /**
-          * If `true`, the segment is disabled.
+          * If `true`, the segmented button will span the viewport width.
          */
         "fullWidth"?: boolean;
         /**
-          * If `true`, the segment is selected.
+          * The index of the selected button.
          */
         "selected": number;
     }
@@ -2530,6 +2538,12 @@ declare global {
     interface HTMLVaButtonSegmentedElementEventMap {
         "component-library-analytics": any;
     }
+    /**
+     * @componentName Button Segmented
+     * @nativeHandler onClick
+     * @maturityCategory use
+     * @maturityLevel alpha
+     */
     interface HTMLVaButtonSegmentedElement extends Components.VaButtonSegmented, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaButtonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButtonSegmentedElement, ev: VaButtonSegmentedCustomEvent<HTMLVaButtonSegmentedElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3943,13 +3957,19 @@ declare namespace LocalJSX {
          */
         "update"?: boolean;
     }
+    /**
+     * @componentName Button Segmented
+     * @nativeHandler onClick
+     * @maturityCategory use
+     * @maturityLevel alpha
+     */
     interface VaButtonSegmented {
         /**
-          * The text displayed on the button segment.
+          * An array of objects defining the labels and values for each button.
          */
-        "buttons"?: Array<Button>;
+        "buttons"?: Array<ButtonItem>;
         /**
-          * If `true`, the segment is disabled.
+          * If `true`, the segmented button will span the viewport width.
          */
         "fullWidth"?: boolean;
         /**
@@ -3957,7 +3977,7 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
         /**
-          * If `true`, the segment is selected.
+          * The index of the selected button.
          */
         "selected"?: number;
     }
@@ -6053,6 +6073,12 @@ declare module "@stencil/core" {
              * @guidanceHref button/button-pair
              */
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
+            /**
+             * @componentName Button Segmented
+             * @nativeHandler onClick
+             * @maturityCategory use
+             * @maturityLevel alpha
+             */
             "va-button-segmented": LocalJSX.VaButtonSegmented & JSXBase.HTMLAttributes<HTMLVaButtonSegmentedElement>;
             /**
              * @componentName Card
