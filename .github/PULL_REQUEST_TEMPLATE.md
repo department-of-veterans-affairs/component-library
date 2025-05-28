@@ -3,7 +3,7 @@
 https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
 
 ## Configuring this pull request
-- [ ] Add the appropriate [version patch label](https://github.com/department-of-veterans-affairs/component-library#how-to-choose-a-version-number) (`major`, `minor`, `patch`, or `ignore-for-release`).
+- [ ] Add the appropriate [version label](https://github.com/department-of-veterans-affairs/component-library#how-to-choose-a-version-number) to the PR (`major`, `minor`, `patch`, or `ignore-for-release`).
     - Use `ignore-for-release` if a file has not been changed in one of the following packages: 
         - `css-library`
         - `web-components`
@@ -13,7 +13,7 @@ https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
     - Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
     - Designer: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
 - [ ] Complete all sections below.
-- [ ] Delete this section once complete
+- [ ] Delete this section once the above configuration steps have been completed.
 
 <!--
 Code Review Guiding Principles and Review Guide for the component-library (internal link):
