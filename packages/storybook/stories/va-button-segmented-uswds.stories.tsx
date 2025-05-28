@@ -26,13 +26,14 @@ const defaultArgs = {
 const Template = ({ 
   buttons, 
   selected, 
-  fullWidth 
+  fullWidth,
 }) => {
   return (
     <VaButtonSegmented
       buttons={buttons}
       selected={selected}
       full-width={fullWidth}
+      onButtonClick={(e: Event) => console.log(e)}
     />
   );
 };

@@ -16,14 +16,11 @@ import { ButtonItem } from './va-button-segmented.types';
  * @maturityCategory use
  * @maturityLevel alpha
  */
-
 @Component({
   tag: 'va-button-segmented',
   styleUrl: 'va-button-segmented.scss',
   shadow: true,
 })
-
-
 export class VaButtonSegmented {
   @Element() el: HTMLElement;
 
@@ -33,14 +30,28 @@ export class VaButtonSegmented {
   @Prop() buttons: Array<ButtonItem>;
 
   /**
-   * The index of the selected button.
+   * If `true`, the component-library-analytics event is disabled.
    */
-  @Prop({ reflect: true }) selected: number = 0;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
    * If `true`, the segmented button will span the viewport width.
    */
-  @Prop() fullWidth?: boolean = false;
+  @Prop({ reflect: true }) fullWidth?: boolean = false;
+
+  /**
+   * The index of the selected button.
+   */
+  @Prop() selected: number = 0;
+
+  /**
+   * Event emitted when a button is clicked.
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  buttonClick: EventEmitter;
 
   /**
    * The event used to track usage of the component.
@@ -52,16 +63,29 @@ export class VaButtonSegmented {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * @function handleClick
+   * @description Handles the click event on the segmented buttons.
+   * It emits the `buttonClick` event with the selected button index and also emits a component library analytics event if analytics are not disabled via props.
+   * @returns {void}
+   *
+   */
   private handleClick = (): void => {
-    const detail = {
-      componentName: 'va-button-segmented',
-      action: 'click',
-      details: {
-        selected: this.selected,
-      },
-    };
+    // Fire the component library analytics event if analytics is not disabled.
+    if  (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-button-segmented',
+        action: 'click',
+        details: {
+          selected: this.selected,
+        },
+      };
 
-    this.componentLibraryAnalytics.emit(detail);
+      this.componentLibraryAnalytics.emit(detail);
+    }
+
+    // Emit the buttonClick event with the selected index.
+    this.buttonClick.emit(this.selected);
   };
 
   render() {
@@ -72,20 +96,24 @@ export class VaButtonSegmented {
 
     return (
       <Host>
-        {buttons.map((buttonItem, index) => (
-          <button
-            class={buttonClass}
-            onClick={() => {
-              this.selected = index;
-              this.handleClick();
-            }}
-            aria-pressed={this.selected === index ? 'true' : 'false'}
-            part="button"
-          >
-            {buttonItem.label}
-          </button>
-        ))}
-        
+        <ul class="usa-button-group">
+          {buttons.map((buttonItem: ButtonItem, index: number) => (
+            <li class="usa-button-group__item">
+              <button
+                class={buttonClass}
+                onClick={() => {
+                  this.selected = index;
+                  this.handleClick();
+                }}
+                aria-label={buttonItem.label}
+                aria-pressed={this.selected === index ? 'true' : 'false'}
+                part="button"
+              >
+                {buttonItem.label}
+              </button>
+            </li>
+          ))}
+        </ul>
       </Host>
     );
   }

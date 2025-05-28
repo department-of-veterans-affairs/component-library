@@ -379,6 +379,10 @@ export namespace Components {
          */
         "buttons": Array<ButtonItem>;
         /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * If `true`, the segmented button will span the viewport width.
          */
         "fullWidth"?: boolean;
@@ -2536,6 +2540,7 @@ declare global {
         new (): HTMLVaButtonPairElement;
     };
     interface HTMLVaButtonSegmentedElementEventMap {
+        "buttonClick": any;
         "component-library-analytics": any;
     }
     /**
@@ -3969,9 +3974,17 @@ declare namespace LocalJSX {
          */
         "buttons"?: Array<ButtonItem>;
         /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * If `true`, the segmented button will span the viewport width.
          */
         "fullWidth"?: boolean;
+        /**
+          * Event emitted when a button is clicked.
+         */
+        "onButtonClick"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
         /**
           * The event used to track usage of the component.
          */
