@@ -19,6 +19,13 @@ The `design-system-dashboard-cli` package is used to gather metrics on design sy
 
 # Running Build via Storybook
 
+To install dependencies in the component packages and run a local build of the component library in Storybook, run the following in the command line:
+```
+npm run dev
+```
+
+This setup script automates the following tasks:
+
 1. `cd packages/web-components/`
    1. `yarn install`
    2. `yarn build`
@@ -33,8 +40,6 @@ The `design-system-dashboard-cli` package is used to gather metrics on design sy
 4. `cd ../storybook/`
    1. `yarn install`
    2. `yarn storybook`
-
-This will allow you to run Storybook locally to view all components
 
 ## Running tests for web components
 
@@ -306,35 +311,39 @@ The Design System Team will create a release minimally at the beginning of each 
 
 1. If you are unsure if a new release should be created, check with the Release Manager and/or the team first.
    - The DST Release Manager is the engineer on duty for the weekly support rotation.
-2. Determine if the releases should be major, minor, or patch releases. To view what has changed since the last release, go to the [repo home page](https://github.com/department-of-veterans-affairs/component-library), **Releases** > release with **Latest** tag > **X commits to main since this release**. This will show the commits, but you will need to look at the PRs themselves for the `major`, `minor`, and `patch` tags that will go into this release.
-2. Create a new `component-library` PR by doing the following:
+2. Determine if the releases should be major, minor, or patch releases.
+   - Review the PR labels on the [merged PRs since the last release](https://github.com/department-of-veterans-affairs/component-library/pulls?q=is%3Apr+is%3Aclosed+is%3Amerged+sort%3Aupdated-desc) to check which is the highest level of change (major, minor, or patch) for each package changed. This will determine the new package.json version.
+3. Create a PR for the `component-library` that does the following:
    - Update the `package.json` version in the **packages that updates have been made**.
       - `core` (required) - [packages/core/package.json](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4) must be updated for the publishing workflow
          - `web-components` (if needed)
          - `css-library` (if needed)
          - `react-components` (if needed)
-   - Run `yarn install` on the top-level directory of the repo to update `yarn.lock`.
+   - Run `yarn install` in each package directory to update `yarn.lock`.
    - Create the PR with the tag `ignore-for-release`.
-   - Get approval and merge the PR.
+   - Get approval and merge.
 3. From the [repo's homepage](https://github.com/department-of-veterans-affairs/component-library) click on "Releases" in the right-hand sidebar.
 4. Click on the "Draft a new release" button near the top of the page.
 5. Click on the "Choose a tag" drop-down and type the letter `v` followed by the new "core" version number. The target should remain `main`.
-   - Example: `v16.1.0`
+   - Example: `v50.1.2`
 6. For the release title, type the same thing you entered for the tag.
-   - Example: `v16.1.0`
+   - Example: `v50.1.2`
 7. Click on the "Generate release notes" button.
    - If the button is disabled, double-check that the tag/version number is correct and hasn't been released before.
-8. Review the release notes for any typos and/or unneeded notes.
+8. Review the release notes for any typos and/or unnecessary notes.
    - The release notes are intended for public use so they should be professional in tone, easily understandable, and concise.
 9. Ensure the "Set as the latest release" checkbox is checked.
-10. Take a screenshot of the release notes and post in the `#platform-design-system-team` channel on Slack.
+10. Take a screenshot of the release notes and post in the `#design-system-forms` channel on Slack.
     - This is to double-check that everything looks good, that there aren't any last-minute additions to the release that need to be included, and for general awareness of what will be released.
 11. Click the "Publish release" button. GitHub Actions will take care of any necessary build and publishing steps.
     - You can watch to make sure the release is created successfully from the [Github Actions tab](https://github.com/department-of-veterans-affairs/component-library/actions).
-12. Create a PR for the following repositories that updates the `component-library` dependency versions:
+12. Once the packages have been published to NPM, create a PR for the following repositories that updates the dependency versions:
     - [vets-website](https://github.com/department-of-veterans-affairs/vets-website)
+      - Update the `component-library` dependency version in `package.json`
     - [content-build](https://github.com/department-of-veterans-affairs/content-build)
+      - Update the `web-components` dependency version in `package.json`
     - [vets-design-system-documentation](https://github.com/department-of-veterans-affairs/vets-design-system-documentation)
+      - Update the `component-library` dependency version in `package.json`
 
 ### How to choose a version number
 

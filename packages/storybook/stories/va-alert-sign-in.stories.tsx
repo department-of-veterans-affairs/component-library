@@ -107,7 +107,7 @@ const SignInButton = () => <va-button text="Sign in or create an account" />;
 const IdMeSignInButton = () => (
   <button
     style={{
-      ...buttonStyles,
+      ...buttonStyles as React.CSSProperties,
       ...fixedButtonStyles,
       backgroundColor: 'var(--vads-color-success-dark)',
     }}
@@ -127,7 +127,7 @@ const IdMeVerifyButton = () => (
 const LoginGovSignInButton = () => (
   <button
     style={{
-      ...buttonStyles,
+      ...buttonStyles as React.CSSProperties,
       ...fixedButtonStyles,
       backgroundColor: 'var(--vads-color-secondary)',
     }}
@@ -138,7 +138,7 @@ const LoginGovSignInButton = () => (
 const LoginGovVerifyButton = () => (
   <button
     style={{
-      ...buttonStyles,
+      ...buttonStyles as React.CSSProperties,
       backgroundColor: 'var(--vads-color-secondary)',
     }}
   >
