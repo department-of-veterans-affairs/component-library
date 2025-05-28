@@ -17,9 +17,9 @@ export default {
 const defaultArgs = {
   'selected': 0,
   'buttons': [
-    { label: 'Segment 1', value: 'segment1' },
-    { label: 'Segment 2', value: 'segment2' },
-    { label: 'Segment 3', value: 'segment3' }
+    { label: 'two words', value: 'segment1' },
+    { label: 'Three words here', value: 'segment2' },
+    { label: 'Super long label that might go here', value: 'segment3' }
   ],
 };
 

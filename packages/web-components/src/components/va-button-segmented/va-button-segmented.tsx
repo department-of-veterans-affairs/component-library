@@ -85,13 +85,19 @@ export class VaButtonSegmented {
 
   render() {
     const { buttons } = this;
-    const buttonClass = classnames({
+
+    const containerClass = classnames({
+      'usa-button-group': true,
       'va-segmented-button': true,
+
+    });
+    const buttonClass = classnames({
+      'va-segmented-button__button': true,
     });
 
     return (
       <Host>
-        <ul class="usa-button-group">
+        <ul class={containerClass}>
           {buttons.map((buttonItem: ButtonItem, index: number) => (
             <li class="usa-button-group__item">
               <button

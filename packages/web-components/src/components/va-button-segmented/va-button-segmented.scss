@@ -2,10 +2,71 @@
 
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-button/src/styles/usa-button';
+@use 'usa-button-group/src/styles/usa-button-group';
 
-@import '../../mixins/focusable.css';
 
-:host {
+.va-segmented-button {
+  background-color: var(--vads-color-base-lighter);
+  padding: 4px 0;
+  border-radius: 8px;
   display: inline-block;
-  // ...existing code...
+  margin-left: 0;
+  margin-right: 0;
+  display: inline-flex;
+  align-items: center;
 }
+.usa-button-group__item {
+  margin: 0;
+  display: inline-block;
+}
+
+@media screen and (max-width: 640px) {
+  .va-segmented-button {
+    display: flex;
+    width: 100%;
+  }
+  .va-segmented-button__button {
+    flex: 1;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .va-segmented-button__button {
+    max-width: 160px;
+    max-height: 50px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.va-segmented-button__button {
+  padding: 12px 20px;
+  background-color: var(--vads-color-base-lighter);
+  border: 0; 
+  border-radius: 4px;
+  margin: 0 4px;
+  font-size: var(--font-size-root);
+}
+
+.va-segmented-button__button:hover {
+  background-color: var(--vads-button-color-background-disabled-on-light);
+  
+}
+.va-segmented-button__button:focus {
+  background-color: var(--vads-color-action-focus-on-light);
+  outline: var(--vads-button-color-background-disabled-on-light);
+}
+
+.va-segmented-button__button:active, .va-segmented-button__button[aria-pressed=true] {
+  background-color: var(--vads-color-white);
+  font-weight: 700;
+}
+.va-segmented-button__button[aria-pressed=true]:focus,
+.va-segmented-button__button:active:focus,
+.va-segmented-button__button[aria-pressed="true"]:active:focus {
+  background-color: var(--vads-color-action-focus-on-light);
+}
+
