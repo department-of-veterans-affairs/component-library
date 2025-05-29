@@ -1,6 +1,3 @@
-import { Guidance, MaturityScale } from './wc-helpers';
-import { additionalDocs } from './additional-docs';
-
 export default {
   title: 'Deprecated/Link - Action',
   id: 'components/action-link',
@@ -9,7 +6,7 @@ export default {
 export const Primary = {
   render: () => (
     <a className="vads-c-action-link--green" href="#">
-      Call to action lorem ipsum dolar sit emit this is a very long link to
+      Call to action lorem ipsum dolor sit amet this is a very long link to
       observe the wrapping behavior
     </a>
   ),

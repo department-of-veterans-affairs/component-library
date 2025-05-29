@@ -1,6 +1,3 @@
-import { Guidance, MaturityScale } from './wc-helpers';
-import { additionalDocs } from './additional-docs';
-
 export default {
   title: 'Components/Sidenav',
   id: 'components/sidenav',
