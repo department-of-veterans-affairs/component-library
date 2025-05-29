@@ -95,6 +95,14 @@ export class VaButtonSegmented {
     this.buttonClick.emit(this.selected);
   };
 
+  /**
+   * Trims a string to a maximum length and adds an ellipsis if needed.
+   */
+  private trimLabel(label: string, maxLength: number = 20): string {
+    if (typeof label !== 'string') return '';
+    return label.length > maxLength ? label.slice(0, maxLength) + '…' : label;
+  }
+
   render() {
     const { buttons } = this;
 
@@ -124,10 +132,12 @@ export class VaButtonSegmented {
                   this.handleClick();
                 }}
                 aria-label={buttonItem.label}
+                title={buttonItem.label.length > 20 ? buttonItem.label : ''}
+                type="button"
                 aria-pressed={this.selected === index ? 'true' : 'false'}
                 part="button"
               >
-                {buttonItem.label}
+                {this.trimLabel(buttonItem.label)}
               </button>
             </li>
           ))}
