@@ -57,6 +57,7 @@ export class VaButtonSegmented {
   @Event({
     composed: true,
     bubbles: true,
+    eventName: 'buttonClick'
   })
   buttonClick: EventEmitter;
 
