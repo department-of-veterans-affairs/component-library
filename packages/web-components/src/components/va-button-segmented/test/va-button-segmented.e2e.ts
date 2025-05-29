@@ -155,4 +155,21 @@ describe('va-button-segmented', () => {
       </ul>
     `.trim());
   });
+  it(`fires click event`, async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-button-segmented></va-button-segmented>`);
+
+    // Select the component within the page and add buttons property to it
+    await page.$eval('va-button-segmented', (elm: any, buttonsData) => {
+      elm.buttons = buttonsData;
+    }, buttonsData);
+
+    // Wait for the changes to be processed and grab the shadow content
+    await page.waitForChanges();
+    const clickSpy = await page.spyOnEvent('buttonClick');
+    const button = await page.findAll('va-button-segmented >>> button');
+    await button[1].click();
+    expect(clickSpy).toHaveReceivedEventTimes(1);
+    expect(clickSpy.events[0].detail.value).toEqual('segment-2');
+  });
 });

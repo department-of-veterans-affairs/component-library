@@ -77,7 +77,7 @@ export class VaButtonSegmented {
    * @returns {void}
    *
    */
-  private handleClick = (): void => {
+  private handleClick = (buttonItem): void => {
     // Fire the component library analytics event if analytics is not disabled.
     if  (!this.disableAnalytics) {
       const detail = {
@@ -91,8 +91,8 @@ export class VaButtonSegmented {
       this.componentLibraryAnalytics.emit(detail);
     }
 
-    // Emit the buttonClick event with the selected index.
-    this.buttonClick.emit(this.selected);
+    // Emit the buttonClick event with the selected buttonItem.
+    this.buttonClick.emit(buttonItem);
   };
 
   /**
@@ -129,7 +129,7 @@ export class VaButtonSegmented {
                 class={buttonClass}
                 onClick={() => {
                   this.selected = index;
-                  this.handleClick();
+                  this.handleClick(buttonItem);
                 }}
                 aria-label={buttonItem.label}
                 title={buttonItem.label.length > 20 ? buttonItem.label : ''}
