@@ -1,7 +1,7 @@
 import { dirname, join } from "path";
 const path = require('path');
 module.exports = {
-  stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  stories: ['../@(src|stories)/**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
   staticDirs: ['../public'],
   addons: [
     {
@@ -22,6 +22,7 @@ module.exports = {
     getAbsolutePath('@storybook/addon-storysource'),
     getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-mdx-gfm'),
+    getAbsolutePath("@storybook/addon-webpack5-compiler-babel")
   ],
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
