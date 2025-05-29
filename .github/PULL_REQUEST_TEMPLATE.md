@@ -47,17 +47,13 @@ If there are any visual changes, screenshots should be added here.
 - [ ] **Designer** has approved the PR 🔅
 
 ## QA Checklist
-- [ ] Design maintains 1:1 parity with [Figma](https://www.figma.com/files/1499394822283304153/project/105082786?fuid=1192586511403544015). 
+- [ ] Make sure changes align with [Figma](https://www.figma.com/files/1499394822283304153/project/105082786?fuid=1192586511403544015).
 - [ ] New features are covered by e2e and/or unit tests; updates to existing components are covered by existing test suite
 - [ ] Chromatic UI Tests have run and any snapshot changes have been accepted
 - [ ] Changes have been tested against screen readers 🔅
 - [ ] Component behaves as expected across breakpoints 🔅
 - [ ] Tab order and focus state work as expected 🔅
 - [ ] Changes have been tested in vets-website using [Verdaccio](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#local-testing-in-vets-website-with-verdaccio) 🔅
-
-## Acceptance criteria
-- [ ] QA checklist has been completed
-- [ ] Screenshots have been attached that cover desktop and mobile screens
 
 ## Definition of done
 - [ ] A link has been provided to the originating GitHub issue or conversation
