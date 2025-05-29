@@ -78,9 +78,10 @@ const getEventObj = array => {
  *   https://github.com/reactjs/react-docgen#result-data-structure
  * Used to generate some docs for web components in Storybook
  */
-export const propStructure = comp => {
+export const propStructure = (comp, subcomp = undefined) => {
   const props = comp.props.reduce((propObj, prop) => {
     propObj[prop.attr || prop.name] = {
+      name: subcomp ? `${subcomp}: ${prop.attr}` : prop.attr,
       description: prop.docs,
       required: prop.required,
       defaultValue: {
@@ -92,7 +93,7 @@ export const propStructure = comp => {
       },
       // Assigns the argType to the Properties category
       table: {
-        category: 'Properties',
+        category: subcomp ? `${subcomp}` : 'Properties',
         defaultValue: {
           summary: prop.default,
         },
@@ -108,6 +109,39 @@ export const propStructure = comp => {
   const listeners = getEventObj(comp.listeners);
   const listenersWithDescriptions = getListenerDescriptions(comp, listeners);
   return { ...props, ...events, ...listenersWithDescriptions };
+};
+
+/**
+ * Generates default prop values that can be used to define Storybook args
+ * Also can be fed into getDefaultPropValue() to the value of a specific prop
+ * @param {Object} comp - The component object returned by `getWebComponentDocs([componentTag])`
+ * @return {Object} - An object with default prop values
+ */
+export const propDefaults = (comp) => {
+  const props = propStructure(comp);
+  return Object.entries(props).reduce((argObj, [propName, propData]: [string, any]) => {
+    if (propData.defaultValue) {
+      try {
+        argObj[propName] = JSON.parse(propData.defaultValue.value);
+      } catch (e) {
+        argObj[propName] = propData.defaultValue.value;
+      }
+    }
+    return argObj;
+  }, {});
+};
+
+/**
+ * Returns a single value from the component's default props
+ * @param {number} defaults Object
+ * @param {number} key Name of the prop to return
+ */
+
+export const getDefaultPropValue = (componentName, key) => {
+  const defaults = propDefaults(getWebComponentDocs(componentName));
+  return defaults && key in defaults
+    ? JSON.parse(defaults[key])
+    : undefined;
 };
 
 /**
