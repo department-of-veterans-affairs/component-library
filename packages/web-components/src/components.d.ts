@@ -3968,7 +3968,7 @@ declare namespace LocalJSX {
         /**
           * An array of objects defining the labels and values for each button.
          */
-        "buttons"?: Array<ButtonItem>;
+        "buttons": Array<ButtonItem>;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */

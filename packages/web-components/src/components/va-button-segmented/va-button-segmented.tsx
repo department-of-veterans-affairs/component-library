@@ -6,6 +6,7 @@ import {
   h,
   Prop,
   Element,
+  Watch,
 } from '@stencil/core';
 import classnames from 'classnames';
 import { ButtonItem } from './va-button-segmented.types';
@@ -37,7 +38,18 @@ export class VaButtonSegmented {
   /**
    * The index of the selected button.
    */
-  @Prop() selected: number = 0;
+  @Prop({ mutable: true }) selected: number = 0;
+
+  /**
+   * Watch for changes to the `selected` property and ensure it is within bounds.
+   */
+  @Watch('selected')
+  validateSelectedIndex(newValue: number) {
+    // Reset to the first button if out of bounds
+    if (newValue < 0 || newValue >= this.buttons.length) {
+      this.selected = 0;
+    }
+  }
 
   /**
    * Event emitted when a button is clicked.
@@ -89,8 +101,8 @@ export class VaButtonSegmented {
     const containerClass = classnames({
       'usa-button-group': true,
       'va-segmented-button': true,
-
     });
+
     const buttonClass = classnames({
       'va-segmented-button__button': true,
     });
