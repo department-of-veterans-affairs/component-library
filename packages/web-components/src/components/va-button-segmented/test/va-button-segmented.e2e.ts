@@ -1,13 +1,13 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
-describe('va-button-segmented', () => {
-  const buttonsData = [
-    { label: 'Segment 1', value: 'segment-1' },
-    { label: 'Segment 2', value: 'segment-2' },
-    { label: 'Segment 3', value: 'segment-3' }
-  ];
+const buttonsData = [
+  { label: 'Segment 1', value: 'segment-1' },
+  { label: 'Segment 2', value: 'segment-2' },
+  { label: 'Segment 3', value: 'segment-3' }
+];
 
+describe('va-button-segmented', () => {
   it('does not render when no buttons are provided', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button-segmented></va-button-segmented>');
