@@ -99,7 +99,7 @@ export class VaButtonSegmented {
   /**
    * Trims a string to a maximum length and adds an ellipsis if needed.
    */
-  private trimLabel(label: string, maxLength: number = 20): string {
+  private trimLabel(label: string, maxLength: number = 30): string {
     if (typeof label !== 'string') return '';
     return label.length > maxLength ? label.slice(0, maxLength) + '…' : label;
   }

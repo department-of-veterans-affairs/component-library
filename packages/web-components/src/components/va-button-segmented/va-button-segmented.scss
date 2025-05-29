@@ -51,6 +51,7 @@
   border-radius: 4px;
   margin: 0 4px;
   font-size: var(--font-size-root);
+  color: var(--vads-color-base);
   box-sizing: border-box;
 }
 
@@ -65,7 +66,7 @@
 
 .va-segmented-button__button:active, .va-segmented-button__button[aria-pressed=true] {
   background-color: var(--vads-color-white);
-  text-shadow:1px 0px 0px black;
+  text-shadow: .7px 0px 0px var(--vads-color-base);
   
 }
 .va-segmented-button__button[aria-pressed=true]:focus,

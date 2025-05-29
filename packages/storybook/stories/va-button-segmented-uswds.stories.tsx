@@ -31,7 +31,6 @@ const Template = ({
     <VaButtonSegmented
       buttons={buttons}
       selected={selected}
-      onButtonClick={(e: Event) => console.log(e)}
     />
   );
 };
