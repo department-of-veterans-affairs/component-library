@@ -66,7 +66,7 @@
 
 .va-segmented-button__button:active, .va-segmented-button__button[aria-pressed=true] {
   background-color: var(--vads-color-white);
-  text-shadow: .7px 0px 0px var(--vads-color-base);
+  text-shadow: .7px 0px 0px var(--vads-color-base); // Using this instead of font-weight to avoid button resizing and flicker.
   
 }
 .va-segmented-button__button[aria-pressed=true]:focus,
