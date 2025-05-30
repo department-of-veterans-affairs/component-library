@@ -71,6 +71,4 @@ export const Inline = Template.bind(null);
 Inline.args = {
   ...defaultArgs,
   inline: true,
-  message: 'Loading...',
-  label: 'Please wait, loading.',
 };
