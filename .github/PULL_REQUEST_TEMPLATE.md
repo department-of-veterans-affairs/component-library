@@ -22,18 +22,17 @@ https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
 
 ## Description
 
-<!-- Describe the change and context with which it was made beyond ACs unless straightforward.
+<!-- Describe the change and context.
+
 Consider:
-    - What is relevant to code reviewer(s) and not in the ticket?
+    - What is relevant to code reviewer(s)?
     - What context may be relevant to a future dev or you in 6 months about this PR?
     - Did the course of work lead to notable dead ends? If so, why didn't they pan out?
-    - Did the change add new dependencies? Why?
  -->
 
 ## Related Tickets and Links
 
 <!-- Link to any related issues, PRs, Slack conversations, or anything else relevant to documenting the changes.
-    - Were there important sources to link? Examples: an open bug with a dependency project, an article of someone else solving the same problem that was partially or wholly copied, external documentation relevant to solution
 -->
 
 Closes <ticket>
@@ -73,7 +72,7 @@ Use these checklists as guides, not rules. Not all checklists will apply to ever
 
 - [ ] The variation matches its [Figma](https://www.figma.com/files/1499394822283304153/project/105082786?fuid=1192586511403544015) design.
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
-- [ ] A new story has been added to the component's Storybook page
+- [ ] A new story has been added to the component's existing Storybook page
 - [ ] Any Chromatic UI snapshot changes have been accepted by a design reviewer
 - [ ] Tested in vets-website using [Verdaccio](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#local-testing-in-vets-website-with-verdaccio)
 - [ ] **Engineering** has approved the PR
