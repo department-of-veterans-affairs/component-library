@@ -72,5 +72,5 @@ Inline.args = {
   ...defaultArgs,
   inline: true,
   message: 'Loading...',
-  label: '',
+  label: 'Please wait, loading.',
 };
