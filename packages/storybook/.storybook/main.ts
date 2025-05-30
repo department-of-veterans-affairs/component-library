@@ -58,7 +58,7 @@ const config:StorybookConfig = {
     'va-mobile': {
       title: 'VA Mobile Design System',
       url: 'https://department-of-veterans-affairs.github.io/va-mobile-library',
-      expanded: false,
+      expanded: true,
     },
   },
   docs: {
