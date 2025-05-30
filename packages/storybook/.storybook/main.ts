@@ -1,7 +1,8 @@
+import type { StorybookConfig } from '@storybook/react-webpack5';
 import { dirname, join } from "path";
 const path = require('path');
-module.exports = {
-  stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+const config:StorybookConfig = {
+  stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx)', '../@(src|stories)/**/*.mdx'],
   staticDirs: ['../public'],
   addons: [
     {
@@ -22,13 +23,9 @@ module.exports = {
     getAbsolutePath('@storybook/addon-storysource'),
     getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-mdx-gfm'),
+    getAbsolutePath("@storybook/addon-webpack5-compiler-babel")
   ],
-  webpackFinal: async (config, { configType }) => {
-    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
-    // You can change the configuration based on that.
-    // 'PRODUCTION' is used when building the static version of storybook.
-
-    // Make whatever fine-grained changes you need
+  webpackFinal: async (config:any) => {
     config.module.rules.push({
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader'],
@@ -61,7 +58,7 @@ module.exports = {
     'va-mobile': {
       title: 'VA Mobile Design System',
       url: 'https://department-of-veterans-affairs.github.io/va-mobile-library',
-      expanded: 'false',
+      expanded: true,
     },
   },
   docs: {
@@ -72,3 +69,5 @@ module.exports = {
 function getAbsolutePath(value) {
   return dirname(require.resolve(join(value, "package.json")));
 }
+
+export default config;
