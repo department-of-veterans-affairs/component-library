@@ -9,6 +9,7 @@ https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
         - `web-components`
         - `react-components`
         - `core`
+    - Use `css-library` if a file has been changed in the `css-library` package.
 - [ ] Add additional review groups as needed:
     - Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
     - Designer: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
@@ -47,9 +48,9 @@ If there are any visual changes, screenshots should be added here.
 - [ ] **Designer** has approved the PR 🔅
 
 ## QA Checklist
+- [ ] New features and updates are covered by e2e and/or unit tests
+- [ ] Chromatic UI Tests have run and any snapshot changes have been accepted by a reviewer
 - [ ] Make sure changes align with [Figma](https://www.figma.com/files/1499394822283304153/project/105082786?fuid=1192586511403544015).
-- [ ] New features are covered by e2e and/or unit tests; updates to existing components are covered by existing test suite
-- [ ] Chromatic UI Tests have run and any snapshot changes have been accepted
 - [ ] Changes have been tested against screen readers 🔅
 - [ ] Component behaves as expected across breakpoints 🔅
 - [ ] Tab order and focus state work as expected 🔅
@@ -57,7 +58,7 @@ If there are any visual changes, screenshots should be added here.
 
 ## Definition of done
 - [ ] A link has been provided to the originating GitHub issue or conversation
-- [ ] All required approvals have been received (engineering, accessibility, designer)
+- [ ] All required approvals have been received (engineering, accessibility, design)
 - [ ] Documentation has been updated 🔅
 
 🔅 If applicable to the changes. If not applicable, provide reason why.
