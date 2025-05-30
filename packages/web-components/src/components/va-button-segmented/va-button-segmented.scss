@@ -29,6 +29,7 @@
 @media screen and (max-width: 640px) {
   .va-segmented-button {
     display: flex;
+    flex-flow: row;
     width: 100%;
   }
   .va-segmented-button__button {
