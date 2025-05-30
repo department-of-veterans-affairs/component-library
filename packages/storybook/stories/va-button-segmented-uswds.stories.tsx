@@ -17,9 +17,10 @@ export default {
 const defaultArgs = {
   'selected': 0,
   'buttons': [
-    { label: 'two words', value: 'segment1' },
-    { label: 'Three words here', value: 'segment2' },
-    { label: 'Super long label that might go here', value: 'segment3' }
+    { label: 'List', value: 'list' },
+    { label: 'Grid', value: 'grid' },
+    { label: 'Table', value: 'table' },
+    { label: 'Map', value: 'map' }
   ],
 };
 
@@ -41,8 +42,19 @@ Default.args = {
 };
 Default.argTypes = propStructure(segmentedButtonDocs);
 
-export const Selected = Template.bind(null);
-Selected.args = {
+export const SelectedItem = Template.bind(null);
+SelectedItem.args = {
   ...defaultArgs,
   selected: 1,
+};
+
+export const LongLabels = Template.bind(null);
+LongLabels.args = {
+  ...defaultArgs,
+  'buttons': [
+    { label: 'Two words', value: 'twoWords' },
+    { label: 'Three words here', value: 'threeWords' },
+    { label: 'Super long label that might go here', value: 'longLabel' },
+    { label: 'label', value: 'label' }
+  ],
 };
