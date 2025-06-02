@@ -370,8 +370,8 @@ export namespace Components {
     /**
      * @componentName Button Segmented
      * @nativeHandler onClick
-     * @maturityCategory use
-     * @maturityLevel alpha
+     * @maturityCategory caution
+     * @maturityLevel candidate
      */
     interface VaButtonSegmented {
         /**
@@ -2536,14 +2536,13 @@ declare global {
         new (): HTMLVaButtonPairElement;
     };
     interface HTMLVaButtonSegmentedElementEventMap {
-        "buttonClick": any;
         "component-library-analytics": any;
     }
     /**
      * @componentName Button Segmented
      * @nativeHandler onClick
-     * @maturityCategory use
-     * @maturityLevel alpha
+     * @maturityCategory caution
+     * @maturityLevel candidate
      */
     interface HTMLVaButtonSegmentedElement extends Components.VaButtonSegmented, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaButtonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButtonSegmentedElement, ev: VaButtonSegmentedCustomEvent<HTMLVaButtonSegmentedElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3961,8 +3960,8 @@ declare namespace LocalJSX {
     /**
      * @componentName Button Segmented
      * @nativeHandler onClick
-     * @maturityCategory use
-     * @maturityLevel alpha
+     * @maturityCategory caution
+     * @maturityLevel candidate
      */
     interface VaButtonSegmented {
         /**
@@ -3973,10 +3972,6 @@ declare namespace LocalJSX {
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
-        /**
-          * Event emitted when a button is clicked.
-         */
-        "onButtonClick"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
         /**
           * The event used to track usage of the component.
          */
@@ -6081,8 +6076,8 @@ declare module "@stencil/core" {
             /**
              * @componentName Button Segmented
              * @nativeHandler onClick
-             * @maturityCategory use
-             * @maturityLevel alpha
+             * @maturityCategory caution
+             * @maturityLevel candidate
              */
             "va-button-segmented": LocalJSX.VaButtonSegmented & JSXBase.HTMLAttributes<HTMLVaButtonSegmentedElement>;
             /**

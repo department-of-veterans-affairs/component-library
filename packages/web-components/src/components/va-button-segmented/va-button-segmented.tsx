@@ -14,8 +14,8 @@ import { ButtonItem } from './va-button-segmented.types';
 /**
  * @componentName Button Segmented
  * @nativeHandler onClick
- * @maturityCategory use
- * @maturityLevel alpha
+ * @maturityCategory caution
+ * @maturityLevel candidate
  */
 @Component({
   tag: 'va-button-segmented',
@@ -52,16 +52,6 @@ export class VaButtonSegmented {
   }
 
   /**
-   * Event emitted when a button is clicked.
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-    eventName: 'buttonClick'
-  })
-  buttonClick: EventEmitter;
-
-  /**
    * The event used to track usage of the component.
    */
   @Event({
@@ -74,11 +64,9 @@ export class VaButtonSegmented {
   /**
    * @function handleClick
    * @description Handles the click event on the segmented buttons.
-   * It emits the `buttonClick` event with the selected button index and also emits a component library analytics event if analytics are not disabled via props.
    * @returns {void}
-   *
    */
-  private handleClick = (buttonItem): void => {
+  private handleClick = (): void => {
     // Fire the component library analytics event if analytics is not disabled.
     if  (!this.disableAnalytics) {
       const detail = {
@@ -91,9 +79,6 @@ export class VaButtonSegmented {
 
       this.componentLibraryAnalytics.emit(detail);
     }
-
-    // Emit the buttonClick event with the selected buttonItem.
-    this.buttonClick.emit(buttonItem);
   };
 
   /**
@@ -130,7 +115,7 @@ export class VaButtonSegmented {
                 class={buttonClass}
                 onClick={() => {
                   this.selected = index;
-                  this.handleClick(buttonItem);
+                  this.handleClick();
                 }}
                 aria-label={buttonItem.label}
                 title={buttonItem.label.length > 20 ? buttonItem.label : ''}
