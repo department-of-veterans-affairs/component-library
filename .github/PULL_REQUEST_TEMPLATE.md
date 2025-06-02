@@ -129,6 +129,7 @@ In all scenarios, changes should be tested by the author and verified by the rev
 <details>
   <summary>📖 Storybook Update</summary>
 
+- [ ] The PR has the `ignore-for-release` label
 - [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
 - [ ] **Engineering** has approved the PR
 </details>
