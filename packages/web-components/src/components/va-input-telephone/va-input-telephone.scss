@@ -31,7 +31,7 @@
   display: block;
 }
 
-va-text-input::part(label), 
+va-text-input::part(label),
 va-combo-box::part(label) {
   margin-top: 0;
 }
@@ -47,14 +47,12 @@ fieldset {
 }
 
 va-combo-box {
-  flex: 1;
+  flex: auto;
   min-width: 216px;
-  max-width: 236px;
 }
 
 va-text-input {
- max-width: 236px;
- flex: 5;
+ max-width: 20ch;
 }
 
 .va-input-telephone-wrapper {
