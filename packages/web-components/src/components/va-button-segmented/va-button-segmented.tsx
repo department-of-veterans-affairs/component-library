@@ -8,6 +8,7 @@ import {
   Element,
   Watch,
 } from '@stencil/core';
+import { truncate } from '../../utils/utils';
 import classnames from 'classnames';
 import { ButtonItem } from './va-button-segmented.types';
 
@@ -81,14 +82,6 @@ export class VaButtonSegmented {
     }
   };
 
-  /**
-   * Trims a string to a maximum length and adds an ellipsis if needed.
-   */
-  private trimLabel(label: string, maxLength: number = 30): string {
-    if (typeof label !== 'string') return '';
-    return label.length > maxLength ? label.slice(0, maxLength) + '…' : label;
-  }
-
   render() {
     const { buttons } = this;
 
@@ -122,7 +115,7 @@ export class VaButtonSegmented {
                 type="button"
                 aria-pressed={this.selected === index ? 'true' : 'false'}
               >
-                {this.trimLabel(buttonItem.label)}
+                {truncate(buttonItem.label, 145, null)}
               </button>
             </li>
           ))}
