@@ -136,7 +136,6 @@ export class VaButtonSegmented {
                 title={buttonItem.label.length > 20 ? buttonItem.label : ''}
                 type="button"
                 aria-pressed={this.selected === index ? 'true' : 'false'}
-                part="button"
               >
                 {this.trimLabel(buttonItem.label)}
               </button>
