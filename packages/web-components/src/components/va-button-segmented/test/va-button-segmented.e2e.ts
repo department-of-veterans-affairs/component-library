@@ -189,3 +189,52 @@ it('passes an axe check when selected index if specified', async () => {
 
   await axeCheck(page);
 });
+
+it('renders a maximum of four buttons', async () => {
+  const page = await newE2EPage();
+  await page.setContent(`<va-button-segmented></va-button-segmented>`);
+
+  // Select the component within the page and set buttons property to more than four buttons
+  const longButtonsData = [
+    { label: 'Segment 1', value: 'segment-1' },
+    { label: 'Segment 2', value: 'segment-2' },
+    { label: 'Segment 3', value: 'segment-3' },
+    { label: 'Segment 4', value: 'segment-4' },
+    { label: 'Segment 5', value: 'segment-5' }
+  ];
+
+  await page.$eval('va-button-segmented', (elm: any, longButtonsData) => {
+    elm.buttons = longButtonsData;
+  }, longButtonsData);
+
+  // Wait for the changes to be processed and grab the shadow content
+  await page.waitForChanges();
+  const shadowContent = await page.$eval('va-button-segmented',
+    el => el.shadowRoot.innerHTML.trim(),
+  );
+
+  expect(shadowContent).toEqualHtml(`
+    <ul class="usa-button-group va-segmented-button">
+      <li class="usa-button-group__item">
+        <button class="va-segmented-button__button" aria-label="Segment 1" aria-pressed="true" type="button">
+          Segment 1
+        </button>
+      </li>
+      <li class="usa-button-group__item">
+        <button class="va-segmented-button__button" aria-label="Segment 2" aria-pressed="false" type="button">
+          Segment 2
+        </button>
+      </li>
+      <li class="usa-button-group__item">
+        <button class="va-segmented-button__button" aria-label="Segment 3" aria-pressed="false" type="button">
+          Segment 3
+        </button>
+      </li>
+      <li class="usa-button-group__item">
+        <button class="va-segmented-button__button" aria-label="Segment 4" aria-pressed="false" type="button">
+          Segment 4
+        </button>
+      </li>
+    </ul>
+  `.trim());
+});

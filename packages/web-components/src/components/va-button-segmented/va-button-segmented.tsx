@@ -29,7 +29,7 @@ export class VaButtonSegmented {
   /**
    * An array of objects defining the labels and values for each button.
    */
-  @Prop() buttons!: Array<ButtonItem>;
+  @Prop({ mutable: true }) buttons!: Array<ButtonItem>;
 
   /**
    * If `true`, the component-library-analytics event is disabled.
@@ -40,6 +40,17 @@ export class VaButtonSegmented {
    * The index of the selected button.
    */
   @Prop({ mutable: true }) selected: number = 0;
+
+  /**
+   * Watch for changes to the `buttons` property and do validation to ensure it does not exceed four buttons.
+   */
+  @Watch('buttons')
+  validateButtons(newValue: Array<ButtonItem>) {
+    // Ensure there are no more than four buttons
+    if (newValue.length > 4) {
+      this.buttons = newValue.slice(0, 4);
+    }
+  }
 
   /**
    * Watch for changes to the `selected` property and ensure it is within bounds.
@@ -63,6 +74,15 @@ export class VaButtonSegmented {
   componentLibraryAnalytics: EventEmitter;
 
   /**
+   * Before component loads, validate the initial buttons array and ensure it does not exceed four buttons.
+   */
+  componentWillLoad() {
+    if (this.buttons && this.buttons.length > 4) {
+      this.buttons = this.buttons.slice(0, 4);
+    }
+  }
+
+  /**
    * @function handleClick
    * @description Handles the click event on the segmented buttons.
    * @returns {void}
@@ -83,8 +103,6 @@ export class VaButtonSegmented {
   };
 
   render() {
-    const { buttons } = this;
-
     const containerClass = classnames({
       'usa-button-group': true,
       'va-segmented-button': true,
@@ -95,14 +113,14 @@ export class VaButtonSegmented {
     });
 
     // Do not render if no buttons are provided
-    if (!buttons || !buttons.length) {
+    if (!this.buttons || !this.buttons.length) {
       return null;
     }
 
     return (
       <Host>
         <ul class={containerClass}>
-          {buttons.map((buttonItem: ButtonItem, index: number) => (
+          {this.buttons.map((buttonItem: ButtonItem, index: number) => (
             <li class="usa-button-group__item">
               <button
                 class={buttonClass}
