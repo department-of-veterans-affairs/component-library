@@ -155,4 +155,37 @@ describe('va-button-segmented', () => {
       </ul>
     `.trim());
   });
+
+  it('passes an axe check with a long label', async () => {
+    // create a new puppeteer page
+    // load the page with html content
+    const page = await newE2EPage();
+    await page.setContent(`<va-button-segmented></va-button-segmented>`);
+    // Select the component within the page and add buttons property to it
+    await page.$eval('va-button-segmented', (elm: any, buttonsData) => {
+      // Add a button with a long label
+      buttonsData.push({ label: 'Super long label that might go here', value: 'long-label' });
+      elm.buttons = buttonsData;
+    }, buttonsData);
+
+    await page.waitForChanges();
+    await axeCheck(page);
+  });
+});
+
+it('passes an axe check when selected index if specified', async () => {
+  // create a new puppeteer page
+  // load the page with html content
+  const page = await newE2EPage();
+  await page.setContent(`<va-button-segmented></va-button-segmented>`);
+
+  // Select the component within the page and add buttons property to it
+  await page.$eval('va-button-segmented', (elm: any, buttonsData) => {
+    elm.buttons = buttonsData;
+    elm.selected = 1; // Select the second button
+  }, buttonsData);
+
+  await page.waitForChanges();
+
+  await axeCheck(page);
 });
