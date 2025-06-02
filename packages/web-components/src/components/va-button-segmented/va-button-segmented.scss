@@ -3,6 +3,7 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-button/src/styles/usa-button';
 @use 'usa-button-group/src/styles/usa-button-group';
+@import "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss";
 
 :host {
   display: flex;
@@ -12,7 +13,7 @@
 
 .va-segmented-button {
   background-color: var(--vads-color-base-lighter);
-  padding: 4px 0;
+  padding: var(--vads-spacing-0p5) 0;
   border-radius: 8px;
   display: inline-block;
   margin-left: 0;
@@ -26,7 +27,7 @@
   flex: 1 1 auto;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: $tablet) {
   .va-segmented-button {
     display: flex;
     flex-flow: row;
@@ -34,19 +35,21 @@
   }
   .va-segmented-button__button {
     flex: 1;
+    padding: var(--vads-spacing-1p5) var(--vads-spacing-0p5);
   }
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: $tablet) {
   .va-segmented-button__button {
     max-width: 160px;
+    padding: var(--vads-spacing-1p5) var(--vads-spacing-2p5);
   }
 }
 
 .va-segmented-button__button {
   width: 100%;
+  max-width: 160px;
   height: 100%;
-  padding: 12px 20px;
   background-color: var(--vads-color-base-lighter);
   border: 0; 
   border-radius: 4px;
