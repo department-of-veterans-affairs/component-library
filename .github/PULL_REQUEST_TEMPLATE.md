@@ -53,9 +53,12 @@ See [QA Checklists](#qa-checklists) for required approvals. Use your best judgme
 
 Use these checklists as guides, not rules. Not all checklists will apply to every PR but there could be some overlap.
 
+In all scenarios, it's expected that the changes have been tested by the author and verified by the reviewer(s) (e.g. functionality, browser breakpoints, etc. )
+
 <details>
   <summary>✨ New Component Added</summary>
 
+- [ ] The PR has the `minor` label
 - [ ] The component matches the [Figma](https://www.figma.com/files/1499394822283304153/project/105082786?fuid=1192586511403544015) designs.
 - [ ] All properties, custom events, and utility functions have e2e and/or unit tests
 - [ ] A new Storybook page has been added for the component
@@ -70,6 +73,7 @@ Use these checklists as guides, not rules. Not all checklists will apply to ever
 <details>
   <summary>🌱 New Component Variation Added</summary>
 
+- [ ] The PR has the `minor` label
 - [ ] The variation matches its [Figma](https://www.figma.com/files/1499394822283304153/project/105082786?fuid=1192586511403544015) design.
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
 - [ ] A new story has been added to the component's existing Storybook page
@@ -82,15 +86,27 @@ Use these checklists as guides, not rules. Not all checklists will apply to ever
 <details>
   <summary>🐞 Component Fix</summary>
 
+- [ ] The PR has the `patch` label
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
-- [ ] Any markup changes are evaluated for impact on vets-website
+- [ ] Any markup changes are evaluated for impact on vets-website. Are any tests referencing the changed previous markup?
 - [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
 - [ ] **Engineering** has approved the PR
 </details>
 
 <details>
+  <summary>♿️ Component Fix - Accessibility</summary>
+
+- [ ] The PR has the `patch` label
+- [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
+- [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
+- [ ] **Engineering** has approved the PR
+- [ ] **Accessibility** has approved the PR
+</details>
+
+<details>
   <summary>🚨 Component Fix - Breaking API Change</summary>
 
+- [ ] The PR has the `major` label
 - [ ] vets-website has been checked to determine the impact of the breaking change
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
 - [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
@@ -99,12 +115,13 @@ Use these checklists as guides, not rules. Not all checklists will apply to ever
 </details>
 
 <details>
-  <summary>♿️ Component Fix - Accessibility</summary>
+  <summary>🔧 Component Update - Non-Breaking API Change</summary>
 
+- [ ] The PR has the `minor` label
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
 - [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
+- [ ] Tested in vets-website using [Verdaccio](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#local-testing-in-vets-website-with-verdaccio)
 - [ ] **Engineering** has approved the PR
-- [ ] **Accessibility** has approved the PR
 </details>
 
 <details>
