@@ -2536,6 +2536,7 @@ declare global {
         new (): HTMLVaButtonPairElement;
     };
     interface HTMLVaButtonSegmentedElementEventMap {
+        "vaChange": any;
         "component-library-analytics": any;
     }
     /**
@@ -3976,6 +3977,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
+        /**
+          * Event emitted when selected button changes (a button is clicked).
+         */
+        "onVaChange"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
         /**
           * The index of the selected button.
          */

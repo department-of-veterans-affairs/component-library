@@ -64,6 +64,15 @@ export class VaButtonSegmented {
   }
 
   /**
+   * Event emitted when selected button changes (a button is clicked).
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  vaChange: EventEmitter;
+
+  /**
    * The event used to track usage of the component.
    */
   @Event({
@@ -85,9 +94,10 @@ export class VaButtonSegmented {
   /**
    * @function handleClick
    * @description Handles the click event on the segmented buttons.
+   * @param {ButtonItem} buttonItem - The button item that was clicked.
    * @returns {void}
    */
-  private handleClick = (): void => {
+  private handleClick = (buttonItem: ButtonItem): void => {
     // Fire the component library analytics event if analytics is not disabled.
     if  (!this.disableAnalytics) {
       const detail = {
@@ -100,6 +110,9 @@ export class VaButtonSegmented {
 
       this.componentLibraryAnalytics.emit(detail);
     }
+
+    // Emit the vaChange event with the selected buttonItem.
+    this.vaChange.emit(buttonItem);
   };
 
   render() {
@@ -126,7 +139,7 @@ export class VaButtonSegmented {
                 class={buttonClass}
                 onClick={() => {
                   this.selected = index;
-                  this.handleClick();
+                  this.handleClick(buttonItem);
                 }}
                 aria-label={buttonItem.label}
                 title={buttonItem.label.length > 20 ? buttonItem.label : ''}

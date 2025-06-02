@@ -22,16 +22,21 @@ const defaultArgs = {
     { label: 'Table', value: 'table' },
     { label: 'Map', value: 'map' }
   ],
+  'vaChange': (e: MouseEvent) => {
+    console.log('Button clicked:', e.detail);
+  }
 };
 
 const Template = ({ 
   buttons, 
   selected,
+  vaChange
 }) => {
   return (
     <VaButtonSegmented
       buttons={buttons}
       selected={selected}
+      onVaChange={vaChange}
     />
   );
 };
