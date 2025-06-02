@@ -6,6 +6,7 @@
 <!-- DO NOT REMOVE - This `{{head.ref}}` is a placeholder for a CI job - it will be updated automatically -->
 https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
 
+<!--  DELETE THIS SECTION WHEN COMPLETE -->
 ## Configuring this pull request
 - [ ] Add the appropriate [version label](https://github.com/department-of-veterans-affairs/component-library#how-to-choose-a-version-number) to the PR (`major`, `minor`, `patch`, `css-library`, or `ignore-for-release`).
     - Use `ignore-for-release` if a file has not been changed in one of the following packages: 
@@ -19,6 +20,7 @@ https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
     - Designer: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
 - [ ] Complete all sections below.
 - [ ] Delete this section once the above configuration steps have been completed.
+
 
 ## Description
 
@@ -42,18 +44,18 @@ Closes <ticket>
 <!-- If there are any visual changes, screenshots should be added here. -->
 
 ## Required Approvals Before Merging
-See [QA Checklists](#qa-checklists) for required approvals. Use your best judgment to determine if additional reviews are needed. When in doubt, request a review.
+See QA Checklists section below for suggested required approvals. Use your best judgment to determine if additional reviews are needed. When in doubt, request a review.
 
 **Approval Teams**
 - Engineering: [platform-design-system-fe](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-fe)
 - Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
-- Designer: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
+- Design: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
 
 ## QA Checklists
 
 Use these checklists as guides, not rules. Not all checklists will apply to every PR but there could be some overlap.
 
-In all scenarios, it's expected that the changes have been tested by the author and verified by the reviewer(s) (e.g. functionality, browser breakpoints, etc. )
+In all scenarios, changes should be tested by the author and verified by the reviewer(s) (e.g. functionality, responsiveness, etc. )
 
 <details>
   <summary>✨ New Component Added</summary>
