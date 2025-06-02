@@ -840,6 +840,10 @@ export namespace Components {
           * Whether the country select should be included. Set to true to exclude it.
          */
         "noCountry"?: boolean;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required"?: boolean;
     }
     /**
      * @componentName Language Toggle
@@ -2772,7 +2776,6 @@ declare global {
     };
     interface HTMLVaInputTelephoneElementEventMap {
         "vaContact": any;
-        "vaCountryCode": any;
     }
     /**
      * @componentName Input Telephone
@@ -4488,9 +4491,9 @@ declare namespace LocalJSX {
          */
         "onVaContact"?: (event: VaInputTelephoneCustomEvent<any>) => void;
         /**
-          * The event emitted when the country code changes
+          * Render marker indicating field is required.
          */
-        "onVaCountryCode"?: (event: VaInputTelephoneCustomEvent<any>) => void;
+        "required"?: boolean;
     }
     /**
      * @componentName Language Toggle
