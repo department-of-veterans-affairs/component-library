@@ -79,7 +79,7 @@ npx stencil test --e2e  -- src/components/va-accordion/test/va-accordion-*
 
 This repo uses [`Chromatic`](https://www.chromatic.com/) to streamline reviews by publishing your changes online. A link containing your changes is automatically added to pull requests to aid others when reviewing your code.
 
-In order for this link to work, follow these rules when naming your branch:
+In order for the preview link to work without making edits to the link, follow these rules when naming your branch:
 
 - Your branch must contain only lowercase letters, numbers and dashes
 - Your branch must not exceed 37 characters
@@ -351,7 +351,7 @@ The Design System Team will create a release minimally at the beginning of each 
 
 ### How to choose a version number
 
-Pull requests are labeled as `major`, `minor`, `patch`, or `ignore-for-release` for generating release notes.
+Pull requests are labeled as `major`, `minor`, `patch`, `ignore-for-release`, or `css-library` for generating release notes.
 
 This repo follows [semantic versioning](https://semver.org/). Here are some examples of which changes correspond to which version (MAJOR, MINOR, or PATCH) increase.
 

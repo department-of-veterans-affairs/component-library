@@ -5,7 +5,7 @@
 
 <!-- 
 🏷️ PR Setup - Add a label
-Guidelines:
+Label Guidelines:
     - Review the [version change examples](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#how-to-choose-a-version-number) in the README.
     - Use `major`, `minor`, `patch` for changes to the `web-components` or `react-components` packages.
     - Use `css-library` if a file has been changed in the `css-library` package.
@@ -48,9 +48,9 @@ If there are any visual changes, screenshots should be added here.
 See the QA Checklists section below for suggested approvals. Use your best judgment if additional reviews are needed. When in doubt, request a review.
 
 **Approval Groups**
-- [ ] Engineering: [platform-design-system-fe](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-fe)
-- [ ] Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
-- [ ] Design: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
+- Engineering: [platform-design-system-fe](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-fe)
+- Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
+- Design: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
 
 ## QA Checklists
 
@@ -91,7 +91,8 @@ In all scenarios, changes should be fully tested by the author and verified by t
 
 - [ ] The PR has the `patch` label
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
-- [ ] Any markup changes are evaluated for impact on vets-website. Are any vets-website tests using the markup?
+- [ ] Any markup changes are evaluated for impact on vets-website.
+    - Will any vets-website tests fail from the change?
 - [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
 - [ ] **Engineering** has approved the PR
 </details>
