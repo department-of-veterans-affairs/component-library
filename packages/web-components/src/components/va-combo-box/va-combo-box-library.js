@@ -445,7 +445,7 @@ const changeElementValue = (el, value = '') => {
     const optionHtml = options.map((option, index) => {
       const isOptGroup = isDataOptGroup(option);
       const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
-      if (isOptGroup) 
+      if (isOptGroup)
         groupLength += 1;
 
       if (!isOptGroup) {
@@ -487,7 +487,7 @@ const changeElementValue = (el, value = '') => {
       li.setAttribute('tabindex', tabindex);
       li.setAttribute('role', isOptGroup ? 'group' : 'option');
       li.setAttribute('data-value', option.value);
-      
+
       if (comboBox.isInVaInputTelephone) {
         li.innerHTML = Sanitizer.escapeHTML`<div class="flag-wrapper">
         <span class="flag flag-${option.value.toLowerCase()}"></span>
@@ -516,9 +516,9 @@ const changeElementValue = (el, value = '') => {
 
     inputEl.setAttribute('aria-expanded', 'true');
 
-    const getPluralizedMessage = (count, singular, plural) => 
+    const getPluralizedMessage = (count, singular, plural) =>
       count ? `${count} ${count > 1 ? plural : singular} available.` : '';
-  
+
     const groupsStatus = getPluralizedMessage(groupLength, 'group', 'groups');
     const optionsStatus = getPluralizedMessage(optionIndex, 'result', 'results');
 
@@ -572,7 +572,19 @@ const changeElementValue = (el, value = '') => {
     const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(listOptionEl);
 
     changeElementValue(selectEl, listOptionEl.dataset.value);
-    changeElementValue(inputEl, listOptionEl.textContent);
+
+    // Use different text extraction method for telephone inputs
+    if (comboBox.isInVaInputTelephone) {
+      // Extract just the flag-text portion or preserve the original input value if re-selecting
+      const flagText = listOptionEl.querySelector('.flag-text');
+      if (flagText) {
+        changeElementValue(inputEl, flagText.textContent);
+      }
+    } else {
+      // Standard behavior for non-telephone inputs
+      changeElementValue(inputEl, listOptionEl.textContent);
+    }
+
     comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
     hideList(comboBoxEl);
     inputEl.focus();
@@ -607,9 +619,9 @@ const changeElementValue = (el, value = '') => {
 const completeSelection = el => {
     const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
     statusEl.textContent = '';
-  
+
     const inputValue = (inputEl.value || '').trim().toLowerCase();
-  
+
     if (inputValue) {
       // Find a matching option
       const matchingFunc = comboBox.isInVaInputTelephone
@@ -619,7 +631,7 @@ const completeSelection = el => {
         })
         : (option => option.text.toLowerCase() === inputValue)
       const matchingOption = Array.from(selectEl.options).find(matchingFunc)
-  
+
       if (matchingOption) {
         // If a match is found, update the input and select values
         changeElementValue(selectEl, matchingOption.value);
@@ -629,7 +641,7 @@ const completeSelection = el => {
         return;
       }
     }
-  
+
     // If no match is found or input value is empty,
     // clear the select value but maintain the input value.
     // This allows the user to type a value that doesn't exist in the options
@@ -671,7 +683,7 @@ const completeSelection = el => {
     if (nextOptionEl) {
       if (nextOptionEl.getAttribute('role') === 'group') {
         nextOptionEl = nextOptionEl.nextSibling
-      } 
+      }
       highlightOption(comboBoxEl, nextOptionEl);
     }
 
@@ -708,7 +720,7 @@ const completeSelection = el => {
     if (nextOptionEl) {
       if (nextOptionEl.getAttribute('role') === 'group') {
         nextOptionEl = nextOptionEl.nextSibling
-      } 
+      }
       highlightOption(focusedOptionEl, nextOptionEl);
     }
 
@@ -750,7 +762,7 @@ const completeSelection = el => {
     if (nextOptionEl) {
       if (nextOptionEl.getAttribute('role') === 'group') {
         nextOptionEl = nextOptionEl.previousSibling
-      } 
+      }
       highlightOption(focusedOptionEl, nextOptionEl);
     }
 
