@@ -18,7 +18,7 @@ import {
   getCountryCallingCode,
   parsePhoneNumber,
   PhoneNumber
-} from 'libphonenumber-js/min'; 
+} from 'libphonenumber-js/min';
 import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
 import { i18next } from '../..';
@@ -201,7 +201,7 @@ export class VaInputTelephone {
     const allButUS = getCountries()
       .filter(country => country !== this.DEFAULT_COUNTRY);
     allButUS.push(...Object.keys(DATA_MAP.countries) as CountryCode[]);
-    
+
     const sortedAllButUs = allButUS.sort((a, b) => {
       const one = this.getCountryName(a);
       const two = this.getCountryName(b);
@@ -269,7 +269,7 @@ export class VaInputTelephone {
       noCountry,
       required
     } = this;
-    
+
     const legendClasses = classNames({
       'usa-legend': true,
       'usa-label--error': !!error
@@ -293,7 +293,7 @@ export class VaInputTelephone {
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
               <va-combo-box
-                label="Country"
+                label="Country code"
                 name="country-codes"
                 show-input-error="false"
                 error={countryError}
