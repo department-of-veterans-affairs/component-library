@@ -9,15 +9,25 @@ import {
   Event
 } from '@stencil/core';
 
-import { AsYouType, isPossiblePhoneNumber, CountryCode, getExampleNumber, getCountries, getCountryCallingCode } from 'libphonenumber-js/min'; 
+import {
+  AsYouType,
+  isPossiblePhoneNumber,
+  CountryCode,
+  getExampleNumber,
+  getCountries,
+  getCountryCallingCode,
+  parsePhoneNumber,
+  PhoneNumber
+} from 'libphonenumber-js/min';
 import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
+import { i18next } from '../..';
 import { DATA_MAP, mapCountry } from './utils';
 
 /**
  * @componentName Input Telephone
  * @maturityCategory caution
- * @maturityLevel proposal
+ * @maturityLevel candidate
  * @guidanceHref form/input-telephone
  * @translations English
  */
@@ -27,7 +37,7 @@ import { DATA_MAP, mapCountry } from './utils';
   styleUrl: 'va-input-telephone.scss',
   shadow: true,
 })
-export class VaInternationalTelephone {
+export class VaInputTelephone {
   @Element() el: HTMLElement;
   textInputRef: HTMLVaTextInputElement;
   DEFAULT_COUNTRY: CountryCode = 'US';
@@ -35,13 +45,12 @@ export class VaInternationalTelephone {
   /**
    * The telephone contact information
    */
-  @Prop() contact?: string;
+  @Prop({ reflect: true, mutable: true }) contact?: string = '';
 
   /**
    * The 2 letter ISO country code for a country
    */
   @Prop({ reflect: true, mutable: true }) country?: CountryCode = this.DEFAULT_COUNTRY;
-
 
   /**
    * Header text for the component
@@ -64,14 +73,14 @@ export class VaInternationalTelephone {
   @Prop() noCountry?: boolean = false;
 
   /**
+   * Render marker indicating field is required.
+   */
+  @Prop() required?: boolean = false;
+
+  /**
    * The event emitted when the contact changes
    */
   @Event() vaContact: EventEmitter;
-
-  /**
-   * The event emitted when the country code changes
-   */
-  @Event() vaCountryCode: EventEmitter
 
   /**
    * The contact formatted according to the selected country
@@ -93,6 +102,11 @@ export class VaInternationalTelephone {
    */
   @State() contactError: string = '';
 
+  /**
+   * Is the phone number valid for the selected country
+   */
+  @State() isValid: boolean = false;
+
   resetErrors() {
     this.countryError = '';
     this.contactError = '';
@@ -102,7 +116,8 @@ export class VaInternationalTelephone {
   updateContact(event: InputEvent) {
     const target = event.target as HTMLInputElement;
     const { value } = target;
-    this.formattedContact = value ? this.formatContact(value) : '';
+    this.contact = value;
+    this.formattedContact = this.formatContact(value);
   }
 
   // get an error message for a country that includes the template of a valid phone number for that country
@@ -118,20 +133,39 @@ export class VaInternationalTelephone {
   // validate the contact and emit the contact and validation state
   validateContact() {
     this.resetErrors();
-    let isValid = false;
     if (this.country) {
-      if (this.formattedContact) {
-        const _country = mapCountry(this.country);
-        isValid = isPossiblePhoneNumber(this.formattedContact, _country);
-        this.error = isValid ? '' : this.getErrorMessageForCountry()
-      } else {
-        this.error = 'Please enter a phone number';
-      }
+      const _country = mapCountry(this.country);
+      this.isValid = !!this.contact
+        ? isPossiblePhoneNumber(this.contact, _country)
+        : false;
+      this.error = this.isValid
+        ? ''
+        : this.getErrorMessageForCountry();
       this.contactError = this.error;
     } else {
       this.validateCountry();
     }
-    this.vaContact.emit({ contact: this.formattedContact, isValid });
+    this.handelEmit();
+  }
+
+  handelEmit() {
+    const tryParse = !!this.contact && !!this.country;
+    let phoneNumber: PhoneNumber | null;
+    try {
+      phoneNumber = tryParse
+        ? parsePhoneNumber(this.contact, mapCountry(this.country))
+        : null;
+    } catch {
+      // there was a parse error of some kind due to invalid input, i.e. input like "abc"
+      // not screening contact via regex because it is difficult to handle all possibilities for all countries
+      phoneNumber = null;
+    }
+    this.vaContact.emit({
+      callingCode: (tryParse && phoneNumber !== null) ? phoneNumber.countryCallingCode : undefined,
+      countryCode: this.country,
+      contact: (tryParse && phoneNumber !== null) ? phoneNumber.nationalNumber : this.contact,
+      isValid: this.isValid
+    });
   }
 
   // make sure country has been selected
@@ -140,6 +174,7 @@ export class VaInternationalTelephone {
     if (!this.country) {
       this.error = 'Please choose a country';
       this.countryError = this.error;
+      this.handelEmit();
     } else {
       this.validateContact();
     }
@@ -150,13 +185,14 @@ export class VaInternationalTelephone {
     const { value } = event.detail;
     this.country = value;
     this.validateCountry();
-    this.vaCountryCode.emit({ code: value });
   }
 
   formatContact(value: string) {
     // some territories are formatted / validated as if they were a different, larger country
     const _country = mapCountry(this.country);
-    return new AsYouType(_country).input(value);
+    const _formatted = new AsYouType(_country).input(value);
+    // if input has no numbers return it for sake of error correction
+    return _formatted === '' ? value : _formatted
   }
 
   // get list of country codes alphabetized by name with US in front
@@ -189,15 +225,13 @@ export class VaInternationalTelephone {
   }
 
   componentWillLoad() {
-    if (this.contact) {
-      this.formattedContact = this.formatContact(this.contact);
-    }
     this.countries = this.buildCountryList();
   }
 
   componentDidLoad() {
     // if a contact was provided, check if it's valid for the country
-    if (this.formattedContact) {
+    if (this.contact) {
+      this.formattedContact = this.formatContact(this.contact);
       this.validateContact();
     }
     const comboBox = this.el.shadowRoot.querySelector('va-combo-box');
@@ -232,7 +266,8 @@ export class VaInternationalTelephone {
       country,
       countryError,
       contactError,
-      noCountry
+      noCountry,
+      required
     } = this;
     
     const legendClasses = classNames({
@@ -246,6 +281,12 @@ export class VaInternationalTelephone {
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClasses}>
               {header}
+              {required && (
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
             {error && <span id="error-message" role="alert">{error}</span>}

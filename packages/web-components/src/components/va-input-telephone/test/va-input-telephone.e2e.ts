@@ -23,7 +23,17 @@ describe('va-input-telephone', () => {
     const input = await page.find('va-input-telephone >>> input#inputField');
     const value = await input.getProperty('value');
     expect(value).toBe('(234) 567-8910')
-  })
+  });
+
+  it('renders an error and shows invalid contact in prefill', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-input-telephone contact="abcdefg" />');
+    const input = await page.find('va-input-telephone >>> input#inputField');
+    const value = await input.getProperty('value');
+    expect(value).toBe('abcdefg')
+    const error = await page.find('va-input-telephone >>> span#error-message');
+    expect(error.innerText).toContain('phone number in a valid format, for example,');
+  });
 
   it('prefills a country', async () => {
     const page = await newE2EPage();
@@ -60,7 +70,7 @@ describe('va-input-telephone', () => {
     await input.click(); 
     await input.press('Tab');
     const error = await page.find('va-input-telephone >>> span#error-message');
-    expect(error.innerText).toContain('Please enter a phone number');
+    expect(error.innerText).toContain('phone number in a valid format, for example,');
   });
 
   it('shows an error message if contact does not match the form required by the selected country', async () => {
@@ -98,17 +108,6 @@ describe('va-input-telephone', () => {
     expect(flagSpan).not.toBeNull();
   })
 
-  it('emits the vaCountryCode event', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-input-telephone />');
-    const countrySpy = await page.spyOnEvent('vaCountryCode');
-    const input = await page.find('va-input-telephone >>> va-combo-box');
-    await input.click();
-    await input.press('Tab');
-    await input.press('Tab');
-    expect(countrySpy).toHaveReceivedEventDetail({ code: 'US' });
-  });
-
   it('emits the vaContact event', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-input-telephone contact="2345678910" />');
@@ -116,7 +115,24 @@ describe('va-input-telephone', () => {
     const input = await page.find('va-input-telephone >>> va-text-input >>> input');
     await input.click();
     await input.press('Tab');
-    expect(contactSpy).toHaveReceivedEventDetail({ contact: '(234) 567-8910', isValid: true });
+    expect(contactSpy).toHaveReceivedEventDetail({
+      callingCode: '1',
+      contact: '2345678910',
+      countryCode: 'US',
+      isValid: true
+    });
+  });
+
+  it('renders a required span', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-input-telephone required />',
+    );
+
+    const requiredSpan = await page.find(
+      'va-input-telephone >>> span.usa-label--required',
+    );
+    expect(requiredSpan).not.toBeNull();
   });
 
   it('does not render render country select when no-country is true', async () => {
