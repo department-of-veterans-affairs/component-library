@@ -22,7 +22,8 @@ const defaultArgs = {
   country: null,
   'no-country': false,
   hint: "",
-  error: ""
+  error: "",
+  required: false
 };
 
 const Template = ({
@@ -31,7 +32,8 @@ const Template = ({
   contact,
   country,
   error,
-  header
+  header,
+  required
 }) => {
   return (
     <va-input-telephone
@@ -41,6 +43,7 @@ const Template = ({
       contact={contact}
       no-country={noCountry}
       error={error}
+      required={required}
     />
   );
 };
@@ -85,6 +88,12 @@ export const WithHint = Template.bind(null);
 WithHint.args = {
   ...defaultArgs,
   hint: 'Enter a phone number where you can be reached if we have questions about your application',
+}
+
+export const WithRequired = Template.bind(null);
+WithRequired.args = {
+  ...defaultArgs,
+  required: true
 }
 
 export const WithNoCountry = Template.bind(null);

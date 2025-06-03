@@ -30,7 +30,7 @@ export const DATA_MAP = {
     'AQ': 'NF', //Antarctica
     'BV': 'NO', //Bouvet Island
     'TF': 'RE', //French Southern Territories
-    'HM': 'NF', //Heard Island and McDonald Islands,
+    'HM': 'AU', //Heard Island and McDonald Islands,
     'UM': 'US', //United States Minor Outlying Islands
     'PN': 'NZ', //Pitcairn Island
   }
