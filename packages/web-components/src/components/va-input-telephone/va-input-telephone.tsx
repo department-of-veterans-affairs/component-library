@@ -127,7 +127,12 @@ export class VaInputTelephone {
     const asYouType = new AsYouType(_country);
     asYouType.input(example);
     const msg = asYouType.getTemplate();
-    return `Enter a ${this.getCountryName(_country)} phone number in a valid format, for example, [${msg}]`;
+    const countryName = this.getCountryName(_country);
+    const article =
+      ['a', 'e', 'i', 'o'].includes(countryName.charAt(0).toLowerCase())
+      ? 'an'
+      : 'a';
+    return `Enter ${article} ${countryName} phone number in a valid format, for example, [${msg}]`;
   }
 
   // validate the contact and emit the contact and validation state
