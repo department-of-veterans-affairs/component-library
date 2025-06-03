@@ -369,7 +369,6 @@ export namespace Components {
     }
     /**
      * @componentName Button Segmented
-     * @nativeHandler onClick
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -2540,12 +2539,11 @@ declare global {
         new (): HTMLVaButtonPairElement;
     };
     interface HTMLVaButtonSegmentedElementEventMap {
-        "vaChange": any;
+        "vaButtonClick": any;
         "component-library-analytics": any;
     }
     /**
      * @componentName Button Segmented
-     * @nativeHandler onClick
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3963,7 +3961,6 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Button Segmented
-     * @nativeHandler onClick
      * @maturityCategory caution
      * @maturityLevel candidate
      */
@@ -3983,7 +3980,7 @@ declare namespace LocalJSX {
         /**
           * Event emitted when selected button changes (a button is clicked).
          */
-        "onVaChange"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
+        "onVaButtonClick"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
         /**
           * The index of the selected button.
          */
@@ -6083,7 +6080,6 @@ declare module "@stencil/core" {
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
             /**
              * @componentName Button Segmented
-             * @nativeHandler onClick
              * @maturityCategory caution
              * @maturityLevel candidate
              */

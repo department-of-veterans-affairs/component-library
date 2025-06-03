@@ -14,7 +14,6 @@ import { ButtonItem } from './va-button-segmented.types';
 
 /**
  * @componentName Button Segmented
- * @nativeHandler onClick
  * @maturityCategory caution
  * @maturityLevel candidate
  */
@@ -70,7 +69,7 @@ export class VaButtonSegmented {
     composed: true,
     bubbles: true,
   })
-  vaChange: EventEmitter;
+  vaButtonClick: EventEmitter;
 
   /**
    * The event used to track usage of the component.
@@ -111,8 +110,8 @@ export class VaButtonSegmented {
       this.componentLibraryAnalytics.emit(detail);
     }
 
-    // Emit the vaChange event with the selected buttonItem.
-    this.vaChange.emit(buttonItem);
+    // Emit the vaButtonClick event with the selected buttonItem.
+    this.vaButtonClick.emit(buttonItem);
   };
 
   render() {
