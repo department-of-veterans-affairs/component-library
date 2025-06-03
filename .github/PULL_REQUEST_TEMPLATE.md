@@ -1,26 +1,24 @@
 <!-- PR title naming convention:
-'[component-name]: Brief summary of issue suitable for the release notes',
+'[component-name]: brief summary suitable for the release notes',
 -->
 
 ## Chromatic
 <!-- DO NOT REMOVE - This `{{head.ref}}` is a placeholder for a CI job - it will be updated automatically -->
 https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
 
-<!--  DELETE THIS SECTION WHEN COMPLETE -->
-## Configuring this pull request
-- [ ] Add the appropriate [version label](https://github.com/department-of-veterans-affairs/component-library#how-to-choose-a-version-number) to the PR (`major`, `minor`, `patch`, `css-library`, or `ignore-for-release`).
+
+<!-- 🏷️ Add a label to the PR
+
+Label Guidelines:
+    - Review the [version change examples](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#how-to-choose-a-version-number) in the README.
+    - Use `major`, `minor`, `patch` for changes to the `web-components` or `react-components` packages.
+    - Use `css-library` if a file has been changed in the `css-library` package.
     - Use `ignore-for-release` if a file has not been changed in one of the following packages: 
         - `css-library`
         - `web-components`
         - `react-components`
         - `core`
-    - Use `css-library` if a file has been changed in the `css-library` package.
-- [ ] Add additional review groups as needed:
-    - Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
-    - Designer: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
-- [ ] Complete all sections below.
-- [ ] Delete this section once the above configuration steps have been completed.
-
+-->
 
 ## Description
 
@@ -44,18 +42,18 @@ Closes <ticket>
 <!-- If there are any visual changes, screenshots should be added here. -->
 
 ## Required Approvals Before Merging
-See QA Checklists section below for suggested required approvals. Use your best judgment to determine if additional reviews are needed. When in doubt, request a review.
+See QA Checklists section below for suggested required approvals. Use your best judgment if additional reviews are needed. When in doubt, request a review.
 
-**Approval Teams**
-- Engineering: [platform-design-system-fe](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-fe)
-- Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
-- Design: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
+**Approval Groups**
+- [ ] Engineering: [platform-design-system-fe](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-fe)
+- [ ] Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
+- [ ] Design: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
 
 ## QA Checklists
 
-Use these checklists as guides, not rules. Not all checklists will apply to every PR but there could be some overlap.
+Use the QA checklists below as guides, not rules. Not all checklists will apply to every PR but there could be some overlap.
 
-In all scenarios, changes should be tested by the author and verified by the reviewer(s) (e.g. functionality, responsiveness, etc. )
+In all scenarios, changes should be tested by the author and verified by the reviewer(s) (functionality, responsiveness, etc.)
 
 <details>
   <summary>✨ New Component Added</summary>
@@ -109,7 +107,7 @@ In all scenarios, changes should be tested by the author and verified by the rev
   <summary>🚨 Component Fix - Breaking API Change</summary>
 
 - [ ] The PR has the `major` label
-- [ ] vets-website has been checked to determine the impact of the breaking change
+- [ ] vets-website and content-build have been checked to determine the impact of the breaking change
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
 - [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
 - [ ] Tested in vets-website using [Verdaccio](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#local-testing-in-vets-website-with-verdaccio)
@@ -122,7 +120,6 @@ In all scenarios, changes should be tested by the author and verified by the rev
 - [ ] The PR has the `minor` label
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
 - [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
-- [ ] Tested in vets-website using [Verdaccio](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#local-testing-in-vets-website-with-verdaccio)
 - [ ] **Engineering** has approved the PR
 </details>
 
@@ -138,5 +135,6 @@ In all scenarios, changes should be tested by the author and verified by the rev
   <summary>🎨 CSS-Library Update</summary>
 
 - [ ] The PR has the `css-library` label
+- [ ] vets-website and content-build have been checked to determine the impact of any breaking changes
 - [ ] **Engineering** has approved the PR
 </details>
