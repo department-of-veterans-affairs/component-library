@@ -95,7 +95,6 @@ export default {
     itemsHeadlineSlot: false,
     itemsIcon: false,
     accordionItems: items,
-    level: getDefaultPropValue('va-accordion-item', 'level'),
   },
 };
 

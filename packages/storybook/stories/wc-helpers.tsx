@@ -93,7 +93,7 @@ export const propStructure = (comp, subcomp = undefined) => {
       },
       // Assigns the argType to the Properties category
       table: {
-        category: subcomp ? `${subcomp}` : 'Properties',
+        category: subcomp ? subcomp : 'Properties',
         defaultValue: {
           summary: prop.default,
         },
