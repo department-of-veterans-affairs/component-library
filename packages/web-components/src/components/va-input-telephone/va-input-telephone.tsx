@@ -27,7 +27,7 @@ import { DATA_MAP, mapCountry } from './utils';
 /**
  * @componentName Input Telephone
  * @maturityCategory caution
- * @maturityLevel proposal
+ * @maturityLevel candidate
  * @guidanceHref form/input-telephone
  * @translations English
  */
