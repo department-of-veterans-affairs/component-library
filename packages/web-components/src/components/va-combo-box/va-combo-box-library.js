@@ -412,30 +412,98 @@ const changeElementValue = (el, value = '') => {
     const filter = comboBoxEl.dataset.filter || DEFAULT_FILTER;
     const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
 
-    const options = [];
-    for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
-      const optionEl = selectEl.options[i];
-      const optionId = `${listOptionBaseId}${options.length}`;
+    let options = [];
+    const optionsStartsWith = [];
+    const optionsContains = [];
+    const optionList = [...selectEl.options];
 
-      const filterKey = comboBox.isInVaInputTelephone ? 'innerHTML' : 'text';
-      const filterValue = optionEl[filterKey];
-      if (
-        optionEl.value &&
-        (disableFiltering ||
-          isPristine ||
-          !inputValue ||
-          regex.test(filterValue))
-      ) {
-        if (selectEl.value && optionEl.value === selectEl.value) {
-          selectedItemId = optionId;
-        }
+    /**
+     * Builds and sorts options array.
+     *
+     * Option param is passed through regex test before passing into this function.
+     * When filtering is enabled, the array will be sorted by options that start with the query, followed by
+     * options that contain the query.
+     * When filtering is disabled, all options will be included in the array unsorted.
+     *
+     * These array items will populate the list that is displayed to the user after a search query is entered.
+     * Array attributes are also used to set option IDs and aria-setsize attributes.
+     *
+     * @param {HTMLOptionElement} option - Option element from select array
+     */
+    const buildOptionsArray = option => {
+      if (disableFiltering || isPristine) {
+        options.push(option);
+        return;
+      }
 
-        if (disableFiltering && !firstFoundId && regex.test(filterValue)) {
+      const matchStartsWith = option.text.toLowerCase().startsWith(inputValue);
+
+      if (matchStartsWith) {
+        optionsStartsWith.push(option);
+      } else {
+        optionsContains.push(option);
+      }
+
+      options = [...optionsStartsWith, ...optionsContains];
+    };
+
+    /**
+     * Compares option text to query using generated regex filter.
+     *
+     * @param {HTMLOptionElement} option
+     * @returns {boolean} - True when option text matches user input query.
+     */
+    const optionMatchesQuery = option => regex.test(option.text);
+
+    /**
+     * Logic check to determine if options array needs to be updated.
+     *
+     * @param {HTMLOptionElement} option
+     * @returns {boolean} - True when option has value && if filtering is disabled, combo box has an active selection,
+     * there is no inputValue, or if option matches user query
+     */
+    const arrayNeedsUpdate = option =>
+      option.value &&
+      (disableFiltering || isPristine || !inputValue || optionMatchesQuery(option));
+
+    /**
+     * Checks if firstFoundId should be assigned, which is then used to set itemToFocus.
+     *
+     * @param {HTMLOptionElement} option
+     * @return {boolean} - Returns true if filtering is disabled, no firstFoundId is assigned, and the option matches the query.
+     */
+    const isFirstMatch = option =>
+      disableFiltering && !firstFoundId && optionMatchesQuery(option);
+
+    /**
+     * Checks if isCurrentSelection should be assigned, which is then used to set itemToFocus.
+     *
+     * @param {HTMLOptionElement} option
+     * @returns {boolean} - Returns true if option.value matches selectEl.value.
+     */
+    const isCurrentSelection = option =>
+      selectEl.value && option.value === selectEl.value;
+
+    /**
+     * Update the array of options that should be displayed on the page.
+     * Assign an ID to each displayed option.
+     * Identify and assign the option that should receive focus.
+     */
+    optionList.forEach(option => {
+      if (arrayNeedsUpdate(option)) {
+        buildOptionsArray(option);
+
+        const optionId = `${listOptionBaseId}${options.indexOf(option)}`;
+
+        if (isFirstMatch(option)) {
           firstFoundId = optionId;
         }
+
+        if (isCurrentSelection(option)) {
+          selectedItemId = optionId;
+        }
       }
-      options.push(optionEl);
-    }
+    });
 
     const numOptions = options.length;
     let isFocused = false;
@@ -445,7 +513,7 @@ const changeElementValue = (el, value = '') => {
     const optionHtml = options.map((option, index) => {
       const isOptGroup = isDataOptGroup(option);
       const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
-      if (isOptGroup) 
+      if (isOptGroup)
         groupLength += 1;
 
       if (!isOptGroup) {
@@ -487,7 +555,7 @@ const changeElementValue = (el, value = '') => {
       li.setAttribute('tabindex', tabindex);
       li.setAttribute('role', isOptGroup ? 'group' : 'option');
       li.setAttribute('data-value', option.value);
-      
+
       if (comboBox.isInVaInputTelephone) {
         li.innerHTML = Sanitizer.escapeHTML`<div class="flag-wrapper">
         <span class="flag flag-${option.value.toLowerCase()}"></span>
@@ -516,9 +584,9 @@ const changeElementValue = (el, value = '') => {
 
     inputEl.setAttribute('aria-expanded', 'true');
 
-    const getPluralizedMessage = (count, singular, plural) => 
+    const getPluralizedMessage = (count, singular, plural) =>
       count ? `${count} ${count > 1 ? plural : singular} available.` : '';
-  
+
     const groupsStatus = getPluralizedMessage(groupLength, 'group', 'groups');
     const optionsStatus = getPluralizedMessage(optionIndex, 'result', 'results');
 
@@ -607,9 +675,9 @@ const changeElementValue = (el, value = '') => {
 const completeSelection = el => {
     const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
     statusEl.textContent = '';
-  
+
     const inputValue = (inputEl.value || '').trim().toLowerCase();
-  
+
     if (inputValue) {
       // Find a matching option
       const matchingFunc = comboBox.isInVaInputTelephone
@@ -619,7 +687,7 @@ const completeSelection = el => {
         })
         : (option => option.text.toLowerCase() === inputValue)
       const matchingOption = Array.from(selectEl.options).find(matchingFunc)
-  
+
       if (matchingOption) {
         // If a match is found, update the input and select values
         changeElementValue(selectEl, matchingOption.value);
@@ -629,7 +697,7 @@ const completeSelection = el => {
         return;
       }
     }
-  
+
     // If no match is found or input value is empty,
     // clear the select value but maintain the input value.
     // This allows the user to type a value that doesn't exist in the options
@@ -671,7 +739,7 @@ const completeSelection = el => {
     if (nextOptionEl) {
       if (nextOptionEl.getAttribute('role') === 'group') {
         nextOptionEl = nextOptionEl.nextSibling
-      } 
+      }
       highlightOption(comboBoxEl, nextOptionEl);
     }
 
@@ -708,7 +776,7 @@ const completeSelection = el => {
     if (nextOptionEl) {
       if (nextOptionEl.getAttribute('role') === 'group') {
         nextOptionEl = nextOptionEl.nextSibling
-      } 
+      }
       highlightOption(focusedOptionEl, nextOptionEl);
     }
 
@@ -750,7 +818,7 @@ const completeSelection = el => {
     if (nextOptionEl) {
       if (nextOptionEl.getAttribute('role') === 'group') {
         nextOptionEl = nextOptionEl.previousSibling
-      } 
+      }
       highlightOption(focusedOptionEl, nextOptionEl);
     }
 
