@@ -571,9 +571,11 @@ const changeElementValue = (el, value = '') => {
   const selectItem = listOptionEl => {
     const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(listOptionEl);
 
+    // Update the select value after selection
     changeElementValue(selectEl, listOptionEl.dataset.value);
 
-    // Use different text extraction method for telephone inputs
+    // Update the input value after selection
+    // To prevent display error, use different text extraction method for telephone inputs
     if (comboBox.isInVaInputTelephone) {
       // Extract just the flag-text portion or preserve the original input value if re-selecting
       const flagText = listOptionEl.querySelector('.flag-text');

@@ -1,7 +1,5 @@
 // The functions in this file are only used if va-combo-box is inside the va-input-telephone component
 
-// import { truncate } from '../../utils/utils';
-
 /**
  * Calculates the interior width of an element in pixels (total width minus border and padding).
  *
