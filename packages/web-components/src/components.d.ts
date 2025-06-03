@@ -789,7 +789,7 @@ export namespace Components {
     /**
      * @componentName Input Telephone
      * @maturityCategory caution
-     * @maturityLevel proposal
+     * @maturityLevel candidate
      * @guidanceHref form/input-telephone
      * @translations English
      */
@@ -2730,7 +2730,7 @@ declare global {
     /**
      * @componentName Input Telephone
      * @maturityCategory caution
-     * @maturityLevel proposal
+     * @maturityLevel candidate
      * @guidanceHref form/input-telephone
      * @translations English
      */
@@ -4378,7 +4378,7 @@ declare namespace LocalJSX {
     /**
      * @componentName Input Telephone
      * @maturityCategory caution
-     * @maturityLevel proposal
+     * @maturityLevel candidate
      * @guidanceHref form/input-telephone
      * @translations English
      */
@@ -6089,7 +6089,7 @@ declare module "@stencil/core" {
             /**
              * @componentName Input Telephone
              * @maturityCategory caution
-             * @maturityLevel proposal
+             * @maturityLevel candidate
              * @guidanceHref form/input-telephone
              * @translations English
              */
