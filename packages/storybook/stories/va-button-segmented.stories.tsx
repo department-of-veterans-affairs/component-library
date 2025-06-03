@@ -5,7 +5,7 @@ const segmentedButtonDocs = getWebComponentDocs('va-button-segmented');
 
 export default {
   title: 'Components/Button Segmented',
-  id: 'uswds/va-button-segmented',
+  id: 'va-button-segmented',
   parameters: {
     componentSubtitle: 'va-button-segmented web component',
     docs: {
@@ -15,6 +15,7 @@ export default {
 };
 
 const defaultArgs = {
+  'ariaLabel': 'Segmented Button Example.',
   'selected': 0,
   'buttons': [
     { label: 'List', value: 'list' },
@@ -27,13 +28,15 @@ const defaultArgs = {
   }
 };
 
-const Template = ({ 
+const Template = ({
+  ariaLabel,
   buttons, 
   selected,
   vaButtonClick
 }) => {
   return (
     <VaButtonSegmented
+      ariaLabel={ariaLabel}
       buttons={buttons}
       selected={selected}
       onVaButtonClick={vaButtonClick}

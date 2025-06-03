@@ -374,6 +374,10 @@ export namespace Components {
      */
     interface VaButtonSegmented {
         /**
+          * The aria-label for the button group, used for accessibility
+         */
+        "ariaLabel": string;
+        /**
           * An array of objects defining the labels and values for each button.
          */
         "buttons": Array<ButtonItem>;
@@ -3965,6 +3969,10 @@ declare namespace LocalJSX {
      * @maturityLevel candidate
      */
     interface VaButtonSegmented {
+        /**
+          * The aria-label for the button group, used for accessibility
+         */
+        "ariaLabel": string;
         /**
           * An array of objects defining the labels and values for each button.
          */
