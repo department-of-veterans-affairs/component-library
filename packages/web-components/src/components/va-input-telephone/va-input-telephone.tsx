@@ -18,7 +18,7 @@ import {
   getCountryCallingCode,
   parsePhoneNumber,
   PhoneNumber
-} from 'libphonenumber-js/min'; 
+} from 'libphonenumber-js/min';
 import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
 import { i18next } from '../..';
@@ -27,7 +27,7 @@ import { DATA_MAP, mapCountry } from './utils';
 /**
  * @componentName Input Telephone
  * @maturityCategory caution
- * @maturityLevel proposal
+ * @maturityLevel candidate
  * @guidanceHref form/input-telephone
  * @translations English
  */
