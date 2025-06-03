@@ -1,15 +1,11 @@
-<!-- PR title naming convention:
-'[component-name]: brief summary suitable for the release notes',
+<!-- 
+ℹ️ PR title naming convention:
+[component-name]: brief summary suitable for the release notes
 -->
 
-## Chromatic
-<!-- DO NOT REMOVE - This `{{head.ref}}` is a placeholder for a CI job - it will be updated automatically -->
-https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
-
-
-<!-- 🏷️ Add a label to the PR
-
-Label Guidelines:
+<!-- 
+🏷️ PR Setup - Add a label
+Guidelines:
     - Review the [version change examples](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#how-to-choose-a-version-number) in the README.
     - Use `major`, `minor`, `patch` for changes to the `web-components` or `react-components` packages.
     - Use `css-library` if a file has been changed in the `css-library` package.
@@ -20,10 +16,14 @@ Label Guidelines:
         - `core`
 -->
 
+## Chromatic
+<!-- DO NOT REMOVE - This `{{head.ref}}` is a placeholder for a CI job - it will be updated automatically -->
+https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com\
+
 ## Description
 
-<!-- Describe the change and context.
-
+<!-- 
+Describe the change and context.
 Consider:
     - What is relevant to code reviewer(s)?
     - What context may be relevant to a future dev or you in 6 months about this PR?
@@ -32,17 +32,20 @@ Consider:
 
 ## Related Tickets and Links
 
-<!-- Link to any related issues, PRs, Slack conversations, or anything else relevant to documenting the changes.
+<!-- 
+Link to any related issues, PRs, Slack conversations, or anything else relevant to documenting the changes.
 -->
 
 Closes <ticket>
 
 ## Screenshots
 
-<!-- If there are any visual changes, screenshots should be added here. -->
+<!-- 
+If there are any visual changes, screenshots should be added here. 
+-->
 
 ## Required Approvals Before Merging
-See QA Checklists section below for suggested required approvals. Use your best judgment if additional reviews are needed. When in doubt, request a review.
+See the QA Checklists section below for suggested approvals. Use your best judgment if additional reviews are needed. When in doubt, request a review.
 
 **Approval Groups**
 - [ ] Engineering: [platform-design-system-fe](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-fe)
@@ -53,7 +56,7 @@ See QA Checklists section below for suggested required approvals. Use your best 
 
 Use the QA checklists below as guides, not rules. Not all checklists will apply to every PR but there could be some overlap.
 
-In all scenarios, changes should be tested by the author and verified by the reviewer(s) (functionality, responsiveness, etc.)
+In all scenarios, changes should be fully tested by the author and verified by the reviewer(s); functionality, responsiveness, etc.
 
 <details>
   <summary>✨ New Component Added</summary>
@@ -88,7 +91,7 @@ In all scenarios, changes should be tested by the author and verified by the rev
 
 - [ ] The PR has the `patch` label
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
-- [ ] Any markup changes are evaluated for impact on vets-website. Are any tests referencing the changed previous markup?
+- [ ] Any markup changes are evaluated for impact on vets-website. Are any vets-website tests using the markup?
 - [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
 - [ ] **Engineering** has approved the PR
 </details>
@@ -107,7 +110,7 @@ In all scenarios, changes should be tested by the author and verified by the rev
   <summary>🚨 Component Fix - Breaking API Change</summary>
 
 - [ ] The PR has the `major` label
-- [ ] vets-website and content-build have been checked to determine the impact of the breaking change
+- [ ] vets-website and content-build have been evaluated to determine the impact of the breaking change
 - [ ] Any new properties, custom events, or utility functions have e2e and/or unit tests
 - [ ] Any Chromatic UI snapshot changes have been reviewed and approved by a designer if necessary
 - [ ] Tested in vets-website using [Verdaccio](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#local-testing-in-vets-website-with-verdaccio)
