@@ -73,17 +73,17 @@ describe('va-button-segmented', () => {
     expect(shadowContent.trim()).toEqualHtml(`
       <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 1" aria-pressed="true" type="button">
+          <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" type="radio">
             Segment 1
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 2" aria-pressed="false" type="button">
+          <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="false" type="radio">
             Segment 2
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 3" aria-pressed="false" type="button">
+          <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" type="radio">
             Segment 3
           </button>
         </li>
@@ -124,17 +124,17 @@ describe('va-button-segmented', () => {
     expect(shadowContent).toEqualHtml(`
       <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 1" aria-pressed="false" type="button">
+          <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="false" type="radio">
             Segment 1
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 2" aria-pressed="true" type="button">
+          <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="true" type="radio">
             Segment 2
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 3" aria-pressed="false" type="button">
+          <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" type="radio">
             Segment 3
           </button>
         </li>
@@ -162,17 +162,17 @@ describe('va-button-segmented', () => {
     expect(shadowContent).toEqualHtml(`
       <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 1" aria-pressed="true" type="button">
+          <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" type="radio">
             Segment 1
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 2" aria-pressed="false" type="button">
+          <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="false" type="radio">
             Segment 2
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 3" aria-pressed="false" type="button">
+          <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" type="radio">
             Segment 3
           </button>
         </li>
@@ -235,22 +235,22 @@ it('renders a maximum of four buttons', async () => {
   expect(shadowContent).toEqualHtml(`
     <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
       <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-label="Segment 1" aria-pressed="true" type="button">
+        <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" type="radio">
           Segment 1
         </button>
       </li>
       <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-label="Segment 2" aria-pressed="false" type="button">
+        <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="false" type="radio">
           Segment 2
         </button>
       </li>
       <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-label="Segment 3" aria-pressed="false" type="button">
+        <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" type="radio">
           Segment 3
         </button>
       </li>
       <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-label="Segment 4" aria-pressed="false" type="button">
+        <button class="va-segmented-button__button" aria-label="Segment 4" aria-checked="false" type="radio">
           Segment 4
         </button>
       </li>

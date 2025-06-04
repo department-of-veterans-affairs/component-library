@@ -33,7 +33,7 @@
   min-height: 44px;
   background-color: var(--vads-color-base-lighter);
   border: 0;
-  box-shadow: 0 4px 0 0 var(--vads-color-base-lighter); 
+  box-shadow: 0 4px 0 0 var(--vads-color-base-lighter);
   border-radius: 4px;
   margin: 0 4px;
   color: var(--vads-color-base);
@@ -65,26 +65,26 @@
 .va-segmented-button__button:hover {
   background-color: var(--vads-button-color-background-disabled-on-light);
   border-color: var(--vads-button-color-background-disabled-on-light);
-  
+
 }
 
-.va-segmented-button__button:active, .va-segmented-button__button[aria-pressed=true] {
+.va-segmented-button__button:active, .va-segmented-button__button[aria-checked=true] {
   background-color: var(--vads-color-white);
-  box-shadow: 0 4px 0 0 var(--vads-color-white); 
+  box-shadow: 0 4px 0 0 var(--vads-color-white);
   text-shadow: .7px 0px 0px var(--vads-color-base); // Using this instead of font-weight to avoid button resizing and flicker.
-  
+
 }
 
 .va-segmented-button__button:focus {
   background-color: var(--vads-color-action-focus-on-light);
   outline: var(--vads-button-color-background-disabled-on-light);
-  box-shadow: 0 4px 0 0 var(--vads-color-base); 
+  box-shadow: 0 4px 0 0 var(--vads-color-base);
 }
 
-.va-segmented-button__button[aria-pressed=true]:focus,
+.va-segmented-button__button[aria-checked=true]:focus,
 .va-segmented-button__button:active:focus,
-.va-segmented-button__button[aria-pressed="true"]:active:focus {
+.va-segmented-button__button[aria-checked="true"]:active:focus {
   background-color: var(--vads-color-action-focus-on-light);
-  box-shadow: 0 4px 0 0 var(--vads-color-base); 
+  box-shadow: 0 4px 0 0 var(--vads-color-base);
 }
 
