@@ -147,7 +147,7 @@ export class VaButtonSegmented {
                 }}
                 aria-label={buttonItem.label}
                 title={buttonItem.label.length > 20 ? buttonItem.label : ''}
-                type="radio"
+                role="radio"
                 aria-checked={this.selected === index ? 'true' : 'false'}
               >
                 {truncate(buttonItem.label, 145, null)}
