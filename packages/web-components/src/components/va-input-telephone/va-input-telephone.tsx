@@ -291,7 +291,7 @@ export class VaInputTelephone {
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
               <va-combo-box
-                label="Country code"
+                label="Country"
                 name="country-codes"
                 show-input-error="false"
                 error={countryError}
