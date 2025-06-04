@@ -156,8 +156,8 @@ describe('va-combo-box', () => {
     const changeEvent = await page.spyOnEvent('vaSelect');
 
     await input.click();
-    await page.keyboard.press('ArrowDown'); 
-    await page.keyboard.press('Enter'); 
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
     const vaSelectEvent = changeEvent.events[0];
     expect(vaSelectEvent.detail.value).toEqual('foo');
     expect(vaSelectEvent.type).toEqual('vaSelect');
@@ -179,8 +179,8 @@ describe('va-combo-box', () => {
     const changeEvent = await page.spyOnEvent('vaSelect');
 
     await input.click();
-    await page.keyboard.press('ArrowDown'); 
-    await page.keyboard.press('Enter'); 
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
     const vaSelectEvent = changeEvent.events[0];
     expect(vaSelectEvent.detail.value).toEqual('foo');
     expect(vaSelectEvent.type).toEqual('vaSelect');
@@ -328,31 +328,31 @@ describe('va-combo-box', () => {
 
   it('selects matching option on focusout if user-typed text is identical', async () => {
     const page = await newE2EPage();
-  
+
     // Initialize 2 combo boxes, the first with a value of ""
     await page.setContent(`
           <va-combo-box label="label 1" value="">
             <option value="foo">Foo</option>
             <option value="bar">Bar</option>
-          </va-select>
+          </va-combo-box>
           <va-combo-box label="label 2" value="bar">
             <option value="foo">Foo</option>
             <option value="bar">Bar</option>
-          </va-select>
+          </va-combo-box>
         `);
-  
+
     const firstCombo = await page.find('va-combo-box:first-of-type >>> input');
     const secondCombo = await page.find('va-combo-box:last-of-type >>> input');
-  
+
     // Type into the first combo box
     await firstCombo.type('foo');
-  
+
     // Click into the second combo box to focus away from the first
     await secondCombo.click();
-  
+
     // Verify the value of the first combo box has changed to the value of the typed text
     const firstComboValue = await firstCombo.getProperty('value');
-    expect(firstComboValue).toBe('foo');
+    expect(firstComboValue).toBe('Foo');
   });
 
   it('handles search result status aria', async () => {
@@ -369,27 +369,29 @@ describe('va-combo-box', () => {
               <option value="qux">Qux</option>
             </optgroup>
             <option value="quux">Quux</option>
-          </va-select>
+          </va-combo-box>
         `);
 
     const input = await page.find('va-combo-box >>> input');
 
     await input.click();
 
-    await page.keyboard.type('Ba');
     const ariaElement = async () => await page.find('va-combo-box >>> .usa-combo-box__status.usa-sr-only');
-
     const element = await ariaElement();
     expect(element.textContent).toEqualText('2 groups available. 5 results available.');
 
-    await page.keyboard.type('z');
+    await page.keyboard.type('Ba');
     const updatedElement = await ariaElement();
-    expect(updatedElement.textContent).toEqualText('2 groups available. 5 results available.');
+    expect(updatedElement.textContent).toEqualText('2 results available.');
+
+    await page.keyboard.type('z');
+    const updatedElementZ = await ariaElement();
+    expect(updatedElementZ.textContent).toEqualText('1 result available.');
   });
-  
+
   it('sets value to empty when user-typed text does not match any valid options', async () => {
     const page = await newE2EPage();
-  
+
     // Initialize 2 combo boxes, the first with a value of "foo"
     await page.setContent(`
           <va-combo-box label="label 1" value="foo">
@@ -397,22 +399,22 @@ describe('va-combo-box', () => {
             <option value="bar">Bar</option>
           </va-combo-box>
         `);
-  
+
     // Get the entire first va-combo-box element
     const firstComboBox = await page.find('va-combo-box');
     const initialFirstComboBoxValue = await firstComboBox.getProperty('value');
     expect(initialFirstComboBoxValue).toBe('foo');
-  
+
     // Get the input inside the first va-combo-box
     const firstComboInput = await firstComboBox.find('va-combo-box >>> input');
-  
+
     // Type into the combo box input
     await firstComboInput.type('faa');
-    await page.keyboard.press('Enter'); 
-  
+    await page.keyboard.press('Enter');
+
     await page.waitForChanges();
     // Verify the value of the first combo box has been cleared
     const firstComboValue = await firstComboBox.getProperty('value');
     expect(firstComboValue).toBe('');
-  });  
+  });
 });
