@@ -789,7 +789,7 @@ export namespace Components {
     /**
      * @componentName Input Telephone
      * @maturityCategory caution
-     * @maturityLevel proposal
+     * @maturityLevel candidate
      * @guidanceHref form/input-telephone
      * @translations English
      */
@@ -818,6 +818,10 @@ export namespace Components {
           * Whether the country select should be included. Set to true to exclude it.
          */
         "noCountry"?: boolean;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required"?: boolean;
     }
     /**
      * @componentName Language Toggle
@@ -2722,12 +2726,11 @@ declare global {
     };
     interface HTMLVaInputTelephoneElementEventMap {
         "vaContact": any;
-        "vaCountryCode": any;
     }
     /**
      * @componentName Input Telephone
      * @maturityCategory caution
-     * @maturityLevel proposal
+     * @maturityLevel candidate
      * @guidanceHref form/input-telephone
      * @translations English
      */
@@ -4375,7 +4378,7 @@ declare namespace LocalJSX {
     /**
      * @componentName Input Telephone
      * @maturityCategory caution
-     * @maturityLevel proposal
+     * @maturityLevel candidate
      * @guidanceHref form/input-telephone
      * @translations English
      */
@@ -4409,9 +4412,9 @@ declare namespace LocalJSX {
          */
         "onVaContact"?: (event: VaInputTelephoneCustomEvent<any>) => void;
         /**
-          * The event emitted when the country code changes
+          * Render marker indicating field is required.
          */
-        "onVaCountryCode"?: (event: VaInputTelephoneCustomEvent<any>) => void;
+        "required"?: boolean;
     }
     /**
      * @componentName Language Toggle
@@ -6086,7 +6089,7 @@ declare module "@stencil/core" {
             /**
              * @componentName Input Telephone
              * @maturityCategory caution
-             * @maturityLevel proposal
+             * @maturityLevel candidate
              * @guidanceHref form/input-telephone
              * @translations English
              */
