@@ -71,7 +71,7 @@ describe('va-button-segmented', () => {
     );
 
     expect(shadowContent.trim()).toEqualHtml(`
-      <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
+      <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="radiogroup">
         <li class="usa-button-group__item">
           <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" type="radio">
             Segment 1
@@ -122,7 +122,7 @@ describe('va-button-segmented', () => {
     );
 
     expect(shadowContent).toEqualHtml(`
-      <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
+      <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="radiogroup">
         <li class="usa-button-group__item">
           <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="false" type="radio">
             Segment 1
@@ -160,7 +160,7 @@ describe('va-button-segmented', () => {
     );
 
     expect(shadowContent).toEqualHtml(`
-      <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
+      <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="radiogroup">
         <li class="usa-button-group__item">
           <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" type="radio">
             Segment 1
@@ -233,7 +233,7 @@ it('renders a maximum of four buttons', async () => {
   );
 
   expect(shadowContent).toEqualHtml(`
-    <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
+    <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="radiogroup">
       <li class="usa-button-group__item">
         <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" type="radio">
           Segment 1
