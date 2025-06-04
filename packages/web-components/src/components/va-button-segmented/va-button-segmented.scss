@@ -40,7 +40,7 @@
   box-sizing: border-box;
   cursor: pointer;
   font-family: var(--font-source-sans);
-  font-size: var(--font-size-root);
+  font-size: $vads-font-size-source-sans-normalized;
 }
 
 @media screen and (max-width: $tablet) {
@@ -65,7 +65,12 @@
 .va-segmented-button__button:hover {
   background-color: var(--vads-button-color-background-disabled-on-light);
   border-color: var(--vads-button-color-background-disabled-on-light);
+<<<<<<< Updated upstream
 
+=======
+  box-shadow: 0 4px 0 0 var(--vads-button-color-background-disabled-on-light); 
+  
+>>>>>>> Stashed changes
 }
 
 .va-segmented-button__button:active, .va-segmented-button__button[aria-checked=true] {
