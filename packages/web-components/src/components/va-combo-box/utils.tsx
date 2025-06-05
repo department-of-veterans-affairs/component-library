@@ -1,10 +1,8 @@
 // The functions in this file are only used if va-combo-box is inside the va-input-telephone component
 
-import { truncate } from '../../utils/utils';
-
 /**
  * Calculates the interior width of an element in pixels (total width minus border and padding).
- * 
+ *
  * @param element - The HTML element to measure
  * @returns The interior width in pixels
  */
@@ -17,28 +15,6 @@ export function getInteriorWidth(element: HTMLElement): number | null {
 
   return element.clientWidth - paddingLeft - paddingRight;
 }
-
-// get the truncated (if necessary) country name for the input
-export function handleTruncation(text: string, input: HTMLInputElement) {
-    const [country, _prefix] = text.split('+');
-    const prefix = `+${_prefix}`;
-    // find available space
-    const interiorWidth = getInteriorWidth(input);
-    const availableWidth = interiorWidth - 30; // subtract space devoted to button and separator
-
-    //find length of prefix
-    const computedStyle = window.getComputedStyle(input);
-    const fontStyle = `${computedStyle.fontSize} ${computedStyle.fontFamily}`;
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    context.font = fontStyle;
-    const prefixLength = Math.ceil(context.measureText(prefix).width);
-
-    // get truncated country name
-    const truncatedCountry = truncate(country, availableWidth - prefixLength, fontStyle);
-    return `${truncatedCountry}${prefix}`;
-  }
-
 
 // when user is changing country, remove the flag icon in the input
 export function manageFlagIcon() {
@@ -60,7 +36,7 @@ export function handleRerender() {
     if (!!option) {
       const { text } = option as HTMLOptionElement;
       const input = this.el.shadowRoot.querySelector('input');
-      input.value = handleTruncation(text, input);
+      input.value = text;
       const flagSpan = this.el.shadowRoot.querySelector('span.dynamic-flag');
       // remove old flag class
       removeClassByPrefix(flagSpan, 'flag-');
