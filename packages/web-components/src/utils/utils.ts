@@ -332,3 +332,24 @@ export function truncate(text: string, maxWidth: number, fontStyle: string): str
 
   return text.substring(0, best).trim() + ellipsis;
 }
+
+/**
+ * Gets the proper article for a word, either "a" or "an"
+ * based upon first letter of the word
+ * 
+ * @param string - The string that needs an article
+ * @param useUe - Whether to treat a word that starts with "u" as starting with a vowel
+ * @returns Either "a" or "an"
+ */
+export function getArticle(string: string, useU=true): 'a' | 'an' {
+  const vowels = ['a', 'i', 'e', 'o', ];
+
+  // there are cases when we know we will have words that start with "u"
+  // that don't get "an" as an article, e.g. "university"
+  if (useU) {
+    vowels.push('u');
+  }
+
+  const testLetter = string.charAt(0).toLowerCase();
+  return vowels.includes(testLetter) ? 'an' : 'a';
+}

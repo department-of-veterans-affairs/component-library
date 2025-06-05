@@ -23,6 +23,7 @@ import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
 import { i18next } from '../..';
 import { DATA_MAP, mapCountry } from './utils';
+import { getArticle } from '../../utils/utils';
 
 /**
  * @componentName Input Telephone
@@ -127,7 +128,9 @@ export class VaInputTelephone {
     const asYouType = new AsYouType(_country);
     asYouType.input(example);
     const msg = asYouType.getTemplate();
-    return `Enter a ${this.getCountryName(_country)} phone number in a valid format, for example, [${msg}]`;
+    const countryName = this.getCountryName(_country);
+    const article = getArticle(countryName, false);
+    return `Enter ${article} ${countryName} phone number in a valid format, for example, [${msg}]`;
   }
 
   // validate the contact and emit the contact and validation state
