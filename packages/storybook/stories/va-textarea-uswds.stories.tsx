@@ -273,6 +273,13 @@ LabelHeader.args = {
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is example hint text' };
 
+export const WithHintTextAndHeaderLevel = Template.bind(null);
+WithHintTextAndHeaderLevel.args = {
+  ...defaultArgs,
+  hint: 'This is example hint text',
+  'label-header-level': '3',
+};
+
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
