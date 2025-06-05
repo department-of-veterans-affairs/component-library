@@ -45,9 +45,10 @@ const noop = () => {};
    * @param {HTMLInputElement|HTMLSelectElement} el The element to update
    * @param {string} value The new value of the element
    */
-const changeElementValue = (el, value = '') => {
+  const changeElementValue = (el, value = '') => {
     const elementToChange = el;
     elementToChange.value = value;
+
     const event = new CustomEvent('change', {
       bubbles: true,
       cancelable: true,
@@ -247,7 +248,6 @@ const changeElementValue = (el, value = '') => {
     input.setAttribute('type', 'text');
     input.setAttribute('role', 'combobox');
     input.onmouseup = handleMouseUp;
-
     additionalAttributes.forEach(attr =>
       Object.keys(attr).forEach(key => {
         const value = Sanitizer.escapeHTML`${attr[key]}`;
@@ -265,7 +265,7 @@ const changeElementValue = (el, value = '') => {
     comboBoxEl.insertAdjacentHTML(
       'beforeend',
       Sanitizer.escapeHTML`
-      <span class="${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}" tabindex="-1">
+    <span class="${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}" tabindex="-1">
         <button type="button" class="${CLEAR_INPUT_BUTTON_CLASS}" aria-label="Clear the select contents">&nbsp;</button>
       </span>
       <span class="${INPUT_BUTTON_SEPARATOR_CLASS}">&nbsp;</span>
@@ -288,6 +288,7 @@ const changeElementValue = (el, value = '') => {
     if (comboBox.isInVaInputTelephone) {
       comboBoxEl.querySelector(`:scope > span.${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}`).remove();
     }
+
 
     if (selectedOption) {
       const { inputEl } = getComboBoxContext(comboBoxEl);
@@ -413,12 +414,13 @@ const changeElementValue = (el, value = '') => {
     const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
 
     const options = [];
+    let parentOptGroupId = '';
     for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
-
       const filterKey = comboBox.isInVaInputTelephone ? 'innerHTML' : 'text';
       const filterValue = optionEl[filterKey];
+
       if (
         optionEl.value &&
         (disableFiltering ||
@@ -433,8 +435,32 @@ const changeElementValue = (el, value = '') => {
         if (disableFiltering && !firstFoundId && regex.test(filterValue)) {
           firstFoundId = optionId;
         }
+
+        // handle filtering when input contains a value
+        if (
+          inputValue &&
+          regex.test(filterValue) &&
+          optionEl.getAttribute('data-optgroup') !== 'true'
+        ) {
+
+          // Check if the option element is not a header optgroup
+          // and has a header optgroup associated with it
+          if (
+            optionEl.getAttribute('data-optgroup-option') === 'true' &&
+            parentOptGroupId !== optionEl.getAttribute('aria-describedby')
+          ) {
+            // Get an associated header optgroup element
+            parentOptGroupId = optionEl.getAttribute('aria-describedby');
+            const parentOptgroupEl = selectEl.querySelector(
+              '#' + parentOptGroupId,
+            );
+            // Add the header optgroup element first
+            options.push(parentOptgroupEl);
+          }
+        }
+        // Add the option element
+        options.push(optionEl);
       }
-      options.push(optionEl);
     }
 
     const numOptions = options.length;
@@ -495,6 +521,7 @@ const changeElementValue = (el, value = '') => {
       } else {
         li.textContent = option.text;
       }
+
       return li;
     });
 
@@ -620,13 +647,14 @@ const changeElementValue = (el, value = '') => {
    */
 const completeSelection = el => {
     const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
+
     statusEl.textContent = '';
 
     const inputValue = (inputEl.value || '').trim().toLowerCase();
 
     if (inputValue) {
       // Find a matching option
-      const matchingFunc = comboBox.isInVaInputTelephone
+    const matchingFunc = comboBox.isInVaInputTelephone
         ? (option => {
           const [name, _] = inputValue.split('...');
           return option.text.toLowerCase().startsWith(name.toLowerCase());
