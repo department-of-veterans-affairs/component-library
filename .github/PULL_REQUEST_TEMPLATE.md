@@ -44,10 +44,23 @@ Closes <ticket>
 If there are any visual changes, screenshots should be added here. 
 -->
 
-## Required Approvals Before Merging
+## Testing and review
+
+<!--
+Provide any testing instructions or review steps as needed.
+
+For example: 
+- [ ] When you type "+1", the component returns filtered all options with the "+1" country code.
+- [ ] When you type "123", the component returns filtered all options with the "123" area code.
+-->
+
+## Approvals
 See the QA Checklists section below for suggested approvals. Use your best judgment if additional reviews are needed. When in doubt, request a review.
 
 **Approval Groups**
+
+Add approval groups to the PR as needed:
+
 - Engineering: [platform-design-system-fe](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-fe)
 - Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
 - Design: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
