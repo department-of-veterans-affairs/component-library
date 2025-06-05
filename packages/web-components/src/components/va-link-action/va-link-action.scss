@@ -56,6 +56,7 @@
   justify-content: center;
   color: white;
   print-color-adjust: exact; /* Ensures icon color is preserved in print */
+  -webkit-print-color-adjust: exact;
 }
 
 .va-link--primary {
