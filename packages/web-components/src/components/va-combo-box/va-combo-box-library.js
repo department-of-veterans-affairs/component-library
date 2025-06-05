@@ -598,8 +598,22 @@ const noop = () => {};
   const selectItem = listOptionEl => {
     const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(listOptionEl);
 
+    // Update the select value after selection
     changeElementValue(selectEl, listOptionEl.dataset.value);
-    changeElementValue(inputEl, listOptionEl.textContent);
+
+    // Update the input value after selection
+    // To prevent display error, use different text extraction method for telephone inputs
+    if (comboBox.isInVaInputTelephone) {
+      // Extract just the flag-text portion or preserve the original input value if re-selecting
+      const flagText = listOptionEl.querySelector('.flag-text');
+      if (flagText) {
+        changeElementValue(inputEl, flagText.textContent);
+      }
+    } else {
+      // Standard behavior for non-telephone inputs
+      changeElementValue(inputEl, listOptionEl.textContent);
+    }
+
     comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
     hideList(comboBoxEl);
     inputEl.focus();
