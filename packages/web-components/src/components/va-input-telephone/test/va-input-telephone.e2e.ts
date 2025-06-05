@@ -29,6 +29,8 @@ describe('va-input-telephone', () => {
     const page = await newE2EPage();
     await page.setContent('<va-input-telephone contact="abcdefg" />');
     const input = await page.find('va-input-telephone >>> input#inputField');
+    await input.click(); 
+    await input.press('Tab');
     const value = await input.getProperty('value');
     expect(value).toBe('abcdefg')
     const error = await page.find('va-input-telephone >>> span#error-message');
@@ -129,14 +131,13 @@ describe('va-input-telephone', () => {
 
   it('emits the vaContact event', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-input-telephone contact="2345678910" />');
+    await page.setContent('<va-input-telephone />');
     const contactSpy = await page.spyOnEvent('vaContact');
     const input = await page.find('va-input-telephone >>> va-text-input >>> input');
-    await input.click();
-    await input.press('Tab');
+    await input.type('2345678900');
     expect(contactSpy).toHaveReceivedEventDetail({
-      callingCode: '1',
-      contact: '2345678910',
+      callingCode: "1",
+      contact: '2345678900',
       countryCode: 'US',
       isValid: true
     });

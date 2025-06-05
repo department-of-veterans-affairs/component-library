@@ -119,6 +119,7 @@ export class VaInputTelephone {
     const { value } = target;
     this.contact = value;
     this.formattedContact = this.formatContact(value);
+    this.handleEmit();
   }
 
   // get an error message for a country that includes the template of a valid phone number for that country
@@ -134,24 +135,29 @@ export class VaInputTelephone {
   }
 
   // validate the contact and emit the contact and validation state
-  validateContact() {
+  validateContact(setErrors=false) {
     this.resetErrors();
     if (this.country) {
       const _country = mapCountry(this.country);
       this.isValid = !!this.contact
         ? isPossiblePhoneNumber(this.contact, _country)
         : false;
-      this.error = this.isValid
+      // we don't want to set errors on every keystroke, only on blur
+      // but we do want to update the isValid property on every keystroke
+      if (setErrors) {
+         this.error = this.isValid
         ? ''
         : this.getErrorMessageForCountry();
-      this.contactError = this.error;
+        this.contactError = this.error;
+      }
     } else {
-      this.validateCountry();
+      this.validateCountry(setErrors);
     }
-    this.handleEmit();
   }
 
+
   handleEmit() {
+    this.validateContact()
     const tryParse = !!this.contact && !!this.country;
     let phoneNumber: PhoneNumber | null;
     try {
@@ -172,12 +178,12 @@ export class VaInputTelephone {
   }
 
   // make sure country has been selected
-  validateCountry() {
+  validateCountry(setErrors = false) {
+    if (!setErrors) return
     this.resetErrors();
     if (!this.country) {
       this.error = 'Please choose a country';
       this.countryError = this.error;
-      this.handleEmit();
     }
   }
 
@@ -185,7 +191,8 @@ export class VaInputTelephone {
   countryChange(event: CustomEvent<{ value: CountryCode }>) {
     const { value } = event.detail;
     this.country = value;
-    this.validateCountry();
+    this.handleEmit();
+    this.validateContact(true);
   }
 
   formatContact(value: string) {
@@ -193,7 +200,7 @@ export class VaInputTelephone {
     const _country = mapCountry(this.country);
     const _formatted = new AsYouType(_country).input(value);
     // if input has no numbers return it for sake of error correction
-    return _formatted === '' ? value : _formatted
+    return _formatted === '' ? value : _formatted;
   }
 
   // get list of country codes alphabetized by name with US in front
@@ -315,7 +322,7 @@ export class VaInputTelephone {
                 show-input-error="false"
                 error={contactError}
                 onInput={(e) => this.updateContact(e)}
-                onBlur={() => this.validateContact()}
+                onBlur={() => this.validateContact(true)}
               />
             </div>
           </fieldset>
