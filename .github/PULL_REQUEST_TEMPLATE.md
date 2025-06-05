@@ -30,7 +30,7 @@ Consider:
     - Did the course of work lead to notable dead ends? If so, why didn't they pan out?
  -->
 
-## Related Tickets and Links
+## Related tickets and links
 
 <!-- 
 Link to any related issues, PRs, Slack conversations, or anything else relevant to documenting the changes.
@@ -53,7 +53,7 @@ Provide any testing instructions or review steps as needed.
 ## Approvals
 See the QA Checklists section below for suggested approvals. Use your best judgment if additional reviews are needed. When in doubt, request a review.
 
-**Approval Groups**
+**Approval groups**
 
 Add approval groups to the PR as needed:
 
@@ -61,7 +61,7 @@ Add approval groups to the PR as needed:
 - Accessibility: [platform-design-system-a11y](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-a11y)
 - Design: [platform-design-system-designer](https://github.com/orgs/department-of-veterans-affairs/teams/platform-design-system-designers)
 
-## QA Checklists
+## QA checklists
 
 Use the QA checklists below as guides, not rules. Not all checklists will apply to every PR but there could be some overlap.
 
