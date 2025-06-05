@@ -148,10 +148,10 @@ export class VaInputTelephone {
     } else {
       this.validateCountry();
     }
-    this.handelEmit();
+    this.handleEmit();
   }
 
-  handelEmit() {
+  handleEmit() {
     const tryParse = !!this.contact && !!this.country;
     let phoneNumber: PhoneNumber | null;
     try {
@@ -177,9 +177,7 @@ export class VaInputTelephone {
     if (!this.country) {
       this.error = 'Please choose a country';
       this.countryError = this.error;
-      this.handelEmit();
-    } else {
-      this.validateContact();
+      this.handleEmit();
     }
   }
 
