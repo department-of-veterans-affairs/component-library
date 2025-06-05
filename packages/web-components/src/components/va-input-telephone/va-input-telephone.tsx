@@ -148,10 +148,10 @@ export class VaInputTelephone {
     } else {
       this.validateCountry();
     }
-    this.handelEmit();
+    this.handleEmit();
   }
 
-  handelEmit() {
+  handleEmit() {
     const tryParse = !!this.contact && !!this.country;
     let phoneNumber: PhoneNumber | null;
     try {
@@ -177,9 +177,7 @@ export class VaInputTelephone {
     if (!this.country) {
       this.error = 'Please choose a country';
       this.countryError = this.error;
-      this.handelEmit();
-    } else {
-      this.validateContact();
+      this.handleEmit();
     }
   }
 
@@ -204,7 +202,7 @@ export class VaInputTelephone {
     const allButUS = getCountries()
       .filter(country => country !== this.DEFAULT_COUNTRY);
     allButUS.push(...Object.keys(DATA_MAP.countries) as CountryCode[]);
-    
+
     const sortedAllButUs = allButUS.sort((a, b) => {
       const one = this.getCountryName(a);
       const two = this.getCountryName(b);
@@ -272,7 +270,7 @@ export class VaInputTelephone {
       noCountry,
       required
     } = this;
-    
+
     const legendClasses = classNames({
       'usa-legend': true,
       'usa-label--error': !!error
