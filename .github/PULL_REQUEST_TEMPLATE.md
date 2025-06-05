@@ -48,10 +48,6 @@ If there are any visual changes, screenshots should be added here.
 
 <!--
 Provide any testing instructions or review steps as needed.
-
-For example: 
-- [ ] When you type "+1", the component returns filtered all options with the "+1" country code.
-- [ ] When you type "123", the component returns filtered all options with the "123" area code.
 -->
 
 ## Approvals
