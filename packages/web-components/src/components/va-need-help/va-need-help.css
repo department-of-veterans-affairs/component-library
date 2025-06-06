@@ -6,7 +6,7 @@
   border-bottom: 3px solid var(--vads-color-primary);
   margin: 0.3em 0;
   font-family: var(--font-serif);
-  font-size: var(--font-size-h3);
+  font-size: var(--font-size-h1);
   line-height: 1.5;
   font-weight: normal;
 }
