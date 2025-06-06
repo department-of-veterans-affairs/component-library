@@ -8,7 +8,7 @@
   font-family: var(--font-serif);
   font-size: var(--font-size-h3);
   line-height: 1.5;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 ::slotted([slot='content']) {
