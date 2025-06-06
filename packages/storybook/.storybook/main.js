@@ -1,4 +1,5 @@
-import { dirname, join } from "path";
+import { dirname, join } from 'path';
+import { themes } from '@storybook/theming';
 const path = require('path');
 module.exports = {
   stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
@@ -62,6 +63,13 @@ module.exports = {
       title: 'VA Mobile Design System',
       url: 'https://department-of-veterans-affairs.github.io/va-mobile-library',
       expanded: 'false',
+      // parameters: {
+      //   darkMode: {
+      //     dark: { ...themes.dark },
+      //     light: { ...themes.light },
+      //     stylePreview: true,
+      //   },
+      // },
     },
   },
   docs: {
@@ -70,5 +78,5 @@ module.exports = {
 };
 
 function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, "package.json")));
+  return dirname(require.resolve(join(value, 'package.json')));
 }
