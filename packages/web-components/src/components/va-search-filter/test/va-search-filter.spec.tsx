@@ -80,3 +80,11 @@ describe('getTotalActiveFiltersByFacet', () => {
         expect(VaSearchFilter.getTotalActiveFiltersByFacet(activeFilters2)).toBe(0);
     })
 });
+
+describe('getSrOnlyProp', () => {
+    it('returns a singular or pluralized string based on the number of active filters', () => {
+        expect(VaSearchFilter.getSrOnlyProp(1, 'headerSrOnly')).toEqual({ headerSrOnly: 'filter applied' });
+        expect(VaSearchFilter.getSrOnlyProp(2, 'headerSrOnly')).toEqual({ headerSrOnly: 'filters applied' });
+        expect(VaSearchFilter.getSrOnlyProp(0, 'headerSrOnly')).toEqual({});
+    })
+})

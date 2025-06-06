@@ -193,6 +193,7 @@ describe('va-accordion-item', () => {
       </va-accordion-item>`
     );
   });
+
   it("does not render the sub header icon if there is no sub header", async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -220,6 +221,7 @@ describe('va-accordion-item', () => {
       Content inside
     </va-accordion-item>`);
   });
+
   it('passes axe check with subheader icon', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -229,6 +231,27 @@ describe('va-accordion-item', () => {
     await axeCheck(page);
 
   })
+
+  it('adds header text when header prop is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-accordion-item header="My header">Content inside</va-accordion-item>',
+    );
+
+    const header = await page.find('va-accordion-item >>> .va-accordion__header');
+
+    expect(header.textContent).toEqual('My header');
+  })
+
+  it('adds sr-only text to the header when headerSrOnly is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-accordion-item header="My header" header-sr-only="with sr-only text">Content inside</va-accordion-item>',
+    );
+
+    const header = await page.find('va-accordion-item >>> .va-accordion__header');
+    expect(header.textContent).toContain('My header with sr-only text');
+  });
 
   // Skipping Test until fix can be found via ticket 33479
   // Test sometimes succeeds and other times fails
