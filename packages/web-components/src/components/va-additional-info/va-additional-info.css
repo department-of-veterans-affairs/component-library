@@ -8,8 +8,8 @@
 /* Add left side blue border if disable border prop disabled or not present */
 :host(:not([disable-border])) a[aria-expanded='true'] ~ #info,
 :host([disable-border='false']) a[aria-expanded='true'] ~ #info {
-  padding-left: calc(20px - 7px);
-  border-left: 7px solid transparent;
+  padding-left: calc(20px - 4px);
+  border-left: 4px solid transparent;
   border-left-color: var(--vads-color-primary-alt-darkest);
 }
 
