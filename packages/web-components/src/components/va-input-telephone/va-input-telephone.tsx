@@ -23,6 +23,7 @@ import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
 import { i18next } from '../..';
 import { DATA_MAP, mapCountry } from './utils';
+import { getArticle } from '../../utils/utils';
 
 /**
  * @componentName Input Telephone
@@ -127,7 +128,9 @@ export class VaInputTelephone {
     const asYouType = new AsYouType(_country);
     asYouType.input(example);
     const msg = asYouType.getTemplate();
-    return `Enter a ${this.getCountryName(_country)} phone number in a valid format, for example, [${msg}]`;
+    const countryName = this.getCountryName(_country);
+    const article = getArticle(countryName, false);
+    return `Enter ${article} ${countryName} phone number in a valid format, for example, [${msg}]`;
   }
 
   // validate the contact and emit the contact and validation state
@@ -145,10 +148,10 @@ export class VaInputTelephone {
     } else {
       this.validateCountry();
     }
-    this.handelEmit();
+    this.handleEmit();
   }
 
-  handelEmit() {
+  handleEmit() {
     const tryParse = !!this.contact && !!this.country;
     let phoneNumber: PhoneNumber | null;
     try {
@@ -174,9 +177,7 @@ export class VaInputTelephone {
     if (!this.country) {
       this.error = 'Please choose a country';
       this.countryError = this.error;
-      this.handelEmit();
-    } else {
-      this.validateContact();
+      this.handleEmit();
     }
   }
 
@@ -201,7 +202,7 @@ export class VaInputTelephone {
     const allButUS = getCountries()
       .filter(country => country !== this.DEFAULT_COUNTRY);
     allButUS.push(...Object.keys(DATA_MAP.countries) as CountryCode[]);
-    
+
     const sortedAllButUs = allButUS.sort((a, b) => {
       const one = this.getCountryName(a);
       const two = this.getCountryName(b);
@@ -269,7 +270,7 @@ export class VaInputTelephone {
       noCountry,
       required
     } = this;
-    
+
     const legendClasses = classNames({
       'usa-legend': true,
       'usa-label--error': !!error
@@ -293,7 +294,7 @@ export class VaInputTelephone {
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
               <va-combo-box
-                label="Country"
+                label="Country code"
                 name="country-codes"
                 show-input-error="false"
                 error={countryError}

@@ -106,7 +106,26 @@ describe('va-input-telephone', () => {
     await page.waitForChanges();
     const flagSpan = await page.find('va-input-telephone >>> va-combo-box >>> span.flag-af');
     expect(flagSpan).not.toBeNull();
-  })
+  });
+
+  it('handles the a/an in error message appropriately for country starts with a vowel', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-input-telephone country="ID" />');
+    let input = await page.find('va-input-telephone >>> va-text-input >>> input');
+    await input.press('Tab');
+    let error = await page.find('va-input-telephone >>> span#error-message');
+    expect(error.innerText).toContain('Enter an Indonesia');
+  });
+
+  it('handles the a/an in error message appropriately for country doesn\'t start with vowel', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-input-telephone country="FJ" />');
+    await page.waitForChanges();
+    const input = await page.find('va-input-telephone >>> va-text-input >>> input');
+    await input.press('Tab');
+    const error = await page.find('va-input-telephone >>> span#error-message');
+    expect(error.innerText).toContain('Enter a Fiji');
+  });
 
   it('emits the vaContact event', async () => {
     const page = await newE2EPage();
