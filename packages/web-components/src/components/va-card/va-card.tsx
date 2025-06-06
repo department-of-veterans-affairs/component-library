@@ -22,9 +22,22 @@ export class VaCard {
    */
   @Prop() background?: boolean = false;
 
+  /**
+   * If set, displays an icon at the top of the card in a blue circle.
+   * The value should be the icon name to use.
+   */
+  @Prop() withIcon?: string;
+
   render() {
     return (
       <Host>
+        {this.withIcon && (
+          <div class="va-card__icon-wrapper">
+            <span class="va-card__icon-circle">
+              <va-icon icon={this.withIcon} size={5} />
+            </span>
+          </div>
+        )}
         <slot></slot>
       </Host>
     );
