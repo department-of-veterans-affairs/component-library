@@ -5,7 +5,8 @@ import {
   isInteractiveLinkOrButton,
   isMessageSet,
   deepEquals,
-  truncate
+  truncate,
+  getArticle
 } from './utils';
 
 describe('format', () => {
@@ -335,5 +336,19 @@ describe('truncate()', () => {
     const startingText = 'This text is short';
     const truncatedText = truncate(startingText, 200, FONT);
     expect(truncatedText).toEqual(startingText);
+  })
+
+  it('it gets the right article for a string', () => {
+    const appleArticle = getArticle('apple');
+    expect(appleArticle).toEqual('an');
+
+    const dogArticle = getArticle('dog');
+    expect(dogArticle).toEqual('a');
+
+    const universityArticle = getArticle('university', false);
+    expect(universityArticle).toEqual('a');
+
+    const umbrellaArticle = getArticle('umbrella');
+    expect(umbrellaArticle).toEqual('an');
   })
 })
