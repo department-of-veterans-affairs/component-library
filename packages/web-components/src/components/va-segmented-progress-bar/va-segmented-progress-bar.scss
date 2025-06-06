@@ -8,3 +8,16 @@
 *, ::after, ::before {
   box-sizing: border-box;
 }
+
+:host .usa-step-indicator__heading {
+  display: flex;
+}
+
+:host .usa-step-indicator__heading-counter {
+  flex-shrink: 0;
+}
+
+:host .usa-step-indicator__heading-text {
+  text-wrap: wrap;
+  padding-top: calc(-1.1ex + 1.25rem);
+}

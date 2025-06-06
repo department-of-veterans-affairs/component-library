@@ -145,3 +145,9 @@ CustomProgressTerm.args = {
   headerLevel: 2,
   progressTerm: 'Chapter',
 };
+
+export const LongHeaderCausingWrap = Template.bind(null);
+LongHeaderCausingWrap.args = {
+  ...defaultArgs,
+  'heading-text': 'This is a very long header that will cause the text to wrap onto multiple lines, which is useful for testing how the component handles long text in the header.',
+};
