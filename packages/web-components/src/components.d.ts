@@ -379,6 +379,10 @@ export namespace Components {
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
+        /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use.
+         */
+        "withIcon"?: string;
     }
     /**
      * @nativeHandler onBlur
@@ -3924,6 +3928,10 @@ declare namespace LocalJSX {
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
+        /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use.
+         */
+        "withIcon"?: string;
     }
     /**
      * @nativeHandler onBlur

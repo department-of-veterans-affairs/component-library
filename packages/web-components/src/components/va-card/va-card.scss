@@ -1,5 +1,6 @@
 :host {
   display: block;
+  position: relative;
   border: 1px solid var(--vads-color-gray-medium);
   background-color: var(--vads-color-white);
   padding: 16px;
@@ -16,4 +17,39 @@
 :host([background]:not([background='false'])) {
   background-color: var(--vads-color-base-lightest);
   border: none;
+}
+
+.va-card__icon-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.va-card__icon-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--vads-color-primary-darker);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.va-card__icon-circle va-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vads-color-white);
+}
+
+:host([with-icon]:not([with-icon=''])) {
+  padding-top: 44px;
+  margin-top: 28px;
 }
