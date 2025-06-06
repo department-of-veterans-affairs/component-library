@@ -1,6 +1,5 @@
 name: 'Chromatic'
 
-# Run on non-draft PRs and pushes to main
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
@@ -37,4 +36,4 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           skip: 'dependabot/**'
-          autoAcceptChanges: "main" # This will automatically accept all changes on the main branch
+          autoAcceptChanges: "main"
