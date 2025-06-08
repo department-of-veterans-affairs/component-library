@@ -139,7 +139,8 @@ describe('va-input-telephone', () => {
       callingCode: "1",
       contact: '2345678900',
       countryCode: 'US',
-      isValid: true
+      isValid: true,
+      error: null
     });
   });
 

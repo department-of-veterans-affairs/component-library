@@ -23,7 +23,8 @@ const defaultArgs = {
   'no-country': false,
   hint: "",
   error: "",
-  required: false
+  required: false,
+  label: "",
 };
 
 const Template = ({
@@ -32,13 +33,13 @@ const Template = ({
   contact,
   country,
   error,
-  header,
+  label,
   required
 }) => {
   return (
     <va-input-telephone
       hint={hint}
-      header={header}
+      label={label}
       country={country}
       contact={contact}
       no-country={noCountry}
@@ -66,10 +67,10 @@ WithCountry.args = {
   country: "MX"
 }
 
-export const WithCustomHeader = Template.bind(null);
-WithCustomHeader.args = {
+export const WithCustomLabel = Template.bind(null);
+WithCustomLabel.args = {
   ...defaultArgs,
-  header: 'Secondary phone number'
+  label: 'Secondary phone number'
 }
 
 export const WithCustomError = Template.bind(null);
