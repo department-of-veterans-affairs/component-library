@@ -16,11 +16,12 @@ export default {
 const defaultArgs = {
   'show-shadow': false,
   'background': false,
-  'with-icon': '',
+  'icon-name': '',
 };
 
-const Template = ({ 'show-shadow': showShadow, 'background': background, 'with-icon': withIcon }) => (
-  <va-card show-shadow={showShadow} background={background} with-icon={withIcon}>
+const Template = ({ 'show-shadow': showShadow, 'background': background, 'icon-name': iconName }) => (
+  <va-card show-shadow={showShadow} background={background} icon-name={iconName}>
+    <h3>Example card title</h3>
     <p>Example card content</p>
   </va-card>
 );
@@ -46,11 +47,11 @@ withDropShadow.args = {
 export const withIcon = Template.bind(null);
 withIcon.args = {
   ...defaultArgs,
-  'with-icon': 'location_city',
+  'icon-name': 'location_city',
 };
 withIcon.argTypes = {
   ...propStructure(cardDocs),
-  'with-icon': {
+  'icon-name': {
     control: 'text',
     description: 'Displays an icon at the top of the card in a blue circle. Value is the icon name.',
   },

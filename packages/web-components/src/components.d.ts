@@ -376,13 +376,13 @@ export namespace Components {
          */
         "background"?: boolean;
         /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
+        /**
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
-        /**
-          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use.
-         */
-        "withIcon"?: string;
     }
     /**
      * @nativeHandler onBlur
@@ -3925,13 +3925,13 @@ declare namespace LocalJSX {
          */
         "background"?: boolean;
         /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
+        /**
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
-        /**
-          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use.
-         */
-        "withIcon"?: string;
     }
     /**
      * @nativeHandler onBlur

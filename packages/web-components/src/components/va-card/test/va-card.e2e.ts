@@ -63,9 +63,9 @@ describe('va-card', () => {
         await axeCheck(page);
       });
       
-    it('renders an icon in a blue circle when with-icon is set', async () => {
+    it('renders an icon in a blue circle when icon-name is set', async () => {
         const page = await newE2EPage();
-        await page.setContent('<va-card with-icon="check"></va-card>');
+        await page.setContent('<va-card icon-name="check"></va-card>');
         const iconWrapper = await page.find('va-card >>> .va-card__icon-wrapper');
         const iconCircle = await page.find('va-card >>> .va-card__icon-circle');
         const vaIcon = await page.find('va-card >>> va-icon');

@@ -3,7 +3,7 @@
   position: relative;
   border: 1px solid var(--vads-color-gray-medium);
   background-color: var(--vads-color-white);
-  padding: 16px;
+  padding: var(--vads-spacing-2);
 }
 
 :host([show-shadow]:not([show-shadow='false'])),
@@ -49,7 +49,13 @@
   color: var(--vads-color-white);
 }
 
-:host([with-icon]:not([with-icon=''])) {
-  padding-top: 44px;
+:host([icon-name]:not([icon-name=''])) {
+  padding-top: var(--vads-spacing-4);
   margin-top: 28px;
+}
+
+/* Increase specificity for headings in cards with icons to override typography styles */
+:host([icon-name]:not([icon-name=''])) ::slotted(h2),
+:host([icon-name]:not([icon-name=''])) ::slotted(h3) {
+  margin-top: var(--vads-spacing-1) !important;
 }

@@ -24,17 +24,17 @@ export class VaCard {
 
   /**
    * If set, displays an icon at the top of the card in a blue circle.
-   * The value should be the icon name to use.
+   * The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
    */
-  @Prop() withIcon?: string;
+  @Prop() iconName?: string;
 
   render() {
     return (
       <Host>
-        {this.withIcon && (
+        {this.iconName && (
           <div class="va-card__icon-wrapper">
             <span class="va-card__icon-circle">
-              <va-icon icon={this.withIcon} size={5} />
+              <va-icon icon={this.iconName} size={5} />
             </span>
           </div>
         )}
