@@ -143,7 +143,6 @@ export class VaButtonSegmented {
       e.preventDefault();
     }
     if (nextIndex !== index) {
-      this.selected = nextIndex;
       // Find all button elements in the group and focus the next one
       const host = this.el.shadowRoot || this.el;
       const btns = host.querySelectorAll('button.va-segmented-button__button');
