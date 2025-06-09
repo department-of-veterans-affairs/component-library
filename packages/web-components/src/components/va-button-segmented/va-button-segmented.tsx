@@ -183,6 +183,7 @@ export class VaButtonSegmented {
                 title={buttonItem.label.length > 20 ? buttonItem.label : ''}
                 role="radio"
                 aria-checked={this.selected === index ? 'true' : 'false'}
+                tabIndex={this.selected === index ? 0 : -1}
               >
                 {truncate(buttonItem.label, 145, null)}
               </button>
