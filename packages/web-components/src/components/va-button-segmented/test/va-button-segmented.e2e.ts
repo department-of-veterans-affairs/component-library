@@ -276,3 +276,45 @@ it(`fires click event`, async () => {
     expect(clickSpy).toHaveReceivedEventTimes(1);
     expect(clickSpy.events[0].detail.value).toEqual('segment-2');
   });
+
+it('shifts focus to the next and previous buttons on arrow key press', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-button-segmented></va-button-segmented>`);
+
+    await page.$eval('va-button-segmented', (elm, exampleAriaLabel, buttonsData) => {
+      elm.ariaLabel = exampleAriaLabel;
+      elm.buttons = buttonsData;
+    }, exampleAriaLabel, buttonsData);
+
+    await page.waitForChanges();
+    const buttons = await page.findAll('va-button-segmented >>> button');
+    // Focus the first button
+    await buttons[0].focus();
+    // Press ArrowRight to move to the next button
+    await buttons[0].press('ArrowRight');
+    await page.waitForChanges();
+    const isFocused1 = await page.evaluate(() => {
+      const root = document.querySelector('va-button-segmented').shadowRoot;
+      const btns = Array.from(root.querySelectorAll('button'));
+      return root.activeElement === btns[1];
+    });
+    expect(isFocused1).toBe(true);
+    // Press ArrowLeft to move back to the first button
+    await buttons[1].press('ArrowLeft');
+    await page.waitForChanges();
+    const isFocused0 = await page.evaluate(() => {
+      const root = document.querySelector('va-button-segmented').shadowRoot;
+      const btns = Array.from(root.querySelectorAll('button'));
+      return root.activeElement === btns[0];
+    });
+    expect(isFocused0).toBe(true);
+    // Press ArrowLeft on the first button to wrap to the last button
+    await buttons[0].press('ArrowLeft');
+    await page.waitForChanges();
+    const isFocusedLast = await page.evaluate(() => {
+      const root = document.querySelector('va-button-segmented').shadowRoot;
+      const btns = Array.from(root.querySelectorAll('button'));
+      return root.activeElement === btns[btns.length - 1];
+    });
+    expect(isFocusedLast).toBe(true);
+});
