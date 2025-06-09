@@ -9,9 +9,9 @@ import {
 
 const accordionDocs = getWebComponentDocs('va-accordion');
 const accordionItemDocs = getWebComponentDocs('va-accordion-item');
-const subcomponentName = 'va-accordion-item';
 const defaultItemValues = {
   open: getDefaultPropValue('va-accordion-item', 'open'),
+  subheader: getDefaultPropValue('va-accordion-item', 'subheader')
 };
 
 const items = [
@@ -19,7 +19,6 @@ const items = [
     ...defaultItemValues,
     id: 'first',
     header: 'First Amendment',
-
     body: 'Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances.',
   },
   {
@@ -47,7 +46,7 @@ export default {
   },
   argTypes: {
     ...propStructure(accordionDocs),
-    ...propStructure(accordionItemDocs, subcomponentName),
+    ...propStructure(accordionItemDocs, 'va-accordion-item'),
     i18n: {
       name: 'Add internationalization buttons',
       description: 'Adds buttons to change the language of the component',
@@ -57,13 +56,13 @@ export default {
     accordionItems: {
       name: 'va-accordion-item: content',
       description: 'Content and props for the accordion items',
-      table: { category: subcomponentName },
+      table: { category: 'va-accordion-item' },
     },
     itemsIcon: {
       name: 'va-accordion-item: add header icons',
       description: 'Add header and subheader icons via a slot',
       control: { type: 'boolean' },
-      table: { category: subcomponentName },
+      table: { category: 'va-accordion-item' },
     },
     itemsHeadlineSlot: {
       table: { disable: true },
@@ -73,7 +72,7 @@ export default {
       description: 'Set heading level for all accordion items',
       control: { type: 'number', min: 1, max: 6 },
       table: {
-        category: subcomponentName,
+        category: 'va-accordion-item',
         defaultValue: {
           summary: getDefaultPropValue('va-accordion-item', 'level'),
         },
@@ -131,8 +130,6 @@ const Template = args => {
             subheader={
               accordion.subheader
                 ? accordion.subheader
-                : args.itemsIcon
-                ? 'Subheader'
                 : undefined
             }
             level={args.level ? args.level : undefined}
@@ -178,6 +175,10 @@ Subheader.args = {
 export const IconHeaders = Template.bind(null);
 IconHeaders.args = {
   itemsIcon: true,
+  accordionItems: items.map(item => ({
+    ...item,
+    subheader: 'Subheader',
+  })),
 };
 
 export const HeadlineSlot = Template.bind(null);
@@ -186,7 +187,7 @@ HeadlineSlot.argTypes = {
     name: 'va-accordion-item: use headline slot',
     description: 'Add the header via a slot',
     control: { type: 'boolean' },
-    table: { disable: false, category: subcomponentName },
+    table: { disable: false, category: 'va-accordion-item' },
   },
 };
 HeadlineSlot.args = {
