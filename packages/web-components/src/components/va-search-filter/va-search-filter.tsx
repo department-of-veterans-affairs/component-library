@@ -308,7 +308,7 @@ export class VaSearchFilter {
         <Host>
           <h2 id="header">{header}{totalActiveFilters > 0 ? ` (${totalActiveFilters})` : ''}
             {totalActiveFilters > 0 && (
-              <span class="usa-sr-only"> applied</span>
+              <span class="usa-sr-only">&nbsp;applied</span>
             )}
           </h2>
           {filterOptions.length > 0 && (

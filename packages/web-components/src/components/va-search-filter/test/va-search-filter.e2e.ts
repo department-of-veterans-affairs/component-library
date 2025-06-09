@@ -307,7 +307,7 @@ describe('va-search-filter', () => {
     // Get the h2 element
     const h2 = await page.find('va-search-filter >>> h2');
     const text = await h2.getProperty('textContent');
-    expect(text).toBe('Filters (3) applied');
+    expect(text).toBe('Filters (3) applied');
   });
 
   it('adds the correct headerSrOnly text to the va-accordion-item prop - desktop', async () => {
