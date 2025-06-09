@@ -344,7 +344,7 @@ export class VaSearchFilter {
           <va-accordion class="va-search-filter__accordion">
             <va-accordion-item
               header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')}
-              {...VaSearchFilter.getSrOnlyProp(totalActiveFilters, 'headerSrOnly')}
+              headerSrOnly="applied"
               open
             >
               <span slot="icon"><va-icon icon="filter_list" /></span>
