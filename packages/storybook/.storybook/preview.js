@@ -27,7 +27,6 @@ import {
   applyPolyfills,
   defineCustomElements,
 } from '@department-of-veterans-affairs/component-library';
-import { themes } from '@storybook/theming';
 
 applyPolyfills().then(() => {
   defineCustomElements();
@@ -102,11 +101,13 @@ const viewports = {
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
-  darkMode: {
-    dark: { ...themes.dark },
-    light: { ...themes.light },
-    stylePreview: true,
-  },
+
+  // darkMode: {
+  //   dark: { ...themes.dark },
+  //   light: { ...themes.light },
+  //   stylePreview: true,
+  // },
+
   options: {
     storySort: {
       method: 'alphabetical',
@@ -120,11 +121,20 @@ export const parameters = {
       ],
     },
   },
+
   viewport: {
-    viewports,
-    defaultViewport: 'small',
-  },
+      options: viewports,
+    },
+
   viewMode: 'docs',
+
+  docs: {
+    codePanel: true
+  }
+};
+
+export const initialGlobals = {
+  viewport: { value: 'small' },
 };
 
 export const decorators = [
@@ -164,3 +174,4 @@ const observeDocsRoot = () => {
 document.body.onload = function () {
   observeDocsRoot();
 };
+export const tags = ['autodocs'];
