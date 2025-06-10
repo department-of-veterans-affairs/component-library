@@ -73,17 +73,17 @@ describe('va-button-segmented', () => {
     expect(shadowContent.trim()).toEqualHtml(`
       <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="radiogroup">
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" role="radio">
+          <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" role="radio" tabindex="0">
             Segment 1
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="false" role="radio">
+          <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="false" role="radio" tabindex="-1">
             Segment 2
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" role="radio">
+          <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" role="radio" tabindex="-1">
             Segment 3
           </button>
         </li>
@@ -124,17 +124,17 @@ describe('va-button-segmented', () => {
     expect(shadowContent).toEqualHtml(`
       <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="radiogroup">
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="false" role="radio">
+          <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="false" role="radio" tabindex="-1">
             Segment 1
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="true" role="radio">
+          <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="true" role="radio" tabindex="0">
             Segment 2
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" role="radio">
+          <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" role="radio" tabindex="-1">
             Segment 3
           </button>
         </li>
@@ -162,17 +162,17 @@ describe('va-button-segmented', () => {
     expect(shadowContent).toEqualHtml(`
       <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="radiogroup">
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" role="radio">
+          <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" role="radio" tabindex="0">
             Segment 1
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="false" role="radio">
+          <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="false" role="radio" tabindex="-1">
             Segment 2
           </button>
         </li>
         <li class="usa-button-group__item">
-          <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" role="radio">
+          <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" role="radio" tabindex="-1">
             Segment 3
           </button>
         </li>
@@ -235,22 +235,22 @@ it('renders a maximum of four buttons', async () => {
   expect(shadowContent).toEqualHtml(`
     <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="radiogroup">
       <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" role="radio">
+        <button class="va-segmented-button__button" aria-label="Segment 1" aria-checked="true" role="radio" tabindex="0">
           Segment 1
         </button>
       </li>
       <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="false" role="radio">
+        <button class="va-segmented-button__button" aria-label="Segment 2" aria-checked="false" role="radio" tabindex="-1">
           Segment 2
         </button>
       </li>
       <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" role="radio">
+        <button class="va-segmented-button__button" aria-label="Segment 3" aria-checked="false" role="radio" tabindex="-1">
           Segment 3
         </button>
       </li>
       <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-label="Segment 4" aria-checked="false" role="radio">
+        <button class="va-segmented-button__button" aria-label="Segment 4" aria-checked="false" role="radio" tabindex="-1">
           Segment 4
         </button>
       </li>
@@ -259,62 +259,62 @@ it('renders a maximum of four buttons', async () => {
 });
 
 it(`fires click event`, async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-button-segmented></va-button-segmented>`);
+  const page = await newE2EPage();
+  await page.setContent(`<va-button-segmented></va-button-segmented>`);
 
-    // Select the component within the page and add buttons property to it
-    await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, buttonsData) => {
-      elm.ariaLabel = exampleAriaLabel;
-      elm.buttons = buttonsData;
-    }, exampleAriaLabel, buttonsData);
+  // Select the component within the page and add buttons property to it
+  await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, buttonsData) => {
+    elm.ariaLabel = exampleAriaLabel;
+    elm.buttons = buttonsData;
+  }, exampleAriaLabel, buttonsData);
 
-    // Wait for the changes to be processed and grab the shadow content
-    await page.waitForChanges();
-    const clickSpy = await page.spyOnEvent('vaButtonClick');
-    const button = await page.findAll('va-button-segmented >>> button');
-    await button[1].click();
-    expect(clickSpy).toHaveReceivedEventTimes(1);
-    expect(clickSpy.events[0].detail.value).toEqual('segment-2');
-  });
+  // Wait for the changes to be processed and grab the shadow content
+  await page.waitForChanges();
+  const clickSpy = await page.spyOnEvent('vaButtonClick');
+  const button = await page.findAll('va-button-segmented >>> button');
+  await button[1].click();
+  expect(clickSpy).toHaveReceivedEventTimes(1);
+  expect(clickSpy.events[0].detail.value).toEqual('segment-2');
+});
 
 it('shifts focus to the next and previous buttons on arrow key press', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-button-segmented></va-button-segmented>`);
+  const page = await newE2EPage();
+  await page.setContent(`<va-button-segmented></va-button-segmented>`);
 
-    await page.$eval('va-button-segmented', (elm, exampleAriaLabel, buttonsData) => {
-      elm.ariaLabel = exampleAriaLabel;
-      elm.buttons = buttonsData;
-    }, exampleAriaLabel, buttonsData);
+  await page.$eval('va-button-segmented', (elm, exampleAriaLabel, buttonsData) => {
+    elm.ariaLabel = exampleAriaLabel;
+    elm.buttons = buttonsData;
+  }, exampleAriaLabel, buttonsData);
 
-    await page.waitForChanges();
-    const buttons = await page.findAll('va-button-segmented >>> button');
-    // Focus the first button
-    await buttons[0].focus();
-    // Press ArrowRight to move to the next button
-    await buttons[0].press('ArrowRight');
-    await page.waitForChanges();
-    const isFocused1 = await page.evaluate(() => {
-      const root = document.querySelector('va-button-segmented').shadowRoot;
-      const btns = Array.from(root.querySelectorAll('button'));
-      return root.activeElement === btns[1];
-    });
-    expect(isFocused1).toBe(true);
-    // Press ArrowLeft to move back to the first button
-    await buttons[1].press('ArrowLeft');
-    await page.waitForChanges();
-    const isFocused0 = await page.evaluate(() => {
-      const root = document.querySelector('va-button-segmented').shadowRoot;
-      const btns = Array.from(root.querySelectorAll('button'));
-      return root.activeElement === btns[0];
-    });
-    expect(isFocused0).toBe(true);
-    // Press ArrowLeft on the first button to wrap to the last button
-    await buttons[0].press('ArrowLeft');
-    await page.waitForChanges();
-    const isFocusedLast = await page.evaluate(() => {
-      const root = document.querySelector('va-button-segmented').shadowRoot;
-      const btns = Array.from(root.querySelectorAll('button'));
-      return root.activeElement === btns[btns.length - 1];
-    });
-    expect(isFocusedLast).toBe(true);
+  await page.waitForChanges();
+  const buttons = await page.findAll('va-button-segmented >>> button');
+  // Focus the first button
+  await buttons[0].focus();
+  // Press ArrowRight to move to the next button
+  await buttons[0].press('ArrowRight');
+  await page.waitForChanges();
+  const isFocused1 = await page.evaluate(() => {
+    const root = document.querySelector('va-button-segmented').shadowRoot;
+    const btns = Array.from(root.querySelectorAll('button'));
+    return root.activeElement === btns[1];
+  });
+  expect(isFocused1).toBe(true);
+  // Press ArrowLeft to move back to the first button
+  await buttons[1].press('ArrowLeft');
+  await page.waitForChanges();
+  const isFocused0 = await page.evaluate(() => {
+    const root = document.querySelector('va-button-segmented').shadowRoot;
+    const btns = Array.from(root.querySelectorAll('button'));
+    return root.activeElement === btns[0];
+  });
+  expect(isFocused0).toBe(true);
+  // Press ArrowLeft on the first button to wrap to the last button
+  await buttons[0].press('ArrowLeft');
+  await page.waitForChanges();
+  const isFocusedLast = await page.evaluate(() => {
+    const root = document.querySelector('va-button-segmented').shadowRoot;
+    const btns = Array.from(root.querySelectorAll('button'));
+    return root.activeElement === btns[btns.length - 1];
+  });
+  expect(isFocusedLast).toBe(true);
 });
