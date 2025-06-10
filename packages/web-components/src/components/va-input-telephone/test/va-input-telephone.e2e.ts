@@ -138,6 +138,7 @@ describe('va-input-telephone', () => {
     expect(contactSpy).toHaveReceivedEventDetail({
       callingCode: "1",
       contact: '2345678900',
+      contactLength: 10,
       countryCode: 'US',
       isValid: true,
       error: null
