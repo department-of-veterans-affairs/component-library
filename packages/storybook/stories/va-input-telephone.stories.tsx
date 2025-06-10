@@ -1,9 +1,12 @@
+import { useEffect, useState } from 'react';
+import { VaInputTelephone } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
 } from './wc-helpers';
 
+VaInputTelephone.displayName = 'VaLanguageToggle';
 const inputTelephoneDocs = getWebComponentDocs('va-input-telephone');
 
 export default {
@@ -79,11 +82,22 @@ WithCustomError.args = {
   error: 'This is a custom error message'
 }
 
-export const WithPhoneFormatError = Template.bind(null);
-WithPhoneFormatError.args = {
-  ...defaultArgs,
-  contact: "234"
-}
+
+const WithPhoneFormatTemplate = () => {
+
+  const [err, setErr] = useState('');
+  useEffect(() => {
+    setTimeout(() => {
+      setErr('Enter a United States of America phone number in a valid format, for example, (xxx) xxx-xxxx');
+    }, 100);
+  }, []);
+
+  return (
+    <VaInputTelephone contact="234" error={err} />
+  );
+};
+
+export const WithPhoneFormatError = WithPhoneFormatTemplate.bind(null);
 
 export const WithHint = Template.bind(null);
 WithHint.args = {
