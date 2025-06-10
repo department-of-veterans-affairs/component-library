@@ -65,6 +65,7 @@ const Template = ({
   tty,
   sms,
   'message-aria-describedby': messageAriaDescribedBy,
+  'disable-analytics': disableAnalytics = false,
 }) => {
   return (
     <div>
@@ -81,6 +82,7 @@ const Template = ({
         tty={tty}
         sms={sms}
         message-aria-describedby={messageAriaDescribedBy}
+        disable-analytics={disableAnalytics}
       ></va-telephone>
     </div>
   );
@@ -95,6 +97,7 @@ const defaultArgs = {
   'tty': false,
   'sms': false,
   'vanity': undefined,
+  'disable-analytics': false,
 };
 
 export const Default = Template.bind(null);

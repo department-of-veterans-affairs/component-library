@@ -71,6 +71,11 @@ export class VaTelephone {
   @Prop() messageAriaDescribedby?: string;
 
   /**
+   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+   */
+  @Prop() disableAnalytics?: boolean = false;
+
+  /**
    * The event used to track usage of the component. This is emitted when
    * clicking on an anchor link.
    */
@@ -179,15 +184,21 @@ export class VaTelephone {
   }
   /* eslint-enable i18next/no-literal-string */
 
+  /**
+   * Handle click event on the telephone link.
+   * Emits an analytics event if `disableAnalytics` is false.
+   */
   private handleClick(): void {
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-telephone',
-      action: 'click',
-      details: {
-        contact: this.contact,
-        extension: this.extension,
-      },
-    });
+    if (!this.disableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-telephone',
+        action: 'click',
+        details: {
+          contact: this.contact,
+          extension: this.extension,
+        },
+      });
+    }
   }
 
   render() {
