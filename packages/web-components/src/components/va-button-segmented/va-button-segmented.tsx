@@ -16,6 +16,7 @@ import { ButtonItem } from './va-button-segmented.types';
  * @componentName Button Segmented
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @guidanceHref button/button-segmented
  */
 @Component({
   tag: 'va-button-segmented',

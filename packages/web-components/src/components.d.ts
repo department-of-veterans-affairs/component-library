@@ -371,6 +371,7 @@ export namespace Components {
      * @componentName Button Segmented
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref button/button-segmented
      */
     interface VaButtonSegmented {
         /**
@@ -2554,6 +2555,7 @@ declare global {
      * @componentName Button Segmented
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref button/button-segmented
      */
     interface HTMLVaButtonSegmentedElement extends Components.VaButtonSegmented, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaButtonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButtonSegmentedElement, ev: VaButtonSegmentedCustomEvent<HTMLVaButtonSegmentedElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3971,6 +3973,7 @@ declare namespace LocalJSX {
      * @componentName Button Segmented
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref button/button-segmented
      */
     interface VaButtonSegmented {
         /**
@@ -6098,6 +6101,7 @@ declare module "@stencil/core" {
              * @componentName Button Segmented
              * @maturityCategory caution
              * @maturityLevel candidate
+             * @guidanceHref button/button-segmented
              */
             "va-button-segmented": LocalJSX.VaButtonSegmented & JSXBase.HTMLAttributes<HTMLVaButtonSegmentedElement>;
             /**
