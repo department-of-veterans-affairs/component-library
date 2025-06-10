@@ -165,6 +165,12 @@ export class VaModal {
   @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
 
   /**
+   * The id of the element that labels the modal. Should only be applied to corresponding
+   * attribute on the modal element if a value is not passed to the `modalTitle` prop.
+   */
+  @Prop() ariaLabelledby?: string;
+
+  /**
    * Local state to track if the shift key is pressed
    */
   @State() shifted: boolean = false;
@@ -425,16 +431,31 @@ export class VaModal {
       visible,
       forcedModal,
       unstyled,
+      ariaLabelledby,
     } = this;
 
     if (!visible) return null;
 
+    // Determine if the modal title exists and is not empty.
+    const modalTitleExists = modalTitle && modalTitle !== '';
+
     const ariaLabel =
-      modalTitle && modalTitle !== '' ? `${modalTitle} modal` : null;
+      modalTitleExists ? `${modalTitle} modal` : null;
     /* eslint-enable i18next/no-literal-string */
     const btnAriaLabel = modalTitle
       ? `Close ${modalTitle} modal`
       : 'Close modal';
+
+    // Set dynamic attributes for aria-label or aria-labelledby
+    // based on the presence of modalTitle or ariaLabelledby. If modalTitle is passed
+    // it should take precedence over ariaLabelledby.
+    const dynamicAttributes = {};
+    if (ariaLabel) {
+      dynamicAttributes['aria-label'] = ariaLabel;
+    }
+    else if (ariaLabelledby && !modalTitleExists) {
+      dynamicAttributes['aria-labelledby'] = ariaLabelledby;
+    }
 
     const wrapperClass = classnames({
       'usa-modal': true,
@@ -488,8 +509,8 @@ export class VaModal {
               ? 'alertdialog'
               : 'dialog'
           }
-          aria-label={ariaLabel}
           aria-modal="true"
+          {...dynamicAttributes}
         >
           <div class={contentClass}>
             {closingButton}
