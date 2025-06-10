@@ -21,8 +21,10 @@ const defaultArgs = {
 
 const Template = ({ 'show-shadow': showShadow, 'background': background, 'icon-name': iconName }) => (
   <va-card show-shadow={showShadow} background={background} icon-name={iconName}>
-    <h3>Example card title</h3>
-    <p>Example card content</p>
+    <div>
+      <h3 className='vads-u-margin-top--1'>Example card title</h3>
+      <p>Example card content</p>
+    </div>
   </va-card>
 );
 
