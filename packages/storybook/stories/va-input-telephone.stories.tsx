@@ -39,7 +39,7 @@ const Template = ({
   return (
     <va-input-telephone
       hint={hint}
-      label={label}
+      label={label ? label : null}
       country={country}
       contact={contact}
       no-country={noCountry}
