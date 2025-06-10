@@ -229,4 +229,18 @@ describe('va-telephone', () => {
 
     await axeCheck(page);
   });
+
+  it('does not fire an analytics event when disableAnalytics is passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone contact="8772228387" message-aria-describedby="main number" disable-analytics="true"></va-telephone>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const link = await page.find('va-telephone >>> a');
+    await link.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
 });

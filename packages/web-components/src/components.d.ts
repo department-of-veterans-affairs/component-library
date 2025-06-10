@@ -1848,6 +1848,10 @@ export namespace Components {
          */
         "countryCode"?: string;
         /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * Optional numeric string phone number extension
          */
         "extension"?: string;
@@ -5608,6 +5612,10 @@ declare namespace LocalJSX {
           * Prepends the country code to the given contact number. Do NOT include the '+'
          */
         "countryCode"?: string;
+        /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
         /**
           * Optional numeric string phone number extension
          */
