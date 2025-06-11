@@ -46,7 +46,7 @@ export class VaCheckboxGroup {
   /**
    * Optional text that will be read by screen readers in addition to the label text.
   */
-  @Prop() labelSrOnly?: string = null;
+  @Prop() labelSrOnly?: string;
 
   /**
    * Whether or not this input field is required.

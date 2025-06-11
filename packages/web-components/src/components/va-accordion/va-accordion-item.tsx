@@ -39,7 +39,7 @@ export class VaAccordionItem {
   /**
    * Optional text that will be read by screen readers in addition to the header text.
   */
-  @Prop() headerSrOnly?: string = null;
+  @Prop() headerSrOnly?: string;
 
   /**
    * Optional accordion item subheader text. Default is null.
