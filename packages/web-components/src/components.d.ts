@@ -376,6 +376,10 @@ export namespace Components {
          */
         "background"?: boolean;
         /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
+        /**
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
@@ -1843,6 +1847,10 @@ export namespace Components {
           * Prepends the country code to the given contact number. Do NOT include the '+'
          */
         "countryCode"?: string;
+        /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
         /**
           * Optional numeric string phone number extension
          */
@@ -3921,6 +3929,10 @@ declare namespace LocalJSX {
          */
         "background"?: boolean;
         /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
+        /**
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
@@ -5600,6 +5612,10 @@ declare namespace LocalJSX {
           * Prepends the country code to the given contact number. Do NOT include the '+'
          */
         "countryCode"?: string;
+        /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
         /**
           * Optional numeric string phone number extension
          */

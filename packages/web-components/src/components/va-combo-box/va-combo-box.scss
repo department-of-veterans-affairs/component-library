@@ -92,7 +92,11 @@
   }
 }
 
-.input-telephone-wrapper > input {
+.input-telephone-wrapper > .usa-combo-box__input {
   padding-left: 36px;
-  padding-right: 15px !important;
+  padding-right: 3rem;
+  overflow: hidden !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
 }
