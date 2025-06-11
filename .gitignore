@@ -3,6 +3,7 @@
 *.code-workspace
 *.log
 tmp/
+.vscode
 
 *.tern-port
 node_modules/
