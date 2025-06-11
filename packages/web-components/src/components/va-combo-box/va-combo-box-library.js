@@ -171,7 +171,7 @@ const noop = () => {};
    *
    * @param {HTMLElement} _comboBoxEl The initial element of the combo box component
    */
-  const enhanceComboBox = (_comboBoxEl, _labelEl) => {
+  const enhanceComboBox = (_comboBoxEl, _labelEl, initValue) => {
     const comboBoxEl = _comboBoxEl.closest(COMBO_BOX);
 
     if (comboBoxEl.dataset.enhanced) return;
@@ -282,6 +282,13 @@ const noop = () => {};
       </ul>
       <div class="${STATUS_CLASS} usa-sr-only" role="status"></div>`,
     );
+
+    //Sanitizer does not allow conditional rendering of elements
+    // this approach allows tests to pass
+    if (comboBox.isInVaInputTelephone) {
+      comboBoxEl.querySelector(`:scope > span.${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}`).remove();
+    }
+
 
     if (selectedOption) {
       const { inputEl } = getComboBoxContext(comboBoxEl);
@@ -411,35 +418,32 @@ const noop = () => {};
     for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
+      const filterKey = comboBox.isInVaInputTelephone ? 'innerHTML' : 'text';
+      const filterValue = optionEl[filterKey];
 
       if (
         optionEl.value &&
         (disableFiltering ||
           isPristine ||
           !inputValue ||
-          regex.test(optionEl.text))
+          regex.test(filterValue))
       ) {
         if (selectEl.value && optionEl.value === selectEl.value) {
           selectedItemId = optionId;
         }
 
-        if (disableFiltering && !firstFoundId && regex.test(optionEl.text)) {
+        if (disableFiltering && !firstFoundId && regex.test(filterValue)) {
           firstFoundId = optionId;
-        }
-
-        if (!inputValue){
-          options.push(optionEl);
-          continue;
         }
 
         // handle filtering when input contains a value
         if (
           inputValue &&
-          regex.test(optionEl.text) &&
-          optionEl.getAttribute('data-optgroup') !== 'true' 
+          regex.test(filterValue) &&
+          optionEl.getAttribute('data-optgroup') !== 'true'
         ) {
 
-          // Check if the option element is not a header optgroup 
+          // Check if the option element is not a header optgroup
           // and has a header optgroup associated with it
           if (
             optionEl.getAttribute('data-optgroup-option') === 'true' &&
@@ -453,10 +457,9 @@ const noop = () => {};
             // Add the header optgroup element first
             options.push(parentOptgroupEl);
           }
-
-          // Add the option element
-          options.push(optionEl);
         }
+        // Add the option element
+        options.push(optionEl);
       }
     }
 
@@ -468,7 +471,7 @@ const noop = () => {};
     const optionHtml = options.map((option, index) => {
       const isOptGroup = isDataOptGroup(option);
       const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
-      if (isOptGroup) 
+      if (isOptGroup)
         groupLength += 1;
 
       if (!isOptGroup) {
@@ -479,7 +482,7 @@ const noop = () => {};
       let tabindex = '-1';
       let ariaSelected = 'false';
 
-      if (selectEl.value && option.value === selectEl.value) {
+      if (selectEl.value && option.value === selectEl.value && !isOptGroup) {
         classes.push(LIST_OPTION_SELECTED_CLASS, LIST_OPTION_FOCUSED_CLASS);
         tabindex = '0';
         ariaSelected = 'true';
@@ -510,7 +513,14 @@ const noop = () => {};
       li.setAttribute('tabindex', tabindex);
       li.setAttribute('role', isOptGroup ? 'group' : 'option');
       li.setAttribute('data-value', option.value);
-      li.textContent = option.text;
+
+      if (comboBox.isInVaInputTelephone) {
+        li.innerHTML = Sanitizer.escapeHTML`<div class="flag-wrapper">
+        <span class="flag flag-${option.value.toLowerCase()}"></span>
+        <span class="flag-text">${option.text}</span></div>`;
+      } else {
+        li.textContent = option.text;
+      }
 
       return li;
     });
@@ -533,9 +543,9 @@ const noop = () => {};
 
     inputEl.setAttribute('aria-expanded', 'true');
 
-    const getPluralizedMessage = (count, singular, plural) => 
+    const getPluralizedMessage = (count, singular, plural) =>
       count ? `${count} ${count > 1 ? plural : singular} available.` : '';
-  
+
     const groupsStatus = getPluralizedMessage(groupLength, 'group', 'groups');
     const optionsStatus = getPluralizedMessage(optionIndex, 'result', 'results');
 
@@ -588,8 +598,22 @@ const noop = () => {};
   const selectItem = listOptionEl => {
     const { comboBoxEl, selectEl, inputEl } = getComboBoxContext(listOptionEl);
 
+    // Update the select value after selection
     changeElementValue(selectEl, listOptionEl.dataset.value);
-    changeElementValue(inputEl, listOptionEl.textContent);
+
+    // Update the input value after selection
+    // To prevent display error, use different text extraction method for telephone inputs
+    if (comboBox.isInVaInputTelephone) {
+      // Extract just the flag-text portion or preserve the original input value if re-selecting
+      const flagText = listOptionEl.querySelector('.flag-text');
+      if (flagText) {
+        changeElementValue(inputEl, flagText.textContent);
+      }
+    } else {
+      // Standard behavior for non-telephone inputs
+      changeElementValue(inputEl, listOptionEl.textContent);
+    }
+
     comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
     hideList(comboBoxEl);
     inputEl.focus();
@@ -623,26 +647,31 @@ const noop = () => {};
    */
 const completeSelection = el => {
     const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
-  
+
     statusEl.textContent = '';
-  
+
     const inputValue = (inputEl.value || '').trim().toLowerCase();
-  
+
     if (inputValue) {
       // Find a matching option
-      const matchingOption = Array.from(selectEl.options).find(
-        option => option.text.toLowerCase() === inputValue
-      );
-  
+    const matchingFunc = comboBox.isInVaInputTelephone
+        ? (option => {
+          const [name, _] = inputValue.split('...');
+          return option.text.toLowerCase().startsWith(name.toLowerCase());
+        })
+        : (option => option.text.toLowerCase() === inputValue)
+      const matchingOption = Array.from(selectEl.options).find(matchingFunc)
+
       if (matchingOption) {
         // If a match is found, update the input and select values
         changeElementValue(selectEl, matchingOption.value);
-        changeElementValue(inputEl, matchingOption.text);
+        const _text = comboBox.isInVaInputTelephone ? inputEl.value : matchingOption.text;
+        changeElementValue(inputEl, _text);
         comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
         return;
       }
     }
-  
+
     // If no match is found or input value is empty,
     // clear the select value but maintain the input value.
     // This allows the user to type a value that doesn't exist in the options
@@ -684,7 +713,7 @@ const completeSelection = el => {
     if (nextOptionEl) {
       if (nextOptionEl.getAttribute('role') === 'group') {
         nextOptionEl = nextOptionEl.nextSibling
-      } 
+      }
       highlightOption(comboBoxEl, nextOptionEl);
     }
 
@@ -721,7 +750,7 @@ const completeSelection = el => {
     if (nextOptionEl) {
       if (nextOptionEl.getAttribute('role') === 'group') {
         nextOptionEl = nextOptionEl.nextSibling
-      } 
+      }
       highlightOption(focusedOptionEl, nextOptionEl);
     }
 
@@ -763,7 +792,7 @@ const completeSelection = el => {
     if (nextOptionEl) {
       if (nextOptionEl.getAttribute('role') === 'group') {
         nextOptionEl = nextOptionEl.previousSibling
-      } 
+      }
       highlightOption(focusedOptionEl, nextOptionEl);
     }
 
@@ -885,9 +914,13 @@ const completeSelection = el => {
       },
     },
     {
-      init(root, labelEl) {
+      init(root, labelEl, value, isInVaInputTelephone = false) {
+        // only set this variable once
+        if (this.isInVaInputTelephone === undefined) {
+          this.isInVaInputTelephone = isInVaInputTelephone;
+        }
         selectOrMatches(COMBO_BOX, root).forEach(comboBoxEl => {
-          enhanceComboBox(comboBoxEl, labelEl);
+          enhanceComboBox(comboBoxEl, labelEl, value);
         });
       },
       getComboBoxContext,

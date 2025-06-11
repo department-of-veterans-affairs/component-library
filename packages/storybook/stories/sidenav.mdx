@@ -1,0 +1,21 @@
+import { Canvas, Meta, Story, Subtitle, Title } from '@storybook/blocks';
+import { Guidance, MaturityScale } from './wc-helpers';
+import { additionalDocs } from './additional-docs';
+import * as SidenavStories from './sidenav.stories';
+
+<Meta of={SidenavStories} />
+
+<Title>Sidenav</Title>
+<Subtitle>Sidenav component classes</Subtitle>
+
+<MaturityScale category={additionalDocs['Sidenav'].maturityCategory} level={additionalDocs['Sidenav'].maturityLevel} />
+
+<Guidance href={additionalDocs['Sidenav'].guidanceHref} name={additionalDocs['Sidenav'].guidanceName} />
+
+## Stories
+
+### Default
+
+<Canvas>
+  <Story of={SidenavStories.Default} />
+</Canvas>

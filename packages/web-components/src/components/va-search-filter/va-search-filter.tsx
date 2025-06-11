@@ -303,9 +303,13 @@ export class VaSearchFilter {
                 <va-accordion-item
                   header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
                   key={facet.id}
+                  level={3}
                   open
                 >
-                  <va-checkbox-group label={facet.label} class="va-search-filter__checkbox-group">
+                  <va-checkbox-group 
+                    label={facet.label} 
+                    class="va-search-filter__checkbox-group"
+                  >
                     {facet.category.map((category: FilterCategory) =>
                       renderCheckbox(facet, category)
                     )}
@@ -332,6 +336,7 @@ export class VaSearchFilter {
                 <va-checkbox-group
                   label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
                   key={facet.id}
+                  label-header-level="3"
                 >
                   {facet.category.map((category: FilterCategory) =>
                     renderCheckbox(facet, category)

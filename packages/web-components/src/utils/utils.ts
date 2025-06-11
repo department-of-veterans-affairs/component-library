@@ -284,3 +284,72 @@ export function deepEquals(a: any, b: any): boolean {
     return true;
   }
 }
+
+/**
+ * Truncates a string to fit within a specified width in pixels.
+ * Adds "..." at the end if truncated.
+ * 
+ * @param text - The string to truncate
+ * @param maxWidth - The maximum width in pixels
+ * @param fontStyle - Optional font style string (e.g. "14px Arial")
+ * @returns The truncated string or original if it fits
+ */
+export function truncate(text: string, maxWidth: number, fontStyle: string): string {
+  if (!text) return text;
+
+  // Create a canvas to measure text width
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  if (!context) return text;
+  context.font = fontStyle;
+
+  // Check if the text already fits
+  if (context.measureText(text).width <= maxWidth) {
+    return text;
+  }
+
+  // Text is too long, need to truncate
+  const ellipsis = '...';
+  const ellipsisWidth = context.measureText(ellipsis).width;
+
+  // Binary search to find the optimal truncation point
+  let start = 0;
+  let end = text.length;
+  let best = 0;
+
+  while (start <= end) {
+    const mid = Math.floor((start + end) / 2);
+    const testText = text.substring(0, mid);
+    const width = context.measureText(testText).width + ellipsisWidth;
+
+    if (width <= maxWidth) {
+      best = mid;
+      start = mid + 1;
+    } else {
+      end = mid - 1;
+    }
+  }
+
+  return text.substring(0, best).trim() + ellipsis;
+}
+
+/**
+ * Gets the proper article for a word, either "a" or "an"
+ * based upon first letter of the word
+ * 
+ * @param string - The string that needs an article
+ * @param useUe - Whether to treat a word that starts with "u" as starting with a vowel
+ * @returns Either "a" or "an"
+ */
+export function getArticle(string: string, useU=true): 'a' | 'an' {
+  const vowels = ['a', 'i', 'e', 'o', ];
+
+  // there are cases when we know we will have words that start with "u"
+  // that don't get "an" as an article, e.g. "university"
+  if (useU) {
+    vowels.push('u');
+  }
+
+  const testLetter = string.charAt(0).toLowerCase();
+  return vowels.includes(testLetter) ? 'an' : 'a';
+}
