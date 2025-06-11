@@ -85,7 +85,7 @@ const defaultArgs = {
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
   'secondary-button-text': 'Secondary',
   'forcedModal': false,
-  'ariaLabelledBy': undefined,
+  'messageAriaLabelledby': undefined,
 };
 
 const Template = ({
@@ -101,7 +101,7 @@ const Template = ({
   status,
   visible,
   forcedModal,
-  ariaLabelledBy,
+  messageAriaLabelledby,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
   const wrapRef = useRef(null);
@@ -136,7 +136,7 @@ const Template = ({
         secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
-        ariaLabelledby={ariaLabelledBy}
+        messageAriaLabelledby={messageAriaLabelledby}
       >
         <p>This is a succinct, helpful {status} message</p>
       </VaModal>
@@ -253,7 +253,7 @@ WithoutButtons.args = {
 export const WithoutTitle = Template.bind(null);
 WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
 
-export const WithoutTitleAndWithAriaLabelledBy = ({
+export const WithoutTitleAndWithAriaLabelledById = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
   large,
@@ -266,7 +266,7 @@ export const WithoutTitleAndWithAriaLabelledBy = ({
   visible = true,
   forcedModal,
   modalTitle = undefined,
-  ariaLabelledBy = 'custom-heading',
+  messageAriaLabelledby = 'A different title',
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
   const wrapRef = useRef(null);
@@ -285,7 +285,7 @@ export const WithoutTitleAndWithAriaLabelledBy = ({
 
   return (
     <div ref={wrapRef}>
-      <h1 id="custom-heading">Testing h1 heading</h1>
+      <h1>Testing h1 heading</h1>
       <va-button onClick={openModal} text="Click here to open modal" />
       <VaModal
         forcedModal={forcedModal}
@@ -301,7 +301,7 @@ export const WithoutTitleAndWithAriaLabelledBy = ({
         secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
-        ariaLabelledby={ariaLabelledBy}
+        messageAriaLabelledby={messageAriaLabelledby}
       >
         <p>This is a succinct, helpful {status} message</p>
       </VaModal>

@@ -1117,10 +1117,6 @@ export namespace Components {
          */
         "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
-          * The id of the element that labels the modal. Should only be applied to corresponding attribute on the modal element if a value is not passed to the `modalTitle` prop.
-         */
-        "ariaLabelledby"?: string;
-        /**
           * Click outside modal will trigger closeEvent
          */
         "clickToClose"?: boolean;
@@ -1140,6 +1136,10 @@ export namespace Components {
           * If `true`, modal will be wider.
          */
         "large"?: boolean;
+        /**
+          * Text to serve as an alternate heading for the modal when the desired behavior is to have a heading with the `aria-labelledby` attribute. Only is applied when `modalTitle` prop value is not provided.
+         */
+        "messageAriaLabelledby"?: string;
         /**
           * Title/header text for the modal
          */
@@ -4758,10 +4758,6 @@ declare namespace LocalJSX {
          */
         "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
-          * The id of the element that labels the modal. Should only be applied to corresponding attribute on the modal element if a value is not passed to the `modalTitle` prop.
-         */
-        "ariaLabelledby"?: string;
-        /**
           * Click outside modal will trigger closeEvent
          */
         "clickToClose"?: boolean;
@@ -4781,6 +4777,10 @@ declare namespace LocalJSX {
           * If `true`, modal will be wider.
          */
         "large"?: boolean;
+        /**
+          * Text to serve as an alternate heading for the modal when the desired behavior is to have a heading with the `aria-labelledby` attribute. Only is applied when `modalTitle` prop value is not provided.
+         */
+        "messageAriaLabelledby"?: string;
         /**
           * Title/header text for the modal
          */
