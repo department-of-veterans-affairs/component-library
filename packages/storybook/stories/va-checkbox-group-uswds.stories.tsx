@@ -358,6 +358,31 @@ Tile.args = {
   label: 'Select any historical figure',
 };
 
+export const TileWithHint = USWDSTiled.bind(null);
+TileWithHint.args = {
+  ...defaultArgs,
+  tile: true,
+  label: 'Select any historical figure',
+  hint: 'This is example hint text',
+};
+
+export const TileWithError = USWDSTiled.bind(null);
+TileWithError.args = {
+  ...defaultArgs,
+  tile: true,
+  label: 'Select any historical figure',
+  error: 'There has been a problem',
+};
+
+export const TileWithHintAndError = USWDSTiled.bind(null);
+TileWithHintAndError.args = {
+  ...defaultArgs,
+  tile: true,
+  label: 'Select any historical figure',
+  hint: 'This is example hint text',
+  error: 'There has been a problem',
+};
+
 export const withDescriptionMessage = Template.bind(null);
 withDescriptionMessage.args = {
   ...defaultArgs,
