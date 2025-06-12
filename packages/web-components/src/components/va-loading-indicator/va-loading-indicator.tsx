@@ -30,7 +30,7 @@ export class VaLoadingIndicator {
   /**
    * The message visible on screen when loading
    */
-  @Prop() message: string;
+  @Prop() message?: string;
 
   /**
    * An aria label
@@ -41,6 +41,11 @@ export class VaLoadingIndicator {
    * Set to true if the loading indicator should capture focus
    */
   @Prop() setFocus?: boolean = false;
+
+  /**
+   * Set to true if the loading indicator should be displayed inline
+   */
+  @Prop() inline?: boolean = false;
 
   /**
    * Analytics tracking function(s) will be called. Form components
@@ -106,11 +111,15 @@ export class VaLoadingIndicator {
   }
 
   render() {
-    const { message, label } = this;
+    const { message, label, inline } = this;
     let className = "loading-indicator";
 
     if (isChromatic()) {
       className += " chromatic";
+    }
+
+    if (inline) {
+      className += " loading-indicator-inline";
     }
 
     return (
