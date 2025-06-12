@@ -3,7 +3,8 @@
   "description": "The monorepo containing the component library packages.",
   "scripts": {
     "chromatic-bridge": "echo \"Nothing to see here\"",
-    "dev": "bash ./setup.sh"
+    "dev": "bash ./setup.sh",
+    "prepare": "husky"
   },
   "private": true,
   "version": "1.0.0",
