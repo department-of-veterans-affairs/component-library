@@ -178,6 +178,16 @@ export class VaSearchFilter {
   }
 
   /**
+   * Returns a component prop for appending screen reader text to the filter header or label
+   * @param count The number of active filters
+   * @param prop The component property name
+   * @returns 
+   */
+  static getSrOnlyProp(count: number, prop: string) {
+    return count > 0 ? { [prop]: `${count === 1 ? 'filter' : 'filters'} applied` } : {};
+  }
+
+  /**
    * Get the total number of active filters by category.
    * @returns {number} The total number of active filters by category.
    */
@@ -296,12 +306,17 @@ export class VaSearchFilter {
     if (isDesktop) {
       return (
         <Host>
-          <h2 id="header">{header}{totalActiveFilters > 0 ? ` (${totalActiveFilters})` : ''}</h2>
+          <h2 id="header">{header}{totalActiveFilters > 0 ? ` (${totalActiveFilters})` : ''}
+            {totalActiveFilters > 0 && (
+              <span class="usa-sr-only">&nbsp;applied</span>
+            )}
+          </h2>
           {filterOptions.length > 0 && (
             <va-accordion class="va-search-filter__accordion">
               {filterOptions.map((facet: FilterFacet) => (
                 <va-accordion-item
                   header={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
+                  {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'headerSrOnly')}
                   key={facet.id}
                   level={3}
                   open
@@ -329,12 +344,14 @@ export class VaSearchFilter {
           <va-accordion class="va-search-filter__accordion">
             <va-accordion-item
               header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')}
+              headerSrOnly="applied"
               open
             >
               <span slot="icon"><va-icon icon="filter_list" /></span>
               {filterOptions.map((facet: FilterFacet) => (
                 <va-checkbox-group
                   label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
+                  {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
                   key={facet.id}
                   label-header-level="3"
                 >

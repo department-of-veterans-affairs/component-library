@@ -49,6 +49,10 @@ export namespace Components {
          */
         "header"?: string;
         /**
+          * Optional text that will be read by screen readers in addition to the header text.
+         */
+        "headerSrOnly"?: string;
+        /**
           * Header level for button wrapper. Must be between 1 and 6
          */
         "level"?: number;
@@ -376,6 +380,10 @@ export namespace Components {
          */
         "background"?: boolean;
         /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
+        /**
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
@@ -483,6 +491,10 @@ export namespace Components {
           * Insert a header with defined level inside the label (legend)
          */
         "labelHeaderLevel"?: string;
+        /**
+          * Optional text that will be read by screen readers in addition to the label text.
+         */
+        "labelSrOnly"?: string;
         /**
           * An optional message that will be read by screen readers when a checkbox is focused.
          */
@@ -790,7 +802,7 @@ export namespace Components {
      * @componentName Input Telephone
      * @maturityCategory caution
      * @maturityLevel candidate
-     * @guidanceHref form/input-telephone
+     * @guidanceHref form/telephone-input
      * @translations English
      */
     interface VaInputTelephone {
@@ -807,13 +819,13 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * Header text for the component
-         */
-        "header"?: string;
-        /**
           * Hint string text
          */
         "hint"?: string;
+        /**
+          * Label text for the component
+         */
+        "label"?: string;
         /**
           * Whether the country select should be included. Set to true to exclude it.
          */
@@ -2739,7 +2751,7 @@ declare global {
      * @componentName Input Telephone
      * @maturityCategory caution
      * @maturityLevel candidate
-     * @guidanceHref form/input-telephone
+     * @guidanceHref form/telephone-input
      * @translations English
      */
     interface HTMLVaInputTelephoneElement extends Components.VaInputTelephone, HTMLStencilElement {
@@ -3546,6 +3558,10 @@ declare namespace LocalJSX {
          */
         "header"?: string;
         /**
+          * Optional text that will be read by screen readers in addition to the header text.
+         */
+        "headerSrOnly"?: string;
+        /**
           * Header level for button wrapper. Must be between 1 and 6
          */
         "level"?: number;
@@ -3929,6 +3945,10 @@ declare namespace LocalJSX {
          */
         "background"?: boolean;
         /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
+        /**
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
@@ -4044,6 +4064,10 @@ declare namespace LocalJSX {
           * Insert a header with defined level inside the label (legend)
          */
         "labelHeaderLevel"?: string;
+        /**
+          * Optional text that will be read by screen readers in addition to the label text.
+         */
+        "labelSrOnly"?: string;
         /**
           * An optional message that will be read by screen readers when a checkbox is focused.
          */
@@ -4387,7 +4411,7 @@ declare namespace LocalJSX {
      * @componentName Input Telephone
      * @maturityCategory caution
      * @maturityLevel candidate
-     * @guidanceHref form/input-telephone
+     * @guidanceHref form/telephone-input
      * @translations English
      */
     interface VaInputTelephone {
@@ -4404,13 +4428,13 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * Header text for the component
-         */
-        "header"?: string;
-        /**
           * Hint string text
          */
         "hint"?: string;
+        /**
+          * Label text for the component
+         */
+        "label"?: string;
         /**
           * Whether the country select should be included. Set to true to exclude it.
          */
@@ -6106,7 +6130,7 @@ declare module "@stencil/core" {
              * @componentName Input Telephone
              * @maturityCategory caution
              * @maturityLevel candidate
-             * @guidanceHref form/input-telephone
+             * @guidanceHref form/telephone-input
              * @translations English
              */
             "va-input-telephone": LocalJSX.VaInputTelephone & JSXBase.HTMLAttributes<HTMLVaInputTelephoneElement>;
