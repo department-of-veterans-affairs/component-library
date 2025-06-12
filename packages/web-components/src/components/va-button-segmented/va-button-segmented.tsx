@@ -120,39 +120,6 @@ export class VaButtonSegmented {
     this.vaButtonClick.emit(buttonItem);
   };
 
-  /**
-   * Handles keyboard navigation for the segmented buttons.
-   * ArrowRight/ArrowDown: move to next button
-   * ArrowLeft/ArrowUp: move to previous button
-   */
-
-  /**
-   * @function handleKeyDown
-   * @description Handles keyboard navigation for the segmented buttons. ArrowRight/ArrowDown: move to next button ArrowLeft/ArrowUp: move to previous button
-   * @param {KeyboardEvent} e  - The keyboard event.
-   * @param {number} index - The index of the currently focused button.
-   * @returns {void}
-   */
-  private handleKeyDown(e: KeyboardEvent, index: number) {
-    const total = this.buttons.length;
-    let nextIndex = index;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-      nextIndex = (index + 1) % total;
-      e.preventDefault();
-    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-      nextIndex = (index - 1 + total) % total;
-      e.preventDefault();
-    }
-    if (nextIndex !== index) {
-      // Find all button elements in the group and focus the next one
-      const host = this.el.shadowRoot || this.el;
-      const btns = host.querySelectorAll('button.va-segmented-button__button');
-      if (btns[nextIndex]) {
-        (btns[nextIndex] as HTMLElement).focus();
-      }
-    }
-  }
-
   render() {
     const containerClass = classnames({
       'usa-button-group': true,
@@ -170,7 +137,7 @@ export class VaButtonSegmented {
 
     return (
       <Host>
-        <ul class={containerClass} role="radiogroup" aria-label={this.ariaLabel}>
+        <ul class={containerClass} role="group" aria-label={this.ariaLabel}>
           {this.buttons.map((buttonItem: ButtonItem, index: number) => (
             <li class="usa-button-group__item">
               <button
@@ -179,12 +146,9 @@ export class VaButtonSegmented {
                   this.selected = index;
                   this.handleClick(buttonItem);
                 }}
-                onKeyDown={e => this.handleKeyDown(e, index)}
-                aria-label={buttonItem.label}
+                type="button"
                 title={buttonItem.label.length > 20 ? buttonItem.label : ''}
-                role="radio"
-                aria-checked={this.selected === index ? 'true' : 'false'}
-                tabIndex={this.selected === index ? 0 : -1}
+                aria-pressed={this.selected === index ? 'true' : 'false'}
               >
                 {truncate(buttonItem.label, 145, null)}
               </button>
