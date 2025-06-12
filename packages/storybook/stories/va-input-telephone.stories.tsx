@@ -1,9 +1,12 @@
+import { useEffect, useState } from 'react';
+import { VaInputTelephone } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
 } from './wc-helpers';
 
+VaInputTelephone.displayName = 'VaLanguageToggle';
 const inputTelephoneDocs = getWebComponentDocs('va-input-telephone');
 
 export default {
@@ -23,7 +26,8 @@ const defaultArgs = {
   'no-country': false,
   hint: "",
   error: "",
-  required: false
+  required: false,
+  label: "",
 };
 
 const Template = ({
@@ -32,13 +36,13 @@ const Template = ({
   contact,
   country,
   error,
-  header,
+  label,
   required
 }) => {
   return (
     <va-input-telephone
       hint={hint}
-      header={header}
+      label={label ? label : null}
       country={country}
       contact={contact}
       no-country={noCountry}
@@ -66,10 +70,10 @@ WithCountry.args = {
   country: "MX"
 }
 
-export const WithCustomHeader = Template.bind(null);
-WithCustomHeader.args = {
+export const WithCustomLabel = Template.bind(null);
+WithCustomLabel.args = {
   ...defaultArgs,
-  header: 'Secondary phone number'
+  label: 'Secondary phone number'
 }
 
 export const WithCustomError = Template.bind(null);
@@ -78,11 +82,22 @@ WithCustomError.args = {
   error: 'This is a custom error message'
 }
 
-export const WithPhoneFormatError = Template.bind(null);
-WithPhoneFormatError.args = {
-  ...defaultArgs,
-  contact: "234"
-}
+
+const WithPhoneFormatTemplate = () => {
+
+  const [err, setErr] = useState('');
+  useEffect(() => {
+    setTimeout(() => {
+      setErr('Enter a United States of America phone number in a valid format, for example, (xxx) xxx-xxxx');
+    }, 100);
+  }, []);
+
+  return (
+    <VaInputTelephone contact="234" error={err} />
+  );
+};
+
+export const WithPhoneFormatError = WithPhoneFormatTemplate.bind(null);
 
 export const WithHint = Template.bind(null);
 WithHint.args = {

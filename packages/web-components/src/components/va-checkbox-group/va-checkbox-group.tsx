@@ -44,6 +44,11 @@ export class VaCheckboxGroup {
   @Prop() label!: string;
 
   /**
+   * Optional text that will be read by screen readers in addition to the label text.
+  */
+  @Prop() labelSrOnly?: string;
+
+  /**
    * Whether or not this input field is required.
    */
   @Prop() required?: boolean = false;
@@ -145,6 +150,7 @@ export class VaCheckboxGroup {
       useFormsPattern,
       formHeadingLevel,
       formHeading,
+      labelSrOnly
     } = this;
     const HeaderLevel = this.getHeaderLevel();
     const ariaLabeledByIds =
@@ -204,6 +210,7 @@ export class VaCheckboxGroup {
                   {label}
                 </span>
               )}
+              {labelSrOnly && <span class="usa-sr-only">{labelSrOnly}</span>}
               {isMessageSet(messageAriaDescribedby) && (
                 <span id="description-message" class="usa-sr-only">
                   {messageAriaDescribedby}
