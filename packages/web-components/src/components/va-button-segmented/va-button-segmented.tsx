@@ -130,9 +130,12 @@ export class VaButtonSegmented {
       'va-segmented-button__button': true,
     });
 
-    // Do not render if no aria-label or buttons are provided
-    if (!this.label || !this.buttons || !this.buttons.length) {
-      return null;
+    // Throw errors if required props are not provided.
+    if (!this.label) {
+      throw new Error('va-button-segmented: "label" prop is required.');
+    }
+    else if (!this.buttons || !this.buttons.length) {
+      throw new Error('va-button-segmented: "buttons" prop is required and must contain at least one button.');
     }
 
     return (
