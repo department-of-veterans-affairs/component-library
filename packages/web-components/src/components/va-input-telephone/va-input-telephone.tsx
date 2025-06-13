@@ -6,7 +6,8 @@ import {
   h,
   State,
   EventEmitter,
-  Event
+  Event,
+  Watch
 } from '@stencil/core';
 
 import {
@@ -23,12 +24,13 @@ import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
 import { i18next } from '../..';
 import { DATA_MAP, mapCountry } from './utils';
+import { getArticle } from '../../utils/utils';
 
 /**
  * @componentName Input Telephone
  * @maturityCategory caution
  * @maturityLevel candidate
- * @guidanceHref form/input-telephone
+ * @guidanceHref form/telephone-input
  * @translations English
  */
 
@@ -41,6 +43,8 @@ export class VaInputTelephone {
   @Element() el: HTMLElement;
   textInputRef: HTMLVaTextInputElement;
   DEFAULT_COUNTRY: CountryCode = 'US';
+  COUNTRY_ERROR = 'Please choose a country';
+  CONTACT_ERROR = 'phone number in a valid format, for example,';
 
   /**
    * The telephone contact information
@@ -53,9 +57,9 @@ export class VaInputTelephone {
   @Prop({ reflect: true, mutable: true }) country?: CountryCode = this.DEFAULT_COUNTRY;
 
   /**
-   * Header text for the component
+   * Label text for the component
    */
-  @Prop() header?: string = 'Primary phone number';
+  @Prop() label?: string = 'Home phone number';
 
   /**
    * Hint string text
@@ -107,10 +111,35 @@ export class VaInputTelephone {
    */
   @State() isValid: boolean = false;
 
+  /**
+   * Flag that signifies the user has interacted with the component and therefore can enter an error state
+   */
+  @State() touched: boolean = false;
+
+
+  @Watch('error')
+  syncErrorMessages(newValue: string) {
+    if (newValue?.includes(this.CONTACT_ERROR)) {
+      this.contactError = this.error;
+    } else if (newValue === this.COUNTRY_ERROR) {
+      this.countryError = newValue;
+    }
+  }
+
   resetErrors() {
     this.countryError = '';
     this.contactError = '';
     this.error = '';
+  }
+
+  setValidityState() {
+    if (this.country && this.contact) {
+      this.isValid = isPossiblePhoneNumber(this.contact, mapCountry(this.country));
+      // country may have changed so reformat the number
+      this.formattedContact = this.formatContact(this.contact);
+    } else {
+      this.isValid = false;
+    }
   }
 
   updateContact(event: InputEvent) {
@@ -118,37 +147,43 @@ export class VaInputTelephone {
     const { value } = target;
     this.contact = value;
     this.formattedContact = this.formatContact(value);
+    this.validateContact();
+    this.handleEmit();
+  }
+
+  // return the template for a phone number for the selected country
+  getTemplate() {
+    const _country = mapCountry(this.country);
+    let example = getExampleNumber(_country, examples).format('NATIONAL');
+    const asYouType = new AsYouType(_country);
+    asYouType.input(example);
+    return asYouType.getTemplate();
   }
 
   // get an error message for a country that includes the template of a valid phone number for that country
   getErrorMessageForCountry() {
     const _country = mapCountry(this.country);
-    let example = getExampleNumber(_country, examples).format('NATIONAL');
-    const asYouType = new AsYouType(_country);
-    asYouType.input(example);
-    const msg = asYouType.getTemplate();
-    return `Enter a ${this.getCountryName(_country)} phone number in a valid format, for example, [${msg}]`;
+    const countryName = this.getCountryName(_country);
+    const article = getArticle(countryName, false);
+    return `Enter ${article} ${countryName} phone number in a valid format, for example, ${this.getTemplate()}`;
   }
 
-  // validate the contact and emit the contact and validation state
+  // validate the contact and show errors if appropriate
   validateContact() {
-    this.resetErrors();
     if (this.country) {
-      const _country = mapCountry(this.country);
-      this.isValid = !!this.contact
-        ? isPossiblePhoneNumber(this.contact, _country)
-        : false;
-      this.error = this.isValid
-        ? ''
-        : this.getErrorMessageForCountry();
-      this.contactError = this.error;
+      this.resetErrors();
+      this.setValidityState();
+      if (!this.isValid && this.touched) {
+        this.error = this.getErrorMessageForCountry();
+        this.contactError = this.error;
+      }
     } else {
       this.validateCountry();
     }
-    this.handelEmit();
   }
 
-  handelEmit() {
+
+  handleEmit() {
     const tryParse = !!this.contact && !!this.country;
     let phoneNumber: PhoneNumber | null;
     try {
@@ -160,23 +195,40 @@ export class VaInputTelephone {
       // not screening contact via regex because it is difficult to handle all possibilities for all countries
       phoneNumber = null;
     }
+    let error = null;
+    if (!this.isValid) {
+      if (this.country) {
+        error = this.getErrorMessageForCountry();
+      } else {
+        error = this.COUNTRY_ERROR;
+      }
+    }
+
+    // get the length of a valid phone number for a country
+    // useful for validation in forms system
+    let contactLength = null;
+    if (this.contact && this.country) {
+      contactLength = this.getTemplate().replace(/[^x]/g, '').length;
+    }
+
     this.vaContact.emit({
       callingCode: (tryParse && phoneNumber !== null) ? phoneNumber.countryCallingCode : undefined,
       countryCode: this.country,
       contact: (tryParse && phoneNumber !== null) ? phoneNumber.nationalNumber : this.contact,
-      isValid: this.isValid
+      contactLength,
+      isValid: this.isValid,
+      error
     });
   }
 
   // make sure country has been selected
   validateCountry() {
     this.resetErrors();
+    if (!this.touched) this.touched = true;
     if (!this.country) {
-      this.error = 'Please choose a country';
+      this.error = this.COUNTRY_ERROR;
       this.countryError = this.error;
-      this.handelEmit();
-    } else {
-      this.validateContact();
+      this.isValid = false;
     }
   }
 
@@ -184,7 +236,8 @@ export class VaInputTelephone {
   countryChange(event: CustomEvent<{ value: CountryCode }>) {
     const { value } = event.detail;
     this.country = value;
-    this.validateCountry();
+    this.validateContact();
+    this.handleEmit();
   }
 
   formatContact(value: string) {
@@ -192,7 +245,7 @@ export class VaInputTelephone {
     const _country = mapCountry(this.country);
     const _formatted = new AsYouType(_country).input(value);
     // if input has no numbers return it for sake of error correction
-    return _formatted === '' ? value : _formatted
+    return _formatted === '' ? value : _formatted;
   }
 
   // get list of country codes alphabetized by name with US in front
@@ -201,7 +254,7 @@ export class VaInputTelephone {
     const allButUS = getCountries()
       .filter(country => country !== this.DEFAULT_COUNTRY);
     allButUS.push(...Object.keys(DATA_MAP.countries) as CountryCode[]);
-    
+
     const sortedAllButUs = allButUS.sort((a, b) => {
       const one = this.getCountryName(a);
       const two = this.getCountryName(b);
@@ -226,6 +279,7 @@ export class VaInputTelephone {
 
   componentWillLoad() {
     this.countries = this.buildCountryList();
+    if (this.country === '' as CountryCode) this.country = this.DEFAULT_COUNTRY;
   }
 
   componentDidLoad() {
@@ -239,6 +293,7 @@ export class VaInputTelephone {
       // add listener manually (instead of via @Listen) to prevent this event from appearing in storybook
       comboBox.addEventListener('vaSelect', this.countryChange.bind(this));
     }
+    this.handleEmit();
   }
 
   disconnectedCallback() {
@@ -256,9 +311,15 @@ export class VaInputTelephone {
       : '';
   }
 
+  handleBlur() {
+    if (!this.touched) this.touched = true;
+    this.validateContact();
+    this.handleEmit();
+  }
+
   render() {
     const {
-      header,
+      label,
       hint,
       countries,
       error,
@@ -269,7 +330,7 @@ export class VaInputTelephone {
       noCountry,
       required
     } = this;
-    
+
     const legendClasses = classNames({
       'usa-legend': true,
       'usa-label--error': !!error
@@ -280,7 +341,7 @@ export class VaInputTelephone {
         <div class="input-wrap">
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClasses}>
-              {header}
+              {label}
               {required && (
                 <span class="usa-label--required">
                   {' '}
@@ -293,7 +354,7 @@ export class VaInputTelephone {
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
               <va-combo-box
-                label="Country"
+                label="Country code"
                 name="country-codes"
                 show-input-error="false"
                 error={countryError}
@@ -314,7 +375,7 @@ export class VaInputTelephone {
                 show-input-error="false"
                 error={contactError}
                 onInput={(e) => this.updateContact(e)}
-                onBlur={() => this.validateContact()}
+                onBlur={() => this.handleBlur()}
               />
             </div>
           </fieldset>

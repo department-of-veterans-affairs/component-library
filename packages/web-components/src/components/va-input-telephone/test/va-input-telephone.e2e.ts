@@ -29,6 +29,8 @@ describe('va-input-telephone', () => {
     const page = await newE2EPage();
     await page.setContent('<va-input-telephone contact="abcdefg" />');
     const input = await page.find('va-input-telephone >>> input#inputField');
+    await input.click(); 
+    await input.press('Tab');
     const value = await input.getProperty('value');
     expect(value).toBe('abcdefg')
     const error = await page.find('va-input-telephone >>> span#error-message');
@@ -106,20 +108,40 @@ describe('va-input-telephone', () => {
     await page.waitForChanges();
     const flagSpan = await page.find('va-input-telephone >>> va-combo-box >>> span.flag-af');
     expect(flagSpan).not.toBeNull();
-  })
+  });
+
+  it('handles the a/an in error message appropriately for country starts with a vowel', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-input-telephone country="ID" />');
+    let input = await page.find('va-input-telephone >>> va-text-input >>> input');
+    await input.press('Tab');
+    let error = await page.find('va-input-telephone >>> span#error-message');
+    expect(error.innerText).toContain('Enter an Indonesia');
+  });
+
+  it('handles the a/an in error message appropriately for country doesn\'t start with vowel', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-input-telephone country="FJ" />');
+    await page.waitForChanges();
+    const input = await page.find('va-input-telephone >>> va-text-input >>> input');
+    await input.press('Tab');
+    const error = await page.find('va-input-telephone >>> span#error-message');
+    expect(error.innerText).toContain('Enter a Fiji');
+  });
 
   it('emits the vaContact event', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-input-telephone contact="2345678910" />');
+    await page.setContent('<va-input-telephone />');
     const contactSpy = await page.spyOnEvent('vaContact');
     const input = await page.find('va-input-telephone >>> va-text-input >>> input');
-    await input.click();
-    await input.press('Tab');
+    await input.type('2345678900');
     expect(contactSpy).toHaveReceivedEventDetail({
-      callingCode: '1',
-      contact: '2345678910',
+      callingCode: "1",
+      contact: '2345678900',
+      contactLength: 10,
       countryCode: 'US',
-      isValid: true
+      isValid: true,
+      error: null
     });
   });
 
