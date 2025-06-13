@@ -223,6 +223,25 @@
       ]
     }
   },
+  "vads-button-color-background-disabled-on-light": {
+    "*": {
+      "value": "#c9c9c9",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gray-20}"
+      },
+      "name": "vads-button-color-background-disabled-on-light",
+      "attributes": {
+        "category": "vads-button-color-background-disabled-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-button-color-background-disabled-on-light",
+        "*"
+      ]
+    }
+  },
   "vads-button-color-text-primary-alt-on-light": {
     "*": {
       "value": "#ffffff",

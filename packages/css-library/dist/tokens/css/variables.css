@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 17 Apr 2025 20:55:58 GMT
+ * Generated on Wed, 28 May 2025 19:35:37 GMT
  */
 
 :root {
@@ -18,6 +18,7 @@
   --vads-button-color-background-primary-on-light: #005ea2;
   --vads-button-color-background-primary-alt-active-on-light: #154c21;
   --vads-button-color-background-secondary-on-light: #ffffff;
+  --vads-button-color-background-disabled-on-light: #c9c9c9;
   --vads-button-color-text-primary-alt-on-light: #ffffff;
   --vads-button-color-text-primary-on-light: #ffffff;
   --vads-alert-color-background-info-on-light: #e7f6f8;
