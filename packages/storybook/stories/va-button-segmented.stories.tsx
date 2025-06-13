@@ -15,7 +15,7 @@ export default {
 };
 
 const defaultArgs = {
-  'ariaLabel': 'Segmented Button Example.',
+  'label': 'Segmented Button Example.',
   'selected': 0,
   'buttons': [
     { label: 'List', value: 'list' },
@@ -29,14 +29,14 @@ const defaultArgs = {
 };
 
 const Template = ({
-  ariaLabel,
+  label,
   buttons, 
   selected,
   vaButtonClick
 }) => {
   return (
     <VaButtonSegmented
-      ariaLabel={ariaLabel}
+      label={label}
       buttons={buttons}
       selected={selected}
       onVaButtonClick={vaButtonClick}

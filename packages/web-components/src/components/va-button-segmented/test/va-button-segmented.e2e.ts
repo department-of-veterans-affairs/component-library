@@ -17,7 +17,7 @@ describe('va-button-segmented', () => {
     // Select the component within the page and set buttons property to an empty
     // array.
     await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel) => {
-      elm.ariaLabel = exampleAriaLabel;
+      elm.label = exampleAriaLabel;
       elm.buttons = [];
     }, exampleAriaLabel);
 
@@ -38,7 +38,7 @@ describe('va-button-segmented', () => {
     // Select the component within the page and set buttons property to an empty
     // array and aria-label to an empty string.
     await page.$eval('va-button-segmented', (elm: any, buttonsData) => {
-      elm.ariaLabel = '';
+      elm.label = '';
       elm.buttons = buttonsData;
     }, buttonsData);
 
@@ -60,7 +60,7 @@ describe('va-button-segmented', () => {
 
     // Select the component within the page and add buttons property to it
     await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, buttonsData) => {
-      elm.ariaLabel = exampleAriaLabel;
+      elm.label = exampleAriaLabel;
       elm.buttons = buttonsData;
     }, exampleAriaLabel, buttonsData);
 
@@ -110,7 +110,7 @@ describe('va-button-segmented', () => {
 
     // Select the component within the page and set buttons and selected index
     await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, buttonsData) => {
-      elm.ariaLabel = exampleAriaLabel;
+      elm.label = exampleAriaLabel;
       elm.buttons = buttonsData;
       elm.selected = 1; // Select the second button
     }, exampleAriaLabel, buttonsData);
@@ -148,7 +148,7 @@ describe('va-button-segmented', () => {
 
     // Select the component within the page and set buttons and an out-of-bounds selected index
     await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, buttonsData) => {
-      elm.ariaLabel = exampleAriaLabel;
+      elm.label = exampleAriaLabel;
       elm.buttons = buttonsData;
       elm.selected = 5; // Out of bounds index
     }, exampleAriaLabel, buttonsData);
@@ -222,7 +222,7 @@ it('renders a maximum of four buttons', async () => {
   ];
 
   await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, longButtonsData) => {
-    elm.ariaLabel = exampleAriaLabel;
+    elm.label = exampleAriaLabel;
     elm.buttons = longButtonsData;
   }, exampleAriaLabel, longButtonsData);
 
@@ -264,7 +264,7 @@ it(`fires click event`, async () => {
 
   // Select the component within the page and add buttons property to it
   await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, buttonsData) => {
-    elm.ariaLabel = exampleAriaLabel;
+    elm.label = exampleAriaLabel;
     elm.buttons = buttonsData;
   }, exampleAriaLabel, buttonsData);
 

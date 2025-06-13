@@ -379,10 +379,6 @@ export namespace Components {
      */
     interface VaButtonSegmented {
         /**
-          * The aria-label for the button group, used for accessibility
-         */
-        "ariaLabel": string;
-        /**
           * An array of objects defining the labels and values for each button.
          */
         "buttons": Array<ButtonItem>;
@@ -390,6 +386,10 @@ export namespace Components {
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * The aria-label for the button group, used for accessibility
+         */
+        "label": string;
         /**
           * The index of the selected button.
          */
@@ -3993,10 +3993,6 @@ declare namespace LocalJSX {
      */
     interface VaButtonSegmented {
         /**
-          * The aria-label for the button group, used for accessibility
-         */
-        "ariaLabel": string;
-        /**
           * An array of objects defining the labels and values for each button.
          */
         "buttons": Array<ButtonItem>;
@@ -4004,6 +4000,10 @@ declare namespace LocalJSX {
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * The aria-label for the button group, used for accessibility
+         */
+        "label": string;
         /**
           * The event used to track usage of the component.
          */

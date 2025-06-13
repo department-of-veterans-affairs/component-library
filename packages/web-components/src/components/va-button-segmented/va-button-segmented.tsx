@@ -29,7 +29,7 @@ export class VaButtonSegmented {
   /**
    * The aria-label for the button group, used for accessibility
    */
-  @Prop() ariaLabel!: string;
+  @Prop() label!: string;
 
   /**
    * An array of objects defining the labels and values for each button.
@@ -131,13 +131,13 @@ export class VaButtonSegmented {
     });
 
     // Do not render if no aria-label or buttons are provided
-    if (!this.ariaLabel || !this.buttons || !this.buttons.length) {
+    if (!this.label || !this.buttons || !this.buttons.length) {
       return null;
     }
 
     return (
       <Host>
-        <ul class={containerClass} role="group" aria-label={this.ariaLabel}>
+        <ul class={containerClass} role="group" aria-label={this.label}>
           {this.buttons.map((buttonItem: ButtonItem, index: number) => (
             <li class="usa-button-group__item">
               <button
