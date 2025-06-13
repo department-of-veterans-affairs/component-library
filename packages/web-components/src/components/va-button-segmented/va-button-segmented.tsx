@@ -132,10 +132,12 @@ export class VaButtonSegmented {
 
     // Throw errors if required props are not provided.
     if (!this.label) {
-      throw new Error('va-button-segmented: "label" prop is required.');
+      console.error('va-button-segmented: "label" prop is required.');
+      return null;
     }
-    else if (!this.buttons || !this.buttons.length) {
-      throw new Error('va-button-segmented: "buttons" prop is required and must contain at least one button.');
+    if (!this.buttons || !Array.isArray(this.buttons) || this.buttons.length === 0) {
+      console.error('va-button-segmented: "buttons" prop is required and must contain at least one button.');
+      return null;
     }
 
     return (

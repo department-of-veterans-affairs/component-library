@@ -7,7 +7,7 @@ const buttonsData = [
   { label: 'Segment 3', value: 'segment-3' }
 ];
 
-const exampleAriaLabel = 'Segmented Button Example.';
+const exampleAriaLabel = 'Segmented Button Example.'
 
 describe('va-button-segmented', () => {
   it('does not render when no buttons are provided', async () => {
@@ -97,7 +97,7 @@ describe('va-button-segmented', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-button-segmented
-        ariaLabel="Segmented Button Example."
+        label="Segmented Button Example."
         buttons=\'[{ label: "Segment 1", value: "segment-1" },{ label: "Segment 2", value: "segment-2" },{ label: "Segment 3", value: "segment-3" }]\'
       ></va-button-segmented>
     `);
@@ -186,93 +186,94 @@ describe('va-button-segmented', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-button-segmented
-        ariaLabel="Segmented Button Example."
+        label="Segmented Button Example."
         buttons=\'[{ label: "Super long label that might go here", value: "segment-1" },{ label: "Segment 2", value: "segment-2" },{ label: "Segment 3", value: "segment-3" }]\'
       ></va-button-segmented>
     `);
     await axeCheck(page);
   });
-});
 
-it('passes an axe check when selected index if specified', async () => {
-  // create a new puppeteer page
-  // load the page with html content
-  const page = await newE2EPage();
-  await page.setContent(
-    `<va-button-segmented
-      ariaLabel="Segmented Button Example."
-      buttons=\'[{ label: "Segment 1", value: "segment-1" },{ label: "Segment 2", value: "segment-2" },{ label: "Segment 3", value: "segment-3" }]\'
-      selected="1"
-    ></va-button-segmented>
-  `);
-  await axeCheck(page);
-});
+  it('passes an axe check when selected index if specified', async () => {
+    // create a new puppeteer page
+    // load the page with html content
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-button-segmented
+        label="Segmented Button Example."
+        buttons=\'[{ label: "Segment 1", value: "segment-1" },{ label: "Segment 2", value: "segment-2" },{ label: "Segment 3", value: "segment-3" }]\'
+        selected="1"
+      ></va-button-segmented>
+    `);
+    await axeCheck(page);
+  });
 
-it('renders a maximum of four buttons', async () => {
-  const page = await newE2EPage();
-  await page.setContent(`<va-button-segmented></va-button-segmented>`);
+  it('renders a maximum of four buttons', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-button-segmented></va-button-segmented>`);
 
-  // Select the component within the page and set buttons property to more than four buttons
-  const longButtonsData = [
-    { label: 'Segment 1', value: 'segment-1' },
-    { label: 'Segment 2', value: 'segment-2' },
-    { label: 'Segment 3', value: 'segment-3' },
-    { label: 'Segment 4', value: 'segment-4' },
-    { label: 'Segment 5', value: 'segment-5' }
-  ];
+    // Select the component within the page and set buttons property to more than four buttons
+    const longButtonsData = [
+      { label: 'Segment 1', value: 'segment-1' },
+      { label: 'Segment 2', value: 'segment-2' },
+      { label: 'Segment 3', value: 'segment-3' },
+      { label: 'Segment 4', value: 'segment-4' },
+      { label: 'Segment 5', value: 'segment-5' }
+    ];
 
-  await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, longButtonsData) => {
-    elm.label = exampleAriaLabel;
-    elm.buttons = longButtonsData;
-  }, exampleAriaLabel, longButtonsData);
+    await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, longButtonsData) => {
+      elm.label = exampleAriaLabel;
+      elm.buttons = longButtonsData;
+    }, exampleAriaLabel, longButtonsData);
 
-  // Wait for the changes to be processed and grab the shadow content
-  await page.waitForChanges();
-  const shadowContent = await page.$eval('va-button-segmented',
-    el => el.shadowRoot.innerHTML.trim(),
-  );
+    // Wait for the changes to be processed and grab the shadow content
+    await page.waitForChanges();
+    const shadowContent = await page.$eval('va-button-segmented',
+      el => el.shadowRoot.innerHTML.trim(),
+    );
 
-  expect(shadowContent).toEqualHtml(`
-    <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
-      <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-pressed="true" type="button">
-          Segment 1
-        </button>
-      </li>
-      <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-pressed="false" type="button">
-          Segment 2
-        </button>
-      </li>
-      <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-pressed="false" type="button">
-          Segment 3
-        </button>
-      </li>
-      <li class="usa-button-group__item">
-        <button class="va-segmented-button__button" aria-pressed="false" type="button">
-          Segment 4
-        </button>
-      </li>
-    </ul>
-  `.trim());
-});
+    expect(shadowContent).toEqualHtml(`
+      <ul aria-label="Segmented Button Example." class="usa-button-group va-segmented-button" role="group">
+        <li class="usa-button-group__item">
+          <button class="va-segmented-button__button" aria-pressed="true" type="button">
+            Segment 1
+          </button>
+        </li>
+        <li class="usa-button-group__item">
+          <button class="va-segmented-button__button" aria-pressed="false" type="button">
+            Segment 2
+          </button>
+        </li>
+        <li class="usa-button-group__item">
+          <button class="va-segmented-button__button" aria-pressed="false" type="button">
+            Segment 3
+          </button>
+        </li>
+        <li class="usa-button-group__item">
+          <button class="va-segmented-button__button" aria-pressed="false" type="button">
+            Segment 4
+          </button>
+        </li>
+      </ul>
+    `.trim());
+  });
 
-it(`fires click event`, async () => {
-  const page = await newE2EPage();
-  await page.setContent(`<va-button-segmented></va-button-segmented>`);
+  it(`fires click event`, async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-button-segmented></va-button-segmented>`);
 
-  // Select the component within the page and add buttons property to it
-  await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, buttonsData) => {
-    elm.label = exampleAriaLabel;
-    elm.buttons = buttonsData;
-  }, exampleAriaLabel, buttonsData);
+    // Select the component within the page and add buttons property to it
+    await page.$eval('va-button-segmented', (elm: any, exampleAriaLabel, buttonsData) => {
+      elm.label = exampleAriaLabel;
+      elm.buttons = buttonsData;
+    }, exampleAriaLabel, buttonsData);
 
-  // Wait for the changes to be processed and grab the shadow content
-  await page.waitForChanges();
-  const clickSpy = await page.spyOnEvent('vaButtonClick');
-  const button = await page.findAll('va-button-segmented >>> button');
-  await button[1].click();
-  expect(clickSpy).toHaveReceivedEventTimes(1);
-  expect(clickSpy.events[0].detail.value).toEqual('segment-2');
+    // Wait for the changes to be processed and grab the shadow content
+    await page.waitForChanges();
+    const clickSpy = await page.spyOnEvent('vaButtonClick');
+    const button = await page.findAll('va-button-segmented >>> button');
+    await button[1].click();
+    expect(clickSpy).toHaveReceivedEventTimes(1);
+    expect(clickSpy.events[0].detail.value).toEqual('segment-2');
+  });
+
 });
