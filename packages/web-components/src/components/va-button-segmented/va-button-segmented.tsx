@@ -136,7 +136,7 @@ export class VaButtonSegmented {
       return null;
     }
     if (!this.buttons || !Array.isArray(this.buttons) || this.buttons.length === 0) {
-      console.error('va-button-segmented: "buttons" prop is required and must contain at least one button.');
+      console.error('va-button-segmented: "buttons" prop array is required and must contain at least one item.');
       return null;
     }
 
