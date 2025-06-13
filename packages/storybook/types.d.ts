@@ -47,6 +47,9 @@ declare global {
       'va-select': WCTypes.VaSelect & IsElement & { inert?: boolean };
       'va-service-list-item': WCTypes.VaServiceListItem &
         IsElement & { ref?: any } & { key?: Key };
+      'va-sidenav': WCTypes.VaSidenav & IsElement;
+      'va-sidenav-item': WCTypes.VaSidenavItem & IsElement;
+      'va-sidenav-submenu': WCTypes.VaSidenavSubmenu & IsElement;
       'va-summary-box': WCTypes.VaSummaryBox & IsElement;
       'va-table': WCTypes.VaTable & IsElement;
       'va-table-row': WCTypes.VaTableRow & IsElement & { key?: Key };

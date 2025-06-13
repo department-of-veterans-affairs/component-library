@@ -1699,6 +1699,29 @@ export namespace Components {
         "serviceStatus": string;
     }
     /**
+     * @componentName Side Navigation
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaSidenav {
+    }
+    interface VaSidenavItem {
+        /**
+          * The href for the sidenav item
+         */
+        "href"?: string;
+        /**
+          * If the sidenav item is the current page
+         */
+        "isCurrentPage"?: boolean;
+        /**
+          * The label for the sidenav item
+         */
+        "label"?: string;
+    }
+    interface VaSidenavSubmenu {
+    }
+    /**
      * @componentName Statement of truth
      * @maturityCategory use
      * @maturityLevel deployed
@@ -3284,6 +3307,29 @@ declare global {
         prototype: HTMLVaServiceListItemElement;
         new (): HTMLVaServiceListItemElement;
     };
+    /**
+     * @componentName Side Navigation
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaSidenavElement extends Components.VaSidenav, HTMLStencilElement {
+    }
+    var HTMLVaSidenavElement: {
+        prototype: HTMLVaSidenavElement;
+        new (): HTMLVaSidenavElement;
+    };
+    interface HTMLVaSidenavItemElement extends Components.VaSidenavItem, HTMLStencilElement {
+    }
+    var HTMLVaSidenavItemElement: {
+        prototype: HTMLVaSidenavItemElement;
+        new (): HTMLVaSidenavItemElement;
+    };
+    interface HTMLVaSidenavSubmenuElement extends Components.VaSidenavSubmenu, HTMLStencilElement {
+    }
+    var HTMLVaSidenavSubmenuElement: {
+        prototype: HTMLVaSidenavSubmenuElement;
+        new (): HTMLVaSidenavSubmenuElement;
+    };
     interface HTMLVaStatementOfTruthElementEventMap {
         "vaInputChange": any;
         "vaInputBlur": any;
@@ -3486,6 +3532,9 @@ declare global {
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
         "va-service-list-item": HTMLVaServiceListItemElement;
+        "va-sidenav": HTMLVaSidenavElement;
+        "va-sidenav-item": HTMLVaSidenavItemElement;
+        "va-sidenav-submenu": HTMLVaSidenavSubmenuElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
         "va-table": HTMLVaTableElement;
@@ -5440,6 +5489,29 @@ declare namespace LocalJSX {
         "serviceStatus"?: string;
     }
     /**
+     * @componentName Side Navigation
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaSidenav {
+    }
+    interface VaSidenavItem {
+        /**
+          * The href for the sidenav item
+         */
+        "href"?: string;
+        /**
+          * If the sidenav item is the current page
+         */
+        "isCurrentPage"?: boolean;
+        /**
+          * The label for the sidenav item
+         */
+        "label"?: string;
+    }
+    interface VaSidenavSubmenu {
+    }
+    /**
      * @componentName Statement of truth
      * @maturityCategory use
      * @maturityLevel deployed
@@ -5911,6 +5983,9 @@ declare namespace LocalJSX {
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
         "va-service-list-item": VaServiceListItem;
+        "va-sidenav": VaSidenav;
+        "va-sidenav-item": VaSidenavItem;
+        "va-sidenav-submenu": VaSidenavSubmenu;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
         "va-table": VaTable;
@@ -6263,6 +6338,14 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-service-list-item": LocalJSX.VaServiceListItem & JSXBase.HTMLAttributes<HTMLVaServiceListItemElement>;
+            /**
+             * @componentName Side Navigation
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-sidenav": LocalJSX.VaSidenav & JSXBase.HTMLAttributes<HTMLVaSidenavElement>;
+            "va-sidenav-item": LocalJSX.VaSidenavItem & JSXBase.HTMLAttributes<HTMLVaSidenavItemElement>;
+            "va-sidenav-submenu": LocalJSX.VaSidenavSubmenu & JSXBase.HTMLAttributes<HTMLVaSidenavSubmenuElement>;
             /**
              * @componentName Statement of truth
              * @maturityCategory use
