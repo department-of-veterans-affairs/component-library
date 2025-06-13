@@ -12,7 +12,7 @@ const buttonStyles = {
 };
 
 const fixedButtonStyles = {
-  maxWidth: 165,
+  maxWidth: 258,
   width: '100%',
 };
 
@@ -32,7 +32,7 @@ const IdMeLogo = () => (
       d="M1.5 0H1C.3 0 0 .2 0 .7v10c0 .5.3.7 1 .7h.5c.6 0 1-.2 1-.6V.7c0-.5-.4-.7-1-.7m6.2 9.1H6V2.3h1.6c1.9 0 2.3 1.9 2.3 3.4s-.4 3.4-2.3 3.4zm2.9 1c0-1.2.7-2.2 1.7-2.5l.2-1.9c0-3.6-1.7-5.7-4.8-5.7H4.4c-.5 0-.7.3-.7.8v9.9c0 .5.2.7.7.7h3.3c1.2 0 2.1-.3 2.9-.9v-.3z"
     />
     <path
-      fill="#2EC777"
+      fill="#fff"
       d="M14.2 10.2c0 .6-.5 1.2-1.1 1.2-.6 0-1.2-.6-1.2-1.2 0-.7.6-1.3 1.2-1.3s1.1.6 1.1 1.3"
     />
     <path
@@ -107,12 +107,12 @@ const SignInButton = () => <va-button text="Sign in or create an account" />;
 const IdMeSignInButton = () => (
   <button
     style={{
-      ...buttonStyles as React.CSSProperties,
+      ...(buttonStyles as React.CSSProperties),
       ...fixedButtonStyles,
-      backgroundColor: 'var(--vads-color-success-dark)',
+      backgroundColor: '#08833D',
     }}
   >
-    <IdMeLogo />
+    Sign in with <IdMeLogo />
   </button>
 );
 const IdMeVerifyButton = () => (
@@ -127,12 +127,12 @@ const IdMeVerifyButton = () => (
 const LoginGovSignInButton = () => (
   <button
     style={{
-      ...buttonStyles as React.CSSProperties,
+      ...(buttonStyles as React.CSSProperties),
       ...fixedButtonStyles,
       backgroundColor: 'var(--vads-color-secondary)',
     }}
   >
-    <LoginGovLogo />
+    Sign in with <LoginGovLogo />
   </button>
 );
 const LoginGovVerifyButton = () => (
