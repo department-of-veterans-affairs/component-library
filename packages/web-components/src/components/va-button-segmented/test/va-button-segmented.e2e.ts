@@ -10,6 +10,13 @@ const buttonsData = [
 const exampleAriaLabel = 'Segmented Button Example.'
 
 describe('va-button-segmented', () => {
+  // Suppress console errors during tests
+  // This is useful to avoid noise in the test output, especially for expected
+  // warnings or errors that are part of the component's design.
+  beforeEach(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
   it('does not render when no buttons are provided', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button-segmented></va-button-segmented>');
