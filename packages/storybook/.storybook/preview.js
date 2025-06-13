@@ -102,12 +102,6 @@ const viewports = {
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 
-  // darkMode: {
-  //   dark: { ...themes.dark },
-  //   light: { ...themes.light },
-  //   stylePreview: true,
-  // },
-
   options: {
     storySort: {
       method: 'alphabetical',
@@ -123,8 +117,8 @@ export const parameters = {
   },
 
   viewport: {
-      options: viewports,
-    },
+    options: viewports,
+  },
 
   viewMode: 'docs',
 
