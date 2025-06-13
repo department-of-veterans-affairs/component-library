@@ -155,7 +155,7 @@ export class VaButtonSegmented {
                 title={buttonItem.label.length > 20 ? buttonItem.label : undefined}
                 aria-pressed={this.selected === index ? 'true' : 'false'}
               >
-                {truncate(buttonItem.label, 145, null)}
+                {truncate(buttonItem.label, 100, null)}
               </button>
             </li>
           ))}

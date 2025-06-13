@@ -13,17 +13,17 @@
 
 .va-segmented-button {
   background-color: var(--vads-color-base-lighter);
-  padding: var(--vads-spacing-0p5) 0 calc(var(--vads-spacing-0p5) + 4px) 0; // 4px is to account for the box-shadow on the button
+  padding: var(--vads-spacing-0p5); 
+  padding-bottom: calc(var(--vads-spacing-0p5) + 4px); // 4px is to account for the box-shadow on the button
   border-radius: 8px;
   margin-left: 0;
   margin-right: 0;
-  display: inline-flex;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 .usa-button-group__item {
   margin: 0;
-  display: flex;
-  flex: 1 1 auto;
 }
 
 .va-segmented-button__button {
@@ -35,7 +35,6 @@
   border: 0;
   box-shadow: 0 4px 0 0 var(--vads-color-base-lighter);
   border-radius: 4px;
-  margin: 0 4px;
   color: var(--vads-color-base);
   box-sizing: border-box;
   cursor: pointer;
@@ -45,12 +44,9 @@
 
 @media screen and (max-width: $tablet) {
   .va-segmented-button {
-    display: flex;
-    flex-flow: row;
     width: 100%;
   }
   .va-segmented-button__button {
-    flex: 1;
     padding: var(--vads-spacing-1p5) var(--vads-spacing-0p5) calc(var(--vads-spacing-1p5) - 4px) var(--vads-spacing-0p5);
   }
 }
@@ -71,7 +67,7 @@
 .va-segmented-button__button:active, .va-segmented-button__button[aria-pressed=true] {
   background-color: var(--vads-color-white);
   box-shadow: 0 4px 0 0 var(--vads-color-white);
-  text-shadow: .7px 0px 0px var(--vads-color-base); // Using this instead of font-weight to avoid button resizing and flicker.
+  font-weight: 700;
 
 }
 
