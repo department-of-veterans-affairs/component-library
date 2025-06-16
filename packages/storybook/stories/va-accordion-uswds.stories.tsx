@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect } from 'react';
 import {
   getWebComponentDocs,
   propStructure,
@@ -98,7 +98,7 @@ export default {
   },
 };
 
-const AccordionComponent = memo(args => {
+const AccordionComponent = args => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
     document.querySelector('main')?.setAttribute('lang', lang);
@@ -150,7 +150,7 @@ const AccordionComponent = memo(args => {
       </va-accordion>
     </>
   );
-});
+};
 
 const Template = args => <AccordionComponent {...args} />;
 
