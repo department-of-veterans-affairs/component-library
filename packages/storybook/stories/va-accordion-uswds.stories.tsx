@@ -98,61 +98,64 @@ export default {
   },
 };
 
-const AccordionComponent = args => {
+const Template = args => {
+  return (
+    <va-accordion
+      open-single={args['open-single'] ? args['open-single'] : undefined}
+      disableAnalytics={
+        args['disable-analytics'] ? args['disable-analytics'] : undefined
+      }
+      section-heading={
+        args['section-heading'] ? args['section-heading'] : undefined
+      }
+    >
+      {args.accordionItems.map(accordion => (
+        <va-accordion-item
+          id={accordion.id}
+          header={args.itemsHeadlineSlot ? undefined : accordion.header}
+          bordered={args.bordered}
+          subheader={
+            accordion.subheader
+              ? accordion.subheader
+              : undefined
+          }
+          level={args.level ? args.level : undefined}
+          open={accordion.open}
+        >
+          {args.itemsIcon && (
+            <span slot="icon" className="vads-u-color--green">
+              <va-icon icon="info" />
+            </span>
+          )}
+          {args.itemsIcon && <va-icon icon="mail" slot="subheader-icon" />}
+          {args.itemsHeadlineSlot && (
+            <h3 slot="headline">Slotted {accordion.header}</h3>
+          )}
+          <p>{accordion.body}</p>
+        </va-accordion-item>
+      ))}
+    </va-accordion>
+  );
+};
+
+const I18nTemplate = args => {
   const [lang, setLang] = useState('en');
+
   useEffect(() => {
     document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
 
   return (
     <>
-      {args.i18n && (
-        <div>
-          <va-button onClick={e => setLang('es')} text="Español" />
-          <va-button onClick={e => setLang('en')} text="English" />
-          <va-button onClick={e => setLang('tl')} text="Tagalog" />
-        </div>
-      )}
-      <va-accordion
-        open-single={args['open-single'] ? args['open-single'] : undefined}
-        disableAnalytics={
-          args['disable-analytics'] ? args['disable-analytics'] : undefined
-        }
-        section-heading={
-          args['section-heading'] ? args['section-heading'] : undefined
-        }
-      >
-        {args.accordionItems.map(accordion => (
-          <va-accordion-item
-            id={accordion.id}
-            header={args.itemsHeadlineSlot ? undefined : accordion.header}
-            bordered={args.bordered}
-            subheader={
-              accordion.subheader
-                ? accordion.subheader
-                : undefined
-            }
-            level={args.level ? args.level : undefined}
-            open={accordion.open}
-          >
-            {args.itemsIcon && (
-              <span slot="icon" className="vads-u-color--green">
-                <va-icon icon="info" />
-              </span>
-            )}
-            {args.itemsIcon && <va-icon icon="mail" slot="subheader-icon" />}
-            {args.itemsHeadlineSlot && (
-              <h3 slot="headline">Slotted {accordion.header}</h3>
-            )}
-            <p>{accordion.body}</p>
-          </va-accordion-item>
-        ))}
-      </va-accordion>
+      <div>
+        <va-button onClick={e => setLang('es')} text="Español" />
+        <va-button onClick={e => setLang('en')} text="English" />
+        <va-button onClick={e => setLang('tl')} text="Tagalog" />
+      </div>
+      <Template {...args} />
     </>
   );
 };
-
-const Template = args => <AccordionComponent {...args} />;
 
 export const Default = Template.bind(null);
 
@@ -201,10 +204,8 @@ CustomHeaderLevel.args = {
   level: 4,
 };
 
-export const Internationalization = Template.bind(null);
-Internationalization.args = {
-  i18n: true,
-};
+export const Internationalization = I18nTemplate.bind(null);
+Internationalization.args = {};
 
 export const ManyAccordions = Template.bind(null);
 ManyAccordions.args = {
