@@ -234,4 +234,50 @@ describe('va-additional-info', () => {
     // margin-bottom and margin-top is set to 0 for first slotted child
     expect(calcMaxHeight).toEqual('calc(70px + 1.125rem)');
   });
+
+  it('sets the correct max-height value on window resize', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-additional-info trigger="Click here for a treat!" disable-analytics>
+        <div style="height:50px;padding:10px 0;margin:5px 0;">We're out of treats! Try again later.</div>
+      </va-additional-info>
+    `);
+    const handle = await page.waitForSelector('pierce/#info');
+    const anchorEl = await page.find('va-additional-info >>> a');
+    await anchorEl.click();
+    await page.waitForSelector('pierce/#info.open');
+
+    // Get the initial max-height value
+    const maxHeightBeforeResize = await handle.evaluate((domElement: HTMLElement) =>
+      domElement.style.getPropertyValue('--calc-max-height'),
+    );
+  
+    // Trigger window resize event
+    await page.evaluate(() => window.dispatchEvent(new Event('resize')));
+  
+    // Get the updated max-height value
+    const maxHeightAfterResize = await handle.evaluate((domElement: HTMLElement) =>
+      domElement.style.getPropertyValue('--calc-max-height'),
+    );
+  
+    expect(maxHeightAfterResize).toEqual(maxHeightBeforeResize);
+  });
+
+  it('handles any case where `#info` is not present in the shadow DOM', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-additional-info trigger="More info"></va-additional-info>`);
+  
+    // Remove `#info` manually after render
+    await page.evaluate(() => {
+      const info = document
+        .querySelector('va-additional-info')
+        ?.shadowRoot?.getElementById('info');
+      if (info?.parentNode) info.parentNode.removeChild(info);
+    });
+  
+    // Manually call resize to trigger `updateInfoMaxHeight`
+    await page.evaluate(() => window.dispatchEvent(new Event('resize')));
+  
+    expect(true).toBe(true); // If no error, the test passes
+  });
 });

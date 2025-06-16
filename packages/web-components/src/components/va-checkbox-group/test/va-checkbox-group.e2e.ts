@@ -137,7 +137,7 @@ describe('va-checkbox-group', () => {
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
-    <legend class="usa-legend">
+    <legend class="usa-legend" part="legend">
       <h3 part="header">Testing H3</h3>
     </legend>
   `);
@@ -149,7 +149,7 @@ describe('va-checkbox-group', () => {
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
-      <legend class="usa-legend">
+      <legend class="usa-legend" part="legend">
         <h5 part="header">Testing H5</h5>
         <span class="usa-label--required">
           required
@@ -164,7 +164,7 @@ describe('va-checkbox-group', () => {
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
-      <legend class="usa-legend">
+      <legend class="usa-legend" part="legend">
         Testing
         <span class="usa-label--required">
           required
@@ -179,6 +179,13 @@ describe('va-checkbox-group', () => {
     const message = await page.find('va-checkbox-group >>> #description-message');
     expect(message.textContent).toEqual("Some additional info");
     expect(message).toHaveClass("usa-sr-only");
+  });
+
+  it('adds sr-only text to the label when labelSrOnly is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group label="My label" label-sr-only="with sr-only text"></va-checkbox-group>');
+    const label = await page.find('va-checkbox-group >>> legend');
+    expect(label.textContent).toContain('My label with sr-only text');
   });
 
   it('useFormsPattern displays header for the single field pattern', async () => {

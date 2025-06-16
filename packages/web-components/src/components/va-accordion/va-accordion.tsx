@@ -101,13 +101,13 @@ export class VaAccordion {
     const clickedItem = (event.target as HTMLElement).closest(
       'va-accordion-item',
     );
-    
+
     if(this.el !== clickedItem.parentElement) {
       // ignore if this item is not a direct child of this va-accordion
       // this is to prevent issues with nested accordions
       return;
     }
-    
+
     // Usage for slot to provide context to analytics for header and level
     const header = clickedItem.querySelector('[slot="headline"]');
     // using the slot to provide context to analytics for header and level
@@ -129,7 +129,8 @@ export class VaAccordion {
         .forEach(item => (item as Element).setAttribute('open', 'false'));
     }
 
-    const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
+    // setAttribute to "true" will only add the attribute name to the DOM, so we need to use "hasAttribute"
+    const prevAttr = clickedItem.getAttribute('open') === 'false' ? false : clickedItem.hasAttribute('open');
 
     if (!this.disableAnalytics) {
       const detail = {
@@ -220,6 +221,7 @@ export class VaAccordion {
 
   render() {
     const { openSingle } = this;
+    const isInsideSearchFilter = this.el.classList.contains('va-search-filter__accordion')
 
     const accordionClass = classNames({
       'usa-accordion': true,
@@ -233,7 +235,7 @@ export class VaAccordion {
             (this.accordionContainer = accordionContainer)
           }
         >
-          {!openSingle ? (
+          {(!openSingle && !isInsideSearchFilter) ? (
             <button
               aria-expanded={`${this.expanded}`}
               class="va-accordion__button"

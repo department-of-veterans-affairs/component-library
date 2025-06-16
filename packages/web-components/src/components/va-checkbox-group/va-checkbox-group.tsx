@@ -44,6 +44,11 @@ export class VaCheckboxGroup {
   @Prop() label!: string;
 
   /**
+   * Optional text that will be read by screen readers in addition to the label text.
+  */
+  @Prop() labelSrOnly?: string;
+
+  /**
    * Whether or not this input field is required.
    */
   @Prop() required?: boolean = false;
@@ -103,6 +108,11 @@ export class VaCheckboxGroup {
     if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
   }
 
+  @Listen('resize', { target: 'window' })
+  handleResize() {
+    forceUpdate(this);
+  }
+
   private fireAnalyticsEvent(optionLabel) {
     this.componentLibraryAnalytics.emit({
       componentName: 'va-checkbox-group',
@@ -140,6 +150,7 @@ export class VaCheckboxGroup {
       useFormsPattern,
       formHeadingLevel,
       formHeading,
+      labelSrOnly
     } = this;
     const HeaderLevel = this.getHeaderLevel();
     const ariaLabeledByIds =
@@ -154,6 +165,7 @@ export class VaCheckboxGroup {
     const legendClass = classnames({
       'usa-legend': true,
       'usa-label--error': error,
+      'usa-sr-only': this.el.classList.contains('va-search-filter__checkbox-group')
     });
     const isFormsPattern =
       useFormsPattern === 'single' || useFormsPattern === 'multiple'
@@ -185,6 +197,7 @@ export class VaCheckboxGroup {
             <legend
               class={legendClass}
               aria-describedby={messageAriaDescribedbyId}
+              part="legend"
             >
               {HeaderLevel ? (
                 <HeaderLevel part="header">{label}</HeaderLevel>
@@ -197,6 +210,7 @@ export class VaCheckboxGroup {
                   {label}
                 </span>
               )}
+              {labelSrOnly && <span class="usa-sr-only">{labelSrOnly}</span>}
               {isMessageSet(messageAriaDescribedby) && (
                 <span id="description-message" class="usa-sr-only">
                   {messageAriaDescribedby}

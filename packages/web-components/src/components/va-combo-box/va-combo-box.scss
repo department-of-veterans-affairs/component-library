@@ -73,6 +73,30 @@
   right: calc(2.5rem + 2px);
 }
 
-  .usa-combo-box__clear-input {
-    display: block !important;
+.usa-combo-box__clear-input {
+  display: block !important;
+}
+
+.dynamic-flag {
+  position: absolute;
+  // center the flag
+  bottom: calc((2.5rem - 16px) * 0.5);
+  left: 10px;
+}
+
+.flag-wrapper {
+  display: flex;
+  align-items: center;
+  & > span {
+    margin-right: 8px;
+  }
+}
+
+.input-telephone-wrapper > .usa-combo-box__input {
+  padding-left: 36px;
+  padding-right: 3rem;
+  overflow: hidden !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
 }

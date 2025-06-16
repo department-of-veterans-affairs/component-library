@@ -43,6 +43,7 @@ const Template = ({
   channel,
   'disable-analytics': disableAnalytics,
   download,
+  external,
   href,
   filename,
   filetype,
@@ -64,6 +65,7 @@ const Template = ({
         channel={channel}
         disable-analytics={disableAnalytics}
         download={download}
+        external={external}
         href={href}
         filename={filename}
         filetype={filetype}
