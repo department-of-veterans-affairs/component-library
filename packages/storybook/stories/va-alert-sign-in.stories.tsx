@@ -26,9 +26,9 @@ const IdMeLogo = () => (
     fill="none"
     viewBox="0 0 30 12"
     style={svgStyles}
-    aria-labelledby="service-name"
+    aria-labelledby="idme-title"
   >
-    <title id="service-name">ID.me</title>
+    <title id="idme-title">ID.me</title>
     <path
       fill="#FFF"
       d="M1.5 0H1C.3 0 0 .2 0 .7v10c0 .5.3.7 1 .7h.5c.6 0 1-.2 1-.6V.7c0-.5-.4-.7-1-.7m6.2 9.1H6V2.3h1.6c1.9 0 2.3 1.9 2.3 3.4s-.4 3.4-2.3 3.4zm2.9 1c0-1.2.7-2.2 1.7-2.5l.2-1.9c0-3.6-1.7-5.7-4.8-5.7H4.4c-.5 0-.7.3-.7.8v9.9c0 .5.2.7.7.7h3.3c1.2 0 2.1-.3 2.9-.9v-.3z"
@@ -50,9 +50,9 @@ const LoginGovLogo = () => (
     fill="none"
     viewBox="0 0 114 15"
     style={svgStyles}
-    aria-labelledby="service-name"
+    aria-labelledby="logingov-title"
   >
-    <title id="service-name">Login.gov</title>
+    <title id="logingov-title">Login.gov</title>
     <g fill="#fff" clipPath="url(#a)">
       <path d="M10.4 0H1.7C.7 0 0 .7 0 1.6v8.1a1 1 0 0 0 .1.5c.4.7 1.8 3 6 4.8 4-1.8 5.5-4.1 5.9-4.8a1 1 0 0 0 0-.5v-8c0-.5-.1-1-.4-1.2a1.7 1.7 0 0 0-1.2-.5ZM7.7 9.6a9.8 9.8 0 0 1-3.3 0L5 6.5a1.6 1.6 0 0 1-.7-1.3 1.7 1.7 0 0 1 1.3-1.7 1.7 1.7 0 0 1 2 1 1.6 1.6 0 0 1-.5 2l.6 3.1Z" />
       <path
