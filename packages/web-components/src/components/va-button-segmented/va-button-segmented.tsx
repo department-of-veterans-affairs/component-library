@@ -26,9 +26,9 @@ export class VaButtonSegmented {
   @Element() el: HTMLElement;
 
   /**
-   * The aria-label for the button group, used for accessibility
+   * The aria-label for the button group, used for accessibility. Not required, but recommended.
    */
-  @Prop() label!: string;
+  @Prop() label: string;
 
   /**
    * An array of objects defining the labels and values for each button.
@@ -128,12 +128,6 @@ export class VaButtonSegmented {
     const buttonClass = classnames({
       'va-segmented-button__button': true,
     });
-
-    // Throw errors if required props are not provided.
-    if (!this.label) {
-      console.error('va-button-segmented: "label" prop is required.');
-      return null;
-    }
     if (!this.buttons || !Array.isArray(this.buttons) || this.buttons.length === 0) {
       console.error('va-button-segmented: "buttons" prop array is required and must contain at least one item.');
       return null;
