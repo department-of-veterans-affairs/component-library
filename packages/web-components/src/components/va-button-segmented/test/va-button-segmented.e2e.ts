@@ -38,27 +38,6 @@ describe('va-button-segmented', () => {
     expect(shadowContent).toBe('');
   });
 
-  it('does not render when aria-label is not provided', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-button-segmented></va-button-segmented>');
-
-    // Select the component within the page and set buttons property to an empty
-    // array and aria-label to an empty string.
-    await page.$eval('va-button-segmented', (elm: any, buttonsData) => {
-      elm.label = '';
-      elm.buttons = buttonsData;
-    }, buttonsData);
-
-    // Wait for the changes to be processed and grab the shadow content
-    await page.waitForChanges();
-    const shadowContent = await page.$eval('va-button-segmented',
-      el => el.shadowRoot.innerHTML.trim(),
-    );
-
-    // Expect the shadow content to be empty since no buttons were provided
-    expect(shadowContent).toBe('');
-  });
-
   it('renders with buttons', async () => {
     // create a new puppeteer page
     // load the page with html content

@@ -387,7 +387,7 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * The aria-label for the button group, used for accessibility
+          * The aria-label for the button group, used for accessibility. Not required, but recommended.
          */
         "label": string;
         /**
@@ -4001,9 +4001,9 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
-          * The aria-label for the button group, used for accessibility
+          * The aria-label for the button group, used for accessibility. Not required, but recommended.
          */
-        "label": string;
+        "label"?: string;
         /**
           * The event used to track usage of the component.
          */
