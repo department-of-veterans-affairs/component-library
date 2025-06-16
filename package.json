@@ -26,6 +26,7 @@
     "webpack": "5"
   },
   "devDependencies": {
-    "husky": "^9.0.11"
+    "husky": "^9.0.11",
+    "util": "^0.12.5"
   }
 }
