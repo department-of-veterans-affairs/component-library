@@ -22,7 +22,7 @@ module.exports = function karmaConfig(config) {
             use: {
               loader: 'babel-loader',
               options: {
-                configFile: path.resolve(__dirname, '../config/babel.config.js'),
+                configFile: './config/babel.config.js',
               },
             },
           },
