@@ -101,10 +101,7 @@ export default {
 const AccordionComponent = memo(args => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
-    const mainElement = document.querySelector('main');
-    if (mainElement) {
-      mainElement.setAttribute('lang', lang);
-    }
+    document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
 
   return (
