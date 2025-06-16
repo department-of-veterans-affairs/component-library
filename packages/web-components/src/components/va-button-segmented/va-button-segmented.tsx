@@ -8,7 +8,6 @@ import {
   Element,
   Watch,
 } from '@stencil/core';
-import { truncate } from '../../utils/utils';
 import classnames from 'classnames';
 import { ButtonItem } from './va-button-segmented.types';
 
@@ -155,7 +154,7 @@ export class VaButtonSegmented {
                 title={buttonItem.label.length > 20 ? buttonItem.label : undefined}
                 aria-pressed={this.selected === index ? 'true' : 'false'}
               >
-                {truncate(buttonItem.label, 100, null)}
+                {buttonItem.label}
               </button>
             </li>
           ))}
