@@ -24,6 +24,7 @@ const defaultArgs = {
   inputError: '',
   checkboxError: '',
   inputMessageAriaDescribedy: '',
+  hideLegalNote: false,
   checked: false,
   inputLabel: 'Your full name',
   checkboxLabel:
@@ -36,6 +37,7 @@ const Template = ({
   inputError,
   checkboxError,
   inputMessageAriaDescribedy,
+  hideLegalNote,
   checked,
   inputLabel,
   checkboxLabel,
@@ -48,6 +50,7 @@ const Template = ({
         inputError={inputError}
         checkboxError={checkboxError}
         inputMessageAriaDescribedby={inputMessageAriaDescribedy}
+        hideLegalNote={hideLegalNote}
         checked={checked}
         inputLabel={inputLabel}
         checkboxLabel={checkboxLabel}
@@ -87,3 +90,6 @@ WithCustomHeading.args = {
 
 export const WithPrefilling = Template.bind(null);
 WithPrefilling.args = { ...defaultArgs, inputValue: 'Jane Doe', checked: true };
+
+export const WithoutLegalNote = Template.bind(null);
+WithoutLegalNote.args = { ...defaultArgs, hideLegalNote: true };
