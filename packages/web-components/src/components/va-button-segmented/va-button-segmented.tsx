@@ -137,7 +137,7 @@ export class VaButtonSegmented {
 
     return (
       <Host>
-        <ul class={containerClass} role="group" aria-label={this.label}>
+        <ul class={containerClass} aria-label={this.label}>
           {this.buttons.map((buttonItem: ButtonItem, index: number) => (
             <li class="usa-button-group__item">
               <button
