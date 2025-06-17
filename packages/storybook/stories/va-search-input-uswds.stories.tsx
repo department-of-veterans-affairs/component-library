@@ -22,6 +22,7 @@ const Template = ({
   value,
   label,
   suggestions,
+  supportsSuggestions,
   small,
   big,
 }) => (
@@ -33,6 +34,7 @@ const Template = ({
       onInput={e => console.log(e)}
       onSubmit={e => console.log(e)}
       suggestions={suggestions}
+      supportsSuggestions={supportsSuggestions}
       small={small}
       big={big}
     />
@@ -44,6 +46,7 @@ const defaultArgs = {
   'value': 'benefits',
   'label': 'Search VA.gov',
   'suggestions': undefined,
+  'supportsSuggestions': false,
   'small': false,
   'big': false,
 };
@@ -122,6 +125,7 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
         onInput={handleInput}
         onSubmit={handleSubmit}
         suggestions={latestSuggestions}
+        supportsSuggestions={true}
       />
     </div>
   );
