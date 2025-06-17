@@ -4,7 +4,6 @@ import {
   Event,
   EventEmitter,
   Host,
-  // Listen,
   Prop,
   Watch,
   h,
@@ -67,6 +66,23 @@ export class VaTabs {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  connectedCallback() {
+    // Make sure that the tab panel corresponding to the selected tab is visible
+    // when the component is first rendered.
+    this.validateSelectedIndex(this.selected);
+
+    // With all elements reset to hidden, query DOM for the element with the ID
+    // of the clicked tab's URL.
+    const targetId = this.tabItems[this.selected].url.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+
+    // Remove hidden attribute from the target element if it exists.
+    if (targetElement) {
+      // Ensure the target element is visible by removing any 'hidden' attribute.
+      targetElement.removeAttribute('hidden');
+    }
+  }
+
   /**
    * @function handleClick
    * @description Handles the click event of an individual tab.
@@ -92,6 +108,28 @@ export class VaTabs {
 
     // Update the selected index to the clicked tab's index.
     this.selected = clickedIndex;
+
+    // Reset all tab panel content elements to hidden by iterating over the URLs
+    // of the tab items and setting the 'hidden' attribute on each corresponding
+    // element.
+    this.tabItems.forEach((item: TabItem) => {
+      const targetId = item.url.replace('#', '');
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.setAttribute('hidden', '');
+      }
+    });
+
+    // With all elements reset to hidden, query DOM for the element with the ID
+    // of the clicked tab's URL.
+    const targetId = this.tabItems[clickedIndex].url.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+
+    // Remove hidden attribute from the target element if it exists.
+    if (targetElement) {
+      // Ensure the target element is visible by removing any 'hidden' attribute.
+      targetElement.removeAttribute('hidden');
+    }
   };
 
   render() {

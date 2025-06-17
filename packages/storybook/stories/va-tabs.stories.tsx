@@ -30,26 +30,25 @@ const vaTabs = (args: any) => {
     ...rest
   } = args;
   return (
-    <VaTabs
-      label={label}
-      tabItems={tabItems}
-      {...rest}
-    />
+    <div>
+      <VaTabs
+        label={label}
+        tabItems={tabItems}
+        {...rest}
+      />
+      {
+        defaultArgs.tabItems.map((item, index) => (
+          <div id={`tab${index + 1}`} key={item.label} hidden>
+            <h2>{item.label}</h2>
+            <p>Content for {item.label} goes here.</p>
+          </div>
+        ))
+      }
+    </div>
   );
 }
 
 const Template = (args: any) => vaTabs(args);
-
-/*
-{
-  defaultArgs.tabItems.map((item, index) => (
-    <div id={`tab${index + 1}`} key={item.label}>
-      <h2>{item.label}</h2>
-      <p>Content for {item.label} goes here.</p>
-    </div>
-  ));
-}
-*/
 
 export const Default = Template.bind(null);
 Default.args = defaultArgs;
