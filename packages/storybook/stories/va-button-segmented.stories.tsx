@@ -55,14 +55,3 @@ SelectedItem.args = {
   ...defaultArgs,
   selected: 1,
 };
-
-export const LongLabels = Template.bind(null);
-LongLabels.args = {
-  ...defaultArgs,
-  'buttons': [
-    { label: 'Two words', value: 'twoWords' },
-    { label: 'Three words here', value: 'threeWords' },
-    { label: 'Super long label that might go here', value: 'longLabel' },
-    { label: 'label', value: 'label' }
-  ],
-};
