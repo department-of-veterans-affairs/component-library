@@ -379,7 +379,7 @@ export namespace Components {
      */
     interface VaButtonSegmented {
         /**
-          * An array of objects defining the labels and values for each button.
+          * An array of objects defining the labels and values for each button. The recommended structure is: `{ label: string, value?: string }`, with the `label` property being required. The `value` property is optional and can be used to store additional information about the button. The maximum number of buttons allowed is four.
          */
         "buttons": Array<ButtonItem>;
         /**
@@ -3993,7 +3993,7 @@ declare namespace LocalJSX {
      */
     interface VaButtonSegmented {
         /**
-          * An array of objects defining the labels and values for each button.
+          * An array of objects defining the labels and values for each button. The recommended structure is: `{ label: string, value?: string }`, with the `label` property being required. The `value` property is optional and can be used to store additional information about the button. The maximum number of buttons allowed is four.
          */
         "buttons": Array<ButtonItem>;
         /**

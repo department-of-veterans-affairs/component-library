@@ -31,7 +31,9 @@ export class VaButtonSegmented {
   @Prop() label: string;
 
   /**
-   * An array of objects defining the labels and values for each button.
+   * An array of objects defining the labels and values for each button. The recommended structure is: `{ label: string, value?: string }`, with the `label` property being required.
+   * The `value` property is optional and can be used to store additional information about the button.
+   * The maximum number of buttons allowed is four.
    */
   @Prop({ mutable: true }) buttons!: Array<ButtonItem>;
 
