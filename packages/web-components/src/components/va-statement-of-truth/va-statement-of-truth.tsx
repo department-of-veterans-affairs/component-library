@@ -46,6 +46,11 @@ export class VaStatementOfTruth {
   @Prop() inputMessageAriaDescribedby: string = '';
 
   /**
+   *  The flag to determine if the legal note should be rendered
+   */
+  @Prop() hideLegalNote: boolean;
+
+  /**
    *  The flag to prefill the checked state of the va-checkbox component
    */
   @Prop() checked: boolean;
@@ -113,6 +118,7 @@ export class VaStatementOfTruth {
       inputLabel,
       checkboxLabel,
       inputMessageAriaDescribedby,
+      hideLegalNote,
       checked,
       inputValue,
       inputError,
@@ -120,12 +126,14 @@ export class VaStatementOfTruth {
     } = this;
     return (
       <Host>
-        <p class="font-sans-6">
-          <strong>Note:</strong> According to federal law, there are criminal
-          penalties, including a fine and/or imprisonment for up to 5 years, for
-          withholding information or for providing incorrect information
-          (Reference: 18 U.S.C. 1001).
-        </p>
+        {!hideLegalNote && (
+          <p id="legal-note" class="font-sans-6">
+            <strong>Note:</strong> According to federal law, there are criminal
+            penalties, including a fine and/or imprisonment for up to 5 years,
+            for withholding information or for providing incorrect information
+            (Reference: 18 U.S.C. 1001).
+          </p>
+        )}
         <article>
           <h3>{heading}</h3>
           <slot></slot>
