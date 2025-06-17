@@ -46,7 +46,7 @@ export class VaStatementOfTruth {
   @Prop() inputMessageAriaDescribedby: string = '';
 
   /**
-   *  The flag to determine if the legal note should be rendered
+   *  Removes the legal notice text. Use this property when there are multiple statement of truth components on the page to avoid redundancy.
    */
   @Prop() hideLegalNote: boolean;
 
