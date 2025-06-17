@@ -1,0 +1,27 @@
+.va-tabs__list {
+  display: flex;
+  overflow-x: visible;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--vads-color-base-dark);
+  align-items: end;
+}
+
+/* Styles for individual tabs */
+.va-tabs__tab_item {
+  display: inline-block;
+  flex-shrink: 0;
+  margin: 0 0.75rem;
+  text-align: center;
+}
+
+/* Remove margin for the first and last tabs */
+.va-tabs__tab_item:first-child {
+  margin-left: 0;
+}
+
+.va-tabs__tab_item:last-child {
+  margin-right: 0;
+}

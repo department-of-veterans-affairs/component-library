@@ -88,7 +88,7 @@ export class VaTabs {
    * @description Handles the click event of an individual tab.
    * @returns {void}
    */
-  private handleClick = (event: MouseEvent, clickedIndex: number): void => {
+  private handleClick = (event: Event, clickedIndex: number): void => {
     // Prevent the default anchor behavior in order to prevent the page from
     // jumping to the anchor link when the tab is clicked.
     event.preventDefault();
@@ -132,6 +132,44 @@ export class VaTabs {
     }
   };
 
+  /**
+   * @function handleKeyDown
+   * @description Handles keyboard navigation for the tabs.
+   * @param {KeyboardEvent} event - The keyboard event.
+   * @param {number} index - The index of the currently focused tab.
+   * @returns {void}
+   */
+  private handleKeyDown = (event: KeyboardEvent, index: number): void => {
+    const currentlyActiveElement = document.activeElement as HTMLAnchorElement;
+    if (event.key === ' ') {
+      event.preventDefault(); // Prevent scrolling when space is pressed
+      this.handleClick(event, index);
+    }
+    // Handle keyboard navigation for the tabs
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      // Move to the next tab
+      const nextIndex = index === this.tabItems.length - 1 ? 0 : index + 1;
+      console.log('nextIndex', nextIndex);
+      this.selected = nextIndex;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      // Move to the previous tab
+      const prevIndex = (index - 1 + this.tabItems.length) % this.tabItems.length;
+      console.log('prevIndex', prevIndex);
+      this.selected = prevIndex;
+    }
+
+    // Query the DOM for the element with the ID of the clicked tab's URL.
+    const targetId = this.tabItems[this.selected].url.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+
+    currentlyActiveElement.blur();
+
+    // If the target element exists, focus it.
+    if (targetElement) {
+      targetElement.focus();
+    }
+  }
+
   render() {
     const {
       label,
@@ -141,6 +179,10 @@ export class VaTabs {
 
     const containerClass = classnames({
       'va-tabs': true,
+    });
+
+    const listClass = classnames({
+      'va-tabs__list': true,
     });
 
     // Check to ensure that tabItems is an array and has at least one item with
@@ -158,13 +200,14 @@ export class VaTabs {
     return (
       <Host>
         <nav aria-label={label} class={containerClass}>
-          <ul>
+          <ul class={listClass}>
             {tabItems.map((item: TabItem, index: number) => (
-              <li class={index === selected ? 'selected' : ''} key={item.label}>
+              <li class={index === selected ? 'va-tabs__tab_item selected' : 'va-tabs__tab_item'}>
                 <a
                   href={`${item.url}`}
                   aria-current={index === selected ? 'page' : undefined}
                   onClick={(e: MouseEvent) => this.handleClick(e, index)}
+                  onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, index)}
                 >
                   {item.label}
                 </a>
