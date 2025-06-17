@@ -10,11 +10,13 @@ import { UploadedFile } from "./components/va-file-input/uploadedFile";
 import { CountryCode } from "libphonenumber-js/min";
 import { Filter } from "./components/va-search-filter/va-search-filter";
 import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
+import { TabItem } from "./components/va-tabs/va-tabs.types";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
 export { CountryCode } from "libphonenumber-js/min";
 export { Filter } from "./components/va-search-filter/va-search-filter";
 export { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
+export { TabItem } from "./components/va-tabs/va-tabs.types";
 export namespace Components {
     /**
      * @componentName Accordion
@@ -1842,6 +1844,29 @@ export namespace Components {
     interface VaTableRow {
     }
     /**
+     * @componentName Tabs
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTabs {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * A unique name for the rendered nav landmark. To be set as value for wrapper's `aria-label` attribute.
+         */
+        "label": string;
+        /**
+          * The index of the currently selected tab. Defaults to 0 (the first tab).
+         */
+        "selected": number;
+        /**
+          * An array of tab item objects, each containing a label and a URL.
+         */
+        "tabItems": TabItem[];
+    }
+    /**
      * @componentName Telephone
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -2263,6 +2288,10 @@ export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
 export interface VaTableInnerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaTableInnerElement;
+}
+export interface VaTabsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTabsElement;
 }
 export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3374,6 +3403,28 @@ declare global {
         prototype: HTMLVaTableRowElement;
         new (): HTMLVaTableRowElement;
     };
+    interface HTMLVaTabsElementEventMap {
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Tabs
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaTabsElement extends Components.VaTabs, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTabsElementEventMap>(type: K, listener: (this: HTMLVaTabsElement, ev: VaTabsCustomEvent<HTMLVaTabsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTabsElementEventMap>(type: K, listener: (this: HTMLVaTabsElement, ev: VaTabsCustomEvent<HTMLVaTabsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaTabsElement: {
+        prototype: HTMLVaTabsElement;
+        new (): HTMLVaTabsElement;
+    };
     interface HTMLVaTelephoneElementEventMap {
         "component-library-analytics": any;
     }
@@ -3507,6 +3558,7 @@ declare global {
         "va-table": HTMLVaTableElement;
         "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
+        "va-tabs": HTMLVaTabsElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-text-input": HTMLVaTextInputElement;
         "va-textarea": HTMLVaTextareaElement;
@@ -5615,6 +5667,33 @@ declare namespace LocalJSX {
     interface VaTableRow {
     }
     /**
+     * @componentName Tabs
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTabs {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * A unique name for the rendered nav landmark. To be set as value for wrapper's `aria-label` attribute.
+         */
+        "label"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaTabsCustomEvent<any>) => void;
+        /**
+          * The index of the currently selected tab. Defaults to 0 (the first tab).
+         */
+        "selected"?: number;
+        /**
+          * An array of tab item objects, each containing a label and a URL.
+         */
+        "tabItems": TabItem[];
+    }
+    /**
      * @componentName Telephone
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -5948,6 +6027,7 @@ declare namespace LocalJSX {
         "va-table": VaTable;
         "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
+        "va-tabs": VaTabs;
         "va-telephone": VaTelephone;
         "va-text-input": VaTextInput;
         "va-textarea": VaTextarea;
@@ -6320,6 +6400,12 @@ declare module "@stencil/core" {
              */
             "va-table-inner": LocalJSX.VaTableInner & JSXBase.HTMLAttributes<HTMLVaTableInnerElement>;
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
+            /**
+             * @componentName Tabs
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-tabs": LocalJSX.VaTabs & JSXBase.HTMLAttributes<HTMLVaTabsElement>;
             /**
              * @componentName Telephone
              * @maturityCategory use
