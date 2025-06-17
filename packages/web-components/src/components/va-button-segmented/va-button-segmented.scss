@@ -51,7 +51,12 @@
   }
 }
 
-
+@media screen and (min-width: $tablet) {
+  .va-segmented-button__button {
+    max-width: 160px;
+    padding: var(--vads-spacing-1p5) var(--vads-spacing-2p5) calc(var(--vads-spacing-1p5) - 4px) var(--vads-spacing-2p5);
+  }
+}
 
 .va-segmented-button__button:hover {
   background-color: var(--vads-button-color-background-disabled-on-light);
@@ -62,9 +67,22 @@
 .va-segmented-button__button:active, .va-segmented-button__button[aria-pressed=true] {
   background-color: var(--vads-color-white);
   box-shadow: 0 4px 0 0 var(--vads-color-white);
-  font-weight: 700;
-  padding: 0;
-
+  position: relative;
+  
+  &::after {
+    content: attr(data-label) / "";
+    background: var(--vads-color-white);
+    border-radius: 4px;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .va-segmented-button__button:focus {
@@ -78,15 +96,9 @@
 .va-segmented-button__button[aria-pressed="true"]:active:focus {
   background-color: var(--vads-color-action-focus-on-light);
   box-shadow: 0 4px 0 0 var(--vads-color-base);
-}
 
-@media screen and (min-width: $tablet) {
-  .va-segmented-button__button {
-    max-width: 160px;
-    padding: var(--vads-spacing-1p5) var(--vads-spacing-2p5) calc(var(--vads-spacing-1p5) - 4px) var(--vads-spacing-2p5);
-  }
-  .va-segmented-button__button:active, .va-segmented-button__button[aria-pressed=true] {
-    padding: var(--vads-spacing-1p5) calc(var(--vads-spacing-2p5) - 1px) calc(var(--vads-spacing-1p5) - 4px) calc(var(--vads-spacing-2p5) - 1px);
+  &::after {
+    background-color: var(--vads-color-action-focus-on-light);
   }
 }
 

@@ -149,6 +149,7 @@ export class VaButtonSegmented {
                 type="button"
                 title={buttonItem.label.length > 20 ? buttonItem.label : undefined}
                 aria-pressed={this.selected === index ? 'true' : 'false'}
+                data-label={buttonItem.label}
               >
                 {buttonItem.label}
               </button>
