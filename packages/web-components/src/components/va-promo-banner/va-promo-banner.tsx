@@ -22,8 +22,8 @@ const DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_NAME = 'DISMISSED_PROMO_BANNERS';
 
 /**
  * @componentName Banner - Promo
- * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityCategory dont_use
+ * @maturityLevel deprecated
  * @guidanceHref banner/promo
  */
 @Component({
