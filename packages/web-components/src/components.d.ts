@@ -1175,6 +1175,10 @@ export namespace Components {
          */
         "large"?: boolean;
         /**
+          * Text to serve as an alternate heading for the modal when the desired behavior is to have a heading with the `aria-labelledby` attribute. Only is applied when `modalTitle` prop value is not provided.
+         */
+        "messageAriaLabelledby"?: string;
+        /**
           * Title/header text for the modal
          */
         "modalTitle"?: string;
@@ -4884,6 +4888,10 @@ declare namespace LocalJSX {
           * If `true`, modal will be wider.
          */
         "large"?: boolean;
+        /**
+          * Text to serve as an alternate heading for the modal when the desired behavior is to have a heading with the `aria-labelledby` attribute. Only is applied when `modalTitle` prop value is not provided.
+         */
+        "messageAriaLabelledby"?: string;
         /**
           * Title/header text for the modal
          */

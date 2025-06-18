@@ -165,6 +165,13 @@ export class VaModal {
   @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
 
   /**
+   * Text to serve as an alternate heading for the modal when the desired behavior
+   * is to have a heading with the `aria-labelledby` attribute. Only is applied
+   * when `modalTitle` prop value is not provided.
+   */
+  @Prop() messageAriaLabelledby?: string;
+
+  /**
    * Local state to track if the shift key is pressed
    */
   @State() shifted: boolean = false;
@@ -331,7 +338,7 @@ export class VaModal {
           }
           if (focusElms.length) {
             // add the web component and focusable shadow elements
-            // document.activeElement targets the web component but the event
+            // document.activeElement targets the web component but the event
             // is composed, so crosses shadow DOM and shows up in composedPath
             focusableElms.push(elm);
             return focusableElms.concat(focusElms);
@@ -416,6 +423,7 @@ export class VaModal {
 
   render() {
     const {
+      messageAriaLabelledby,
       modalTitle,
       primaryButtonClick,
       primaryButtonText,
@@ -429,12 +437,26 @@ export class VaModal {
 
     if (!visible) return null;
 
+    // Determine if the modal title exists and is not empty.
+    const modalTitleExists = modalTitle && modalTitle !== '';
+
     const ariaLabel =
-      modalTitle && modalTitle !== '' ? `${modalTitle} modal` : null;
+      modalTitleExists ? `${modalTitle} modal` : null;
     /* eslint-enable i18next/no-literal-string */
     const btnAriaLabel = modalTitle
       ? `Close ${modalTitle} modal`
       : 'Close modal';
+
+    // Set dynamic attributes for aria-label or aria-labelledby
+    // based on the presence of modalTitle or messageAriaLabelledby. If modalTitle is passed
+    // it should take precedence over messageAriaLabelledby.
+    const dynamicAttributes = {};
+    if (ariaLabel) {
+      dynamicAttributes['aria-label'] = ariaLabel;
+    }
+    else if (messageAriaLabelledby && !modalTitleExists) {
+      dynamicAttributes['aria-labelledby'] = 'label-heading';
+    }
 
     const wrapperClass = classnames({
       'usa-modal': true,
@@ -488,8 +510,8 @@ export class VaModal {
               ? 'alertdialog'
               : 'dialog'
           }
-          aria-label={ariaLabel}
           aria-modal="true"
+          {...dynamicAttributes}
         >
           <div class={contentClass}>
             {closingButton}
@@ -507,6 +529,13 @@ export class VaModal {
                     {modalTitle}
                   </h2>
                 )}
+                {
+                  !modalTitle && dynamicAttributes['aria-labelledby'] ? (
+                    <h2 class={titleClass} tabindex={-1} id="label-heading">
+                      {messageAriaLabelledby}
+                    </h2>
+                  ) : null
+                }
                 <div class="usa-prose" id="description">
                   <slot></slot>
                 </div>
