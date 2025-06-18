@@ -142,7 +142,7 @@ describe('va-input-telephone', () => {
       countryCode: 'US',
       isValid: true,
       error: null,
-      touched: true
+      touched: false
     });
   });
 
