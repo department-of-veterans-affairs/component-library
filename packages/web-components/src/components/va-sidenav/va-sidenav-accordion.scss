@@ -1,0 +1,31 @@
+@forward 'settings';
+
+@use 'usa-accordion/src/styles/usa-accordion';
+
+.va-sidenav__accordion {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.va-sidenav__accordion {
+  margin-bottom: 0;
+  margin-top: 0;
+  list-style-type: none;
+  padding-left: 0;
+  font-size: var(--vads-font-size-source-sans-normalized);
+  line-height: var(--vads-font-line-height-2);
+  border-top: 1px solid var(--vads-color-base-lighter);
+}
+
+.usa-accordion__button {
+  background-color: unset;
+  color: var(--vads-color-base-dark);
+  font-size: 15px;
+  padding: 0.5rem 1rem;
+}
+
+:host(:not([open])) #accordionitems,
+:host([open='false']) #accordionitems {
+  display: none;
+}
