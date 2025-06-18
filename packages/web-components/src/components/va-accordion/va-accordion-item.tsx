@@ -37,6 +37,11 @@ export class VaAccordionItem {
   @Prop() header?: string;
 
   /**
+   * Optional text that will be read by screen readers in addition to the header text.
+  */
+  @Prop() headerSrOnly?: string;
+
+  /**
    * Optional accordion item subheader text. Default is null.
   */
   @Prop() subheader?: string = null;
@@ -102,7 +107,7 @@ export class VaAccordionItem {
   }
 
   render() {
-    const { bordered, header, subheader, level, open } = this;
+    const { bordered, header, subheader, level, open, headerSrOnly } = this;
     const accordionItemClass = classNames({
       'usa-accordion--bordered': bordered,
     });
@@ -131,6 +136,7 @@ export class VaAccordionItem {
             <span class="va-accordion__header">
               <slot name="icon" />
               {this.slotHeader || header || ieSlotCheckHeader}
+              {headerSrOnly && <span class="usa-sr-only">&nbsp;{headerSrOnly}</span>}
             </span>
             {this.subheader &&
               <span class="va-accordion__subheader">

@@ -285,4 +285,108 @@ describe('va-search-filter', () => {
       expect(secondLabel).toContain('1');
     }
   });
+
+  it('adds the "applied" descriptor to the h2 text for screenreaders - desktop', async () => {
+    const page = await newE2EPage();
+
+    // Set viewport to desktop size
+    await page.setViewport({
+      width: 1024,
+      height: 768
+    });
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filters"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+
+    // Get the h2 element
+    const h2 = await page.find('va-search-filter >>> h2');
+    const text = await h2.getProperty('textContent');
+    expect(text).toBe('Filters (3) applied');
+  });
+
+  it('adds the correct headerSrOnly text to the va-accordion-item prop - desktop', async () => {
+    const page = await newE2EPage();
+
+    // Set viewport to desktop size
+    await page.setViewport({
+      width: 1024,
+      height: 768
+    });
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filters" headerSrOnly="with sr-only text"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+
+    // Get the va-accordion-item element
+    const accordionItem = await page.find('va-search-filter >>> va-accordion-item');
+    const header = await accordionItem.getProperty('header');
+    expect(header).toBe('Benefits (2)');
+
+    const headerSrOnly = await accordionItem.getProperty('headerSrOnly');
+    expect(headerSrOnly).toBe('filters applied');
+  });
+
+  it('adds the correct headerSrOnly text to the va-accordion-item prop - mobile web', async () => {
+    const page = await newE2EPage();
+
+    // Set viewport to mobile size
+    await page.setViewport({
+      width: 480,
+      height: 768
+    });
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filters"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+
+    // Get the va-accordion-item element
+    const accordionItem = await page.find('va-search-filter >>> va-accordion-item');
+    const header = await accordionItem.getProperty('header');
+    expect(header).toBe('Filters (3)');
+
+    const headerSrOnly = await accordionItem.getProperty('headerSrOnly');
+    expect(headerSrOnly).toBe('applied');
+  })
+
+  it('adds the correct headersSrOnly text to the va-checkbox-group prop - mobile web', async () => {
+    const page = await newE2EPage();
+
+    // Set viewport to mobile size
+    await page.setViewport({
+      width: 480,
+      height: 768
+    });
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filters"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+
+    // Get the va-checkbox-group element
+    const checkboxGroup = await page.find('va-search-filter >>> va-checkbox-group');
+    const label = await checkboxGroup.getProperty('label');
+    expect(label).toBe('Benefits (2)');
+    const labelSrOnly = await checkboxGroup.getProperty('labelSrOnly');
+    expect(labelSrOnly).toBe('filters applied');
+  })
 });
