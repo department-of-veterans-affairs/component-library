@@ -109,12 +109,17 @@ export class VaBreadcrumbs {
    * @private
    */
   private updateBreadCrumbList(breadcrumbList: Breadcrumb[]) {
-    const firstBreadcrumb = breadcrumbList[0];
+    // Clone the array and its objects to avoid mutating the original prop value
+    const clonedBreadcrumbs = breadcrumbList.map(bc => ({ ...bc }));
+    const firstBreadcrumb = clonedBreadcrumbs[0];
     if (firstBreadcrumb && this.homeVeteransAffairs) {
       firstBreadcrumb.label = 'VA.gov home';
     }
-
-    this.formattedBreadcrumbs = breadcrumbList;
+    // Only update state if the value actually changed to avoid infinite loops
+    const isDifferent = JSON.stringify(this.formattedBreadcrumbs) !== JSON.stringify(clonedBreadcrumbs);
+    if (isDifferent) {
+      this.formattedBreadcrumbs = clonedBreadcrumbs;
+    }
   }
 
   private getClickLevel(target: HTMLAnchorElement) {
@@ -202,6 +207,21 @@ export class VaBreadcrumbs {
     }
   }
 
+  /**
+   * This method is invoked once before the component is first rendered and on component update.
+   * Its main purpose is to validate and format the breadcrumbList prop, if present.
+   */
+  private validateAndFormatBreadcrumbs() {
+    if (!this.breadcrumbList?.length) return;
+
+    let potentialBreadcrumbs = this.validateBreadcrumbs(this.breadcrumbList);
+
+    if (potentialBreadcrumbs) {
+      this.updateBreadCrumbList(potentialBreadcrumbs);
+    } else return;
+
+  }
+
   componentDidLoad() {
     // We are getting the slot nodes so that we can handle either receiving an
     // anchor tag or a list item with an anchor tag.
@@ -222,19 +242,13 @@ export class VaBreadcrumbs {
     });
   }
 
-  /**
-   * This method is invoked once before the component is first rendered.
-   * Its main purpose is to validate and format the breadcrumbList prop, if present.
-   *
-   */
+  
   componentWillLoad() {
-    if (!this.breadcrumbList?.length) return;
+    this.validateAndFormatBreadcrumbs();
+  }
 
-    let potentialBreadcrumbs = this.validateBreadcrumbs(this.breadcrumbList);
-
-    if (potentialBreadcrumbs) {
-      this.updateBreadCrumbList(potentialBreadcrumbs);
-    } else return;
+  componentDidUpdate() {
+    this.validateAndFormatBreadcrumbs();
   }
 
   /**
