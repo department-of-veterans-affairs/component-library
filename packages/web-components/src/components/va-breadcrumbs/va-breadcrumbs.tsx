@@ -6,7 +6,6 @@ import {
   Host,
   h,
   Prop,
-  Watch,
   State
 } from '@stencil/core';
 import classnames from 'classnames';
@@ -60,20 +59,7 @@ export class VaBreadcrumbs {
    * Each breadcrumb is represented as an object with at least two properties: 'label' and 'href'.
    */
   @State() formattedBreadcrumbs?: Breadcrumb[] = [];
-  /**
-   *
-   * This is a method that watches for changes in the 'breadcrumbList' prop.
-   * When the 'breadcrumbList' prop changes, this method parses the new value (provided as a JSON-formatted string)
-   * into a JavaScript object and assigns it to the 'breadcrumbsState' state.
-   */
-  @Watch('breadcrumbList')
-  watchBreadcrumbListHandler(breadcrumbList) {
-    if (!this.breadcrumbList?.length) return;
-    let potentialBreadcrumbs = this.validateBreadcrumbs(breadcrumbList);
-    if (potentialBreadcrumbs) {
-      this.updateBreadCrumbList(potentialBreadcrumbs);
-    }
-  }
+  
   /**
    * Analytics tracking function(s) will not be called
    */
