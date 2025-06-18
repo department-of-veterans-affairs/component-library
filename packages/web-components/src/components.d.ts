@@ -6,11 +6,13 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+import { ButtonItem } from "./components/va-button-segmented/va-button-segmented.types";
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
 import { CountryCode } from "libphonenumber-js/min";
 import { Filter } from "./components/va-search-filter/va-search-filter";
 import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+export { ButtonItem } from "./components/va-button-segmented/va-button-segmented.types";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
 export { CountryCode } from "libphonenumber-js/min";
 export { Filter } from "./components/va-search-filter/va-search-filter";
@@ -368,6 +370,30 @@ export namespace Components {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
+    }
+    /**
+     * @componentName Button Segmented
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref button/button-segmented
+     */
+    interface VaButtonSegmented {
+        /**
+          * An array of objects defining the labels and values for each button. The recommended structure is: `{ label: string, value?: string }`, with the `label` property being required. The `value` property is optional and can be used to store additional information about the button. The maximum number of buttons allowed is four.
+         */
+        "buttons": Array<ButtonItem>;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The aria-label for the button group, used for accessibility. Not required, but recommended.
+         */
+        "label": string;
+        /**
+          * The index of the selected button.
+         */
+        "selected": number;
     }
     /**
      * @componentName Card
@@ -2148,6 +2174,10 @@ export interface VaButtonPairCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaButtonPairElement;
 }
+export interface VaButtonSegmentedCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaButtonSegmentedElement;
+}
 export interface VaCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaCheckboxElement;
@@ -2528,6 +2558,30 @@ declare global {
     var HTMLVaButtonPairElement: {
         prototype: HTMLVaButtonPairElement;
         new (): HTMLVaButtonPairElement;
+    };
+    interface HTMLVaButtonSegmentedElementEventMap {
+        "vaButtonClick": any;
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Button Segmented
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref button/button-segmented
+     */
+    interface HTMLVaButtonSegmentedElement extends Components.VaButtonSegmented, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaButtonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButtonSegmentedElement, ev: VaButtonSegmentedCustomEvent<HTMLVaButtonSegmentedElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaButtonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButtonSegmentedElement, ev: VaButtonSegmentedCustomEvent<HTMLVaButtonSegmentedElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaButtonSegmentedElement: {
+        prototype: HTMLVaButtonSegmentedElement;
+        new (): HTMLVaButtonSegmentedElement;
     };
     /**
      * @componentName Card
@@ -3464,6 +3518,7 @@ declare global {
         "va-button": HTMLVaButtonElement;
         "va-button-icon": HTMLVaButtonIconElement;
         "va-button-pair": HTMLVaButtonPairElement;
+        "va-button-segmented": HTMLVaButtonSegmentedElement;
         "va-card": HTMLVaCardElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
@@ -3929,6 +3984,38 @@ declare namespace LocalJSX {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
+    }
+    /**
+     * @componentName Button Segmented
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref button/button-segmented
+     */
+    interface VaButtonSegmented {
+        /**
+          * An array of objects defining the labels and values for each button. The recommended structure is: `{ label: string, value?: string }`, with the `label` property being required. The `value` property is optional and can be used to store additional information about the button. The maximum number of buttons allowed is four.
+         */
+        "buttons": Array<ButtonItem>;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The aria-label for the button group, used for accessibility. Not required, but recommended.
+         */
+        "label"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
+        /**
+          * Event emitted when selected button changes (a button is clicked).
+         */
+        "onVaButtonClick"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
+        /**
+          * The index of the selected button.
+         */
+        "selected"?: number;
     }
     /**
      * @componentName Card
@@ -5905,6 +5992,7 @@ declare namespace LocalJSX {
         "va-button": VaButton;
         "va-button-icon": VaButtonIcon;
         "va-button-pair": VaButtonPair;
+        "va-button-segmented": VaButtonSegmented;
         "va-card": VaCard;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
@@ -6033,6 +6121,13 @@ declare module "@stencil/core" {
              * @guidanceHref button/button-pair
              */
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
+            /**
+             * @componentName Button Segmented
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             * @guidanceHref button/button-segmented
+             */
+            "va-button-segmented": LocalJSX.VaButtonSegmented & JSXBase.HTMLAttributes<HTMLVaButtonSegmentedElement>;
             /**
              * @componentName Card
              * @maturityCategory use
