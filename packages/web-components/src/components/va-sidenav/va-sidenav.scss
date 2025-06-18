@@ -2,12 +2,33 @@
   display: block;
 }
 
-.va-sidenav {
+.va-sidenav__list {
   margin-bottom: 0;
   margin-top: 0;
   list-style-type: none;
   padding-left: 0;
   font-size: var(--vads-font-size-source-sans-normalized);
   line-height: var(--vads-font-line-height-2);
-  border-bottom: 1px solid var(--vads-color-gray-2);
+  border-top: 1px solid var(--vads-color-base-lighter);
+  border-bottom: 1px solid var(--vads-color-base-lighter);
+}
+
+.va-sidenav__header {
+  display: flex;
+  align-items: center;
+}
+
+.va-sidenav__icon-background {
+  color: var(--vads-color-white);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  position: relative;
+  va-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

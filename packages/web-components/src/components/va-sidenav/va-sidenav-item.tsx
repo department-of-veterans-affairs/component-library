@@ -24,22 +24,20 @@ export class VaSidenavItem {
    */
   @Prop() isCurrentPage?: boolean;
 
-  @State() hasSubmenu = false;
-
-  @State() isOpen = false;
+  @State() hasAccordion = false;
 
   componentDidLoad() {
     // when the slot content is available, check if it has a 
-    // va-sidenav-submenu element and set the hasSubmenu state
+    // va-sidenav-accordion element and set the hasAccordion state
     const slot = this.el.shadowRoot?.querySelector('slot');
     if (slot) {
       const slotContent = slot.assignedNodes();
-      const hasSubmenu = slotContent.some(node => 
+      const hasAccordion = slotContent.some(node => 
         node.nodeType === Node.ELEMENT_NODE && 
-        (node as Element).tagName === 'VA-SIDENAV-SUBMENU'
+        (node as Element).tagName === 'VA-SIDENAV-ACCORDION'
       );
-      if (hasSubmenu) {
-        this.hasSubmenu = true;
+      if (hasAccordion) {
+        this.hasAccordion = true;
       }
     }
   }
@@ -48,14 +46,14 @@ export class VaSidenavItem {
     const anchorClasses = classNames({
       'va-sidenav__current': this.isCurrentPage,
     });
+
+    const href = this.isCurrentPage ? '#content' : this.href;
     
     return (
-      <li class="va-sidenav__item" role="presentation">
-        <a role="menuitem" class={anchorClasses} href={this.href}>{this.label}
-          {this.hasSubmenu && (
-            this.isOpen ? <va-icon icon="expand_less"></va-icon> : <va-icon icon="expand_more"></va-icon>
-          )}
-        </a>
+      <li class="va-sidenav__item" aria-current={this.isCurrentPage ? 'page' : undefined}>
+        {!this.hasAccordion && (
+          <a class={anchorClasses} href={href}>{this.label}</a>
+        )}
         <slot></slot>
       </li>
     );

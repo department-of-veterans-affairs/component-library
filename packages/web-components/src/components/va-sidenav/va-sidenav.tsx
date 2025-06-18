@@ -14,8 +14,14 @@ export class VaSidenav {
   render() {
     return (
       <Host>
-        <nav aria-label="Side navigation">
-          <ul class="va-sidenav" role="menu">
+        <nav aria-label="Pages related to [this section] or [h2]">
+        <h2 class="va-sidenav__header">
+          <span class="va-sidenav__icon-background" style={{ backgroundColor: `var(--vads-color-primary)` }}>
+            <va-icon icon="account_circle"></va-icon>
+          </span>
+          Profile
+        </h2>
+          <ul class="va-sidenav__list">
             <slot></slot>
           </ul>
         </nav>

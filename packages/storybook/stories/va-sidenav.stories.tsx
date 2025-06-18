@@ -12,23 +12,28 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={sidenavDocs} />,
     },
   },
-};  
+};
 
 const Template = ({}) => (
   <va-sidenav>
     <va-sidenav-item href="#" label="Parent item"></va-sidenav-item>
-    <va-sidenav-item href="#" label="Current page" is-current-page={true}>
+    <va-sidenav-item href="#" label="Parent item with current page" is-current-page={true}></va-sidenav-item>
+    <va-sidenav-item href="#" label="Parent item"></va-sidenav-item>
+    <va-sidenav-item href="#" label="Parent item with a very long label for a sidenav item to see how it reflows when it is very long or if we zoom in"></va-sidenav-item>
+    <va-sidenav-item href="#" label="Parent item for submenu (non-accordion)">
       <va-sidenav-submenu>
-        <va-sidenav-item href="#" label="Child item"></va-sidenav-item>
-        <va-sidenav-item href="#" label="Child item with children">
-          <va-sidenav-submenu>
-            <va-sidenav-item href="#" label="Grandchild item" is-current-page={true}></va-sidenav-item>
-            <va-sidenav-item href="#" label="Grandchild item"></va-sidenav-item>
-          </va-sidenav-submenu>
-        </va-sidenav-item>
+          <va-sidenav-item href="#" label="Child item"></va-sidenav-item>
+          <va-sidenav-item href="#" label="Child item"></va-sidenav-item>
       </va-sidenav-submenu>
     </va-sidenav-item>
-    <va-sidenav-item href="#" label="Another parent item"></va-sidenav-item>
+    <va-sidenav-item label="Parent item for submenu (accordion)">
+      <va-sidenav-accordion>
+        <va-sidenav-item href="#" label="Child item"></va-sidenav-item>
+        <va-sidenav-item href="#" label="Child item"></va-sidenav-item>
+        <va-sidenav-item href="#" label="Child item"></va-sidenav-item>
+        <va-sidenav-item href="#" label="Child item"></va-sidenav-item>
+      </va-sidenav-accordion>
+    </va-sidenav-item>
   </va-sidenav>
 );
 
