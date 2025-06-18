@@ -66,6 +66,13 @@ const Template = ({
   );
 };
 
+const DualTemplate = ({ component1Args, component2Args }) => (
+  <>
+    <Template {...component1Args} />
+    <Template {...component2Args} />
+  </>
+);
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 
@@ -91,5 +98,8 @@ WithCustomHeading.args = {
 export const WithPrefilling = Template.bind(null);
 WithPrefilling.args = { ...defaultArgs, inputValue: 'Jane Doe', checked: true };
 
-export const WithoutLegalNote = Template.bind(null);
-WithoutLegalNote.args = { ...defaultArgs, hideLegalNote: true };
+export const WithoutLegalNote = DualTemplate.bind(null);
+WithoutLegalNote.args = {
+  component1Args: { ...defaultArgs },
+  component2Args: { ...defaultArgs, hideLegalNote: true },
+};
