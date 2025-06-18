@@ -217,7 +217,8 @@ export class VaInputTelephone {
       contact: (tryParse && phoneNumber !== null) ? phoneNumber.nationalNumber : this.contact,
       contactLength,
       isValid: this.isValid,
-      error
+      error,
+      touched: this.touched,
     });
   }
 

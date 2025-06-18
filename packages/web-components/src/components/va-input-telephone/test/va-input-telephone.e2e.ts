@@ -141,7 +141,8 @@ describe('va-input-telephone', () => {
       contactLength: 10,
       countryCode: 'US',
       isValid: true,
-      error: null
+      error: null,
+      touched: true
     });
   });
 
