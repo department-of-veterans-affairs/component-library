@@ -1,0 +1,62 @@
+.vacds-loader {
+  position: relative;
+  width: 12.5rem;
+  height: 12.5rem
+}
+
+.vacds-loader-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1.25rem solid #f0f0f0;
+  border-top: 1.5625rem solid #005ea2;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  animation: vacds-loader-spin 1s linear infinite
+}
+
+.vacds-loader-text {
+  position: absolute;
+  top: 45%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Arial, sans
+}
+
+.vacds-loader-text span {
+  color: #1a4480;
+  font-size: 1.25rem;
+  position: fixed;
+  width: 8rem;
+  overflow-wrap: break-word
+}
+
+@keyframes vacds-loader-spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.vacds-loader-border .edge {
+  position: absolute;
+  border-radius: 50%;
+  width: 1.4375rem;
+  height: 1.4375rem;
+  background: #005ea2
+}
+
+.vacds-loader .edge.edge-left,
+.vacds-loader .edge.edge-right {
+  position: absolute;
+  top: 10%;
+  transform: translateY(-53%)
+}
+
+.vacds-loader .edge.edge-left {
+  left: 2%
+}
+
+.vacds-loader .edge.edge-right {
+  right: 2%
+}
