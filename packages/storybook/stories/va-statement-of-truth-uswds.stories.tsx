@@ -68,8 +68,26 @@ const Template = ({
 
 const DualTemplate = ({ component1Args, component2Args }) => (
   <>
-    <Template {...component1Args} />
-    <Template {...component2Args} />
+    <VaStatementOfTruth
+      {...component1Args}
+      onVaInputChange={e => console.log(e, 'vaInputChange fired')}
+      onVaInputBlur={e => console.log(e, 'vaInputBlur fired')}
+      onVaCheckboxChange={e => console.log(e, 'vaCheckboxChange fired')}
+    >
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere
+      architecto sequi minus. Ab iusto adipisci natus error repudiandae totam
+      quo earum dolorum ullam sed, dicta quidem quod at sapiente. Obcaecati?
+    </VaStatementOfTruth>
+    <VaStatementOfTruth
+      {...component2Args}
+      onVaInputChange={e => console.log(e, 'vaInputChange fired')}
+      onVaInputBlur={e => console.log(e, 'vaInputBlur fired')}
+      onVaCheckboxChange={e => console.log(e, 'vaCheckboxChange fired')}
+    >
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere
+      architecto sequi minus. Ab iusto adipisci natus error repudiandae totam
+      quo earum dolorum ullam sed, dicta quidem quod at sapiente. Obcaecati?
+    </VaStatementOfTruth>
   </>
 );
 
