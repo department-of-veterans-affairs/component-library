@@ -993,13 +993,13 @@ export namespace Components {
          */
         "alignTop"?: string;
         /**
-          * Whether the loader is currently busy (use 'true' or 'false' as string)
-         */
-        "ariaBusy"?: string;
-        /**
           * The ARIA live region setting
          */
-        "ariaLive"?: string;
+        "ariaLiveRegion"?: string;
+        /**
+          * Whether the loader is currently busy (use 'true' or 'false' as string)
+         */
+        "busy"?: string;
         /**
           * The text to display in the center of the loader
          */
@@ -4661,13 +4661,13 @@ declare namespace LocalJSX {
          */
         "alignTop"?: string;
         /**
-          * Whether the loader is currently busy (use 'true' or 'false' as string)
-         */
-        "ariaBusy"?: string;
-        /**
           * The ARIA live region setting
          */
-        "ariaLive"?: string;
+        "ariaLiveRegion"?: string;
+        /**
+          * Whether the loader is currently busy (use 'true' or 'false' as string)
+         */
+        "busy"?: string;
         /**
           * The text to display in the center of the loader
          */

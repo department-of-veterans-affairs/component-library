@@ -32,12 +32,12 @@ export class VaLoader {
   /**
    * The ARIA live region setting
    */
-  @Prop() ariaLive?: string;
+  @Prop() ariaLiveRegion?: string;
 
   /**
    * Whether the loader is currently busy (use 'true' or 'false' as string)
    */
-  @Prop() ariaBusy?: string;
+  @Prop() busy?: string;
 
   /**
    * Custom left alignment
@@ -106,8 +106,8 @@ export class VaLoader {
         <div
           class="vacds-loader"
           role={this.loaderRole}
-          aria-live={this.ariaLive}
-          aria-busy={this.ariaBusy}
+          aria-live={this.ariaLiveRegion}
+          aria-busy={this.busy}
           tabindex={0}
         >
           <div class="vacds-loader-border">
