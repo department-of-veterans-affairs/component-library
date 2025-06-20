@@ -12,6 +12,9 @@
   "vads-button-color-background-secondary-on-light": {
     "*": { "value": "#ffffff" }
   },
+  "vads-button-color-background-disabled-on-light": {
+    "*": { "value": "{uswds-system-color-gray-20}" }
+  },
   "vads-button-color-text-primary-alt-on-light": {
     "*": { "value": "#ffffff" }
   },
