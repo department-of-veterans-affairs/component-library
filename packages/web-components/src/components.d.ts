@@ -1566,6 +1566,10 @@ export namespace Components {
          */
         "suggestions"?: any;
         /**
+          * If `true`, the component will be recognized as a combobox. If `false`, the component will be recognized as a search input.
+         */
+        "supportsSuggestions"?: boolean;
+        /**
           * The value of the input field
          */
         "value"?: string;
@@ -5363,6 +5367,10 @@ declare namespace LocalJSX {
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
+        /**
+          * If `true`, the component will be recognized as a combobox. If `false`, the component will be recognized as a search input.
+         */
+        "supportsSuggestions"?: boolean;
         /**
           * The value of the input field
          */

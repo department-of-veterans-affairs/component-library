@@ -70,6 +70,12 @@ export class VaSearchInput {
   @Prop() suggestions?: any;
 
   /**
+   * If `true`, the component will be recognized as a combobox.
+   * If `false`, the component will be recognized as a search input.
+   */
+  @Prop() supportsSuggestions?: boolean = false;
+
+  /**
    * The value of the input field
    */
   @Prop({ mutable: true, reflect: true }) value?: string = '';
@@ -447,6 +453,7 @@ export class VaSearchInput {
       big,
       small,
       showClearButton,
+      supportsSuggestions
     } = this;
 
     /**
@@ -454,7 +461,7 @@ export class VaSearchInput {
      * a combobox. Used in determining what attributes should exist or be omitted on search input.
      */
     const isCombobox = formattedSuggestions.length;
-    const ariaAutoComplete = isCombobox ? 'list' : 'none';
+    const ariaAutoComplete = (isCombobox || supportsSuggestions) ? 'list' : 'none';
     /* eslint-disable-next-line i18next/no-literal-string */
     const ariaControls = isCombobox ? 'va-search-listbox' : undefined;
     /**
