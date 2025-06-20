@@ -404,7 +404,7 @@ import { initIconSpriteLocation } from '@department-of-veterans-affairs/web-comp
 // Initialize the global sprite path configuration
 initIconSpriteLocation();
 // Set the sprite path globally (do this before rendering any icon)
-globalThis.setVaIconSpriteLocation('/img/sprite.svg');
+globalThis.setVaIconSpriteLocation('[custom sprite path]');
         `}
       </pre>
       <p>
