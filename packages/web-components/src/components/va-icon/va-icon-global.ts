@@ -14,6 +14,6 @@ export function initIconSpriteLocation() {
     };
 
     globalThis.getVaIconSpriteLocation = () => {
-        return globalThis[VA_ICON_SPRITE_PATH] || './../img/sprite.svg';
+        return globalThis[VA_ICON_SPRITE_PATH] || '/img/sprite.svg';
     };
 }
