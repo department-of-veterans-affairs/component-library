@@ -525,6 +525,7 @@ export class VaSearchInput {
                 class="usa-search__submit-icon"
                 icon="search"
                 size={3}
+                srtext="Search"
               ></va-icon>
             </button>
           </div>
