@@ -820,6 +820,10 @@ export namespace Components {
          */
         "size"?: number;
         /**
+          * The location (url) of the icon sprite file. If not set, uses the global or default location.
+         */
+        "spriteLocation"?: string;
+        /**
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
@@ -4485,6 +4489,10 @@ declare namespace LocalJSX {
           * The size variant of the icon, an integer between 3 and 9 inclusive
          */
         "size"?: number;
+        /**
+          * The location (url) of the icon sprite file. If not set, uses the global or default location.
+         */
+        "spriteLocation"?: string;
         /**
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */

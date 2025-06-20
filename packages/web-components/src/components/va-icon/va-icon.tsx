@@ -1,6 +1,7 @@
 import { Component, Host, Prop, h } from '@stencil/core';
 import classnames from 'classnames';
 import { consoleDevError } from '../../utils/utils';
+import { initIconSpriteLocation } from './va-icon-global';
 
 /**
  * @componentName Icon
@@ -15,10 +16,17 @@ import { consoleDevError } from '../../utils/utils';
   shadow: true,
 })
 export class VaIcon {
+
   /**
    * The name of the icon to use
    */
   @Prop() icon!: string;
+
+  /**
+   * The location (url) of the icon sprite file.
+   * If not set, uses the global or default location.
+   */
+  @Prop() spriteLocation?: string; // Default location for the icon sprite
 
   /**
    * The size variant of the icon,
@@ -41,14 +49,21 @@ export class VaIcon {
     return this.size;
   }
 
+  componentWillLoad() {
+    if (!globalThis.getVaIconSpriteLocation) {
+      initIconSpriteLocation();
+    }
+  }
+
   render() {
-    const { icon, srtext } = this;
+    const { icon, srtext, spriteLocation } = this;
     const size = this.getSize();
     const iconClass = classnames({
       'usa-icon': true,
       [`usa-icon--size-${size}`]: !!size,
     });
-    const imageSrc = `/img/sprite.svg#${icon}`; //* getAssetPath() had no perceivable effect here
+    
+    const imageSrc = `${ spriteLocation || globalThis.getVaIconSpriteLocation() }#${icon}`; //* getAssetPath() had no perceivable effect here
     return (
       <Host>
         <svg
@@ -57,11 +72,11 @@ export class VaIcon {
           aria-hidden={!!srtext ? null : 'true'}
           focusable="false"
           role="img"
-        >
-          {srtext && <title id="icon-title">{srtext}</title>}
-          <use href={imageSrc}></use>
-        </svg>
-      </Host>
+          >
+            {srtext && <title id="icon-title">{srtext}</title>}
+            <use href={imageSrc}></use>
+          </svg>
+        </Host>
     );
   }
 }
