@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Host, Prop, h } from '@stencil/core';
 import classnames from 'classnames';
 import { consoleDevError } from '../../utils/utils';
 import { initIconSpriteLocation } from './va-icon-global';
@@ -13,7 +13,7 @@ import { initIconSpriteLocation } from './va-icon-global';
   tag: 'va-icon',
   styleUrl: 'va-icon.scss',
   assetsDirs: ['../img'],
-  shadow: false,
+  shadow: true,
 })
 export class VaIcon {
 
@@ -49,12 +49,9 @@ export class VaIcon {
     return this.size;
   }
 
-  connectedCallback() {
+  componentWillLoad() {
     if (!globalThis.getVaIconSpriteLocation) {
-      console.log('globalThis.getVaIconSpriteLocation is not defined');
       initIconSpriteLocation();
-    } else {
-      console.log('Already initialized globalThis.getVaIconSpriteLocation', globalThis.getVaIconSpriteLocation());
     }
   }
 
@@ -66,20 +63,20 @@ export class VaIcon {
       [`usa-icon--size-${size}`]: !!size,
     });
     
-    console.log(spriteLocation, globalThis.getVaIconSpriteLocation());
     const imageSrc = `${ spriteLocation || globalThis.getVaIconSpriteLocation() }#${icon}`; //* getAssetPath() had no perceivable effect here
-    console.log('imageSrc', imageSrc);
     return (
-      <svg
-        class={iconClass}
-        aria-labelledby={!!srtext ? 'icon-title' : null}
-        aria-hidden={!!srtext ? null : 'true'}
-        focusable="false"
-        role="img"
-      >
-        {srtext && <title id="icon-title">{srtext}</title>}
-        <use href={imageSrc}></use>
-      </svg>
+      <Host>
+        <svg
+          class={iconClass}
+          aria-labelledby={!!srtext ? 'icon-title' : null}
+          aria-hidden={!!srtext ? null : 'true'}
+          focusable="false"
+          role="img"
+          >
+            {srtext && <title id="icon-title">{srtext}</title>}
+            <use href={imageSrc}></use>
+          </svg>
+        </Host>
     );
   }
 }
