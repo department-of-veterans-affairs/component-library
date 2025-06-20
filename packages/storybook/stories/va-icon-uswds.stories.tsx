@@ -1,5 +1,6 @@
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 import './styles/va-icon.scss';
+import { initIconSpriteLocation } from '@department-of-veterans-affairs/component-library';
 
 const iconDocs = getWebComponentDocs('va-icon');
 
@@ -10,6 +11,35 @@ export default {
     componentSubtitle: 'va-icon web component',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={iconDocs} />,
+      description: {
+        component: `
+          ### Global Sprite Path Configuration
+
+          You can globally set the SVG sprite path for all \`<va-icon>\` components in your application using the following methods:
+
+          \`\`\`js
+          // Import the setter from the package
+          import { setVaIconSpriteLocation } from '@department-of-veterans-affairs/web-components';
+
+          // Set the sprite path globally (do this before rendering any <va-icon>)
+          setVaIconSpriteLocation('/img/sprite.svg');
+          \`\`\`
+
+          Or, if you are not using a module system, you can set it on \`window\` or \`globalThis\`:
+
+          \`\`\`js
+          window.setVaIconSpriteLocation && window.setVaIconSpriteLocation('/img/sprite.svg');
+          \`\`\`
+
+          To get the current sprite path:
+
+          \`\`\`js
+          const currentPath = window.getVaIconSpriteLocation && window.getVaIconSpriteLocation();
+          \`\`\`
+
+          **Note:** This must be set before any \`<va-icon>\` is rendered to ensure all icons use the correct sprite path.
+        `
+      },
     },
   },
 };
@@ -358,3 +388,35 @@ const icons = [
   'zoom_out',
   'zoom_out_map',
 ];
+
+
+const iconPathConfigurationDocs = () => {
+  return (
+    <div>
+      <p>
+        You can globally set the SVG sprite path for all <code>&lt;va-icon&gt;</code> components in your application using the following methods:
+      </p>
+      <pre style={{ fontSize: '.75em', background: `var(--vads-color-gray-light-alt)`, padding: `10px` }}>
+        {`
+// Import the the init function from the web-components package
+import { initIconSpriteLocation } from '@department-of-veterans-affairs/web-components';
+
+// Initialize the global sprite path configuration
+initIconSpriteLocation();
+// Set the sprite path globally (do this before rendering any icon)
+globalThis.setVaIconSpriteLocation('/img/sprite.svg');
+        `}
+      </pre>
+      <p>
+        To get the current sprite path:
+      </p>
+      <pre style={{ fontSize: '.75em', background: `var(--vads-color-gray-light-alt)`, padding: `10px` }}>
+        {`let currentIconPath = globalThis.getVaIconSpriteLocation();`}
+      </pre>
+      <p>
+        <strong>Note:</strong> This must be set before any <code>&lt;va-icon&gt;</code> is rendered to ensure all icons use the correct sprite path.
+      </p>
+    </div>
+  );
+}
+export const GlobalSpritePathConfiguration = iconPathConfigurationDocs.bind(null);
