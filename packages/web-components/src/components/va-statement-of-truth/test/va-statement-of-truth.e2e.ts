@@ -73,7 +73,7 @@ describe('va-statement-of-truth', () => {
     const inputEl = await page.$('pierce/[name="veteran-signature"]');
     await inputEl.type('test');
     // wait for last event
-    await page.waitForTimeout(500);
+    await new Promise(resolve => setTimeout(resolve, 500));
     expect(vaInputChangeSpy).toHaveReceivedEventDetail({ value: 'test' });
   });
 
@@ -103,6 +103,13 @@ describe('va-statement-of-truth', () => {
     const span = await page.$('pierce/span#input-message');
     const text = await page.evaluate(element => element.textContent, span);
     expect(text).toContain('testing one two three');
+  });
+
+  it('hides the legal note when flag is enabled', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth hide-legal-note/>');
+    const note = await page.find('va-statement-of-truth >>> #legal-note');
+    expect(note).toBeNull();
   });
 
   it('permits prefilling the form', async () => {
