@@ -49,6 +49,29 @@ export class VaIcon {
     return this.size;
   }
 
+  private validateSpriteLocation(rawSpritePath : string): string {
+    let safeSpritePath = '/img/sprite.svg';
+    // Only allow .svg files from the same origin or relative paths
+    try {
+      const url = new URL(rawSpritePath, window.location.origin);
+      if (
+        url.origin === window.location.origin &&
+        url.pathname.endsWith('.svg') &&
+        !rawSpritePath.includes('..')
+      ) {
+        safeSpritePath = url.pathname;
+      } else {
+        consoleDevError(`Unsafe or invalid SVG sprite path provided to <va-icon>: ${rawSpritePath}`);
+      }
+      return safeSpritePath;
+    } catch (e) {
+      // If not a valid URL, fallback to default and warn
+      consoleDevError(`Invalid SVG sprite path provided to <va-icon>: ${rawSpritePath}`);
+      return safeSpritePath;
+    }
+    
+  }
+
   componentWillLoad() {
     if (!globalThis.getVaIconSpriteLocation) {
       initIconSpriteLocation();
@@ -62,8 +85,8 @@ export class VaIcon {
       'usa-icon': true,
       [`usa-icon--size-${size}`]: !!size,
     });
-    
-    const imageSrc = `${ spriteLocation || globalThis.getVaIconSpriteLocation() }#${icon}`; //* getAssetPath() had no perceivable effect here
+    // Validate the sprite path to ensure it is a safe SVG file
+    const imageSrc = this.validateSpriteLocation(spriteLocation || globalThis.getVaIconSpriteLocation()) + `#${icon}`;
     return (
       <Host>
         <svg
@@ -72,11 +95,11 @@ export class VaIcon {
           aria-hidden={!!srtext ? null : 'true'}
           focusable="false"
           role="img"
-          >
-            {srtext && <title id="icon-title">{srtext}</title>}
-            <use href={imageSrc}></use>
-          </svg>
-        </Host>
+        >
+          {srtext && <title id="icon-title">{srtext}</title>}
+          <use href={imageSrc}></use>
+        </svg>
+      </Host>
     );
   }
 }
