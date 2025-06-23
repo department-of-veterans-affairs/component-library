@@ -27,7 +27,7 @@ import { DATA_MAP, mapCountry } from './utils';
 import { getArticle } from '../../utils/utils';
 
 /**
- * @componentName Input Telephone
+ * @componentName Telephone Input
  * @maturityCategory caution
  * @maturityLevel candidate
  * @guidanceHref form/telephone-input
@@ -35,11 +35,11 @@ import { getArticle } from '../../utils/utils';
  */
 
 @Component({
-  tag: 'va-input-telephone',
-  styleUrl: 'va-input-telephone.scss',
+  tag: 'va-telephone-input',
+  styleUrl: 'va-telephone-input.scss',
   shadow: true,
 })
-export class VaInputTelephone {
+export class VaTelephoneInput {
   @Element() el: HTMLElement;
   textInputRef: HTMLVaTextInputElement;
   DEFAULT_COUNTRY: CountryCode = 'US';
@@ -80,6 +80,12 @@ export class VaInputTelephone {
    * Render marker indicating field is required.
    */
   @Prop() required?: boolean = false;
+
+  /**
+   * If true, this prop instructs the component to display error messages in response to the internal error state.
+   * If false, error messages must be passed in from consumer.
+   */
+  @Prop() showInternalErrors?: boolean = true;
 
   /**
    * The event emitted when the contact changes
@@ -173,7 +179,7 @@ export class VaInputTelephone {
     if (this.country) {
       this.resetErrors();
       this.setValidityState();
-      if (!this.isValid && this.touched) {
+      if (!this.isValid && this.touched && this.showInternalErrors) {
         this.error = this.getErrorMessageForCountry();
         this.contactError = this.error;
       }
@@ -204,20 +210,13 @@ export class VaInputTelephone {
       }
     }
 
-    // get the length of a valid phone number for a country
-    // useful for validation in forms system
-    let contactLength = null;
-    if (this.contact && this.country) {
-      contactLength = this.getTemplate().replace(/[^x]/g, '').length;
-    }
-
     this.vaContact.emit({
       callingCode: (tryParse && phoneNumber !== null) ? phoneNumber.countryCallingCode : undefined,
       countryCode: this.country,
       contact: (tryParse && phoneNumber !== null) ? phoneNumber.nationalNumber : this.contact,
-      contactLength,
       isValid: this.isValid,
-      error
+      error,
+      touched: this.touched,
     });
   }
 
@@ -225,10 +224,11 @@ export class VaInputTelephone {
   validateCountry() {
     this.resetErrors();
     if (!this.touched) this.touched = true;
-    if (!this.country) {
+    if (this.country) return;
+    this.isValid = false;
+    if (this.showInternalErrors) {
       this.error = this.COUNTRY_ERROR;
       this.countryError = this.error;
-      this.isValid = false;
     }
   }
 
