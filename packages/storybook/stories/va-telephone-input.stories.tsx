@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
-import { VaInputTelephone } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaTelephoneInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
 } from './wc-helpers';
 
-VaInputTelephone.displayName = 'VaLanguageToggle';
-const inputTelephoneDocs = getWebComponentDocs('va-input-telephone');
+VaTelephoneInput.displayName = 'VaLanguageToggle';
+const inputTelephoneDocs = getWebComponentDocs('va-telephone-input');
 
 export default {
-  title: 'Components/Input Telephone',
-  id: 'components/va-input-telephone',
+  title: 'Components/Telephone Input',
+  id: 'components/va-telephone-input',
   parameters: {
-    componentSubtitle: 'va-input-telephone web component',
+    componentSubtitle: 'va-telephone-input web component',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={inputTelephoneDocs} />,
     },
@@ -28,6 +28,7 @@ const defaultArgs = {
   error: "",
   required: false,
   label: "",
+  'show-external-errors': true
 };
 
 const Template = ({
@@ -37,10 +38,11 @@ const Template = ({
   country,
   error,
   label,
-  required
+  required,
+  'show-internal-errors': showInternalErrors
 }) => {
   return (
-    <va-input-telephone
+    <va-telephone-input
       hint={hint}
       label={label ? label : null}
       country={country}
@@ -48,6 +50,7 @@ const Template = ({
       no-country={noCountry}
       error={error}
       required={required}
+      show-internal-errors={showInternalErrors}
     />
   );
 };
@@ -93,7 +96,7 @@ const WithPhoneFormatTemplate = () => {
   }, []);
 
   return (
-    <VaInputTelephone contact="234" error={err} />
+    <VaTelephoneInput contact="234" error={err} />
   );
 };
 
@@ -115,4 +118,12 @@ export const WithNoCountry = Template.bind(null);
 WithNoCountry.args = {
   ...defaultArgs,
   'no-country': true,
+}
+
+export const WithShowInternalErrors = Template.bind(null);
+WithShowInternalErrors.args = {
+  ...defaultArgs,
+  'show-internal-errors': false,
+  hint: 'This component will only show external errors.',
+  error: 'This error is externally passed to the component.'
 }
