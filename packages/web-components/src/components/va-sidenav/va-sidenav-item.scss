@@ -34,24 +34,5 @@ a:hover {
   top: .25rem;
   width: .25rem;
   left: 0;
+  z-index: 1;
 }
-
-// :host(.va-sidenav__parent-submenu-item) {
-//     border-top: 1px solid var(--vads-color-base-lighter);
-// }
-
-// :host(.va-sidenav__nested-submenu-item) a, :host(.va-sidenav__parent-submenu-item) a {
-//   color: var(--vads-color-base-dark);
-//   font-size: 15px;
-//   font-weight: 700;
-// }
-
-/* First level of nesting */
-// :host(.va-sidenav__submenu-item) a, :host(.va-sidenav__accordion-item) a {
-//     padding-left: 2rem;
-// }
-
-/* Second level of nesting (grandchild items) */
-// :host(.va-sidenav__nested-submenu-item) a, :host(.va-sidenav__nested-accordion-item) a {
-//     padding-left: 3rem;
-// }

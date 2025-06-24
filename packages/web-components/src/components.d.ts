@@ -1716,6 +1716,22 @@ export namespace Components {
      * @maturityLevel candidate
      */
     interface VaSidenav {
+        /**
+          * Header text to display at the top of the side navigation.
+         */
+        "header"?: string;
+        /**
+          * Adds a circle around the icon with the provided background [color token](https://design.va.gov/foundation/color-palette).
+         */
+        "iconBackgroundColor"?: string;
+        /**
+          * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. A iconBackgroundColor must be set.
+         */
+        "iconName"?: string;
+        /**
+          * Used to describe the navigation for screen readers. If the header property is set, that text will be used instead of this value.
+         */
+        "sectionName"?: string;
     }
     interface VaSidenavAccordion {
         /**
@@ -5543,6 +5559,22 @@ declare namespace LocalJSX {
      * @maturityLevel candidate
      */
     interface VaSidenav {
+        /**
+          * Header text to display at the top of the side navigation.
+         */
+        "header"?: string;
+        /**
+          * Adds a circle around the icon with the provided background [color token](https://design.va.gov/foundation/color-palette).
+         */
+        "iconBackgroundColor"?: string;
+        /**
+          * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. A iconBackgroundColor must be set.
+         */
+        "iconName"?: string;
+        /**
+          * Used to describe the navigation for screen readers. If the header property is set, that text will be used instead of this value.
+         */
+        "sectionName"?: string;
     }
     interface VaSidenavAccordion {
         /**
