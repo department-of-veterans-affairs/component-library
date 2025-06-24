@@ -1729,13 +1729,13 @@ export namespace Components {
     }
     interface VaSidenavItem {
         /**
+          * If the sidenav item is the current page
+         */
+        "currentPage"?: boolean;
+        /**
           * The href for the sidenav item
          */
         "href"?: string;
-        /**
-          * If the sidenav item is the current page
-         */
-        "isCurrentPage"?: boolean;
         /**
           * The label for the sidenav item
          */
@@ -5556,13 +5556,13 @@ declare namespace LocalJSX {
     }
     interface VaSidenavItem {
         /**
+          * If the sidenav item is the current page
+         */
+        "currentPage"?: boolean;
+        /**
           * The href for the sidenav item
          */
         "href"?: string;
-        /**
-          * If the sidenav item is the current page
-         */
-        "isCurrentPage"?: boolean;
         /**
           * The label for the sidenav item
          */

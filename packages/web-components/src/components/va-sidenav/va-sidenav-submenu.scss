@@ -5,8 +5,14 @@
 }
 
 .va-sidenav__submenu-label {
-  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--vads-color-base-lightest);
+  color: #71767A;
+  font-size: 13.8px;
+  font-weight: 700;
+  letter-spacing: 3%;
+  padding: 0.7rem 1rem;
   padding-left: 1rem;
+  text-transform: uppercase;
   &:hover {
     background-color: #f0f0f0;
   }
@@ -14,4 +20,8 @@
 
 ::slotted(va-sidenav-item) {
   --va-sidenav-item-link-padding-left: 2rem;
+}
+
+.va-sidenav-submenu__current {
+  background-color: #f0f0f0;
 }

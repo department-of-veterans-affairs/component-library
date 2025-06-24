@@ -3,12 +3,13 @@
   list-style-type: none;
   padding-left: 0;
   margin: 0;
+  border-bottom: 1px solid var(--vads-color-base-lightest);
 }
 
 a {
-  color: var(--vads-color-base);
+  color: var(--vads-color-link);
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
   padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
   text-decoration: none;
 }
@@ -21,6 +22,18 @@ a:hover {
 .va-sidenav__current {
   position: relative;
   font-weight: 700;
+}
+
+.va-sidenav__current::after {
+  background-color: #005ea2;
+  border-radius: 99rem;
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: .25rem;
+  top: .25rem;
+  width: .25rem;
+  left: 0;
 }
 
 // :host(.va-sidenav__parent-submenu-item) {

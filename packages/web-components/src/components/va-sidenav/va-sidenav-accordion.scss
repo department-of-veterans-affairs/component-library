@@ -13,16 +13,17 @@
   margin-top: 0;
   list-style-type: none;
   padding-left: 0;
-  font-size: var(--vads-font-size-source-sans-normalized);
   line-height: var(--vads-font-line-height-2);
-  border-top: 1px solid var(--vads-color-base-lighter);
+  // border-top: 1px solid var(--vads-color-base-lighter);
 }
 
 .usa-accordion__button {
   background-color: unset;
-  color: var(--vads-color-base-dark);
-  font-size: 15px;
-  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--vads-color-base-lightest);
+  color: #71767A;
+  letter-spacing: 3%;
+  padding: 0.7rem 1rem;
+  text-transform: uppercase;
 }
 
 :host(:not([open])) #accordionitems,

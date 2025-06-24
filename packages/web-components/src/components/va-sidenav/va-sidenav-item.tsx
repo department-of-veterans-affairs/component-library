@@ -22,17 +22,17 @@ export class VaSidenavItem {
   /**
    * If the sidenav item is the current page
    */
-  @Prop() isCurrentPage?: boolean;
+  @Prop() currentPage?: boolean;
 
   render() {
     const anchorClasses = classNames({
-      'va-sidenav__current': this.isCurrentPage,
+      'va-sidenav__current': this.currentPage,
     });
 
-    const href = this.isCurrentPage ? '#content' : this.href;
+    const href = this.currentPage ? '#content' : this.href;
     
     return (
-      <div class="va-sidenav__item" aria-current={this.isCurrentPage ? 'page' : undefined}>
+      <div class="va-sidenav__item" aria-current={this.currentPage ? 'page' : undefined}>
         <a class={anchorClasses} href={href} part="link">{this.label}</a>
         <slot></slot>
       </div>
