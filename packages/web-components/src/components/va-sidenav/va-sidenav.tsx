@@ -15,15 +15,15 @@ export class VaSidenav {
     return (
       <Host>
         <nav aria-label="Pages related to [this section] or [h2]">
-        <h2 class="va-sidenav__header">
-          <span class="va-sidenav__icon-background" style={{ backgroundColor: `var(--vads-color-primary)` }}>
-            <va-icon icon="account_circle"></va-icon>
-          </span>
-          Profile
-        </h2>
-          <ul class="va-sidenav__list">
+          <h2 class="va-sidenav__header">
+            <span class="va-sidenav__icon-background" style={{ backgroundColor: `var(--vads-color-primary)` }}>
+              <va-icon icon="account_circle"></va-icon>
+            </span>
+            Profile
+          </h2>
+          <div class="va-sidenav__list">
             <slot></slot>
-          </ul>
+          </div>
         </nav>
       </Host>
     );

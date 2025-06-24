@@ -1719,6 +1719,10 @@ export namespace Components {
     }
     interface VaSidenavAccordion {
         /**
+          * The label for the accordion menu section
+         */
+        "label": string;
+        /**
           * If the accordion menu section is expanded.
          */
         "open"?: boolean;
@@ -1738,6 +1742,10 @@ export namespace Components {
         "label"?: string;
     }
     interface VaSidenavSubmenu {
+        /**
+          * The label for the submenu
+         */
+        "label": string;
     }
     /**
      * @componentName Statement of truth
@@ -5538,6 +5546,10 @@ declare namespace LocalJSX {
     }
     interface VaSidenavAccordion {
         /**
+          * The label for the accordion menu section
+         */
+        "label": string;
+        /**
           * If the accordion menu section is expanded.
          */
         "open"?: boolean;
@@ -5557,6 +5569,10 @@ declare namespace LocalJSX {
         "label"?: string;
     }
     interface VaSidenavSubmenu {
+        /**
+          * The label for the submenu
+         */
+        "label": string;
     }
     /**
      * @componentName Statement of truth

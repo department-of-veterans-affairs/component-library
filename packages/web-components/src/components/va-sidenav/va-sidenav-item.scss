@@ -1,44 +1,42 @@
 :host {
   display: block;
-}
-
-li {
-    margin-bottom: 0px;
-    max-width: unset;
-    list-style-type: none;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
 }
 
 a {
-    color: var(--vads-color-base);
-    display: block;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
+  color: var(--vads-color-base);
+  display: block;
+  padding: 0.5rem 1rem;
+  padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
+  text-decoration: none;
 }
 
 a:hover {
-    background-color: #f0f0f0;
-    text-decoration: none;
+  background-color: #f0f0f0;
+  text-decoration: none;
 }
 
 .va-sidenav__current {
-    position: relative;
-    font-weight: 700;
-}
-
-:host(.va-sidenav__parent-submenu-item) {
-    border-top: 1px solid var(--vads-color-base-lighter);
-}
-
-:host(.va-sidenav__nested-submenu-item) a, :host(.va-sidenav__parent-submenu-item) a {
-  color: var(--vads-color-base-dark);
-  font-size: 15px;
+  position: relative;
   font-weight: 700;
 }
 
+// :host(.va-sidenav__parent-submenu-item) {
+//     border-top: 1px solid var(--vads-color-base-lighter);
+// }
+
+// :host(.va-sidenav__nested-submenu-item) a, :host(.va-sidenav__parent-submenu-item) a {
+//   color: var(--vads-color-base-dark);
+//   font-size: 15px;
+//   font-weight: 700;
+// }
+
 /* First level of nesting */
-:host(.va-sidenav__submenu-item) a, :host(.va-sidenav__accordion-item) a {
-    padding-left: 2rem;
-}
+// :host(.va-sidenav__submenu-item) a, :host(.va-sidenav__accordion-item) a {
+//     padding-left: 2rem;
+// }
 
 /* Second level of nesting (grandchild items) */
 // :host(.va-sidenav__nested-submenu-item) a, :host(.va-sidenav__nested-accordion-item) a {

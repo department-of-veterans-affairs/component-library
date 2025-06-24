@@ -29,3 +29,7 @@
 :host([open='false']) #accordionitems {
   display: none;
 }
+
+::slotted(va-sidenav-item) {
+  --va-sidenav-item-link-padding-left: 2rem;
+}

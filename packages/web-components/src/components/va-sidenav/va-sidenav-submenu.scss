@@ -1,5 +1,17 @@
 .va-sidenav__submenu {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.va-sidenav__submenu-label {
+  padding: 0.5rem 1rem;
+  padding-left: 1rem;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+::slotted(va-sidenav-item) {
+  --va-sidenav-item-link-padding-left: 2rem;
 }

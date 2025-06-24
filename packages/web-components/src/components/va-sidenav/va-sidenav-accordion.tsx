@@ -1,4 +1,4 @@
-import { Component, h, Element, State, Prop } from '@stencil/core';
+import { Component, h, Element, Prop } from '@stencil/core';
 
 @Component({
   tag: 'va-sidenav-accordion',
@@ -13,36 +13,18 @@ export class VaSidenavAccordion {
   */
   @Prop({ reflect: true }) open?: boolean = true;
 
-  @State() label: string;
+  /**
+   * The label for the accordion menu section
+   */
+  @Prop() label!: string;
 
   toggleOpen() {
     this.open = !this.open;
   }
 
-  handleAccordionClasses() {
-    // Add submenu class to all slotted va-sidenav-item elements
-    const items = this.el.querySelectorAll('va-sidenav-item');
-    
-    items.forEach(item => {
-      item.classList.add('va-sidenav__accordion-item');
-    });
-  }
-
-  getAccordionLabel() {
-    const parentItem = this.el.closest('va-sidenav-item');
-    if (parentItem) {
-      this.label = parentItem.getAttribute('label');
-    }
-  }
-
-  componentDidLoad() {
-    this.getAccordionLabel();
-    this.handleAccordionClasses();
-  }
-
   render() {
     return (
-      <ul class="va-sidenav__accordion">
+      <nav class="va-sidenav__accordion" aria-label="Pages related to [this section]">
         <button 
           class="usa-accordion__button"
           onClick={this.toggleOpen.bind(this)}
@@ -53,7 +35,7 @@ export class VaSidenavAccordion {
         <div id="accordionitems">
           <slot></slot>
         </div>
-      </ul>
+      </nav>
     );
   }
 }
