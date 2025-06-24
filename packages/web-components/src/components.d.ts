@@ -1378,8 +1378,8 @@ export namespace Components {
     }
     /**
      * @componentName Banner - Promo
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory dont_use
+     * @maturityLevel deprecated
      * @guidanceHref banner/promo
      */
     interface VaPromoBanner {
@@ -3165,8 +3165,8 @@ declare global {
     }
     /**
      * @componentName Banner - Promo
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory dont_use
+     * @maturityLevel deprecated
      * @guidanceHref banner/promo
      */
     interface HTMLVaPromoBannerElement extends Components.VaPromoBanner, HTMLStencilElement {
@@ -5144,8 +5144,8 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Banner - Promo
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory dont_use
+     * @maturityLevel deprecated
      * @guidanceHref banner/promo
      */
     interface VaPromoBanner {
@@ -6345,8 +6345,8 @@ declare module "@stencil/core" {
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             /**
              * @componentName Banner - Promo
-             * @maturityCategory use
-             * @maturityLevel deployed
+             * @maturityCategory dont_use
+             * @maturityLevel deprecated
              * @guidanceHref banner/promo
              */
             "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
