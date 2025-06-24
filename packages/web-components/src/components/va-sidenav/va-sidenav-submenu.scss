@@ -2,6 +2,7 @@
   list-style-type: none;
   padding-left: 0;
   margin: 0;
+  position: relative;
 }
 
 .va-sidenav__submenu-label {
@@ -22,6 +23,14 @@
   --va-sidenav-item-link-padding-left: 2rem;
 }
 
-.va-sidenav-submenu__current {
-  background-color: #f0f0f0;
+.va-sidenav-submenu__current::after {
+  background-color: var(--vads-color-primary-lighter);
+  border-radius: 99rem;
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: .25rem;
+  top: .25rem;
+  width: .25rem;
+  left: 0;
 }

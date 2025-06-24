@@ -1,5 +1,6 @@
-import { Component, h, Element, Prop } from '@stencil/core';
+import { Component, h, Element, Prop, State, Listen } from '@stencil/core';
 import classNames from 'classnames';
+
 @Component({
   tag: 'va-sidenav-submenu',
   styleUrl: 'va-sidenav-submenu.scss',
@@ -13,9 +14,48 @@ export class VaSidenavMenu {
    */
   @Prop() label!: string;
 
+  /**
+   * Tracks if any child item is the current page
+   */
+  @State() hasCurrentPageItem: boolean = false;
+
+  /**
+   * Component lifecycle method that runs when the component is first connected to the DOM
+   */
+  componentDidLoad() {
+    this.checkForCurrentPageItems();
+  }
+
+  /**
+   * Listen for slot changes to detect when items are added or removed
+   */
+  @Listen('slotchange')
+  onSlotChange() {
+    this.checkForCurrentPageItems();
+  }
+
+  /**
+   * Check if any of the slotted va-sidenav-items have current-page set to true
+   */
+  checkForCurrentPageItems() {
+    const slot = this.el.shadowRoot?.querySelector('slot');
+    if (!slot) return;
+
+    const slottedElements = slot.assignedElements();
+    
+    // Check if any of the slotted elements are va-sidenav-items with current-page=true
+    this.hasCurrentPageItem = slottedElements.some(element => {
+      if (element.tagName.toLowerCase() === 'va-sidenav-item') {
+        return element.hasAttribute('current-page') && 
+               element.getAttribute('current-page') !== 'false';
+      }
+      return false;
+    });
+  }
+
   render() {
     const submenuClasses = classNames({
-      'va-sidenav-submenu__current': false,
+      'va-sidenav-submenu__current': this.hasCurrentPageItem,
       'va-sidenav__submenu': true
     });
 
