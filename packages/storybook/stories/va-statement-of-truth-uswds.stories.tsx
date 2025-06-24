@@ -24,6 +24,7 @@ const defaultArgs = {
   inputError: '',
   checkboxError: '',
   inputMessageAriaDescribedy: '',
+  hideLegalNote: false,
   checked: false,
   inputLabel: 'Your full name',
   checkboxLabel:
@@ -36,6 +37,7 @@ const Template = ({
   inputError,
   checkboxError,
   inputMessageAriaDescribedy,
+  hideLegalNote,
   checked,
   inputLabel,
   checkboxLabel,
@@ -48,6 +50,7 @@ const Template = ({
         inputError={inputError}
         checkboxError={checkboxError}
         inputMessageAriaDescribedby={inputMessageAriaDescribedy}
+        hideLegalNote={hideLegalNote}
         checked={checked}
         inputLabel={inputLabel}
         checkboxLabel={checkboxLabel}
@@ -62,6 +65,31 @@ const Template = ({
     </div>
   );
 };
+
+const DualTemplate = ({ component1Args, component2Args }) => (
+  <>
+    <VaStatementOfTruth
+      {...component1Args}
+      onVaInputChange={e => console.log(e, 'vaInputChange fired')}
+      onVaInputBlur={e => console.log(e, 'vaInputBlur fired')}
+      onVaCheckboxChange={e => console.log(e, 'vaCheckboxChange fired')}
+    >
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere
+      architecto sequi minus. Ab iusto adipisci natus error repudiandae totam
+      quo earum dolorum ullam sed, dicta quidem quod at sapiente. Obcaecati?
+    </VaStatementOfTruth>
+    <VaStatementOfTruth
+      {...component2Args}
+      onVaInputChange={e => console.log(e, 'vaInputChange fired')}
+      onVaInputBlur={e => console.log(e, 'vaInputBlur fired')}
+      onVaCheckboxChange={e => console.log(e, 'vaCheckboxChange fired')}
+    >
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere
+      architecto sequi minus. Ab iusto adipisci natus error repudiandae totam
+      quo earum dolorum ullam sed, dicta quidem quod at sapiente. Obcaecati?
+    </VaStatementOfTruth>
+  </>
+);
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
@@ -87,3 +115,9 @@ WithCustomHeading.args = {
 
 export const WithPrefilling = Template.bind(null);
 WithPrefilling.args = { ...defaultArgs, inputValue: 'Jane Doe', checked: true };
+
+export const WithoutLegalNote = DualTemplate.bind(null);
+WithoutLegalNote.args = {
+  component1Args: { ...defaultArgs },
+  component2Args: { ...defaultArgs, hideLegalNote: true },
+};
