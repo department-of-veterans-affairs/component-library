@@ -208,6 +208,7 @@ export class VaTabs {
                   aria-current={index === selected ? 'page' : undefined}
                   onClick={(e: MouseEvent) => this.handleClick(e, index)}
                   onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, index)}
+                  data-label={item.label}
                 >
                   {item.label}
                 </a>

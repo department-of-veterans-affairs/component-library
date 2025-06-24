@@ -17,9 +17,9 @@ export default {
 const defaultArgs = {
   label: 'Navigation',
   tabItems: [
-    { label: 'Tab 1', url: '#tab1' },
-    { label: 'Tab 2', url: '#tab2' },
-    { label: 'Tab 3', url: '#tab3' },
+    { label: 'Inbox', url: '#tab1' },
+    { label: 'Sent', url: '#tab2' },
+    { label: 'More Files', url: '#tab3' },
   ],
 };
 

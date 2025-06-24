@@ -6,17 +6,19 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+import { ButtonItem } from "./components/va-button-segmented/va-button-segmented.types";
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
-import { CountryCode } from "libphonenumber-js/min";
 import { Filter } from "./components/va-search-filter/va-search-filter";
 import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 import { TabItem } from "./components/va-tabs/va-tabs.types";
+import { CountryCode } from "libphonenumber-js/min";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
+export { ButtonItem } from "./components/va-button-segmented/va-button-segmented.types";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
-export { CountryCode } from "libphonenumber-js/min";
 export { Filter } from "./components/va-search-filter/va-search-filter";
 export { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export { TabItem } from "./components/va-tabs/va-tabs.types";
+export { CountryCode } from "libphonenumber-js/min";
 export namespace Components {
     /**
      * @componentName Accordion
@@ -370,6 +372,30 @@ export namespace Components {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
+    }
+    /**
+     * @componentName Button Segmented
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref button/button-segmented
+     */
+    interface VaButtonSegmented {
+        /**
+          * An array of objects defining the labels and values for each button. The recommended structure is: `{ label: string, value?: string }`, with the `label` property being required. The `value` property is optional and can be used to store additional information about the button. The maximum number of buttons allowed is four.
+         */
+        "buttons": Array<ButtonItem>;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The aria-label for the button group, used for accessibility. Not required, but recommended.
+         */
+        "label": string;
+        /**
+          * The index of the selected button.
+         */
+        "selected": number;
     }
     /**
      * @componentName Card
@@ -799,43 +825,6 @@ export namespace Components {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
-    }
-    /**
-     * @componentName Input Telephone
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     * @guidanceHref form/telephone-input
-     * @translations English
-     */
-    interface VaInputTelephone {
-        /**
-          * The telephone contact information
-         */
-        "contact"?: string;
-        /**
-          * The 2 letter ISO country code for a country
-         */
-        "country"?: CountryCode;
-        /**
-          * The error for the component
-         */
-        "error"?: string;
-        /**
-          * Hint string text
-         */
-        "hint"?: string;
-        /**
-          * Label text for the component
-         */
-        "label"?: string;
-        /**
-          * Whether the country select should be included. Set to true to exclude it.
-         */
-        "noCountry"?: boolean;
-        /**
-          * Render marker indicating field is required.
-         */
-        "required"?: boolean;
     }
     /**
      * @componentName Language Toggle
@@ -1387,8 +1376,8 @@ export namespace Components {
     }
     /**
      * @componentName Banner - Promo
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory dont_use
+     * @maturityLevel deprecated
      * @guidanceHref banner/promo
      */
     interface VaPromoBanner {
@@ -1735,6 +1724,10 @@ export namespace Components {
          */
         "heading": string;
         /**
+          * Removes the legal notice text. Use this property when there are multiple statement of truth components on the page to avoid redundancy.
+         */
+        "hideLegalNote": boolean;
+        /**
           * The error to be applied to the va-text-input element
          */
         "inputError": string;
@@ -1912,6 +1905,47 @@ export namespace Components {
           * Optional vanity phone number. Replaces the last 4 digits or the entire text with the vanity text input
          */
         "vanity"?: string;
+    }
+    /**
+     * @componentName Telephone Input
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref form/telephone-input
+     * @translations English
+     */
+    interface VaTelephoneInput {
+        /**
+          * The telephone contact information
+         */
+        "contact"?: string;
+        /**
+          * The 2 letter ISO country code for a country
+         */
+        "country"?: CountryCode;
+        /**
+          * The error for the component
+         */
+        "error"?: string;
+        /**
+          * Hint string text
+         */
+        "hint"?: string;
+        /**
+          * Label text for the component
+         */
+        "label"?: string;
+        /**
+          * Whether the country select should be included. Set to true to exclude it.
+         */
+        "noCountry"?: boolean;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required"?: boolean;
+        /**
+          * If true, this prop instructs the component to display error messages in response to the internal error state. If false, error messages must be passed in from consumer.
+         */
+        "showInternalErrors"?: boolean;
     }
     /**
      * @nativeHandler onInput
@@ -2173,6 +2207,10 @@ export interface VaButtonPairCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaButtonPairElement;
 }
+export interface VaButtonSegmentedCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaButtonSegmentedElement;
+}
 export interface VaCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaCheckboxElement;
@@ -2196,10 +2234,6 @@ export interface VaFileInputCustomEvent<T> extends CustomEvent<T> {
 export interface VaFileInputMultipleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputMultipleElement;
-}
-export interface VaInputTelephoneCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLVaInputTelephoneElement;
 }
 export interface VaLanguageToggleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2296,6 +2330,10 @@ export interface VaTabsCustomEvent<T> extends CustomEvent<T> {
 export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaTelephoneElement;
+}
+export interface VaTelephoneInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTelephoneInputElement;
 }
 export interface VaTextInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2558,6 +2596,30 @@ declare global {
         prototype: HTMLVaButtonPairElement;
         new (): HTMLVaButtonPairElement;
     };
+    interface HTMLVaButtonSegmentedElementEventMap {
+        "vaButtonClick": any;
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Button Segmented
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref button/button-segmented
+     */
+    interface HTMLVaButtonSegmentedElement extends Components.VaButtonSegmented, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaButtonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButtonSegmentedElement, ev: VaButtonSegmentedCustomEvent<HTMLVaButtonSegmentedElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaButtonSegmentedElementEventMap>(type: K, listener: (this: HTMLVaButtonSegmentedElement, ev: VaButtonSegmentedCustomEvent<HTMLVaButtonSegmentedElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaButtonSegmentedElement: {
+        prototype: HTMLVaButtonSegmentedElement;
+        new (): HTMLVaButtonSegmentedElement;
+    };
     /**
      * @componentName Card
      * @maturityCategory use
@@ -2768,30 +2830,6 @@ declare global {
     var HTMLVaIconElement: {
         prototype: HTMLVaIconElement;
         new (): HTMLVaIconElement;
-    };
-    interface HTMLVaInputTelephoneElementEventMap {
-        "vaContact": any;
-    }
-    /**
-     * @componentName Input Telephone
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     * @guidanceHref form/telephone-input
-     * @translations English
-     */
-    interface HTMLVaInputTelephoneElement extends Components.VaInputTelephone, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVaInputTelephoneElementEventMap>(type: K, listener: (this: HTMLVaInputTelephoneElement, ev: VaInputTelephoneCustomEvent<HTMLVaInputTelephoneElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVaInputTelephoneElementEventMap>(type: K, listener: (this: HTMLVaInputTelephoneElement, ev: VaInputTelephoneCustomEvent<HTMLVaInputTelephoneElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLVaInputTelephoneElement: {
-        prototype: HTMLVaInputTelephoneElement;
-        new (): HTMLVaInputTelephoneElement;
     };
     interface HTMLVaLanguageToggleElementEventMap {
         "vaLanguageToggle": any;
@@ -3156,8 +3194,8 @@ declare global {
     }
     /**
      * @componentName Banner - Promo
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory dont_use
+     * @maturityLevel deprecated
      * @guidanceHref banner/promo
      */
     interface HTMLVaPromoBannerElement extends Components.VaPromoBanner, HTMLStencilElement {
@@ -3447,6 +3485,30 @@ declare global {
         prototype: HTMLVaTelephoneElement;
         new (): HTMLVaTelephoneElement;
     };
+    interface HTMLVaTelephoneInputElementEventMap {
+        "vaContact": any;
+    }
+    /**
+     * @componentName Telephone Input
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref form/telephone-input
+     * @translations English
+     */
+    interface HTMLVaTelephoneInputElement extends Components.VaTelephoneInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTelephoneInputElementEventMap>(type: K, listener: (this: HTMLVaTelephoneInputElement, ev: VaTelephoneInputCustomEvent<HTMLVaTelephoneInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTelephoneInputElementEventMap>(type: K, listener: (this: HTMLVaTelephoneInputElement, ev: VaTelephoneInputCustomEvent<HTMLVaTelephoneInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaTelephoneInputElement: {
+        prototype: HTMLVaTelephoneInputElement;
+        new (): HTMLVaTelephoneInputElement;
+    };
     interface HTMLVaTextInputElementEventMap {
         "component-library-analytics": any;
     }
@@ -3515,6 +3577,7 @@ declare global {
         "va-button": HTMLVaButtonElement;
         "va-button-icon": HTMLVaButtonIconElement;
         "va-button-pair": HTMLVaButtonPairElement;
+        "va-button-segmented": HTMLVaButtonSegmentedElement;
         "va-card": HTMLVaCardElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
@@ -3526,7 +3589,6 @@ declare global {
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
-        "va-input-telephone": HTMLVaInputTelephoneElement;
         "va-language-toggle": HTMLVaLanguageToggleElement;
         "va-link": HTMLVaLinkElement;
         "va-link-action": HTMLVaLinkActionElement;
@@ -3560,6 +3622,7 @@ declare global {
         "va-table-row": HTMLVaTableRowElement;
         "va-tabs": HTMLVaTabsElement;
         "va-telephone": HTMLVaTelephoneElement;
+        "va-telephone-input": HTMLVaTelephoneInputElement;
         "va-text-input": HTMLVaTextInputElement;
         "va-textarea": HTMLVaTextareaElement;
     }
@@ -3981,6 +4044,38 @@ declare namespace LocalJSX {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
+    }
+    /**
+     * @componentName Button Segmented
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref button/button-segmented
+     */
+    interface VaButtonSegmented {
+        /**
+          * An array of objects defining the labels and values for each button. The recommended structure is: `{ label: string, value?: string }`, with the `label` property being required. The `value` property is optional and can be used to store additional information about the button. The maximum number of buttons allowed is four.
+         */
+        "buttons": Array<ButtonItem>;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The aria-label for the button group, used for accessibility. Not required, but recommended.
+         */
+        "label"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
+        /**
+          * Event emitted when selected button changes (a button is clicked).
+         */
+        "onVaButtonClick"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
+        /**
+          * The index of the selected button.
+         */
+        "selected"?: number;
     }
     /**
      * @componentName Card
@@ -4454,47 +4549,6 @@ declare namespace LocalJSX {
           * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
-    }
-    /**
-     * @componentName Input Telephone
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     * @guidanceHref form/telephone-input
-     * @translations English
-     */
-    interface VaInputTelephone {
-        /**
-          * The telephone contact information
-         */
-        "contact"?: string;
-        /**
-          * The 2 letter ISO country code for a country
-         */
-        "country"?: CountryCode;
-        /**
-          * The error for the component
-         */
-        "error"?: string;
-        /**
-          * Hint string text
-         */
-        "hint"?: string;
-        /**
-          * Label text for the component
-         */
-        "label"?: string;
-        /**
-          * Whether the country select should be included. Set to true to exclude it.
-         */
-        "noCountry"?: boolean;
-        /**
-          * The event emitted when the contact changes
-         */
-        "onVaContact"?: (event: VaInputTelephoneCustomEvent<any>) => void;
-        /**
-          * Render marker indicating field is required.
-         */
-        "required"?: boolean;
     }
     /**
      * @componentName Language Toggle
@@ -5138,8 +5192,8 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Banner - Promo
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory dont_use
+     * @maturityLevel deprecated
      * @guidanceHref banner/promo
      */
     interface VaPromoBanner {
@@ -5542,6 +5596,10 @@ declare namespace LocalJSX {
          */
         "heading"?: string;
         /**
+          * Removes the legal notice text. Use this property when there are multiple statement of truth components on the page to avoid redundancy.
+         */
+        "hideLegalNote"?: boolean;
+        /**
           * The error to be applied to the va-text-input element
          */
         "inputError"?: string;
@@ -5743,6 +5801,51 @@ declare namespace LocalJSX {
           * Optional vanity phone number. Replaces the last 4 digits or the entire text with the vanity text input
          */
         "vanity"?: string;
+    }
+    /**
+     * @componentName Telephone Input
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref form/telephone-input
+     * @translations English
+     */
+    interface VaTelephoneInput {
+        /**
+          * The telephone contact information
+         */
+        "contact"?: string;
+        /**
+          * The 2 letter ISO country code for a country
+         */
+        "country"?: CountryCode;
+        /**
+          * The error for the component
+         */
+        "error"?: string;
+        /**
+          * Hint string text
+         */
+        "hint"?: string;
+        /**
+          * Label text for the component
+         */
+        "label"?: string;
+        /**
+          * Whether the country select should be included. Set to true to exclude it.
+         */
+        "noCountry"?: boolean;
+        /**
+          * The event emitted when the contact changes
+         */
+        "onVaContact"?: (event: VaTelephoneInputCustomEvent<any>) => void;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required"?: boolean;
+        /**
+          * If true, this prop instructs the component to display error messages in response to the internal error state. If false, error messages must be passed in from consumer.
+         */
+        "showInternalErrors"?: boolean;
     }
     /**
      * @nativeHandler onInput
@@ -5984,6 +6087,7 @@ declare namespace LocalJSX {
         "va-button": VaButton;
         "va-button-icon": VaButtonIcon;
         "va-button-pair": VaButtonPair;
+        "va-button-segmented": VaButtonSegmented;
         "va-card": VaCard;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
@@ -5995,7 +6099,6 @@ declare namespace LocalJSX {
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
-        "va-input-telephone": VaInputTelephone;
         "va-language-toggle": VaLanguageToggle;
         "va-link": VaLink;
         "va-link-action": VaLinkAction;
@@ -6029,6 +6132,7 @@ declare namespace LocalJSX {
         "va-table-row": VaTableRow;
         "va-tabs": VaTabs;
         "va-telephone": VaTelephone;
+        "va-telephone-input": VaTelephoneInput;
         "va-text-input": VaTextInput;
         "va-textarea": VaTextarea;
     }
@@ -6114,6 +6218,13 @@ declare module "@stencil/core" {
              */
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
             /**
+             * @componentName Button Segmented
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             * @guidanceHref button/button-segmented
+             */
+            "va-button-segmented": LocalJSX.VaButtonSegmented & JSXBase.HTMLAttributes<HTMLVaButtonSegmentedElement>;
+            /**
              * @componentName Card
              * @maturityCategory use
              * @maturityLevel deployed
@@ -6198,14 +6309,6 @@ declare module "@stencil/core" {
              * @maturityLevel available
              */
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
-            /**
-             * @componentName Input Telephone
-             * @maturityCategory caution
-             * @maturityLevel candidate
-             * @guidanceHref form/telephone-input
-             * @translations English
-             */
-            "va-input-telephone": LocalJSX.VaInputTelephone & JSXBase.HTMLAttributes<HTMLVaInputTelephoneElement>;
             /**
              * @componentName Language Toggle
              * @maturityCategory caution
@@ -6322,8 +6425,8 @@ declare module "@stencil/core" {
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             /**
              * @componentName Banner - Promo
-             * @maturityCategory use
-             * @maturityLevel deployed
+             * @maturityCategory dont_use
+             * @maturityLevel deprecated
              * @guidanceHref banner/promo
              */
             "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
@@ -6412,6 +6515,14 @@ declare module "@stencil/core" {
              * @maturityLevel best_practice
              */
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
+            /**
+             * @componentName Telephone Input
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             * @guidanceHref form/telephone-input
+             * @translations English
+             */
+            "va-telephone-input": LocalJSX.VaTelephoneInput & JSXBase.HTMLAttributes<HTMLVaTelephoneInputElement>;
             /**
              * @nativeHandler onInput
              * @nativeHandler onBlur
