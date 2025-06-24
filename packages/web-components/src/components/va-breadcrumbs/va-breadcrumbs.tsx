@@ -8,6 +8,7 @@ import {
   Prop,
   State
 } from '@stencil/core';
+import { deepEquals } from '../../utils/utils';
 import classnames from 'classnames';
 
 export type Breadcrumb = {
@@ -102,8 +103,8 @@ export class VaBreadcrumbs {
       firstBreadcrumb.label = 'VA.gov home';
     }
     // Only update state if the value actually changed to avoid infinite loops
-    const isDifferent = JSON.stringify(this.formattedBreadcrumbs) !== JSON.stringify(clonedBreadcrumbs);
-    if (isDifferent) {
+    const isEqual = deepEquals(this.formattedBreadcrumbs, clonedBreadcrumbs);
+    if (!isEqual) {
       this.formattedBreadcrumbs = clonedBreadcrumbs;
     }
   }
