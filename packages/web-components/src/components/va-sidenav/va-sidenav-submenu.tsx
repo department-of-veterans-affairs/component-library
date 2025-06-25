@@ -19,9 +19,6 @@ export class VaSidenavMenu {
    */
   @State() hasCurrentPageItem: boolean = false;
 
-  /**
-   * Component lifecycle method that runs when the component is first connected to the DOM
-   */
   componentDidLoad() {
     this.checkForCurrentPageItems();
   }
@@ -43,7 +40,6 @@ export class VaSidenavMenu {
 
     const slottedElements = slot.assignedElements();
     
-    // Check if any of the slotted elements are va-sidenav-items with current-page=true
     this.hasCurrentPageItem = slottedElements.some(element => {
       if (element.tagName.toLowerCase() === 'va-sidenav-item') {
         return element.hasAttribute('current-page') && 

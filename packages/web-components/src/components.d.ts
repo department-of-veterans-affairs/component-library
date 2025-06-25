@@ -1756,6 +1756,10 @@ export namespace Components {
           * The label for the sidenav item
          */
         "label"?: string;
+        /**
+          * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
+         */
+        "routerLink"?: boolean;
     }
     interface VaSidenavSubmenu {
         /**
@@ -2308,6 +2312,10 @@ export interface VaSegmentedProgressBarCustomEvent<T> extends CustomEvent<T> {
 export interface VaSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaSelectElement;
+}
+export interface VaSidenavItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSidenavItemElement;
 }
 export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3370,7 +3378,18 @@ declare global {
         prototype: HTMLVaSidenavAccordionElement;
         new (): HTMLVaSidenavAccordionElement;
     };
+    interface HTMLVaSidenavItemElementEventMap {
+        "vaRouteChange": { href: string };
+    }
     interface HTMLVaSidenavItemElement extends Components.VaSidenavItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaSidenavItemElementEventMap>(type: K, listener: (this: HTMLVaSidenavItemElement, ev: VaSidenavItemCustomEvent<HTMLVaSidenavItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaSidenavItemElementEventMap>(type: K, listener: (this: HTMLVaSidenavItemElement, ev: VaSidenavItemCustomEvent<HTMLVaSidenavItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaSidenavItemElement: {
         prototype: HTMLVaSidenavItemElement;
@@ -5599,6 +5618,14 @@ declare namespace LocalJSX {
           * The label for the sidenav item
          */
         "label"?: string;
+        /**
+          * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router.  The `href` and `isRouterLink` props must be set.
+         */
+        "onVaRouteChange"?: (event: VaSidenavItemCustomEvent<{ href: string }>) => void;
+        /**
+          * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
+         */
+        "routerLink"?: boolean;
     }
     interface VaSidenavSubmenu {
         /**

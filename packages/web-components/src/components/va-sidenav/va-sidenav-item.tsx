@@ -1,4 +1,4 @@
-import { Component, h, Prop, Element } from '@stencil/core';
+import { Component, h, Prop, Element, Event, EventEmitter } from '@stencil/core';
 import classNames from 'classnames';
 
 @Component({
@@ -24,6 +24,28 @@ export class VaSidenavItem {
    */
   @Prop() currentPage?: boolean;
 
+  /**
+   * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
+   */
+  @Prop() routerLink?: boolean;
+
+  /**
+   * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router. 
+   * The `href` and `isRouterLink` props must be set.
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  vaRouteChange: EventEmitter<{ href: string }>;
+
+  handleClick(e: MouseEvent) {
+    if (this.routerLink) {
+      e.preventDefault();
+      this.vaRouteChange.emit({ href: this.href });
+    }
+  }
+
   render() {
     const anchorClasses = classNames({
       'va-sidenav__current': this.currentPage,
@@ -33,7 +55,7 @@ export class VaSidenavItem {
     
     return (
       <div class="va-sidenav__item" aria-current={this.currentPage ? 'page' : undefined}>
-        <a class={anchorClasses} href={href} part="link">{this.label}</a>
+        <a class={anchorClasses} href={href} onClick={this.handleClick.bind(this)}>{this.label}</a>
         <slot></slot>
       </div>
     );
