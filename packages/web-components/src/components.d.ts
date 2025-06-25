@@ -1374,8 +1374,8 @@ export namespace Components {
     }
     /**
      * @componentName Banner - Promo
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory dont_use
+     * @maturityLevel deprecated
      * @guidanceHref banner/promo
      */
     interface VaPromoBanner {
@@ -1722,6 +1722,10 @@ export namespace Components {
          */
         "heading": string;
         /**
+          * Removes the legal notice text. Use this property when there are multiple statement of truth components on the page to avoid redundancy.
+         */
+        "hideLegalNote": boolean;
+        /**
           * The error to be applied to the va-text-input element
          */
         "inputError": string;
@@ -1878,7 +1882,7 @@ export namespace Components {
         "vanity"?: string;
     }
     /**
-     * @componentName Input Telephone
+     * @componentName Telephone Input
      * @maturityCategory caution
      * @maturityLevel candidate
      * @guidanceHref form/telephone-input
@@ -3161,8 +3165,8 @@ declare global {
     }
     /**
      * @componentName Banner - Promo
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory dont_use
+     * @maturityLevel deprecated
      * @guidanceHref banner/promo
      */
     interface HTMLVaPromoBannerElement extends Components.VaPromoBanner, HTMLStencilElement {
@@ -3434,7 +3438,7 @@ declare global {
         "vaContact": any;
     }
     /**
-     * @componentName Input Telephone
+     * @componentName Telephone Input
      * @maturityCategory caution
      * @maturityLevel candidate
      * @guidanceHref form/telephone-input
@@ -5136,8 +5140,8 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Banner - Promo
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory dont_use
+     * @maturityLevel deprecated
      * @guidanceHref banner/promo
      */
     interface VaPromoBanner {
@@ -5540,6 +5544,10 @@ declare namespace LocalJSX {
          */
         "heading"?: string;
         /**
+          * Removes the legal notice text. Use this property when there are multiple statement of truth components on the page to avoid redundancy.
+         */
+        "hideLegalNote"?: boolean;
+        /**
           * The error to be applied to the va-text-input element
          */
         "inputError"?: string;
@@ -5716,7 +5724,7 @@ declare namespace LocalJSX {
         "vanity"?: string;
     }
     /**
-     * @componentName Input Telephone
+     * @componentName Telephone Input
      * @maturityCategory caution
      * @maturityLevel candidate
      * @guidanceHref form/telephone-input
@@ -6337,8 +6345,8 @@ declare module "@stencil/core" {
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             /**
              * @componentName Banner - Promo
-             * @maturityCategory use
-             * @maturityLevel deployed
+             * @maturityCategory dont_use
+             * @maturityLevel deprecated
              * @guidanceHref banner/promo
              */
             "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
@@ -6422,7 +6430,7 @@ declare module "@stencil/core" {
              */
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             /**
-             * @componentName Input Telephone
+             * @componentName Telephone Input
              * @maturityCategory caution
              * @maturityLevel candidate
              * @guidanceHref form/telephone-input
