@@ -248,4 +248,23 @@ describe('va-breadcrumbs', () => {
 
     expect(lastAnchorHref).toContain('/three');
   });
+
+  it('does not mutate the original breadcrumb-list prop', async () => {
+    const originalCrumbs = [
+      { label: 'Home', href: '#home' },
+      { label: 'Current', href: '#current' }
+    ];
+    const crumbsJson = JSON.stringify(originalCrumbs);
+    const page = await newE2EPage({
+      html: `<va-breadcrumbs breadcrumb-list='${crumbsJson}'></va-breadcrumbs>`
+    });
+    // Wait for hydration and rendering
+    await page.waitForChanges();
+    // Get the prop value from the element after rendering
+    const mutatedCrumbs = await page.$eval('va-breadcrumbs', el => el.breadcrumbList);
+    // The originalCrumbs array should not be mutated
+    expect(mutatedCrumbs).toEqual(crumbsJson);
+    // Also check the in-memory JS object is unchanged
+    expect(originalCrumbs[0].label).toBe('Home');
+  });
 });

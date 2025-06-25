@@ -6,9 +6,9 @@ import {
   Host,
   h,
   Prop,
-  Watch,
   State
 } from '@stencil/core';
+import { deepEquals } from '../../utils/utils';
 import classnames from 'classnames';
 
 export type Breadcrumb = {
@@ -60,20 +60,7 @@ export class VaBreadcrumbs {
    * Each breadcrumb is represented as an object with at least two properties: 'label' and 'href'.
    */
   @State() formattedBreadcrumbs?: Breadcrumb[] = [];
-  /**
-   *
-   * This is a method that watches for changes in the 'breadcrumbList' prop.
-   * When the 'breadcrumbList' prop changes, this method parses the new value (provided as a JSON-formatted string)
-   * into a JavaScript object and assigns it to the 'breadcrumbsState' state.
-   */
-  @Watch('breadcrumbList')
-  watchBreadcrumbListHandler(breadcrumbList) {
-    if (!this.breadcrumbList?.length) return;
-    let potentialBreadcrumbs = this.validateBreadcrumbs(breadcrumbList);
-    if (potentialBreadcrumbs) {
-      this.updateBreadCrumbList(potentialBreadcrumbs);
-    }
-  }
+  
   /**
    * Analytics tracking function(s) will not be called
    */
@@ -109,12 +96,17 @@ export class VaBreadcrumbs {
    * @private
    */
   private updateBreadCrumbList(breadcrumbList: Breadcrumb[]) {
-    const firstBreadcrumb = breadcrumbList[0];
+    // Clone the array and its objects to avoid mutating the original prop value
+    const clonedBreadcrumbs = breadcrumbList.map(bc => ({ ...bc }));
+    const firstBreadcrumb = clonedBreadcrumbs[0];
     if (firstBreadcrumb && this.homeVeteransAffairs) {
       firstBreadcrumb.label = 'VA.gov home';
     }
-
-    this.formattedBreadcrumbs = breadcrumbList;
+    // Only update state if the value actually changed to avoid infinite loops
+    const isEqual = deepEquals(this.formattedBreadcrumbs, clonedBreadcrumbs);
+    if (!isEqual) {
+      this.formattedBreadcrumbs = clonedBreadcrumbs;
+    }
   }
 
   private getClickLevel(target: HTMLAnchorElement) {
@@ -202,6 +194,21 @@ export class VaBreadcrumbs {
     }
   }
 
+  /**
+   * This method is invoked once before the component is first rendered and on component update.
+   * Its main purpose is to validate and format the breadcrumbList prop, if present.
+   */
+  private validateAndFormatBreadcrumbs() {
+    if (!this.breadcrumbList?.length) return;
+
+    let potentialBreadcrumbs = this.validateBreadcrumbs(this.breadcrumbList);
+
+    if (potentialBreadcrumbs) {
+      this.updateBreadCrumbList(potentialBreadcrumbs);
+    } else return;
+
+  }
+
   componentDidLoad() {
     // We are getting the slot nodes so that we can handle either receiving an
     // anchor tag or a list item with an anchor tag.
@@ -222,19 +229,13 @@ export class VaBreadcrumbs {
     });
   }
 
-  /**
-   * This method is invoked once before the component is first rendered.
-   * Its main purpose is to validate and format the breadcrumbList prop, if present.
-   *
-   */
+  
   componentWillLoad() {
-    if (!this.breadcrumbList?.length) return;
+    this.validateAndFormatBreadcrumbs();
+  }
 
-    let potentialBreadcrumbs = this.validateBreadcrumbs(this.breadcrumbList);
-
-    if (potentialBreadcrumbs) {
-      this.updateBreadCrumbList(potentialBreadcrumbs);
-    } else return;
+  componentDidUpdate() {
+    this.validateAndFormatBreadcrumbs();
   }
 
   /**
