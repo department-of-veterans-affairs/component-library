@@ -129,6 +129,8 @@ export class VaTelephoneInput {
       this.contactError = this.error;
     } else if (newValue === this.COUNTRY_ERROR) {
       this.countryError = newValue;
+    } else {
+      this.resetErrors();
     }
   }
 
