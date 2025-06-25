@@ -132,6 +132,7 @@ globalThis.setVaIconSpriteLocation('[custom sprite path]');
       <p>
         <strong>Note:</strong> This must be set before any <code style={{ fontSize: '.75em', background: `var(--vads-color-gray-light-alt)`, padding: `5px` }}>&lt;va-icon&gt;</code> is rendered to ensure all icons use the correct sprite path.
       </p>
+      <i>* The sprite.svg path must be loaded from the same origin as you application, cannot traverse the file system using ".." and must be a ".svg" file.</i>
     </div>
   );
 }

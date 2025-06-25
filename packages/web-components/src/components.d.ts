@@ -820,7 +820,7 @@ export namespace Components {
          */
         "size"?: number;
         /**
-          * The location (url) of the icon sprite file. If not set, uses the global or default location.
+          * The location (url) of the icon sprite file. If not set, uses the global or default location. The path must be loaded from the same origin as you application, cannot traverse the file system using `..` and must be a `.svg` file.
          */
         "spriteLocation"?: string;
         /**
@@ -4498,7 +4498,7 @@ declare namespace LocalJSX {
          */
         "size"?: number;
         /**
-          * The location (url) of the icon sprite file. If not set, uses the global or default location.
+          * The location (url) of the icon sprite file. If not set, uses the global or default location. The path must be loaded from the same origin as you application, cannot traverse the file system using `..` and must be a `.svg` file.
          */
         "spriteLocation"?: string;
         /**

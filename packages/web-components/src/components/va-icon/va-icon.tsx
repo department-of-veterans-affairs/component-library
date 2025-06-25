@@ -16,7 +16,7 @@ import { initIconSpriteLocation } from './va-icon-global';
   shadow: true,
 })
 export class VaIcon {
-
+  private fallbackSpriteLocation = '/img/sprite.svg';
   /**
    * The name of the icon to use
    */
@@ -25,8 +25,9 @@ export class VaIcon {
   /**
    * The location (url) of the icon sprite file.
    * If not set, uses the global or default location.
+   * The path must be loaded from the same origin as you application, cannot traverse the file system using `..` and must be a `.svg` file.
    */
-  @Prop() spriteLocation?: string; // Default location for the icon sprite
+  @Prop() spriteLocation?: string;
 
   /**
    * The size variant of the icon,
@@ -50,7 +51,8 @@ export class VaIcon {
   }
 
   private validateSpriteLocation(rawSpritePath : string): string {
-    let safeSpritePath = '/img/sprite.svg';
+    let safeSpritePath = this.fallbackSpriteLocation,
+        errorMessage = `Invalid SVG sprite path provided to <va-icon>: ${rawSpritePath}`;
     // Only allow .svg files from the same origin or relative paths
     try {
       const url = new URL(rawSpritePath, window.location.origin);
@@ -61,12 +63,11 @@ export class VaIcon {
       ) {
         safeSpritePath = url.pathname;
       } else {
-        consoleDevError(`Unsafe or invalid SVG sprite path provided to <va-icon>: ${rawSpritePath}`);
+        consoleDevError(errorMessage);
       }
       return safeSpritePath;
     } catch (e) {
-      // If not a valid URL, fallback to default and warn
-      consoleDevError(`Invalid SVG sprite path provided to <va-icon>: ${rawSpritePath}`);
+      consoleDevError(errorMessage);
       return safeSpritePath;
     }
     
