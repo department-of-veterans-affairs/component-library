@@ -14,7 +14,7 @@ export type OptionalLink = Components.VaLink;
 
 /**
  * @componentName Service List Item
- * @maturityCategory caution
+ * @maturityCategory available
  * @maturityLevel candidate
  */
 @Component({
