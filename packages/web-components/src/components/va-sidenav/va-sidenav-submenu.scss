@@ -1,11 +1,11 @@
-.va-sidenav__submenu {
+.va-sidenav-submenu {
   list-style-type: none;
   padding-left: 0;
   margin: 0;
   position: relative;
 }
 
-.va-sidenav__submenu-label {
+.va-sidenav-submenu__label {
   border-bottom: 1px solid var(--vads-color-base-lightest);
   color: var(--vads-color-gray-medium);
   font-size: 13.8px;
@@ -14,6 +14,31 @@
   padding: 0.7rem 1rem;
   padding-left: 1rem;
   text-transform: uppercase;
+}
+
+.va-sidenav-submenu__link {
+  color: var(--vads-color-link);
+  display: block;
+  padding: 0.7rem 1rem;
+  padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
+  position: relative;
+  text-decoration: none;
+  &:hover {
+    background-color: var(--vads-color-base-lightest);
+  }
+}
+
+.va-sidenav-submenu__current-link::after {
+  background-color: var(--vads-color-link);
+  border-radius: 99rem;
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: .25rem;
+  top: .25rem;
+  width: .25rem;
+  left: 0;
+  z-index: 1;
 }
 
 ::slotted(va-sidenav-item) {
