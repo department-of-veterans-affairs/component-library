@@ -1733,16 +1733,6 @@ export namespace Components {
          */
         "sectionName"?: string;
     }
-    interface VaSidenavAccordion {
-        /**
-          * The label for the accordion menu section
-         */
-        "label": string;
-        /**
-          * If the accordion menu section is expanded.
-         */
-        "open"?: boolean;
-    }
     interface VaSidenavItem {
         /**
           * If the sidenav item is the current page
@@ -3372,12 +3362,6 @@ declare global {
         prototype: HTMLVaSidenavElement;
         new (): HTMLVaSidenavElement;
     };
-    interface HTMLVaSidenavAccordionElement extends Components.VaSidenavAccordion, HTMLStencilElement {
-    }
-    var HTMLVaSidenavAccordionElement: {
-        prototype: HTMLVaSidenavAccordionElement;
-        new (): HTMLVaSidenavAccordionElement;
-    };
     interface HTMLVaSidenavItemElementEventMap {
         "vaRouteChange": { href: string };
     }
@@ -3604,7 +3588,6 @@ declare global {
         "va-select": HTMLVaSelectElement;
         "va-service-list-item": HTMLVaServiceListItemElement;
         "va-sidenav": HTMLVaSidenavElement;
-        "va-sidenav-accordion": HTMLVaSidenavAccordionElement;
         "va-sidenav-item": HTMLVaSidenavItemElement;
         "va-sidenav-submenu": HTMLVaSidenavSubmenuElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
@@ -5595,16 +5578,6 @@ declare namespace LocalJSX {
          */
         "sectionName"?: string;
     }
-    interface VaSidenavAccordion {
-        /**
-          * The label for the accordion menu section
-         */
-        "label": string;
-        /**
-          * If the accordion menu section is expanded.
-         */
-        "open"?: boolean;
-    }
     interface VaSidenavItem {
         /**
           * If the sidenav item is the current page
@@ -6110,7 +6083,6 @@ declare namespace LocalJSX {
         "va-select": VaSelect;
         "va-service-list-item": VaServiceListItem;
         "va-sidenav": VaSidenav;
-        "va-sidenav-accordion": VaSidenavAccordion;
         "va-sidenav-item": VaSidenavItem;
         "va-sidenav-submenu": VaSidenavSubmenu;
         "va-statement-of-truth": VaStatementOfTruth;
@@ -6471,7 +6443,6 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-sidenav": LocalJSX.VaSidenav & JSXBase.HTMLAttributes<HTMLVaSidenavElement>;
-            "va-sidenav-accordion": LocalJSX.VaSidenavAccordion & JSXBase.HTMLAttributes<HTMLVaSidenavAccordionElement>;
             "va-sidenav-item": LocalJSX.VaSidenavItem & JSXBase.HTMLAttributes<HTMLVaSidenavItemElement>;
             "va-sidenav-submenu": LocalJSX.VaSidenavSubmenu & JSXBase.HTMLAttributes<HTMLVaSidenavSubmenuElement>;
             /**
