@@ -4,13 +4,14 @@ import {
   Event,
   EventEmitter,
   Host,
+  Listen,
   Prop,
+  State,
   Watch,
   h,
 } from '@stencil/core';
 import classnames from 'classnames';
 import { TabItem } from './va-tabs.types';
-
 
 /**
  * @componentName Tabs
@@ -23,6 +24,13 @@ import { TabItem } from './va-tabs.types';
   shadow: true,
 })
 export class VaTabs {
+  private resetRender: boolean = true;
+  private debounce: number = null;
+  @State() overflowItems: Array<TabItem> = [];
+  @State() visibleItems: Array<TabItem> = [];
+  @State() windowWidth: number = window.innerWidth;
+  @State() overflowMenuVisible: boolean = false;
+
   @Element() el: HTMLElement;
 
   /**
@@ -66,6 +74,49 @@ export class VaTabs {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  private toggleOverflowMenu = () => {
+    this.overflowMenuVisible = !this.overflowMenuVisible;
+  }
+
+  private checkForOverflow = (): void => {
+    const container = this.el.shadowRoot.firstElementChild.querySelector('.va-tabs__list');
+    if (!container) {
+      console.warn('va-tabs: Container for tab items not found.');
+      return;
+    }
+    const firstRun = this.visibleItems.length === 0;
+    // Check if the container has overflow
+    if (container.scrollWidth > container.clientWidth) {
+      const items = Array.from(container.children) as HTMLAnchorElement[];
+      const moreTabWith = (container.querySelector('.va-tabs__tab_item.overflow-link')?.clientWidth + 12) || 0; // 12px margin
+      const clientWidth = container.clientWidth - moreTabWith;
+      let visibleItems = [], overflowItems = this.overflowItems;
+      items.forEach((item, index) => {
+        let rect = item.getBoundingClientRect();
+        if ((rect.x + item.clientWidth + 24)  >  clientWidth) { // 24px for margin
+          if (!overflowItems.includes(this.tabItems[index])) {
+            overflowItems.push(this.tabItems[index]);
+          }
+        } else {
+          visibleItems.push(this.tabItems[index]);
+        }
+      });
+
+      overflowItems.sort((a,b) => {
+        return this.tabItems.indexOf(a) > this.tabItems.indexOf(b) ? 1 : -1;
+      })
+
+      this.overflowItems = overflowItems;
+      this.visibleItems = visibleItems;
+      if (firstRun) {
+        // Re-run because the more tab may have been added
+        setTimeout(() => {
+          this.checkForOverflow();
+        })
+      }
+    }
+  }
+
   connectedCallback() {
     // Make sure that the tab panel corresponding to the selected tab is visible
     // when the component is first rendered.
@@ -81,6 +132,34 @@ export class VaTabs {
       // Ensure the target element is visible by removing any 'hidden' attribute.
       targetElement.removeAttribute('hidden');
     }
+  }
+
+  componentDidRender() {
+    if (this.resetRender) {
+      this.resetRender = false;
+      this.checkForOverflow();
+    }
+    
+  }
+
+  @Listen('resize', { target: 'window' })
+  handleResize() {
+    if (this.debounce !== null) {
+      clearTimeout(this.debounce);
+      this.debounce = null;
+    }
+    this.debounce = window.setTimeout(() => {
+      if (window.innerWidth > this.windowWidth) {
+        // If the window is resized to be larger, reset the overflow items. Causes re-render.
+        this.overflowItems = [];
+        this.visibleItems = [];
+        this.resetRender = true;
+      } else {
+        this.checkForOverflow();
+      }
+      this.windowWidth = window.innerWidth;
+      this.debounce = null;
+    }, 100);
   }
 
   /**
@@ -197,12 +276,14 @@ export class VaTabs {
       return null;
     }
 
+    let tabItemsToRenderAsTabs = this.visibleItems.length > 0 ? this.visibleItems : tabItems;
+
     return (
       <Host>
         <nav aria-label={label} class={containerClass}>
           <ul class={listClass}>
-            {tabItems.map((item: TabItem, index: number) => (
-              <li class={index === selected ? 'va-tabs__tab_item selected' : 'va-tabs__tab_item'}>
+            {tabItemsToRenderAsTabs.map((item: TabItem, index: number) => (
+              <li class={tabItems.indexOf(item) === selected ? 'va-tabs__tab_item selected' : 'va-tabs__tab_item'}>
                 <a
                   href={`${item.url}`}
                   aria-current={index === selected ? 'page' : undefined}
@@ -214,6 +295,33 @@ export class VaTabs {
                 </a>
               </li>
             ))}
+            {this.overflowItems.length > 0 && (
+              <li class="va-tabs__tab_item overflow-link">
+                <a
+                  href="#"
+                  aria-haspopup="true"
+                  aria-expanded={this.overflowMenuVisible}
+                  onClick={() => this.toggleOverflowMenu()}
+                >
+                  More ({this.overflowItems.length}) <va-icon icon="expand_more"/>
+                </a>
+                <ul class={`va-tabs__overflow-menu ${this.overflowMenuVisible ? 'visible' : ''}`}>
+                  {this.overflowItems.map((item: TabItem) => (
+                    <li class={tabItems.indexOf(item) === selected ? 'va-tabs__tab_overflow-item selected' : 'va-tabs__tab_overflow-item'}>
+                      <a
+                        href={`${item.url}`}
+                        onClick={(e: MouseEvent) => {this.handleClick(e, tabItems.indexOf(item)); this.toggleOverflowMenu()}}
+                        aria-current={tabItems.indexOf(item) === selected ? 'page' : undefined}
+                        onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, tabItems.indexOf(item))}
+                        data-label={item.label}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            )}
           </ul>
         </nav>
       </Host>

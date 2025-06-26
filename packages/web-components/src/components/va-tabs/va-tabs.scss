@@ -41,8 +41,29 @@
         justify-content: center;
       }
 
+      &:hover:after {
+        background-color: var(--vads-color-base-lightest);
+      }
+
       &:focus:after, &:hover:focus:after, &:active:after {
         background-color: var(--vads-color-action-focus-on-light);
+      }
+    }
+
+    
+  }
+
+  &.overflow-link {
+    position: relative;
+    
+    & > a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+
+      va-icon {
+        margin-left: 0.5rem;
       }
     }
   }
@@ -77,4 +98,78 @@
 
 .va-tabs__tab_item:last-child {
   margin-right: 0;
+}
+
+/*
+*
+* Overflow styles
+*
+*/
+
+.va-tabs__overflow-menu {
+  position: absolute;
+  right: 0;
+  border: 1px solid var(--vads-color-base-dark);
+  list-style: none;
+  padding-inline-start: 0;
+  visibility: hidden;
+
+  &.visible {
+    visibility: visible;
+  }
+
+}
+
+.va-tabs__tab_overflow-item {
+  text-align: left;
+  min-width: 128px;
+
+  &.selected {
+    a {
+      border-left-color: var(--vads-color-primary);
+      color: var(--vads-color-base);
+
+      &::after {
+        content: attr(data-label) / "";
+        display: block;
+        font-weight: 700;
+        background: var(--vads-color-white);
+        position: absolute;
+        top: 4px;
+        left: 6px;
+        width: calc(100% - 8px);
+        height: calc(100% - 6px);
+        display: flex;
+        align-items: center;
+        justify-content: left;
+      }
+
+      &:hover:after {
+        background-color: var(--vads-color-base-lightest);
+      }
+
+      &:focus:after, &:hover:focus:after, &:active:after {
+        background-color: var(--vads-color-action-focus-on-light);
+      }
+    }
+  }
+
+  a {
+    justify-content: left;
+    border-bottom: 0;
+    border-left: 4px solid transparent;
+
+    &:hover {
+      cursor: pointer;
+      border-left-color: var(--vads-color-primary);
+    }
+
+    &:focus, &:hover:focus, &:active {
+      border-left-color: transparent;
+      background-color: var(--vads-color-action-focus-on-light);
+      outline: 2px solid var(--vads-color-action-border-focus-on-light);
+      outline-offset: -2px;
+      color: var(--vads-color-base);
+    }
+  }
 }
