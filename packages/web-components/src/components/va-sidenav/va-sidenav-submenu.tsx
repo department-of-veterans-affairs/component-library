@@ -39,6 +39,8 @@ export class VaSidenavMenu {
    */
   @State() hasCurrentPageItem: boolean = false;
 
+  @State() isCurrentPage: boolean = false;
+
   componentDidLoad() {
     this.checkForCurrentPageItems();
   }
@@ -86,6 +88,7 @@ export class VaSidenavMenu {
     
     // Set state if either this submenu or any child is current
     this.hasCurrentPageItem = isCurrentPage || hasCurrentPageChild;
+    this.isCurrentPage = isCurrentPage;
   }
 
   render() {
@@ -95,7 +98,7 @@ export class VaSidenavMenu {
     });
 
     const linkClasses = classNames({
-      'va-sidenav-submenu__current-link': this.hasCurrentPageItem,
+      'va-sidenav-submenu__current-link': this.isCurrentPage,
       'va-sidenav-submenu__link': true
     });
 

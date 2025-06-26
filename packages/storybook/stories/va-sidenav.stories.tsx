@@ -15,19 +15,20 @@ export default {
 };
 
 const Template = () => { 
+
   return (
     <va-sidenav header="Profile" icon-name="account_circle" icon-background-color="vads-color-primary">
-      <va-sidenav-item href="#" label="Parent item"></va-sidenav-item>
-      <va-sidenav-item href="#" label="Parent item"></va-sidenav-item>
-      <va-sidenav-item href="#" label="Parent item"></va-sidenav-item>
-      <va-sidenav-item href="#" label="Parent item with a very long label for a sidenav item to see how it reflows when it is very long or if we zoom in"></va-sidenav-item>
-      <va-sidenav-submenu label="Parent item for submenu (non-accordion)">
-          <va-sidenav-item href="#" label="Child item"></va-sidenav-item>
-          <va-sidenav-item href="#" label="Child item as current page" current-page={true}></va-sidenav-item>
-          <va-sidenav-item href="#" label="Child item"></va-sidenav-item>
+      <va-sidenav-item href="#" label="Personal information"></va-sidenav-item>
+      <va-sidenav-item href="#" label="Contact information"></va-sidenav-item>
+      <va-sidenav-item href="#" label="Personal health care contacts"></va-sidenav-item>
+      <va-sidenav-item href="#" label="Military service"></va-sidenav-item>
+      <va-sidenav-item href="#" label="Direct deposit information"></va-sidenav-item>
+      <va-sidenav-submenu label="Communication settings">
+        <va-sidenav-item href="#" label="Notification settings"></va-sidenav-item>
+        <va-sidenav-item current-page={true} href="#" label="Paperless delivery"></va-sidenav-item>
       </va-sidenav-submenu>
-      <va-sidenav-item href="#" label="Parent item"></va-sidenav-item>
-      <va-sidenav-item href="#" label="Parent item"></va-sidenav-item>
+      <va-sidenav-item href="#" label="Account security"></va-sidenav-item>
+      <va-sidenav-item href="#" label="Connected apps"></va-sidenav-item>
     </va-sidenav>
   )
 };
