@@ -7,6 +7,7 @@ import {
   Prop,
   Element,
   Watch,
+  State,
 } from '@stencil/core';
 import classnames from 'classnames';
 import { ButtonItem } from './va-button-segmented.types';
@@ -23,6 +24,8 @@ import { ButtonItem } from './va-button-segmented.types';
   shadow: true,
 })
 export class VaButtonSegmented {
+  @State() mouseDown: boolean = false;
+
   @Element() el: HTMLElement;
 
   /**
@@ -125,6 +128,7 @@ export class VaButtonSegmented {
     const containerClass = classnames({
       'usa-button-group': true,
       'va-segmented-button': true,
+      'mouse-down': this.mouseDown,
     });
 
     const buttonClass = classnames({
@@ -146,6 +150,10 @@ export class VaButtonSegmented {
                   this.selected = index;
                   this.handleClick(buttonItem);
                 }}
+                onMouseDown={() => this.mouseDown = true}
+                onMouseUp={() => this.mouseDown = false}
+                // onMouseDown={() => this.handleMouseDownOrUp(true)}
+                // onMouseUp={() => this.handleMouseDownOrUp(false)}
                 type="button"
                 title={buttonItem.label.length > 20 ? buttonItem.label : undefined}
                 aria-pressed={this.selected === index ? 'true' : 'false'}

@@ -13,7 +13,7 @@
 
 .va-segmented-button {
   background-color: var(--vads-color-base-lighter);
-  padding: var(--vads-spacing-0p5); 
+  padding: var(--vads-spacing-0p5);
   padding-bottom: calc(var(--vads-spacing-0p5) + 4px); // 4px is to account for the box-shadow on the button
   border-radius: 8px;
   margin-left: 0;
@@ -22,6 +22,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 }
+
 .usa-button-group__item {
   margin: 0;
 }
@@ -64,24 +65,42 @@
   box-shadow: 0 4px 0 0 var(--vads-button-color-background-disabled-on-light);
 }
 
-.va-segmented-button__button:active, .va-segmented-button__button[aria-pressed=true] {
-  background-color: var(--vads-color-white);
-  box-shadow: 0 4px 0 0 var(--vads-color-white);
-  position: relative;
-  
-  &::after {
-    content: attr(data-label) / "";
-    background: var(--vads-color-white);
-    border-radius: 4px;
-    font-weight: 700;
-    position: absolute;
-    top: 4px;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/*
+  Wrap active/focus styles in a "mouse-down" class to prevent the flicker effect
+  when a new button is pressed while another is active.
+*/
+.va-segmented-button:not(.mouse-down) {
+  .va-segmented-button__button:active,
+  .va-segmented-button__button[aria-pressed=true] {
+    background-color: var(--vads-color-white);
+    box-shadow: 0 4px 0 0 var(--vads-color-white);
+    position: relative;
+
+    &::after {
+      content: attr(data-label) / "";
+      background: var(--vads-color-white);
+      border-radius: 4px;
+      font-weight: 700;
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .va-segmented-button__button[aria-pressed=true]:focus,
+  .va-segmented-button__button:active:focus,
+  .va-segmented-button__button[aria-pressed="true"]:active:focus {
+    background-color: var(--vads-color-action-focus-on-light);
+    box-shadow: 0 4px 0 0 var(--vads-color-base);
+
+    &::after {
+      background-color: var(--vads-color-action-focus-on-light);
+    }
   }
 }
 
@@ -89,16 +108,5 @@
   background-color: var(--vads-color-action-focus-on-light);
   outline: var(--vads-button-color-background-disabled-on-light);
   box-shadow: 0 4px 0 0 var(--vads-color-base);
-}
-
-.va-segmented-button__button[aria-pressed=true]:focus,
-.va-segmented-button__button:active:focus,
-.va-segmented-button__button[aria-pressed="true"]:active:focus {
-  background-color: var(--vads-color-action-focus-on-light);
-  box-shadow: 0 4px 0 0 var(--vads-color-base);
-
-  &::after {
-    background-color: var(--vads-color-action-focus-on-light);
-  }
 }
 
