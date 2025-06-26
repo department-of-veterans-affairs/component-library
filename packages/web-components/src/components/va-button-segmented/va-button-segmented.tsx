@@ -152,8 +152,6 @@ export class VaButtonSegmented {
                 }}
                 onMouseDown={() => this.mouseDown = true}
                 onMouseUp={() => this.mouseDown = false}
-                // onMouseDown={() => this.handleMouseDownOrUp(true)}
-                // onMouseUp={() => this.handleMouseDownOrUp(false)}
                 type="button"
                 title={buttonItem.label.length > 20 ? buttonItem.label : undefined}
                 aria-pressed={this.selected === index ? 'true' : 'false'}
