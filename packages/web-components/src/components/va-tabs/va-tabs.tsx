@@ -24,12 +24,12 @@ import { TabItem } from './va-tabs.types';
   shadow: true,
 })
 export class VaTabs {
-  private resetRender: boolean = true;
-  private debounce: number = null;
   @State() overflowItems: Array<TabItem> = [];
   @State() visibleItems: Array<TabItem> = [];
   @State() windowWidth: number = window.innerWidth;
   @State() overflowMenuVisible: boolean = false;
+  private resetRender: boolean = true;
+  private debounce: number = null;
 
   @Element() el: HTMLElement;
 
@@ -64,6 +64,26 @@ export class VaTabs {
     }
   }
 
+  @Listen('resize', { target: 'window' })
+  handleResize() {
+    if (this.debounce !== null) {
+      clearTimeout(this.debounce);
+      this.debounce = null;
+    }
+    this.debounce = window.setTimeout(() => {
+      if (window.innerWidth > this.windowWidth) {
+        // If the window is resized to be larger, reset the overflow items. Causes re-render.
+        this.overflowItems = [];
+        this.visibleItems = [];
+        this.resetRender = true;
+      } else {
+        this.checkForOverflow();
+      }
+      this.windowWidth = window.innerWidth;
+      this.debounce = null;
+    }, 100);
+  }
+
   /**
    * The event used to track usage of the component.
    */
@@ -73,49 +93,6 @@ export class VaTabs {
     eventName: 'component-library-analytics',
   })
   componentLibraryAnalytics: EventEmitter;
-
-  private toggleOverflowMenu = () => {
-    this.overflowMenuVisible = !this.overflowMenuVisible;
-  }
-
-  private checkForOverflow = (): void => {
-    const container = this.el.shadowRoot.firstElementChild.querySelector('.va-tabs__list');
-    if (!container) {
-      console.warn('va-tabs: Container for tab items not found.');
-      return;
-    }
-    const firstRun = this.visibleItems.length === 0;
-    // Check if the container has overflow
-    if (container.scrollWidth > container.clientWidth) {
-      const items = Array.from(container.children) as HTMLAnchorElement[];
-      const moreTabWith = (container.querySelector('.va-tabs__tab_item.overflow-link')?.clientWidth + 12) || 0; // 12px margin
-      const clientWidth = container.clientWidth - moreTabWith;
-      let visibleItems = [], overflowItems = this.overflowItems;
-      items.forEach((item, index) => {
-        let rect = item.getBoundingClientRect();
-        if ((rect.x + item.clientWidth + 24)  >  clientWidth) { // 24px for margin
-          if (!overflowItems.includes(this.tabItems[index])) {
-            overflowItems.push(this.tabItems[index]);
-          }
-        } else {
-          visibleItems.push(this.tabItems[index]);
-        }
-      });
-
-      overflowItems.sort((a,b) => {
-        return this.tabItems.indexOf(a) > this.tabItems.indexOf(b) ? 1 : -1;
-      })
-
-      this.overflowItems = overflowItems;
-      this.visibleItems = visibleItems;
-      if (firstRun) {
-        // Re-run because the more tab may have been added
-        setTimeout(() => {
-          this.checkForOverflow();
-        })
-      }
-    }
-  }
 
   connectedCallback() {
     // Make sure that the tab panel corresponding to the selected tab is visible
@@ -140,26 +117,6 @@ export class VaTabs {
       this.checkForOverflow();
     }
     
-  }
-
-  @Listen('resize', { target: 'window' })
-  handleResize() {
-    if (this.debounce !== null) {
-      clearTimeout(this.debounce);
-      this.debounce = null;
-    }
-    this.debounce = window.setTimeout(() => {
-      if (window.innerWidth > this.windowWidth) {
-        // If the window is resized to be larger, reset the overflow items. Causes re-render.
-        this.overflowItems = [];
-        this.visibleItems = [];
-        this.resetRender = true;
-      } else {
-        this.checkForOverflow();
-      }
-      this.windowWidth = window.innerWidth;
-      this.debounce = null;
-    }, 100);
   }
 
   /**
@@ -246,6 +203,59 @@ export class VaTabs {
     // If the target element exists, focus it.
     if (targetElement) {
       targetElement.focus();
+    }
+  }
+
+  /**
+   * @function toggleOverflowMenu
+   * @description Toggles the visibility of the overflow menu.
+   * @returns {void}
+   */
+  private toggleOverflowMenu = () => {
+    this.overflowMenuVisible = !this.overflowMenuVisible;
+  }
+
+  /**
+   * @function checkForOverflow
+   * @description Checks if the tab items overflow the container and updates the visible and overflow items accordingly.
+   * @returns {void}
+   */
+  private checkForOverflow = (): void => {
+    const container = this.el.shadowRoot.firstElementChild.querySelector('.va-tabs__list');
+    if (!container) {
+      console.warn('va-tabs: Container for tab items not found.');
+      return;
+    }
+    const firstRun = this.visibleItems.length === 0;
+    // Check if the container has overflow
+    if (container.scrollWidth > container.clientWidth) {
+      const items = Array.from(container.children) as HTMLAnchorElement[];
+      const moreTabWith = (container.querySelector('.va-tabs__tab_item.overflow-link')?.clientWidth + 12) || 0; // 12px margin
+      const clientWidth = container.clientWidth - moreTabWith;
+      let visibleItems = [], overflowItems = this.overflowItems;
+      items.forEach((item, index) => {
+        let rect = item.getBoundingClientRect();
+        if ((rect.x + item.clientWidth + 24)  >  clientWidth) { // 24px for margin
+          if (!overflowItems.includes(this.tabItems[index])) {
+            overflowItems.push(this.tabItems[index]);
+          }
+        } else {
+          visibleItems.push(this.tabItems[index]);
+        }
+      });
+
+      overflowItems.sort((a,b) => {
+        return this.tabItems.indexOf(a) > this.tabItems.indexOf(b) ? 1 : -1;
+      })
+
+      this.overflowItems = overflowItems;
+      this.visibleItems = visibleItems;
+      if (firstRun) {
+        // Re-run because the more tab may have been added
+        setTimeout(() => {
+          this.checkForOverflow();
+        })
+      }
     }
   }
 
