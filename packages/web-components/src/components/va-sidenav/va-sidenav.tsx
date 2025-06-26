@@ -47,6 +47,9 @@ export class VaSidenav {
     forceUpdate(this);
   }
 
+  /**
+   * Checks for multiple current-page links and sets only the first one found to true.
+   */
   setOnlyOneCurrentPage() {
     const currentPageElements = this.el.querySelectorAll('[current-page]');
     currentPageElements.forEach((el, index) => {
