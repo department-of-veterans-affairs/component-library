@@ -27,7 +27,7 @@ export class VaSidenav {
   @Prop() header?: string;
 
   /**
-   * Used to describe the navigation for screen readers. If the header property is set, that text will be used instead of this value.
+   * Used to describe the navigation for screen readers. If the `header` property is set, the `header` text will be used instead of this value.
    */
   @Prop() sectionName?: string;
 
@@ -37,7 +37,7 @@ export class VaSidenav {
   @Prop() iconName?: string;
 
   /**
-   * Adds a circle around the icon with the provided background [color token](https://design.va.gov/foundation/color-palette). 
+   * Adds a circle around the icon with the provided background [VADS color token](https://design.va.gov/foundation/color-palette). 
    */
   @Prop() iconBackgroundColor?: string = 'vads-color-primary';
 
@@ -69,7 +69,7 @@ export class VaSidenav {
     if (this.isDesktop) {
       return (
         <Host>
-          <nav aria-label={this.header || this.sectionName}>
+          <nav aria-label={`Pages related to ${this.header || this.sectionName}`}>
             {this.header && (
               <h2 class="va-sidenav__header">
                 {this.iconName && this.iconBackgroundColor && (

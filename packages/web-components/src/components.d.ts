@@ -1721,7 +1721,7 @@ export namespace Components {
          */
         "header"?: string;
         /**
-          * Adds a circle around the icon with the provided background [color token](https://design.va.gov/foundation/color-palette).
+          * Adds a circle around the icon with the provided background [VADS color token](https://design.va.gov/foundation/color-palette).
          */
         "iconBackgroundColor"?: string;
         /**
@@ -1729,7 +1729,7 @@ export namespace Components {
          */
         "iconName"?: string;
         /**
-          * Used to describe the navigation for screen readers. If the header property is set, that text will be used instead of this value.
+          * Used to describe the navigation for screen readers. If the `header` property is set, the `header` text will be used instead of this value.
          */
         "sectionName"?: string;
     }
@@ -5593,7 +5593,7 @@ declare namespace LocalJSX {
          */
         "header"?: string;
         /**
-          * Adds a circle around the icon with the provided background [color token](https://design.va.gov/foundation/color-palette).
+          * Adds a circle around the icon with the provided background [VADS color token](https://design.va.gov/foundation/color-palette).
          */
         "iconBackgroundColor"?: string;
         /**
@@ -5601,7 +5601,7 @@ declare namespace LocalJSX {
          */
         "iconName"?: string;
         /**
-          * Used to describe the navigation for screen readers. If the header property is set, that text will be used instead of this value.
+          * Used to describe the navigation for screen readers. If the `header` property is set, the `header` text will be used instead of this value.
          */
         "sectionName"?: string;
     }
