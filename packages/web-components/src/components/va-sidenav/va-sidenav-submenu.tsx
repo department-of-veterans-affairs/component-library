@@ -15,9 +15,14 @@ export class VaSidenavMenu {
   @Prop() label!: string;
 
   /**
-   * When present, the category name will be a link.
+   * When present, the category name will be a link. If it is also the `current-page`, this will be set to `#content`.
    */
   @Prop() href?: string;
+
+  /**
+   * Identifies when the parent is the current page. The current page link will have distinct style treatment and use the `#content` hash on the `href`.
+   */
+  @Prop() currentPage?: boolean;
 
   /**
    * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
@@ -42,7 +47,7 @@ export class VaSidenavMenu {
   @State() isCurrentPage: boolean = false;
 
   componentDidLoad() {
-    this.checkForCurrentPageItems();
+    this.checkForCurrentPageItem();
   }
 
   /**
@@ -50,7 +55,7 @@ export class VaSidenavMenu {
    */
   @Listen('slotchange')
   onSlotChange() {
-    this.checkForCurrentPageItems();
+    this.checkForCurrentPageItem();
   }
 
   handleClick(e: MouseEvent) {
@@ -61,39 +66,72 @@ export class VaSidenavMenu {
   }
 
   /**
-   * Check if any of the slotted va-sidenav-items have current-page set to true
+   * Helper method to check if an element is a va-sidenav-item with current-page set
    */
-  private checkForCurrentPageItems() {
+  private isCurrentPageItem(element: Element): boolean {
+    return element.tagName.toLowerCase() === 'va-sidenav-item' && 
+           element.hasAttribute('current-page') && 
+           element.getAttribute('current-page') !== 'false';
+  }
+
+  /**
+   * Check if any of the slotted va-sidenav-items have current-page set to true
+   * or if the submenu parent itself has current-page set to true
+   */
+  private checkForCurrentPageItem() {
     // Check if this submenu itself has current-page set (only if it has an href)
-    const isCurrentPage = this.href && 
-                         this.el.hasAttribute('current-page') && 
-                         this.el.getAttribute('current-page') !== 'false';
-    
-    // Check if any child items have current-page set
+    const isCurrentPage = this.href && this.currentPage;
+
+    // Get slotted elements
     const slot = this.el.shadowRoot?.querySelector('slot');
+    const slottedElements = slot?.assignedElements();
+
+    // If there is no slot, there are no children to check
     if (!slot) {
-      this.hasCurrentPageItem = isCurrentPage;
+      this.hasCurrentPageItem = false;
+      this.isCurrentPage = isCurrentPage;
       return;
     }
-
-    const slottedElements = slot.assignedElements();
     
-    const hasCurrentPageChild = slottedElements.some(element => {
-      if (element.tagName.toLowerCase() === 'va-sidenav-item') {
-        return element.hasAttribute('current-page') && 
-               element.getAttribute('current-page') !== 'false';
+    // If the submenu itself is the current page, remove current-page from children
+    if (isCurrentPage) {
+      this.hasCurrentPageItem = false;
+      this.isCurrentPage = true;
+      
+      // Remove current-page attribute from any children
+      slottedElements?.forEach(element => {
+        if (this.isCurrentPageItem(element)) {
+          element.removeAttribute('current-page');
+        }
+      });
+      
+      return;
+    }
+    
+    // Check if any child items have current-page set
+    let hasCurrentPageChild = false;
+    
+    // Process children, keeping only the first current-page item
+    slottedElements?.forEach(element => {
+      if (this.isCurrentPageItem(element)) {
+        if (!hasCurrentPageChild) {
+          // This is the first current page item we found
+          hasCurrentPageChild = true;
+        } else {
+          // We already found a current page item, remove this one
+          element.removeAttribute('current-page');
+        }
       }
-      return false;
     });
     
-    // Set state if either this submenu or any child is current
-    this.hasCurrentPageItem = isCurrentPage || hasCurrentPageChild;
-    this.isCurrentPage = isCurrentPage;
+    // Set state
+    this.hasCurrentPageItem = hasCurrentPageChild;
+    this.isCurrentPage = false;
   }
 
   render() {
     const submenuClasses = classNames({
-      'va-sidenav-submenu__current': this.hasCurrentPageItem,
+      'va-sidenav-submenu__current': this.hasCurrentPageItem || this.isCurrentPage,
       'va-sidenav-submenu': true
     });
 
@@ -102,10 +140,14 @@ export class VaSidenavMenu {
       'va-sidenav-submenu__link': true
     });
 
+    const href = this.isCurrentPage ? '#content' : this.href;
+
     return (
       <nav class={submenuClasses} aria-label={`Pages related to the ${this.label} section`}>
         {this.href ? (
-          <a class={linkClasses} href={this.href} onClick={this.handleClick.bind(this)}>{this.label}</a>
+          <div aria-current={this.isCurrentPage ? 'page' : undefined}>
+            <a class={linkClasses} href={href} onClick={this.handleClick.bind(this)}>{this.label}</a>
+          </div>
         ) : (
           <div class="va-sidenav-submenu__label">{this.label}</div>
         )}

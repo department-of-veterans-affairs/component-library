@@ -10,7 +10,7 @@ export class VaSidenavItem {
   @Element() el!: HTMLElement;
 
   /**
-   * The href for the sidenav item
+   * The href for the sidenav item. If it is also the `current-page`, this will be set to `#content`.
    */
   @Prop() href?: string;
 
@@ -20,7 +20,7 @@ export class VaSidenavItem {
   @Prop() label?: string;
 
   /**
-   * If the sidenav item is the current page
+   * Identifies when the item is the current page. The current page link will have distinct style treatment and use the `#content` hash on the `href`.
    */
   @Prop() currentPage?: boolean;
 
