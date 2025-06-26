@@ -1735,7 +1735,7 @@ export namespace Components {
     }
     interface VaSidenavItem {
         /**
-          * Identifies when the item is the current page. The current page link will have distinct style treatment and use the `#content` hash on the `href`.
+          * Identifies when the item is the current page. The current page link have the `#content` hash on the `href`.
          */
         "currentPage"?: boolean;
         /**
@@ -1753,7 +1753,7 @@ export namespace Components {
     }
     interface VaSidenavSubmenu {
         /**
-          * Identifies when the parent is the current page. The current page link will have distinct style treatment and use the `#content` hash on the `href`.
+          * Identifies when the item is the current page. The current page link have the `#content` hash on the `href`.
          */
         "currentPage"?: boolean;
         /**
@@ -5607,7 +5607,7 @@ declare namespace LocalJSX {
     }
     interface VaSidenavItem {
         /**
-          * Identifies when the item is the current page. The current page link will have distinct style treatment and use the `#content` hash on the `href`.
+          * Identifies when the item is the current page. The current page link have the `#content` hash on the `href`.
          */
         "currentPage"?: boolean;
         /**
@@ -5629,7 +5629,7 @@ declare namespace LocalJSX {
     }
     interface VaSidenavSubmenu {
         /**
-          * Identifies when the parent is the current page. The current page link will have distinct style treatment and use the `#content` hash on the `href`.
+          * Identifies when the item is the current page. The current page link have the `#content` hash on the `href`.
          */
         "currentPage"?: boolean;
         /**

@@ -20,7 +20,7 @@ export class VaSidenavItem {
   @Prop() label?: string;
 
   /**
-   * Identifies when the item is the current page. The current page link will have distinct style treatment and use the `#content` hash on the `href`.
+   * Identifies when the item is the current page. The current page link have the `#content` hash on the `href`.
    */
   @Prop() currentPage?: boolean;
 

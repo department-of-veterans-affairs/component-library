@@ -47,6 +47,19 @@ export class VaSidenav {
     forceUpdate(this);
   }
 
+  setOnlyOneCurrentPage() {
+    const currentPageElements = this.el.querySelectorAll('[current-page]');
+    currentPageElements.forEach((el, index) => {
+      if (index > 0) {
+        el.setAttribute('current-page', 'false');
+      }
+    });
+  }
+
+  componentWillLoad() {
+    this.setOnlyOneCurrentPage();
+  }
+
   private isDesktop: boolean = window.innerWidth > TABLET_BREAKPOINT;
 
   render() {
