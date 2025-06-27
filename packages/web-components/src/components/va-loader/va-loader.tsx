@@ -104,17 +104,17 @@ export class VaLoader {
     return (
       <Host>
         <div
-          class="vacds-loader"
+          class="va-loader"
           role={this.loaderRole}
           aria-live={this.ariaLiveRegion}
           aria-busy={this.busy}
           tabindex={0}
         >
-          <div class="vacds-loader-border">
-            <span class="edge edge-left"></span>
-            <span class="edge edge-right"></span>
+          <div class="va-loader__border">
+            <span class="va-loader__edge va-loader__edge--left"></span>
+            <span class="va-loader__edge va-loader__edge--right"></span>
           </div>
-          <div class="vacds-loader-text" ref={el => (this.textRef = el)}>
+          <div class="va-loader__text" ref={el => (this.textRef = el)}>
             <span style={spanStyle}>{this.loaderText}</span>
           </div>
         </div>
