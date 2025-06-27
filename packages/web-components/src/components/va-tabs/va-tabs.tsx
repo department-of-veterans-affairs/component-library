@@ -24,6 +24,7 @@ import { TabItem } from './va-tabs.types';
   shadow: true,
 })
 export class VaTabs {
+  @State() visibleButtonElements: NodeListOf<Element> | null = null;
   @State() overflowItems: Array<TabItem> = [];
   @State() visibleItems: Array<TabItem> = [];
   @State() windowWidth: number = window.innerWidth;
@@ -75,6 +76,7 @@ export class VaTabs {
         // If the window is resized to be larger, reset the overflow items. Causes re-render.
         this.overflowItems = [];
         this.visibleItems = [];
+        this.visibleButtonElements = null;
         this.resetRender = true;
       } else {
         this.checkForOverflow();
@@ -117,6 +119,10 @@ export class VaTabs {
       this.checkForOverflow();
     }
 
+    // Ensure that the visible button elements are reset after the component is rendered.
+    if (!this.visibleButtonElements || !this.visibleButtonElements.length) {
+      this.resetVisibleButtonElements();
+    }
   }
 
   /**
@@ -169,6 +175,18 @@ export class VaTabs {
   };
 
   /**
+   * @function resetVisibleButtonElements
+   * @description Resets the visible button elements to include only those that are not in the overflow menu.
+   * This is called after the component is rendered and when the window is resized to ensure that the visible buttons
+   * are correctly identified.
+   * @returns {void}
+   */
+  private resetVisibleButtonElements = (): void => {
+    // Combine the two NodeLists into a single NodeList
+    this.visibleButtonElements = this.el.shadowRoot.querySelectorAll('.va-tabs__list > .va-tabs__tab_item > button:not([aria-haspopup="true"])');
+  }
+
+  /**
    * @function handleKeyDown
    * @description Handles keyboard navigation for the tabs.
    * @param {KeyboardEvent} event - The keyboard event.
@@ -176,33 +194,29 @@ export class VaTabs {
    * @returns {void}
    */
   private handleKeyDown = (event: KeyboardEvent, index: number): void => {
-    const currentlyActiveElement = document.activeElement as HTMLAnchorElement;
-    if (event.key === ' ') {
-      event.preventDefault(); // Prevent scrolling when space is pressed
-      this.handleClick(event, index);
-    }
-    // Handle keyboard navigation for the tabs
-    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-      // Move to the next tab
-      const nextIndex = index === this.tabItems.length - 1 ? 0 : index + 1;
-      console.log('nextIndex', nextIndex);
-      this.selected = nextIndex;
-    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-      // Move to the previous tab
-      const prevIndex = (index - 1 + this.tabItems.length) % this.tabItems.length;
-      console.log('prevIndex', prevIndex);
-      this.selected = prevIndex;
-    }
+    let newFocusedIndex = index;;
 
-    // Query the DOM for the element with the ID of the clicked tab's URL.
-    const targetId = this.tabItems[this.selected].url.replace('#', '');
-    const targetElement = document.getElementById(targetId);
+    // Determine if the key pressed is a left or right arrow key
+    if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+      this.visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "-1");
+      // Move right
+      if (event.key === "ArrowRight") {
+        newFocusedIndex++;
+        // If we're at the end, go to the start
+        if (newFocusedIndex >= this.visibleButtonElements.length) {
+          newFocusedIndex = 0;
+        }
+        // Move left
+      } else if (event.key === "ArrowLeft") {
+        newFocusedIndex--;
+        // If we're at the start, move to the end
+        if (newFocusedIndex < 0) {
+          newFocusedIndex = this.visibleButtonElements.length - 1;
+        }
+      }
 
-    currentlyActiveElement.blur();
-
-    // If the target element exists, focus it.
-    if (targetElement) {
-      targetElement.focus();
+      this.visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "0");
+      (this.visibleButtonElements[newFocusedIndex] as HTMLElement).focus();
     }
   }
 
@@ -250,6 +264,7 @@ export class VaTabs {
 
       this.overflowItems = overflowItems;
       this.visibleItems = visibleItems;
+      this.resetVisibleButtonElements();
       if (firstRun) {
         // Re-run because the more tab may have been added
         setTimeout(() => {
@@ -314,6 +329,7 @@ export class VaTabs {
                   aria-haspopup="true"
                   aria-expanded={this.overflowMenuVisible}
                   onClick={() => this.toggleOverflowMenu()}
+                  onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, this.tabItems.length - this.overflowItems.length)}
                 >
                   More ({this.overflowItems.length}) <va-icon icon="expand_more"/>
                 </button>
