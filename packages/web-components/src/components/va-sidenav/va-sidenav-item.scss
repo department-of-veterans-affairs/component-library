@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  border-bottom: 1px solid var(--vads-color-base-lightest);
+}
+
+a {
+  color: var(--vads-color-link);
+  display: block;
+  line-height: var(--vads-font-line-height-4);
+  padding: 0.6rem 1rem;
+  padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: var(--vads-color-base-lightest);
+  text-decoration: none;
+}
+
+.va-sidenav__current {
+  position: relative;
+  font-weight: 700;
+}
+
+.va-sidenav__current::after {
+  background-color: var(--vads-color-link);
+  border-radius: 99rem;
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: .25rem;
+  top: .25rem;
+  width: .25rem;
+  left: 0;
+  z-index: 1;
+}
