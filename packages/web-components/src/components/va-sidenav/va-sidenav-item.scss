@@ -9,7 +9,8 @@
 a {
   color: var(--vads-color-link);
   display: block;
-  padding: 0.7rem 1rem;
+  line-height: var(--vads-font-line-height-4);
+  padding: 0.6rem 1rem;
   padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
   text-decoration: none;
 }

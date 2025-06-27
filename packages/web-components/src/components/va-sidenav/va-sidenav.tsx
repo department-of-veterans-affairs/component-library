@@ -65,18 +65,28 @@ export class VaSidenav {
 
   private isDesktop: boolean = window.innerWidth > TABLET_BREAKPOINT;
 
+  private iconBackgroundColorStyle = () => {
+    return {
+      backgroundColor: `var(--${this.iconBackgroundColor})`
+    };
+  };
+
+  private ariaLabel = () => {
+    return `Pages related to ${this.sectionName ? this.sectionName : this.header}`;
+  };
+
   render() {
     if (this.isDesktop) {
       return (
         <Host>
-          <nav aria-label={`Pages related to ${this.header || this.sectionName}`}>
+          <nav aria-label={this.ariaLabel()}>
             {this.header && (
               <h2 class="va-sidenav__header">
-                {this.iconName && this.iconBackgroundColor && (
-                  <span class="va-sidenav__icon-background" style={{ backgroundColor: `var(--${this.iconBackgroundColor})` }}>
+                {this.iconName ? (
+                  <span class="va-sidenav__icon-background" style={this.iconBackgroundColorStyle()}>
                     <va-icon icon={this.iconName}></va-icon>
                   </span>
-                )}
+                ) : null}
                 {this.header}
               </h2>
             )}
@@ -91,11 +101,11 @@ export class VaSidenav {
     return (
       <Host>
         <va-accordion open-single>
-          <va-accordion-item bordered header={`${this.header || this.sectionName} menu`}>
+          <va-accordion-item bordered header={`${this.header} menu`}>
             <span slot="icon">
               <va-icon icon="menu" />
             </span>
-            <nav aria-label={`Pages related to ${this.header || this.sectionName}`}>
+            <nav aria-label={this.ariaLabel()}>
               <div class="va-sidenav__list">
                 <slot></slot>
               </div>

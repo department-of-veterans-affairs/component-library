@@ -1,11 +1,136 @@
 import { newE2EPage } from '@stencil/core/testing';
 
 describe('va-sidenav', () => {
-  it('renders', async () => {
+  it('header property sets the header and aria-labelfor desktop and mobile web', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-sidenav></va-sidenav>');
 
-    const element = await page.find('va-sidenav');
-    expect(element).toHaveClass('hydrated');
+    // Set viewport to desktop size
+    await page.setViewport({
+      width: 1024,
+      height: 768
+    });
+
+    await page.setContent('<va-sidenav header="Profile"></va-sidenav>');
+
+    const navMenuHeader = await page.find('va-sidenav >>> .va-sidenav__header');
+    const navMenu = await page.find('va-sidenav >>> nav');
+    const ariaLabel = await navMenu.getAttribute('aria-label');
+
+    expect(navMenuHeader).toEqualText('Profile');
+    expect(ariaLabel).toEqualText('Pages related to Profile');
+
+    // Set viewport to mobile web size
+    await page.setViewport({
+      width: 480,
+      height: 768
+    });
+
+    await page.waitForChanges();
+
+    const sideNavAccordionItem = await page.find('va-sidenav >>> va-accordion-item');
+    const sideNavAccordionHeader = await sideNavAccordionItem.getProperty('header');
+    
+    expect(sideNavAccordionHeader).toEqualText('Profile menu');
+
+    const navElement = await page.find('va-sidenav >>> nav');
+    const ariaLabelMobileWeb = await (await navElement.getAttribute('aria-label'));
+    expect(ariaLabelMobileWeb).toEqualText('Pages related to Profile');
+  });
+
+  it('iconName prop sets the icon with a background color - desktop', async () => {
+    const page = await newE2EPage();
+    // Set viewport to desktop size
+    await page.setViewport({
+      width: 1024,
+      height: 768
+    });
+
+    await page.setContent('<va-sidenav header="Profile" icon-name="account_circle" icon-background-color="vads-color-primary"><va-sidenav-item href="#" label="Personal information"></va-sidenav-item></va-sidenav>');
+
+    const iconBackground = await page.find('va-sidenav >>> .va-sidenav__icon-background');
+    expect(iconBackground).not.toBeNull();
+    
+    // Check the background color style using getAttribute
+    const style = await iconBackground.getComputedStyle();
+    expect(style.backgroundColor).toEqual('rgb(0, 94, 162)'); // vads-color-primary
+
+    const icon = await page.find('va-sidenav >>> va-icon');
+    expect(icon).not.toBeNull();
+    
+    const iconName = await icon.getProperty('icon');
+    expect(iconName).toEqual('account_circle');
+  });
+
+  it('iconName prop displays va-icon and only the "menu" icon displays on mobile web', async () => {
+    const page = await newE2EPage();
+    // Set viewport to mobile size
+    await page.setViewport({
+      width: 480,
+      height: 320
+    });
+
+    await page.setContent('<va-sidenav header="Profile" icon-name="account_circle" icon-background-color="vads-color-primary"><va-sidenav-item href="#" label="Personal information"></va-sidenav-item></va-sidenav>');
+
+    // check that there is only one va-icon element
+    const iconCount = await page.findAll('va-sidenav >>> va-icon');
+    expect(iconCount.length).toEqual(1);
+
+    const icon = await page.find('va-sidenav >>> va-icon');
+    expect(icon).not.toBeNull();
+
+    const iconName = await icon.getProperty('icon');
+    expect(iconName).toEqual('menu');
+  });
+
+  it('sectionName prop is used for aria-label instead of header when set', async () => {
+    const page = await newE2EPage();
+    // Set viewport to desktop size
+    await page.setViewport({
+      width: 1024,
+      height: 768
+    });
+
+    await page.setContent('<va-sidenav header="Profile" section-name="Profile with more details"></va-sidenav>');
+
+    const navElement = await page.find('va-sidenav >>> nav');
+    const ariaLabel = await navElement.getAttribute('aria-label');
+    expect(ariaLabel).toBe('Pages related to Profile with more details');
+
+
+    // Set viewport to mobile web size
+    await page.setViewport({
+      width: 480,
+      height: 768
+    });
+
+    await page.waitForChanges();
+
+    const navElementMobileWeb = await page.find('va-sidenav >>> nav');
+    const ariaLabelMobileWeb = await navElementMobileWeb.getAttribute('aria-label');
+    expect(ariaLabelMobileWeb).toBe('Pages related to Profile with more details');
+  });
+
+  it('mobile web markup displays va-accordion and va-accordion-item', async () => {
+    const page = await newE2EPage();
+    // Set viewport to mobile size
+    await page.setViewport({
+      width: 480,
+      height: 768
+    });
+
+    await page.setContent('<va-sidenav header="Profile" section-name="Profile with more details"></va-sidenav>');
+
+    const accordion = await page.find('va-sidenav >>> va-accordion');
+    const accordionItem = await page.find('va-sidenav >>> va-accordion-item');
+    expect(accordion).not.toBeNull();
+    expect(accordionItem).not.toBeNull();
+  });
+
+  it('sets only one current page', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-sidenav><va-sidenav-item current-page="true"></va-sidenav-item><va-sidenav-item current-page="true"></va-sidenav-item></va-sidenav>');
+
+    const currentPageElements = await page.findAll('[current-page="true"]');
+    expect(currentPageElements.length).toBe(1);
   });
 });
