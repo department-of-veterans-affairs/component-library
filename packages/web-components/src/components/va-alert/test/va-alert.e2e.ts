@@ -201,13 +201,13 @@ describe('va-alert', () => {
   it('should not overwrite status if valid', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert status="continue"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert status="warning"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .usa-alert');
 
     expect(element.classList.contains('usa-alert--info')).toBeFalsy();
-    expect(element.classList.contains('usa-alert--continue')).toBeTruthy();
+    expect(element.classList.contains('usa-alert--warning')).toBeTruthy();
   });
 
   it('renders section markup when full-width prop is active', async () => {
