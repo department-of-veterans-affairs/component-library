@@ -273,7 +273,8 @@ function NativeHandlers({ docsTags = [] }) {
 function CanvasLink() {
   // We're inside an iframe on the Docs page, so we need to get the parent
   // @ts-ignore ignoring "window not found" error
-  const canvasLink = window.parent.location.href.replace('docs', 'story');
+  let canvasLink = window.parent.location.href.replace('docs', 'story');
+  canvasLink = canvasLink.replace('docs', 'default');
   return (
     <p className="component-details">
       Information on this component's accessibility, html output, and how it is
