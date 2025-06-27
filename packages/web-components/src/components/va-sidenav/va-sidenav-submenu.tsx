@@ -46,7 +46,7 @@ export class VaSidenavMenu {
 
   @State() isCurrentPage: boolean = false;
 
-  componentDidLoad() {
+  componentWillLoad() {
     this.checkForCurrentPageItem();
   }
 
@@ -140,12 +140,12 @@ export class VaSidenavMenu {
       'va-sidenav-submenu__link': true
     });
 
-    const href = this.isCurrentPage ? '#content' : this.href;
+    const href = this.currentPage ? '#content' : this.href;
 
     return (
       <nav class={submenuClasses} aria-label={`Pages related to the ${this.label} section`}>
         {this.href ? (
-          <div aria-current={this.isCurrentPage ? 'page' : undefined}>
+          <div class="va-sidenav-submenu__link-wrapper" aria-current={this.currentPage ? 'page' : undefined}>
             <a class={linkClasses} href={href} onClick={this.handleClick.bind(this)}>{this.label}</a>
           </div>
         ) : (

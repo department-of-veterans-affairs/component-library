@@ -45,6 +45,20 @@ describe('va-sidenav-item', () => {
     await page.close();
   });
 
+  it('currentPage href goes to #content', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+        <va-sidenav>
+          <va-sidenav-item href="/profile" label="Profile" current-page="true"></va-sidenav-item>
+        </va-sidenav>`);
+
+    const item = await page.find('va-sidenav-item >>> .va-sidenav__current');
+    const href = await item.getAttribute('href');
+    expect(href).toBe('#content');
+    
+    await page.close();
+  });
+
   it('sends a click event when routerLink is not set', async () => {
     const page = await newE2EPage();
     await page.setContent(`
