@@ -56,6 +56,14 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: PROPOSED,
   },
+
+  'Loader': {
+    guidanceHref: 'loader',
+    guidanceName: 'Loader',
+    maturityCategory: DONT_USE,
+    maturityLevel: PROPOSED,
+  },
+
   // MDX
   'Tag': {
     guidanceHref: 'tag',

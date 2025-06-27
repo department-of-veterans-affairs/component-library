@@ -30,6 +30,7 @@ declare global {
       'va-link': WCTypes.VaLink & IsElement;
       'va-link-action': WCTypes.VaLinkAction & IsElement;
       'va-loading-indicator': WCTypes.VaLoadingIndicator & IsElement;
+      'va-loader': WCTypes.VaLoader & IsElement;
       'va-maintenance-banner': WCTypes.VaMaintenanceBanner & IsElement;
       'va-minimal-footer': WCTypes.VaMinimalFooter & IsElement;
       'va-need-help': WCTypes.VaNeedHelp & IsElement;
