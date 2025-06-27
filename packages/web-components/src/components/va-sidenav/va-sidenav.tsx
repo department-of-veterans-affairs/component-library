@@ -32,7 +32,7 @@ export class VaSidenav {
   @Prop() sectionName?: string;
 
   /**
-   * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. A iconBackgroundColor must be set.
+   * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
    */
   @Prop() iconName?: string;
 

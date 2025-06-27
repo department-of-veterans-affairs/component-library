@@ -31,7 +31,7 @@ export class VaSidenavItem {
 
   /**
    * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router. 
-   * The `href` and `isRouterLink` props must be set.
+   * The `href` and `router-link` props must be set.
    */
   @Event({
     composed: true,

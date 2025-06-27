@@ -1725,7 +1725,7 @@ export namespace Components {
          */
         "iconBackgroundColor"?: string;
         /**
-          * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. A iconBackgroundColor must be set.
+          * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
         /**
@@ -5597,7 +5597,7 @@ declare namespace LocalJSX {
          */
         "iconBackgroundColor"?: string;
         /**
-          * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. A iconBackgroundColor must be set.
+          * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
         /**
@@ -5619,7 +5619,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router.  The `href` and `isRouterLink` props must be set.
+          * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router.  The `href` and `router-link` props must be set.
          */
         "onVaRouteChange"?: (event: VaSidenavItemCustomEvent<{ href: string }>) => void;
         /**
@@ -5641,7 +5641,7 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
-          * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router.  The `href` and `isRouterLink` props must be set.
+          * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router.  The `href` and `router-link` props must be set.
          */
         "onVaRouteChange"?: (event: VaSidenavSubmenuCustomEvent<{ href: string }>) => void;
         /**
