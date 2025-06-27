@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-const loadingIndicatorDocs = getWebComponentDocs('va-loader');
+const loaderDocs = getWebComponentDocs('va-loader');
 
 export default {
   title: 'Components/Loader',
@@ -9,51 +9,53 @@ export default {
   parameters: {
     componentSubtitle: 'va-loader web component',
     docs: {
-      page: () => (
-        <StoryDocs storyDefault={Default} data={loadingIndicatorDocs} />
-      ),
-    },
-    actions: {
-      handles: ['component-library-analytics'],
+      page: () => <StoryDocs storyDefault={Default} data={loaderDocs} />,
     },
   },
 };
 
 const defaultArgs = {
-  'message': 'Loading your application...',
-  'label': 'Loading',
-  'set-focus': false,
-  'enable-analytics': false,
+  'center-label': 'Loading',
+  'loader-role': 'status',
+  'aria-live-region': 'polite',
+  'busy': 'true',
+  'align-left': '0px',
+  'align-top': '0px',
 };
 
 const Template = ({
-  'enable-analytics': enableAnalytics,
-  label,
-  message,
-  'set-focus': setFocus,
+  'center-label': centerLabel,
+  'loader-role': loaderRole,
+  'aria-live-region': ariaLiveRegion,
+  'busy': busy,
+  'align-left': alignLeft,
+  'align-top': alignTop,
 }) => {
-  const [isLoading, setIsLoading] = useState(true);
   return (
     <div>
-      {enableAnalytics && (
-        <button
-          className="vads-u-display--flex vads-u-margin-x--auto"
-          onClick={() => setIsLoading(false)}
-        >
-          Finish loading
-        </button>
-      )}
-      {isLoading && <va-loader />}
+      <va-loader
+        center-label={centerLabel}
+        loader-role={loaderRole}
+        aria-live-region={ariaLiveRegion}
+        busy={busy}
+        align-left={alignLeft}
+        align-top={alignTop}
+      ></va-loader>
     </div>
   );
 };
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(loadingIndicatorDocs);
+Default.argTypes = propStructure(loaderDocs);
 
-export const SetFocus = Template.bind(null);
-SetFocus.args = { ...defaultArgs, 'set-focus': true };
+export const AccessibleLoader = Template.bind(null);
+AccessibleLoader.args = { ...defaultArgs, 'aria-live-region': 'assertive' };
 
-export const EnableAnalytics = Template.bind(null);
-EnableAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+export const CustomPositionLoader = Template.bind(null);
+CustomPositionLoader.args = {
+  ...defaultArgs,
+  'center-label': 'Calculating',
+  'align-left': '-13px',
+  'align-top': '0px',
+};

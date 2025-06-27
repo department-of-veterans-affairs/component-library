@@ -973,8 +973,8 @@ export namespace Components {
     }
     /**
      * @componentName Loader
-     * @maturityCategory review
-     * @maturityLevel development
+     * @maturityCategory don't use
+     * @maturityLevel proposed
      */
     interface VaLoader {
         /**
@@ -2908,8 +2908,8 @@ declare global {
     };
     /**
      * @componentName Loader
-     * @maturityCategory review
-     * @maturityLevel development
+     * @maturityCategory don't use
+     * @maturityLevel proposed
      */
     interface HTMLVaLoaderElement extends Components.VaLoader, HTMLStencilElement {
     }
@@ -4710,8 +4710,8 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Loader
-     * @maturityCategory review
-     * @maturityLevel development
+     * @maturityCategory don't use
+     * @maturityLevel proposed
      */
     interface VaLoader {
         /**
@@ -6334,8 +6334,8 @@ declare module "@stencil/core" {
             "va-link-action": LocalJSX.VaLinkAction & JSXBase.HTMLAttributes<HTMLVaLinkActionElement>;
             /**
              * @componentName Loader
-             * @maturityCategory review
-             * @maturityLevel development
+             * @maturityCategory don't use
+             * @maturityLevel proposed
              */
             "va-loader": LocalJSX.VaLoader & JSXBase.HTMLAttributes<HTMLVaLoaderElement>;
             /**
