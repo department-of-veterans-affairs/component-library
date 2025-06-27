@@ -22,7 +22,7 @@
   text-align: center;
 
   &.selected {
-    a {
+    button {
       border-bottom-color: var(--vads-color-primary);
       color: var(--vads-color-base);
 
@@ -50,35 +50,38 @@
       }
     }
 
-    
+
   }
 
   &.overflow-link {
     position: relative;
-    
-    & > a {
+
+    & > button {
       display: flex;
       align-items: center;
       justify-content: center;
-      
+
 
       va-icon {
         margin-left: 0.5rem;
       }
     }
   }
-  
 
-  a {
+
+  button {
+    background-color: transparent;
+    color: var(--vads-color-primary);
     position: relative;
     display: block;;
     padding: 12px 8px 8px;
+    border: none;
     border-bottom: 4px solid transparent;
 
     &:hover {
       cursor: pointer;
       background: var(--vads-color-base-lightest);
-      border-bottom-color: var(--vads-color-primary);
+      border-bottom-color:  var(--vads-color-primary);
     }
 
     &:focus, &:hover:focus, &:active {
@@ -125,7 +128,7 @@
   min-width: 128px;
 
   &.selected {
-    a {
+    button {
       border-left-color: var(--vads-color-primary);
       color: var(--vads-color-base);
 
@@ -154,7 +157,7 @@
     }
   }
 
-  a {
+  button {
     justify-content: left;
     border-bottom: 0;
     border-left: 4px solid transparent;

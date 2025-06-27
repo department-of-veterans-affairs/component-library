@@ -116,7 +116,7 @@ export class VaTabs {
       this.resetRender = false;
       this.checkForOverflow();
     }
-    
+
   }
 
   /**
@@ -211,7 +211,7 @@ export class VaTabs {
    * @description Toggles the visibility of the overflow menu.
    * @returns {void}
    */
-  private toggleOverflowMenu = () => {
+  private toggleOverflowMenu = (): void => {
     this.overflowMenuVisible = !this.overflowMenuVisible;
   }
 
@@ -290,50 +290,55 @@ export class VaTabs {
 
     return (
       <Host>
-        <nav aria-label={label} class={containerClass}>
-          <ul class={listClass}>
+        <section class={containerClass}>
+          <div role="tablist" aria-label={label} class={listClass}>
             {tabItemsToRenderAsTabs.map((item: TabItem, index: number) => (
               <li class={tabItems.indexOf(item) === selected ? 'va-tabs__tab_item selected' : 'va-tabs__tab_item'}>
-                <a
-                  href={`${item.url}`}
-                  aria-current={index === selected ? 'page' : undefined}
+                <button
+                  role="tab"
+                  aria-selected={index === selected ? 'page' : undefined}
+                  aria-controls={item.url.replace('#', '')}
+                  id={`${item.url}`}
+                  tabIndex={index === selected ? 0 : -1}
                   onClick={(e: MouseEvent) => this.handleClick(e, index)}
                   onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, index)}
                   data-label={item.label}
                 >
                   {item.label}
-                </a>
+                </button>
               </li>
             ))}
             {this.overflowItems.length > 0 && (
               <li class="va-tabs__tab_item overflow-link">
-                <a
-                  href="#"
+                <button
                   aria-haspopup="true"
                   aria-expanded={this.overflowMenuVisible}
                   onClick={() => this.toggleOverflowMenu()}
                 >
                   More ({this.overflowItems.length}) <va-icon icon="expand_more"/>
-                </a>
+                </button>
                 <ul class={`va-tabs__overflow-menu ${this.overflowMenuVisible ? 'visible' : ''}`}>
                   {this.overflowItems.map((item: TabItem) => (
                     <li class={tabItems.indexOf(item) === selected ? 'va-tabs__tab_overflow-item selected' : 'va-tabs__tab_overflow-item'}>
-                      <a
-                        href={`${item.url}`}
+                      <button
+                        role="tab"
+                        aria-selected={tabItems.indexOf(item) === selected ? 'page' : undefined}
+                        aria-controls={item.url.replace('#', '')}
+                        id={`${item.url}`}
+                        tabIndex={tabItems.indexOf(item) === selected ? 0 : -1}
                         onClick={(e: MouseEvent) => {this.handleClick(e, tabItems.indexOf(item)); this.toggleOverflowMenu()}}
-                        aria-current={tabItems.indexOf(item) === selected ? 'page' : undefined}
                         onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, tabItems.indexOf(item))}
                         data-label={item.label}
                       >
                         {item.label}
-                      </a>
+                      </button>
                     </li>
                   ))}
                 </ul>
               </li>
             )}
-          </ul>
-        </nav>
+          </div>
+        </section>
       </Host>
     );
   }
