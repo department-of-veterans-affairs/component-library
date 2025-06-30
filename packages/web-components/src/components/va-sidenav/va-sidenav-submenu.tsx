@@ -46,6 +46,9 @@ export class VaSidenavMenu {
 
   @State() isCurrentPage: boolean = false;
 
+  // Observer for current-page changes on slotted elements
+  private mutationObserver: MutationObserver;
+
   componentWillLoad() {
     if (this.href && this.currentPage) {
       this.isCurrentPage = true;
@@ -58,7 +61,14 @@ export class VaSidenavMenu {
     // before we check for the current page item.
     setTimeout(() => {
       this.checkForCurrentPageItem();
+      this.setupMutationObserver();
     }, 0);
+  }
+
+  disconnectedCallback() {
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect();
+    }
   }
 
   /**
@@ -67,6 +77,42 @@ export class VaSidenavMenu {
   @Listen('slotchange')
   onSlotChange() {
     this.checkForCurrentPageItem();
+
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect();
+      this.setupMutationObserver();
+    }
+  }
+
+  /**
+   * A mutation observer to watch for current-page attribute changes on slotted elements
+   */
+  private setupMutationObserver() {
+    // Create a mutation observer to watch for attribute changes
+    this.mutationObserver = new MutationObserver((mutations) => {
+      // Check if any mutations affected the current-page attribute
+      const shouldUpdate = mutations.some(mutation => 
+        mutation.type === 'attributes' && 
+        mutation.attributeName === 'current-page'
+      );
+      
+      if (shouldUpdate) {
+        this.checkForCurrentPageItem();
+      }
+    });
+
+    const slot = this.el.shadowRoot?.querySelector('slot');
+    if (slot) {
+      const slottedElements = slot.assignedElements();
+      
+      // Observe each slotted element for attribute changes
+      slottedElements.forEach(element => {
+        this.mutationObserver.observe(element, {
+          attributes: true,
+          attributeFilter: ['current-page']
+        });
+      });
+    }
   }
 
   handleClick(e: MouseEvent) {
