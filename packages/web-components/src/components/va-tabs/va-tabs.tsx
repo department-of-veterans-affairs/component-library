@@ -65,6 +65,25 @@ export class VaTabs {
     }
   }
 
+  /**
+   * Watch for changes to the `overflowMenuVisible` property to reset the visible button elements.
+   */
+  @Watch('overflowMenuVisible')
+  handleOverflowMenuVisibilityChange() {
+    // Reset the visible button elements when the overflow menu visibility changes
+    this.resetVisibleButtonElements();
+  }
+
+  /**
+   * Watch for changes to the `overflowItems` property to reset the visible button elements.
+   * This is necessary to ensure that the correct buttons are shown when the overflow items change.
+   */
+  @Watch('overflowItems')
+  handleOverflowItemsChange() {
+    // Reset the overflow menu visibility when overflow items change
+    this.resetVisibleButtonElements();
+  }
+
   @Listen('resize', { target: 'window' })
   handleResize() {
     if (this.debounce !== null) {
@@ -118,7 +137,9 @@ export class VaTabs {
       this.resetRender = false;
       this.checkForOverflow();
     }
+  }
 
+  componentDidLoad() {
     // Ensure that the visible button elements are reset after the component is rendered.
     if (!this.visibleButtonElements || !this.visibleButtonElements.length) {
       this.resetVisibleButtonElements();
@@ -176,14 +197,18 @@ export class VaTabs {
 
   /**
    * @function resetVisibleButtonElements
-   * @description Resets the visible button elements to include only those that are not in the overflow menu.
+   * @description Resets the `visibleButtonElements` state array to reflect the current visible buttons in the tab list.
    * This is called after the component is rendered and when the window is resized to ensure that the visible buttons
    * are correctly identified.
    * @returns {void}
    */
   private resetVisibleButtonElements = (): void => {
-    // Combine the two NodeLists into a single NodeList
-    this.visibleButtonElements = this.el.shadowRoot.querySelectorAll('.va-tabs__list > .va-tabs__tab_item > button:not([aria-haspopup="true"])');
+    // If the overflow menu is visible, we want to show all buttons, including those in the overflow menu. Otherwise, we
+    // only want to show the visible buttons in the tab list.
+    let selectorString = this.overflowMenuVisible ?
+      'button' :
+      '.va-tabs__tab_visible_button, .va-tabs__tab_more_button';
+    this.visibleButtonElements = this.el.shadowRoot.querySelectorAll(selectorString);
   }
 
   /**
@@ -194,7 +219,7 @@ export class VaTabs {
    * @returns {void}
    */
   private handleKeyDown = (event: KeyboardEvent, index: number): void => {
-    let newFocusedIndex = index;;
+    let newFocusedIndex = index;
 
     // Determine if the key pressed is a left or right arrow key
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
@@ -202,8 +227,11 @@ export class VaTabs {
       // Move right
       if (event.key === "ArrowRight") {
         newFocusedIndex++;
+
+        const lastIndex = this.overflowMenuVisible ? this.tabItems.length + 1 : this.visibleButtonElements.length;
+
         // If we're at the end, go to the start
-        if (newFocusedIndex >= this.visibleButtonElements.length) {
+        if (newFocusedIndex >= lastIndex) {
           newFocusedIndex = 0;
         }
         // Move left
@@ -227,6 +255,7 @@ export class VaTabs {
    */
   private toggleOverflowMenu = (): void => {
     this.overflowMenuVisible = !this.overflowMenuVisible;
+    this.resetVisibleButtonElements();
   }
 
   /**
@@ -315,6 +344,7 @@ export class VaTabs {
                   aria-controls={item.url.replace('#', '')}
                   id={`${item.url}`}
                   tabIndex={index === selected ? 0 : -1}
+                  class="va-tabs__tab_visible_button"
                   onClick={(e: MouseEvent) => this.handleClick(e, index)}
                   onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, index)}
                   data-label={item.label}
@@ -330,9 +360,11 @@ export class VaTabs {
                   aria-expanded={this.overflowMenuVisible}
                   onClick={() => this.toggleOverflowMenu()}
                   onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, this.tabItems.length - this.overflowItems.length)}
+                  class="va-tabs__tab_more_button"
                 >
                   More ({this.overflowItems.length}) <va-icon icon="expand_more"/>
                 </button>
+
                 <ul class={`va-tabs__overflow-menu ${this.overflowMenuVisible ? 'visible' : ''}`}>
                   {this.overflowItems.map((item: TabItem) => (
                     <li class={tabItems.indexOf(item) === selected ? 'va-tabs__tab_overflow-item selected' : 'va-tabs__tab_overflow-item'}>
@@ -342,8 +374,11 @@ export class VaTabs {
                         aria-controls={item.url.replace('#', '')}
                         id={`${item.url}`}
                         tabIndex={tabItems.indexOf(item) === selected ? 0 : -1}
-                        onClick={(e: MouseEvent) => {this.handleClick(e, tabItems.indexOf(item)); this.toggleOverflowMenu()}}
-                        onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, tabItems.indexOf(item))}
+                        onClick={(e: MouseEvent) => {
+                          this.handleClick(e, tabItems.indexOf(item));
+                          this.toggleOverflowMenu();
+                        }}
+                        onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, tabItems.indexOf(item) + 1)}
                         data-label={item.label}
                       >
                         {item.label}
