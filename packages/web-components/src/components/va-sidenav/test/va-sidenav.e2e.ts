@@ -121,6 +121,23 @@ describe('va-sidenav', () => {
     await page.close();
   });
 
+  it('displays "Menu" when header is not set on mobile web', async () => {
+    const page = await newE2EPage();
+    // Set viewport to mobile size
+    await page.setViewport({
+      width: 480,
+      height: 320
+    });
+
+    await page.setContent('<va-sidenav></va-sidenav>');
+
+    const accordionItem = await page.find('va-sidenav >>> va-accordion-item');
+    const accordionItemHeader = await accordionItem.getProperty('header');
+    expect(accordionItemHeader).toEqual('Menu');
+    
+    await page.close();
+  });
+
   it('sectionName prop is used for aria-label instead of header when set', async () => {
     const page = await newE2EPage();
     // Set viewport to desktop size

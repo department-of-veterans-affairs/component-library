@@ -101,7 +101,7 @@ export class VaSidenav {
     return (
       <Host>
         <va-accordion open-single>
-          <va-accordion-item bordered header={`${this.header} menu`}>
+          <va-accordion-item bordered header={this.header ? `${this.header} menu` : 'Menu'}>
             <span slot="icon">
               <va-icon icon="menu" />
             </span>
