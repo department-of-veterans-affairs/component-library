@@ -25,12 +25,13 @@ import { TabItem } from './va-tabs.types';
 })
 export class VaTabs {
   @State() visibleButtonElements: NodeListOf<Element> | null = null;
-  @State() overflowItems: Array<TabItem> = [];
-  @State() visibleItems: Array<TabItem> = [];
+  @State() overflowTabs: Array<TabItem> = [];
+  @State() visibleTabs: Array<TabItem> = [];
   @State() windowWidth: number = window.innerWidth;
   @State() overflowMenuVisible: boolean = false;
   private resetRender: boolean = true;
   private debounce: number = null;
+  private formattedTabItems: Array<TabItem> = [];
 
   @Element() el: HTMLElement;
 
@@ -52,7 +53,7 @@ export class VaTabs {
   /**
    * An array of tab item objects, each containing a label and a URL.
    */
-  @Prop({ mutable: true }) tabItems!: TabItem[];
+  @Prop() tabItems!: TabItem[] | string;
 
   /**
    * Watch for changes to the `selected` property and ensure it is within bounds.
@@ -75,11 +76,11 @@ export class VaTabs {
   }
 
   /**
-   * Watch for changes to the `overflowItems` property to reset the visible button elements.
+   * Watch for changes to the `overflowTabs` property to reset the visible button elements.
    * This is necessary to ensure that the correct buttons are shown when the overflow items change.
    */
-  @Watch('overflowItems')
-  handleOverflowItemsChange() {
+  @Watch('overflowTabs')
+  handleOverflowTabsChange() {
     // Reset the overflow menu visibility when overflow items change
     this.resetVisibleButtonElements();
   }
@@ -93,9 +94,9 @@ export class VaTabs {
     this.debounce = window.setTimeout(() => {
       if (window.innerWidth > this.windowWidth) {
         // If the window is resized to be larger, reset the overflow items. Causes re-render.
-        this.overflowItems = [];
-        this.visibleItems = [];
         this.visibleButtonElements = null;
+        this.overflowTabs = [];
+        this.visibleTabs = [];
         this.resetRender = true;
       } else {
         this.checkForOverflow();
@@ -116,19 +117,32 @@ export class VaTabs {
   componentLibraryAnalytics: EventEmitter;
 
   connectedCallback() {
+    if (!Array.isArray(this.tabItems) && typeof this.tabItems === 'string') {
+      try {
+        this.formattedTabItems = JSON.parse(this.tabItems as string) as TabItem[];
+      } catch (e) {
+        return false;
+      }
+    } else {
+      this.formattedTabItems = this.tabItems as TabItem[];
+    }
     // Make sure that the tab panel corresponding to the selected tab is visible
     // when the component is first rendered.
     this.validateSelectedIndex(this.selected);
 
     // With all elements reset to hidden, query DOM for the element with the ID
     // of the clicked tab's URL.
-    const targetId = this.tabItems[this.selected].url.replace('#', '');
-    const targetElement = document.getElementById(targetId);
+    if (this.tabItems.length > 0) {
+      const targetId = this.formattedTabItems[this.selected].url.replace('#', '');
+      const targetElement = document.getElementById(targetId);
 
-    // Remove hidden attribute from the target element if it exists.
-    if (targetElement) {
-      // Ensure the target element is visible by removing any 'hidden' attribute.
-      targetElement.removeAttribute('hidden');
+
+
+      // Remove hidden attribute from the target element if it exists.
+      if (targetElement) {
+        // Ensure the target element is visible by removing any 'hidden' attribute.
+        targetElement.removeAttribute('hidden');
+      }
     }
   }
 
@@ -153,7 +167,7 @@ export class VaTabs {
    */
   private handleClick = (event: Event, clickedIndex: number): void => {
     // Prevent the default anchor behavior in order to prevent the page from
-    // jumping to the anchor link when the tab is clicked.
+    // jumping to the anchor button when the tab is clicked.
     event.preventDefault();
 
     // Fire the component library analytics event if analytics is not disabled.
@@ -175,7 +189,7 @@ export class VaTabs {
     // Reset all tab panel content elements to hidden by iterating over the URLs
     // of the tab items and setting the 'hidden' attribute on each corresponding
     // element.
-    this.tabItems.forEach((item: TabItem) => {
+    this.formattedTabItems.forEach((item: TabItem) => {
       const targetId = item.url.replace('#', '');
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
@@ -185,7 +199,7 @@ export class VaTabs {
 
     // With all elements reset to hidden, query DOM for the element with the ID
     // of the clicked tab's URL.
-    const targetId = this.tabItems[clickedIndex].url.replace('#', '');
+    const targetId = this.formattedTabItems[clickedIndex].url.replace('#', '');
     const targetElement = document.getElementById(targetId);
 
     // Remove hidden attribute from the target element if it exists.
@@ -264,50 +278,54 @@ export class VaTabs {
    * @returns {void}
    */
   private checkForOverflow = (): void => {
-    const container = this.el.shadowRoot.firstElementChild.querySelector('.va-tabs__list');
+    const container = this.el.shadowRoot.firstElementChild?.querySelector('.va-tabs__list');
     if (!container) {
       console.warn('va-tabs: Container for tab items not found.');
       return;
     }
-    const firstRun = this.visibleItems.length === 0;
+    const firstRun = this.visibleTabs.length === 0;
     // Check if the container has overflow
+    
     if (container.scrollWidth > container.clientWidth) {
       const items = Array.from(container.children) as HTMLAnchorElement[];
-      const moreTabWith = (container.querySelector('.va-tabs__tab_item.overflow-link')?.clientWidth + 12) || 0; // 12px margin
+      const moreTabWith = (container.querySelector('.va-tabs__tab_item.overflow')?.clientWidth + 12) || 0; // 12px margin
       const clientWidth = container.clientWidth - moreTabWith;
-      let visibleItems = [], overflowItems = this.overflowItems;
+      let visibleTabs = [], overflowTabs = this.overflowTabs;
       items.forEach((item, index) => {
         let rect = item.getBoundingClientRect();
         if ((rect.x + item.clientWidth + 24)  >  clientWidth) { // 24px for margin
-          if (!overflowItems.includes(this.tabItems[index])) {
-            overflowItems.push(this.tabItems[index]);
+          if (!overflowTabs.includes(this.formattedTabItems[index])) {
+            overflowTabs.push(this.formattedTabItems[index]);
           }
         } else {
-          visibleItems.push(this.tabItems[index]);
+          visibleTabs.push(this.tabItems[index]);
         }
       });
 
-      overflowItems.sort((a,b) => {
-        return this.tabItems.indexOf(a) > this.tabItems.indexOf(b) ? 1 : -1;
+      overflowTabs.sort((a,b) => {
+        return this.formattedTabItems.indexOf(a) > this.formattedTabItems.indexOf(b) ? 1 : -1;
       })
 
-      this.overflowItems = overflowItems;
-      this.visibleItems = visibleItems;
       this.resetVisibleButtonElements();
+      this.overflowTabs = overflowTabs;
+      this.visibleTabs = visibleTabs;
       if (firstRun) {
         // Re-run because the more tab may have been added
         setTimeout(() => {
           this.checkForOverflow();
         })
       }
+    } else {
+      this.visibleTabs = this.formattedTabItems.map(ti => ({ ...ti }));;
+      this.overflowTabs = [];
     }
   }
 
   render() {
-    const {
+    let {
       label,
       selected,
-      tabItems
+      formattedTabItems
     } = this;
 
     const containerClass = classnames({
@@ -317,27 +335,35 @@ export class VaTabs {
     const listClass = classnames({
       'va-tabs__list': true,
     });
-
+    
     // Check to ensure that tabItems is an array and has at least one item with
     // a valid label and URL before rendering
     // TODO: Should we enforce at least two tab items?
     if (
-      !Array.isArray(tabItems) ||
-      tabItems.length === 0 ||
-      !tabItems.some(item => item.label && item.url)
+      !Array.isArray(formattedTabItems) ||
+      formattedTabItems.length === 0 ||
+      !formattedTabItems.some(item => item.label && item.url)
     ) {
       console.error('va-tabs: Invalid tabItems prop: must be an array with at least one item containing a valid label and URL.');
       return null;
     }
 
-    let tabItemsToRenderAsTabs = this.visibleItems.length > 0 ? this.visibleItems : tabItems;
-
+    let tabItemsToRenderAsTabs = this.visibleTabs.length > 0 ? this.visibleTabs : formattedTabItems;
+    function getFormattedTabItemIndex(item: TabItem): number {
+      let matchedIndex;
+      formattedTabItems.forEach((tabItem, index) => {
+        if (tabItem.label === item.label && tabItem.url === item.url) {
+          matchedIndex = index;
+        }
+      });
+      return matchedIndex
+    }
     return (
       <Host>
         <section class={containerClass}>
           <div role="tablist" aria-label={label} class={listClass}>
             {tabItemsToRenderAsTabs.map((item: TabItem, index: number) => (
-              <li class={tabItems.indexOf(item) === selected ? 'va-tabs__tab_item selected' : 'va-tabs__tab_item'}>
+              <li class={getFormattedTabItemIndex(item) === selected ? 'va-tabs__tab_item selected' : 'va-tabs__tab_item'}>
                 <button
                   role="tab"
                   aria-selected={index === selected ? 'page' : undefined}
@@ -353,32 +379,32 @@ export class VaTabs {
                 </button>
               </li>
             ))}
-            {this.overflowItems.length > 0 && (
-              <li class="va-tabs__tab_item overflow-link">
+            {this.overflowTabs.length > 0 && (
+              <li class="va-tabs__tab_item overflow">
                 <button
                   aria-haspopup="true"
                   aria-expanded={this.overflowMenuVisible}
                   onClick={() => this.toggleOverflowMenu()}
-                  onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, this.tabItems.length - this.overflowItems.length)}
+                  onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, this.tabItems.length - this.overflowTabs.length)}
                   class="va-tabs__tab_more_button"
                 >
-                  More ({this.overflowItems.length}) <va-icon icon="expand_more"/>
+                  More ({this.overflowTabs.length}) <va-icon icon="expand_more"/>
                 </button>
 
                 <ul class={`va-tabs__overflow-menu ${this.overflowMenuVisible ? 'visible' : ''}`}>
-                  {this.overflowItems.map((item: TabItem) => (
-                    <li class={tabItems.indexOf(item) === selected ? 'va-tabs__tab_overflow-item selected' : 'va-tabs__tab_overflow-item'}>
+                  {this.overflowTabs.map((item: TabItem) => (
+                    <li class={getFormattedTabItemIndex(item) === selected ? 'va-tabs__tab_overflow-item selected' : 'va-tabs__tab_overflow-item'}>
                       <button
                         role="tab"
-                        aria-selected={tabItems.indexOf(item) === selected ? 'page' : undefined}
+                        aria-selected={getFormattedTabItemIndex(item) === selected ? 'page' : undefined}
                         aria-controls={item.url.replace('#', '')}
                         id={`${item.url}`}
-                        tabIndex={tabItems.indexOf(item) === selected ? 0 : -1}
+                        tabIndex={getFormattedTabItemIndex(item) === selected ? 0 : -1}
                         onClick={(e: MouseEvent) => {
-                          this.handleClick(e, tabItems.indexOf(item));
+                          this.handleClick(e, getFormattedTabItemIndex(item));
                           this.toggleOverflowMenu();
                         }}
-                        onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, tabItems.indexOf(item) + 1)}
+                        onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, getFormattedTabItemIndex(item) + 1)}
                         data-label={item.label}
                       >
                         {item.label}

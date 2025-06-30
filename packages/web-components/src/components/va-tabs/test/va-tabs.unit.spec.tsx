@@ -1,0 +1,80 @@
+import { newSpecPage } from '@stencil/core/testing';
+import { h } from '@stencil/core';
+import { VaTabs } from '../va-tabs';
+
+describe('VaTabs', () => {
+
+  beforeAll(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    (console.warn as jest.Mock).mockRestore();
+    (console.error as jest.Mock).mockRestore();
+  });
+
+  it('should initialize with all tabs visible if there is enough space', async () => {
+    let listItems = [
+      { label: 'Tab 1', url: '#tab1' },
+      { label: 'Tab 2', url: '#tab2' },
+      { label: 'Tab 3', url: '#tab3' },
+      { label: 'Tab 4', url: '#tab4' },
+    ];
+    const page = await newSpecPage({
+      components: [VaTabs],
+      template: () => (<va-tabs tabItems={listItems}></va-tabs>)
+    });
+
+    const vaTabsList = page.body.querySelector('va-tabs').shadowRoot.firstElementChild.querySelector('.va-tabs__list') as HTMLElement;
+    await Object.defineProperty(vaTabsList, 'scrollWidth', { configurable: true, value: 10000 });
+    await Object.defineProperty(vaTabsList, 'clientWidth', { configurable: true, value: 10000 });
+    
+    expect(page.rootInstance.visibleTabs.length).toBe(4);
+    expect(page.rootInstance.overflowTabs.length).toBe(0);
+  });
+
+  it('should move last two tabs to overflow if only two fit', async () => {
+    // Simulate only two tabs fit
+    let listItems = [
+      { label: 'Tab 1', url: '#tab1' },
+      { label: 'Tab 2', url: '#tab2' },
+      { label: 'Tab 3', url: '#tab3' },
+      { label: 'Tab 4', url: '#tab4' },
+    ];
+    const page = await newSpecPage({
+      components: [VaTabs],
+      template: () => (<va-tabs tabItems={listItems}></va-tabs>)
+    });
+
+    const vaTabsList = page.body.querySelector('va-tabs').shadowRoot.firstElementChild.querySelector('.va-tabs__list') as HTMLElement;
+    await Object.defineProperty(vaTabsList, 'scrollWidth', { configurable: true, value: 500 });
+    await Object.defineProperty(vaTabsList, 'clientWidth', { configurable: true, value: 100 });
+    await vaTabsList.querySelectorAll('.va-tabs__tab_item').forEach(async (item: HTMLElement) => { 
+        await Object.defineProperty(item, 'clientWidth', { configurable: true, value: 100 });
+    });
+
+    await page.rootInstance.checkForOverflow();
+    expect(page.rootInstance.visibleTabs.length).toBeLessThan(4);
+    expect(page.rootInstance.overflowTabs.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('should handle when no listItems are provided', async () => {
+    let listItems = [];
+    const page = await newSpecPage({
+      components: [VaTabs],
+      template: () => (<va-tabs tabItems={listItems}></va-tabs>)
+    });
+    expect(page.rootInstance.visibleTabs.length).toBe(0);
+    expect(page.rootInstance.overflowTabs.length).toBe(0);
+  });
+
+  it('should not throw if el is missing', async () => {
+    let listItems = [];
+    const page = await newSpecPage({
+      components: [VaTabs],
+      template: () => (<va-tabs tabItems={listItems}></va-tabs>)
+    });
+    expect(() => page.rootInstance.checkForOverflow()).not.toThrow();
+  });
+});

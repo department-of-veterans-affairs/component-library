@@ -1861,7 +1861,7 @@ export namespace Components {
         /**
           * An array of tab item objects, each containing a label and a URL.
          */
-        "tabItems": TabItem[];
+        "tabItems": TabItem[] | string;
     }
     /**
      * @componentName Telephone
@@ -5757,7 +5757,7 @@ declare namespace LocalJSX {
         /**
           * An array of tab item objects, each containing a label and a URL.
          */
-        "tabItems": TabItem[];
+        "tabItems": TabItem[] | string;
     }
     /**
      * @componentName Telephone
