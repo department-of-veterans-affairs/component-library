@@ -630,7 +630,7 @@ export class VaFileInput {
                             onPrimaryButtonClick={() => this.removeFile(true)}
                             onSecondaryButtonClick={this.closeModal}
                           >
-                            We'll remove the uploaded document{' '}
+                            We'll delete the uploaded file{' '}
                             <span class="file-label">{file ? file.name : uploadedFile.name}</span>
                           </va-modal>
                         </Fragment>
