@@ -34,11 +34,10 @@ describe('va-sidenav-item', () => {
           <va-sidenav-item href="/profile" label="Profile" current-page="true"></va-sidenav-item>
         </va-sidenav>`);
 
-    const item = await page.find('va-sidenav-item >>> .va-sidenav__item');
-    const ariaCurrent = await item.getAttribute('aria-current');
+    const link = await page.find('va-sidenav-item >>> a');
+    const ariaCurrent = await link.getAttribute('aria-current');
     expect(ariaCurrent).toBe('page');
 
-    const link = await item.find('a');
     const linkClasses = await link.getAttribute('class');
     expect(linkClasses).toContain('va-sidenav__current');
     

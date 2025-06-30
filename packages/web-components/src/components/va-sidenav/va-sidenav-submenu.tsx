@@ -1,4 +1,4 @@
-import { Component, h, Element, Prop, State, Listen, Event, EventEmitter } from '@stencil/core';
+import { Component, h, Element, Prop, State, Listen, Event, EventEmitter, Host } from '@stencil/core';
 import classNames from 'classnames';
 
 @Component({
@@ -47,7 +47,18 @@ export class VaSidenavMenu {
   @State() isCurrentPage: boolean = false;
 
   componentWillLoad() {
-    this.checkForCurrentPageItem();
+    if (this.href && this.currentPage) {
+      this.isCurrentPage = true;
+    }
+  }
+
+  componentDidLoad() {
+    // Use setTimeout to resolve a Stencil warning about state changes in the render cycle.
+    // We are using the componentDidLoad lifecycle method to ensure that the slot is fully rendered 
+    // before we check for the current page item.
+    setTimeout(() => {
+      this.checkForCurrentPageItem();
+    }, 0);
   }
 
   /**
@@ -87,7 +98,7 @@ export class VaSidenavMenu {
     const slottedElements = slot?.assignedElements();
 
     // If there is no slot, there are no children to check
-    if (!slot) {
+    if (!slot || !slottedElements || slottedElements.length === 0) {
       this.hasCurrentPageItem = false;
       this.isCurrentPage = isCurrentPage;
       return;
@@ -99,7 +110,7 @@ export class VaSidenavMenu {
       this.isCurrentPage = true;
       
       // Remove current-page attribute from any children
-      slottedElements?.forEach(element => {
+      slottedElements.forEach(element => {
         if (this.isCurrentPageItem(element)) {
           element.removeAttribute('current-page');
         }
@@ -111,16 +122,10 @@ export class VaSidenavMenu {
     // Check if any child items have current-page set
     let hasCurrentPageChild = false;
     
-    // Process children, keeping only the first current-page item
-    slottedElements?.forEach(element => {
+    // Process children
+    slottedElements.forEach(element => {
       if (this.isCurrentPageItem(element)) {
-        if (!hasCurrentPageChild) {
-          // This is the first current page item we found
-          hasCurrentPageChild = true;
-        } else {
-          // We already found a current page item, remove this one
-          element.removeAttribute('current-page');
-        }
+        hasCurrentPageChild = true;
       }
     });
     
@@ -143,16 +148,20 @@ export class VaSidenavMenu {
     const href = this.currentPage ? '#content' : this.href;
 
     return (
-      <nav class={submenuClasses} aria-label={`Pages related to the ${this.label} section`}>
-        {this.href ? (
-          <div class="va-sidenav-submenu__link-wrapper" aria-current={this.currentPage ? 'page' : undefined}>
-            <a class={linkClasses} href={href} onClick={this.handleClick.bind(this)}>{this.label}</a>
-          </div>
-        ) : (
-          <div class="va-sidenav-submenu__label">{this.label}</div>
-        )}
-        <slot></slot>
-      </nav>
+      <Host>
+        <nav class={submenuClasses} aria-label={`Pages related to the ${this.label} section`}>
+          {this.href ? (
+            <a 
+              class={linkClasses} 
+              href={href} 
+              aria-current={this.currentPage ? 'page' : undefined} 
+              onClick={this.handleClick.bind(this)}>{this.label}</a>
+          ) : (
+            <div class="va-sidenav-submenu__label">{this.label}</div>
+          )}
+          <slot></slot>
+        </nav>
+      </Host>
     );
   }
 }

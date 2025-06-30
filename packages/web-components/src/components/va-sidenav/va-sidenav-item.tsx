@@ -1,4 +1,4 @@
-import { Component, h, Prop, Element, Event, EventEmitter } from '@stencil/core';
+import { Component, h, Prop, Element, Event, EventEmitter, Host } from '@stencil/core';
 import classNames from 'classnames';
 
 @Component({
@@ -54,10 +54,14 @@ export class VaSidenavItem {
     const href = this.currentPage ? '#content' : this.href;
     
     return (
-      <div class="va-sidenav__item" aria-current={this.currentPage ? 'page' : undefined}>
-        <a class={anchorClasses} href={href} onClick={this.handleClick.bind(this)}>{this.label}</a>
+      <Host>
+        <a 
+          class={anchorClasses} 
+          href={href} 
+          aria-current={this.currentPage ? 'page' : undefined}
+          onClick={this.handleClick.bind(this)}>{this.label}</a>
         <slot></slot>
-      </div>
+      </Host>
     );
   }
 }
