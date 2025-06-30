@@ -48,7 +48,7 @@ describe('va-search-input', () => {
         <form class="usa-search" role="search">
           <label class="usa-sr-only" for="search-field">Search</label>
           <div class="usa-search__input-wrapper">
-            <input class="usa-input" id="search-field" name="search" type="search" aria-autocomplete="none" aria-label="Search" autocomplete="off">
+            <input class="usa-input" id="search-field" name="search" type="search" aria-label="Search" autocomplete="off">
             <button aria-label="Clear the search contents" class="usa-search__clear-input  usa-search__clear-input_empty" type="button">
               <va-icon class="hydrated usa-search__clear-icon"></va-icon>
             </button>
