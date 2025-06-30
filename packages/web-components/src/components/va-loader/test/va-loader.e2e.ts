@@ -9,11 +9,11 @@ describe('va-loader', () => {
     const element = await page.find('va-loader');
     expect(element).not.toBeNull();
 
-    const loaderDiv = await page.find('va-loader >>> .vacds-loader');
+    const loaderDiv = await page.find('va-loader >>> .va-loader');
     expect(loaderDiv).not.toBeNull();
     expect(await loaderDiv.getAttribute('role')).toBe('status');
 
-    const textDiv = await page.find('va-loader >>> .vacds-loader-text');
+    const textDiv = await page.find('va-loader >>> .va-loader__text');
     const text = await textDiv.getProperty('textContent');
     expect(text).toBe('Loading');
   });
@@ -25,7 +25,7 @@ describe('va-loader', () => {
       `<va-loader center-label="${customLabel}"></va-loader>`,
     );
 
-    const textDiv = await page.find('va-loader >>> .vacds-loader-text');
+    const textDiv = await page.find('va-loader >>> .va-loader__text');
     const text = await textDiv.getProperty('textContent');
     expect(text).toBe(customLabel);
   });
@@ -35,31 +35,36 @@ describe('va-loader', () => {
     await page.setContent('<va-loader></va-loader>');
 
     // Initial state
-    let textDiv = await page.find('va-loader >>> .vacds-loader-text');
+    let textDiv = await page.find('va-loader >>> .va-loader__text');
+    expect(textDiv).not.toBeNull();
     let text = await textDiv.getProperty('textContent');
     expect(text).toBe('Loading');
 
     // Wait for first rotation (250ms)
     await page.waitForTimeout(250);
-    textDiv = await page.find('va-loader >>> .vacds-loader-text');
+    textDiv = await page.find('va-loader >>> .va-loader__text');
+    expect(textDiv).not.toBeNull();
     text = await textDiv.getProperty('textContent');
     expect(text).toBe('Loading.');
 
     // Wait for second rotation (250ms)
     await page.waitForTimeout(250);
-    textDiv = await page.find('va-loader >>> .vacds-loader-text');
+    textDiv = await page.find('va-loader >>> .va-loader__text');
+    expect(textDiv).not.toBeNull();
     text = await textDiv.getProperty('textContent');
     expect(text).toBe('Loading..');
 
     // Wait for third rotation (250ms)
     await page.waitForTimeout(250);
-    textDiv = await page.find('va-loader >>> .vacds-loader-text');
+    textDiv = await page.find('va-loader >>> .va-loader__text');
+    expect(textDiv).not.toBeNull();
     text = await textDiv.getProperty('textContent');
     expect(text).toBe('Loading...');
 
     // Wait for fourth rotation (250ms) - back to initial state
     await page.waitForTimeout(250);
-    textDiv = await page.find('va-loader >>> .vacds-loader-text');
+    textDiv = await page.find('va-loader >>> .va-loader__text');
+    expect(textDiv).not.toBeNull();
     text = await textDiv.getProperty('textContent');
     expect(text).toBe('Loading');
   });
