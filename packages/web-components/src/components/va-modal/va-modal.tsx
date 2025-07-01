@@ -447,15 +447,18 @@ export class VaModal {
       ? `Close ${modalTitle} modal`
       : 'Close modal';
 
-    // Set dynamic attributes for aria-label or aria-labelledby
-    // based on the presence of modalTitle or messageAriaLabelledby. If modalTitle is passed
-    // it should take precedence over messageAriaLabelledby.
+    // Set dynamic attributes for aria-label or aria-labelledby based on the presence of modalTitle or messageAriaLabelledby.
+    // If modalTitle is passed it should take precedence over messageAriaLabelledby. If neither is provided, a warning
+    // will be logged in the console.
     const dynamicAttributes = {};
     if (ariaLabel) {
       dynamicAttributes['aria-label'] = ariaLabel;
     }
     else if (messageAriaLabelledby && !modalTitleExists) {
       dynamicAttributes['aria-labelledby'] = 'label-heading';
+    }
+    else {
+      console.warn('An accessible name for the modal is required. Please provide either a modalTitle or messageAriaLabelledby attribute.');
     }
 
     const wrapperClass = classnames({

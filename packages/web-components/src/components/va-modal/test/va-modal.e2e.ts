@@ -2,6 +2,18 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-modal', () => {
+  let consoleWarnSpy;
+
+  beforeEach(() => {
+    // Spy on console.warn and mock its implementation to prevent it from logging to the actual console
+    consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    // Restore the original console.warn after each test
+    consoleWarnSpy.mockRestore();
+  });
+
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(`
@@ -290,7 +302,7 @@ describe('va-modal', () => {
 
     expect(dialog.getAttribute('aria-labelledby')).toBeNull()
     expect(dialog.getAttribute('aria-label')).toBe('Example Title modal');
-  });
+  })
 
   it('passes an axe check when message-aria-labelledby is set', async () => {
     const page = await newE2EPage();
@@ -305,5 +317,22 @@ describe('va-modal', () => {
     await page.waitForChanges();
 
     await axeCheck(page);
+  });
+
+  it('should log a console warning when modal-title and message-aria-labelledby are not set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal visible>
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    await page.waitForChanges();
+
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      expect.stringContaining('An accessible name for the modal is required. Please provide either a modalTitle or messageAriaLabelledby attribute.')
+    );
   });
 });
