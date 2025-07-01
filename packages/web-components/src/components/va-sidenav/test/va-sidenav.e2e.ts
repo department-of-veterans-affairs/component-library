@@ -195,4 +195,45 @@ describe('va-sidenav', () => {
     
     await page.close();
   });
+
+  it('updates current-page attributes when navigation link is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-sidenav header="Profile" icon-name="account_circle" icon-background-color="vads-color-primary">
+        <va-sidenav-item current-page="true" href="#" label="Personal information"></va-sidenav-item>
+        <va-sidenav-item id="contact-info" href="#" label="Contact information"></va-sidenav-item>
+        <va-sidenav-submenu id="submenu" label="Submenu">
+          <va-sidenav-item id="submenu-item" href="#" label="Submenu item"></va-sidenav-item>
+        </va-sidenav-submenu>
+      </va-sidenav>`);
+    const currentPageElements = await page.findAll('[current-page="true"]');
+    expect(currentPageElements.length).toBe(1);
+
+    const item = await page.find('#contact-info');
+    item.click();
+
+    await page.waitForChanges();
+
+    let currentPageElementsAfterClick = await page.findAll('[current-page="true"]');
+    expect(currentPageElementsAfterClick.length).toBe(1);
+
+    const submenuItem = await page.find('#submenu-item');
+    submenuItem.click();
+
+    await page.waitForChanges();
+
+    currentPageElementsAfterClick = await page.findAll('[current-page="true"]');
+    expect(currentPageElementsAfterClick.length).toBe(1);
+    
+    const submenu = await page.find('#submenu');
+    submenu.setAttribute('href', '#');
+    submenu.click();
+    
+    await page.waitForChanges();
+    
+    currentPageElementsAfterClick = await page.findAll('[current-page="true"]');
+    expect(currentPageElementsAfterClick.length).toBe(1);
+    
+    await page.close();
+  });
 });
