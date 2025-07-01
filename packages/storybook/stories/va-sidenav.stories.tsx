@@ -36,6 +36,7 @@ export default {
   argTypes: {
     'resize': { table: { disable: true } },
     'sideNav': { table: { disable: true } },
+    'id': { table: { disable: true } },
   },
   args: {
     header: 'Profile',
@@ -56,6 +57,7 @@ const Template = (args) => {
     <va-sidenav 
       id={args.id}
       header={args.header}
+      section-name={args['section-name']}
       icon-name={args['icon-name']}
       icon-background-color={args['icon-background-color']}>
       {sideNav.map((item, index) => 
@@ -228,6 +230,7 @@ Default.args = {
   'icon-name': null,
   'icon-background-color': null,
   id: 'default-sidenav',
+  'section-name': 'Default navigation example',
 };
 Default.argTypes = propStructure(sidenavDocs);
 
@@ -250,7 +253,8 @@ sideNavSubmenu.splice(4, 0, {
 WithSubmenu.args = {
   sideNav: sideNavSubmenu,
   id: 'submenu-sidenav',
-};
+  'section-name': null,
+  };
 
 export const WithSubmenuLinked = Template.bind(null);
 const sideNavSubmenuLinked: any[] = [...sideNavBaseline()];
