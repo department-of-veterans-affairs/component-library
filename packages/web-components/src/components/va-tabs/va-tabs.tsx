@@ -24,7 +24,6 @@ import { TabItem } from './va-tabs.types';
   shadow: true,
 })
 export class VaTabs {
-  @State() visibleButtonElements: NodeListOf<Element> | null = null;
   @State() overflowTabs: Array<TabItem> = [];
   @State() visibleTabs: Array<TabItem> = [];
   @State() windowWidth: number = window.innerWidth;
@@ -32,6 +31,7 @@ export class VaTabs {
   private resetRender: boolean = true;
   private debounce: number = null;
   private formattedTabItems: Array<TabItem> = [];
+  private visibleButtonElements: NodeListOf<Element> | null = null;
 
   @Element() el: HTMLElement;
 
@@ -153,11 +153,10 @@ export class VaTabs {
     }
   }
 
-  componentDidLoad() {
-    // Ensure that the visible button elements are reset after the component is rendered.
-    if (!this.visibleButtonElements || !this.visibleButtonElements.length) {
-      this.resetVisibleButtonElements();
-    }
+  componentDidUpdate() {
+    // After the component updates, reset the visible button elements to ensure
+    // that the references to DOM elements are correct in `this.visibleButtonElements`.
+    this.resetVisibleButtonElements();
   }
 
   /**
@@ -284,8 +283,8 @@ export class VaTabs {
       return;
     }
     const firstRun = this.visibleTabs.length === 0;
+
     // Check if the container has overflow
-    
     if (container.scrollWidth > container.clientWidth) {
       const items = Array.from(container.children) as HTMLAnchorElement[];
       const moreTabWith = (container.querySelector('.va-tabs__tab_item.overflow')?.clientWidth + 12) || 0; // 12px margin
@@ -335,7 +334,7 @@ export class VaTabs {
     const listClass = classnames({
       'va-tabs__list': true,
     });
-    
+
     // Check to ensure that tabItems is an array and has at least one item with
     // a valid label and URL before rendering
     // TODO: Should we enforce at least two tab items?
