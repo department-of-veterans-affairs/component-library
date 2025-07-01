@@ -162,8 +162,8 @@ export class VaFileInput {
       //This won't be read if its not in a timeout due to other messages being read.
       setTimeout(() => {this.updateStatusMessage(value)});
   }
-  
-  @Watch('percentUploaded') 
+
+  @Watch('percentUploaded')
     percentHandler(value: number) {
       if (value >= 100) {
         this.resetState();
@@ -171,7 +171,7 @@ export class VaFileInput {
     }
 
   /**
-   * called when file has been uploaded 
+   * called when file has been uploaded
    * or file upload has been cancelled
    * only relevant when percentUploaded specified
    */
@@ -502,7 +502,7 @@ export class VaFileInput {
       : 'selected-files-wrapper';
     const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
 
-    
+
     const showProgBar = percentUploaded !== null && percentUploaded < 100;
 
     let statusClassNames = 'file-status-label'
@@ -630,7 +630,7 @@ export class VaFileInput {
                             onPrimaryButtonClick={() => this.removeFile(true)}
                             onSecondaryButtonClick={this.closeModal}
                           >
-                            We'll remove the uploaded document{' '}
+                            We'll delete the uploaded file{' '}
                             <span class="file-label">{file ? file.name : uploadedFile.name}</span>
                           </va-modal>
                         </Fragment>
