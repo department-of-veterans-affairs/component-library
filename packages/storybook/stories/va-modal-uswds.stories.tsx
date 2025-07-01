@@ -85,7 +85,7 @@ const defaultArgs = {
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
   'secondary-button-text': 'Secondary',
   'forcedModal': false,
-  'messageAriaLabelledby': undefined,
+  'message-aria-labelledby': undefined,
 };
 
 const Template = ({
@@ -101,7 +101,7 @@ const Template = ({
   status,
   visible,
   forcedModal,
-  messageAriaLabelledby,
+  'message-aria-labelledby': messageAriaLabelledby,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
   const wrapRef = useRef(null);
@@ -250,10 +250,14 @@ WithoutButtons.args = {
   'secondary-button-text': undefined,
 };
 
-export const WithoutTitle = Template.bind(null);
-WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
+export const WithoutTitleOrMessageAriaLabelledBy = Template.bind(null);
+WithoutTitleOrMessageAriaLabelledBy.args = {
+  ...defaultArgs,
+  'modal-title': undefined,
+  'message-aria-labelledby': undefined
+};
 
-export const WithoutTitleAndWithAriaLabelledById = ({
+export const WithoutTitleAndWithMessageAriaLabelledBy = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
   large,
