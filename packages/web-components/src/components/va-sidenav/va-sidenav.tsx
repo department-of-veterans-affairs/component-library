@@ -41,6 +41,9 @@ export class VaSidenav {
    */
   @Prop() iconBackgroundColor?: string = 'vads-color-primary';
 
+  // Mutation observer to watch for current-page attribute changes
+  private mutationObserver: MutationObserver;
+
   @Listen('resize', { target: 'window' })
   handleResize() {
     this.isDesktop = window.innerWidth > TABLET_BREAKPOINT;
@@ -51,7 +54,7 @@ export class VaSidenav {
    * Checks for multiple current-page links and sets only the first one found to true.
    */
   setOnlyOneCurrentPage() {
-    const currentPageElements = this.el.querySelectorAll('[current-page]');
+    const currentPageElements = this.el.querySelectorAll('va-sidenav-item[current-page], va-sidenav-submenu[current-page]');
     currentPageElements.forEach((el, index) => {
       if (index > 0) {
         el.setAttribute('current-page', 'false');
@@ -59,8 +62,60 @@ export class VaSidenav {
     });
   }
 
+  /**
+   * Watch for changes to the current-page attribute on any va-sidenav-item or va-sidenav-submenu elements.
+   * When a change is detected, it updates all other elements to have current-page="false"
+   * except the one that triggered the mutation. This ensures only one item is marked as the current-page.
+   */
+  setupCurrentPageObserver() {
+    // Create a new mutation observer
+    this.mutationObserver = new MutationObserver((mutations) => {
+      // Filter for mutations that involve the current-page attribute
+      const currentPageMutations = mutations.filter(mutation => 
+        mutation.type === 'attributes' && 
+        mutation.attributeName === 'current-page'
+      );
+
+      if (currentPageMutations.length > 0) {
+        // Get the element that triggered the mutation
+        const changedElement = currentPageMutations[0].target as Element;
+        const isCurrentPage = changedElement.getAttribute('current-page') === 'true';
+
+        // Only proceed if the element was set to true
+        if (isCurrentPage) {
+          // Get all elements with current-page attribute
+          const allElements = this.el.querySelectorAll('va-sidenav-item[current-page], va-sidenav-submenu[current-page]');
+          
+          // Set current-page="false" for all elements except the one that triggered the mutation
+          allElements.forEach(el => {
+            if (el !== changedElement) {
+              el.setAttribute('current-page', 'false');
+            }
+          });
+        }
+      }
+    });
+
+    // Start observing the sidenav element for attribute changes on its descendants
+    this.mutationObserver.observe(this.el, {
+      attributes: true,
+      attributeFilter: ['current-page'],
+      subtree: true, // Watch all descendants
+    });
+  }
+
   componentWillLoad() {
     this.setOnlyOneCurrentPage();
+  }
+
+  componentDidLoad() {
+    this.setupCurrentPageObserver();
+  }
+
+  disconnectedCallback() {
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect();
+    }
   }
 
   private isDesktop: boolean = window.innerWidth > TABLET_BREAKPOINT;
