@@ -118,7 +118,8 @@ export namespace Components {
         "status"?: | 'info'
     | 'warning'
     | 'error'
-    | 'success';
+    | 'success'
+    | 'continue';
         /**
           * If `true`, the alert will be visible.
          */
@@ -212,7 +213,7 @@ export namespace Components {
         /**
           * The type of the banner. This affects both the icon of the AlertBox and border color / background.
          */
-        "type"?: 'info' | 'warning' | 'error' | 'success';
+        "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
@@ -3703,7 +3704,8 @@ declare namespace LocalJSX {
         "status"?: | 'info'
     | 'warning'
     | 'error'
-    | 'success';
+    | 'success'
+    | 'continue';
         /**
           * If `true`, the alert will be visible.
          */
@@ -3805,7 +3807,7 @@ declare namespace LocalJSX {
         /**
           * The type of the banner. This affects both the icon of the AlertBox and border color / background.
          */
-        "type"?: 'info' | 'warning' | 'error' | 'success';
+        "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
          */

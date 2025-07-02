@@ -51,7 +51,7 @@ export class VaBanner {
   /**
    * The type of the banner. This affects both the icon of the AlertBox and border color / background.
    * */
-  @Prop() type?: 'info' | 'warning' | 'error' | 'success' = 'info';
+  @Prop() type?: 'info' | 'warning' | 'error' | 'success' | 'continue' = 'info';
   /* eslint-enable i18next/no-literal-string */
 
   /**

@@ -37,7 +37,8 @@ export class VaAlert {
     | 'info'
     | 'warning'
     | 'error'
-    | 'success' = 'info';
+    | 'success'
+    | 'continue' = 'info';
 
   /**
    * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
@@ -173,7 +174,7 @@ export class VaAlert {
     /* eslint-disable i18next/no-literal-string */
 
     // Enforce pre-defined statuses
-    const definedStatuses = ['info', 'warning', 'error', 'success'];
+    const definedStatuses = ['info', 'warning', 'error', 'success', 'continue'];
     if (definedStatuses.indexOf(status) === -1) {
       status = 'info';
     }
@@ -182,6 +183,7 @@ export class VaAlert {
     if (!visible) return <div aria-live="polite" />;
 
     const classes = classnames('usa-alert', `usa-alert--${status}`, {
+      'usa-alert--success': status === 'continue',
       'usa-alert--slim': slim && !fullWidth,
     });
 
@@ -197,6 +199,13 @@ export class VaAlert {
           onClick={this.handleAlertBodyClick.bind(this)}
         >
           <div>
+            {status === 'continue' && (
+              <va-icon
+                class="va-alert__lock-icon"
+                icon="lock"
+                size={slim ? 3 : 4}
+              ></va-icon>
+            )}
             {!slim && <slot name="headline"></slot>}
             <slot></slot>
           </div>
