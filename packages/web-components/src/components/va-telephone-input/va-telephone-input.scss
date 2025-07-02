@@ -29,9 +29,10 @@
 
 :host {
   display: block;
+  margin-top: 24px;
 }
 
-va-text-input::part(label), 
+va-text-input::part(label),
 va-combo-box::part(label) {
   margin-top: 0;
 }
@@ -49,12 +50,10 @@ fieldset {
 va-combo-box {
   flex: 1;
   min-width: 216px;
-  max-width: 236px;
 }
 
 va-text-input {
- max-width: 236px;
- flex: 5;
+  width: 20ch;
 }
 
 .va-input-telephone-wrapper {

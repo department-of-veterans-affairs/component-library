@@ -165,7 +165,7 @@ export class VaLink {
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
-      'link--center': iconName || external,
+      'link--center': iconName,
     });
 
     // Active link variant

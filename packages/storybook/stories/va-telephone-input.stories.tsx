@@ -1,16 +1,19 @@
+import { useEffect, useState } from 'react';
+import { VaTelephoneInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
 } from './wc-helpers';
 
-const inputTelephoneDocs = getWebComponentDocs('va-input-telephone');
+VaTelephoneInput.displayName = 'VaLanguageToggle';
+const inputTelephoneDocs = getWebComponentDocs('va-telephone-input');
 
 export default {
-  title: 'Components/Input Telephone',
-  id: 'components/va-input-telephone',
+  title: 'Components/Telephone Input',
+  id: 'components/va-telephone-input',
   parameters: {
-    componentSubtitle: 'va-input-telephone web component',
+    componentSubtitle: 'va-telephone-input web component',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={inputTelephoneDocs} />,
     },
@@ -23,7 +26,9 @@ const defaultArgs = {
   'no-country': false,
   hint: "",
   error: "",
-  required: false
+  required: false,
+  label: "",
+  'show-external-errors': true
 };
 
 const Template = ({
@@ -32,18 +37,20 @@ const Template = ({
   contact,
   country,
   error,
-  header,
-  required
+  label,
+  required,
+  'show-internal-errors': showInternalErrors
 }) => {
   return (
-    <va-input-telephone
+    <va-telephone-input
       hint={hint}
-      header={header}
+      label={label ? label : null}
       country={country}
       contact={contact}
       no-country={noCountry}
       error={error}
       required={required}
+      show-internal-errors={showInternalErrors}
     />
   );
 };
@@ -66,10 +73,10 @@ WithCountry.args = {
   country: "MX"
 }
 
-export const WithCustomHeader = Template.bind(null);
-WithCustomHeader.args = {
+export const WithCustomLabel = Template.bind(null);
+WithCustomLabel.args = {
   ...defaultArgs,
-  header: 'Secondary phone number'
+  label: 'Secondary phone number'
 }
 
 export const WithCustomError = Template.bind(null);
@@ -78,11 +85,22 @@ WithCustomError.args = {
   error: 'This is a custom error message'
 }
 
-export const WithPhoneFormatError = Template.bind(null);
-WithPhoneFormatError.args = {
-  ...defaultArgs,
-  contact: "234"
-}
+
+const WithPhoneFormatTemplate = () => {
+
+  const [err, setErr] = useState('');
+  useEffect(() => {
+    setTimeout(() => {
+      setErr('Enter a United States of America phone number in a valid format, for example, (xxx) xxx-xxxx');
+    }, 100);
+  }, []);
+
+  return (
+    <VaTelephoneInput contact="234" error={err} />
+  );
+};
+
+export const WithPhoneFormatError = WithPhoneFormatTemplate.bind(null);
 
 export const WithHint = Template.bind(null);
 WithHint.args = {
@@ -100,4 +118,12 @@ export const WithNoCountry = Template.bind(null);
 WithNoCountry.args = {
   ...defaultArgs,
   'no-country': true,
+}
+
+export const WithShowInternalErrors = Template.bind(null);
+WithShowInternalErrors.args = {
+  ...defaultArgs,
+  'show-internal-errors': false,
+  hint: 'This component will only show external errors.',
+  error: 'This error is externally passed to the component.'
 }
