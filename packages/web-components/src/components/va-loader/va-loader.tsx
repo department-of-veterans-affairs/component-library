@@ -2,8 +2,8 @@ import { Component, Element, Host, Prop, State, h, Watch } from '@stencil/core';
 
 /**
  * @componentName Loader
- * @maturityCategory don't use
- * @maturityLevel proposed
+ * @maturityCategory caution
+ * @maturityLevel candidate
  */
 
 @Component({
