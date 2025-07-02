@@ -98,7 +98,7 @@ export default {
   },
 };
 
-const Template = args => {
+const Template = (args) => {
   return (
     <va-accordion
       open-single={args['open-single'] ? args['open-single'] : undefined}
@@ -111,6 +111,7 @@ const Template = args => {
     >
       {args.accordionItems.map(accordion => (
         <va-accordion-item
+          key={accordion.id}
           id={accordion.id}
           header={args.itemsHeadlineSlot ? undefined : accordion.header}
           bordered={args.bordered}
@@ -152,7 +153,7 @@ const I18nTemplate = args => {
         <va-button onClick={e => setLang('en')} text="English" />
         <va-button onClick={e => setLang('tl')} text="Tagalog" />
       </div>
-      <Template {...args} />
+      {Template(args)}
     </>
   );
 };
