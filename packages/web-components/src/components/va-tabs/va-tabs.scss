@@ -111,11 +111,12 @@
 
 .va-tabs__overflow-menu {
   position: absolute;
-  right: 0;
   border: 1px solid var(--vads-color-base-dark);
   list-style: none;
   padding-inline-start: 0;
   visibility: hidden;
+  margin-block: 0;
+  background-color: var(--vads-color-white);
 
   &.visible {
     visibility: visible;
@@ -123,6 +124,7 @@
 
 }
 
+/*
 .va-tabs__tab_overflow-item {
   text-align: left;
   min-width: 128px;
@@ -161,6 +163,8 @@
     justify-content: left;
     border-bottom: 0;
     border-left: 4px solid transparent;
+    width: 100%;
+    text-align: left;
 
     &:hover {
       cursor: pointer;
@@ -176,3 +180,4 @@
     }
   }
 }
+*/

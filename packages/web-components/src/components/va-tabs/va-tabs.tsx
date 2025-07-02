@@ -4,9 +4,9 @@ import {
   Event,
   EventEmitter,
   Host,
-  Listen,
+  //Listen,
   Prop,
-  State,
+  //State,
   Watch,
   h,
 } from '@stencil/core';
@@ -24,14 +24,17 @@ import { TabItem } from './va-tabs.types';
   shadow: true,
 })
 export class VaTabs {
+  /*
+  @State() visibleButtonElements: NodeListOf<Element> | null = null;
   @State() overflowTabs: Array<TabItem> = [];
   @State() visibleTabs: Array<TabItem> = [];
   @State() windowWidth: number = window.innerWidth;
   @State() overflowMenuVisible: boolean = false;
   private resetRender: boolean = true;
-  private debounce: number = null;
+  private debounce: number = null;*/
   private formattedTabItems: Array<TabItem> = [];
-  private visibleButtonElements: NodeListOf<Element> | null = null;
+  //private visibleButtonElements: NodeListOf<Element> | null = null;
+  
 
   @Element() el: HTMLElement;
 
@@ -66,45 +69,47 @@ export class VaTabs {
     }
   }
 
-  /**
+  
+  /*
    * Watch for changes to the `overflowMenuVisible` property to reset the visible button elements.
    */
-  @Watch('overflowMenuVisible')
-  handleOverflowMenuVisibilityChange() {
-    // Reset the visible button elements when the overflow menu visibility changes
-    this.resetVisibleButtonElements();
-  }
+  // @Watch('overflowMenuVisible')
+  // handleOverflowMenuVisibilityChange() {
+  //   // Reset the visible button elements when the overflow menu visibility changes
+  //   this.resetVisibleButtonElements();
+  // }
 
-  /**
+  /*
    * Watch for changes to the `overflowTabs` property to reset the visible button elements.
    * This is necessary to ensure that the correct buttons are shown when the overflow items change.
    */
-  @Watch('overflowTabs')
-  handleOverflowTabsChange() {
-    // Reset the overflow menu visibility when overflow items change
-    this.resetVisibleButtonElements();
-  }
+  // @Watch('overflowTabs')
+  // handleOverflowTabsChange() {
+  //   // Reset the overflow menu visibility when overflow items change
+  //   this.resetVisibleButtonElements();
+  // }
 
-  @Listen('resize', { target: 'window' })
-  handleResize() {
-    if (this.debounce !== null) {
-      clearTimeout(this.debounce);
-      this.debounce = null;
-    }
-    this.debounce = window.setTimeout(() => {
-      if (window.innerWidth > this.windowWidth) {
-        // If the window is resized to be larger, reset the overflow items. Causes re-render.
-        this.visibleButtonElements = null;
-        this.overflowTabs = [];
-        this.visibleTabs = [];
-        this.resetRender = true;
-      } else {
-        this.checkForOverflow();
-      }
-      this.windowWidth = window.innerWidth;
-      this.debounce = null;
-    }, 100);
-  }
+  // @Listen('resize', { target: 'window' })
+  // handleResize() {
+  //   if (this.debounce !== null) {
+  //     clearTimeout(this.debounce);
+  //     this.debounce = null;
+  //   }
+  //   this.debounce = window.setTimeout(() => {
+  //     if (window.innerWidth > this.windowWidth) {
+  //       // If the window is resized to be larger, reset the overflow items. Causes re-render.
+  //       this.visibleButtonElements = null;
+  //       this.overflowTabs = [];
+  //       this.visibleTabs = [];
+  //       this.resetRender = true;
+  //     } else {
+  //       this.checkForOverflow();
+  //     }
+  //     this.windowWidth = window.innerWidth;
+  //     this.debounce = null;
+  //   }, 100);
+  // }
+  
 
   /**
    * The event used to track usage of the component.
@@ -146,18 +151,21 @@ export class VaTabs {
     }
   }
 
+  /*
   componentDidRender() {
     if (this.resetRender) {
       this.resetRender = false;
       this.checkForOverflow();
     }
   }
+    
 
   componentDidUpdate() {
     // After the component updates, reset the visible button elements to ensure
     // that the references to DOM elements are correct in `this.visibleButtonElements`.
     this.resetVisibleButtonElements();
   }
+    */
 
   /**
    * @function handleClick
@@ -215,14 +223,14 @@ export class VaTabs {
    * are correctly identified.
    * @returns {void}
    */
-  private resetVisibleButtonElements = (): void => {
+ /// private resetVisibleButtonElements = (): void => {
     // If the overflow menu is visible, we want to show all buttons, including those in the overflow menu. Otherwise, we
     // only want to show the visible buttons in the tab list.
-    let selectorString = this.overflowMenuVisible ?
-      'button' :
-      '.va-tabs__tab_visible_button, .va-tabs__tab_more_button';
-    this.visibleButtonElements = this.el.shadowRoot.querySelectorAll(selectorString);
-  }
+ //   let selectorString = this.overflowMenuVisible ?
+ //     'button' :
+ //     '.va-tabs__tab_visible_button, .va-tabs__tab_more_button';
+ //   this.visibleButtonElements = this.el.shadowRoot.querySelectorAll(selectorString);
+ // }
 
   /**
    * @function handleKeyDown
@@ -233,16 +241,16 @@ export class VaTabs {
    */
   private handleKeyDown = (event: KeyboardEvent, index: number): void => {
     let newFocusedIndex = index;
-
+    let visibleButtonElements = this.el.shadowRoot.querySelectorAll('.va-tabs__tab_visible_button, .va-tabs__tab_more_button');
     // Determine if the key pressed is a left or right arrow key
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
-      this.visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "-1");
+      visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "-1");
       // Move right
       if (event.key === "ArrowRight") {
         newFocusedIndex++;
 
-        const lastIndex = this.overflowMenuVisible ? this.tabItems.length + 1 : this.visibleButtonElements.length;
-
+        //const lastIndex = this.overflowMenuVisible ? this.tabItems.length + 1 : this.visibleButtonElements.length;
+        const lastIndex = this.formattedTabItems.length;
         // If we're at the end, go to the start
         if (newFocusedIndex >= lastIndex) {
           newFocusedIndex = 0;
@@ -252,12 +260,12 @@ export class VaTabs {
         newFocusedIndex--;
         // If we're at the start, move to the end
         if (newFocusedIndex < 0) {
-          newFocusedIndex = this.visibleButtonElements.length - 1;
+          newFocusedIndex = visibleButtonElements.length - 1;
         }
       }
 
-      this.visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "0");
-      (this.visibleButtonElements[newFocusedIndex] as HTMLElement).focus();
+      visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "0");
+      (visibleButtonElements[newFocusedIndex] as HTMLElement).focus();
     }
   }
 
@@ -266,17 +274,17 @@ export class VaTabs {
    * @description Toggles the visibility of the overflow menu.
    * @returns {void}
    */
-  private toggleOverflowMenu = (): void => {
+  /*private toggleOverflowMenu = (): void => {
     this.overflowMenuVisible = !this.overflowMenuVisible;
     this.resetVisibleButtonElements();
-  }
+  }*/
 
   /**
    * @function checkForOverflow
    * @description Checks if the tab items overflow the container and updates the visible and overflow items accordingly.
    * @returns {void}
    */
-  private checkForOverflow = (): void => {
+  /*private checkForOverflow = (): void => {
     const container = this.el.shadowRoot.firstElementChild?.querySelector('.va-tabs__list');
     if (!container) {
       console.warn('va-tabs: Container for tab items not found.');
@@ -318,7 +326,7 @@ export class VaTabs {
       this.visibleTabs = this.formattedTabItems.map(ti => ({ ...ti }));;
       this.overflowTabs = [];
     }
-  }
+  }*/
 
   render() {
     let {
@@ -347,8 +355,8 @@ export class VaTabs {
       return null;
     }
 
-    let tabItemsToRenderAsTabs = this.visibleTabs.length > 0 ? this.visibleTabs : formattedTabItems;
-    function getFormattedTabItemIndex(item: TabItem): number {
+    //let tabItemsToRenderAsTabs = this.visibleTabs.length > 0 ? this.visibleTabs : formattedTabItems;
+    /*function getFormattedTabItemIndex(item: TabItem): number {
       let matchedIndex;
       formattedTabItems.forEach((tabItem, index) => {
         if (tabItem.label === item.label && tabItem.url === item.url) {
@@ -356,13 +364,13 @@ export class VaTabs {
         }
       });
       return matchedIndex
-    }
+    }*/
     return (
       <Host>
         <section class={containerClass}>
           <div role="tablist" aria-label={label} class={listClass}>
-            {tabItemsToRenderAsTabs.map((item: TabItem, index: number) => (
-              <li class={getFormattedTabItemIndex(item) === selected ? 'va-tabs__tab_item selected' : 'va-tabs__tab_item'}>
+            {formattedTabItems.map((item: TabItem, index: number) => (
+              <li class={index === selected ? 'va-tabs__tab_item selected' : 'va-tabs__tab_item'}>
                 <button
                   role="tab"
                   aria-selected={index === selected ? 'page' : undefined}
@@ -378,41 +386,45 @@ export class VaTabs {
                 </button>
               </li>
             ))}
-            {this.overflowTabs.length > 0 && (
-              <li class="va-tabs__tab_item overflow">
-                <button
-                  aria-haspopup="true"
-                  aria-expanded={this.overflowMenuVisible}
-                  onClick={() => this.toggleOverflowMenu()}
-                  onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, this.tabItems.length - this.overflowTabs.length)}
-                  class="va-tabs__tab_more_button"
-                >
-                  More ({this.overflowTabs.length}) <va-icon icon="expand_more"/>
-                </button>
-
-                <ul class={`va-tabs__overflow-menu ${this.overflowMenuVisible ? 'visible' : ''}`}>
-                  {this.overflowTabs.map((item: TabItem) => (
-                    <li class={getFormattedTabItemIndex(item) === selected ? 'va-tabs__tab_overflow-item selected' : 'va-tabs__tab_overflow-item'}>
-                      <button
-                        role="tab"
-                        aria-selected={getFormattedTabItemIndex(item) === selected ? 'page' : undefined}
-                        aria-controls={item.url.replace('#', '')}
-                        id={`${item.url}`}
-                        tabIndex={getFormattedTabItemIndex(item) === selected ? 0 : -1}
-                        onClick={(e: MouseEvent) => {
-                          this.handleClick(e, getFormattedTabItemIndex(item));
-                          this.toggleOverflowMenu();
-                        }}
-                        onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, getFormattedTabItemIndex(item) + 1)}
-                        data-label={item.label}
-                      >
-                        {item.label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            )}
+            {/*
+              The overflow menu code below is commented out for now. To restore, replace `{false && (...)}` with the code block.
+              {false && (
+                this.overflowTabs.length > 0 && (
+                  <li class="va-tabs__tab_item overflow">
+                    <button
+                      aria-haspopup="true"
+                      aria-expanded={this.overflowMenuVisible}
+                      onClick={() => this.toggleOverflowMenu()}
+                      onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, this.tabItems.length - this.overflowTabs.length)}
+                      class="va-tabs__tab_more_button"
+                    >
+                      More ({this.overflowTabs.length}) <va-icon icon="expand_more"/>
+                    </button>
+                    <ul class={`va-tabs__overflow-menu ${this.overflowMenuVisible ? 'visible' : ''}`}>
+                      {this.overflowTabs.map((item: TabItem) => (
+                        <li class={getFormattedTabItemIndex(item) === selected ? 'va-tabs__tab_overflow-item selected' : 'va-tabs__tab_overflow-item'}>
+                          <button
+                            role="tab"
+                            aria-selected={getFormattedTabItemIndex(item) === selected ? 'page' : undefined}
+                            aria-controls={item.url.replace('#', '')}
+                            id={`${item.url}`}
+                            tabIndex={getFormattedTabItemIndex(item) === selected ? 0 : -1}
+                            onClick={(e: MouseEvent) => {
+                              this.handleClick(e, getFormattedTabItemIndex(item));
+                              this.toggleOverflowMenu();
+                            }}
+                            onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, getFormattedTabItemIndex(item) + 1)}
+                            data-label={item.label}
+                          >
+                            {item.label}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                )
+              )}
+            */}
           </div>
         </section>
       </Host>

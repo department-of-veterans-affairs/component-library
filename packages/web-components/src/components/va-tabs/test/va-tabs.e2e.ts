@@ -16,19 +16,6 @@ describe('va-tabs', () => {
     expect(el).not.toBeNull();
   });
 
-  it('shows overflow dropdown when tabs exceed width', async () => {
-    const page = await newE2EPage({
-      html: `<va-tabs tab-items='${tabItems}'></va-tabs>`
-    });
-    await page.setViewport({ width: 100, height: 600 });
-    await page.waitForChanges();
-    
-    const moreTrigger = await page.find('va-tabs >>> .va-tabs__tab_item.overflow');
-    expect(moreTrigger).not.toBeNull();
-    const dropdown = await page.find('va-tabs >>> .va-tabs__overflow-menu');
-    expect(dropdown).not.toBeNull();
-  });
-
   it('selects tab and shows correct panel', async () => {
     const page = await newE2EPage({
       html: `<va-tabs tab-items='${tabItems}'></va-tabs>`
