@@ -454,7 +454,7 @@ export class VaSearchInput {
      * a combobox. Used in determining what attributes should exist or be omitted on search input.
      */
     const isCombobox = formattedSuggestions.length;
-    const ariaAutoComplete = isCombobox ? 'list' : 'none';
+    const ariaAutoComplete = isCombobox ? 'list' : undefined;
     /* eslint-disable-next-line i18next/no-literal-string */
     const ariaControls = isCombobox ? 'va-search-listbox' : undefined;
     /**
