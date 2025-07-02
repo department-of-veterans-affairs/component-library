@@ -27,7 +27,7 @@
 .va-loader__text span {
   color: var(--vads-color-primary-dark);
   font-size: 1.25rem;
-  position: fixed;
+  position: absolute;
   width: 8rem;
   overflow-wrap: break-word;
 }
