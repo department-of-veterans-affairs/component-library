@@ -12,7 +12,7 @@ This directory contains examples of how to integrate the VA Design System into d
 
 The icons sprite sheet must be loaded from the same origin as your application. By default, the icon sprite sheet is loaded inside of the components from the `/img/sprite.svg` path.
 
-The sprite sheet is included in the `@department-of-veterans-affairs/component-library` package at `/dist/img/sprite.svg`. We recommend adding that file to your porject as part of your build process to ensure you're receiving the most recent version of the sprite sheet and that it's available at the correct path.
+The sprite sheet is included in the `@department-of-veterans-affairs/component-library` package at `/dist/img/sprite.svg`. We recommend adding that file to your project as part of your build process to ensure you're receiving the most recent version of the sprite sheet and that it's available at the correct path.
 
 If you need to override the default sprite sheet path from `/img/sprite.svg` to a different path, you can do so by setting `initIconSpriteLocation` as part of the component library initialization:
 

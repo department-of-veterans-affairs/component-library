@@ -32,8 +32,6 @@ export const initVAComponents = () => {
   defineCustomElementVaMinimalFooter();
   defineCustomElementVaLink();
   defineCustomElementVaBreadcrumbs();
-  // Add more component definitions as needed
-  console.log('VA Component Library components initialized');
 };
 
 // Auto-initialize when this module is loaded
