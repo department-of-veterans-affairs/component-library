@@ -20,7 +20,7 @@ export class VaSidenavMenu {
   @Prop() href?: string;
 
   /**
-   * Identifies when the item is the current page. The current page link have the `#content` hash on the `href`.
+   * Identifies when the item is the current page. The current page link will have `#content` on the `href`.
    */
   @Prop() currentPage?: boolean;
 
@@ -85,7 +85,8 @@ export class VaSidenavMenu {
   }
 
   /**
-   * A mutation observer to watch for current-page attribute changes on slotted elements
+   * Watch the current-page attribute for changes on slotted elements 
+   * so that we can update the submenu state for displaying the submenu style.
    */
   private setupMutationObserver() {
     // Create a mutation observer to watch for attribute changes
@@ -101,6 +102,13 @@ export class VaSidenavMenu {
       }
     });
 
+    // Watch the submenu element itself for current-page attribute changes
+    this.mutationObserver.observe(this.el, {
+      attributes: true,
+      attributeFilter: ['current-page']
+    });
+
+    // Also watch all slotted elements
     const slot = this.el.shadowRoot?.querySelector('slot');
     if (slot) {
       const slottedElements = slot.assignedElements();

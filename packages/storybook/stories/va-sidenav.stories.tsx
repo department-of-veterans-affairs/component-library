@@ -7,32 +7,8 @@ const sidenavDocs = getWebComponentDocs('va-sidenav');
 const sidenavItemDocs = getWebComponentDocs('va-sidenav-item');
 const sidenavSubmenuDocs = getWebComponentDocs('va-sidenav-submenu');
 
-// Helper function to add key prop to web components
+// Helper function to add key prop to web components for React
 const withKey = (key: string, props: any = {}) => ({ ...props, key } as any);
-
-const sideNavDefault = [
-  {
-    href: '#',
-    label: 'Personal information',
-  },
-  {
-    href: '#',
-    label: 'Contact information',
-  },
-  {
-    href: '#',
-    label: 'Personal health care contacts',
-    'current-page': true,
-  },
-  {
-    href: '#',
-    label: 'Military service',
-  },
-  {
-    href: '#',
-    label: 'Direct deposit information',
-  },
-];
 
 export default {
   title: 'Components/Side Navigation',
@@ -43,7 +19,7 @@ export default {
     'va-sidenav-submenu': {
       ...componentStructure(sidenavSubmenuDocs)[sidenavSubmenuDocs.tag],
       argTypes: {
-        slotchange: { table: { disable: true } }, // not working atm
+        slotchange: { table: { disable: true } }, // not working atm :/
       }
     },
   },
@@ -60,9 +36,9 @@ export default {
   argTypes: {
     'resize': { table: { disable: true } },
     'sideNav': { table: { disable: true } },
+    'id': { table: { disable: true } },
   },
   args: {
-    sideNav: sideNavDefault,
     header: 'Profile',
     'icon-name': 'account_circle',
     'icon-background-color': 'vads-color-primary',
@@ -73,20 +49,15 @@ const Template = (args) => {
   const { sideNav } = args;
 
   const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    // update the target element to have current-page="true"
+    e.preventDefault(); // stopping the link from navigating just for Storybook
     e.currentTarget.setAttribute('current-page', 'true');
-    // update all other elements to have current-page="false"
-    document.querySelectorAll('va-sidenav-item').forEach((item) => {
-      if (item !== e.currentTarget) {
-        item.setAttribute('current-page', 'false');
-      }
-    });
   }
 
   return (
     <va-sidenav 
+      id={args.id}
       header={args.header}
+      section-name={args['section-name']}
       icon-name={args['icon-name']}
       icon-background-color={args['icon-background-color']}>
       {sideNav.map((item, index) => 
@@ -94,13 +65,14 @@ const Template = (args) => {
           <va-sidenav-submenu 
             {...withKey(`item-${index}`)} 
             label={item.label} 
-            href={item.href}>
+            href={item.href} 
+            onClick={ (e) => handleClick(e)}>
             {item.submenu.map((submenuItem, submenuIndex) => 
               <va-sidenav-item 
                 {...withKey(`item-${index}-${submenuIndex}`)} 
                 href={submenuItem.href} 
                 label={submenuItem.label} 
-                onClick={handleClick}>
+                onClick={ (e) => handleClick(e)}>
               </va-sidenav-item>
             )}
           </va-sidenav-submenu>
@@ -110,7 +82,7 @@ const Template = (args) => {
             current-page={item['current-page']} 
             href={item.href} 
             label={item.label} 
-            onClick={handleClick}
+            onClick={ (e) => handleClick(e)}
           ></va-sidenav-item>
         )
       )}
@@ -121,17 +93,11 @@ const Template = (args) => {
 const WithRouterTemplate = (args) => {
 
   const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // stopping the link from navigating just for Storybook
     e.currentTarget.setAttribute('current-page', 'true');
-    document.querySelectorAll('#router-sidenav va-sidenav-item').forEach((item) => {
-      if (item !== e.currentTarget) {
-        item.setAttribute('current-page', 'false');
-      }
-    });
   }
 
   const handleRouteChange = (e: CustomEvent) => {
-    console.log('route change', e.detail);
     document.getElementById('route-change-message').textContent = `Route changed to ${e.detail.href}`;
   }
 
@@ -150,6 +116,8 @@ const WithRouterTemplate = (args) => {
           import React from 'react';
           <br />
           import &#x7b; useHistory &#x7d; from 'react-router-dom';
+          <br />
+          import VaSidenavItem from '@department-of-veterans-affairs/web-components/react-bindings';
           <br />
           <br />
           const YourComponent &#61; (&#x7b;&#x7d;) &#61;&#62; &#x7b;
@@ -202,102 +170,120 @@ const WithRouterTemplate = (args) => {
           href="/contact-info" 
           label="Contact information"
           router-link={true}
-          onClick={handleClick}
+          onClick={(e) => handleClick(e)}
           onVaRouteChange={handleRouteChange}></VaSidenavItem>
         <VaSidenavItem
           href="/personal-info" 
           label="Personal information" 
           router-link={true}
-          onClick={handleClick}
+          onClick={(e) => handleClick(e)}
           onVaRouteChange={handleRouteChange}></VaSidenavItem>
         <VaSidenavItem
           href="/military-service" 
           label="Military service" 
           router-link={true}
-          onClick={handleClick}
+          onClick={(e) => handleClick(e)}
           onVaRouteChange={handleRouteChange}></VaSidenavItem>
       </va-sidenav>
     </div>
   ) 
 }
 
-const sideNavSubmenu = [
-  {
-    href: '#',
-    label: 'Personal information',
-  },
-  {
-    href: '#',
-    label: 'Contact information',
-  },
-  {
-    href: '#',
-    label: 'Personal health care contacts',
-  },
-  {
-    href: '#',
-    label: 'Military service',
-    'current-page': true,
-  },
-  {
-    href: '#',
-    label: 'Direct deposit information',
-  },
-  {
-    isSubmenu: true,
-    label: 'Communication settings',
-    submenu: [
-      {
-        href: '#',
-        label: 'Notification settings',
-      },
-      {
-        href: '#',
-        label: 'Paperless delivery',
-      },
-    ],
-  },
-  {
-    href: '#',
-    label: 'Account security',
-  },
-  {
-    href: '#',
-    label: 'Connected apps',
-  }
-];
+function sideNavBaseline() {
+  return [
+    {
+      href: '#',
+      label: 'Personal information',
+    },
+    {
+      href: '#',
+      label: 'Contact information',
+    },
+    {
+      href: '#',
+      label: 'Personal health care contacts',
+      'current-page': true,
+    },
+    {
+      href: '#',
+      label: 'Military service',
+    },
+    {
+      href: '#',
+      label: 'Direct deposit information',
+    },
+    {
+      href: '#',
+      label: 'Account security',
+    },
+    {
+      href: '#',
+      label: 'Connected apps',
+    }
+  ];
+}
 
 export const Default = Template.bind(null);
 Default.args = {
-  sideNav: sideNavDefault,
+  sideNav: sideNavBaseline(),
   header: null,
   'icon-name': null,
   'icon-background-color': null,
+  id: 'default-sidenav',
+  'section-name': 'Default navigation example',
 };
 Default.argTypes = propStructure(sidenavDocs);
 
 export const WithSubmenu = Template.bind(null);
+const sideNavSubmenu: any[] = [...sideNavBaseline()];
+sideNavSubmenu.splice(4, 0, {
+  isSubmenu: true,
+  label: 'Communication settings',
+  submenu: [
+    {
+      href: '#',
+      label: 'Notification settings',
+    },
+    {
+      href: '#',
+      label: 'Paperless delivery',
+    },
+  ],
+});
 WithSubmenu.args = {
   sideNav: sideNavSubmenu,
+  id: 'submenu-sidenav',
+  'section-name': null,
+  };
+
+export const WithSubmenuLinked = Template.bind(null);
+const sideNavSubmenuLinked: any[] = [...sideNavBaseline()];
+sideNavSubmenuLinked.splice(4, 0, {
+  isSubmenu: true,
+  label: 'Communication settings',
+  href: '#',
+  submenu: [
+    {
+      href: '#',
+      label: 'Notification settings',
+    },
+    {
+      href: '#',
+      label: 'Paperless delivery',
+    },
+  ],
+  id: 'submenu-linked-sidenav',
+});
+WithSubmenuLinked.args = {
+  sideNav: sideNavSubmenuLinked,
 };
-
-// export const WithSubmenuLinked = Template.bind(null);
-// const sideNavSubmenuLinked = sideNavSubmenu.map((item) => {
-//   return {
-//     ...item,
-//     ...(item.isSubmenu ? { href: '#' } : item)
-//   };
-// });
-
-// WithSubmenuLinked.args = {
-//   sideNav: sideNavSubmenuLinked,
-// };
 
 export const WithRouterLinkSupport = WithRouterTemplate.bind(null);
 WithRouterLinkSupport.args = {
   header: "Router link example",
   'icon-name': 'lightbulb',
   'icon-background-color': 'vads-color-primary-darker',
-  sideNav: sideNavDefault,
+  sideNav: sideNavBaseline(),
+  id: 'router-link-sidenav',
 };
 WithRouterLinkSupport.argTypes = propStructure(sidenavDocs);
