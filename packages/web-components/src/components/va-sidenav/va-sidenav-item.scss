@@ -22,10 +22,8 @@ a {
    &:focus {
       background-color: var(--vads-color-action-focus-on-light);
       color: var(--vads-color-base);
-      box-shadow: inset 0px -4px 0px var(--vads-color-base);
-      &::after {
-        bottom: 0;
-      }
+      box-shadow: inset 0px -4px 0px var(--vads-color-base);  
+      z-index: 1;
     }
 }
 
