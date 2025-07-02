@@ -216,7 +216,16 @@ export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
-Default.argTypes = propStructure(alertDocs);
+Default.argTypes = {
+  ...propStructure(alertDocs),
+   'status': {
+    description: 'Determines the icon and background color. `info`, `error`, `success`, or `warning`',
+    table: { 
+      category: 'Properties',
+      defaultValue: { summary: 'info' },
+    },
+  },
+};
 
 export const Success = Template.bind(null);
 Success.args = {
