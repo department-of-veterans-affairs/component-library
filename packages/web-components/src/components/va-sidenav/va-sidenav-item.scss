@@ -6,6 +6,11 @@
   border-bottom: 1px solid var(--vads-color-base-lightest);
 }
 
+:host, :host:focus, [href]:focus {
+  outline: unset!important;
+  outline-offset: unset!important;
+}
+
 a {
   color: var(--vads-color-link);
   display: block;
@@ -13,11 +18,16 @@ a {
   padding: 0.6rem 1rem;
   padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
   text-decoration: none;
+
+   &:focus {
+      background-color: var(--vads-color-action-focus-on-light);
+      color: var(--vads-color-link);
+      box-shadow: 0px 4px 0px var(--vads-color-base);
+    }
 }
 
 a:hover {
   background-color: var(--vads-color-base-lightest);
-  text-decoration: none;
 }
 
 .va-sidenav__current {
