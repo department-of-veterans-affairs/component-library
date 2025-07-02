@@ -85,7 +85,7 @@ const defaultArgs = {
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
   'secondary-button-text': 'Secondary',
   'forcedModal': false,
-  'message-aria-labelledby': undefined,
+  'label': undefined,
 };
 
 const Template = ({
@@ -101,7 +101,7 @@ const Template = ({
   status,
   visible,
   forcedModal,
-  'message-aria-labelledby': messageAriaLabelledby,
+  'label': label,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
   const wrapRef = useRef(null);
@@ -136,7 +136,7 @@ const Template = ({
         secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
-        messageAriaLabelledby={messageAriaLabelledby}
+        label={label}
       >
         <p>This is a succinct, helpful {status} message</p>
       </VaModal>
@@ -250,14 +250,14 @@ WithoutButtons.args = {
   'secondary-button-text': undefined,
 };
 
-export const WithoutTitleOrMessageAriaLabelledBy = Template.bind(null);
-WithoutTitleOrMessageAriaLabelledBy.args = {
+export const WithoutTitleOrLabel = Template.bind(null);
+WithoutTitleOrLabel.args = {
   ...defaultArgs,
   'modal-title': undefined,
-  'message-aria-labelledby': undefined
+  'label': undefined
 };
 
-export const WithoutTitleAndWithMessageAriaLabelledBy = ({
+export const WithoutTitleAndWithLabel = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
   large,
@@ -270,7 +270,7 @@ export const WithoutTitleAndWithMessageAriaLabelledBy = ({
   visible = true,
   forcedModal,
   modalTitle = undefined,
-  messageAriaLabelledby = 'A different title',
+  label = 'A test modal',
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
   const wrapRef = useRef(null);
@@ -305,7 +305,7 @@ export const WithoutTitleAndWithMessageAriaLabelledBy = ({
         secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
-        messageAriaLabelledby={messageAriaLabelledby}
+        label={label}
       >
         <p>This is a succinct, helpful {status} message</p>
       </VaModal>

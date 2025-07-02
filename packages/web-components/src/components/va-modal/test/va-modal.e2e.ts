@@ -270,10 +270,10 @@ describe('va-modal', () => {
     expect(activeTagName).toBeFalsy();
   });
 
-  it('should include an aria-labelled by attribute when message-aria-labelledby is set and modal-title is not set', async () => {
+  it('should include an aria-label value when label value is passed', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal visible message-aria-labelledby="Test alternate heading">
+      <va-modal visible label="Test heading">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -281,17 +281,15 @@ describe('va-modal', () => {
     `);
 
     const dialog = await page.find('va-modal >>> div[role="dialog"]');
-    const label = await page.find('va-modal >>> h2');
 
-    expect(dialog.getAttribute('aria-labelledby')).toBe('label-heading');
-    expect(label.textContent).toBe('Test alternate heading');
+    expect(dialog.getAttribute('aria-label')).toBe('Test heading');
   });
 
-  it('should not include an aria-labelled by attribute when both modalTitle and message-aria-labelledby values are set', async () => {
+  it('if values are passed for both label and modal-title props, the label value should take precedence for aria-label', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <h1>Custom Label</h1>
-      <va-modal modal-title="Example Title" visible message-aria-labelledby="Test alternate heading">
+      <va-modal modal-title="Modal Title" visible label="Modal label">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -300,26 +298,36 @@ describe('va-modal', () => {
 
     const dialog = await page.find('va-modal >>> div[role="dialog"]');
 
-    expect(dialog.getAttribute('aria-labelledby')).toBeNull()
-    expect(dialog.getAttribute('aria-label')).toBe('Example Title modal');
-  })
+    expect(dialog.getAttribute('aria-label')).toBe('Modal label');
+  });
 
-  it('passes an axe check when message-aria-labelledby is set', async () => {
+  it('passes an axe check with label prop', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal visible message-aria-labelledby="Test alternate heading">
+      <va-modal visible label="Test heading">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
       </va-modal>
     `);
-
-    await page.waitForChanges();
 
     await axeCheck(page);
   });
 
-  it('should log a console warning when modal-title and message-aria-labelledby are not set', async () => {
+  it('passes an axe check with modal-title prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal modal-title="Test heading" visible>
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    await axeCheck(page);
+  });
+
+  it('should log a console warning when modal-title and label are not set', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-modal visible>
@@ -332,7 +340,7 @@ describe('va-modal', () => {
     await page.waitForChanges();
 
     expect(consoleWarnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('An accessible name for the modal is required. Please provide either a modalTitle or messageAriaLabelledby attribute.')
+      expect.stringContaining('<va-modal>: An accessible name for the modal is required. Please provide either a label or modalTitle prop value.'),
     );
   });
 });

@@ -165,11 +165,10 @@ export class VaModal {
   @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
 
   /**
-   * Text to serve as an alternate heading for the modal when the desired behavior
-   * is to have a heading with the `aria-labelledby` attribute. Only is applied
-   * when `modalTitle` prop value is not provided.
+   * Label for the modal, to be set as aria-label. Will take precedence over modalTitle
+   * in settings of aria-label.
    */
-  @Prop() messageAriaLabelledby?: string;
+  @Prop() label?: string = '';
 
   /**
    * Local state to track if the shift key is pressed
@@ -423,7 +422,7 @@ export class VaModal {
 
   render() {
     const {
-      messageAriaLabelledby,
+      label,
       modalTitle,
       primaryButtonClick,
       primaryButtonText,
@@ -437,28 +436,24 @@ export class VaModal {
 
     if (!visible) return null;
 
-    // Determine if the modal title exists and is not empty.
-    const modalTitleExists = modalTitle && modalTitle !== '';
-
-    const ariaLabel =
-      modalTitleExists ? `${modalTitle} modal` : null;
-    /* eslint-enable i18next/no-literal-string */
-    const btnAriaLabel = modalTitle
-      ? `Close ${modalTitle} modal`
-      : 'Close modal';
-
-    // Set dynamic attributes for aria-label or aria-labelledby based on the presence of modalTitle or messageAriaLabelledby.
-    // If modalTitle is passed it should take precedence over messageAriaLabelledby. If neither is provided, a warning
+    // Conditionally set value to eventually be passed to the aria-label attribute
+    // of the modal's inner div wrapper. If label prop is provided, use that. Otherwise
+    // if modalTitle prop is provided, use that. If neither is provided, a warning
     // will be logged in the console.
-    const dynamicAttributes = {};
-    if (ariaLabel) {
-      dynamicAttributes['aria-label'] = ariaLabel;
+    // The aria label for the close button will also be set based upon the same logic.
+    let ariaLabel: string | null = null;
+    let btnAriaLabel: string = 'Close modal';
+
+    if (label) {
+      ariaLabel = label;
+      btnAriaLabel = `Close ${label} modal`;
     }
-    else if (messageAriaLabelledby && !modalTitleExists) {
-      dynamicAttributes['aria-labelledby'] = 'label-heading';
+    else if (modalTitle && modalTitle !== '') {
+      ariaLabel = `${modalTitle} modal`;
+      btnAriaLabel = `Close ${modalTitle} modal`;
     }
     else {
-      console.warn('An accessible name for the modal is required. Please provide either a modalTitle or messageAriaLabelledby attribute.');
+      console.warn('<va-modal>: An accessible name for the modal is required. Please provide either a label or modalTitle prop value.');
     }
 
     const wrapperClass = classnames({
@@ -514,7 +509,7 @@ export class VaModal {
               : 'dialog'
           }
           aria-modal="true"
-          {...dynamicAttributes}
+          aria-label={ariaLabel}
         >
           <div class={contentClass}>
             {closingButton}
@@ -532,13 +527,6 @@ export class VaModal {
                     {modalTitle}
                   </h2>
                 )}
-                {
-                  !modalTitle && dynamicAttributes['aria-labelledby'] ? (
-                    <h2 class={titleClass} tabindex={-1} id="label-heading">
-                      {messageAriaLabelledby}
-                    </h2>
-                  ) : null
-                }
                 <div class="usa-prose" id="description">
                   <slot></slot>
                 </div>
