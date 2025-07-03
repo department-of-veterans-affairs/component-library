@@ -59,7 +59,7 @@ applyPolyfills().then(() => {
 
 const viewports = {
   xsmall: {
-    name: 'XSmall Screen',
+    name: 'mobile',
     styles: {
       height: '568px',
       width: '320px',
@@ -67,7 +67,7 @@ const viewports = {
     type: 'mobile',
   },
   small: {
-    name: 'Small Screen',
+    name: 'mobile-lg',
     styles: {
       height: '896px',
       width: '481px',
@@ -75,7 +75,15 @@ const viewports = {
     type: 'mobile',
   },
   medium: {
-    name: 'Medium',
+    name: 'tablet',
+    styles: {
+      height: '1112px',
+      width: '640px',
+    },
+    type: 'tablet',
+  },
+  mediumScreen: {
+    name: 'medium-screen',
     styles: {
       height: '1112px',
       width: '768px',
@@ -83,7 +91,7 @@ const viewports = {
     type: 'tablet',
   },
   smallDesktop: {
-    name: 'Small Desktop',
+    name: 'desktop',
     styles: {
       height: '1400px',
       width: '1008px',
@@ -91,10 +99,10 @@ const viewports = {
     type: 'desktop',
   },
   large: {
-    name: 'Large',
+    name: 'desktop-lg',
     styles: {
       height: '1600px',
-      width: '1601px',
+      width: '1201px',
     },
     type: 'desktop',
   },
@@ -122,7 +130,7 @@ export const parameters = {
   },
   viewport: {
     viewports,
-    defaultViewport: 'small',
+    defaultViewport: 'medium',
   },
   viewMode: 'docs',
 };
