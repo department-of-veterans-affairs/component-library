@@ -42,6 +42,7 @@ const Template = ({
   'show-internal-errors': showInternalErrors
 }) => {
   return (
+    // @ts-ignore - Custom web component
     <va-telephone-input
       hint={hint}
       label={label ? label : null}
@@ -86,13 +87,13 @@ WithCustomError.args = {
 }
 
 
-const WithPhoneFormatTemplate = () => {
+const WithPhoneFormatTemplate = ({}) => {
 
   const [err, setErr] = useState('');
   useEffect(() => {
     setTimeout(() => {
       setErr('Enter a United States of America phone number in a valid format, for example, (xxx) xxx-xxxx');
-    }, 100);
+    }, 0);
   }, []);
 
   return (
