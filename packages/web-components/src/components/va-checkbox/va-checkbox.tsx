@@ -130,7 +130,9 @@ export class VaCheckbox {
       const descriptionSlot = this.el.shadowRoot.querySelector('slot[name="description"]') as HTMLSlotElement;
       if (descriptionSlot) {
         // handle multiple description slots
-        description = descriptionSlot?.assignedNodes().map(n => n.textContent).join(' ') as string;
+        description = descriptionSlot?.assignedNodes()
+          .map(node => node.textContent)
+          .join(' ') as string;
       }
     }
 
