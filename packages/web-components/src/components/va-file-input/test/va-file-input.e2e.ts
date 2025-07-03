@@ -329,6 +329,15 @@ describe('va-file-input', () => {
     expect(label).toEqualText('File password required')
     
   });
+
+  it('renders error on password input if password-error is set', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted password-error="Encrypted file requires a password."/>`);
+
+    const textInput = await page.find('va-file-input >>> va-text-input');
+    const errorSpan = await textInput.find('>>> span.usa-error-message');
+    expect(errorSpan).not.toBeNull();
+    expect(errorSpan).toEqualText('Encrypted file requires a password.');
+  })
   
   it('does not render file password field if encrypted is unset', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`);

@@ -137,6 +137,11 @@ export class VaFileInput {
   @Prop({ mutable: true}) percentUploaded?: number = null;
 
   /**
+   * Error message for the encrypted password input
+   */
+  @Prop() passwordError?: string;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -440,6 +445,7 @@ export class VaFileInput {
       statusText,
       uploadedFile,
       percentUploaded,
+      passwordError,
     } = this;
 
     if (value && !this.file) {
@@ -595,7 +601,7 @@ export class VaFileInput {
                   <div>
                     {this.showSeparator && <hr class="separator" />}
                     {encrypted && (
-                      <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required />
+                      <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required error={passwordError} />
                     )}
                     <div class="additional-info-slot">
                       <slot></slot>
