@@ -21,7 +21,7 @@ function getTableMarkup(props = {}): string {
       Declaration of Independence
     </span>
     <span>
-      Statement adopted by the Continental Congress declaring independence from the British Empire
+      Statement adopted by the Continental Congress declaring independence from the <span id="embedded-span">British Empire</span>
     </span>
     <span>
       1776
@@ -94,5 +94,16 @@ describe('va-table', () => {
     const element = await page.find('va-table-inner >>> table');
 
     expect(element).toHaveClass('usa-table--stacked');
+  });
+
+  it('only adds va-table-slot-* to top-level spans in va-table-row', async () => {
+    const page = await newE2EPage();
+    await page.setContent(getTableMarkup());
+
+    // Only top-level spans should have the slot attribute
+    const firstRow = await (await page.findAll('va-table-row')).at(1);
+    const nested = await firstRow.find('#embedded-span');
+
+    expect(nested.getAttribute('slot')).toBeNull();
   });
 });
