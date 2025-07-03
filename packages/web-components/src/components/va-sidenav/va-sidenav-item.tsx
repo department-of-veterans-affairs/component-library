@@ -12,12 +12,12 @@ export class VaSidenavItem {
   /**
    * The href for the sidenav item. If it is also the `current-page`, this will be set to `#content`.
    */
-  @Prop() href?: string;
+  @Prop() href!: string;
 
   /**
    * The label for the sidenav item
    */
-  @Prop() label?: string;
+  @Prop() label!: string;
 
   /**
    * Identifies when the item is the current page. The current page link will have `#content` on the `href`.

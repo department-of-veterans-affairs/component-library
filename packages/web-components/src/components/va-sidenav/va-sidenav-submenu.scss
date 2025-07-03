@@ -20,6 +20,11 @@
   outline-offset: unset!important;
 }
 
+a:hover {
+  background-color: var(--vads-color-base-lightest);
+  box-shadow: none;
+}
+
 .va-sidenav-submenu__link {
   color: var(--vads-color-link);
   display: block;

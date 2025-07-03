@@ -1734,11 +1734,11 @@ export namespace Components {
         /**
           * The href for the sidenav item. If it is also the `current-page`, this will be set to `#content`.
          */
-        "href"?: string;
+        "href": string;
         /**
           * The label for the sidenav item
          */
-        "label"?: string;
+        "label": string;
         /**
           * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
          */
@@ -5675,11 +5675,11 @@ declare namespace LocalJSX {
         /**
           * The href for the sidenav item. If it is also the `current-page`, this will be set to `#content`.
          */
-        "href"?: string;
+        "href": string;
         /**
           * The label for the sidenav item
          */
-        "label"?: string;
+        "label": string;
         /**
           * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router.  The `href` and `router-link` props must be set.
          */
