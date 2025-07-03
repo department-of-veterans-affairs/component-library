@@ -1,0 +1,62 @@
+:host {
+  display: block;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  border-bottom: 1px solid var(--vads-color-base-lightest);
+  &:active {
+    background-color: var(--vads-color-action-focus-on-light);
+    color: var(--vads-color-base);
+    box-shadow: inset 0px -4px 0px var(--vads-color-base);  
+    z-index: 1;
+  }
+}
+
+:host, :host:focus, [href]:focus {
+  outline: none!important;
+  outline-offset: none;
+}
+
+a {
+  color: var(--vads-color-link);
+  display: block;
+  line-height: var(--vads-font-line-height-4);
+  padding: 0.6rem 1rem;
+  padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
+  text-decoration: none;
+
+    &:focus {
+      background-color: var(--vads-color-action-focus-on-light);
+      color: var(--vads-color-base);
+      box-shadow: inset 0px -4px 0px var(--vads-color-base);  
+      z-index: 1;
+    }
+}
+
+a:hover {
+  background-color: var(--vads-color-base-lightest);
+  box-shadow: none;
+}
+
+.va-sidenav__current {
+  position: relative;
+  font-weight: 700;
+  &:active {
+    background-color: var(--vads-color-action-focus-on-light);
+    color: var(--vads-color-base);
+    box-shadow: inset 0px -4px 0px var(--vads-color-base);  
+    z-index: 1;
+  }
+}
+
+.va-sidenav__current::after {
+  background-color: var(--vads-color-link);
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: .25rem;
+  top: .25rem;
+  width: .25rem;
+  left: 0;
+  z-index: 1;
+}
