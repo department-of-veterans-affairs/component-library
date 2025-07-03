@@ -2,6 +2,7 @@ import React from 'react';
 
 import { getWebComponentDocs, propStructure, StoryDocs, componentStructure } from './wc-helpers';
 import { VaSidenavItem } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { parameters } from '../.storybook/preview';
 
 const sidenavDocs = getWebComponentDocs('va-sidenav');
 const sidenavItemDocs = getWebComponentDocs('va-sidenav-item');
@@ -9,6 +10,8 @@ const sidenavSubmenuDocs = getWebComponentDocs('va-sidenav-submenu');
 
 // Helper function to add key prop to web components for React
 const withKey = (key: string, props: any = {}) => ({ ...props, key } as any);
+
+const { viewport } = parameters;
 
 export default {
   title: 'Components/Side Navigation',
@@ -31,6 +34,13 @@ export default {
         data={sidenavDocs} 
         componentName="va-sidenav" 
       />,
+    },
+    chromatic: {
+      // Test each story for va-sidenav in two viewports
+      modes: {
+        mobile: viewport.viewports["small"],
+        desktop: viewport.viewports["large"],
+      },
     },
   },
   argTypes: {
