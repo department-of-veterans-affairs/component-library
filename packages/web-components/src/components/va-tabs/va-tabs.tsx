@@ -33,7 +33,7 @@ export class VaTabs {
   private resetRender: boolean = true;
   private debounce: number = null;*/
   private formattedTabItems: Array<TabItem> = [];
-  //private visibleButtonElements: NodeListOf<Element> | null = null;
+  private visibleButtonElements: NodeListOf<Element> | null = null;
 
 
   @Element() el: HTMLElement;
@@ -154,21 +154,24 @@ export class VaTabs {
     }
   }
 
-  /*
-  componentDidRender() {
-    if (this.resetRender) {
-      this.resetRender = false;
-      this.checkForOverflow();
-    }
-  }
+  // componentDidRender() {
+  //   if (this.resetRender) {
+  //     this.resetRender = false;
+  //     this.checkForOverflow();
+  //   }
+  // }
 
+  // componentDidUpdate() {
+  //   // After the component updates, reset the visible button elements to ensure
+  //   // that the references to DOM elements are correct in `this.visibleButtonElements`.
+  //   this.resetVisibleButtonElements();
+  // }
 
-  componentDidUpdate() {
-    // After the component updates, reset the visible button elements to ensure
-    // that the references to DOM elements are correct in `this.visibleButtonElements`.
-    this.resetVisibleButtonElements();
+  // Once component has fully loaded and first render has occurred, query the DOM
+  // for all the tab items to populate the `visibleButtonElements` property.
+  componentDidLoad() {
+    this.visibleButtonElements = this.el.shadowRoot.querySelectorAll('.va-tabs__tab_item');
   }
-    */
 
   /**
    * @function handleClick
@@ -226,14 +229,14 @@ export class VaTabs {
    * are correctly identified.
    * @returns {void}
    */
- /// private resetVisibleButtonElements = (): void => {
-    // If the overflow menu is visible, we want to show all buttons, including those in the overflow menu. Otherwise, we
-    // only want to show the visible buttons in the tab list.
- //   let selectorString = this.overflowMenuVisible ?
- //     'button' :
- //     '.va-tabs__tab_visible_button, .va-tabs__tab_more_button';
- //   this.visibleButtonElements = this.el.shadowRoot.querySelectorAll(selectorString);
- // }
+  // private resetVisibleButtonElements = (): void => {
+  //   // If the overflow menu is visible, we want to show all buttons, including those in the overflow menu. Otherwise, we
+  //   // only want to show the visible buttons in the tab list.
+  //   // let selectorString = this.overflowMenuVisible ?
+  //   //   'button' :
+  //   //   '.va-tabs__tab_visible_button, .va-tabs__tab_more_button';
+  //   // this.visibleButtonElements = this.el.shadowRoot.querySelectorAll(selectorString);
+  // }
 
   /**
    * @function handleKeyDown
@@ -244,10 +247,11 @@ export class VaTabs {
    */
   private handleKeyDown = (event: KeyboardEvent, index: number): void => {
     let newFocusedIndex = index;
-    let visibleButtonElements = this.el.shadowRoot.querySelectorAll('.va-tabs__tab_visible_button, .va-tabs__tab_more_button');
+
     // Determine if the key pressed is a left or right arrow key
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
-      visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "-1");
+      this.visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "-1");
+
       // Move right
       if (event.key === "ArrowRight") {
         newFocusedIndex++;
@@ -263,12 +267,12 @@ export class VaTabs {
         newFocusedIndex--;
         // If we're at the start, move to the end
         if (newFocusedIndex < 0) {
-          newFocusedIndex = visibleButtonElements.length - 1;
+          newFocusedIndex = this.visibleButtonElements.length - 1;
         }
       }
 
-      visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "0");
-      (visibleButtonElements[newFocusedIndex] as HTMLElement).focus();
+      this.visibleButtonElements[newFocusedIndex].setAttribute("tabindex", "0");
+      (this.visibleButtonElements[newFocusedIndex] as HTMLElement).focus();
     }
   }
 
