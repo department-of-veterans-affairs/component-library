@@ -174,6 +174,8 @@ describe('va-checkbox', () => {
     const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await checkboxEl.click();
 
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'change',
       componentName: 'va-checkbox',
@@ -197,6 +199,8 @@ describe('va-checkbox', () => {
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await checkboxEl.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'change',
@@ -233,6 +237,8 @@ describe('va-checkbox', () => {
     await checkboxEl.click();
     await page.waitForChanges();
 
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'change',
       componentName: 'va-checkbox',
@@ -255,6 +261,8 @@ describe('va-checkbox', () => {
     await checkboxEl.click();
     await page.waitForChanges();
 
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'change',
       componentName: 'va-checkbox',
@@ -275,6 +283,8 @@ describe('va-checkbox', () => {
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
     await checkboxEl.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'change',
