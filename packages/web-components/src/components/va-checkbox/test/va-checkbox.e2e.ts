@@ -186,7 +186,7 @@ describe('va-checkbox', () => {
     });
   });
 
-  it('fires an analytics event with description slotted content', async () => {
+  it('fires an analytics event with multiple description slotted content', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `<va-checkbox label="Just another checkbox here" enable-analytics>
@@ -267,28 +267,7 @@ describe('va-checkbox', () => {
     });
   });
 
-  it("fires analytics when multiple description slots are used", async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-checkbox label="Just another checkbox here" required enable-analytics="true"><p slot="description">Description content in a slot 1.</p><p slot="description">Description content in a slot 2.</p></va-checkbox>',
-    );
-    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const checkboxEl = await page.find('va-checkbox >>> .va-checkbox__label');
-    await checkboxEl.click();
-
-    expect(analyticsSpy).toHaveReceivedEventDetail({
-      action: 'change',
-      componentName: 'va-checkbox',
-      details: {
-        label: 'Just another checkbox here',
-        description: 'Description content in a slot 1. Description content in a slot 2.',
-        checked: true,
-        required: true,
-      },
-    });
-  });
-
-  it.only("fires analytics when no description is used", async () => {
+  it("fires analytics when no description is used", async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-checkbox label="Just another checkbox here" required enable-analytics="true"/>',
