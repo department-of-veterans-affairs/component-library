@@ -125,22 +125,14 @@ export class VaCheckbox {
 
   private fireAnalyticsEvent = () => {
     // Either the description prop or the text content of the description slots
-    const description =
-      this.description ||
-      [
-        // This won't work in IE
-        ...(
-          this.el.shadowRoot.querySelector(
-            'slot[name="description"]',
-          ) as HTMLSlotElement
-        )?.assignedNodes(),
-        // For IE
-        ...Array.from(
-          this.el.shadowRoot.querySelectorAll('[slot="description"]'),
-        ),
-      ]
-        .map(n => n.textContent)
-        .join(' ');
+    let description = this.description || '';
+    if (!description) {
+      const descriptionSlot = this.el.shadowRoot.querySelector('slot[name="description"]') as HTMLSlotElement;
+      if (descriptionSlot) {
+        // handle multiple description slots
+        description = descriptionSlot?.assignedNodes().map(n => n.textContent).join(' ') as string;
+      }
+    }
 
     this.componentLibraryAnalytics.emit({
       componentName: 'va-checkbox',
