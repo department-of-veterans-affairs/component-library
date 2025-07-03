@@ -2,6 +2,18 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-modal', () => {
+  let consoleWarnSpy;
+
+  beforeEach(() => {
+    // Spy on console.warn and mock its implementation to prevent it from logging to the actual console
+    consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    // Restore the original console.warn after each test
+    consoleWarnSpy.mockRestore();
+  });
+
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(`
@@ -238,23 +250,97 @@ describe('va-modal', () => {
 
   it('should handle empty focusableChildren array gracefully when no focusable content exists', async () => {
     const page = await newE2EPage();
-  
+
     // the `forced-modal` removes the close button
     await page.setContent(`
       <va-modal modal-title="No Focusable Content" forced-modal visible>
         <div aria-hidden="true">Non-focusable content</div>
       </va-modal>
     `);
-  
+
     await page.waitForChanges();
-  
+
     // Try to find any focused element inside the modal
     const activeTagName = await page.evaluate(() => {
       const modal = document.querySelector('va-modal');
       return modal.shadowRoot.activeElement?.tagName || modal.shadowRoot.querySelector(':focus')?.tagName;
     });
-  
+
     // Expect that nothing is focused
     expect(activeTagName).toBeFalsy();
+  });
+
+  it('should include an aria-label value when label value is passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal visible label="Test heading">
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    const dialog = await page.find('va-modal >>> div[role="dialog"]');
+
+    expect(dialog.getAttribute('aria-label')).toBe('Test heading');
+  });
+
+  it('if values are passed for both label and modal-title props, the label value should take precedence for aria-label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <h1>Custom Label</h1>
+      <va-modal modal-title="Modal Title" visible label="Modal label">
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    const dialog = await page.find('va-modal >>> div[role="dialog"]');
+
+    expect(dialog.getAttribute('aria-label')).toBe('Modal label');
+  });
+
+  it('passes an axe check with label prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal visible label="Test heading">
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    await axeCheck(page);
+  });
+
+  it('passes an axe check with modal-title prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal modal-title="Test heading" visible>
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    await axeCheck(page);
+  });
+
+  it('should log a console warning when modal-title and label are not set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal visible>
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    await page.waitForChanges();
+
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      expect.stringContaining('<va-modal>: An accessible name for the modal is required. Please provide either a label or modalTitle prop value.'),
+    );
   });
 });
