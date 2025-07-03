@@ -1,9 +1,12 @@
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 import { VaSearchFilter } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { parameters } from '../.storybook/preview';
 
 VaSearchFilter.displayName = 'VaSearchFilter';
 
 const searchFilterDocs = getWebComponentDocs('va-search-filter');
+
+const { viewport } = parameters;
 
 export default {
   title: 'Components/Search Filter',
@@ -12,6 +15,13 @@ export default {
     componentSubtitle: 'va-search-filter web component',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={searchFilterDocs} />,
+    },
+    chromatic: {
+      // Test each story for va-search-filter in two modes
+      modes: {
+        mobile: viewport.viewports["small"],
+        desktop: viewport.viewports["large"],
+      },
     },
   },
   argTypes: {

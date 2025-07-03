@@ -9,8 +9,6 @@ on:
 
 jobs:
   chromatic-deployment:
-    # Run if it's a push to main OR a PR that is NOT a draft
-    if: github.ref == 'refs/heads/main' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
