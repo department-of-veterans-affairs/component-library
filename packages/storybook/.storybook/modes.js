@@ -1,19 +1,16 @@
 export const allModes = {
     default: {
-      // integer is just width
-      viewport: 1008,
+      viewport: 1024, // --desktop
     },
     small: {
-      // object can specify both
       viewport: {
         height: 896,
-        width: 481,
+        width: 481, // --mobile-lg
       },
     },
     large: {
-      // object with width
       viewport: {
-        width: 1601,
+        width: 1201, // --desktop-lg
       },
     }
   };
