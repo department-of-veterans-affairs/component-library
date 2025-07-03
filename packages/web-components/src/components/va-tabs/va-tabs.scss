@@ -31,10 +31,10 @@
   max-width: 10rem;
 
   &:focus, &:hover:focus, &:active {
-    // background-color: var(--vads-color-action-focus-on-light);
-    // border-bottom-color: var(--vads-color-action-border-focus-on-light);
-    // outline: 2px solid var(--vads-color-action-border-focus-on-light);
-    // outline-offset: -2px;
+    background-color: var(--vads-color-action-focus-on-light);
+    border-bottom-color: var(--vads-color-action-border-focus-on-light);
+    outline: 2px solid var(--vads-color-action-border-focus-on-light);
+    outline-offset: -2px;
     color: var(--vads-color-base);
   }
 
@@ -54,31 +54,29 @@
 
     &:hover {
       cursor: pointer;
-      // background: var(--vads-color-base-lightest);
+      background: var(--vads-color-base-lightest);
       border-bottom-color:  var(--vads-color-primary);
     }
 
     &:focus, &:hover:focus, &:active {
       background-color: var(--vads-color-action-focus-on-light);
       border-bottom-color: var(--vads-color-action-border-focus-on-light);
-      // outline: 2px solid var(--vads-color-action-border-focus-on-light);
-      // outline-offset: -2px;
       color: var(--vads-color-base);
     }
 
     &::after {
       content: attr(data-label) / "";
-      font-weight: 700;
-      background: var(--vads-color-white);
-      color: var(--vads-color-base);
-      position: absolute;
-      width: 100%;
-      height: calc(100% - 1.5rem); // 1.5rem is the cumulative vertical padding on the tab item
-      top: 1rem; // Account for top padding of tab item
-      left: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: absolute;
+      height: calc(100% - 1.5rem); // 1.5rem is the cumulative vertical padding on the tab item
+      top: 1rem; // Account for top padding of tab item
+      width: calc(100% - 4px); // Don't take up full width so outline of tab item is fully visible
+      left: 2px; // Update horizontal position to align with the tab item due to decreased width
+      font-weight: 700;
+      background: var(--vads-color-white);
+      color: var(--vads-color-base);
     }
 
     &:hover::after {
