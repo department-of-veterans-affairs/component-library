@@ -2,55 +2,92 @@
 @import "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss";
 @import '../../mixins/links.css';
 
-
 .va-tabs__list {
   display: flex;
   overflow-x: visible;
   flex-wrap: nowrap;
   margin: 0;
   padding: 0;
+  gap: 1.5rem;
   width: 100%;
   border-bottom: 1px solid var(--vads-color-base-dark);
-  align-items: end;
+  height: 52px;
 }
 
 /* Styles for individual tabs */
 .va-tabs__tab_item {
-  display: inline-block;
+  display: block;
   flex-shrink: 0;
-  margin: 0 0.75rem;
   text-align: center;
+  height: 100%;
+  background-color: transparent;
+  color: var(--vads-color-primary);
+  position: relative;
+  display: block;
+  padding: 1rem 0.5rem 0.5rem;
+  border: none;
+  border-bottom: 4px solid transparent;
+  min-width: 4rem;
+  max-width: 10rem;
 
-  &.selected {
-    button {
-      border-bottom-color: var(--vads-color-primary);
-      color: var(--vads-color-base);
+  &:focus, &:hover:focus, &:active {
+    // background-color: var(--vads-color-action-focus-on-light);
+    // border-bottom-color: var(--vads-color-action-border-focus-on-light);
+    // outline: 2px solid var(--vads-color-action-border-focus-on-light);
+    // outline-offset: -2px;
+    color: var(--vads-color-base);
+  }
 
-      &::after {
-        content: attr(data-label) / "";
-        display: block;
-        font-weight: 700;
-        background: var(--vads-color-white);
-        position: absolute;
-        top: 4px;
-        left: 2px;
-        width: calc(100% - 4px);
-        height: calc(100% - 4px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+  &[aria-selected='false'] {
+    &:hover {
+      cursor: pointer;
+      background: var(--vads-color-base-lightest);
+      border-bottom-color:  var(--vads-color-primary);
+      color: var(--vads-color-ink);
+    }
+  }
 
-      &:hover:after {
-        background-color: var(--vads-color-base-lightest);
-      }
+  &[aria-selected='true'] {
+    border-bottom-color: var(--vads-color-primary);
+    color: transparent;
+    background: var(--vads-color-white);
 
-      &:focus:after, &:hover:focus:after, &:active:after {
-        background-color: var(--vads-color-action-focus-on-light);
-      }
+    &:hover {
+      cursor: pointer;
+      // background: var(--vads-color-base-lightest);
+      border-bottom-color:  var(--vads-color-primary);
     }
 
+    &:focus, &:hover:focus, &:active {
+      background-color: var(--vads-color-action-focus-on-light);
+      border-bottom-color: var(--vads-color-action-border-focus-on-light);
+      // outline: 2px solid var(--vads-color-action-border-focus-on-light);
+      // outline-offset: -2px;
+      color: var(--vads-color-base);
+    }
 
+    &::after {
+      content: attr(data-label) / "";
+      font-weight: 700;
+      background: var(--vads-color-white);
+      color: var(--vads-color-base);
+      position: absolute;
+      width: 100%;
+      height: calc(100% - 1.5rem); // 1.5rem is the cumulative vertical padding on the tab item
+      top: 1rem; // Account for top padding of tab item
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:hover::after {
+      background-color: var(--vads-color-base-lightest);
+    }
+
+    &:focus::after, &:hover:focus::after, &:active::after {
+      background-color: var(--vads-color-action-focus-on-light);
+    }
   }
 
   &.overflow-link {
@@ -67,40 +104,6 @@
       }
     }
   }
-
-
-  button {
-    background-color: transparent;
-    color: var(--vads-color-primary);
-    position: relative;
-    display: block;;
-    padding: 12px 8px 8px;
-    border: none;
-    border-bottom: 4px solid transparent;
-
-    &:hover {
-      cursor: pointer;
-      background: var(--vads-color-base-lightest);
-      border-bottom-color:  var(--vads-color-primary);
-    }
-
-    &:focus, &:hover:focus, &:active {
-      background-color: var(--vads-color-action-focus-on-light);
-      border-bottom-color: transparent;
-      outline: 2px solid var(--vads-color-action-border-focus-on-light);
-      outline-offset: -2px;
-      color: var(--vads-color-base);
-    }
-  }
-}
-
-/* Remove margin for the first and last tabs */
-.va-tabs__tab_item:first-child {
-  margin-left: 0;
-}
-
-.va-tabs__tab_item:last-child {
-  margin-right: 0;
 }
 
 /*

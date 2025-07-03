@@ -34,7 +34,7 @@ export class VaTabs {
   private debounce: number = null;*/
   private formattedTabItems: Array<TabItem> = [];
   //private visibleButtonElements: NodeListOf<Element> | null = null;
-  
+
 
   @Element() el: HTMLElement;
 
@@ -69,7 +69,6 @@ export class VaTabs {
     }
   }
 
-  
   /*
    * Watch for changes to the `overflowMenuVisible` property to reset the visible button elements.
    */
@@ -109,7 +108,7 @@ export class VaTabs {
   //     this.debounce = null;
   //   }, 100);
   // }
-  
+
 
   /**
    * The event used to track usage of the component.
@@ -130,6 +129,12 @@ export class VaTabs {
       }
     } else {
       this.formattedTabItems = this.tabItems as TabItem[];
+
+      // If there are more than three tab items, slice the array to only include
+      // the first three.
+      if (this.formattedTabItems.length > 3) {
+        this.formattedTabItems = this.formattedTabItems.slice(0, 3);
+      }
     }
     // Make sure that the tab panel corresponding to the selected tab is visible
     // when the component is first rendered.
@@ -140,8 +145,6 @@ export class VaTabs {
     if (this.tabItems.length > 0) {
       const targetId = this.formattedTabItems[this.selected].url.replace('#', '');
       const targetElement = document.getElementById(targetId);
-
-
 
       // Remove hidden attribute from the target element if it exists.
       if (targetElement) {
@@ -158,7 +161,7 @@ export class VaTabs {
       this.checkForOverflow();
     }
   }
-    
+
 
   componentDidUpdate() {
     // After the component updates, reset the visible button elements to ensure
@@ -345,7 +348,6 @@ export class VaTabs {
 
     // Check to ensure that tabItems is an array and has at least one item with
     // a valid label and URL before rendering
-    // TODO: Should we enforce at least two tab items?
     if (
       !Array.isArray(formattedTabItems) ||
       formattedTabItems.length === 0 ||
@@ -355,7 +357,8 @@ export class VaTabs {
       return null;
     }
 
-    //let tabItemsToRenderAsTabs = this.visibleTabs.length > 0 ? this.visibleTabs : formattedTabItems;
+    // let tabItemsToRenderAsTabs = this.visibleTabs.length > 0 ? this.visibleTabs : formattedTabItems;
+
     /*function getFormattedTabItemIndex(item: TabItem): number {
       let matchedIndex;
       formattedTabItems.forEach((tabItem, index) => {
@@ -365,26 +368,25 @@ export class VaTabs {
       });
       return matchedIndex
     }*/
+
     return (
       <Host>
         <section class={containerClass}>
           <div role="tablist" aria-label={label} class={listClass}>
             {formattedTabItems.map((item: TabItem, index: number) => (
-              <li class={index === selected ? 'va-tabs__tab_item selected' : 'va-tabs__tab_item'}>
-                <button
-                  role="tab"
-                  aria-selected={index === selected ? 'page' : undefined}
-                  aria-controls={item.url.replace('#', '')}
-                  id={`${item.url}`}
-                  tabIndex={index === selected ? 0 : -1}
-                  class="va-tabs__tab_visible_button"
-                  onClick={(e: MouseEvent) => this.handleClick(e, index)}
-                  onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, index)}
-                  data-label={item.label}
-                >
-                  {item.label}
-                </button>
-              </li>
+              <button
+                role="tab"
+                aria-selected={index === selected ? 'true' : 'false'}
+                aria-controls={item.url.replace('#', '')}
+                id={`${item.url}`}
+                tabIndex={index === selected ? 0 : -1}
+                class={'va-tabs__tab_item va-tabs__tab_visible'}
+                onClick={(e: MouseEvent) => this.handleClick(e, index)}
+                onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e, index)}
+                data-label={item.label}
+              >
+                {item.label}
+              </button>
             ))}
             {/*
               The overflow menu code below is commented out for now. To restore, replace `{false && (...)}` with the code block.
