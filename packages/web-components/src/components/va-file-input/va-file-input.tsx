@@ -137,6 +137,11 @@ export class VaFileInput {
   @Prop({ mutable: true}) percentUploaded?: number = null;
 
   /**
+   * Error message for the encrypted password input
+   */
+  @Prop() passwordError?: string;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -162,8 +167,8 @@ export class VaFileInput {
       //This won't be read if its not in a timeout due to other messages being read.
       setTimeout(() => {this.updateStatusMessage(value)});
   }
-  
-  @Watch('percentUploaded') 
+
+  @Watch('percentUploaded')
     percentHandler(value: number) {
       if (value >= 100) {
         this.resetState();
@@ -171,7 +176,7 @@ export class VaFileInput {
     }
 
   /**
-   * called when file has been uploaded 
+   * called when file has been uploaded
    * or file upload has been cancelled
    * only relevant when percentUploaded specified
    */
@@ -440,6 +445,7 @@ export class VaFileInput {
       statusText,
       uploadedFile,
       percentUploaded,
+      passwordError,
     } = this;
 
     if (value && !this.file) {
@@ -502,7 +508,7 @@ export class VaFileInput {
       : 'selected-files-wrapper';
     const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
 
-    
+
     const showProgBar = percentUploaded !== null && percentUploaded < 100;
 
     let statusClassNames = 'file-status-label'
@@ -595,7 +601,7 @@ export class VaFileInput {
                   <div>
                     {this.showSeparator && <hr class="separator" />}
                     {encrypted && (
-                      <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required />
+                      <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required error={passwordError} />
                     )}
                     <div class="additional-info-slot">
                       <slot></slot>
@@ -630,7 +636,7 @@ export class VaFileInput {
                             onPrimaryButtonClick={() => this.removeFile(true)}
                             onSecondaryButtonClick={this.closeModal}
                           >
-                            We'll remove the uploaded document{' '}
+                            We'll delete the uploaded file{' '}
                             <span class="file-label">{file ? file.name : uploadedFile.name}</span>
                           </va-modal>
                         </Fragment>

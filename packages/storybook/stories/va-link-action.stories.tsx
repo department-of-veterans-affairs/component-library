@@ -85,9 +85,13 @@ Reverse.args = {
   text: 'Call to action',
   type: 'reverse',
 };
-Reverse.parameters = {
-  backgrounds: { default: 'dark' },
-};
+Reverse.decorators = [
+  (Story) => (
+    <div className="usa-background-dark vads-u-padding--2">
+      <Story />
+    </div>
+  ),
+];
 
 export const PrimaryEntry = Template.bind({});
 PrimaryEntry.args = {

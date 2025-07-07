@@ -34,7 +34,8 @@
     "prop-types": "^15.6.2",
     "react-focus-on": "^3.5.1",
     "react-transition-group": "1",
-    "recast": "^0.14.4"
+    "recast": "^0.14.4",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.17",
