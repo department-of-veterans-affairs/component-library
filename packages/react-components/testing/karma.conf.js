@@ -34,6 +34,9 @@ module.exports = function karmaConfig(config) {
           '@department-of-veterans-affairs/web-components/react-bindings':
             path.resolve(__dirname, '../../web-components/'),
         },
+        fallback: {
+          "util": require.resolve("util/")
+        },
       },
       // target: 'node',
       node: { global: true },

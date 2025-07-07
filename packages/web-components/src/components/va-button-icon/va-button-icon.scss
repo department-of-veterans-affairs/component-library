@@ -16,6 +16,7 @@
   color: var(--vads-color-link);
   text-transform: uppercase;
   position: relative;
+  column-gap: 0.25rem;
 
   &:hover, &:focus, &:active {
     color: var(--vads-color-primary-dark);
