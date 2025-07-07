@@ -7,7 +7,6 @@ import {
   Prop,
   Element,
   Watch,
-  State,
 } from '@stencil/core';
 import classnames from 'classnames';
 import { ButtonItem } from './va-button-segmented.types';
@@ -24,8 +23,6 @@ import { ButtonItem } from './va-button-segmented.types';
   shadow: true,
 })
 export class VaButtonSegmented {
-  @State() mouseDown: boolean = false;
-
   @Element() el: HTMLElement;
 
   /**
@@ -128,12 +125,13 @@ export class VaButtonSegmented {
     const containerClass = classnames({
       'usa-button-group': true,
       'va-segmented-button': true,
-      'mouse-down': this.mouseDown,
     });
 
     const buttonClass = classnames({
       'va-segmented-button__button': true,
     });
+
+    // Validate that the buttons prop is provided and is a non-empty array.
     if (!this.buttons || !Array.isArray(this.buttons) || this.buttons.length === 0) {
       console.error('va-button-segmented: "buttons" prop array is required and must contain at least one item.');
       return null;
@@ -150,8 +148,6 @@ export class VaButtonSegmented {
                   this.selected = index;
                   this.handleClick(buttonItem);
                 }}
-                onMouseDown={() => this.mouseDown = true}
-                onMouseUp={() => this.mouseDown = false}
                 type="button"
                 title={buttonItem.label.length > 20 ? buttonItem.label : undefined}
                 aria-pressed={this.selected === index ? 'true' : 'false'}
