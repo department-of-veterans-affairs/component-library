@@ -1,3 +1,5 @@
+@import '../../mixins/focusable.css';
+
 .va-sidenav-submenu {
   list-style-type: none;
   padding-left: 0;
@@ -15,11 +17,6 @@
   text-transform: uppercase;
 }
 
-:host, :host:focus, [href]:focus {
-  outline: unset!important;
-  outline-offset: unset!important;
-}
-
 a:hover {
   background-color: var(--vads-color-base-lightest);
   box-shadow: none;
@@ -32,12 +29,6 @@ a:hover {
   padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
   position: relative;
   text-decoration: none;
-  &:focus {
-    background-color: var(--vads-color-action-focus-on-light);
-    color: var(--vads-color-base);
-    box-shadow: inset 0px -4px 0px var(--vads-color-base);
-    z-index: 1;
-  }
 }
 
 .va-sidenav-submenu__current-link::after {

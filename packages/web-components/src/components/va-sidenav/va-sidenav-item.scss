@@ -1,3 +1,5 @@
+@import '../../mixins/focusable.css';
+
 :host {
   display: block;
   list-style-type: none;
@@ -12,11 +14,6 @@
   }
 }
 
-:host, :host:focus, [href]:focus {
-  outline: none!important;
-  outline-offset: none;
-}
-
 a {
   color: var(--vads-color-link);
   display: block;
@@ -24,13 +21,6 @@ a {
   padding: 0.6rem 1rem;
   padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
   text-decoration: none;
-
-    &:focus {
-      background-color: var(--vads-color-action-focus-on-light);
-      color: var(--vads-color-base);
-      box-shadow: inset 0px -4px 0px var(--vads-color-base);  
-      z-index: 1;
-    }
 }
 
 a:hover {
