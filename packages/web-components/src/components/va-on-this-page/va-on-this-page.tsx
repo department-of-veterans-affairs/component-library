@@ -80,10 +80,13 @@ export class VaOnThisPage {
     const { handleOnClick } = this;
     const allHeaders = Array.from(document.querySelectorAll('article h2')) as Array<HTMLHeadingElement>;
 
-    // Helper function to add tabindex to a heading
-    // This resolves an issue with on-page links not working in Safari with VoiceOver
+    // Helper function to add tabindex="-1" to each h2
+    // This resolves an issue with Safari/VoiceOver that prevents on-page links from
+    // moving focus to the heading when clicked
     const makeHeadingFocusable = (heading: HTMLHeadingElement): void => {
-      heading.setAttribute('tabindex', '-1');
+      if (!heading.hasAttribute('tabindex')) {
+        heading.setAttribute('tabindex', '-1');
+      }
     };
 
     // Helper function to validate that the heading has the required id
