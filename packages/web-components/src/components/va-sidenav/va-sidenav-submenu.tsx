@@ -203,7 +203,7 @@ export class VaSidenavMenu {
 
     return (
       <Host role="listitem">
-        <div role="list" class={submenuClasses}>
+        <nav role="list" class={submenuClasses} aria-describedby="va-sidenav-submenu__label">
           {this.href ? (
             <a 
               role="listitem"
@@ -215,7 +215,7 @@ export class VaSidenavMenu {
             <div role="listitem" id="va-sidenav-submenu__label" class="va-sidenav-submenu__label">{this.label}</div>
           )}
           <slot></slot>
-        </div>
+        </nav>
       </Host>
     );
   }

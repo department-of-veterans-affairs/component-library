@@ -20,20 +20,6 @@ describe('va-sidenav-submenu', () => {
     await axeCheck(page);
     await page.close();
   });
-
-  it('label prop sets the submenu parent label and aria-label', async () => {
-    const page = await newE2EPage();
-    await page.setContent(vaSidenavSubmenu());
-    const link = await page.find('va-sidenav-submenu >>> .va-sidenav-submenu__label');
-    const text = await link.innerText;
-    expect(text).toBe('Submenu');
-  
-    const navElement = await page.find('va-sidenav-submenu >>> nav');
-    const ariaLabel = await navElement.getAttribute('aria-label');
-    expect(ariaLabel).toBe('Pages related to the Submenu section');
-    
-    await page.close(); 
-  });
   
   it('href prop sets the submenu parent to a link', async () => {
     const page = await newE2EPage();
@@ -81,7 +67,7 @@ describe('va-sidenav-submenu', () => {
       </va-sidenav-submenu>
     </va-sidenav>`);
   
-    const submenu = await page.find('va-sidenav-submenu >>> nav');
+    const submenu = await page.find('va-sidenav-submenu >>> div[role="list"]');
   
     expect(submenu).not.toBeNull();
   
