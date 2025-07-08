@@ -134,7 +134,7 @@ export class VaSidenav {
     if (this.isDesktop) {
       return (
         <Host>
-          <nav aria-label={this.ariaLabel()} role="list">
+          <nav aria-label={this.ariaLabel()}>
             {this.header && (
               <h2 class="va-sidenav__header">
                 {this.iconName ? (
@@ -145,7 +145,7 @@ export class VaSidenav {
                 {this.header}
               </h2>
             )}
-            <div class="va-sidenav__list">
+            <div class="va-sidenav__list" role="list">
               <slot></slot>
             </div>
           </nav>

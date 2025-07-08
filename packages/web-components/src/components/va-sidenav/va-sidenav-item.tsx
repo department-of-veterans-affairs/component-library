@@ -54,9 +54,8 @@ export class VaSidenavItem {
     const href = this.currentPage ? '#content' : this.href;
     
     return (
-      <Host>
+      <Host role="listitem">
         <a 
-          role="listitem"
           class={anchorClasses} 
           href={href} 
           aria-current={this.currentPage ? 'page' : undefined}

@@ -202,16 +202,17 @@ export class VaSidenavMenu {
     const href = this.currentPage ? '#content' : this.href;
 
     return (
-      <Host>
-        <div role="list" class={submenuClasses} aria-labelledby="va-sidenav-submenu__label">
+      <Host role="listitem">
+        <div role="list" class={submenuClasses}>
           {this.href ? (
             <a 
+              role="listitem"
               class={linkClasses} 
               href={href} 
               aria-current={this.currentPage ? 'page' : undefined} 
               onClick={this.handleClick.bind(this)}>{this.label}</a>
           ) : (
-            <div id="va-sidenav-submenu__label" class="va-sidenav-submenu__label">{this.label}</div>
+            <div role="listitem" id="va-sidenav-submenu__label" class="va-sidenav-submenu__label">{this.label}</div>
           )}
           <slot></slot>
         </div>
