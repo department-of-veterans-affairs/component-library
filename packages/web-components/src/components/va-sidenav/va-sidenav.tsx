@@ -145,7 +145,7 @@ export class VaSidenav {
                 {this.header}
               </h2>
             )}
-            <div class="va-sidenav__list" role="list">
+            <div role="list" class="va-sidenav__list">
               <slot></slot>
             </div>
           </nav>
@@ -161,7 +161,7 @@ export class VaSidenav {
               <va-icon icon="menu" />
             </span>
             <nav aria-label={this.ariaLabel()}>
-              <div class="va-sidenav__list" role="list">
+              <div role="list" class="va-sidenav__list">
                 <slot></slot>
               </div>
             </nav>

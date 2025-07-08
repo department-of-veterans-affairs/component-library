@@ -30,9 +30,6 @@ a:hover {
   padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
   position: relative;
   text-decoration: none;
-  &:active {
-    z-index: 2;
-  }
 }
 
 .va-sidenav-submenu__current-link {

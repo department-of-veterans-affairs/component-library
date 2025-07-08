@@ -21,9 +21,6 @@ a {
   padding: 0.5rem 0.25rem 0.5rem 1rem;
   padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
   text-decoration: none;
-  &:active {
-    z-index: 2;
-  }
 }
 
 a:hover {
