@@ -56,6 +56,7 @@ export class VaSidenavItem {
     return (
       <Host>
         <a 
+          role="listitem"
           class={anchorClasses} 
           href={href} 
           aria-current={this.currentPage ? 'page' : undefined}
