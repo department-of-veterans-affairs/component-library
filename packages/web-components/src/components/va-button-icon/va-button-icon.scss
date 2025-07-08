@@ -14,6 +14,7 @@
   background: var(--vads-button-color-background-secondary-on-light, #FFFFFF);
   color: var(--vads-color-link);
   text-transform: uppercase;
+  column-gap: 0.25rem;
 
   &:hover, &:focus, &:active {
     color: var(--vads-color-primary-dark);
