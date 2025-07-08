@@ -78,21 +78,32 @@ export class VaOnThisPage {
 
   render() {
     const { handleOnClick } = this;
+    const allHeaders = Array.from(document.querySelectorAll('article h2')) as Array<HTMLHeadingElement>;
 
-    const h2s = Array.from(document.querySelectorAll('article h2')).filter(
-      heading => {
-        if (!heading.id) {
-          consoleDevError(`${heading.textContent} is missing an id`);
-        }
-        return heading.id;
-      },
-    ) as Array<HTMLElement>;
+    // Helper function to add tabindex to a heading
+    // This resolves an issue with on-page links not working in Safari with VoiceOver
+    const makeHeadingFocusable = (heading: HTMLHeadingElement): void => {
+      heading.setAttribute('tabindex', '-1');
+    };
+
+    // Helper function to validate that the heading has the required id
+    const getHeadingId = (heading: HTMLHeadingElement): string => {
+      if (!heading.id) {
+        consoleDevError(`${heading.textContent} is missing an id`);
+      }
+      return heading.id;
+    };
+
+    const enhancedHeaders = allHeaders.filter(heading => {
+      makeHeadingFocusable(heading);
+      return getHeadingId(heading);
+    });
 
     return (
       <nav aria-labelledby="on-this-page">
         <ul>
           <li id="on-this-page">{i18next.t('on-this-page')}</li>
-          {h2s.map(heading => (
+          {enhancedHeaders.map(heading => (
             <li>
               <a href={`#${heading.id}`} onClick={handleOnClick}>
                 <va-icon icon="arrow_downward"></va-icon>
