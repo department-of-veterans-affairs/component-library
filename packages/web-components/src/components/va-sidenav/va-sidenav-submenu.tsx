@@ -203,7 +203,7 @@ export class VaSidenavMenu {
 
     return (
       <Host>
-        <nav class={submenuClasses} aria-label={`Pages related to the ${this.label} section`}>
+        <nav class={submenuClasses} aria-labelledby="va-sidenav-submenu__label">
           {this.href ? (
             <a 
               class={linkClasses} 
@@ -211,7 +211,7 @@ export class VaSidenavMenu {
               aria-current={this.currentPage ? 'page' : undefined} 
               onClick={this.handleClick.bind(this)}>{this.label}</a>
           ) : (
-            <div class="va-sidenav-submenu__label">{this.label}</div>
+            <div id="va-sidenav-submenu__label" class="va-sidenav-submenu__label">{this.label}</div>
           )}
           <slot></slot>
         </nav>
