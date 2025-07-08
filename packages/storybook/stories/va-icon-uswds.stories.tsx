@@ -398,6 +398,7 @@ const icons = [
   'support',
   'support_agent',
   'text_fields',
+  'threads',
   'thumb_down_alt',
   'thumb_up_alt',
   'timer',
