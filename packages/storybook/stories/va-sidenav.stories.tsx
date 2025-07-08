@@ -58,7 +58,10 @@ const Template = (args) => {
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault(); // stopping the link from navigating just for Storybook
-    e.currentTarget.setAttribute('current-page', 'true');
+
+    if (e.currentTarget.hasAttribute('href')) {
+      e.currentTarget.setAttribute('current-page', 'true');
+    }
   }
 
   return (

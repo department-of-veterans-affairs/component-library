@@ -23,12 +23,20 @@ a:hover {
 }
 
 .va-sidenav-submenu__link {
+  border-bottom: 1px solid var(--vads-color-base-lightest);
   color: var(--vads-color-link);
   display: block;
   padding: 0.7rem 1rem;
   padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
   position: relative;
   text-decoration: none;
+  &:active {
+    z-index: 2;
+  }
+}
+
+.va-sidenav-submenu__current-link {
+  font-weight: var(--font-weight-bold);
 }
 
 .va-sidenav-submenu__current-link::after {
@@ -52,8 +60,8 @@ a:hover {
   content: "";
   display: block;
   position: absolute;
-  bottom: .25rem;
-  top: .25rem;
+  bottom: 0;
+  top: 0;
   width: .25rem;
   left: 0;
 }

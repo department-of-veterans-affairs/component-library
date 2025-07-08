@@ -48,7 +48,7 @@ export class VaSidenavItem {
 
   render() {
     const anchorClasses = classNames({
-      'va-sidenav__current': this.currentPage,
+      'va-sidenav-item__current': this.currentPage,
     });
 
     const href = this.currentPage ? '#content' : this.href;

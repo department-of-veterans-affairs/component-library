@@ -13,10 +13,17 @@
 }
 
 .va-sidenav__header {
+  align-items: center;
   color: var(--vads-color-base);
   display: flex;
-  align-items: center;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-bold);
   margin-bottom: 12px;
+  margin-top: 0;
+  .va-sidenav__icon-background {
+    font-size: 24px;
+  }
 }
 
 .va-sidenav__icon-background {

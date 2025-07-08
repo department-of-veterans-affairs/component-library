@@ -18,9 +18,12 @@ a {
   color: var(--vads-color-link);
   display: block;
   line-height: var(--vads-font-line-height-4);
-  padding: 0.6rem 1rem;
+  padding: 0.5rem 0.25rem 0.5rem 1rem;
   padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
   text-decoration: none;
+  &:active {
+    z-index: 2;
+  }
 }
 
 a:hover {
@@ -28,12 +31,12 @@ a:hover {
   box-shadow: none;
 }
 
-.va-sidenav__current {
+.va-sidenav-item__current {
   position: relative;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
-.va-sidenav__current::after {
+.va-sidenav-item__current::after {
   background-color: var(--vads-color-link);
   content: "";
   display: block;
