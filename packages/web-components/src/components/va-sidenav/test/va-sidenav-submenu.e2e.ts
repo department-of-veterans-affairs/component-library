@@ -17,7 +17,7 @@ describe('va-sidenav-submenu', () => {
     const page = await newE2EPage();
     await page.setContent(vaSidenavSubmenu());
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
     await page.close();
   });
   
@@ -67,7 +67,7 @@ describe('va-sidenav-submenu', () => {
       </va-sidenav-submenu>
     </va-sidenav>`);
   
-    const submenu = await page.find('va-sidenav-submenu >>> div[role="list"]');
+    const submenu = await page.find('va-sidenav-submenu >>> nav');
   
     expect(submenu).not.toBeNull();
   

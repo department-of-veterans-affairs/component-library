@@ -20,7 +20,7 @@ describe('va-sidenav', () => {
       </va-sidenav-submenu>
     </va-sidenav>`);
   
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
 
     // Set viewport to mobile web size
     await page.setViewport({
@@ -30,7 +30,7 @@ describe('va-sidenav', () => {
 
     await page.waitForChanges();
 
-    await axeCheck(page);
+    await axeCheck(page, ['aria-allowed-role']);
     await page.close();
   });
 

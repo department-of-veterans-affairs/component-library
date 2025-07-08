@@ -39,7 +39,7 @@ describe('va-sidenav-item', () => {
     expect(ariaCurrent).toBe('page');
 
     const linkClasses = await link.getAttribute('class');
-    expect(linkClasses).toContain('va-sidenav__current');
+    expect(linkClasses).toContain('va-sidenav-item__current');
     
     await page.close();
   });
@@ -51,7 +51,7 @@ describe('va-sidenav-item', () => {
           <va-sidenav-item href="/profile" label="Profile" current-page="true"></va-sidenav-item>
         </va-sidenav>`);
 
-    const item = await page.find('va-sidenav-item >>> .va-sidenav__current');
+    const item = await page.find('va-sidenav-item >>> .va-sidenav-item__current');
     const href = await item.getAttribute('href');
     expect(href).toBe('#content');
     

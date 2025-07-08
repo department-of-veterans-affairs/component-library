@@ -161,7 +161,7 @@ export class VaSidenav {
               <va-icon icon="menu" />
             </span>
             <nav aria-label={this.ariaLabel()}>
-              <div class="va-sidenav__list">
+              <div class="va-sidenav__list" role="list">
                 <slot></slot>
               </div>
             </nav>
