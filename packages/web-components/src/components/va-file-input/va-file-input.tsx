@@ -144,7 +144,7 @@ export class VaFileInput {
   /**
    * Reset to initial visual state. Useful in conjunction with errors
    */
-  @Prop() resetVisualState?: boolean = false;
+  @Prop({ mutable: true }) resetVisualState?: boolean = false;
 
   /**
    * The event emitted when the file input value changes.
