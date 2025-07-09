@@ -707,6 +707,10 @@ export namespace Components {
          */
         "name"?: string;
         /**
+          * Error message for the encrypted password input
+         */
+        "passwordError"?: string;
+        /**
           * Percent upload completed. For use with va-progress-bar component
          */
         "percentUploaded"?: number;
@@ -4430,6 +4434,10 @@ declare namespace LocalJSX {
           * The event emitted when the file input password value changes.
          */
         "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * Error message for the encrypted password input
+         */
+        "passwordError"?: string;
         /**
           * Percent upload completed. For use with va-progress-bar component
          */

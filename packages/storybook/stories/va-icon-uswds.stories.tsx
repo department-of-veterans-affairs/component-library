@@ -321,6 +321,7 @@ const icons = [
   'mail',
   'mail_outline',
   'map',
+  'mark_email_read',
   'masks',
   'medical_services',
   'medical_services_outlined',
