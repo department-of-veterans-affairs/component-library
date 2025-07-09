@@ -23,12 +23,18 @@
   }
 
   // override USWDS to solve issue with multi-line decenders touching (increase line-height and decrease padding top/bottom)
+  // add position relative and z-index to make focus outline appear above sibling elements
   .usa-button {
     line-height: var(--vads-font-line-height-2);
     padding: .60rem 1.25rem;
+    position: relative;
 
     &--big {
       padding: .8rem 1.5rem;
+    }
+
+    &:focus {
+      z-index: 1;
     }
   }
 
