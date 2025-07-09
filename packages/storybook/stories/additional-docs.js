@@ -56,6 +56,7 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: PROPOSED,
   },
+
   // MDX
   'Tag': {
     guidanceHref: 'tag',

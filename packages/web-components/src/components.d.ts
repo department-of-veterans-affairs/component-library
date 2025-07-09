@@ -976,6 +976,37 @@ export namespace Components {
         "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
     }
     /**
+     * @componentName Loader
+     * @maturityCategory don't use
+     * @maturityLevel proposed
+     */
+    interface VaLoader {
+        /**
+          * Custom left alignment
+         */
+        "alignLeft"?: string;
+        /**
+          * Custom top alignment
+         */
+        "alignTop"?: string;
+        /**
+          * The ARIA live region setting
+         */
+        "ariaLiveRegion"?: string;
+        /**
+          * Whether the loader is currently busy (use 'true' or 'false' as string)
+         */
+        "busy"?: string;
+        /**
+          * The text to display in the center of the loader
+         */
+        "centerLabel"?: string;
+        /**
+          * The ARIA role for the loader
+         */
+        "loaderRole"?: string;
+    }
+    /**
      * @componentName Loading indicator
      * @maturityCategory use
      * @maturityLevel deployed
@@ -2879,6 +2910,17 @@ declare global {
         prototype: HTMLVaLinkActionElement;
         new (): HTMLVaLinkActionElement;
     };
+    /**
+     * @componentName Loader
+     * @maturityCategory don't use
+     * @maturityLevel proposed
+     */
+    interface HTMLVaLoaderElement extends Components.VaLoader, HTMLStencilElement {
+    }
+    var HTMLVaLoaderElement: {
+        prototype: HTMLVaLoaderElement;
+        new (): HTMLVaLoaderElement;
+    };
     interface HTMLVaLoadingIndicatorElementEventMap {
         "component-library-analytics": any;
     }
@@ -3549,6 +3591,7 @@ declare global {
         "va-language-toggle": HTMLVaLanguageToggleElement;
         "va-link": HTMLVaLinkElement;
         "va-link-action": HTMLVaLinkActionElement;
+        "va-loader": HTMLVaLoaderElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
@@ -4672,6 +4715,37 @@ declare namespace LocalJSX {
           * The type of the link, which determines its style. Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
          */
         "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
+    }
+    /**
+     * @componentName Loader
+     * @maturityCategory don't use
+     * @maturityLevel proposed
+     */
+    interface VaLoader {
+        /**
+          * Custom left alignment
+         */
+        "alignLeft"?: string;
+        /**
+          * Custom top alignment
+         */
+        "alignTop"?: string;
+        /**
+          * The ARIA live region setting
+         */
+        "ariaLiveRegion"?: string;
+        /**
+          * Whether the loader is currently busy (use 'true' or 'false' as string)
+         */
+        "busy"?: string;
+        /**
+          * The text to display in the center of the loader
+         */
+        "centerLabel"?: string;
+        /**
+          * The ARIA role for the loader
+         */
+        "loaderRole"?: string;
     }
     /**
      * @componentName Loading indicator
@@ -6039,6 +6113,7 @@ declare namespace LocalJSX {
         "va-language-toggle": VaLanguageToggle;
         "va-link": VaLink;
         "va-link-action": VaLinkAction;
+        "va-loader": VaLoader;
         "va-loading-indicator": VaLoadingIndicator;
         "va-maintenance-banner": VaMaintenanceBanner;
         "va-memorable-date": VaMemorableDate;
@@ -6265,6 +6340,12 @@ declare module "@stencil/core" {
              * @guidanceName Action link
              */
             "va-link-action": LocalJSX.VaLinkAction & JSXBase.HTMLAttributes<HTMLVaLinkActionElement>;
+            /**
+             * @componentName Loader
+             * @maturityCategory don't use
+             * @maturityLevel proposed
+             */
+            "va-loader": LocalJSX.VaLoader & JSXBase.HTMLAttributes<HTMLVaLoaderElement>;
             /**
              * @componentName Loading indicator
              * @maturityCategory use
