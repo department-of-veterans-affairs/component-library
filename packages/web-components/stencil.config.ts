@@ -47,10 +47,6 @@ export const config: Config = {
           src: 'img/sprite.svg',
           dest: path.join(__dirname, 'dist/img/sprite.svg'),
         },
-        {
-          src: 'img/sprite.svg',
-          dest: path.join(__dirname, '../storybook/public/img/sprite.svg'),
-        },
       ],
     },
     {
