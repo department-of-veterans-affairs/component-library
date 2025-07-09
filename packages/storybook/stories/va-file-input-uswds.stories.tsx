@@ -408,3 +408,41 @@ const PercentUploadedTemplate = args => {
 
 export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
 WithPercentUploaded.args = { ...defaultArgs };
+
+const VisualStateResetTemplate = args => {
+  const [reset, setReset] = useState(false);
+  const [error, setError] = useState(null);
+
+  function handleClick() {
+    setReset(prev => !prev);
+  }
+
+  function handleFileAdd() {
+    setReset(false);
+    setError(null);
+  }
+
+  useEffect(() => {
+    if (reset) {
+      setError('Error encountered during upload. Please try again.');
+    }
+  }, [reset]);
+
+  return (
+    <div>
+      <p>If the component recieves an error after or during file upload it may be useful to reset the visual state. Add a file then click the "Reset visual state" button to see a demonstration.</p>
+      <VaFileInput
+        {...args}
+        resetVisualState={reset}
+        error={error}
+        onClick={handleFileAdd}
+      />
+      <p>
+        <va-button text="Reset visual state" onClick={handleClick} />
+      </p>
+    </div>
+  )
+}
+
+export const WithVisualStateReset = VisualStateResetTemplate.bind(null);
+WithVisualStateReset.args = { ...defaultArgs }

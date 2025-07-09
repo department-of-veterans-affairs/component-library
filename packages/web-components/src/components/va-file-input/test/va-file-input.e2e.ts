@@ -345,4 +345,16 @@ describe('va-file-input', () => {
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).toBeNull();
   });
+
+  it('resets visual state if component recieves resetVisualState prop', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`);
+    const host = await page.find('va-file-input');
+    const containerSelector = 'va-file-input >>> div.selected-files-wrapper'
+    const containerBefore = await host.find(containerSelector);
+    expect(containerBefore).not.toBeNull();
+    host.setAttribute('reset-visual-state', 'true');
+    await page.waitForChanges();
+    const containerAfter = await host.find(containerSelector)
+    expect(containerAfter).toBeNull();
+  });
 });

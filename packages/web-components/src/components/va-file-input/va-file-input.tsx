@@ -142,6 +142,11 @@ export class VaFileInput {
   @Prop() passwordError?: string;
 
   /**
+   * Reset to initial visual state. Useful in conjunction with errors
+   */
+  @Prop() resetVisualState?: boolean = false;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -173,12 +178,23 @@ export class VaFileInput {
       if (value >= 100) {
         this.resetState();
       }
+  }
+  
+  /**
+   * Return to initial visual state of component to display error and
+   * allow user to try to add file again.
+   */
+  @Watch('resetVisualState')
+  handleError(value: boolean) {
+    if (value) {
+      this.resetState();
     }
+  }
 
   /**
    * called when file has been uploaded
    * or file upload has been cancelled
-   * only relevant when percentUploaded specified
+   * or if resetVisualState prop set to true
    */
   private resetState() {
     this.fileContents = null;
@@ -188,6 +204,7 @@ export class VaFileInput {
   }
 
   private handleChange = (e: Event) => {
+    this.resetVisualState = false;
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0]);
@@ -446,13 +463,14 @@ export class VaFileInput {
       uploadedFile,
       percentUploaded,
       passwordError,
+      resetVisualState,
     } = this;
 
     if (value && !this.file) {
       this.handleFile(value, false);
     }
 
-    const displayError = this.error || this.internalError;
+    const displayError = error || this.internalError;
     const ariaDescribedbyIds =
       `${hint ? 'input-hint-message' : ''} ${
         displayError ? 'input-error-message' : ''
@@ -543,7 +561,7 @@ export class VaFileInput {
             aria-describedby={ariaDescribedbyIds}
             onChange={this.handleChange}
           />
-          {(uploadStatus === 'idle' && !uploadedFile) && (
+          {(uploadStatus === 'idle' && (!uploadedFile || resetVisualState)) && (
             <div>
               <span id="file-input-error-alert" role="alert">
                 {displayError && (
@@ -566,7 +584,7 @@ export class VaFileInput {
               </div>
             </div>
           )}
-          {(uploadStatus !== 'idle' || uploadedFile) && (
+          {(!resetVisualState && (uploadStatus !== 'idle' || uploadedFile)) && (
             <div class={selectedFileClassName}>
               {!headless && (
                 <div class="selected-files-label">
