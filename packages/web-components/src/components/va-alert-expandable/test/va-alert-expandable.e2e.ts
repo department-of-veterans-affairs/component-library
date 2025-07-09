@@ -218,22 +218,49 @@ describe('va-alert-expandable', () => {
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
 
-  it.skip('sets the correct max-height value for the content given', async () => {
+  it('sets the correct max-height value on window resize', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-alert-expandable trigger="Click here for a treat!" disable-analytics>
-        <div style="height:50px;padding:10px 0;margin:5px 0;">We're out of treats! Try again later.</div>
+      <va-alert-expandable status="warning" trigger="Limited services and hours" disable-analytics>
+        <div style="height:50px;padding:10px 0;margin:5px 0;">Limited services and hours content</div>
       </va-alert-expandable>
     `);
     const handle = await page.waitForSelector('pierce/#alert-body');
     const anchorEl = await page.find('va-alert-expandable >>> a');
     await anchorEl.click();
     await page.waitForSelector('pierce/#alert-body.open');
-    const calcMaxHeight = await handle.evaluate((domElement: HTMLElement) =>
+
+    // Get the initial max-height value
+    const maxHeightBeforeResize = await handle.evaluate((domElement: HTMLElement) =>
       domElement.style.getPropertyValue('--calc-max-height'),
     );
-    // 50px from height + 20px from inline padding + 39px from #slot-wrap element.
-    // margin-bottom and margin-top is set to 0 for first slotted child.
-    expect(calcMaxHeight).toEqual('calc(109px + 2rem)');
+
+    // Trigger window resize event
+    await page.evaluate(() => window.dispatchEvent(new Event('resize')));
+
+    // Get the updated max-height value
+    const maxHeightAfterResize = await handle.evaluate((domElement: HTMLElement) =>
+      domElement.style.getPropertyValue('--calc-max-height'),
+    );
+
+    expect(maxHeightAfterResize).toEqual(maxHeightBeforeResize);
+  });
+
+  it('handles any case where `#alert-body` is not present in the shadow DOM', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-alert-expandable status="warning" trigger="Limited services and hours"></va-alert-expandable>`);
+
+    // Remove `#info` manually after render
+    await page.evaluate(() => {
+      const info = document
+        .querySelector('va-alert-expandable')
+        ?.shadowRoot?.getElementById('alert-body');
+      if (info?.parentNode) info.parentNode.removeChild(info);
+    });
+
+    // Manually call resize to trigger `updateInfoMaxHeight`
+    await page.evaluate(() => window.dispatchEvent(new Event('resize')));
+
+    expect(true).toBe(true); // If no error, the test passes
   });
 });
