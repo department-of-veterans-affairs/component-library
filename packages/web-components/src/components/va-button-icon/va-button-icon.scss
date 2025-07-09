@@ -10,14 +10,21 @@
 }
 
 // Styles for "regular" buttons
+// add position relative and z-index to make focus outline appear above sibling elements
 :host .usa-button {
   background: var(--vads-button-color-background-secondary-on-light, #FFFFFF);
   color: var(--vads-color-link);
   text-transform: uppercase;
+  position: relative;
+  column-gap: 0.25rem;
 
   &:hover, &:focus, &:active {
     color: var(--vads-color-primary-dark);
     background: var(--vads-color-primary-lighter);
+  }
+
+  &:focus {
+    z-index: 1;
   }
 }
 
