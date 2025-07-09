@@ -430,7 +430,7 @@ const VisualStateResetTemplate = args => {
 
   return (
     <div>
-      <p>If the component recieves an error after or during file upload it may be useful to reset the visual state. Add a file then click the "Reset visual state" button to see a demonstration.</p>
+      <p>If the component receives an error after or during file upload it may be useful to reset the visual state. Add a file then click the "Reset visual state" button to see a demonstration.</p>
       <VaFileInput
         {...args}
         resetVisualState={reset}
