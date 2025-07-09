@@ -53,7 +53,6 @@ export class VaOnThisPage {
    */
   @Prop() disableAnalytics?: boolean = false;
 
-
   private handleOnClick = event => {
     if (this.disableAnalytics) return;
     this.componentLibraryAnalytics.emit({
@@ -121,6 +120,4 @@ export class VaOnThisPage {
       </nav>
     );
   }
-
-
 }
