@@ -250,15 +250,15 @@ describe('va-alert-expandable', () => {
     const page = await newE2EPage();
     await page.setContent(`<va-alert-expandable status="warning" trigger="Limited services and hours"></va-alert-expandable>`);
 
-    // Remove `#info` manually after render
+    // Remove `#alert-body` manually after render
     await page.evaluate(() => {
-      const info = document
+      const alertBody = document
         .querySelector('va-alert-expandable')
         ?.shadowRoot?.getElementById('alert-body');
-      if (info?.parentNode) info.parentNode.removeChild(info);
+      if (alertBody?.parentNode) alertBody.parentNode.removeChild(alertBody);
     });
 
-    // Manually call resize to trigger `updateInfoMaxHeight`
+    // Manually call resize to trigger `updateAlertBodyMaxHeight`
     await page.evaluate(() => window.dispatchEvent(new Event('resize')));
 
     expect(true).toBe(true); // If no error, the test passes
