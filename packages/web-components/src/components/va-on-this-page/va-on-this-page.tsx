@@ -53,6 +53,29 @@ export class VaOnThisPage {
    */
   @Prop() disableAnalytics?: boolean = false;
 
+  private articleHeaders: Array<HTMLHeadingElement> = [];
+
+  /**
+   * Moves focus to the heading element corresponding to the clicked anchor link.
+   * This is added to fix known issues with screen readers like VoiceOver.
+   *
+   * @param event - The mouse click event from the anchor element
+   * @remarks
+   * Temporarily setting the tabindex to -1 fixes a VoiceOver bug that mishandles focus.
+   * Adding role="text" fixes a screen reader bug that causes duplicate text announcements.
+   * Both should be removed after the bugs are fixed in the screen readers.
+   */
+  private moveFocusToHeading = (event: MouseEvent) => {
+    const target = event.target as HTMLAnchorElement;
+    const heading = document.getElementById(target.hash.slice(1)) as HTMLHeadingElement;
+    if (heading) {
+      heading.setAttribute('tabindex', '-1');
+      heading.setAttribute('role', 'text');
+      heading.focus();
+      heading.removeAttribute('tabindex');
+    }
+  };
+
   private handleOnClick = event => {
     if (this.disableAnalytics) return;
     this.componentLibraryAnalytics.emit({
@@ -64,9 +87,9 @@ export class VaOnThisPage {
           event.path?.[0]?.textContent,
       },
     });
-  };
 
-  private articleHeaders: Array<HTMLHeadingElement> = [];
+    this.moveFocusToHeading(event);
+  };
 
   connectedCallback() {
     this.articleHeaders = Array.from(document.querySelectorAll('article h2')) as Array<HTMLHeadingElement>;
@@ -77,19 +100,6 @@ export class VaOnThisPage {
 
   disconnectedCallback() {
     i18next.off('languageChanged');
-  }
-
-  componentDidLoad() {
-    /**
-     * Allow the browser to move focus to the heading when the link is clicked
-     * This resolves an issue with Safari/VoiceOver that prevents same page links
-     *  from moving focus to the heading when clicked
-    */
-    this.articleHeaders
-      .filter(heading => !heading.hasAttribute('tabindex'))
-      .forEach(heading => {
-        heading.setAttribute('tabindex', '-1');
-      });
   }
 
   render() {
