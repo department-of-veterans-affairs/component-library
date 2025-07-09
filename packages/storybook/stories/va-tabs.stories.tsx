@@ -20,12 +20,6 @@ const defaultArgs = {
     { label: 'Inbox', url: '#tab1' },
     { label: 'Sent', url: '#tab2' },
     { label: 'More Files', url: '#tab3' },
-    { label: 'Inbox2', url: '#tab4' },
-    { label: 'Sent2', url: '#tab5' },
-    { label: 'More Files2', url: '#tab6' },
-    { label: 'Inbox3', url: '#tab7' },
-    { label: 'Sent3', url: '#tab8' },
-    { label: 'More Files3', url: '#tab9' },
   ],
 };
 
