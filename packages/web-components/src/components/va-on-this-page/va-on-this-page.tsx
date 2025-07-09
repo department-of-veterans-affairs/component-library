@@ -53,6 +53,7 @@ export class VaOnThisPage {
    */
   @Prop() disableAnalytics?: boolean = false;
 
+
   private handleOnClick = event => {
     if (this.disableAnalytics) return;
     this.componentLibraryAnalytics.emit({
@@ -66,7 +67,10 @@ export class VaOnThisPage {
     });
   };
 
+  private articleHeaders: Array<HTMLHeadingElement> = [];
+
   connectedCallback() {
+    this.articleHeaders = Array.from(document.querySelectorAll('article h2')) as Array<HTMLHeadingElement>;
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
@@ -76,37 +80,36 @@ export class VaOnThisPage {
     i18next.off('languageChanged');
   }
 
+  componentDidLoad() {
+    /**
+     * Allow the browser to move focus to the heading when the link is clicked
+     * This resolves an issue with Safari/VoiceOver that prevents same page links
+     *  from moving focus to the heading when clicked
+    */
+    this.articleHeaders
+      .filter(heading => !heading.hasAttribute('tabindex'))
+      .forEach(heading => {
+        heading.setAttribute('tabindex', '-1');
+      });
+  }
+
   render() {
     const { handleOnClick } = this;
-    const allHeaders = Array.from(document.querySelectorAll('article h2')) as Array<HTMLHeadingElement>;
 
-    // Helper function to add tabindex="-1" to each h2
-    // This resolves an issue with Safari/VoiceOver that prevents on-page links from
-    // moving focus to the heading when clicked
-    const makeHeadingFocusable = (heading: HTMLHeadingElement): void => {
-      if (!heading.hasAttribute('tabindex')) {
-        heading.setAttribute('tabindex', '-1');
-      }
-    };
-
-    // Helper function to validate that the heading has the required id
-    const getHeadingId = (heading: HTMLHeadingElement): string => {
-      if (!heading.id) {
-        consoleDevError(`${heading.textContent} is missing an id`);
-      }
-      return heading.id;
-    };
-
-    const enhancedHeaders = allHeaders.filter(heading => {
-      makeHeadingFocusable(heading);
-      return getHeadingId(heading);
-    });
+    const h2s = this.articleHeaders.filter(
+      heading => {
+        if (!heading.id) {
+          consoleDevError(`${heading.textContent} is missing an id`);
+        }
+        return heading.id;
+      },
+    ) as Array<HTMLElement>;
 
     return (
       <nav aria-labelledby="on-this-page">
         <ul>
           <li id="on-this-page">{i18next.t('on-this-page')}</li>
-          {enhancedHeaders.map(heading => (
+          {h2s.map(heading => (
             <li>
               <a href={`#${heading.id}`} onClick={handleOnClick}>
                 <va-icon icon="arrow_downward"></va-icon>
@@ -118,4 +121,6 @@ export class VaOnThisPage {
       </nav>
     );
   }
+
+
 }
