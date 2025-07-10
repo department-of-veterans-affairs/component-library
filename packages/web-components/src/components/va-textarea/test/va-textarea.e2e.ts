@@ -225,12 +225,14 @@ describe('va-textarea', () => {
     const inputEl = await page.find('va-textarea >>> textarea');
     await inputEl.type('Hello');
 
-    // Wait 1000ms for the character count to update (debounced in the component)
-    await new Promise((r) => setTimeout(r, 1000));
-
     const span = await page.find('va-textarea >>> span.usa-character-count__status')
 
     expect(span.innerText).toEqual('5 characters left');
+
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1000));
+    const srSpan = await page.find('va-textarea >>> span#charcount-message')
+    expect(srSpan.innerText).toEqual('5 characters left');
 
   });
 
@@ -244,11 +246,15 @@ describe('va-textarea', () => {
     const inputEl = await page.find('va-textarea >>> textarea');
     await inputEl.type('This is too long');
 
-    // Wait 1000ms for the character count to update (debounced in the component)
-    await new Promise((r) => setTimeout(r, 1000));
-
     const messageSpan = await page.find('va-textarea >>> span.usa-character-count__status');
     expect(messageSpan.innerText).toEqual('6 characters over limit');
+
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1000));
+    expect(
+      (await page.find('va-textarea >>> span#charcount-message'))
+        .innerText,
+    ).toContain('6 characters over limit');
 
     const {color} = await messageSpan.getComputedStyle()
     expect(color).toEqual(

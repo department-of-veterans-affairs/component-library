@@ -342,18 +342,21 @@ export class VaTextarea {
             </span>
           )}
           {charcount && maxlength && (
-            <span
-              id="charcount-message"
-              class={messageClass}
-              aria-live="polite"
-              ref={(el) => (this.charCountElement = el as HTMLSpanElement)}
-            >
-              {/*
-                Element inner text is empty because it's initially set in componentDidRender
-                and programmatically updated `getCharacterMessage` on input. This
-                is to avoid unwanted
-              */}
-            </span>
+            <Fragment>
+              <span aria-hidden="true" class={messageClass}>{getCharacterMessage(this.value, this.getMaxlength())}</span>
+              <span
+                id="charcount-message"
+                aria-live="polite"
+                class="usa-sr-only"
+                ref={(el) => (this.charCountElement = el as HTMLSpanElement)}
+              >
+                {/*
+                  Element inner text is empty because it's initially set in componentDidRender
+                  and programmatically updated `getCharacterMessage` on input. This
+                  is to avoid obtrusive updates for screen readers.
+                */}
+              </span>
+            </Fragment>
           )}
           {isMessageSet(messageAriaDescribedby) && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">

@@ -595,18 +595,23 @@ export class VaTextInput {
             </span>
           )}
           {charcount && maxlength && (
+            <Fragment>
+            <span aria-hidden="true" class={messageClass}>
+              {getCharacterMessage(this.value, this.getMaxlength())}
+            </span>
             <span
               id="charcount-message"
-              class={messageClass}
+              class='usa-sr-only'
               aria-live="polite"
               ref={(el) => (this.charCountElement = el as HTMLSpanElement)}
             >
               {/*
                 Element inner text is empty because it's initially set in componentDidRender
                 and programmatically updated `getCharacterMessage` on input. This
-                is to avoid unwanted
+                is to avoid obtrusive updates for screen readers.
               */}
             </span>
+            </Fragment>
           )}
         </div>
       </Host>

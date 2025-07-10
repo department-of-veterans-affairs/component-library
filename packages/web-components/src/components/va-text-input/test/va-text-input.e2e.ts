@@ -246,11 +246,15 @@ describe('va-text-input', () => {
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('222');
 
-    // Wait 1000ms for the character count to update (debounced in the component)
-    await new Promise((r) => setTimeout(r, 1000));
-
     expect(
       (await page.find('va-text-input >>> span.usa-character-count__status'))
+        .innerText,
+    ).toContain('0 characters left');
+
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1000));
+    expect(
+      (await page.find('va-text-input >>> span#charcount-message'))
         .innerText,
     ).toContain('0 characters left');
 
@@ -259,11 +263,15 @@ describe('va-text-input', () => {
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('2');
 
-    // Wait 1000ms for the character count to update (debounced in the component)
-    await new Promise((r) => setTimeout(r, 1000));
-
     expect(
       (await page.find('va-text-input >>> span.usa-character-count__status'))
+        .innerText,
+    ).toContain('2 characters left');
+
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1000));
+    expect(
+      (await page.find('va-text-input >>> span#charcount-message'))
         .innerText,
     ).toContain('2 characters left');
 
@@ -423,11 +431,15 @@ describe('va-text-input', () => {
     const inputEl = await page.find('va-text-input >>> input');
     await inputEl.type('Hello');
 
-    // Wait 1000ms for the character count to update (debounced in the component)
-    await new Promise((r) => setTimeout(r, 1000));
-
     expect(
       (await page.find('va-text-input >>> span.usa-character-count__status'))
+        .innerText,
+    ).toContain('5 characters left');
+
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1000));
+    expect(
+      (await page.find('va-text-input >>> span#charcount-message'))
         .innerText,
     ).toContain('5 characters left');
   });
