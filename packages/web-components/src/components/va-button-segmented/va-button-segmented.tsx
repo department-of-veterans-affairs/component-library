@@ -130,6 +130,8 @@ export class VaButtonSegmented {
     const buttonClass = classnames({
       'va-segmented-button__button': true,
     });
+
+    // Validate that the buttons prop is provided and is a non-empty array.
     if (!this.buttons || !Array.isArray(this.buttons) || this.buttons.length === 0) {
       console.error('va-button-segmented: "buttons" prop array is required and must contain at least one item.');
       return null;
