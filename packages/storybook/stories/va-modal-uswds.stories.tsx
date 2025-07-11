@@ -85,6 +85,7 @@ const defaultArgs = {
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
   'secondary-button-text': 'Secondary',
   'forcedModal': false,
+  'label': undefined,
 };
 
 const Template = ({
@@ -100,6 +101,7 @@ const Template = ({
   status,
   visible,
   forcedModal,
+  'label': label,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
   const wrapRef = useRef(null);
@@ -134,6 +136,7 @@ const Template = ({
         secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
+        label={label}
       >
         <p>This is a succinct, helpful {status} message</p>
       </VaModal>
@@ -247,8 +250,19 @@ WithoutButtons.args = {
   'secondary-button-text': undefined,
 };
 
-export const WithoutTitle = Template.bind(null);
-WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
+export const WithoutTitleOrLabel = Template.bind(null);
+WithoutTitleOrLabel.args = {
+  ...defaultArgs,
+  'modal-title': undefined,
+  'label': undefined
+};
+
+export const WithoutTitleAndWithLabel = Template.bind(null);
+WithoutTitleAndWithLabel.args = {
+  ...defaultArgs,
+  'modal-title': undefined,
+  'label': 'A test modal',
+};
 
 export const WithNestedWebComponents = ({
   'click-to-close': clickToClose,
