@@ -705,6 +705,10 @@ export namespace Components {
          */
         "name"?: string;
         /**
+          * Error message for the encrypted password input
+         */
+        "passwordError"?: string;
+        /**
           * Percent upload completed. For use with va-progress-bar component
          */
         "percentUploaded"?: number;
@@ -716,6 +720,10 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Reset to initial visual state. Useful in conjunction with errors
+         */
+        "resetVisualState"?: boolean;
         /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
@@ -4383,6 +4391,10 @@ declare namespace LocalJSX {
          */
         "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * Error message for the encrypted password input
+         */
+        "passwordError"?: string;
+        /**
           * Percent upload completed. For use with va-progress-bar component
          */
         "percentUploaded"?: number;
@@ -4394,6 +4406,10 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Reset to initial visual state. Useful in conjunction with errors
+         */
+        "resetVisualState"?: boolean;
         /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */

@@ -47,6 +47,7 @@ const defaultArgs = {
   'status-text': null,
   'uploadedFile': null,
   'maxFileSize': Infinity,
+  'password-error': false
 };
 
 const Template = ({
@@ -67,6 +68,7 @@ const Template = ({
   children,
   uploadedFile,
   maxFileSize,
+  passwordError
 }) => {
   return (
     <VaFileInput
@@ -87,6 +89,7 @@ const Template = ({
       children={children}
       uploadedFile={uploadedFile}
       maxFileSize={maxFileSize}
+      passwordError={passwordError}
     />
   );
 };
@@ -105,6 +108,7 @@ const AcceptsFilePasswordTemplate = ({
   hint,
   vaChange,
   encrypted,
+  passwordError
 }) => {
   return (
     <>
@@ -118,12 +122,16 @@ const AcceptsFilePasswordTemplate = ({
         hint={hint}
         onVaChange={vaChange}
         encrypted={encrypted}
+        passwordError={passwordError}
       />
     </>
   );
 };
 export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
 AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
+
+export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
+WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {
@@ -400,3 +408,41 @@ const PercentUploadedTemplate = args => {
 
 export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
 WithPercentUploaded.args = { ...defaultArgs };
+
+const VisualStateResetTemplate = args => {
+  const [reset, setReset] = useState(false);
+  const [error, setError] = useState(null);
+
+  function handleClick() {
+    setReset(prev => !prev);
+  }
+
+  function handleFileAdd() {
+    setReset(false);
+    setError(null);
+  }
+
+  useEffect(() => {
+    if (reset) {
+      setError('Error encountered during upload. Please try again.');
+    }
+  }, [reset]);
+
+  return (
+    <div>
+      <p>If the component receives an error after or during file upload it may be useful to reset the visual state. Add a file then click the "Reset visual state" button to see a demonstration.</p>
+      <VaFileInput
+        {...args}
+        resetVisualState={reset}
+        error={error}
+        onClick={handleFileAdd}
+      />
+      <p>
+        <va-button text="Reset visual state" onClick={handleClick} />
+      </p>
+    </div>
+  )
+}
+
+export const WithVisualStateReset = VisualStateResetTemplate.bind(null);
+WithVisualStateReset.args = { ...defaultArgs }
