@@ -32,7 +32,7 @@ if (Build.isTesting) {
 @Component({
   tag: 'va-on-this-page',
   styleUrl: 'va-on-this-page.css',
-  shadow: true,
+  shadow: false,
 })
 export class VaOnThisPage {
   @Element() el: HTMLElement;
@@ -56,6 +56,16 @@ export class VaOnThisPage {
   private articleHeaders: Array<HTMLHeadingElement> = [];
 
   /**
+   * Handler for removing tabindex and role attributes on blur.
+   */
+  private handleHeadingBlur = (event: FocusEvent) => {
+    const heading = event.target as HTMLHeadingElement;
+    heading.removeAttribute('tabindex');
+    heading.removeAttribute('role');
+    heading.removeEventListener('blur', this.handleHeadingBlur);
+  };
+
+  /**
    * Moves focus to the heading element corresponding to the clicked anchor link.
    * This is added to fix known issues with screen readers like VoiceOver.
    *
@@ -72,11 +82,14 @@ export class VaOnThisPage {
       heading.setAttribute('tabindex', '-1');
       heading.setAttribute('role', 'text');
       heading.focus();
-      heading.removeAttribute('tabindex');
+      heading.removeEventListener('blur', this.handleHeadingBlur);
+      heading.addEventListener('blur', this.handleHeadingBlur, { once: true });
     }
   };
 
   private handleOnClick = event => {
+    this.moveFocusToHeading(event);
+
     if (this.disableAnalytics) return;
     this.componentLibraryAnalytics.emit({
       componentName: 'va-on-this-page',
@@ -87,8 +100,6 @@ export class VaOnThisPage {
           event.path?.[0]?.textContent,
       },
     });
-
-    this.moveFocusToHeading(event);
   };
 
   connectedCallback() {
