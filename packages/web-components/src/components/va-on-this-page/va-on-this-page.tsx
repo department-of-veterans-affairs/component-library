@@ -32,7 +32,7 @@ if (Build.isTesting) {
 @Component({
   tag: 'va-on-this-page',
   styleUrl: 'va-on-this-page.css',
-  shadow: false,
+  shadow: true,
 })
 export class VaOnThisPage {
   @Element() el: HTMLElement;
@@ -52,8 +52,6 @@ export class VaOnThisPage {
    * If true, analytics event will not be fired
    */
   @Prop() disableAnalytics?: boolean = false;
-
-  private articleHeaders: Array<HTMLHeadingElement> = [];
 
   /**
    * Handler for removing tabindex and role attributes on blur.
@@ -103,7 +101,6 @@ export class VaOnThisPage {
   };
 
   connectedCallback() {
-    this.articleHeaders = Array.from(document.querySelectorAll('article h2')) as Array<HTMLHeadingElement>;
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
@@ -116,7 +113,7 @@ export class VaOnThisPage {
   render() {
     const { handleOnClick } = this;
 
-    const h2s = this.articleHeaders.filter(
+    const h2s = Array.from(document.querySelectorAll('article h2')).filter(
       heading => {
         if (!heading.id) {
           consoleDevError(`${heading.textContent} is missing an id`);
