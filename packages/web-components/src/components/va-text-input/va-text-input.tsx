@@ -15,6 +15,7 @@ import classnames from 'classnames';
 import { i18next } from '../..';
 import {
   consoleDevError,
+  debounce,
   getCharacterMessage,
   getHeaderLevel,
   isMessageSet,
@@ -44,6 +45,8 @@ if (Build.isTesting) {
 })
 export class VaTextInput {
   @Element() el: HTMLElement;
+
+  charCountElement: HTMLSpanElement;
 
   /**
    * Input types we will allow to be specified with the "type" prop.
@@ -236,6 +239,26 @@ export class VaTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
+  componentDidRender() {
+    // If the charCountElement is empty, set the initial text
+    if (this.charCountElement && !this.charCountElement.innerText) {
+      this.charCountElement.innerText = getCharacterMessage(
+        this.value,
+        this.getMaxlength(),
+      );
+    }
+  }
+
   componentWillLoad() {
     this.updatePaddingLeft();
     this.updatePaddingRight();
@@ -297,6 +320,17 @@ export class VaTextInput {
   private handleInput = (e: InputEvent) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
+
+    // Update the inner text of the character count element after a 1000ms delay
+    // to prevent obtrusive updates for screen readers.
+    if (this.charCountElement) {
+      debounce(() => {
+        this.charCountElement.innerText = getCharacterMessage(
+          this.value,
+          this.getMaxlength(),
+        );
+      }, 1000)();
+    }
   };
 
   private handleBlur = (e: Event) => {
@@ -357,16 +391,6 @@ export class VaTextInput {
       return '.01';
     }
     return this.step ? this.step : undefined;
-  }
-
-  connectedCallback() {
-    i18next.on('languageChanged', () => {
-      forceUpdate(this.el);
-    });
-  }
-
-  disconnectedCallback() {
-    i18next.off('languageChanged');
   }
 
   render() {
@@ -571,13 +595,23 @@ export class VaTextInput {
             </span>
           )}
           {charcount && maxlength && (
+            <Fragment>
+            <span aria-hidden="true" class={messageClass}>
+              {getCharacterMessage(this.value, this.getMaxlength())}
+            </span>
             <span
               id="charcount-message"
-              class={messageClass}
+              class='usa-sr-only'
               aria-live="polite"
+              ref={(el) => (this.charCountElement = el as HTMLSpanElement)}
             >
-              {getCharacterMessage(value, maxlength)}
+              {/*
+                Element inner text is empty because it's initially set in componentDidRender
+                and programmatically updated `getCharacterMessage` on input. This
+                is to avoid obtrusive updates for screen readers.
+              */}
             </span>
+            </Fragment>
           )}
         </div>
       </Host>
