@@ -165,6 +165,12 @@ export class VaModal {
   @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
 
   /**
+   * Label for the modal, to be set as aria-label. Will take precedence over modalTitle
+   * in settings of aria-label.
+   */
+  @Prop() label?: string = '';
+
+  /**
    * Local state to track if the shift key is pressed
    */
   @State() shifted: boolean = false;
@@ -331,7 +337,7 @@ export class VaModal {
           }
           if (focusElms.length) {
             // add the web component and focusable shadow elements
-            // document.activeElement targets the web component but the event
+            // document.activeElement targets the web component but the event
             // is composed, so crosses shadow DOM and shows up in composedPath
             focusableElms.push(elm);
             return focusableElms.concat(focusElms);
@@ -416,6 +422,7 @@ export class VaModal {
 
   render() {
     const {
+      label,
       modalTitle,
       primaryButtonClick,
       primaryButtonText,
@@ -429,12 +436,25 @@ export class VaModal {
 
     if (!visible) return null;
 
-    const ariaLabel =
-      modalTitle && modalTitle !== '' ? `${modalTitle} modal` : null;
-    /* eslint-enable i18next/no-literal-string */
-    const btnAriaLabel = modalTitle
-      ? `Close ${modalTitle} modal`
-      : 'Close modal';
+    // Conditionally set value to eventually be passed to the aria-label attribute
+    // of the modal's inner div wrapper. If label prop is provided, use that. Otherwise
+    // if modalTitle prop is provided, use that. If neither is provided, a warning
+    // will be logged in the console.
+    // The aria label for the close button will also be set based upon the same logic.
+    let ariaLabel: string | null = null;
+    let btnAriaLabel: string = 'Close modal';
+
+    if (label) {
+      ariaLabel = label;
+      btnAriaLabel = `Close ${label} modal`;
+    }
+    else if (modalTitle && modalTitle !== '') {
+      ariaLabel = `${modalTitle} modal`;
+      btnAriaLabel = `Close ${modalTitle} modal`;
+    }
+    else {
+      console.warn('<va-modal>: An accessible name for the modal is required. Please provide either a label or modalTitle prop value.');
+    }
 
     const wrapperClass = classnames({
       'usa-modal': true,
@@ -488,8 +508,8 @@ export class VaModal {
               ? 'alertdialog'
               : 'dialog'
           }
-          aria-label={ariaLabel}
           aria-modal="true"
+          aria-label={ariaLabel}
         >
           <div class={contentClass}>
             {closingButton}
