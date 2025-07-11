@@ -1146,6 +1146,10 @@ export namespace Components {
          */
         "initialFocusSelector"?: string;
         /**
+          * Label for the modal, to be set as aria-label. Will take precedence over modalTitle in settings of aria-label.
+         */
+        "label"?: string;
+        /**
           * If `true`, modal will be wider.
          */
         "large"?: boolean;
@@ -4871,6 +4875,10 @@ declare namespace LocalJSX {
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
+        /**
+          * Label for the modal, to be set as aria-label. Will take precedence over modalTitle in settings of aria-label.
+         */
+        "label"?: string;
         /**
           * If `true`, modal will be wider.
          */
