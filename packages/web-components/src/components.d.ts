@@ -721,6 +721,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Reset to initial visual state. Useful in conjunction with errors
+         */
+        "resetVisualState"?: boolean;
+        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -1141,6 +1145,10 @@ export namespace Components {
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
+        /**
+          * Label for the modal, to be set as aria-label. Will take precedence over modalTitle in settings of aria-label.
+         */
+        "label"?: string;
         /**
           * If `true`, modal will be wider.
          */
@@ -4399,6 +4407,10 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Reset to initial visual state. Useful in conjunction with errors
+         */
+        "resetVisualState"?: boolean;
+        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -4863,6 +4875,10 @@ declare namespace LocalJSX {
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
+        /**
+          * Label for the modal, to be set as aria-label. Will take precedence over modalTitle in settings of aria-label.
+         */
+        "label"?: string;
         /**
           * If `true`, modal will be wider.
          */
