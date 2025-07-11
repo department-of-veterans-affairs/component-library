@@ -184,7 +184,7 @@ const WithRouterTemplate = ({
           import &#x7b; useHistory &#x7d; from 'react-router-dom';
           <br />
           <br />
-          const YourComponent &#61; (&#x7b; label, disableAnalytics, uswds,
+          const YourComponent &#61; (&#x7b; label, disableAnalytics,
           breadcrumbList, wrapping &#x7d;) &#61;&#62; &#x7b;
           <br />
           &nbsp;const history &#61; useHistory();
@@ -205,8 +205,6 @@ const WithRouterTemplate = ({
           &nbsp;&nbsp;&nbsp;label=&#x7b;label&#x7d;
           <br />
           &nbsp;&nbsp;&nbsp;disableAnalytics=&#x7b;disableAnalytics&#x7d;
-          <br />
-          &nbsp;&nbsp;&nbsp;uswds=&#x7b;uswds&#x7d;
           <br />
           &nbsp;&nbsp;&nbsp;breadcrumbList=&#x7b;breadcrumbs&#x7d;
           <br />
