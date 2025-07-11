@@ -257,60 +257,11 @@ WithoutTitleOrLabel.args = {
   'label': undefined
 };
 
-export const WithoutTitleAndWithLabel = ({
-  'click-to-close': clickToClose,
-  'disable-analytics': disableAnalytics,
-  large,
-  'initial-focus-selector': initialFocusSelector,
-  'primary-button-text': primaryButtonText,
-  'secondary-button-text': secondaryButtonText,
-  primaryButtonClick,
-  secondaryButtonClick,
-  status,
-  visible = true,
-  forcedModal,
-  modalTitle = undefined,
-  label = 'A test modal',
-}) => {
-  const [isVisible, setIsVisible] = useState(visible);
-  const wrapRef = useRef(null);
-  const onCloseEvent = () => {
-    setIsVisible(!isVisible);
-    resizeViewPorts(wrapRef?.current, false);
-  };
-  const openModal = () => {
-    setIsVisible(true);
-    resizeViewPorts(wrapRef?.current, true);
-  };
-
-  useEffect(() => {
-    resizeViewPorts(wrapRef?.current, isVisible);
-  }, [isVisible]);
-
-  return (
-    <div ref={wrapRef}>
-      <h1>Testing h1 heading</h1>
-      <va-button onClick={openModal} text="Click here to open modal" />
-      <VaModal
-        forcedModal={forcedModal}
-        clickToClose={clickToClose}
-        disableAnalytics={disableAnalytics}
-        large={large}
-        modalTitle={modalTitle}
-        initialFocusSelector={initialFocusSelector}
-        onCloseEvent={onCloseEvent}
-        onPrimaryButtonClick={primaryButtonClick}
-        primaryButtonText={primaryButtonText}
-        onSecondaryButtonClick={secondaryButtonClick}
-        secondaryButtonText={secondaryButtonText}
-        status={status}
-        visible={isVisible}
-        label={label}
-      >
-        <p>This is a succinct, helpful {status} message</p>
-      </VaModal>
-    </div>
-  );
+export const WithoutTitleAndWithLabel = Template.bind(null);
+WithoutTitleAndWithLabel.args = {
+  ...defaultArgs,
+  'modal-title': undefined,
+  'label': 'A test modal',
 };
 
 export const WithNestedWebComponents = ({
