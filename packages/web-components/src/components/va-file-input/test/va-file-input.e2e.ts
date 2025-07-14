@@ -329,11 +329,45 @@ describe('va-file-input', () => {
     expect(label).toEqualText('File password required')
     
   });
+
+  it('renders error on password input if password-error is set', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted password-error="Encrypted file requires a password."/>`);
+
+    const textInput = await page.find('va-file-input >>> va-text-input');
+    const errorSpan = await textInput.find('>>> span.usa-error-message');
+    expect(errorSpan).not.toBeNull();
+    expect(errorSpan).toEqualText('Encrypted file requires a password.');
+  })
   
   it('does not render file password field if encrypted is unset', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`);
 
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).toBeNull();
+  });
+
+  it('resets visual state if component receives resetVisualState prop', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input error="network error"/>`);
+    const host = await page.find('va-file-input');
+   
+    // check that file is in file added state
+    const containerSelector = 'va-file-input >>> div.selected-files-wrapper'
+    const containerBefore = await host.find(containerSelector);
+    expect(containerBefore).not.toBeNull();
+    
+    // check that error appears 
+    const errorMessage = await page.find('va-file-input >>> span.usa-error-message');
+    expect(errorMessage).not.toBeNull();
+    
+    // check that component resets visual state
+    host.setAttribute('reset-visual-state', 'true');
+    await page.waitForChanges();
+    const containerAfter = await host.find(containerSelector)
+    expect(containerAfter).toBeNull();
+
+    // check that error still present
+    const fileInfoCardAfter = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessageAfter = await fileInfoCardAfter.find('span.usa-error-message');
+    expect(errorMessageAfter).not.toBeNull();
   });
 });

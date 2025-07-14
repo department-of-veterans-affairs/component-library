@@ -87,8 +87,8 @@ export class VaTable {
    * a particular va-table-row element
    */
   getCellsInRow(row: Element): HTMLSpanElement[] {
-    const children = row.querySelectorAll('span');
-    const cells = Array.from(children);
+    // Only select top-level span children, not nested spans
+    const cells = Array.from(row.querySelectorAll(':scope > span')) as HTMLSpanElement[];
     if (!this.cols) {
       this.cols = cells.length;
     }
