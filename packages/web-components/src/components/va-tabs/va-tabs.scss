@@ -1,6 +1,7 @@
 @import '~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css';
 @import "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss";
 @import '../../mixins/links.css';
+@import '../../mixins/focusable.css';
 
 .va-tabs__list {
   display: flex;
@@ -30,14 +31,6 @@ button.va-tabs__tab_item {
   min-width: 4rem;
   max-width: 10rem;
 
-  &:focus, &:hover:focus, &:active {
-    background-color: var(--vads-color-action-focus-on-light);
-    border-bottom-color: var(--vads-color-action-border-focus-on-light);
-    outline: 2px solid var(--vads-color-action-border-focus-on-light);
-    outline-offset: -2px;
-    color: var(--vads-color-base);
-  }
-
   &[aria-selected='false'] {
     &:hover {
       cursor: pointer;
@@ -58,12 +51,6 @@ button.va-tabs__tab_item {
       border-bottom-color:  var(--vads-color-primary);
     }
 
-    &:focus, &:hover:focus, &:active {
-      background-color: var(--vads-color-action-focus-on-light);
-      border-bottom-color: var(--vads-color-action-border-focus-on-light);
-      color: var(--vads-color-base);
-    }
-
     &::after {
       content: attr(data-label) / "";
       display: flex;
@@ -81,10 +68,6 @@ button.va-tabs__tab_item {
 
     &:hover::after {
       background-color: var(--vads-color-base-lightest);
-    }
-
-    &:focus::after, &:hover:focus::after, &:active::after {
-      background-color: var(--vads-color-action-focus-on-light);
     }
   }
 
