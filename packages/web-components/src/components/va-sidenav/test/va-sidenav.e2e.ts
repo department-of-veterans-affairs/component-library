@@ -98,29 +98,6 @@ describe('va-sidenav', () => {
     await page.close();
   });
 
-  it('iconName prop displays va-icon and only the "menu" icon displays on mobile web', async () => {
-    const page = await newE2EPage();
-    // Set viewport to mobile size
-    await page.setViewport({
-      width: 480,
-      height: 320
-    });
-
-    await page.setContent('<va-sidenav header="Profile" icon-name="account_circle" icon-background-color="vads-color-primary"><va-sidenav-item href="#" label="Personal information"></va-sidenav-item></va-sidenav>');
-
-    // check that there is only one va-icon element
-    const iconCount = await page.findAll('va-sidenav >>> va-icon');
-    expect(iconCount.length).toEqual(1);
-
-    const icon = await page.find('va-sidenav >>> va-icon');
-    expect(icon).not.toBeNull();
-
-    const iconName = await icon.getProperty('icon');
-    expect(iconName).toEqual('menu');
-    
-    await page.close();
-  });
-
   it('displays "Menu" when header is not set on mobile web', async () => {
     const page = await newE2EPage();
     // Set viewport to mobile size

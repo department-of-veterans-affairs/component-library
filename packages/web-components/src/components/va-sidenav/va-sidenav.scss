@@ -40,3 +40,7 @@
     transform: translate(-50%, -50%);
   }
 }
+
+va-accordion-item::part(accordion-header) {
+  padding-left: 1.4rem;
+}

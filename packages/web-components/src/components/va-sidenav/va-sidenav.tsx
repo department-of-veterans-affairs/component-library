@@ -157,9 +157,6 @@ export class VaSidenav {
       <Host>
         <va-accordion open-single>
           <va-accordion-item bordered header="Related pages menu">
-            <span slot="icon">
-              <va-icon icon="menu" />
-            </span>
             <nav aria-label={this.ariaLabel()}>
               <div role="list" class="va-sidenav__list">
                 <slot></slot>
