@@ -50,7 +50,7 @@ describe('va-sidenav', () => {
     const ariaLabel = await navMenu.getAttribute('aria-label');
 
     expect(navMenuHeader).toEqualText('Profile');
-    expect(ariaLabel).toEqualText('Pages related to Profile');
+    expect(ariaLabel).toEqualText('Related pages menu');
 
     // Set viewport to mobile web size
     await page.setViewport({
@@ -67,7 +67,7 @@ describe('va-sidenav', () => {
 
     const navElement = await page.find('va-sidenav >>> nav');
     const ariaLabelMobileWeb = await (await navElement.getAttribute('aria-label'));
-    expect(ariaLabelMobileWeb).toEqualText('Pages related to Profile');
+    expect(ariaLabelMobileWeb).toEqualText('Related pages menu');
     
     await page.close();
   });
@@ -150,7 +150,7 @@ describe('va-sidenav', () => {
 
     const navElement = await page.find('va-sidenav >>> nav');
     const ariaLabel = await navElement.getAttribute('aria-label');
-    expect(ariaLabel).toBe('Pages related to Profile with more details');
+    expect(ariaLabel).toBe('Related pages menu');
 
 
     // Set viewport to mobile web size
@@ -163,7 +163,7 @@ describe('va-sidenav', () => {
 
     const navElementMobileWeb = await page.find('va-sidenav >>> nav');
     const ariaLabelMobileWeb = await navElementMobileWeb.getAttribute('aria-label');
-    expect(ariaLabelMobileWeb).toBe('Pages related to Profile with more details');
+    expect(ariaLabelMobileWeb).toBe('Related pages menu');
     
     await page.close();
   });

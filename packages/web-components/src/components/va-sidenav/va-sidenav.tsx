@@ -127,7 +127,7 @@ export class VaSidenav {
   };
 
   private ariaLabel = () => {
-    return `Pages related to ${this.sectionName ? this.sectionName : this.header}`;
+    return "Related pages menu";
   };
 
   render() {
