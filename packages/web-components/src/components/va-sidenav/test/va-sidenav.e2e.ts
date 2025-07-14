@@ -63,7 +63,7 @@ describe('va-sidenav', () => {
     const sideNavAccordionItem = await page.find('va-sidenav >>> va-accordion-item');
     const sideNavAccordionHeader = await sideNavAccordionItem.getProperty('header');
     
-    expect(sideNavAccordionHeader).toEqualText('Profile menu');
+    expect(sideNavAccordionHeader).toEqualText('Related pages menu');
 
     const navElement = await page.find('va-sidenav >>> nav');
     const ariaLabelMobileWeb = await (await navElement.getAttribute('aria-label'));
@@ -133,7 +133,7 @@ describe('va-sidenav', () => {
 
     const accordionItem = await page.find('va-sidenav >>> va-accordion-item');
     const accordionItemHeader = await accordionItem.getProperty('header');
-    expect(accordionItemHeader).toEqual('Menu');
+    expect(accordionItemHeader).toEqual('Related pages menu');
     
     await page.close();
   });
