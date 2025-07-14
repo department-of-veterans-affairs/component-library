@@ -115,7 +115,7 @@ describe('va-sidenav', () => {
     await page.close();
   });
 
-  it('sectionName prop is used for aria-label instead of header when set', async () => {
+  it('the aria-label is consistent across desktop and mobile web', async () => {
     const page = await newE2EPage();
     // Set viewport to desktop size
     await page.setViewport({
@@ -123,7 +123,7 @@ describe('va-sidenav', () => {
       height: 768
     });
 
-    await page.setContent('<va-sidenav header="Profile" section-name="Profile with more details"></va-sidenav>');
+    await page.setContent('<va-sidenav header="Profile"></va-sidenav>');
 
     const navElement = await page.find('va-sidenav >>> nav');
     const ariaLabel = await navElement.getAttribute('aria-label');

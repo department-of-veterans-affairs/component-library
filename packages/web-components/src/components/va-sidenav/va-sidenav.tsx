@@ -27,11 +27,6 @@ export class VaSidenav {
   @Prop() header?: string;
 
   /**
-   * Used to describe the navigation for screen readers. If the `header` property is set, the `header` text will be used instead of this value.
-   */
-  @Prop() sectionName?: string;
-
-  /**
    * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
    */
   @Prop() iconName?: string;
