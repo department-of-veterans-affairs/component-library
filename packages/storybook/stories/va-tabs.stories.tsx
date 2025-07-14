@@ -1,7 +1,25 @@
 import { VaTabs } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure,
+  StoryDocs,
+  propDefaults,
+  getDefaultPropValue,
+} from './wc-helpers';
 
 const tabsDocs = getWebComponentDocs('va-tabs');
+
+const tabItems = [
+  { label: 'First', url: '#tab1' },
+  { label: 'Second', url: '#tab2' },
+  { label: 'Third', url: '#tab3' },
+];
+
+const panelContent = [
+  'Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances.',
+  'A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed.',
+  'No Soldier shall, in time of peace be quartered in any house, without the consent of the Owner, nor in time of war, but in a manner to be prescribed by law.',
+]
 
 export default {
   title: 'Components/Tabs',
@@ -12,35 +30,38 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={tabsDocs} />,
     },
   },
-};
-
-const defaultArgs = {
-  label: 'Navigation',
-  tabItems: [
-    { label: 'Inbox', url: '#tab1' },
-    { label: 'Sent', url: '#tab2' },
-    { label: 'More Files', url: '#tab3' },
-  ],
+  argTypes: {
+    ...propStructure(tabsDocs),
+    label: {
+      name: 'Label',
+      description: 'Label for the tabs component',
+      control: { type: 'text' },
+    },
+    tabItems: {
+      name: 'Tab Items',
+      description: 'Array of objects representing the tabs, each with a label and URL',
+      control: { type: 'object' },
+    },
+  },
+  args: {
+    ...propDefaults(tabsDocs),
+    label: 'Filtered content options',
+    tabItems: tabItems,
+  },
 };
 
 const vaTabs = (args: any) => {
-  const {
-    label,
-    tabItems,
-    ...rest
-  } = args;
   return (
     <div>
       <VaTabs
-        label={label}
-        tabItems={tabItems}
-        {...rest}
+        label={args.label}
+        tabItems={args.tabItems}
       />
       {
-        defaultArgs.tabItems.map((item, index) => (
+        args.tabItems.map((item, index) => (
           <div id={`tab${index + 1}`} key={item.label} hidden>
             <h2>{item.label}</h2>
-            <p>Content for {item.label} goes here.</p>
+            <p>{panelContent[index]}</p>
           </div>
         ))
       }
@@ -51,5 +72,4 @@ const vaTabs = (args: any) => {
 const Template = (args: any) => vaTabs(args);
 
 export const Default = Template.bind(null);
-Default.args = defaultArgs;
 Default.argTypes = propStructure(tabsDocs);
