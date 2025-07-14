@@ -153,7 +153,7 @@ describe('va-sidenav', () => {
       height: 768
     });
 
-    await page.setContent('<va-sidenav header="Profile" section-name="Profile with more details"></va-sidenav>');
+    await page.setContent('<va-sidenav header="Profile"></va-sidenav>');
 
     const accordion = await page.find('va-sidenav >>> va-accordion');
     const accordionItem = await page.find('va-sidenav >>> va-accordion-item');
