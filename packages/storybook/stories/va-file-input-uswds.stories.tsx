@@ -133,6 +133,10 @@ AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
 export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
 WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
 
+export const WithAutomaticEncryptionDetection = Template.bind(null);
+WithAutomaticEncryptionDetection.args = { ...defaultArgs, label: 'Add an encrypted pdf', hint: 'Password input will appear after you add the encrypted pdf' }
+
+
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {
   ...defaultArgs,

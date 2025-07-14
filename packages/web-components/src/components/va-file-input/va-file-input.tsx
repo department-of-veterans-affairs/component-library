@@ -16,6 +16,7 @@ import { i18next } from '../..';
 import { fileInput } from './va-file-input-upgrader';
 import { extensionToMimeType } from './fileExtensionToMimeType';
 import { UploadedFile } from './uploadedFile';
+import { isEncryptedPdf } from './encryption';
 
 /**
  * @componentName File input
@@ -42,6 +43,7 @@ export class VaFileInput {
   @State() internalError?: string;
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
+  @State() isEncrypted: boolean = false;
 
   /**
    * The label for the file input.
@@ -222,7 +224,7 @@ export class VaFileInput {
     }
   };
 
-  private handleFile = (file: File, emitChange: boolean = true) => {
+  private handleFile = async (file: File, emitChange: boolean = true) => {
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
@@ -232,12 +234,21 @@ export class VaFileInput {
       }
     }
 
+    // only run check if file not already declared encrypted
+    if (file.type === 'application/pdf' && !this.encrypted) {
+      this.isEncrypted = await isEncryptedPdf(file);
+    }
+
+    if (file.size === 0) {
+      this.internalError = `The file you selected is empty. Files must be larger than 0B.`;
+      this.resetState();
+      return;
+    }
+
     if (file.size > this.maxFileSize) {
       this.internalError = `
         We can't upload your file because it's too big. Files must be less than ${this.formatFileSize(this.maxFileSize)}.`;
-      // in case the file was added by clicking the "change file" button do a reset
-      this.fileContents = null;
-      this.uploadStatus = 'idle';
+      this.resetState();
       return;
     }
 
@@ -459,6 +470,7 @@ export class VaFileInput {
       value,
       readOnly,
       encrypted,
+      isEncrypted,
       statusText,
       uploadedFile,
       percentUploaded,
@@ -618,7 +630,7 @@ export class VaFileInput {
                 {(file || value || uploadedFile) && (
                   <div>
                     {this.showSeparator && <hr class="separator" />}
-                    {encrypted && (
+                    {(encrypted || isEncrypted) && (
                       <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required error={passwordError} />
                     )}
                     <div class="additional-info-slot">

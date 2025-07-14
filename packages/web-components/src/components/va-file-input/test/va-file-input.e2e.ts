@@ -3,10 +3,11 @@ import { axeCheck } from '../../../testing/test-helpers';
 import { ElementHandle } from 'puppeteer';
 const path = require('path');
 
-async function setUpPageWithUploadedFile(content:string) {
+async function setUpPageWithUploadedFile(content:string, file = '1x1.png') {
   const page = await newE2EPage();
   await page.setContent(content);
-  const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+  const filePath = path.relative(process.cwd(), __dirname + `/${file}`);
 
   const input = (await page.$(
     'pierce/#fileInputField',
@@ -329,6 +330,22 @@ describe('va-file-input', () => {
     expect(label).toEqualText('File password required')
     
   });
+
+  it('renders file password field if pdf is encrypted but encrypted prop not set', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'encrypted.pdf');
+
+    const textInput = await page.find('va-file-input >>> va-text-input');
+    expect(textInput).not.toBeNull();
+    const label = await textInput.find(' >>> label');
+    expect(label).toEqualText('File password required')
+  });
+  
+  it('does not render file password field if pdf is not encrypted and encrypted prop not set', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'not-encrypted.pdf');
+
+    const textInput = await page.find('va-file-input >>> va-text-input');
+    expect(textInput).toBeNull();
+  })
 
   it('renders error on password input if password-error is set', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted password-error="Encrypted file requires a password."/>`);
