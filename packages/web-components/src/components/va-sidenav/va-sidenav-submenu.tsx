@@ -212,7 +212,7 @@ export class VaSidenavMenu {
               aria-current={this.currentPage ? 'page' : undefined} 
               onClick={this.handleClick.bind(this)}>{this.label}</a>
           ) : (
-            <div role="listitem" id="va-sidenav-submenu__label" class="va-sidenav-submenu__label">{this.label}</div>
+            <div id="va-sidenav-submenu__label" class="va-sidenav-submenu__label">{this.label}</div>
           )}
           <slot></slot>
         </div>
