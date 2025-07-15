@@ -180,8 +180,7 @@ export class VaSidenavMenu {
 
   render() {
     const submenuClasses = classNames({
-      'va-sidenav-submenu__current': this.hasCurrentPageItem || this.isCurrentPage,
-      'va-sidenav-submenu': true
+      'va-sidenav-submenu__current': this.hasCurrentPageItem || this.isCurrentPage
     });
 
     const linkClasses = classNames({
@@ -192,18 +191,17 @@ export class VaSidenavMenu {
     const href = this.currentPage ? '#content' : this.href;
 
     return (
-      <Host role="listitem">
-        <div role="list" class={submenuClasses} aria-describedby="va-sidenav-submenu__label">
-          {this.href ? (
-            <a 
-              role="listitem"
-              class={linkClasses} 
-              href={href} 
-              aria-current={this.currentPage ? 'page' : undefined} 
-              onClick={this.handleClick.bind(this)}>{this.label}</a>
-          ) : (
-            <div id="va-sidenav-submenu__label" class="va-sidenav-submenu__label">{this.label}</div>
-          )}
+      <Host role="listitem" class={submenuClasses}>
+        {this.href ? (
+          <a
+            class={linkClasses}
+            href={href}
+            aria-current={this.currentPage ? 'page' : undefined}
+            onClick={this.handleClick.bind(this)}>{this.label}</a>
+        ) : (
+          <div id="va-sidenav-submenu__label" class="va-sidenav-submenu__label">{this.label}</div>
+        )}
+        <div role="list" aria-describedby="va-sidenav-submenu__label">
           <slot></slot>
         </div>
       </Host>

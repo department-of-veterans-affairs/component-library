@@ -67,7 +67,7 @@ describe('va-sidenav-submenu', () => {
       </va-sidenav-submenu>
     </va-sidenav>`);
   
-    const submenu = await page.find('va-sidenav-submenu >>> div[role="list"]');
+    const submenu = await page.find('va-sidenav-submenu');
   
     expect(submenu).not.toBeNull();
   

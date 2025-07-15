@@ -1,6 +1,6 @@
 @import '../../mixins/focusable.css';
 
-.va-sidenav-submenu {
+:host {
   list-style-type: none;
   padding-left: 0;
   margin: 0;
@@ -52,7 +52,7 @@ a:hover {
   --va-sidenav-item-link-padding-left: 2rem;
 }
 
-.va-sidenav-submenu__current::after {
+:host(.va-sidenav-submenu__current)::after {
   background-color: var(--vads-color-primary-lighter);
   content: "";
   display: block;
