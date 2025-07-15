@@ -121,15 +121,13 @@ export class VaSidenav {
     };
   };
 
-  private ariaLabel = () => {
-    return "Related pages menu";
-  };
+  private ariaLabel = "Related pages menu";
 
   render() {
     if (this.isDesktop) {
       return (
         <Host>
-          <nav aria-label={this.ariaLabel()}>
+          <nav aria-label={this.ariaLabel}>
             {this.header && (
               <h2 class="va-sidenav__header">
                 {this.iconName ? (
@@ -151,8 +149,8 @@ export class VaSidenav {
     return (
       <Host>
         <va-accordion open-single>
-          <va-accordion-item bordered header="Related pages menu">
-            <nav aria-label={this.ariaLabel()}>
+          <va-accordion-item bordered header={this.ariaLabel}>
+            <nav aria-label={this.ariaLabel}>
               <div role="list" class="va-sidenav__list">
                 <slot></slot>
               </div>
