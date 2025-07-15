@@ -23,6 +23,10 @@ a {
   text-decoration: none;
 }
 
+[href]:focus {
+  outline: none!important;
+}
+
 a:hover {
   background-color: var(--vads-color-base-lightest);
   box-shadow: none;
