@@ -3,10 +3,10 @@ import { axeCheck } from '../../../testing/test-helpers';
 import { ElementHandle } from 'puppeteer';
 const path = require('path');
 
-async function setUpPageWithUploadedFile(content:string) {
+async function setUpPageWithUploadedFile(content:string, fileName: string = '1x1.png') {
   const page = await newE2EPage();
   await page.setContent(content);
-  const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+  const filePath = path.relative(process.cwd(), __dirname + `/${fileName}`);
 
   const input = (await page.$(
     'pierce/#fileInputField',
@@ -300,6 +300,20 @@ describe('va-file-input', () => {
     const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
     expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too big. Files must be less than 1 B.");
+  });
+
+  it('displays an error if file size is zero bytes', async () => {
+    const page = await setUpPageWithUploadedFile('<va-file-input />', 'zero.png');
+    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessage = await fileInfoCard.find('span.usa-error-message');
+    expect(errorMessage.innerHTML).toEqual("The file you selected is empty. Files must be larger than 0B.");
+  });
+
+  it('displays an error if file size is too small', async () => {
+    const page = await setUpPageWithUploadedFile('<va-file-input min-file-size="1024"/>');
+    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessage = await fileInfoCard.find('span.usa-error-message');
+    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too small. Files must be at least 1&nbsp;KB.");
   });
 
   it('renders a progress bar if percent-uploaded prop is set', async () => {
