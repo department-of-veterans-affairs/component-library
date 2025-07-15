@@ -76,7 +76,6 @@ export class VaSidenav {
         const changedElement = currentPageMutations[0].target as Element;
         const isCurrentPage = changedElement.getAttribute('current-page') === 'true';
 
-        // Only proceed if the element was set to true
         if (isCurrentPage) {
           // Get all elements with current-page attribute
           const allElements = this.el.querySelectorAll('va-sidenav-item[current-page], va-sidenav-submenu[current-page]');
@@ -84,7 +83,8 @@ export class VaSidenav {
           // Set current-page="false" for all elements except the one that triggered the mutation
           allElements.forEach(el => {
             if (el !== changedElement) {
-              el.setAttribute('current-page', 'false');
+              // Remove the attribute completely
+              el.removeAttribute('current-page');
             }
           });
         }

@@ -144,48 +144,38 @@ export class VaSidenavMenu {
    * or if the submenu parent itself has current-page set to true
    */
   private checkForCurrentPageItem() {
-    // Check if this submenu itself has current-page set (only if it has an href)
-    const isCurrentPage = this.href && this.currentPage;
-
     // Get slotted elements
     const slot = this.el.shadowRoot?.querySelector('slot');
     const slottedElements = slot?.assignedElements();
 
     // If there is no slot, there are no children to check
     if (!slot || !slottedElements || slottedElements.length === 0) {
+      // Only check if this submenu itself has current-page set (if it has an href)
+      this.isCurrentPage = this.href && this.currentPage;
       this.hasCurrentPageItem = false;
-      this.isCurrentPage = isCurrentPage;
-      return;
-    }
-    
-    // If the submenu itself is the current page, remove current-page from children
-    if (isCurrentPage) {
-      this.hasCurrentPageItem = false;
-      this.isCurrentPage = true;
-      
-      // Remove current-page attribute from any children
-      slottedElements.forEach(element => {
-        if (this.isCurrentPageItem(element)) {
-          element.removeAttribute('current-page');
-        }
-      });
-      
       return;
     }
     
     // Check if any child items have current-page set
     let hasCurrentPageChild = false;
     
-    // Process children
+    // Process children to see if any have current-page
     slottedElements.forEach(element => {
       if (this.isCurrentPageItem(element)) {
         hasCurrentPageChild = true;
       }
     });
     
-    // Set state
+    // Update state based on children and self
     this.hasCurrentPageItem = hasCurrentPageChild;
-    this.isCurrentPage = false;
+    
+    // If a child item is the current page, the submenu link itself should not be styled as current
+    if (hasCurrentPageChild) {
+      this.isCurrentPage = false;
+    } else {
+      // Otherwise, check if this submenu itself has current-page set (only if it has an href)
+      this.isCurrentPage = this.href && this.currentPage;
+    }
   }
 
   render() {

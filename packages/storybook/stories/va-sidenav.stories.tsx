@@ -57,7 +57,9 @@ const Template = (args) => {
   const { sideNav } = args;
 
   const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault(); // stopping the link from navigating just for Storybook
+    // stopping the link from navigating for Storybook
+    e.preventDefault();
+    e.stopPropagation();
 
     if (e.currentTarget.hasAttribute('href')) {
       e.currentTarget.setAttribute('current-page', 'true');
@@ -103,7 +105,9 @@ const Template = (args) => {
 const WithRouterTemplate = (args) => {
 
   const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault(); // stopping the link from navigating just for Storybook
+    // stopping the link from navigating for Storybook
+    e.preventDefault();
+    e.stopPropagation();
     e.currentTarget.setAttribute('current-page', 'true');
   }
 
