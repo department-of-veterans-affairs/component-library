@@ -71,7 +71,7 @@ const Template = (args) => {
       icon-name={args['icon-name']}
       icon-background-color={args['icon-background-color']}>
       {sideNav.map((item, index) => 
-        item.isSubmenu ? (
+        item.submenu ? (
           <va-sidenav-submenu 
             {...withKey(`item-${index}`)} 
             label={item.label} 
@@ -243,10 +243,46 @@ Default.args = {
 };
 Default.argTypes = propStructure(sidenavDocs);
 
-export const WithSubmenu = Template.bind(null);
+export const Levels = Template.bind(null);
+Levels.args = {
+  sideNav: [
+    {
+      href: '#',
+      label: 'Level 2 link',
+    },
+    {
+      href: '#',
+      label: 'Level 2 link',
+    },
+    {
+      href: '#',
+      label: 'Level 2 link',
+      submenu: [
+        {
+          href: '#',
+          label: 'Level 3 link'
+        },
+        {
+          href: '#',
+          label: 'Level 3 link'
+        },
+        {
+          href: '#',
+          label: 'Level 3 link'
+        }
+      ]
+    }
+  ],
+  header: 'Level 1 Title',
+  'icon-name': 'account_circle',
+  'icon-background-color': 'vads-color-primary',
+  id: 'levels-sidenav',
+};
+Levels.argTypes = propStructure(sidenavDocs);
+
+export const CategorizedLinks = Template.bind(null);
 const sideNavSubmenu: any[] = [...sideNavBaseline()];
 sideNavSubmenu.splice(4, 0, {
-  isSubmenu: true,
   label: 'Communication settings',
   submenu: [
     {
@@ -259,15 +295,14 @@ sideNavSubmenu.splice(4, 0, {
     },
   ],
 });
-WithSubmenu.args = {
+CategorizedLinks.args = {
   sideNav: sideNavSubmenu,
-  id: 'submenu-sidenav',
-  };
+  id: 'submenu-categorized-links',
+};
 
-export const WithSubmenuLinked = Template.bind(null);
+export const NestedLinks = Template.bind(null);
 const sideNavSubmenuLinked: any[] = [...sideNavBaseline()];
 sideNavSubmenuLinked.splice(4, 0, {
-  isSubmenu: true,
   label: 'Communication settings',
   href: '#',
   submenu: [
@@ -280,9 +315,9 @@ sideNavSubmenuLinked.splice(4, 0, {
       label: 'Paperless delivery',
     },
   ],
-  id: 'submenu-linked-sidenav',
+  id: 'submenu-nested-links',
 });
-WithSubmenuLinked.args = {
+NestedLinks.args = {
   sideNav: sideNavSubmenuLinked,
 };
 
