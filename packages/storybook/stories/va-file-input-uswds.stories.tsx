@@ -47,6 +47,7 @@ const defaultArgs = {
   'status-text': null,
   'uploadedFile': null,
   'maxFileSize': Infinity,
+  'minFileSize': 0,
   'password-error': false
 };
 
@@ -68,6 +69,7 @@ const Template = ({
   children,
   uploadedFile,
   maxFileSize,
+  minFileSize,
   passwordError
 }) => {
   return (
@@ -89,6 +91,7 @@ const Template = ({
       children={children}
       uploadedFile={uploadedFile}
       maxFileSize={maxFileSize}
+      minFileSize={minFileSize}
       passwordError={passwordError}
     />
   );
@@ -160,10 +163,18 @@ ErrorMessage.args = {
 export const WithMaxFileSize = Template.bind(null);
 WithMaxFileSize.args = {
   ...defaultArgs,
-  label: 'Input has a file-size restriction (specified in bytes)',
+  label: 'Input has a maximum file-size restriction (specified in bytes)',
   hint: 'An error will be thrown if the selected file is greater than 1 KB',
   maxFileSize: 1024,
 };
+
+export const WithMinFileSize = Template.bind(null);
+WithMinFileSize.args = {
+  ...defaultArgs,
+  label: 'Input has a minimum file-size restriction (specified in bytes)',
+  hint: 'An error will be thrown if the selected file is less than 1 MB',
+  minFileSize: 1024*1024,
+}
 
 export const HeaderLabel = Template.bind(null);
 HeaderLabel.args = {

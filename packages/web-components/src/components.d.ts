@@ -701,6 +701,10 @@ export namespace Components {
          */
         "maxFileSize"?: number;
         /**
+          * Minimum allowed file size in bytes.
+         */
+        "minFileSize"?: number;
+        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -1716,6 +1720,61 @@ export namespace Components {
         "serviceStatus": string;
     }
     /**
+     * @componentName Side Navigation
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaSidenav {
+        /**
+          * Header text to display at the top of the side navigation.
+         */
+        "header"?: string;
+        /**
+          * Adds a circle around the icon with the provided background [VADS color token](https://design.va.gov/foundation/color-palette).
+         */
+        "iconBackgroundColor"?: string;
+        /**
+          * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
+         */
+        "iconName"?: string;
+    }
+    interface VaSidenavItem {
+        /**
+          * Identifies when the item is the current page. The current page link will have `#content` on the `href`.
+         */
+        "currentPage"?: boolean;
+        /**
+          * The href for the sidenav item. If it is also the `current-page`, this will be set to `#content`.
+         */
+        "href": string;
+        /**
+          * The label for the sidenav item
+         */
+        "label": string;
+        /**
+          * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
+         */
+        "routerLink"?: boolean;
+    }
+    interface VaSidenavSubmenu {
+        /**
+          * Identifies when the item is the current page. The current page link will have `#content` on the `href`.
+         */
+        "currentPage"?: boolean;
+        /**
+          * When present, the category name will be a link. If it is also the `current-page`, this will be set to `#content`.
+         */
+        "href"?: string;
+        /**
+          * The label for the submenu
+         */
+        "label": string;
+        /**
+          * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
+         */
+        "routerLink"?: boolean;
+    }
+    /**
      * @componentName Statement of truth
      * @maturityCategory use
      * @maturityLevel deployed
@@ -2328,6 +2387,14 @@ export interface VaSegmentedProgressBarCustomEvent<T> extends CustomEvent<T> {
 export interface VaSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaSelectElement;
+}
+export interface VaSidenavItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSidenavItemElement;
+}
+export interface VaSidenavSubmenuCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSidenavSubmenuElement;
 }
 export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3385,6 +3452,51 @@ declare global {
         prototype: HTMLVaServiceListItemElement;
         new (): HTMLVaServiceListItemElement;
     };
+    /**
+     * @componentName Side Navigation
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaSidenavElement extends Components.VaSidenav, HTMLStencilElement {
+    }
+    var HTMLVaSidenavElement: {
+        prototype: HTMLVaSidenavElement;
+        new (): HTMLVaSidenavElement;
+    };
+    interface HTMLVaSidenavItemElementEventMap {
+        "vaRouteChange": { href: string };
+    }
+    interface HTMLVaSidenavItemElement extends Components.VaSidenavItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaSidenavItemElementEventMap>(type: K, listener: (this: HTMLVaSidenavItemElement, ev: VaSidenavItemCustomEvent<HTMLVaSidenavItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaSidenavItemElementEventMap>(type: K, listener: (this: HTMLVaSidenavItemElement, ev: VaSidenavItemCustomEvent<HTMLVaSidenavItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaSidenavItemElement: {
+        prototype: HTMLVaSidenavItemElement;
+        new (): HTMLVaSidenavItemElement;
+    };
+    interface HTMLVaSidenavSubmenuElementEventMap {
+        "vaRouteChange": { href: string };
+    }
+    interface HTMLVaSidenavSubmenuElement extends Components.VaSidenavSubmenu, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaSidenavSubmenuElementEventMap>(type: K, listener: (this: HTMLVaSidenavSubmenuElement, ev: VaSidenavSubmenuCustomEvent<HTMLVaSidenavSubmenuElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaSidenavSubmenuElementEventMap>(type: K, listener: (this: HTMLVaSidenavSubmenuElement, ev: VaSidenavSubmenuCustomEvent<HTMLVaSidenavSubmenuElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaSidenavSubmenuElement: {
+        prototype: HTMLVaSidenavSubmenuElement;
+        new (): HTMLVaSidenavSubmenuElement;
+    };
     interface HTMLVaStatementOfTruthElementEventMap {
         "vaInputChange": any;
         "vaInputBlur": any;
@@ -3650,6 +3762,9 @@ declare global {
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
         "va-service-list-item": HTMLVaServiceListItemElement;
+        "va-sidenav": HTMLVaSidenavElement;
+        "va-sidenav-item": HTMLVaSidenavItemElement;
+        "va-sidenav-submenu": HTMLVaSidenavSubmenuElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
         "va-tab-item": HTMLVaTabItemElement;
@@ -4446,6 +4561,10 @@ declare namespace LocalJSX {
           * Maximum allowed file size in bytes.
          */
         "maxFileSize"?: number;
+        /**
+          * Minimum allowed file size in bytes.
+         */
+        "minFileSize"?: number;
         /**
           * The name for the input element.
          */
@@ -5626,6 +5745,69 @@ declare namespace LocalJSX {
         "serviceStatus"?: string;
     }
     /**
+     * @componentName Side Navigation
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaSidenav {
+        /**
+          * Header text to display at the top of the side navigation.
+         */
+        "header"?: string;
+        /**
+          * Adds a circle around the icon with the provided background [VADS color token](https://design.va.gov/foundation/color-palette).
+         */
+        "iconBackgroundColor"?: string;
+        /**
+          * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
+         */
+        "iconName"?: string;
+    }
+    interface VaSidenavItem {
+        /**
+          * Identifies when the item is the current page. The current page link will have `#content` on the `href`.
+         */
+        "currentPage"?: boolean;
+        /**
+          * The href for the sidenav item. If it is also the `current-page`, this will be set to `#content`.
+         */
+        "href": string;
+        /**
+          * The label for the sidenav item
+         */
+        "label": string;
+        /**
+          * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router.  The `href` and `router-link` props must be set.
+         */
+        "onVaRouteChange"?: (event: VaSidenavItemCustomEvent<{ href: string }>) => void;
+        /**
+          * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
+         */
+        "routerLink"?: boolean;
+    }
+    interface VaSidenavSubmenu {
+        /**
+          * Identifies when the item is the current page. The current page link will have `#content` on the `href`.
+         */
+        "currentPage"?: boolean;
+        /**
+          * When present, the category name will be a link. If it is also the `current-page`, this will be set to `#content`.
+         */
+        "href"?: string;
+        /**
+          * The label for the submenu
+         */
+        "label": string;
+        /**
+          * Fires when a sidenav anchor link is clicked. This can be leveraged when using a SPA routing library like React Router.  The `href` and `router-link` props must be set.
+         */
+        "onVaRouteChange"?: (event: VaSidenavSubmenuCustomEvent<{ href: string }>) => void;
+        /**
+          * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
+         */
+        "routerLink"?: boolean;
+    }
+    /**
      * @componentName Statement of truth
      * @maturityCategory use
      * @maturityLevel deployed
@@ -6181,6 +6363,9 @@ declare namespace LocalJSX {
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
         "va-service-list-item": VaServiceListItem;
+        "va-sidenav": VaSidenav;
+        "va-sidenav-item": VaSidenavItem;
+        "va-sidenav-submenu": VaSidenavSubmenu;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
         "va-tab-item": VaTabItem;
@@ -6535,6 +6720,14 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-service-list-item": LocalJSX.VaServiceListItem & JSXBase.HTMLAttributes<HTMLVaServiceListItemElement>;
+            /**
+             * @componentName Side Navigation
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-sidenav": LocalJSX.VaSidenav & JSXBase.HTMLAttributes<HTMLVaSidenavElement>;
+            "va-sidenav-item": LocalJSX.VaSidenavItem & JSXBase.HTMLAttributes<HTMLVaSidenavItemElement>;
+            "va-sidenav-submenu": LocalJSX.VaSidenavSubmenu & JSXBase.HTMLAttributes<HTMLVaSidenavSubmenuElement>;
             /**
              * @componentName Statement of truth
              * @maturityCategory use
