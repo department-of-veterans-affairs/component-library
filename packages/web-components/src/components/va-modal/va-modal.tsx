@@ -266,7 +266,35 @@ export class VaModal {
     this.teardownModal();
   }
 
+  /**
+   * Restores focus to the appropriate element when the modal is closed.
+   *
+   * This method will attempt to restore focus in the following order:
+   * 1. First, it looks for any element with the `data-va-modal-return-focus="true"` attribute
+   * that was added during setupModal.
+   * 2. If not found, it falls back to the element that was saved when the modal opened (if it still exists in the DOM)
+   * 3. If still not found, it does nothing.
+   *
+   * Once an element is found and focused, the `data-va-modal-return-focus` attribute is removed.
+   *
+   * @private
+   */
+  private restoreFocus() {
+    let elementToFocus: HTMLElement | null = null;
+    elementToFocus = document.querySelector('[data-va-modal-return-focus="true"]') as HTMLElement;
+
+    if (!elementToFocus && this.savedFocus && document.contains(this.savedFocus)) {
+      elementToFocus = this.savedFocus;
+    }
+
+    if (elementToFocus) {
+      elementToFocus.focus();
+      elementToFocus.removeAttribute('data-va-modal-return-focus');
+    }
+  }
+
   private handleClose(e: KeyboardEvent | MouseEvent) {
+    this.restoreFocus();
     this.closeEvent.emit(e);
   }
 
@@ -350,12 +378,36 @@ export class VaModal {
     }, []);
   }
 
+  /**
+   * Traverses the shadow DOM tree to find the actual focused element.
+   * This method handles cases where the focused element is inside one or more shadow roots.
+   *
+   * @returns The deepest actively focused element in the shadow DOM tree, or null if no element is focused
+   * @private
+   */
+  private getRealActiveElement(): HTMLElement | null {
+    let activeElement = document.activeElement as HTMLElement;
+
+    // Traverse shadow DOM boundaries to find the actual focused element
+    while (activeElement && activeElement.shadowRoot && activeElement.shadowRoot.activeElement) {
+      activeElement = activeElement.shadowRoot.activeElement as HTMLElement;
+    }
+
+    return activeElement;
+  }
+
   // This method traps the focus inside our web component, prevents scrolling outside
   // the modal, and adds aria-hidden="true" to all elements outside the web component.
   // Fires analytics event unless disableAnalytics is true.
   private setupModal() {
     // Save previous focus & restore when modal is closed
-    this.savedFocus = document.activeElement as HTMLElement;
+    // For web components, we need to get the real focused element, not just the shadow host
+    this.savedFocus = this.getRealActiveElement();
+
+    // Add a temporary data attribute to the focused element so we can find it later
+    if (this.savedFocus && !this.savedFocus.hasAttribute('data-va-modal-return-focus')) {
+      this.savedFocus.setAttribute('data-va-modal-return-focus', 'true');
+    }
 
     // find all focusable children within the modal, but maintain tab order
     this.focusableChildren = this.getFocusableChildren();
