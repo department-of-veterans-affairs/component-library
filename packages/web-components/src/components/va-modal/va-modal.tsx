@@ -267,29 +267,19 @@ export class VaModal {
   }
 
   /**
-   * Restores focus to the appropriate element when the modal is closed.
-   *
-   * This method will attempt to restore focus in the following order:
-   * 1. First, it looks for any element with the `data-va-modal-return-focus="true"` attribute
-   * that was added during setupModal.
-   * 2. If not found, it falls back to the element that was saved when the modal opened (if it still exists in the DOM)
-   * 3. If still not found, it does nothing.
-   *
-   * Once an element is found and focused, the `data-va-modal-return-focus` attribute is removed.
-   *
-   * @private
+   * Restores focus to the element that triggered the modal open.
+   * This method checks if the saved focus element is still in the document
+   * and focuses it if it exists.
    */
   private restoreFocus() {
     let elementToFocus: HTMLElement | null = null;
-    elementToFocus = document.querySelector('[data-va-modal-return-focus="true"]') as HTMLElement;
 
-    if (!elementToFocus && this.savedFocus && document.contains(this.savedFocus)) {
+    if (this.savedFocus && document.body.contains(this.savedFocus)) {
       elementToFocus = this.savedFocus;
     }
 
     if (elementToFocus) {
       elementToFocus.focus();
-      elementToFocus.removeAttribute('data-va-modal-return-focus');
     }
   }
 
@@ -401,13 +391,7 @@ export class VaModal {
   // Fires analytics event unless disableAnalytics is true.
   private setupModal() {
     // Save previous focus & restore when modal is closed
-    // For web components, we need to get the real focused element, not just the shadow host
     this.savedFocus = this.getRealActiveElement();
-
-    // Add a temporary data attribute to the focused element so we can find it later
-    if (this.savedFocus && !this.savedFocus.hasAttribute('data-va-modal-return-focus')) {
-      this.savedFocus.setAttribute('data-va-modal-return-focus', 'true');
-    }
 
     // find all focusable children within the modal, but maintain tab order
     this.focusableChildren = this.getFocusableChildren();
