@@ -1,10 +1,8 @@
-import { VaTabs } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
   propDefaults,
-  getDefaultPropValue,
 } from './wc-helpers';
 
 const tabsDocs = getWebComponentDocs('va-tabs');
@@ -57,11 +55,19 @@ const vaTabs = (args: any) => {
     <div>
       <va-tabs label={args.label} selected={args.selected}>
         {
-          args.tabItems.map((item, index: number) => (
-            <va-tab-item href={item.url} key={item.label}>
-              {item.label}
-            </va-tab-item>
-          ))
+          args.tabItems.map((item, index: number) => {
+            let label = item.label;
+
+            if (args.useLongTabLabel && index === 1) {
+              label = 'Really long tab name here';
+            }
+
+            return (
+              <va-tab-item href={item.url} key={item.label}>
+                {label}
+              </va-tab-item>
+            );
+          })
         }
       </va-tabs>
       {
@@ -80,3 +86,17 @@ const Template = (args: any) => vaTabs(args);
 
 export const Default = Template.bind(null);
 Default.argTypes = propStructure(tabsDocs);
+
+export const WithSecondTabSelected = Template.bind(null);
+WithSecondTabSelected.args = {
+  ...Default.args,
+  selected: 1,
+};
+WithSecondTabSelected.argTypes = propStructure(tabsDocs);
+
+export const WithALongLabel = Template.bind(null);
+WithALongLabel.args = {
+  ...Default.args,
+  useLongTabLabel: true,
+};
+WithALongLabel.argTypes = propStructure(tabsDocs);
