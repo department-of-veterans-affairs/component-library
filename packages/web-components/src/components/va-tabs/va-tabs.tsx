@@ -53,17 +53,13 @@ export class VaTabs {
   componentLibraryAnalytics: EventEmitter;
 
   componentWillRender() {
-    // Check if there are any va-tab-item elements in the slot
+    // Check if there are any va-tab-item elements in the slot and flip `allowRender`
+    // to false if not.
     const tabItems = this.el.querySelectorAll('va-tab-item');
-
     if (tabItems.length === 0) {
       this.allowRender = false;
       console.warn('va-tabs: No va-tab-item elements found. The component will not render.');
-    } else {
-      this.allowRender = true;
     }
-
-    return this.allowRender;
   }
 
   connectedCallback() {
