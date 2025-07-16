@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+.va-sidenav__list {
+  margin-bottom: 0;
+  margin-top: 0;
+  list-style-type: none;
+  padding-left: 0;
+  font-size: var(--vads-font-size-source-sans-normalized);
+  line-height: var(--vads-font-line-height-2);
+  border-top: 1px solid var(--vads-color-base-lighter);
+}
+
+.va-sidenav__header {
+  align-items: center;
+  color: var(--vads-color-base);
+  display: flex;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 12px;
+  margin-top: 0;
+  .va-sidenav__icon-background {
+    font-size: 24px;
+  }
+}
+
+.va-sidenav__icon-background {
+  color: var(--vads-color-white);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  position: relative;
+  va-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+va-accordion-item::part(accordion-header) {
+  padding-left: 1.4rem;
+}
