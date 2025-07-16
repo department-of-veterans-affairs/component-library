@@ -1,0 +1,19 @@
+@use "./fonts/font-face";
+
+/* Base styles */
+body {
+  margin: 0;
+  font-family: "Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  min-height: 100vh;    
+  display: flex;
+  flex-direction: column;
+}
+
+va-minimal-footer {
+  margin-top: auto;
+}

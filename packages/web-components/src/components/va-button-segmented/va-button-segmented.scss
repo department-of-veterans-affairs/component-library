@@ -1,0 +1,85 @@
+@forward 'settings';
+
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-button/src/styles/usa-button';
+@use 'usa-button-group/src/styles/usa-button-group';
+@import "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss";
+@import '../../mixins/focusable-no-offset.css';
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+
+.va-segmented-button {
+  background-color: var(--vads-color-base-lighter);
+  padding: var(--vads-spacing-0p5);
+  border-radius: 8px;
+  margin-left: 0;
+  margin-right: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.usa-button-group__item {
+  margin: 0;
+}
+
+.va-segmented-button__button {
+  width: 100%;
+  max-width: 160px;
+  height: 100%;
+  min-height: 44px;
+  background-color: var(--vads-color-base-lighter);
+  border: 0;
+  border-radius: 4px;
+  color: var(--vads-color-base);
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: var(--font-source-sans);
+  font-size: $vads-font-size-source-sans-normalized;
+}
+
+@media screen and (max-width: $tablet) {
+  .va-segmented-button {
+    width: 100%;
+  }
+  .va-segmented-button__button {
+    padding: var(--vads-spacing-1p5) var(--vads-spacing-0p5) var(--vads-spacing-1p5) var(--vads-spacing-0p5);
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .va-segmented-button__button {
+    max-width: 160px;
+    padding: var(--vads-spacing-1p5) var(--vads-spacing-2p5) var(--vads-spacing-1p5) var(--vads-spacing-2p5);
+  }
+}
+
+.va-segmented-button__button:hover {
+  background-color: var(--vads-button-color-background-disabled-on-light);
+  border-color: var(--vads-button-color-background-disabled-on-light);
+}
+
+.va-segmented-button__button:active, .va-segmented-button__button[aria-pressed=true] {
+  background-color: var(--vads-color-white);
+  position: relative;
+
+  &::after {
+    content: attr(data-label) / "";
+    background: var(--vads-color-white);
+    border-radius: 4px;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+

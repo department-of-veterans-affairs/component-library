@@ -3,10 +3,10 @@ import { axeCheck } from '../../../testing/test-helpers';
 import { ElementHandle } from 'puppeteer';
 const path = require('path');
 
-async function setUpPageWithUploadedFile(content:string) {
+async function setUpPageWithUploadedFile(content:string, fileName: string = '1x1.png') {
   const page = await newE2EPage();
   await page.setContent(content);
-  const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+  const filePath = path.relative(process.cwd(), __dirname + `/${fileName}`);
 
   const input = (await page.$(
     'pierce/#fileInputField',
@@ -302,6 +302,20 @@ describe('va-file-input', () => {
     expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too big. Files must be less than 1 B.");
   });
 
+  it('displays an error if file size is zero bytes', async () => {
+    const page = await setUpPageWithUploadedFile('<va-file-input />', 'zero.png');
+    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessage = await fileInfoCard.find('span.usa-error-message');
+    expect(errorMessage.innerHTML).toEqual("The file you selected is empty. Files must be larger than 0B.");
+  });
+
+  it('displays an error if file size is too small', async () => {
+    const page = await setUpPageWithUploadedFile('<va-file-input min-file-size="1024"/>');
+    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessage = await fileInfoCard.find('span.usa-error-message');
+    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too small. Files must be at least 1&nbsp;KB.");
+  });
+
   it('renders a progress bar if percent-uploaded prop is set', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="12" />`);
 
@@ -329,11 +343,45 @@ describe('va-file-input', () => {
     expect(label).toEqualText('File password required')
     
   });
+
+  it('renders error on password input if password-error is set', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted password-error="Encrypted file requires a password."/>`);
+
+    const textInput = await page.find('va-file-input >>> va-text-input');
+    const errorSpan = await textInput.find('>>> span.usa-error-message');
+    expect(errorSpan).not.toBeNull();
+    expect(errorSpan).toEqualText('Encrypted file requires a password.');
+  })
   
   it('does not render file password field if encrypted is unset', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`);
 
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).toBeNull();
+  });
+
+  it('resets visual state if component receives resetVisualState prop', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input error="network error"/>`);
+    const host = await page.find('va-file-input');
+   
+    // check that file is in file added state
+    const containerSelector = 'va-file-input >>> div.selected-files-wrapper'
+    const containerBefore = await host.find(containerSelector);
+    expect(containerBefore).not.toBeNull();
+    
+    // check that error appears 
+    const errorMessage = await page.find('va-file-input >>> span.usa-error-message');
+    expect(errorMessage).not.toBeNull();
+    
+    // check that component resets visual state
+    host.setAttribute('reset-visual-state', 'true');
+    await page.waitForChanges();
+    const containerAfter = await host.find(containerSelector)
+    expect(containerAfter).toBeNull();
+
+    // check that error still present
+    const fileInfoCardAfter = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessageAfter = await fileInfoCardAfter.find('span.usa-error-message');
+    expect(errorMessageAfter).not.toBeNull();
   });
 });

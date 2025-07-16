@@ -3,19 +3,30 @@
 ![Publishing workflow](https://github.com/department-of-veterans-affairs/component-library/actions/workflows/publish.yml/badge.svg)
 ![Latest version](https://img.shields.io/npm/v/@department-of-veterans-affairs/component-library)
 
+## Looking for install instructions as a consumer of the VA Design System?
+
+This repository is for contributors and maintainers of the VA Design System. If you're looking for the install instructions as a consumer of the VA Design System, check out the install instructions in the [VA Design System Documentation](https://design.va.gov/about/developers/install).
+
+## Repository structure
+
 This is a monorepo containing the following packages:
 
 - `web-components`
-- `react-components`
+- `react-components` (deprecated)
 - `css-library`
 - `storybook`
 - `design-system-dashboard-cli`
+- `integration-examples`
 
 The `core` package is for bundling the `web-components` and `react-components` packages into one for publishing.
+  - **note:** The `web-components` package contains web components and the React bindings for those web components.
+  - **note:** The `react-components` package is deprecated and will be removed in a future release.
 
 The `storybook` package is for the combined story files from each `*-components` package.
 
 The `design-system-dashboard-cli` package is used to gather metrics on design system usage.
+
+The `integration-examples` package is for examples of how to integrate the VA Design System into different frameworks and build tools outside of vets-website ([VA.gov](https://VA.gov)).
 
 # Running Build via Storybook
 

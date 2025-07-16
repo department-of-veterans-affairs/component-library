@@ -132,9 +132,24 @@ export class VaFileInput {
   @Prop() maxFileSize?: number = Infinity;
 
   /**
+   * Minimum allowed file size in bytes.
+   */
+  @Prop() minFileSize?: number = 0;
+
+  /**
    * Percent upload completed. For use with va-progress-bar component
    */
   @Prop({ mutable: true}) percentUploaded?: number = null;
+
+  /**
+   * Error message for the encrypted password input
+   */
+  @Prop() passwordError?: string;
+
+  /**
+   * Reset to initial visual state. Useful in conjunction with errors
+   */
+  @Prop({ mutable: true }) resetVisualState?: boolean = false;
 
   /**
    * The event emitted when the file input value changes.
@@ -162,18 +177,29 @@ export class VaFileInput {
       //This won't be read if its not in a timeout due to other messages being read.
       setTimeout(() => {this.updateStatusMessage(value)});
   }
-  
-  @Watch('percentUploaded') 
+
+  @Watch('percentUploaded')
     percentHandler(value: number) {
       if (value >= 100) {
         this.resetState();
       }
+  }
+  
+  /**
+   * Return to initial visual state of component to display error and
+   * allow user to try to add file again.
+   */
+  @Watch('resetVisualState')
+  handleError(value: boolean) {
+    if (value) {
+      this.resetState();
     }
+  }
 
   /**
-   * called when file has been uploaded 
+   * called when file has been uploaded
    * or file upload has been cancelled
-   * only relevant when percentUploaded specified
+   * or if resetVisualState prop set to true
    */
   private resetState() {
     this.fileContents = null;
@@ -183,6 +209,7 @@ export class VaFileInput {
   }
 
   private handleChange = (e: Event) => {
+    this.resetVisualState = false;
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0]);
@@ -210,12 +237,23 @@ export class VaFileInput {
       }
     }
 
+     if (file.size === 0) {
+      this.internalError = `The file you selected is empty. Files must be larger than 0B.`;
+      this.resetState();
+      return;
+    }
+
     if (file.size > this.maxFileSize) {
       this.internalError = `
         We can't upload your file because it's too big. Files must be less than ${this.formatFileSize(this.maxFileSize)}.`;
       // in case the file was added by clicking the "change file" button do a reset
-      this.fileContents = null;
-      this.uploadStatus = 'idle';
+      this.resetState();
+      return;
+    }
+
+    if (file.size < this.minFileSize) {
+      this.internalError = `We can't upload your file because it's too small. Files must be at least ${this.formatFileSize(this.minFileSize)}.`;
+      this.resetState();
       return;
     }
 
@@ -440,13 +478,15 @@ export class VaFileInput {
       statusText,
       uploadedFile,
       percentUploaded,
+      passwordError,
+      resetVisualState,
     } = this;
 
     if (value && !this.file) {
       this.handleFile(value, false);
     }
 
-    const displayError = this.error || this.internalError;
+    const displayError = error || this.internalError;
     const ariaDescribedbyIds =
       `${hint ? 'input-hint-message' : ''} ${
         displayError ? 'input-error-message' : ''
@@ -502,7 +542,7 @@ export class VaFileInput {
       : 'selected-files-wrapper';
     const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
 
-    
+
     const showProgBar = percentUploaded !== null && percentUploaded < 100;
 
     let statusClassNames = 'file-status-label'
@@ -537,7 +577,7 @@ export class VaFileInput {
             aria-describedby={ariaDescribedbyIds}
             onChange={this.handleChange}
           />
-          {(uploadStatus === 'idle' && !uploadedFile) && (
+          {(uploadStatus === 'idle' && (!uploadedFile || resetVisualState)) && (
             <div>
               <span id="file-input-error-alert" role="alert">
                 {displayError && (
@@ -560,7 +600,7 @@ export class VaFileInput {
               </div>
             </div>
           )}
-          {(uploadStatus !== 'idle' || uploadedFile) && (
+          {(!resetVisualState && (uploadStatus !== 'idle' || uploadedFile)) && (
             <div class={selectedFileClassName}>
               {!headless && (
                 <div class="selected-files-label">
@@ -595,7 +635,7 @@ export class VaFileInput {
                   <div>
                     {this.showSeparator && <hr class="separator" />}
                     {encrypted && (
-                      <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required />
+                      <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required error={passwordError} />
                     )}
                     <div class="additional-info-slot">
                       <slot></slot>
@@ -630,7 +670,7 @@ export class VaFileInput {
                             onPrimaryButtonClick={() => this.removeFile(true)}
                             onSecondaryButtonClick={this.closeModal}
                           >
-                            We'll remove the uploaded document{' '}
+                            We'll delete the uploaded file{' '}
                             <span class="file-label">{file ? file.name : uploadedFile.name}</span>
                           </va-modal>
                         </Fragment>

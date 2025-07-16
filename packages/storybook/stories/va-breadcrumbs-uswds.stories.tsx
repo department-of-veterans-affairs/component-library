@@ -15,18 +15,26 @@ export default {
     },
   },
 };
-const Template = ({ label, 'disable-analytics': disableAnalytics, 'current-page-redirect': currentPageRedirect, 'breadcrumb-list': breadcrumbList }) => (
+const Template = ({ 
+  label, 
+  'disable-analytics': disableAnalytics, 
+  'current-page-redirect': currentPageRedirect, 
+  'breadcrumb-list': breadcrumbList,
+  'home-veterans-affairs': homeVeteransAffairs = true
+}) => (
   <VaBreadcrumbs
     label={label}
     disableAnalytics={disableAnalytics}
     breadcrumbList={breadcrumbList}
     currentPageRedirect={currentPageRedirect}
+    homeVeteransAffairs={homeVeteransAffairs}
   ></VaBreadcrumbs>
 );
 
 const DynamicCrumbsTemplate = ({
   label,
   'disable-analytics': disableAnalytics,
+  'home-veterans-affairs': homeVeteransAffairs = true,
 }) => {
   const breadcrumbs = [
     { label: 'VA.gov home', href: '/#1' },
@@ -67,6 +75,7 @@ const DynamicCrumbsTemplate = ({
           label={label}
           disableAnalytics={disableAnalytics}
           breadcrumbList={crumbs}
+          homeVeteransAffairs={homeVeteransAffairs}
         ></VaBreadcrumbs>
       )}
     </div>
@@ -77,6 +86,7 @@ const WrappingCrumbsTemplate = ({
   label,
   'disable-analytics': disableAnalytics,
   wrapping,
+  'home-veterans-affairs': homeVeteransAffairs = true,
 }) => {
   const breadcrumbs = [
     { label: 'VA.gov home', href: '/#1' },
@@ -94,6 +104,7 @@ const WrappingCrumbsTemplate = ({
         disableAnalytics={disableAnalytics}
         breadcrumbList={breadcrumbs}
         wrapping={wrapping}
+        homeVeteransAffairs={homeVeteransAffairs}
       ></VaBreadcrumbs>
     </div>
   );
@@ -102,6 +113,7 @@ const WrappingCrumbsTemplate = ({
 const MultipleLanguagesTemplate = ({
   label,
   'disable-analytics': disableAnalytics,
+  'home-veterans-affairs': homeVeteransAffairs = true,
 }) => {
   const breadcrumbs = [
     { label: 'VA.gov home', href: '/#1' },
@@ -123,6 +135,7 @@ const MultipleLanguagesTemplate = ({
         label={label}
         disableAnalytics={disableAnalytics}
         breadcrumbList={breadcrumbs}
+        homeVeteransAffairs={homeVeteransAffairs}
       ></VaBreadcrumbs>
     </div>
   );
@@ -132,6 +145,7 @@ const WithRouterTemplate = ({
   label,
   'disable-analytics': disableAnalytics,
   wrapping,
+  'home-veterans-affairs': homeVeteransAffairs = true,
 }) => {
   const breadcrumbs = [
     { label: 'VA.gov home', href: '/#1' },
@@ -170,7 +184,7 @@ const WithRouterTemplate = ({
           import &#x7b; useHistory &#x7d; from 'react-router-dom';
           <br />
           <br />
-          const YourComponent &#61; (&#x7b; label, disableAnalytics, uswds,
+          const YourComponent &#61; (&#x7b; label, disableAnalytics,
           breadcrumbList, wrapping &#x7d;) &#61;&#62; &#x7b;
           <br />
           &nbsp;const history &#61; useHistory();
@@ -192,8 +206,6 @@ const WithRouterTemplate = ({
           <br />
           &nbsp;&nbsp;&nbsp;disableAnalytics=&#x7b;disableAnalytics&#x7d;
           <br />
-          &nbsp;&nbsp;&nbsp;uswds=&#x7b;uswds&#x7d;
-          <br />
           &nbsp;&nbsp;&nbsp;breadcrumbList=&#x7b;breadcrumbs&#x7d;
           <br />
           &nbsp;&nbsp;&nbsp;wrapping=&#x7b;wrapping&#x7d;
@@ -213,13 +225,14 @@ const WithRouterTemplate = ({
         breadcrumbList={breadcrumbs}
         wrapping={wrapping}
         onRouteChange={handleRouteChange}
+        homeVeteransAffairs={homeVeteransAffairs}
       ></VaBreadcrumbs>
     </div>
   );
 };
 
 const dataArray = [
-  { label: 'VA.gov home', href: '#one' },
+  { label: 'Custom home', href: '#one' },
   { label: 'Level two', href: '#two' },
   { label: 'Level three', href: '#three' },
 ];
@@ -227,9 +240,10 @@ const dataArray = [
 const defaultArgs = {
   'label': 'Breadcrumb',
   'breadcrumb-list':
-    '[{ "label": "VA.gov home", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]',
+    '[{ "label": "Custom home", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]',
   'disable-analytics': false,
   'wrapping': false,
+  'home-veterans-affairs': true,
 };
 
 export const Default = Template.bind(null);
