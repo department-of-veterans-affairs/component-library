@@ -366,8 +366,7 @@ export class VaModal {
    * Traverses the shadow DOM tree to find the actual focused element.
    * This method handles cases where the focused element is inside one or more shadow roots.
    *
-   * @returns The deepest actively focused element in the shadow DOM tree, or null if no element is focused
-   * @private
+   * @returns activeElement - The deepest actively focused element in the shadow DOM tree, or null if no element is focused
    */
   private getRealActiveElement(): HTMLElement | null {
     let activeElement = document.activeElement as HTMLElement;
