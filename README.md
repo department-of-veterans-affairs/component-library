@@ -3,6 +3,12 @@
 ![Publishing workflow](https://github.com/department-of-veterans-affairs/component-library/actions/workflows/publish.yml/badge.svg)
 ![Latest version](https://img.shields.io/npm/v/@department-of-veterans-affairs/component-library)
 
+## Looking for install instructions as a consumer of the VA Design System?
+
+This repository is for contributors and maintainers of the VA Design System. If you're looking for the install instructions as a consumer of the VA Design System, check out the install instructions in the [VA Design System Documentation](https://design.va.gov/about/developers/install).
+
+## Repository structure
+
 This is a monorepo containing the following packages:
 
 - `web-components`
