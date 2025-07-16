@@ -1,7 +1,5 @@
 @import '~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css';
 @import "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss";
-@import '../../mixins/links.css';
-@import '../../mixins/focusable.css';
 
 .va-tabs__list {
   display: flex;
@@ -15,153 +13,74 @@
   height: 52px;
 }
 
-/* Styles for individual tabs */
-button.va-tabs__tab_item {
-  display: block;
-  flex-shrink: 0;
-  text-align: center;
-  height: 100%;
-  background-color: transparent;
-  color: var(--vads-color-primary);
-  position: relative;
-  display: block;
-  padding: 1rem 0.5rem 0.5rem;
-  border: none;
-  border-bottom: 4px solid transparent;
-  min-width: 4rem;
-  max-width: 10rem;
+// /* Styles for individual tabs */
+// button.va-tabs__tab_item {
+//   display: block;
+//   flex-shrink: 0;
+//   text-align: center;
+//   height: 100%;
+//   background-color: transparent;
+//   color: var(--vads-color-primary);
+//   position: relative;
+//   display: block;
+//   padding: 1rem 0.5rem 0.5rem;
+//   border: none;
+//   border-bottom: 4px solid transparent;
+//   min-width: 4rem;
+//   max-width: 10rem;
 
-  &[aria-selected='false'] {
-    &:hover {
-      cursor: pointer;
-      background: var(--vads-color-base-lightest);
-      border-bottom-color:  var(--vads-color-primary);
-      color: var(--vads-color-ink);
-    }
-  }
+//   &[aria-selected='false'] {
+//     &:hover {
+//       cursor: pointer;
+//       background: var(--vads-color-base-lightest);
+//       border-bottom-color:  var(--vads-color-primary);
+//       color: var(--vads-color-ink);
+//     }
+//   }
 
-  &[aria-selected='true'] {
-    border-bottom-color: var(--vads-color-primary);
-    color: transparent;
-    background: var(--vads-color-white);
+//   &[aria-selected='true'] {
+//     border-bottom-color: var(--vads-color-primary);
+//     color: transparent;
+//     background: var(--vads-color-white);
 
-    &:hover {
-      cursor: pointer;
-      background: var(--vads-color-base-lightest);
-      border-bottom-color:  var(--vads-color-primary);
-    }
+//     &:hover {
+//       cursor: pointer;
+//       background: var(--vads-color-base-lightest);
+//       border-bottom-color:  var(--vads-color-primary);
+//     }
 
-    &::after {
-      content: attr(data-label) / "";
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      height: calc(100% - 1.5rem); // 1.5rem is the cumulative vertical padding on the tab item
-      top: 1rem; // Account for top padding of tab item
-      width: calc(100% - 4px); // Don't take up full width so outline of tab item is fully visible
-      left: 2px; // Update horizontal position to align with the tab item due to decreased width
-      font-weight: 700;
-      background: var(--vads-color-white);
-      color: var(--vads-color-base);
-    }
+//     &::after {
+//       content: attr(data-label) / "";
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       position: absolute;
+//       height: calc(100% - 1.5rem); // 1.5rem is the cumulative vertical padding on the tab item
+//       top: 1rem; // Account for top padding of tab item
+//       width: calc(100% - 4px); // Don't take up full width so outline of tab item is fully visible
+//       left: 2px; // Update horizontal position to align with the tab item due to decreased width
+//       font-weight: 700;
+//       background: var(--vads-color-white);
+//       color: var(--vads-color-base);
+//     }
 
-    &:hover::after {
-      background-color: var(--vads-color-base-lightest);
-    }
-  }
+//     &:hover::after {
+//       background-color: var(--vads-color-base-lightest);
+//     }
+//   }
 
-  &.overflow-link {
-    position: relative;
+//   &.overflow-link {
+//     position: relative;
 
-    & > button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+//     & > button {
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
 
 
-      va-icon {
-        margin-left: 0.5rem;
-      }
-    }
-  }
-}
-
-/*
-*
-* Overflow styles
-*
-*/
-
-.va-tabs__overflow-menu {
-  position: absolute;
-  border: 1px solid var(--vads-color-base-dark);
-  list-style: none;
-  padding-inline-start: 0;
-  visibility: hidden;
-  margin-block: 0;
-  background-color: var(--vads-color-white);
-
-  &.visible {
-    visibility: visible;
-  }
-
-}
-
-/*
-.va-tabs__tab_overflow-item {
-  text-align: left;
-  min-width: 128px;
-
-  &.selected {
-    button {
-      border-left-color: var(--vads-color-primary);
-      color: var(--vads-color-base);
-
-      &::after {
-        content: attr(data-label) / "";
-        display: block;
-        font-weight: 700;
-        background: var(--vads-color-white);
-        position: absolute;
-        top: 4px;
-        left: 6px;
-        width: calc(100% - 8px);
-        height: calc(100% - 6px);
-        display: flex;
-        align-items: center;
-        justify-content: left;
-      }
-
-      &:hover:after {
-        background-color: var(--vads-color-base-lightest);
-      }
-
-      &:focus:after, &:hover:focus:after, &:active:after {
-        background-color: var(--vads-color-action-focus-on-light);
-      }
-    }
-  }
-
-  button {
-    justify-content: left;
-    border-bottom: 0;
-    border-left: 4px solid transparent;
-    width: 100%;
-    text-align: left;
-
-    &:hover {
-      cursor: pointer;
-      border-left-color: var(--vads-color-primary);
-    }
-
-    &:focus, &:hover:focus, &:active {
-      border-left-color: transparent;
-      background-color: var(--vads-color-action-focus-on-light);
-      outline: 2px solid var(--vads-color-action-border-focus-on-light);
-      outline-offset: -2px;
-      color: var(--vads-color-base);
-    }
-  }
-}
-*/
+//       va-icon {
+//         margin-left: 0.5rem;
+//       }
+//     }
+//   }
+// }

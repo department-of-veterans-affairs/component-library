@@ -10,9 +10,10 @@ import {
 const tabsDocs = getWebComponentDocs('va-tabs');
 
 const tabItems = [
-  { label: 'First', url: '#tab1' },
-  { label: 'Second', url: '#tab2' },
-  { label: 'Third', url: '#tab3' },
+  { label: 'Status', url: '#tab1' },
+  { label: 'Issues', url: '#tab2' },
+  { label: 'Overview', url: '#tab3' },
+  { label: 'Test', url: '#tab4' },
 ];
 
 const panelContent = [
@@ -47,18 +48,24 @@ export default {
     ...propDefaults(tabsDocs),
     label: 'Filtered content options',
     tabItems: tabItems,
+    selected: 0,
   },
 };
 
 const vaTabs = (args: any) => {
   return (
     <div>
-      <VaTabs
-        label={args.label}
-        tabItems={args.tabItems}
-      />
+      <va-tabs label={args.label} selected={args.selected}>
+        {
+          args.tabItems.map((item, index: number) => (
+            <va-tab-item href={item.url} key={item.label}>
+              {item.label}
+            </va-tab-item>
+          ))
+        }
+      </va-tabs>
       {
-        args.tabItems.map((item, index) => (
+        args.tabItems.map((item, index: number) => (
           <div id={`tab${index + 1}`} key={item.label} hidden>
             <h2>{item.label}</h2>
             <p>{panelContent[index]}</p>

@@ -1,52 +1,112 @@
 import { newE2EPage } from '@stencil/core/testing';
+// import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-tabs', () => {
-  const tabItems = JSON.stringify([
-    { label: 'Tab 1', url: '#tab1' },
-    { label: 'Tab 2', url: '#tab2' },
-    { label: 'Tab 3', url: '#tab3' },
-  ]);
-
-  const extraTabItems = JSON.stringify([
-    { label: 'Tab 4', url: '#tab4' },
-    { label: 'Tab 5', url: '#tab5' }
-  ]);
-
   it('renders', async () => {
-    const page = await newE2EPage({
-      html: `<va-tabs tab-items='${tabItems}'></va-tabs>`
-    });
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <va-tabs label="Filtered content options">
+        <va-tab-item href="#tab1">Tab 1</va-tab-item>
+        <va-tab-item href="#tab2">Tab 2</va-tab-item>
+        <va-tab-item href="#tab3">Tab 3</va-tab-item>
+      </va-tabs>`
+    );
 
     const el = await page.find('va-tabs');
     expect(el).not.toBeNull();
   });
 
-  it('selects tab and shows correct panel', async () => {
-    const page = await newE2EPage({
-      html: `<va-tabs tab-items='${tabItems}'></va-tabs>`
-    });
-    await page.setViewport({ width: 1000, height: 600 });
+  it('does not render if no children are passed', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`<va-tabs></va-tabs>`);
+
+    const elementHandle = await page.$('va-tabs');
     await page.waitForChanges();
 
-    const tab2 = await page.find('va-tabs >>> button[id="#tab2"]');
-    await tab2.click();
+    const shadowContent = await page.evaluate(
+      el => el.shadowRoot.innerHTML.trim(),
+      elementHandle,
+    );
+
+    expect(shadowContent).toBe('');
+  });
+
+  it('selects tab and shows correct panel', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <va-tabs label="Filtered content options">
+        <va-tab-item href="#tab1">Tab 1</va-tab-item>
+        <va-tab-item href="#tab2">Tab 2</va-tab-item>
+        <va-tab-item href="#tab3">Tab 3</va-tab-item>
+      </va-tabs>`
+    );
+
+    const buttons = await page.findAll(
+      'va-tab-item >>> button',
+    );
+    expect(buttons.length).toEqual(3);
+
+    // Trigger click
+    const button2 = buttons[1];
+    await button2.click();
+
     await page.waitForChanges();
 
     // Check that tab2 is selected
-    const ariaSelected = tab2.getAttribute('aria-selected');
+    const ariaSelected = button2.getAttribute('aria-selected');
     expect(ariaSelected).toBe('true');
   });
 
-  it('only renders a maximum of 3 tabs', async () => {
-    const fiveItems = [...JSON.parse(tabItems), ...JSON.parse(extraTabItems)];
+  it('respects the selected prop', async () => {
+    const page = await newE2EPage();
 
-    // const tabItems = JSON.stringify(extraTabItems);
-    const page = await newE2EPage({
-      html: `<va-tabs tab-items='${fiveItems}'></va-tabs>`
-    });
+    await page.setContent(`
+      <va-tabs label="Filtered content options" selected="1">
+        <va-tab-item href="#tab1">Tab 1</va-tab-item>
+        <va-tab-item href="#tab2">Tab 2</va-tab-item>
+        <va-tab-item href="#tab3">Tab 3</va-tab-item>
+      </va-tabs>`
+    );
+
+    const buttons = await page.findAll(
+      'va-tab-item >>> button',
+    );
+    expect(buttons.length).toEqual(3);
+
+    expect(buttons[1].getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('only renders a maximum of 3 tabs', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <va-tabs>
+        <va-tab-item href="#tab1">Tab 1</va-tab-item>
+        <va-tab-item href="#tab2">Tab 2</va-tab-item>
+        <va-tab-item href="#tab3">Tab 3</va-tab-item>
+        <va-tab-item href="#tab4">Tab 4</va-tab-item>
+        <va-tab-item href="#tab5">Tab 5</va-tab-item>
+      </va-tabs>`
+    );
     await page.waitForChanges();
 
     const tabs = await page.findAll('va-tabs >>> button');
     expect(tabs.length).toBeLessThanOrEqual(3);
   });
+
+  // it('passes an axe check', async () => {
+  //   const page = await newE2EPage();
+  //   await page.setContent(`
+  //     <va-tabs label="Filtered content options">
+  //       <va-tab-item href="#tab1">Tab 1</va-tab-item>
+  //       <va-tab-item href="#tab2">Tab 2</va-tab-item>
+  //       <va-tab-item href="#tab3">Tab 3</va-tab-item>
+  //     </va-tabs>`
+  //   );
+
+  //   await axeCheck(page);
+  // });
 });

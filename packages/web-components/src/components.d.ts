@@ -10,14 +10,12 @@ import { ButtonItem } from "./components/va-button-segmented/va-button-segmented
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
 import { Filter } from "./components/va-search-filter/va-search-filter";
 import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
-import { TabItem } from "./components/va-tabs/va-tabs.types";
 import { CountryCode } from "libphonenumber-js/min";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export { ButtonItem } from "./components/va-button-segmented/va-button-segmented.types";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
 export { Filter } from "./components/va-search-filter/va-search-filter";
 export { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
-export { TabItem } from "./components/va-tabs/va-tabs.types";
 export { CountryCode } from "libphonenumber-js/min";
 export namespace Components {
     /**
@@ -1767,6 +1765,10 @@ export namespace Components {
      */
     interface VaSummaryBox {
     }
+    interface VaTabItem {
+        "href": string;
+        "isSelectedTab"?: boolean;
+    }
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -1869,11 +1871,7 @@ export namespace Components {
         /**
           * The index of the currently selected tab. Defaults to 0 (the first tab).
          */
-        "selected": number;
-        /**
-          * An array of tab item objects, each containing a label and a URL.
-         */
-        "tabItems": TabItem[] | string;
+        "selected"?: number;
     }
     /**
      * @componentName Telephone
@@ -2334,6 +2332,10 @@ export interface VaSelectCustomEvent<T> extends CustomEvent<T> {
 export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaStatementOfTruthElement;
+}
+export interface VaTabItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTabItemElement;
 }
 export interface VaTableInnerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3418,6 +3420,23 @@ declare global {
         prototype: HTMLVaSummaryBoxElement;
         new (): HTMLVaSummaryBoxElement;
     };
+    interface HTMLVaTabItemElementEventMap {
+        "tabItemSelected": any;
+    }
+    interface HTMLVaTabItemElement extends Components.VaTabItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTabItemElementEventMap>(type: K, listener: (this: HTMLVaTabItemElement, ev: VaTabItemCustomEvent<HTMLVaTabItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTabItemElementEventMap>(type: K, listener: (this: HTMLVaTabItemElement, ev: VaTabItemCustomEvent<HTMLVaTabItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaTabItemElement: {
+        prototype: HTMLVaTabItemElement;
+        new (): HTMLVaTabItemElement;
+    };
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -3633,6 +3652,7 @@ declare global {
         "va-service-list-item": HTMLVaServiceListItemElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
+        "va-tab-item": HTMLVaTabItemElement;
         "va-table": HTMLVaTableElement;
         "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
@@ -5667,6 +5687,14 @@ declare namespace LocalJSX {
      */
     interface VaSummaryBox {
     }
+    interface VaTabItem {
+        "href": string;
+        "isSelectedTab"?: boolean;
+        /**
+          * This event is fired so that va-tabs element can manage which item is selected.
+         */
+        "onTabItemSelected"?: (event: VaTabItemCustomEvent<any>) => void;
+    }
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -5778,10 +5806,6 @@ declare namespace LocalJSX {
           * The index of the currently selected tab. Defaults to 0 (the first tab).
          */
         "selected"?: number;
-        /**
-          * An array of tab item objects, each containing a label and a URL.
-         */
-        "tabItems": TabItem[] | string;
     }
     /**
      * @componentName Telephone
@@ -6159,6 +6183,7 @@ declare namespace LocalJSX {
         "va-service-list-item": VaServiceListItem;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
+        "va-tab-item": VaTabItem;
         "va-table": VaTable;
         "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
@@ -6522,6 +6547,7 @@ declare module "@stencil/core" {
              * @maturityLevel deployed
              */
             "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
+            "va-tab-item": LocalJSX.VaTabItem & JSXBase.HTMLAttributes<HTMLVaTabItemElement>;
             /**
              * @componentName Table
              * @maturityCategory caution
