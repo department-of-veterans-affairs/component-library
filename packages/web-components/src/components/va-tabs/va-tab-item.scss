@@ -11,7 +11,8 @@ button.va-tabs__tab_item {
   color: var(--vads-color-primary);
   position: relative;
   display: block;
-  padding: 1rem 0.5rem 0.5rem;
+  padding: 1rem;
+  padding-bottom: .5rem;
   border: none;
   border-bottom: 4px solid transparent;
   min-width: 4rem;
