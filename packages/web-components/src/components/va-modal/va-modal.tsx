@@ -272,14 +272,8 @@ export class VaModal {
    * and focuses it if it exists.
    */
   private restoreFocus() {
-    let elementToFocus: HTMLElement | null = null;
-
     if (this.savedFocus && document.body.contains(this.savedFocus)) {
-      elementToFocus = this.savedFocus;
-    }
-
-    if (elementToFocus) {
-      elementToFocus.focus();
+      this.savedFocus.focus();
     }
   }
 
