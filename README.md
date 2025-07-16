@@ -12,13 +12,15 @@ This repository is for contributors and maintainers of the VA Design System. If 
 This is a monorepo containing the following packages:
 
 - `web-components`
-- `react-components`
+- `react-components` (deprecated)
 - `css-library`
 - `storybook`
 - `design-system-dashboard-cli`
 - `integration-examples`
 
 The `core` package is for bundling the `web-components` and `react-components` packages into one for publishing.
+  - **note:** The `web-components` package contains web components and the React bindings for those web components.
+  - **note:** The `react-components` package is deprecated and will be removed in a future release.
 
 The `storybook` package is for the combined story files from each `*-components` package.
 
