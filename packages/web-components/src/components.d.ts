@@ -701,6 +701,10 @@ export namespace Components {
          */
         "maxFileSize"?: number;
         /**
+          * Minimum allowed file size in bytes.
+         */
+        "minFileSize"?: number;
+        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -4485,6 +4489,10 @@ declare namespace LocalJSX {
           * Maximum allowed file size in bytes.
          */
         "maxFileSize"?: number;
+        /**
+          * Minimum allowed file size in bytes.
+         */
+        "minFileSize"?: number;
         /**
           * The name for the input element.
          */
