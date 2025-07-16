@@ -266,19 +266,7 @@ export class VaModal {
     this.teardownModal();
   }
 
-  /**
-   * Restores focus to the element that triggered the modal open.
-   * This method checks if the saved focus element is still in the document
-   * and focuses it if it exists.
-   */
-  private restoreFocus() {
-    if (this.savedFocus && document.body.contains(this.savedFocus)) {
-      this.savedFocus.focus();
-    }
-  }
-
   private handleClose(e: KeyboardEvent | MouseEvent) {
-    this.restoreFocus();
     this.closeEvent.emit(e);
   }
 
