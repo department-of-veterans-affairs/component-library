@@ -1,0 +1,62 @@
+.va-loader {
+  position: relative;
+  width: 12.5rem;
+  height: 12.5rem;
+}
+
+.va-loader__border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1.25rem solid var(--vads-color-base-lightest);
+  border-top: 1.5625rem solid var(--vads-color-primary);
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  animation: va-loader-spin 1s linear infinite;
+}
+
+.va-loader__text {
+  position: absolute;
+  top: 45%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  font-family: var(--vads-font-sans);
+}
+
+.va-loader__text span {
+  color: var(--vads-color-primary-dark);
+  font-size: 1.25rem;
+  position: absolute;
+  width: 8rem;
+  overflow-wrap: break-word;
+}
+
+@keyframes va-loader-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.va-loader__border .va-loader__edge {
+  position: absolute;
+  border-radius: 50%;
+  width: 1.4375rem;
+  height: 1.4375rem;
+  background: var(--vads-color-primary);
+}
+
+.va-loader .va-loader__edge--left,
+.va-loader .va-loader__edge--right {
+  position: absolute;
+  top: 10%;
+  transform: translateY(-53%);
+}
+
+.va-loader .va-loader__edge--left {
+  left: 2%;
+}
+
+.va-loader .va-loader__edge--right {
+  right: 2%;
+}
