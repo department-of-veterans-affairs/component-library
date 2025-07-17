@@ -1,0 +1,66 @@
+@import '../../mixins/focusable.css';
+
+:host {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  position: relative;
+  display: block;
+  height: 100%;
+}
+
+.va-sidenav-submenu__label {
+  border-bottom: 1px solid var(--vads-color-base-lightest);
+  color: var(--vads-color-base);
+  font-size: 0.8625rem; // 13.8px
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+  padding-left: 1rem;
+  text-transform: uppercase;
+}
+
+a:hover {
+  background-color: var(--vads-color-base-lightest);
+  box-shadow: none;
+}
+
+.va-sidenav-submenu__link {
+  border-bottom: 1px solid var(--vads-color-base-lightest);
+  color: var(--vads-color-link);
+  display: block;
+  padding: 0.7rem 1rem;
+  padding-left: var(--va-sidenav-item-link-padding-left, 1rem);
+  position: relative;
+  text-decoration: none;
+}
+
+.va-sidenav-submenu__current-link {
+  font-weight: var(--font-weight-bold);
+}
+
+.va-sidenav-submenu__current-link::after {
+  background-color: var(--vads-color-link);
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: .25rem;
+  top: .25rem;
+  width: .25rem;
+  left: 0;
+  z-index: 1;
+}
+
+::slotted(va-sidenav-item) {
+  --va-sidenav-item-link-padding-left: 2rem;
+}
+
+:host(.va-sidenav-submenu__current)::after {
+  background-color: var(--vads-color-primary-lighter);
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  width: .25rem;
+  left: 0;
+}
