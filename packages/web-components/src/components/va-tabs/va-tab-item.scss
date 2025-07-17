@@ -1,5 +1,3 @@
-@import '~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css';
-@import "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss";
 @import '../../mixins/focusable.css';
 
 button.va-tabs__tab_item {
@@ -14,6 +12,8 @@ button.va-tabs__tab_item {
   min-width: 4rem;
   max-width: 10rem;
   min-height: 52px;
+  font-family: var(--font-source-sans);
+  font-size: var(--vads-font-size-source-sans-normalized);
 
   &[aria-selected='false'] {
     &:hover {
