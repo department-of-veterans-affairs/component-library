@@ -145,14 +145,14 @@ export class VaTelephone {
 
     // If a country code is provided, attempt to format the number as international.
     if (countryCode) {
-      let phoneNumber = null;
+      let parsedPhoneNumber = null;
       try {
-        phoneNumber = parsePhoneNumberFromString(`+${countryCode}${formattedNum}`);
+        parsedPhoneNumber = parsePhoneNumberFromString(`+${countryCode}${formattedNum}`);
       } catch (error) {
         console.error('Error parsing phone number:', error);
       }
-      if (phoneNumber) {
-        formattedNum = phoneNumber.formatInternational();
+      if (parsedPhoneNumber) {
+        formattedNum = parsedPhoneNumber.formatInternational();
       } else {
         formattedNum = formattedNum.startsWith('+')
           ? `${formattedNum}`
