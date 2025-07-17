@@ -8,9 +8,6 @@ input:not([disabled]):focus,
 textarea:not([disabled]):focus,
 #form-question
 [role='option']:focus,
-*[tabindex]:focus, 
-a.va-sidenav-submenu__link:focus {
+*[tabindex]:focus {
   outline: 2px solid var(--vads-color-action-focus-on-light);
-  outline-offset: 2px;
-  z-index: 2;
 }
