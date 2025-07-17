@@ -160,21 +160,20 @@ export class VaTextarea {
     }
   }
 
-  private handleInput = (e: Event) => {
+  private updateScreenReaderCount = debounce(() => {
+    if (this.charCountElement) {
+      this.charCountElement.innerText = getCharacterMessage(
+        this.value,
+        this.getMaxlength(),
+      );
+    }
+  }, 1000);
+
+  private handleInput = (e: InputEvent) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-
-    // Update the inner text of the character count element after a 1000ms delay
-    // to prevent obtrusive updates for screen readers.
-    if (this.charCountElement) {
-      debounce(() => {
-        this.charCountElement.innerText = getCharacterMessage(
-          this.value,
-          this.getMaxlength(),
-        );
-      }, 1000)();
-    }
-  };
+    this.updateScreenReaderCount();
+  }
 
   private handleBlur = () => {
     // Only fire the analytics event if enabled and value is not null
