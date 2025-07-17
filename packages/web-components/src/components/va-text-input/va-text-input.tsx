@@ -317,21 +317,20 @@ export class VaTextInput {
     return this.maxlength;
   }
 
+  private updateScreenReaderCount = debounce(() => {
+    if (this.charCountElement) {
+      this.charCountElement.innerText = getCharacterMessage(
+        this.value,
+        this.getMaxlength(),
+      );
+    }
+  }, 1000);
+
   private handleInput = (e: InputEvent) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-
-    // Update the inner text of the character count element after a 1000ms delay
-    // to prevent obtrusive updates for screen readers.
-    if (this.charCountElement) {
-      debounce(() => {
-        this.charCountElement.innerText = getCharacterMessage(
-          this.value,
-          this.getMaxlength(),
-        );
-      }, 1000)();
-    }
-  };
+    this.updateScreenReaderCount();
+  }
 
   private handleBlur = (e: Event) => {
     if (this.enableAnalytics) {
