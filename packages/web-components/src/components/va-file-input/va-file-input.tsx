@@ -117,7 +117,9 @@ export class VaFileInput {
   @Prop() readOnly?: boolean = false;
 
   /**
-   * When true shows a password field
+   * When true, displays a password field.
+   *
+   * Note: This component does not check if a file is encrypted. For encryption checks, see: [Checking if an uploaded PDF is encrypted](https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted)
    */
   @Prop() encrypted?: boolean = false;
 
