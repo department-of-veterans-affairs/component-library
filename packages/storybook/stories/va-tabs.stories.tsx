@@ -3,9 +3,11 @@ import {
   propStructure,
   StoryDocs,
   propDefaults,
+  componentStructure,
 } from './wc-helpers';
 
 const tabsDocs = getWebComponentDocs('va-tabs');
+const tabItemDocs= getWebComponentDocs('va-tab-item');
 
 const tabItems = [
   { label: 'Status', targetId: 'panel-1' },
@@ -22,7 +24,11 @@ const panelContent = [
 
 export default {
   title: 'Components/Tabs',
-  id: 'components/Tabs',
+  id: 'components/va-tabs',
+  component: 'va-tabs',
+  subcomponents: {
+    'va-tab-item': componentStructure(tabItemDocs)[tabItemDocs.tag],
+  },
   parameters: {
     componentSubtitle: 'va-tabs web component',
     docs: {
@@ -36,17 +42,14 @@ export default {
       description: 'Label for the tabs component',
       control: { type: 'text' },
     },
-    tabItems: {
-      name: 'Tab Items',
-      description: 'Array of objects representing the tabs, each with a label and URL',
-      control: { type: 'object' },
-    },
   },
   args: {
     ...propDefaults(tabsDocs),
     label: 'Filtered content options',
     tabItems: tabItems,
+    panelContent: panelContent,
     selected: 0,
+    key: 0, // Used to differentiate between multiple instances in the DOM to prevent duplicate IDs
   },
 };
 
@@ -56,13 +59,14 @@ const vaTabs = (args: any) => {
       <va-tabs label={args.label} selected={args.selected}>
         {
           args.tabItems.map((item, index: number) => {
+            let targetId = `${item.targetId}-${args.key}`;
             let label = item.label;
             if (args.useLongTabLabel && index === 1) {
               label = 'Really long tab name here';
             }
 
             return (
-              <va-tab-item target-id={item.targetId} key={item.label}>
+              <va-tab-item target-id={targetId} key={item.label}>
                 {label}
               </va-tab-item>
             );
@@ -70,13 +74,15 @@ const vaTabs = (args: any) => {
         }
       </va-tabs>
       {
-        args.tabItems.map((item, index: number) => (
-          <div id={item.targetId} key={item.label} hidden>
-            <h2>{item.label}</h2>
-            <p>{panelContent[index]}</p>
-          </div>
-        ))
-      }
+        args.tabItems.map((item, index: number) => {
+          let targetId = `${item.targetId}-${args.key}`;
+          return (
+            <div id={targetId} key={item.label} hidden>
+              <h2>{item.label}</h2>
+              <p>{panelContent[index]}</p>
+            </div>
+        );
+      })}
     </div>
   );
 }
@@ -90,6 +96,7 @@ export const WithSecondTabSelected = Template.bind(null);
 WithSecondTabSelected.args = {
   ...Default.args,
   selected: 1,
+  key: 1,
 };
 WithSecondTabSelected.argTypes = propStructure(tabsDocs);
 
@@ -97,5 +104,6 @@ export const WithALongLabel = Template.bind(null);
 WithALongLabel.args = {
   ...Default.args,
   useLongTabLabel: true,
+  key: 2,
 };
 WithALongLabel.argTypes = propStructure(tabsDocs);
