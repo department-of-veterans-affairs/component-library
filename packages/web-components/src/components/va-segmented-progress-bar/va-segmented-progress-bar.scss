@@ -3,10 +3,15 @@
 @use 'usa-step-indicator/src/styles/usa-step-indicator';
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @import '../../mixins/accessibility.css';
+@import '../../mixins/focusable.css';
 
 
 *, ::after, ::before {
   box-sizing: border-box;
+}
+
+:host {
+  display: block;
 }
 
 :host .usa-step-indicator__heading {
