@@ -8,6 +8,7 @@ import {
   Host,
 } from '@stencil/core';
 import { isMessageSet } from '../../utils/utils';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 /**
  * @componentName Telephone
@@ -143,7 +144,13 @@ export class VaTelephone {
     }
 
     if (countryCode) {
-      formattedNum = `+${countryCode} ${formattedNum}`;
+      let phoneNumber = parsePhoneNumberFromString(`+${countryCode}${formattedNum}`);
+      if (phoneNumber) {
+        formattedNum = phoneNumber.formatInternational();
+      } else {
+        formattedNum = `+${countryCode} ${formattedNum}`;
+      }
+
     }
 
     if (tty) {
