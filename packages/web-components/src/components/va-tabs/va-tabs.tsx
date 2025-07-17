@@ -100,7 +100,7 @@ export class VaTabs {
     // With all elements reset to hidden, query DOM for the element with the ID
     // of the clicked tab's URL.
     if (this.tabItems.length > 0) {
-      const targetId = this.tabItems[this.selected].getAttribute('href').replace('#', '');
+      const targetId = this.tabItems[this.selected].getAttribute('target-id');
       const targetElement = document.getElementById(targetId);
 
       // Remove hidden attribute from the target element if it exists.
@@ -113,20 +113,8 @@ export class VaTabs {
 
   @Listen('tabItemSelected')
   itemToggledHandler(event: CustomEvent) {
-    // Determine if it was a click or keyboard event that triggered the tab selection.
-    const isKeyboardEvent = event.detail && event.detail.type === 'keydown';
-
     // By default, assume the selected tab is the one that was clicked.
     let selectedTab = event.target as HTMLVaTabItemElement;
-
-    // If the event was triggered by a keyboard action, set selectedTab based on
-    // the keyboard event via `updateFocusedTabBasedOnKeyboard`. Note that the
-    // `updateFocusedTabBasedOnKeyboard` method will also update focused tab button
-    // based on the key pressed.
-    if (isKeyboardEvent) {
-      this.updateFocusedTabBasedOnKeyboard(event.detail.key);
-      return;
-    }
 
     this.tabWithFocus = selectedTab;
 
@@ -164,7 +152,7 @@ export class VaTabs {
     // Query the DOM for each tab's corresponding panel and either hide or show
     // it based on the selected tab.
     this.tabItems.forEach((item) => {
-      const targetId = item.getAttribute('href').replace('#', '');
+      const targetId = item.getAttribute('target-id');
       const targetElement = document.getElementById(targetId);
       const isSelectedTab = item.getAttribute('is-selected-tab') === 'true';
 
@@ -176,12 +164,10 @@ export class VaTabs {
     });
   }
 
-  /**
-   * Updates the focused tab based on keyboard navigation and returns the newly focused tab item.
-   * @param {string} keyPressed The key that was pressed.
-   * @returns {HTMLVaTabItemElement} The newly focused tab item.
-   */
-  private updateFocusedTabBasedOnKeyboard = (keyPressed: string): void => {
+  @Listen('tabItemKeyNavigated')
+  itemKeyNavigatedHandler(event: CustomEvent) {
+    const keyPressed = event.detail.key;
+
     // Get index of the currently focused tab item and its nested button.
     let newFocusedIndex = Array.from(this.tabItems).indexOf(this.tabWithFocus);
     const button = this.tabWithFocus.shadowRoot?.querySelector('button.va-tabs__tab_item');

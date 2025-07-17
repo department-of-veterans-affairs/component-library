@@ -8,10 +8,10 @@ import {
 const tabsDocs = getWebComponentDocs('va-tabs');
 
 const tabItems = [
-  { label: 'Status', url: '#tab1' },
-  { label: 'Issues', url: '#tab2' },
-  { label: 'Overview', url: '#tab3' },
-  { label: 'Test', url: '#tab4' },
+  { label: 'Status', targetId: 'panel-1' },
+  { label: 'Issues', targetId: 'panel-2' },
+  { label: 'Overview', targetId: 'panel-3' },
+  { label: 'Test', targetId: 'panel-4' },
 ];
 
 const panelContent = [
@@ -57,13 +57,12 @@ const vaTabs = (args: any) => {
         {
           args.tabItems.map((item, index: number) => {
             let label = item.label;
-
             if (args.useLongTabLabel && index === 1) {
               label = 'Really long tab name here';
             }
 
             return (
-              <va-tab-item href={item.url} key={item.label}>
+              <va-tab-item target-id={item.targetId} key={item.label}>
                 {label}
               </va-tab-item>
             );
@@ -72,7 +71,7 @@ const vaTabs = (args: any) => {
       </va-tabs>
       {
         args.tabItems.map((item, index: number) => (
-          <div id={`tab${index + 1}`} key={item.label} hidden>
+          <div id={item.targetId} key={item.label} hidden>
             <h2>{item.label}</h2>
             <p>{panelContent[index]}</p>
           </div>

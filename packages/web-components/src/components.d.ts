@@ -1825,8 +1825,14 @@ export namespace Components {
     interface VaSummaryBox {
     }
     interface VaTabItem {
-        "href": string;
+        /**
+          * Denotes whether this tab item is currently selected in parent va-tabs.
+         */
         "isSelectedTab"?: boolean;
+        /**
+          * The id of the target panel that this tab item controls.
+         */
+        "targetId": string;
     }
     /**
      * @componentName Table
@@ -3534,6 +3540,7 @@ declare global {
     };
     interface HTMLVaTabItemElementEventMap {
         "tabItemSelected": any;
+        "tabItemKeyNavigated": any;
     }
     interface HTMLVaTabItemElement extends Components.VaTabItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaTabItemElementEventMap>(type: K, listener: (this: HTMLVaTabItemElement, ev: VaTabItemCustomEvent<HTMLVaTabItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -5870,12 +5877,22 @@ declare namespace LocalJSX {
     interface VaSummaryBox {
     }
     interface VaTabItem {
-        "href": string;
+        /**
+          * Denotes whether this tab item is currently selected in parent va-tabs.
+         */
         "isSelectedTab"?: boolean;
+        /**
+          * This event is fired when the user navigates between tab items using the keyboard using the left and right arrow keys. It allows focus to be managed by parent va-tabs.
+         */
+        "onTabItemKeyNavigated"?: (event: VaTabItemCustomEvent<any>) => void;
         /**
           * This event is fired so that va-tabs element can manage which item is selected.
          */
         "onTabItemSelected"?: (event: VaTabItemCustomEvent<any>) => void;
+        /**
+          * The id of the target panel that this tab item controls.
+         */
+        "targetId": string;
     }
     /**
      * @componentName Table
