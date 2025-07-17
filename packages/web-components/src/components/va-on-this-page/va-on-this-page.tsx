@@ -59,7 +59,6 @@ export class VaOnThisPage {
   private handleHeadingBlur = (event: FocusEvent) => {
     const heading = event.target as HTMLHeadingElement;
     heading.removeAttribute('tabindex');
-    heading.removeAttribute('role');
     heading.removeEventListener('blur', this.handleHeadingBlur);
   };
 
@@ -78,7 +77,6 @@ export class VaOnThisPage {
     const heading = document.getElementById(target.hash.slice(1)) as HTMLHeadingElement;
     if (heading) {
       heading.setAttribute('tabindex', '-1');
-      heading.setAttribute('role', 'text');
       heading.focus();
       heading.removeEventListener('blur', this.handleHeadingBlur);
       heading.addEventListener('blur', this.handleHeadingBlur, { once: true });
