@@ -7,9 +7,9 @@ describe('va-tabs', () => {
 
     await page.setContent(`
       <va-tabs label="Filtered content options">
-        <va-tab-item target-id="tab1">Tab 1</va-tab-item>
-        <va-tab-item target-id="tab2">Tab 2</va-tab-item>
-        <va-tab-item target-id="tab3">Tab 3</va-tab-item>
+        <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
+        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
       </va-tabs>`
     );
 
@@ -38,9 +38,9 @@ describe('va-tabs', () => {
 
     await page.setContent(`
       <va-tabs label="Filtered content options">
-        <va-tab-item target-id="tab1">Tab 1</va-tab-item>
-        <va-tab-item target-id="tab2">Tab 2</va-tab-item>
-        <va-tab-item target-id="tab3">Tab 3</va-tab-item>
+        <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
+        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
       </va-tabs>`
     );
 
@@ -65,9 +65,9 @@ describe('va-tabs', () => {
 
     await page.setContent(`
       <va-tabs label="Filtered content options" selected="1">
-        <va-tab-item target-id="tab1">Tab 1</va-tab-item>
-        <va-tab-item target-id="tab2">Tab 2</va-tab-item>
-        <va-tab-item target-id="tab3">Tab 3</va-tab-item>
+        <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
+        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
       </va-tabs>`
     );
 
@@ -84,11 +84,11 @@ describe('va-tabs', () => {
 
     await page.setContent(`
       <va-tabs>
-        <va-tab-item target-id="tab1">Tab 1</va-tab-item>
-        <va-tab-item target-id="tab2">Tab 2</va-tab-item>
-        <va-tab-item target-id="tab3">Tab 3</va-tab-item>
-        <va-tab-item target-id="tab4">Tab 4</va-tab-item>
-        <va-tab-item target-id="tab5">Tab 5</va-tab-item>
+        <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
+        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
+        <va-tab-item target-id="tab4" button-text="Tab 4"></va-tab-item>
+        <va-tab-item target-id="tab5" button-text="Tab 5"></va-tab-item>
       </va-tabs>`
     );
     await page.waitForChanges();
@@ -101,9 +101,9 @@ describe('va-tabs', () => {
   //   const page = await newE2EPage();
   //   await page.setContent(`
   //     <va-tabs label="Filtered content options">
-  //       <va-tab-item target-id="tab1">Tab 1</va-tab-item>
-  //       <va-tab-item target-id="tab2">Tab 2</va-tab-item>
-  //       <va-tab-item target-id="tab3">Tab 3</va-tab-item>
+  //       <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
+  //       <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
+  //       <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
   //     </va-tabs>`
   //   );
 

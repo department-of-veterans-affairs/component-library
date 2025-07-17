@@ -23,6 +23,11 @@ export class VaTabItem {
   @Element() el: HTMLElement;
 
   /**
+   * The text content of the button element.
+   */
+  @Prop() buttonText!: string;
+
+  /**
    * The id of the target panel that this tab item controls.
    */
   @Prop() targetId!: string;
@@ -65,15 +70,6 @@ export class VaTabItem {
     }
   }
 
-  componentDidLoad() {
-    // Set the button element's data-label attribute to the text content of the slot.
-    const slotContent = this.el.textContent?.trim() || '';
-    const button = this.el.shadowRoot?.querySelector('.va-tabs__tab_item');
-    if (button) {
-      button.setAttribute('data-label', slotContent);
-    }
-  }
-
   /**
    * @function handleClick
    * @description Emits the `tabItemSelected` event when the component's button element is clicked.
@@ -98,6 +94,7 @@ export class VaTabItem {
 
   render() {
     const {
+      buttonText,
       targetId,
       isSelectedTab
     } = this;
@@ -118,8 +115,9 @@ export class VaTabItem {
           tabIndex={isSelectedTab ? 0 : -1}
           onClick={(e: MouseEvent) => this.handleClick(e)}
           onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e)}
+          data-label={buttonText}
         >
-          <slot></slot>
+          {buttonText}
         </button>
       </Host>
     );

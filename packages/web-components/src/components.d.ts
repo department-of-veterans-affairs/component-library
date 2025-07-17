@@ -1826,6 +1826,10 @@ export namespace Components {
     }
     interface VaTabItem {
         /**
+          * The text content of the button element.
+         */
+        "buttonText": string;
+        /**
           * Denotes whether this tab item is currently selected in parent va-tabs.
          */
         "isSelectedTab"?: boolean;
@@ -5877,6 +5881,10 @@ declare namespace LocalJSX {
     interface VaSummaryBox {
     }
     interface VaTabItem {
+        /**
+          * The text content of the button element.
+         */
+        "buttonText": string;
         /**
           * Denotes whether this tab item is currently selected in parent va-tabs.
          */

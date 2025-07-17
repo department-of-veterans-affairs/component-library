@@ -66,8 +66,7 @@ const vaTabs = (args: any) => {
             }
 
             return (
-              <va-tab-item target-id={targetId} key={item.label}>
-                {label}
+              <va-tab-item button-text={label} target-id={targetId} key={item.label}>
               </va-tab-item>
             );
           })
