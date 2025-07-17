@@ -14,6 +14,7 @@ import classnames from 'classnames';
 import { i18next } from '../..';
 import {
   consoleDevError,
+  debounce,
   getCharacterMessage,
   getHeaderLevel,
   isMessageSet,
@@ -42,6 +43,8 @@ if (Build.isTesting) {
 })
 export class VaTextarea {
   @Element() el!: any;
+
+  charCountElement: HTMLSpanElement;
 
   /**
    * The label for the textarea.
@@ -147,10 +150,30 @@ export class VaTextarea {
     i18next.off('languageChanged');
   }
 
-  private handleInput = (e: Event) => {
+  componentDidRender() {
+    // If the charCountElement is empty, set the initial text
+    if (this.charCountElement && !this.charCountElement.innerText) {
+      this.charCountElement.innerText = getCharacterMessage(
+        this.value,
+        this.getMaxlength(),
+      );
+    }
+  }
+
+  private updateScreenReaderCount = debounce(() => {
+    if (this.charCountElement) {
+      this.charCountElement.innerText = getCharacterMessage(
+        this.value,
+        this.getMaxlength(),
+      );
+    }
+  }, 1000);
+
+  private handleInput = (e: InputEvent) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-  };
+    this.updateScreenReaderCount();
+  }
 
   private handleBlur = () => {
     // Only fire the analytics event if enabled and value is not null
@@ -318,13 +341,21 @@ export class VaTextarea {
             </span>
           )}
           {charcount && maxlength && (
-            <span
-              id="charcount-message"
-              class={messageClass}
-              aria-live="polite"
-            >
-              {getCharacterMessage(value, maxlength)}
-            </span>
+            <Fragment>
+              <span aria-hidden="true" class={messageClass}>{getCharacterMessage(this.value, this.getMaxlength())}</span>
+              <span
+                id="charcount-message"
+                aria-live="polite"
+                class="usa-sr-only"
+                ref={(el) => (this.charCountElement = el as HTMLSpanElement)}
+              >
+                {/*
+                  Element inner text is empty because it's initially set in componentDidRender
+                  and programmatically updated `getCharacterMessage` on input. This
+                  is to avoid obtrusive updates for screen readers.
+                */}
+              </span>
+            </Fragment>
           )}
           {isMessageSet(messageAriaDescribedby) && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">
