@@ -143,14 +143,21 @@ export class VaTelephone {
       }
     }
 
+    // If a country code is provided, attempt to format the number as international.
     if (countryCode) {
-      let phoneNumber = parsePhoneNumberFromString(`+${countryCode}${formattedNum}`);
+      let phoneNumber = null;
+      try {
+        phoneNumber = parsePhoneNumberFromString(`+${countryCode}${formattedNum}`);
+      } catch (error) {
+        console.error('Error parsing phone number:', error);
+      }
       if (phoneNumber) {
         formattedNum = phoneNumber.formatInternational();
       } else {
-        formattedNum = `+${countryCode} ${formattedNum}`;
+        formattedNum = formattedNum.startsWith('+')
+          ? `${formattedNum}`
+          : `+${countryCode} ${formattedNum}`;
       }
-
     }
 
     if (tty) {
