@@ -1824,6 +1824,20 @@ export namespace Components {
      */
     interface VaSummaryBox {
     }
+    interface VaTabItem {
+        /**
+          * The text content of the button element.
+         */
+        "buttonText": string;
+        /**
+          * Denotes whether this tab item is currently selected in parent va-tabs.
+         */
+        "isSelectedTab"?: boolean;
+        /**
+          * The id of the target panel that this tab item controls.
+         */
+        "targetId": string;
+    }
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -1908,6 +1922,25 @@ export namespace Components {
         "tableType"?: 'borderless';
     }
     interface VaTableRow {
+    }
+    /**
+     * @componentName Tabs
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTabs {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * A unique name for the rendered nav landmark. To be set as value for wrapper's `aria-label` attribute.
+         */
+        "label": string;
+        /**
+          * The index of the currently selected tab. Defaults to 0 (the first tab).
+         */
+        "selected"?: number;
     }
     /**
      * @componentName Telephone
@@ -2377,9 +2410,17 @@ export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaStatementOfTruthElement;
 }
+export interface VaTabItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTabItemElement;
+}
 export interface VaTableInnerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaTableInnerElement;
+}
+export interface VaTabsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTabsElement;
 }
 export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3501,6 +3542,24 @@ declare global {
         prototype: HTMLVaSummaryBoxElement;
         new (): HTMLVaSummaryBoxElement;
     };
+    interface HTMLVaTabItemElementEventMap {
+        "tabItemSelected": any;
+        "tabItemKeyNavigated": any;
+    }
+    interface HTMLVaTabItemElement extends Components.VaTabItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTabItemElementEventMap>(type: K, listener: (this: HTMLVaTabItemElement, ev: VaTabItemCustomEvent<HTMLVaTabItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTabItemElementEventMap>(type: K, listener: (this: HTMLVaTabItemElement, ev: VaTabItemCustomEvent<HTMLVaTabItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaTabItemElement: {
+        prototype: HTMLVaTabItemElement;
+        new (): HTMLVaTabItemElement;
+    };
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -3539,6 +3598,28 @@ declare global {
     var HTMLVaTableRowElement: {
         prototype: HTMLVaTableRowElement;
         new (): HTMLVaTableRowElement;
+    };
+    interface HTMLVaTabsElementEventMap {
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Tabs
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaTabsElement extends Components.VaTabs, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTabsElementEventMap>(type: K, listener: (this: HTMLVaTabsElement, ev: VaTabsCustomEvent<HTMLVaTabsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTabsElementEventMap>(type: K, listener: (this: HTMLVaTabsElement, ev: VaTabsCustomEvent<HTMLVaTabsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaTabsElement: {
+        prototype: HTMLVaTabsElement;
+        new (): HTMLVaTabsElement;
     };
     interface HTMLVaTelephoneElementEventMap {
         "component-library-analytics": any;
@@ -3697,9 +3778,11 @@ declare global {
         "va-sidenav-submenu": HTMLVaSidenavSubmenuElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
+        "va-tab-item": HTMLVaTabItemElement;
         "va-table": HTMLVaTableElement;
         "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
+        "va-tabs": HTMLVaTabsElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-telephone-input": HTMLVaTelephoneInputElement;
         "va-text-input": HTMLVaTextInputElement;
@@ -5797,6 +5880,28 @@ declare namespace LocalJSX {
      */
     interface VaSummaryBox {
     }
+    interface VaTabItem {
+        /**
+          * The text content of the button element.
+         */
+        "buttonText": string;
+        /**
+          * Denotes whether this tab item is currently selected in parent va-tabs.
+         */
+        "isSelectedTab"?: boolean;
+        /**
+          * This event is fired when the user navigates between tab items using the keyboard using the left and right arrow keys. It allows focus to be managed by parent va-tabs.
+         */
+        "onTabItemKeyNavigated"?: (event: VaTabItemCustomEvent<any>) => void;
+        /**
+          * This event is fired so that va-tabs element can manage which item is selected.
+         */
+        "onTabItemSelected"?: (event: VaTabItemCustomEvent<any>) => void;
+        /**
+          * The id of the target panel that this tab item controls.
+         */
+        "targetId": string;
+    }
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -5885,6 +5990,29 @@ declare namespace LocalJSX {
         "tableType"?: 'borderless';
     }
     interface VaTableRow {
+    }
+    /**
+     * @componentName Tabs
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTabs {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * A unique name for the rendered nav landmark. To be set as value for wrapper's `aria-label` attribute.
+         */
+        "label"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaTabsCustomEvent<any>) => void;
+        /**
+          * The index of the currently selected tab. Defaults to 0 (the first tab).
+         */
+        "selected"?: number;
     }
     /**
      * @componentName Telephone
@@ -6265,9 +6393,11 @@ declare namespace LocalJSX {
         "va-sidenav-submenu": VaSidenavSubmenu;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
+        "va-tab-item": VaTabItem;
         "va-table": VaTable;
         "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
+        "va-tabs": VaTabs;
         "va-telephone": VaTelephone;
         "va-telephone-input": VaTelephoneInput;
         "va-text-input": VaTextInput;
@@ -6635,6 +6765,7 @@ declare module "@stencil/core" {
              * @maturityLevel deployed
              */
             "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
+            "va-tab-item": LocalJSX.VaTabItem & JSXBase.HTMLAttributes<HTMLVaTabItemElement>;
             /**
              * @componentName Table
              * @maturityCategory caution
@@ -6648,6 +6779,12 @@ declare module "@stencil/core" {
              */
             "va-table-inner": LocalJSX.VaTableInner & JSXBase.HTMLAttributes<HTMLVaTableInnerElement>;
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
+            /**
+             * @componentName Tabs
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-tabs": LocalJSX.VaTabs & JSXBase.HTMLAttributes<HTMLVaTabsElement>;
             /**
              * @componentName Telephone
              * @maturityCategory use
