@@ -50,13 +50,6 @@ export const additionalDocs = {
     maturityLevel: AVAILABLE,
   },
   // MDX
-  'Sidenav': {
-    guidanceHref: 'sidenav',
-    guidanceName: 'Sidenav',
-    maturityCategory: DONT_USE,
-    maturityLevel: PROPOSED,
-  },
-  // MDX
   'Tag': {
     guidanceHref: 'tag',
     guidanceName: 'Tag',
