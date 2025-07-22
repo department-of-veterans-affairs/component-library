@@ -5,9 +5,12 @@ import {
   propDefaults,
   componentStructure,
 } from './wc-helpers';
+import { VaTabs, VaTabItem, VaTabPanel } from '@department-of-veterans-affairs/web-components/react-bindings';
+
 
 const tabsDocs = getWebComponentDocs('va-tabs');
 const tabItemDocs= getWebComponentDocs('va-tab-item');
+const tabPanelDocs= getWebComponentDocs('va-tab-panel');
 
 const tabItems = [
   { label: 'Status', targetId: 'panel-1' },
@@ -28,6 +31,7 @@ export default {
   component: 'va-tabs',
   subcomponents: {
     'va-tab-item': componentStructure(tabItemDocs)[tabItemDocs.tag],
+    'va-tab-panel': componentStructure(tabPanelDocs)[tabPanelDocs.tag],
   },
   parameters: {
     componentSubtitle: 'va-tabs web component',
@@ -53,35 +57,69 @@ export default {
   },
 };
 
+{/* Tab panels go in the default/unnamed slot */}
+{/* {
+  args.tabItems.map((item, index: number) => {
+    let targetId = `${item.targetId}-${args.key}`;
+    return (
+      <va-tab-panel panel-id={targetId} key={`${item.label}-panel`} selected={index === args.selected} slot="panel">
+        <h2>{item.label}</h2>
+        <p>{args.panelContent[index]}</p>
+      </va-tab-panel>
+    );
+  })
+} */}
+
+// const vaTabs = (args: any) => {
+//   return (
+//     <div>
+//       <VaTabs label={args.label} selected={args.selected}>
+//         {
+//           args.tabItems.map((item, index: number) => {
+//             let targetId = `${item.targetId}-${args.key}`;
+//             let label = item.label;
+//             if (args.useLongTabLabel && index === 1) {
+//               label = 'Really long tab name here';
+//             }
+
+//             return (
+//               <VaTabItem buttonText={label} targetId={targetId} key={item.label} slot="tab">
+//               </VaTabItem>
+//             );
+//           })
+//         }
+//         <VaTabPanel panelId="panel-1" slot="panel">
+//           <h2>Panel 1</h2>
+//           <p>This is the content for Panel 1.</p>
+//         </VaTabPanel>
+//         <VaTabPanel panelId="panel-2" slot="panel">
+//           <h2>Panel 2</h2>
+//           <p>This is the content for Panel 2.</p>
+//         </VaTabPanel>
+//         <VaTabPanel panelId="panel-3" slot="panel">
+//           <h2>Panel 3</h2>
+//           <p>This is the content for Panel 3.</p>
+//         </VaTabPanel>
+//       </VaTabs>
+//     </div>
+//   );
+// }
+
 const vaTabs = (args: any) => {
   return (
     <div>
-      <va-tabs label={args.label} selected={args.selected}>
-        {
-          args.tabItems.map((item, index: number) => {
-            let targetId = `${item.targetId}-${args.key}`;
-            let label = item.label;
-            if (args.useLongTabLabel && index === 1) {
-              label = 'Really long tab name here';
-            }
-
-            return (
-              <va-tab-item button-text={label} target-id={targetId} key={item.label}>
-              </va-tab-item>
-            );
-          })
-        }
-      </va-tabs>
-      {
-        args.tabItems.map((item, index: number) => {
-          let targetId = `${item.targetId}-${args.key}`;
-          return (
-            <div id={targetId} key={item.label} hidden>
-              <h2>{item.label}</h2>
-              <p>{panelContent[index]}</p>
-            </div>
-        );
-      })}
+      <VaTabs label={args.label} selected={args.selected}>
+        <VaTabItem buttonText="Status" targetId="panel-1" slot="tab"></VaTabItem>
+        <VaTabItem buttonText="Issues" targetId="panel-2" slot="tab"></VaTabItem>
+        <VaTabPanel panelId="panel-1" slot="panel" selected={true}>
+          <h2>Panel 1</h2>
+          <p>This is the content for Panel 1.</p>
+        </VaTabPanel>
+        <VaTabPanel panelId="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </VaTabPanel>
+      </VaTabs>
     </div>
   );
 }

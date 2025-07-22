@@ -59,15 +59,15 @@ export class VaTabItem {
   connectedCallback() {
     // With all elements reset to hidden, query DOM for the element with the ID
     // of the clicked tab's URL.
-    if (this.isSelectedTab) {
-      const targetElement = document.getElementById(this.targetId);
+    // if (this.isSelectedTab) {
+    //   const targetElement = document.getElementById(this.targetId);
 
-      // Remove hidden attribute from the target element if it exists.
-      if (targetElement) {
-        // Ensure the target element is visible by removing any 'hidden' attribute.
-        targetElement.removeAttribute('hidden');
-      }
-    }
+    //   // Remove hidden attribute from the target element if it exists.
+    //   if (targetElement) {
+    //     // Ensure the target element is visible by removing any 'hidden' attribute.
+    //     targetElement.removeAttribute('hidden');
+    //   }
+    // }
   }
 
   /**

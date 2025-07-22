@@ -63,7 +63,7 @@ export class VaTabs {
   }
 
   connectedCallback() {
-    // Populate the `tabItems` property with all `va-tab-item` elements in the slot.
+    // Populate the `tabItems` property with all `va-tab-item` elements in the slot
     this.tabItems = this.el.querySelectorAll('va-tab-item');
 
     // Set value on the n-th element corresponding to the value of the `selected` prop.
@@ -101,7 +101,7 @@ export class VaTabs {
     // of the clicked tab's URL.
     if (this.tabItems.length > 0) {
       const targetId = this.tabItems[this.selected].getAttribute('target-id');
-      const targetElement = document.getElementById(targetId);
+      const targetElement = document.querySelector(`#${targetId}`);
 
       // Remove hidden attribute from the target element if it exists.
       if (targetElement) {
@@ -138,30 +138,23 @@ export class VaTabs {
       return;
     }
 
-    // Set the clicked tab as selected.
+    // Get references to the currently selected tab and its panel.
+    const tabToDeselect = this.el.querySelector('va-tab-item[is-selected-tab="true"]')
+      || this.el.querySelector('va-tab-item[is-selected-tab=""]');
+    const panelToHide = this.el.querySelector('va-tab-panel[selected="true"]')
+      || this.el.querySelector('va-tab-panel[selected=""]');
+
+    // Deselect the currently selected tab and hide its panel.
+    tabToDeselect?.setAttribute('is-selected-tab', 'false');
+    panelToHide?.setAttribute('selected', 'false');
+
+    // Get the target ID of the clicked tab.
+    const targetId = selectedTab.getAttribute('target-id');
+    const panelToDisplay = this.el.querySelector(`va-tab-panel[panel-id="${targetId}"]`);
+
+    // Select new tab and display its panel.
     selectedTab.setAttribute('is-selected-tab', 'true');
-
-    // If any other tab is selected, set it to not selected.
-    const otherTabs = this.el.querySelectorAll('va-tab-item');
-    otherTabs.forEach((tab: HTMLVaTabItemElement) => {
-      if (tab !== selectedTab) {
-        tab.setAttribute('is-selected-tab', 'false');
-      }
-    });
-
-    // Query the DOM for each tab's corresponding panel and either hide or show
-    // it based on the selected tab.
-    this.tabItems.forEach((item) => {
-      const targetId = item.getAttribute('target-id');
-      const targetElement = document.getElementById(targetId);
-      const isSelectedTab = item.getAttribute('is-selected-tab') === 'true';
-
-      if (targetElement && !isSelectedTab) {
-        targetElement.setAttribute('hidden', '');
-      } else if (targetElement && isSelectedTab) {
-        targetElement.removeAttribute('hidden');
-      }
-    });
+    panelToDisplay?.setAttribute('selected', 'true');
   }
 
   @Listen('tabItemKeyNavigated')
@@ -220,8 +213,9 @@ export class VaTabs {
       <Host>
         <section class={containerClass}>
           <div role="tablist" aria-label={label} class={listClass}>
-            <slot></slot>
+            <slot name="tab"></slot>
           </div>
+          <slot name="panel"></slot>
         </section>
       </Host>
     );

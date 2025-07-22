@@ -56,6 +56,7 @@ declare global {
       'va-table-row': WCTypes.VaTableRow & IsElement & { key?: Key };
       'va-tabs': WCTypes.VaTabs & IsElement;
       'va-tab-item': WCTypes.VaTabItem & IsElement & { key?: Key };
+      'va-tab-panel': WCTypes.VaTabPanel & IsElement & { key?: Key };
       'va-telephone': WCTypes.VaTelephone & IsElement;
       'va-text-input': WCTypes.VaTextInput & IsElement;
       'va-textarea': WCTypes.VaTextarea & IsElement;
