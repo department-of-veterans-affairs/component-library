@@ -60,7 +60,6 @@ export class VaOnThisPage {
     const heading = event.target as HTMLHeadingElement;
     heading.removeAttribute('tabindex');
     heading.removeAttribute('role');
-    heading.removeEventListener('blur', this.handleHeadingBlur);
   };
 
   /**
@@ -74,13 +73,13 @@ export class VaOnThisPage {
    * Both should be removed after the bugs are fixed in the screen readers.
    */
   private moveFocusToHeading = (event: MouseEvent) => {
-    const target = event.target as HTMLAnchorElement;
-    const heading = document.getElementById(target.hash.slice(1)) as HTMLHeadingElement;
+    const anchor = event.currentTarget as HTMLAnchorElement;
+    const heading = document.getElementById(anchor.hash.slice(1)) as HTMLHeadingElement;
+
     if (heading) {
       heading.setAttribute('tabindex', '-1');
       heading.setAttribute('role', 'text');
       heading.focus();
-      heading.removeEventListener('blur', this.handleHeadingBlur);
       heading.addEventListener('blur', this.handleHeadingBlur, { once: true });
     }
   };
