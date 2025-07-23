@@ -84,7 +84,7 @@ describe('formatPhoneNumber', () => {
         contact: intlContact,
         countryCode,
       }),
-    ).toBe('+63 (02) 8555 8888');
+    ).toBe('+63 2 8555 8888');
   });
 });
 
