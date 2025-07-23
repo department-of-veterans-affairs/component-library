@@ -59,25 +59,32 @@ const Template = (args) => {
   return (
     <va-tabs label={args.label} selected={args.selected}>
       {
-        args.tabItems.map((item, index) => (
-          <Fragment key={`fragment-${item.targetId}-${args.templateKey}`}>
-            <va-tab-item
-              key={`tab-item-${item.targetId}-${args.templateKey}`}
-              button-text={item.label}
-              target-id={item.targetId}
-              slot="tab"
-            ></va-tab-item>
-            <va-tab-panel
-              key={item.targetId}
-              panel-id={item.targetId}
-              slot="panel"
-              selected={index === args.selected}
-            >
-              <h2>{item.label}</h2>
-              <p>{args.panelContent[index]}</p>
-            </va-tab-panel>
-          </Fragment>
-        ))
+        args.tabItems.map((item, index) => {
+          let formattedLabel = item.label;
+          if (args.useLongTabLabel && index === 1) {
+            formattedLabel = 'Really long tab name here';
+          }
+
+          return (
+            <Fragment key={`fragment-${item.targetId}-${args.templateKey}`}>
+              <va-tab-item
+                key={`tab-item-${item.targetId}-${args.templateKey}`}
+                button-text={formattedLabel}
+                target-id={item.targetId}
+                slot="tab"
+              ></va-tab-item>
+              <va-tab-panel
+                key={item.targetId}
+                panel-id={item.targetId}
+                slot="panel"
+                selected={index === args.selected}
+              >
+                <h2>{item.label}</h2>
+                <p>{args.panelContent[index]}</p>
+              </va-tab-panel>
+            </Fragment>
+          );
+        })
       }
     </va-tabs>
   );
