@@ -114,7 +114,7 @@ Verdaccio allows contributors to publish a new version of the VA Design System c
 
 #### Before you begin
 1. VA Design System component library and vets-website require different versions of NodeJS. Be sure you have [NVM installed](https://github.com/nvm-sh/nvm#installing-and-updating) before you begin.
-1. Download Node `v14.15.0` and a current Node `v18.x.x` or `v20.x.x`
+1. Download Node `v14.15.0` and a current Node `v18.x.x` or `v22.x.x`
 1. Verdaccio also requires [Python3](https://www.python.org/downloads/). Ensure you have Python3 installed by opening a terminal window and typing the following command:
 
    ```shell
@@ -153,14 +153,14 @@ Verdaccio allows contributors to publish a new version of the VA Design System c
    ```
 
 #### Publish your component-library changes to Verdaccio
-The next step is to update the `core` and `web-component` package versions in their respective `package.json` files. _**Note:** You must use Node `v18.x.x` or `v20.x.x` for this step._
+The next step is to update the `core` and `web-component` package versions in their respective `package.json` files. _**Note:** You must use Node `v18.x.x` or `v22.x.x` for this step._
 
-1. Navigate to `component-library` and switch to Node `[18, 20]`
+1. Navigate to `component-library` and switch to Node `[18, 22]`
 
    ```shell
    cd component-library/
-   nvm use 18.x.x # Or version 20
-   nvm use 20.x.x
+   nvm use 18.x.x # Or version 22
+   nvm use 22.x.x
    ```
 1. Navigate to `packages/web-components` and update the package version. Assuming the current version is `10.1.1`, you could change the version to `10.1.2-rc1` or something similar.
 
@@ -247,7 +247,7 @@ After you are finished testing, reset `vets-website` to use the standard registr
 
    ```shell
    nvm use 14.15.0
-   nvm use 18.x.x OR nvm use 20.x.x
+   nvm use 18.x.x OR nvm use 22.x.x
    ```
 
 #### Using Verdaccio on GitHub Codespaces
