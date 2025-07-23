@@ -129,14 +129,14 @@ export class VaSidenav {
         <Host>
           <nav aria-label={this.ariaLabel}>
             {this.header && (
-              <h2 class="va-sidenav__header">
+              <span class="va-sidenav__header">
                 {this.iconName ? (
                   <span class="va-sidenav__icon-background" style={this.iconBackgroundColorStyle()}>
                     <va-icon icon={this.iconName}></va-icon>
                   </span>
                 ) : null}
                 {this.header}
-              </h2>
+              </span>
             )}
             <div role="list" class="va-sidenav__list">
               <slot></slot>
