@@ -21,7 +21,7 @@ export class VaTabPanel {
       <Host
         id={this.panelId}
         role="tabpanel"
-        tabindex="0"
+        tabindex={this.selected ? '0' : '-1'}
         class="va-tab-panel__content"
         aria-hidden={!this.selected ? 'true' : 'false'}
         hidden={!this.selected}

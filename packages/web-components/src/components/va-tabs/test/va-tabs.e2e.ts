@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-// import { axeCheck } from '../../../testing/test-helpers';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-tabs', () => {
   it('renders', async () => {
@@ -10,8 +10,24 @@ describe('va-tabs', () => {
         <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
-      </va-tabs>`
-    );
+        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+          <h2>Panel 1</h2>
+          <p>This is the content for Panel 1.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-3" slot="panel">
+          <h2>Panel 3</h2>
+          <p>This is the content for Panel 3.</p>
+        </va-tab-panel>
+      </va-tabs>
+    `);
 
     const el = await page.find('va-tabs');
     expect(el).not.toBeNull();
@@ -37,26 +53,40 @@ describe('va-tabs', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-tabs label="Filtered content options">
+      <va-tabs label="Filtered content options" selected="0">
         <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
-      </va-tabs>`
-    );
+        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+          <h2>Panel 1</h2>
+          <p>This is the content for Panel 1.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-3" slot="panel">
+          <h2>Panel 3</h2>
+          <p>This is the content for Panel 3.</p>
+        </va-tab-panel>
+      </va-tabs>
+    `);
 
-    const buttons = await page.findAll(
-      'va-tab-item >>> button',
-    );
-    expect(buttons.length).toEqual(3);
+    const tabItems = await page.findAll('va-tab-item');
+    expect(tabItems.length).toEqual(3);
 
-    // Trigger click
-    const button2 = buttons[1];
-    await button2.click();
+    const tab2 = await page.find('va-tab-item[target-id="tab2"]');
+    expect(tab2).not.toBeNull();
+    await page.$eval('va-tab-item[target-id="tab2"]', el => el.click());
 
     await page.waitForChanges();
 
     // Check that tab2 is selected
-    const ariaSelected = button2.getAttribute('aria-selected');
+    const ariaSelected = tab2.getAttribute('aria-selected');
     expect(ariaSelected).toBe('true');
   });
 
@@ -68,45 +98,97 @@ describe('va-tabs', () => {
         <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
-      </va-tabs>`
-    );
+        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+          <h2>Panel 1</h2>
+          <p>This is the content for Panel 1.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-3" slot="panel">
+          <h2>Panel 3</h2>
+          <p>This is the content for Panel 3.</p>
+        </va-tab-panel>
+      </va-tabs>
+    `);
 
-    const buttons = await page.findAll(
-      'va-tab-item >>> button',
-    );
-    expect(buttons.length).toEqual(3);
+    const tabItems = await page.findAll('va-tab-item');
+    expect(tabItems.length).toEqual(3);
 
-    expect(buttons[1].getAttribute('aria-selected')).toBe('true');
+    expect(tabItems[1].getAttribute('aria-selected')).toBe('true');
   });
 
   it('only renders a maximum of 3 tabs', async () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-tabs>
+      <va-tabs label="Filtered content options" selected="1">
         <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
         <va-tab-item target-id="tab4" button-text="Tab 4"></va-tab-item>
-        <va-tab-item target-id="tab5" button-text="Tab 5"></va-tab-item>
-      </va-tabs>`
-    );
+        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+          <h2>Panel 1</h2>
+          <p>This is the content for Panel 1.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-3" slot="panel">
+          <h2>Panel 3</h2>
+          <p>This is the content for Panel 3.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-4" slot="panel">
+          <h2>Panel 4</h2>
+          <p>This is the content for Panel 4.</p>
+        </va-tab-panel>
+      </va-tabs>
+    `);
     await page.waitForChanges();
 
     const tabs = await page.findAll('va-tabs >>> button');
     expect(tabs.length).toBeLessThanOrEqual(3);
   });
 
-  // it('passes an axe check', async () => {
-  //   const page = await newE2EPage();
-  //   await page.setContent(`
-  //     <va-tabs label="Filtered content options">
-  //       <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
-  //       <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
-  //       <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
-  //     </va-tabs>`
-  //   );
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-tabs label="Filtered content options">
+        <va-tab-item target-id="tab1" button-text="Tab 1" is-selected-tab="true"></va-tab-item>
+        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
 
-  //   await axeCheck(page);
-  // });
+        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+          <h2>Panel 1</h2>
+          <p>This is the content for Panel 1.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-2" slot="panel">
+          <h2>Panel 2</h2>
+          <p>This is the content for Panel 2.</p>
+        </va-tab-panel>
+        <va-tab-panel panel-id="panel-3" slot="panel">
+          <h2>Panel 3</h2>
+          <p>This is the content for Panel 3.</p>
+        </va-tab-panel>
+      </va-tabs>
+    `);
+
+    await page.waitForChanges();
+
+    await axeCheck(page);
+  });
 });
