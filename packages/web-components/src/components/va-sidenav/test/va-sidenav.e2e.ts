@@ -214,7 +214,6 @@ describe('va-sidenav', () => {
     await page.close();
   });
 
-  // add a test that checks that the deskop header is a span and not an h2
   it('desktop header is a span and not an h2', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-sidenav header="Profile"></va-sidenav>');
