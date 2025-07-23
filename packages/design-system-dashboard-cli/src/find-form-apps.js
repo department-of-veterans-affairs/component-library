@@ -20,8 +20,10 @@ function findFormApps(allModules) {
   );
 
   const formAppNames = Array.from(
-    new Set(importResults.map(i => getManifest(i.path).appName))
-  );
+    new Set(importResults.map(i => getManifest(i.path)).filter(manifest => manifest !== null).map(manifest => manifest.appName))
+  )
+    .filter(appName => !appName.toLowerCase().includes('testing') && !appName.toLowerCase().includes('mock') && !appName.toLowerCase().includes('demo'))
+    .sort();
 
   return formAppNames;
 }
