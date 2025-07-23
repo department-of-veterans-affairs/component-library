@@ -216,6 +216,13 @@ describe('va-sidenav', () => {
 
   it('desktop header is a span and not an h2', async () => {
     const page = await newE2EPage();
+
+    // Set viewport to desktop size
+    await page.setViewport({
+      width: 1024,
+      height: 768
+    });
+
     await page.setContent('<va-sidenav header="Profile"></va-sidenav>');
 
     const header = await page.find('va-sidenav >>> .va-sidenav__header');
