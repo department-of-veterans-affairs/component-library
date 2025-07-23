@@ -101,12 +101,12 @@ export class VaTabs {
     // of the clicked tab's URL.
     if (this.tabItems.length > 0) {
       const targetId = this.tabItems[this.selected].getAttribute('target-id');
-      const targetElement = document.querySelector(`#${targetId}`);
+      const panelToDisplay = this.el.querySelector(`va-tab-panel[panel-id="${targetId}"]`);
 
       // Remove hidden attribute from the target element if it exists.
-      if (targetElement) {
-        // Ensure the target element is visible by removing any 'hidden' attribute.
-        targetElement.removeAttribute('hidden');
+      if (panelToDisplay) {
+        // Ensure the target element is visible by setting the `selected` attribute.
+        panelToDisplay.setAttribute('selected', 'true');
       }
     }
   }

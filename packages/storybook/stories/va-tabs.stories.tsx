@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import {
   getWebComponentDocs,
   propStructure,
@@ -6,7 +7,6 @@ import {
   componentStructure,
 } from './wc-helpers';
 import { VaTabs, VaTabItem, VaTabPanel } from '@department-of-veterans-affairs/web-components/react-bindings';
-
 
 const tabsDocs = getWebComponentDocs('va-tabs');
 const tabItemDocs= getWebComponentDocs('va-tab-item');
@@ -53,78 +53,74 @@ export default {
     tabItems: tabItems,
     panelContent: panelContent,
     selected: 0,
-    key: 0, // Used to differentiate between multiple instances in the DOM to prevent duplicate IDs
+    templateKey: 0, // Used to differentiate between multiple instances in the DOM to prevent duplicate IDs
   },
 };
 
-{/* Tab panels go in the default/unnamed slot */}
-{/* {
-  args.tabItems.map((item, index: number) => {
-    let targetId = `${item.targetId}-${args.key}`;
-    return (
-      <va-tab-panel panel-id={targetId} key={`${item.label}-panel`} selected={index === args.selected} slot="panel">
-        <h2>{item.label}</h2>
-        <p>{args.panelContent[index]}</p>
-      </va-tab-panel>
-    );
-  })
-} */}
+const Template = (args) => (
+  <VaTabs label={args.label} selected={args.selected}>
+    <VaTabItem buttonText="Status" targetId="panel-1" slot="tab"></VaTabItem>
+    <VaTabItem buttonText="Issues" targetId="panel-2" slot="tab"></VaTabItem>
+    <VaTabPanel panelId="panel-1" slot="panel" selected={true}>
+      <h2>Panel 1</h2>
+      <p>This is the content for Panel 1.</p>
+    </VaTabPanel>
+    <VaTabPanel panelId="panel-2" slot="panel" selected={false}>
+      <h2>Panel 2</h2>
+      <p>This is the content for Panel 2.</p>
+    </VaTabPanel>
+  </VaTabs>
+);
 
-// const vaTabs = (args: any) => {
-//   return (
-//     <div>
-//       <VaTabs label={args.label} selected={args.selected}>
-//         {
-//           args.tabItems.map((item, index: number) => {
-//             let targetId = `${item.targetId}-${args.key}`;
-//             let label = item.label;
-//             if (args.useLongTabLabel && index === 1) {
-//               label = 'Really long tab name here';
-//             }
-
-//             return (
-//               <VaTabItem buttonText={label} targetId={targetId} key={item.label} slot="tab">
-//               </VaTabItem>
-//             );
-//           })
-//         }
-//         <VaTabPanel panelId="panel-1" slot="panel">
-//           <h2>Panel 1</h2>
-//           <p>This is the content for Panel 1.</p>
+// const Template = (args: any) => (
+//   <VaTabs label={args.label} selected={args.selected}>
+//     {args.tabItems.map((item, index) => (
+//       <Fragment key={`fragment-${index}-tabs`}>
+//         <VaTabItem
+//           buttonText={item.label}
+//           targetId={item.targetId}
+//           key={item.label}
+//           isSelectedTab={index === args.selected}
+//           slot="tab"
+//         />
+//         <VaTabPanel
+//           panelId={item.targetId}
+//           selected={index === args.selected}
+//           key={`${item.label}-panel`}
+//           slot="panel"
+//         >
+//           <h2>{item.label}</h2>
+//           <p>{args.panelContent[index]}</p>
 //         </VaTabPanel>
-//         <VaTabPanel panelId="panel-2" slot="panel">
-//           <h2>Panel 2</h2>
-//           <p>This is the content for Panel 2.</p>
-//         </VaTabPanel>
-//         <VaTabPanel panelId="panel-3" slot="panel">
-//           <h2>Panel 3</h2>
-//           <p>This is the content for Panel 3.</p>
-//         </VaTabPanel>
-//       </VaTabs>
-//     </div>
-//   );
-// }
+//       </Fragment>
+//     ))}
+//   </VaTabs>
+// );
 
-const vaTabs = (args: any) => {
-  return (
-    <div>
-      <VaTabs label={args.label} selected={args.selected}>
-        <VaTabItem buttonText="Status" targetId="panel-1" slot="tab"></VaTabItem>
-        <VaTabItem buttonText="Issues" targetId="panel-2" slot="tab"></VaTabItem>
-        <VaTabPanel panelId="panel-1" slot="panel" selected={true}>
-          <h2>Panel 1</h2>
-          <p>This is the content for Panel 1.</p>
-        </VaTabPanel>
-        <VaTabPanel panelId="panel-2" slot="panel">
-          <h2>Panel 2</h2>
-          <p>This is the content for Panel 2.</p>
-        </VaTabPanel>
-      </VaTabs>
-    </div>
-  );
-}
-
-const Template = (args: any) => vaTabs(args);
+// const Template = (args: any) => (
+//   <va-tabs label={args.label} selected={args.selected}>
+//     {args.tabItems.map((item, index) => (
+//       <va-tab-item
+//         button-text={item.label}
+//         target-id={item.targetId}
+//         key={item.label}
+//         is-selected-tab={index === args.selected ? true : false}
+//         slot="tab"
+//       ></va-tab-item>
+//     ))}
+//     {args.tabItems.map((item, index) => (
+//       <va-tab-panel
+//         panel-id={item.targetId}
+//         slot="panel"
+//         selected={index === args.selected ? true : false}
+//         key={`${item.label}-panel`}
+//       >
+//         <h2>{item.label}</h2>
+//         <p>{args.panelContent[index]}</p>
+//       </va-tab-panel>
+//     ))}
+//   </va-tabs>
+// );
 
 export const Default = Template.bind(null);
 Default.argTypes = propStructure(tabsDocs);
@@ -133,7 +129,7 @@ export const WithSecondTabSelected = Template.bind(null);
 WithSecondTabSelected.args = {
   ...Default.args,
   selected: 1,
-  key: 1,
+  templateKey: 1,
 };
 WithSecondTabSelected.argTypes = propStructure(tabsDocs);
 
@@ -141,6 +137,6 @@ export const WithALongLabel = Template.bind(null);
 WithALongLabel.args = {
   ...Default.args,
   useLongTabLabel: true,
-  key: 2,
+  templateKey: 2,
 };
 WithALongLabel.argTypes = propStructure(tabsDocs);
