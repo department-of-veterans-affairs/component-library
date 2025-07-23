@@ -22,6 +22,7 @@ import classnames from 'classnames';
 })
 export class VaTabs {
   private tabItems: NodeListOf<HTMLVaTabItemElement>;
+  private tabPanels: NodeListOf<HTMLVaTabPanelElement>;
   private tabWithFocus: HTMLVaTabItemElement;
   private allowRender: boolean = true;
 
@@ -65,6 +66,7 @@ export class VaTabs {
   connectedCallback() {
     // Populate the `tabItems` property with all `va-tab-item` elements in the slot
     this.tabItems = this.el.querySelectorAll('va-tab-item');
+    this.tabPanels = this.el.querySelectorAll('va-tab-panel');
 
     // Set value on the n-th element corresponding to the value of the `selected` prop.
     if (this.selected < 0 || this.selected >= this.tabItems.length) {
@@ -81,9 +83,10 @@ export class VaTabs {
     this.tabWithFocus = this.tabItems[this.selected];
 
     // If there are more than three tabs passed to slot, remove any beyond the first three.
-    if (this.tabItems.length > 3) {
+    if (this.tabItems.length > 3 || this.tabPanels.length > 3) {
       // Convert NodeList to Array and slice the first three items.
       const firstThreeItems = Array.from(this.tabItems).slice(0, 3);
+      const firstThreePanels = Array.from(this.tabPanels).slice(0, 3);
 
       // Remove all items from the slot.
       this.el.innerHTML = '';
@@ -92,9 +95,14 @@ export class VaTabs {
       firstThreeItems.forEach((item) => {
         this.el.appendChild(item);
       });
+      // Then append the first three panels.
+      firstThreePanels.forEach((panel) => {
+        this.el.appendChild(panel);
+      });
 
       // Then updated the `tabItems` property to reflect the new state.
       this.tabItems = this.el.querySelectorAll('va-tab-item');
+      this.tabPanels = this.el.querySelectorAll('va-tab-panel');
     }
 
     // With all elements reset to hidden, query DOM for the element with the ID
