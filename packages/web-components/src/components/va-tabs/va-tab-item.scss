@@ -1,7 +1,9 @@
 @import '../../mixins/focusable.css';
 
-button.va-tabs__tab_item {
-  display: block;
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   color: var(--vads-color-primary);
   position: relative;
@@ -11,62 +13,44 @@ button.va-tabs__tab_item {
   border-bottom: 4px solid transparent;
   min-width: 4rem;
   max-width: 10rem;
-  min-height: 52px;
   font-family: var(--font-source-sans);
   font-size: var(--vads-font-size-source-sans-normalized);
+}
 
-  &[aria-selected='false'] {
-    &:hover {
-      cursor: pointer;
-      background: var(--vads-color-base-lightest);
-      border-bottom-color:  var(--vads-color-primary);
-      color: var(--vads-color-ink);
-    }
-  }
+:host([aria-selected='false']:hover) {
+  cursor: pointer;
+  background: var(--vads-color-base-lightest);
+  border-bottom-color:  var(--vads-color-primary);
+  color: var(--vads-color-ink);
+}
 
-  &[aria-selected='true'] {
-    border-bottom-color: var(--vads-color-primary);
-    color: transparent;
-    background: var(--vads-color-white);
+:host([aria-selected='true']) {
+  border-bottom-color: var(--vads-color-primary);
+  color: transparent;
+  background: var(--vads-color-white);
+}
 
-    &:hover {
-      cursor: pointer;
-      background: var(--vads-color-base-lightest);
-      border-bottom-color:  var(--vads-color-primary);
-    }
+:host([aria-selected='true']:hover) {
+  cursor: pointer;
+  background: var(--vads-color-base-lightest);
+  border-bottom-color:  var(--vads-color-primary);
+}
 
-    &::after {
-      content: attr(data-label) / "";
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      height: calc(100% - 1.5rem); // 1.5rem is the cumulative vertical padding on the tab item
-      top: 1rem; // Account for top padding of tab item
-      width: calc(100% - 4px); // Don't take up full width so outline of tab item is fully visible
-      left: 2px; // Update horizontal position to align with the tab item due to decreased width
-      font-weight: 700;
-      background: var(--vads-color-white);
-      color: var(--vads-color-base);
-    }
+:host([aria-selected='true'])::after {
+  content: attr(data-label) / "";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: calc(100% - 1.5rem); // 1.5rem is the cumulative vertical padding on the tab item
+  top: 1rem; // Account for top padding of tab item
+  width: calc(100% - 4px); // Don't take up full width so outline of tab item is fully visible
+  left: 2px; // Update horizontal position to align with the tab item due to decreased width
+  font-weight: 700;
+  background: var(--vads-color-white);
+  color: var(--vads-color-base);
+}
 
-    &:hover::after {
-      background-color: var(--vads-color-base-lightest);
-    }
-  }
-
-  &.overflow-link {
-    position: relative;
-
-    & > button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-
-      va-icon {
-        margin-left: 0.5rem;
-      }
-    }
-  }
+:host([aria-selected='true']:hover)::after {
+  background-color: var(--vads-color-base-lightest);
 }

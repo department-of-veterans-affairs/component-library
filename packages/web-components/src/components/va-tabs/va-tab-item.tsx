@@ -82,13 +82,17 @@ export class VaTabItem {
 
   /**
    * @function handleKeyDown
-   * @description When either the left or right arrow key is pressed, this method emits the `tabItemKeyNavigated` event.
+   * @description When either the left or right arrow key is pressed, this method emits the `tabItemKeyNavigated` event. When the Enter or Space key is pressed, it triggers a click event.
    * @param {KeyboardEvent} e - The keydown event.
    */
   private handleKeyDown(e: KeyboardEvent) {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
       e.preventDefault();
       this.tabItemKeyNavigated.emit(e);
+    }
+    else if (e.key === 'Enter' || e.key === ' ') {
+      // If the Enter or Space key is pressed, trigger the click event.
+      this.handleClick(new MouseEvent('click', { bubbles: true, cancelable: true }));
     }
   }
 
@@ -104,21 +108,19 @@ export class VaTabItem {
     });
 
     return (
-      <Host>
-        <button
-          role="tab"
-          class={buttonClass}
-          aria-selected={isSelectedTab ? 'true' : 'false'}
-          aria-controls={targetId}
-          id={`${targetId}-tab`}
-          ref={(el) => this.buttonElement = el as HTMLButtonElement}
-          tabIndex={isSelectedTab ? 0 : -1}
-          onClick={(e: MouseEvent) => this.handleClick(e)}
-          onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e)}
-          data-label={buttonText}
-        >
-          {buttonText}
-        </button>
+      <Host
+        role="tab"
+        class={buttonClass}
+        aria-selected={isSelectedTab ? 'true' : 'false'}
+        aria-controls={targetId}
+        id={`${targetId}-tab`}
+        ref={(el) => this.buttonElement = el as HTMLButtonElement}
+        tabIndex={isSelectedTab ? 0 : -1}
+        onClick={(e: MouseEvent) => this.handleClick(e)}
+        onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e)}
+        data-label={buttonText}
+      >
+        {buttonText}
       </Host>
     );
   }

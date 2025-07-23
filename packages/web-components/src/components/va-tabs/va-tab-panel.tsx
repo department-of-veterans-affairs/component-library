@@ -18,17 +18,15 @@ export class VaTabPanel {
 
   render() {
     return (
-      <Host>
-        <div
-          id={this.panelId}
-          role="tabpanel"
-          tabindex="0"
-          class="va-tab-panel__content"
-          aria-hidden={!this.selected ? 'true' : 'false'}
-          hidden={!this.selected}
-        >
-          <slot></slot>
-        </div>
+      <Host
+        id={this.panelId}
+        role="tabpanel"
+        tabindex="0"
+        class="va-tab-panel__content"
+        aria-hidden={!this.selected ? 'true' : 'false'}
+        hidden={!this.selected}
+      >
+        <slot></slot>
       </Host>
     );
   }

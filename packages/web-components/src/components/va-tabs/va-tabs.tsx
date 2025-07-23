@@ -123,7 +123,7 @@ export class VaTabs {
       let currentlyActiveIndex = Array.from(this.tabItems).indexOf(selectedTab);
 
       const detail = {
-        componentName: 'va-button-segmented',
+        componentName: 'va-tabs',
         action: 'click',
         details: {
           selected: currentlyActiveIndex,
@@ -163,11 +163,10 @@ export class VaTabs {
 
     // Get index of the currently focused tab item and its nested button.
     let newFocusedIndex = Array.from(this.tabItems).indexOf(this.tabWithFocus);
-    const button = this.tabWithFocus.shadowRoot?.querySelector('button.va-tabs__tab_item');
 
     // Determine if the key pressed is a left or right arrow key
     if (keyPressed === "ArrowRight" || keyPressed === "ArrowLeft") {
-      button.setAttribute("tabindex", "-1");
+      this.tabWithFocus.setAttribute("tabindex", "-1");
 
       // Move right
       if (keyPressed === "ArrowRight") {
@@ -188,9 +187,8 @@ export class VaTabs {
       // Update the tab index of the next button to be made selected and manually
       // focus on it.
       this.tabWithFocus = this.tabItems[newFocusedIndex];
-      let nextButton = this.tabWithFocus.shadowRoot?.querySelector('button.va-tabs__tab_item');
-      nextButton.setAttribute("tabindex", "0");
-      (nextButton as HTMLElement).focus();
+      this.tabWithFocus.setAttribute("tabindex", "0");
+      (this.tabWithFocus as HTMLElement).focus();
     }
   }
 
