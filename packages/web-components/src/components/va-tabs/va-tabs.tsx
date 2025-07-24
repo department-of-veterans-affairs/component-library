@@ -225,12 +225,12 @@ export class VaTabs {
 
     return (
       <Host>
-        <section class={containerClass}>
+        <div class={containerClass}>
           <div role="tablist" aria-label={label} class={listClass}>
             <slot name="tab"></slot>
           </div>
           <slot name="panel"></slot>
-        </section>
+        </div>
       </Host>
     );
   }
