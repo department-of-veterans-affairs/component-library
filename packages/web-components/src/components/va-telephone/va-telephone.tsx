@@ -8,6 +8,7 @@ import {
   Host,
 } from '@stencil/core';
 import { isMessageSet } from '../../utils/utils';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 /**
  * @componentName Telephone
@@ -142,8 +143,21 @@ export class VaTelephone {
       }
     }
 
+    // If a country code is provided, attempt to format the number as international.
     if (countryCode) {
-      formattedNum = `+${countryCode} ${formattedNum}`;
+      let parsedPhoneNumber = null;
+      try {
+        parsedPhoneNumber = parsePhoneNumberFromString(`+${countryCode}${formattedNum}`);
+      } catch (error) {
+        console.error('Error parsing phone number:', error);
+      }
+      if (parsedPhoneNumber) {
+        formattedNum = parsedPhoneNumber.formatInternational();
+      } else {
+        formattedNum = formattedNum.startsWith('+')
+          ? `${formattedNum}`
+          : `+${countryCode} ${formattedNum}`;
+      }
     }
 
     if (tty) {
