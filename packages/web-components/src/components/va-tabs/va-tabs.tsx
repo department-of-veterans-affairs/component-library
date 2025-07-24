@@ -82,6 +82,14 @@ export class VaTabs {
     // Set the focused button to the selected tab's button.
     this.tabWithFocus = this.tabItems[this.selected];
 
+    // Dynamically assign slots to tab items and panels
+    this.tabItems.forEach((item) => {
+      item.setAttribute('slot', 'tab');
+    });
+    this.tabPanels.forEach((panel) => {
+      panel.setAttribute('slot', 'panel');
+    });
+
     // If there are more than three tabs passed to slot, remove any beyond the first three.
     if (this.tabItems.length > 3 || this.tabPanels.length > 3) {
       // Convert NodeList to Array and slice the first three items.
