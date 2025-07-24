@@ -59,38 +59,6 @@ a:visited {
   color: #54278f;
 }
 
-.usa-external_link::after {
-  background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.png) no-repeat 0 0;
-  background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.svg) no-repeat 0 0;
-  background-size: 100%;
-  content: "";
-  display: inline-block;
-  height: 0.65em;
-  margin-bottom: -1px;
-  margin-left: 4px;
-  width: 0.65em;
-}
-.usa-external_link:hover::after {
-  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.png);
-  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.svg);
-}
-
-.usa-external_link-alt::after {
-  background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.png) no-repeat 0 0;
-  background: url(~@department-of-veterans-affairs/css-library/dist/img/external-link.svg) no-repeat 0 0;
-  background-size: 100%;
-  content: "";
-  display: inline-block;
-  height: 0.65em;
-  margin-bottom: -1px;
-  margin-left: 4px;
-  width: 0.65em;
-}
-.usa-external_link-alt:hover::after {
-  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.png);
-  background-image: url(~@department-of-veterans-affairs/css-library/dist/img/external-link-hover.svg);
-}
-
 h1,
 h2,
 h3,
