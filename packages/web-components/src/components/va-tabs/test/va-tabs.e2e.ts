@@ -7,22 +7,22 @@ describe('va-tabs', () => {
 
     await page.setContent(`
       <va-tabs label="Filtered content options">
-        <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
-        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
-        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+        <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
+        <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
+        <va-tab-panel panel-id="panel-1" selected="true">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-3" slot="panel">
+        <va-tab-panel panel-id="panel-3">
           <h2>Panel 3</h2>
           <p>This is the content for Panel 3.</p>
         </va-tab-panel>
@@ -54,22 +54,22 @@ describe('va-tabs', () => {
 
     await page.setContent(`
       <va-tabs label="Filtered content options" selected="0">
-        <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
-        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
-        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+        <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
+        <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
+        <va-tab-panel panel-id="panel-1" selected="true">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-3" slot="panel">
+        <va-tab-panel panel-id="panel-3">
           <h2>Panel 3</h2>
           <p>This is the content for Panel 3.</p>
         </va-tab-panel>
@@ -79,9 +79,9 @@ describe('va-tabs', () => {
     const tabItems = await page.findAll('va-tab-item');
     expect(tabItems.length).toEqual(3);
 
-    const tab2 = await page.find('va-tab-item[target-id="tab2"]');
+    const tab2 = await page.find('va-tab-item[target-id="panel-2"]');
     expect(tab2).not.toBeNull();
-    await page.$eval('va-tab-item[target-id="tab2"]', el => el.click());
+    await page.$eval('va-tab-item[target-id="panel-2"]', el => el.click());
 
     await page.waitForChanges();
 
@@ -95,22 +95,22 @@ describe('va-tabs', () => {
 
     await page.setContent(`
       <va-tabs label="Filtered content options" selected="1">
-        <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
-        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
-        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+        <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
+        <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
+        <va-tab-panel panel-id="panel-1" selected="true">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-3" slot="panel">
+        <va-tab-panel panel-id="panel-3">
           <h2>Panel 3</h2>
           <p>This is the content for Panel 3.</p>
         </va-tab-panel>
@@ -128,27 +128,27 @@ describe('va-tabs', () => {
 
     await page.setContent(`
       <va-tabs label="Filtered content options" selected="1">
-        <va-tab-item target-id="tab1" button-text="Tab 1"></va-tab-item>
-        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
-        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
-        <va-tab-item target-id="tab4" button-text="Tab 4"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+        <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
+        <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
+        <va-tab-item target-id="panel-4" button-text="Tab 4"></va-tab-item>
+        <va-tab-panel panel-id="panel-1" selected="true">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-3" slot="panel">
+        <va-tab-panel panel-id="panel-3">
           <h2>Panel 3</h2>
           <p>This is the content for Panel 3.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-4" slot="panel">
+        <va-tab-panel panel-id="panel-4">
           <h2>Panel 4</h2>
           <p>This is the content for Panel 4.</p>
         </va-tab-panel>
@@ -163,31 +163,30 @@ describe('va-tabs', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-tabs label="Filtered content options">
-        <va-tab-item target-id="tab1" button-text="Tab 1" is-selected-tab="true"></va-tab-item>
-        <va-tab-item target-id="tab2" button-text="Tab 2"></va-tab-item>
-        <va-tab-item target-id="tab3" button-text="Tab 3"></va-tab-item>
-
-        <va-tab-panel panel-id="panel-1" slot="panel" selected="true">
+      <va-tabs label="Filtered content options" selected="0">
+        <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
+        <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
+        <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
+        <va-tab-panel panel-id="panel-1" selected="true">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-2" slot="panel">
+        <va-tab-panel panel-id="panel-2">
           <h2>Panel 2</h2>
           <p>This is the content for Panel 2.</p>
         </va-tab-panel>
-        <va-tab-panel panel-id="panel-3" slot="panel">
+        <va-tab-panel panel-id="panel-3">
           <h2>Panel 3</h2>
           <p>This is the content for Panel 3.</p>
         </va-tab-panel>
       </va-tabs>
     `);
 
-    await page.waitForChanges();
+    await page.waitForChanges()
 
     await axeCheck(page);
   });
