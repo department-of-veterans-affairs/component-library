@@ -134,6 +134,11 @@ export class VaFileInput {
   @Prop() maxFileSize?: number = Infinity;
 
   /**
+   * Minimum allowed file size in bytes.
+   */
+  @Prop() minFileSize?: number = 0;
+
+  /**
    * Percent upload completed. For use with va-progress-bar component
    */
   @Prop({ mutable: true}) percentUploaded?: number = null;
@@ -234,12 +239,23 @@ export class VaFileInput {
       }
     }
 
+     if (file.size === 0) {
+      this.internalError = `The file you selected is empty. Files must be larger than 0B.`;
+      this.resetState();
+      return;
+    }
+
     if (file.size > this.maxFileSize) {
       this.internalError = `
         We can't upload your file because it's too big. Files must be less than ${this.formatFileSize(this.maxFileSize)}.`;
       // in case the file was added by clicking the "change file" button do a reset
-      this.fileContents = null;
-      this.uploadStatus = 'idle';
+      this.resetState();
+      return;
+    }
+
+    if (file.size < this.minFileSize) {
+      this.internalError = `We can't upload your file because it's too small. Files must be at least ${this.formatFileSize(this.minFileSize)}.`;
+      this.resetState();
       return;
     }
 
