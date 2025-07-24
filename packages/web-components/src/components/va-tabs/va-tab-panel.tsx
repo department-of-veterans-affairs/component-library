@@ -23,7 +23,6 @@ export class VaTabPanel {
         role="tabpanel"
         tabindex={this.selected ? '0' : '-1'}
         class="va-tab-panel__content"
-        aria-hidden={!this.selected ? 'true' : 'false'}
         hidden={!this.selected}
         aria-labelledby={`${this.panelId}-tab`}
       >
