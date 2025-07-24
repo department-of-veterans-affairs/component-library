@@ -76,15 +76,13 @@ const Template = (args) => {
                 key={`tab-item-${item.targetId}-${args.templateKey}`}
                 button-text={formattedLabel}
                 target-id={item.targetId}
-                slot="tab"
               ></va-tab-item>
               <va-tab-panel
                 key={item.targetId}
                 panel-id={item.targetId}
-                slot="panel"
                 selected={index === args.selected}
               >
-                <h2>{item.label}</h2>
+                <h2>{formattedLabel}</h2>
                 <p>{item.panelContent}</p>
               </va-tab-panel>
             </Fragment>
