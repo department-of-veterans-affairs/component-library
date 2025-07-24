@@ -1,0 +1,122 @@
+name: Weekly Design System Reports
+
+on:
+  schedule:
+    # Run every Thursday at 11 PM UTC (adjust timezone as needed)
+    - cron: '0 23 * * 4'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  generate-reports:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60 # Increase timeout for large repos
+    
+    steps:
+    - name: Checkout component-library
+      uses: actions/checkout@v4
+      with:
+        path: component-library
+        
+    - name: Checkout vets-website
+      uses: actions/checkout@v4
+      with:
+        repository: department-of-veterans-affairs/vets-website
+        path: vets-website
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 1 # Shallow clone for faster checkout
+        
+    - name: Checkout content-build
+      uses: actions/checkout@v4
+      with:
+        repository: department-of-veterans-affairs/content-build
+        path: content-build
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 1 # Shallow clone for faster checkout
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: component-library/packages/design-system-dashboard-cli/package.json
+        
+    - name: Install dependencies
+      working-directory: component-library/packages/design-system-dashboard-cli
+      run: npm install
+      
+    - name: Create output directory
+      working-directory: component-library/packages/design-system-dashboard-cli
+      run: mkdir -p output
+      
+    - name: Create .env.json
+      working-directory: component-library/packages/design-system-dashboard-cli
+      run: |
+        cat > .env.json << EOF
+        {
+          "repos": {
+            "vets-website": "../../../vets-website/",
+            "content-build": "../../../content-build/"
+          }
+        }
+        EOF
+        
+    - name: Generate form apps report
+      working-directory: component-library/packages/design-system-dashboard-cli
+      run: npm run forms -- --csv --output output/form-apps-$(date +%Y-%m-%d).csv
+      
+    - name: Generate design system components report
+      working-directory: component-library/packages/design-system-dashboard-cli
+      run: npm run report:csv -- --output output/ds-components-$(date +%Y-%m-%d).csv
+      
+    - name: Generate forms library usage report
+      working-directory: component-library/packages/design-system-dashboard-cli
+      run: npm run forms-library-usage -- --list > output/forms-library-usage-$(date +%Y-%m-%d).txt
+      
+    - name: Upload reports as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: weekly-reports-${{ github.run_number }}
+        path: component-library/packages/design-system-dashboard-cli/output/
+        retention-days: 90
+        
+    - name: Create summary
+      working-directory: component-library/packages/design-system-dashboard-cli
+      run: |
+        echo "## Weekly Design System Reports - $(date +%Y-%m-%d)" > output/report-summary.md
+        echo "" >> output/report-summary.md
+        echo "### Form Applications" >> output/report-summary.md
+        FORM_COUNT=$(npm run forms --silent | grep -o '[0-9]\+')
+        echo "Total form apps: $FORM_COUNT" >> output/report-summary.md
+        echo "" >> output/report-summary.md
+        echo "### Forms Library Usage" >> output/report-summary.md
+        LIBRARY_COUNT=$(npm run forms-library-usage --silent | grep -o '[0-9]\+')
+        echo "Non-form applications using forms library: $LIBRARY_COUNT" >> output/report-summary.md
+        echo "" >> output/report-summary.md
+        echo "### Generated Files" >> output/report-summary.md
+        echo "- \`form-apps-$(date +%Y-%m-%d).csv\` - List of form applications" >> output/report-summary.md
+        echo "- \`ds-components-$(date +%Y-%m-%d).csv\` - Design system component usage" >> output/report-summary.md
+        echo "- \`forms-library-usage-$(date +%Y-%m-%d).txt\` - Non-form apps using forms library" >> output/report-summary.md
+        
+    - name: Commit and push reports
+      working-directory: component-library
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add packages/design-system-dashboard-cli/output/
+        git commit -m "Add weekly reports for $(date +%Y-%m-%d)" -a || exit 0
+        git push
+    - name: Create GitHub issue with summary
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const summary = fs.readFileSync('component-library/packages/design-system-dashboard-cli/output/report-summary.md', 'utf8');
+          
+          // Create an issue with the weekly report
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `Weekly Design System Report - ${new Date().toISOString().split('T')[0]}`,
+            body: summary,
+            labels: ['report', 'automated']
+          });
