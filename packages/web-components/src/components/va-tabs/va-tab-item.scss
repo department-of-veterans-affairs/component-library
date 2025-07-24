@@ -1,4 +1,5 @@
 @import '../../mixins/focusable-no-offset.css';
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
 :host {
   display: flex;
@@ -55,4 +56,10 @@
 
 :host([aria-selected='true']:hover)::after {
   background-color: var(--vads-color-base-lightest);
+}
+
+@media screen and (min-width: $medium-screen) {
+  :host {
+    max-width: unset;
+  }
 }
