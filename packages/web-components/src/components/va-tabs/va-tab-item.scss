@@ -8,7 +8,7 @@
   color: var(--vads-color-primary);
   position: relative;
   padding: 1rem;
-  padding-bottom: .5rem;
+  padding-bottom: calc(1rem - 4px); // Adjust bottom padding to account for border
   border: none;
   border-bottom: 4px solid transparent;
   min-width: 4rem;
@@ -16,6 +16,7 @@
   font-family: var(--font-source-sans);
   font-size: var(--vads-font-size-source-sans-normalized);
   text-align: center;
+  line-height: var(--vads-font-line-height-2);
 }
 
 :host([aria-selected='false']:hover) {
@@ -43,7 +44,7 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  height: calc(100% - 1.5rem); // 1.5rem is the cumulative vertical padding on the tab item
+  height: calc(100% - calc(2rem - 4px)); // 2rem - 4px is the cumulative vertical padding on the tab item
   top: 1rem; // Account for top padding of tab item
   width: calc(100% - 4px); // Don't take up full width so outline of tab item is fully visible
   left: 2px; // Update horizontal position to align with the tab item due to decreased width
