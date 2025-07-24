@@ -19,6 +19,8 @@ import {
   getCharacterMessage,
   getHeaderLevel,
   isMessageSet,
+  getMaxLength,
+  updateScreenReaderCount,
 } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -254,7 +256,7 @@ export class VaTextInput {
     if (this.charCountElement && !this.charCountElement.innerText) {
       this.charCountElement.innerText = getCharacterMessage(
         this.value,
-        this.getMaxlength(),
+        getMaxLength(this.maxlength),
       );
     }
   }
@@ -304,32 +306,12 @@ export class VaTextInput {
     return this.type;
   }
 
-  /**
-   * This ensures that the `maxlength` property will be positive
-   * or it won't be used at all
-   */
-  private getMaxlength() {
-    if (this.maxlength <= 0) {
-      consoleDevError('The maxlength prop must be positive!');
-      return undefined;
-    }
-
-    return this.maxlength;
-  }
-
-  private updateScreenReaderCount = debounce(() => {
-    if (this.charCountElement) {
-      this.charCountElement.innerText = getCharacterMessage(
-        this.value,
-        this.getMaxlength(),
-      );
-    }
-  }, 1000);
+  private debouncedUpdateScreenReaderCount = debounce(updateScreenReaderCount, 1000);
 
   private handleInput = (e: InputEvent) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-    this.updateScreenReaderCount();
+    this.debouncedUpdateScreenReaderCount(this.charCountElement, this.value, getMaxLength(this.maxlength));
   }
 
   private handleBlur = (e: Event) => {
@@ -423,7 +405,7 @@ export class VaTextInput {
       errorHasPii = false,
     } = this;
     const type = this.getInputType();
-    const maxlength = this.getMaxlength();
+    const maxlength = getMaxLength(this.maxlength);
     const inputmode = this.getInputmode();
     const step = this.getStep();
 
@@ -596,7 +578,7 @@ export class VaTextInput {
           {charcount && maxlength && (
             <Fragment>
             <span aria-hidden="true" class={messageClass}>
-              {getCharacterMessage(this.value, this.getMaxlength())}
+              {getCharacterMessage(this.value, getMaxLength(this.maxlength))}
             </span>
             <span
               id="charcount-message"

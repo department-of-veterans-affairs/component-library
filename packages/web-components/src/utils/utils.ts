@@ -371,3 +371,49 @@ export function debounce<T extends (...args: any[]) => void>(
     timeout = setTimeout(() => func.apply(this, args), wait);
   };
 }
+
+/**
+ * Gets the maximum length for an input field.
+ *
+ * @param maxLength - The maximum length as a number or string
+ * @returns {number | undefined} The maximum length as a number, or undefined if not set or invalid
+ */
+export function getMaxLength(maxLength?: number | string): number | undefined {
+  if (maxLength === undefined || maxLength === null) {
+    return undefined;
+  }
+
+  // Convert to number if it's a string
+  const maxLengthNumber = typeof maxLength === 'string' ? parseInt(maxLength, 10) : maxLength;
+
+  // Log dev error if the maxLength is not a positive number and return undefined
+  if (maxLengthNumber <= 0 || isNaN(maxLengthNumber)) {
+    consoleDevError('The maxlength prop must be positive!');
+    return undefined;
+  }
+
+  return maxLengthNumber;
+}
+/**
+ * Updates the screen reader count for a character count element (va-input or va-textarea).
+ * NOTE: This function should be debounced with a 1000ms to avoid excessive updates.
+ *
+ * @param charCountElement - The element displaying the character count
+ * @param value - The current input value
+ * @param maxLength - The maximum allowed length
+ * @returns {void}
+ */
+export function updateScreenReaderCount(
+  charCountElement: HTMLElement | null,
+  value: string | undefined,
+  maxLength: number | undefined,
+): void {
+  if (!charCountElement) {
+    return;
+  }
+
+  charCountElement.innerText = getCharacterMessage(
+    value,
+    getMaxLength(maxLength),
+  );
+}

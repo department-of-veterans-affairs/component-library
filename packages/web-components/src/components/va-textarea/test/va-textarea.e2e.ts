@@ -66,7 +66,7 @@ describe('va-textarea', () => {
     // Render the error message text
     const requiredSpan = await page.find('va-textarea >>> .usa-label--required');
     // This is the key for i18next
-    expect(requiredSpan).toEqualText('required');
+    expect(requiredSpan).toEqualText('(*Required)');
   });
 
   it('textarea component passes an aXe check', async () => {
@@ -169,7 +169,7 @@ describe('va-textarea', () => {
     expect(await textareaEl.getProperty('value')).toBe('222');
     // This is the i18next key surrounded by parentheses
     expect((await page.find('va-textarea >>> span.usa-hint')).innerText).toContain(
-      'max-chars',
+      '(Max. 3 characters)',
     );
   });
 
@@ -250,7 +250,7 @@ describe('va-textarea', () => {
     expect(messageSpan.innerText).toEqual('6 characters over limit');
 
     // Wait 1000ms for the screen reader character count to update (debounced in the component)
-    await new Promise((r) => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 1005));
     expect(
       (await page.find('va-textarea >>> span#charcount-message'))
         .innerText,

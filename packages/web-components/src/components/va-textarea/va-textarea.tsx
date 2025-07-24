@@ -13,10 +13,11 @@ import {
 import classnames from 'classnames';
 import { i18next } from '../..';
 import {
-  consoleDevError,
-  debounce,
   getCharacterMessage,
+  debounce,
   getHeaderLevel,
+  getMaxLength,
+  updateScreenReaderCount,
   isMessageSet,
 } from '../../utils/utils';
 
@@ -155,24 +156,17 @@ export class VaTextarea {
     if (this.charCountElement && !this.charCountElement.innerText) {
       this.charCountElement.innerText = getCharacterMessage(
         this.value,
-        this.getMaxlength(),
+        getMaxLength(this.maxlength),
       );
     }
   }
 
-  private updateScreenReaderCount = debounce(() => {
-    if (this.charCountElement) {
-      this.charCountElement.innerText = getCharacterMessage(
-        this.value,
-        this.getMaxlength(),
-      );
-    }
-  }, 1000);
+  private debouncedUpdateScreenReaderCount = debounce(updateScreenReaderCount, 1000);
 
   private handleInput = (e: InputEvent) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-    this.updateScreenReaderCount();
+    this.debouncedUpdateScreenReaderCount(this.charCountElement, this.value, getMaxLength(this.maxlength));
   }
 
   private handleBlur = () => {
@@ -188,19 +182,6 @@ export class VaTextarea {
       });
     }
   };
-
-  /**
-   * This ensures that the `maxlength` property will be positive
-   * or it won't be used at all
-   */
-  private getMaxlength() {
-    if (this.maxlength <= 0) {
-      consoleDevError('The maxlength prop must be positive!');
-      return undefined;
-    }
-
-    return this.maxlength;
-  }
 
   render() {
     const {
@@ -219,7 +200,7 @@ export class VaTextarea {
       formHeading,
     } = this;
 
-    const maxlength = this.getMaxlength();
+    const maxlength = getMaxLength(this.maxlength);
     const ariaDescribedbyIds =
       `${error ? 'input-error-message' : ''} ${
         charcount && maxlength ? 'charcount-message' : ''
@@ -342,7 +323,9 @@ export class VaTextarea {
           )}
           {charcount && maxlength && (
             <Fragment>
-              <span aria-hidden="true" class={messageClass}>{getCharacterMessage(this.value, this.getMaxlength())}</span>
+              <span aria-hidden="true" class={messageClass}>
+                {getCharacterMessage(this.value, getMaxLength(this.maxlength))}
+              </span>
               <span
                 id="charcount-message"
                 aria-live="polite"
