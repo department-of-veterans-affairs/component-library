@@ -37,7 +37,7 @@ describe('va-textarea', () => {
     expect(textarea.getAttribute('aria-describedby')).toContain(
       'input-error-message',
     );
-  });
+  })
 
   it('textarea component renders hint text', async () => {
     const page = await newE2EPage();
@@ -224,9 +224,15 @@ describe('va-textarea', () => {
 
     const inputEl = await page.find('va-textarea >>> textarea');
     await inputEl.type('Hello');
+
     const span = await page.find('va-textarea >>> span.usa-character-count__status')
 
     expect(span.innerText).toEqual('5 characters left');
+
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1000));
+    const srSpan = await page.find('va-textarea >>> span#charcount-message')
+    expect(srSpan.innerText).toEqual('5 characters left');
 
   });
 
@@ -243,6 +249,13 @@ describe('va-textarea', () => {
     const messageSpan = await page.find('va-textarea >>> span.usa-character-count__status');
     expect(messageSpan.innerText).toEqual('6 characters over limit');
 
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1005));
+    expect(
+      (await page.find('va-textarea >>> span#charcount-message'))
+        .innerText,
+    ).toContain('6 characters over limit');
+
     const {color} = await messageSpan.getComputedStyle()
     expect(color).toEqual(
       'rgb(181, 9, 9)',
@@ -250,7 +263,7 @@ describe('va-textarea', () => {
 
     expect(inputEl.getAttribute('aria-invalid')).toBe("true");
   });
-  
+
   it('textarea component useFormsPattern displays header for the single field pattern', async () => {
     const page = await newE2EPage();
     await page.setContent(

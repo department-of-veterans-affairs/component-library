@@ -6,7 +6,8 @@ import {
   isMessageSet,
   deepEquals,
   truncate,
-  getArticle
+  getArticle,
+  getMaxLength,
 } from './utils';
 
 describe('format', () => {
@@ -322,11 +323,11 @@ describe('truncate()', () => {
 
   const FONT = '16.96px "Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans';
   it('should truncate text that is too long', async () => {
-  
-  
+
+
     const startingText = 'This text is too long and needs to be truncated';
     const truncatedText = truncate(startingText, 100, FONT);
-  
+
     // Verify text was actually truncated
     expect(truncatedText.length).toBeLessThan(startingText.length);
     expect(truncatedText).toContain('...');
@@ -351,4 +352,12 @@ describe('truncate()', () => {
     const umbrellaArticle = getArticle('umbrella');
     expect(umbrellaArticle).toEqual('an');
   })
+
+  it('gets the correct max length for a string', () => {
+    expect(getMaxLength(100)).toEqual(100);
+    expect(getMaxLength('100')).toEqual(100);
+    expect(getMaxLength('')).toEqual(undefined);
+    expect(getMaxLength(null)).toEqual(undefined);
+    expect(getMaxLength(undefined)).toEqual(undefined);
+  });
 })

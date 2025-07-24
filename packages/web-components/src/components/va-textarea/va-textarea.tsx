@@ -13,9 +13,11 @@ import {
 import classnames from 'classnames';
 import { i18next } from '../..';
 import {
-  consoleDevError,
   getCharacterMessage,
+  debounce,
   getHeaderLevel,
+  getMaxLength,
+  updateScreenReaderCount,
   isMessageSet,
 } from '../../utils/utils';
 
@@ -42,6 +44,8 @@ if (Build.isTesting) {
 })
 export class VaTextarea {
   @Element() el!: any;
+
+  charCountElement: HTMLSpanElement;
 
   /**
    * The label for the textarea.
@@ -147,10 +151,23 @@ export class VaTextarea {
     i18next.off('languageChanged');
   }
 
-  private handleInput = (e: Event) => {
+  componentDidRender() {
+    // If the charCountElement is empty, set the initial text
+    if (this.charCountElement && !this.charCountElement.innerText) {
+      this.charCountElement.innerText = getCharacterMessage(
+        this.value,
+        getMaxLength(this.maxlength),
+      );
+    }
+  }
+
+  private debouncedUpdateScreenReaderCount = debounce(updateScreenReaderCount, 1000);
+
+  private handleInput = (e: InputEvent) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-  };
+    this.debouncedUpdateScreenReaderCount(this.charCountElement, this.value, getMaxLength(this.maxlength));
+  }
 
   private handleBlur = () => {
     // Only fire the analytics event if enabled and value is not null
@@ -165,19 +182,6 @@ export class VaTextarea {
       });
     }
   };
-
-  /**
-   * This ensures that the `maxlength` property will be positive
-   * or it won't be used at all
-   */
-  private getMaxlength() {
-    if (this.maxlength <= 0) {
-      consoleDevError('The maxlength prop must be positive!');
-      return undefined;
-    }
-
-    return this.maxlength;
-  }
 
   render() {
     const {
@@ -196,7 +200,7 @@ export class VaTextarea {
       formHeading,
     } = this;
 
-    const maxlength = this.getMaxlength();
+    const maxlength = getMaxLength(this.maxlength);
     const ariaDescribedbyIds =
       `${error ? 'input-error-message' : ''} ${
         charcount && maxlength ? 'charcount-message' : ''
@@ -318,13 +322,23 @@ export class VaTextarea {
             </span>
           )}
           {charcount && maxlength && (
-            <span
-              id="charcount-message"
-              class={messageClass}
-              aria-live="polite"
-            >
-              {getCharacterMessage(value, maxlength)}
-            </span>
+            <Fragment>
+              <span aria-hidden="true" class={messageClass}>
+                {getCharacterMessage(this.value, getMaxLength(this.maxlength))}
+              </span>
+              <span
+                id="charcount-message"
+                aria-live="polite"
+                class="usa-sr-only"
+                ref={(el) => (this.charCountElement = el as HTMLSpanElement)}
+              >
+                {/*
+                  Element inner text is empty because it's initially set in componentDidRender
+                  and programmatically updated `getCharacterMessage` on input. This
+                  is to avoid obtrusive updates for screen readers.
+                */}
+              </span>
+            </Fragment>
           )}
           {isMessageSet(messageAriaDescribedby) && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">

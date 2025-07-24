@@ -1824,6 +1824,16 @@ export namespace Components {
      */
     interface VaSummaryBox {
     }
+    interface VaTabPanel {
+        /**
+          * The unique identifier for the tab panel. This should match the id referenced by the corresponding tab.
+         */
+        "panelId": string;
+        /**
+          * Indicates whether the tab panel is currently selected/visible.
+         */
+        "selected": boolean;
+    }
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -3501,6 +3511,12 @@ declare global {
         prototype: HTMLVaSummaryBoxElement;
         new (): HTMLVaSummaryBoxElement;
     };
+    interface HTMLVaTabPanelElement extends Components.VaTabPanel, HTMLStencilElement {
+    }
+    var HTMLVaTabPanelElement: {
+        prototype: HTMLVaTabPanelElement;
+        new (): HTMLVaTabPanelElement;
+    };
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -3697,6 +3713,7 @@ declare global {
         "va-sidenav-submenu": HTMLVaSidenavSubmenuElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
+        "va-tab-panel": HTMLVaTabPanelElement;
         "va-table": HTMLVaTableElement;
         "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
@@ -5797,6 +5814,16 @@ declare namespace LocalJSX {
      */
     interface VaSummaryBox {
     }
+    interface VaTabPanel {
+        /**
+          * The unique identifier for the tab panel. This should match the id referenced by the corresponding tab.
+         */
+        "panelId": string;
+        /**
+          * Indicates whether the tab panel is currently selected/visible.
+         */
+        "selected"?: boolean;
+    }
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -6265,6 +6292,7 @@ declare namespace LocalJSX {
         "va-sidenav-submenu": VaSidenavSubmenu;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
+        "va-tab-panel": VaTabPanel;
         "va-table": VaTable;
         "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
@@ -6635,6 +6663,7 @@ declare module "@stencil/core" {
              * @maturityLevel deployed
              */
             "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
+            "va-tab-panel": LocalJSX.VaTabPanel & JSXBase.HTMLAttributes<HTMLVaTabPanelElement>;
             /**
              * @componentName Table
              * @maturityCategory caution
