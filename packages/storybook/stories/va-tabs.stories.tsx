@@ -53,7 +53,7 @@ export default {
   },
   args: {
     ...propDefaults(tabsDocs),
-    label: 'Filtered content options',
+    label: 'Status details',
     tabItems: tabItems,
     selected: 0,
     templateKey: 0, // Used to differentiate between multiple instances in the DOM to prevent duplicate IDs
