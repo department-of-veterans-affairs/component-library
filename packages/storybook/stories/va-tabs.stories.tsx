@@ -64,17 +64,11 @@ const Template = (args) => {
   return (
     <va-tabs label={args.label} selected={args.selected}>
       {
-        args.tabItems.map((item, index) => {
-          let formattedLabel = item.label;
-          if (args.longTabLabelExample && index === 1) {
-            formattedLabel = args.longTabLabelExample
-          }
-
-          return (
+        args.tabItems.map((item, index) => (
             <Fragment key={`fragment-${item.targetId}-${args.templateKey}`}>
               <va-tab-item
                 key={`tab-item-${item.targetId}-${args.templateKey}`}
-                button-text={formattedLabel}
+                button-text={item.label}
                 target-id={item.targetId}
               ></va-tab-item>
               <va-tab-panel
@@ -82,12 +76,11 @@ const Template = (args) => {
                 panel-id={item.targetId}
                 selected={index === args.selected}
               >
-                <h2>{formattedLabel}</h2>
+                <h2>{item.label}</h2>
                 <p>{item.panelContent}</p>
               </va-tab-panel>
             </Fragment>
-          );
-        })
+        ))
       }
     </va-tabs>
   );
@@ -103,11 +96,3 @@ WithSecondTabSelected.args = {
   templateKey: 1,
 };
 WithSecondTabSelected.argTypes = propStructure(tabsDocs);
-
-export const WithALongLabel = Template.bind(null);
-WithALongLabel.args = {
-  ...Default.args,
-  longTabLabelExample: 'Really long tab name here',
-  templateKey: 2,
-};
-WithALongLabel.argTypes = propStructure(tabsDocs);
