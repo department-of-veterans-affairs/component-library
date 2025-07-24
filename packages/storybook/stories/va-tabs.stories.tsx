@@ -66,8 +66,8 @@ const Template = (args) => {
       {
         args.tabItems.map((item, index) => {
           let formattedLabel = item.label;
-          if (args.useLongTabLabel && index === 1) {
-            formattedLabel = 'Really long tab name here';
+          if (args.longTabLabelExample && index === 1) {
+            formattedLabel = args.longTabLabelExample
           }
 
           return (
@@ -109,7 +109,7 @@ WithSecondTabSelected.argTypes = propStructure(tabsDocs);
 export const WithALongLabel = Template.bind(null);
 WithALongLabel.args = {
   ...Default.args,
-  useLongTabLabel: true,
+  longTabLabelExample: 'Really long tab name here',
   templateKey: 2,
 };
 WithALongLabel.argTypes = propStructure(tabsDocs);
