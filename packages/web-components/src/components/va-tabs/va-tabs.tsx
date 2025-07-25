@@ -205,6 +205,7 @@ export class VaTabs {
       this.tabWithFocus = this.tabItems[newFocusedIndex];
       this.tabWithFocus.setAttribute("tabindex", "0");
       (this.tabWithFocus as HTMLElement).focus();
+      this.tabWithFocus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
 
