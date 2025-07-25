@@ -63,7 +63,6 @@
     "typescript": "^5.5.4"
   },
   "peerDependencies": {
-    "@department-of-veterans-affairs/formation": "^11.0.6",
     "i18next": "*",
     "i18next-browser-languagedetector": "*"
   }

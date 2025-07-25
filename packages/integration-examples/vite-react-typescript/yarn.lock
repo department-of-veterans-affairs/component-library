@@ -289,7 +289,6 @@ __metadata:
     react-focus-on: "npm:^3.5.1"
     react-transition-group: "npm:^1.0.0"
   peerDependencies:
-    "@department-of-veterans-affairs/formation": "*"
     react: ^18
     react-dom: "*"
   checksum: 10/e011fef78aad70ab538fef4562940f9925ab07d0be96f9bcaee86daf13c50416ce62a7cdad21b63b4ccc5fee4bce5d9d8a25e89eeb5df4ec636a38567e76a60f
@@ -337,7 +336,6 @@ __metadata:
     classnames: "npm:^2.3.1"
     intersection-observer: "npm:^0.12.0"
   peerDependencies:
-    "@department-of-veterans-affairs/formation": ^11.0.6
     i18next: "*"
     i18next-browser-languagedetector: "*"
   checksum: 10/f0bd4bfda5f335e1695abcd8d4760147cd07781e35b8fb54046bad072080a26d8c59b61d40bd8c378c8c046d0765318e992b19d0fea2a41713c5badd1a927b79
