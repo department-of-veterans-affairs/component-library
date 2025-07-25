@@ -422,7 +422,7 @@ WithHeadingNotMatchingTab.argTypes = propStructure(tabsDocs);
 export const WithMeaningfulContent = TemplateWithMeaningfulContent.bind(null);
 WithMeaningfulContent.args = {
   ...Default.args,
-  label: 'Status details',
+  label: 'Claim details',
   selected: 0,
   templateKey: 5,
 };
