@@ -43,6 +43,9 @@ export class VaFileInput {
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
 
+  // don't generate previews for files bigger than limit because this can lock main thread
+  FILE_PREVIEW_SIZE_LIMIT = 1024 * 1024 * 5;
+
   /**
    * The label for the file input.
    */
@@ -266,7 +269,9 @@ export class VaFileInput {
     }
     this.uploadStatus = 'success';
     this.internalError = null;
-    this.generateFileContents(this.file);
+    if (file.size < this.FILE_PREVIEW_SIZE_LIMIT) {
+      this.generateFileContents(this.file);
+    }
     this.updateStatusMessage(`You have selected the file: ${this.file.name}`);
     this.el.focus();
 
