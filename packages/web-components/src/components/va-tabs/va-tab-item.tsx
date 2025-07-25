@@ -86,8 +86,9 @@ export class VaTabItem {
    * @param {KeyboardEvent} e - The keydown event.
    */
   private handleKeyDown(e: KeyboardEvent) {
+    e.preventDefault();
+
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-      e.preventDefault();
       this.tabItemKeyNavigated.emit(e);
     }
     else if (e.key === 'Enter' || e.key === ' ') {
