@@ -120,12 +120,6 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(alertExpandableDocs);
 
-export const Error = Template.bind(null);
-Error.args = {
-  ...defaultArgs,
-  status: 'error',
-};
-
 export const Warning = Template.bind(null);
 Warning.args = {
   ...defaultArgs,
