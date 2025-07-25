@@ -205,6 +205,8 @@ export class VaTabs {
       this.tabWithFocus = this.tabItems[newFocusedIndex];
       this.tabWithFocus.setAttribute("tabindex", "0");
       (this.tabWithFocus as HTMLElement).focus();
+      // Ensure that the newly focused tab is visible in the viewport (helpful
+      // for when zoom is high).
       this.tabWithFocus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
