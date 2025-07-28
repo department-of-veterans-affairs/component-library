@@ -141,9 +141,9 @@ export namespace Components {
          */
         "iconless"?: boolean;
         /**
-          * Determines the icon and background color. One of `info`, `success`, `warning`, or `continue`
+          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
-        "status"?: 'continue' | 'success' | 'warning' | 'info';
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * The text to trigger the expansion
          */
@@ -3862,9 +3862,9 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaAlertExpandableCustomEvent<any>) => void;
         /**
-          * Determines the icon and background color. One of `info`, `success`, `warning`, or `continue`
+          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
-        "status"?: 'continue' | 'success' | 'warning' | 'info';
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * The text to trigger the expansion
          */

@@ -29,9 +29,9 @@ export class VaAlertExpandable {
 
   /**
    * Determines the icon and background color.
-   * One of `info`, `success`, `warning`, or `continue`
+   * One of `info`, `error`, `success`, `warning`, or `continue`
    */
-  @Prop() status?: 'continue' | 'success' | 'warning' | 'info';
+  @Prop() status?: 'continue' | 'error' | 'info' | 'success' | 'warning';
 
   /**
    * The text to trigger the expansion
@@ -117,14 +117,18 @@ export class VaAlertExpandable {
     /* eslint-disable i18next/no-literal-string */
     const statusIcons = {
       continue: 'lock',
+      error: 'info',
       warning: 'warning',
       info: 'info',
       success: 'check_circle',
     };
+    const role = status === 'error' ? 'alert' : null;
+    const ariaLive = status === 'error' ? 'assertive' : null;
+    /* eslint-enable i18next/no-literal-string */
 
     return (
       <Host>
-        <div class={alertClasses}>
+        <div role={role} aria-live={ariaLive} class={alertClasses}>
           <a
             role="button"
             aria-controls="alert-body"
