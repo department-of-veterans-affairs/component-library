@@ -29,7 +29,6 @@
     "chromatic": "^11.5.1",
     "css-loader": "^7.1.2",
     "http-server": "^14.1.1",
-    "node-sass": "^9.0.0",
     "react-dom": "^17.0.2",
     "sass-loader": "^16.0.5",
     "storybook": "^9.0.6"
