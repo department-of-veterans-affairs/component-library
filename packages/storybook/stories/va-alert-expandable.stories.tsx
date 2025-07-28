@@ -66,18 +66,6 @@ const IconlessTemplate = ({ trigger, iconless }) => {
       </va-alert-expandable>
       <br />
       <va-alert-expandable
-        status="error"
-        trigger={trigger}
-        iconless={iconless}
-        disable-analytics="false"
-      >
-        <p>
-          This is the alert content. To take action on this alert, please call{' '}
-          <va-telephone contact="8775551234"></va-telephone>.
-        </p>
-      </va-alert-expandable>
-      <br />
-      <va-alert-expandable
         status="warning"
         trigger={trigger}
         iconless={iconless}
