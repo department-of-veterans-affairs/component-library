@@ -172,6 +172,7 @@ export class VaOmbInfo {
             onFocusin={() => this.trapFocus()}
             secondary
             text="View Privacy Act Statement"
+            message-aria-describedby={ombNumber ? `Privacy Act statement for OMB control number ${ombNumber}` : undefined}
           />
         </div>
         <va-modal
