@@ -104,8 +104,6 @@ const Template = (args) => {
                 selected={index === args.selected}
               >
                 {panelChildren}
-
-                <va-button text="Show full list"></va-button>
               </va-tab-panel>
             </Fragment>
           );
