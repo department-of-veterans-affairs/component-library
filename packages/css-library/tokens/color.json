@@ -60,9 +60,6 @@
   "vads-color-action-focus-on-light": {
     "*": { "value": "{uswds-system-color-yellow-vivid-20}" }
   },
-  "vads-color-action-border-focus-on-light": {
-    "*": { "value": "{uswds-system-color-gray-90}" }
-  },
   "vads-color-base": {
     "*": { "value": "{uswds-system-color-gray-90}" }
   },

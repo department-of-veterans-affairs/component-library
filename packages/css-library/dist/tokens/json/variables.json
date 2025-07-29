@@ -527,25 +527,6 @@
       ]
     }
   },
-  "vads-color-action-border-focus-on-light": {
-    "*": {
-      "value": "#1b1b1b",
-      "filePath": "tokens/color.json",
-      "isSource": true,
-      "original": {
-        "value": "{uswds-system-color-gray-90}"
-      },
-      "name": "vads-color-action-border-focus-on-light",
-      "attributes": {
-        "category": "vads-color-action-border-focus-on-light",
-        "type": "*"
-      },
-      "path": [
-        "vads-color-action-border-focus-on-light",
-        "*"
-      ]
-    }
-  },
   "vads-color-base": {
     "*": {
       "value": "#1b1b1b",
