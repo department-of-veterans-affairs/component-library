@@ -33,6 +33,12 @@ const tabItems = [
     alternateHeading: 'Overview of the claim process',
     targetId: 'panel-3',
     panelContent: 'No Soldier shall, in time of peace be quartered in any house, without the consent of the Owner, nor in time of war, but in a manner to be prescribed by law.'
+  },
+  {
+    label: 'Details',
+    alternateHeading: 'Details of the claim',
+    targetId: 'panel-4',
+    panelContent: 'The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause.'
   }
 ];
 
@@ -66,6 +72,7 @@ export default {
     templateKey: 0, // Used to differentiate between multiple instances in the DOM to prevent duplicate IDs
     omitPanelHeading: false, // Used to omit the panel heading in the template.
     useAlternateHeading: false, // Used to show a different heading than the tab label.
+    renderAdditionalTabItem: false, // Used to conditionally render an additional (fourth) tab item.
   },
 };
 
@@ -74,6 +81,10 @@ const Template = (args) => {
     <va-tabs label={args.label} selected={args.selected}>
       {
         args.tabItems.map((item, index) => {
+          // Skip rendering for additional tab items if its not indicated in args
+          if (!args.renderAdditionalTabItem && index > 2) {
+            return null;
+          }
           // Format the label for the tab item, using a long label if specified
           // in args or the alternate heading if specified.
           let formattedLabel = item.label;
@@ -201,11 +212,18 @@ WithHeadingNotMatchingTab.args = {
 };
 WithHeadingNotMatchingTab.argTypes = propStructure(tabsDocs);
 
+export const WithAdditionalTabItem = Template.bind(null);
+WithAdditionalTabItem.args = {
+  ...Default.args,
+  renderAdditionalTabItem: true,
+};
+WithAdditionalTabItem.argTypes = propStructure(tabsDocs);
+
 export const WithMeaningfulContent = TemplateWithMeaningfulContent.bind(null);
 WithMeaningfulContent.args = {
   ...Default.args,
   label: 'Claim details',
   selected: 0,
-  templateKey: 5,
+  templateKey: 6,
 };
 WithMeaningfulContent.argTypes = propStructure(tabsDocs);
