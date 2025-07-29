@@ -121,7 +121,7 @@ const TemplateWithMeaningfulContent = (args) => {
     <va-tabs label={args.label} selected={args.selected}>
       <va-tab-item button-text="Status" target-id="meaningful-panel-1"></va-tab-item>
       <va-tab-panel panel-id="meaningful-panel-1" selected={args.selected === 0}>
-        <div className="vads-u-padding--2 vads-u-padding-top--3">
+        <div>
           <h2 className="tab-header vads-u-margin-y--0">
             Claim status
           </h2>
@@ -136,7 +136,7 @@ const TemplateWithMeaningfulContent = (args) => {
 
       <va-tab-item button-text="Issues" target-id="meaningful-panel-2"></va-tab-item>
       <va-tab-panel panel-id="meaningful-panel-2" selected={args.selected === 1}>
-        <div className="vads-u-padding--2 vads-u-padding-top--3">
+        <div>
           <h2 className="tab-header vads-u-margin-y--0">Claim files</h2>
           <p className="vads-u-margin-top--1 va-introtext">
             If you need to add evidence, you can do that here. You can also review
@@ -149,7 +149,7 @@ const TemplateWithMeaningfulContent = (args) => {
 
       <va-tab-item button-text="Overview" target-id="meaningful-panel-3"></va-tab-item>
       <va-tab-panel panel-id="meaningful-panel-3" selected={args.selected === 2}>
-        <div className="vads-u-padding--2 vads-u-padding-top--3">
+        <div>
           <div className="claim-overview-header-container">
             <h2 className="tab-header vads-u-margin-y--0">
               Overview of the claim process
