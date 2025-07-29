@@ -64,4 +64,4 @@ This should be set as **GITHUB_API_KEY** in your environment variable.
 
 ### 4. Update consuming apps
 
-The last step is to update the `package.json` files of consuming apps to use the latest version of `@department-of-veterans-affairs/formation` (or `component-library`). For example, if you are working with the `vets-website` project, open the `vets-website`'s `package.json` to update the version number of the `@department-of-veterans-affairs/formation` entry listed in the `dependencies` section. The version number should match what you just published to NPM.
+The last step is to update the `package.json` files of consuming apps to use the latest version of `@department-of-veterans-affairs/component-library`. For example, if you are working with the `vets-website` project, open the `vets-website`'s `package.json` to update the version number of the `@department-of-veterans-affairs/component-library` entry listed in the `dependencies` section. The version number should match what you just published to NPM.
