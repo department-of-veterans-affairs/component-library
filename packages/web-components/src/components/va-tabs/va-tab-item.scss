@@ -27,7 +27,6 @@
   cursor: pointer;
   background: var(--vads-color-base-lightest);
   border-bottom-color:  var(--vads-color-primary);
-  color: var(--vads-color-ink);
 }
 
 :host([aria-selected='true']) {
@@ -54,7 +53,7 @@
   left: 2px; // Update horizontal position to align with the tab item due to decreased width
   font-weight: 700;
   background: var(--vads-color-white);
-  color: var(--vads-color-base);
+  color: var(--vads-color-link);
 }
 
 :host([aria-selected='true']:hover)::after {
