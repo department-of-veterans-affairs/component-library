@@ -36,13 +36,13 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
-        cache: 'npm'
-        cache-dependency-path: component-library/packages/design-system-dashboard-cli/package.json
-        
+        node-version: '22.x'
+        cache: 'yarn'
+        cache-dependency-path: component-library/packages/design-system-dashboard-cli/yarn.lock
+    
     - name: Install dependencies
       working-directory: component-library/packages/design-system-dashboard-cli
-      run: npm install
+      run: yarn install
       
     - name: Create output directory
       working-directory: component-library/packages/design-system-dashboard-cli
