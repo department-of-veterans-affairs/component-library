@@ -1,4 +1,3 @@
-@import '../../mixins/focusable-no-offset.css';
 @import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
 :host {
@@ -18,6 +17,10 @@
   font-size: var(--vads-font-size-source-sans-normalized);
   text-align: center;
   line-height: var(--vads-font-line-height-2);
+}
+
+:host(:focus) {
+  outline-offset: -2px !important; // Needed to override styles from `base.css` that set outline-offset with [tabindex]:focus selector
 }
 
 :host([aria-selected='false']:hover) {
