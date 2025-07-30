@@ -211,6 +211,7 @@ WithALongLabel.args = {
   templateKey: 2,
 };
 WithALongLabel.argTypes = propStructure(tabsDocs);
+WithALongLabel.tags = ['dst-testing'];
 
 export const WithoutPanelHeading = Template.bind(null);
 WithoutPanelHeading.args = {
@@ -219,6 +220,8 @@ WithoutPanelHeading.args = {
   templateKey: 3,
 };
 WithoutPanelHeading.argTypes = propStructure(tabsDocs);
+WithoutPanelHeading.tags = ['dst-testing'];
+
 
 export const WithHeadingNotMatchingTab = Template.bind(null);
 WithHeadingNotMatchingTab.args = {
@@ -230,6 +233,8 @@ WithHeadingNotMatchingTab.args = {
   templateKey: 4,
 };
 WithHeadingNotMatchingTab.argTypes = propStructure(tabsDocs);
+WithHeadingNotMatchingTab.tags = ['dst-testing'];
+
 
 export const WithAdditionalTabItem = Template.bind(null);
 WithAdditionalTabItem.args = {
@@ -237,6 +242,8 @@ WithAdditionalTabItem.args = {
   renderAdditionalTabItem: true,
 };
 WithAdditionalTabItem.argTypes = propStructure(tabsDocs);
+WithAdditionalTabItem.tags = ['dst-testing'];
+
 
 export const WithMeaningfulContent = TemplateWithMeaningfulContent.bind(null);
 WithMeaningfulContent.args = {
@@ -246,3 +253,4 @@ WithMeaningfulContent.args = {
   templateKey: 6,
 };
 WithMeaningfulContent.argTypes = propStructure(tabsDocs);
+WithMeaningfulContent.tags = ['dst-testing'];
