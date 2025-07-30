@@ -18,29 +18,36 @@ const tabPanelDocs= getWebComponentDocs('va-tab-panel');
 const tabItems = [
   {
     label: 'Status',
-    alternateHeading: 'Claim Status',
+    panelHeading: 'Status',
     targetId: 'panel-1',
     panelContent: 'Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances.',
   },
   {
     label: 'Files',
-    alternateHeading: 'Claim Files',
+    panelHeading: 'Files',
     targetId: 'panel-2',
     panelContent: 'A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed.',
   },
   {
     label: 'Overview',
-    alternateHeading: 'Overview of the claim process',
+    panelHeading: 'Overview',
     targetId: 'panel-3',
     panelContent: 'No Soldier shall, in time of peace be quartered in any house, without the consent of the Owner, nor in time of war, but in a manner to be prescribed by law.'
   },
   {
     label: 'Details',
-    alternateHeading: 'Details of the claim',
+    panelHeading: 'Details',
     targetId: 'panel-4',
     panelContent: 'The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause.'
   }
 ];
+
+const altPanelHeadings = [
+  'Status details',
+  'Files details',
+  'Overview of the claim process',
+  'Details of the claim'
+]
 
 export default {
   title: 'Components/Tabs',
@@ -81,7 +88,6 @@ export default {
     selected: 0,
     templateKey: 0, // Used to differentiate between multiple instances in the DOM to prevent duplicate IDs
     omitPanelHeading: false, // Used to omit the panel heading in the template.
-    useAlternateHeading: false, // Used to show a different heading than the tab label.
     renderAdditionalTabItem: false, // Used to conditionally render an additional (fourth) tab item.
   },
 };
@@ -96,21 +102,16 @@ const Template = (args) => {
             return null;
           }
           // Format the label for the tab item, using a long label if specified
-          // in args or the alternate heading if specified.
+          // in args or the panel heading if specified.
           let formattedLabel = item.label;
-          let panelContentHeading = item.label;
           if (args.longTabLabelExample && index === 1) {
             formattedLabel = args.longTabLabelExample;
-            panelContentHeading = args.longTabLabelExample;
-          }
-          else if (args.useAlternateHeading) {
-            panelContentHeading = item.alternateHeading;
           }
 
           // Construct child content to be passed to the panel.
           let panelChildren = !args.omitPanelHeading ?(
             <Fragment>
-              <h2>{panelContentHeading}</h2>
+              <h2>{item.panelHeading}</h2>
               <p>{item.panelContent}</p>
             </Fragment>
           ) : <p>{item.panelContent}</p>;
@@ -217,7 +218,10 @@ WithoutPanelHeading.argTypes = propStructure(tabsDocs);
 export const WithHeadingNotMatchingTab = Template.bind(null);
 WithHeadingNotMatchingTab.args = {
   ...Default.args,
-  useAlternateHeading: true,
+  tabItems: tabItems.map((item, index) => ({
+    ...item,
+    panelHeading: altPanelHeadings[index],
+  })),
   templateKey: 4,
 };
 WithHeadingNotMatchingTab.argTypes = propStructure(tabsDocs);
