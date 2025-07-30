@@ -11,7 +11,7 @@
   "dependencies": {
     "@department-of-veterans-affairs/component-library": "workspace:packages/core",
     "prop-types": "^15.7.2",
-    "react": "^19"
+    "react": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.27.1",
@@ -29,7 +29,7 @@
     "chromatic": "^11.5.1",
     "css-loader": "^7.1.2",
     "http-server": "^14.1.1",
-    "react-dom": "^19.1.0",
+    "react-dom": "^17.0.2",
     "sass-loader": "^16.0.5",
     "storybook": "^9.0.6"
   }
