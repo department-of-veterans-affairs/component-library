@@ -77,7 +77,6 @@ jobs:
         echo "- \`forms-library-usage-$(date +%Y-%m-%d).txt\` - Non-form apps using forms library" >> output/report-summary.md
         
     - name: Commit and push reports
-      working-directory: component-library
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
