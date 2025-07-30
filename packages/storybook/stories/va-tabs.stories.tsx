@@ -63,6 +63,16 @@ export default {
       description: 'Label for the tabs component',
       control: { type: 'text' },
     },
+    templateKey: {
+      table: {
+        disable: true,
+      }
+    },
+    renderAdditionalTabItem: {
+      table: {
+        disable: true,
+      }
+    },
   },
   args: {
     ...propDefaults(tabsDocs),
