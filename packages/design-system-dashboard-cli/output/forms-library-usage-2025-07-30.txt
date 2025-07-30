@@ -1,0 +1,10 @@
+
+> dst-dashboard@0.0.1 forms-library-usage
+> node src/non-form-app-uses --list
+
+Non-form applications using the forms library: 0 
+
+┌─────────┐
+│ (index) │
+├─────────┤
+└─────────┘
