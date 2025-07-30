@@ -70,6 +70,10 @@ export default {
       description: 'Label for the tabs component',
       control: { type: 'text' },
     },
+    initiallySelected: {
+      table: {
+        disable: true,
+      },
     templateKey: {
       table: {
         disable: true,
