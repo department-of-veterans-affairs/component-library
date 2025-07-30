@@ -41,18 +41,26 @@ jobs:
     
     - name: Install dependencies
       run: yarn install
+      
+    - name: Create output directory
+      working-directory: packages/design-system-dashboard-cli
+      run: mkdir -p output
         
     - name: Generate form apps report
       working-directory: packages/design-system-dashboard-cli
-      run: npm run forms -- --csv --output output/form-apps-$(date +%Y-%m-%d).csv
+      run: |
+        echo "Current directory: $(pwd)"
+        echo "Checking .env.json exists: $(ls -la .env.json || echo 'NOT FOUND')"
+        echo "Checking vets-website path: $(ls -la ../../../vets-website/src/applications || echo 'PATH NOT FOUND')"
+        yarn forms --csv --output output/form-apps-$(date +%Y-%m-%d).csv
       
     - name: Generate design system components report
       working-directory: packages/design-system-dashboard-cli
-      run: npm run report:csv -- --output output/ds-components-$(date +%Y-%m-%d).csv
+      run: yarn report:csv --output output/ds-components-$(date +%Y-%m-%d).csv
       
     - name: Generate forms library usage report
       working-directory: packages/design-system-dashboard-cli
-      run: npm run forms-library-usage -- --list > output/forms-library-usage-$(date +%Y-%m-%d).txt
+      run: yarn forms-library-usage --list > output/forms-library-usage-$(date +%Y-%m-%d).txt
       
     - name: Upload reports as artifacts
       uses: actions/upload-artifact@v4
@@ -67,11 +75,11 @@ jobs:
         echo "## Weekly Design System Reports - $(date +%Y-%m-%d)" > output/report-summary.md
         echo "" >> output/report-summary.md
         echo "### Form Applications" >> output/report-summary.md
-        FORM_COUNT=$(npm run forms --silent | grep -o '[0-9]\+')
+        FORM_COUNT=$(yarn forms --silent | grep -o '[0-9]\+')
         echo "Total form apps: $FORM_COUNT" >> output/report-summary.md
         echo "" >> output/report-summary.md
         echo "### Forms Library Usage" >> output/report-summary.md
-        LIBRARY_COUNT=$(npm run forms-library-usage --silent | grep -o '[0-9]\+')
+        LIBRARY_COUNT=$(yarn forms-library-usage --silent | grep -o '[0-9]\+')
         echo "Non-form applications using forms library: $LIBRARY_COUNT" >> output/report-summary.md
         echo "" >> output/report-summary.md
         echo "### Generated Files" >> output/report-summary.md
