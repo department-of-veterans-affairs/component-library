@@ -74,6 +74,7 @@ export default {
       table: {
         disable: true,
       },
+    },
     templateKey: {
       table: {
         disable: true,
