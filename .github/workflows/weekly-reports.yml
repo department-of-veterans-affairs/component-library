@@ -72,7 +72,7 @@ jobs:
     - name: Create summary
       working-directory: packages/design-system-dashboard-cli
       run: |
-         echo "## Weekly Design System Reports - $(date +%Y-%m-%d)" > output/report-summary.md
+        echo "## Weekly Design System Reports - $(date +%Y-%m-%d)" > output/report-summary.md
         echo "" >> output/report-summary.md
         echo "### Form Applications" >> output/report-summary.md
         FORM_COUNT=$(yarn forms 2>/dev/null | grep -o '[0-9]\+' | head -1)
@@ -83,9 +83,9 @@ jobs:
         echo "Non-form applications using forms library: $LIBRARY_COUNT" >> output/report-summary.md
         echo "" >> output/report-summary.md
         echo "### Generated Files" >> output/report-summary.md
-        echo "- \`form-apps-$(date +%Y-%m-%d).csv\` - List of form applications" >> output/report-summary.md
-        echo "- \`ds-components-$(date +%Y-%m-%d).csv\` - Design system component usage" >> output/report-summary.md
-        echo "- \`forms-library-usage-$(date +%Y-%m-%d).txt\` - Non-form apps using forms library" >> output/report-summary.md
+        echo "- `form-apps-$(date +%Y-%m-%d).csv` - List of form applications" >> output/report-summary.md
+        echo "- `ds-components-$(date +%Y-%m-%d).csv` - Design system component usage" >> output/report-summary.md
+        echo "- `forms-library-usage-$(date +%Y-%m-%d).txt` - Non-form apps using forms library" >> output/report-summary.md
 
     - name: Switch to branch
       run: | 
