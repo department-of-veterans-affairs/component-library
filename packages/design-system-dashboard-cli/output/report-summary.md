@@ -7,6 +7,6 @@ Total form apps: 0
 Non-form applications using forms library: 0
 
 ### Generated Files
-- `form-apps-2025-07-30.csv` - List of form applications
-- `ds-components-2025-07-30.csv` - Design system component usage
-- `forms-library-usage-2025-07-30.txt` - Non-form apps using forms library
+-  - List of form applications
+-  - Design system component usage
+-  - Non-form apps using forms library
