@@ -14,8 +14,6 @@ jobs:
     steps:
     - name: Checkout component-library
       uses: actions/checkout@v4
-      with:
-        path: component-library
         
     - name: Checkout vets-website
       uses: actions/checkout@v4
@@ -40,46 +38,29 @@ jobs:
         cache: 'yarn'
     
     - name: Install dependencies
-      working-directory: component-library/packages/design-system-dashboard-cli
       run: yarn install
-      
-    - name: Create output directory
-      working-directory: component-library/packages/design-system-dashboard-cli
-      run: mkdir -p output
-      
-    - name: Create .env.json
-      working-directory: component-library/packages/design-system-dashboard-cli
-      run: |
-        cat > .env.json << EOF
-        {
-          "repos": {
-            "vets-website": "../../../vets-website/",
-            "content-build": "../../../content-build/"
-          }
-        }
-        EOF
         
     - name: Generate form apps report
-      working-directory: component-library/packages/design-system-dashboard-cli
+      working-directory: packages/design-system-dashboard-cli
       run: npm run forms -- --csv --output output/form-apps-$(date +%Y-%m-%d).csv
       
     - name: Generate design system components report
-      working-directory: component-library/packages/design-system-dashboard-cli
+      working-directory: packages/design-system-dashboard-cli
       run: npm run report:csv -- --output output/ds-components-$(date +%Y-%m-%d).csv
       
     - name: Generate forms library usage report
-      working-directory: component-library/packages/design-system-dashboard-cli
+      working-directory: packages/design-system-dashboard-cli
       run: npm run forms-library-usage -- --list > output/forms-library-usage-$(date +%Y-%m-%d).txt
       
     - name: Upload reports as artifacts
       uses: actions/upload-artifact@v4
       with:
         name: weekly-reports-${{ github.run_number }}
-        path: component-library/packages/design-system-dashboard-cli/output/
+        path: packages/design-system-dashboard-cli/output/
         retention-days: 90
         
     - name: Create summary
-      working-directory: component-library/packages/design-system-dashboard-cli
+      working-directory: packages/design-system-dashboard-cli
       run: |
         echo "## Weekly Design System Reports - $(date +%Y-%m-%d)" > output/report-summary.md
         echo "" >> output/report-summary.md
@@ -109,7 +90,7 @@ jobs:
       with:
         script: |
           const fs = require('fs');
-          const summary = fs.readFileSync('component-library/packages/design-system-dashboard-cli/output/report-summary.md', 'utf8');
+          const summary = fs.readFileSync('packages/design-system-dashboard-cli/output/report-summary.md', 'utf8');
           
           // Create an issue with the weekly report
           await github.rest.issues.create({
