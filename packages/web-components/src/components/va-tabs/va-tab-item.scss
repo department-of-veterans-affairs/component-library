@@ -11,7 +11,7 @@
   padding-bottom: calc(1rem - 4px); // Adjust bottom padding to account for border
   border: none;
   border-bottom: 4px solid transparent;
-  min-width: 4rem;
+  min-width: 3.8rem;
   max-width: 10rem;
   font-family: var(--font-source-sans);
   font-size: var(--vads-font-size-source-sans-normalized);
@@ -58,6 +58,12 @@
 
 :host([aria-selected='true']:hover)::after {
   background-color: var(--vads-color-base-lightest);
+}
+
+@media screen and (min-width: 380px) {
+  :host {
+    min-width: 4rem;
+  }
 }
 
 @media screen and (min-width: $medium-screen) {
