@@ -13,6 +13,9 @@ jobs:
     steps:
     - name: Checkout component-library
       uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref || github.ref_name }}
+        fetch-depth: 0
         
     - name: Checkout vets-website
       uses: actions/checkout@v4
@@ -75,6 +78,10 @@ jobs:
         echo "- \`form-apps-$(date +%Y-%m-%d).csv\` - List of form applications" >> output/report-summary.md
         echo "- \`ds-components-$(date +%Y-%m-%d).csv\` - Design system component usage" >> output/report-summary.md
         echo "- \`forms-library-usage-$(date +%Y-%m-%d).txt\` - Non-form apps using forms library" >> output/report-summary.md
+
+    - name: Switch to branch
+      run: | 
+        git checkout ${{ github.head_ref || github.ref_name }}
         
     - name: Commit and push reports
       run: |
