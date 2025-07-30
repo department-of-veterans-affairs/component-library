@@ -220,7 +220,6 @@ WithoutPanelHeading.args = {
   templateKey: 3,
 };
 WithoutPanelHeading.argTypes = propStructure(tabsDocs);
-WithoutPanelHeading.tags = ['dst-testing'];
 
 
 export const WithHeadingNotMatchingTab = Template.bind(null);
@@ -233,7 +232,6 @@ WithHeadingNotMatchingTab.args = {
   templateKey: 4,
 };
 WithHeadingNotMatchingTab.argTypes = propStructure(tabsDocs);
-WithHeadingNotMatchingTab.tags = ['dst-testing'];
 
 
 export const WithAdditionalTabItem = Template.bind(null);
@@ -253,4 +251,3 @@ WithMeaningfulContent.args = {
   templateKey: 6,
 };
 WithMeaningfulContent.argTypes = propStructure(tabsDocs);
-WithMeaningfulContent.tags = ['dst-testing'];
