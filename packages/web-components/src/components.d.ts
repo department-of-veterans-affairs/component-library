@@ -1272,7 +1272,11 @@ export namespace Components {
          */
         "expDate": string;
         /**
-          * The OMB control number or form number.
+          * The form number
+         */
+        "formId"?: string;
+        /**
+          * The OMB control number
          */
         "ombNumber"?: string;
         /**
@@ -5145,7 +5149,11 @@ declare namespace LocalJSX {
          */
         "expDate": string;
         /**
-          * The OMB control number or form number.
+          * The form number
+         */
+        "formId"?: string;
+        /**
+          * The OMB control number
          */
         "ombNumber"?: string;
         /**

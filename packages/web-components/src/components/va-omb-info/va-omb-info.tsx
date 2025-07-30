@@ -38,9 +38,14 @@ export class VaOmbInfo {
   @Prop() expDate!: string;
 
   /**
-   * The OMB control number or form number.
+   * The OMB control number
    */
   @Prop() ombNumber?: string;
+
+  /**
+   * The form number
+   */
+  @Prop() formId?: string;
 
   /**
    * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
@@ -148,6 +153,7 @@ export class VaOmbInfo {
       resBurden,
       toggleModalVisible,
       visible,
+      formId
     } = this;
 
     /* eslint-disable i18next/no-literal-string */
@@ -171,8 +177,7 @@ export class VaOmbInfo {
             onClick={toggleModalVisible}
             onFocusin={() => this.trapFocus()}
             secondary
-            text="View Privacy Act Statement"
-            message-aria-describedby={ombNumber ? `Privacy Act statement for OMB control number ${ombNumber}` : undefined}
+            text={formId ? `Privacy Act Statement for Form ${formId}` : 'Privacy Act Statement'}
           />
         </div>
         <va-modal
