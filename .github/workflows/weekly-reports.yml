@@ -72,14 +72,14 @@ jobs:
     - name: Create summary
       working-directory: packages/design-system-dashboard-cli
       run: |
-        echo "## Weekly Design System Reports - $(date +%Y-%m-%d)" > output/report-summary.md
+         echo "## Weekly Design System Reports - $(date +%Y-%m-%d)" > output/report-summary.md
         echo "" >> output/report-summary.md
         echo "### Form Applications" >> output/report-summary.md
-        FORM_COUNT=$(yarn forms --silent | grep -o '[0-9]\+')
+        FORM_COUNT=$(yarn forms 2>/dev/null | grep -o '[0-9]\+' | head -1)
         echo "Total form apps: $FORM_COUNT" >> output/report-summary.md
         echo "" >> output/report-summary.md
         echo "### Forms Library Usage" >> output/report-summary.md
-        LIBRARY_COUNT=$(yarn forms-library-usage --silent | grep -o '[0-9]\+')
+        LIBRARY_COUNT=$(yarn forms-library-usage 2>/dev/null | grep -o '[0-9]\+' | head -1)
         echo "Non-form applications using forms library: $LIBRARY_COUNT" >> output/report-summary.md
         echo "" >> output/report-summary.md
         echo "### Generated Files" >> output/report-summary.md
