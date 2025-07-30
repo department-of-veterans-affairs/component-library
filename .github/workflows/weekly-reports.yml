@@ -1,9 +1,8 @@
 name: Weekly Design System Reports
 
 on:
-  schedule:
-    # Run every Thursday at 11 PM UTC (adjust timezone as needed)
-    - cron: '0 23 * * 4'
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
   workflow_dispatch: # Allow manual triggering
 
 jobs:
