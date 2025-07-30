@@ -10,7 +10,7 @@ describe('va-tabs', () => {
         <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" selected="true">
+        <va-tab-panel panel-id="panel-1" initially-selected"true">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
@@ -53,11 +53,11 @@ describe('va-tabs', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-tabs label="Filtered content options" selected="0">
+      <va-tabs label="Filtered content options" initially-selected"0">
         <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" selected="true">
+        <va-tab-panel panel-id="panel-1" initially-selected"true">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
@@ -90,11 +90,11 @@ describe('va-tabs', () => {
     expect(ariaSelected).toBe('true');
   });
 
-  it('respects the selected prop', async () => {
+  it('respects the initially-selected prop', async () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-tabs label="Filtered content options" selected="1">
+      <va-tabs label="Filtered content options" initially-selected="1">
         <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
@@ -126,11 +126,11 @@ describe('va-tabs', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-tabs label="Filtered content options" selected="0">
+      <va-tabs label="Filtered content options" initially-selected"0">
         <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" selected="true">
+        <va-tab-panel panel-id="panel-1" initially-selected"true">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>

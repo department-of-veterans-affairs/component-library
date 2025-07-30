@@ -39,9 +39,9 @@ export class VaTabs {
   @Prop() label: string;
 
   /**
-   * The index of the currently selected tab. Defaults to 0 (the first tab).
+   * The index of the initially selected tab. Defaults to 0 (the first tab).
    */
-  @Prop({ mutable: true }) selected?: number = 0;
+  @Prop({ mutable: true }) initiallySelected?: number = 0;
 
   /**
    * The event used to track usage of the component.
@@ -68,19 +68,19 @@ export class VaTabs {
     this.tabItems = this.el.querySelectorAll('va-tab-item');
     this.tabPanels = this.el.querySelectorAll('va-tab-panel');
 
-    // Set value on the n-th element corresponding to the value of the `selected` prop.
-    if (this.selected < 0 || this.selected >= this.tabItems.length) {
-      console.warn(`Selected index ${this.selected} is out of bounds. Resetting to 0.`);
-      this.selected = 0; // Reset to the first tab if out of bounds.
+    // Set value on the n-th element corresponding to the value of the `initiallySelected` prop.
+    if (this.initiallySelected < 0 || this.initiallySelected >= this.tabItems.length) {
+      console.warn(`Selected index ${this.initiallySelected} is out of bounds. Resetting to 0.`);
+      this.initiallySelected = 0; // Reset to the first tab if out of bounds.
     }
 
-    const selectedTab = this.tabItems[this.selected];
+    const selectedTab = this.tabItems[this.initiallySelected];
     if (selectedTab) {
       selectedTab.setAttribute('is-selected-tab', 'true');
     }
 
     // Set the focused button to the selected tab's button.
-    this.tabWithFocus = this.tabItems[this.selected];
+    this.tabWithFocus = this.tabItems[this.initiallySelected];
 
     // Dynamically assign slots to tab items and panels
     this.tabItems.forEach((item) => {
@@ -93,7 +93,7 @@ export class VaTabs {
     // With all elements reset to hidden, query DOM for the element with the ID
     // of the clicked tab's URL.
     if (this.tabItems.length > 0) {
-      const targetId = this.tabItems[this.selected].getAttribute('target-id');
+      const targetId = this.tabItems[this.initiallySelected].getAttribute('target-id');
       const panelToDisplay = this.el.querySelector(`va-tab-panel[panel-id="${targetId}"]`);
 
       // Remove hidden attribute from the target element if it exists.

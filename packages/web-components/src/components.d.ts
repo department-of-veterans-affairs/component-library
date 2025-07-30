@@ -1944,13 +1944,13 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * The index of the initially selected tab. Defaults to 0 (the first tab).
+         */
+        "initiallySelected"?: number;
+        /**
           * A unique name for the rendered nav landmark. To be set as value for wrapper's `aria-label` attribute.
          */
         "label": string;
-        /**
-          * The index of the currently selected tab. Defaults to 0 (the first tab).
-         */
-        "selected"?: number;
     }
     /**
      * @componentName Telephone
@@ -6029,6 +6029,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * The index of the initially selected tab. Defaults to 0 (the first tab).
+         */
+        "initiallySelected"?: number;
+        /**
           * A unique name for the rendered nav landmark. To be set as value for wrapper's `aria-label` attribute.
          */
         "label"?: string;
@@ -6036,10 +6040,6 @@ declare namespace LocalJSX {
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaTabsCustomEvent<any>) => void;
-        /**
-          * The index of the currently selected tab. Defaults to 0 (the first tab).
-         */
-        "selected"?: number;
     }
     /**
      * @componentName Telephone

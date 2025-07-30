@@ -85,7 +85,7 @@ export default {
     ...propDefaults(tabsDocs),
     label: 'Status details',
     tabItems: tabItems,
-    selected: 0,
+    initiallySelected: 0,
     templateKey: 0, // Used to differentiate between multiple instances in the DOM to prevent duplicate IDs
     omitPanelHeading: false, // Used to omit the panel heading in the template.
     renderAdditionalTabItem: false, // Used to conditionally render an additional (fourth) tab item.
@@ -94,7 +94,7 @@ export default {
 
 const Template = (args) => {
   return (
-    <va-tabs label={args.label} selected={args.selected}>
+    <va-tabs label={args.label} initially-selected={args.initiallySelected}>
       {
         args.tabItems.map((item, index) => {
           // Skip rendering for additional tab items if its not indicated in args
@@ -126,7 +126,7 @@ const Template = (args) => {
               <va-tab-panel
                 key={item.targetId}
                 panel-id={item.targetId}
-                selected={index === args.selected}
+                // selected={index === args.initiallySelected}
               >
                 {panelChildren}
               </va-tab-panel>
@@ -140,9 +140,9 @@ const Template = (args) => {
 
 const TemplateWithMeaningfulContent = (args) => {
   return (
-    <va-tabs label={args.label} selected={args.selected}>
+    <va-tabs label={args.label} initially-selected={args.initiallySelected}>
       <va-tab-item button-text="Status" target-id="meaningful-panel-1"></va-tab-item>
-      <va-tab-panel panel-id="meaningful-panel-1" selected={args.selected === 0}>
+      <va-tab-panel panel-id="meaningful-panel-1">
         <div>
           <h2 className="tab-header vads-u-margin-y--0">
             Claim status
@@ -157,7 +157,7 @@ const TemplateWithMeaningfulContent = (args) => {
       </va-tab-panel>
 
       <va-tab-item button-text="Issues" target-id="meaningful-panel-2"></va-tab-item>
-      <va-tab-panel panel-id="meaningful-panel-2" selected={args.selected === 1}>
+      <va-tab-panel panel-id="meaningful-panel-2">
         <div>
           <h2 className="tab-header vads-u-margin-y--0">Claim files</h2>
           <p className="vads-u-margin-top--1 va-introtext">
@@ -170,7 +170,7 @@ const TemplateWithMeaningfulContent = (args) => {
       </va-tab-panel>
 
       <va-tab-item button-text="Overview" target-id="meaningful-panel-3"></va-tab-item>
-      <va-tab-panel panel-id="meaningful-panel-3" selected={args.selected === 2}>
+      <va-tab-panel panel-id="meaningful-panel-3">
         <div>
           <div className="claim-overview-header-container">
             <h2 className="tab-header vads-u-margin-y--0">
@@ -194,7 +194,7 @@ Default.argTypes = propStructure(tabsDocs);
 export const WithSecondTabSelected = Template.bind(null);
 WithSecondTabSelected.args = {
   ...Default.args,
-  selected: 1,
+  initiallySelected: 1,
   templateKey: 1,
 };
 WithSecondTabSelected.argTypes = propStructure(tabsDocs);
@@ -237,7 +237,7 @@ export const WithMeaningfulContent = TemplateWithMeaningfulContent.bind(null);
 WithMeaningfulContent.args = {
   ...Default.args,
   label: 'Claim details',
-  selected: 0,
+  initiallySelected: 0,
   templateKey: 6,
 };
 WithMeaningfulContent.argTypes = propStructure(tabsDocs);
