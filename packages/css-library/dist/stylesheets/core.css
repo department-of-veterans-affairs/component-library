@@ -4085,6 +4085,19 @@ fieldset {
   background-size: 100%;
 }
 
+/*
+  Original: @import "~uswds/src/stylesheets/components/media-block";
+  ***THIS IS USWDS v1***
+*/
+.usa-media_block-img {
+  float: left;
+  margin-right: 0.625rem;
+}
+
+.usa-media_block-body {
+  overflow: hidden;
+}
+
 /**
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
