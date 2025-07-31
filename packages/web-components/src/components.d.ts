@@ -1272,7 +1272,7 @@ export namespace Components {
          */
         "expDate": string;
         /**
-          * The form number
+          * The form number to display in the Privacy Act Statement button text. When provided, the button reads "Privacy Act Statement for VA Form {formId}". This improves clarity and accessibility when multiple instances exist on the same page.
          */
         "formId"?: string;
         /**
@@ -5149,7 +5149,7 @@ declare namespace LocalJSX {
          */
         "expDate": string;
         /**
-          * The form number
+          * The form number to display in the Privacy Act Statement button text. When provided, the button reads "Privacy Act Statement for VA Form {formId}". This improves clarity and accessibility when multiple instances exist on the same page.
          */
         "formId"?: string;
         /**

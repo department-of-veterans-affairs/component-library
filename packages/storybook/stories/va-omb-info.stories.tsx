@@ -38,22 +38,23 @@ const Template = ({
       exp-date={expDate}
       omb-number={ombNumber}
       res-burden={resBurden}
-      form-id={formId}
+      form-id={formId ? formId : undefined}
     />
   );
 };
 
 export const Default = Template.bind(null);
-export const WithoutOMBNumber = Template.bind(null);
-WithoutOMBNumber.args = {
-  ...defaultArgs,
-  'omb-number': undefined,
-};
 
 export const WithFormId = Template.bind(null);
 WithFormId.args = {
   ...defaultArgs,
   'form-id': '34-5678',
+};
+
+export const WithoutOMBNumber = Template.bind(null);
+WithoutOMBNumber.args = {
+  ...defaultArgs,
+  'omb-number': undefined,
 };
 
 export const WithoutResponseBurden = Template.bind(null);
@@ -75,6 +76,7 @@ const SlotTemplate = ({
   'exp-date': expDate,
   'omb-number': ombNumber,
   'res-burden': resBurden,
+  'form-id': formId,
 }) => {
   return (
     // @ts-ignore ignoring the hyphenated prop names
@@ -83,6 +85,7 @@ const SlotTemplate = ({
       exp-date={expDate}
       omb-number={ombNumber}
       res-burden={resBurden}
+      form-id={formId ? formId : undefined}
     >
       Passing children content will override the default privacy act statement
     </va-omb-info>
