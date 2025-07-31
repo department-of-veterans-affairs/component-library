@@ -10,7 +10,7 @@ describe('va-tabs', () => {
         <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" initially-selected"true">
+        <va-tab-panel panel-id="panel-1">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
@@ -57,7 +57,7 @@ describe('va-tabs', () => {
         <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" initially-selected"true">
+        <va-tab-panel panel-id="panel-1">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
@@ -98,7 +98,7 @@ describe('va-tabs', () => {
         <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" selected="true">
+        <va-tab-panel panel-id="panel-1">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
@@ -130,7 +130,7 @@ describe('va-tabs', () => {
         <va-tab-item target-id="panel-1" button-text="Tab 1"></va-tab-item>
         <va-tab-item target-id="panel-2" button-text="Tab 2"></va-tab-item>
         <va-tab-item target-id="panel-3" button-text="Tab 3"></va-tab-item>
-        <va-tab-panel panel-id="panel-1" initially-selected"true">
+        <va-tab-panel panel-id="panel-1">
           <h2>Panel 1</h2>
           <p>This is the content for Panel 1.</p>
         </va-tab-panel>
