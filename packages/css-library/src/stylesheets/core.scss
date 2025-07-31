@@ -27,12 +27,14 @@
 @import 'formation-overrides/elements/buttons';
 @import 'formation-overrides/elements/inputs';
 @import 'formation-overrides/elements/labels';
-@import 'elements/lists';
 @import 'formation-overrides/elements/typography';
 @import 'formation-overrides/components/alerts';
 @import 'formation-overrides/components/banner';
 @import 'formation-overrides/components/forms';
-@import 'formation-overrides/components/media-block';
 @import 'formation-overrides/components/side-nav';
+
+// ---- USWDS v3 --- //
+@import 'elements/lists';
+@import 'elements/media-block';
 
 @import 'base/va';
