@@ -14,10 +14,6 @@
   background-color: var(--vads-alert-color-background-info-on-light);
 }
 
-:host([status='error']) {
-  background-color: var(--vads-alert-color-background-error-on-light);
-}
-
 :host([status='success']) {
   background-color: var(--vads-alert-color-background-success-on-light);
 }
@@ -39,10 +35,6 @@ div.warning .alert-expandable-trigger:hover {
 
 div.info .alert-expandable-trigger:hover {
   background-color: var(--vads-color-primary-alt-light);
-}
-
-div.error .alert-expandable-trigger:hover {
-  background-color: var(--vads-color-secondary-light);
 }
 
 div.success .alert-expandable-trigger:hover {
