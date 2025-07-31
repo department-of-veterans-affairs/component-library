@@ -1830,21 +1830,21 @@ export namespace Components {
          */
         "buttonText": string;
         /**
-          * Denotes whether this tab item is currently selected in parent va-tabs.
+          * Denotes whether this tab item is currently selected in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
          */
-        "isSelectedTab"?: boolean;
+        "selected"?: boolean;
         /**
-          * The id of the target panel that this tab item controls.
+          * The `id` of the target panel that this tab item controls.
          */
         "targetId": string;
     }
     interface VaTabPanel {
         /**
-          * The unique identifier for the tab panel. This should match the id referenced by the corresponding tab.
+          * The unique identifier for the tab panel. This should match the id referenced by the corresponding `va-tab-item`.
          */
         "panelId": string;
         /**
-          * Indicates whether the tab panel is currently selected/visible.
+          * Indicates whether the tab panel is currently selected/visible in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
          */
         "selected": boolean;
     }
@@ -1944,11 +1944,11 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * The index of the initially selected tab. Defaults to 0 (the first tab).
+          * The index of the initially selected tab. Defaults to `0` (the first tab).
          */
         "initiallySelected"?: number;
         /**
-          * A unique name for the rendered nav landmark. To be set as value for wrapper's `aria-label` attribute.
+          * A unique name for the rendered div serving as `role="tablist"`. To be set as value for wrapper's `aria-label` attribute.
          */
         "label": string;
     }
@@ -5903,10 +5903,6 @@ declare namespace LocalJSX {
          */
         "buttonText": string;
         /**
-          * Denotes whether this tab item is currently selected in parent va-tabs.
-         */
-        "isSelectedTab"?: boolean;
-        /**
           * This event is fired when the user navigates between tab items using the keyboard using the left and right arrow keys. It allows focus to be managed by parent va-tabs.
          */
         "onTabItemKeyNavigated"?: (event: VaTabItemCustomEvent<any>) => void;
@@ -5915,17 +5911,21 @@ declare namespace LocalJSX {
          */
         "onTabItemSelected"?: (event: VaTabItemCustomEvent<any>) => void;
         /**
-          * The id of the target panel that this tab item controls.
+          * Denotes whether this tab item is currently selected in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
+         */
+        "selected"?: boolean;
+        /**
+          * The `id` of the target panel that this tab item controls.
          */
         "targetId": string;
     }
     interface VaTabPanel {
         /**
-          * The unique identifier for the tab panel. This should match the id referenced by the corresponding tab.
+          * The unique identifier for the tab panel. This should match the id referenced by the corresponding `va-tab-item`.
          */
         "panelId": string;
         /**
-          * Indicates whether the tab panel is currently selected/visible.
+          * Indicates whether the tab panel is currently selected/visible in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
          */
         "selected"?: boolean;
     }
@@ -6029,11 +6029,11 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
-          * The index of the initially selected tab. Defaults to 0 (the first tab).
+          * The index of the initially selected tab. Defaults to `0` (the first tab).
          */
         "initiallySelected"?: number;
         /**
-          * A unique name for the rendered nav landmark. To be set as value for wrapper's `aria-label` attribute.
+          * A unique name for the rendered div serving as `role="tablist"`. To be set as value for wrapper's `aria-label` attribute.
          */
         "label"?: string;
         /**

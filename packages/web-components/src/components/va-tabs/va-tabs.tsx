@@ -34,12 +34,12 @@ export class VaTabs {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * A unique name for the rendered nav landmark. To be set as value for wrapper's `aria-label` attribute.
+   * A unique name for the rendered div serving as `role="tablist"`. To be set as value for wrapper's `aria-label` attribute.
    */
   @Prop() label: string;
 
   /**
-   * The index of the initially selected tab. Defaults to 0 (the first tab).
+   * The index of the initially selected tab. Defaults to `0` (the first tab).
    */
   @Prop({ mutable: true }) initiallySelected?: number = 0;
 
@@ -76,7 +76,7 @@ export class VaTabs {
 
     const selectedTab = this.tabItems[this.initiallySelected];
     if (selectedTab) {
-      selectedTab.setAttribute('is-selected-tab', 'true');
+      selectedTab.setAttribute('selected', 'true');
     }
 
     // Set the focused button to the selected tab's button.
@@ -127,18 +127,18 @@ export class VaTabs {
     }
 
     // If tab that was clicked is already selected, do nothing.
-    if (selectedTab.getAttribute('is-selected-tab') === 'true') {
+    if (selectedTab.getAttribute('selected') === 'true') {
       return;
     }
 
     // Get references to the currently selected tab and its panel.
-    const tabToDeselect = this.el.querySelector('va-tab-item[is-selected-tab="true"]')
-      || this.el.querySelector('va-tab-item[is-selected-tab=""]');
+    const tabToDeselect = this.el.querySelector('va-tab-item[selected="true"]')
+      || this.el.querySelector('va-tab-item[selected=""]');
     const panelToHide = this.el.querySelector('va-tab-panel[selected="true"]')
       || this.el.querySelector('va-tab-panel[selected=""]');
 
     // Deselect the currently selected tab and hide its panel.
-    tabToDeselect?.setAttribute('is-selected-tab', 'false');
+    tabToDeselect?.setAttribute('selected', 'false');
     panelToHide?.setAttribute('selected', 'false');
 
     // Get the target ID of the clicked tab.
@@ -146,7 +146,7 @@ export class VaTabs {
     const panelToDisplay = this.el.querySelector(`va-tab-panel[panel-id="${targetId}"]`);
 
     // Select new tab and display its panel.
-    selectedTab.setAttribute('is-selected-tab', 'true');
+    selectedTab.setAttribute('selected', 'true');
     panelToDisplay?.setAttribute('selected', 'true');
   }
 

@@ -28,14 +28,14 @@ export class VaTabItem {
   @Prop() buttonText!: string;
 
   /**
-   * The id of the target panel that this tab item controls.
+   * The `id` of the target panel that this tab item controls.
    */
   @Prop() targetId!: string;
 
   /**
-   * Denotes whether this tab item is currently selected in parent va-tabs.
+   * Denotes whether this tab item is currently selected in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
    */
-  @Prop({ reflect: true }) isSelectedTab?: boolean = false;
+  @Prop({ reflect: true }) selected?: boolean = false;
 
   /**
    * This event is fired so that va-tabs element can manage which item is selected.
@@ -87,7 +87,7 @@ export class VaTabItem {
     const {
       buttonText,
       targetId,
-      isSelectedTab
+      selected
     } = this;
 
     const buttonClass = classNames({
@@ -98,11 +98,11 @@ export class VaTabItem {
       <Host
         role="tab"
         class={buttonClass}
-        aria-selected={isSelectedTab ? 'true' : 'false'}
+        aria-selected={selected ? 'true' : 'false'}
         aria-controls={targetId}
         id={`${targetId}-tab`}
         ref={(el) => this.buttonElement = el as HTMLButtonElement}
-        tabIndex={isSelectedTab ? 0 : -1}
+        tabIndex={selected ? 0 : -1}
         onClick={(e: MouseEvent) => this.handleClick(e)}
         onKeyDown={(e: KeyboardEvent) => this.handleKeyDown(e)}
         data-label={buttonText}

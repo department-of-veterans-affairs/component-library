@@ -7,12 +7,12 @@ import { Component, Host, Prop, h } from '@stencil/core';
 })
 export class VaTabPanel {
   /**
-   * The unique identifier for the tab panel. This should match the id referenced by the corresponding tab.
+   * The unique identifier for the tab panel. This should match the id referenced by the corresponding `va-tab-item`.
    */
   @Prop() panelId!: string;
 
   /**
-   * Indicates whether the tab panel is currently selected/visible.
+   * Indicates whether the tab panel is currently selected/visible in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
    */
   @Prop({ reflect: true }) selected: boolean = false;
 
