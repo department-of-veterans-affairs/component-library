@@ -45,7 +45,7 @@ export class VaOmbInfo {
   /**
    * The form number to display in the Privacy Act Statement button text.
    * When provided, the button reads "Privacy Act Statement for VA Form {formId}".
-   * This improves clarity and accessibility when multiple instances exist on the same page.
+   * This improves accessibility when multiple instances exist on the same page.
    */
   @Prop() formId?: string;
 
@@ -179,7 +179,7 @@ export class VaOmbInfo {
             onClick={toggleModalVisible}
             onFocusin={() => this.trapFocus()}
             secondary
-            text={formId ? `Privacy Act Statement for VA Form ${formId}` : 'Privacy Act Statement'}
+            text={formId ? `View Privacy Act Statement for VA Form ${formId}` : 'View Privacy Act Statement'}
           />
         </div>
         <va-modal
