@@ -765,7 +765,7 @@ export namespace Components {
         /**
           * Array of booleans, displays file password field for corresponding file input.
          */
-        "encrypted": boolean[];
+        "encrypted"?: boolean[];
         /**
           * Array of error messages corresponding to each file input. The length and order match the files array.
          */
@@ -787,6 +787,14 @@ export namespace Components {
          */
         "name"?: string;
         /**
+          * Array of password error messages corresponding to each file input. The length and order match the files array.
+         */
+        "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of numbers corresponding to the progress of the upload of each file.
+         */
+        "percentUploaded"?: number[];
+        /**
           * Optionally displays the read-only view
          */
         "readOnly"?: boolean;
@@ -794,6 +802,10 @@ export namespace Components {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+        /**
+          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
+         */
+        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
@@ -4592,6 +4604,14 @@ declare namespace LocalJSX {
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
+          * Array of password error messages corresponding to each file input. The length and order match the files array.
+         */
+        "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of numbers corresponding to the progress of the upload of each file.
+         */
+        "percentUploaded"?: number[];
+        /**
           * Optionally displays the read-only view
          */
         "readOnly"?: boolean;
@@ -4599,6 +4619,10 @@ declare namespace LocalJSX {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
+        /**
+          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
+         */
+        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
