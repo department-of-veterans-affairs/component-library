@@ -191,10 +191,6 @@ export class VaTabs {
   render() {
     let { label } = this;
 
-    const containerClass = classnames({
-      'va-tabs': true,
-    });
-
     const listClass = classnames({
       'va-tabs__list': true,
     });
@@ -205,7 +201,7 @@ export class VaTabs {
 
     return (
       <Host>
-        <div class={containerClass}>
+        <div>
           <div role="tablist" aria-label={label} class={listClass}>
             <slot name="tab"></slot>
           </div>
