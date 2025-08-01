@@ -55,9 +55,19 @@ export class VaFileInputMultiple {
   @Prop() errors: string[] = [];
 
   /**
+   * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
+   */
+  @Prop() resetVisualState?: boolean[] = [];
+
+  /**
+   * Array of password error messages corresponding to each file input. The length and order match the files array.
+   */
+  @Prop() passwordErrors?: Array<string | null> = [];
+
+  /**
    * Array of booleans, displays file password field for corresponding file input.
    */
-  @Prop() encrypted: boolean[] = [];
+  @Prop() encrypted?: boolean[] = [];
 
   /**
    * Hint text provided to guide users on the expected format or type of files.
@@ -88,6 +98,12 @@ export class VaFileInputMultiple {
    * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
    */
   @Prop() slotFieldIndexes?: Number[] = null; 
+
+  /**
+   * Array of numbers corresponding to the progress of the upload of each file.
+   */
+  @Prop() percentUploaded?: number[] = [];
+
 
   /**
    * Event emitted when any change to the file inputs occurs.
@@ -387,6 +403,9 @@ export class VaFileInputMultiple {
       accept,
       errors,
       encrypted,
+      percentUploaded,
+      resetVisualState,
+      passwordErrors,
       enableAnalytics,
       readOnly,
     } = this;
@@ -411,9 +430,16 @@ export class VaFileInputMultiple {
             </div>
           )}
           {files.map((fileEntry, pageIndex) => {
+            const _resetVisualState = resetVisualState && resetVisualState.length >= pageIndex
+              ? resetVisualState[pageIndex] : null;
+            const _percentUploaded = percentUploaded && percentUploaded.length >= pageIndex
+              ? percentUploaded[pageIndex] : null;
+            const _passwordError = passwordErrors && passwordErrors.length >= pageIndex
+              ? passwordErrors[pageIndex] : null;
             return (
               <va-file-input
                 key={fileEntry.key}
+                id={`instance-${pageIndex}`}
                 headless
                 label={label}
                 hint={hint}
@@ -426,6 +452,9 @@ export class VaFileInputMultiple {
                   : {})}
                 error={errors[pageIndex]}
                 encrypted={encrypted[pageIndex]}
+                percentUploaded={_percentUploaded}
+                resetVisualState={_resetVisualState}
+                passwordError={_passwordError}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
