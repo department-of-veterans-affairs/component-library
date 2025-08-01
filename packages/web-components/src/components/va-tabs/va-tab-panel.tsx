@@ -17,14 +17,16 @@ export class VaTabPanel {
   @Prop({ reflect: true }) selected: boolean = false;
 
   render() {
+    let { panelId, selected } = this;
+
     return (
       <Host
-        id={this.panelId}
+        id={panelId}
         role="tabpanel"
-        tabindex={this.selected ? '0' : '-1'}
+        tabindex={selected ? '0' : '-1'}
         class="va-tab-panel__content"
-        hidden={!this.selected}
-        aria-labelledby={`${this.panelId}-tab`}
+        hidden={!selected}
+        aria-labelledby={`${panelId}-tab`}
       >
         <slot></slot>
       </Host>
