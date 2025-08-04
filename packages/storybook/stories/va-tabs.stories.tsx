@@ -47,6 +47,13 @@ export default {
   title: 'Components/Tabs',
   id: 'components/va-tabs',
   component: 'va-tabs',
+  decorators: [
+    (Story) => (
+      <div className="columns">
+        <Story />
+      </div>
+    ),
+  ],
   subcomponents: {
     'va-tab-item': componentStructure(tabItemDocs)[tabItemDocs.tag],
     'va-tab-panel': componentStructure(tabPanelDocs)[tabPanelDocs.tag],
@@ -87,93 +94,89 @@ export default {
 
 const Template = (args) => {
   return (
-    <div className="columns">
-      <va-tabs label={args.label} initially-selected={args.initiallySelected}>
-        {
-          args.tabItems.map((item, index) => {
-            // Format the label for the tab item, using a long label if specified
-            // in args or the panel heading if specified.
-            let formattedLabel = item.label;
-            if (args.longTabLabelExample && index === 1) {
-              formattedLabel = args.longTabLabelExample;
-            }
+    <va-tabs label={args.label} initially-selected={args.initiallySelected}>
+      {
+        args.tabItems.map((item, index) => {
+          // Format the label for the tab item, using a long label if specified
+          // in args or the panel heading if specified.
+          let formattedLabel = item.label;
+          if (args.longTabLabelExample && index === 1) {
+            formattedLabel = args.longTabLabelExample;
+          }
 
-            // Construct child content to be passed to the panel.
-            let panelChildren = !args.omitPanelHeading ?(
-              <Fragment>
-                <h2 className="vads-u-margin-y--0">{item.panelHeading}</h2>
-                <p>{item.panelContent}</p>
-              </Fragment>
-            ) : <p className="vads-u-margin-y--0">{item.panelContent}</p>;
+          // Construct child content to be passed to the panel.
+          let panelChildren = !args.omitPanelHeading ?(
+            <Fragment>
+              <h2 className="vads-u-margin-y--0">{item.panelHeading}</h2>
+              <p>{item.panelContent}</p>
+            </Fragment>
+          ) : <p className="vads-u-margin-y--0">{item.panelContent}</p>;
 
-            return (
-              <Fragment key={`fragment-${item.targetId}-${args.templateKey}`}>
-                <va-tab-item
-                  key={`tab-item-${item.targetId}-${args.templateKey}`}
-                  button-text={formattedLabel}
-                  target-id={item.targetId}
-                ></va-tab-item>
-                <va-tab-panel key={item.targetId} panel-id={item.targetId}>
-                  {panelChildren}
-                </va-tab-panel>
-              </Fragment>
-            );
-          })
-        }
-      </va-tabs>
-    </div>
+          return (
+            <Fragment key={`fragment-${item.targetId}-${args.templateKey}`}>
+              <va-tab-item
+                key={`tab-item-${item.targetId}-${args.templateKey}`}
+                button-text={formattedLabel}
+                target-id={item.targetId}
+              ></va-tab-item>
+              <va-tab-panel key={item.targetId} panel-id={item.targetId}>
+                {panelChildren}
+              </va-tab-panel>
+            </Fragment>
+          );
+        })
+      }
+    </va-tabs>
   );
 }
 
 const TemplateWithMeaningfulContent = (args) => {
   return (
-    <div className="columns">
-      <va-tabs label={args.label} initially-selected={args.initiallySelected}>
-        <va-tab-item button-text="Status" target-id="meaningful-panel-1"></va-tab-item>
-        <va-tab-panel panel-id="meaningful-panel-1">
-          <div>
+    <va-tabs label={args.label} initially-selected={args.initiallySelected}>
+      <va-tab-item button-text="Status" target-id="meaningful-panel-1"></va-tab-item>
+      <va-tab-panel panel-id="meaningful-panel-1">
+        <div>
+          <h2 className="tab-header vads-u-margin-y--0">
+            Claim status
+          </h2>
+          <p>
+            Here's the latest information on your claim.
+          </p>
+          <CardDefault {...CardDefault.args} />
+          <h3>Additional evidence</h3>
+          <FileInputDefault {...FileInputDefault.args} />
+        </div>
+      </va-tab-panel>
+
+      <va-tab-item button-text="Issues" target-id="meaningful-panel-2"></va-tab-item>
+      <va-tab-panel panel-id="meaningful-panel-2">
+        <div>
+          <h2 className="tab-header vads-u-margin-y--0">Claim files</h2>
+          <p className="vads-u-margin-top--1 va-introtext">
+            If you need to add evidence, you can do that here. You can also review
+            the files associated with this claim.
+          </p>
+
+          <TableDefault {...TableDefault.args} />
+        </div>
+      </va-tab-panel>
+
+      <va-tab-item button-text="Overview" target-id="meaningful-panel-3"></va-tab-item>
+      <va-tab-panel panel-id="meaningful-panel-3">
+        <div>
+          <div className="claim-overview-header-container">
             <h2 className="tab-header vads-u-margin-y--0">
-              Claim status
+              Overview of the claim process
             </h2>
-            <p>
-              Here's the latest information on your claim.
+            <p className="vads-u-margin-top--1 vads-u-margin-bottom--2 va-introtext">
+              There are 8 steps in the claim process. It's common for claims to
+              repeat steps 3 to 6 if we need more information.
             </p>
-            <CardDefault {...CardDefault.args} />
-            <h3>Additional evidence</h3>
-            <FileInputDefault {...FileInputDefault.args} />
           </div>
-        </va-tab-panel>
-
-        <va-tab-item button-text="Issues" target-id="meaningful-panel-2"></va-tab-item>
-        <va-tab-panel panel-id="meaningful-panel-2">
-          <div>
-            <h2 className="tab-header vads-u-margin-y--0">Claim files</h2>
-            <p className="vads-u-margin-top--1 va-introtext">
-              If you need to add evidence, you can do that here. You can also review
-              the files associated with this claim.
-            </p>
-
-            <TableDefault {...TableDefault.args} />
-          </div>
-        </va-tab-panel>
-
-        <va-tab-item button-text="Overview" target-id="meaningful-panel-3"></va-tab-item>
-        <va-tab-panel panel-id="meaningful-panel-3">
-          <div>
-            <div className="claim-overview-header-container">
-              <h2 className="tab-header vads-u-margin-y--0">
-                Overview of the claim process
-              </h2>
-              <p className="vads-u-margin-top--1 vads-u-margin-bottom--2 va-introtext">
-                There are 8 steps in the claim process. It's common for claims to
-                repeat steps 3 to 6 if we need more information.
-              </p>
-            </div>
-            <ManyAccordions {...ManyAccordions.args} />
-          </div>
-        </va-tab-panel>
-      </va-tabs>
-    </div>
+          <ManyAccordions {...ManyAccordions.args} />
+        </div>
+      </va-tab-panel>
+    </va-tabs>
   )
 }
 
