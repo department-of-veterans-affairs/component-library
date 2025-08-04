@@ -33,12 +33,6 @@ const tabItems = [
     panelHeading: 'Overview',
     targetId: 'panel-3',
     panelContent: 'No Soldier shall, in time of peace be quartered in any house, without the consent of the Owner, nor in time of war, but in a manner to be prescribed by law.'
-  },
-  {
-    label: 'Details',
-    panelHeading: 'Details',
-    targetId: 'panel-4',
-    panelContent: 'The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause.'
   }
 ];
 
@@ -237,6 +231,15 @@ WithHeadingNotMatchingTab.argTypes = propStructure(tabsDocs);
 export const WithAdditionalTabItem = Template.bind(null);
 WithAdditionalTabItem.args = {
   ...Default.args,
+  tabItems: [
+    ...tabItems,
+    {
+      label: 'Details',
+      panelHeading: 'Details',
+      targetId: 'panel-4',
+      panelContent: 'The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause.'
+    }
+  ],
   renderAdditionalTabItem: true,
 };
 WithAdditionalTabItem.argTypes = propStructure(tabsDocs);
