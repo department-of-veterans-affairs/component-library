@@ -74,11 +74,6 @@ export default {
         disable: true,
       }
     },
-    renderAdditionalTabItem: {
-      table: {
-        disable: true,
-      }
-    },
   },
   args: {
     ...propDefaults(tabsDocs),
@@ -87,7 +82,6 @@ export default {
     initiallySelected: 0,
     templateKey: 0, // Used to differentiate between multiple instances in the DOM to prevent duplicate IDs
     omitPanelHeading: false, // Used to omit the panel heading in the template.
-    renderAdditionalTabItem: false, // Used to conditionally render an additional (fourth) tab item.
   },
 };
 
@@ -97,10 +91,6 @@ const Template = (args) => {
       <va-tabs label={args.label} initially-selected={args.initiallySelected}>
         {
           args.tabItems.map((item, index) => {
-            // Skip rendering for additional tab items if its not indicated in args
-            if (!args.renderAdditionalTabItem && index > 2) {
-              return null;
-            }
             // Format the label for the tab item, using a long label if specified
             // in args or the panel heading if specified.
             let formattedLabel = item.label;
@@ -240,7 +230,6 @@ WithAdditionalTabItem.args = {
       panelContent: 'The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause.'
     }
   ],
-  renderAdditionalTabItem: true,
 };
 WithAdditionalTabItem.argTypes = propStructure(tabsDocs);
 WithAdditionalTabItem.tags = ['dst-testing'];
