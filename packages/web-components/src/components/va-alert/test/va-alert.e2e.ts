@@ -5,7 +5,7 @@ describe('va-alert', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-alert></va-alert>');
+    await page.setContent('<va-alert><h4 slot="headline">This is an alert</h4><div>This is the alert content</div></va-alert>');
     const element = await page.find('va-alert');
 
     expect(element).toEqualHtml(`
@@ -20,6 +20,12 @@ describe('va-alert', () => {
             </div>
           </div>
         </mock:shadow-root>
+        <h4 slot="headline">
+          This is an alert
+        </h4>
+        <div>
+          This is the alert content
+        </div>
       </va-alert>
     `);
   });
@@ -245,4 +251,18 @@ describe('va-alert', () => {
 
     await axeCheck(page);
   });
+
+  it('applies the slim class when a headline is not provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-alert></va-alert>');
+    const element = await page.find('va-alert >>> .usa-alert');
+    expect(element.classList.contains('usa-alert--slim')).toBeTruthy();
+  });
+
+  it('does not apply the slim class when aheadline is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-alert><h4 slot="headline">This is an alert</h4></va-alert>');
+    const element = await page.find('va-alert >>> .usa-alert');
+    expect(element.classList.contains('usa-alert--slim')).toBeFalsy();
+  }); 
 });
