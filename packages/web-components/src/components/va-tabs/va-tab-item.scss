@@ -17,6 +17,12 @@
   font-size: var(--vads-font-size-source-sans-normalized);
   text-align: center;
   line-height: var(--vads-font-line-height-2);
+
+  @media (forced-colors: active) {
+    background-color: ButtonFace;
+    color: ButtonText;
+    border-bottom-color: ButtonFace;
+  }
 }
 
 :host(:focus) {
