@@ -69,7 +69,7 @@ export class VaAlert {
   /**
    * Displays the slim variation.
    */
-  @Prop({ mutable: true }) slim?: boolean = false;
+  @Prop({ mutable: true, reflect: true }) slim?: boolean = false;
 
   /**
    * Fires when the component has successfully finished rendering for the first

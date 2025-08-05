@@ -37,7 +37,7 @@ describe('va-alert', () => {
     const element = await page.find('va-alert');
 
     expect(element).toEqualHtml(`
-      <va-alert class="hydrated" visible="false" status="info">
+      <va-alert class="hydrated" slim="" visible="false" status="info">
         <mock:shadow-root>
           <div aria-live="polite"></div>
         </mock:shadow-root>
@@ -252,17 +252,25 @@ describe('va-alert', () => {
     await axeCheck(page);
   });
 
-  it('applies the slim class when a headline is not provided', async () => {
+  it('applies the slim class and attribute when a headline is not provided', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-alert></va-alert>');
+
+    const alert = await page.find('va-alert');
     const element = await page.find('va-alert >>> .usa-alert');
+
     expect(element.classList.contains('usa-alert--slim')).toBeTruthy();
+    expect(alert).toHaveAttribute('slim');
   });
 
-  it('does not apply the slim class when a headline is provided', async () => {
+  it('does not apply the slim class and attribute when a headline is provided', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-alert><h4 slot="headline">This is an alert</h4></va-alert>');
+
+    const alert = await page.find('va-alert');
     const element = await page.find('va-alert >>> .usa-alert');
+
     expect(element.classList.contains('usa-alert--slim')).toBeFalsy();
+    expect(alert).not.toHaveAttribute('slim');
   }); 
 });
