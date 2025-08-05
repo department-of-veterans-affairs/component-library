@@ -115,14 +115,16 @@ export class VaFileInputMultiple {
   private fileKeyCounter: number = 0;
   private additionalSlot = null;
 
-  private additionalFileUploadMessage = (
-    <span>
-       Drag an additional file here or{' '}
-      <span class="file-input-choose-text">
-        choose from folder
+  private getAdditionalFileUploadMessage = () => {
+    return (
+      <span>
+        Drag an additional file here or{' '}
+        <span class="file-input-choose-text">
+          choose from folder
+        </span>
       </span>
-    </span>
-  )
+    );
+  }
 
   /**
    * Finds a file entry by its unique key.
@@ -420,7 +422,7 @@ export class VaFileInputMultiple {
                 required={required}
                 // only add custom upload message after the first file input
                 {...(pageIndex > 0
-                  ? { uploadMessage: this.additionalFileUploadMessage }
+                  ? { uploadMessage: this.getAdditionalFileUploadMessage() }
                   : {})}
                 error={errors[pageIndex]}
                 encrypted={encrypted[pageIndex]}

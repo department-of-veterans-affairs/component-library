@@ -53,7 +53,40 @@ export class VaOnThisPage {
    */
   @Prop() disableAnalytics?: boolean = false;
 
+  /**
+   * Handler for removing tabindex and role attributes on blur.
+   */
+  private handleHeadingBlur = (event: FocusEvent) => {
+    const heading = event.target as HTMLHeadingElement;
+    heading.removeAttribute('tabindex');
+    heading.removeAttribute('role');
+  };
+
+  /**
+   * Moves focus to the heading element corresponding to the clicked anchor link.
+   * This is added to fix known issues with screen readers like VoiceOver.
+   *
+   * @param event - The mouse click event from the anchor element
+   * @remarks
+   * Temporarily setting the tabindex to -1 fixes a VoiceOver bug that mishandles focus.
+   * Adding role="text" fixes a screen reader bug that causes duplicate text announcements.
+   * Both should be removed after the bugs are fixed in the screen readers.
+   */
+  private moveFocusToHeading = (event: MouseEvent) => {
+    const anchor = event.currentTarget as HTMLAnchorElement;
+    const heading = document.getElementById(anchor.hash.slice(1)) as HTMLHeadingElement;
+
+    if (heading) {
+      heading.setAttribute('tabindex', '-1');
+      heading.setAttribute('role', 'text');
+      heading.focus();
+      heading.addEventListener('blur', this.handleHeadingBlur, { once: true });
+    }
+  };
+
   private handleOnClick = event => {
+    this.moveFocusToHeading(event);
+
     if (this.disableAnalytics) return;
     this.componentLibraryAnalytics.emit({
       componentName: 'va-on-this-page',
