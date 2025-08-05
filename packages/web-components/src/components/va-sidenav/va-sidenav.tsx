@@ -52,7 +52,7 @@ export class VaSidenav {
     const currentPageElements = this.el.querySelectorAll('va-sidenav-item[current-page], va-sidenav-submenu[current-page]');
     currentPageElements.forEach((el, index) => {
       if (index > 0) {
-        el.setAttribute('current-page', 'false');
+        el.removeAttribute('current-page');
       }
     });
   }
