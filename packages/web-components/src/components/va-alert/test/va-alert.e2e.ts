@@ -259,7 +259,7 @@ describe('va-alert', () => {
     expect(element.classList.contains('usa-alert--slim')).toBeTruthy();
   });
 
-  it('does not apply the slim class when aheadline is provided', async () => {
+  it('does not apply the slim class when a headline is provided', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-alert><h4 slot="headline">This is an alert</h4></va-alert>');
     const element = await page.find('va-alert >>> .usa-alert');
