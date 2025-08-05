@@ -261,6 +261,37 @@ const FormsPatternMultipleTemplate = ({ name, value, uswds }) => {
   );
 };
 
+const TestToggleErrorStateTemplate = ({ name, value, focusEl="input-error-message" }) => {
+  const [error, setError] = useState("");
+
+  const handleClick = () => {
+    setError(`Unique error message ${Math.floor(Math.random() * 1000)}`);
+
+    const moveFocusTo = document
+      .getElementById('form-pattern-multiple-input')
+      ?.shadowRoot?.getElementById(focusEl);
+
+    applyFocus(moveFocusTo);
+  };
+  return (
+    <>
+      <va-text-input
+        required
+        error={error}
+        id="form-pattern-multiple-input"
+        name={name}
+        label="First Name"
+        value={value}
+        use-forms-pattern="multiple"
+        form-heading-level={1}
+        form-heading="Name and email address"
+        form-description="This is the additional form-description prop"
+      />
+      <va-button text="Submit" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
+    </>
+  );
+};
+
 const FormsPatternSingleTemplate = ({ name, value, error }) => {
   const id = Math.floor(Math.random() * 10) + 1;
   const handleClick = () => {
@@ -521,4 +552,18 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
+};
+
+export const TestToggleErrorStateWithFocusManagement = TestToggleErrorStateTemplate.bind(null);
+TestToggleErrorStateWithFocusManagement.args = {
+  ...defaultArgs,
+  focusEl: null
+};
+TestToggleErrorStateWithFocusManagement.argTypes = {
+  focusEl: {
+    name: 'Focus element',
+    description: 'The element to focus when the error is toggled',
+    control: { type: 'select' },
+    options: [null, 'input-error-message', 'form-question'],
+  },
 };

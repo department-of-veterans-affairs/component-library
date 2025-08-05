@@ -508,19 +508,15 @@ export class VaTextInput {
               {hint && <span class="usa-hint">{hint}</span>}
             </label>
           )}
-          <slot></slot>
+         <slot></slot>
           <span id="input-error-message" role="alert" class={errorClass}>
-            {error && (
-              <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span
-                  class={errorMessageClass}
-                  data-dd-action-name={errorHasPii ? 'input error' : undefined}
-                >
-                  {error}
-                </span>
-              </Fragment>
-            )}
+            <span class="usa-sr-only">{i18next.t('error')}</span>
+            <span
+              class={errorMessageClass}
+              data-dd-action-name={errorHasPii ? 'input error' : undefined}
+            >
+              {error}
+            </span>
           </span>
           <div class={currencyWrapper}>
             {currency && <div id="symbol">$</div>}
