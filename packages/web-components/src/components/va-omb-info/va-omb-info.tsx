@@ -38,9 +38,16 @@ export class VaOmbInfo {
   @Prop() expDate!: string;
 
   /**
-   * The OMB control number or form number.
+   * The OMB control number
    */
   @Prop() ombNumber?: string;
+
+  /**
+   * The form number to display in the Privacy Act Statement button text.
+   * When provided, the button reads "Privacy Act Statement for VA Form {formId}".
+   * This improves accessibility when multiple instances exist on the same page.
+   */
+  @Prop() formId?: string;
 
   /**
    * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
@@ -148,6 +155,7 @@ export class VaOmbInfo {
       resBurden,
       toggleModalVisible,
       visible,
+      formId
     } = this;
 
     /* eslint-disable i18next/no-literal-string */
@@ -171,7 +179,7 @@ export class VaOmbInfo {
             onClick={toggleModalVisible}
             onFocusin={() => this.trapFocus()}
             secondary
-            text="View Privacy Act Statement"
+            text={formId ? `View Privacy Act Statement for VA Form ${formId}` : 'View Privacy Act Statement'}
           />
         </div>
         <va-modal
