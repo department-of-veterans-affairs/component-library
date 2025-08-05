@@ -5,6 +5,7 @@ import {
   StoryDocs,
   propDefaults,
   componentStructure,
+  removeFragmentsFromCodeSource,
 } from './wc-helpers';
 import { Default as CardDefault } from './va-card.stories';
 import { Default as FileInputDefault } from './va-file-input-uswds.stories';
@@ -62,6 +63,9 @@ export default {
     componentSubtitle: 'va-tabs web component',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={tabsDocs} />,
+      source: {
+        transform: (source: string) => removeFragmentsFromCodeSource(source),
+      }
     },
   },
   argTypes: {
