@@ -169,9 +169,12 @@ export class VaAlert {
       this.updateCloseAriaLabelWithHeadlineText();
     }
 
-    const headlineText = this.getHeadlineText();
-    if (!headlineText) {
-      this.slim = true;
+    const isBannerAlert = this.el.id === 'va-banner-alert';
+
+    // Apply the slim property if there is no headline text and this alert is not used by va-banner
+    if (!isBannerAlert) {
+      const headlineText = this.getHeadlineText();
+      this.slim = !headlineText;
     }
   }
 
