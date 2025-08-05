@@ -515,7 +515,7 @@ export class VaTextInput {
               class={errorMessageClass}
               data-dd-action-name={errorHasPii ? 'input error' : undefined}
             >
-              {error}
+              {error ? error : ''}
             </span>
           </span>
           <div class={currencyWrapper}>
