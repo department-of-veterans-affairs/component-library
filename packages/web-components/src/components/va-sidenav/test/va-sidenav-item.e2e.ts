@@ -103,6 +103,7 @@ describe('va-sidenav-item handles different formats of current-page attribute', 
     const page = await newE2EPage();
     await page.setContent(`
       <va-sidenav>
+        <va-sidenav-item href="#" label="Neutral link"></va-sidenav-item>
         <va-sidenav-item id="explicit-true" current-page="true" href="#" label="Explicit true"></va-sidenav-item>
       </va-sidenav>
     `);
@@ -126,6 +127,7 @@ describe('va-sidenav-item handles different formats of current-page attribute', 
     const page = await newE2EPage();
     await page.setContent(`
       <va-sidenav>
+        <va-sidenav-item href="#" label="Neutral link"></va-sidenav-item>
         <va-sidenav-item id="empty-string" current-page="" href="#" label="Empty string"></va-sidenav-item>
       </va-sidenav>
     `);
@@ -150,6 +152,7 @@ describe('va-sidenav-item handles different formats of current-page attribute', 
     const page = await newE2EPage();
     await page.setContent(`
       <va-sidenav>
+        <va-sidenav-item href="#" label="Neutral link"></va-sidenav-item>
         <va-sidenav-item id="no-value" current-page href="#" label="No value"></va-sidenav-item>
       </va-sidenav>
     `);
@@ -174,6 +177,7 @@ describe('va-sidenav-item handles different formats of current-page attribute', 
     const page = await newE2EPage();
     await page.setContent(`
       <va-sidenav>
+        <va-sidenav-item href="#" label="Neutral link"></va-sidenav-item>
         <va-sidenav-item id="true" current-page="TRUE" href="#" label="True"></va-sidenav-item>
       </va-sidenav>
     `);
@@ -198,6 +202,7 @@ describe('va-sidenav-item handles different formats of current-page attribute', 
     const page = await newE2EPage();
     await page.setContent(`
       <va-sidenav>
+        <va-sidenav-item href="#" label="Neutral link"></va-sidenav-item>
         <va-sidenav-item id="false" current-page="false" href="#" label="False"></va-sidenav-item>
       </va-sidenav>
     `);
