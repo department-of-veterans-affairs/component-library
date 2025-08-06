@@ -1,3 +1,12 @@
+// Locally scoped variables to help with styling gradient background and box shadows
+$space-xs: 4px;
+$space-s: 8px;
+$space-m: 16px;
+$space-l: 24px;
+$space-xl: 32px;
+$list-background-color: rgb(255, 255, 255);
+$list-gradient-color: rgb(188, 197, 204);
+
 .va-tabs__list {
   display: flex;
   flex-wrap: nowrap;
@@ -8,5 +17,37 @@
   border-bottom: 1px solid var(--vads-color-gray-medium);
   min-height: 52px;
   overflow-x: auto;
+  overflow-y: hidden;
   scrollbar-width: thin;
+  overscroll-behavior: none;
+  border-radius: 5px 5px 0 0;
+  background-color: $list-background-color;
+  background-image:
+    radial-gradient(ellipse farthest-side at 0 50%, $list-gradient-color 0, $list-background-color),
+    radial-gradient(ellipse farthest-side at 100% 50%, $list-gradient-color 0, $list-background-color);
+  background-repeat: no-repeat;
+  background-position: 0 $space-xs, 100% $space-xs;
+  background-size: $space-s 85%, $space-s 85%;
+
+  &::before,
+  &::after {
+    content: '';
+    box-sizing: content-box;
+    align-self: stretch;
+    margin-block-end: 1px;
+  }
+
+  &::before {
+    margin-inline-end: calc(-1 * $space-m); // Promising way to fix the issue while we investigate further
+    padding-inline-start: $space-m;
+    box-shadow: inset $space-l 0 $space-s calc(-1 * $space-s) $list-background-color;
+  }
+
+  &::after {
+    margin-inline-start: calc(-1 * $space-m);
+    padding-inline-end: $space-m;
+    min-inline-size: $space-l;
+    flex: 1;
+    box-shadow: inset calc(-1 * $space-l) 0 $space-s calc(-1 * $space-s) $list-background-color;
+  }
 }

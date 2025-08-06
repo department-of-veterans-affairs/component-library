@@ -38,7 +38,6 @@
 :host([aria-selected='true']) {
   border-bottom-color: var(--vads-color-primary);
   color: transparent;
-  background: var(--vads-color-white);
 }
 
 :host([aria-selected='true']:hover) {
@@ -58,7 +57,6 @@
   width: calc(100% - 4px); // Don't take up full width so outline of tab item is fully visible
   left: 2px; // Update horizontal position to align with the tab item due to decreased width
   font-weight: 700;
-  background: var(--vads-color-white);
   color: var(--vads-color-link);
 }
 
