@@ -70,4 +70,34 @@ describe('va-omb-info', () => {
 
     expect(ombNumber).toBeTruthy();
   });
+
+  it('restores focus to privacy button after modal closes', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-omb-info exp-date="12/31/2077" />');
+
+    // Click privacy button to open modal
+    const privacyButton = await page.find('va-omb-info >>> va-button');
+    expect(privacyButton).toBeTruthy();
+    await privacyButton.click();
+    await page.waitForChanges();
+
+    // Close modal
+    const closeButton = await page.find('va-omb-info >>> va-modal >>> button');
+    expect(closeButton).toBeTruthy();
+    await closeButton.click();
+    await page.waitForChanges();
+
+    // Verify focus is correctly restored
+    const isFocusCorrect = await page.evaluate(() => {
+      const ombInfo = document.querySelector('va-omb-info');
+      const vaButton = ombInfo?.shadowRoot?.querySelector('va-button');
+      const internalButton = vaButton?.shadowRoot?.querySelector('button');
+      
+      // Focus should be on the host element with internal button focused in shadow DOM
+      return document.activeElement === ombInfo && 
+             vaButton?.shadowRoot?.activeElement === internalButton;
+    });
+    
+    expect(isFocusCorrect).toBe(true);
+  });
 });
