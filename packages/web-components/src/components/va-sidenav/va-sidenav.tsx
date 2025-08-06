@@ -60,8 +60,8 @@ export class VaSidenav {
   /**
    * Watch for changes to the current-page attribute on any va-sidenav-item or va-sidenav-submenu element.
    * With those changed current-page attributes, check if the attribute value is not null and not "false".
-   * If it is not null and not "false", allow the first element found to hav a truthy current-page value 
-   * to be marked as the current-page. Otherwise, remove the current-page attribute from all elements. 
+   * If it is not null and not "false", allow the first element found to have a truthy current-page value 
+   * to be marked as the current-page. Otherwise, remove the current-page attribute from all other elements. 
    * Only one element should be the current-page.
    */
   setupCurrentPageObserver() {
