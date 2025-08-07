@@ -5,6 +5,7 @@ import {
   EventEmitter,
   Host,
   Prop,
+  State,
   Listen,
   h,
 } from '@stencil/core';
@@ -25,8 +26,12 @@ export class VaTabs {
   private tabPanels: NodeListOf<HTMLVaTabPanelElement>;
   private tabWithFocus: HTMLVaTabItemElement;
   private allowRender: boolean = true;
+  private tabListElement: HTMLElement;
+  private resizeObserver: ResizeObserver;
 
   @Element() el: HTMLElement;
+
+  @State() isOverflowing: boolean = false;
 
   /**
    * If `true`, the component-library-analytics event is disabled.
@@ -101,6 +106,31 @@ export class VaTabs {
         // Ensure the target element is visible by setting the `selected` attribute.
         panelToDisplay.setAttribute('selected', 'true');
       }
+    }
+  }
+
+  componentDidRender() {
+    // Get reference to the tab list element after render
+    if (!this.tabListElement) {
+      this.tabListElement = this.el.shadowRoot?.querySelector('.va-tabs__list') as HTMLElement;
+    }
+
+    // Set up ResizeObserver to monitor for overflow changes
+    if (this.tabListElement && !this.resizeObserver) {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.checkForOverflow();
+      });
+      this.resizeObserver.observe(this.tabListElement);
+    }
+
+    // Initial overflow check
+    this.checkForOverflow();
+  }
+
+  disconnectedCallback() {
+    // Clean up ResizeObserver when component is removed
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
     }
   }
 
@@ -188,11 +218,23 @@ export class VaTabs {
     }
   }
 
+  /**
+   * Helper function to check if the tab list is overflowing. Updates the `isOverflowing`
+   * state to conditionally apply class for styling.
+   * @returns {void}
+   */
+  private checkForOverflow(): void {
+    if (!this.tabListElement) return;
+
+    this.isOverflowing = this.tabListElement.scrollWidth > this.tabListElement.clientWidth;
+  }
+
   render() {
     let { label } = this;
 
     const listClass = classnames({
       'va-tabs__list': true,
+      'is-overflowing': this.isOverflowing,
     });
 
     if (!this.allowRender) {
