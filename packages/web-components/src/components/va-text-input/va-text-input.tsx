@@ -490,7 +490,7 @@ export class VaTextInput {
     return (
       <Host>
         {formsHeading}
-        <div class="input-wrap" aria-label={error ? error : undefined} id="input-wrap">
+        <div class="input-wrap" id="input-wrap" aria-label={error ? error : undefined}>
           {label && (
             <label
               htmlFor="inputField"

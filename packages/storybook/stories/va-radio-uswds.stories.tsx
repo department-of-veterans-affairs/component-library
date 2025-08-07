@@ -383,6 +383,42 @@ const FormsPatternSingleTemplate = ({ required, error, label, name }) => {
   );
 };
 
+const TestToggleErrorStateTemplate = ({ name, label, focusEl="input-error-message" }) => {
+  const [error, setError] = useState(null);
+
+  const handleClick = () => {
+    setError(`This is an error message`);
+
+    const moveFocusTo = document
+      .getElementById('form-pattern-error-state')
+      ?.shadowRoot?.getElementById(focusEl);
+
+    applyFocus(moveFocusTo);
+  };
+  return (
+    <>
+      <va-radio
+        required
+        error={error}
+        id="form-pattern-error-state"
+        name={name}
+        label={label}
+        use-forms-pattern="multiple"
+        form-heading-level={1}
+        form-heading="Name and email address"
+        form-description="This is the additional form-description prop"
+      >
+        <va-radio-option label="Sojourner Truth" name={name} value="1" />
+        <va-radio-option label="Frederick Douglass" name={name} value="2" />
+        <va-radio-option label="Booker T. Washington" name={name} value="3" />
+        <va-radio-option label="George Washington Carver" name={name} value="4" />
+      </va-radio>
+
+      <va-button text="Submit" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
+    </>
+  );
+};
+
 const defaultArgs = {
   'enable-analytics': false,
   'label': 'Select one historical figure',
@@ -511,4 +547,19 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
+};
+
+
+export const TestToggleErrorStateWithFocusManagement = TestToggleErrorStateTemplate.bind(null);
+TestToggleErrorStateWithFocusManagement.args = {
+  ...defaultArgs,
+  focusEl: null
+};
+TestToggleErrorStateWithFocusManagement.argTypes = {
+  focusEl: {
+    name: 'Element to focus on error toggle',
+    description: 'The element to focus when the error is toggled',
+    control: { type: 'radio' },
+    options: [null, 'input-wrap', 'radio-error-message', 'form-question'],
+  },
 };

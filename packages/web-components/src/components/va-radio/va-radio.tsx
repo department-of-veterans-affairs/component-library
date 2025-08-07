@@ -284,7 +284,7 @@ export class VaRadio {
     return (
       <Host aria-invalid={error ? 'true' : 'false'}>
         {formsHeading}
-        <div class="input-wrap">
+        <div class="input-wrap" id="input-wrap" aria-label={error ? error : undefined}>
           <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
             <legend
               class={legendClass}
@@ -324,13 +324,13 @@ export class VaRadio {
               )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            {error && (
-              <span class="usa-error-message" role="alert">
+            <span id="radio-error-message" class="usa-error-message" role="alert">
+              {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span> {error}
                 </Fragment>
-              </span>
-            )}
+              )}
+            </span>
             <slot></slot>
           </fieldset>
         </div>
