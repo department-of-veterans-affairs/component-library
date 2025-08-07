@@ -91,6 +91,14 @@ jobs:
     - name: Test design system components report
       working-directory: packages/design-system-dashboard-cli
       run: |
+        # Create GitHub-specific .env.json
+        echo '{
+          "repos": {
+            "vets-website": "../../vets-website/",
+            "content-build": "../../content-build/"
+          }
+        }' > .env.json.github
+        
         # Temporarily replace .env.json with GitHub paths
         mv .env.json .env.json.original
         mv .env.json.github .env.json
