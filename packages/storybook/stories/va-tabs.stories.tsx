@@ -11,6 +11,7 @@ import { Default as CardDefault } from './va-card.stories';
 import { Default as FileInputDefault } from './va-file-input-uswds.stories';
 import { Default as TableDefault } from './va-table-uswds.stories';
 import { ManyAccordions as ManyAccordions } from './va-accordion-uswds.stories';
+import './styles/va-tabs.scss';
 
 const tabsDocs = getWebComponentDocs('va-tabs');
 const tabItemDocs= getWebComponentDocs('va-tab-item');
@@ -111,10 +112,10 @@ const Template = (args) => {
           // Construct child content to be passed to the panel.
           let panelChildren = !args.omitPanelHeading ?(
             <Fragment>
-              <h2 className="vads-u-margin-y--0">{item.panelHeading}</h2>
+              <h2>{item.panelHeading}</h2>
               <p>{item.panelContent}</p>
             </Fragment>
-          ) : <p className="vads-u-margin-y--0">{item.panelContent}</p>;
+          ) : <p>{item.panelContent}</p>;
 
           return (
             <Fragment key={`fragment-${item.targetId}-${args.templateKey}`}>
@@ -140,7 +141,7 @@ const TemplateWithMeaningfulContent = (args) => {
       <va-tab-item button-text="Status" target-id="meaningful-panel-1"></va-tab-item>
       <va-tab-panel panel-id="meaningful-panel-1">
         <div>
-          <h2 className="tab-header vads-u-margin-y--0">
+          <h2 className="vads-u-margin-y--0">
             Claim status
           </h2>
           <p>
@@ -155,7 +156,7 @@ const TemplateWithMeaningfulContent = (args) => {
       <va-tab-item button-text="Issues" target-id="meaningful-panel-2"></va-tab-item>
       <va-tab-panel panel-id="meaningful-panel-2">
         <div>
-          <h2 className="tab-header vads-u-margin-y--0">Claim files</h2>
+          <h2 className="vads-u-margin-y--0">Claim files</h2>
           <p className="vads-u-margin-top--1 va-introtext">
             If you need to add evidence, you can do that here. You can also review
             the files associated with this claim.
@@ -169,7 +170,7 @@ const TemplateWithMeaningfulContent = (args) => {
       <va-tab-panel panel-id="meaningful-panel-3">
         <div>
           <div className="claim-overview-header-container">
-            <h2 className="tab-header vads-u-margin-y--0">
+            <h2 className="vads-u-margin-y--0">
               Overview of the claim process
             </h2>
             <p className="vads-u-margin-top--1 vads-u-margin-bottom--2 va-introtext">
