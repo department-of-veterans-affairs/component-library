@@ -113,12 +113,40 @@ jobs:
         
         # Restore original .env.json
         mv .env.json.original .env.json
+        
+    - name: Test forms library usage report
+      working-directory: packages/design-system-dashboard-cli
+      run: |
+        # Create GitHub-specific .env.json
+        echo '{
+          "repos": {
+            "vets-website": "../../vets-website/",
+            "content-build": "../../content-build/"
+          }
+        }' > .env.json.github
+        
+        # Temporarily replace .env.json with GitHub paths
+        mv .env.json .env.json.original
+        mv .env.json.github .env.json
+        
+        echo "=== Testing yarn forms-library-usage command ==="
+        yarn forms-library-usage --list > output/forms-library-usage-$(date +%Y-%m-%d).txt
+        
+        echo "=== Checking forms library usage output ==="
+        ls -la output/
+        wc -l output/forms-library-usage-$(date +%Y-%m-%d).txt
+        head -10 output/forms-library-usage-$(date +%Y-%m-%d).txt
+        
+        # Restore original .env.json
+        mv .env.json.original .env.json
       
     - name: Upload reports
       uses: actions/upload-artifact@v4
       with:
         name: reports-${{ github.run_number }}
-        path: packages/design-system-dashboard-cli/output/*.csv
+        path: |
+          packages/design-system-dashboard-cli/output/*.csv
+          packages/design-system-dashboard-cli/output/*.txt
         retention-days: 7
 
            
@@ -128,6 +156,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git add packages/design-system-dashboard-cli/output/form-apps-$(date +%Y-%m-%d).csv
         git add packages/design-system-dashboard-cli/output/ds-components-$(date +%Y-%m-%d).csv
+        git add packages/design-system-dashboard-cli/output/forms-library-usage-$(date +%Y-%m-%d).txt
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
