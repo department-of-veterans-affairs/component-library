@@ -86,3 +86,16 @@ jobs:
         name: test-form-report-${{ github.run_number }}
         path: packages/design-system-dashboard-cli/output/form-apps-test.csv
         retention-days: 7
+
+           
+    - name: Commit and push report
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add packages/design-system-dashboard-cli/output/form-apps-test.csv
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Add test form apps report for $(date +%Y-%m-%d)"
+          git push
+        fi
