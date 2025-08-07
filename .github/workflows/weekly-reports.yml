@@ -1,12 +1,12 @@
-name: Test Form Apps Report
+name: Weekly Design System Reports
 
 on:
-  pull_request:
-    types: [opened, reopened, synchronize, ready_for_review]
+  schedule:
+    - cron: '0 22 * * 4' # Run every Thursday at 10 PM UTC (6 PM EDT / 5 PM EST)
   workflow_dispatch: # Allow manual triggering
 
 jobs:
-  test-form-report:
+  generate-weekly-reports:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     
@@ -52,43 +52,23 @@ jobs:
           }
         }' > .env.json.github
         
-    - name: Debug environment
-      working-directory: packages/design-system-dashboard-cli
-      run: |
-        echo "=== Current directory ==="
-        pwd
-        echo "=== Repository structure ==="
-        ls -la ../../
-        echo "=== vets-website structure ==="
-        ls -la ../../vets-website/src/applications/ | head -10
-        echo "=== .env.json content ==="
-        cat .env.json.github
-        
     - name: Create output directory
       working-directory: packages/design-system-dashboard-cli
       run: mkdir -p output
         
-    - name: Test forms report with GitHub paths
+    - name: Generate forms report
       working-directory: packages/design-system-dashboard-cli
       run: |
         # Temporarily replace .env.json with GitHub paths
         mv .env.json .env.json.original
         mv .env.json.github .env.json
         
-        echo "=== Testing yarn forms command ==="
-        yarn forms --list
-        echo "=== Generating CSV ==="
         yarn forms --csv --output output/form-apps-$(date +%Y-%m-%d).csv
         
-        echo "=== Checking output ==="
-        ls -la output/
-        wc -l output/form-apps-$(date +%Y-%m-%d).csv
-        head -10 output/form-apps-$(date +%Y-%m-%d).csv
-        
         # Restore original .env.json
         mv .env.json.original .env.json
         
-    - name: Test design system components report
+    - name: Generate design system components report
       working-directory: packages/design-system-dashboard-cli
       run: |
         # Create GitHub-specific .env.json
@@ -103,18 +83,12 @@ jobs:
         mv .env.json .env.json.original
         mv .env.json.github .env.json
         
-        echo "=== Testing yarn report:csv command ==="
         yarn report:csv --output output/ds-components-$(date +%Y-%m-%d).csv
         
-        echo "=== Checking DS components output ==="
-        ls -la output/
-        wc -l output/ds-components-$(date +%Y-%m-%d).csv
-        head -10 output/ds-components-$(date +%Y-%m-%d).csv
-        
         # Restore original .env.json
         mv .env.json.original .env.json
         
-    - name: Test forms library usage report
+    - name: Generate forms library usage report
       working-directory: packages/design-system-dashboard-cli
       run: |
         # Create GitHub-specific .env.json
@@ -129,13 +103,7 @@ jobs:
         mv .env.json .env.json.original
         mv .env.json.github .env.json
         
-        echo "=== Testing yarn forms-library-usage command ==="
         yarn forms-library-usage --list > output/forms-library-usage-$(date +%Y-%m-%d).txt
-        
-        echo "=== Checking forms library usage output ==="
-        ls -la output/
-        wc -l output/forms-library-usage-$(date +%Y-%m-%d).txt
-        head -10 output/forms-library-usage-$(date +%Y-%m-%d).txt
         
         # Restore original .env.json
         mv .env.json.original .env.json
