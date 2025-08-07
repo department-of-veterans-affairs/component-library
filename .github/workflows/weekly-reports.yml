@@ -25,6 +25,14 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 1
         
+    - name: Checkout content-build
+      uses: actions/checkout@v4
+      with:
+        repository: department-of-veterans-affairs/content-build
+        path: content-build
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 1
+        
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
@@ -70,32 +78,51 @@ jobs:
         echo "=== Testing yarn forms command ==="
         yarn forms --list
         echo "=== Generating CSV ==="
-        yarn forms --csv --output output/form-apps-test.csv
+        yarn forms --csv --output output/form-apps-$(date +%Y-%m-%d).csv
         
         echo "=== Checking output ==="
         ls -la output/
-        wc -l output/form-apps-test.csv
-        head -10 output/form-apps-test.csv
+        wc -l output/form-apps-$(date +%Y-%m-%d).csv
+        head -10 output/form-apps-$(date +%Y-%m-%d).csv
+        
+        # Restore original .env.json
+        mv .env.json.original .env.json
+        
+    - name: Test design system components report
+      working-directory: packages/design-system-dashboard-cli
+      run: |
+        # Temporarily replace .env.json with GitHub paths
+        mv .env.json .env.json.original
+        mv .env.json.github .env.json
+        
+        echo "=== Testing yarn report:csv command ==="
+        yarn report:csv --output output/ds-components-$(date +%Y-%m-%d).csv
+        
+        echo "=== Checking DS components output ==="
+        ls -la output/
+        wc -l output/ds-components-$(date +%Y-%m-%d).csv
+        head -10 output/ds-components-$(date +%Y-%m-%d).csv
         
         # Restore original .env.json
         mv .env.json.original .env.json
       
-    - name: Upload test report
+    - name: Upload reports
       uses: actions/upload-artifact@v4
       with:
-        name: test-form-report-${{ github.run_number }}
-        path: packages/design-system-dashboard-cli/output/form-apps-test.csv
+        name: reports-${{ github.run_number }}
+        path: packages/design-system-dashboard-cli/output/*.csv
         retention-days: 7
 
            
-    - name: Commit and push report
+    - name: Commit and push reports
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add packages/design-system-dashboard-cli/output/form-apps-test.csv
+        git add packages/design-system-dashboard-cli/output/form-apps-$(date +%Y-%m-%d).csv
+        git add packages/design-system-dashboard-cli/output/ds-components-$(date +%Y-%m-%d).csv
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          git commit -m "Add test form apps report for $(date +%Y-%m-%d)"
+          git commit -m "Add weekly reports for $(date +%Y-%m-%d)"
           git push
         fi
