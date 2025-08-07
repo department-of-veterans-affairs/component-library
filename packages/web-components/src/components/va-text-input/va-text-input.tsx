@@ -490,7 +490,7 @@ export class VaTextInput {
     return (
       <Host>
         {formsHeading}
-        <div class="input-wrap">
+        <div class="input-wrap" aria-label={error ? error : undefined} id="input-wrap">
           {label && (
             <label
               htmlFor="inputField"
@@ -510,13 +510,17 @@ export class VaTextInput {
           )}
          <slot></slot>
           <span id="input-error-message" role="alert" class={errorClass}>
-            <span class="usa-sr-only">{i18next.t('error')}</span>
-            <span
-              class={errorMessageClass}
-              data-dd-action-name={errorHasPii ? 'input error' : undefined}
-            >
-              {error ? error : ''}
-            </span>
+            {error && (
+              <Fragment>
+                <span class="usa-sr-only">{i18next.t('error')}</span>
+                <span
+                  class={errorMessageClass}
+                  data-dd-action-name={errorHasPii ? 'input error' : undefined}
+                >
+                  {error}
+                </span>
+              </Fragment>
+            )}
           </span>
           <div class={currencyWrapper}>
             {currency && <div id="symbol">$</div>}

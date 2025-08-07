@@ -265,7 +265,7 @@ const TestToggleErrorStateTemplate = ({ name, value, focusEl="input-error-messag
   const [error, setError] = useState(null);
 
   const handleClick = () => {
-    setError(`Unique error message ${Math.floor(Math.random() * 1000)}`);
+    setError(`This is an error message`);
 
     const moveFocusTo = document
       .getElementById('form-pattern-multiple-input')
@@ -564,6 +564,6 @@ TestToggleErrorStateWithFocusManagement.argTypes = {
     name: 'Element to focus on error toggle',
     description: 'The element to focus when the error is toggled',
     control: { type: 'radio' },
-    options: [null, 'input-error-message', 'form-question'],
+    options: [null, 'input-wrap', 'input-error-message', 'form-question'],
   },
 };
