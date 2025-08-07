@@ -58,16 +58,6 @@ export class VaTabs {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  componentWillRender() {
-    // Check if there are any va-tab-item elements in the slot and flip `allowRender`
-    // to false if not.
-    const tabItems = this.el.querySelectorAll('va-tab-item');
-    if (tabItems.length === 0) {
-      this.allowRender = false;
-      console.warn('va-tabs: No va-tab-item elements found. The component will not render.');
-    }
-  }
-
   connectedCallback() {
     // Populate the `tabItems` property with all `va-tab-item` elements in the slot
     this.tabItems = this.el.querySelectorAll('va-tab-item');
@@ -109,6 +99,23 @@ export class VaTabs {
     }
   }
 
+  disconnectedCallback() {
+    // Clean up ResizeObserver when component is removed
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  }
+
+  componentWillRender() {
+    // Check if there are any va-tab-item elements in the slot and flip `allowRender`
+    // to false if not.
+    const tabItems = this.el.querySelectorAll('va-tab-item');
+    if (tabItems.length === 0) {
+      this.allowRender = false;
+      console.warn('va-tabs: No va-tab-item elements found. The component will not render.');
+    }
+  }
+
   componentDidRender() {
     // Get reference to the tab list element after render
     if (!this.tabListElement) {
@@ -125,13 +132,6 @@ export class VaTabs {
 
     // Initial overflow check
     this.checkForOverflow();
-  }
-
-  disconnectedCallback() {
-    // Clean up ResizeObserver when component is removed
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
   }
 
   @Listen('tabItemSelected')
