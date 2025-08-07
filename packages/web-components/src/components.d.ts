@@ -141,9 +141,9 @@ export namespace Components {
          */
         "iconless"?: boolean;
         /**
-          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
+          * Determines the icon and background color. One of `info`, `success`, `warning`, or `continue`
          */
-        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        "status"?: 'continue' | 'info' | 'success' | 'warning';
         /**
           * The text to trigger the expansion
          */
@@ -1272,7 +1272,11 @@ export namespace Components {
          */
         "expDate": string;
         /**
-          * The OMB control number or form number.
+          * The form number to display in the Privacy Act Statement button text. When provided, the button reads "Privacy Act Statement for VA Form {formId}". This improves accessibility when multiple instances exist on the same page.
+         */
+        "formId"?: string;
+        /**
+          * The OMB control number
          */
         "ombNumber"?: string;
         /**
@@ -3862,9 +3866,9 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaAlertExpandableCustomEvent<any>) => void;
         /**
-          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
+          * Determines the icon and background color. One of `info`, `success`, `warning`, or `continue`
          */
-        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        "status"?: 'continue' | 'info' | 'success' | 'warning';
         /**
           * The text to trigger the expansion
          */
@@ -5145,7 +5149,11 @@ declare namespace LocalJSX {
          */
         "expDate": string;
         /**
-          * The OMB control number or form number.
+          * The form number to display in the Privacy Act Statement button text. When provided, the button reads "Privacy Act Statement for VA Form {formId}". This improves accessibility when multiple instances exist on the same page.
+         */
+        "formId"?: string;
+        /**
+          * The OMB control number
          */
         "ombNumber"?: string;
         /**
