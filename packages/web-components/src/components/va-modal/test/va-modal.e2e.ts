@@ -343,4 +343,55 @@ describe('va-modal', () => {
       expect.stringContaining('<va-modal>: An accessible name for the modal is required. Please provide either a label or modalTitle prop value.'),
     );
   });
+
+  it('should correctly restore focus to button element when modal closes', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <button id="outside-button">Outside button</button>
+      <va-modal modal-title="Test Modal">
+        <p>Modal content</p>
+      </va-modal>
+    `);
+
+    // Focus on the outside button using page.focus() for native HTML elements
+    await page.focus('#outside-button');
+    await page.waitForChanges();
+
+    // Open and close the modal
+    const modal = await page.find('va-modal');
+    await modal.setProperty('visible', true);
+    await page.waitForChanges();
+    await modal.setProperty('visible', false);
+    await page.waitForChanges();
+
+    // Verify focus was restored to the original button
+    const activeElement = await page.evaluate(() => document.activeElement?.id);
+    expect(activeElement).toBe('outside-button');
+  });
+
+  it('should correctly restore focus to va-button element when modal closes', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-button id="outside-va-button" text="VA Button"></va-button>
+      <va-modal modal-title="Test Modal">
+        <p>Modal content</p>
+      </va-modal>
+    `);
+
+    // Focus on the internal button within the va-button shadow DOM using >>> deep selector
+    const internalButton = await page.find('#outside-va-button >>> button');
+    await internalButton.focus();
+    await page.waitForChanges();
+
+    // Open and close the modal
+    const modal = await page.find('va-modal');
+    await modal.setProperty('visible', true);
+    await page.waitForChanges();
+    await modal.setProperty('visible', false);
+    await page.waitForChanges();
+
+    // Verify focus was restored to the va-button
+    const activeElement = await page.evaluate(() => document.activeElement?.id);
+    expect(activeElement).toBe('outside-va-button');
+  });
 });
