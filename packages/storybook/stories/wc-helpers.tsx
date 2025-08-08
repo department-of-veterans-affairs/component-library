@@ -391,3 +391,19 @@ export function resizeViewPorts(wrap, isVisible) {
   const story = wrap.closest('.sb-anchor');
   story?.classList.toggle('expand', isVisible);
 }
+
+/**
+ * Removes React.Fragment tags from the source code for clarity in "Code" tab panel
+ * Pass output to `parameters.docs.source.transform` in Storybook stories.
+ * @param source - The source code string to transform
+ * @returns The transformed source code string
+ */
+export function removeFragmentsFromCodeSource(source: string): string {
+  // Remove React.Fragment tags from the source code for clarity
+  return source
+    .replace(/<React\.Fragment\s+key="[^"]*">\s*/g, '')
+    .replace(/\s*<\/React\.Fragment>/g, '')
+    .replace(/<React\.Fragment[^>]*>\s*/g, '')
+    .replace(/\s*<\/React\.Fragment>/g, '')
+    .replace(/\n\s*\n/g, '\n');
+}
