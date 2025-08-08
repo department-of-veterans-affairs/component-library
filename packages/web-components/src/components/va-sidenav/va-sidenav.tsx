@@ -2,10 +2,10 @@ import { Component, Host, h, Prop, Listen, Element } from '@stencil/core';
 import { forceUpdate } from '@stencil/core';
 
 /**
- * Value corresponds with the --tablet breakpoint size.
+ * Value corresponds with the --medium-screen breakpoint size.
  * https://design.va.gov/foundation/breakpoints
  */
-const TABLET_BREAKPOINT = 640;
+const MEDIUM_SCREEN_BREAKPOINT = 768;
 
 /**
  * @componentName Side Navigation
@@ -41,7 +41,7 @@ export class VaSidenav {
 
   @Listen('resize', { target: 'window' })
   handleResize() {
-    this.isDesktop = window.innerWidth > TABLET_BREAKPOINT;
+    this.isDesktop = window.innerWidth >= MEDIUM_SCREEN_BREAKPOINT;
     forceUpdate(this);
   }
 
@@ -120,7 +120,7 @@ export class VaSidenav {
     }
   }
 
-  private isDesktop: boolean = window.innerWidth > TABLET_BREAKPOINT;
+  private isDesktop: boolean = window.innerWidth >= MEDIUM_SCREEN_BREAKPOINT;
 
   private iconBackgroundColorStyle = () => {
     return {
