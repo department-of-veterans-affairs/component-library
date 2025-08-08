@@ -7,7 +7,8 @@ import {
   State,
   EventEmitter,
   Event,
-  Watch
+  Watch,
+  Fragment,
 } from '@stencil/core';
 
 import {
@@ -352,7 +353,18 @@ export class VaTelephoneInput {
               )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            {error && <span id="error-message" role="alert">{error}</span>}
+
+            <span id="error-message" role="alert">
+              {error && {error}}
+            </span>
+            <span id="checkbox-error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="usa-sr-only">{i18next.t('error')}</span>
+                  <span class="usa-error-message">{error}</span>
+                </Fragment>
+              )}
+            </span>
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
               <va-combo-box
