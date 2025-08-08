@@ -69,7 +69,7 @@ export class VaAlert {
   /**
    * Displays the slim variation.
    */
-  @Prop() slim?: boolean = false;
+  @Prop({ mutable: true, reflect: true }) slim?: boolean = false;
 
   /**
    * Fires when the component has successfully finished rendering for the first
@@ -112,9 +112,11 @@ export class VaAlert {
 
     try { 
       // This is the happy path, meaning the user isn't using IE11
-    const slot = this.el.shadowRoot?.querySelector('slot');
-    const children = slot ? (slot as HTMLSlotElement).assignedNodes() : [];
-    headlineText = children.length > 0 ? children[0].textContent : null;
+      const headlineSlot = this.el.shadowRoot?.querySelector('slot[name="headline"]');
+      if (headlineSlot) {
+        const children = (headlineSlot as HTMLSlotElement).assignedNodes();
+        headlineText = children.length > 0 ? children[0].textContent : null;
+      }
     } catch (e) {
       // This is where we handle the edge case of the user being on IE11
     const children = Array.from(this.el.shadowRoot?.childNodes || []);
@@ -165,6 +167,14 @@ export class VaAlert {
   componentDidRender() {
     if (!this.closeBtnAriaLabel) {
       this.updateCloseAriaLabelWithHeadlineText();
+    }
+
+    const isBannerAlert = this.el.id === 'va-banner-alert';
+
+    // Apply the slim property if there is no headline text and this alert is not used by va-banner
+    if (!isBannerAlert) {
+      const headlineText = this.getHeadlineText();
+      this.slim = !headlineText;
     }
   }
 

@@ -186,6 +186,7 @@ export class VaBanner {
     return (
       <Host>
         <va-alert
+          id="va-banner-alert"
           visible
           full-width
           closeable={this.showClose}
