@@ -490,7 +490,7 @@ export class VaTextInput {
     return (
       <Host>
         {formsHeading}
-        <div class="input-wrap">
+        <div class="input-wrap" id="input-wrap" aria-label={error ? error : undefined}>
           {label && (
             <label
               htmlFor="inputField"
@@ -508,7 +508,7 @@ export class VaTextInput {
               {hint && <span class="usa-hint">{hint}</span>}
             </label>
           )}
-          <slot></slot>
+         <slot></slot>
           <span id="input-error-message" role="alert" class={errorClass}>
             {error && (
               <Fragment>
