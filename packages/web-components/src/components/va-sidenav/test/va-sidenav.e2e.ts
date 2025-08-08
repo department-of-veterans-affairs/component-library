@@ -231,4 +231,50 @@ describe('va-sidenav', () => {
     
     await page.close();
   });
+
+  it('programatically set the current-page attribute on multiple elements', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-sidenav><va-sidenav-item id="item-0"></va-sidenav-item><va-sidenav-item id="item-1" current-page></va-sidenav-item><va-sidenav-item id="item-2"></va-sidenav-item></va-sidenav>');
+    
+    function hasCurrentStyle(item: any) {
+      return !!item.shadowRoot.querySelector('.va-sidenav-item__current');
+    }
+
+    let currentPageElements = await page.findAll('va-sidenav-item');
+
+    // expect only the second item to have the current-page attribute on initial load
+    expect(currentPageElements[0].getAttribute('current-page')).toBeNull();
+    expect(currentPageElements[1].getAttribute('current-page')).not.toBeNull();
+    expect(currentPageElements[2].getAttribute('current-page')).toBeNull();
+
+    // The second item has the current-page styling
+    expect(hasCurrentStyle(currentPageElements[1] as any)).toBe(true);
+
+    // The others do not have the current-page styling
+    expect(hasCurrentStyle(currentPageElements[0] as any)).toBe(false);
+    expect(hasCurrentStyle(currentPageElements[2] as any)).toBe(false); 
+
+    // update all of the current-page attributes to "false" except the third element
+    currentPageElements.forEach((el) => {
+      el.setAttribute('current-page', el.id === 'item-2' ? '' : 'false');
+    });
+
+    await page.waitForChanges();
+
+    currentPageElements = await page.findAll('va-sidenav-item');
+
+    // expect only the third item to have the current-page attribute
+    expect(currentPageElements[0].getAttribute('current-page')).toBeNull();
+    expect(currentPageElements[1].getAttribute('current-page')).toBeNull();
+    expect(currentPageElements[2].getAttribute('current-page')).not.toBeNull();
+
+    // The third item has the current-page styling
+    expect(hasCurrentStyle(currentPageElements[2] as any)).toBe(true);
+
+    // The others do not
+    expect(hasCurrentStyle(currentPageElements[0] as any)).toBe(false);
+    expect(hasCurrentStyle(currentPageElements[1] as any)).toBe(false); 
+    
+    await page.close();
+  });
 });
