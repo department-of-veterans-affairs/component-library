@@ -7,6 +7,7 @@ import {
   Prop,
   State,
   Listen,
+  Watch,
   h,
 } from '@stencil/core';
 import classnames from 'classnames';
@@ -33,6 +34,11 @@ export class VaTabs {
   @Element() el: HTMLElement;
 
   @State() isOverflowing: boolean = false;
+  @Watch('isOverflowing')
+  watchIsOverflowing() {
+    this.handleScroll();
+  }
+
   @State() hideLeftScrollIndicator: boolean = false;
   @State() hideRightScrollIndicator: boolean = false;
 
@@ -139,6 +145,7 @@ export class VaTabs {
     if (this.tabListElement && !this.resizeObserver) {
       this.resizeObserver = new ResizeObserver(() => {
         this.checkForOverflow();
+        this.handleScroll();
       });
       this.resizeObserver.observe(this.tabListElement);
 

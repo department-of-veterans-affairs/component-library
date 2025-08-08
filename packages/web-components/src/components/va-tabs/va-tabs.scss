@@ -36,4 +36,10 @@
       radial-gradient(ellipse farthest-side at 0 50%, $vads-color-base-light 0, $vads-color-white),
       radial-gradient(ellipse farthest-side at 100% 50%, $vads-color-white 0, $vads-color-white);
   }
+
+  &.is-overflowing.hide-left-scroll-indicator.hide-right-scroll-indicator {
+    background-image:
+      radial-gradient(ellipse farthest-side at 0 50%, $vads-color-white 0, $vads-color-white),
+      radial-gradient(ellipse farthest-side at 100% 50%, $vads-color-white 0, $vads-color-white);
+  }
 }
