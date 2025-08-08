@@ -1,11 +1,4 @@
-// Locally scoped variables to help with styling gradient background and box shadows
-$space-xs: .25rem;
-$space-s: .5rem;
-$space-m: 1rem;
-$space-l: 1.5rem;
-$space-xl: 2rem;
-$list-background-color: rgb(255, 255, 255);
-$list-gradient-color: rgb(188, 197, 204);
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
 .va-tabs__list {
   display: flex;
@@ -23,33 +16,24 @@ $list-gradient-color: rgb(188, 197, 204);
   border-radius: 5px 5px 0 0;
 
   &.is-overflowing {
-    background-color: $list-background-color;
+    background-color: $vads-color-white;
     background-image:
-      radial-gradient(ellipse farthest-side at 0 50%, $list-gradient-color 0, $list-background-color),
-      radial-gradient(ellipse farthest-side at 100% 50%, $list-gradient-color 0, $list-background-color);
+      radial-gradient(ellipse farthest-side at 0 50%, $vads-color-base-light 0, $vads-color-white),
+      radial-gradient(ellipse farthest-side at 100% 50%, $vads-color-base-light 0, $vads-color-white);
     background-repeat: no-repeat;
-    background-position: 0 $space-xs, 100% $space-xs;
-    background-size: $space-s 85%, $space-s 85%;
+    background-position: 0 .25rem, 100% .25rem;
+    background-size: .5rem 85%, .5rem 85%;
+  }
 
-    &::before,
-    &::after {
-      content: '';
-      box-sizing: content-box;
-      align-self: stretch;
-      margin-block-end: 1px;
-    }
+  &.is-overflowing.hide-left-scroll-indicator {
+    background-image:
+      radial-gradient(ellipse farthest-side at 0 50%, $vads-color-white 0, $vads-color-white),
+      radial-gradient(ellipse farthest-side at 100% 50%, $vads-color-base-light 0, $vads-color-white);
+  }
 
-    &::before {
-      padding-inline-start: $space-l;
-      box-shadow: inset $space-l 0 $space-s calc(-1 * $space-s) $list-background-color;
-    }
-
-    &::after {
-      margin-inline-start: calc(-1 * $space-m);
-      padding-inline-end: $space-m;
-      min-inline-size: $space-l;
-      flex: 1;
-      box-shadow: inset calc(-1 * $space-l) 0 $space-s calc(-1 * $space-s) $list-background-color;
-    }
+  &.is-overflowing.hide-right-scroll-indicator {
+    background-image:
+      radial-gradient(ellipse farthest-side at 0 50%, $vads-color-base-light 0, $vads-color-white),
+      radial-gradient(ellipse farthest-side at 100% 50%, $vads-color-white 0, $vads-color-white);
   }
 }

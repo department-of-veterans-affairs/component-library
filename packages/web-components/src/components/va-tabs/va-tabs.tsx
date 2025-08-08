@@ -28,10 +28,13 @@ export class VaTabs {
   private allowRender: boolean = true;
   private tabListElement: HTMLElement;
   private resizeObserver: ResizeObserver;
+  private scrollAnimationFrame: number;
 
   @Element() el: HTMLElement;
 
   @State() isOverflowing: boolean = false;
+  @State() hideLeftScrollIndicator: boolean = false;
+  @State() hideRightScrollIndicator: boolean = false;
 
   /**
    * If `true`, the component-library-analytics event is disabled.
@@ -104,6 +107,16 @@ export class VaTabs {
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
     }
+
+    // Clean up scroll event listener
+    if (this.tabListElement) {
+      this.tabListElement.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
+
+    // Cancel any pending animation frame
+    if (this.scrollAnimationFrame) {
+      cancelAnimationFrame(this.scrollAnimationFrame);
+    }
   }
 
   componentWillRender() {
@@ -128,10 +141,15 @@ export class VaTabs {
         this.checkForOverflow();
       });
       this.resizeObserver.observe(this.tabListElement);
+
+      // Add scroll event listener for horizontal scrolling
+      this.tabListElement.addEventListener('scroll', this.handleScroll.bind(this));
     }
 
     // Initial overflow check
     this.checkForOverflow();
+    // Initial scroll handling to set visibility of scroll indicators
+    this.handleScroll();
   }
 
   @Listen('tabItemSelected')
@@ -229,12 +247,41 @@ export class VaTabs {
     this.isOverflowing = this.tabListElement.scrollWidth > this.tabListElement.clientWidth;
   }
 
+  /**
+   * Handler for scroll events on the tab list element. Updates state values to
+   * determine if scroll indicators should be shown or hidden.
+   * @returns {void}
+   */
+  private handleScroll(): void {
+    // Cancel any pending animation frame
+    if (this.scrollAnimationFrame) {
+      cancelAnimationFrame(this.scrollAnimationFrame);
+    }
+
+    // Schedule the scroll handling for the next animation frame
+    this.scrollAnimationFrame = requestAnimationFrame(() => {
+      if (this.tabListElement) {
+        const scrollLeft = this.tabListElement.scrollLeft;
+        const scrollWidth = this.tabListElement.scrollWidth;
+        const clientWidth = this.tabListElement.clientWidth;
+
+        // Adjust visibility of scroll indicators based on scroll position:
+        // - If the scroll position is at the start, hide the left indicator.
+        // - If the scroll position is at the end, hide the right indicator.
+        this.hideLeftScrollIndicator = scrollLeft <= 5;
+        this.hideRightScrollIndicator = scrollLeft >= (scrollWidth - clientWidth - 5);
+      }
+    });
+  }
+
   render() {
     let { label } = this;
 
     const listClass = classnames({
       'va-tabs__list': true,
       'is-overflowing': this.isOverflowing,
+      'hide-left-scroll-indicator': this.hideLeftScrollIndicator,
+      'hide-right-scroll-indicator': this.hideRightScrollIndicator,
     });
 
     if (!this.allowRender) {
