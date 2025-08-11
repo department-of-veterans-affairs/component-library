@@ -2,10 +2,10 @@ import { Component, Host, h, Prop, Listen, Element } from '@stencil/core';
 import { forceUpdate } from '@stencil/core';
 
 /**
- * Value corresponds with the --tablet breakpoint size.
+ * Value corresponds with the --medium-screen breakpoint size.
  * https://design.va.gov/foundation/breakpoints
  */
-const TABLET_BREAKPOINT = 640;
+const MEDIUM_SCREEN_BREAKPOINT = 768;
 
 /**
  * @componentName Side Navigation
@@ -41,26 +41,28 @@ export class VaSidenav {
 
   @Listen('resize', { target: 'window' })
   handleResize() {
-    this.isDesktop = window.innerWidth > TABLET_BREAKPOINT;
+    this.isDesktop = window.innerWidth >= MEDIUM_SCREEN_BREAKPOINT;
     forceUpdate(this);
   }
 
   /**
-   * Checks for multiple current-page links and sets only the first one found to true.
+   * Checks for multiple current-page links and allow only the first one found.
    */
   setOnlyOneCurrentPage() {
     const currentPageElements = this.el.querySelectorAll('va-sidenav-item[current-page], va-sidenav-submenu[current-page]');
     currentPageElements.forEach((el, index) => {
       if (index > 0) {
-        el.setAttribute('current-page', 'false');
+        el.removeAttribute('current-page');
       }
     });
   }
 
   /**
-   * Watch for changes to the current-page attribute on any va-sidenav-item or va-sidenav-submenu elements.
-   * When a change is detected, it updates all other elements to have current-page="false"
-   * except the one that triggered the mutation. This ensures only one item is marked as the current-page.
+   * Watch for changes to the current-page attribute on any va-sidenav-item or va-sidenav-submenu element.
+   * With those changed current-page attributes, check if the attribute value is not null and not "false".
+   * If it is not null and not "false", allow the first element found to have a truthy current-page value 
+   * to be marked as the current-page. Otherwise, remove the current-page attribute from all other elements. 
+   * Only one element should be the current-page.
    */
   setupCurrentPageObserver() {
     // Create a new mutation observer
@@ -72,18 +74,23 @@ export class VaSidenav {
       );
 
       if (currentPageMutations.length > 0) {
-        // Get the element that triggered the mutation
-        const changedElement = currentPageMutations[0].target as Element;
-        const isCurrentPage = changedElement.getAttribute('current-page') === 'true';
-
-        if (isCurrentPage) {
-          // Get all elements with current-page attribute
-          const allElements = this.el.querySelectorAll('va-sidenav-item[current-page], va-sidenav-submenu[current-page]');
+        // Find the first mutation with a truthy current-page value
+        const truthyMutation = currentPageMutations.find(mutation => {
+          const element = mutation.target as Element;
+          const attrValue = element.getAttribute('current-page');
+          return attrValue !== null && attrValue !== 'false';
+        });
+        
+        // If we found a truthy current-page attribute, make sure it's the only one by removing current-page from all other elements
+        if (truthyMutation) {
+          const truthyElement = truthyMutation.target as Element;
           
-          // Set current-page="false" for all elements except the one that triggered the mutation
-          allElements.forEach(el => {
-            if (el !== changedElement) {
-              // Remove the attribute completely
+          // Get all elements with current-page attribute
+          const allCurrentPageElements = this.el.querySelectorAll('va-sidenav-item[current-page], va-sidenav-submenu[current-page]');
+          
+          // Remove the current-page attribute for all elements except the first truthy one found
+          allCurrentPageElements.forEach(el => {
+            if (el !== truthyElement) {
               el.removeAttribute('current-page');
             }
           });
@@ -113,7 +120,7 @@ export class VaSidenav {
     }
   }
 
-  private isDesktop: boolean = window.innerWidth > TABLET_BREAKPOINT;
+  private isDesktop: boolean = window.innerWidth >= MEDIUM_SCREEN_BREAKPOINT;
 
   private iconBackgroundColorStyle = () => {
     return {
