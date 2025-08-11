@@ -42,6 +42,7 @@ const Template = ({
   error,
   value,
   monthSelect,
+  ...rest
 }) => {
   return (
     <VaMemorableDate
@@ -54,6 +55,7 @@ const Template = ({
       value={value}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+      {...rest}
     />
   );
 };
@@ -321,6 +323,38 @@ const CustomErrorMessageTemplate = ({
   );
 };
 
+const ToggleErrorStateTemplate = (args) => {
+  const [error, setError] = useState(null);
+  const { focusEl } = args;
+
+  const handleClick = () => {
+    error ? setError(null) : setError(`This is an error message`);
+
+    if (focusEl) {
+      const moveFocusTo = document
+        .getElementById('error-demo')
+        ?.shadowRoot?.getElementById(focusEl);
+
+      applyFocus(moveFocusTo);
+    }
+  };
+
+  return (
+    <>
+      {Template({
+        ...defaultArgs,
+        error: error,
+        required: true,
+        id: "error-demo",
+        'use-forms-pattern': "single",
+        'form-heading': "Error state demo",
+        'form-heading-level': 1,
+      })}
+      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
@@ -402,4 +436,16 @@ export const FormsPatternMultipleError =
 FormsPatternMultipleError.args = {
   ...defaultArgs,
   error: 'Error Message Example',
+};
+
+export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
+ToggleErrorState.args = {
+  focusEl: null,
+};
+ToggleErrorState.argTypes = {
+  focusEl: {
+    name: 'Element to focus on error toggle',
+    control: { type: 'radio' },
+    options: [null, 'input-error-message', 'input-wrap', 'form-question'],
+  },
 };

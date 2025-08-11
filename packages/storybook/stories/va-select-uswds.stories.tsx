@@ -61,6 +61,7 @@ const Template = ({
   options,
   'use-add-button': useAddButton,
   'full-width': fullWidth,
+  ...rest
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
 
@@ -90,6 +91,7 @@ const Template = ({
         message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
         full-width={fullWidth}
+        {...rest}
       >
         {modifiedOptions}
       </va-select>
@@ -142,6 +144,38 @@ const InertTemplate = ({
       >
         {modifiedOptions}
       </va-select>
+    </>
+  );
+};
+
+const ToggleErrorStateTemplate = (args) => {
+  const [error, setError] = useState(null);
+  const { focusEl } = args;
+
+  const handleClick = () => {
+    error ? setError(null) : setError(`This is an error message`);
+
+    if (focusEl) {
+      const moveFocusTo = document
+        .getElementById('error-demo')
+        ?.shadowRoot?.getElementById(focusEl);
+
+      applyFocus(moveFocusTo);
+    }
+  };
+
+  return (
+    <>
+      {Template({
+        ...defaultArgs,
+        error: error,
+        required: true,
+        id: "error-demo",
+        'use-forms-pattern': "single",
+        'form-heading': "Error state demo",
+        'form-heading-level': 1,
+      })}
+      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
     </>
   );
 };
@@ -364,4 +398,16 @@ FormsPatternMultiple.args = {
   'use-forms-pattern': 'multiple',
   'form-heading-level': 1,
   'form-heading': 'Select a branch of the armed forces',
+};
+
+export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
+ToggleErrorState.args = {
+  focusEl: null,
+};
+ToggleErrorState.argTypes = {
+  focusEl: {
+    name: 'Element to focus on error toggle',
+    control: { type: 'radio' },
+    options: [null, 'input-error-message', 'input-wrap', 'form-question'],
+  },
 };

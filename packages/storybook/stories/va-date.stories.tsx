@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { VaDate } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { applyFocus } from './wc-helpers';
 
 VaDate.displayName = 'VaDate';
 
@@ -38,6 +39,7 @@ const Template = ({
   value,
   'enable-analytics': enableAnalytics,
   'month-optional': monthOptional,
+  ...rest
 }) => {
   return (
     <VaDate
@@ -54,6 +56,7 @@ const Template = ({
       }}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
       enableAnalytics={enableAnalytics}
+      {...rest}
     />
   );
 };
@@ -156,6 +159,38 @@ const CustomRequiredMessageTemplate = ({
   );
 };
 
+const ToggleErrorStateTemplate = (args) => {
+  const [error, setError] = useState(null);
+  const { focusEl } = args;
+
+  const handleClick = () => {
+    error ? setError(null) : setError(`This is an error message`);
+
+    if (focusEl) {
+      const moveFocusTo = document
+        .getElementById('error-demo')
+        ?.shadowRoot?.getElementById(focusEl);
+
+      applyFocus(moveFocusTo);
+    }
+  };
+
+  return (
+    <>
+      {Template({
+        ...defaultArgs,
+        error: error,
+        required: true,
+        id: "error-demo",
+        'use-forms-pattern': "single",
+        'form-heading': "Error state demo",
+        'form-heading-level': 1,
+      })}
+      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(dateDocs);
@@ -199,3 +234,15 @@ CustomValidation.args = {
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+
+export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
+ToggleErrorState.args = {
+  focusEl: null,
+};
+ToggleErrorState.argTypes = {
+  focusEl: {
+    name: 'Element to focus on error toggle',
+    control: { type: 'radio' },
+    options: [null, 'error-message', 'input-wrap', 'form-question'],
+  },
+};

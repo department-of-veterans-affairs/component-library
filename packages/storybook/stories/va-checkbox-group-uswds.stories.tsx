@@ -45,6 +45,7 @@ const vaCheckboxGroup = args => {
       hint={hint}
       label-header-level={labelHeaderLevel}
       message-aria-describedby={messageAriaDescribedby}
+      {...rest}
     >
       <va-checkbox label="Sojourner Truth" name="example" value="1" />
       <va-checkbox label="Frederick Douglass" name="example" value="2" />
@@ -132,6 +133,38 @@ const I18nTemplate = args => {
       />
       <div style={{ marginTop: '20px' }}>{vaCheckboxGroup(args)}</div>
     </div>
+  );
+};
+
+const ToggleErrorStateTemplate = (args) => {
+  const [error, setError] = useState(null);
+  const { focusEl } = args;
+
+  const handleClick = () => {
+    error ? setError(null) : setError(`This is an error message`);
+
+    if (focusEl) {
+      const moveFocusTo = document
+        .getElementById('error-demo')
+        ?.shadowRoot?.getElementById(focusEl);
+
+      applyFocus(moveFocusTo);
+    }
+  };
+
+  return (
+    <>
+      {Template({
+        ...defaultArgs,
+        error: error,
+        required: true,
+        id: "error-demo",
+        'use-forms-pattern': "single",
+        'form-heading': "Error state demo",
+        'form-heading-level': 1,
+      })}
+      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
+    </>
   );
 };
 
@@ -412,4 +445,16 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
+};
+
+export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
+ToggleErrorState.args = {
+  focusEl: null,
+};
+ToggleErrorState.argTypes = {
+  focusEl: {
+    name: 'Element to focus on error toggle',
+    control: { type: 'radio' },
+    options: [null, 'checkbox-error-message', 'input-wrap', 'form-question'],
+  },
 };

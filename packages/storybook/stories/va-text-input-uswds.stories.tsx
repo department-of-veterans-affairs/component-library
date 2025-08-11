@@ -99,6 +99,7 @@ const Template = ({
   'input-suffix': inputSuffix,
   'input-icon-suffix': inputIconSuffix,
   'show-input-error': showInputError,
+  ...rest
 }) => {
   return (
     <va-text-input
@@ -130,6 +131,7 @@ const Template = ({
       input-suffix={inputSuffix}
       input-icon-suffix={inputIconSuffix}
       show-input-error={showInputError}
+      {...rest}
     />
   );
 };
@@ -392,6 +394,39 @@ export const Autocomplete = ({ name, label, autocomplete }) => {
   );
 };
 
+const ToggleErrorStateTemplate = (args) => {
+  const [error, setError] = useState(null);
+  const { focusEl } = args;
+
+  const handleClick = () => {
+    error ? setError(null) : setError(`This is an error message`);
+
+    if (focusEl) {
+      const moveFocusTo = document
+        .getElementById('error-demo')
+        ?.shadowRoot?.getElementById(focusEl);
+
+      applyFocus(moveFocusTo);
+    }
+  };
+
+  return (
+    <>
+      {Template({
+        ...defaultArgs,
+        error: error,
+        required: true,
+        id: "error-demo",
+        'use-forms-pattern': "single",
+        'form-heading': "Error state demo",
+        'form-heading-level': 1,
+      })}
+      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
+    </>
+  );
+};
+
+
 Autocomplete.args = {
   ...defaultArgs,
   name: 'email',
@@ -522,3 +557,16 @@ export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
 };
+
+export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
+ToggleErrorState.args = {
+  focusEl: null,
+};
+ToggleErrorState.argTypes = {
+  focusEl: {
+    name: 'Element to focus on error toggle',
+    control: { type: 'radio' },
+    options: [null, 'input-error-message', 'input-wrap', 'form-question'],
+  },
+};
+

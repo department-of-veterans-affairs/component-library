@@ -393,7 +393,7 @@ const ToggleErrorStateTemplate = (args) => {
 
     if (focusEl) {
       const moveFocusTo = document
-        .getElementById('radio-error-demo')
+        .getElementById('error-demo')
         ?.shadowRoot?.getElementById(focusEl);
 
       applyFocus(moveFocusTo);
@@ -406,9 +406,10 @@ const ToggleErrorStateTemplate = (args) => {
         ...args,
         error: error,
         required: true,
-        id: "radio-error-demo",
-        'use-forms-pattern': "multiple",
-        'form-heading': "Radio error demo",
+        id: "error-demo",
+        'use-forms-pattern': "single",
+        'form-heading': "Error state demo",
+        'form-heading-level': 1,
       })}
       <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
     </>

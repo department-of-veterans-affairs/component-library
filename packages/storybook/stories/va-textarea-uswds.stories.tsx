@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   getWebComponentDocs,
   propStructure,
@@ -52,6 +53,7 @@ const Template = ({
   'message-aria-describedby': messageAriaDescribedby,
   'label-header-level': labelHeaderLevel,
   'header-aria-describedby': headerAriaDescribedby,
+  ...rest
 }) => {
   return (
     <va-textarea
@@ -72,6 +74,7 @@ const Template = ({
       message-aria-describedby={messageAriaDescribedby}
       label-header-level={labelHeaderLevel}
       header-aria-describedby={headerAriaDescribedby}
+      {...rest}
     />
   );
 };
@@ -244,6 +247,38 @@ const FormsPatternMultipleTemplate = ({
   );
 };
 
+const ToggleErrorStateTemplate = (args) => {
+  const [error, setError] = useState(null);
+  const { focusEl } = args;
+
+  const handleClick = () => {
+    error ? setError(null) : setError(`This is an error message`);
+
+    if (focusEl) {
+      const moveFocusTo = document
+        .getElementById('error-demo')
+        ?.shadowRoot?.getElementById(focusEl);
+
+      applyFocus(moveFocusTo);
+    }
+  };
+
+  return (
+    <>
+      {Template({
+        ...defaultArgs,
+        error: error,
+        required: true,
+        id: "error-demo",
+        'use-forms-pattern': "single",
+        'form-heading': "Error state demo",
+        'form-heading-level': 1,
+      })}
+      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textareaDocs);
@@ -306,4 +341,16 @@ export const FormsPatternMultipleError =
 FormsPatternMultipleError.args = {
   ...defaultArgs,
   error: 'This is an error message',
+};
+
+export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
+ToggleErrorState.args = {
+  focusEl: null,
+};
+ToggleErrorState.argTypes = {
+  focusEl: {
+    name: 'Element to focus on error toggle',
+    control: { type: 'radio' },
+    options: [null, 'input-error-message', 'input-wrap', 'form-question'],
+  },
 };
