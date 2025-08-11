@@ -6,6 +6,7 @@ import {
   propDefaults,
   componentStructure,
   removeFragmentsFromCodeSource,
+  internalTestingAlert,
 } from './wc-helpers';
 import { Default as CardDefault } from './va-card.stories';
 import { Default as FileInputDefault } from './va-file-input-uswds.stories';
@@ -204,6 +205,12 @@ WithALongLabel.args = {
 };
 WithALongLabel.argTypes = propStructure(tabsDocs);
 WithALongLabel.tags = ['dst-testing'];
+WithALongLabel.decorators = [(Story) => (
+  <>
+    {internalTestingAlert('how an extended tab label behaves within the component', true)}
+    <Story />
+  </>
+)];
 
 export const WithoutPanelHeading = Template.bind(null);
 WithoutPanelHeading.args = {
@@ -213,6 +220,15 @@ WithoutPanelHeading.args = {
 };
 WithoutPanelHeading.argTypes = propStructure(tabsDocs);
 WithoutPanelHeading.tags = ['dst-testing'];
+WithoutPanelHeading.decorators = [(Story) => (
+  <>
+    {internalTestingAlert(
+      'how the component behaves and if there are any accessibility concerns when the panel heading is omitted',
+      true
+    )}
+    <Story />
+  </>
+)];
 
 
 export const WithHeadingNotMatchingTab = Template.bind(null);
@@ -226,6 +242,12 @@ WithHeadingNotMatchingTab.args = {
 };
 WithHeadingNotMatchingTab.argTypes = propStructure(tabsDocs);
 WithHeadingNotMatchingTab.tags = ['dst-testing'];
+WithHeadingNotMatchingTab.decorators = [(Story) => (
+  <>
+    {internalTestingAlert()}
+    <Story />
+  </>
+)];
 
 
 export const WithAdditionalTabItem = Template.bind(null);
@@ -243,6 +265,15 @@ WithAdditionalTabItem.args = {
 };
 WithAdditionalTabItem.argTypes = propStructure(tabsDocs);
 WithAdditionalTabItem.tags = ['dst-testing'];
+WithAdditionalTabItem.decorators = [(Story) => (
+  <>
+    {internalTestingAlert(
+      'how the component behaves when an additional tab item is added. At this point, only three tabs are recommended', 
+      true
+    )}
+    <Story />
+  </>
+)];
 
 
 export const WithMeaningfulContent = TemplateWithMeaningfulContent.bind(null);
@@ -254,3 +285,9 @@ WithMeaningfulContent.args = {
 };
 WithMeaningfulContent.argTypes = propStructure(tabsDocs);
 WithMeaningfulContent.tags = ['dst-testing'];
+WithMeaningfulContent.decorators = [(Story) => (
+  <>
+    {internalTestingAlert()}
+    <Story />
+  </>
+)];

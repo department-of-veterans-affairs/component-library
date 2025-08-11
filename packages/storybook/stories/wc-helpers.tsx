@@ -407,3 +407,34 @@ export function removeFragmentsFromCodeSource(source: string): string {
     .replace(/\s*<\/React\.Fragment>/g, '')
     .replace(/\n\s*\n/g, '\n');
 }
+
+/**
+ * Helper function to render an instance of `va-alert` to indicate that a story is for internal testing purposes.
+ * Helpful for downstream users to understand the context of the story and that it may not be suitable for production use.
+ * @param scenario - A string describing the scenario for internal testing.
+ * @param notRecommended - A boolean indicating if the pattern is not recommended for production use.
+ * @returns A JSX element for the internal testing alert.
+ */
+export function internalTestingAlert(scenario: string | null = null, notRecommended: boolean = false) {
+  let contextPara = null;
+
+  if (scenario || notRecommended) {
+    contextPara = (
+      <p className="vads-u-margin-bottom--0">
+        {scenario && `The intention is to test ${scenario}.`}
+        {notRecommended && ' This pattern is not recommended for production use as it may lead to usability issues.'}
+      </p>
+    );
+  }
+  return (
+    <div className="vads-u-margin-y--2">
+      <va-alert status="warning">
+        <h2 slot="headline">Heads up!</h2>
+        <p>
+          This is a developer preview for internal testing purposes.
+        </p>
+        {contextPara}
+      </va-alert>
+    </div>
+  );
+}
