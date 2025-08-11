@@ -52,6 +52,7 @@ const vaRadioConst = args => {
       hint={hint}
       label-header-level={labelHeaderLevel}
       header-aria-describedby={headerAriaDescribedby}
+      {...rest}
     >
       <va-radio-option label="Sojourner Truth" name={name} value="1" />
       <va-radio-option label="Frederick Douglass" name={name} value="2" />
@@ -383,6 +384,37 @@ const FormsPatternSingleTemplate = ({ required, error, label, name }) => {
   );
 };
 
+const ToggleErrorStateTemplate = (args) => {
+  const [error, setError] = useState(null);
+  const { focusEl } = args;
+
+  const handleClick = () => {
+    error ? setError(null) : setError(`This is an error message`);
+
+    if (focusEl) {
+      const moveFocusTo = document
+        .getElementById('radio-error-demo')
+        ?.shadowRoot?.getElementById(focusEl);
+
+      applyFocus(moveFocusTo);
+    }
+  };
+
+  return (
+    <>
+      {Template({
+        ...args,
+        error: error,
+        required: true,
+        id: "radio-error-demo",
+        'use-forms-pattern': "multiple",
+        'form-heading': "Radio error demo",
+      })}
+      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
+    </>
+  );
+};
+
 const defaultArgs = {
   'enable-analytics': false,
   'label': 'Select one historical figure',
@@ -511,4 +543,16 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
+};
+
+export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
+ToggleErrorState.args = {
+  focusEl: null,
+};
+ToggleErrorState.argTypes = {
+  focusEl: {
+    name: 'Element to focus on error toggle',
+    control: { type: 'radio' },
+    options: [null, 'radio-error-message', 'input-wrap', 'form-question'],
+  },
 };
