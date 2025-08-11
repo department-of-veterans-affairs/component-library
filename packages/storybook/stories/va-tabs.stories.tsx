@@ -204,7 +204,6 @@ WithALongLabel.args = {
   templateKey: 2,
 };
 WithALongLabel.argTypes = propStructure(tabsDocs);
-WithALongLabel.tags = ['dst-testing'];
 WithALongLabel.decorators = [(Story) => (
   <>
     {internalTestingAlert('how an extended tab label behaves within the component', true)}
@@ -219,7 +218,6 @@ WithoutPanelHeading.args = {
   templateKey: 3,
 };
 WithoutPanelHeading.argTypes = propStructure(tabsDocs);
-WithoutPanelHeading.tags = ['dst-testing'];
 WithoutPanelHeading.decorators = [(Story) => (
   <>
     {internalTestingAlert(
@@ -241,7 +239,6 @@ WithHeadingNotMatchingTab.args = {
   templateKey: 4,
 };
 WithHeadingNotMatchingTab.argTypes = propStructure(tabsDocs);
-WithHeadingNotMatchingTab.tags = ['dst-testing'];
 WithHeadingNotMatchingTab.decorators = [(Story) => (
   <>
     {internalTestingAlert()}
@@ -264,7 +261,6 @@ WithAdditionalTabItem.args = {
   ],
 };
 WithAdditionalTabItem.argTypes = propStructure(tabsDocs);
-WithAdditionalTabItem.tags = ['dst-testing'];
 WithAdditionalTabItem.decorators = [(Story) => (
   <>
     {internalTestingAlert(
@@ -284,7 +280,6 @@ WithMeaningfulContent.args = {
   templateKey: 6,
 };
 WithMeaningfulContent.argTypes = propStructure(tabsDocs);
-WithMeaningfulContent.tags = ['dst-testing'];
 WithMeaningfulContent.decorators = [(Story) => (
   <>
     {internalTestingAlert()}
