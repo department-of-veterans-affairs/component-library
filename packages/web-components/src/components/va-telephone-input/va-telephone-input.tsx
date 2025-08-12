@@ -124,7 +124,7 @@ export class VaTelephoneInput {
    * Visible error message for the component
    * This is used to display the error in the UI
    */ 
-  @State() visibleError: string = this.error;
+  @State() visibleError: string;
 
 
   @Watch('error')
@@ -305,6 +305,7 @@ export class VaTelephoneInput {
   componentWillLoad() {
     this.countries = this.buildCountryList();
     if (this.country === '' as CountryCode) this.country = this.DEFAULT_COUNTRY;
+    this.visibleError = this.error;
   }
 
   componentDidLoad() {
