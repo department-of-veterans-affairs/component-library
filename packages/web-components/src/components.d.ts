@@ -1944,10 +1944,6 @@ export namespace Components {
      */
     interface VaTabs {
         /**
-          * If `true`, the component-library-analytics event is disabled.
-         */
-        "disableAnalytics"?: boolean;
-        /**
           * The index of the initially selected tab. Defaults to `0` (the first tab).
          */
         "initiallySelected"?: number;
@@ -2431,10 +2427,6 @@ export interface VaTabItemCustomEvent<T> extends CustomEvent<T> {
 export interface VaTableInnerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaTableInnerElement;
-}
-export interface VaTabsCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLVaTabsElement;
 }
 export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3619,23 +3611,12 @@ declare global {
         prototype: HTMLVaTableRowElement;
         new (): HTMLVaTableRowElement;
     };
-    interface HTMLVaTabsElementEventMap {
-        "component-library-analytics": any;
-    }
     /**
      * @componentName Tabs
      * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface HTMLVaTabsElement extends Components.VaTabs, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVaTabsElementEventMap>(type: K, listener: (this: HTMLVaTabsElement, ev: VaTabsCustomEvent<HTMLVaTabsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVaTabsElementEventMap>(type: K, listener: (this: HTMLVaTabsElement, ev: VaTabsCustomEvent<HTMLVaTabsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaTabsElement: {
         prototype: HTMLVaTabsElement;
@@ -6033,10 +6014,6 @@ declare namespace LocalJSX {
      */
     interface VaTabs {
         /**
-          * If `true`, the component-library-analytics event is disabled.
-         */
-        "disableAnalytics"?: boolean;
-        /**
           * The index of the initially selected tab. Defaults to `0` (the first tab).
          */
         "initiallySelected"?: number;
@@ -6044,10 +6021,6 @@ declare namespace LocalJSX {
           * A unique name for the rendered div serving as `role="tablist"`. To be set as value for wrapper's `aria-label` attribute.
          */
         "label"?: string;
-        /**
-          * The event used to track usage of the component.
-         */
-        "onComponent-library-analytics"?: (event: VaTabsCustomEvent<any>) => void;
     }
     /**
      * @componentName Telephone

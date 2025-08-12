@@ -1,8 +1,6 @@
 import {
   Component,
   Element,
-  Event,
-  EventEmitter,
   Host,
   Prop,
   State,
@@ -43,11 +41,6 @@ export class VaTabs {
   @State() hideRightScrollIndicator: boolean = false;
 
   /**
-   * If `true`, the component-library-analytics event is disabled.
-   */
-  @Prop() disableAnalytics?: boolean = false;
-
-  /**
    * A unique name for the rendered div serving as `role="tablist"`. To be set as value for wrapper's `aria-label` attribute.
    */
   @Prop() label: string;
@@ -56,16 +49,6 @@ export class VaTabs {
    * The index of the initially selected tab. Defaults to `0` (the first tab).
    */
   @Prop({ mutable: true }) initiallySelected?: number = 0;
-
-  /**
-   * The event used to track usage of the component.
-   */
-  @Event({
-    bubbles: true,
-    composed: true,
-    eventName: 'component-library-analytics',
-  })
-  componentLibraryAnalytics: EventEmitter;
 
   connectedCallback() {
     // Populate the `tabItems` property with all `va-tab-item` elements in the slot
@@ -165,21 +148,6 @@ export class VaTabs {
     let selectedTab = event.target as HTMLVaTabItemElement;
 
     this.tabWithFocus = selectedTab;
-
-    // Emit analytics event if analytics is not disabled.
-    if (!this.disableAnalytics) {
-      let currentlyActiveIndex = Array.from(this.tabItems).indexOf(selectedTab);
-
-      const detail = {
-        componentName: 'va-tabs',
-        action: 'click',
-        details: {
-          selected: currentlyActiveIndex,
-        },
-      };
-
-      this.componentLibraryAnalytics.emit(detail);
-    }
 
     // If tab that was clicked is already selected, do nothing.
     if (selectedTab.getAttribute('selected') === 'true') {
