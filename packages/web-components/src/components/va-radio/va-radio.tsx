@@ -324,11 +324,11 @@ export class VaRadio {
               )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            <span id="radio-error-message" role="alert">
+            <span class="usa-error-message" id="radio-error-message" role="alert">
               {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span>
-                  <span class="usa-error-message">{error}</span>
+                  {error}
                 </Fragment>
               )}
             </span>

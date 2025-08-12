@@ -7,8 +7,7 @@ import {
   State,
   EventEmitter,
   Event,
-  Watch,
-  Fragment,
+  Watch
 } from '@stencil/core';
 
 import {
@@ -354,7 +353,7 @@ export class VaTelephoneInput {
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
             <span id="error-message" role="alert">
-              {error && {error}}
+              {error && error}
             </span>
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
