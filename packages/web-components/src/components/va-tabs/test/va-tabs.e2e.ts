@@ -144,6 +144,7 @@ describe('va-tabs', () => {
           <p>This is the content for Panel 3.</p>
         </va-tab-panel>
       </va-tabs>
+    `);
 
     const tabItems = await page.findAll('va-tab-item');
     expect(tabItems.length).toEqual(3);
