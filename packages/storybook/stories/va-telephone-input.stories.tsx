@@ -6,7 +6,7 @@ import {
   StoryDocs,
 } from './wc-helpers';
 
-VaTelephoneInput.displayName = 'VaLanguageToggle';
+VaTelephoneInput.displayName = 'VaTelephoneInput';
 const inputTelephoneDocs = getWebComponentDocs('va-telephone-input');
 
 export default {
