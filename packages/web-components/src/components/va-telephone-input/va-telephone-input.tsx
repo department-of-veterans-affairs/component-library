@@ -12,19 +12,17 @@ import {
 
 import {
   AsYouType,
-  isPossiblePhoneNumber,
   CountryCode,
-  getExampleNumber,
   getCountries,
   getCountryCallingCode,
   parsePhoneNumber,
-  PhoneNumber
+  PhoneNumber,
+  Metadata,
+  isPossiblePhoneNumber
 } from 'libphonenumber-js/min';
-import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
 import { i18next } from '../..';
 import { DATA_MAP, mapCountry } from './utils';
-import { getArticle } from '../../utils/utils';
 
 /**
  * @componentName Telephone Input
@@ -69,7 +67,7 @@ export class VaTelephoneInput {
   /**
    * The error for the component
    */
-  @Prop({ reflect: true, mutable: true }) error?: string = '';
+  @Prop({ reflect: true }) error?: string = '';
 
   /**
    * Whether the country select should be included. Set to true to exclude it.
@@ -122,6 +120,12 @@ export class VaTelephoneInput {
    */
   @State() touched: boolean = false;
 
+  /**
+   * Visible error message for the component
+   * This is used to display the error in the UI
+   */ 
+  @State() visibleError: string = this.error;
+
 
   @Watch('error')
   syncErrorMessages(newValue: string) {
@@ -137,7 +141,7 @@ export class VaTelephoneInput {
   resetErrors() {
     this.countryError = '';
     this.contactError = '';
-    this.error = '';
+    this.visibleError = this.error;
   }
 
   setValidityState() {
@@ -159,21 +163,40 @@ export class VaTelephoneInput {
     this.handleEmit();
   }
 
-  // return the template for a phone number for the selected country
+  getNumberRange(lengths: number[]): string {
+    if (!lengths.length) return '';
+    const sorted = lengths.slice().sort((a, b) => a - b);
+    // Check if all numbers are consecutive
+    let isConsecutive = true;
+    for (let i = 1; i < sorted.length; i++) {
+      if (sorted[i] !== sorted[i - 1] + 1) {
+        isConsecutive = false;
+        break;
+      }
+    }
+    if (isConsecutive && sorted.length > 1) {
+      return `${sorted[0]} to ${sorted[sorted.length - 1]}`;
+    }
+    if (sorted.length === 1) return String(sorted[0]);
+    if (sorted.length === 2 && sorted[1] === sorted[0] + 1) return `${sorted[0]} to ${sorted[1]}`;
+    if (sorted.length === 2) return `${sorted[0]} or ${sorted[1]}`;
+    return `${sorted.slice(0, -1).join(', ')} or ${sorted[sorted.length - 1]}`;
+  }
+
+  // return the possible lengths of a phone number for the selected country
   getTemplate() {
     const _country = mapCountry(this.country);
-    let example = getExampleNumber(_country, examples).format('NATIONAL');
-    const asYouType = new AsYouType(_country);
-    asYouType.input(example);
-    return asYouType.getTemplate();
+    const metadata = new Metadata();
+    metadata.selectNumberingPlan(_country);
+    const possibleLengths = metadata.numberingPlan.possibleLengths();
+    return this.getNumberRange(possibleLengths);
   }
 
   // get an error message for a country that includes the template of a valid phone number for that country
   getErrorMessageForCountry() {
     const _country = mapCountry(this.country);
     const countryName = this.getCountryName(_country);
-    const article = getArticle(countryName, false);
-    return `Enter ${article} ${countryName} phone number in a valid format, for example, ${this.getTemplate()}`;
+    return `Enter a valid ${countryName} phone number. Use ${this.getTemplate()} digits.`;
   }
 
   // validate the contact and show errors if appropriate
@@ -182,8 +205,8 @@ export class VaTelephoneInput {
       this.resetErrors();
       this.setValidityState();
       if (!this.isValid && this.touched && this.showInternalErrors) {
-        this.error = this.getErrorMessageForCountry();
-        this.contactError = this.error;
+        this.visibleError = this.getErrorMessageForCountry();
+        this.contactError = this.visibleError;
       }
     } else {
       this.validateCountry();
@@ -229,8 +252,8 @@ export class VaTelephoneInput {
     if (this.country) return;
     this.isValid = false;
     if (this.showInternalErrors) {
-      this.error = this.COUNTRY_ERROR;
-      this.countryError = this.error;
+      this.visibleError = this.COUNTRY_ERROR;
+      this.countryError = this.visibleError;
     }
   }
 
@@ -329,6 +352,7 @@ export class VaTelephoneInput {
       country,
       countryError,
       contactError,
+      visibleError,
       noCountry,
       required
     } = this;
@@ -352,7 +376,7 @@ export class VaTelephoneInput {
               )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            {error && <span id="error-message" role="alert">{error}</span>}
+            {visibleError && <span id="error-message" role="alert">{visibleError}</span>}
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
               <va-combo-box
