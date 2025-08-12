@@ -138,12 +138,19 @@ export class VaTelephoneInput {
     }
   }
 
+  /**
+   * Resets all error states for the country and contact fields, and sets visibleError to the current error prop.
+   */
   resetErrors() {
     this.countryError = '';
     this.contactError = '';
     this.visibleError = this.error;
   }
 
+  /**
+   * Sets the validity state of the phone number for the selected country.
+   * Updates isValid and formattedContact based on the current contact and country values.
+   */
   setValidityState() {
     if (this.country && this.contact) {
       this.isValid = isPossiblePhoneNumber(this.contact, mapCountry(this.country));
@@ -154,6 +161,12 @@ export class VaTelephoneInput {
     }
   }
 
+  /**
+   * Handles input events for the contact field.
+   * Updates the contact and formattedContact state, triggers validation, and emits the updated contact event.
+   *
+   * @param event - InputEvent from the contact input field
+   */
   updateContact(event: InputEvent) {
     const target = event.target as HTMLInputElement;
     const { value } = target;
@@ -163,7 +176,15 @@ export class VaTelephoneInput {
     this.handleEmit();
   }
 
-  getNumberRange(lengths: number[]): string {
+  /**
+   * Returns a string describing the valid phone number lengths for a country.
+   * If all numbers are consecutive, returns a range (e.g. "8 to 10").
+   * If not, returns a comma-separated list with 'or' before the last number (e.g. "6, 8 or 9").
+   *
+   * @param lengths - Array of valid phone number lengths for a country
+   * @returns A formatted string representing the valid lengths or ranges
+   */
+  getPhoneNumberLengthString(lengths: number[]): string {
     if (!lengths.length) return '';
     const sorted = lengths.slice().sort((a, b) => a - b);
     // Check if all numbers are consecutive
@@ -183,23 +204,37 @@ export class VaTelephoneInput {
     return `${sorted.slice(0, -1).join(', ')} or ${sorted[sorted.length - 1]}`;
   }
 
-  // return the possible lengths of a phone number for the selected country
-  getTemplate() {
+  /**
+   * Gets a formatted string representing the valid phone number lengths for the selected country.
+   * Uses getPhoneNumberLengthString to format the result as a range or list.
+   *
+   * @returns A formatted string of valid phone number lengths for the selected country
+   */
+  getValidPhoneNumberLengths() {
     const _country = mapCountry(this.country);
     const metadata = new Metadata();
     metadata.selectNumberingPlan(_country);
     const possibleLengths = metadata.numberingPlan.possibleLengths();
-    return this.getNumberRange(possibleLengths);
+    return this.getPhoneNumberLengthString(possibleLengths);
   }
 
-  // get an error message for a country that includes the template of a valid phone number for that country
+  /**
+   * Returns an error message for the selected country, including the valid phone number digit length(s).
+   * Uses getValidPhoneNumberLengths to format the digit length(s) as a range or list.
+   *
+   * @returns A formatted error message string for the selected country
+   */
   getErrorMessageForCountry() {
     const _country = mapCountry(this.country);
     const countryName = this.getCountryName(_country);
-    return `Enter a valid ${countryName} phone number. Use ${this.getTemplate()} digits.`;
+    return `Enter a valid ${countryName} phone number. Use ${this.getValidPhoneNumberLengths()} digits.`;
   }
 
-  // validate the contact and show errors if appropriate
+  /**
+   * Validates the contact and country fields, sets error messages, and updates validity state.
+   * If the country is selected, checks the phone number validity and sets error messages as needed.
+   * If the country is not selected, triggers country validation and error state.
+   */
   validateContact() {
     if (this.country) {
       this.resetErrors();
@@ -214,6 +249,12 @@ export class VaTelephoneInput {
   }
 
 
+  /**
+   * Emits the vaContact event with the current phone number, country, validity, and error state.
+   * Attempts to parse the phone number and includes calling code and national number if valid.
+   *
+   * @emits vaContact - Event containing callingCode, countryCode, contact, isValid, error, and touched
+   */
   handleEmit() {
     const tryParse = !!this.contact && !!this.country;
     let phoneNumber: PhoneNumber | null;
@@ -245,7 +286,11 @@ export class VaTelephoneInput {
     });
   }
 
-  // make sure country has been selected
+  /**
+   * Validates that a country has been selected.
+   * Sets error messages and validity state if no country is selected.
+   * Updates touched state to indicate user interaction.
+   */
   validateCountry() {
     this.resetErrors();
     if (!this.touched) this.touched = true;
@@ -257,7 +302,12 @@ export class VaTelephoneInput {
     }
   }
 
-  // when country is selected, do validation
+  /**
+   * Handles the event when the country is changed in the combo box.
+   * Updates the country property, triggers validation, and emits the updated contact event.
+   *
+   * @param event - CustomEvent containing the new country value
+   */
   countryChange(event: CustomEvent<{ value: CountryCode }>) {
     const { value } = event.detail;
     this.country = value;
@@ -265,6 +315,13 @@ export class VaTelephoneInput {
     this.handleEmit();
   }
 
+  /**
+   * Formats the input phone number value according to the selected country.
+   * Uses AsYouType from libphonenumber-js for formatting. If no numbers are present, returns the input value.
+   *
+   * @param value - The phone number string to format
+   * @returns The formatted phone number string, or the original value if formatting is not possible
+   */
   formatContact(value: string) {
     // some territories are formatted / validated as if they were a different, larger country
     const _country = mapCountry(this.country);
@@ -273,8 +330,12 @@ export class VaTelephoneInput {
     return _formatted === '' ? value : _formatted;
   }
 
-  // get list of country codes alphabetized by name with US in front
-  // add some territories not in library
+  /**
+   * Builds and returns a list of country codes alphabetized by name, with US at the front.
+   * Also adds territories not present in the default country list.
+   *
+   * @returns An array of country codes, with US first and the rest sorted alphabetically
+   */
   buildCountryList() {
     const allButUS = getCountries()
       .filter(country => country !== this.DEFAULT_COUNTRY);
@@ -289,7 +350,13 @@ export class VaTelephoneInput {
     return [this.DEFAULT_COUNTRY, ...sortedAllButUs];
   }
 
-  // return the name of a country using the country code
+  /**
+   * Returns the display name for a given country code.
+   * Handles special cases using DATA_MAP.names, otherwise uses Intl.DisplayNames.
+   *
+   * @param countryCode - The ISO country code to get the display name for
+   * @returns The display name for the country
+   */
   getCountryName(countryCode: string) {
     // some country names must be handled explicitly
     if (countryCode in DATA_MAP.names) {
