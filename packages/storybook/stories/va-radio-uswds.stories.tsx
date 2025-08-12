@@ -403,7 +403,7 @@ const ToggleErrorStateTemplate = (args) => {
   return (
     <>
       {Template({
-        ...args,
+        ...defaultArgs,
         error: error,
         required: true,
         id: "error-demo",
