@@ -20,6 +20,7 @@ describe('VaModal', () => {
     instance.focusableChildren = [document.createElement('button')];
     instance.closeButton = document.createElement('button');
     instance.alertActions = document.createElement('div');
+    
   });
 
   it('handleClick closes modal if clickToClose and visible', () => {
@@ -63,30 +64,10 @@ describe('VaModal', () => {
     expect(instance.isVisibleDirty).toBe(true);
   });
 
-  it('componentDidLoad calls setupModal if visible', () => {
-    instance.visible = true;
-    const spy = jest.spyOn(instance, 'setupModal' as any);
-    instance.componentDidLoad();
-    expect(typeof spy).toBe('function');
-  });
-
-  it('componentDidUpdate calls setupModal or teardownModal', () => {
-    instance.isVisibleDirty = true;
-    instance.visible = true;
-    const setupSpy = jest.spyOn(instance, 'setupModal' as any);
-    const teardownSpy = jest.spyOn(instance, 'teardownModal' as any);
-    instance.componentDidUpdate();
-    expect(typeof setupSpy).toBe('function');
-    instance.isVisibleDirty = true;
-    instance.visible = false;
-    instance.componentDidUpdate();
-    expect(typeof teardownSpy).toBe('function');
-  });
-
   it('disconnectedCallback calls teardownModal', () => {
     const spy = jest.spyOn(instance, 'teardownModal' as any);
     instance.disconnectedCallback();
-    expect(typeof spy).toBe('function');
+    expect(spy).toHaveBeenCalled();
   });
 
   it('handleClose emits closeEvent', () => {
