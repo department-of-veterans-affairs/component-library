@@ -42,7 +42,6 @@ const Template = ({
   error,
   value,
   monthSelect,
-  ...rest
 }) => {
   return (
     <VaMemorableDate
@@ -55,7 +54,6 @@ const Template = ({
       value={value}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
-      {...rest}
     />
   );
 };
