@@ -2,20 +2,20 @@ name: Weekly Design System Reports
 
 on:
   schedule:
-    # Run every Thursday at 11 PM UTC (adjust timezone as needed)
-    - cron: '0 23 * * 4'
+    - cron: '0 22 * * 4' # Run every Thursday at 10 PM UTC (6 PM EDT / 5 PM EST)
   workflow_dispatch: # Allow manual triggering
 
 jobs:
-  generate-reports:
+  generate-weekly-reports:
     runs-on: ubuntu-latest
-    timeout-minutes: 60 # Increase timeout for large repos
+    timeout-minutes: 30
     
     steps:
     - name: Checkout component-library
       uses: actions/checkout@v4
       with:
-        path: component-library
+        ref: ${{ github.head_ref || github.ref_name }}
+        fetch-depth: 1
         
     - name: Checkout vets-website
       uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
         repository: department-of-veterans-affairs/vets-website
         path: vets-website
         token: ${{ secrets.GITHUB_TOKEN }}
-        fetch-depth: 1 # Shallow clone for faster checkout
+        fetch-depth: 1
         
     - name: Checkout content-build
       uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
         repository: department-of-veterans-affairs/content-build
         path: content-build
         token: ${{ secrets.GITHUB_TOKEN }}
-        fetch-depth: 1 # Shallow clone for faster checkout
+        fetch-depth: 1
         
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -40,82 +40,94 @@ jobs:
         cache: 'yarn'
     
     - name: Install dependencies
-      working-directory: component-library/packages/design-system-dashboard-cli
       run: yarn install
       
-    - name: Create output directory
-      working-directory: component-library/packages/design-system-dashboard-cli
-      run: mkdir -p output
-      
-    - name: Create .env.json
-      working-directory: component-library/packages/design-system-dashboard-cli
+    - name: Create correct .env.json for GitHub Actions
+      working-directory: packages/design-system-dashboard-cli
       run: |
-        cat > .env.json << EOF
-        {
+        echo '{
           "repos": {
-            "vets-website": "../../../vets-website/",
-            "content-build": "../../../content-build/"
+            "vets-website": "../../vets-website/",
+            "content-build": "../../content-build/"
           }
-        }
-        EOF
+        }' > .env.json.github
         
-    - name: Generate form apps report
-      working-directory: component-library/packages/design-system-dashboard-cli
-      run: npm run forms -- --csv --output output/form-apps-$(date +%Y-%m-%d).csv
-      
+    - name: Create output directory
+      working-directory: packages/design-system-dashboard-cli
+      run: mkdir -p output
+        
+    - name: Generate forms report
+      working-directory: packages/design-system-dashboard-cli
+      run: |
+        # Temporarily replace .env.json with GitHub paths
+        mv .env.json .env.json.original
+        mv .env.json.github .env.json
+        
+        yarn forms --csv --output output/form-apps-$(date +%Y-%m-%d).csv
+        
+        # Restore original .env.json
+        mv .env.json.original .env.json
+        
     - name: Generate design system components report
-      working-directory: component-library/packages/design-system-dashboard-cli
-      run: npm run report:csv -- --output output/ds-components-$(date +%Y-%m-%d).csv
-      
+      working-directory: packages/design-system-dashboard-cli
+      run: |
+        # Create GitHub-specific .env.json
+        echo '{
+          "repos": {
+            "vets-website": "../../vets-website/",
+            "content-build": "../../content-build/"
+          }
+        }' > .env.json.github
+        
+        # Temporarily replace .env.json with GitHub paths
+        mv .env.json .env.json.original
+        mv .env.json.github .env.json
+        
+        yarn report:csv --output output/ds-components-$(date +%Y-%m-%d).csv
+        
+        # Restore original .env.json
+        mv .env.json.original .env.json
+        
     - name: Generate forms library usage report
-      working-directory: component-library/packages/design-system-dashboard-cli
-      run: npm run forms-library-usage -- --list > output/forms-library-usage-$(date +%Y-%m-%d).txt
+      working-directory: packages/design-system-dashboard-cli
+      run: |
+        # Create GitHub-specific .env.json
+        echo '{
+          "repos": {
+            "vets-website": "../../vets-website/",
+            "content-build": "../../content-build/"
+          }
+        }' > .env.json.github
+        
+        # Temporarily replace .env.json with GitHub paths
+        mv .env.json .env.json.original
+        mv .env.json.github .env.json
+        
+        yarn forms-library-usage --list > output/forms-library-usage-$(date +%Y-%m-%d).txt
+        
+        # Restore original .env.json
+        mv .env.json.original .env.json
       
-    - name: Upload reports as artifacts
+    - name: Upload reports
       uses: actions/upload-artifact@v4
       with:
-        name: weekly-reports-${{ github.run_number }}
-        path: component-library/packages/design-system-dashboard-cli/output/
-        retention-days: 90
-        
-    - name: Create summary
-      working-directory: component-library/packages/design-system-dashboard-cli
-      run: |
-        echo "## Weekly Design System Reports - $(date +%Y-%m-%d)" > output/report-summary.md
-        echo "" >> output/report-summary.md
-        echo "### Form Applications" >> output/report-summary.md
-        FORM_COUNT=$(npm run forms --silent | grep -o '[0-9]\+')
-        echo "Total form apps: $FORM_COUNT" >> output/report-summary.md
-        echo "" >> output/report-summary.md
-        echo "### Forms Library Usage" >> output/report-summary.md
-        LIBRARY_COUNT=$(npm run forms-library-usage --silent | grep -o '[0-9]\+')
-        echo "Non-form applications using forms library: $LIBRARY_COUNT" >> output/report-summary.md
-        echo "" >> output/report-summary.md
-        echo "### Generated Files" >> output/report-summary.md
-        echo "- \`form-apps-$(date +%Y-%m-%d).csv\` - List of form applications" >> output/report-summary.md
-        echo "- \`ds-components-$(date +%Y-%m-%d).csv\` - Design system component usage" >> output/report-summary.md
-        echo "- \`forms-library-usage-$(date +%Y-%m-%d).txt\` - Non-form apps using forms library" >> output/report-summary.md
-        
+        name: reports-${{ github.run_number }}
+        path: |
+          packages/design-system-dashboard-cli/output/*.csv
+          packages/design-system-dashboard-cli/output/*.txt
+        retention-days: 7
+
+           
     - name: Commit and push reports
-      working-directory: component-library
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add packages/design-system-dashboard-cli/output/
-        git commit -m "Add weekly reports for $(date +%Y-%m-%d)" -a || exit 0
-        git push
-    - name: Create GitHub issue with summary
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const fs = require('fs');
-          const summary = fs.readFileSync('component-library/packages/design-system-dashboard-cli/output/report-summary.md', 'utf8');
-          
-          // Create an issue with the weekly report
-          await github.rest.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: `Weekly Design System Report - ${new Date().toISOString().split('T')[0]}`,
-            body: summary,
-            labels: ['report', 'automated']
-          });
+        git add packages/design-system-dashboard-cli/output/form-apps-$(date +%Y-%m-%d).csv
+        git add packages/design-system-dashboard-cli/output/ds-components-$(date +%Y-%m-%d).csv
+        git add packages/design-system-dashboard-cli/output/forms-library-usage-$(date +%Y-%m-%d).txt
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Add weekly reports for $(date +%Y-%m-%d)"
+          git push
+        fi
