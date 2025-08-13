@@ -554,6 +554,6 @@ ToggleErrorState.argTypes = {
   focusEl: {
     name: 'Element to focus on error toggle',
     control: { type: 'radio' },
-    options: [null, 'radio-error-message', 'input-wrap', 'form-question'],
+    options: [null, 'radio-error-message', 'form-question'],
   },
 };
