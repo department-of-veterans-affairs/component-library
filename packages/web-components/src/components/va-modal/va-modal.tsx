@@ -396,6 +396,8 @@ export class VaModal {
     // if it exists. You are able to focus elements in both light and shadow DOM.
     const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
       this.el.shadowRoot?.querySelector(this.initialFocusSelector) ||
+      this.el.shadowRoot?.querySelector('#heading') ||
+      this.el.shadowRoot?.querySelector('#description') ||
       this.closeButton) as HTMLElement;
     initialFocus?.focus();
 
@@ -540,11 +542,11 @@ export class VaModal {
             <div class={bodyClass}>
               <div role="document">
                 {modalTitle && (
-                  <h2 class={titleClass} tabindex={-1} id="heading">
+                  <h2 class={titleClass} tabindex={-1} id="heading" tabIndex={-1}>
                     {modalTitle}
                   </h2>
                 )}
-                <div class="usa-prose" id="description">
+                <div class="usa-prose" id="description" tabIndex={-1}>
                   <slot></slot>
                 </div>
               </div>
