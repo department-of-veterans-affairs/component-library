@@ -81,14 +81,16 @@ describe('va-radio', () => {
     await page.setContent('<va-radio error="This is an error"></va-radio>');
 
     const element = await page.find('va-radio');
-    const errorElement = await page.find('va-radio >>> .usa-error-message');
+    const errorElement = await page.find('va-radio >>> #radio-error-message');
     expect(element.getAttribute('aria-invalid')).toEqual('true');
     expect(errorElement).toEqualHtml(`
-     <span class="usa-error-message" id="radio-error-message" role="alert">
+     <span id="radio-error-message" role="alert">
        <span class="usa-sr-only">
          error
        </span>
-       This is an error
+      <span class="usa-error-message">
+        This is an error
+      </span>
      </span>
     `);
   });
