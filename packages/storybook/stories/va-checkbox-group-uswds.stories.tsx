@@ -136,7 +136,16 @@ const I18nTemplate = args => {
   );
 };
 
-const ToggleErrorStateTemplate = (args) => {
+/**
+ * Template that demonstrates toggling form error states.
+ *
+ * For accessibility testing purposes, the template also supports moving focus
+ * to various elements after entering the error state.
+ *
+ * Note: This template only toggles the error state and does not actually
+ * validate the input value.
+ */
+const ToggleErrorStateTemplate = args => {
   const [error, setError] = useState(null);
   const { focusEl } = args;
 
@@ -156,14 +165,18 @@ const ToggleErrorStateTemplate = (args) => {
     <>
       {Template({
         ...defaultArgs,
-        error: error,
-        required: true,
-        id: "error-demo",
-        'use-forms-pattern': "single",
-        'form-heading': "Error state demo",
+        'error': error,
+        'required': true,
+        'id': 'error-demo',
+        'use-forms-pattern': 'single',
+        'form-heading': 'Error state demo',
         'form-heading-level': 1,
       })}
-      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
+      <va-button
+        text="Toggle error state"
+        onClick={handleClick}
+        style={{ marginTop: '2rem' }}
+      ></va-button>
     </>
   );
 };

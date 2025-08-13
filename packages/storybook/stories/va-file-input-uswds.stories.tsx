@@ -304,7 +304,16 @@ return (
   );
 };
 
-const ToggleErrorStateTemplate = (args) => {
+/**
+ * Template component that demonstrates toggling form error states.
+ *
+ * For accessibility testing purposes, the template also supports moving focus
+ * to various elements after entering the error state.
+ *
+ * Note: This template only toggles the error state and does not actually
+ * validate the input value.
+ */
+const ToggleErrorStateTemplate = args => {
   const [error, setError] = useState(null);
   const { focusEl } = args;
 
@@ -324,6 +333,7 @@ const ToggleErrorStateTemplate = (args) => {
     <>
       {Template({
         ...defaultArgs,
+        ...args,
         error: error,
         required: true,
         id: "error-demo",
@@ -497,6 +507,6 @@ ToggleErrorState.argTypes = {
   focusEl: {
     name: 'Element to focus on error toggle',
     control: { type: 'radio' },
-    options: [null, 'file-input-error-alert', 'form-question'],
+    options: [null, 'file-input-error-alert'],
   },
 };

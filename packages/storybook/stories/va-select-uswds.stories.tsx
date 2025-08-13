@@ -148,7 +148,16 @@ const InertTemplate = ({
   );
 };
 
-const ToggleErrorStateTemplate = (args) => {
+/**
+ * Template component that demonstrates toggling form error states.
+ *
+ * For accessibility testing purposes, the template also supports moving focus
+ * to various elements after entering the error state.
+ *
+ * Note: This template only toggles the error state and does not actually
+ * validate the input value.
+ */
+const ToggleErrorStateTemplate = args => {
   const [error, setError] = useState(null);
   const { focusEl } = args;
 
