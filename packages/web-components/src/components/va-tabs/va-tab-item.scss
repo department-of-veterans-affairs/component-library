@@ -1,0 +1,77 @@
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var(--vads-color-primary);
+  position: relative;
+  padding: 1rem;
+  padding-bottom: calc(1rem - 4px); // Adjust bottom padding to account for border
+  border: none;
+  border-bottom: 4px solid transparent;
+  min-width: 2.75rem;
+  max-width: 10rem;
+  font-family: var(--font-source-sans);
+  font-size: var(--vads-font-size-source-sans-normalized);
+  text-align: center;
+  line-height: var(--vads-font-line-height-2);
+
+  @media (forced-colors: active) {
+    background-color: ButtonFace;
+    color: ButtonText;
+    border-bottom-color: ButtonFace;
+  }
+}
+
+:host(:focus) {
+  outline-offset: -2px !important; // Needed to override styles from `base.css` that set outline-offset with [tabindex]:focus selector
+}
+
+:host([aria-selected='false']:hover) {
+  cursor: pointer;
+  background: var(--vads-color-base-lightest);
+  border-bottom-color:  var(--vads-color-primary);
+}
+
+:host([aria-selected='true']) {
+  border-bottom-color: var(--vads-color-primary);
+  color: transparent;
+}
+
+:host([aria-selected='true']:hover) {
+  cursor: pointer;
+  background: var(--vads-color-base-lightest);
+  border-bottom-color:  var(--vads-color-primary);
+}
+
+:host([aria-selected='true'])::after {
+  content: attr(data-label) / "";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: calc(100% - calc(2rem - 4px)); // 2rem - 4px is the cumulative vertical padding on the tab item
+  top: 1rem; // Account for top padding of tab item
+  width: calc(100% - 4px); // Don't take up full width so outline of tab item is fully visible
+  left: 2px; // Update horizontal position to align with the tab item due to decreased width
+  font-weight: 700;
+  color: var(--vads-color-link);
+}
+
+:host([aria-selected='true']:hover)::after {
+  background-color: var(--vads-color-base-lightest);
+}
+
+@media screen and (min-width: 380px) {
+  :host {
+    min-width: 4rem;
+  }
+}
+
+@media screen and (min-width: $medium-screen) {
+  :host {
+    max-width: unset;
+  }
+}

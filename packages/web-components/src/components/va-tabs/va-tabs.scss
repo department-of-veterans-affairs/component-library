@@ -1,0 +1,43 @@
+.va-tabs__list {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  gap: .5rem;
+  width: 100%;
+  border-bottom: 1px solid var(--vads-color-gray-medium);
+  min-height: 52px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  overscroll-behavior: none;
+  border-radius: 5px 5px 0 0;
+
+  &.is-overflowing {
+    background-color: var(--vads-color-white);
+    background-image:
+      radial-gradient(ellipse farthest-side at 0 50%, var(--vads-color-base-light) 0, var(--vads-color-white)),
+      radial-gradient(ellipse farthest-side at 100% 50%, var(--vads-color-base-light) 0, var(--vads-color-white));
+    background-repeat: no-repeat;
+    background-position: 0 .25rem, 100% .25rem;
+    background-size: .5rem 85%, .5rem 85%;
+  }
+
+  &.is-overflowing.hide-left-scroll-indicator {
+    background-image:
+      radial-gradient(ellipse farthest-side at 0 50%, var(--vads-color-white) 0, var(--vads-color-white)),
+      radial-gradient(ellipse farthest-side at 100% 50%, var(--vads-color-base-light) 0, var(--vads-color-white));
+  }
+
+  &.is-overflowing.hide-right-scroll-indicator {
+    background-image:
+      radial-gradient(ellipse farthest-side at 0 50%, var(--vads-color-base-light) 0, var(--vads-color-white)),
+      radial-gradient(ellipse farthest-side at 100% 50%, var(--vads-color-white) 0, var(--vads-color-white));
+  }
+
+  &.is-overflowing.hide-left-scroll-indicator.hide-right-scroll-indicator {
+    background-image:
+      radial-gradient(ellipse farthest-side at 0 50%, var(--vads-color-white) 0, var(--vads-color-white)),
+      radial-gradient(ellipse farthest-side at 100% 50%, var(--vads-color-white) 0, var(--vads-color-white));
+  }
+}
