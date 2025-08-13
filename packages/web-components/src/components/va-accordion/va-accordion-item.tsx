@@ -120,6 +120,16 @@ export class VaAccordionItem {
         // eslint-disable-next-line i18next/no-literal-string
         : `h${level}`;
 
+      const headerClass = classNames({
+        'va-accordion__header': true,
+        'va-accordion__header--has-icon': this.el.querySelector('[slot="icon"]'),
+      });
+
+      const subHeaderClass = classNames({
+        'va-accordion__subheader': true,
+        'va-accordion__subheader--has-icon': this.el.querySelector('[slot="subheader-icon"]'),
+      });
+
       return (
         <Tag class="usa-accordion__heading">
           <button
@@ -133,13 +143,13 @@ export class VaAccordionItem {
             }}
             part="accordion-header"
           >
-            <span class="va-accordion__header">
+            <span class={headerClass}>
               <slot name="icon" />
               {this.slotHeader || header || ieSlotCheckHeader}
               {headerSrOnly && <span class="usa-sr-only">&nbsp;{headerSrOnly}</span>}
             </span>
             {this.subheader &&
-              <span class="va-accordion__subheader">
+              <span class={subHeaderClass}>
                 <slot name="subheader-icon" />
                 {subheader}
               </span>}
