@@ -4,7 +4,7 @@ describe('VaModal', () => {
   let instance: VaModal;
   beforeEach(() => {
     instance = new VaModal();
-    //instance.el = document.createElement('div') as any;
+    instance.el = document.createElement('div') as any;
     instance.visible = true;
     instance.isVisibleDirty = false;
     instance.ariaHiddenNodeExceptions = [];
