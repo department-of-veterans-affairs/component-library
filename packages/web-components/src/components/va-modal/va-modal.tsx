@@ -582,7 +582,7 @@ export class VaModal {
             <div class={bodyClass}>
               <div role="document">
                 {modalTitle && (
-                  <h2 class={titleClass} id="heading" tabIndex={-1}>
+                  <h2 class={titleClass} id="heading">
                     {modalTitle}
                   </h2>
                 )}
