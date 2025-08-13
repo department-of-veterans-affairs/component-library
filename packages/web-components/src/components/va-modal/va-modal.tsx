@@ -182,6 +182,11 @@ export class VaModal {
 
   // This click event listener is used to close the modal when clickToClose
   // is true and the user clicks the overlay outside of the modal contents.
+  /**
+   * Handles click events on the modal overlay to close the modal if clickToClose is enabled.
+   *
+   * @param e - MouseEvent from the click
+   */
   @Listen('click')
   handleClick(e: MouseEvent) {
     if (!this.clickToClose) return;
@@ -195,6 +200,11 @@ export class VaModal {
 
   // This keydown event listener is used to close the modal when the user hits
   // the Escape key.
+  /**
+   * Handles keydown events on the window to close the modal on Escape key and manage focus trap state.
+   *
+   * @param e - KeyboardEvent from the keydown
+   */
   @Listen('keydown', { target: 'window' })
   handleKeyDown(e: KeyboardEvent) {
     if (!this.visible) return;
@@ -209,7 +219,11 @@ export class VaModal {
     this.shifted = e.shiftKey;
   }
 
-  // Handle when the focus is leaving the last element, wrap back to the first if appropriate
+  /**
+   * Handles focus leaving the last focusable element in the modal and wraps focus to the first element.
+   *
+   * @param e - KeyboardEvent from the keydown
+   */
   handleLastElementFocus(e: KeyboardEvent) {
     if (this.visible) {
       // The focus is outside the modal
@@ -221,7 +235,11 @@ export class VaModal {
     }
   }
 
-  // Handle when the focus is leaving the first element, wrap back to the last if appropriate
+  /**
+   * Handles focus leaving the first focusable element in the modal and wraps focus to the last element.
+   *
+   * @param e - KeyboardEvent from the keydown
+   */
   handleFirstElementFocus(e: KeyboardEvent) {
     if (this.visible) {
       // The focus is outside the modal
@@ -233,24 +251,26 @@ export class VaModal {
     }
   }
 
-  // This is a workaround for determining when to call setupModal or teardownModal.
-  // Elements are not yet available in the DOM due to `if (!visible) return null;`.
-  // See componentDidUpdate.
+  /**
+   * Watch handler for the visible prop to trigger modal setup or teardown.
+   */
   @Watch('visible')
   watchVisibleHandler() {
     this.isVisibleDirty = true;
   }
 
+  /**
+   * Lifecycle method called after the component is loaded. Sets up the modal if visible.
+   */
   componentDidLoad() {
     if (this.visible) {
       requestAnimationFrame(() => this.setupModal());
     }
   }
 
-  // Stencil's componentDidUpdate doesn't provide us with previous props to compare
-  // and determine if we need to setup or destroy the modal. We can use a boolean
-  // variable inside a Watch decorator as a workaround to determine if an update needs
-  // to occur.
+  /**
+   * Lifecycle method called after the component is updated. Sets up or tears down the modal as needed.
+   */
   componentDidUpdate() {
     if (!this.isVisibleDirty) return;
 
@@ -262,14 +282,27 @@ export class VaModal {
     }
   }
 
+  /**
+   * Lifecycle method called when the component is disconnected from the DOM. Tears down the modal.
+   */
   disconnectedCallback() {
     this.teardownModal();
   }
 
+  /**
+   * Handles closing the modal and emits the closeEvent.
+   *
+   * @param e - KeyboardEvent or MouseEvent that triggered the close
+   */
   private handleClose(e: KeyboardEvent | MouseEvent) {
     this.closeEvent.emit(e);
   }
 
+  /**
+   * Handles primary button click, emits primaryButtonClick, and fires analytics if enabled.
+   *
+   * @param e - MouseEvent from the button click
+   */
   private handlePrimaryButtonClick(e: MouseEvent) {
     this.primaryButtonClick.emit(e);
 
@@ -287,6 +320,11 @@ export class VaModal {
     }
   }
 
+  /**
+   * Handles secondary button click, emits secondaryButtonClick, and fires analytics if enabled.
+   *
+   * @param e - MouseEvent from the button click
+   */
   private handleSecondaryButtonClick(e: MouseEvent) {
     this.secondaryButtonClick.emit(e);
 
@@ -304,9 +342,11 @@ export class VaModal {
     }
   }
 
-  // Pass in an array of focusable elements and return non-hidden and elements
-  // inside the shadow DOM; note: when an element inside a web component has
-  // focus, document.activeElement will point to the web component itself
+  /**
+   * Returns an array of focusable children within the modal, including shadow DOM elements.
+   *
+   * @returns Array of focusable HTMLElement children
+   */
   private getFocusableChildren() {
     const modalContent = Array.from(
       this.el?.querySelectorAll(focusableQueryString) || [],
@@ -352,9 +392,8 @@ export class VaModal {
 
   /**
    * Traverses the shadow DOM tree to find the actual focused element.
-   * This method handles cases where the focused element is inside one or more shadow roots.
    *
-   * @returns activeElement - The deepest actively focused element in the shadow DOM tree, or null if no element is focused
+   * @returns The deepest actively focused element in the shadow DOM tree, or null if no element is focused
    */
   private getRealActiveElement(): HTMLElement | null {
     let activeElement = document.activeElement as HTMLElement;
@@ -367,9 +406,9 @@ export class VaModal {
     return activeElement;
   }
 
-  // This method traps the focus inside our web component, prevents scrolling outside
-  // the modal, and adds aria-hidden="true" to all elements outside the web component.
-  // Fires analytics event unless disableAnalytics is true.
+  /**
+   * Sets up the modal: traps focus, disables body scroll, sets aria-hidden, and fires analytics.
+   */
   private setupModal() {
     // Save previous focus & restore when modal is closed
     this.savedFocus = this.getRealActiveElement();
@@ -431,8 +470,9 @@ export class VaModal {
     }
   }
 
-  // This method removes the focus trap, re-enables scrolling and
-  // removes aria-hidden="true" from external elements.
+  /**
+   * Tears down the modal: removes focus trap, re-enables body scroll, and restores focus.
+   */
   private teardownModal() {
     clearAllBodyScrollLocks();
     this.undoAriaHidden?.();
