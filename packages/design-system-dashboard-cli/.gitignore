@@ -11,6 +11,3 @@ yarn-error.log*
 *.tsbuildinfo
 .npm
 .eslintcache
-
-ds-components-*.csv
-form-apps-*.csv
