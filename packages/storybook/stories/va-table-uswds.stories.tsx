@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { VaPagination } from '@department-of-veterans-affairs/component-library/dist/react-bindings';
+import { VaPagination, VaTable } from '@department-of-veterans-affairs/component-library/dist/react-bindings';
 
 const vaTableDocs = getWebComponentDocs('va-table');
 
@@ -52,8 +52,19 @@ const Template = args => {
     'right-align-cols': rightAlignCols,
   } = args;
 
+  // Examples for how to handle events from interactive elements in table cells
+  const handleTableEvent = (e) => {
+    if (e.detail.targetElement.tagName === 'VA-BUTTON') {
+      console.log('Button was clicked in table:', e);
+    }
+
+    if (e.detail.targetElement.tagName === 'VA-CHECKBOX' && e.detail.eventType === 'vaChange') {
+      console.log('Checkbox was toggled in table:', e);
+    }
+  };
+
   return (
-    <va-table
+    <VaTable
       scrollable={scrollable}
       table-title={tableTitle}
       stacked={args.stacked}
@@ -62,6 +73,8 @@ const Template = args => {
       striped={striped}
       full-width={fullWidth}
       right-align-cols={rightAlignCols}
+      onVa-table-click={handleTableEvent}
+      onVa-table-vaChange={handleTableEvent}
     >
       <va-table-row>
         {columns.map((col, i) => (
@@ -72,11 +85,19 @@ const Template = args => {
       {rows.map((row, index) => (
         <va-table-row key={`row-default-${index}`}>
           {row.map((item, index2) => (
-            <span key={`cell-default-${index2}`}>{item}</span>
+            <span key={`cell-default-${index2}`}>
+              {index === 2 && index2 === 0 ? (
+                <va-checkbox label="Check me" id={`checkbox-${index}-${index2}`} />
+              ) : index === 3 && index2 === 0 ? (
+                <va-button text="Click me" id={`button-${index}-${index2}`} />
+              ) : (
+                item
+              )}
+            </span>
           ))}
         </va-table-row>
       ))}
-    </va-table>
+    </VaTable>
   );
 };
 
