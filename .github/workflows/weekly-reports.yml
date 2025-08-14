@@ -127,31 +127,35 @@ jobs:
         retention-days: 7
 
            
-    - name: Create pull request with reports
-      uses: peter-evans/create-pull-request@v6
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "Add weekly reports for ${{ steps.date.outputs.date }}"
-        title: "Weekly Design System Reports - ${{ steps.date.outputs.date }}"
-        body: |
-          ## Weekly Design System Reports - ${{ steps.date.outputs.date }}
+    - name: Commit reports to weekly branch
+      run: |
+        # Create a new branch for this week's reports
+        git checkout -b weekly-reports/${{ steps.date.outputs.date }}
+        
+        # Configure git
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Add and commit the reports
+        git add packages/design-system-dashboard-cli/output/form-apps-${{ steps.date.outputs.date }}.csv
+        git add packages/design-system-dashboard-cli/output/ds-components-${{ steps.date.outputs.date }}.csv
+        git add packages/design-system-dashboard-cli/output/forms-library-usage-${{ steps.date.outputs.date }}.txt
+        
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+          exit 0
+        else
+          git commit -m "Add weekly reports for ${{ steps.date.outputs.date }}"
+          git push origin weekly-reports/${{ steps.date.outputs.date }}
           
-          This automated pull request contains the weekly design system usage reports:
-          
-          ### 📊 Reports Included:
-          - **Form Applications** (`form-apps-${{ steps.date.outputs.date }}.csv`) - List of all form applications using RoutedSavableApp
-          - **Design System Components** (`ds-components-${{ steps.date.outputs.date }}.csv`) - Component usage across VA.gov
-          - **Forms Library Usage** (`forms-library-usage-${{ steps.date.outputs.date }}.txt`) - Non-form apps using forms library code
-          
-          ### 🤖 Automation Details:
-          - Generated automatically every Thursday evening
-          - Reports are stored in `packages/design-system-dashboard-cli/output/`
-          - Data will be consumed by the Metrics Dashboard on design.va.gov
-          
-          **Ready for review and merge!** 🚀
-        branch: weekly-reports/${{ steps.date.outputs.date }}
-        delete-branch: true
-        add-paths: |
-          packages/design-system-dashboard-cli/output/form-apps-*.csv
-          packages/design-system-dashboard-cli/output/ds-components-*.csv
-          packages/design-system-dashboard-cli/output/forms-library-usage-*.txt
+          echo "## 📊 Weekly Reports Generated!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Branch created: \`weekly-reports/${{ steps.date.outputs.date }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Manual step required:** Create a PR from this branch to main." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Reports generated:" >> $GITHUB_STEP_SUMMARY
+          echo "- form-apps-${{ steps.date.outputs.date }}.csv" >> $GITHUB_STEP_SUMMARY
+          echo "- ds-components-${{ steps.date.outputs.date }}.csv" >> $GITHUB_STEP_SUMMARY
+          echo "- forms-library-usage-${{ steps.date.outputs.date }}.txt" >> $GITHUB_STEP_SUMMARY
+        fi
