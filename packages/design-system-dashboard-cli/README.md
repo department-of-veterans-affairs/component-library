@@ -6,6 +6,23 @@ This little tool is used by the VA.gov design system team to gather metrics on
 design system usage. For now, it's a simple CLI which may be used to output
 formatted text to the terminal or a CSV file.
 
+## Automated Weekly Reports
+
+This tool now includes an automated GitHub Actions workflow that generates comprehensive weekly reports every Thursday evening. The workflow produces three reports:
+
+1. **Form Applications Report** (`form-apps-YYYY-MM-DD.csv`) - Lists all applications using the `RoutedSavableApp` component
+2. **Design System Components Report** (`ds-components-YYYY-MM-DD.csv`) - Tracks usage of design system components across VA.gov
+3. **Forms Library Usage Report** (`forms-library-usage-YYYY-MM-DD.txt`) - Identifies non-form applications using forms library code
+
+These reports are automatically:
+
+- Generated every Thursday at 10 PM UTC (6 PM EDT / 5 PM EST)
+- Committed to the repository in the `output/` directory for historical tracking
+- Made available as downloadable artifacts
+- Consumed by the **Metrics Dashboard** on the [design.va.gov guidance site](https://design.va.gov/about/metrics/) to provide data visualizations and insights for the design system team
+
+The workflow can also be triggered manually via the GitHub Actions interface when needed.
+
 ## Usage
 
 Before you can use this tool, you'll need the following:
