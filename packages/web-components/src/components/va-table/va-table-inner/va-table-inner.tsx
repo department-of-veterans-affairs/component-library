@@ -111,6 +111,61 @@ export class VaTableInner {
     }
   }
 
+  connectedCallback() {
+    this.setupEventDelegation();
+  }
+
+  setupEventDelegation() {
+    // Events to dispatch from interactive elements in the table cells
+    const dispatchedSlotEvents = [
+      'click', 'vaChange'
+    ];
+
+    dispatchedSlotEvents.forEach(eventType => {
+      this.el.addEventListener(eventType, this.handleGenericEvent.bind(this), true);
+    });
+  }
+
+  handleGenericEvent(e: Event) {
+    // Only process events that originated from slotted content
+    if (this.isEventFromSlottedContent(e)) {
+      // Create a generalized table event
+      const tableEvent = new CustomEvent(`va-table-${e.type}`, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          originalEvent: e,
+          eventType: e.type,
+          targetElement: e.target,
+          targetId: (e.target as HTMLElement).id
+        }
+      });
+
+      this.el.dispatchEvent(tableEvent);
+    }
+  }
+
+  isEventFromSlottedContent(e: Event): boolean {
+    const target = e.target as Element;
+    if (!target) return false;
+
+    // Check if the target is within a slot or is slotted content
+    const closestSlot = target.closest('slot') || target.assignedSlot;
+    if (closestSlot) return true;
+
+    // Check if target has a slot attribute (is slotted content)
+    if (target.hasAttribute && target.hasAttribute('slot')) return true;
+
+    // Check if target is a descendant of slotted content
+    let parent = target.parentElement;
+    while (parent && parent !== this.el) {
+      if (parent.hasAttribute && parent.hasAttribute('slot')) return true;
+      parent = parent.parentElement;
+    }
+
+    return false;
+  }
+
   fireSort(e: Event) {
     const target = e.currentTarget as HTMLElement;
     const th = target.closest('th');
