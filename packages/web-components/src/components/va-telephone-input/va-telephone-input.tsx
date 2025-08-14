@@ -415,7 +415,6 @@ export class VaTelephoneInput {
       label,
       hint,
       countries,
-      error,
       formattedContact,
       country,
       countryError,
@@ -425,13 +424,17 @@ export class VaTelephoneInput {
       required
     } = this;
 
+    const hostClasses = classNames({
+      'error': !!visibleError,
+    })
+
     const legendClasses = classNames({
       'usa-legend': true,
-      'usa-label--error': !!error
+      'usa-label--error': !!visibleError
     });
 
     return (
-      <Host>
+      <Host class={hostClasses}>
         <div class="input-wrap">
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClasses}>

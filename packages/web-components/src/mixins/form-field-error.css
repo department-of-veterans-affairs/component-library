@@ -10,14 +10,14 @@
   font-size: 1.06rem;
 }
 
-:host([error]:not([error=''])) {
+:host([error]:not([error=''])), :host(.error) {
   border-left: 0.3rem solid var(--vads-color-secondary-dark);
   padding-left: 1.25rem;
   position: relative;
 }
 
 @media screen and (min-width: 1008px) {
-  :host([error]:not([error=''])) {
+  :host([error]:not([error=''])), :host(.error) {
     margin-left: -1.4375rem; /* padding left + border left */
   }
 }
