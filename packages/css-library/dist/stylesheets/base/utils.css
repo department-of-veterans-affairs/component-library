@@ -111,7 +111,7 @@
   font-weight: 700;
 }
 .heading-level-2 {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 .heading-level-3 {
@@ -123,11 +123,11 @@
   font-weight: 700;
 }
 .heading-level-5 {
-  font-size: 0.9375rem;
+  font-size: 0.938rem;
   font-weight: 700;
 }
 .heading-level-6 {
-  font-size: 0.8125rem;
+  font-size: 0.938rem;
   font-weight: 400;
   line-height: 1.5;
   text-transform: none;
