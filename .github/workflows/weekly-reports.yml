@@ -3,6 +3,11 @@ name: Weekly Design System Reports
 on:
   schedule:
     - cron: '0 22 * * 4' # Run every Thursday at 10 PM UTC (6 PM EDT / 5 PM EST)
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+    paths:
+      - '.github/workflows/weekly-reports.yml'
+      - 'packages/design-system-dashboard-cli/**'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
@@ -118,16 +123,31 @@ jobs:
         retention-days: 7
 
            
-    - name: Commit and push reports
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add packages/design-system-dashboard-cli/output/form-apps-$(date +%Y-%m-%d).csv
-        git add packages/design-system-dashboard-cli/output/ds-components-$(date +%Y-%m-%d).csv
-        git add packages/design-system-dashboard-cli/output/forms-library-usage-$(date +%Y-%m-%d).txt
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "Add weekly reports for $(date +%Y-%m-%d)"
-          git push
-        fi
+    - name: Create pull request with reports
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "Add weekly reports for $(date +%Y-%m-%d)"
+        title: "Weekly Design System Reports - $(date +%Y-%m-%d)"
+        body: |
+          ## Weekly Design System Reports - $(date +%Y-%m-%d)
+          
+          This automated pull request contains the weekly design system usage reports:
+          
+          ### 📊 Reports Included:
+          - **Form Applications** (`form-apps-$(date +%Y-%m-%d).csv`) - List of all form applications using RoutedSavableApp
+          - **Design System Components** (`ds-components-$(date +%Y-%m-%d).csv`) - Component usage across VA.gov
+          - **Forms Library Usage** (`forms-library-usage-$(date +%Y-%m-%d).txt`) - Non-form apps using forms library code
+          
+          ### 🤖 Automation Details:
+          - Generated automatically every Thursday evening
+          - Reports are stored in `packages/design-system-dashboard-cli/output/`
+          - Data will be consumed by the Metrics Dashboard on design.va.gov
+          
+          **Ready for review and merge!** 🚀
+        branch: weekly-reports/$(date +%Y-%m-%d)
+        delete-branch: true
+        add-paths: |
+          packages/design-system-dashboard-cli/output/form-apps-*.csv
+          packages/design-system-dashboard-cli/output/ds-components-*.csv
+          packages/design-system-dashboard-cli/output/forms-library-usage-*.txt
