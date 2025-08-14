@@ -113,6 +113,10 @@ jobs:
         # Restore original .env.json
         mv .env.json.original .env.json
       
+    - name: Get current date
+      id: date
+      run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+      
     - name: Upload reports
       uses: actions/upload-artifact@v4
       with:
@@ -127,17 +131,17 @@ jobs:
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "Add weekly reports for $(date +%Y-%m-%d)"
-        title: "Weekly Design System Reports - $(date +%Y-%m-%d)"
+        commit-message: "Add weekly reports for ${{ steps.date.outputs.date }}"
+        title: "Weekly Design System Reports - ${{ steps.date.outputs.date }}"
         body: |
-          ## Weekly Design System Reports - $(date +%Y-%m-%d)
+          ## Weekly Design System Reports - ${{ steps.date.outputs.date }}
           
           This automated pull request contains the weekly design system usage reports:
           
           ### 📊 Reports Included:
-          - **Form Applications** (`form-apps-$(date +%Y-%m-%d).csv`) - List of all form applications using RoutedSavableApp
-          - **Design System Components** (`ds-components-$(date +%Y-%m-%d).csv`) - Component usage across VA.gov
-          - **Forms Library Usage** (`forms-library-usage-$(date +%Y-%m-%d).txt`) - Non-form apps using forms library code
+          - **Form Applications** (`form-apps-${{ steps.date.outputs.date }}.csv`) - List of all form applications using RoutedSavableApp
+          - **Design System Components** (`ds-components-${{ steps.date.outputs.date }}.csv`) - Component usage across VA.gov
+          - **Forms Library Usage** (`forms-library-usage-${{ steps.date.outputs.date }}.txt`) - Non-form apps using forms library code
           
           ### 🤖 Automation Details:
           - Generated automatically every Thursday evening
@@ -145,7 +149,7 @@ jobs:
           - Data will be consumed by the Metrics Dashboard on design.va.gov
           
           **Ready for review and merge!** 🚀
-        branch: weekly-reports/$(date +%Y-%m-%d)
+        branch: weekly-reports/${{ steps.date.outputs.date }}
         delete-branch: true
         add-paths: |
           packages/design-system-dashboard-cli/output/form-apps-*.csv
