@@ -431,122 +431,122 @@ Default.args = {
 };
 Default.argTypes = propStructure(vaTableDocs);
 
-// export const Bordered = Template.bind(null);
-// Bordered.args = {
-//   'table-title': 'This is a stacked bordered table.',
-//   'table-type': 'bordered',
-//   'rows': data,
-//   'columns': defaultColumns,
-// };
-// Bordered.argTypes = propStructure(vaTableDocs);
+export const Bordered = Template.bind(null);
+Bordered.args = {
+  'table-title': 'This is a stacked bordered table.',
+  'table-type': 'bordered',
+  'rows': data,
+  'columns': defaultColumns,
+};
+Bordered.argTypes = propStructure(vaTableDocs);
 
-// export const NonStacked = Template.bind(null);
-// NonStacked.args = {
-//   'table-title':
-//     'This table is not stacked. It will not change on a mobile screen.',
-//   'stacked': false,
-//   'rows': data,
-//   'columns': defaultColumns,
-// };
-// NonStacked.argTypes = propStructure(vaTableDocs);
+export const NonStacked = Template.bind(null);
+NonStacked.args = {
+  'table-title':
+    'This table is not stacked. It will not change on a mobile screen.',
+  'stacked': false,
+  'rows': data,
+  'columns': defaultColumns,
+};
+NonStacked.argTypes = propStructure(vaTableDocs);
 
-// export const WithCustomMarkup = CustomComponentsTemplate.bind(null);
-// WithCustomMarkup.args = {
-//   'table-title': 'This table has custom markup in some of its cells.',
-//   'rows': data,
-//   'columns': defaultColumns,
-// };
+export const WithCustomMarkup = CustomComponentsTemplate.bind(null);
+WithCustomMarkup.args = {
+  'table-title': 'This table has custom markup in some of its cells.',
+  'rows': data,
+  'columns': defaultColumns,
+};
 
-// export const WithPagination = Pagination.bind(null);
-// WithPagination.args = {
-//   'table-title': 'This table uses pagination.',
-//   'rows': paginationData,
-//   'scrollable': true,
-// };
+export const WithPagination = Pagination.bind(null);
+WithPagination.args = {
+  'table-title': 'This table uses pagination.',
+  'rows': paginationData,
+  'scrollable': true,
+};
 
-// export const WithMissingData = Template.bind(null);
-// WithMissingData.args = {
-//   'table-title': 'This table has some cells without data',
-//   'rows': [
-//     ['A document', '', ''],
-//     [
-//       'Bill of Rights',
-//       'The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms',
-//       '1791',
-//     ],
-//   ],
-//   'columns': defaultColumns,
-// };
+export const WithMissingData = Template.bind(null);
+WithMissingData.args = {
+  'table-title': 'This table has some cells without data',
+  'rows': [
+    ['A document', '', ''],
+    [
+      'Bill of Rights',
+      'The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms',
+      '1791',
+    ],
+  ],
+  'columns': defaultColumns,
+};
 
-// export const Sortable = Template.bind(null);
-// Sortable.args = {
-//   'table-title': 'This is a sortable table',
-//   'rows': sortData,
-//   'columns': sortColumns,
-//   'sortable': true,
-//   'scrollable': true,
-// };
+export const Sortable = Template.bind(null);
+Sortable.args = {
+  'table-title': 'This is a sortable table',
+  'rows': sortData,
+  'columns': sortColumns,
+  'sortable': true,
+  'scrollable': true,
+};
 
-// export const SortWithDataAttribute = SortWithDataAttributeTemplate.bind(null);
-// SortWithDataAttribute.args = {
-//   'table-title': 'This is a sortable table using data-sort-value',
-// };
+export const SortWithDataAttribute = SortWithDataAttributeTemplate.bind(null);
+SortWithDataAttribute.args = {
+  'table-title': 'This is a sortable table using data-sort-value',
+};
 
-// export const Striped = Template.bind(null);
-// Striped.args = {
-//   'table-title': 'This is a striped table.',
-//   'rows': data,
-//   'columns': defaultColumns,
-//   'striped': true,
-//   'table-type': 'bordered',
-// };
+export const Striped = Template.bind(null);
+Striped.args = {
+  'table-title': 'This is a striped table.',
+  'rows': data,
+  'columns': defaultColumns,
+  'striped': true,
+  'table-type': 'bordered',
+};
 
-// export const Scrollable = Template.bind(null);
-// Scrollable.args = {
-//   'table-title': 'This is a scrollable table.',
-//   'rows': data,
-//   'columns': defaultColumns,
-//   'scrollable': true,
-//   'stacked': false,
-// };
+export const Scrollable = Template.bind(null);
+Scrollable.args = {
+  'table-title': 'This is a scrollable table.',
+  'rows': data,
+  'columns': defaultColumns,
+  'scrollable': true,
+  'stacked': false,
+};
 
-// export const ScrollableWithStripes = Template.bind(null);
-// ScrollableWithStripes.args = {
-//   'table-title': 'This is a striped table that is also scrollable.',
-//   'rows': data,
-//   'columns': defaultColumns,
-//   'striped': true,
-//   'table-type': 'bordered',
-//   'scrollable': true,
-// };
+export const ScrollableWithStripes = Template.bind(null);
+ScrollableWithStripes.args = {
+  'table-title': 'This is a striped table that is also scrollable.',
+  'rows': data,
+  'columns': defaultColumns,
+  'striped': true,
+  'table-type': 'bordered',
+  'scrollable': true,
+};
 
-// const FullWidthColumns = [
-//   'Letter of the Alphabet',
-//   'Number Position',
-//   'ROT13 (Rotate by 13 places)',
-// ];
-// const FullWidthRows = [
-//   ['A', '1', 'N'],
-//   ['E', '5', 'R'],
-//   ['I', '9', 'V'],
-//   ['O', '15', 'B'],
-//   ['U', '21', 'H'],
-// ];
+const FullWidthColumns = [
+  'Letter of the Alphabet',
+  'Number Position',
+  'ROT13 (Rotate by 13 places)',
+];
+const FullWidthRows = [
+  ['A', '1', 'N'],
+  ['E', '5', 'R'],
+  ['I', '9', 'V'],
+  ['O', '15', 'B'],
+  ['U', '21', 'H'],
+];
 
-// export const FullWidth = Template.bind(null);
-// FullWidth.args = {
-//   'table-title':
-//     'This is a table with minimal content that has been set to be "full width".',
-//   'rows': FullWidthRows,
-//   'columns': FullWidthColumns,
-//   'full-width': true,
-// };
+export const FullWidth = Template.bind(null);
+FullWidth.args = {
+  'table-title':
+    'This is a table with minimal content that has been set to be "full width".',
+  'rows': FullWidthRows,
+  'columns': FullWidthColumns,
+  'full-width': true,
+};
 
-// export const RightAlignedColumns = Template.bind(null);
-// RightAlignedColumns.args = {
-//   'table-title':
-//     'This is a regular table with the second and third column right-aligned.',
-//   'rows': FullWidthRows,
-//   'columns': FullWidthColumns,
-//   'right-align-cols': '1,2',
-// };
+export const RightAlignedColumns = Template.bind(null);
+RightAlignedColumns.args = {
+  'table-title':
+    'This is a regular table with the second and third column right-aligned.',
+  'rows': FullWidthRows,
+  'columns': FullWidthColumns,
+  'right-align-cols': '1,2',
+};
