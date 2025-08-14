@@ -83,7 +83,7 @@ const Template = args => {
       </va-table-row>
 
       {rows.map((row, index) => (
-        <va-table-row key={`row-default-${index}`} id="test-events-table">
+        <va-table-row key={`row-default-${index}`}>
           {row.map((item, index2) => (
             <span key={`cell-default-${index2}`}>
               {index === 2 && index2 === 0 ? (
