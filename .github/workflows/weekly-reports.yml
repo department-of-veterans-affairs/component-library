@@ -113,9 +113,11 @@ jobs:
         # Restore original .env.json
         mv .env.json.original .env.json
       
-    - name: Get current date
+    - name: Get current date and timestamp
       id: date
-      run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+      run: |
+        echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+        echo "timestamp=$(date +%Y-%m-%d-%H%M%S)" >> $GITHUB_OUTPUT
       
     - name: Upload reports
       uses: actions/upload-artifact@v4
@@ -129,8 +131,14 @@ jobs:
            
     - name: Commit reports to weekly branch
       run: |
+        # Create a unique branch name with timestamp to avoid conflicts
+        BRANCH_NAME="weekly-reports/${{ steps.date.outputs.timestamp }}"
+        
+        # Fetch remote branches to check for conflicts
+        git fetch origin
+        
         # Create a new branch for this week's reports
-        git checkout -b weekly-reports/${{ steps.date.outputs.date }}
+        git checkout -b $BRANCH_NAME
         
         # Configure git
         git config --local user.email "action@github.com"
@@ -146,13 +154,18 @@ jobs:
           exit 0
         else
           git commit -m "Add weekly reports for ${{ steps.date.outputs.date }}"
-          git push origin weekly-reports/${{ steps.date.outputs.date }}
+          
+          # Try to push, and if it fails, force push (since it's a new branch with reports)
+          if ! git push origin $BRANCH_NAME; then
+            echo "Push failed, force pushing new branch..."
+            git push --force origin $BRANCH_NAME
+          fi
           
           echo "## 📊 Weekly Reports Generated!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Branch created: \`weekly-reports/${{ steps.date.outputs.date }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "Branch created: \`$BRANCH_NAME\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Manual step required:** Create a PR from this branch to main." >> $GITHUB_STEP_SUMMARY
+          echo "**Manual step required:** [Create a PR from this branch to main](https://github.com/department-of-veterans-affairs/component-library/compare/main...$BRANCH_NAME)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Reports generated:" >> $GITHUB_STEP_SUMMARY
           echo "- form-apps-${{ steps.date.outputs.date }}.csv" >> $GITHUB_STEP_SUMMARY
