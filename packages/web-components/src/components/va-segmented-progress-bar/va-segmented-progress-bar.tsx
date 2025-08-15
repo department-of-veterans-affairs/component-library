@@ -130,6 +130,9 @@ export class VaSegmentedProgressBar {
       });
     }
 
+    const defaultAriaLabel = `You are on ${progressTerm} ${current} of ${total}: ${headingText}`;
+    const headingAriaLabel = this.label || defaultAriaLabel;
+
     return (
       <Host>
         <div class={indicatorClass}>
@@ -152,7 +155,7 @@ export class VaSegmentedProgressBar {
               </ol>
               {
                 <div class="usa-step-indicator__header">
-                  <Tag class="usa-step-indicator__heading">
+                  <Tag class="usa-step-indicator__heading" aria-label={headingAriaLabel}>
                     <span class="usa-step-indicator__heading-counter">
                       <span class="usa-sr-only">{progressTerm}</span>
                       <span class="usa-step-indicator__current-step">{current}</span>
@@ -165,5 +168,5 @@ export class VaSegmentedProgressBar {
             </div>
       </Host>
     )
-  } 
+  }
 }
