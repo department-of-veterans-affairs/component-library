@@ -111,6 +111,11 @@ export class VaButton {
   @Prop() messageAriaDescribedby?: string;
 
   /**
+   * If `true`, the button will use `Feedback` as its text and use the secondary variant.
+   */
+  @Prop({ reflect: true }) feedback: boolean = false;
+
+  /**
    * The event used to track usage of the component.
    */
   @Event({
@@ -140,6 +145,7 @@ export class VaButton {
     if (this.continue) return 'Continue';
     if (this.back) return 'Back';
     if (this.loading && !this.text) return 'Loading...';
+    if (this.feedback) return 'Feedback';
     return;
   };
 
@@ -212,6 +218,7 @@ export class VaButton {
       big,
       messageAriaDescribedby,
       fullWidth,
+      feedback
     } = this;
 
     const ariaDescribedbyIds =
@@ -225,7 +232,7 @@ export class VaButton {
     const buttonClass = classnames({
       'usa-button': true,
       'usa-button--big': big,
-      'usa-button--outline': back || secondary,
+      'usa-button--outline': back || secondary || feedback,
       'va-button-primary--alternate': primaryAlternate,
       'va-button--full-width': fullWidth,
     });

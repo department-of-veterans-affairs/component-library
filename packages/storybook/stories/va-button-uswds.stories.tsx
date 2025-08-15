@@ -24,6 +24,7 @@ const defaultArgs = {
   'secondary': undefined,
   'primary-alternate': undefined,
   'submit': undefined,
+  'feedback': undefined,
   'message-aria-describedby': 'Optional description text for screen readers',
   'onClick': e => console.log(e),
 };
@@ -39,6 +40,7 @@ const Template = ({
   label,
   secondary,
   primaryAlternate,
+  feedback,
   submit,
   text,
   messageAriaDescribedby,
@@ -56,6 +58,7 @@ const Template = ({
       label={label}
       secondary={secondary}
       primary-alternate={primaryAlternate}
+      feedback={feedback}
       submit={submit}
       text={!loading && !text ? null : text}
       onClick={onClick}
@@ -111,6 +114,12 @@ Back.args = {
   back: true,
 };
 
+export const Feedback = Template.bind(null);
+Feedback.args = {
+  ...defaultArgs,
+  feedback: true,
+};
+
 export const Disabled = Template.bind(null);
 Disabled.args = {
   ...defaultArgs,
@@ -148,6 +157,7 @@ const TemplateWithForm = ({
   label,
   secondary,
   primaryAlternate,
+  feedback,
   submit,
   text,
   messageAriaDescribedby,
@@ -169,6 +179,7 @@ const TemplateWithForm = ({
         label={label}
         secondary={secondary}
         primary-alternate={primaryAlternate}
+        feedback={feedback}
         submit={submit}
         text={text}
         onClick={e => handleClick(e)}

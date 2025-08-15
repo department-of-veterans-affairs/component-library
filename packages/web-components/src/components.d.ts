@@ -282,6 +282,10 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
+          * If `true`, the button will use `Feedback` as its text and use the secondary variant.
+         */
+        "feedback": boolean;
+        /**
           * If `true`, the button will expand to the full available width of its container.
          */
         "fullWidth"?: boolean;
@@ -4018,6 +4022,10 @@ declare namespace LocalJSX {
           * If `true`, the click event will not fire.
          */
         "disabled"?: boolean;
+        /**
+          * If `true`, the button will use `Feedback` as its text and use the secondary variant.
+         */
+        "feedback"?: boolean;
         /**
           * If `true`, the button will expand to the full available width of its container.
          */
