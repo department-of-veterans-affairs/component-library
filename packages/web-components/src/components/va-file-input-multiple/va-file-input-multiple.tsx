@@ -87,14 +87,14 @@ export class VaFileInputMultiple {
   /**
    * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
    */
-  @Prop() slotFieldIndexes?: Number[] = null; 
+  @Prop() slotFieldIndexes?: Number[] = null;
 
   /**
    * Event emitted when any change to the file inputs occurs.
-   * 
+   *
    * Sends back an object with the following data structure:
    * `{ action: string, file: triggering file, state: files array }`
-   * 
+   *
    * The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
    */
   @Event() vaMultipleChange: EventEmitter;
@@ -221,7 +221,7 @@ export class VaFileInputMultiple {
       // empty status message so it is read when updated
       statusMessageDiv.textContent = ""
       setTimeout(() => {
-        statusMessageDiv.textContent = "File removed."
+        statusMessageDiv.textContent = "File deleted."
       }, 1000);
       filesArray = this.buildFilesArray(this.files, true);
     }
