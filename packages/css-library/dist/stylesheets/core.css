@@ -2071,7 +2071,7 @@ template {
   font-weight: 700;
 }
 .heading-level-2 {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 .heading-level-3 {
@@ -2083,11 +2083,11 @@ template {
   font-weight: 700;
 }
 .heading-level-5 {
-  font-size: 0.9375rem;
+  font-size: 0.938rem;
   font-weight: 700;
 }
 .heading-level-6 {
-  font-size: 0.8125rem;
+  font-size: 0.938rem;
   font-weight: 400;
   line-height: 1.5;
   text-transform: none;
@@ -2960,7 +2960,7 @@ option:first-child {
 }
 
 legend {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
@@ -3207,7 +3207,7 @@ legend {
   background-color: #565c65;
   border-radius: 2px;
   color: #ffffff;
-  font-size: 0.9375rem;
+  font-size: 0.938rem;
   margin-right: 0.3125rem;
   padding: 0.0625rem 0.4375rem;
   text-transform: uppercase;
@@ -3315,11 +3315,11 @@ h1 a {
 }
 
 h2 {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 h2 a {
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: 700;
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
@@ -3345,24 +3345,24 @@ h4 a {
 }
 
 h5 {
-  font-size: 0.9375rem;
+  font-size: 0.938rem;
   font-weight: 700;
 }
 h5 a {
-  font-size: 0.9375rem;
+  font-size: 0.938rem;
   font-weight: 700;
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 h6 {
-  font-size: 0.8125rem;
+  font-size: 0.938rem;
   font-weight: 400;
   line-height: 1.5;
   text-transform: none;
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 h6 a {
-  font-size: 0.8125rem;
+  font-size: 0.938rem;
   font-weight: 400;
   line-height: 1.5;
   text-transform: none;
@@ -3449,7 +3449,7 @@ dfn {
 }
 
 .usa-text-small {
-  font-size: 0.8125rem;
+  font-size: 0.938rem;
   margin-top: 0;
 }
 
@@ -3665,7 +3665,7 @@ dfn {
 }
 @media screen and (min-width: 481px), print and (min-width: 481px) {
   .usa-banner {
-    font-size: 0.8125rem;
+    font-size: 0.938rem;
     padding-bottom: 0;
   }
 }
@@ -3675,7 +3675,7 @@ dfn {
   padding-bottom: 3px;
   padding-left: 0.9375rem;
   background-color: transparent;
-  font-size: 0.9375rem;
+  font-size: 0.938rem;
   padding-top: 1.25rem;
   width: 100%;
 }
@@ -3762,7 +3762,7 @@ dfn {
   align-items: center;
   border-bottom: 1px solid #aeb0b5;
   display: flex;
-  font-size: 0.9375rem;
+  font-size: 0.938rem;
   min-height: 3.5rem;
   padding-right: 1.875rem;
 }
@@ -3988,7 +3988,7 @@ fieldset {
 .usa-form-note {
   float: right;
   font-family: "Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 0.9375rem;
+  font-size: 0.938rem;
   margin: 0 0 scale(1.5rem);
 }
 .usa-form-note + * {
@@ -4186,7 +4186,7 @@ fieldset {
 }
 .usa-sidenav-sub_list li {
   border: none;
-  font-size: 0.9375rem;
+  font-size: 0.938rem;
 }
 .usa-sidenav-sub_list a {
   padding-left: 1.75rem;
