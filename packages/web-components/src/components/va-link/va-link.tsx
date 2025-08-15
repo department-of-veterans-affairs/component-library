@@ -178,7 +178,7 @@ export class VaLink {
             onClick={handleClick}
             aria-label={label}
           >
-            {text}
+            {text}&nbsp; {/* Include no-break space to prevent last word from line-breaking without trailing icon */}
             <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
           </a>
         </Host>
