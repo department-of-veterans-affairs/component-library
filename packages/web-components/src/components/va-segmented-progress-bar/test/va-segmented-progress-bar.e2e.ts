@@ -20,7 +20,7 @@ describe('va-segmented-progress-bar', () => {
               <li class=\"usa-step-indicator__segment\"></li>
             </ol>
             <div class=\"usa-step-indicator__header\">
-              <h4 class=\"usa-step-indicator__heading\">
+              <h4 class=\"usa-step-indicator__heading\" aria-label="You are on Step 3 of 6">
                 <span class=\"usa-step-indicator__heading-counter\">
                   <span class=\"usa-sr-only\">
                     Step
@@ -150,5 +150,43 @@ describe('va-segmented-progress-bar', () => {
     const counter = element.shadowRoot.querySelector('.usa-step-indicator__heading-counter .usa-sr-only');
     expect(counter.innerHTML).toBe('Chapter');
   })
+
+  describe('aria-label rendering', () => {
+    it("should render the correct aria-label with current steps", async () => {
+      const page = await newE2EPage({
+        html: '<va-segmented-progress-bar current="3" total="6"></va-segmented-progress-bar>',
+      });
+      const element = await page.find('va-segmented-progress-bar');
+      const heading = element.shadowRoot.querySelector('.usa-step-indicator__heading');
+      expect(heading.getAttribute('aria-label')).toBe('You are on Step 3 of 6');
+    });
+
+    it("should render the correct aria-label when heading text is provided", async () => {
+      const page = await newE2EPage({
+        html: '<va-segmented-progress-bar current="3" total="6" heading-text="My Process"></va-segmented-progress-bar>',
+      });
+      const element = await page.find('va-segmented-progress-bar');
+      const heading = element.shadowRoot.querySelector('.usa-step-indicator__heading');
+      expect(heading.getAttribute('aria-label')).toBe('You are on Step 3 of 6: My Process');
+    });
+
+    it("should render the correct aria-label when labels are provided", async () => {
+      const page = await newE2EPage({
+        html: '<va-segmented-progress-bar current="3" total="6" heading-text="My Process" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
+      });
+      const element = await page.find('va-segmented-progress-bar');
+      const heading = element.shadowRoot.querySelector('.usa-step-indicator__heading');
+      expect(heading.getAttribute('aria-label')).toBe('You are on Step 3 of 6: Supporting Documents');
+    });
+
+    it("should render the correct aria-label with custom progress-term", async () => {
+      const page = await newE2EPage({
+        html: '<va-segmented-progress-bar current="3" total="6" progress-term="Chapter"></va-segmented-progress-bar>',
+      });
+      const element = await page.find('va-segmented-progress-bar');
+      const heading = element.shadowRoot.querySelector('.usa-step-indicator__heading');
+      expect(heading.getAttribute('aria-label')).toBe('You are on Chapter 3 of 6');
+    });
+  });
 });
 
