@@ -130,8 +130,11 @@ export class VaSegmentedProgressBar {
       });
     }
 
-    const defaultAriaLabel = `You are on ${progressTerm} ${current} of ${total}: ${headingText}`;
-    const headingAriaLabel = this.label || defaultAriaLabel;
+    const stepLabel = labels ? labelsArray[current - 1] : '';
+    const headingLabel = stepLabel ? stepLabel : headingText ? headingText : '';
+    // eslint-disable-next-line i18next/no-literal-string
+    const defaultAriaLabel = `You are on ${progressTerm} ${current} of ${total}${headingLabel ? `: ${headingLabel}` : ''}`;
+    // const headingAriaLabel = this.label || defaultAriaLabel;
 
     return (
       <Host>
@@ -155,13 +158,13 @@ export class VaSegmentedProgressBar {
               </ol>
               {
                 <div class="usa-step-indicator__header">
-                  <Tag class="usa-step-indicator__heading" aria-label={headingAriaLabel}>
+                  <Tag class="usa-step-indicator__heading" aria-label={defaultAriaLabel}>
                     <span class="usa-step-indicator__heading-counter">
                       <span class="usa-sr-only">{progressTerm}</span>
                       <span class="usa-step-indicator__current-step">{current}</span>
                       <span class="usa-step-indicator__total-steps"> of {total}</span>
                     </span>
-                    <span class="usa-step-indicator__heading-text">{labels ? labelsArray[current - 1] : headingText}</span>
+                    <span class="usa-step-indicator__heading-text">{headingLabel}</span>
                   </Tag>
                 </div>
               }
