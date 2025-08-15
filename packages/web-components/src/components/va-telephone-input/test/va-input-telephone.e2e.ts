@@ -29,7 +29,7 @@ describe('va-telephone-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-telephone-input contact="abcdefg" />');
     const input = await page.find('va-telephone-input >>> input#inputField');
-    await input.click(); 
+    await input.click();
     await input.press('Tab');
     const value = await input.getProperty('value');
     expect(value).toBe('abcdefg')
@@ -69,7 +69,7 @@ describe('va-telephone-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-telephone-input />');
     const input = await page.find('va-telephone-input >>> va-text-input');
-    await input.click(); 
+    await input.click();
     await input.press('Tab');
     const error = await page.find('va-telephone-input >>> span#error-message');
     expect(error.innerText).toContain('phone number in a valid format, for example,');
@@ -173,7 +173,7 @@ describe('va-telephone-input', () => {
     await page.keyboard.press('Enter');
     await page.waitForChanges();
     const error = await page.find('va-telephone-input >>> span#error-message');
-      expect(error).toBeNull();
+      expect(error.innerText.trim()).toBe('');
   });
 
   it('passes an axe check', async () => {

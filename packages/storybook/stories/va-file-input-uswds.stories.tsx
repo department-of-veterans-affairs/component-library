@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { applyFocus, getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 // @ts-ignore
 import testImage from './images/search-bar.png';
 
@@ -70,7 +70,8 @@ const Template = ({
   uploadedFile,
   maxFileSize,
   minFileSize,
-  passwordError
+  passwordError,
+  ...rest
 }) => {
   return (
     <VaFileInput
@@ -93,6 +94,7 @@ const Template = ({
       maxFileSize={maxFileSize}
       minFileSize={minFileSize}
       passwordError={passwordError}
+      {...rest}
     />
   );
 };
@@ -115,9 +117,9 @@ const AcceptsFilePasswordTemplate = ({
 }) => {
   return (
     <>
-      To learn how to check for an encrypted PDF <va-link 
+      To learn how to check for an encrypted PDF <va-link
         text='see platform documentation'
-        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted' 
+        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted'
       />.
       <VaFileInput
         label={label}
@@ -180,7 +182,7 @@ export const HeaderLabel = Template.bind(null);
 HeaderLabel.args = {
   ...defaultArgs,
   label: 'Header label',
-  headerSize: 3,
+  'header-size': 3,
   required: true,
 };
 
@@ -298,6 +300,45 @@ return (
           View validation code in our repo
         </a>
       </div>
+    </>
+  );
+};
+
+/**
+ * Template component that demonstrates toggling form error states.
+ *
+ * For accessibility testing purposes, the template also supports moving focus
+ * to various elements after entering the error state.
+ *
+ * Note: This template only toggles the error state and does not actually
+ * validate the input value.
+ */
+const ToggleErrorStateTemplate = args => {
+  const [error, setError] = useState(null);
+  const { focusEl } = args;
+
+  const handleClick = () => {
+    error ? setError(null) : setError(`This is an error message`);
+
+    if (focusEl) {
+      const moveFocusTo = document
+        .getElementById('error-demo')
+        ?.shadowRoot?.getElementById(focusEl);
+
+      applyFocus(moveFocusTo);
+    }
+  };
+
+  return (
+    <>
+      {Template({
+        ...defaultArgs,
+        ...args,
+        error: error,
+        required: true,
+        id: "error-demo",
+      })}
+      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
     </>
   );
 };
@@ -456,4 +497,16 @@ const VisualStateResetTemplate = args => {
 }
 
 export const WithVisualStateReset = VisualStateResetTemplate.bind(null);
-WithVisualStateReset.args = { ...defaultArgs }
+WithVisualStateReset.args = { ...defaultArgs };
+
+export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
+ToggleErrorState.args = {
+  focusEl: null,
+};
+ToggleErrorState.argTypes = {
+  focusEl: {
+    name: 'Element to focus on error toggle',
+    control: { type: 'radio' },
+    options: [null, 'file-input-error-alert'],
+  },
+};

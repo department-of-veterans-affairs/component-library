@@ -352,7 +352,9 @@ export class VaTelephoneInput {
               )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            {error && <span id="error-message" role="alert">{error}</span>}
+            <span id="error-message" role="alert">
+              {error && error}
+            </span>
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
               <va-combo-box

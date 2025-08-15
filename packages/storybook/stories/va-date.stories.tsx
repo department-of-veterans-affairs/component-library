@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { VaDate } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { applyFocus } from './wc-helpers';
 
 VaDate.displayName = 'VaDate';
 
@@ -38,6 +39,7 @@ const Template = ({
   value,
   'enable-analytics': enableAnalytics,
   'month-optional': monthOptional,
+  ...rest
 }) => {
   return (
     <VaDate
@@ -54,6 +56,7 @@ const Template = ({
       }}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
       enableAnalytics={enableAnalytics}
+      {...rest}
     />
   );
 };
