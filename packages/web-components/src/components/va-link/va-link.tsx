@@ -179,8 +179,7 @@ export class VaLink {
             aria-label={label}
           >
             {text}
-            {/* Include nowrap style on span to prevent last word from line-breaking without trailing icon */}
-            <span style={{ whiteSpace: 'nowrap' }}>
+            <span class="link-icon--active-icon-wrapper">
               <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
             </span>
           </a>
