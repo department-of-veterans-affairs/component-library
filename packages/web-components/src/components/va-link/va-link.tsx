@@ -178,8 +178,11 @@ export class VaLink {
             onClick={handleClick}
             aria-label={label}
           >
-            {text}&nbsp; {/* Include no-break space to prevent last word from line-breaking without trailing icon */}
-            <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
+            {text}
+            {/* Include nowrap style on span to prevent last word from line-breaking without trailing icon */}
+            <span style={{ whiteSpace: 'nowrap' }}>
+              <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
+            </span>
           </a>
         </Host>
       );
