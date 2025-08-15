@@ -43,7 +43,9 @@ describe('va-link', () => {
       <mock:shadow-root>
         <a href="https://www.va.gov">
           Share your VA medical records
-          <va-icon class="hydrated link-icon--active"></va-icon>
+          <span class="link-icon--active-icon-wrapper">
+            <va-icon class="hydrated link-icon--active"></va-icon>
+          </span>
         </a>
       </mock:shadow-root>
     </va-link>
