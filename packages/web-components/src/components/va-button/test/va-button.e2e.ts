@@ -49,6 +49,22 @@ describe('va-button', () => {
     `);
   });
 
+  it('renders Feedback button variant', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button feedback></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button feedback="" class="hydrated">
+      <mock:shadow-root>
+        <span class="loading-message" role="status"></span>
+        <button class="usa-button usa-button--outline" type="button" part="button">
+          Feedback
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
   it('renders an icon after the button text when continue is true', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button continue></va-button>');
