@@ -21,7 +21,7 @@
       "root": { "value": "1rem" },
       "md": { "value": "1.063rem" },
       "lg": { "value": "1.25rem" },
-      "xl": { "value": "1.875rem" },
+      "xl": { "value": "2rem" },
       "2xl": { "value": "2.5rem" },
       "h1": { "value": "{font.size.2xl}" },
       "h2": { "value": "{font.size.xl}" },
@@ -59,12 +59,12 @@
       },
       "eyebrow": { "value": "17px" },
       "heading": {
-        "level-1": { "value": "40px" },
-        "level-2": { "value": "32px" },
-        "level-3": { "value": "20px" },
-        "level-4": { "value": "17px" },
-        "level-5": { "value": "15px" },
-        "level-6": { "value": "15px" }
+        "level-1": { "value": "2.5rem" },
+        "level-2": { "value": "2rem" },
+        "level-3": { "value": "1.25rem" },
+        "level-4": { "value": "1.063rem" },
+        "level-5": { "value": "0.938rem" },
+        "level-6": { "value": "0.938rem" }
       }
     }
   }
