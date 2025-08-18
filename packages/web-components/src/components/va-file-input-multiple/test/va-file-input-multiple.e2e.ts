@@ -180,6 +180,97 @@ describe('va-file-input-multiple', () => {
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);
   });
 
+  it('resets a single file input to initial visual state when resetVisualState is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Set resetVisualState to true for the first input
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.resetVisualState = [true];
+    });
+    await page.waitForChanges();
+    
+    // Verify the file input shows initial state (instructions visible)
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input >>> .file-input-instructions');
+    expect(fileInput).not.toBeNull();
+    expect(fileInput.innerHTML).toContain('Drag a file here or');
+    
+    // Verify no selected files wrapper is present (indicating reset state)
+    const selectedFiles = await page.find('va-file-input-multiple >>> va-file-input >>> .selected-files-wrapper');
+    expect(selectedFiles).toBeNull();
+  });
+
+  it('passes resetVisualState prop to individual file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set resetVisualState with mixed values
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.resetVisualState = [true, false];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that the resetVisualState prop is passed correctly
+    const firstInputResetProp = await fileInputs[0].getProperty('resetVisualState');
+    const secondInputResetProp = await fileInputs[1].getProperty('resetVisualState');
+    
+    expect(firstInputResetProp).toBe(true);
+    expect(secondInputResetProp).toBe(false);
+  });
+
+  it('shows initial state when resetVisualState is applied with errors', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Set both error and resetVisualState
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.errors = ['This file has an error'];
+      el.resetVisualState = [true];
+    });
+    await page.waitForChanges();
+    
+    // When resetVisualState is true, should show initial instructions despite error
+    const instructions = await page.find('va-file-input-multiple >>> va-file-input >>> .file-input-instructions');
+    expect(instructions).not.toBeNull();
+    expect(instructions.innerHTML).toContain('Drag a file here or');
+    
+    // Error should still be present but instructions should be visible due to reset
+    const errorMessage = await page.find('va-file-input-multiple >>> va-file-input >>> .usa-error-message');
+    expect(errorMessage).not.toBeNull();
+  });
+
+  it('shows initial state for encrypted file inputs when resetVisualState is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Set up encrypted file with resetVisualState
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.encrypted = [true];
+      el.resetVisualState = [true];
+    });
+    await page.waitForChanges();
+    
+    // Should show initial instructions despite encryption setting
+    const instructions = await page.find('va-file-input-multiple >>> va-file-input >>> .file-input-instructions');
+    expect(instructions).not.toBeNull();
+    expect(instructions.innerHTML).toContain('Drag a file here or');
+    
+    // Should not show selected files wrapper when reset
+    const selectedFiles = await page.find('va-file-input-multiple >>> va-file-input >>> .selected-files-wrapper');
+    expect(selectedFiles).toBeNull();
+  });
+
   it.skip('passes an aXe check', async () => {
     const page = await newE2EPage();
 
