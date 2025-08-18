@@ -430,6 +430,47 @@ describe('va-file-input-multiple', () => {
     expect(defaultMaxSize).toBe(Infinity);
   });
 
+  it('passes minFileSize prop to all file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set minFileSize prop
+    const minSize = 1000; // 1KB
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.minFileSize = 1000;
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that minFileSize prop is passed to all file inputs
+    const firstInputMinSize = await fileInputs[0].getProperty('minFileSize');
+    const secondInputMinSize = await fileInputs[1].getProperty('minFileSize');
+    
+    expect(firstInputMinSize).toBe(minSize);
+    expect(secondInputMinSize).toBe(minSize);
+  });
+
+  it('applies default minFileSize value when not specified', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input');
+    
+    // Check that default minFileSize is 0
+    const defaultMinSize = await fileInput.getProperty('minFileSize');
+    expect(defaultMinSize).toBe(0);
+  });
+
   it.skip('passes an aXe check', async () => {
     const page = await newE2EPage();
 

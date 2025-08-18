@@ -787,6 +787,10 @@ export namespace Components {
          */
         "maxFileSize"?: number;
         /**
+          * Minimum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "minFileSize"?: number;
+        /**
           * Name attribute for the file input element, used to identify the form data in the submission.
          */
         "name"?: string;
@@ -4688,6 +4692,10 @@ declare namespace LocalJSX {
           * Maximum allowed file size in bytes. The value is applied to all file inputs.
          */
         "maxFileSize"?: number;
+        /**
+          * Minimum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "minFileSize"?: number;
         /**
           * Name attribute for the file input element, used to identify the form data in the submission.
          */

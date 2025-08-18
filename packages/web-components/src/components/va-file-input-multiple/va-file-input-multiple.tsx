@@ -110,6 +110,11 @@ export class VaFileInputMultiple {
   @Prop() maxFileSize?: number = Infinity;
 
   /**
+   * Minimum allowed file size in bytes. The value is applied to all file inputs.
+   */
+  @Prop() minFileSize?: number = 0;
+
+  /**
    * Event emitted when any change to the file inputs occurs.
    *
    * Sends back an object with the following data structure:
@@ -413,6 +418,7 @@ export class VaFileInputMultiple {
       enableAnalytics,
       readOnly,
       maxFileSize,
+      minFileSize,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error' : '';
@@ -470,6 +476,7 @@ export class VaFileInputMultiple {
                 value={fileEntry.file}
                 readOnly={readOnly}
                 maxFileSize={maxFileSize}
+                minFileSize={minFileSize}
                 class={fileEntry.file ? 'has-file' : 'no-file'}
               />
             );
