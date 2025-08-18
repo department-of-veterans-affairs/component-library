@@ -1,4 +1,5 @@
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { applyFocus } from './wc-helpers';
 
 const segmentedProgressBarDocs = getWebComponentDocs(
   'va-segmented-progress-bar',
@@ -7,6 +8,13 @@ const segmentedProgressBarDocs = getWebComponentDocs(
 export default {
   title: 'Components/Progress bar - segmented USWDS',
   id: 'uswds/va-segmented-progress-bar',
+  decorators: [
+    (Story) => (
+      <div className="vads-u-margin--3">
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     componentSubtitle: 'va-segmented-progress-bar web component',
     docs: {
@@ -15,6 +23,15 @@ export default {
       ),
     },
   },
+  argTypes: {
+    ...propStructure(segmentedProgressBarDocs),
+    showToggleFocusButton: {
+      name: 'Show toggle focus button',
+      control: { type: 'boolean' },
+      description: 'Toggles the visibility of the focus button. Used to test the screen reader announcement.',
+      table: {category: 'Storybook-only'}
+    }
+  }
 };
 
 const Template = ({
@@ -29,25 +46,42 @@ const Template = ({
   headerLevel,
   progressTerm,
   'use-div': useDiv,
-}) => (
-  // Wrapper for spacing when viewing in storybook
-  // Component can be used without it
-  <div style={{ margin: '1.9rem' }}>
-    <va-segmented-progress-bar
-      enable-analytics={enableAnalytics}
-      current={current}
-      total={total}
-      label={label}
-      heading-text={headingText}
-      labels={labels}
-      centered-labels={centeredLabels}
-      counters={counters}
-      header-level={headerLevel}
-      progress-term={progressTerm}
-      use-div={useDiv}
-    ></va-segmented-progress-bar>
-  </div>
-);
+  showToggleFocusButton,
+}) => {
+
+    // Moves focus to the component wrapper to test the screen reader announcement.
+    const handleClick = () => {
+      const moveFocusTo = document
+        .getElementById('focus-demo')
+        ?.shadowRoot?.querySelector('.usa-step-indicator');
+      applyFocus(moveFocusTo);
+    };
+
+    return (
+      <>
+        <va-segmented-progress-bar
+          enable-analytics={enableAnalytics}
+          current={current}
+          total={total}
+          label={label}
+          heading-text={headingText}
+          labels={labels}
+          centered-labels={centeredLabels}
+          counters={counters}
+          header-level={headerLevel}
+          progress-term={progressTerm}
+          use-div={useDiv}
+          id={showToggleFocusButton ? 'focus-demo' : undefined}
+        ></va-segmented-progress-bar>
+        {showToggleFocusButton && (
+          <va-button
+            text="Move focus to component wrapper"
+            onClick={handleClick}
+          />
+        )}
+      </>
+    );
+};
 
 const defaultArgs = {
   'enable-analytics': false,
@@ -59,14 +93,13 @@ const defaultArgs = {
   'centered-labels': undefined,
   'counters': undefined,
   'use-div': false,
+  'showToggleFocusButton': false,
 };
 
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
-
-Default.argTypes = propStructure(segmentedProgressBarDocs);
 
 export const StepLabels = Template.bind(null);
 StepLabels.args = {
