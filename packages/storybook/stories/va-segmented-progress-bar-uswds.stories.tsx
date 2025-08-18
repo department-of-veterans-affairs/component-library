@@ -51,10 +51,8 @@ const Template = ({
 
     // Moves focus to the component wrapper to test the screen reader announcement.
     const handleClick = () => {
-      const moveFocusTo = document
-        .getElementById('focus-demo')
-        ?.shadowRoot?.querySelector('.usa-step-indicator');
-      applyFocus(moveFocusTo);
+      const customElement = document.getElementById('focus-demo');
+      applyFocus(customElement);
     };
 
     return (
