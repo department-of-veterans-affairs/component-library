@@ -104,7 +104,6 @@ export class VaFileInputMultiple {
    */
   @Prop() percentUploaded?: number[] = [];
 
-
   /**
    * Event emitted when any change to the file inputs occurs.
    *

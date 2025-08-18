@@ -271,6 +271,92 @@ describe('va-file-input-multiple', () => {
     expect(selectedFiles).toBeNull();
   });
 
+  it('passes percentUploaded prop to individual file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set percentUploaded with different values for each input
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.percentUploaded = [75, 25];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that the percentUploaded prop is passed correctly
+    const firstInputPercent = await fileInputs[0].getProperty('percentUploaded');
+    const secondInputPercent = await fileInputs[1].getProperty('percentUploaded');
+    
+    expect(firstInputPercent).toBe(75);
+    expect(secondInputPercent).toBe(25);
+  });
+
+  it('handles percentUploaded array with fewer values than file inputs', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload files to create multiple inputs
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input1 = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input1.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    const inputs = await page.$$('pierce/#fileInputField');
+    const input2 = inputs[1] as ElementHandle<HTMLInputElement>;
+    await input2.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set percentUploaded with only one value for two inputs
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.percentUploaded = [50];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // First input should get the specified value
+    const firstInputPercent = await fileInputs[0].getProperty('percentUploaded');
+    expect(firstInputPercent).toBe(50);
+    
+    // Second input should get null or undefined (no value provided)
+    const secondInputPercent = await fileInputs[1].getProperty('percentUploaded');
+    expect(secondInputPercent).toBeUndefined();
+  });
+
+  it('displays progress bar when percentUploaded is less than 100', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file first
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set percentUploaded to show progress
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.percentUploaded = [60];
+    });
+    await page.waitForChanges();
+    
+    // Should show progress bar
+    const progressBar = await page.find('va-file-input-multiple >>> va-file-input >>> va-progress-bar');
+    expect(progressBar).not.toBeNull();
+    
+    // Should show uploading status
+    const uploadingStatus = await page.find('va-file-input-multiple >>> va-file-input >>> .uploading-status');
+    expect(uploadingStatus).not.toBeNull();
+  });
+
   it.skip('passes an aXe check', async () => {
     const page = await newE2EPage();
 
