@@ -158,7 +158,7 @@ export class VaSegmentedProgressBar {
               </ol>
               {
                 <div class="usa-step-indicator__header">
-                  <Tag class="usa-step-indicator__heading" aria-label={defaultAriaLabel}>
+                  <Tag class="usa-step-indicator__heading">
                     <span class="usa-step-indicator__heading-counter">
                       <span class="usa-sr-only">{progressTerm}</span>
                       <span class="usa-step-indicator__current-step">{current}</span>
