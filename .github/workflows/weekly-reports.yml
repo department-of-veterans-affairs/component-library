@@ -3,6 +3,11 @@ name: Weekly Design System Reports
 on:
   schedule:
     - cron: '0 22 * * 4' # Run every Thursday at 10 PM UTC (6 PM EDT / 5 PM EST)
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+    paths:
+      - '.github/workflows/weekly-reports.yml'
+      - 'packages/design-system-dashboard-cli/**'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
@@ -108,6 +113,12 @@ jobs:
         # Restore original .env.json
         mv .env.json.original .env.json
       
+    - name: Get current date and timestamp
+      id: date
+      run: |
+        echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+        echo "timestamp=$(date +%Y-%m-%d-%H%M%S)" >> $GITHUB_OUTPUT
+      
     - name: Upload reports
       uses: actions/upload-artifact@v4
       with:
@@ -118,16 +129,46 @@ jobs:
         retention-days: 7
 
            
-    - name: Commit and push reports
+    - name: Commit reports to weekly branch
       run: |
+        # Create a unique branch name with timestamp to avoid conflicts
+        BRANCH_NAME="weekly-reports/${{ steps.date.outputs.timestamp }}"
+        
+        # Fetch remote branches to check for conflicts
+        git fetch origin
+        
+        # Create a new branch for this week's reports
+        git checkout -b $BRANCH_NAME
+        
+        # Configure git
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add packages/design-system-dashboard-cli/output/form-apps-$(date +%Y-%m-%d).csv
-        git add packages/design-system-dashboard-cli/output/ds-components-$(date +%Y-%m-%d).csv
-        git add packages/design-system-dashboard-cli/output/forms-library-usage-$(date +%Y-%m-%d).txt
+        
+        # Add and commit the reports
+        git add packages/design-system-dashboard-cli/output/form-apps-${{ steps.date.outputs.date }}.csv
+        git add packages/design-system-dashboard-cli/output/ds-components-${{ steps.date.outputs.date }}.csv
+        git add packages/design-system-dashboard-cli/output/forms-library-usage-${{ steps.date.outputs.date }}.txt
+        
         if git diff --staged --quiet; then
           echo "No changes to commit"
+          exit 0
         else
-          git commit -m "Add weekly reports for $(date +%Y-%m-%d)"
-          git push
+          git commit -m "Add weekly reports for ${{ steps.date.outputs.date }}"
+          
+          # Try to push, and if it fails, force push (since it's a new branch with reports)
+          if ! git push origin $BRANCH_NAME; then
+            echo "Push failed, force pushing new branch..."
+            git push --force origin $BRANCH_NAME
+          fi
+          
+          echo "## 📊 Weekly Reports Generated!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Branch created: \`$BRANCH_NAME\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Manual step required:** [Create a PR from this branch to main](https://github.com/department-of-veterans-affairs/component-library/compare/main...$BRANCH_NAME)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Reports generated:" >> $GITHUB_STEP_SUMMARY
+          echo "- form-apps-${{ steps.date.outputs.date }}.csv" >> $GITHUB_STEP_SUMMARY
+          echo "- ds-components-${{ steps.date.outputs.date }}.csv" >> $GITHUB_STEP_SUMMARY
+          echo "- forms-library-usage-${{ steps.date.outputs.date }}.txt" >> $GITHUB_STEP_SUMMARY
         fi
