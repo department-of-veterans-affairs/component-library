@@ -179,7 +179,9 @@ export class VaLink {
             aria-label={label}
           >
             {text}
-            <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
+            <span class="link-icon--active-icon-wrapper">
+              <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
+            </span>
           </a>
         </Host>
       );
