@@ -389,6 +389,47 @@ describe('va-file-input-multiple', () => {
     expect(uploadingStatus).not.toBeNull();
   });
 
+  it('passes maxFileSize prop to all file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set maxFileSize prop
+    const maxSize = 5000000; // 5MB
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.maxFileSize = 5000000;
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that maxFileSize prop is passed to all file inputs
+    const firstInputMaxSize = await fileInputs[0].getProperty('maxFileSize');
+    const secondInputMaxSize = await fileInputs[1].getProperty('maxFileSize');
+    
+    expect(firstInputMaxSize).toBe(maxSize);
+    expect(secondInputMaxSize).toBe(maxSize);
+  });
+
+  it('applies default maxFileSize value when not specified', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input');
+    
+    // Check that default maxFileSize is Infinity
+    const defaultMaxSize = await fileInput.getProperty('maxFileSize');
+    expect(defaultMaxSize).toBe(Infinity);
+  });
+
   it.skip('passes an aXe check', async () => {
     const page = await newE2EPage();
 

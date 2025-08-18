@@ -105,6 +105,11 @@ export class VaFileInputMultiple {
   @Prop() percentUploaded?: number[] = [];
 
   /**
+   * Maximum allowed file size in bytes. The value is applied to all file inputs.
+   */
+  @Prop() maxFileSize?: number = Infinity;
+
+  /**
    * Event emitted when any change to the file inputs occurs.
    *
    * Sends back an object with the following data structure:
@@ -407,6 +412,7 @@ export class VaFileInputMultiple {
       passwordErrors,
       enableAnalytics,
       readOnly,
+      maxFileSize,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error' : '';
@@ -463,6 +469,7 @@ export class VaFileInputMultiple {
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}
                 readOnly={readOnly}
+                maxFileSize={maxFileSize}
                 class={fileEntry.file ? 'has-file' : 'no-file'}
               />
             );
