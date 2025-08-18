@@ -157,8 +157,8 @@ describe('va-segmented-progress-bar', () => {
         html: '<va-segmented-progress-bar current="3" total="6"></va-segmented-progress-bar>',
       });
       const element = await page.find('va-segmented-progress-bar');
-      const heading = element.shadowRoot.querySelector('.usa-step-indicator__heading');
-      expect(heading.getAttribute('aria-label')).toBe('You are on Step 3 of 6');
+      const wrapper = element.shadowRoot.querySelector('.usa-step-indicator');
+      expect(wrapper.getAttribute('aria-label')).toBe('You are on Step 3 of 6');
     });
 
     it("should render the correct aria-label when heading text is provided", async () => {
@@ -166,8 +166,8 @@ describe('va-segmented-progress-bar', () => {
         html: '<va-segmented-progress-bar current="3" total="6" heading-text="My Process"></va-segmented-progress-bar>',
       });
       const element = await page.find('va-segmented-progress-bar');
-      const heading = element.shadowRoot.querySelector('.usa-step-indicator__heading');
-      expect(heading.getAttribute('aria-label')).toBe('You are on Step 3 of 6: My Process');
+      const wrapper = element.shadowRoot.querySelector('.usa-step-indicator');
+      expect(wrapper.getAttribute('aria-label')).toBe('You are on Step 3 of 6: My Process');
     });
 
     it("should render the correct aria-label when labels are provided", async () => {
@@ -175,8 +175,8 @@ describe('va-segmented-progress-bar', () => {
         html: '<va-segmented-progress-bar current="3" total="6" heading-text="My Process" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
       });
       const element = await page.find('va-segmented-progress-bar');
-      const heading = element.shadowRoot.querySelector('.usa-step-indicator__heading');
-      expect(heading.getAttribute('aria-label')).toBe('You are on Step 3 of 6: Supporting Documents');
+      const wrapper = element.shadowRoot.querySelector('.usa-step-indicator');
+      expect(wrapper.getAttribute('aria-label')).toBe('You are on Step 3 of 6: Supporting Documents');
     });
 
     it("should render the correct aria-label with custom progress-term", async () => {
@@ -184,8 +184,8 @@ describe('va-segmented-progress-bar', () => {
         html: '<va-segmented-progress-bar current="3" total="6" progress-term="Chapter"></va-segmented-progress-bar>',
       });
       const element = await page.find('va-segmented-progress-bar');
-      const heading = element.shadowRoot.querySelector('.usa-step-indicator__heading');
-      expect(heading.getAttribute('aria-label')).toBe('You are on Chapter 3 of 6');
+      const wrapper = element.shadowRoot.querySelector('.usa-step-indicator');
+      expect(wrapper.getAttribute('aria-label')).toBe('You are on Chapter 3 of 6');
     });
   });
 });

@@ -1,4 +1,5 @@
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { applyFocus } from './wc-helpers';
 
 const segmentedProgressBarDocs = getWebComponentDocs(
   'va-segmented-progress-bar',
@@ -29,6 +30,7 @@ const Template = ({
   headerLevel,
   progressTerm,
   'use-div': useDiv,
+  ...rest
 }) => (
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
@@ -45,6 +47,7 @@ const Template = ({
       header-level={headerLevel}
       progress-term={progressTerm}
       use-div={useDiv}
+      {...rest}
     ></va-segmented-progress-bar>
   </div>
 );
@@ -59,6 +62,9 @@ const defaultArgs = {
   'centered-labels': undefined,
   'counters': undefined,
   'use-div': false,
+  'centeredLabels': undefined,
+  'headerLevel': undefined,
+  'progressTerm': undefined,
 };
 
 export const Default = Template.bind(null);
@@ -151,3 +157,28 @@ LongHeaderCausingWrap.args = {
   ...defaultArgs,
   'heading-text': 'This is a very long header that will cause the text to wrap onto multiple lines, which is useful for testing how the component handles long text in the header.',
 };
+
+const ToggleErrorStateTemplate = () => {
+  const handleClick = () => {
+      const moveFocusTo = document
+        .getElementById('focus-demo')
+        ?.shadowRoot?.querySelector('.usa-step-indicator');
+
+      applyFocus(moveFocusTo);
+  };
+
+  return (
+    <>
+      {Template({
+        ...defaultArgs,
+        id: 'focus-demo'
+      })}
+      <va-button
+        text="Move focus to component wrapper"
+        onClick={handleClick}
+      ></va-button>
+    </>
+  );
+};
+
+export const TestMoveFocus = ToggleErrorStateTemplate.bind(null);
