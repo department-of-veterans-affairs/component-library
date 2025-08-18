@@ -271,6 +271,38 @@ describe('va-file-input-multiple', () => {
     expect(selectedFiles).toBeNull();
   });
 
+  it('handles resetVisualState array with fewer values than file inputs', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload files to create multiple inputs
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input1 = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input1.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    const inputs = await page.$$('pierce/#fileInputField');
+    const input2 = inputs[1] as ElementHandle<HTMLInputElement>;
+    await input2.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set resetVisualState with only one value for two inputs
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.resetVisualState = [true];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // First input should get the specified value
+    const firstInputReset = await fileInputs[0].getProperty('resetVisualState');
+    expect(firstInputReset).toBe(true);
+    
+    // Second input should get undefined (no value provided)
+    const secondInputReset = await fileInputs[1].getProperty('resetVisualState');
+    expect(secondInputReset).toBeUndefined();
+  });
+
   it('passes percentUploaded prop to individual file input components', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-file-input-multiple />');
