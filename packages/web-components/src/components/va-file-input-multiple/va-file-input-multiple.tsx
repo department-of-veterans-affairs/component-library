@@ -11,6 +11,7 @@ import {
 import { i18next } from '../..';
 import { FileIndex } from "./FileIndex";
 import { FileDetails } from "./FileDetails";
+import { UploadedFile } from "../va-file-input/uploadedFile";
 
 /**
  * A component that manages multiple file inputs, allowing users to upload several files.
@@ -118,6 +119,11 @@ export class VaFileInputMultiple {
    * Optional file status, ex: "Uploading...", "Uploaded".
    */
   @Prop() statusText?: string;
+
+  /**
+   * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
+   */
+  @Prop() uploadedFiles?: UploadedFile[];
 
   /**
    * Event emitted when any change to the file inputs occurs.
@@ -425,6 +431,7 @@ export class VaFileInputMultiple {
       maxFileSize,
       minFileSize,
       statusText,
+      uploadedFiles,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error' : '';
@@ -453,6 +460,8 @@ export class VaFileInputMultiple {
               ? percentUploaded[pageIndex] : null;
             const _passwordError = passwordErrors && passwordErrors.length >= pageIndex
               ? passwordErrors[pageIndex] : null;
+            const _uploadedFile = uploadedFiles && uploadedFiles.length >= pageIndex
+              ? uploadedFiles[pageIndex] : null;
             return (
               <va-file-input
                 key={fileEntry.key}
@@ -484,6 +493,7 @@ export class VaFileInputMultiple {
                 maxFileSize={maxFileSize}
                 minFileSize={minFileSize}
                 statusText={statusText}
+                uploadedFile={_uploadedFile}
                 class={fileEntry.file ? 'has-file' : 'no-file'}
               />
             );
