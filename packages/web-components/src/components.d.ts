@@ -819,10 +819,6 @@ export namespace Components {
          */
         "statusText"?: string;
         /**
-          * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
-         */
-        "uploadedFiles"?: UploadedFile[];
-        /**
           * The value attribute for the file view element.
          */
         "value"?: File[];
@@ -4732,10 +4728,6 @@ declare namespace LocalJSX {
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
-        /**
-          * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
-         */
-        "uploadedFiles"?: UploadedFile[];
         /**
           * The value attribute for the file view element.
          */
