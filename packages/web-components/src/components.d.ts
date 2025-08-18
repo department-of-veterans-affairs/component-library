@@ -665,10 +665,6 @@ export namespace Components {
          */
         "accept"?: string;
         /**
-          * The text displayed on the button.
-         */
-        "buttonText": string;
-        /**
           * Emit component-library-analytics events on the file input change event.
          */
         "enableAnalytics"?: boolean;
@@ -4562,10 +4558,6 @@ declare namespace LocalJSX {
           * A comma-separated list of unique file type specifiers.
          */
         "accept"?: string;
-        /**
-          * The text displayed on the button.
-         */
-        "buttonText"?: string;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
