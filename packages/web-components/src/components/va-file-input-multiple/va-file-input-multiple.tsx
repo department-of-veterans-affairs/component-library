@@ -115,6 +115,11 @@ export class VaFileInputMultiple {
   @Prop() minFileSize?: number = 0;
 
   /**
+   * Optional file status, ex: "Uploading...", "Uploaded".
+   */
+  @Prop() statusText?: string;
+
+  /**
    * Event emitted when any change to the file inputs occurs.
    *
    * Sends back an object with the following data structure:
@@ -419,6 +424,7 @@ export class VaFileInputMultiple {
       readOnly,
       maxFileSize,
       minFileSize,
+      statusText,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error' : '';
@@ -477,6 +483,7 @@ export class VaFileInputMultiple {
                 readOnly={readOnly}
                 maxFileSize={maxFileSize}
                 minFileSize={minFileSize}
+                statusText={statusText}
                 class={fileEntry.file ? 'has-file' : 'no-file'}
               />
             );

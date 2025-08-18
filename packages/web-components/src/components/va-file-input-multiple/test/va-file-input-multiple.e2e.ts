@@ -471,6 +471,47 @@ describe('va-file-input-multiple', () => {
     expect(defaultMinSize).toBe(0);
   });
 
+  it('passes statusText prop to all file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set statusText prop
+    const customStatus = 'Processing file...';
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.statusText = 'Processing file...';
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that statusText prop is passed to all file inputs
+    const firstInputStatus = await fileInputs[0].getProperty('statusText');
+    const secondInputStatus = await fileInputs[1].getProperty('statusText');
+    
+    expect(firstInputStatus).toBe(customStatus);
+    expect(secondInputStatus).toBe(customStatus);
+  });
+
+  it('applies undefined statusText when not specified', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input');
+    
+    // Check that statusText is undefined when not set
+    const defaultStatus = await fileInput.getProperty('statusText');
+    expect(defaultStatus).toBeUndefined();
+  });
+
   it.skip('passes an aXe check', async () => {
     const page = await newE2EPage();
 

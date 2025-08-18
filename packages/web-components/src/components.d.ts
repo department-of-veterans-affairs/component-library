@@ -819,6 +819,10 @@ export namespace Components {
          */
         "slotFieldIndexes"?: Number[];
         /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
           * The value attribute for the file view element.
          */
         "value"?: File[];
@@ -4728,6 +4732,10 @@ declare namespace LocalJSX {
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
         "slotFieldIndexes"?: Number[];
+        /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
         /**
           * The value attribute for the file view element.
          */
