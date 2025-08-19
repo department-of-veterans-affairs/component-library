@@ -6198,6 +6198,10 @@ through all possible variants
   font-family: Bitter, Georgia, Cambria, Times New Roman, Times, serif !important;
 }
 
+.vads-u-font-family--monospace {
+  font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace !important;
+}
+
 .vads-u-font-size--source-sans-normalized {
   font-size: 1.063rem !important;
 }
