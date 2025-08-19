@@ -28,5 +28,8 @@
   },
   "desktop-lg": {
     "value": "1201px"
+  },
+  "widescreen": {
+    "value": "1400px"
   }
 }
