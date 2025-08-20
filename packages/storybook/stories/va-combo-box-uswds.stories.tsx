@@ -1,6 +1,9 @@
-import { useState } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { applyFocus } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure, StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
+ } from './wc-helpers';
 
 const comboBoxDocs = getWebComponentDocs('va-combo-box');
 
@@ -13,6 +16,10 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={comboBoxDocs} />,
     },
   },
+  argTypes: {
+    ...propStructure(comboBoxDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message']),
+  }
 };
 
 const defaultArgs = {
@@ -25,6 +32,8 @@ const defaultArgs = {
   hint: undefined,
   placeholder: undefined,
   disabled: undefined,
+  showToggleFocusButton: false,
+  focusEl: null,
   options: [
     <option value="apple">Apple</option>,
     <option value="banana">Banana</option>,
@@ -50,85 +59,55 @@ const defaultArgs = {
   ],
 };
 
-const Template = ({
-  label,
-  name,
-  value,
-  required,
-  error,
-  hint,
-  options,
-  placeholder,
-  disabled,
-  messageAriaDescribedby,
-  ...rest
-}) => {
-  return (
-    <va-combo-box
-      label={label}
-      name={name}
-      value={value}
-      required={required}
-      error={error}
-      hint={hint}
-      placeholder={placeholder}
-      disabled={disabled}
-      message-aria-describedby={messageAriaDescribedby}
-      {...rest}
-    >
-      {options}
-    </va-combo-box>
-  );
-};
+const ComboBoxComponent = (args) => {
+  const {
+    label,
+    name,
+    value,
+    required,
+    error,
+    hint,
+    options,
+    placeholder,
+    disabled,
+    messageAriaDescribedby,
+    showToggleFocusButton,
+    focusEl,
+  } = args;
 
-/**
- * Template that demonstrates toggling form error states.
- *
- * For accessibility testing purposes, the template also supports moving focus
- * to various elements after entering the error state.
- *
- * Note: This template only toggles the error state and does not actually
- * validate the input value.
- */
-const ToggleErrorStateTemplate = args => {
-  const [error, setError] = useState(null);
-  const { focusEl } = args;
-
-  const handleClick = () => {
-    error ? setError(null) : setError(`This is an error message`);
-
-    if (focusEl) {
-      const moveFocusTo = document
-        .getElementById('error-demo')
-        ?.shadowRoot?.getElementById(focusEl);
-
-      applyFocus(moveFocusTo);
-    }
-  };
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
 
   return (
     <>
-      {Template({
-        ...defaultArgs,
-        'error': error,
-        'required': true,
-        'id': 'error-demo',
-        'use-forms-pattern': 'single',
-        'form-heading': 'Error state demo',
-        'form-heading-level': 1,
-      })}
-      <va-button
-        text="Toggle error state"
-        onClick={handleClick}
-        style={{ marginTop: '2rem' }}
-      ></va-button>
+      <va-combo-box
+        label={label}
+        name={name}
+        value={value}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        placeholder={placeholder}
+        disabled={disabled}
+        message-aria-describedby={messageAriaDescribedby}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      >
+        {options}
+      </va-combo-box>
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
     </>
   );
 };
 
+const Template = (args) => <ComboBoxComponent {...args} />;
+
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(comboBoxDocs);
 
 export const WithDefaultValue = Template.bind({});
 WithDefaultValue.args = {
@@ -194,16 +173,4 @@ const optGroupArgs = {
 export const OptionGroups = Template.bind({});
 OptionGroups.args = {
   ...optGroupArgs,
-};
-
-export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
-ToggleErrorState.args = {
-  focusEl: null,
-};
-ToggleErrorState.argTypes = {
-  focusEl: {
-    name: 'Element to focus on error toggle',
-    control: { type: 'radio' },
-    options: [null, 'input-error-message', 'form-question'],
-  },
 };

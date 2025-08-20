@@ -1,4 +1,5 @@
 import * as PropTypes from 'prop-types';
+import { useState } from 'react';
 import {
   Title,
   Subtitle,
@@ -377,6 +378,85 @@ export function applyFocus(el) {
 
     el.focus();
   }
+}
+
+/**
+ * Reusable hook for error toggle functionality in Storybook stories.
+ * Manages error state and provides a click handler for testing focus management.
+ *
+ * @param {string|null} initialError - The initial error message
+ * @param {string} focusEl - CSS selector for the element to focus when error is shown
+ * @param {string} defaultError - Default error message to use when toggling
+ * @returns {object} - Object containing errorMsg, setErrorMsg, and handleClick
+ */
+export function useErrorToggle(initialError, focusEl, defaultError = 'There has been an error') {
+  const [errorMsg, setErrorMsg] = useState(initialError);
+
+  const handleClick = () => {
+    const willShowError = !errorMsg;
+    const errorToShow = initialError || defaultError;
+    errorMsg ? setErrorMsg(null) : setErrorMsg(errorToShow);
+
+    // Only move focus when showing an error (not when clearing it)
+    if (focusEl && willShowError) {
+      // Use setTimeout to ensure DOM updates before focusing
+      setTimeout(() => {
+        const component = document.getElementById('error-demo-wrapper');
+
+        if (focusEl === '#error-demo-wrapper' || focusEl === 'error-demo-wrapper') {
+          // Focus on the wrapper component itself
+          if (component) {
+            applyFocus(component);
+          }
+        } else if (component?.shadowRoot) {
+          // Focus on an element within the shadow DOM
+          let moveFocusTo;
+
+          // Try getElementById first, then querySelector for flexibility
+          if (focusEl.startsWith('#')) {
+            moveFocusTo = component.shadowRoot.getElementById(focusEl.substring(1));
+          } else if (focusEl.startsWith('.')) {
+            moveFocusTo = component.shadowRoot.querySelector(focusEl);
+          } else {
+            // Assume it's an ID without the # prefix
+            moveFocusTo = component.shadowRoot.getElementById(focusEl) ||
+                         component.shadowRoot.querySelector(focusEl);
+          }
+
+          if (moveFocusTo) {
+            applyFocus(moveFocusTo);
+          }
+        }
+      }, 100);
+    }
+  };
+
+  return { errorMsg, setErrorMsg, handleClick };
+}
+
+/**
+ * Standard argTypes for error toggle functionality in Storybook stories.
+ * Provides controls for testing focus management and screen reader announcements.
+ *
+ * @param {string[]} focusOptions - Array of CSS selectors for focus targets
+ * @returns {object} - Object containing showToggleFocusButton and focusEl argTypes
+ */
+export function errorToggleArgTypes(focusOptions = ['#error-demo-wrapper']) {
+  return {
+    showToggleFocusButton: {
+      name: 'Show toggle error button',
+      control: { type: 'boolean' },
+      description: 'Toggles the visibility of the error toggle button. Used to test the screen reader announcement.',
+      table: { category: 'Storybook-only' }
+    },
+    focusEl: {
+      name: 'Move focus to this element on error',
+      if: { arg: 'showToggleFocusButton' },
+      control: { type: 'radio' },
+      options: [null, ...focusOptions],
+      table: { category: 'Storybook-only' }
+    },
+  };
 }
 
 /**

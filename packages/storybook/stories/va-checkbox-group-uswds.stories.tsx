@@ -4,6 +4,8 @@ import {
   componentStructure,
   propStructure,
   StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
   applyFocus,
 } from './wc-helpers';
 
@@ -23,9 +25,13 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={checkBoxGroupDocs} />,
     },
   },
+  argTypes: {
+    ...propStructure(checkBoxGroupDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#checkbox-error-message','.input-wrap']),
+  }
 };
 
-const vaCheckboxGroup = args => {
+const CheckboxGroupComponent = (args) => {
   const {
     'enable-analytics': enableAnalytics,
     error,
@@ -34,28 +40,41 @@ const vaCheckboxGroup = args => {
     hint,
     'label-header-level': labelHeaderLevel,
     'message-aria-describedby': messageAriaDescribedby,
-    ...rest
+    showToggleFocusButton,
+    focusEl
   } = args;
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-checkbox-group
-      enable-analytics={enableAnalytics}
-      error={error}
-      label={label}
-      required={required}
-      hint={hint}
-      label-header-level={labelHeaderLevel}
-      message-aria-describedby={messageAriaDescribedby}
-      {...rest}
-    >
-      <va-checkbox label="Sojourner Truth" name="example" value="1" />
-      <va-checkbox label="Frederick Douglass" name="example" value="2" />
-      <va-checkbox label="Booker T. Washington" name="example" value="3" />
-      <va-checkbox label="George Washington Carver" name="example" value="4" />
-    </va-checkbox-group>
+    <>
+      <va-checkbox-group
+        enable-analytics={enableAnalytics}
+        error={errorMsg}
+        label={label}
+        required={required}
+        hint={hint}
+        label-header-level={labelHeaderLevel}
+        message-aria-describedby={messageAriaDescribedby}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      >
+        <va-checkbox label="Sojourner Truth" name="example" value="1" />
+        <va-checkbox label="Frederick Douglass" name="example" value="2" />
+        <va-checkbox label="Booker T. Washington" name="example" value="3" />
+        <va-checkbox label="George Washington Carver" name="example" value="4" />
+      </va-checkbox-group>
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
   );
 };
 
-const Template = args => vaCheckboxGroup(args);
+const Template = (args) => <CheckboxGroupComponent {...args} />;
 
 const USWDSTiled = ({
   'enable-analytics': enableAnalytics,
@@ -107,7 +126,7 @@ const USWDSTiled = ({
   );
 };
 
-const I18nTemplate = args => {
+const I18nComponent = (args) => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -131,55 +150,12 @@ const I18nTemplate = args => {
         style={{ fontSize: '16px' }}
         text="Tagalog"
       />
-      <div style={{ marginTop: '20px' }}>{vaCheckboxGroup(args)}</div>
+      <div style={{ marginTop: '20px' }}><CheckboxGroupComponent {...args} /></div>
     </div>
   );
 };
 
-/**
- * Template that demonstrates toggling form error states.
- *
- * For accessibility testing purposes, the template also supports moving focus
- * to various elements after entering the error state.
- *
- * Note: This template only toggles the error state and does not actually
- * validate the input value.
- */
-const ToggleErrorStateTemplate = args => {
-  const [error, setError] = useState(null);
-  const { focusEl } = args;
-
-  const handleClick = () => {
-    error ? setError(null) : setError(`This is an error message`);
-
-    if (focusEl) {
-      const moveFocusTo = document
-        .getElementById('error-demo')
-        ?.shadowRoot?.getElementById(focusEl);
-
-      applyFocus(moveFocusTo);
-    }
-  };
-
-  return (
-    <>
-      {Template({
-        ...defaultArgs,
-        'error': error,
-        'required': true,
-        'id': 'error-demo',
-        'use-forms-pattern': 'single',
-        'form-heading': 'Error state demo',
-        'form-heading-level': 1,
-      })}
-      <va-button
-        text="Toggle error state"
-        onClick={handleClick}
-        style={{ marginTop: '2rem' }}
-      ></va-button>
-    </>
-  );
-};
+const I18nTemplate = (args) => <I18nComponent {...args} />;
 
 const defaultArgs = {
   'enable-analytics': false,
@@ -193,6 +169,8 @@ const defaultArgs = {
   'form-heading': null,
   'form-description': null,
   'message-aria-describedby': null,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 export const Default = Template.bind(null);
@@ -458,16 +436,4 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
-};
-
-export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
-ToggleErrorState.args = {
-  focusEl: null,
-};
-ToggleErrorState.argTypes = {
-  focusEl: {
-    name: 'Element to focus on error toggle',
-    control: { type: 'radio' },
-    options: [null, 'checkbox-error-message', 'form-question'],
-  },
 };
