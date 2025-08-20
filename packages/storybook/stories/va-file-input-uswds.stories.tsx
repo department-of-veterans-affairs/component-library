@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { applyFocus, getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure,
+  StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
+} from './wc-helpers';
 // @ts-ignore
 import testImage from './images/search-bar.png';
 
@@ -18,6 +24,8 @@ export default {
     },
   },
   argTypes: {
+    ...propStructure(fileInputDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#file-input-error-alert']),
     // hide the uploadMessage prop from the properties table in storybook
     uploadMessage: {
       table: {
@@ -48,7 +56,9 @@ const defaultArgs = {
   'uploadedFile': null,
   'maxFileSize': Infinity,
   'minFileSize': 0,
-  'password-error': false
+  'password-error': false,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -71,31 +81,44 @@ const Template = ({
   maxFileSize,
   minFileSize,
   passwordError,
-  ...rest
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <VaFileInput
-      label={label}
-      name={name}
-      accept={accept}
-      required={required}
-      error={error}
-      hint={hint}
-      enable-analytics={enableAnalytics}
-      onVaChange={vaChange}
-      onVaPasswordChange={vaPasswordChange}
-      header-size={headerSize}
-      readOnly={readOnly}
-      encrypted={encrypted}
-      statusText={statusText}
-      value={value}
-      children={children}
-      uploadedFile={uploadedFile}
-      maxFileSize={maxFileSize}
-      minFileSize={minFileSize}
-      passwordError={passwordError}
-      {...rest}
-    />
+    <>
+      <VaFileInput
+        label={label}
+        name={name}
+        accept={accept}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        enable-analytics={enableAnalytics}
+        onVaChange={vaChange}
+        onVaPasswordChange={vaPasswordChange}
+        header-size={headerSize}
+        readOnly={readOnly}
+        encrypted={encrypted}
+        statusText={statusText}
+        value={value}
+        children={children}
+        uploadedFile={uploadedFile}
+        maxFileSize={maxFileSize}
+        minFileSize={minFileSize}
+        passwordError={passwordError}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      />
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
   );
 };
 
@@ -304,45 +327,6 @@ return (
   );
 };
 
-/**
- * Template component that demonstrates toggling form error states.
- *
- * For accessibility testing purposes, the template also supports moving focus
- * to various elements after entering the error state.
- *
- * Note: This template only toggles the error state and does not actually
- * validate the input value.
- */
-const ToggleErrorStateTemplate = args => {
-  const [error, setError] = useState(null);
-  const { focusEl } = args;
-
-  const handleClick = () => {
-    error ? setError(null) : setError(`This is an error message`);
-
-    if (focusEl) {
-      const moveFocusTo = document
-        .getElementById('error-demo')
-        ?.shadowRoot?.getElementById(focusEl);
-
-      applyFocus(moveFocusTo);
-    }
-  };
-
-  return (
-    <>
-      {Template({
-        ...defaultArgs,
-        ...args,
-        error: error,
-        required: true,
-        id: "error-demo",
-      })}
-      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
-    </>
-  );
-};
-
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {
   ...defaultArgs,
@@ -498,15 +482,3 @@ const VisualStateResetTemplate = args => {
 
 export const WithVisualStateReset = VisualStateResetTemplate.bind(null);
 WithVisualStateReset.args = { ...defaultArgs };
-
-export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
-ToggleErrorState.args = {
-  focusEl: null,
-};
-ToggleErrorState.argTypes = {
-  focusEl: {
-    name: 'Element to focus on error toggle',
-    control: { type: 'radio' },
-    options: [null, 'file-input-error-alert'],
-  },
-};
