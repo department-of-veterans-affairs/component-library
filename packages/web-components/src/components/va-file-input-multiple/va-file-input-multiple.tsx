@@ -11,6 +11,7 @@ import {
 import { i18next } from '../..';
 import { FileIndex } from "./FileIndex";
 import { FileDetails } from "./FileDetails";
+import { UploadedFile } from "../va-file-input/uploadedFile";
 
 /**
  * A component that manages multiple file inputs, allowing users to upload several files.
@@ -55,9 +56,19 @@ export class VaFileInputMultiple {
   @Prop() errors: string[] = [];
 
   /**
+   * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
+   */
+  @Prop() resetVisualState?: boolean[] = [];
+
+  /**
+   * Array of password error messages corresponding to each file input. The length and order match the files array.
+   */
+  @Prop() passwordErrors?: Array<string | null> = [];
+
+  /**
    * Array of booleans, displays file password field for corresponding file input.
    */
-  @Prop() encrypted: boolean[] = [];
+  @Prop() encrypted?: boolean[] = [];
 
   /**
    * Hint text provided to guide users on the expected format or type of files.
@@ -88,6 +99,31 @@ export class VaFileInputMultiple {
    * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
    */
   @Prop() slotFieldIndexes?: Number[] = null;
+
+  /**
+   * Array of numbers corresponding to the progress of the upload of each file.
+   */
+  @Prop() percentUploaded?: number[] = [];
+
+  /**
+   * Maximum allowed file size in bytes. The value is applied to all file inputs.
+   */
+  @Prop() maxFileSize?: number = Infinity;
+
+  /**
+   * Minimum allowed file size in bytes. The value is applied to all file inputs.
+   */
+  @Prop() minFileSize?: number = 0;
+
+  /**
+   * Optional file status, ex: "Uploading...", "Uploaded".
+   */
+  @Prop() statusText?: string;
+
+  /**
+   * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
+   */
+  @Prop() uploadedFiles?: UploadedFile[];
 
   /**
    * Event emitted when any change to the file inputs occurs.
@@ -387,8 +423,15 @@ export class VaFileInputMultiple {
       accept,
       errors,
       encrypted,
+      percentUploaded,
+      resetVisualState,
+      passwordErrors,
       enableAnalytics,
       readOnly,
+      maxFileSize,
+      minFileSize,
+      statusText,
+      uploadedFiles,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error' : '';
@@ -411,9 +454,18 @@ export class VaFileInputMultiple {
             </div>
           )}
           {files.map((fileEntry, pageIndex) => {
+            const _resetVisualState = resetVisualState && resetVisualState.length >= pageIndex
+              ? resetVisualState[pageIndex] : null;
+            const _percentUploaded = percentUploaded && percentUploaded.length >= pageIndex
+              ? percentUploaded[pageIndex] : null;
+            const _passwordError = passwordErrors && passwordErrors.length >= pageIndex
+              ? passwordErrors[pageIndex] : null;
+            const _uploadedFile = uploadedFiles && uploadedFiles.length >= pageIndex
+              ? uploadedFiles[pageIndex] : null;
             return (
               <va-file-input
                 key={fileEntry.key}
+                id={`instance-${pageIndex}`}
                 headless
                 label={label}
                 hint={hint}
@@ -426,6 +478,9 @@ export class VaFileInputMultiple {
                   : {})}
                 error={errors[pageIndex]}
                 encrypted={encrypted[pageIndex]}
+                percentUploaded={_percentUploaded}
+                resetVisualState={_resetVisualState}
+                passwordError={_passwordError}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
@@ -435,6 +490,10 @@ export class VaFileInputMultiple {
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}
                 readOnly={readOnly}
+                maxFileSize={maxFileSize}
+                minFileSize={minFileSize}
+                statusText={statusText}
+                uploadedFile={_uploadedFile}
                 class={fileEntry.file ? 'has-file' : 'no-file'}
               />
             );
