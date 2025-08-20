@@ -205,7 +205,7 @@ export const HeaderLabel = Template.bind(null);
 HeaderLabel.args = {
   ...defaultArgs,
   label: 'Header label',
-  'header-size': 3,
+  headerSize: 3,
   required: true,
 };
 
