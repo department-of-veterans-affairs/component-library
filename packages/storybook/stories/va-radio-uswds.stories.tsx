@@ -3,7 +3,11 @@ import {
   VaRadio,
   VaRadioOption,
 } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { applyFocus } from './wc-helpers';
+import {
+  applyFocus,
+  useErrorToggle,
+  errorToggleArgTypes,
+} from './wc-helpers';
 
 import {
   getWebComponentDocs,
@@ -28,6 +32,10 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={radioDocs} />,
     },
   },
+  argTypes: {
+      ...propStructure(radioDocs),
+      ...errorToggleArgTypes(['#error-demo-wrapper','#radio-error-message','.input-wrap']),
+  },
 };
 
 const vaRadioConst = args => {
@@ -40,25 +48,38 @@ const vaRadioConst = args => {
     required,
     'label-header-level': labelHeaderLevel,
     'header-aria-describedby': headerAriaDescribedby,
-    ...rest
+    showToggleFocusButton,
+    focusEl
   } = args;
 
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-radio
-      enable-analytics={enableAnalytics}
-      error={error}
-      label={label}
-      required={required}
-      hint={hint}
-      label-header-level={labelHeaderLevel}
-      header-aria-describedby={headerAriaDescribedby}
-      {...rest}
-    >
-      <va-radio-option label="Sojourner Truth" name={name} value="1" />
-      <va-radio-option label="Frederick Douglass" name={name} value="2" />
-      <va-radio-option label="Booker T. Washington" name={name} value="3" />
-      <va-radio-option label="George Washington Carver" name={name} value="4" />
-    </va-radio>
+    <>
+      <va-radio
+        enable-analytics={enableAnalytics}
+        error={errorMsg}
+        label={label}
+        required={required}
+        hint={hint}
+        label-header-level={labelHeaderLevel}
+        header-aria-describedby={headerAriaDescribedby}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      >
+        <va-radio-option label="Sojourner Truth" name={name} value="1" />
+        <va-radio-option label="Frederick Douglass" name={name} value="2" />
+        <va-radio-option label="Booker T. Washington" name={name} value="3" />
+        <va-radio-option label="George Washington Carver" name={name} value="4" />
+      </va-radio>
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
+
   );
 };
 
@@ -204,12 +225,17 @@ const USWDSTiledError = ({
   label,
   required,
   hint,
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
     <>
       <va-radio
         enable-analytics={enableAnalytics}
-        error="This is an error"
+        error={errorMsg}
         label={label}
         required={required}
         hint={hint}
@@ -237,6 +263,13 @@ const USWDSTiledError = ({
           tile
         />
       </va-radio>
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
     </>
   );
 };
@@ -384,46 +417,6 @@ const FormsPatternSingleTemplate = ({ required, error, label, name }) => {
   );
 };
 
-/**
- * Template component that demonstrates toggling form error states.
- *
- * For accessibility testing purposes, the template also supports moving focus
- * to various elements after entering the error state.
- *
- * Note: This template only toggles the error state and does not actually
- * validate the input value.
- */
-const ToggleErrorStateTemplate = args => {
-  const [error, setError] = useState(null);
-  const { focusEl } = args;
-
-  const handleClick = () => {
-    error ? setError(null) : setError(`This is an error message`);
-
-    if (focusEl) {
-      const moveFocusTo = document
-        .getElementById('error-demo')
-        ?.shadowRoot?.getElementById(focusEl);
-
-      applyFocus(moveFocusTo);
-    }
-  };
-
-  return (
-    <>
-      {Template({
-        ...defaultArgs,
-        error: error,
-        required: true,
-        id: "error-demo",
-        'use-forms-pattern': "single",
-        'form-heading': "Error state demo",
-        'form-heading-level': 1,
-      })}
-      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
-    </>
-  );
-};
 
 const defaultArgs = {
   'enable-analytics': false,
@@ -437,6 +430,8 @@ const defaultArgs = {
   'form-heading-level': null,
   'form-heading': null,
   'form-description': null,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 export const Default = Template.bind(null);
@@ -553,16 +548,4 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
-};
-
-export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
-ToggleErrorState.args = {
-  focusEl: null,
-};
-ToggleErrorState.argTypes = {
-  focusEl: {
-    name: 'Element to focus on error toggle',
-    control: { type: 'radio' },
-    options: [null, 'radio-error-message', 'form-question'],
-  },
 };

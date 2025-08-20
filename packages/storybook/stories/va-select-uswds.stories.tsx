@@ -4,6 +4,8 @@ import {
   propStructure,
   StoryDocs,
   applyFocus,
+  useErrorToggle,
+  errorToggleArgTypes,
 } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
@@ -16,6 +18,10 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={selectDocs} />,
     },
+  },
+  argTypes: {
+    ...propStructure(selectDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
   },
 };
 
@@ -47,6 +53,8 @@ const defaultArgs = {
   ],
   'use-add-button': false,
   'full-width': false,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -61,9 +69,11 @@ const Template = ({
   options,
   'use-add-button': useAddButton,
   'full-width': fullWidth,
-  ...rest
+  showToggleFocusButton,
+  focusEl
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
 
   return (
     <>
@@ -85,16 +95,23 @@ const Template = ({
         name={name}
         value={value}
         required={required}
-        error={error}
+        error={errorMsg}
         hint={hint}
         aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
         full-width={fullWidth}
-        {...rest}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         {modifiedOptions}
       </va-select>
+      {showToggleFocusButton && (
+          <va-button
+            text="Toggle error state"
+            onClick={handleClick}
+            class="vads-u-margin-top--2"
+          ></va-button>
+      )}
     </>
   );
 };
@@ -144,47 +161,6 @@ const InertTemplate = ({
       >
         {modifiedOptions}
       </va-select>
-    </>
-  );
-};
-
-/**
- * Template component that demonstrates toggling form error states.
- *
- * For accessibility testing purposes, the template also supports moving focus
- * to various elements after entering the error state.
- *
- * Note: This template only toggles the error state and does not actually
- * validate the input value.
- */
-const ToggleErrorStateTemplate = args => {
-  const [error, setError] = useState(null);
-  const { focusEl } = args;
-
-  const handleClick = () => {
-    error ? setError(null) : setError(`This is an error message`);
-
-    if (focusEl) {
-      const moveFocusTo = document
-        .getElementById('error-demo')
-        ?.shadowRoot?.getElementById(focusEl);
-
-      applyFocus(moveFocusTo);
-    }
-  };
-
-  return (
-    <>
-      {Template({
-        ...defaultArgs,
-        error: error,
-        required: true,
-        id: "error-demo",
-        'use-forms-pattern': "single",
-        'form-heading': "Error state demo",
-        'form-heading-level': 1,
-      })}
-      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
     </>
   );
 };
@@ -407,16 +383,4 @@ FormsPatternMultiple.args = {
   'use-forms-pattern': 'multiple',
   'form-heading-level': 1,
   'form-heading': 'Select a branch of the armed forces',
-};
-
-export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
-ToggleErrorState.args = {
-  focusEl: null,
-};
-ToggleErrorState.argTypes = {
-  focusEl: {
-    name: 'Element to focus on error toggle',
-    control: { type: 'radio' },
-    options: [null, 'input-error-message', 'form-question'],
-  },
 };

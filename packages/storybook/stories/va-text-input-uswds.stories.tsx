@@ -3,6 +3,8 @@ import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
   applyFocus,
 } from './wc-helpers';
 import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
@@ -19,6 +21,8 @@ export default {
     },
   },
   argTypes: {
+    ...propStructure(textInputDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
     inputmode: {
       control: {
         type: 'select',
@@ -72,6 +76,8 @@ const defaultArgs = {
   'input-suffix': undefined,
   'input-icon-suffix': undefined,
   'show-input-error': true,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -99,40 +105,53 @@ const Template = ({
   'input-suffix': inputSuffix,
   'input-icon-suffix': inputIconSuffix,
   'show-input-error': showInputError,
-  ...rest
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-text-input
-      name={name}
-      label={label}
-      autocomplete={autocomplete}
-      enable-analytics={enableAnalytics}
-      required={required}
-      error={error}
-      hint={hint}
-      maxlength={maxlength}
-      value={value}
-      inputmode={inputmode}
-      step={step}
-      type={type}
-      success={success}
-      pattern={pattern}
-      onBlur={e => console.log('blur event', e)}
-      onInput={e =>
-        console.log('input event value', (e.target as HTMLInputElement).value)
-      }
-      message-aria-describedby={messageAriaDescribedby}
-      charcount={charcount}
-      min={min}
-      max={max}
-      currency={currency}
-      input-prefix={inputPrefix}
-      input-icon-prefix={inputIconPrefix}
-      input-suffix={inputSuffix}
-      input-icon-suffix={inputIconSuffix}
-      show-input-error={showInputError}
-      {...rest}
-    />
+    <>
+      <va-text-input
+        name={name}
+        label={label}
+        autocomplete={autocomplete}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        maxlength={maxlength}
+        value={value}
+        inputmode={inputmode}
+        step={step}
+        type={type}
+        success={success}
+        pattern={pattern}
+        onBlur={e => console.log('blur event', e)}
+        onInput={e =>
+          console.log('input event value', (e.target as HTMLInputElement).value)
+        }
+        message-aria-describedby={messageAriaDescribedby}
+        charcount={charcount}
+        min={min}
+        max={max}
+        currency={currency}
+        input-prefix={inputPrefix}
+        input-icon-prefix={inputIconPrefix}
+        input-suffix={inputSuffix}
+        input-icon-suffix={inputIconSuffix}
+        show-input-error={showInputError}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      />
+      {showToggleFocusButton && (
+          <va-button
+            text="Toggle error state"
+            onClick={handleClick}
+            class="vads-u-margin-top--2"
+          ></va-button>
+      )}
+    </>
   );
 };
 
@@ -394,48 +413,6 @@ export const Autocomplete = ({ name, label, autocomplete }) => {
   );
 };
 
-/**
- * Template component that demonstrates toggling form error states.
- *
- * For accessibility testing purposes, the template also supports moving focus
- * to various elements after entering the error state.
- *
- * Note: This template only toggles the error state and does not actually
- * validate the input value.
- */
-const ToggleErrorStateTemplate = args => {
-  const [error, setError] = useState(null);
-  const { focusEl } = args;
-
-  const handleClick = () => {
-    error ? setError(null) : setError(`This is an error message`);
-
-    if (focusEl) {
-      const moveFocusTo = document
-        .getElementById('error-demo')
-        ?.shadowRoot?.getElementById(focusEl);
-
-      applyFocus(moveFocusTo);
-    }
-  };
-
-  return (
-    <>
-      {Template({
-        ...defaultArgs,
-        error: error,
-        required: true,
-        id: "error-demo",
-        'use-forms-pattern': "single",
-        'form-heading': "Error state demo",
-        'form-heading-level': 1,
-      })}
-      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
-    </>
-  );
-};
-
-
 Autocomplete.args = {
   ...defaultArgs,
   name: 'email',
@@ -566,16 +543,3 @@ export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
 };
-
-export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
-ToggleErrorState.args = {
-  focusEl: null,
-};
-ToggleErrorState.argTypes = {
-  focusEl: {
-    name: 'Element to focus on error toggle',
-    control: { type: 'radio' },
-    options: [null, 'input-error-message', 'form-question'],
-  },
-};
-

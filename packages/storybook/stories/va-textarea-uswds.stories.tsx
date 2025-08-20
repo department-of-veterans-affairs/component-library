@@ -4,6 +4,8 @@ import {
   propStructure,
   StoryDocs,
   applyFocus,
+  useErrorToggle,
+  errorToggleArgTypes,
 } from './wc-helpers';
 
 const textareaDocs = getWebComponentDocs('va-textarea');
@@ -16,6 +18,10 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={textareaDocs} />,
     },
+  },
+  argTypes: {
+    ...propStructure(textareaDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
   },
 };
 
@@ -37,6 +43,8 @@ const defaultArgs = {
   'form-description': null,
   'label-header-level': null,
   'header-aria-describedby': null,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -53,29 +61,42 @@ const Template = ({
   'message-aria-describedby': messageAriaDescribedby,
   'label-header-level': labelHeaderLevel,
   'header-aria-describedby': headerAriaDescribedby,
-  ...rest
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-textarea
-      name={name}
-      label={label}
-      enable-analytics={enableAnalytics}
-      required={required}
-      error={error}
-      hint={hint}
-      maxlength={maxlength}
-      value={value}
-      placeholder={placeholder}
-      onBlur={e => console.log('blur event', e)}
-      onInput={e =>
-        console.log('input event value', (e.target as HTMLInputElement).value)
-      }
-      charcount={charcount}
-      message-aria-describedby={messageAriaDescribedby}
-      label-header-level={labelHeaderLevel}
-      header-aria-describedby={headerAriaDescribedby}
-      {...rest}
-    />
+    <>
+      <va-textarea
+        name={name}
+        label={label}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        maxlength={maxlength}
+        value={value}
+        placeholder={placeholder}
+        onBlur={e => console.log('blur event', e)}
+        onInput={e =>
+          console.log('input event value', (e.target as HTMLInputElement).value)
+        }
+        charcount={charcount}
+        message-aria-describedby={messageAriaDescribedby}
+        label-header-level={labelHeaderLevel}
+        header-aria-describedby={headerAriaDescribedby}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      />
+      {showToggleFocusButton && (
+          <va-button
+            text="Toggle error state"
+            onClick={handleClick}
+            class="vads-u-margin-top--2"
+          ></va-button>
+      )}
+    </>
   );
 };
 
@@ -247,47 +268,6 @@ const FormsPatternMultipleTemplate = ({
   );
 };
 
-/**
- * Template component that demonstrates toggling form error states.
- *
- * For accessibility testing purposes, the template also supports moving focus
- * to various elements after entering the error state.
- *
- * Note: This template only toggles the error state and does not actually
- * validate the input value.
- */
-const ToggleErrorStateTemplate = args => {
-  const [error, setError] = useState(null);
-  const { focusEl } = args;
-
-  const handleClick = () => {
-    error ? setError(null) : setError(`This is an error message`);
-
-    if (focusEl) {
-      const moveFocusTo = document
-        .getElementById('error-demo')
-        ?.shadowRoot?.getElementById(focusEl);
-
-      applyFocus(moveFocusTo);
-    }
-  };
-
-  return (
-    <>
-      {Template({
-        ...defaultArgs,
-        error: error,
-        required: true,
-        id: "error-demo",
-        'use-forms-pattern': "single",
-        'form-heading': "Error state demo",
-        'form-heading-level': 1,
-      })}
-      <va-button text="Toggle error state" onClick={handleClick} style={{ marginTop: '2rem' }}></va-button>
-    </>
-  );
-};
-
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textareaDocs);
@@ -350,16 +330,4 @@ export const FormsPatternMultipleError =
 FormsPatternMultipleError.args = {
   ...defaultArgs,
   error: 'This is an error message',
-};
-
-export const ToggleErrorState = ToggleErrorStateTemplate.bind(null);
-ToggleErrorState.args = {
-  focusEl: null,
-};
-ToggleErrorState.argTypes = {
-  focusEl: {
-    name: 'Element to focus on error toggle',
-    control: { type: 'radio' },
-    options: [null, 'input-error-message', 'form-question'],
-  },
 };
