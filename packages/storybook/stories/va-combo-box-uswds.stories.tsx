@@ -29,9 +29,6 @@ const defaultArgs = {
   required: false,
   error: undefined,
   messageAriaDescribedby: undefined,
-  hint: undefined,
-  placeholder: undefined,
-  disabled: undefined,
   showToggleFocusButton: false,
   focusEl: null,
   options: [
