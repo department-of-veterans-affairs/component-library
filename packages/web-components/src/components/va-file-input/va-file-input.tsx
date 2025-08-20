@@ -57,11 +57,6 @@ export class VaFileInput {
   @Prop() name?: string;
 
   /**
-   * The text displayed on the button.
-   */
-  @Prop() buttonText: string;
-
-  /**
    * The value attribute for the file view element.
    */
   @Prop() value?: File;
@@ -189,7 +184,7 @@ export class VaFileInput {
         this.resetState();
       }
   }
-  
+
   /**
    * Return to initial visual state of component to display error and
    * allow user to try to add file again.
@@ -295,7 +290,7 @@ export class VaFileInput {
     }
     this.file = null;
     this.uploadedFile = null;
-    this.updateStatusMessage(`File removed. No file selected.`);
+    this.updateStatusMessage(`File deleted. No file selected.`);
     this.el.focus();
   };
 
@@ -671,7 +666,7 @@ export class VaFileInput {
                           <va-modal
                             modalTitle="Delete this file?"
                             visible={this.showModal}
-                            primaryButtonText="Yes, remove this"
+                            primaryButtonText="Yes, delete this"
                             secondaryButtonText="No, keep this"
                             onCloseEvent={this.closeModal}
                             onPrimaryButtonClick={() => this.removeFile(true)}

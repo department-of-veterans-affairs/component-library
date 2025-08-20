@@ -38,6 +38,10 @@
   margin-right: 4px;
 }
 
+:host .link-icon--active-icon-wrapper {
+  white-space: nowrap;
+}
+
 .link-icon--active {
   vertical-align: baseline;
   position: relative;
