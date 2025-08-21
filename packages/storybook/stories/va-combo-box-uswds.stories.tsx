@@ -56,7 +56,7 @@ const defaultArgs = {
   ],
 };
 
-const ComboBoxComponent = (args) => {
+const Template = args => {
   const {
     label,
     name,
@@ -100,8 +100,6 @@ const ComboBoxComponent = (args) => {
     </>
   );
 };
-
-const Template = (args) => <ComboBoxComponent {...args} />;
 
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };

@@ -31,7 +31,7 @@ export default {
   }
 };
 
-const CheckboxGroupComponent = (args) => {
+const Template = args => {
   const {
     'enable-analytics': enableAnalytics,
     error,
@@ -73,8 +73,6 @@ const CheckboxGroupComponent = (args) => {
     </>
   );
 };
-
-const Template = (args) => <CheckboxGroupComponent {...args} />;
 
 const USWDSTiled = ({
   'enable-analytics': enableAnalytics,
@@ -126,7 +124,7 @@ const USWDSTiled = ({
   );
 };
 
-const I18nComponent = (args) => {
+const I18nTemplate  = args => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -150,12 +148,10 @@ const I18nComponent = (args) => {
         style={{ fontSize: '16px' }}
         text="Tagalog"
       />
-      <div style={{ marginTop: '20px' }}><CheckboxGroupComponent {...args} /></div>
+      <div style={{ marginTop: '20px' }}><Template {...args} /></div>
     </div>
   );
 };
-
-const I18nTemplate = (args) => <I18nComponent {...args} />;
 
 const defaultArgs = {
   'enable-analytics': false,
