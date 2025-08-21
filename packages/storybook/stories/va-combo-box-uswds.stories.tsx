@@ -1,4 +1,9 @@
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure, StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
+ } from './wc-helpers';
 
 const comboBoxDocs = getWebComponentDocs('va-combo-box');
 
@@ -11,6 +16,10 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={comboBoxDocs} />,
     },
   },
+  argTypes: {
+    ...propStructure(comboBoxDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message']),
+  }
 };
 
 const defaultArgs = {
@@ -20,6 +29,8 @@ const defaultArgs = {
   required: false,
   error: undefined,
   messageAriaDescribedby: undefined,
+  showToggleFocusButton: false,
+  focusEl: null,
   options: [
     <option value="apple">Apple</option>,
     <option value="banana">Banana</option>,
@@ -45,38 +56,53 @@ const defaultArgs = {
   ],
 };
 
-const Template = ({
-  label,
-  name,
-  value,
-  required,
-  error,
-  hint,
-  options,
-  placeholder,
-  disabled,
-  messageAriaDescribedby,
-}) => {
+const Template = args => {
+  const {
+    label,
+    name,
+    value,
+    required,
+    error,
+    hint,
+    options,
+    placeholder,
+    disabled,
+    messageAriaDescribedby,
+    showToggleFocusButton,
+    focusEl,
+  } = args;
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-combo-box
-      label={label}
-      name={name}
-      value={value}
-      required={required}
-      error={error}
-      hint={hint}
-      placeholder={placeholder}
-      disabled={disabled}
-      message-aria-describedby={messageAriaDescribedby}
-    >
-      {options}
-    </va-combo-box>
+    <>
+      <va-combo-box
+        label={label}
+        name={name}
+        value={value}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        placeholder={placeholder}
+        disabled={disabled}
+        message-aria-describedby={messageAriaDescribedby}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      >
+        {options}
+      </va-combo-box>
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(comboBoxDocs);
 
 export const WithDefaultValue = Template.bind({});
 WithDefaultValue.args = {

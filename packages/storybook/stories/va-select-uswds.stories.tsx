@@ -4,6 +4,8 @@ import {
   propStructure,
   StoryDocs,
   applyFocus,
+  useErrorToggle,
+  errorToggleArgTypes,
 } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
@@ -16,6 +18,10 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={selectDocs} />,
     },
+  },
+  argTypes: {
+    ...propStructure(selectDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message']),
   },
 };
 
@@ -47,6 +53,8 @@ const defaultArgs = {
   ],
   'use-add-button': false,
   'full-width': false,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -61,8 +69,11 @@ const Template = ({
   options,
   'use-add-button': useAddButton,
   'full-width': fullWidth,
+  showToggleFocusButton,
+  focusEl
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
 
   return (
     <>
@@ -84,15 +95,23 @@ const Template = ({
         name={name}
         value={value}
         required={required}
-        error={error}
+        error={errorMsg}
         hint={hint}
         aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
         full-width={fullWidth}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         {modifiedOptions}
       </va-select>
+      {showToggleFocusButton && (
+          <va-button
+            text="Toggle error state"
+            onClick={handleClick}
+            class="vads-u-margin-top--2"
+          ></va-button>
+      )}
     </>
   );
 };
