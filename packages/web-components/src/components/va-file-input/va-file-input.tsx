@@ -57,11 +57,6 @@ export class VaFileInput {
   @Prop() name?: string;
 
   /**
-   * The text displayed on the button.
-   */
-  @Prop() buttonText: string;
-
-  /**
    * The value attribute for the file view element.
    */
   @Prop() value?: File;
