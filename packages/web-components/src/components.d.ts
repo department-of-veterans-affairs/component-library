@@ -779,11 +779,11 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Maximum allowed file size in bytes. The value is applied to all file inputs. Maximum allowed file size in bytes.
+          * Maximum allowed file size in bytes. The value is applied to all file inputs.
          */
         "maxFileSize"?: number;
         /**
-          * Minimum allowed file size in bytes. The value is applied to all file inputs. Minimum allowed file size in bytes.
+          * Minimum allowed file size in bytes. The value is applied to all file inputs.
          */
         "minFileSize"?: number;
         /**
@@ -4694,11 +4694,11 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Maximum allowed file size in bytes. The value is applied to all file inputs. Maximum allowed file size in bytes.
+          * Maximum allowed file size in bytes. The value is applied to all file inputs.
          */
         "maxFileSize"?: number;
         /**
-          * Minimum allowed file size in bytes. The value is applied to all file inputs. Minimum allowed file size in bytes.
+          * Minimum allowed file size in bytes. The value is applied to all file inputs.
          */
         "minFileSize"?: number;
         /**

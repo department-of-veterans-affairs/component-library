@@ -67,16 +67,6 @@ export class VaFileInputMultiple {
   @Prop() passwordErrors?: Array<string | null> = [];
 
   /**
-   * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-   */
-  @Prop() resetVisualState?: boolean[] = [];
-
-  /**
-   * Array of password error messages corresponding to each file input. The length and order match the files array.
-   */
-  @Prop() passwordErrors?: Array<string | null> = [];
-
-  /**
    * Array of booleans, displays file password field for corresponding file input.
    */
   @Prop() encrypted?: boolean[] = [];
@@ -137,21 +127,6 @@ export class VaFileInputMultiple {
   @Prop() uploadedFiles?: UploadedFile[];
 
   /**
-   * Array of numbers corresponding to the progress of the upload of each file.
-   */
-  @Prop() percentUploaded?: number[] = [];
-
-  /**
-   * Maximum allowed file size in bytes.
-   */
-  @Prop({ reflect: true}) maxFileSize?: number = Infinity;
-
-  /**
-   * Minimum allowed file size in bytes.
-   */
-  @Prop({ reflect: true }) minFileSize?: number = 0;
-
-  /**
    * Event emitted when any change to the file inputs occurs.
    *
    * Sends back an object with the following data structure:
@@ -170,15 +145,6 @@ export class VaFileInputMultiple {
    * Internal state to track whether files added via the "value" prop have already been added to the "files" state or not.
    */
   @State() valueAdded: boolean = false;
-
-  // if the last file input has an error, don't render another input until the error is cleared
-  // @Watch('errors')
-  // checkLastError(errors: string[]) {
-  //   if (errors[errors.length - 1] && this.files.length > 0) {
-  //     this.fileKeyCounter--;
-  //     this.files.pop();
-  //   }
-  // }
 
   /**
    * Counter to assign unique keys to new file inputs.
