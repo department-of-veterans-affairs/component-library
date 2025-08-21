@@ -46,7 +46,6 @@ const defaultArgs = {
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'vaPasswordChange': null,
-  'uswds': true,
   'header-size': null,
   'children': null,
   'value': null,
