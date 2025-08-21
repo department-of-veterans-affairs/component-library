@@ -239,6 +239,7 @@ const USWDSTiledError = ({
         label={label}
         required={required}
         hint={hint}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         <va-radio-option
           id="sojourner-truth2"

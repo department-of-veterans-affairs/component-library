@@ -21,7 +21,7 @@ export default {
   },
   argTypes: {
     ...propStructure(selectDocs),
-    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message']),
   },
 };
 
