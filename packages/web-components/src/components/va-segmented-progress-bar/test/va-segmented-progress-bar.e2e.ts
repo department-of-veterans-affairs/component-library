@@ -23,7 +23,7 @@ describe('va-segmented-progress-bar', () => {
               <h4 class=\"usa-step-indicator__heading\">
                 <span class=\"usa-step-indicator__heading-counter\">
                   <span class=\"usa-sr-only\">
-                    Step
+                    You are on Step
                   </span>
                   <span class=\"usa-step-indicator__current-step\">
                     3
@@ -148,7 +148,7 @@ describe('va-segmented-progress-bar', () => {
     });
     const element = await page.find('va-segmented-progress-bar');
     const counter = element.shadowRoot.querySelector('.usa-step-indicator__heading-counter .usa-sr-only');
-    expect(counter.innerHTML).toBe('Chapter');
+    expect(counter.innerHTML).toBe('You are on Chapter');
   })
 });
 
