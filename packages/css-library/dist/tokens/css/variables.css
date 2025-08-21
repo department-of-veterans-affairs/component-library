@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 22 Jul 2025 18:22:16 GMT
+ * Generated on Tue, 19 Aug 2025 20:33:13 GMT
  */
 
 :root {
@@ -14,6 +14,7 @@
   --mobile-lg: 480px;
   --desktop: 1024px;
   --desktop-lg: 1201px;
+  --widescreen: 1400px;
   --color-link-default-hover: rgba(#000000, 0.05);
   --vads-button-color-background-primary-on-light: #005ea2;
   --vads-button-color-background-primary-alt-active-on-light: #154c21;
@@ -131,8 +132,10 @@
   --vads-input-tile-border-on-light: rgba(27, 27, 27, 0.03);
   --font-family-sans: 'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
   --font-family-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-family-monospace: 'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace;
   --font-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-source-sans: 'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+  --font-monospace: 'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
   --font-style-normal: normal;
@@ -141,10 +144,10 @@
   --font-size-root: 1rem;
   --font-size-md: 1.063rem;
   --font-size-lg: 1.25rem;
-  --font-size-xl: 1.875rem;
+  --font-size-xl: 2rem;
   --font-size-2xl: 2.5rem;
   --font-size-h1: 2.5rem;
-  --font-size-h2: 1.875rem;
+  --font-size-h2: 2rem;
   --font-size-h3: 1.25rem;
   --font-size-h4: 1.063rem;
   --font-size-h5: 0.938rem;
@@ -166,12 +169,12 @@
   --vads-font-size-body-medium: 17px;
   --vads-font-size-body-small: 15px;
   --vads-font-size-eyebrow: 17px;
-  --vads-font-size-heading-level-1: 40px;
-  --vads-font-size-heading-level-2: 32px;
-  --vads-font-size-heading-level-3: 20px;
-  --vads-font-size-heading-level-4: 17px;
-  --vads-font-size-heading-level-5: 15px;
-  --vads-font-size-heading-level-6: 15px;
+  --vads-font-size-heading-level-1: 2.5rem;
+  --vads-font-size-heading-level-2: 2rem;
+  --vads-font-size-heading-level-3: 1.25rem;
+  --vads-font-size-heading-level-4: 1.063rem;
+  --vads-font-size-heading-level-5: 0.938rem;
+  --vads-font-size-heading-level-6: 0.938rem;
   --vads-size-line-length-1: 44ex;
   --vads-size-line-length-2: 60ex;
   --vads-size-line-length-3: 64ex;

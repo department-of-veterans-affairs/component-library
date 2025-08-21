@@ -180,6 +180,420 @@ describe('va-file-input-multiple', () => {
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);
   });
 
+  it('resets a single file input to initial visual state when resetVisualState is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Set resetVisualState to true for the first input
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.resetVisualState = [true];
+    });
+    await page.waitForChanges();
+    
+    // Verify the file input shows initial state (instructions visible)
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input >>> .file-input-instructions');
+    expect(fileInput).not.toBeNull();
+    expect(fileInput.innerHTML).toContain('Drag a file here or');
+    
+    // Verify no selected files wrapper is present (indicating reset state)
+    const selectedFiles = await page.find('va-file-input-multiple >>> va-file-input >>> .selected-files-wrapper');
+    expect(selectedFiles).toBeNull();
+  });
+
+  it('passes resetVisualState prop to individual file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set resetVisualState with mixed values
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.resetVisualState = [true, false];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that the resetVisualState prop is passed correctly
+    const firstInputResetProp = await fileInputs[0].getProperty('resetVisualState');
+    const secondInputResetProp = await fileInputs[1].getProperty('resetVisualState');
+    
+    expect(firstInputResetProp).toBe(true);
+    expect(secondInputResetProp).toBe(false);
+  });
+
+  it('shows initial state when resetVisualState is applied with errors', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Set both error and resetVisualState
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.errors = ['This file has an error'];
+      el.resetVisualState = [true];
+    });
+    await page.waitForChanges();
+    
+    // When resetVisualState is true, should show initial instructions despite error
+    const instructions = await page.find('va-file-input-multiple >>> va-file-input >>> .file-input-instructions');
+    expect(instructions).not.toBeNull();
+    expect(instructions.innerHTML).toContain('Drag a file here or');
+    
+    // Error should still be present but instructions should be visible due to reset
+    const errorMessage = await page.find('va-file-input-multiple >>> va-file-input >>> .usa-error-message');
+    expect(errorMessage).not.toBeNull();
+  });
+
+  it('shows initial state for encrypted file inputs when resetVisualState is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Set up encrypted file with resetVisualState
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.encrypted = [true];
+      el.resetVisualState = [true];
+    });
+    await page.waitForChanges();
+    
+    // Should show initial instructions despite encryption setting
+    const instructions = await page.find('va-file-input-multiple >>> va-file-input >>> .file-input-instructions');
+    expect(instructions).not.toBeNull();
+    expect(instructions.innerHTML).toContain('Drag a file here or');
+    
+    // Should not show selected files wrapper when reset
+    const selectedFiles = await page.find('va-file-input-multiple >>> va-file-input >>> .selected-files-wrapper');
+    expect(selectedFiles).toBeNull();
+  });
+
+  it('handles resetVisualState array with fewer values than file inputs', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload files to create multiple inputs
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input1 = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input1.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    const inputs = await page.$$('pierce/#fileInputField');
+    const input2 = inputs[1] as ElementHandle<HTMLInputElement>;
+    await input2.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set resetVisualState with only one value for two inputs
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.resetVisualState = [true];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // First input should get the specified value
+    const firstInputReset = await fileInputs[0].getProperty('resetVisualState');
+    expect(firstInputReset).toBe(true);
+    
+    // Second input should get undefined (no value provided)
+    const secondInputReset = await fileInputs[1].getProperty('resetVisualState');
+    expect(secondInputReset).toBeUndefined();
+  });
+
+  it('passes percentUploaded prop to individual file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set percentUploaded with different values for each input
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.percentUploaded = [75, 25];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that the percentUploaded prop is passed correctly
+    const firstInputPercent = await fileInputs[0].getProperty('percentUploaded');
+    const secondInputPercent = await fileInputs[1].getProperty('percentUploaded');
+    
+    expect(firstInputPercent).toBe(75);
+    expect(secondInputPercent).toBe(25);
+  });
+
+  it('handles percentUploaded array with fewer values than file inputs', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload files to create multiple inputs
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input1 = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input1.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    const inputs = await page.$$('pierce/#fileInputField');
+    const input2 = inputs[1] as ElementHandle<HTMLInputElement>;
+    await input2.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set percentUploaded with only one value for two inputs
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.percentUploaded = [50];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // First input should get the specified value
+    const firstInputPercent = await fileInputs[0].getProperty('percentUploaded');
+    expect(firstInputPercent).toBe(50);
+    
+    // Second input should get null or undefined (no value provided)
+    const secondInputPercent = await fileInputs[1].getProperty('percentUploaded');
+    expect(secondInputPercent).toBeUndefined();
+  });
+
+  it('displays progress bar when percentUploaded is less than 100', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file first
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set percentUploaded to show progress
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.percentUploaded = [60];
+    });
+    await page.waitForChanges();
+    
+    // Should show progress bar
+    const progressBar = await page.find('va-file-input-multiple >>> va-file-input >>> va-progress-bar');
+    expect(progressBar).not.toBeNull();
+    
+    // Should show uploading status
+    const uploadingStatus = await page.find('va-file-input-multiple >>> va-file-input >>> .uploading-status');
+    expect(uploadingStatus).not.toBeNull();
+  });
+
+  it('passes maxFileSize prop to all file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set maxFileSize prop
+    const maxSize = 5000000; // 5MB
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.maxFileSize = 5000000;
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that maxFileSize prop is passed to all file inputs
+    const firstInputMaxSize = await fileInputs[0].getProperty('maxFileSize');
+    const secondInputMaxSize = await fileInputs[1].getProperty('maxFileSize');
+    
+    expect(firstInputMaxSize).toBe(maxSize);
+    expect(secondInputMaxSize).toBe(maxSize);
+  });
+
+  it('applies default maxFileSize value when not specified', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input');
+    
+    // Check that default maxFileSize is Infinity
+    const defaultMaxSize = await fileInput.getProperty('maxFileSize');
+    expect(defaultMaxSize).toBe(Infinity);
+  });
+
+  it('passes minFileSize prop to all file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set minFileSize prop
+    const minSize = 1000; // 1KB
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.minFileSize = 1000;
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that minFileSize prop is passed to all file inputs
+    const firstInputMinSize = await fileInputs[0].getProperty('minFileSize');
+    const secondInputMinSize = await fileInputs[1].getProperty('minFileSize');
+    
+    expect(firstInputMinSize).toBe(minSize);
+    expect(secondInputMinSize).toBe(minSize);
+  });
+
+  it('applies default minFileSize value when not specified', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input');
+    
+    // Check that default minFileSize is 0
+    const defaultMinSize = await fileInput.getProperty('minFileSize');
+    expect(defaultMinSize).toBe(0);
+  });
+
+  it('passes statusText prop to all file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set statusText prop
+    const customStatus = 'Processing file...';
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.statusText = 'Processing file...';
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that statusText prop is passed to all file inputs
+    const firstInputStatus = await fileInputs[0].getProperty('statusText');
+    const secondInputStatus = await fileInputs[1].getProperty('statusText');
+    
+    expect(firstInputStatus).toBe(customStatus);
+    expect(secondInputStatus).toBe(customStatus);
+  });
+
+  it('applies undefined statusText when not specified', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input');
+    
+    // Check that statusText is undefined when not set
+    const defaultStatus = await fileInput.getProperty('statusText');
+    expect(defaultStatus).toBeUndefined();
+  });
+
+  it('passes uploadedFiles array to corresponding file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload a file to create a second input
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set uploadedFiles array with different files for each input
+    const uploadedFilesArray = [
+      { name: 'document1.pdf', type: 'application/pdf', size: 1024 },
+      { name: 'image1.jpg', type: 'image/jpeg', size: 2048 }
+    ];
+    
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.uploadedFiles = [
+        { name: 'document1.pdf', type: 'application/pdf', size: 1024 },
+        { name: 'image1.jpg', type: 'image/jpeg', size: 2048 }
+      ];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // Verify we have two file inputs
+    expect(fileInputs.length).toBe(2);
+    
+    // Check that uploadedFiles are passed to corresponding inputs
+    const firstInputUploadedFile = await fileInputs[0].getProperty('uploadedFile');
+    const secondInputUploadedFile = await fileInputs[1].getProperty('uploadedFile');
+    
+    expect(firstInputUploadedFile).toEqual(uploadedFilesArray[0]);
+    expect(secondInputUploadedFile).toEqual(uploadedFilesArray[1]);
+  });
+
+  it('handles uploadedFiles array with fewer values than file inputs', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    // Upload files to create multiple inputs
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input1 = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input1.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    const inputs = await page.$$('pierce/#fileInputField');
+    const input2 = inputs[1] as ElementHandle<HTMLInputElement>;
+    await input2.uploadFile(filePath);
+    await page.waitForChanges();
+    
+    // Set uploadedFiles with only one value for two inputs
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.uploadedFiles = [
+        { name: 'document1.pdf', type: 'application/pdf', size: 1024 }
+      ];
+    });
+    await page.waitForChanges();
+    
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+    
+    // First input should get the specified uploaded file
+    const firstInputUploadedFile = await fileInputs[0].getProperty('uploadedFile');
+    expect(firstInputUploadedFile).toEqual({ name: 'document1.pdf', type: 'application/pdf', size: 1024 });
+    
+    // Second input should get undefined (no value provided)
+    const secondInputUploadedFile = await fileInputs[1].getProperty('uploadedFile');
+    expect(secondInputUploadedFile).toBeUndefined();
+  });
+
+  it('applies null uploadedFile when uploadedFiles not specified', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+    
+    const fileInput = await page.find('va-file-input-multiple >>> va-file-input');
+    
+    // Check that uploadedFile is null when not set
+    const defaultUploadedFile = await fileInput.getProperty('uploadedFile');
+    expect(defaultUploadedFile).toBeNull();
+  });
+
   it.skip('passes an aXe check', async () => {
     const page = await newE2EPage();
 
