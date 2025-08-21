@@ -783,6 +783,14 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Maximum allowed file size in bytes.
+         */
+        "maxFileSize"?: number;
+        /**
+          * Minimum allowed file size in bytes.
+         */
+        "minFileSize"?: number;
+        /**
           * Name attribute for the file input element, used to identify the form data in the submission.
          */
         "name"?: string;
@@ -2827,6 +2835,7 @@ declare global {
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
         "vaPasswordChange": any;
+        "vaFileInputError": any;
         "component-library-analytics": any;
     }
     /**
@@ -4518,6 +4527,10 @@ declare namespace LocalJSX {
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * The event emitted when adding file results in an error, e.g. exceeding max file size
+         */
+        "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
           * The event emitted when the file input password value changes.
          */
         "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
@@ -4595,6 +4608,14 @@ declare namespace LocalJSX {
           * Label for the file input, displayed above the input.
          */
         "label"?: string;
+        /**
+          * Maximum allowed file size in bytes.
+         */
+        "maxFileSize"?: number;
+        /**
+          * Minimum allowed file size in bytes.
+         */
+        "minFileSize"?: number;
         /**
           * Name attribute for the file input element, used to identify the form data in the submission.
          */

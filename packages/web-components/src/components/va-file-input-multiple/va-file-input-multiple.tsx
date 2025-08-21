@@ -7,6 +7,7 @@ import {
   Host,
   Event,
   EventEmitter,
+  // Watch,
 } from '@stencil/core';
 import { i18next } from '../..';
 import { FileIndex } from "./FileIndex";
@@ -104,6 +105,15 @@ export class VaFileInputMultiple {
    */
   @Prop() percentUploaded?: number[] = [];
 
+  /**
+   * Maximum allowed file size in bytes.
+   */
+  @Prop({ reflect: true}) maxFileSize?: number = Infinity;
+
+  /**
+   * Minimum allowed file size in bytes.
+   */
+  @Prop({ reflect: true }) minFileSize?: number = 0;
 
   /**
    * Event emitted when any change to the file inputs occurs.
@@ -124,6 +134,15 @@ export class VaFileInputMultiple {
    * Internal state to track whether files added via the "value" prop have already been added to the "files" state or not.
    */
   @State() valueAdded: boolean = false;
+
+  // if the last file input has an error, don't render another input until the error is cleared
+  // @Watch('errors')
+  // checkLastError(errors: string[]) {
+  //   if (errors[errors.length - 1] && this.files.length > 0) {
+  //     this.fileKeyCounter--;
+  //     this.files.pop();
+  //   }
+  // }
 
   /**
    * Counter to assign unique keys to new file inputs.
@@ -408,12 +427,14 @@ export class VaFileInputMultiple {
       passwordErrors,
       enableAnalytics,
       readOnly,
+      maxFileSize,
+      minFileSize,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error' : '';
 
     return (
-      <Host class={hasError}>
+      <Host class={hasError} error={hasError ? 'error' : ''}>
         {label &&
           !readOnly &&
           this.renderLabelOrHeader(label, required, headerSize)}
@@ -430,12 +451,6 @@ export class VaFileInputMultiple {
             </div>
           )}
           {files.map((fileEntry, pageIndex) => {
-            const _resetVisualState = resetVisualState && resetVisualState.length >= pageIndex
-              ? resetVisualState[pageIndex] : null;
-            const _percentUploaded = percentUploaded && percentUploaded.length >= pageIndex
-              ? percentUploaded[pageIndex] : null;
-            const _passwordError = passwordErrors && passwordErrors.length >= pageIndex
-              ? passwordErrors[pageIndex] : null;
             return (
               <va-file-input
                 key={fileEntry.key}
@@ -450,11 +465,11 @@ export class VaFileInputMultiple {
                 {...(pageIndex > 0
                   ? { uploadMessage: this.getAdditionalFileUploadMessage() }
                   : {})}
-                error={errors[pageIndex]}
-                encrypted={encrypted[pageIndex]}
-                percentUploaded={_percentUploaded}
-                resetVisualState={_resetVisualState}
-                passwordError={_passwordError}
+                error={errors[pageIndex] || null}
+                encrypted={encrypted[pageIndex] || null}
+                percentUploaded={percentUploaded[pageIndex] || null}
+                resetVisualState={resetVisualState[pageIndex] || null}
+                passwordError={passwordErrors[pageIndex] || null}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
@@ -465,6 +480,8 @@ export class VaFileInputMultiple {
                 value={fileEntry.file}
                 readOnly={readOnly}
                 class={fileEntry.file ? 'has-file' : 'no-file'}
+                max-file-size={maxFileSize}
+                min-file-size={minFileSize}
               />
             );
           })}
