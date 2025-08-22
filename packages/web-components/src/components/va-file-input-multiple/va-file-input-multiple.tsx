@@ -7,7 +7,6 @@ import {
   Host,
   Event,
   EventEmitter,
-  // Watch,
 } from '@stencil/core';
 import { i18next } from '../..';
 import { FileIndex } from "./FileIndex";
