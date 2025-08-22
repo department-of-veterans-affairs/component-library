@@ -62,6 +62,7 @@ const Template = ({
   enableAnalytics,
   vaChange,
   vaPasswordChange,
+  vaFileInputError,
   headerSize,
   readOnly,
   encrypted,
@@ -84,7 +85,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
       onVaPasswordChange={vaPasswordChange}
-      onVaFileInputError={}
+      onVaFileInputError={vaFileInputError}
       header-size={headerSize}
       readOnly={readOnly}
       encrypted={encrypted}
