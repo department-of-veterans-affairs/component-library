@@ -2886,6 +2886,7 @@ declare global {
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
         "vaPasswordChange": any;
+        "vaFileInputError": any;
         "component-library-analytics": any;
     }
     /**
@@ -4610,6 +4611,10 @@ declare namespace LocalJSX {
           * The event emitted when the file input value changes.
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * The event emitted when adding a file results in an error, e.g. exceeding max file size
+         */
+        "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * The event emitted when the file input password value changes.
          */
