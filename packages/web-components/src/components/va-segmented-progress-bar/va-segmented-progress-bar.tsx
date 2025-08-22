@@ -154,7 +154,7 @@ export class VaSegmentedProgressBar {
                 <div class="usa-step-indicator__header">
                   <Tag class="usa-step-indicator__heading">
                     <span class="usa-step-indicator__heading-counter">
-                      <span class="usa-sr-only">{progressTerm}</span>
+                      <span class="usa-sr-only">You are on {progressTerm}</span>
                       <span class="usa-step-indicator__current-step">{current}</span>
                       <span class="usa-step-indicator__total-steps"> of {total}</span>
                     </span>
@@ -165,5 +165,5 @@ export class VaSegmentedProgressBar {
             </div>
       </Host>
     )
-  } 
+  }
 }

@@ -437,7 +437,7 @@ export class VaFileInputMultiple {
     const hasError = this.hasErrors() ? 'has-error' : '';
 
     return (
-      <Host class={hasError}>
+      <Host class={hasError} error={hasError ? 'error' : ''}>
         {label &&
           !readOnly &&
           this.renderLabelOrHeader(label, required, headerSize)}
@@ -495,6 +495,8 @@ export class VaFileInputMultiple {
                 statusText={statusText}
                 uploadedFile={_uploadedFile}
                 class={fileEntry.file ? 'has-file' : 'no-file'}
+                max-file-size={maxFileSize}
+                min-file-size={minFileSize}
               />
             );
           })}
