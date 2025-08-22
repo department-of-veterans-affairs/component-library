@@ -38,6 +38,8 @@ const defaultArgs = {
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'vaPasswordChange': null,
+  'vaFileInputError': event =>
+    alert(`File input error event received: ${event?.detail?.error}`),
   'header-size': null,
   'children': null,
   'value': null,
@@ -82,6 +84,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
       onVaPasswordChange={vaPasswordChange}
+      onVaFileInputError={}
       header-size={headerSize}
       readOnly={readOnly}
       encrypted={encrypted}
