@@ -31,7 +31,7 @@ const { repos } = require('./env');
  */
 function filterSearchedComponents(data, searchStrings = []) {
   // Filter out the non-matches
-  const searchTerms = searchStrings.map(s => new RegExp(s));
+  const searchTerms = searchStrings.map(s => new RegExp(_.escapeRegExp(s)));
   const matchedComponentNames = Object.keys(data).filter(componentName =>
     searchTerms.length
       ? searchTerms.reduce(
