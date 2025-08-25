@@ -179,7 +179,7 @@ export class VaOmbInfo {
             onClick={toggleModalVisible}
             onFocusin={() => this.trapFocus()}
             secondary
-            text={formId ? `View Privacy Act Statement for VA Form ${formId}` : 'View Privacy Act Statement'}
+            text={formId ? `Privacy Act Statement for VA Form ${formId}` : 'Privacy Act Statement'}
           />
         </div>
         <va-modal

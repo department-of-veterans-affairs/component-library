@@ -57,11 +57,6 @@ export class VaFileInput {
   @Prop() name?: string;
 
   /**
-   * The text displayed on the button.
-   */
-  @Prop() buttonText: string;
-
-  /**
    * The value attribute for the file view element.
    */
   @Prop() value?: File;
@@ -167,6 +162,11 @@ export class VaFileInput {
   @Event() vaPasswordChange: EventEmitter;
 
   /**
+   * The event emitted when adding a file results in an error, e.g. exceeding max file size
+   */
+  @Event() vaFileInputError: EventEmitter
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * file input changes and enableAnalytics is true.
    */
@@ -195,8 +195,18 @@ export class VaFileInput {
    * allow user to try to add file again.
    */
   @Watch('resetVisualState')
-  handleError(value: boolean) {
+  handleResetVisualState(value: boolean) {
     if (value) {
+      this.resetState();
+    }
+  }
+
+ /**
+  * If component gets two consecutive errors make sure state resets both times
+  */
+  @Watch('error')
+  handleError(newError: string, oldError: string) {
+    if (oldError && newError) {
       this.resetState();
     }
   }
@@ -233,31 +243,31 @@ export class VaFileInput {
   };
 
   private handleFile = (file: File, emitChange: boolean = true) => {
+    let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
         this.removeFile(false);
-        this.internalError = 'This is not a valid file type.';
-        return;
+        fileError = 'This is not a valid file type.';
       }
     }
 
      if (file.size === 0) {
-      this.internalError = `The file you selected is empty. Files must be larger than 0B.`;
-      this.resetState();
-      return;
+      fileError = `The file you selected is empty. Files must be larger than 0B.`;
     }
 
     if (file.size > this.maxFileSize) {
-      this.internalError = `
+      fileError = `
         We can't upload your file because it's too big. Files must be less than ${this.formatFileSize(this.maxFileSize)}.`;
-      // in case the file was added by clicking the "change file" button do a reset
-      this.resetState();
-      return;
     }
 
     if (file.size < this.minFileSize) {
-      this.internalError = `We can't upload your file because it's too small. Files must be at least ${this.formatFileSize(this.minFileSize)}.`;
+      fileError = `We can't upload your file because it's too small. Files must be at least ${this.formatFileSize(this.minFileSize)}.`;
+    }
+
+    if (fileError) {
+      this.internalError = fileError;
+      this.vaFileInputError.emit({ error: fileError });
       this.resetState();
       return;
     }
@@ -295,7 +305,7 @@ export class VaFileInput {
     }
     this.file = null;
     this.uploadedFile = null;
-    this.updateStatusMessage(`File removed. No file selected.`);
+    this.updateStatusMessage(`File deleted. No file selected.`);
     this.el.focus();
   };
 
@@ -407,8 +417,16 @@ export class VaFileInput {
     }
   };
 
-  private generateFileContents(file: File) {
+  private async generateFileContents(file: File) {
     if (!file) return;
+
+    // check if file is a dummy file - e.g. from prefilling a form with already uploaded file
+    // in this case we want to use the standard file icon
+    const slice = file.slice(0, 20);
+    const buffer = await slice.arrayBuffer();
+    const bytes = new Uint8Array(buffer);
+    const zeroCheck = bytes.every(byte => byte === 0);
+    if (zeroCheck) return;
 
     const reader = new FileReader();
     this.fileType = file.type;
@@ -470,8 +488,6 @@ export class VaFileInput {
       accept,
       error,
       hint,
-      file,
-      uploadStatus,
       dragFileString,
       chooseFileString,
       uploadMessage,
@@ -492,6 +508,9 @@ export class VaFileInput {
     if (value && !this.file) {
       this.handleFile(value, false);
     }
+
+    // these values may get updated after call to this.handleFile above
+    const { uploadStatus, file, } = this;
 
     const displayError = error || this.internalError;
     const ariaDescribedbyIds =
@@ -671,7 +690,7 @@ export class VaFileInput {
                           <va-modal
                             modalTitle="Delete this file?"
                             visible={this.showModal}
-                            primaryButtonText="Yes, remove this"
+                            primaryButtonText="Yes, delete this"
                             secondaryButtonText="No, keep this"
                             onCloseEvent={this.closeModal}
                             onPrimaryButtonClick={() => this.removeFile(true)}
