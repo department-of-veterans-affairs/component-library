@@ -12,19 +12,17 @@ import {
 
 import {
   AsYouType,
-  isPossiblePhoneNumber,
   CountryCode,
-  getExampleNumber,
   getCountries,
   getCountryCallingCode,
   parsePhoneNumber,
-  PhoneNumber
+  PhoneNumber,
+  Metadata,
+  isPossiblePhoneNumber
 } from 'libphonenumber-js/min';
-import examples from 'libphonenumber-js/examples.mobile.json';
 import classNames from 'classnames';
 import { i18next } from '../..';
 import { DATA_MAP, mapCountry } from './utils';
-import { getArticle } from '../../utils/utils';
 
 /**
  * @componentName Telephone Input
@@ -69,7 +67,7 @@ export class VaTelephoneInput {
   /**
    * The error for the component
    */
-  @Prop({ reflect: true, mutable: true }) error?: string = '';
+  @Prop({ reflect: true }) error?: string = '';
 
   /**
    * Whether the country select should be included. Set to true to exclude it.
@@ -122,6 +120,12 @@ export class VaTelephoneInput {
    */
   @State() touched: boolean = false;
 
+  /**
+   * Visible error message for the component
+   * This is used to display the error in the UI
+   */ 
+  @State() visibleError: string;
+
 
   @Watch('error')
   syncErrorMessages(newValue: string) {
@@ -134,12 +138,19 @@ export class VaTelephoneInput {
     }
   }
 
+  /**
+   * Resets all error states for the country and contact fields, and sets visibleError to the current error prop.
+   */
   resetErrors() {
     this.countryError = '';
     this.contactError = '';
-    this.error = '';
+    this.visibleError = this.error;
   }
 
+  /**
+   * Sets the validity state of the phone number for the selected country.
+   * Updates isValid and formattedContact based on the current contact and country values.
+   */
   setValidityState() {
     if (this.country && this.contact) {
       this.isValid = isPossiblePhoneNumber(this.contact, mapCountry(this.country));
@@ -150,6 +161,12 @@ export class VaTelephoneInput {
     }
   }
 
+  /**
+   * Handles input events for the contact field.
+   * Updates the contact and formattedContact state, triggers validation, and emits the updated contact event.
+   *
+   * @param event - InputEvent from the contact input field
+   */
   updateContact(event: InputEvent) {
     const target = event.target as HTMLInputElement;
     const { value } = target;
@@ -159,31 +176,72 @@ export class VaTelephoneInput {
     this.handleEmit();
   }
 
-  // return the template for a phone number for the selected country
-  getTemplate() {
-    const _country = mapCountry(this.country);
-    let example = getExampleNumber(_country, examples).format('NATIONAL');
-    const asYouType = new AsYouType(_country);
-    asYouType.input(example);
-    return asYouType.getTemplate();
+  /**
+   * Returns a string describing the valid phone number lengths for a country.
+   * If all numbers are consecutive, returns a range (e.g. "8 to 10").
+   * If not, returns a comma-separated list with 'or' before the last number (e.g. "6, 8 or 9").
+   *
+   * @param lengths - Array of valid phone number lengths for a country
+   * @returns A formatted string representing the valid lengths or ranges
+   */
+  getPhoneNumberLengthString(lengths: number[]): string {
+    if (!lengths.length) return '';
+    const sorted = lengths.slice().sort((a, b) => a - b);
+    // Check if all numbers are consecutive
+    let isConsecutive = true;
+    for (let i = 1; i < sorted.length; i++) {
+      if (sorted[i] !== sorted[i - 1] + 1) {
+        isConsecutive = false;
+        break;
+      }
+    }
+    if (isConsecutive && sorted.length > 1) {
+      return `${sorted[0]} to ${sorted[sorted.length - 1]}`;
+    }
+    if (sorted.length === 1) return String(sorted[0]);
+    if (sorted.length === 2 && sorted[1] === sorted[0] + 1) return `${sorted[0]} to ${sorted[1]}`;
+    if (sorted.length === 2) return `${sorted[0]} or ${sorted[1]}`;
+    return `${sorted.slice(0, -1).join(', ')} or ${sorted[sorted.length - 1]}`;
   }
 
-  // get an error message for a country that includes the template of a valid phone number for that country
+  /**
+   * Gets a formatted string representing the valid phone number lengths for the selected country.
+   * Uses getPhoneNumberLengthString to format the result as a range or list.
+   *
+   * @returns A formatted string of valid phone number lengths for the selected country
+   */
+  getValidPhoneNumberLengths() {
+    const _country = mapCountry(this.country);
+    const metadata = new Metadata();
+    metadata.selectNumberingPlan(_country);
+    const possibleLengths = metadata.numberingPlan.possibleLengths();
+    return this.getPhoneNumberLengthString(possibleLengths);
+  }
+
+  /**
+   * Returns an error message for the selected country, including the valid phone number digit length(s).
+   * Uses getValidPhoneNumberLengths to format the digit length(s) as a range or list.
+   *
+   * @returns A formatted error message string for the selected country
+   */
   getErrorMessageForCountry() {
     const _country = mapCountry(this.country);
     const countryName = this.getCountryName(_country);
-    const article = getArticle(countryName, false);
-    return `Enter ${article} ${countryName} phone number in a valid format, for example, ${this.getTemplate()}`;
+    return `Enter a valid ${countryName} phone number. Use ${this.getValidPhoneNumberLengths()} digits.`;
   }
 
-  // validate the contact and show errors if appropriate
+  /**
+   * Validates the contact and country fields, sets error messages, and updates validity state.
+   * If the country is selected, checks the phone number validity and sets error messages as needed.
+   * If the country is not selected, triggers country validation and error state.
+   */
   validateContact() {
     if (this.country) {
       this.resetErrors();
       this.setValidityState();
       if (!this.isValid && this.touched && this.showInternalErrors) {
-        this.error = this.getErrorMessageForCountry();
-        this.contactError = this.error;
+        this.visibleError = this.getErrorMessageForCountry();
+        this.contactError = this.visibleError;
       }
     } else {
       this.validateCountry();
@@ -191,6 +249,12 @@ export class VaTelephoneInput {
   }
 
 
+  /**
+   * Emits the vaContact event with the current phone number, country, validity, and error state.
+   * Attempts to parse the phone number and includes calling code and national number if valid.
+   *
+   * @emits vaContact - Event containing callingCode, countryCode, contact, isValid, error, and touched
+   */
   handleEmit() {
     const tryParse = !!this.contact && !!this.country;
     let phoneNumber: PhoneNumber | null;
@@ -222,19 +286,28 @@ export class VaTelephoneInput {
     });
   }
 
-  // make sure country has been selected
+  /**
+   * Validates that a country has been selected.
+   * Sets error messages and validity state if no country is selected.
+   * Updates touched state to indicate user interaction.
+   */
   validateCountry() {
     this.resetErrors();
     if (!this.touched) this.touched = true;
     if (this.country) return;
     this.isValid = false;
     if (this.showInternalErrors) {
-      this.error = this.COUNTRY_ERROR;
-      this.countryError = this.error;
+      this.visibleError = this.COUNTRY_ERROR;
+      this.countryError = this.visibleError;
     }
   }
 
-  // when country is selected, do validation
+  /**
+   * Handles the event when the country is changed in the combo box.
+   * Updates the country property, triggers validation, and emits the updated contact event.
+   *
+   * @param event - CustomEvent containing the new country value
+   */
   countryChange(event: CustomEvent<{ value: CountryCode }>) {
     const { value } = event.detail;
     this.country = value;
@@ -242,6 +315,13 @@ export class VaTelephoneInput {
     this.handleEmit();
   }
 
+  /**
+   * Formats the input phone number value according to the selected country.
+   * Uses AsYouType from libphonenumber-js for formatting. If no numbers are present, returns the input value.
+   *
+   * @param value - The phone number string to format
+   * @returns The formatted phone number string, or the original value if formatting is not possible
+   */
   formatContact(value: string) {
     // some territories are formatted / validated as if they were a different, larger country
     const _country = mapCountry(this.country);
@@ -250,8 +330,12 @@ export class VaTelephoneInput {
     return _formatted === '' ? value : _formatted;
   }
 
-  // get list of country codes alphabetized by name with US in front
-  // add some territories not in library
+  /**
+   * Builds and returns a list of country codes alphabetized by name, with US at the front.
+   * Also adds territories not present in the default country list.
+   *
+   * @returns An array of country codes, with US first and the rest sorted alphabetically
+   */
   buildCountryList() {
     const allButUS = getCountries()
       .filter(country => country !== this.DEFAULT_COUNTRY);
@@ -266,7 +350,13 @@ export class VaTelephoneInput {
     return [this.DEFAULT_COUNTRY, ...sortedAllButUs];
   }
 
-  // return the name of a country using the country code
+  /**
+   * Returns the display name for a given country code.
+   * Handles special cases using DATA_MAP.names, otherwise uses Intl.DisplayNames.
+   *
+   * @param countryCode - The ISO country code to get the display name for
+   * @returns The display name for the country
+   */
   getCountryName(countryCode: string) {
     // some country names must be handled explicitly
     if (countryCode in DATA_MAP.names) {
@@ -282,6 +372,7 @@ export class VaTelephoneInput {
   componentWillLoad() {
     this.countries = this.buildCountryList();
     if (this.country === '' as CountryCode) this.country = this.DEFAULT_COUNTRY;
+    this.visibleError = this.error;
   }
 
   componentDidLoad() {
@@ -324,22 +415,26 @@ export class VaTelephoneInput {
       label,
       hint,
       countries,
-      error,
       formattedContact,
       country,
       countryError,
       contactError,
+      visibleError,
       noCountry,
       required
     } = this;
 
+    const hostClasses = classNames({
+      'va-form-group--error': !!visibleError,
+    })
+
     const legendClasses = classNames({
       'usa-legend': true,
-      'usa-label--error': !!error
+      'usa-label--error': !!visibleError
     });
 
     return (
-      <Host>
+      <Host class={hostClasses}>
         <div class="input-wrap">
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClasses}>
@@ -352,7 +447,7 @@ export class VaTelephoneInput {
               )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            {error && <span id="error-message" role="alert">{error}</span>}
+            {visibleError && <span id="error-message" role="alert">{visibleError}</span>}
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
               <va-combo-box
