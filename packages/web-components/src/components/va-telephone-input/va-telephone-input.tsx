@@ -425,7 +425,7 @@ export class VaTelephoneInput {
     } = this;
 
     const hostClasses = classNames({
-      'error': !!visibleError,
+      'va-form-group--error': !!visibleError,
     })
 
     const legendClasses = classNames({
