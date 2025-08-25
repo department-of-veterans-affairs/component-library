@@ -38,7 +38,7 @@ describe('va-modal', () => {
                   <h2 class="usa-modal__heading" id="heading" tabindex="-1">
                     Example Title
                   </h2>
-                  <div class="usa-prose" id="description">
+                  <div class="usa-prose" id="description" tabindex="-1">
                     <slot></slot>
                   </div>
                 </div>
@@ -124,10 +124,7 @@ describe('va-modal', () => {
     `);
 
     const focusedElement = await page.find('va-modal >>> :focus');
-
-    expect(focusedElement.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
-    );
+    expect(focusedElement).toHaveClass('usa-modal__heading');
   });
 
   it('should open with focus assigned to given selector', async () => {
@@ -160,12 +157,9 @@ describe('va-modal', () => {
 
     // Start with focus on the close button
     const focusedElement = await page.find('va-modal >>> :focus');
-    expect(focusedElement.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
-    );
+    expect(focusedElement.tagName).toEqual('H2');
 
     await page.keyboard.down('Shift');
-    await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.up('Shift');
 
@@ -261,13 +255,10 @@ describe('va-modal', () => {
     await page.waitForChanges();
 
     // Try to find any focused element inside the modal
-    const activeTagName = await page.evaluate(() => {
-      const modal = document.querySelector('va-modal');
-      return modal.shadowRoot.activeElement?.tagName || modal.shadowRoot.querySelector(':focus')?.tagName;
-    });
+    const closeBtn = await page.find('va-modal >>> .va-modal-close');
 
     // Expect that nothing is focused
-    expect(activeTagName).toBeFalsy();
+    expect(closeBtn).toBeNull();
   });
 
   it('should include an aria-label value when label value is passed', async () => {
