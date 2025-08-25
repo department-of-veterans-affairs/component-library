@@ -20,7 +20,6 @@ describe('va-accordion-item', () => {
               </span>
             </button>
           </h2>
-          <slot name="headline"></slot>
           <div class="usa-accordion__content usa-prose" hidden="" id="content" part="accordion-content">
             <slot></slot>
           </div>
@@ -158,7 +157,7 @@ describe('va-accordion-item', () => {
     const element = await page.find('va-accordion-item');
     let subheader = element.shadowRoot.querySelector('.va-accordion__subheader');
     expect(subheader.textContent).toEqualText('The subheader');
-  });
+  })
 
   it("render the sub header icon", async () => {
     const page = await newE2EPage();
@@ -182,7 +181,6 @@ describe('va-accordion-item', () => {
                 </span>
               </button>
             </h2>
-            <slot name="headline"></slot>
             <div class="usa-accordion__content usa-prose" hidden="" id="content" part="accordion-content">
               <slot></slot>
             </div>
@@ -212,7 +210,6 @@ describe('va-accordion-item', () => {
               </span>
             </button>
           </h2>
-          <slot name="headline"></slot>
           <div class="usa-accordion__content usa-prose" hidden="" id="content" part="accordion-content">
             <slot></slot>
           </div>

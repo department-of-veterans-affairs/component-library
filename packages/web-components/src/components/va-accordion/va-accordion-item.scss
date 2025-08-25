@@ -22,9 +22,13 @@ button {
   line-height: 1.15;
 }
 
-/* Hiding since element would be duplicated via the Shadow DOM */
+// !important needed to override global styles that take precedence over slotted
+// styles
 ::slotted([slot='headline']) {
-  display: none;
+  font-size: 1.06rem !important;
+  line-height: 1.15 !important;
+  margin: 0px !important;
+  font-family: var(--font-source-sans) !important;
 }
 
 ::slotted([slot='icon']),
