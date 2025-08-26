@@ -384,4 +384,76 @@ describe('va-file-input', () => {
     const errorMessageAfter = await fileInfoCardAfter.find('span.usa-error-message');
     expect(errorMessageAfter).not.toBeNull();
   });
+
+   it('emits the vaChange event only once', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input min-file-size="1024"/>`);
+
+    const fileUploadSpy = await page.spyOnEvent('vaFileInputError');
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+     expect(fileUploadSpy).toHaveReceivedEventDetail({
+      error: "We can't upload your file because it's too small. Files must be at least 1\xa0KB."
+    });
+  });
+
+  it('resets component state when receiving two consecutive errors', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`);
+    const host = await page.find('va-file-input');
+    
+    // Verify file is uploaded and component is in success state
+    const containerSelector = 'va-file-input >>> div.selected-files-wrapper';
+    const containerBefore = await host.find(containerSelector);
+    expect(containerBefore).not.toBeNull();
+    
+    // Set first error - this should reset component to initial state
+    host.setAttribute('error', 'first error message');
+    await page.waitForChanges();
+
+    expect(host.classList.contains('has-error'));
+    
+    // Check that first error appears
+    const firstErrorMessage = await page.find('va-file-input >>> span.usa-error-message');
+    expect(firstErrorMessage).toEqualText('first error message');
+  
+    
+    // Set second error (consecutive error) - component should stay in initial state but update message
+    host.setAttribute('error', 'second error message');
+    await page.waitForChanges();
+
+    expect(host.classList.contains('has-error'));
+    
+    // Check that second error appears (message updated)
+    const secondErrorMessage = await page.find('va-file-input >>> span.usa-error-message');
+    expect(secondErrorMessage).toEqualText('second error message');
+    
+    // Component should still be in initial state (container still gone)
+    const containerAfterSecondError = await host.find(containerSelector);
+    expect(containerAfterSecondError).toBeNull();
+  });
+
+  it('handles placeholder file upload and shows default file icon', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    
+    // Check that the file was uploaded (container should exist)
+    const containerSelector = 'va-file-input >>> div.selected-files-wrapper';
+    const container = await host.find(containerSelector);
+    expect(container).not.toBeNull();
+    
+    // Check that no image preview is generated (should show default file icon)
+    const imagePreview = await host.find('va-file-input >>> .thumbnail-preview');
+    expect(imagePreview).toBeNull();
+    
+    // Check that the default file icon (svg) is displayed
+    const defaultIcon = await host.find('va-file-input >>> .thumbnail-container svg');
+    expect(defaultIcon).not.toBeNull();
+  });
 });
