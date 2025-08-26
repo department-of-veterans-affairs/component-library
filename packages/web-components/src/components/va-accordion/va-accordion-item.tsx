@@ -5,10 +5,8 @@ import {
   EventEmitter,
   Host,
   Prop,
-  State,
   h,
 } from '@stencil/core';
-import { getSlottedNodes } from '../../utils/utils';
 import classNames from 'classnames';
 
 @Component({
@@ -62,36 +60,9 @@ export class VaAccordionItem {
   @Prop() bordered?: boolean = false;
 
   /**
-   * Local State for slot=headline replacement of props (header).
-   * Provides context of the header text to the Accordion Item
-   */
-  @State() slotHeader: string = null;
-
-  /**
-   * Local State for slot=headline replacement of props (level).
-   * Provides context of the level to the Accordion Item
-   */
-  @State() slotTag: string = null;
-
-  /**
    * Toggle button reference
    */
   private expandButton: HTMLButtonElement = null;
-
-  private toggleOpen(e: MouseEvent): void {
-    this.accordionItemToggled.emit(e);
-  }
-
-  // Using onSlotChange to fire event on inital load
-  // Data access from slot html element is being perfomed by this function
-  // Function allows us to provide context to state
-  // State is then being digested by the Header Function below
-  private populateStateValues() {
-    getSlottedNodes(this.el, null).forEach((node: HTMLSlotElement) => {
-      this.slotHeader = node.innerHTML;
-      this.slotTag = node.tagName.toLowerCase();
-    });
-  }
 
   componentDidLoad() {
     // auto-expand accordion if the window hash matches the ID
@@ -106,18 +77,29 @@ export class VaAccordionItem {
     }
   }
 
+  private toggleOpen(e: MouseEvent): void {
+    this.accordionItemToggled.emit(e);
+  }
+
   render() {
-    const { bordered, header, subheader, level, open, headerSrOnly } = this;
+    const {
+      bordered,
+      header,
+      subheader,
+      level,
+      open,
+      headerSrOnly,
+    } = this;
+
+    const headlineSlot = this.el.querySelector('[slot="headline"]');
+
     const accordionItemClass = classNames({
       'usa-accordion--bordered': bordered,
     });
+
     const Header = () => {
-      const headline = this.el.querySelector('[slot="headline"]');
-      const ieSlotCheckHeader = headline?.innerHTML;
-      // eslint-disable-next-line i18next/no-literal-string
-      const Tag = (headline && headline.tagName.includes("H"))
-        ? headline.tagName.toLowerCase()
-        // eslint-disable-next-line i18next/no-literal-string
+      const Tag = (headlineSlot && headlineSlot.tagName.includes("H"))
+        ? headlineSlot.tagName.toLowerCase()
         : `h${level}`;
 
       const headerClass = classNames({
@@ -145,7 +127,7 @@ export class VaAccordionItem {
           >
             <span class={headerClass}>
               <slot name="icon" />
-              {this.slotHeader || header || ieSlotCheckHeader}
+              {headlineSlot ? <slot name="headline" /> : header}
               {headerSrOnly && <span class="usa-sr-only">&nbsp;{headerSrOnly}</span>}
             </span>
             {this.subheader &&
@@ -162,7 +144,6 @@ export class VaAccordionItem {
       <Host>
         <div class={accordionItemClass}>
           <Header />
-          <slot name="headline" onSlotchange={() => this.populateStateValues()} />
           <div
             id="content"
             class="usa-accordion__content usa-prose"
