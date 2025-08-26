@@ -25,8 +25,8 @@ button {
 // !important needed to override global styles that take precedence over slotted
 // styles
 ::slotted([slot='headline']) {
-  font-size: 1.06rem !important;
-  line-height: 1.15 !important;
+  font-size: var(--vads-font-size-source-sans-normalized) !important;
+  line-height: var(--vads-font-line-height-2) !important;
   margin: 0px !important;
   font-family: var(--font-source-sans) !important;
 }
