@@ -467,7 +467,7 @@ export class VaModal {
     }
     else if (modalTitle && modalTitle !== '') {
       ariaLabel = `${modalTitle} modal`;
-      btnAriaLabel = `Close ${modalTitle} modal`;
+      btnAriaLabel = `Close modal`;
     }
     else {
       console.warn('<va-modal>: An accessible name for the modal is required. Please provide either a label or modalTitle prop value.');

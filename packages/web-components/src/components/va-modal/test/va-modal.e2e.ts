@@ -30,7 +30,7 @@ describe('va-modal', () => {
         <mock:shadow-root>
         <div aria-label="Example Title modal" aria-modal="true" class="usa-modal" role="dialog">
             <div class="usa-modal__content va-modal__content">
-              <button aria-label="Close Example Title modal" class="first-focusable-child last-focusable-child va-modal-close" type="button">
+              <button aria-label="Close modal" class="first-focusable-child last-focusable-child va-modal-close" type="button">
                 <va-icon class="hydrated"></va-icon>
               </button>
               <div class="usa-modal__main">
@@ -126,7 +126,7 @@ describe('va-modal', () => {
     const focusedElement = await page.find('va-modal >>> :focus');
 
     expect(focusedElement.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
+      'Close modal',
     );
   });
 
@@ -161,7 +161,7 @@ describe('va-modal', () => {
     // Start with focus on the close button
     const focusedElement = await page.find('va-modal >>> :focus');
     expect(focusedElement.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
+      'Close modal',
     );
 
     await page.keyboard.down('Shift');
@@ -172,7 +172,7 @@ describe('va-modal', () => {
     // Shift + tab x2 returns to close button
     const shiftTabElement = await page.find('va-modal >>> :focus');
     expect(shiftTabElement.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
+      'Close modal',
     );
 
     // Try to tab outside of the modal, it will return focus to the close button
@@ -180,7 +180,7 @@ describe('va-modal', () => {
     await page.keyboard.press('Tab');
     const tab2Element = await page.find('va-modal >>> :focus');
     expect(tab2Element.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
+      'Close modal',
     );
   });
 
