@@ -63,7 +63,10 @@ a[aria-expanded='true'] .additional-info-icon {
   transition: transform 0.15s linear;
 }
 
-::slotted(*) {
-  margin-bottom: 0 !important;
+::slotted(*:first-child) {
   margin-top: 0 !important;
+}
+
+::slotted(*:last-child) {
+  margin-bottom: 0 !important;
 }
