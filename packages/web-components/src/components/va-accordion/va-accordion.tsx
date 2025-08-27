@@ -244,8 +244,8 @@ export class VaAccordion {
               onClick={() => this.expandCollapseAll(!this.expanded)}
               aria-label={
                 this.expanded
-                  ? i18next.t('collapse-all-aria-label')
-                  : i18next.t('expand-all-aria-label')
+                  ? `${i18next.t('collapse-all-aria-label')}, current state:`
+                  : `${i18next.t('expand-all-aria-label')}, current state:`
               }
             >
               {this.expanded
