@@ -19,7 +19,6 @@
     max-width: 100% !important;
     margin-top: 16px;
     flex: 0;
-    width: 288px;
   }
 
   .va-input-telephone-wrapper {
@@ -66,12 +65,7 @@ va-text-input {
   max-width: var(--mobile-lg);
 }
 
-// use container query if possible
-@container component-wrapper (max-width: 360px) {
-  @include small-screen;
-}
-
 // fall back if container query not supported
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   @include small-screen;
 }
