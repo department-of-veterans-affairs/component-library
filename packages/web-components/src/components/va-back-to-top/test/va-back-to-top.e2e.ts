@@ -145,6 +145,7 @@ describe('va-back-to-top', () => {
     const pastPlaceholder = 1000;
 
     await page.mouse.wheel({ deltaY: pastPlaceholder });
+    await new Promise(r => setTimeout(r, 100));
     await page.waitForChanges();
 
     expect(wrapper).toHaveClass('docked');

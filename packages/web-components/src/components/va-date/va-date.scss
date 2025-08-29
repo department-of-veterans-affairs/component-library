@@ -46,6 +46,7 @@ span.required {
   display: flex;
   margin-top: 12px;
   flex-wrap: wrap;
+  row-gap: 12px;
 }
 
 :host([error]:not([error=''])) .date-container {
