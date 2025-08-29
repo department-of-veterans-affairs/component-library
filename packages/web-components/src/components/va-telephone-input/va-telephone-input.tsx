@@ -123,7 +123,7 @@ export class VaTelephoneInput {
   /**
    * Visible error message for the component
    * This is used to display the error in the UI
-   */ 
+   */
   @State() visibleError: string;
 
 
@@ -447,7 +447,9 @@ export class VaTelephoneInput {
               )}
               {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            {visibleError && <span id="error-message" role="alert">{visibleError}</span>}
+            <span id="error-message" role="alert">
+              {visibleError && visibleError}
+            </span>
             <div class="va-input-telephone-wrapper" tabIndex={0}>
               { !noCountry &&
               <va-combo-box
