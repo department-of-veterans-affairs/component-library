@@ -29,7 +29,7 @@
   display: block;
 }
 
-slot:not([name])::slotted(*) {
+slot:not([name])::slotted(*:last-child) {
   margin-bottom: 0.5rem;
 }
 
