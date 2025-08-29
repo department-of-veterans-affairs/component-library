@@ -49,6 +49,7 @@ if (Build.isTesting) {
 })
 export class VaMemorableDate {
   @Element() el: HTMLElement;
+
   /**
    * Render marker indicating field is required.
    */
@@ -144,6 +145,13 @@ export class VaMemorableDate {
   private dayTouched: boolean = false;
   private monthTouched: boolean = false;
   private yearTouched: boolean = false;
+
+  private hasValidHintSlot: boolean = false;
+  private slotHintValues: { [key: string]: string | null} = {
+    dayHint: null,
+    monthHint: null,
+    yearHint: null,
+  };
 
   private handleDateBlur = (event: FocusEvent) => {
     let undef;
@@ -273,6 +281,21 @@ export class VaMemorableDate {
     this.currentYear = year;
     this.currentMonth = month;
     this.currentDay = day;
+
+    // Check validity of hint slot and populate slotHintValues - if there are hints
+    // with "monthHint", "dayHint", and "yearHint" are all present
+    const hintSlot = this.el.querySelector('[slot="slotted-hint"]');
+    const slotChildrenArr = Array.from(hintSlot.children);
+    if (hintSlot && slotChildrenArr?.length) {
+      // Populate slotHintValues object
+      for (let i = 0; i < slotChildrenArr.length; i++) {
+        const child = slotChildrenArr[i] as HTMLElement;
+        this.slotHintValues[child.id] = child.innerText;
+      }
+
+      // Check that every value in this.slotHintValues is not null
+      this.hasValidHintSlot = Object.values(this.slotHintValues).every(value => value !== null);
+    }
   }
 
   render() {
@@ -290,6 +313,7 @@ export class VaMemorableDate {
     } = this;
 
     const { currentYear, currentMonth, currentDay } = this;
+    // eslint-disable-next-line i18next/no-literal-string
     const describedbyIds = ['dateHint', hint ? 'hint' : '']
       .filter(Boolean)
       .join(' ');
@@ -351,12 +375,15 @@ export class VaMemorableDate {
         </Fragment>
       );
     }
+
+    // Construct month input - either <va-select> or <va-text-input> based on value
+    // of monthSelect prop
     const monthDisplay = monthSelect ? (
       <div class="usa-form-group usa-form-group--month usa-form-group--select">
         <va-select
           label={i18next.t('month')}
           name={name ? `${name}Month` : 'Month'}
-          aria-describedby={describedbyIds}
+          aria-describedby={!this.hasValidHintSlot && describedbyIds}
           aria-labelledby={ariaLabeledByIds}
           invalid={this.invalidMonth}
           onVaSelect={this.handleMonthChange}
@@ -368,6 +395,7 @@ export class VaMemorableDate {
           }
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           showError={false}
+          message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.monthHint}
         >
           {months &&
             months.map(monthOption => (
@@ -387,7 +415,7 @@ export class VaMemorableDate {
           name={name ? `${name}Month` : 'Month'}
           maxlength={2}
           pattern="[0-9]*"
-          aria-describedby={describedbyIds}
+          aria-describedby={!this.hasValidHintSlot && describedbyIds}
           aria-labelledby={ariaLabeledByIds}
           invalid={this.invalidMonth}
           // Value must be a string
@@ -401,6 +429,7 @@ export class VaMemorableDate {
           type="text"
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           show-input-error="false"
+          message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.monthHint}
         />
       </div>
     );
@@ -408,6 +437,7 @@ export class VaMemorableDate {
       'usa-legend': true,
       'usa-label--error': error,
     });
+
     return (
       <Host onBlur={handleDateBlur}>
         {formsHeading}
@@ -415,21 +445,31 @@ export class VaMemorableDate {
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClass} id="input-label" part="legend">
               {label}
+
               {required && (
                 <span class="usa-label--required">
                   {' '}
                   {i18next.t('required')}
                 </span>
               )}
+
+              {/* Additional hint to be rendered if passed as prop */}
               {hint && (
                 <div class="usa-hint" id="hint">
                   {hint}
                 </div>
               )}
-              <span class="usa-hint" id="dateHint">
-                {hintText}
-              </span>
+
+              {/* Render either default hint or slotted hint if a valid one is passed */}
+              {!this.hasValidHintSlot ? (
+                <span class="usa-hint" id="dateHint">
+                  {hintText}
+                </span>
+              ) : (
+                <slot name="slotted-hint" />
+              )}
             </legend>
+
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
@@ -450,7 +490,7 @@ export class VaMemorableDate {
                   name={name ? `${name}Day` : 'Day'}
                   maxlength={2}
                   pattern="[0-9]*"
-                  aria-describedby={describedbyIds}
+                  aria-describedby={!this.hasValidHintSlot && describedbyIds}
                   invalid={this.invalidDay}
                   // Value must be a string
                   // if NaN provide empty string
@@ -465,6 +505,7 @@ export class VaMemorableDate {
                     this.invalidDay ? getStandardErrorMessage(error) : null
                   }
                   show-input-error="false"
+                  message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.dayHint || null}
                 />
               </div>
               <div class="usa-form-group usa-form-group--year">
@@ -473,7 +514,7 @@ export class VaMemorableDate {
                   name={name ? `${name}Year` : 'Year'}
                   maxlength={4}
                   pattern="[0-9]*"
-                  aria-describedby={describedbyIds}
+                  aria-describedby={!this.hasValidHintSlot && describedbyIds}
                   invalid={this.invalidYear}
                   // Value must be a string
                   // if NaN provide empty string
@@ -488,6 +529,7 @@ export class VaMemorableDate {
                     this.invalidYear ? getStandardErrorMessage(error) : null
                   }
                   show-input-error="false"
+                  message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.yearHint}
                 />
               </div>
             </div>

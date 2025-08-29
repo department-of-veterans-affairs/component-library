@@ -33,6 +33,11 @@ slot:not([name])::slotted(*) {
   margin-bottom: 0.5rem;
 }
 
+slot[name="slotted-hint"]::slotted(*) {
+  display: block;
+  color: rgb(113, 118, 122);
+}
+
 va-select::part(label),
 va-text-input::part(label) {
   margin-top: 0;
