@@ -139,7 +139,7 @@ export class VaFileInput {
   /**
    * Percent upload completed. For use with va-progress-bar component
    */
-  @Prop({ mutable: true}) percentUploaded?: number = null;
+  @Prop({ mutable: true, reflect:true}) percentUploaded?: number = null;
 
   /**
    * Error message for the encrypted password input
@@ -660,26 +660,30 @@ export class VaFileInput {
                 {(file || value || uploadedFile) && (
                   <div>
                     {this.showSeparator && <hr class="separator" />}
+                    {!readOnly && showProgBar && 
+                      (
+                        <Fragment>
+                            <va-progress-bar percent={percentUploaded} />
+                            <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
+                          </Fragment>
+                      )
+                    }
                     {encrypted && (
                       <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required error={passwordError} />
                     )}
                     <div class="additional-info-slot">
                       <slot></slot>
                     </div>
-                    {!readOnly ?
-                      (showProgBar
-                        ? <Fragment>
-                            <va-progress-bar percent={percentUploaded} />
-                            <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
-                          </Fragment>
-                        : <Fragment>
+                    {!readOnly && !showProgBar && 
+                      (
+                        <Fragment>
                           <div class="file-button-section">
                             <va-button-icon
                               buttonType="change-file"
                               onClick={this.changeFile}
-                              label="Change file"
-                              aria-label={`change file ${file ? file.name : uploadedFile.name}`}
-                            ></va-button-icon>
+                                label="Change file"
+                                aria-label={`change file ${file ? file.name : uploadedFile.name}`}
+                              ></va-button-icon>
                             <va-button-icon
                               buttonType="delete"
                               onClick={this.openModal}
@@ -701,7 +705,7 @@ export class VaFileInput {
                           </va-modal>
                         </Fragment>
                       )
-                      : null}
+                    }
                   </div>
                 )}
               </va-card>
