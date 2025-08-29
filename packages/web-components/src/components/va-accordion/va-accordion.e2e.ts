@@ -14,7 +14,7 @@ describe('va-accordion', () => {
       <va-accordion class="hydrated">
         <mock:shadow-root>
           <div class="usa-accordion">
-            <button aria-expanded="false" aria-label="expand-all-aria-label" class="va-accordion__button" data-testid="expand-all-accordions">
+            <button aria-label="expand-all-aria-label" class="va-accordion__button" data-testid="expand-all-accordions">
               expand-all +
             </button>
             <slot></slot>
@@ -77,7 +77,7 @@ describe('va-accordion', () => {
     expect(buttons[0].getAttribute('aria-expanded')).toEqual('false');
     expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
   });
-  
+
   it('can open nested open-single item', async () => {
     const page = await newE2EPage();
     await page.setContent(`
