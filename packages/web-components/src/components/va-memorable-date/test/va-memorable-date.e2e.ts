@@ -1388,4 +1388,87 @@ describe('va-memorable-date', () => {
     expect(errorSpan).not.toBeNull();
     expect(errorSpan.innerHTML).toEqual('This is a custom year error message');
   });
+
+  describe('with slotted hint', () => {
+    it('renders a slot for a custom hint when slot[name="slotted-hint"] is passed with spans for "monthHint", "dayHint", and "yearHint" as id values', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-memorable-date name="test" label="Example label" month-select="false">
+          <div slot="slotted-hint">
+            <span id="monthHint">Enter 2 digits for the month</span>.<span id="dayHint">Enter one or two digits for the day</span> and <span id="yearHint">enter four digits for the year.</span>
+          </div>
+        </va-memorable-date>
+      `);
+
+      await page.waitForSelector('va-memorable-date.hydrated');
+
+      const namedSlot = await page.find('va-memorable-date >>> legend slot');
+      expect(namedSlot).not.toBeNull();
+
+      const monthHintSpan = await page.find('va-memorable-date span#monthHint');
+      expect(monthHintSpan).not.toBeNull();
+      expect(monthHintSpan.textContent).toBe('Enter 2 digits for the month');
+
+      const dayHintSpan = await page.find('va-memorable-date span#dayHint');
+      expect(dayHintSpan).not.toBeNull();
+      expect(dayHintSpan.textContent).toBe('Enter one or two digits for the day');
+
+      const yearHintSpan = await page.find('va-memorable-date span#yearHint');
+      expect(yearHintSpan).not.toBeNull();
+      expect(yearHintSpan.textContent).toBe('enter four digits for the year.');
+    });
+
+    it('renders default slot if slotted hint is passed without all three hints provided (month, day, and year)', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-memorable-date name="test" label="Example label" month-select="false">
+          <div slot="slotted-hint">
+            <span id="monthHint">Enter 2 digits for the month</span> and <span id="yearHint">enter four digits for the year.</span>
+          </div>
+        </va-memorable-date>
+      `);
+
+      // Get page HTML output and print to console
+      await page.waitForChanges();
+
+      // Ensure that the named slot is not a child of the legend element
+      const hintSlotInLegend = await page.find('va-memorable-date >>> legend slot');
+      expect(hintSlotInLegend).toBeNull();
+
+      // Default hint should be rendered in its place
+      const defaultHint = await page.find('va-memorable-date >>> #dateHint');
+      expect(defaultHint).not.toBeNull();
+    });
+
+    it('passes an axe check with slotted hint', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-memorable-date name="test" label="Example label" month-select="false">
+          <div slot="slotted-hint">
+            <span id="monthHint">Enter 2 digits for the month</span>.<span id="dayHint">Enter one or two digits for the day</span> and <span id="yearHint">enter four digits for the year.</span>
+          </div>
+        </va-memorable-date>
+      `);
+
+      await page.waitForChanges();
+
+      await axeCheck(page);
+    });
+
+    it('puts precedence on slotted hint over default hint', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-memorable-date name="test" label="Example label" month-select="false">
+          <div slot="slotted-hint">
+            <span id="monthHint">Enter 2 digits for the month</span>.<span id="dayHint">Enter one or two digits for the day</span> and <span id="yearHint">enter four digits for the year.</span>
+          </div>
+        </va-memorable-date>
+      `);
+
+      await page.waitForChanges();
+
+      const defaultHint = await page.find('va-memorable-date >>> #dateHint');
+      expect(defaultHint).toBeNull();
+    });
+  });
 });
