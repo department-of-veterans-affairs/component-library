@@ -9,6 +9,7 @@ import {
   State,
   h,
   forceUpdate,
+  Fragment
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 import { i18next } from '../..';
@@ -236,22 +237,29 @@ export class VaAccordion {
           }
         >
           {(!openSingle && !isInsideSearchFilter) ? (
-            <button
-              aria-expanded={`${this.expanded}`}
-              class="va-accordion__button"
-              data-testid="expand-all-accordions"
-              ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
-              onClick={() => this.expandCollapseAll(!this.expanded)}
-              aria-label={
-                this.expanded
-                  ? `${i18next.t('collapse-all-aria-label')}, current state:`
-                  : `${i18next.t('expand-all-aria-label')}, current state:`
-              }
-            >
-              {this.expanded
-                ? `${i18next.t('collapse-all')} -`
-                : `${i18next.t('expand-all')} +`}
-            </button>
+            <Fragment>
+              <button
+                class="va-accordion__button"
+                data-testid="expand-all-accordions"
+                ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+                onClick={() => this.expandCollapseAll(!this.expanded)}
+                aria-label={
+                  this.expanded
+                    ? `${i18next.t('collapse-all-aria-label')}`
+                    : `${i18next.t('expand-all-aria-label')}`
+                }
+              >
+                {this.expanded
+                  ? `${i18next.t('collapse-all')} -`
+                  : `${i18next.t('expand-all')} +`}
+              </button>
+              <span aria-live="assertive" id="expand-status" class="usa-sr-only">
+                  {this.expanded
+                    ? "Accordions expanded"
+                    : "Accordions collapsed"
+                  }
+                </span>
+            </Fragment>
           ) : null}
           <slot></slot>
         </div>
