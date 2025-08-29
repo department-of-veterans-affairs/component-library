@@ -349,18 +349,9 @@ export class VaMemorableDate {
       return i18next.t(error, errorParameters(error));
     };
 
-    // Error attribute should be leveraged for custom error messaging
-    // Fieldset has an implicit aria role of group
-    const ariaLabeledByIds =
-      `${useFormsPattern && formHeading ? 'form-question' : ''} ${
-        useFormsPattern ? 'form-description' : ''
-      } ${useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
-    const isFormsPattern =
-      useFormsPattern === 'single' || useFormsPattern === 'multiple'
-        ? true
-        : false;
+    // Construct forms heading for when the form pattern is being used.
     let formsHeading = null;
-    if (isFormsPattern) {
+    if (useFormsPattern === 'single' || useFormsPattern === 'multiple') {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
       formsHeading = (
         <Fragment>
@@ -375,6 +366,14 @@ export class VaMemorableDate {
         </Fragment>
       );
     }
+
+    // Construct aria-labelledby attribute values to be passed to <va-text-input>
+    // and <va-select>. The value is conditional based upon the forms pattern and
+    // the presence of formHeading and label.
+    const ariaLabeledByIds =
+      `${useFormsPattern && formHeading ? 'form-question' : ''} ${
+        useFormsPattern ? 'form-description' : ''
+      } ${useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
 
     // Construct month input - either <va-select> or <va-text-input> based on value
     // of monthSelect prop
@@ -442,6 +441,7 @@ export class VaMemorableDate {
       <Host onBlur={handleDateBlur}>
         {formsHeading}
         <div class="input-wrap">
+          {/* Note: fieldset has an implicit aria role of group */}
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClass} id="input-label" part="legend">
               {label}
@@ -505,7 +505,7 @@ export class VaMemorableDate {
                     this.invalidDay ? getStandardErrorMessage(error) : null
                   }
                   show-input-error="false"
-                  message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.dayHint || null}
+                  message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.dayHint}
                 />
               </div>
               <div class="usa-form-group usa-form-group--year">
