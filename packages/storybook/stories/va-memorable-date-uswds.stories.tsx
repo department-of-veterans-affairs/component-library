@@ -321,6 +321,34 @@ const CustomErrorMessageTemplate = ({
   );
 };
 
+const slottedHintTemplate = ({
+  label,
+  name,
+  required,
+  error,
+  value,
+  hint,
+  monthSelect,
+}) => {
+  return (
+    <VaMemorableDate
+      monthSelect={monthSelect}
+      label={label}
+      name={name}
+      required={required}
+      error={error}
+      value={value}
+      hint={hint}
+      onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+      onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+    >
+      <div slot="slotted-hint">
+        <span id="monthHint">Enter 2 digits for the month</span>.<span id="dayHint">Enter one or two digits for the day</span> and <span id="yearHint">enter four digits for the year.</span>
+      </div>
+    </VaMemorableDate>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
@@ -403,3 +431,6 @@ FormsPatternMultipleError.args = {
   ...defaultArgs,
   error: 'Error Message Example',
 };
+
+export const SlottedHintText = slottedHintTemplate.bind(null);
+SlottedHintText.args = { ...defaultArgs };
