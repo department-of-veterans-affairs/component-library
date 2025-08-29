@@ -139,7 +139,7 @@ export class VaFileInput {
   /**
    * Percent upload completed. For use with va-progress-bar component
    */
-  @Prop({ mutable: true, reflect:true}) percentUploaded?: number = null;
+  @Prop({ mutable: true }) percentUploaded?: number = null;
 
   /**
    * Error message for the encrypted password input
