@@ -668,12 +668,16 @@ export class VaFileInput {
                           </Fragment>
                       )
                     }
-                    {encrypted && (
-                      <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required error={passwordError} />
-                    )}
-                    <div class="additional-info-slot">
-                      <slot></slot>
-                    </div>
+                    {!showProgBar &&
+                      <Fragment>
+                        {encrypted && (
+                          <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required error={passwordError} />
+                        )}
+                        <div class="additional-info-slot">
+                          <slot></slot>
+                        </div>
+                      </Fragment>
+                    }
                     {!readOnly && !showProgBar && 
                       (
                         <Fragment>
