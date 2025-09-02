@@ -124,7 +124,7 @@ export class VaFileInput {
   /**
    * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
    */
-  @Prop() uploadedFile?: UploadedFile;
+  @Prop({ mutable: true }) uploadedFile?: UploadedFile;
 
   /**
    * Maximum allowed file size in bytes.
@@ -139,7 +139,7 @@ export class VaFileInput {
   /**
    * Percent upload completed. For use with va-progress-bar component
    */
-  @Prop({ mutable: true }) percentUploaded?: number = null;
+  @Prop({ mutable: true, reflect: true }) percentUploaded?: number = null;
 
   /**
    * Error message for the encrypted password input
