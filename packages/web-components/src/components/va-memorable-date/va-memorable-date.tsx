@@ -432,108 +432,116 @@ export class VaMemorableDate {
         />
       </div>
     );
+
     const legendClass = classnames({
       'usa-legend': true,
       'usa-label--error': error,
     });
+
+    const mainComponentContent = (
+      <Fragment>
+        <legend class={legendClass} id="input-label" part="legend">
+          {label}
+
+          {required && (
+            <span class="usa-label--required">
+              {' '}
+              {i18next.t('required')}
+            </span>
+          )}
+
+          {/* Additional hint to be rendered if passed as prop */}
+          {hint && (
+            <div class="usa-hint" id="hint">
+              {hint}
+            </div>
+          )}
+
+          {/* Render either default hint or slotted hint if a valid one is passed */}
+          {!this.hasValidHintSlot ? (
+            <span class="usa-hint" id="dateHint">
+              {hintText}
+            </span>
+          ) : (
+            <slot name="slotted-hint" />
+          )}
+        </legend>
+
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="usa-sr-only">{i18next.t('error')}</span>
+              <span class="usa-error-message">
+                {getErrorMessage(error)}
+              </span>
+            </Fragment>
+          )}
+        </span>
+        <slot />
+
+        <div class="usa-memorable-date">
+          {monthDisplay}
+          <div class="usa-form-group usa-form-group--day">
+            <va-text-input
+              label={i18next.t('day')}
+              name={name ? `${name}Day` : 'Day'}
+              maxlength={2}
+              pattern="[0-9]*"
+              aria-describedby={!this.hasValidHintSlot && describedbyIds}
+              invalid={this.invalidDay}
+              // Value must be a string
+              // if NaN provide empty string
+              value={currentDay?.toString()}
+              onInput={this.handleDayChange}
+              onBlur={this.handleDayBlur}
+              class="usa-form-group--day-input memorable-date-input"
+              reflectInputError={error === 'day-range' ? true : false}
+              inputmode="numeric"
+              type="text"
+              error={
+                this.invalidDay ? getStandardErrorMessage(error) : null
+              }
+              show-input-error="false"
+              message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.dayHint}
+            />
+          </div>
+          <div class="usa-form-group usa-form-group--year">
+            <va-text-input
+              label={i18next.t('year')}
+              name={name ? `${name}Year` : 'Year'}
+              maxlength={4}
+              pattern="[0-9]*"
+              aria-describedby={!this.hasValidHintSlot && describedbyIds}
+              invalid={this.invalidYear}
+              // Value must be a string
+              // if NaN provide empty string
+              value={currentYear?.toString()}
+              onInput={this.handleYearChange}
+              onBlur={this.handleYearBlur}
+              class="usa-form-group--year-input memorable-date-input"
+              reflectInputError={error === 'year-range' ? true : false}
+              inputmode="numeric"
+              type="text"
+              error={
+                this.invalidYear ? getStandardErrorMessage(error) : null
+              }
+              show-input-error="false"
+              message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.yearHint}
+            />
+          </div>
+        </div>
+      </Fragment>
+    );
 
     return (
       <Host onBlur={handleDateBlur}>
         {formsHeading}
         <div class="input-wrap">
           {/* Note: fieldset has an implicit aria role of group */}
-          <fieldset class="usa-form usa-fieldset">
-            <legend class={legendClass} id="input-label" part="legend">
-              {label}
-
-              {required && (
-                <span class="usa-label--required">
-                  {' '}
-                  {i18next.t('required')}
-                </span>
-              )}
-
-              {/* Additional hint to be rendered if passed as prop */}
-              {hint && (
-                <div class="usa-hint" id="hint">
-                  {hint}
-                </div>
-              )}
-
-              {/* Render either default hint or slotted hint if a valid one is passed */}
-              {!this.hasValidHintSlot ? (
-                <span class="usa-hint" id="dateHint">
-                  {hintText}
-                </span>
-              ) : (
-                <slot name="slotted-hint" />
-              )}
-            </legend>
-
-            <span id="error-message" role="alert">
-              {error && (
-                <Fragment>
-                  <span class="usa-sr-only">{i18next.t('error')}</span>
-                  <span class="usa-error-message">
-                    {getErrorMessage(error)}
-                  </span>
-                </Fragment>
-              )}
-            </span>
-            <slot />
-
-            <div class="usa-memorable-date">
-              {monthDisplay}
-              <div class="usa-form-group usa-form-group--day">
-                <va-text-input
-                  label={i18next.t('day')}
-                  name={name ? `${name}Day` : 'Day'}
-                  maxlength={2}
-                  pattern="[0-9]*"
-                  aria-describedby={!this.hasValidHintSlot && describedbyIds}
-                  invalid={this.invalidDay}
-                  // Value must be a string
-                  // if NaN provide empty string
-                  value={currentDay?.toString()}
-                  onInput={this.handleDayChange}
-                  onBlur={this.handleDayBlur}
-                  class="usa-form-group--day-input memorable-date-input"
-                  reflectInputError={error === 'day-range' ? true : false}
-                  inputmode="numeric"
-                  type="text"
-                  error={
-                    this.invalidDay ? getStandardErrorMessage(error) : null
-                  }
-                  show-input-error="false"
-                  message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.dayHint}
-                />
-              </div>
-              <div class="usa-form-group usa-form-group--year">
-                <va-text-input
-                  label={i18next.t('year')}
-                  name={name ? `${name}Year` : 'Year'}
-                  maxlength={4}
-                  pattern="[0-9]*"
-                  aria-describedby={!this.hasValidHintSlot && describedbyIds}
-                  invalid={this.invalidYear}
-                  // Value must be a string
-                  // if NaN provide empty string
-                  value={currentYear?.toString()}
-                  onInput={this.handleYearChange}
-                  onBlur={this.handleYearBlur}
-                  class="usa-form-group--year-input memorable-date-input"
-                  reflectInputError={error === 'year-range' ? true : false}
-                  inputmode="numeric"
-                  type="text"
-                  error={
-                    this.invalidYear ? getStandardErrorMessage(error) : null
-                  }
-                  show-input-error="false"
-                  message-aria-describedby={this.hasValidHintSlot && this.slotHintValues.yearHint}
-                />
-              </div>
-            </div>
-          </fieldset>
+          {!this.hasValidHintSlot ?
+            <fieldset class="usa-form usa-fieldset">{mainComponentContent}</fieldset> :
+            <div class="usa-form usa-fieldset">{mainComponentContent}</div>
+          }
         </div>
       </Host>
     );
