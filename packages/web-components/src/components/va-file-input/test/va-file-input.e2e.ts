@@ -456,4 +456,42 @@ describe('va-file-input', () => {
     const defaultIcon = await host.find('va-file-input >>> .thumbnail-container svg');
     expect(defaultIcon).not.toBeNull();
   });
+
+  it('shows progress bar and cancel button when uploading', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="50"/>`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    const progressBar = await host.find('va-file-input >>> va-progress-bar');
+    const cancelBtn = await host.find('va-file-input >>>va-button-icon');
+    expect(progressBar).not.toBeNull();
+    expect(cancelBtn).not.toBeNull();
+  });
+
+  it('shows password input when encrypted and not uploading', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted/>`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    const passwordInput = await host.find('va-file-input >>> va-text-input');
+    expect(passwordInput).not.toBeNull();
+  });
+
+  it('renders additional info slot when not uploading', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input><div>Extra info</div></va-file-input>`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    const slot = await host.find('va-file-input >>> .additional-info-slot');
+    const slotContent = await page.$eval('va-file-input >>> .additional-info-slot slot', slot => {
+      const nodes = slot.assignedNodes();
+      return nodes.map(node => (node as HTMLElement).textContent).join('');
+    });
+    expect(slot).not.toBeNull();
+    expect(slotContent).toEqual('Extra info');
+  });
+
+  it('shows change and delete buttons when file is present and not uploading', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    const changeBtn = await host.find('va-file-input >>> va-button-icon[aria-label="change file placeholder.png"]');
+    const deleteBtn = await host.find('va-file-input >>> va-button-icon[aria-label="delete file placeholder.png"]');
+    expect(changeBtn).not.toBeNull();
+    expect(deleteBtn).not.toBeNull();
+  });
+
 });
