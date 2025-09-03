@@ -1469,6 +1469,6 @@ describe('va-memorable-date', () => {
 
       const defaultHint = await page.find('va-memorable-date >>> #dateHint');
       expect(defaultHint).toBeNull();
-    })
+    });
   });
 });
