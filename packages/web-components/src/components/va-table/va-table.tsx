@@ -134,7 +134,7 @@ export class VaTable {
   makeFragment(): DocumentFragment {
     const frag = document.createDocumentFragment();
     this.cells.forEach(cell => {
-      frag.appendChild(cell.cloneNode(true));
+      frag.appendChild(cell);
     });
     return frag;
   }
