@@ -287,6 +287,9 @@ export class VaMemorableDate {
     const hintSlot = this.el.querySelector('[slot="slotted-hint"]');
     const slotChildrenArr = Array.from(hintSlot.children);
     if (hintSlot && slotChildrenArr?.length) {
+      // Add aria-hidden to slot outer to prevent it from being read in its entirety
+      // in addition to individual hints.
+      hintSlot.setAttribute('aria-hidden', 'true');
       // Populate slotHintValues object
       for (let i = 0; i < slotChildrenArr.length; i++) {
         const child = slotChildrenArr[i] as HTMLElement;
