@@ -26,7 +26,7 @@ describe('va-file-input', () => {
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-file-input label="This is the file upload label" buttonText="Upload a file" required="false" class="hydrated"></va-file-input>',
+      '<va-file-input label="This is the file upload label" required="false" class="hydrated"></va-file-input>',
     );
 
     const element = await page.find('va-file-input');
@@ -54,7 +54,7 @@ describe('va-file-input', () => {
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-file-input required label="Example file input." buttonText="Upload a file" />`,
+      `<va-file-input required label="Example file input." />`,
     );
 
     const requiredSpan = await page.find(
@@ -66,7 +66,7 @@ describe('va-file-input', () => {
   it('the `accept` attribute exists if set', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-file-input buttonText="Upload a file" accept=".png" />`,
+      `<va-file-input accept=".png" />`,
     );
 
     const fileInput = await page.find('va-file-input >>> input');
@@ -75,7 +75,7 @@ describe('va-file-input', () => {
 
   it('the `accept` attribute does not apply if omitted', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttonText="Upload a file" />`);
+    await page.setContent(`<va-file-input />`);
 
     const fileInput = await page.find('va-file-input >>> input');
     expect(fileInput.getAttribute('accept')).toBeFalsy();
@@ -112,7 +112,7 @@ describe('va-file-input', () => {
   });
 
   it('renders a "Change File" button if there is a file', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input buttonText="Upload a file" />`);
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`);
 
     const fileInfoCard = await page.find('va-file-input >>> va-card');
     const fileChangeButton = await fileInfoCard.find(
@@ -123,7 +123,7 @@ describe('va-file-input', () => {
   });
 
   it('does not render a "Change File" button if read-only', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input buttonText="Upload a file" read-only />`);
+    const page = await setUpPageWithUploadedFile(`<va-file-input read-only />`);
 
     const fileInfoCard = await page.find('va-file-input >>> va-card');
     const fileChangeButton = await fileInfoCard.find(
@@ -146,7 +146,7 @@ describe('va-file-input', () => {
 
   it('emits the vaChange event only once', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttonText="Upload a file" />`);
+    await page.setContent(`<va-file-input />`);
 
     const fileUploadSpy = await page.spyOnEvent('vaChange');
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
@@ -165,7 +165,7 @@ describe('va-file-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-file-input required label="This is a test" buttonText="Upload a file" error="With an error message" />',
+      '<va-file-input required label="This is a test" error="With an error message" />',
     );
 
     await axeCheck(page);
@@ -173,7 +173,7 @@ describe('va-file-input', () => {
 
   it('Renders file summary when uploadedFile prop is set', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttonText="Upload a file"/>`);
+    await page.setContent(`<va-file-input />`);
 
     await page.$eval('va-file-input', (elm: any) => {
       // within the browser's context
@@ -195,7 +195,7 @@ describe('va-file-input', () => {
   // this test usually passes but it is too flaky to enable
   it.skip('opens a modal when delete button clicked and lets user remove or keep file', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttonText="Upload a file" />`);
+    await page.setContent(`<va-file-input />`);
 
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
 
@@ -249,7 +249,7 @@ describe('va-file-input', () => {
   // this test usually passes but it is too flaky to enable
   it.skip('opens a modal when delete button clicked and lets user remove the file', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttonText="Upload a file" />`);
+    await page.setContent(`<va-file-input />`);
 
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
 
@@ -384,4 +384,114 @@ describe('va-file-input', () => {
     const errorMessageAfter = await fileInfoCardAfter.find('span.usa-error-message');
     expect(errorMessageAfter).not.toBeNull();
   });
+
+   it('emits the vaChange event only once', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input min-file-size="1024"/>`);
+
+    const fileUploadSpy = await page.spyOnEvent('vaFileInputError');
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+     expect(fileUploadSpy).toHaveReceivedEventDetail({
+      error: "We can't upload your file because it's too small. Files must be at least 1\xa0KB."
+    });
+  });
+
+  it('resets component state when receiving two consecutive errors', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`);
+    const host = await page.find('va-file-input');
+    
+    // Verify file is uploaded and component is in success state
+    const containerSelector = 'va-file-input >>> div.selected-files-wrapper';
+    const containerBefore = await host.find(containerSelector);
+    expect(containerBefore).not.toBeNull();
+    
+    // Set first error - this should reset component to initial state
+    host.setAttribute('error', 'first error message');
+    await page.waitForChanges();
+
+    expect(host.classList.contains('has-error'));
+    
+    // Check that first error appears
+    const firstErrorMessage = await page.find('va-file-input >>> span.usa-error-message');
+    expect(firstErrorMessage).toEqualText('first error message');
+  
+    
+    // Set second error (consecutive error) - component should stay in initial state but update message
+    host.setAttribute('error', 'second error message');
+    await page.waitForChanges();
+
+    expect(host.classList.contains('has-error'));
+    
+    // Check that second error appears (message updated)
+    const secondErrorMessage = await page.find('va-file-input >>> span.usa-error-message');
+    expect(secondErrorMessage).toEqualText('second error message');
+    
+    // Component should still be in initial state (container still gone)
+    const containerAfterSecondError = await host.find(containerSelector);
+    expect(containerAfterSecondError).toBeNull();
+  });
+
+  it('handles placeholder file upload and shows default file icon', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    
+    // Check that the file was uploaded (container should exist)
+    const containerSelector = 'va-file-input >>> div.selected-files-wrapper';
+    const container = await host.find(containerSelector);
+    expect(container).not.toBeNull();
+    
+    // Check that no image preview is generated (should show default file icon)
+    const imagePreview = await host.find('va-file-input >>> .thumbnail-preview');
+    expect(imagePreview).toBeNull();
+    
+    // Check that the default file icon (svg) is displayed
+    const defaultIcon = await host.find('va-file-input >>> .thumbnail-container svg');
+    expect(defaultIcon).not.toBeNull();
+  });
+
+  it('shows progress bar and cancel button when uploading', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="50"/>`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    const progressBar = await host.find('va-file-input >>> va-progress-bar');
+    const cancelBtn = await host.find('va-file-input >>>va-button-icon');
+    expect(progressBar).not.toBeNull();
+    expect(cancelBtn).not.toBeNull();
+  });
+
+  it('shows password input when encrypted and not uploading', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted/>`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    const passwordInput = await host.find('va-file-input >>> va-text-input');
+    expect(passwordInput).not.toBeNull();
+  });
+
+  it('renders additional info slot when not uploading', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input><div>Extra info</div></va-file-input>`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    const slot = await host.find('va-file-input >>> .additional-info-slot');
+    const slotContent = await page.$eval('va-file-input >>> .additional-info-slot slot', slot => {
+      const nodes = slot.assignedNodes();
+      return nodes.map(node => (node as HTMLElement).textContent).join('');
+    });
+    expect(slot).not.toBeNull();
+    expect(slotContent).toEqual('Extra info');
+  });
+
+  it('shows change and delete buttons when file is present and not uploading', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'placeholder.png');
+    const host = await page.find('va-file-input');
+    const changeBtn = await host.find('va-file-input >>> va-button-icon[aria-label="change file placeholder.png"]');
+    const deleteBtn = await host.find('va-file-input >>> va-button-icon[aria-label="delete file placeholder.png"]');
+    expect(changeBtn).not.toBeNull();
+    expect(deleteBtn).not.toBeNull();
+  });
+
 });

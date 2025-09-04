@@ -152,6 +152,7 @@ jobs:
           **Ready for review and merge!** 🚀
         branch: weekly-reports/${{ steps.date.outputs.timestamp }}
         delete-branch: true
+        labels: ignore-for-release
         add-paths: |
           packages/design-system-dashboard-cli/output/form-apps-*.csv
           packages/design-system-dashboard-cli/output/ds-components-*.csv

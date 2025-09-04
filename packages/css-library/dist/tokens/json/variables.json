@@ -149,6 +149,21 @@
       "desktop-lg"
     ]
   },
+  "widescreen": {
+    "value": "1400px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "1400px"
+    },
+    "name": "widescreen",
+    "attributes": {
+      "category": "widescreen"
+    },
+    "path": [
+      "widescreen"
+    ]
+  },
   "color-link-default-hover": {
     "alpha": "0.05",
     "value": "rgba(#000000, 0.05)",
@@ -2393,6 +2408,25 @@
           "family",
           "serif"
         ]
+      },
+      "monospace": {
+        "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace"
+        },
+        "name": "font-family-monospace",
+        "attributes": {
+          "category": "font",
+          "type": "family",
+          "item": "monospace"
+        },
+        "path": [
+          "font",
+          "family",
+          "monospace"
+        ]
       }
     },
     "serif": {
@@ -2432,6 +2466,23 @@
           "sans"
         ]
       }
+    },
+    "monospace": {
+      "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace",
+      "filePath": "tokens/fonts.json",
+      "isSource": true,
+      "original": {
+        "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace"
+      },
+      "name": "font-monospace",
+      "attributes": {
+        "category": "font",
+        "type": "monospace"
+      },
+      "path": [
+        "font",
+        "monospace"
+      ]
     },
     "weight": {
       "normal": {

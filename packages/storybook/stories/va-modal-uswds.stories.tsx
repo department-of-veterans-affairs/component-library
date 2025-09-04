@@ -264,6 +264,13 @@ WithoutTitleAndWithLabel.args = {
   'label': 'A test modal',
 };
 
+export const WithInitialFocusSelector = Template.bind(null);
+WithInitialFocusSelector.args = {
+  ...defaultArgs,
+  'initial-focus-selector': '.usa-modal__heading',
+  'label': 'Title',
+};
+
 export const WithNestedWebComponents = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
