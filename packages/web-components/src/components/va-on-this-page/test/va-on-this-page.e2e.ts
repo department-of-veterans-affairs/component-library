@@ -12,8 +12,8 @@ describe('va-on-this-page', () => {
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
             <ul>
-              <li id="on-this-page">on-this-page</li>
             </ul>
           </nav>
         </mock:shadow-root>
@@ -58,8 +58,8 @@ describe('va-on-this-page', () => {
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
             <ul>
-              <li id="on-this-page">on-this-page</li>
               <li>
                 <a href="#an-id">
                   <va-icon class="hydrated"></va-icon>
@@ -99,8 +99,8 @@ describe('va-on-this-page', () => {
     <va-on-this-page class="hydrated">
     <mock:shadow-root>
       <nav aria-labelledby="on-this-page">
+        <h2 id="on-this-page">on-this-page</h2>
         <ul>
-          <li id="on-this-page">on-this-page</li>
           <li>
             <a href="#foo">
               <va-icon class="hydrated"></va-icon>
@@ -136,8 +136,8 @@ describe('va-on-this-page', () => {
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
             <ul>
-              <li id="on-this-page">on-this-page</li>
               <li>
                 <a href="#an-id">
                   <va-icon class="hydrated"></va-icon>
