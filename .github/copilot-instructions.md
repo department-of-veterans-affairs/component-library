@@ -6,11 +6,11 @@ This is the **VA Design System Component Library**, a comprehensive monorepo con
 
 ### Repository Structure
 - **`packages/web-components/`** - Stencil-based web components (standards-based, framework-agnostic)
-- **`packages/react-components/`** - React bindings and React-specific components
-- **`packages/css-library/`** - Design tokens, utility classes, and SCSS foundations
+- **`packages/react-components/`** - **DEPRECATED** - React bindings and React-specific components (use web-components instead)
+- **`packages/css-library/`** - Design tokens, utility classes, and SCSS foundations (design tokens moving to new utilities repo)
 - **`packages/storybook/`** - Component documentation and visual testing
 - **`packages/design-system-dashboard-cli/`** - Analytics and usage tracking tools
-- **`packages/core/`** - Shared utilities and helper functions
+- **`packages/core/`** - Bundle package for publishing web-components and react-components together
 - **`packages/integration-examples/`** - Example implementations for different frameworks
 
 ## Development Context
@@ -26,7 +26,7 @@ This is the **VA Design System Component Library**, a comprehensive monorepo con
 - **Base Web Components**: Built with Stencil, output vanilla web components
 - **React Bindings**: Auto-generated React wrappers for web components
 - **Design System Maturity**: Components have maturity levels (use/caution/don't use)
-- **Accessibility First**: All components must meet WCAG 2.1 AA standards
+- **Accessibility First**: All components must meet WCAG 2.2 Level A and AA standards
 
 ## Key Development Workflows
 
@@ -44,7 +44,9 @@ The repository includes automated weekly reporting via GitHub Actions:
    - Include comprehensive JSDoc documentation
    - Write unit tests and e2e tests
 
-2. **React Components** (packages/react-components/):
+2. **React Components** (packages/react-components/) - **DEPRECATED**:
+   - **DO NOT** create new React components - use web-components instead
+   - Existing React components are maintained for backward compatibility only
    - TypeScript with proper prop interfaces
    - Use React hooks for state management
    - Include accessibility attributes and ARIA support
@@ -66,7 +68,7 @@ The repository includes automated weekly reporting via GitHub Actions:
 ### Accessibility Requirements
 - All components must be keyboard navigable
 - Screen reader compatible with proper ARIA attributes
-- Color contrast ratios meet WCAG 2.1 AA standards
+- Color contrast ratios meet WCAG 2.2 Level A and AA standards
 - Focus management and visual focus indicators
 - Support for high contrast mode and reduced motion
 
@@ -81,7 +83,7 @@ The repository includes automated weekly reporting via GitHub Actions:
 ### Adding New Components
 1. Create component in `packages/web-components/src/components/`
 2. Add Stencil component with proper decorators and JSDoc
-3. Create comprehensive unit tests
+3. Create comprehensive unit tests and e2e tests
 4. Add Storybook stories for documentation
 5. Generate React bindings automatically
 6. Update component documentation and design guidance
@@ -94,16 +96,18 @@ The repository includes automated weekly reporting via GitHub Actions:
 5. Consider impact on consuming applications
 
 ### Publishing Components
-1. Components are published via automated CI/CD
-2. Semantic versioning for release management
-3. Release notes generated from conventional commits
-4. Multiple npm packages published from monorepo
+- Components are published via automated CI/CD
+- Semantic versioning for release management  
+- Release notes generated from conventional commits
+- Multiple npm packages published from monorepo
+- **Comprehensive publishing steps**: [See README.md](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#publishing)
 
 ## Integration and Usage
 
 ### External Dependencies
 - **vets-website**: Primary consumer application
 - **content-build**: Static site generator for VA.gov
+- **next-build**: Front-end templating, build, and deploy for VA.gov CMS content
 - **design.va.gov**: Design system documentation site
 
 ### Analytics and Metrics
@@ -156,7 +160,7 @@ The repository includes automated weekly reporting via GitHub Actions:
 - **Design System Documentation**: [design.va.gov](https://design.va.gov)
 - **Component Library**: [design.va.gov/components](https://design.va.gov/components)
 - **GitHub Repository**: [department-of-veterans-affairs/component-library](https://github.com/department-of-veterans-affairs/component-library)
-- **Storybook Documentation**: Available in development builds
+- **Storybook Documentation**: [design.va.gov/storybook](https://design.va.gov/storybook/?path=/docs/about-introduction--docs)
 - **VA Design System Team**: Primary maintainers and design guidance
 
 ---
