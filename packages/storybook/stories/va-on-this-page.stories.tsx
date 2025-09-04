@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
-import { getWebComponentDocs, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const otpDocs = getWebComponentDocs('va-on-this-page');
+
+const defaultArgs = {
+  'header-level': undefined,
+};
 
 export default {
   title: 'Components/On this page',
@@ -12,11 +16,16 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={otpDocs} />,
     },
   },
+  args: defaultArgs,
+  argTypes: propStructure(otpDocs),
 };
 
-const articleJSX = (
-  <article>
-    <va-on-this-page></va-on-this-page>
+const Template = ({
+  'header-level': headerLevel
+}) => {
+  return (
+<article>
+    <va-on-this-page header-level={headerLevel}/>
     <h2 id="if-im-a-veteran">
       If I’m a Veteran, can I get VR&amp;E benefits and services?
     </h2>
@@ -49,11 +58,8 @@ const articleJSX = (
       <li>Gamma</li>
     </ol>
   </article>
-);
-
-const Template = () => {
-  return articleJSX;
-};
+  )
+}
 
 const I18nTemplate = args => {
   const { headline, level, ...rest } = args;
@@ -69,7 +75,7 @@ const I18nTemplate = args => {
       <button onClick={e => setLang('en')}>English</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>
 
-      {articleJSX}
+      {Template}
     </div>
   );
 };
@@ -77,3 +83,9 @@ const I18nTemplate = args => {
 export const Default = Template.bind(null);
 
 export const Internationalization = I18nTemplate.bind(null);
+
+export const CustomHeaderLevel = Template.bind(null);
+CustomHeaderLevel.args = {
+  ...defaultArgs,
+  'header-level': 3,
+};
