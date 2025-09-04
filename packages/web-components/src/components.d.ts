@@ -1696,6 +1696,10 @@ export namespace Components {
          */
         "showError"?: boolean;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "showRequiredText"?: boolean;
+        /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
          */
         "useFormsPattern"?: string;
@@ -2182,6 +2186,10 @@ export namespace Components {
           * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
          */
         "showInputError"?: boolean;
+        /**
+          * Whether or not to show the (*Required) text.
+         */
+        "showRequiredText"?: boolean;
         /**
           * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
          */
@@ -5763,6 +5771,10 @@ declare namespace LocalJSX {
          */
         "showError"?: boolean;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "showRequiredText"?: boolean;
+        /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
          */
         "useFormsPattern"?: string;
@@ -6293,6 +6305,10 @@ declare namespace LocalJSX {
           * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
          */
         "showInputError"?: boolean;
+        /**
+          * Whether or not to show the (*Required) text.
+         */
+        "showRequiredText"?: boolean;
         /**
           * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
          */

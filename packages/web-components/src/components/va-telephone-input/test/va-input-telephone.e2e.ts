@@ -70,6 +70,7 @@ describe('va-telephone-input', () => {
     await page.setContent('<va-telephone-input />');
     const input = await page.find('va-telephone-input >>> va-text-input');
     await input.click();
+    await input.press('1');
     await input.press('Tab');
     const error = await page.find('va-telephone-input >>> span#error-message');
     expect(error.innerText).toContain('Enter a valid United States of America phone number. Use 10 digits.');
@@ -114,6 +115,7 @@ describe('va-telephone-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-telephone-input country="ID" />');
     let input = await page.find('va-telephone-input >>> va-text-input >>> input');
+    await input.press('1');
     await input.press('Tab');
     let error = await page.find('va-telephone-input >>> span#error-message');
     expect(error.innerText).toContain('Enter a valid Indonesia phone number. Use 7 to 17 digits.');
@@ -124,6 +126,7 @@ describe('va-telephone-input', () => {
     await page.setContent('<va-telephone-input country="FJ" />');
     await page.waitForChanges();
     const input = await page.find('va-telephone-input >>> va-text-input >>> input');
+    await input.press('1');
     await input.press('Tab');
     const error = await page.find('va-telephone-input >>> span#error-message');
     expect(error.innerText).toContain('Enter a valid Fiji phone number. Use 7 or 11 digits.');
