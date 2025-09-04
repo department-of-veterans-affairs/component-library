@@ -21,5 +21,8 @@ yarn-error.log*
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
-componentUsage-*.csv
 packages/storybook/storybook-static/
+
+# Allow weekly report files to be tracked
+!packages/design-system-dashboard-cli/output/*.csv
+!packages/design-system-dashboard-cli/output/-*.txt
