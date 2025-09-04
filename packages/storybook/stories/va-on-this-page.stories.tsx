@@ -62,7 +62,6 @@ const Template = ({
 }
 
 const I18nTemplate = args => {
-  const { headline, level, ...rest } = args;
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -75,7 +74,7 @@ const I18nTemplate = args => {
       <button onClick={e => setLang('en')}>English</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>
 
-      {Template}
+      {Template(args)}
     </div>
   );
 };
