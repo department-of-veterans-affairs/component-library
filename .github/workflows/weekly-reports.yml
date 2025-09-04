@@ -3,6 +3,11 @@ name: Weekly Design System Reports
 on:
   schedule:
     - cron: '0 22 * * 4' # Run every Thursday at 10 PM UTC (6 PM EDT / 5 PM EST)
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+    paths:
+      - '.github/workflows/weekly-reports.yml'
+      - 'packages/design-system-dashboard-cli/**'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
@@ -108,6 +113,12 @@ jobs:
         # Restore original .env.json
         mv .env.json.original .env.json
       
+    - name: Get current date and timestamp
+      id: date
+      run: |
+        echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+        echo "timestamp=$(date +%Y-%m-%d-%H%M%S)" >> $GITHUB_OUTPUT
+      
     - name: Upload reports
       uses: actions/upload-artifact@v4
       with:
@@ -116,18 +127,33 @@ jobs:
           packages/design-system-dashboard-cli/output/*.csv
           packages/design-system-dashboard-cli/output/*.txt
         retention-days: 7
-
-           
-    - name: Commit and push reports
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add packages/design-system-dashboard-cli/output/form-apps-$(date +%Y-%m-%d).csv
-        git add packages/design-system-dashboard-cli/output/ds-components-$(date +%Y-%m-%d).csv
-        git add packages/design-system-dashboard-cli/output/forms-library-usage-$(date +%Y-%m-%d).txt
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "Add weekly reports for $(date +%Y-%m-%d)"
-          git push
-        fi
+        
+    - name: Create pull request with reports
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.COMPONENT_LIBRARY_WORKFLOWS }}
+        commit-message: "Add weekly reports for ${{ steps.date.outputs.date }}"
+        title: "Weekly Design System Reports - ${{ steps.date.outputs.date }}"
+        body: |
+          ## Weekly Design System Reports - ${{ steps.date.outputs.date }}
+          
+          This automated pull request contains the weekly design system usage reports:
+          
+          ### 📊 Reports Included:
+          - **Form Applications** (`form-apps-${{ steps.date.outputs.date }}.csv`) - List of all form applications using RoutedSavableApp
+          - **Design System Components** (`ds-components-${{ steps.date.outputs.date }}.csv`) - Component usage across VA.gov
+          - **Forms Library Usage** (`forms-library-usage-${{ steps.date.outputs.date }}.txt`) - Non-form apps using forms library code
+          
+          ### 🤖 Automation Details:
+          - Generated automatically every Thursday evening
+          - Reports are stored in `packages/design-system-dashboard-cli/output/`
+          - Data will be consumed by the Metrics Dashboard on design.va.gov
+          
+          **Ready for review and merge!** 🚀
+        branch: weekly-reports/${{ steps.date.outputs.timestamp }}
+        delete-branch: true
+        labels: ignore-for-release
+        add-paths: |
+          packages/design-system-dashboard-cli/output/form-apps-*.csv
+          packages/design-system-dashboard-cli/output/ds-components-*.csv
+          packages/design-system-dashboard-cli/output/forms-library-usage-*.txt
