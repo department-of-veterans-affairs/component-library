@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure,
+  StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
+} from './wc-helpers';
 // @ts-ignore
 import testImage from './images/search-bar.png';
 
@@ -18,6 +24,8 @@ export default {
     },
   },
   argTypes: {
+    ...propStructure(fileInputDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#file-input-error-alert']),
     // hide the uploadMessage prop from the properties table in storybook
     uploadMessage: {
       table: {
@@ -49,7 +57,9 @@ const defaultArgs = {
   'uploadedFile': null,
   'maxFileSize': Infinity,
   'minFileSize': 0,
-  'password-error': false
+  'password-error': false,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -72,31 +82,46 @@ const Template = ({
   uploadedFile,
   maxFileSize,
   minFileSize,
-  passwordError
+  passwordError,
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <VaFileInput
-      label={label}
-      name={name}
-      accept={accept}
-      required={required}
-      error={error}
-      hint={hint}
-      enable-analytics={enableAnalytics}
-      onVaChange={vaChange}
-      onVaPasswordChange={vaPasswordChange}
-      onVaFileInputError={vaFileInputError}
-      header-size={headerSize}
-      readOnly={readOnly}
-      encrypted={encrypted}
-      statusText={statusText}
-      value={value}
-      children={children}
-      uploadedFile={uploadedFile}
-      maxFileSize={maxFileSize}
-      minFileSize={minFileSize}
-      passwordError={passwordError}
-    />
+    <>
+      <VaFileInput
+        label={label}
+        name={name}
+        accept={accept}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        enable-analytics={enableAnalytics}
+        onVaChange={vaChange}
+        onVaPasswordChange={vaPasswordChange}
+        onVaFileInputError={vaFileInputError}
+        header-size={headerSize}
+        readOnly={readOnly}
+        encrypted={encrypted}
+        statusText={statusText}
+        value={value}
+        children={children}
+        uploadedFile={uploadedFile}
+        maxFileSize={maxFileSize}
+        minFileSize={minFileSize}
+        passwordError={passwordError}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      />
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
   );
 };
 
@@ -118,9 +143,9 @@ const AcceptsFilePasswordTemplate = ({
 }) => {
   return (
     <>
-      To learn how to check for an encrypted PDF <va-link 
+      To learn how to check for an encrypted PDF <va-link
         text='see platform documentation'
-        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted' 
+        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted'
       />.
       <VaFileInput
         label={label}
@@ -459,4 +484,4 @@ const VisualStateResetTemplate = args => {
 }
 
 export const WithVisualStateReset = VisualStateResetTemplate.bind(null);
-WithVisualStateReset.args = { ...defaultArgs }
+WithVisualStateReset.args = { ...defaultArgs };
