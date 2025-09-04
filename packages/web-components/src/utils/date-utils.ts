@@ -194,12 +194,9 @@ export function validate({
 }: ValidateConfig): void {
 
   // Don't validate if all values are empty
-  console.log(year, month, day);
   if ((!year) && !month && !day) {
-    console.log('here')
     return;
   }
-  console.log('continuing');
   const maxDays = daysForSelectedMonth(year, month);
 
   // Reset previous invalid states
