@@ -3,6 +3,8 @@ import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
   applyFocus,
 } from './wc-helpers';
 import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
@@ -19,6 +21,8 @@ export default {
     },
   },
   argTypes: {
+    ...propStructure(textInputDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
     inputmode: {
       control: {
         type: 'select',
@@ -72,6 +76,8 @@ const defaultArgs = {
   'input-suffix': undefined,
   'input-icon-suffix': undefined,
   'show-input-error': true,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -99,38 +105,53 @@ const Template = ({
   'input-suffix': inputSuffix,
   'input-icon-suffix': inputIconSuffix,
   'show-input-error': showInputError,
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-text-input
-      name={name}
-      label={label}
-      autocomplete={autocomplete}
-      enable-analytics={enableAnalytics}
-      required={required}
-      error={error}
-      hint={hint}
-      maxlength={maxlength}
-      value={value}
-      inputmode={inputmode}
-      step={step}
-      type={type}
-      success={success}
-      pattern={pattern}
-      onBlur={e => console.log('blur event', e)}
-      onInput={e =>
-        console.log('input event value', (e.target as HTMLInputElement).value)
-      }
-      message-aria-describedby={messageAriaDescribedby}
-      charcount={charcount}
-      min={min}
-      max={max}
-      currency={currency}
-      input-prefix={inputPrefix}
-      input-icon-prefix={inputIconPrefix}
-      input-suffix={inputSuffix}
-      input-icon-suffix={inputIconSuffix}
-      show-input-error={showInputError}
-    />
+    <>
+      <va-text-input
+        name={name}
+        label={label}
+        autocomplete={autocomplete}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        maxlength={maxlength}
+        value={value}
+        inputmode={inputmode}
+        step={step}
+        type={type}
+        success={success}
+        pattern={pattern}
+        onBlur={e => console.log('blur event', e)}
+        onInput={e =>
+          console.log('input event value', (e.target as HTMLInputElement).value)
+        }
+        message-aria-describedby={messageAriaDescribedby}
+        charcount={charcount}
+        min={min}
+        max={max}
+        currency={currency}
+        input-prefix={inputPrefix}
+        input-icon-prefix={inputIconPrefix}
+        input-suffix={inputSuffix}
+        input-icon-suffix={inputIconSuffix}
+        show-input-error={showInputError}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      />
+      {showToggleFocusButton && (
+          <va-button
+            text="Toggle error state"
+            onClick={handleClick}
+            class="vads-u-margin-top--2"
+          ></va-button>
+      )}
+    </>
   );
 };
 

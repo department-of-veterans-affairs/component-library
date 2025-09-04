@@ -99,7 +99,10 @@ a[aria-expanded='true'] .alert-expandable-icon {
   margin-right: 8px;
 }
 
-::slotted(*) {
-  margin-bottom: 0 !important;
+::slotted(*:first-child) {
   margin-top: 0 !important;
+}
+
+::slotted(*:last-child) {
+  margin-bottom: 0 !important;
 }

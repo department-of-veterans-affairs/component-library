@@ -665,10 +665,6 @@ export namespace Components {
          */
         "accept"?: string;
         /**
-          * The text displayed on the button.
-         */
-        "buttonText": string;
-        /**
           * Emit component-library-analytics events on the file input change event.
          */
         "enableAnalytics"?: boolean;
@@ -765,7 +761,7 @@ export namespace Components {
         /**
           * Array of booleans, displays file password field for corresponding file input.
          */
-        "encrypted": boolean[];
+        "encrypted"?: boolean[];
         /**
           * Array of error messages corresponding to each file input. The length and order match the files array.
          */
@@ -783,9 +779,25 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Maximum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "maxFileSize"?: number;
+        /**
+          * Minimum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "minFileSize"?: number;
+        /**
           * Name attribute for the file input element, used to identify the form data in the submission.
          */
         "name"?: string;
+        /**
+          * Array of password error messages corresponding to each file input. The length and order match the files array.
+         */
+        "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of numbers corresponding to the progress of the upload of each file.
+         */
+        "percentUploaded"?: number[];
         /**
           * Optionally displays the read-only view
          */
@@ -795,9 +807,21 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
+         */
+        "resetVisualState"?: boolean[];
+        /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
         "slotFieldIndexes"?: Number[];
+        /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
+          * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
+         */
+        "uploadedFiles"?: UploadedFile[];
         /**
           * The value attribute for the file view element.
          */
@@ -2862,6 +2886,7 @@ declare global {
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
         "vaPasswordChange": any;
+        "vaFileInputError": any;
         "component-library-analytics": any;
     }
     /**
@@ -4539,10 +4564,6 @@ declare namespace LocalJSX {
          */
         "accept"?: string;
         /**
-          * The text displayed on the button.
-         */
-        "buttonText"?: string;
-        /**
           * Emit component-library-analytics events on the file input change event.
          */
         "enableAnalytics"?: boolean;
@@ -4590,6 +4611,10 @@ declare namespace LocalJSX {
           * The event emitted when the file input value changes.
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * The event emitted when adding a file results in an error, e.g. exceeding max file size
+         */
+        "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * The event emitted when the file input password value changes.
          */
@@ -4669,6 +4694,14 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * Maximum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "maxFileSize"?: number;
+        /**
+          * Minimum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "minFileSize"?: number;
+        /**
           * Name attribute for the file input element, used to identify the form data in the submission.
          */
         "name"?: string;
@@ -4676,6 +4709,14 @@ declare namespace LocalJSX {
           * Event emitted when any change to the file inputs occurs.  Sends back an object with the following data structure: `{ action: string, file: triggering file, state: files array }`  The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
+        /**
+          * Array of password error messages corresponding to each file input. The length and order match the files array.
+         */
+        "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of numbers corresponding to the progress of the upload of each file.
+         */
+        "percentUploaded"?: number[];
         /**
           * Optionally displays the read-only view
          */
@@ -4685,9 +4726,21 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
+         */
+        "resetVisualState"?: boolean[];
+        /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
         "slotFieldIndexes"?: Number[];
+        /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
+          * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
+         */
+        "uploadedFiles"?: UploadedFile[];
         /**
           * The value attribute for the file view element.
          */

@@ -2,12 +2,14 @@
   "font": {
     "family": {
       "sans": { "value": "'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
-      "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" }
+      "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" },
+      "monospace": { "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace" }
     },
     "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" },
     "source": {
       "sans": { "value": "'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"}
     },
+    "monospace": { "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace" },
     "weight": {
       "normal": { "value": "400"},
       "bold": { "value": "700"}
