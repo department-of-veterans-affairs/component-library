@@ -91,8 +91,8 @@ const USWDSTiled = ({
         hint={hint}
       >
         <va-checkbox
-          id="soujourner-truth"
-          label="Soujourner Truth"
+          id="sojourner-truth"
+          label="Sojourner Truth"
           checkbox-description="This is optional text that can be used to describe the label in more detail."
           name="group1"
           value="1"
@@ -244,8 +244,8 @@ const FormsPatternMultipleTemplate = ({
         form-description="This is the additional form-description prop"
       >
         <va-checkbox
-          id="soujourner-truth"
-          label="Soujourner Truth"
+          id="sojourner-truth"
+          label="Sojourner Truth"
           name="multiple"
           value="1"
         />
