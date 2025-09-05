@@ -89,6 +89,11 @@ export class VaTextInput {
   @Prop() required?: boolean = false;
 
   /**
+   * Whether or not to show the (*Required) text.
+   */
+  @Prop() showRequiredText?: boolean = true;
+
+  /**
    * The inputmode attribute.
    */
   @Prop() inputmode?:
@@ -327,9 +332,11 @@ export class VaTextInput {
     }
 
     if (
-      this.inputmode === 'decimal' ||
-      this.inputmode === 'numeric' ||
-      this.currency
+      (
+        this.inputmode === 'decimal' ||
+        this.inputmode === 'numeric' ||
+        this.currency
+      ) && this.value
     ) {
       let defaultError = i18next.t('number-error');
       const target = e.target as HTMLInputElement;
@@ -382,6 +389,7 @@ export class VaTextInput {
       showInputError,
       invalid,
       required,
+      showRequiredText,
       value,
       name,
       autocomplete,
@@ -499,7 +507,7 @@ export class VaTextInput {
               part="label"
             >
               {label}
-              {required && (
+              {required && showRequiredText && (
                 <span class="usa-label--required">
                   {' '}
                   {i18next.t('required')}

@@ -42,6 +42,11 @@ export class VaSelect {
   @Prop() required?: boolean = false;
 
   /**
+   * Whether or not to show the (*Required) text.
+   */
+  @Prop() showRequiredText?: boolean = true;
+
+  /**
    * Text label for the field.
    */
   @Prop() label!: string;
@@ -245,6 +250,7 @@ export class VaSelect {
       invalid,
       label,
       required,
+      showRequiredText,
       name,
       hint,
       messageAriaDescribedby,
@@ -297,7 +303,7 @@ export class VaSelect {
         {label && (
           <label htmlFor="options" class={labelClass} part="label">
             {label}
-            {required && (
+            {required && showRequiredText && (
               <span class="usa-label--required"> {i18next.t('required')}</span>
             )}
           </label>

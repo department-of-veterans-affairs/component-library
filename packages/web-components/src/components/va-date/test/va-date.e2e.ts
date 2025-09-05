@@ -154,6 +154,7 @@ describe('va-date', () => {
 
       // Trigger Blur
       await handleMonth.press('Tab');
+      await handleYear.press('1');
       await handleYear.press('Tab');
       await page.waitForChanges();
 

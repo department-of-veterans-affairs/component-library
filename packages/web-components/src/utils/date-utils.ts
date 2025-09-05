@@ -192,6 +192,11 @@ export function validate({
   monthSelect,
   monthOptional,
 }: ValidateConfig): void {
+
+  // Don't validate if all values are empty
+  if ((!year) && !month && !day) {
+    return;
+  }
   const maxDays = daysForSelectedMonth(year, month);
 
   // Reset previous invalid states
