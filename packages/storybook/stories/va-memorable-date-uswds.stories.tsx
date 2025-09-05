@@ -31,7 +31,8 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
-  monthSelect: false,
+  'month-select': false,
+  'remove-date-hint': false,
 };
 
 const Template = ({
@@ -41,7 +42,8 @@ const Template = ({
   required,
   error,
   value,
-  monthSelect,
+  'month-select': monthSelect,  
+  'remove-date-hint': removeDateHint,
 }) => {
   return (
     <VaMemorableDate
@@ -50,8 +52,9 @@ const Template = ({
       name={name}
       hint={hint}
       required={required}
-      error={error}
+      error={error}  
       value={value}
+      removeDateHint={removeDateHint}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
