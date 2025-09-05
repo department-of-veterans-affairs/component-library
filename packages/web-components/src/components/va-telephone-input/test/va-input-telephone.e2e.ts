@@ -65,7 +65,7 @@ describe('va-telephone-input', () => {
     expect(error.innerText).toContain('This is an error message');
   });
 
-  it('shows an error message if contact missing', async () => {
+  it('shows an error message if contact invalid', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-telephone-input />');
     const input = await page.find('va-telephone-input >>> va-text-input');
