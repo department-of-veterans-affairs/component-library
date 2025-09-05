@@ -1444,11 +1444,11 @@ a.vads-c-action-link--white:before {
 }
 
 a.vads-c-action-link--white:hover {
-  color: #face00;
+  color: #2491ff;
   background-color: transparent;
 }
 a.vads-c-action-link--white:hover:before {
-  background-color: #face00;
+  background-color: #2491ff;
 }
 
 /*# sourceMappingURL=m-action-link.css.map */

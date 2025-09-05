@@ -525,11 +525,11 @@
   },
   "vads-color-action-focus-on-light": {
     "*": {
-      "value": "#face00",
+      "value": "#2491ff",
       "filePath": "tokens/color.json",
       "isSource": true,
       "original": {
-        "value": "{uswds-system-color-yellow-vivid-20}"
+        "value": "{uswds-system-color-blue-vivid-40}"
       },
       "name": "vads-color-action-focus-on-light",
       "attributes": {

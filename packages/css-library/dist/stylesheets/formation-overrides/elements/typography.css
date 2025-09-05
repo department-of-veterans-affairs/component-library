@@ -52,7 +52,7 @@ a:hover, a:active {
   color: #1a4480;
 }
 a:focus {
-  outline: 2px solid #face00;
+  outline: 2px solid #2491ff;
   outline-offset: 2px;
 }
 a:visited {
