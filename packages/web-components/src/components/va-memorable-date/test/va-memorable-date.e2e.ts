@@ -167,6 +167,35 @@ describe('va-memorable-date', () => {
     `);
   });
 
+  it('removes internal date hint text when removeDateHint prop is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date label="Label" hint="custom date hint text" required month-select remove-date-hint></va-memorable-date>',
+    );
+
+    const element = await page.find('va-memorable-date');
+    expect(element).toHaveClass('hydrated');
+    
+    // Check that the custom hint is still present (only removeDateHint affects dateHint)
+    const hintElement = await page.find('va-memorable-date >>> div#hint');
+    expect(hintElement).not.toBeNull();
+    expect(await hintElement.innerText).toBe('custom date hint text');
+    
+    // Check that the date hint element is not present in the DOM
+    const dateHintElement = await page.find('va-memorable-date >>> span#dateHint');
+    expect(dateHintElement).toBeNull();
+    
+    // Verify the aria-describedby only includes the custom hint when removeDateHint is true
+    const monthSelect = await page.find('va-memorable-date >>> va-select');
+    expect(monthSelect.getAttribute('aria-describedby')).toBe('hint');
+    
+    const dayInput = await page.find('va-memorable-date >>> .usa-form-group--day-input');
+    expect(dayInput.getAttribute('aria-describedby')).toBe('hint');
+    
+    const yearInput = await page.find('va-memorable-date >>> .usa-form-group--year-input');
+    expect(yearInput.getAttribute('aria-describedby')).toBe('hint');
+  });
+
   it('renders an error message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date error="This is a mistake" />');

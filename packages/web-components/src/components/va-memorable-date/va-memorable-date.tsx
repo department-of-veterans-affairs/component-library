@@ -116,6 +116,11 @@ export class VaMemorableDate {
   @Prop() customYearErrorMessage?: string;
 
   /**
+   * Removes the default date hint text
+   */
+  @Prop() removeDateHint?: boolean = false;
+
+  /**
    * Fires when the date input loses focus after its value was changed
    */
   @Event({
@@ -287,12 +292,14 @@ export class VaMemorableDate {
       useFormsPattern,
       formHeadingLevel,
       formHeading,
+      removeDateHint,
     } = this;
 
     const { currentYear, currentMonth, currentDay } = this;
-    const describedbyIds = ['dateHint', hint ? 'hint' : '']
-      .filter(Boolean)
-      .join(' ');
+    const describedbyIds = [
+      !removeDateHint ? 'dateHint' : '',
+      hint ? 'hint' : ''
+    ].filter(Boolean).join(' ');
 
     const hintText = monthSelect
       ? i18next.t('date-hint-with-select')
@@ -426,9 +433,11 @@ export class VaMemorableDate {
                   {hint}
                 </div>
               )}
-              <span class="usa-hint" id="dateHint">
-                {hintText}
-              </span>
+              {!removeDateHint && (
+                <span class="usa-hint" id="dateHint">
+                  {hintText}
+                </span>
+              )}
             </legend>
             <span id="error-message" role="alert">
               {error && (
