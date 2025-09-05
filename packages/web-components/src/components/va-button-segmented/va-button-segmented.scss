@@ -19,9 +19,25 @@
   margin-left: 0;
   margin-right: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 }
+
+.va-segmented-button[data-count='4'] {
+  grid-template-columns: repeat(4, 1fr);
+
+  .va-segmented-button__button {
+    max-width: 160px;
+  }
+}
+
+.va-segmented-button[data-count='3'] {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.va-segmented-button[data-count='2'] {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 
 .usa-button-group__item {
   margin: 0;
@@ -29,7 +45,6 @@
 
 .va-segmented-button__button {
   width: 100%;
-  max-width: 160px;
   height: 100%;
   min-height: 44px;
   background-color: var(--vads-color-base-lighter);
@@ -52,6 +67,10 @@
 }
 
 @media screen and (min-width: $tablet) {
+  .va-segmented-button[data-count='2'], .va-segmented-button[data-count='3'] {
+    display: flex;
+  }
+
   .va-segmented-button__button {
     max-width: 160px;
     padding: var(--vads-spacing-1p5) var(--vads-spacing-2p5) var(--vads-spacing-1p5) var(--vads-spacing-2p5);
