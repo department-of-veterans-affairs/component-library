@@ -1126,6 +1126,10 @@ export namespace Components {
          */
         "name": string;
         /**
+          * Removes the default date hint text
+         */
+        "removeDateHint"?: boolean;
+        /**
           * Render marker indicating field is required.
          */
         "required"?: boolean;
@@ -5084,6 +5088,10 @@ declare namespace LocalJSX {
           * Fires when the date input loses focus after its value was changed
          */
         "onDateChange"?: (event: VaMemorableDateCustomEvent<any>) => void;
+        /**
+          * Removes the default date hint text
+         */
+        "removeDateHint"?: boolean;
         /**
           * Render marker indicating field is required.
          */
