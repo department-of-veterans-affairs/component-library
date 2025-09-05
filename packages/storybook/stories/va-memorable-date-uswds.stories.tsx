@@ -33,6 +33,7 @@ const defaultArgs = {
   value: undefined,
   'month-select': false,
   'remove-date-hint': false,
+  customYearErrorMessage: `Please enter a year between 1900 and ${new Date().getFullYear()}`,
 };
 
 const Template = ({
@@ -44,6 +45,7 @@ const Template = ({
   value,
   'month-select': monthSelect,  
   'remove-date-hint': removeDateHint,
+  customYearErrorMessage,
 }) => {
   return (
     <VaMemorableDate
@@ -55,6 +57,7 @@ const Template = ({
       error={error}  
       value={value}
       removeDateHint={removeDateHint}
+      customYearErrorMessage={customYearErrorMessage}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
@@ -148,7 +151,7 @@ const CustomValidationTemplate = ({
   );
 };
 
-const I18nTemplate = ({ label, name, required, hint, error, value }) => {
+const I18nTemplate = ({ label, name, required, hint, error, value, customYearErrorMessage }) => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -181,6 +184,7 @@ const I18nTemplate = ({ label, name, required, hint, error, value }) => {
         value={value}
         onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
         onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        customYearErrorMessage={customYearErrorMessage}
       />
     </div>
   );
@@ -194,6 +198,7 @@ const FormsPatternSingleTemplate = ({
   error,
   value,
   monthSelect,
+  customYearErrorMessage,
 }) => {
   const id = Math.floor(Math.random() * 100) + 1;
   const handleClick = () => {
@@ -220,6 +225,7 @@ const FormsPatternSingleTemplate = ({
         form-heading-level={1}
         form-heading="Enter a date"
         form-description="This is the additional form-description prop"
+        customYearErrorMessage={customYearErrorMessage}
       >
         <div slot="form-description">
           <p>HTML passed into the form-description slot:</p>
@@ -245,6 +251,7 @@ const FormsPatternMultipleTemplate = ({
   error,
   value,
   monthSelect,
+  customYearErrorMessage,
 }) => {
   const handleClick = () => {
     const header = document
@@ -270,6 +277,7 @@ const FormsPatternMultipleTemplate = ({
         form-heading-level={1}
         form-heading="Enter dates"
         form-description="This is the additional form-description prop"
+        customYearErrorMessage={customYearErrorMessage}
       />
       <VaMemorableDate
         monthSelect={monthSelect}
@@ -282,6 +290,7 @@ const FormsPatternMultipleTemplate = ({
         onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
         use-forms-pattern="single"
         id={`form-pattern-single-input-multiple`}
+        customYearErrorMessage={customYearErrorMessage}
       />
       <hr />
 
@@ -297,6 +306,7 @@ const CustomErrorMessageTemplate = ({
   required,
   error,
   value,
+  customYearErrorMessage,
 }) => {
   return (
     <>
@@ -312,6 +322,7 @@ const CustomErrorMessageTemplate = ({
         onDateBlur={() => {}}
         onDateChange={() => {}}
         customDayErrorMessage="This is a custom error message for an invalid day"
+        customYearErrorMessage={customYearErrorMessage}
       />
       <hr />
       <div>
