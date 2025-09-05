@@ -1321,6 +1321,10 @@ export namespace Components {
           * If true, analytics event will not be fired
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headerLevel"?: number;
     }
     /**
      * @componentName Pagination
@@ -5308,6 +5312,10 @@ declare namespace LocalJSX {
           * If true, analytics event will not be fired
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headerLevel"?: number;
         /**
           * The event used to track usage of the component. This is emitted when the user clicks on a link and enableAnalytics is true.
          */

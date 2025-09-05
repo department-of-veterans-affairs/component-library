@@ -12,8 +12,8 @@ describe('va-on-this-page', () => {
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
             <ul>
-              <li id="on-this-page">on-this-page</li>
             </ul>
           </nav>
         </mock:shadow-root>
@@ -58,8 +58,8 @@ describe('va-on-this-page', () => {
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
             <ul>
-              <li id="on-this-page">on-this-page</li>
               <li>
                 <a href="#an-id">
                   <va-icon class="hydrated"></va-icon>
@@ -99,8 +99,8 @@ describe('va-on-this-page', () => {
     <va-on-this-page class="hydrated">
     <mock:shadow-root>
       <nav aria-labelledby="on-this-page">
+        <h2 id="on-this-page">on-this-page</h2>
         <ul>
-          <li id="on-this-page">on-this-page</li>
           <li>
             <a href="#foo">
               <va-icon class="hydrated"></va-icon>
@@ -136,8 +136,8 @@ describe('va-on-this-page', () => {
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
             <ul>
-              <li id="on-this-page">on-this-page</li>
               <li>
                 <a href="#an-id">
                   <va-icon class="hydrated"></va-icon>
@@ -203,5 +203,40 @@ describe('va-on-this-page', () => {
     await anchor.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
+  it('updates the header level with the header-level prop', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      `
+      <article>
+        <va-on-this-page header-level="3"></va-on-this-page>
+        <div>
+          <h2 id="foo">Foo</h2>
+          <div>bar</div>
+        </div>
+        </article>
+      `,
+    );
+    const element = await page.find('va-on-this-page');
+
+    expect(element).toEqualHtml(`
+      <va-on-this-page class="hydrated" header-level="3">
+        <mock:shadow-root>
+          <nav aria-labelledby="on-this-page">
+            <h3 id="on-this-page">on-this-page</h3>
+            <ul>
+              <li>
+                <a href="#foo">
+                  <va-icon class="hydrated"></va-icon>
+                  <span>Foo</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </mock:shadow-root>
+      </va-on-this-page>
+    `);
   });
 });
