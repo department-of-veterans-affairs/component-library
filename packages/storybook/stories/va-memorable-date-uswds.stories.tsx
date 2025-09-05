@@ -348,7 +348,7 @@ Error.args = {
 export const WithMonthSelect = Template.bind(null);
 WithMonthSelect.args = {
   ...defaultArgs,
-  monthSelect: true,
+  'month-select': true,
   value: '2022-04-19',
 };
 
@@ -363,7 +363,7 @@ export const ErrorWithMonthSelect = Template.bind(null);
 ErrorWithMonthSelect.args = {
   ...defaultArgs,
   error: 'Error Message Example',
-  monthSelect: true,
+  'month-select': true,
 };
 
 export const CustomValidation = CustomValidationTemplate.bind(null);
@@ -397,7 +397,7 @@ export const FormsPatternSingleWithoutMonthDropdown =
   FormsPatternSingleTemplate.bind(null);
 FormsPatternSingleWithoutMonthDropdown.args = {
   ...defaultArgs,
-  monthSelect: false,
+  'month-select': false,
 };
 
 export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
