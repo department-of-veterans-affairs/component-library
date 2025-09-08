@@ -238,27 +238,30 @@ export class VaAccordion {
         >
           {(!openSingle && !isInsideSearchFilter) ? (
             <Fragment>
-              <button
-                class="va-accordion__button"
-                data-testid="expand-all-accordions"
-                ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
-                onClick={() => this.expandCollapseAll(!this.expanded)}
-                aria-label={
-                  this.expanded
-                    ? `${i18next.t('collapse-all-aria-label')}`
-                    : `${i18next.t('expand-all-aria-label')}`
-                }
-              >
-                {this.expanded
-                  ? `${i18next.t('collapse-all')} -`
-                  : `${i18next.t('expand-all')} +`}
-              </button>
-              <span aria-live="assertive" id="expand-status" class="usa-sr-only">
-                  {this.expanded
-                    ? "Accordions expanded"
-                    : "Accordions collapsed"
-                  }
-                </span>
+              <ul class="expand-list">
+                <li>
+                  <button
+                    class="va-accordion__button"
+                    data-testid="expand-all-accordions"
+                    ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+                    onClick={() => this.expandCollapseAll(true)}
+                    aria-pressed={this.expanded ? 'true' : 'false'}
+                  >
+                    {i18next.t('expand-all')}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    class="va-accordion__button"
+                    data-testid="collapse-all-accordions"
+                    ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+                    onClick={() => this.expandCollapseAll(false)}
+                    aria-pressed={this.expanded ? 'false' : 'true'}
+                  >
+                    {i18next.t('collapse-all')}
+                  </button>
+                </li>
+              </ul>
             </Fragment>
           ) : null}
           <slot></slot>
