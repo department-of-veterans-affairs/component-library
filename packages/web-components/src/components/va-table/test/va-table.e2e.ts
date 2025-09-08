@@ -98,7 +98,7 @@ describe('va-table', () => {
 
   it('only adds va-table-slot-* to top-level spans in va-table-row', async () => {
     const page = await newE2EPage();
-    await page.setContent(getTableMarkup());
+    await page.setContent(getTableMarkup({sortable: 'true'}));
 
     // Only top-level spans should have the slot attribute
     const firstRow = await (await page.findAll('va-table-row')).at(1);
