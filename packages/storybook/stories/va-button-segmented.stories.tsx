@@ -55,3 +55,22 @@ SelectedItem.args = {
   ...defaultArgs,
   selected: 1,
 };
+
+export const ThreeButtons = Template.bind(null);
+ThreeButtons.args = {
+  ...defaultArgs,
+  buttons: [
+    { label: 'All', value: 'all' },
+    { label: 'Active', value: 'active' },
+    { label: 'Archived', value: 'archived' }
+  ],
+};
+
+export const TwoButtons = Template.bind(null);
+TwoButtons.args = {
+  ...defaultArgs,
+  buttons: [
+    { label: 'Upcoming', value: 'upcoming' },
+    { label: 'Past', value: 'past' },
+  ],
+};
