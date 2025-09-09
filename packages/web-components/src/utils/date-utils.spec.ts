@@ -20,16 +20,6 @@ describe('checkLeapYear',
 });
 
 describe('validate', () => {
-  function getMockComponent() {
-    return {
-      invalidYear: false,
-      invalidMonth: false,
-      invalidDay: false,
-      error: null,
-      required: true,
-    };
-  }
-
   describe('NaN validation', () => {
     it('indicates when the year is NaN', () => {
       const memorableDateComponent = {} as Components.VaMemorableDate;
