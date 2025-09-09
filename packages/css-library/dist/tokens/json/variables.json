@@ -525,11 +525,11 @@
   },
   "vads-color-action-focus-on-light": {
     "*": {
-      "value": "#face00",
+      "value": "#0080FF",
       "filePath": "tokens/color.json",
       "isSource": true,
       "original": {
-        "value": "{uswds-system-color-yellow-vivid-20}"
+        "value": "#0080FF"
       },
       "name": "vads-color-action-focus-on-light",
       "attributes": {
@@ -538,6 +538,25 @@
       },
       "path": [
         "vads-color-action-focus-on-light",
+        "*"
+      ]
+    }
+  },
+  "vads-color-action-focus-alt": {
+    "*": {
+      "value": "#4f97d1",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-40}"
+      },
+      "name": "vads-color-action-focus-alt",
+      "attributes": {
+        "category": "vads-color-action-focus-alt",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-action-focus-alt",
         "*"
       ]
     }
@@ -1735,6 +1754,25 @@
       },
       "path": [
         "vads-color-warning-lighter",
+        "*"
+      ]
+    }
+  },
+  "vads-color-gold-light": {
+    "*": {
+      "value": "#face00",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-yellow-vivid-20}"
+      },
+      "name": "vads-color-gold-light",
+      "attributes": {
+        "category": "vads-color-gold-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-gold-light",
         "*"
       ]
     }
