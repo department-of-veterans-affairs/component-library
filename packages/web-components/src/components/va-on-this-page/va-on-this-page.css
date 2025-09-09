@@ -18,6 +18,7 @@
 #on-this-page {
   font-family: var(--font-serif);
   font-size: 1.25rem;
+  font-weight: var(--font-weight-normal);
   margin: 0.4em 0em;
 }
 
@@ -29,7 +30,8 @@ ul {
   padding-left: 0;
 }
 
-li {
+li,
+#on-this-page {
   padding: 0.5em;
   max-width: var(--vads-size-line-length-4);
 }

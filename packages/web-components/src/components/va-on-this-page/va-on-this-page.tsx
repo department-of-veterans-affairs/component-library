@@ -9,7 +9,7 @@ import {
 } from '@stencil/core';
 import { i18next } from '../..';
 import { Build } from '@stencil/core';
-import { consoleDevError } from '../../utils/utils';
+import { consoleDevError, getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -47,6 +47,11 @@ export class VaOnThisPage {
     bubbles: true,
   })
   componentLibraryAnalytics: EventEmitter;
+
+  /**
+   * Header level. Must be between 1 and 6
+   */
+  @Prop() headerLevel?: number = 2;
 
   /**
    * If true, analytics event will not be fired
@@ -111,6 +116,8 @@ export class VaOnThisPage {
 
   render() {
     const { handleOnClick } = this;
+    // eslint-disable-next-line i18next/no-literal-string
+    const HeaderLevel = getHeaderLevel(this.headerLevel) || 'h2';
 
     const h2s = Array.from(document.querySelectorAll('article h2')).filter(
       heading => {
@@ -123,8 +130,8 @@ export class VaOnThisPage {
 
     return (
       <nav aria-labelledby="on-this-page">
+        <HeaderLevel id="on-this-page">{i18next.t('on-this-page')}</HeaderLevel>
         <ul>
-          <li id="on-this-page">{i18next.t('on-this-page')}</li>
           {h2s.map(heading => (
             <li>
               <a href={`#${heading.id}`} onClick={handleOnClick}>
