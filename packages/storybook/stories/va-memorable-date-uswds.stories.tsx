@@ -31,7 +31,8 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
-  monthSelect: false,
+  'month-select': false,
+  'remove-date-hint': false,
   customYearErrorMessage: `Please enter a year between 1900 and ${new Date().getFullYear()}`,
 };
 
@@ -42,7 +43,8 @@ const Template = ({
   required,
   error,
   value,
-  monthSelect,
+  'month-select': monthSelect,  
+  'remove-date-hint': removeDateHint,
   customYearErrorMessage,
 }) => {
   return (
@@ -52,8 +54,9 @@ const Template = ({
       name={name}
       hint={hint}
       required={required}
-      error={error}
+      error={error}  
       value={value}
+      removeDateHint={removeDateHint}
       customYearErrorMessage={customYearErrorMessage}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
@@ -345,7 +348,7 @@ Error.args = {
 export const WithMonthSelect = Template.bind(null);
 WithMonthSelect.args = {
   ...defaultArgs,
-  monthSelect: true,
+  'month-select': true,
   value: '2022-04-19',
 };
 
@@ -360,7 +363,7 @@ export const ErrorWithMonthSelect = Template.bind(null);
 ErrorWithMonthSelect.args = {
   ...defaultArgs,
   error: 'Error Message Example',
-  monthSelect: true,
+  'month-select': true,
 };
 
 export const CustomValidation = CustomValidationTemplate.bind(null);
@@ -394,7 +397,7 @@ export const FormsPatternSingleWithoutMonthDropdown =
   FormsPatternSingleTemplate.bind(null);
 FormsPatternSingleWithoutMonthDropdown.args = {
   ...defaultArgs,
-  monthSelect: false,
+  'month-select': false,
 };
 
 export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
