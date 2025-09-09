@@ -282,6 +282,25 @@ export function validate({
     return;
   }
 
+  // If month is selected but day and year have not been touched, set error for untouched fields
+  if (month && monthTouched && !dayTouched && !yearTouched) {
+    if (!monthYearOnly) {
+      component.invalidDay = true;
+      component.error = 'date-error';
+    } else {
+      component.invalidYear = true;
+      component.error = 'date-error';
+    }
+    return;
+  }
+
+  // If month and day is set but year has not been touched, set error
+  if (month && monthTouched && day && dayTouched && !yearTouched) {
+    component.invalidYear = true;
+    component.error = 'date-error';
+    return;
+  }
+
   // Remove any error message if none of the fields are invalid
   if (
     !component.invalidYear &&

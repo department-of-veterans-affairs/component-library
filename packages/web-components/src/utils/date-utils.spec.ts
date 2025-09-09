@@ -20,6 +20,16 @@ describe('checkLeapYear',
 });
 
 describe('validate', () => {
+  function getMockComponent() {
+    return {
+      invalidYear: false,
+      invalidMonth: false,
+      invalidDay: false,
+      error: null,
+      required: true,
+    };
+  }
+
   describe('NaN validation', () => {
     it('indicates when the year is NaN', () => {
       const memorableDateComponent = {} as Components.VaMemorableDate;
@@ -294,6 +304,51 @@ describe('validate', () => {
       expect(memorableDateComponent.invalidYear).toEqual(false);
       expect(memorableDateComponent.invalidMonth).toEqual(false);
       expect(memorableDateComponent.invalidDay).toEqual(false);
+    });
+
+    it('sets error when month is selected and touched, but day and year are not touched', () => {
+      const memorableDateComponent = {} as Components.VaDate;
+      const year = NaN;
+      const yearTouched = false;
+      const month = 1;
+      const monthTouched = true;
+      const day = NaN;
+      const dayTouched = false;
+      const monthYearOnly = false;
+
+      validate({ component: memorableDateComponent, year, yearTouched, month, monthTouched, day, dayTouched, monthYearOnly} );
+      expect(memorableDateComponent.invalidDay).toBe(true);
+      expect(memorableDateComponent.error).toBe('date-error');
+    });
+
+    it('sets error when month and day are selected and touched, but year is not touched', () => {
+      const memorableDateComponent = {} as Components.VaDate;
+      const year = NaN;
+      const yearTouched = false;
+      const month = 1;
+      const monthTouched = true;
+      const day = 1;
+      const dayTouched = true;
+      const monthYearOnly = false;
+
+      validate({ component: memorableDateComponent, year, yearTouched, month, monthTouched, day, dayTouched, monthYearOnly} );
+      expect(memorableDateComponent.invalidYear).toBe(true);
+      expect(memorableDateComponent.error).toBe('date-error');
+    });
+
+    it('sets error for monthYearOnly true when month is selected and touched, but year is not touched', () => {
+      const memorableDateComponent = {} as Components.VaDate;
+      const year = NaN;
+      const yearTouched = false;
+      const month = 1;
+      const monthTouched = true;
+      const day = NaN;
+      const dayTouched = false;
+      const monthYearOnly = true;
+
+      validate({ component: memorableDateComponent, year, yearTouched, month, monthTouched, day, dayTouched, monthYearOnly} );
+      expect(memorableDateComponent.invalidYear).toBe(true);
+      expect(memorableDateComponent.error).toBe('date-error');
     });
   });
 
