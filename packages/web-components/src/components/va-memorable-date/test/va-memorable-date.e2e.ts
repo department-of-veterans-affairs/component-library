@@ -742,6 +742,186 @@ describe('va-memorable-date', () => {
     });
   });
 
+  describe('value prop reactivity', () => {
+    it('updates input fields when value prop changes externally', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" month-select />',
+      );
+
+      const date = await page.find('va-memorable-date');
+      const elementMonth = await page.find(
+        'va-memorable-date >>> .usa-form-group--month-select',
+      );
+      const elementDay = await page.find(
+        'va-memorable-date >>> .usa-form-group--day-input',
+      );
+      const elementYear = await page.find(
+        'va-memorable-date >>> .usa-form-group--year-input',
+      );
+
+      // Verify initial values
+      expect(elementMonth.getAttribute('value')).toBe('5');
+      expect(elementDay.getAttribute('value')).toBe('03');
+      expect(elementYear.getAttribute('value')).toBe('1999');
+
+      // Change value prop externally
+      await page.$eval('va-memorable-date', (elm: any) => {
+        elm.value = '2024-12-25';
+      });
+      await page.waitForChanges();
+
+      // Verify input fields updated
+      expect(elementMonth.getAttribute('value')).toBe('12');
+      expect(elementDay.getAttribute('value')).toBe('25');
+      expect(elementYear.getAttribute('value')).toBe('2024');
+      expect(date.getAttribute('value')).toBe('2024-12-25');
+    });
+
+    it('updates input fields when value prop changes externally without month-select', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" />',
+      );
+
+      const date = await page.find('va-memorable-date');
+      const elementMonth = await page.find(
+        'va-memorable-date >>> .usa-form-group--month-input',
+      );
+      const elementDay = await page.find(
+        'va-memorable-date >>> .usa-form-group--day-input',
+      );
+      const elementYear = await page.find(
+        'va-memorable-date >>> .usa-form-group--year-input',
+      );
+
+      // Verify initial values
+      expect(elementMonth.getAttribute('value')).toBe('05');
+      expect(elementDay.getAttribute('value')).toBe('03');
+      expect(elementYear.getAttribute('value')).toBe('1999');
+
+      // Change value prop externally
+      await page.$eval('va-memorable-date', (elm: any) => {
+        elm.value = '2024-01-15';
+      });
+      await page.waitForChanges();
+
+      // Verify input fields updated
+      expect(elementMonth.getAttribute('value')).toBe('01');
+      expect(elementDay.getAttribute('value')).toBe('15');
+      expect(elementYear.getAttribute('value')).toBe('2024');
+      expect(date.getAttribute('value')).toBe('2024-01-15');
+    });
+
+    it('clears validation errors when value prop changes externally', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" month-select />',
+      );
+
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Create a validation error by entering invalid year
+      await handleYear.click({ clickCount: 3 });
+      await handleYear.press('2');
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      // Verify error exists
+      expect(date.getAttribute('error')).toBe('year-range');
+
+      // Change value prop externally
+      await page.$eval('va-memorable-date', (elm: any) => {
+        elm.value = '2024-12-25';
+      });
+      await page.waitForChanges();
+
+      // Verify error is cleared
+      expect(date.getAttribute('error')).toBe(null);
+      
+      // Verify input fields updated correctly
+      const elementMonth = await page.find(
+        'va-memorable-date >>> .usa-form-group--month-select',
+      );
+      const elementDay = await page.find(
+        'va-memorable-date >>> .usa-form-group--day-input',
+      );
+      const elementYear = await page.find(
+        'va-memorable-date >>> .usa-form-group--year-input',
+      );
+
+      expect(elementMonth.getAttribute('value')).toBe('12');
+      expect(elementDay.getAttribute('value')).toBe('25');
+      expect(elementYear.getAttribute('value')).toBe('2024');
+    });
+
+    it('handles empty value prop changes', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" month-select />',
+      );
+
+      const date = await page.find('va-memorable-date');
+      const elementMonth = await page.find(
+        'va-memorable-date >>> .usa-form-group--month-select',
+      );
+      const elementDay = await page.find(
+        'va-memorable-date >>> .usa-form-group--day-input',
+      );
+      const elementYear = await page.find(
+        'va-memorable-date >>> .usa-form-group--year-input',
+      );
+
+      // Verify initial values
+      expect(elementMonth.getAttribute('value')).toBe('5');
+      expect(elementDay.getAttribute('value')).toBe('03');
+      expect(elementYear.getAttribute('value')).toBe('1999');
+
+      // Clear value prop externally
+      await page.$eval('va-memorable-date', (elm: any) => {
+        elm.value = '';
+      });
+      await page.waitForChanges();
+
+      // Verify input fields are cleared
+      expect(elementMonth.getAttribute('value')).toBe(null);
+      expect(elementDay.getAttribute('value')).toBe(null);
+      expect(elementYear.getAttribute('value')).toBe('');
+      expect(date.getAttribute('value')).toBe('');
+    });
+
+    it('handles partial date value prop changes', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" month-select />',
+      );
+
+      const date = await page.find('va-memorable-date');
+      const elementMonth = await page.find(
+        'va-memorable-date >>> .usa-form-group--month-select',
+      );
+      const elementDay = await page.find(
+        'va-memorable-date >>> .usa-form-group--day-input',
+      );
+      const elementYear = await page.find(
+        'va-memorable-date >>> .usa-form-group--year-input',
+      );
+
+      // Change to partial date (year only)
+      await page.$eval('va-memorable-date', (elm: any) => {
+        elm.value = '2024--';
+      });
+      await page.waitForChanges();
+
+      // Verify only year is set
+      expect(elementYear.getAttribute('value')).toBe('2024');
+      expect(elementMonth.getAttribute('value')).toBe('');
+      expect(elementDay.getAttribute('value')).toBe('');
+      expect(date.getAttribute('value')).toBe('2024--');
+    });
+  });
+
   // Begin test without monthSelect prop
   it('renders without monthSelect', async () => {
     const page = await newE2EPage();

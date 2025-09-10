@@ -8,6 +8,7 @@ import {
   h,
   Element,
   Fragment,
+  Watch,
 } from '@stencil/core';
 
 import {
@@ -274,10 +275,31 @@ export class VaMemorableDate {
 
   componentWillLoad() {
     // Set initial values
+    this.parseValueProp();
+  }
+
+  /**
+   * Parse the value prop and update internal state
+   */
+  private parseValueProp() {
     const [year, month, day] = (this.value || '').split('-');
     this.currentYear = year;
     this.currentMonth = month;
     this.currentDay = day;
+  }
+
+  /**
+   * Watch for changes to the value prop and update input fields.
+   * The value prop will be a string in the YYYY-MM-DD format.
+   */
+  @Watch('value')
+  handleValueChange() {
+    this.parseValueProp();
+    // Clear any existing validation errors when value changes externally
+    this.error = null;
+    this.invalidDay = false;
+    this.invalidMonth = false;
+    this.invalidYear = false;
   }
 
   render() {
