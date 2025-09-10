@@ -28,6 +28,10 @@
   font-weight: normal;
 }
 
+textarea {
+  box-sizing: border-box;
+}
+
 // Overrides for when label is wrapped with a header
 h1, h2, h3, h4, h5, h6 {
   .usa-label {
