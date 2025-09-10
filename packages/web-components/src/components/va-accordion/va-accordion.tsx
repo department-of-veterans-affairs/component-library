@@ -59,6 +59,7 @@ export class VaAccordion {
   expandCollapseBtn!: HTMLButtonElement;
 
   @State() expanded = false;
+  @State() collapsed = true;
 
   /**
    * True if only a single item can be opened at once
@@ -172,17 +173,29 @@ export class VaAccordion {
     const allClosed = currentValue => currentValue === false;
 
     if (accordionItems[method](allOpen)) {
-      return (this.expanded = true);
+      return (
+        this.expanded = true,
+        this.collapsed = false
+      );
     }
 
     if (accordionItems[method](allClosed)) {
-      return (this.expanded = false);
+      return (
+        this.expanded = false,
+        this.collapsed = true
+      );
     }
+
+    return (
+      this.expanded = false,
+      this.collapsed = false
+    );
   }
 
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
+    this.collapsed = !expanded;
 
     const value = expanded ? 'allOpen' : 'allClosed';
     this.accordionExpandCollapseAll.emit({ status: value });
@@ -218,6 +231,8 @@ export class VaAccordion {
   // if one or more accordion-items are open on load, then we should put component in state to "Collapse all"
   componentWillLoad() {
     this.accordionsOpened('some');
+    this.expanded = false;
+    this.collapsed = false;
   }
 
   render() {
@@ -256,7 +271,7 @@ export class VaAccordion {
                     data-testid="collapse-all-accordions"
                     ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
                     onClick={() => this.expandCollapseAll(false)}
-                    aria-pressed={this.expanded ? 'false' : 'true'}
+                    aria-pressed={this.collapsed ? 'true' : 'false'}
                   >
                     {i18next.t('collapse-all')}
                   </button>
