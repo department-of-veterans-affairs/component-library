@@ -4,6 +4,19 @@
 
 @import '../../mixins/focusable.css';
 
+.expand-collapse-list {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li:first-child::after {
+    content: '|';
+    font-size: 0.875rem;
+  }
+}
+
 button.va-accordion__button {
   border: none;
   color: var(--vads-color-link);
@@ -12,7 +25,6 @@ button.va-accordion__button {
   cursor: pointer;
   font-family: inherit;
   font-weight: bold;
-  float: right;
 }
 
 @media print {
