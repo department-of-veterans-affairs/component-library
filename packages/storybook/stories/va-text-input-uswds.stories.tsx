@@ -43,6 +43,11 @@ export default {
         options: ['email', 'number', 'search', 'tel', 'text', 'url'],
       },
     },
+    'hide-required-text': {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 

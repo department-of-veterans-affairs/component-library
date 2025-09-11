@@ -1672,6 +1672,10 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2116,6 +2120,10 @@ export namespace Components {
           * The heading level for the heading if `useFormsPattern`is true.
          */
         "formHeadingLevel"?: number;
+        /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
         /**
           * Optional hint text.
          */
@@ -5731,6 +5739,10 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -6231,6 +6243,10 @@ declare namespace LocalJSX {
           * The heading level for the heading if `useFormsPattern`is true.
          */
         "formHeadingLevel"?: number;
+        /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
         /**
           * Optional hint text.
          */
