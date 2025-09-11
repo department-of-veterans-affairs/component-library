@@ -207,7 +207,7 @@
 }
 
 .schemaform-array-row-title:focus {
-  outline: 2px solid #face00;
+  outline: 2px solid #0080FF;
   outline-offset: 2px;
   display: inline-block;
 }

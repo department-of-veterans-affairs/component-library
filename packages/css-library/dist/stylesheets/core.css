@@ -2036,7 +2036,7 @@ template {
   background: rgba(0, 0, 0, 0.05);
 }
 .va-button-link:focus {
-  outline: 2px solid #face00;
+  outline: 2px solid #0080FF;
   outline-offset: 2px;
   outline-offset: 0;
 }
@@ -2215,7 +2215,7 @@ input:not([disabled]):focus,
 select:not([disabled]):focus,
 textarea:not([disabled]):focus,
 button:not([disabled]):focus {
-  outline: 2px solid #face00;
+  outline: 2px solid #0080FF;
   outline-offset: 2px;
 }
 
@@ -2223,12 +2223,12 @@ iframe:focus,
 [href]:focus,
 [tabindex]:focus,
 [contentEditable=true]:focus {
-  outline: 2px solid #face00;
+  outline: 2px solid #0080FF;
   outline-offset: 2px;
 }
 
 .usa-focus {
-  outline: 2px solid #face00;
+  outline: 2px solid #0080FF;
   outline-offset: 2px;
 }
 
@@ -3043,7 +3043,7 @@ legend {
 }
 
 [type=radio]:focus + label::before {
-  outline: 2px solid #face00;
+  outline: 2px solid #0080FF;
   outline-offset: 4px;
 }
 
@@ -3052,7 +3052,7 @@ legend {
 }
 
 [type=checkbox]:focus + label::before {
-  outline: 2px solid #face00;
+  outline: 2px solid #0080FF;
   outline-offset: 2px;
 }
 
@@ -3284,7 +3284,7 @@ a:hover, a:active {
   color: #1a4480;
 }
 a:focus {
-  outline: 2px solid #face00;
+  outline: 2px solid #0080FF;
   outline-offset: 2px;
 }
 a:visited {

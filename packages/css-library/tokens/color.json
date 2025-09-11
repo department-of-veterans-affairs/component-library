@@ -58,7 +58,10 @@
     "*": { "value": "{uswds-system-color-blue-warm-10}" }
   },
   "vads-color-action-focus-on-light": {
-    "*": { "value": "{uswds-system-color-yellow-vivid-20}" }
+    "*": { "value": "#0080FF" }
+  },
+  "vads-color-action-focus-alt": {
+    "*": { "value": "{uswds-system-color-blue-40}" }
   },
   "vads-color-base": {
     "*": { "value": "{uswds-system-color-gray-90}" }
@@ -248,6 +251,9 @@
   },
   "vads-color-warning-lighter": {
     "*": { "value": "{uswds-system-color-yellow-5}" }
+  },
+  "vads-color-gold-light": {
+    "*": { "value": "{uswds-system-color-yellow-vivid-20}" }
   },
   "vads-color-gold-lighter": {
     "*": { "value": "{uswds-system-color-gold-vivid-10}" }
