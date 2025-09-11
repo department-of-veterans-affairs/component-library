@@ -266,6 +266,7 @@ describe('va-memorable-date', () => {
       await handleMonth.select('');
       await handleMonth.press('Tab');
       // Trigger Blur
+      await handleYear.press('1');
       await handleYear.press('Tab');
 
       await page.waitForChanges();
@@ -300,6 +301,7 @@ describe('va-memorable-date', () => {
 
       // Trigger Blur
       await handleMonth.press('Tab');
+      await handleYear.press('1');
       await handleYear.press('Tab');
       await page.waitForChanges();
 
@@ -1120,6 +1122,7 @@ describe('va-memorable-date', () => {
 
       // Trigger Blur
       await handleMonth.press('Tab');
+      await handleYear.press('1');
       await handleYear.press('Tab');
       await page.waitForChanges();
 
@@ -1142,6 +1145,7 @@ describe('va-memorable-date', () => {
 
       // Trigger Blur
       await handleMonth.press('Tab');
+      await handleYear.press('1');
       await handleYear.press('Tab');
       await page.waitForChanges();
 

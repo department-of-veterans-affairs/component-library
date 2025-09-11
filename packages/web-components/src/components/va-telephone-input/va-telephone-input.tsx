@@ -405,9 +405,12 @@ export class VaTelephoneInput {
   }
 
   handleBlur() {
-    if (!this.touched) this.touched = true;
-    this.validateContact();
-    this.handleEmit();
+    if (this.formattedContact) {
+      if (!this.touched) this.touched = true;
+
+      this.validateContact();
+      this.handleEmit();
+    }
   }
 
   render() {
@@ -472,6 +475,8 @@ export class VaTelephoneInput {
                 inputmode="tel"
                 value={formattedContact}
                 show-input-error="false"
+                required={required}
+                hideRequiredText={true}
                 error={contactError}
                 onInput={(e) => this.updateContact(e)}
                 onBlur={() => this.handleBlur()}
