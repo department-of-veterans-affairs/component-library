@@ -12,7 +12,8 @@
   padding: 0;
 
   li:first-child::after {
-    content: '|';
+    // empty second value prevents pseudo-element from being read by screen readers
+    content: '|' / '';
     font-size: 0.875rem;
   }
 }
