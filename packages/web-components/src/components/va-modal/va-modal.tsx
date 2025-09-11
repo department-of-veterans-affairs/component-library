@@ -16,7 +16,7 @@ import { focusableQueryString } from '../../utils/modal';
 
 /**
  * @click Used to detect clicks outside of modal contents to close modal.
- * @keydown Used to detect Escape key to close modal and trap focus within the component.
+ * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
  * @componentName Modal
  * @maturityCategory use
  * @maturityLevel best_practice
