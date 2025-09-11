@@ -476,7 +476,7 @@ export class VaTelephoneInput {
                 value={formattedContact}
                 show-input-error="false"
                 required={required}
-                showRequiredText={false}
+                hideRequiredText={true}
                 error={contactError}
                 onInput={(e) => this.updateContact(e)}
                 onBlur={() => this.handleBlur()}

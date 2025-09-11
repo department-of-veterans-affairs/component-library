@@ -1672,6 +1672,10 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1703,10 +1707,6 @@ export namespace Components {
           * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
-        /**
-          * Whether or not to show the (*Required) text.
-         */
-        "showRequiredText"?: boolean;
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
          */
@@ -2121,6 +2121,10 @@ export namespace Components {
          */
         "formHeadingLevel"?: number;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2194,10 +2198,6 @@ export namespace Components {
           * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
          */
         "showInputError"?: boolean;
-        /**
-          * Whether or not to show the (*Required) text.
-         */
-        "showRequiredText"?: boolean;
         /**
           * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
          */
@@ -5739,6 +5739,10 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -5786,10 +5790,6 @@ declare namespace LocalJSX {
           * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
          */
         "showError"?: boolean;
-        /**
-          * Whether or not to show the (*Required) text.
-         */
-        "showRequiredText"?: boolean;
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
          */
@@ -6244,6 +6244,10 @@ declare namespace LocalJSX {
          */
         "formHeadingLevel"?: number;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -6321,10 +6325,6 @@ declare namespace LocalJSX {
           * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
          */
         "showInputError"?: boolean;
-        /**
-          * Whether or not to show the (*Required) text.
-         */
-        "showRequiredText"?: boolean;
         /**
           * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
          */

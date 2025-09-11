@@ -91,7 +91,7 @@ export class VaTextInput {
   /**
    * Whether or not to show the (*Required) text.
    */
-  @Prop() showRequiredText?: boolean = true;
+  @Prop() hideRequiredText?: boolean = false;
 
   /**
    * The inputmode attribute.
@@ -389,7 +389,7 @@ export class VaTextInput {
       showInputError,
       invalid,
       required,
-      showRequiredText,
+      hideRequiredText,
       value,
       name,
       autocomplete,
@@ -507,7 +507,7 @@ export class VaTextInput {
               part="label"
             >
               {label}
-              {required && showRequiredText && (
+              {required && !hideRequiredText && (
                 <span class="usa-label--required">
                   {' '}
                   {i18next.t('required')}

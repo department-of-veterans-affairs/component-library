@@ -276,7 +276,7 @@ export class VaDate {
               invalid={this.invalidMonth}
               class="select-month"
               required={required}
-              showRequiredText={false}
+              hideRequiredText={true}
               error={this.monthTouched && this.invalidMonth ? error : null}
               showError={false}
             >
@@ -299,7 +299,7 @@ export class VaDate {
                 invalid={this.invalidDay}
                 class="select-day"
                 required={required}
-                showRequiredText={false}
+                hideRequiredText={true}
                 error={this.dayTouched && this.invalidDay ? this.error : null}
                 showError={false}
               >
@@ -321,7 +321,7 @@ export class VaDate {
               onInput={handleDateChange}
               onBlur={this.handleYearBlur}
               required={required}
-              showRequiredText={false}
+              hideRequiredText={true}
               error={this.yearTouched && this.invalidYear ? error : null}
               show-input-error="false"
               class="input-year"
