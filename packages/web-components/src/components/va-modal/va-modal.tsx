@@ -27,8 +27,6 @@ import { focusableQueryString } from '../../utils/modal';
   shadow: true,
 })
 export class VaModal {
-  @Element() el: HTMLElement;
-
   // This reference is required to allow focus trap to work properly.
   // Without it, keyboard navigation behavior may break and work unexpectedly.
   alertActions: HTMLDivElement;
@@ -50,58 +48,7 @@ export class VaModal {
   // Save focusable children within the modal. Populated on setup
   focusableChildren: HTMLElement[] = null;
 
-  /**
-   * Fires when modal is closed.
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  closeEvent: EventEmitter;
-
-  /**
-   * Fires when primary button is clicked.
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  primaryButtonClick: EventEmitter;
-
-  /**
-   * Fires when secondary button is clicked.
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  secondaryButtonClick: EventEmitter;
-
-  /**
-   * The event used to track usage of the component. Fires when a
-   * a page is selected if enable-analytics is true.
-   */
-  @Event({
-    eventName: 'component-library-analytics',
-    composed: true,
-    bubbles: true,
-  })
-  componentLibraryAnalytics: EventEmitter;
-
-  /**
-   * Listen for the va-button GA event and capture it so
-   * that we can emit a single va-modal GA event that includes
-   * the va-button details in handlePrimaryButtonClick and
-   * handleSecondaryButtonClick.
-   */
-  @Listen('component-library-analytics')
-  handleButtonClickAnalytics(event) {
-    // Prevent va-modal GA event from firing multiple times.
-    if (event.detail.componentName === 'va-modal') return;
-
-    // Prevent va-button GA event from firing.
-    event.stopPropagation();
-  }
+  @Element() el: HTMLElement;
 
   /**
    * Click outside modal will trigger closeEvent
@@ -159,6 +106,13 @@ export class VaModal {
    * If the modal is visible or not
    */
   @Prop({ reflect: true }) visible?: boolean = false;
+  // This is a workaround for determining when to call setupModal or teardownModal.
+  // Elements are not yet available in the DOM due to `if (!visible) return null;`.
+  // See componentDidUpdate.
+  @Watch('visible')
+  watchVisibleHandler() {
+    this.isVisibleDirty = true;
+  }
 
   /**
    * Additional DOM-nodes that should not be hidden from screen readers.
@@ -171,6 +125,84 @@ export class VaModal {
    * in settings of aria-label.
    */
   @Prop() label?: string = '';
+
+  /**
+   * Fires when modal is closed.
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  closeEvent: EventEmitter;
+
+  /**
+   * Fires when primary button is clicked.
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  primaryButtonClick: EventEmitter;
+
+  /**
+   * Fires when secondary button is clicked.
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  secondaryButtonClick: EventEmitter;
+
+  /**
+   * The event used to track usage of the component. Fires when a
+   * a page is selected if enable-analytics is true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
+  componentDidLoad() {
+    if (this.visible) {
+      requestAnimationFrame(() => this.setupModal());
+    }
+  }
+
+  // Stencil's componentDidUpdate doesn't provide us with previous props to compare
+  // and determine if we need to setup or destroy the modal. We can use a boolean
+  // variable inside a Watch decorator as a workaround to determine if an update needs
+  // to occur.
+  componentDidUpdate() {
+    if (!this.isVisibleDirty) return;
+
+    this.isVisibleDirty = false;
+    if (this.visible) {
+      requestAnimationFrame(() => this.setupModal());
+    } else {
+      this.teardownModal();
+    }
+  }
+
+  disconnectedCallback() {
+    this.teardownModal();
+  }
+
+  /**
+   * Listen for the va-button GA event and capture it so
+   * that we can emit a single va-modal GA event that includes
+   * the va-button details in handlePrimaryButtonClick and
+   * handleSecondaryButtonClick.
+   */
+  @Listen('component-library-analytics')
+  handleButtonClickAnalytics(event) {
+    // Prevent va-modal GA event from firing multiple times.
+    if (event.detail.componentName === 'va-modal') return;
+
+    // Prevent va-button GA event from firing.
+    event.stopPropagation();
+  }
 
   // This click event listener is used to close the modal when clickToClose
   // is true and the user clicks the overlay outside of the modal contents.
@@ -211,39 +243,6 @@ export class VaModal {
       e.preventDefault();
       lastElement.focus();
     }
-  }
-
-  // This is a workaround for determining when to call setupModal or teardownModal.
-  // Elements are not yet available in the DOM due to `if (!visible) return null;`.
-  // See componentDidUpdate.
-  @Watch('visible')
-  watchVisibleHandler() {
-    this.isVisibleDirty = true;
-  }
-
-  componentDidLoad() {
-    if (this.visible) {
-      requestAnimationFrame(() => this.setupModal());
-    }
-  }
-
-  // Stencil's componentDidUpdate doesn't provide us with previous props to compare
-  // and determine if we need to setup or destroy the modal. We can use a boolean
-  // variable inside a Watch decorator as a workaround to determine if an update needs
-  // to occur.
-  componentDidUpdate() {
-    if (!this.isVisibleDirty) return;
-
-    this.isVisibleDirty = false;
-    if (this.visible) {
-      requestAnimationFrame(() => this.setupModal());
-    } else {
-      this.teardownModal();
-    }
-  }
-
-  disconnectedCallback() {
-    this.teardownModal();
   }
 
   private handleClose(e: KeyboardEvent | MouseEvent) {
