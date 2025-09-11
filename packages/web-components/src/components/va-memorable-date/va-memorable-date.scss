@@ -36,7 +36,7 @@ slot:not([name])::slotted(*:last-child) {
 va-select::part(label),
 va-text-input::part(label) {
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 va-text-input::part(validation) {
