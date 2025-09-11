@@ -7,7 +7,6 @@ import {
   h,
   Listen,
   Prop,
-  State,
   Watch,
 } from '@stencil/core';
 import classnames from 'classnames';
@@ -17,7 +16,7 @@ import { focusableQueryString } from '../../utils/modal';
 
 /**
  * @click Used to detect clicks outside of modal contents to close modal.
- * @keydown Used to detect Escape key to close modal.
+ * @keydown Used to detect Escape key to close modal and trap focus within the component.
  * @componentName Modal
  * @maturityCategory use
  * @maturityLevel best_practice
@@ -28,6 +27,8 @@ import { focusableQueryString } from '../../utils/modal';
   shadow: true,
 })
 export class VaModal {
+  @Element() el: HTMLElement;
+
   // This reference is required to allow focus trap to work properly.
   // Without it, keyboard navigation behavior may break and work unexpectedly.
   alertActions: HTMLDivElement;
@@ -46,7 +47,8 @@ export class VaModal {
   // This stores reference to previously focused element
   savedFocus: HTMLElement;
 
-  @Element() el: HTMLElement;
+  // Save focusable children within the modal. Populated on setup
+  focusableChildren: HTMLElement[] = null;
 
   /**
    * Fires when modal is closed.
@@ -170,16 +172,6 @@ export class VaModal {
    */
   @Prop() label?: string = '';
 
-  /**
-   * Local state to track if the shift key is pressed
-   */
-  @State() shifted: boolean = false;
-
-  /**
-   * Save focusable children within the modal. Populated on setup
-   */
-  focusableChildren: HTMLElement[] = null;
-
   // This click event listener is used to close the modal when clickToClose
   // is true and the user clicks the overlay outside of the modal contents.
   @Listen('click')
@@ -204,32 +196,20 @@ export class VaModal {
       this.handleClose(e);
     }
 
-    // shift key state used for focus trap. The FocusEvent does not include a
-    // way to check the key state
-    this.shifted = e.shiftKey;
-  }
+    // Stop here if not tab key - we only care about tab for focus trap from this
+    // point forward in the function.
+    if (keyCode !== 'Tab') return;
 
-  // Handle when the focus is leaving the last element, wrap back to the first if appropriate
-  handleLastElementFocus(e: KeyboardEvent) {
-    if (this.visible) {
-      // The focus is outside the modal
-      if (e.key === 'Tab' && !this.shifted) {
-        e.preventDefault();
-        const focusIndex = 0;
-        this.focusableChildren[focusIndex]?.focus();
-      }
-    }
-  }
+    const activeElement = this.getRealActiveElement();
+    const firstElement = this.focusableChildren[0] as HTMLElement;
+    const lastElement = this.focusableChildren[this.focusableChildren.length - 1] as HTMLElement;
 
-  // Handle when the focus is leaving the first element, wrap back to the last if appropriate
-  handleFirstElementFocus(e: KeyboardEvent) {
-    if (this.visible) {
-      // The focus is outside the modal
-      if (e.key === 'Tab' && this.shifted) {
-        e.preventDefault();
-        const focusIndex = this.focusableChildren.length - 1;
-        this.focusableChildren[focusIndex]?.focus();
-      }
+    if (!e.shiftKey && activeElement === lastElement) {
+      e.preventDefault();
+      firstElement.focus();
+    } else if (e.shiftKey && activeElement === firstElement) {
+      e.preventDefault();
+      lastElement.focus();
     }
   }
 
@@ -311,11 +291,17 @@ export class VaModal {
     const modalContent = Array.from(
       this.el?.querySelectorAll(focusableQueryString) || [],
     );
+
     const actionButtons = Array.from(
       this.alertActions?.querySelectorAll(focusableQueryString) || [],
     );
-    // maintain tab order
-    return [
+
+    // This array will keep track of web component tags that have been expanded
+    // to include their shadow DOM children.
+    const hydrateElementsToRemove = [];
+
+    // Specific to maintain tab order
+    const focusableElms = [
       this.closeButton, // close button first
       ...modalContent,
       ...actionButtons, // action buttons last
@@ -325,8 +311,13 @@ export class VaModal {
         // hydrated class likely on web components
         if (elm.classList.contains('hydrated')) {
           let focusElms = [];
+
           // va-radio-option does not have a shadow root, but should still be included in the focusable elements
           if (elm.shadowRoot) {
+            // Add the tag name to the list of elements to remove from the final array
+            // since we are adding its shadow DOM children instead
+            hydrateElementsToRemove.push(elm.tagName);
+
             focusElms = Array.from(
               elm.shadowRoot.querySelectorAll(focusableQueryString) || [],
             );
@@ -348,6 +339,13 @@ export class VaModal {
       }
       return focusableElms;
     }, []);
+
+    // Remove any web component tags that have been expanded to include their
+    // shadow DOM children; the web component itself is already included in the
+    // focusableElms array
+    return focusableElms.filter(
+      elm => !hydrateElementsToRemove.includes(elm.tagName),
+    ) as HTMLElement[];
   }
 
   /**
@@ -376,21 +374,6 @@ export class VaModal {
 
     // find all focusable children within the modal, but maintain tab order
     this.focusableChildren = this.getFocusableChildren();
-
-    // find first focusable item so that focus can be redirected there when needed
-    const firstFocusChild = this.focusableChildren[0];
-    if (firstFocusChild) {
-      firstFocusChild.classList.add('first-focusable-child');
-      firstFocusChild.onkeydown = e => this.handleFirstElementFocus(e);
-    }
-
-    // find last focusable item so that focus can be redirected there when needed
-    const lastFocusChild =
-      this.focusableChildren[this.focusableChildren.length - 1];
-    if (lastFocusChild) {
-      lastFocusChild.classList.add('last-focusable-child');
-      lastFocusChild.onkeydown = e => this.handleLastElementFocus(e);
-    }
 
     // If an initialFocusSelector is provided, the element will be focused on modal open
     // if it exists. You are able to focus elements in both light and shadow DOM.
@@ -458,6 +441,7 @@ export class VaModal {
     // if modalTitle prop is provided, use that. If neither is provided, a warning
     // will be logged in the console.
     // The aria label for the close button will also be set based upon the same logic.
+    /* eslint-disable i18next/no-literal-string */
     let ariaLabel: string | null = null;
     let btnAriaLabel: string = 'Close modal';
 
@@ -492,6 +476,7 @@ export class VaModal {
       'usa-modal__heading': true,
       'va-modal-alert-title': status,
     });
+
     const closingButton = forcedModal ? (
       ''
     ) : (
@@ -505,8 +490,9 @@ export class VaModal {
         <va-icon icon="close" size={4}></va-icon>
       </button>
     );
+
     /* eslint-disable i18next/no-literal-string */
-    /** Icons to show for each status type */
+    // Icons to show for each status type
     const statusIcons = {
       continue: 'lock',
       error: 'error',
@@ -514,8 +500,8 @@ export class VaModal {
       success: 'check',
       warning: 'warning',
     };
-    /* eslint-enable i18next/no-literal-string */
     const statusIcon = statusIcons[status];
+
     return (
       <Host>
         <div
