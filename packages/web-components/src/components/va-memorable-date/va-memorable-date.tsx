@@ -373,6 +373,8 @@ export class VaMemorableDate {
           value={
             currentMonth ? String(parseInt(currentMonth, 10)) : currentMonth
           }
+          required={required}
+          hideRequiredText={true}
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           showError={false}
         >
@@ -406,6 +408,8 @@ export class VaMemorableDate {
           reflectInputError={error === 'month-range' ? true : false}
           inputmode="numeric"
           type="text"
+          required={required}
+          hideRequiredText={true}
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           show-input-error="false"
         />
@@ -470,6 +474,8 @@ export class VaMemorableDate {
                   reflectInputError={error === 'day-range' ? true : false}
                   inputmode="numeric"
                   type="text"
+                  required={required}
+                  hideRequiredText={true}
                   error={
                     this.invalidDay ? getStandardErrorMessage(error) : null
                   }
@@ -493,6 +499,8 @@ export class VaMemorableDate {
                   reflectInputError={error === 'year-range' ? true : false}
                   inputmode="numeric"
                   type="text"
+                  required={required}
+                  hideRequiredText={true}
                   error={
                     this.invalidYear ? getStandardErrorMessage(error) : null
                   }

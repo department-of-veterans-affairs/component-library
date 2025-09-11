@@ -22,6 +22,11 @@ export default {
   argTypes: {
     ...propStructure(selectDocs),
     ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message']),
+    'hide-required-text': {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
