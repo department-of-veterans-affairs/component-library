@@ -46,6 +46,7 @@ const Template = ({
   'month-select': monthSelect,  
   'remove-date-hint': removeDateHint,
   customYearErrorMessage,
+  labelHeaderLevel,
 }) => {
   return (
     <VaMemorableDate
@@ -60,6 +61,7 @@ const Template = ({
       customYearErrorMessage={customYearErrorMessage}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+      labelHeaderLevel={labelHeaderLevel}
     />
   );
 };
@@ -378,6 +380,12 @@ CustomErrorMessage.args = {
   ...defaultArgs,
   value: '2024-11-99',
   error: 'true',
+};
+
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  labelHeaderLevel: 2,
 };
 
 // export const Internationalization = I18nTemplate.bind(null);
