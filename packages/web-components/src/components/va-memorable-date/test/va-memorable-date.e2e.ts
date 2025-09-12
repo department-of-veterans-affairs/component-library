@@ -1421,4 +1421,12 @@ describe('va-memorable-date', () => {
     expect(errorSpan).not.toBeNull();
     expect(errorSpan.innerHTML).toEqual('This is a custom year error message');
   });
+
+  it('renders a header for the label with the supplied labelHeaderLevel prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date label="Test Label" label-header-level="2" name="test"></va-memorable-date>');
+    const header = await page.find('va-memorable-date >>> h2[part="header"]');
+    expect(header).not.toBeNull();
+    expect(header.textContent).toContain('Test Label');
+  });
 });
