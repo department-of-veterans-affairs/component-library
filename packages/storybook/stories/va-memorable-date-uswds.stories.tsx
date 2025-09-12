@@ -197,7 +197,7 @@ const FormsPatternSingleTemplate = ({
   required,
   error,
   value,
-  monthSelect,
+  'month-select': monthSelect,
   customYearErrorMessage,
 }) => {
   const id = Math.floor(Math.random() * 100) + 1;
@@ -391,6 +391,7 @@ export const FormsPatternSingleWithMonthDropdown =
   FormsPatternSingleTemplate.bind(null);
 FormsPatternSingleWithMonthDropdown.args = {
   ...defaultArgs,
+  'month-select': true,
 };
 
 export const FormsPatternSingleWithoutMonthDropdown =
