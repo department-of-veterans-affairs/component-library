@@ -31,6 +31,7 @@ const Template = ({
   label,
   message,
   'set-focus': setFocus,
+  inline,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   return (
@@ -49,6 +50,7 @@ const Template = ({
           message={message}
           set-focus={setFocus}
           enable-analytics={enableAnalytics}
+          inline={inline}
         ></va-loading-indicator>
       )}
     </div>
@@ -64,3 +66,9 @@ SetFocus.args = { ...defaultArgs, 'set-focus': true };
 
 export const EnableAnalytics = Template.bind(null);
 EnableAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+
+export const Inline = Template.bind(null);
+Inline.args = {
+  ...defaultArgs,
+  inline: true,
+};

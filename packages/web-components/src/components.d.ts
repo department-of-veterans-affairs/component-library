@@ -1018,13 +1018,17 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
+          * Set to true if the loading indicator should be displayed inline
+         */
+        "inline"?: boolean;
+        /**
           * An aria label
          */
         "label"?: string;
         /**
           * The message visible on screen when loading
          */
-        "message": string;
+        "message"?: string;
         /**
           * Set to true if the loading indicator should capture focus
          */
@@ -4968,6 +4972,10 @@ declare namespace LocalJSX {
           * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
          */
         "enableAnalytics"?: boolean;
+        /**
+          * Set to true if the loading indicator should capture focus
+         */
+        "inline"?: boolean;
         /**
           * An aria label
          */
