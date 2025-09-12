@@ -440,12 +440,11 @@ export class VaMemorableDate {
       <Fragment>
         {label}
 
-        {useFormsPattern === 'multiple' && (
+        {useFormsPattern === 'multiple' ? (
           <span id="header-message" class="usa-sr-only">
             {label}
           </span>
-        )}
-        {headerAriaDescribedby && (
+        ) : headerAriaDescribedby && (
           <span id="header-message" class="usa-sr-only">
             {headerAriaDescribedby}
           </span>
