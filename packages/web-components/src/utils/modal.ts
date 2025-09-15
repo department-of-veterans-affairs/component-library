@@ -5,7 +5,7 @@
  * A more extensive list can be found at
  * https://github.com/KittyGiraudel/focusable-selectors/blob/main/index.js
  */
- export const focusableQueryString = [
+export const focusableQueryString = [
   'a[href]:not([tabindex^="-"])',
   '.hydrated:not([tabindex^="-"]):not(va-radio-option)', // This was selecting the component wrapper for va-radio-option, we only want to select the input
   '[tabindex]:not([tabindex^="-"])',
