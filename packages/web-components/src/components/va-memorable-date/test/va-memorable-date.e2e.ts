@@ -1605,7 +1605,7 @@ describe('va-memorable-date', () => {
   it('renders a header for the label with the supplied labelHeaderLevel prop', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date label="Test Label" label-header-level="2" name="test"></va-memorable-date>');
-    const header = await page.find('va-memorable-date >>> h2[part="header"]');
+    const header = await page.find('va-memorable-date >>> legend[part="legend"] > h2');
     expect(header).not.toBeNull();
     expect(header.textContent).toContain('Test Label');
   });

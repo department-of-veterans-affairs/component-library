@@ -482,7 +482,6 @@ export class VaMemorableDate {
             <legend class={legendClass} id="input-label" part="legend">
                {label && HeaderLevel ? (
                   <HeaderLevel
-                    part="header"
                     aria-describedby={headerAriaDescribedbyId}
                   >
                     {InnerLabelPart}
