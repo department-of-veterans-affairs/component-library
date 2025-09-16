@@ -256,13 +256,6 @@ function extractDocumentTypesFromShadowDOM = () => {
 };
 ```
 
-TODO SLOT ENHANCEMENTS: 
-
-1. Add data attributes to the cloned content to identify which file input triggered the interaction (file id or index position?). ie. `data-file-key="0"`.
-  - This will be for experimental slot content. The hope is that it will evolve into a prop driven solution.
-2. Add components like `va-select` to the `va-file-input` component itself and pass the value of the interaction as part of the event payload like password.
-  - This should be preferred to having to traverse the shadow DOM to find the value of the interaction.
-
 ## Error Handling
 
 Error handling is designed to be declarative in that the consumer is responsible for validating the file and updating the `errors` and `passwordErrors` props to signify which file has an error. 
@@ -395,13 +388,6 @@ const handleSlotValidation = () => {
   onVaMultipleChange={handleSlotValidation}
 />
 ```
-
-TODO ERROR HANDLING ENHANCEMENTS: 
-
-1. Add data attributes to the cloned content to help make it easier to identify which file input triggered the interaction (file id or index position?). ie. `data-file-key="0"`.
-  - This will be for experimental slot content. The hope is that it will evolve into a prop driven solution.
-2. Add components like `va-select` to the `va-file-input` component itself and connect it to the `error` prop.
-  - This should be preferred to having to traverse the shadow DOM to find the value of the interaction.
 
 ## Validation
 
