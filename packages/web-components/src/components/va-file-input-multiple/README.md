@@ -48,6 +48,16 @@ This event will be emitted when any change to a file occurs.
 }
 ```
 
+The `FileDetails` interface is defined as:
+
+```typescript
+interface FileDetails {
+  file: File,
+  changed: Boolean,
+  password?: string
+}
+```
+
 Each `vaMultipleChange` event includes a `state` array where:
 
 - **`changed: true`**: Indicates which file was affected by the current action
@@ -87,12 +97,12 @@ This event is emitted when a password is entered or changed in any `va-file-inpu
 - **Action**: 
   - `PASSWORD_UPDATE`: Always
 
-#### Validation Error (Internal): `vaFileInputError`
+#### Validation Error: `vaFileInputError`
 
 This event is emitted when a file size or file type validation fails in any `va-file-input` child component.
 
 - **Trigger**: Built-in validation fails (file size, type, empty file)
-- **Action**: Error event bubbles up to external consumer with error message
+- **Action**: Event emitted with error message and file index
 
 #### Password Event Flow
 
@@ -111,8 +121,8 @@ Password events operate independently from file events:
 │   (child #1)    │                    │                        │
 └─────────────────┘                    │  • Determine           │
         │                              │    action type         │
-        │ vaFileInputError             │  • Update state        │
-        └──────────────────────────────┤  • Emit files          │
+        │ onVaFileInputError           │  • Update state        │
+        └───────────────────────────►  │  • Emit files          │
                                        │    array               │
                                        │                        │
                                        │                        │
@@ -121,9 +131,12 @@ Password events operate independently from file events:
 │   (child #2)    │                    │                        │
 └─────────────────┘                    │                        │
         │                              │                        │
-        │ vaFileInputError             │                        │
-        └──────────────────────────────┤                        │
+        │ onVaFileInputError           │                        │
+        └───────────────────────────►  │                        │
                                        └────────────────────────┘
+                                                    │
+                                                    │ onVaMultipleChange
+                                                    │ onVaFileInputError
                                                     │
                                                     ▼
                                           ┌────────────────────┐
@@ -131,17 +144,14 @@ Password events operate independently from file events:
                                           │ of Parent Component│
                                           │ Receives events    │
                                           │                    │
-                                          │ • vaMultipleChange │
-                                          │ • vaFileInputError │
                                           └────────────────────┘
 ```
 
 **Flow Summary:**
-1. **Child Event Received**: `va-file-input` emits `vaChange` or `vaPasswordChange`
+1. **Child Event Received**: `va-file-input` emits `vaChange`, `vaPasswordChange`, or `vaFileInputError`
 2. **State Update**: Internal `files` array is modified
 3. **Array Building**: `buildFilesArray()` constructs the event payload
-4. **Event Emission**: `vaMultipleChange` is emitted with complete state
-5. **State Sync**: Component state is synchronized with `this.files = Array.of(...this.files)`
+4. **Event Emission**: `vaMultipleChange` or `vaFileInputError` is emitted with complete state
 
 #### Example for handling `vaMultipleChange` events
 
