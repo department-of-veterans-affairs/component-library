@@ -1107,6 +1107,10 @@ export namespace Components {
          */
         "formHeadingLevel"?: number;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -1118,6 +1122,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
+        /**
           * Whether or not to use the month as an input or select.
          */
         "monthSelect"?: boolean;
@@ -1125,6 +1133,10 @@ export namespace Components {
           * Used to create unique name attributes for each input.
          */
         "name": string;
+        /**
+          * Removes the default date hint text
+         */
+        "removeDateHint"?: boolean;
         /**
           * Render marker indicating field is required.
          */
@@ -1147,7 +1159,7 @@ export namespace Components {
     }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
-     * @keydown Used to detect Escape key to close modal.
+     * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -1321,6 +1333,10 @@ export namespace Components {
           * If true, analytics event will not be fired
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headerLevel"?: number;
     }
     /**
      * @componentName Pagination
@@ -1663,6 +1679,10 @@ export namespace Components {
           * If true, sets the select to take the full-width of its container
          */
         "fullWidth"?: boolean;
+        /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
         /**
           * Optional hint text.
          */
@@ -2108,6 +2128,10 @@ export namespace Components {
           * The heading level for the heading if `useFormsPattern`is true.
          */
         "formHeadingLevel"?: number;
+        /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
         /**
           * Optional hint text.
          */
@@ -3117,7 +3141,7 @@ declare global {
     }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
-     * @keydown Used to detect Escape key to close modal.
+     * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -5054,6 +5078,10 @@ declare namespace LocalJSX {
          */
         "formHeadingLevel"?: number;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -5064,6 +5092,10 @@ declare namespace LocalJSX {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * Whether or not to use the month as an input or select.
          */
@@ -5084,6 +5116,10 @@ declare namespace LocalJSX {
           * Fires when the date input loses focus after its value was changed
          */
         "onDateChange"?: (event: VaMemorableDateCustomEvent<any>) => void;
+        /**
+          * Removes the default date hint text
+         */
+        "removeDateHint"?: boolean;
         /**
           * Render marker indicating field is required.
          */
@@ -5106,7 +5142,7 @@ declare namespace LocalJSX {
     }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
-     * @keydown Used to detect Escape key to close modal.
+     * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -5308,6 +5344,10 @@ declare namespace LocalJSX {
           * If true, analytics event will not be fired
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headerLevel"?: number;
         /**
           * The event used to track usage of the component. This is emitted when the user clicks on a link and enableAnalytics is true.
          */
@@ -5714,6 +5754,10 @@ declare namespace LocalJSX {
           * If true, sets the select to take the full-width of its container
          */
         "fullWidth"?: boolean;
+        /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
         /**
           * Optional hint text.
          */
@@ -6216,6 +6260,10 @@ declare namespace LocalJSX {
          */
         "formHeadingLevel"?: number;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -6687,7 +6735,7 @@ declare module "@stencil/core" {
             "va-minimal-footer": LocalJSX.VaMinimalFooter & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
             /**
              * @click Used to detect clicks outside of modal contents to close modal.
-             * @keydown Used to detect Escape key to close modal.
+             * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
              * @componentName Modal
              * @maturityCategory use
              * @maturityLevel best_practice
