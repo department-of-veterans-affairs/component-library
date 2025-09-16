@@ -67,24 +67,32 @@ The File object of the file that triggered the change event is available in both
 
 ### Event Flow & Triggers
 
-The `va-file-input-multiple` component listens to two types of `va-file-input` component events:
+The `va-file-input-multiple` component listens to three types of `va-file-input` component events:
 
-#### File Change: `onVaChange`
+#### File Change: `vaChange`
 
 This event is emitted when a file is selected, changed, or removed in any `va-file-input` child component.
 
 - **Trigger**: User selects, changes, or removes a file
-- **Handler**: `handleChange(event, fileKey, pageIndex)`
 - **Action**:
   - `FILE_UPDATED`: If `newFile` exists and `fileObject.file` exists
   - `FILE_ADDED`: If `newFile` exists and `fileObject.file` is null
   - `FILE_REMOVED`: If no `newFile` (deletion)
 
-#### Password Change: `onVaPasswordChange`
+#### Password Change: `vaPasswordChange`
+
+This event is emitted when a password is entered or changed in any `va-file-input` child component.
+
 - **Trigger**: User enters/changes password for encrypted files
-- **Handler**: `handlePasswordChange(event, fileKey)`
 - **Action**: 
   - `PASSWORD_UPDATE`: Always
+
+#### Validation Error (Internal): `vaFileInputError`
+
+This event is emitted when a file size or file type validation fails in any `va-file-input` child component.
+
+- **Trigger**: Built-in validation fails (file size, type, empty file)
+- **Action**: Error event bubbles up to external consumer with error message
 
 #### Password Event Flow
 
@@ -98,22 +106,34 @@ Password events operate independently from file events:
 ### Event Flow Diagram
 
 ```
-┌─────────────────┐    onVaChange      ┌──────────────────┐
-│   va-file-input │ ────────────────►  │  va-file-input-multiple
-│   (child #1)    │                    │                  │
-└─────────────────┘                    │  • Determine     │
-                                       │    action type   │
-┌─────────────────┐  onVaPasswordChange│  • Update state  │    ┌───────────────────┐
-│   va-file-input │ ────────────────► `│  • Build array   │───►│ vaMultipleChange  │
-│   (child #2)    │                    │                  │    │     EVENT         │
-└─────────────────┘                    └──────────────────┘    └───────────────────┘
-                                               │                        │
-┌─────────────────┐    onVaChange              │                        │
-│   va-file-input │ ───────────────────────────►                        ▼
-│   (child #N)    │                                          ┌────────────────────┐
-└─────────────────┘                                          │ External Consumer  │
-                                                             │ of Parent Component│
-                                                             └────────────────────┘
+┌─────────────────┐    onVaChange      ┌────────────────────────┐
+│   va-file-input │ ────────────────►  │  va-file-input-multiple│
+│   (child #1)    │                    │                        │
+└─────────────────┘                    │  • Determine           │
+        │                              │    action type         │
+        │ vaFileInputError             │  • Update state        │
+        └──────────────────────────────┤  • Emit files          │
+                                       │    array               │
+                                       │                        │
+                                       │                        │
+┌─────────────────┐  onVaPasswordChange│                        │
+│   va-file-input │ ────────────────►  │                        │
+│   (child #2)    │                    │                        │
+└─────────────────┘                    │                        │
+        │                              │                        │
+        │ vaFileInputError             │                        │
+        └──────────────────────────────┤                        │
+                                       └────────────────────────┘
+                                                    │
+                                                    ▼
+                                          ┌────────────────────┐
+                                          │ External Consumer  │
+                                          │ of Parent Component│
+                                          │ Receives events    │
+                                          │                    │
+                                          │ • vaMultipleChange │
+                                          │ • vaFileInputError │
+                                          └────────────────────┘
 ```
 
 **Flow Summary:**
