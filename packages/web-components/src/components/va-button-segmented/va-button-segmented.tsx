@@ -110,7 +110,9 @@ export class VaButtonSegmented {
         componentName: 'va-button-segmented',
         action: 'click',
         details: {
-          selected: this.selected,
+          label: buttonItem.label,
+          index: this.buttons.indexOf(buttonItem),
+          totalButtonCount: this.buttons.length,
         },
       };
 
