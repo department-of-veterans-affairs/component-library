@@ -208,7 +208,7 @@ The content in `files` state serves as a template for initial distribution, not 
 ### Main Slot (`<slot></slot>`)
 - **Location**: Rendered at the bottom of each file added
 - **Purpose**: Serves as a capture mechanism for displaying consumer provided content
-- **Limitation**: The slot is cloned and added to each file input instance, so it is not possible to have multiple slots.
+- **Limitation**: The slot is cloned and added to each file input instance, so it is not possible to have multiple unique slots.
 
 #### Usage
 
@@ -225,7 +225,7 @@ The `slotFieldIndexes` prop can be used to control which file inputs receive the
 
 #### Identifying File Context in Slot Interactions
 
-Since slot content is cloned for each file input, it can be challenging to identify which file triggered an interaction. For example, if `va-select` is used for selecting a document type, it is not possible to know which file input the selection belongs to out of the box.
+Since slot content is cloned for each file input, it can be challenging to identify which slot interaction occurred for which file. For example, if `va-select` is used in the slot for selecting a document type, it is not possible to know which file input the selection belongs to out of the box.
 
 An approach for handling this could be:
 
@@ -320,7 +320,7 @@ const handleFileInputError = (event) => {
 
 Error handling for main slot content would need to extend beyond the current `errors` and `passwordErrors` arrays since slot content could contain unknown types and number of interactive elements.
 
-An approach for handling interacive element in the slot could be:
+An approach for handling interactive elements in the slot could be:
 
 #### Shadow DOM Validation Pattern
 
