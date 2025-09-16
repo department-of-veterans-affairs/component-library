@@ -4,6 +4,20 @@
   $theme-font-path: '~@uswds/uswds/fonts',
   $theme-font-type-sans: 'source-sans-pro',
   $theme-font-sans-custom-stack: '"Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans',
+  $theme-typeface-tokens: (
+    'sans': (
+      'display-name': 'Source Sans Pro Web',
+      'cap-height': 328px,
+    ),
+    'bitter': (
+      'display-name': 'Bitter',
+      'cap-height': 349px,
+    ),
+    'monospace': (
+      'display-name': 'Roboto Mono Web',
+      'cap-height': 356px,
+    ),
+  ),
   $theme-namespace: (
     'grid': (
       namespace: 'vads-grid-',
@@ -28,5 +42,5 @@
   $theme-utility-breakpoints-custom: (
     "medium-screen": 768px
   ),
-  $utilities-use-important: true,
+  $utilities-use-important: true
 );
