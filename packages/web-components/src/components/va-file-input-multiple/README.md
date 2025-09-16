@@ -65,11 +65,11 @@ Each `vaMultipleChange` event includes a `state` array where:
 - **Deletion Exception**: No `changed` property is set during `FILE_REMOVED` actions
 
 ```typescript
-// Example: Adding a file at index 1
+// Example: A new file added
 state: [
   { file: existingFile1, changed: false, password: undefined },
-  { file: newFile, changed: true, password: undefined },      // ← This file triggered the event
-  { file: existingFile3, changed: false, password: "secret" }
+  { file: newFile, changed: true, password: undefined },  // ← This slot received a file
+  { file: null, changed: false, password: undefined }     // ← New empty slot added ready for a file
 ]
 ```
 
