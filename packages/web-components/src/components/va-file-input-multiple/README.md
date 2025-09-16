@@ -9,7 +9,7 @@ The `va-file-input-multiple` component is a presentational multi-file upload web
 ### Overview
 
 - **State**: The component uses two `@State` decorators for internal reactive state management with the primary one tracking the state of all files.
-- **Events**: Aggregates child component events and emits a unified `vaMultipleChange` event to external consumers
+- **Events**: Aggregates child component events and emits `vaMultipleChange` for file changes and emits `vaFileInputError` for file size and file type validation errors.
 - **Slot Content**: Slot content is captured, cloned, and distributed to individual file input instances
 - **Error Handling**: Errors are assigned to individual files using the `errors` and `passwordErrors` props to signify which file has an error.
 
@@ -74,6 +74,17 @@ state: [
 ```
 
 The File object of the file that triggered the change event is available in both the `file` property and the `state` array. This provides both granular (what changed) and holistic (complete state) information in a single event.
+
+#### Error Event: `vaFileInputError`
+
+This event is emitted when a file size or file type validation fails in any `va-file-input` child component.
+
+```typescript
+{
+  index: number,  // The index of the file that triggered the error
+  message: string // The error message
+}
+```
 
 ### Event Flow & Triggers
 
