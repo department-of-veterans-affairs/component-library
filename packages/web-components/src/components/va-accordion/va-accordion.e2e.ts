@@ -14,9 +14,18 @@ describe('va-accordion', () => {
       <va-accordion class="hydrated">
         <mock:shadow-root>
           <div class="usa-accordion">
-            <button aria-expanded="false" aria-label="expand-all-aria-label" class="va-accordion__button" data-testid="expand-all-accordions">
-              expand-all +
-            </button>
+            <ul class="expand-collapse-list">
+              <li>
+                <button aria-pressed="false" aria-label="expand-all-aria-label" class="va-accordion__button" data-testid="expand-all-accordions">
+                  expand-all
+                </button>
+              </li>
+              <li>
+                <button aria-pressed="false" aria-label="collapse-all-aria-label" class="va-accordion__button" data-testid="collapse-all-accordions">
+                  collapse-all
+                </button>
+              </li>
+            </ul>
             <slot></slot>
           </div>
         </mock:shadow-root>
@@ -77,7 +86,7 @@ describe('va-accordion', () => {
     expect(buttons[0].getAttribute('aria-expanded')).toEqual('false');
     expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
   });
-  
+
   it('can open nested open-single item', async () => {
     const page = await newE2EPage();
     await page.setContent(`
@@ -134,7 +143,7 @@ describe('va-accordion', () => {
     expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
   });
 
-  it('expands all items when `Expand all +` button is triggered', async () => {
+  it('expands all items when `Expand all` button is triggered', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
@@ -142,16 +151,35 @@ describe('va-accordion', () => {
         <va-accordion-item header="Second item">A bit more</va-accordion-item>
       </va-accordion>`);
 
-    const expandButton = await page.find('va-accordion >>> button');
+    const expandButton = await page.find('va-accordion >>> button[data-testid="expand-all-accordions"]');
     const accordionItems = await page.findAll('va-accordion-item >>> button');
     // Click to trigger expand of all accordion items collectively
     await expandButton.click();
 
     expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('true');
     expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('true');
+    expect(expandButton).toEqualAttribute('aria-pressed', 'true');
   });
 
-  it('fires accordionExpandCollapseAll event when `Expand all +` button is triggered', async () => {
+  it('collapses all items when `Collapse all` button is triggered', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      </va-accordion>`);
+
+    const collapseButton = await page.find('va-accordion >>> button[data-testid="collapse-all-accordions"]');
+    const accordionItems = await page.findAll('va-accordion-item >>> button');
+    // Click to trigger expand of all accordion items collectively
+    await collapseButton.click();
+
+    expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('false');
+    expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('false');
+    expect(collapseButton).toEqualAttribute('aria-pressed', 'true');
+  });
+
+  it('fires accordionExpandCollapseAll event when `Expand all` button is triggered', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
@@ -160,10 +188,10 @@ describe('va-accordion', () => {
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('accordionExpandCollapseAll');
-    const expandCollapseButton = await page.find('va-accordion >>> button');
+    const expandButton = await page.find('va-accordion >>> button[data-testid="expand-all-accordions"]');
 
     // Click to trigger expand of all accordion items collectively
-    await expandCollapseButton.click();
+    await expandButton.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(1);
   });
@@ -177,10 +205,10 @@ describe('va-accordion', () => {
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('accordionExpandCollapseAll');
-    const expandCollapseButton = await page.find('va-accordion >>> button');
+    const expandButton = await page.find('va-accordion >>> button[data-testid="expand-all-accordions"]');
 
     // Click to trigger expand of all accordion items collectively
-    await expandCollapseButton.click(); // open all
+    await expandButton.click(); // open all
 ;
     expect(analyticsSpy).toHaveReceivedEventDetail({
       status: 'allOpen',
@@ -196,38 +224,16 @@ describe('va-accordion', () => {
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('accordionExpandCollapseAll');
-    const expandCollapseButton = await page.find('va-accordion >>> button');
+    const collapseButton = await page.find('va-accordion >>> button[data-testid="collapse-all-accordions"]');
 
-    // Click to trigger expand of all accordion items collectively
-    await expandCollapseButton.click(); // open all
-    await expandCollapseButton.click(); // close all
+    await collapseButton.click(); // close all
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       status: 'allClosed',
     });
   });
 
-  it('collapses all items when `Collapse All -` button is triggered', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
-      </va-accordion>`);
-
-    const expandButton = await page.find('va-accordion >>> button');
-    const accordionItems = await page.findAll('va-accordion-item >>> button');
-    // Click to expand both accordion items manually
-    await accordionItems[0].click();
-    await accordionItems[1].click();
-    // Click to trigger collapse of all accordion items collectively
-    await expandButton.click();
-
-    expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('false');
-    expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('false');
-  });
-
-  it('fires accordionExpandCollapseAll event when `Collapse All -` button is clicked', async () => {
+  it('fires accordionExpandCollapseAll event when `Collapse All` button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
@@ -236,18 +242,18 @@ describe('va-accordion', () => {
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('accordionExpandCollapseAll');
-    const expandCollapseButton = await page.find('va-accordion >>> button');
+    const collapseButton = await page.find('va-accordion >>> button[data-testid="collapse-all-accordions"]');
     const accordionItems = await page.findAll('va-accordion-item >>> button');
     // Click to expand both accordion items manually
     await accordionItems[0].click();
     await accordionItems[1].click();
     // Click to trigger collapse of all accordion items collectively
-    await expandCollapseButton.click();
+    await collapseButton.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(1);
   });
 
-  it('tracks which accordions are opened', async () => {
+  it('applies aria-pressed="true" to expand button when all accordions are opened', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
@@ -257,17 +263,17 @@ describe('va-accordion', () => {
     const accordionItemsButtons = await page.findAll(
       'va-accordion-item >>> button',
     );
-    const expandButton = await page.find('va-accordion >>> button');
+    const expandButton = await page.find('va-accordion >>> button[data-testid="expand-all-accordions"]');
     // Click to expand single accordion item manually
     await accordionItemsButtons[0].click();
     // Check if all accordions opened conditions are met
     // This is a translation key for i18next
-    expect(expandButton).toEqualText('expand-all +');
+    expect(expandButton).toEqualAttribute('aria-pressed', 'false');
     // Click to expand single accordion item manually
     await accordionItemsButtons[1].click();
     // Check if all accordions opened conditions are met
     // This is a translation key for i18next
-    expect(expandButton).toEqualText('collapse-all -');
+    expect(expandButton).toEqualAttribute('aria-pressed', 'true');
   });
 
   it('fires an analytics event when expanded', async () => {
@@ -391,30 +397,5 @@ describe('va-accordion', () => {
         subheader: null,
       },
     });
-  });
-
-  it('shows "Collapse all -" if all accordion-items are open on load', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-accordion section-heading="The Section Heading">
-        <va-accordion-item header="First item" open="true">Some content</va-accordion-item>
-      </va-accordion>`);
-
-    const button = await page.find('va-accordion >>> button');
-
-    expect(button.innerText).toEqual('collapse-all -');
-  });
-
-  it('shows "Collapse all -" if some of accordion-items are open on load', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-accordion section-heading="The Section Heading">
-        <va-accordion-item header="First item" open="true">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">Some content</va-accordion-item>
-      </va-accordion>`);
-
-    const button = await page.find('va-accordion >>> button');
-
-    expect(button.innerText).toEqual('collapse-all -');
   });
 });

@@ -1159,7 +1159,7 @@ export namespace Components {
     }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
-     * @keydown Used to detect Escape key to close modal.
+     * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -3141,7 +3141,7 @@ declare global {
     }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
-     * @keydown Used to detect Escape key to close modal.
+     * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -5142,7 +5142,7 @@ declare namespace LocalJSX {
     }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
-     * @keydown Used to detect Escape key to close modal.
+     * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -6735,7 +6735,7 @@ declare module "@stencil/core" {
             "va-minimal-footer": LocalJSX.VaMinimalFooter & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
             /**
              * @click Used to detect clicks outside of modal contents to close modal.
-             * @keydown Used to detect Escape key to close modal.
+             * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
              * @componentName Modal
              * @maturityCategory use
              * @maturityLevel best_practice
