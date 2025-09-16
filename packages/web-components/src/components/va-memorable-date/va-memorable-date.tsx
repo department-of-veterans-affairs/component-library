@@ -8,6 +8,7 @@ import {
   h,
   Element,
   Fragment,
+  Watch,
 } from '@stencil/core';
 
 import {
@@ -252,6 +253,17 @@ export class VaMemorableDate {
   @Prop() enableAnalytics: boolean = false;
 
   /**
+   * Insert a header with defined level inside the label (legend)
+   */
+  @Prop() labelHeaderLevel?: string;
+
+  /**
+   * An optional message that will be read by screen readers when the header is focused. The label-header-level
+   * prop must be set for this to be active.
+   */
+  @Prop() headerAriaDescribedby?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when an
    * input value changes and enableAnalytics is true.
    */
@@ -274,10 +286,31 @@ export class VaMemorableDate {
 
   componentWillLoad() {
     // Set initial values
+    this.parseValueProp();
+  }
+
+  /**
+   * Parse the value prop and update internal state
+   */
+  private parseValueProp() {
     const [year, month, day] = (this.value || '').split('-');
     this.currentYear = year;
     this.currentMonth = month;
     this.currentDay = day;
+  }
+
+  /**
+   * Watch for changes to the value prop and update input fields.
+   * The value prop will be a string in the YYYY-MM-DD format.
+   */
+  @Watch('value')
+  handleValueChange() {
+    this.parseValueProp();
+    // Clear any existing validation errors when value changes externally
+    this.error = null;
+    this.invalidDay = false;
+    this.invalidMonth = false;
+    this.invalidYear = false;
   }
 
   render() {
@@ -293,6 +326,7 @@ export class VaMemorableDate {
       formHeadingLevel,
       formHeading,
       removeDateHint,
+      headerAriaDescribedby
     } = this;
 
     const { currentYear, currentMonth, currentDay } = this;
@@ -342,6 +376,10 @@ export class VaMemorableDate {
       useFormsPattern === 'single' || useFormsPattern === 'multiple'
         ? true
         : false;
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
+    const headerAriaDescribedbyId = headerAriaDescribedby
+      ? 'header-message'
+      : null;
     let formsHeading = null;
     if (isFormsPattern) {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
@@ -419,13 +457,38 @@ export class VaMemorableDate {
       'usa-legend': true,
       'usa-label--error': error,
     });
+
+    const InnerLabelPart = (
+      <Fragment>
+        {label}
+
+        {useFormsPattern === 'multiple' ? (
+          <span id="header-message" class="usa-sr-only">
+            {label}
+          </span>
+        ) : headerAriaDescribedby && (
+          <span id="header-message" class="usa-sr-only">
+            {headerAriaDescribedby}
+          </span>
+        )}
+      </Fragment>
+    );
+
     return (
       <Host onBlur={handleDateBlur}>
         {formsHeading}
         <div class="input-wrap">
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClass} id="input-label" part="legend">
-              {label}
+               {label && HeaderLevel ? (
+                  <HeaderLevel
+                    aria-describedby={headerAriaDescribedbyId}
+                  >
+                    {InnerLabelPart}
+                  </HeaderLevel>
+                ) : (
+                  <Fragment>{InnerLabelPart}</Fragment>
+              )}
               {required && (
                 <span class="usa-label--required">
                   {' '}
