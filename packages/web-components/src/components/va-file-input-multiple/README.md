@@ -2,24 +2,23 @@
 
 ## Component Overview
 
-The `va-file-input-multiple` component is a multi-file upload web component that wraps individual `va-file-input` components.
-
-The component uses an event-driven architecture where it pushes file data to external consumers rather than requiring them to pull data from the component.
+The `va-file-input-multiple` component is a presentational multi-file upload web component that wraps individual `va-file-input` components. It focuses on managing the UI and user interactions while delegating business logic to consuming applications.
 
 ## Architecture
 
-### Core Architecture Pattern
+### Overview
 
-- **State Management**: The component uses two `@State` decorators for internal reactive state management with the primary one tracking the state of all files.
-- **Event Orchestration**: Aggregates child component events and emits a unified `vaMultipleChange` event to external consumers
-- **Slot Content Management**: Slot content is captured, cloned, and distributed to individual file input instances
-- **Error Handling**: Consumers are responsible for validating files and updating the `errors` and `passwordErrors` props to signify which file has an error.
+- **State**: The component uses two `@State` decorators for internal reactive state management with the primary one tracking the state of all files.
+- **Events**: Aggregates child component events and emits a unified `vaMultipleChange` event to external consumers
+- **Slot Content**: Slot content is captured, cloned, and distributed to individual file input instances
+- **Error Handling**: Errors are assigned to individual files using the `errors` and `passwordErrors` props to signify which file has an error.
 
 ### State Management
 
 The component uses two `@State` decorators to manage internal reactive state:
 
 #### `@State() files: FileIndex[]`
+
 - **Purpose**: Core state array that tracks all files and their metadata
 - **Initial Value**: Starts with one empty file input; `[{ key: 0, file: null, content: null }]`
 - **Structure**: Each file entry contains:
@@ -29,12 +28,13 @@ The component uses two `@State` decorators to manage internal reactive state:
 - **Behavior**: Automatically adds new empty file input when files are added; removes entries when files are deleted
 
 #### `@State() valueAdded: boolean`
+
 - **Purpose**: The state serves as a **one-time initialization flag** to track whether files added via the `value` prop have already been added to the `files` state or not.
 - **Initial Value**: `false`
 - **Behavior**: Set to `true` after files from the `value` prop are processed in `componentDidRender()`
 - **Use Case**: Ensures files provided via the `value` prop are only added to state once during component initialization
 
-### Event System
+### Events
 
 #### Primary Event: `vaMultipleChange`
 
@@ -86,7 +86,7 @@ This event is emitted when a file is selected, changed, or removed in any `va-fi
 - **Action**: 
   - `PASSWORD_UPDATE`: Always
 
-### Password Event Flow
+#### Password Event Flow
 
 Password events operate independently from file events:
 
@@ -115,7 +115,6 @@ Password events operate independently from file events:
                                                              │ of Parent Component│
                                                              └────────────────────┘
 ```
-
 
 **Flow Summary:**
 1. **Child Event Received**: `va-file-input` emits `vaChange` or `vaPasswordChange`
@@ -157,9 +156,13 @@ document.querySelector('va-file-input-multiple')
   });
 ```
 
-## Slot Content Management 
+## Slot Content 
 
-The component has a general slot that can be used to add content to each file input instance.
+The component has a general slot that can be used to add content to each file input instance. 
+
+Individual slot content is initially stored in `@State() files: FileIndex[]` in order to distribute the content to each file input instance.
+
+The content in `files` state serves as a template for initial distribution, not a live reflection of current slot element states.
 
 ### Main Slot (`<slot></slot>`)
 - **Location**: Rendered at the bottom of each file added
@@ -189,16 +192,26 @@ An approach for handling this could be:
 
 ```javascript
 function extractDocumentTypesFromShadowDOM = () => {
+  // Get the va-file-input-multiple element
   const fileInputMultiple = document.querySelector('va-file-input-multiple');
 
+  // Get all va-file-input elements within the shadow DOM
   const fileInputs = Array.from(
     fileInputMultiple?.shadowRoot?.querySelectorAll('va-file-input') || [],
   );
 
+  // Map over the file inputs and extract the value of the va-select element
+  // Example return value:
+  // ['invoice', 'receipt', '', 'contract']
+  // Index 0: First file has "invoice" selected
+  // Index 1: Second file has "receipt" selected  
+  // Index 2: Third file has no selection
+  // Index 3: Fourth file has "contract" selected
   return fileInputs.map(fileInput => {
     const vaSelect = fileInput.querySelector('va-select');
     return vaSelect?.value || '';
   });
+  
 };
 ```
 
@@ -211,9 +224,11 @@ TODO SLOT ENHANCEMENTS:
 
 ## Error Handling
 
-Error handling is designed to be declarative. The parent component is responsible for validating the file and updating the `errors` and `passwordErrors` props to signify which file has an error.
+Error handling is designed to be declarative in that the consumer is responsible for validating the file and updating the `errors` and `passwordErrors` props to signify which file has an error. 
 
-There are two error props because `error` is needed to signal, for example, a network issue with the upload. But the component needed a way internally to indicate that the error is only with the password input field. The alternative was to look for a magic string in the error message, but that is not a robust solution.
+The exception is **file size** and **file type** validation which is handled internally by the component. The component will emit the `vaFileInputError` event with the error message when these validations fail.
+
+There are two error props because `errors` is needed to signal, for example, a network issue with the upload. But the component also needed a way internally to indicate that the error is only with the password input field using `passwordErrors`. The alternative was to look for a magic string in the error message, but that is not a robust solution.
 
 A possible approach for handling errors could be index based like:
 
@@ -230,11 +245,6 @@ const handleFilesChange = (event) => {
   const newPasswordErrors = new Array(state.length).fill(null);
   
   state.forEach((fileDetail, index) => {
-    // Validate file
-    if (fileDetail.file.size > 5 * 1024 * 1024) {
-      newErrors[index] = 'File too large';
-    }
-    
     // Validate password if encrypted
     if (encrypted[index] && !fileDetail.password) {
       newPasswordErrors[index] = 'Password required for encrypted file';
@@ -245,9 +255,22 @@ const handleFilesChange = (event) => {
   setPasswordErrors(newPasswordErrors);
 };
 
+const handleFileInputError = (event) => {
+  // Get the file input element that triggered the error
+  const fileInputElement = event.target;
+  const fileInputId = fileInputElement.id; // e.g., "instance-0", "instance-1"
+  const fileIndex = parseInt(fileInputId.split('-')[1]);
+  
+  // Update errors array with the built-in validation error
+  const newErrors = [...errors];
+  newErrors[fileIndex] = event.detail.error;
+  setErrors(newErrors);
+};
+
 <VaFileInputMultiple
   errors={errors}
   passwordErrors={passwordErrors}
+  onVaFileInputError={handleFileInputError}
   onVaMultipleChange={handleFilesChange}
 />
 ```
@@ -256,49 +279,94 @@ const handleFilesChange = (event) => {
 
 Error handling for main slot content would need to extend beyond the current `errors` and `passwordErrors` arrays since slot content could contain unknown types and number of interactive elements.
 
-An apporach for handling this could be:
+An approach for handling interacive element in the slot could be:
 
 #### Shadow DOM Validation Pattern
 
 ```jsx
 const validateSlotContent = () => {
+  // Get the va-file-input-multiple element
   const fileInputMultiple = document.querySelector('va-file-input-multiple');
+  
+  // Get all va-file-input elements within the shadow DOM
   const fileInputs = Array.from(
     fileInputMultiple?.shadowRoot?.querySelectorAll('va-file-input') || []
   );
-  
+
+  const slotErrors = []; // Array to track slot validation errors
+
+  // Map over the file inputs
   fileInputs.forEach((fileInput, index) => {
+    // Get all interactive elements within the shadow DOM
     const slotElements = {
       documentType: fileInput?.shadowRoot?.querySelector('va-select[name="documentType"]'),
       description: fileInput?.shadowRoot?.querySelector('va-text-input[name="description"]')
     };
-    
-    // Validate and set errors directly on elements
+
+    let hasSlotError = false;
+    const elementErrors = [];
+
+    // Validate and set errors directly on slot elements
     Object.entries(slotElements).forEach(([name, element]) => {
       if (element) {
         if (!element.value) {
           // Set error attribute directly on the element
           element.error = `${name} is required`;
+          elementErrors.push(`${name} is required`);
+          hasSlotError = true;
         } else {
           // Clear error if validation passes
           element.error = '';
         }
       }
     });
+    // Store slot error for this file index
+    slotErrors[index] = hasSlotError ? elementErrors.join(', ') : '';
   });
+
+  // Return the array of slot errors
+  return slotErrors;
 };
+
+// Update component errors prop
+const [errors, setErrors] = useState([]);
+const [slotErrors, setSlotErrors] = useState([]);
+
+const handleSlotValidation = () => {
+  const newSlotErrors = validateSlotContent();
+  setSlotErrors(newSlotErrors);
+  
+  // Combine existing file errors with slot errors
+  const combinedErrors = errors.map((fileError, index) => {
+    const slotError = newSlotErrors[index];
+    
+    if (fileError && slotError) {
+      return `${fileError}; ${slotError}`;
+    }
+    return fileError || slotError || '';
+  });
+  
+  setErrors(combinedErrors);
+};
+
+<VaFileInputMultiple
+  errors={errors}
+  onVaMultipleChange={handleSlotValidation}
+/>
 ```
 
 TODO ERROR HANDLING ENHANCEMENTS: 
 
-1. Add data attributes to the cloned content to identify which file input triggered the interaction (file id or index position?). ie. `data-file-key="0"`.
+1. Add data attributes to the cloned content to help make it easier to identify which file input triggered the interaction (file id or index position?). ie. `data-file-key="0"`.
   - This will be for experimental slot content. The hope is that it will evolve into a prop driven solution.
 2. Add components like `va-select` to the `va-file-input` component itself and connect it to the `error` prop.
   - This should be preferred to having to traverse the shadow DOM to find the value of the interaction.
 
 ## Validation
 
-The component provides validation for file size and file type through the `maxFileSize`, `minFileSize`, and `accept` props. Otherwise teams should implement their own validation for files and update the `errors` and `passwordErrors` props to signify which file has an error.
+The component provides validation for file size and file type through the `maxFileSize`, `minFileSize`, and `accept` props. 
+
+Otherwise teams should implement their own validation for files and update the `errors` and `passwordErrors` props to signify which file has an error.
 
 See the [decision log](https://github.com/department-of-veterans-affairs/va.gov-team/blob/master/products/design-system-forms-library/products/components/va-file-input/design-decision-log.md) for more information about the validation strategy.
 
