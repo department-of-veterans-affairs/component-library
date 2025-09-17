@@ -2792,6 +2792,304 @@
           "size",
           "h6"
         ]
+      },
+      "serif": {
+        "sm": {
+          "value": "1.04rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.04rem"
+          },
+          "name": "font-size-serif-sm",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "sm"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "sm"
+          ]
+        },
+        "md": {
+          "value": "1.1rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.1rem"
+          },
+          "name": "font-size-serif-md",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "md"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "md"
+          ]
+        },
+        "lg": {
+          "value": "1.43rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.43rem"
+          },
+          "name": "font-size-serif-lg",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "lg"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "lg"
+          ]
+        },
+        "xl": {
+          "value": "2.07rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "2.07rem"
+          },
+          "name": "font-size-serif-xl",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "xl"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "xl"
+          ]
+        },
+        "2xl": {
+          "value": "2.59rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "2.59rem"
+          },
+          "name": "font-size-serif-2xl",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "2xl"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "2xl"
+          ]
+        },
+        "h1": {
+          "value": "2.59rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "{font.size.serif.2xl}"
+          },
+          "name": "font-size-serif-h1",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "h1"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "h1"
+          ]
+        },
+        "h2": {
+          "value": "2.07rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "{font.size.serif.xl}"
+          },
+          "name": "font-size-serif-h2",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "h2"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "h2"
+          ]
+        },
+        "h3": {
+          "value": "1.43rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "{font.size.serif.lg}"
+          },
+          "name": "font-size-serif-h3",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "h3"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "h3"
+          ]
+        },
+        "h4": {
+          "value": "1.1rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "{font.size.serif.md}"
+          },
+          "name": "font-size-serif-h4",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "h4"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "h4"
+          ]
+        },
+        "h5": {
+          "value": "1.04rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "{font.size.serif.sm}"
+          },
+          "name": "font-size-serif-h5",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "h5"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "h5"
+          ]
+        },
+        "h6": {
+          "value": "1.04rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "{font.size.serif.sm}"
+          },
+          "name": "font-size-serif-h6",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "serif",
+            "subitem": "h6"
+          },
+          "path": [
+            "font",
+            "size",
+            "serif",
+            "h6"
+          ]
+        }
+      },
+      "mono": {
+        "sm": {
+          "value": "0.95rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "0.95rem"
+          },
+          "name": "font-size-mono-sm",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "mono",
+            "subitem": "sm"
+          },
+          "path": [
+            "font",
+            "size",
+            "mono",
+            "sm"
+          ]
+        },
+        "md": {
+          "value": "1.01rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.01rem"
+          },
+          "name": "font-size-mono-md",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "mono",
+            "subitem": "md"
+          },
+          "path": [
+            "font",
+            "size",
+            "mono",
+            "md"
+          ]
+        },
+        "lg": {
+          "value": "1.31rem",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.31rem"
+          },
+          "name": "font-size-mono-lg",
+          "attributes": {
+            "category": "font",
+            "type": "size",
+            "item": "mono",
+            "subitem": "lg"
+          },
+          "path": [
+            "font",
+            "size",
+            "mono",
+            "lg"
+          ]
+        }
       }
     }
   },
@@ -2990,6 +3288,304 @@
           "line-height",
           "heading"
         ]
+      },
+      "serif": {
+        "-1": {
+          "value": "1",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1"
+          },
+          "name": "vads-font-line-height-serif-1",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "serif",
+            "subitem": "-1"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "serif",
+            "-1"
+          ]
+        },
+        "-2": {
+          "value": "1.3",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.3"
+          },
+          "name": "vads-font-line-height-serif-2",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "serif",
+            "subitem": "-2"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "serif",
+            "-2"
+          ]
+        },
+        "-3": {
+          "value": "1.4",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.4"
+          },
+          "name": "vads-font-line-height-serif-3",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "serif",
+            "subitem": "-3"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "serif",
+            "-3"
+          ]
+        },
+        "-4": {
+          "value": "1.6",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.6"
+          },
+          "name": "vads-font-line-height-serif-4",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "serif",
+            "subitem": "-4"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "serif",
+            "-4"
+          ]
+        },
+        "-5": {
+          "value": "1.7",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.7"
+          },
+          "name": "vads-font-line-height-serif-5",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "serif",
+            "subitem": "-5"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "serif",
+            "-5"
+          ]
+        },
+        "-6": {
+          "value": "1.8",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.8"
+          },
+          "name": "vads-font-line-height-serif-6",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "serif",
+            "subitem": "-6"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "serif",
+            "-6"
+          ]
+        },
+        "default": {
+          "value": "1.6",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.6"
+          },
+          "name": "vads-font-line-height-serif-default",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "serif",
+            "subitem": "default"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "serif",
+            "default"
+          ]
+        }
+      },
+      "mono": {
+        "-1": {
+          "value": "1",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1"
+          },
+          "name": "vads-font-line-height-mono-1",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "mono",
+            "subitem": "-1"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "mono",
+            "-1"
+          ]
+        },
+        "-2": {
+          "value": "1.15",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.15"
+          },
+          "name": "vads-font-line-height-mono-2",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "mono",
+            "subitem": "-2"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "mono",
+            "-2"
+          ]
+        },
+        "-3": {
+          "value": "1.35",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.35"
+          },
+          "name": "vads-font-line-height-mono-3",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "mono",
+            "subitem": "-3"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "mono",
+            "-3"
+          ]
+        },
+        "-4": {
+          "value": "1.5",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.5"
+          },
+          "name": "vads-font-line-height-mono-4",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "mono",
+            "subitem": "-4"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "mono",
+            "-4"
+          ]
+        },
+        "-5": {
+          "value": "1.62",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.62"
+          },
+          "name": "vads-font-line-height-mono-5",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "mono",
+            "subitem": "-5"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "mono",
+            "-5"
+          ]
+        },
+        "-6": {
+          "value": "1.75",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.75"
+          },
+          "name": "vads-font-line-height-mono-6",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "mono",
+            "subitem": "-6"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "mono",
+            "-6"
+          ]
+        },
+        "default": {
+          "value": "1.5",
+          "filePath": "tokens/fonts.json",
+          "isSource": true,
+          "original": {
+            "value": "1.5"
+          },
+          "name": "vads-font-line-height-mono-default",
+          "attributes": {
+            "category": "vads-font",
+            "type": "line-height",
+            "item": "mono",
+            "subitem": "default"
+          },
+          "path": [
+            "vads-font",
+            "line-height",
+            "mono",
+            "default"
+          ]
+        }
       }
     },
     "size": {
@@ -3010,6 +3606,44 @@
           "vads-font",
           "size",
           "source-sans-normalized"
+        ]
+      },
+      "bitter-normalized": {
+        "value": "0.993rem",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "0.993rem"
+        },
+        "name": "vads-font-size-bitter-normalized",
+        "attributes": {
+          "category": "vads-font",
+          "type": "size",
+          "item": "bitter-normalized"
+        },
+        "path": [
+          "vads-font",
+          "size",
+          "bitter-normalized"
+        ]
+      },
+      "monospace-normalized": {
+        "value": "0.946rem",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "0.946rem"
+        },
+        "name": "vads-font-size-monospace-normalized",
+        "attributes": {
+          "category": "vads-font",
+          "type": "size",
+          "item": "monospace-normalized"
+        },
+        "path": [
+          "vads-font",
+          "size",
+          "monospace-normalized"
         ]
       },
       "root": {
