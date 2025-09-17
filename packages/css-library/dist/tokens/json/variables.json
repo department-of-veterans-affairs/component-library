@@ -3609,11 +3609,11 @@
         ]
       },
       "bitter-normalized": {
-        "value": "0.993rem",
+        "value": "1.1rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "0.993rem"
+          "value": "1.1rem"
         },
         "name": "vads-font-size-bitter-normalized",
         "attributes": {
@@ -3628,11 +3628,11 @@
         ]
       },
       "monospace-normalized": {
-        "value": "0.946rem",
+        "value": "1.01rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "0.946rem"
+          "value": "1.01rem"
         },
         "name": "vads-font-size-monospace-normalized",
         "attributes": {
