@@ -22,6 +22,28 @@ $tokens-font-size: (
   'h6': $font-size-h6,
 );
 
+$tokens-font-size-serif: (
+  'bitter-normalized': $font-size-md,
+  'sm': $font-size-serif-sm,
+  'md': $font-size-serif-md,
+  'lg': $font-size-serif-lg,
+  'xl': $font-size-serif-xl,
+  '2xl': $font-size-serif-2xl,
+  'h1': $font-size-serif-h1,
+  'h2': $font-size-serif-h2,
+  'h3': $font-size-serif-h3,
+  'h4': $font-size-serif-h4,
+  'h5': $font-size-serif-h5,
+  'h6': $font-size-serif-h6,
+);
+
+$tokens-font-size-mono: (
+  'mono-normalized': $font-size-md,
+  'sm': $font-size-mono-sm,
+  'md': $font-size-mono-md,
+  'lg': $font-size-mono-lg
+);
+
 $tokens-font-style: (
   'italic': $font-style-italic,
   'normal': $font-style-normal,

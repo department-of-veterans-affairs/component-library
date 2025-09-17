@@ -24,6 +24,28 @@ $u-font-size: (
   ),
 );
 
+$u-font-size-serif: (
+  font-size: (
+    base: 'vads-u-font-size-serif-',
+    modifiers: null,
+    values: map-collect($tokens-font-size-serif),
+    settings: $font-size-settings,
+    property: 'font-size',
+    type: 'utility',
+  ),
+);
+
+$u-font-size-mono: (
+  font-size: (
+    base: 'vads-u-font-size-mono-',
+    modifiers: null,
+    values: map-collect($tokens-font-size-mono),
+    settings: $font-size-settings,
+    property: 'font-size',
+    type: 'utility',
+  ),
+);
+
 $u-font-style: (
   font-style: (
     base: 'vads-u-font-style-',
@@ -49,6 +71,8 @@ $u-font-weight: (
 $u-font: map-collect(
   $u-font-family,
   $u-font-size,
+  $u-font-size-serif,
+  $u-font-size-mono,
   $u-font-style,
   $u-font-weight
 );
