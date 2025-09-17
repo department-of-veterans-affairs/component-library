@@ -4,6 +4,8 @@
 
 The `va-file-input-multiple` component is a presentational multi-file upload web component that wraps individual `va-file-input` components. It focuses on managing the UI and user interactions while delegating business logic to consuming applications.
 
+Each `va-file-input` instance is assigned a unique `id` attribute in the format `instance-{index}`.
+
 ## Architecture
 
 ### Overview
@@ -128,8 +130,8 @@ Password events operate independently from file events:
 
 ```
 ┌─────────────────┐    onVaChange      ┌────────────────────────┐
-│   va-file-input │ ────────────────►  │  va-file-input-multiple│
-│   (child #1)    │                    │                        │
+│  va-file-input  │ ────────────────►  │  va-file-input-multiple│
+│  id: instance-0 │                    │                        │
 └─────────────────┘                    │  • Determine           │
         │                              │    action type         │
         │ onVaFileInputError           │  • Update state        │
@@ -138,8 +140,8 @@ Password events operate independently from file events:
                                        │                        │
                                        │                        │
 ┌─────────────────┐  onVaPasswordChange│                        │
-│   va-file-input │ ────────────────►  │                        │
-│   (child #2)    │                    │                        │
+│  va-file-input  │ ────────────────►  │                        │
+│  id: instance-1 │                    │                        │
 └─────────────────┘                    │                        │
         │                              │                        │
         │ onVaFileInputError           │                        │
@@ -209,19 +211,21 @@ The content in `files` state serves as a template for initial distribution, not 
 - **Location**: Rendered at the bottom of each file added
 - **Purpose**: Serves as a capture mechanism for displaying consumer provided content
 - **Limitation**: The slot is cloned and added to each file input instance, so it is not possible to have multiple unique slots.
+- **Events**: Events emitted from the slot will bubble up to the `va-file-input-multiple` component where they can be handled using a callback.
 
 #### Usage
 
-The `slotFieldIndexes` prop can be used to control which file inputs receive the content. By default, the content is added to all file inputs.
-
 ```jsx
-<va-file-input-multiple>
+<VaFileInputMultiple
+  onVaSelect={handleSlotSelect}>
   <va-select label="Document Type">
     <option value="public">Public Document</option>
     <option value="private">Private Document</option>
   </va-select>
-</va-file-input-multiple>
+</VaFileInputMultiple>
 ```
+
+The `slotFieldIndexes` prop can be used to control which file inputs receive the content. By default, the content is added to all file inputs.
 
 #### Identifying File Context in Slot Interactions
 
@@ -264,6 +268,17 @@ The exception is **file size** and **file type** validation which is handled int
 
 There are two error props because `errors` is needed to signal, for example, a network issue with the upload. But the component also needed a way internally to indicate that the error is only with the password input field using `passwordErrors`. The alternative was to look for a magic string in the error message, but that is not a robust solution.
 
+### Reset Visual State
+
+The `resetVisualState` prop is used to reset the visual state of individual files. It is an array of booleans that correspond to each file input.
+
+- **`true`**: Forces the file input back to its initial state, displaying the file selection interface and any error messages
+- **`false` or `null`**: Shows the normal file state (selected file with upload progress or uploaded file details)
+
+The component automatically resets `resetVisualState` to `false` when a user selects a new file.
+
+#### Error Handling Example
+
 A possible approach for handling errors could be index based like:
 
 ```jsx
@@ -301,9 +316,12 @@ const handleFileInputError = (event) => {
   setErrors(newErrors);
 };
 
+const resetVisualState = errors.map(error => (error ? true : null));
+
 <VaFileInputMultiple
   errors={errors}
   passwordErrors={passwordErrors}
+  resetVisualState={resetVisualState}
   onVaFileInputError={handleFileInputError}
   onVaMultipleChange={handleFilesChange}
 />
