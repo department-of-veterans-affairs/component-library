@@ -107,6 +107,7 @@ This event is emitted when a file is selected, changed, or removed in any `va-fi
 This event is emitted when a password is entered or changed in any `va-file-input` child component.
 
 - **Trigger**: User enters/changes password for encrypted files
+- **Frequency**: Event fires on every keystroke; consumers should implement debouncing to avoid excessive processing
 - **Action**: 
   - `PASSWORD_UPDATE`: Always
 
