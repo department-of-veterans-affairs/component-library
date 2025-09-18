@@ -1,0 +1,29 @@
+Non-form applications using the forms library: 23 
+
+┌─────────┬───────────────────────────────────────────────────────┬───────────────────────────────┐
+│ (index) │ Application Name                                      │ Files Using the Forms Library │
+├─────────┼───────────────────────────────────────────────────────┼───────────────────────────────┤
+│ 0       │ 'Accredited Representative Portal'                    │ 1                             │
+│ 1       │ 'Platform(ish)'                                       │ 63                            │
+│ 2       │ 'Submitted Appeals view &amp; download'               │ 1                             │
+│ 3       │ 'HLR testing'                                         │ 12                            │
+│ 4       │ 'SC testing'                                          │ 27                            │
+│ 5       │ '21P-530EZ Burials benefits form'                     │ 13                            │
+│ 6       │ 'View Dependents'                                     │ 5                             │
+│ 7       │ '21-526EZ disability compensation claim form'         │ 75                            │
+│ 8       │ 'Education Letters'                                   │ 1                             │
+│ 9       │ 'GI Bill Comparison Tool'                             │ 2                             │
+│ 10      │ 'Letters'                                             │ 1                             │
+│ 11      │ 'Your VA home loan COE'                               │ 1                             │
+│ 12      │ 'MHV Secure Messaging'                                │ 1                             │
+│ 13      │ 'Mock SIP Form'                                       │ 5                             │
+│ 14      │ 'Dashboard'                                           │ 4                             │
+│ 15      │ 'VA Profile'                                          │ 4                             │
+│ 16      │ 'Representative Form Upload'                          │ 8                             │
+│ 17      │ 'Mock form minimal header'                            │ 6                             │
+│ 18      │ 'Mock Form Patterns'                                  │ 7                             │
+│ 19      │ 'Static pages'                                        │ 2                             │
+│ 20      │ 'Demo: File for disability compensation - Conditions' │ 8                             │
+│ 21      │ 'Appointments'                                        │ 6                             │
+│ 22      │ 'Verify Your Enrollment'                              │ 3                             │
+└─────────┴───────────────────────────────────────────────────────┴───────────────────────────────┘
