@@ -130,7 +130,7 @@ const Template = (args) => {
           )}
           {args.itemsIcon && <va-icon icon="mail" slot="subheader-icon" />}
           {args.itemsHeadlineSlot && (
-            <h3 slot="headline">Slotted {accordion.header}</h3>
+            <h6 slot="headline">Slotted {accordion.header}</h6>
           )}
           <p>{accordion.body}</p>
         </va-accordion-item>

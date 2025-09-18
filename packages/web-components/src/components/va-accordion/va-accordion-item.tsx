@@ -130,14 +130,18 @@ export class VaAccordionItem {
             slotAttributes[attr.name] = attr.value;
           }
         }
-        const sanitizedContent = Sanitizer.escapeHTML([headlineSlot.innerHTML]);
+
+        const slotClasses = headlineSlot.className || '';
+        slotAttributes['class'] = classNames('usa-accordion__heading', slotClasses);
+
+        const sanitizedContent = Sanitizer.escapeHTML(headlineSlot.innerHTML);
         headerContent = <span innerHTML={sanitizedContent}></span>;
       } else {
         headerContent = header;
       }
 
       return (
-        <Tag class="usa-accordion__heading" {...slotAttributes}>
+        <Tag class={!headlineSlot ? "usa-accordion__heading" : undefined} {...slotAttributes}>
           <button
             type="button"
             class="usa-accordion__button"
