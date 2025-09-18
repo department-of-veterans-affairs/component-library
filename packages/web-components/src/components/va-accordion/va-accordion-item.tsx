@@ -9,6 +9,7 @@ import {
   h,
 } from '@stencil/core';
 import classNames from 'classnames';
+import { Sanitizer } from '../../utils/utils';
 
 @Component({
   tag: 'va-accordion-item',
@@ -105,7 +106,8 @@ export class VaAccordionItem {
     });
 
     const Header = () => {
-      const Tag = (headlineSlot && headlineSlot.tagName.includes("H"))
+      // Determine tag and attributes based on slot vs prop usage
+      const Tag = (headlineSlot && headlineSlot.tagName.toLowerCase().startsWith('h'))
         ? headlineSlot.tagName.toLowerCase()
         : `h${level}`;
 
@@ -119,8 +121,28 @@ export class VaAccordionItem {
         'va-accordion__subheader--has-icon': this.el.querySelector('[slot="subheader-icon"]'),
       });
 
+      // For slots: extract attributes and content
+      let slotAttributes = {};
+      let headerContent;
+      
+      if (headlineSlot) {
+        // Capture all attributes from the slot element except slot attribute
+        for (const attr of Array.from(headlineSlot.attributes)) {
+          if (attr.name !== 'slot') {
+            slotAttributes[attr.name] = attr.value;
+          }
+        }
+        // Get the inner content (innerHTML) to avoid nested headings
+        // Sanitize the HTML content for security
+        const sanitizedContent = Sanitizer.escapeHTML([headlineSlot.innerHTML]);
+        headerContent = <span innerHTML={sanitizedContent}></span>;
+      } else {
+        // For props: use header prop directly
+        headerContent = header;
+      }
+
       return (
-        <Tag class="usa-accordion__heading">
+        <Tag class="usa-accordion__heading" {...slotAttributes}>
           <button
             type="button"
             class="usa-accordion__button"
@@ -133,7 +155,7 @@ export class VaAccordionItem {
           >
             <span class={headerClass}>
               <slot name="icon" />
-              {headlineSlot ? <slot name="headline" /> : header}
+              {headerContent}
               {headerSrOnly && <span class="usa-sr-only">&nbsp;{headerSrOnly}</span>}
             </span>
             {this.subheader &&
@@ -142,7 +164,7 @@ export class VaAccordionItem {
                 {subheader}
               </span>}
           </button>
-        </Tag >
+        </Tag>
       );
     }
 
