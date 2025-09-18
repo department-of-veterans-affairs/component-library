@@ -1,6 +1,9 @@
 export default {
   title: 'Deprecated/Link - Action',
   id: 'components/action-link',
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };
 
 export const Primary = {

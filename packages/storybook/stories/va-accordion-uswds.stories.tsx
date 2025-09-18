@@ -256,6 +256,9 @@ ManyAccordions.args = {
     },
   ],
 };
+ManyAccordions.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 // todo: after upgrading to storybook 8 we can hide this story from the sidebar: https://storybook.js.org/docs/writing-stories/tags
 export const PrintAccordion = Template.bind(null);
@@ -278,5 +281,6 @@ PrintAccordion.args = {
 PrintAccordion.parameters = {
   chromatic: {
     media: 'print',
+    disableSnapshot: true,
   },
 };

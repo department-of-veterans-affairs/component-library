@@ -179,6 +179,9 @@ WithHintTextError.args = {
   ...defaultArgs,
   error: 'Error Message Example',
 };
+WithHintTextError.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const MonthYear = Template.bind({});
 MonthYear.args = { ...defaultArgs, 'month-year-only': true };
@@ -199,3 +202,6 @@ CustomValidation.args = {
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};

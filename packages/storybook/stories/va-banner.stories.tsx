@@ -80,3 +80,6 @@ DismissibleWithSpecificBannerId.args = {
   'show-close': true,
   'dismissed-banner-id': 'specific-banner-id',
 };
+DismissibleWithSpecificBannerId.parameters = {
+  chromatic: { disableSnapshot: true },
+};

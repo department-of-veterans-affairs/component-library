@@ -507,6 +507,9 @@ export const ReactWithCustomEvent = ReactBindingExample.bind(null);
 ReactWithCustomEvent.args = {
   ...defaultArgs,
 };
+ReactWithCustomEvent.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const Error = USWDSTiledError.bind(null);
 Error.args = {

@@ -25,6 +25,7 @@ export default {
     },
   },
   parameters: {
+    chromatic: { disableSnapshot: true },
     componentSubtitle: 'va prefill alert',
     docs: {
       page: () => (

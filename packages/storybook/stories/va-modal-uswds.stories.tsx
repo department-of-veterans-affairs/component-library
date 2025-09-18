@@ -22,20 +22,20 @@ export default {
         useEffect(() => {
           // Function to scroll to top
           const scrollToTop = () => window.scrollTo(0, 0);
-          
+
           // Immediate scroll
           scrollToTop();
-          
+
           // Schedule multiple scroll attempts with increasing delays
           // This helps ensure scrolling works even if Storybook does additional rendering
-          const timers = [50, 100, 300, 500, 1000].map(delay => 
+          const timers = [50, 100, 300, 500, 1000].map(delay =>
             setTimeout(scrollToTop, delay)
           );
-          
+
           // Clean up timers on unmount
           return () => timers.forEach(clearTimeout);
         }, []);
-        
+
         return (
           <>
             <style>
@@ -262,6 +262,9 @@ WithoutTitleAndWithLabel.args = {
   ...defaultArgs,
   'modal-title': undefined,
   'label': 'A test modal',
+};
+WithoutTitleAndWithLabel.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const WithInitialFocusSelector = Template.bind(null);

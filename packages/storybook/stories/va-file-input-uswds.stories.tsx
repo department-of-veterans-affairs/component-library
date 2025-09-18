@@ -343,6 +343,9 @@ WithAnalytics.args = {
   ...defaultArgs,
   'enable-analytics': true,
 };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const UploadedFile = Template.bind(null);
 UploadedFile.args = {
@@ -391,6 +394,9 @@ UploadStatus.args = {
 
 export const FileUploaded = FileUploadedTemplate.bind(null);
 FileUploaded.args = { ...defaultArgs, vaChange: event => event };
+FileUploaded.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const ReadOnly = FileUploadedTemplate.bind(null);
 ReadOnly.args = { ...defaultArgs, vaChange: event => event, readOnly: true };

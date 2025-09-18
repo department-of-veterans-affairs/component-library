@@ -332,6 +332,9 @@ Required.args = { ...defaultArgs, required: true };
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {

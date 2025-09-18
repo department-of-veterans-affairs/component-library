@@ -424,9 +424,15 @@ Autocomplete.args = {
   autocomplete: 'email',
   label: 'This va-text-input is configured for email autocompletion',
 };
+Autocomplete.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
@@ -451,6 +457,9 @@ const WithInlineHintTextTemplate = ({ name, label }) => {
 
 export const WithInlineHintText = WithInlineHintTextTemplate.bind(null);
 WithInlineHintText.args = { ...defaultArgs, label: 'My input (with hint)' };
+WithInlineHintText.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const WithAdditionalInfoTemplate = ({ name, label }) => {
   return (

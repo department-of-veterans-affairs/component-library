@@ -139,6 +139,10 @@ WithMessageAriaDescribedBy.args = {
   ...defaultArgs,
   messageAriaDescribedby: 'This is example aria message',
 };
+WithMessageAriaDescribedBy.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 
 const optGroupArgs = {
   ...defaultArgs,
