@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 18 Sep 2025 15:23:09 GMT
+ * Generated on Thu, 18 Sep 2025 20:26:55 GMT
  */
 
 :root {
@@ -163,9 +163,9 @@
   --font-size-serif-h4: 1.1rem;
   --font-size-serif-h5: 1.04rem;
   --font-size-serif-h6: 1.04rem;
-  --font-size-mono-sm: 0.95rem;
-  --font-size-mono-md: 1.01rem;
-  --font-size-mono-lg: 1.31rem;
+  --font-size-monospace-sm: 0.95rem;
+  --font-size-monospace-md: 1.01rem;
+  --font-size-monospace-lg: 1.31rem;
   --v3-font-base-size: 16px;
   --vads-font-line-height-1: 1;
   --vads-font-line-height-2: 1.15;
@@ -183,13 +183,13 @@
   --vads-font-line-height-serif-5: 1.7;
   --vads-font-line-height-serif-6: 1.8;
   --vads-font-line-height-serif-default: 1.6;
-  --vads-font-line-height-mono-1: 1;
-  --vads-font-line-height-mono-2: 1.15;
-  --vads-font-line-height-mono-3: 1.35;
-  --vads-font-line-height-mono-4: 1.5;
-  --vads-font-line-height-mono-5: 1.62;
-  --vads-font-line-height-mono-6: 1.75;
-  --vads-font-line-height-mono-default: 1.5;
+  --vads-font-line-height-monospace-1: 1;
+  --vads-font-line-height-monospace-2: 1.15;
+  --vads-font-line-height-monospace-3: 1.35;
+  --vads-font-line-height-monospace-4: 1.5;
+  --vads-font-line-height-monospace-5: 1.62;
+  --vads-font-line-height-monospace-6: 1.75;
+  --vads-font-line-height-monospace-default: 1.5;
   --vads-font-size-source-sans-normalized: 1.06rem;
   --vads-font-size-bitter-normalized: 1.1rem;
   --vads-font-size-monospace-normalized: 1.01rem;

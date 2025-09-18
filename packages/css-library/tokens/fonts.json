@@ -45,7 +45,7 @@
         "h5": { "value": "{font.size.serif.sm}" },
         "h6": { "value": "{font.size.serif.sm}" }
       },
-      "mono": {
+      "monospace": {
         "sm": { "value": "0.95rem" },
         "md": { "value": "1.01rem" },
         "lg": { "value": "1.31rem" }
@@ -78,7 +78,7 @@
         "-6": { "value": "1.8"},
         "default": { "value": "1.6" }
       },
-      "mono": {
+      "monospace": {
           "-1": { "value": "1"},
           "-2": { "value": "1.15"},
           "-3": { "value": "1.35"},

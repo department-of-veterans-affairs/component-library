@@ -6302,19 +6302,19 @@ through all possible variants
   font-size: 1.04rem !important;
 }
 
-.vads-u-font-size--mono-normalized {
+.vads-u-font-size--monospace-normalized {
   font-size: 1.063rem !important;
 }
 
-.vads-u-font-size--mono-sm {
+.vads-u-font-size--monospace-sm {
   font-size: 0.95rem !important;
 }
 
-.vads-u-font-size--mono-md {
+.vads-u-font-size--monospace-md {
   font-size: 1.01rem !important;
 }
 
-.vads-u-font-size--mono-lg {
+.vads-u-font-size--monospace-lg {
   font-size: 1.31rem !important;
 }
 
@@ -6414,27 +6414,27 @@ through all possible variants
   line-height: 1.8 !important;
 }
 
-.vads-u-line-height--mono-1 {
+.vads-u-line-height--monospace-1 {
   line-height: 1 !important;
 }
 
-.vads-u-line-height--mono-2 {
+.vads-u-line-height--monospace-2 {
   line-height: 1.15 !important;
 }
 
-.vads-u-line-height--mono-3 {
+.vads-u-line-height--monospace-3 {
   line-height: 1.35 !important;
 }
 
-.vads-u-line-height--mono-4 {
+.vads-u-line-height--monospace-4 {
   line-height: 1.5 !important;
 }
 
-.vads-u-line-height--mono-5 {
+.vads-u-line-height--monospace-5 {
   line-height: 1.62 !important;
 }
 
-.vads-u-line-height--mono-6 {
+.vads-u-line-height--monospace-6 {
   line-height: 1.75 !important;
 }
 
@@ -8151,16 +8151,16 @@ through all possible variants
   .mobile\:vads-u-font-size--serif-h6 {
     font-size: 1.04rem !important;
   }
-  .mobile\:vads-u-font-size--mono-normalized {
+  .mobile\:vads-u-font-size--monospace-normalized {
     font-size: 1.063rem !important;
   }
-  .mobile\:vads-u-font-size--mono-sm {
+  .mobile\:vads-u-font-size--monospace-sm {
     font-size: 0.95rem !important;
   }
-  .mobile\:vads-u-font-size--mono-md {
+  .mobile\:vads-u-font-size--monospace-md {
     font-size: 1.01rem !important;
   }
-  .mobile\:vads-u-font-size--mono-lg {
+  .mobile\:vads-u-font-size--monospace-lg {
     font-size: 1.31rem !important;
   }
   .mobile\:vads-u-height--0 {
@@ -8223,22 +8223,22 @@ through all possible variants
   .mobile\:vads-u-line-height--serif-6 {
     line-height: 1.8 !important;
   }
-  .mobile\:vads-u-line-height--mono-1 {
+  .mobile\:vads-u-line-height--monospace-1 {
     line-height: 1 !important;
   }
-  .mobile\:vads-u-line-height--mono-2 {
+  .mobile\:vads-u-line-height--monospace-2 {
     line-height: 1.15 !important;
   }
-  .mobile\:vads-u-line-height--mono-3 {
+  .mobile\:vads-u-line-height--monospace-3 {
     line-height: 1.35 !important;
   }
-  .mobile\:vads-u-line-height--mono-4 {
+  .mobile\:vads-u-line-height--monospace-4 {
     line-height: 1.5 !important;
   }
-  .mobile\:vads-u-line-height--mono-5 {
+  .mobile\:vads-u-line-height--monospace-5 {
     line-height: 1.62 !important;
   }
-  .mobile\:vads-u-line-height--mono-6 {
+  .mobile\:vads-u-line-height--monospace-6 {
     line-height: 1.75 !important;
   }
   .mobile\:vads-u-margin--0 {
@@ -9625,16 +9625,16 @@ through all possible variants
   .mobile-lg\:vads-u-font-size--serif-h6 {
     font-size: 1.04rem !important;
   }
-  .mobile-lg\:vads-u-font-size--mono-normalized {
+  .mobile-lg\:vads-u-font-size--monospace-normalized {
     font-size: 1.063rem !important;
   }
-  .mobile-lg\:vads-u-font-size--mono-sm {
+  .mobile-lg\:vads-u-font-size--monospace-sm {
     font-size: 0.95rem !important;
   }
-  .mobile-lg\:vads-u-font-size--mono-md {
+  .mobile-lg\:vads-u-font-size--monospace-md {
     font-size: 1.01rem !important;
   }
-  .mobile-lg\:vads-u-font-size--mono-lg {
+  .mobile-lg\:vads-u-font-size--monospace-lg {
     font-size: 1.31rem !important;
   }
   .mobile-lg\:vads-u-height--0 {
@@ -9697,22 +9697,22 @@ through all possible variants
   .mobile-lg\:vads-u-line-height--serif-6 {
     line-height: 1.8 !important;
   }
-  .mobile-lg\:vads-u-line-height--mono-1 {
+  .mobile-lg\:vads-u-line-height--monospace-1 {
     line-height: 1 !important;
   }
-  .mobile-lg\:vads-u-line-height--mono-2 {
+  .mobile-lg\:vads-u-line-height--monospace-2 {
     line-height: 1.15 !important;
   }
-  .mobile-lg\:vads-u-line-height--mono-3 {
+  .mobile-lg\:vads-u-line-height--monospace-3 {
     line-height: 1.35 !important;
   }
-  .mobile-lg\:vads-u-line-height--mono-4 {
+  .mobile-lg\:vads-u-line-height--monospace-4 {
     line-height: 1.5 !important;
   }
-  .mobile-lg\:vads-u-line-height--mono-5 {
+  .mobile-lg\:vads-u-line-height--monospace-5 {
     line-height: 1.62 !important;
   }
-  .mobile-lg\:vads-u-line-height--mono-6 {
+  .mobile-lg\:vads-u-line-height--monospace-6 {
     line-height: 1.75 !important;
   }
   .mobile-lg\:vads-u-margin--0 {
@@ -11099,16 +11099,16 @@ through all possible variants
   .tablet\:vads-u-font-size--serif-h6 {
     font-size: 1.04rem !important;
   }
-  .tablet\:vads-u-font-size--mono-normalized {
+  .tablet\:vads-u-font-size--monospace-normalized {
     font-size: 1.063rem !important;
   }
-  .tablet\:vads-u-font-size--mono-sm {
+  .tablet\:vads-u-font-size--monospace-sm {
     font-size: 0.95rem !important;
   }
-  .tablet\:vads-u-font-size--mono-md {
+  .tablet\:vads-u-font-size--monospace-md {
     font-size: 1.01rem !important;
   }
-  .tablet\:vads-u-font-size--mono-lg {
+  .tablet\:vads-u-font-size--monospace-lg {
     font-size: 1.31rem !important;
   }
   .tablet\:vads-u-height--0 {
@@ -11171,22 +11171,22 @@ through all possible variants
   .tablet\:vads-u-line-height--serif-6 {
     line-height: 1.8 !important;
   }
-  .tablet\:vads-u-line-height--mono-1 {
+  .tablet\:vads-u-line-height--monospace-1 {
     line-height: 1 !important;
   }
-  .tablet\:vads-u-line-height--mono-2 {
+  .tablet\:vads-u-line-height--monospace-2 {
     line-height: 1.15 !important;
   }
-  .tablet\:vads-u-line-height--mono-3 {
+  .tablet\:vads-u-line-height--monospace-3 {
     line-height: 1.35 !important;
   }
-  .tablet\:vads-u-line-height--mono-4 {
+  .tablet\:vads-u-line-height--monospace-4 {
     line-height: 1.5 !important;
   }
-  .tablet\:vads-u-line-height--mono-5 {
+  .tablet\:vads-u-line-height--monospace-5 {
     line-height: 1.62 !important;
   }
-  .tablet\:vads-u-line-height--mono-6 {
+  .tablet\:vads-u-line-height--monospace-6 {
     line-height: 1.75 !important;
   }
   .tablet\:vads-u-margin--0 {
@@ -12573,16 +12573,16 @@ through all possible variants
   .desktop\:vads-u-font-size--serif-h6 {
     font-size: 1.04rem !important;
   }
-  .desktop\:vads-u-font-size--mono-normalized {
+  .desktop\:vads-u-font-size--monospace-normalized {
     font-size: 1.063rem !important;
   }
-  .desktop\:vads-u-font-size--mono-sm {
+  .desktop\:vads-u-font-size--monospace-sm {
     font-size: 0.95rem !important;
   }
-  .desktop\:vads-u-font-size--mono-md {
+  .desktop\:vads-u-font-size--monospace-md {
     font-size: 1.01rem !important;
   }
-  .desktop\:vads-u-font-size--mono-lg {
+  .desktop\:vads-u-font-size--monospace-lg {
     font-size: 1.31rem !important;
   }
   .desktop\:vads-u-height--0 {
@@ -12645,22 +12645,22 @@ through all possible variants
   .desktop\:vads-u-line-height--serif-6 {
     line-height: 1.8 !important;
   }
-  .desktop\:vads-u-line-height--mono-1 {
+  .desktop\:vads-u-line-height--monospace-1 {
     line-height: 1 !important;
   }
-  .desktop\:vads-u-line-height--mono-2 {
+  .desktop\:vads-u-line-height--monospace-2 {
     line-height: 1.15 !important;
   }
-  .desktop\:vads-u-line-height--mono-3 {
+  .desktop\:vads-u-line-height--monospace-3 {
     line-height: 1.35 !important;
   }
-  .desktop\:vads-u-line-height--mono-4 {
+  .desktop\:vads-u-line-height--monospace-4 {
     line-height: 1.5 !important;
   }
-  .desktop\:vads-u-line-height--mono-5 {
+  .desktop\:vads-u-line-height--monospace-5 {
     line-height: 1.62 !important;
   }
-  .desktop\:vads-u-line-height--mono-6 {
+  .desktop\:vads-u-line-height--monospace-6 {
     line-height: 1.75 !important;
   }
   .desktop\:vads-u-margin--0 {
@@ -14047,16 +14047,16 @@ through all possible variants
   .desktop-lg\:vads-u-font-size--serif-h6 {
     font-size: 1.04rem !important;
   }
-  .desktop-lg\:vads-u-font-size--mono-normalized {
+  .desktop-lg\:vads-u-font-size--monospace-normalized {
     font-size: 1.063rem !important;
   }
-  .desktop-lg\:vads-u-font-size--mono-sm {
+  .desktop-lg\:vads-u-font-size--monospace-sm {
     font-size: 0.95rem !important;
   }
-  .desktop-lg\:vads-u-font-size--mono-md {
+  .desktop-lg\:vads-u-font-size--monospace-md {
     font-size: 1.01rem !important;
   }
-  .desktop-lg\:vads-u-font-size--mono-lg {
+  .desktop-lg\:vads-u-font-size--monospace-lg {
     font-size: 1.31rem !important;
   }
   .desktop-lg\:vads-u-height--0 {
@@ -14119,22 +14119,22 @@ through all possible variants
   .desktop-lg\:vads-u-line-height--serif-6 {
     line-height: 1.8 !important;
   }
-  .desktop-lg\:vads-u-line-height--mono-1 {
+  .desktop-lg\:vads-u-line-height--monospace-1 {
     line-height: 1 !important;
   }
-  .desktop-lg\:vads-u-line-height--mono-2 {
+  .desktop-lg\:vads-u-line-height--monospace-2 {
     line-height: 1.15 !important;
   }
-  .desktop-lg\:vads-u-line-height--mono-3 {
+  .desktop-lg\:vads-u-line-height--monospace-3 {
     line-height: 1.35 !important;
   }
-  .desktop-lg\:vads-u-line-height--mono-4 {
+  .desktop-lg\:vads-u-line-height--monospace-4 {
     line-height: 1.5 !important;
   }
-  .desktop-lg\:vads-u-line-height--mono-5 {
+  .desktop-lg\:vads-u-line-height--monospace-5 {
     line-height: 1.62 !important;
   }
-  .desktop-lg\:vads-u-line-height--mono-6 {
+  .desktop-lg\:vads-u-line-height--monospace-6 {
     line-height: 1.75 !important;
   }
   .desktop-lg\:vads-u-margin--0 {
@@ -15521,16 +15521,16 @@ through all possible variants
   .widescreen\:vads-u-font-size--serif-h6 {
     font-size: 1.04rem !important;
   }
-  .widescreen\:vads-u-font-size--mono-normalized {
+  .widescreen\:vads-u-font-size--monospace-normalized {
     font-size: 1.063rem !important;
   }
-  .widescreen\:vads-u-font-size--mono-sm {
+  .widescreen\:vads-u-font-size--monospace-sm {
     font-size: 0.95rem !important;
   }
-  .widescreen\:vads-u-font-size--mono-md {
+  .widescreen\:vads-u-font-size--monospace-md {
     font-size: 1.01rem !important;
   }
-  .widescreen\:vads-u-font-size--mono-lg {
+  .widescreen\:vads-u-font-size--monospace-lg {
     font-size: 1.31rem !important;
   }
   .widescreen\:vads-u-height--0 {
@@ -15593,22 +15593,22 @@ through all possible variants
   .widescreen\:vads-u-line-height--serif-6 {
     line-height: 1.8 !important;
   }
-  .widescreen\:vads-u-line-height--mono-1 {
+  .widescreen\:vads-u-line-height--monospace-1 {
     line-height: 1 !important;
   }
-  .widescreen\:vads-u-line-height--mono-2 {
+  .widescreen\:vads-u-line-height--monospace-2 {
     line-height: 1.15 !important;
   }
-  .widescreen\:vads-u-line-height--mono-3 {
+  .widescreen\:vads-u-line-height--monospace-3 {
     line-height: 1.35 !important;
   }
-  .widescreen\:vads-u-line-height--mono-4 {
+  .widescreen\:vads-u-line-height--monospace-4 {
     line-height: 1.5 !important;
   }
-  .widescreen\:vads-u-line-height--mono-5 {
+  .widescreen\:vads-u-line-height--monospace-5 {
     line-height: 1.62 !important;
   }
-  .widescreen\:vads-u-line-height--mono-6 {
+  .widescreen\:vads-u-line-height--monospace-6 {
     line-height: 1.75 !important;
   }
   .widescreen\:vads-u-margin--0 {
@@ -16995,16 +16995,16 @@ through all possible variants
   .medium-screen\:vads-u-font-size--serif-h6 {
     font-size: 1.04rem !important;
   }
-  .medium-screen\:vads-u-font-size--mono-normalized {
+  .medium-screen\:vads-u-font-size--monospace-normalized {
     font-size: 1.063rem !important;
   }
-  .medium-screen\:vads-u-font-size--mono-sm {
+  .medium-screen\:vads-u-font-size--monospace-sm {
     font-size: 0.95rem !important;
   }
-  .medium-screen\:vads-u-font-size--mono-md {
+  .medium-screen\:vads-u-font-size--monospace-md {
     font-size: 1.01rem !important;
   }
-  .medium-screen\:vads-u-font-size--mono-lg {
+  .medium-screen\:vads-u-font-size--monospace-lg {
     font-size: 1.31rem !important;
   }
   .medium-screen\:vads-u-height--0 {
@@ -17067,22 +17067,22 @@ through all possible variants
   .medium-screen\:vads-u-line-height--serif-6 {
     line-height: 1.8 !important;
   }
-  .medium-screen\:vads-u-line-height--mono-1 {
+  .medium-screen\:vads-u-line-height--monospace-1 {
     line-height: 1 !important;
   }
-  .medium-screen\:vads-u-line-height--mono-2 {
+  .medium-screen\:vads-u-line-height--monospace-2 {
     line-height: 1.15 !important;
   }
-  .medium-screen\:vads-u-line-height--mono-3 {
+  .medium-screen\:vads-u-line-height--monospace-3 {
     line-height: 1.35 !important;
   }
-  .medium-screen\:vads-u-line-height--mono-4 {
+  .medium-screen\:vads-u-line-height--monospace-4 {
     line-height: 1.5 !important;
   }
-  .medium-screen\:vads-u-line-height--mono-5 {
+  .medium-screen\:vads-u-line-height--monospace-5 {
     line-height: 1.62 !important;
   }
-  .medium-screen\:vads-u-line-height--mono-6 {
+  .medium-screen\:vads-u-line-height--monospace-6 {
     line-height: 1.75 !important;
   }
   .medium-screen\:vads-u-margin--0 {

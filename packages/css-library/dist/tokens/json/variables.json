@@ -3026,7 +3026,7 @@
           ]
         }
       },
-      "mono": {
+      "monospace": {
         "sm": {
           "value": "0.95rem",
           "filePath": "tokens/fonts.json",
@@ -3034,17 +3034,17 @@
           "original": {
             "value": "0.95rem"
           },
-          "name": "font-size-mono-sm",
+          "name": "font-size-monospace-sm",
           "attributes": {
             "category": "font",
             "type": "size",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "sm"
           },
           "path": [
             "font",
             "size",
-            "mono",
+            "monospace",
             "sm"
           ]
         },
@@ -3055,17 +3055,17 @@
           "original": {
             "value": "1.01rem"
           },
-          "name": "font-size-mono-md",
+          "name": "font-size-monospace-md",
           "attributes": {
             "category": "font",
             "type": "size",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "md"
           },
           "path": [
             "font",
             "size",
-            "mono",
+            "monospace",
             "md"
           ]
         },
@@ -3076,17 +3076,17 @@
           "original": {
             "value": "1.31rem"
           },
-          "name": "font-size-mono-lg",
+          "name": "font-size-monospace-lg",
           "attributes": {
             "category": "font",
             "type": "size",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "lg"
           },
           "path": [
             "font",
             "size",
-            "mono",
+            "monospace",
             "lg"
           ]
         }
@@ -3438,7 +3438,7 @@
           ]
         }
       },
-      "mono": {
+      "monospace": {
         "-1": {
           "value": "1",
           "filePath": "tokens/fonts.json",
@@ -3446,17 +3446,17 @@
           "original": {
             "value": "1"
           },
-          "name": "vads-font-line-height-mono-1",
+          "name": "vads-font-line-height-monospace-1",
           "attributes": {
             "category": "vads-font",
             "type": "line-height",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "-1"
           },
           "path": [
             "vads-font",
             "line-height",
-            "mono",
+            "monospace",
             "-1"
           ]
         },
@@ -3467,17 +3467,17 @@
           "original": {
             "value": "1.15"
           },
-          "name": "vads-font-line-height-mono-2",
+          "name": "vads-font-line-height-monospace-2",
           "attributes": {
             "category": "vads-font",
             "type": "line-height",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "-2"
           },
           "path": [
             "vads-font",
             "line-height",
-            "mono",
+            "monospace",
             "-2"
           ]
         },
@@ -3488,17 +3488,17 @@
           "original": {
             "value": "1.35"
           },
-          "name": "vads-font-line-height-mono-3",
+          "name": "vads-font-line-height-monospace-3",
           "attributes": {
             "category": "vads-font",
             "type": "line-height",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "-3"
           },
           "path": [
             "vads-font",
             "line-height",
-            "mono",
+            "monospace",
             "-3"
           ]
         },
@@ -3509,17 +3509,17 @@
           "original": {
             "value": "1.5"
           },
-          "name": "vads-font-line-height-mono-4",
+          "name": "vads-font-line-height-monospace-4",
           "attributes": {
             "category": "vads-font",
             "type": "line-height",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "-4"
           },
           "path": [
             "vads-font",
             "line-height",
-            "mono",
+            "monospace",
             "-4"
           ]
         },
@@ -3530,17 +3530,17 @@
           "original": {
             "value": "1.62"
           },
-          "name": "vads-font-line-height-mono-5",
+          "name": "vads-font-line-height-monospace-5",
           "attributes": {
             "category": "vads-font",
             "type": "line-height",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "-5"
           },
           "path": [
             "vads-font",
             "line-height",
-            "mono",
+            "monospace",
             "-5"
           ]
         },
@@ -3551,17 +3551,17 @@
           "original": {
             "value": "1.75"
           },
-          "name": "vads-font-line-height-mono-6",
+          "name": "vads-font-line-height-monospace-6",
           "attributes": {
             "category": "vads-font",
             "type": "line-height",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "-6"
           },
           "path": [
             "vads-font",
             "line-height",
-            "mono",
+            "monospace",
             "-6"
           ]
         },
@@ -3572,17 +3572,17 @@
           "original": {
             "value": "1.5"
           },
-          "name": "vads-font-line-height-mono-default",
+          "name": "vads-font-line-height-monospace-default",
           "attributes": {
             "category": "vads-font",
             "type": "line-height",
-            "item": "mono",
+            "item": "monospace",
             "subitem": "default"
           },
           "path": [
             "vads-font",
             "line-height",
-            "mono",
+            "monospace",
             "default"
           ]
         }
