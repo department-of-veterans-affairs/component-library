@@ -121,23 +121,18 @@ export class VaAccordionItem {
         'va-accordion__subheader--has-icon': this.el.querySelector('[slot="subheader-icon"]'),
       });
 
-      // For slots: extract attributes and content
       let slotAttributes = {};
       let headerContent;
-      
+
       if (headlineSlot) {
-        // Capture all attributes from the slot element except slot attribute
         for (const attr of Array.from(headlineSlot.attributes)) {
           if (attr.name !== 'slot') {
             slotAttributes[attr.name] = attr.value;
           }
         }
-        // Get the inner content (innerHTML) to avoid nested headings
-        // Sanitize the HTML content for security
         const sanitizedContent = Sanitizer.escapeHTML([headlineSlot.innerHTML]);
         headerContent = <span innerHTML={sanitizedContent}></span>;
       } else {
-        // For props: use header prop directly
         headerContent = header;
       }
 
