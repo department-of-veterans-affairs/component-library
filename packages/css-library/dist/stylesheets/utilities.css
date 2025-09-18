@@ -6202,19 +6202,119 @@ through all possible variants
   font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace !important;
 }
 
-.vads-u-font-size-mono--mono-normalized {
+.vads-u-font-size--source-sans-normalized {
   font-size: 1.063rem !important;
 }
 
-.vads-u-font-size-mono--sm {
+.vads-u-font-size--sm {
+  font-size: 0.938rem !important;
+}
+
+.vads-u-font-size--base {
+  font-size: 1rem !important;
+}
+
+.vads-u-font-size--md {
+  font-size: 1.063rem !important;
+}
+
+.vads-u-font-size--lg {
+  font-size: 1.25rem !important;
+}
+
+.vads-u-font-size--xl {
+  font-size: 2rem !important;
+}
+
+.vads-u-font-size--2xl {
+  font-size: 2.5rem !important;
+}
+
+.vads-u-font-size--h1 {
+  font-size: 2.5rem !important;
+}
+
+.vads-u-font-size--h2 {
+  font-size: 2rem !important;
+}
+
+.vads-u-font-size--h3 {
+  font-size: 1.25rem !important;
+}
+
+.vads-u-font-size--h4 {
+  font-size: 1.063rem !important;
+}
+
+.vads-u-font-size--h5 {
+  font-size: 0.938rem !important;
+}
+
+.vads-u-font-size--h6 {
+  font-size: 0.938rem !important;
+}
+
+.vads-u-font-size--serif-normalized {
+  font-size: 1.063rem !important;
+}
+
+.vads-u-font-size--serif-sm {
+  font-size: 1.04rem !important;
+}
+
+.vads-u-font-size--serif-md {
+  font-size: 1.1rem !important;
+}
+
+.vads-u-font-size--serif-lg {
+  font-size: 1.43rem !important;
+}
+
+.vads-u-font-size--serif-xl {
+  font-size: 2.07rem !important;
+}
+
+.vads-u-font-size--serif-2xl {
+  font-size: 2.59rem !important;
+}
+
+.vads-u-font-size--serif-h1 {
+  font-size: 2.59rem !important;
+}
+
+.vads-u-font-size--serif-h2 {
+  font-size: 2.07rem !important;
+}
+
+.vads-u-font-size--serif-h3 {
+  font-size: 1.43rem !important;
+}
+
+.vads-u-font-size--serif-h4 {
+  font-size: 1.1rem !important;
+}
+
+.vads-u-font-size--serif-h5 {
+  font-size: 1.04rem !important;
+}
+
+.vads-u-font-size--serif-h6 {
+  font-size: 1.04rem !important;
+}
+
+.vads-u-font-size--mono-normalized {
+  font-size: 1.063rem !important;
+}
+
+.vads-u-font-size--mono-sm {
   font-size: 0.95rem !important;
 }
 
-.vads-u-font-size-mono--md {
+.vads-u-font-size--mono-md {
   font-size: 1.01rem !important;
 }
 
-.vads-u-font-size-mono--lg {
+.vads-u-font-size--mono-lg {
   font-size: 1.31rem !important;
 }
 
@@ -7928,16 +8028,91 @@ through all possible variants
   .mobile\:vads-u-order--initial {
     order: 0 !important;
   }
-  .mobile\:vads-u-font-size-mono--mono-normalized {
+  .mobile\:vads-u-font-size--source-sans-normalized {
     font-size: 1.063rem !important;
   }
-  .mobile\:vads-u-font-size-mono--sm {
+  .mobile\:vads-u-font-size--sm {
+    font-size: 0.938rem !important;
+  }
+  .mobile\:vads-u-font-size--base {
+    font-size: 1rem !important;
+  }
+  .mobile\:vads-u-font-size--md {
+    font-size: 1.063rem !important;
+  }
+  .mobile\:vads-u-font-size--lg {
+    font-size: 1.25rem !important;
+  }
+  .mobile\:vads-u-font-size--xl {
+    font-size: 2rem !important;
+  }
+  .mobile\:vads-u-font-size--2xl {
+    font-size: 2.5rem !important;
+  }
+  .mobile\:vads-u-font-size--h1 {
+    font-size: 2.5rem !important;
+  }
+  .mobile\:vads-u-font-size--h2 {
+    font-size: 2rem !important;
+  }
+  .mobile\:vads-u-font-size--h3 {
+    font-size: 1.25rem !important;
+  }
+  .mobile\:vads-u-font-size--h4 {
+    font-size: 1.063rem !important;
+  }
+  .mobile\:vads-u-font-size--h5 {
+    font-size: 0.938rem !important;
+  }
+  .mobile\:vads-u-font-size--h6 {
+    font-size: 0.938rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-normalized {
+    font-size: 1.063rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-sm {
+    font-size: 1.04rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-md {
+    font-size: 1.1rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-lg {
+    font-size: 1.43rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-xl {
+    font-size: 2.07rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-2xl {
+    font-size: 2.59rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-h1 {
+    font-size: 2.59rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-h2 {
+    font-size: 2.07rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-h3 {
+    font-size: 1.43rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-h4 {
+    font-size: 1.1rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-h5 {
+    font-size: 1.04rem !important;
+  }
+  .mobile\:vads-u-font-size--serif-h6 {
+    font-size: 1.04rem !important;
+  }
+  .mobile\:vads-u-font-size--mono-normalized {
+    font-size: 1.063rem !important;
+  }
+  .mobile\:vads-u-font-size--mono-sm {
     font-size: 0.95rem !important;
   }
-  .mobile\:vads-u-font-size-mono--md {
+  .mobile\:vads-u-font-size--mono-md {
     font-size: 1.01rem !important;
   }
-  .mobile\:vads-u-font-size-mono--lg {
+  .mobile\:vads-u-font-size--mono-lg {
     font-size: 1.31rem !important;
   }
   .mobile\:vads-u-height--0 {
@@ -9291,16 +9466,91 @@ through all possible variants
   .mobile-lg\:vads-u-order--initial {
     order: 0 !important;
   }
-  .mobile-lg\:vads-u-font-size-mono--mono-normalized {
+  .mobile-lg\:vads-u-font-size--source-sans-normalized {
     font-size: 1.063rem !important;
   }
-  .mobile-lg\:vads-u-font-size-mono--sm {
+  .mobile-lg\:vads-u-font-size--sm {
+    font-size: 0.938rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--base {
+    font-size: 1rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--md {
+    font-size: 1.063rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--lg {
+    font-size: 1.25rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--xl {
+    font-size: 2rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--2xl {
+    font-size: 2.5rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--h1 {
+    font-size: 2.5rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--h2 {
+    font-size: 2rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--h3 {
+    font-size: 1.25rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--h4 {
+    font-size: 1.063rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--h5 {
+    font-size: 0.938rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--h6 {
+    font-size: 0.938rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-normalized {
+    font-size: 1.063rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-sm {
+    font-size: 1.04rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-md {
+    font-size: 1.1rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-lg {
+    font-size: 1.43rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-xl {
+    font-size: 2.07rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-2xl {
+    font-size: 2.59rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-h1 {
+    font-size: 2.59rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-h2 {
+    font-size: 2.07rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-h3 {
+    font-size: 1.43rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-h4 {
+    font-size: 1.1rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-h5 {
+    font-size: 1.04rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--serif-h6 {
+    font-size: 1.04rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--mono-normalized {
+    font-size: 1.063rem !important;
+  }
+  .mobile-lg\:vads-u-font-size--mono-sm {
     font-size: 0.95rem !important;
   }
-  .mobile-lg\:vads-u-font-size-mono--md {
+  .mobile-lg\:vads-u-font-size--mono-md {
     font-size: 1.01rem !important;
   }
-  .mobile-lg\:vads-u-font-size-mono--lg {
+  .mobile-lg\:vads-u-font-size--mono-lg {
     font-size: 1.31rem !important;
   }
   .mobile-lg\:vads-u-height--0 {
@@ -10654,16 +10904,91 @@ through all possible variants
   .tablet\:vads-u-order--initial {
     order: 0 !important;
   }
-  .tablet\:vads-u-font-size-mono--mono-normalized {
+  .tablet\:vads-u-font-size--source-sans-normalized {
     font-size: 1.063rem !important;
   }
-  .tablet\:vads-u-font-size-mono--sm {
+  .tablet\:vads-u-font-size--sm {
+    font-size: 0.938rem !important;
+  }
+  .tablet\:vads-u-font-size--base {
+    font-size: 1rem !important;
+  }
+  .tablet\:vads-u-font-size--md {
+    font-size: 1.063rem !important;
+  }
+  .tablet\:vads-u-font-size--lg {
+    font-size: 1.25rem !important;
+  }
+  .tablet\:vads-u-font-size--xl {
+    font-size: 2rem !important;
+  }
+  .tablet\:vads-u-font-size--2xl {
+    font-size: 2.5rem !important;
+  }
+  .tablet\:vads-u-font-size--h1 {
+    font-size: 2.5rem !important;
+  }
+  .tablet\:vads-u-font-size--h2 {
+    font-size: 2rem !important;
+  }
+  .tablet\:vads-u-font-size--h3 {
+    font-size: 1.25rem !important;
+  }
+  .tablet\:vads-u-font-size--h4 {
+    font-size: 1.063rem !important;
+  }
+  .tablet\:vads-u-font-size--h5 {
+    font-size: 0.938rem !important;
+  }
+  .tablet\:vads-u-font-size--h6 {
+    font-size: 0.938rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-normalized {
+    font-size: 1.063rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-sm {
+    font-size: 1.04rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-md {
+    font-size: 1.1rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-lg {
+    font-size: 1.43rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-xl {
+    font-size: 2.07rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-2xl {
+    font-size: 2.59rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-h1 {
+    font-size: 2.59rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-h2 {
+    font-size: 2.07rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-h3 {
+    font-size: 1.43rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-h4 {
+    font-size: 1.1rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-h5 {
+    font-size: 1.04rem !important;
+  }
+  .tablet\:vads-u-font-size--serif-h6 {
+    font-size: 1.04rem !important;
+  }
+  .tablet\:vads-u-font-size--mono-normalized {
+    font-size: 1.063rem !important;
+  }
+  .tablet\:vads-u-font-size--mono-sm {
     font-size: 0.95rem !important;
   }
-  .tablet\:vads-u-font-size-mono--md {
+  .tablet\:vads-u-font-size--mono-md {
     font-size: 1.01rem !important;
   }
-  .tablet\:vads-u-font-size-mono--lg {
+  .tablet\:vads-u-font-size--mono-lg {
     font-size: 1.31rem !important;
   }
   .tablet\:vads-u-height--0 {
@@ -12017,16 +12342,91 @@ through all possible variants
   .desktop\:vads-u-order--initial {
     order: 0 !important;
   }
-  .desktop\:vads-u-font-size-mono--mono-normalized {
+  .desktop\:vads-u-font-size--source-sans-normalized {
     font-size: 1.063rem !important;
   }
-  .desktop\:vads-u-font-size-mono--sm {
+  .desktop\:vads-u-font-size--sm {
+    font-size: 0.938rem !important;
+  }
+  .desktop\:vads-u-font-size--base {
+    font-size: 1rem !important;
+  }
+  .desktop\:vads-u-font-size--md {
+    font-size: 1.063rem !important;
+  }
+  .desktop\:vads-u-font-size--lg {
+    font-size: 1.25rem !important;
+  }
+  .desktop\:vads-u-font-size--xl {
+    font-size: 2rem !important;
+  }
+  .desktop\:vads-u-font-size--2xl {
+    font-size: 2.5rem !important;
+  }
+  .desktop\:vads-u-font-size--h1 {
+    font-size: 2.5rem !important;
+  }
+  .desktop\:vads-u-font-size--h2 {
+    font-size: 2rem !important;
+  }
+  .desktop\:vads-u-font-size--h3 {
+    font-size: 1.25rem !important;
+  }
+  .desktop\:vads-u-font-size--h4 {
+    font-size: 1.063rem !important;
+  }
+  .desktop\:vads-u-font-size--h5 {
+    font-size: 0.938rem !important;
+  }
+  .desktop\:vads-u-font-size--h6 {
+    font-size: 0.938rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-normalized {
+    font-size: 1.063rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-sm {
+    font-size: 1.04rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-md {
+    font-size: 1.1rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-lg {
+    font-size: 1.43rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-xl {
+    font-size: 2.07rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-2xl {
+    font-size: 2.59rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-h1 {
+    font-size: 2.59rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-h2 {
+    font-size: 2.07rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-h3 {
+    font-size: 1.43rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-h4 {
+    font-size: 1.1rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-h5 {
+    font-size: 1.04rem !important;
+  }
+  .desktop\:vads-u-font-size--serif-h6 {
+    font-size: 1.04rem !important;
+  }
+  .desktop\:vads-u-font-size--mono-normalized {
+    font-size: 1.063rem !important;
+  }
+  .desktop\:vads-u-font-size--mono-sm {
     font-size: 0.95rem !important;
   }
-  .desktop\:vads-u-font-size-mono--md {
+  .desktop\:vads-u-font-size--mono-md {
     font-size: 1.01rem !important;
   }
-  .desktop\:vads-u-font-size-mono--lg {
+  .desktop\:vads-u-font-size--mono-lg {
     font-size: 1.31rem !important;
   }
   .desktop\:vads-u-height--0 {
@@ -13380,16 +13780,91 @@ through all possible variants
   .desktop-lg\:vads-u-order--initial {
     order: 0 !important;
   }
-  .desktop-lg\:vads-u-font-size-mono--mono-normalized {
+  .desktop-lg\:vads-u-font-size--source-sans-normalized {
     font-size: 1.063rem !important;
   }
-  .desktop-lg\:vads-u-font-size-mono--sm {
+  .desktop-lg\:vads-u-font-size--sm {
+    font-size: 0.938rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--base {
+    font-size: 1rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--md {
+    font-size: 1.063rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--lg {
+    font-size: 1.25rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--xl {
+    font-size: 2rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--2xl {
+    font-size: 2.5rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--h1 {
+    font-size: 2.5rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--h2 {
+    font-size: 2rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--h3 {
+    font-size: 1.25rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--h4 {
+    font-size: 1.063rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--h5 {
+    font-size: 0.938rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--h6 {
+    font-size: 0.938rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-normalized {
+    font-size: 1.063rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-sm {
+    font-size: 1.04rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-md {
+    font-size: 1.1rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-lg {
+    font-size: 1.43rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-xl {
+    font-size: 2.07rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-2xl {
+    font-size: 2.59rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-h1 {
+    font-size: 2.59rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-h2 {
+    font-size: 2.07rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-h3 {
+    font-size: 1.43rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-h4 {
+    font-size: 1.1rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-h5 {
+    font-size: 1.04rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--serif-h6 {
+    font-size: 1.04rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--mono-normalized {
+    font-size: 1.063rem !important;
+  }
+  .desktop-lg\:vads-u-font-size--mono-sm {
     font-size: 0.95rem !important;
   }
-  .desktop-lg\:vads-u-font-size-mono--md {
+  .desktop-lg\:vads-u-font-size--mono-md {
     font-size: 1.01rem !important;
   }
-  .desktop-lg\:vads-u-font-size-mono--lg {
+  .desktop-lg\:vads-u-font-size--mono-lg {
     font-size: 1.31rem !important;
   }
   .desktop-lg\:vads-u-height--0 {
@@ -14743,16 +15218,91 @@ through all possible variants
   .widescreen\:vads-u-order--initial {
     order: 0 !important;
   }
-  .widescreen\:vads-u-font-size-mono--mono-normalized {
+  .widescreen\:vads-u-font-size--source-sans-normalized {
     font-size: 1.063rem !important;
   }
-  .widescreen\:vads-u-font-size-mono--sm {
+  .widescreen\:vads-u-font-size--sm {
+    font-size: 0.938rem !important;
+  }
+  .widescreen\:vads-u-font-size--base {
+    font-size: 1rem !important;
+  }
+  .widescreen\:vads-u-font-size--md {
+    font-size: 1.063rem !important;
+  }
+  .widescreen\:vads-u-font-size--lg {
+    font-size: 1.25rem !important;
+  }
+  .widescreen\:vads-u-font-size--xl {
+    font-size: 2rem !important;
+  }
+  .widescreen\:vads-u-font-size--2xl {
+    font-size: 2.5rem !important;
+  }
+  .widescreen\:vads-u-font-size--h1 {
+    font-size: 2.5rem !important;
+  }
+  .widescreen\:vads-u-font-size--h2 {
+    font-size: 2rem !important;
+  }
+  .widescreen\:vads-u-font-size--h3 {
+    font-size: 1.25rem !important;
+  }
+  .widescreen\:vads-u-font-size--h4 {
+    font-size: 1.063rem !important;
+  }
+  .widescreen\:vads-u-font-size--h5 {
+    font-size: 0.938rem !important;
+  }
+  .widescreen\:vads-u-font-size--h6 {
+    font-size: 0.938rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-normalized {
+    font-size: 1.063rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-sm {
+    font-size: 1.04rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-md {
+    font-size: 1.1rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-lg {
+    font-size: 1.43rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-xl {
+    font-size: 2.07rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-2xl {
+    font-size: 2.59rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-h1 {
+    font-size: 2.59rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-h2 {
+    font-size: 2.07rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-h3 {
+    font-size: 1.43rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-h4 {
+    font-size: 1.1rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-h5 {
+    font-size: 1.04rem !important;
+  }
+  .widescreen\:vads-u-font-size--serif-h6 {
+    font-size: 1.04rem !important;
+  }
+  .widescreen\:vads-u-font-size--mono-normalized {
+    font-size: 1.063rem !important;
+  }
+  .widescreen\:vads-u-font-size--mono-sm {
     font-size: 0.95rem !important;
   }
-  .widescreen\:vads-u-font-size-mono--md {
+  .widescreen\:vads-u-font-size--mono-md {
     font-size: 1.01rem !important;
   }
-  .widescreen\:vads-u-font-size-mono--lg {
+  .widescreen\:vads-u-font-size--mono-lg {
     font-size: 1.31rem !important;
   }
   .widescreen\:vads-u-height--0 {
@@ -16106,16 +16656,91 @@ through all possible variants
   .medium-screen\:vads-u-order--initial {
     order: 0 !important;
   }
-  .medium-screen\:vads-u-font-size-mono--mono-normalized {
+  .medium-screen\:vads-u-font-size--source-sans-normalized {
     font-size: 1.063rem !important;
   }
-  .medium-screen\:vads-u-font-size-mono--sm {
+  .medium-screen\:vads-u-font-size--sm {
+    font-size: 0.938rem !important;
+  }
+  .medium-screen\:vads-u-font-size--base {
+    font-size: 1rem !important;
+  }
+  .medium-screen\:vads-u-font-size--md {
+    font-size: 1.063rem !important;
+  }
+  .medium-screen\:vads-u-font-size--lg {
+    font-size: 1.25rem !important;
+  }
+  .medium-screen\:vads-u-font-size--xl {
+    font-size: 2rem !important;
+  }
+  .medium-screen\:vads-u-font-size--2xl {
+    font-size: 2.5rem !important;
+  }
+  .medium-screen\:vads-u-font-size--h1 {
+    font-size: 2.5rem !important;
+  }
+  .medium-screen\:vads-u-font-size--h2 {
+    font-size: 2rem !important;
+  }
+  .medium-screen\:vads-u-font-size--h3 {
+    font-size: 1.25rem !important;
+  }
+  .medium-screen\:vads-u-font-size--h4 {
+    font-size: 1.063rem !important;
+  }
+  .medium-screen\:vads-u-font-size--h5 {
+    font-size: 0.938rem !important;
+  }
+  .medium-screen\:vads-u-font-size--h6 {
+    font-size: 0.938rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-normalized {
+    font-size: 1.063rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-sm {
+    font-size: 1.04rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-md {
+    font-size: 1.1rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-lg {
+    font-size: 1.43rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-xl {
+    font-size: 2.07rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-2xl {
+    font-size: 2.59rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-h1 {
+    font-size: 2.59rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-h2 {
+    font-size: 2.07rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-h3 {
+    font-size: 1.43rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-h4 {
+    font-size: 1.1rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-h5 {
+    font-size: 1.04rem !important;
+  }
+  .medium-screen\:vads-u-font-size--serif-h6 {
+    font-size: 1.04rem !important;
+  }
+  .medium-screen\:vads-u-font-size--mono-normalized {
+    font-size: 1.063rem !important;
+  }
+  .medium-screen\:vads-u-font-size--mono-sm {
     font-size: 0.95rem !important;
   }
-  .medium-screen\:vads-u-font-size-mono--md {
+  .medium-screen\:vads-u-font-size--mono-md {
     font-size: 1.01rem !important;
   }
-  .medium-screen\:vads-u-font-size-mono--lg {
+  .medium-screen\:vads-u-font-size--mono-lg {
     font-size: 1.31rem !important;
   }
   .medium-screen\:vads-u-height--0 {

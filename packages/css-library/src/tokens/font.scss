@@ -20,28 +20,25 @@ $tokens-font-size: (
   'h4': $font-size-h4,
   'h5': $font-size-h5,
   'h6': $font-size-h6,
-);
 
-$tokens-font-size-serif: (
-  'bitter-normalized': $font-size-md,
-  'sm': $font-size-serif-sm,
-  'md': $font-size-serif-md,
-  'lg': $font-size-serif-lg,
-  'xl': $font-size-serif-xl,
-  '2xl': $font-size-serif-2xl,
-  'h1': $font-size-serif-h1,
-  'h2': $font-size-serif-h2,
-  'h3': $font-size-serif-h3,
-  'h4': $font-size-serif-h4,
-  'h5': $font-size-serif-h5,
-  'h6': $font-size-serif-h6,
-);
+  'serif-normalized': $font-size-md,
+  'serif-sm': $font-size-serif-sm,
+  'serif-md': $font-size-serif-md,
+  'serif-lg': $font-size-serif-lg,
+  'serif-xl': $font-size-serif-xl,
+  'serif-2xl': $font-size-serif-2xl,
+  'serif-h1': $font-size-serif-h1,
+  'serif-h2': $font-size-serif-h2,
+  'serif-h3': $font-size-serif-h3,
+  'serif-h4': $font-size-serif-h4,
+  'serif-h5': $font-size-serif-h5,
+  'serif-h6': $font-size-serif-h6,
 
-$tokens-font-size-mono: (
   'mono-normalized': $font-size-md,
-  'sm': $font-size-mono-sm,
-  'md': $font-size-mono-md,
-  'lg': $font-size-mono-lg
+  'mono-sm': $font-size-mono-sm,
+  'mono-md': $font-size-mono-md,
+  'mono-lg': $font-size-mono-lg
+
 );
 
 $tokens-font-style: (
