@@ -5,6 +5,9 @@ on:
     - cron: '0 22 * * 4' # Run every Thursday at 10 PM UTC (6 PM EDT / 5 PM EST)
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
+    branches-ignore:
+      - 'weekly-reports/**'
+      - '*weekly-reports*'
     paths:
       - '.github/workflows/weekly-reports.yml'
       - 'packages/design-system-dashboard-cli/**'
