@@ -124,6 +124,12 @@ The repository includes automated weekly reporting via GitHub Actions:
 - Code review process for all changes
 - **Branch Protection Rules**: The repository requires all changes to be made through pull requests - direct pushes to main are not allowed
 
+### GitHub CLI Usage
+- When using `gh` commands to view issues or PRs, use the `--json` flag and pipe to `cat` to avoid output being caught in the less pager
+- **Example**: `gh pr view 1234 --json | cat` instead of `gh pr view 1234`
+- **Example**: `gh issue list --json | cat` instead of `gh issue list`
+- This prevents terminal paging issues and ensures clean output for AI processing
+
 ### Documentation
 - Comprehensive JSDoc for all public APIs
 - Storybook stories with controls and examples
