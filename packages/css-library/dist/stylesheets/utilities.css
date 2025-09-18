@@ -6390,6 +6390,54 @@ through all possible variants
   line-height: 1.75 !important;
 }
 
+.vads-u-line-height--serif-1 {
+  line-height: 1 !important;
+}
+
+.vads-u-line-height--serif-2 {
+  line-height: 1.3 !important;
+}
+
+.vads-u-line-height--serif-3 {
+  line-height: 1.4 !important;
+}
+
+.vads-u-line-height--serif-4 {
+  line-height: 1.6 !important;
+}
+
+.vads-u-line-height--serif-5 {
+  line-height: 1.7 !important;
+}
+
+.vads-u-line-height--serif-6 {
+  line-height: 1.8 !important;
+}
+
+.vads-u-line-height--mono-1 {
+  line-height: 1 !important;
+}
+
+.vads-u-line-height--mono-2 {
+  line-height: 1.15 !important;
+}
+
+.vads-u-line-height--mono-3 {
+  line-height: 1.35 !important;
+}
+
+.vads-u-line-height--mono-4 {
+  line-height: 1.5 !important;
+}
+
+.vads-u-line-height--mono-5 {
+  line-height: 1.62 !important;
+}
+
+.vads-u-line-height--mono-6 {
+  line-height: 1.75 !important;
+}
+
 .vads-u-margin--0 {
   margin: 0 !important;
 }
@@ -8157,6 +8205,42 @@ through all possible variants
   .mobile\:vads-u-line-height--6 {
     line-height: 1.75 !important;
   }
+  .mobile\:vads-u-line-height--serif-1 {
+    line-height: 1 !important;
+  }
+  .mobile\:vads-u-line-height--serif-2 {
+    line-height: 1.3 !important;
+  }
+  .mobile\:vads-u-line-height--serif-3 {
+    line-height: 1.4 !important;
+  }
+  .mobile\:vads-u-line-height--serif-4 {
+    line-height: 1.6 !important;
+  }
+  .mobile\:vads-u-line-height--serif-5 {
+    line-height: 1.7 !important;
+  }
+  .mobile\:vads-u-line-height--serif-6 {
+    line-height: 1.8 !important;
+  }
+  .mobile\:vads-u-line-height--mono-1 {
+    line-height: 1 !important;
+  }
+  .mobile\:vads-u-line-height--mono-2 {
+    line-height: 1.15 !important;
+  }
+  .mobile\:vads-u-line-height--mono-3 {
+    line-height: 1.35 !important;
+  }
+  .mobile\:vads-u-line-height--mono-4 {
+    line-height: 1.5 !important;
+  }
+  .mobile\:vads-u-line-height--mono-5 {
+    line-height: 1.62 !important;
+  }
+  .mobile\:vads-u-line-height--mono-6 {
+    line-height: 1.75 !important;
+  }
   .mobile\:vads-u-margin--0 {
     margin: 0 !important;
   }
@@ -9593,6 +9677,42 @@ through all possible variants
     line-height: 1.62 !important;
   }
   .mobile-lg\:vads-u-line-height--6 {
+    line-height: 1.75 !important;
+  }
+  .mobile-lg\:vads-u-line-height--serif-1 {
+    line-height: 1 !important;
+  }
+  .mobile-lg\:vads-u-line-height--serif-2 {
+    line-height: 1.3 !important;
+  }
+  .mobile-lg\:vads-u-line-height--serif-3 {
+    line-height: 1.4 !important;
+  }
+  .mobile-lg\:vads-u-line-height--serif-4 {
+    line-height: 1.6 !important;
+  }
+  .mobile-lg\:vads-u-line-height--serif-5 {
+    line-height: 1.7 !important;
+  }
+  .mobile-lg\:vads-u-line-height--serif-6 {
+    line-height: 1.8 !important;
+  }
+  .mobile-lg\:vads-u-line-height--mono-1 {
+    line-height: 1 !important;
+  }
+  .mobile-lg\:vads-u-line-height--mono-2 {
+    line-height: 1.15 !important;
+  }
+  .mobile-lg\:vads-u-line-height--mono-3 {
+    line-height: 1.35 !important;
+  }
+  .mobile-lg\:vads-u-line-height--mono-4 {
+    line-height: 1.5 !important;
+  }
+  .mobile-lg\:vads-u-line-height--mono-5 {
+    line-height: 1.62 !important;
+  }
+  .mobile-lg\:vads-u-line-height--mono-6 {
     line-height: 1.75 !important;
   }
   .mobile-lg\:vads-u-margin--0 {
@@ -11033,6 +11153,42 @@ through all possible variants
   .tablet\:vads-u-line-height--6 {
     line-height: 1.75 !important;
   }
+  .tablet\:vads-u-line-height--serif-1 {
+    line-height: 1 !important;
+  }
+  .tablet\:vads-u-line-height--serif-2 {
+    line-height: 1.3 !important;
+  }
+  .tablet\:vads-u-line-height--serif-3 {
+    line-height: 1.4 !important;
+  }
+  .tablet\:vads-u-line-height--serif-4 {
+    line-height: 1.6 !important;
+  }
+  .tablet\:vads-u-line-height--serif-5 {
+    line-height: 1.7 !important;
+  }
+  .tablet\:vads-u-line-height--serif-6 {
+    line-height: 1.8 !important;
+  }
+  .tablet\:vads-u-line-height--mono-1 {
+    line-height: 1 !important;
+  }
+  .tablet\:vads-u-line-height--mono-2 {
+    line-height: 1.15 !important;
+  }
+  .tablet\:vads-u-line-height--mono-3 {
+    line-height: 1.35 !important;
+  }
+  .tablet\:vads-u-line-height--mono-4 {
+    line-height: 1.5 !important;
+  }
+  .tablet\:vads-u-line-height--mono-5 {
+    line-height: 1.62 !important;
+  }
+  .tablet\:vads-u-line-height--mono-6 {
+    line-height: 1.75 !important;
+  }
   .tablet\:vads-u-margin--0 {
     margin: 0 !important;
   }
@@ -12469,6 +12625,42 @@ through all possible variants
     line-height: 1.62 !important;
   }
   .desktop\:vads-u-line-height--6 {
+    line-height: 1.75 !important;
+  }
+  .desktop\:vads-u-line-height--serif-1 {
+    line-height: 1 !important;
+  }
+  .desktop\:vads-u-line-height--serif-2 {
+    line-height: 1.3 !important;
+  }
+  .desktop\:vads-u-line-height--serif-3 {
+    line-height: 1.4 !important;
+  }
+  .desktop\:vads-u-line-height--serif-4 {
+    line-height: 1.6 !important;
+  }
+  .desktop\:vads-u-line-height--serif-5 {
+    line-height: 1.7 !important;
+  }
+  .desktop\:vads-u-line-height--serif-6 {
+    line-height: 1.8 !important;
+  }
+  .desktop\:vads-u-line-height--mono-1 {
+    line-height: 1 !important;
+  }
+  .desktop\:vads-u-line-height--mono-2 {
+    line-height: 1.15 !important;
+  }
+  .desktop\:vads-u-line-height--mono-3 {
+    line-height: 1.35 !important;
+  }
+  .desktop\:vads-u-line-height--mono-4 {
+    line-height: 1.5 !important;
+  }
+  .desktop\:vads-u-line-height--mono-5 {
+    line-height: 1.62 !important;
+  }
+  .desktop\:vads-u-line-height--mono-6 {
     line-height: 1.75 !important;
   }
   .desktop\:vads-u-margin--0 {
@@ -13909,6 +14101,42 @@ through all possible variants
   .desktop-lg\:vads-u-line-height--6 {
     line-height: 1.75 !important;
   }
+  .desktop-lg\:vads-u-line-height--serif-1 {
+    line-height: 1 !important;
+  }
+  .desktop-lg\:vads-u-line-height--serif-2 {
+    line-height: 1.3 !important;
+  }
+  .desktop-lg\:vads-u-line-height--serif-3 {
+    line-height: 1.4 !important;
+  }
+  .desktop-lg\:vads-u-line-height--serif-4 {
+    line-height: 1.6 !important;
+  }
+  .desktop-lg\:vads-u-line-height--serif-5 {
+    line-height: 1.7 !important;
+  }
+  .desktop-lg\:vads-u-line-height--serif-6 {
+    line-height: 1.8 !important;
+  }
+  .desktop-lg\:vads-u-line-height--mono-1 {
+    line-height: 1 !important;
+  }
+  .desktop-lg\:vads-u-line-height--mono-2 {
+    line-height: 1.15 !important;
+  }
+  .desktop-lg\:vads-u-line-height--mono-3 {
+    line-height: 1.35 !important;
+  }
+  .desktop-lg\:vads-u-line-height--mono-4 {
+    line-height: 1.5 !important;
+  }
+  .desktop-lg\:vads-u-line-height--mono-5 {
+    line-height: 1.62 !important;
+  }
+  .desktop-lg\:vads-u-line-height--mono-6 {
+    line-height: 1.75 !important;
+  }
   .desktop-lg\:vads-u-margin--0 {
     margin: 0 !important;
   }
@@ -15347,6 +15575,42 @@ through all possible variants
   .widescreen\:vads-u-line-height--6 {
     line-height: 1.75 !important;
   }
+  .widescreen\:vads-u-line-height--serif-1 {
+    line-height: 1 !important;
+  }
+  .widescreen\:vads-u-line-height--serif-2 {
+    line-height: 1.3 !important;
+  }
+  .widescreen\:vads-u-line-height--serif-3 {
+    line-height: 1.4 !important;
+  }
+  .widescreen\:vads-u-line-height--serif-4 {
+    line-height: 1.6 !important;
+  }
+  .widescreen\:vads-u-line-height--serif-5 {
+    line-height: 1.7 !important;
+  }
+  .widescreen\:vads-u-line-height--serif-6 {
+    line-height: 1.8 !important;
+  }
+  .widescreen\:vads-u-line-height--mono-1 {
+    line-height: 1 !important;
+  }
+  .widescreen\:vads-u-line-height--mono-2 {
+    line-height: 1.15 !important;
+  }
+  .widescreen\:vads-u-line-height--mono-3 {
+    line-height: 1.35 !important;
+  }
+  .widescreen\:vads-u-line-height--mono-4 {
+    line-height: 1.5 !important;
+  }
+  .widescreen\:vads-u-line-height--mono-5 {
+    line-height: 1.62 !important;
+  }
+  .widescreen\:vads-u-line-height--mono-6 {
+    line-height: 1.75 !important;
+  }
   .widescreen\:vads-u-margin--0 {
     margin: 0 !important;
   }
@@ -16783,6 +17047,42 @@ through all possible variants
     line-height: 1.62 !important;
   }
   .medium-screen\:vads-u-line-height--6 {
+    line-height: 1.75 !important;
+  }
+  .medium-screen\:vads-u-line-height--serif-1 {
+    line-height: 1 !important;
+  }
+  .medium-screen\:vads-u-line-height--serif-2 {
+    line-height: 1.3 !important;
+  }
+  .medium-screen\:vads-u-line-height--serif-3 {
+    line-height: 1.4 !important;
+  }
+  .medium-screen\:vads-u-line-height--serif-4 {
+    line-height: 1.6 !important;
+  }
+  .medium-screen\:vads-u-line-height--serif-5 {
+    line-height: 1.7 !important;
+  }
+  .medium-screen\:vads-u-line-height--serif-6 {
+    line-height: 1.8 !important;
+  }
+  .medium-screen\:vads-u-line-height--mono-1 {
+    line-height: 1 !important;
+  }
+  .medium-screen\:vads-u-line-height--mono-2 {
+    line-height: 1.15 !important;
+  }
+  .medium-screen\:vads-u-line-height--mono-3 {
+    line-height: 1.35 !important;
+  }
+  .medium-screen\:vads-u-line-height--mono-4 {
+    line-height: 1.5 !important;
+  }
+  .medium-screen\:vads-u-line-height--mono-5 {
+    line-height: 1.62 !important;
+  }
+  .medium-screen\:vads-u-line-height--mono-6 {
     line-height: 1.75 !important;
   }
   .medium-screen\:vads-u-margin--0 {
