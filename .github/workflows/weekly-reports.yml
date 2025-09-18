@@ -7,6 +7,7 @@ on:
     types: [opened, reopened, synchronize, ready_for_review]
     branches-ignore:
       - 'weekly-reports/**'
+      - '*weekly-reports*'
     paths:
       - '.github/workflows/weekly-reports.yml'
       - 'packages/design-system-dashboard-cli/**'
