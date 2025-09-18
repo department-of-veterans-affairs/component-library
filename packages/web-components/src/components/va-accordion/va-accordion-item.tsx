@@ -4,6 +4,7 @@ import {
   Event,
   EventEmitter,
   Host,
+  Listen,
   Prop,
   h,
 } from '@stencil/core';
@@ -77,7 +78,13 @@ export class VaAccordionItem {
     }
   }
 
-  private toggleOpen(e: MouseEvent): void {
+  /**
+   * Handle click events using @Listen decorator for better NVDA compatibility.
+   * This pattern matches va-button and works better with Shadow DOM + screen readers.
+   */
+  @Listen('click')
+  handleClick(e: MouseEvent) {
+    // Emit the event - let the parent accordion handle the logic
     this.accordionItemToggled.emit(e);
   }
 
@@ -119,7 +126,6 @@ export class VaAccordionItem {
             class="usa-accordion__button"
             aria-expanded={open ? 'true' : 'false'}
             aria-controls="content"
-            onClick={this.toggleOpen.bind(this)}
             ref={el => {
               this.expandButton = el;
             }}
