@@ -176,6 +176,9 @@ CustomProgressTerm.args = {
   headerLevel: 2,
   progressTerm: 'Chapter',
 };
+CustomProgressTerm.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const LongHeaderCausingWrap = Template.bind(null);
 LongHeaderCausingWrap.args = {

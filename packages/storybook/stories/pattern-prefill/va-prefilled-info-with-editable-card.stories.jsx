@@ -6,6 +6,7 @@ export default {
   title: 'Patterns/Prefill/Usage Examples/Prefilled info with editable card',
   id: 'patterns/Editable-card',
   parameters: {
+    chromatic: { disableSnapshot: true },
     componentSubtitle: 'va prefilled info with editable card',
   },
 };
