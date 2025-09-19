@@ -14,10 +14,19 @@ Each `va-file-input` instance is assigned a unique `id` attribute in the format 
 - **Events**: Aggregates child component events and emits `vaMultipleChange` for file changes and emits `vaFileInputError` for file size and file type validation errors.
 - **Slot Content**: Slot content is captured, cloned, and distributed to individual file input instances
 - **Error Handling**: Errors are assigned to individual files using the `errors` and `passwordErrors` props to signify which file has an error.
+- **Integration Patterns**: Designed to work with external state management, file upload services, and encryption detection libraries
+
+### Key Integration Considerations
+
+- **State Arrays**: All props that manage file-specific data (`errors`, `passwordErrors`, `percentUploaded`, `encrypted`, `resetVisualState`) are arrays that correspond by index to the files
+- **File Index Detection**: Use the `changed: true` property in the `state` array to identify which file triggered an event
+- **Encryption Workflow**: Integrate with file analysis libraries (like the platform utility `standardFileChecks`) to detect encrypted PDFs
+- **Progress Tracking**: Use `percentUploaded` array to show upload progress, setting to `null` when complete
+- **Error Recovery**: Use `resetVisualState` to automatically reset file inputs to initial state when errors occur
 
 ### State Management
 
-The component uses two `@State` decorators to manage internal reactive state:
+The component uses two `@State` decorators internallyto manage internal reactive state:
 
 #### `@State() files: FileIndex[]`
 
@@ -126,6 +135,53 @@ Password events operate independently from file events:
 - **State Persistence**: Password is stored in `fileObject.password`
 - **No File Creation**: Password changes don't trigger new file slots
 - **Immediate Emission**: Password events emit immediately without additional state changes
+- **Debouncing Required**: Since password events fire on every keystroke, consumers should implement debouncing to avoid excessive processing
+
+#### Password Event Debouncing
+
+Since `PASSWORD_UPDATE` events fire on every keystroke, it's essential to implement debouncing to prevent excessive API calls or processing:
+
+```jsx
+import { debounce } from 'lodash';
+
+const DEBOUNCE_WAIT = 1000; // Wait 1 second after user stops typing
+
+// Create debounced password handler
+const debouncePassword = useMemo(
+  () => debounce(({ file, password }, index) => {
+    if (password && password.length > 0) {
+      // Clear previous password errors
+      setPasswordErrors(prev => {
+        const newPasswordErrors = [...prev];
+        newPasswordErrors[index] = null;
+        return newPasswordErrors;
+      });
+      
+      // Process the encrypted file with password
+      processEncryptedFile(file, password, index);
+    }
+  }, DEBOUNCE_WAIT),
+  [processEncryptedFile]
+);
+
+// In your PASSWORD_UPDATE handler
+case 'PASSWORD_UPDATE': {
+  const updatedIndex = state.findIndex(
+    fileDetails => fileDetails.changed === true
+  );
+  if (updatedIndex !== -1) {
+    const fileDetails = state[updatedIndex];
+    debouncePassword(fileDetails, updatedIndex);
+  }
+  break;
+}
+```
+
+**Key Benefits:**
+- **Performance**: Reduces unnecessary API calls during typing
+- **User Experience**: Prevents flickering error states
+- **Resource Management**: Avoids overwhelming backend services
+- **Error Handling**: Allows time for complete password entry before validation
 
 ### Event Flow Diagram
 
@@ -167,39 +223,6 @@ Password events operate independently from file events:
 3. **Array Building**: `buildFilesArray()` constructs the event payload
 4. **Event Emission**: `vaMultipleChange` or `vaFileInputError` is emitted with complete state
 
-#### Example for handling `vaMultipleChange` events
-
-```jsx
-document.querySelector('va-file-input-multiple')
-  .addEventListener('vaMultipleChange', (event) => {
-    const { action, file, state } = event.detail;
-    
-    switch(action) {
-      case 'FILE_ADDED':
-        console.log('A new file was added:', file.name);
-        break;
-        
-      case 'FILE_UPDATED':
-        console.log('An existing file was replaced:', file.name);
-        break;
-        
-      case 'FILE_REMOVED':
-        console.log('A file was deleted:', file.name);
-        break;
-        
-      case 'PASSWORD_UPDATE':
-        console.log('Password was entered for:', file.name);
-        break;
-    }
-    
-    // You can also check the state array to see which file has changed: true
-    const changedFile = state.find(fileDetail => fileDetail.changed === true);
-    if (changedFile) {
-      console.log('Changed file:', changedFile.file.name);
-    }
-  });
-```
-
 ## Slot Content 
 
 The component has a general slot that can be used to add content to each file input instance. 
@@ -218,11 +241,23 @@ The content in `files` state serves as a template for initial distribution, not 
 
 ```jsx
 <VaFileInputMultiple
-  onVaSelect={handleSlotSelect}>
-  <va-select label="Document Type">
-    <option value="public">Public Document</option>
-    <option value="private">Private Document</option>
-  </va-select>
+  onVaMultipleChange={handleMultipleChange}
+  onVaSelect={handleSlotInteraction}
+  errors={fileErrors}
+  passwordErrors={passwordErrors}
+  percentUploaded={percentsUploaded}
+  encrypted={encrypted}
+  resetVisualState={resetVisualState}
+  hint="Upload PDF, JPEG, or PNG files. Encrypted PDFs will require a password."
+  label="Select files to upload"
+>
+  <div className="additional-input-container">
+    <VaSelect required label="Document status">
+      <option value="">Select status</option>
+      <option value="public">Public</option>
+      <option value="private">Private</option>
+    </VaSelect>
+  </div>
 </VaFileInputMultiple>
 ```
 
@@ -237,27 +272,42 @@ An approach for handling this could be:
 #### Shadow DOM Traversal Method
 
 ```javascript
-function extractDocumentTypesFromShadowDOM = () => {
-  // Get the va-file-input-multiple element
-  const fileInputMultiple = document.querySelector('va-file-input-multiple');
-
-  // Get all va-file-input elements within the shadow DOM
-  const fileInputs = Array.from(
-    fileInputMultiple?.shadowRoot?.querySelectorAll('va-file-input') || [],
+// Get all va-file-input elements from shadow DOM
+const getFileInputElements = () => {
+  const componentRef = document.querySelector('va-file-input-multiple');
+  if (!componentRef?.shadowRoot) return [];
+  return Array.from(
+    componentRef.shadowRoot.querySelectorAll('va-file-input')
   );
+};
 
-  // Map over the file inputs and extract the value of the va-select element
-  // Example return value:
-  // ['invoice', 'receipt', '', 'contract']
-  // Index 0: First file has "invoice" selected
-  // Index 1: Second file has "receipt" selected  
-  // Index 2: Third file has no selection
-  // Index 3: Fourth file has "contract" selected
-  return fileInputs.map(fileInput => {
-    const vaSelect = fileInput.querySelector('va-select');
-    return vaSelect?.value || '';
-  });
-  
+// Get the va-file-input instance index from an event
+function getFileInputInstanceIndex(event) {
+  const [vaFileInput] = event
+    .composedPath()
+    .filter(el => el.tagName === 'VA-FILE-INPUT');
+
+  const els = getFileInputElements();
+  return els.findIndex(el => el.id === vaFileInput.id);
+}
+
+// Update slot element error states
+const updateSlotElementError = (fileIndex, errorMessage) => {
+  const fileInputs = getFileInputElements();
+  if (fileInputs.length === 0) return;
+
+  if (fileInputs[fileIndex]) {
+    // Find the slot element within this file input
+    const slotElement = fileInputs[fileIndex].querySelector('va-select');
+    
+    if (slotElement) {
+      if (errorMessage) {
+        slotElement.setAttribute('error', errorMessage);
+      } else {
+        slotElement.removeAttribute('error');
+      }
+    }
+  }
 };
 ```
 
@@ -277,56 +327,6 @@ The `resetVisualState` prop is used to reset the visual state of individual file
 - **`false` or `null`**: Shows the normal file state (selected file with upload progress or uploaded file details)
 
 The component automatically resets `resetVisualState` to `false` when a user selects a new file.
-
-#### Error Handling Example
-
-A possible approach for handling errors could be index based like:
-
-```jsx
-const [files, setFiles] = useState([]);
-const [errors, setErrors] = useState([]);
-const [passwordErrors, setPasswordErrors] = useState([]);
-
-const handleFilesChange = (event) => {
-  const { state } = event.detail;
-  
-  // Ensure all arrays have the same length
-  const newErrors = new Array(state.length).fill('');
-  const newPasswordErrors = new Array(state.length).fill(null);
-  
-  state.forEach((fileDetail, index) => {
-    // Validate password if encrypted
-    if (encrypted[index] && !fileDetail.password) {
-      newPasswordErrors[index] = 'Password required for encrypted file';
-    }
-  });
-  
-  setErrors(newErrors);
-  setPasswordErrors(newPasswordErrors);
-};
-
-const handleFileInputError = (event) => {
-  // Get the file input element that triggered the error
-  const fileInputElement = event.target;
-  const fileInputId = fileInputElement.id; // e.g., "instance-0", "instance-1"
-  const fileIndex = parseInt(fileInputId.split('-')[1]);
-  
-  // Update errors array with the built-in validation error
-  const newErrors = [...errors];
-  newErrors[fileIndex] = event.detail.error;
-  setErrors(newErrors);
-};
-
-const resetVisualState = errors.map(error => (error ? true : null));
-
-<VaFileInputMultiple
-  errors={errors}
-  passwordErrors={passwordErrors}
-  resetVisualState={resetVisualState}
-  onVaFileInputError={handleFileInputError}
-  onVaMultipleChange={handleFilesChange}
-/>
-```
 
 ### Slot content error handling
 
@@ -410,9 +410,54 @@ const handleSlotValidation = () => {
 
 ## Validation
 
-The component provides validation for file size and file type through the `maxFileSize`, `minFileSize`, and `accept` props. 
+The component provides built-in validation for file size and file type through the `maxFileSize`, `minFileSize`, and `accept` props. These validations emit `vaFileInputError` events when they fail.
 
-Otherwise teams should implement their own validation for files and update the `errors` and `passwordErrors` props to signify which file has an error.
+### Custom Validation Patterns
+
+For custom validation (network errors, business rules, etc.), teams should:
+
+1. **Implement validation logic** in their file processing handlers
+2. **Update error arrays** (`errors`, `passwordErrors`) to reflect validation state
+3. **Use resetVisualState** to provide visual feedback for error recovery
+4. **Handle encryption detection** using external libraries like the platform utility in `standardFileChecks`
 
 See the [decision log](https://github.com/department-of-veterans-affairs/va.gov-team/blob/master/products/design-system-forms-library/products/components/va-file-input/design-decision-log.md) for more information about the validation strategy.
 
+## Integration Example
+
+For a basic integration example, see the **VA Design System Playground** implementation:
+
+**📁 [VaFileInputMultiple.jsx](https://github.com/department-of-veterans-affairs/vets-website/blob/main/src/applications/ds-v3-playground/pages/VaFileInputMultiple.jsx)**
+
+This implementation serves as a **reference** for integrating `va-file-input-multiple` in applications outside the forms library. It is a basic example that demonstrates the component's core functionality and provides a starting point for more complex integrations.
+
+This example demonstrates:
+
+### State Management
+- Synchronized arrays for `files`, `percentsUploaded`, `encrypted`, `fileErrors`, and `passwordErrors`
+- State cleanup when files are removed
+- File index detection using the `changed: true` property
+
+### Encryption Workflow
+- Integration with `standardFileChecks` platform utility for PDF encryption detection
+- Debounced password processing to prevent excessive API calls
+- Automatic password field management and error handling
+
+### Progress Tracking & Error Handling
+- Mock file upload with progress simulation
+- Multiple error scenarios based on filename patterns:
+  - **Network errors**: Files with "error" in filename
+  - **Server errors**: Files with "server" in filename  
+  - **Rate limiting**: Files with "limit" in filename
+  - **File size validation**: Files larger than 1MB
+  - **Password validation**: Passwords shorter than 8 characters
+
+### Slot Content Integration
+- Document status selection for each uploaded file
+- Shadow DOM traversal for slot element manipulation
+- Event handling using callback function
+
+### Visual State Management
+- Automatic `resetVisualState` triggering when errors occur
+- Progress bar reset on upload failures
+- Retry experience after error resolution
