@@ -40,7 +40,7 @@ export default {
     type: {
       control: {
         type: 'select',
-        options: ['email', 'number', 'search', 'tel', 'text', 'url'],
+        options: ['email', 'number', 'password', 'search', 'tel', 'text', 'url'],
       },
     },
     'hide-required-text': {

@@ -290,33 +290,35 @@ const CustomValidationTemplate = ({
       <div className="vads-u-margin-top--2">
         <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
           <code>
-            {`const [errorVal, setErrorVal] = useState(error);
+            {`
+                const [errorVal, setErrorVal] = useState(error);
 
-function validateFileContents(event) {
-  setErrorVal(null);
-  if (event.detail.files && event.detail.files.length) {
-    const file = event.detail.files[0];
+                function validateFileContents(event) {
+                  setErrorVal(null);
+                  if (event.detail.files && event.detail.files.length) {
+                    const file = event.detail.files[0];
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const contents = reader.result;
-      const hasX = contents.includes('X');
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      const contents = reader.result;
+                      const hasX = contents.includes('X');
 
-      if (hasX)
-        setErrorVal('File contains an \\'X\\' character');
-    };
+                      if (hasX)
+                        setErrorVal('File contains an \\'X\\' character');
+                    };
 
-    reader.readAsText(file);
-  }
-}
+                    reader.readAsText(file);
+                  }
+                }
 
-return (
-  <VaFileInput
-    ...
-    error={errorVal}
-    onVaChange={validateFileContents}
-  />
-)`}
+                return (
+                  <VaFileInput
+                    ...
+                    error={errorVal}
+                    onVaChange={validateFileContents}
+                  />
+                )
+              `}
           </code>
         </pre>
         <a

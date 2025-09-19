@@ -54,7 +54,7 @@ export class VaTextInput {
    * Input types we will allow to be specified with the "type" prop.
    */
   /* eslint-disable-next-line i18next/no-literal-string */
-  allowedInputTypes = ['email', 'number', 'search', 'tel', 'text', 'url'];
+  allowedInputTypes = ['email', 'number', 'password', 'search', 'tel', 'text', 'url'];
 
   /**
    * The label for the text input.
@@ -114,7 +114,7 @@ export class VaTextInput {
   /**
    * The type attribute.
    */
-  @Prop() type?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url' =
+  @Prop() type?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' =
     'text';
 
   /**
