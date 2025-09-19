@@ -118,3 +118,8 @@ export const Internationalization = () => {
     </div>
   );
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
+};

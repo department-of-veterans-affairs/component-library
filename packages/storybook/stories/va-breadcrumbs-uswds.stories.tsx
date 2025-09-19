@@ -255,6 +255,11 @@ Default.argTypes = propStructure(breadcrumbsDocs);
 
 export const RerenderState = DynamicCrumbsTemplate.bind(null);
 RerenderState.args = { ...defaultArgs };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+RerenderState.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WrappingState = WrappingCrumbsTemplate.bind(null);
 WrappingState.args = { ...defaultArgs, wrapping: true };

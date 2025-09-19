@@ -207,6 +207,11 @@ CustomHeaderLevel.args = {
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const ManyAccordions = Template.bind(null);
 ManyAccordions.args = {

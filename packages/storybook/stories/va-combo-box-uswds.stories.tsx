@@ -173,3 +173,9 @@ export const OptionGroups = Template.bind({});
 OptionGroups.args = {
   ...optGroupArgs,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+OptionGroups.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+

@@ -240,6 +240,11 @@ ClickOutsideToClose.args = {
   ...defaultArgs,
   'click-to-close': true,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+ClickOutsideToClose.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithoutButtons = Template.bind(null);
 WithoutButtons.args = {

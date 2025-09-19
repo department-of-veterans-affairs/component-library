@@ -173,6 +173,11 @@ CustomRequiredMessage.args = {
   ...defaultArgs,
   required: true,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+CustomRequiredMessage.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithHintTextError = WithHintTextTemplate.bind(null);
 WithHintTextError.args = {
@@ -192,12 +197,22 @@ MonthOptional.args = {
   'month-year-only': true,
   'month-optional': true,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+    // TODO: Enable snapshots after integrating Storybook play function
+MonthOptional.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {
   ...defaultArgs,
   required: true,
   value: '2022-04-19',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+    // TODO: Enable snapshots after integrating Storybook play function
+CustomValidation.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const WithAnalytics = Template.bind(null);

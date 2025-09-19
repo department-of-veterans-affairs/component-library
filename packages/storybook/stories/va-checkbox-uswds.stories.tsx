@@ -344,6 +344,11 @@ Internationalization.args = {
   error: 'There has been a problem',
   required: true,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const Indeterminate = IndeterminateTemplate.bind(null);
 Indeterminate.args = { ...defaultArgs };

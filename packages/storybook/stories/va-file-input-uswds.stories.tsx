@@ -160,9 +160,19 @@ const AcceptsFilePasswordTemplate = ({
 };
 export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
 AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsFilePassword.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
 WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithFilePasswordError.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {
@@ -171,6 +181,12 @@ AcceptsOnlySpecificFileTypes.args = {
   hint: 'You can upload a .pdf or .txt file',
   accept: '.pdf,.txt',
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsOnlySpecificFileTypes.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 
 export const AcceptsAnyKindOfImage = Template.bind(null);
 AcceptsAnyKindOfImage.args = {
@@ -179,6 +195,12 @@ AcceptsAnyKindOfImage.args = {
   hint: 'Select any type of image format',
   accept: 'image/*',
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsAnyKindOfImage.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = {
@@ -195,6 +217,11 @@ WithMaxFileSize.args = {
   hint: 'An error will be thrown if the selected file is greater than 1 KB',
   maxFileSize: 1024,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithMaxFileSize.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithMinFileSize = Template.bind(null);
 WithMinFileSize.args = {
@@ -203,6 +230,11 @@ WithMinFileSize.args = {
   hint: 'An error will be thrown if the selected file is less than 1 MB',
   minFileSize: 1024*1024,
 }
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithMinFileSize.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const HeaderLabel = Template.bind(null);
 HeaderLabel.args = {
@@ -236,6 +268,12 @@ AdditionalFormInputs.args = {
   label: 'Additional Form Inputs',
   children: additionalFormInputsContent,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AdditionalFormInputs.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 
 const CustomValidationTemplate = ({
   label,
@@ -336,6 +374,11 @@ CustomValidation.args = {
   label: "Upload a file which does not contain the character 'X'",
   hint: 'Select a .txt file',
   accept: '.txt',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+CustomValidation.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const WithAnalytics = Template.bind(null);
@@ -453,6 +496,11 @@ const PercentUploadedTemplate = args => {
 
 export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
 WithPercentUploaded.args = { ...defaultArgs };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithPercentUploaded.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const VisualStateResetTemplate = args => {
   const [reset, setReset] = useState(false);
@@ -491,3 +539,8 @@ const VisualStateResetTemplate = args => {
 
 export const WithVisualStateReset = VisualStateResetTemplate.bind(null);
 WithVisualStateReset.args = { ...defaultArgs };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithVisualStateReset.parameters = {
+  chromatic: { disableSnapshot: true },
+};
