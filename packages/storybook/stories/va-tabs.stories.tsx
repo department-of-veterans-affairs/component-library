@@ -245,7 +245,9 @@ WithHeadingNotMatchingTab.decorators = [(Story) => (
     <Story />
   </>
 )];
-
+WithHeadingNotMatchingTab.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithAdditionalTabItem = Template.bind(null);
 WithAdditionalTabItem.args = {
@@ -264,7 +266,7 @@ WithAdditionalTabItem.argTypes = propStructure(tabsDocs);
 WithAdditionalTabItem.decorators = [(Story) => (
   <>
     {internalTestingAlert(
-      'how the component behaves when an additional tab item is added. At this point, only three tabs are recommended', 
+      'how the component behaves when an additional tab item is added. At this point, only three tabs are recommended',
       true
     )}
     <Story />

@@ -306,6 +306,9 @@ WithHintTextAndHeaderLevel.args = {
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const ResizableControl = ResizableTemplate.bind(null);
 ResizableControl.args = { ...defaultArgs };

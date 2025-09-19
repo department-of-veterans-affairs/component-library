@@ -58,3 +58,6 @@ DisableAnalytics.args = {
   ...defaultArgs,
   'disable-analytics': true,
 };
+DisableAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};

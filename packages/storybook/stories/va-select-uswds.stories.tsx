@@ -185,6 +185,11 @@ ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 
 export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+DynamicOptions.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const OptGroups = Template.bind(null);
 OptGroups.args = {
@@ -202,6 +207,11 @@ OptGroups.args = {
     </optgroup>,
   ],
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+OptGroups.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const OptGroupsWithOptions = Template.bind(null);
 OptGroupsWithOptions.args = {
@@ -218,6 +228,11 @@ OptGroupsWithOptions.args = {
       Other
     </option>,
   ],
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+OptGroupsWithOptions.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const ReadOnly = InertTemplate.bind(null);
@@ -242,6 +257,11 @@ const I18nTemplate = args => {
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = { ...defaultArgs, required: true };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const WidthsTemplate = ({
   label,

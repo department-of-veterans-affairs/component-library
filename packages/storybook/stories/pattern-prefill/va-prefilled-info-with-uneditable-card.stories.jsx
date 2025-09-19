@@ -5,6 +5,7 @@ export default {
   title: 'Patterns/Prefill/Usage Examples/Prefilled info with uneditable card',
   id: 'patterns/va-prefilled-info-with-uneditable-card',
   parameters: {
+    chromatic: { disableSnapshot: true },
     componentSubtitle: 'va prefilled info with uneditable card',
   },
 };

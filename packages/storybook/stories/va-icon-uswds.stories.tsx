@@ -137,6 +137,7 @@ globalThis.setVaIconSpriteLocation('[custom sprite path]');
 }
 export const GlobalSpritePathConfiguration = iconPathConfigurationDocs.bind(null);
 GlobalSpritePathConfiguration.parameters = {
+  chromatic: { disableSnapshot: true },
   docs: {
     canvas: {
       sourceState: 'none',
