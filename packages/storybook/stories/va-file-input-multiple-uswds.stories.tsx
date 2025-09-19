@@ -455,7 +455,7 @@ CustomValidation.parameters = {
 const EncryptedTemplate = ({ label, name }) => {
   const [encryptedList, setEncryptedList] = useState([]);
 
-  function setEncrpytedForEachFile(event) {
+  function setEncryptedForEachFile(event) {
     const fileEntries = event.detail.state;
     const pdfFiles = fileEntries.map((file) => {
       return file.file.type === 'application/pdf'
@@ -474,13 +474,13 @@ const EncryptedTemplate = ({ label, name }) => {
         name={name}
         hint={"This example shows a password field when a .pdf file is uploaded."}
         encrypted={encryptedList}
-        onVaMultipleChange={setEncrpytedForEachFile}
+        onVaMultipleChange={setEncryptedForEachFile}
       />
       <hr />
       <div>
         <p>
           Parent components are responsible for managing if a password
-          needs to be requested for the file through a dedicated encryted
+          needs to be requested for the file through a dedicated encrypted
           array. Each index in this array corresponds to a file input,
           with the value at each index being true if a password should
           be requested for that specific file, or false if no password is
@@ -493,22 +493,25 @@ const EncryptedTemplate = ({ label, name }) => {
       <div className="vads-u-margin-top--2">
         <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
           <code>
-            {`const [encryptedList, setEncryptedList] = useState([]);
+            {`
+              const [encryptedList, setEncryptedList] = useState([]);
 
-  function setEncrpytedForEachFile(event) {
-    const fileEntries = event.detail.state;
-    const pdfFiles = fileEntries.map((file, index) => {
-      return file.file.type === 'application/pdf'
-    });
-    setEncryptedList(pdfFiles);
-  }
+              function setEncryptedForEachFile(event) {
+                const fileEntries = event.detail.state;
+                const pdfFiles = fileEntries.map((file, index) => {
+                  return file.file.type === 'application/pdf'
+                });
+                setEncryptedList(pdfFiles);
+              }
 
-  return (
-    <VaFileInputMultiple
-      ...
-      encrypted={encryptedList}
-      onVaMultipleChange={setEncrpytedForEachFile}
-    />`}
+              return (
+                <VaFileInputMultiple
+                  ...
+                  encrypted={encryptedList}
+                  onVaMultipleChange={setEncryptedForEachFile}
+                />
+              );
+            `}
           </code>
         </pre>
         <a
