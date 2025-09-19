@@ -658,7 +658,7 @@ export class VaFileInput {
                   </div>
                 </div>
                 {(file || value || uploadedFile) && (
-                  <div class={this.showSeparator ? 'with-separator' : ''}>
+                  <div class={this.showSeparator ? 'with-separator' : undefined}>
                     {!readOnly && showProgBar &&
                       (
                         <Fragment>
