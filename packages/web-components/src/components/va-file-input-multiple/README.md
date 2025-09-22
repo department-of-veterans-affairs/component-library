@@ -265,11 +265,13 @@ The `slotFieldIndexes` prop can be used to control which file inputs receive the
 
 #### Identifying File Context in Slot Interactions
 
-Since slot content is cloned for each file input, it can be challenging to identify which slot interaction occurred for which file. For example, if `va-select` is used in the slot for selecting a document type, it is not possible to know which file input the selection belongs to out of the box.
+Since slot content is cloned for each file input, you will need to identify which slot interaction occurred for which file. For example, if `va-select` is used in the slot for selecting a document type, it is not possible to know which file input the selection belongs to out of the box.
 
-An approach for handling this could be:
+Slot interaction events will bubble up to the `va-file-input-multiple` component where they can be handled using a callback.
 
-#### Shadow DOM Traversal Method
+An approach for handling slot interactions could be:
+
+#### Shadow DOM Querying
 
 ```javascript
 // Get all va-file-input elements from shadow DOM
@@ -309,6 +311,24 @@ const updateSlotElementError = (fileIndex, errorMessage) => {
     }
   }
 };
+
+function handleVaSelect(event) {
+    const { detail } = event;
+    const { value } = detail;
+    const fileIndex = getFileInputInstanceIndex(event);
+
+    // additional handling as needed
+}
+
+<VaFileInputMultiple onVaSelect={handleVaSelect}>
+  <div className="additional-input-container">
+    <VaSelect required label="Document status">
+      <option value="">Select status</option>
+      <option value="public">Public</option>
+      <option value="private">Private</option>
+    </VaSelect>
+  </div>
+</VaFileInputMultiple>
 ```
 
 ## Error Handling
