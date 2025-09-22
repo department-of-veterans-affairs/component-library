@@ -8,6 +8,7 @@ import {
   Stories,
   Controls,
 } from '@storybook/addon-docs';
+import { Unstyled } from '@storybook/addon-docs';
 
 import webComponentDocs from '../../web-components/component-docs.json';
 import { additionalDocs } from './additional-docs';
@@ -327,18 +328,20 @@ export function StoryDocs({
 
   return (
     <>
-      <Title />
-      <Subtitle />
-      <MaturityScale category={maturityCategory} level={maturityLevel} />
-      <Guidance href={guidanceHref} name={guidanceName} />
-      <CanvasLink />
-      <CustomEventsDescription data={componentData} />
-      <Description of={storyDefault} />
-      <NativeHandlers docsTags={data?.docsTags} />
-      <Primary />
-      <Controls of={storyDefault} />
-      <>{children}</>
-      <Stories />
+      <Unstyled>
+        <Title />
+        <Subtitle />
+        <MaturityScale category={maturityCategory} level={maturityLevel} />
+        <Guidance href={guidanceHref} name={guidanceName} />
+        <CanvasLink />
+        <CustomEventsDescription data={componentData} />
+        <Description of={storyDefault} />
+        <NativeHandlers docsTags={data?.docsTags} />
+        <Primary />
+        <Controls of={storyDefault} />
+        <>{children}</>
+        <Stories />
+      </Unstyled>
     </>
   );
 }

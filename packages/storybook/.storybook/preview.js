@@ -127,18 +127,6 @@ export const parameters = {
   }
 };
 
-export const initialGlobals = {
-  viewport: { value: 'small' },
-};
-
-export const decorators = [
-  Story => (
-    <div>
-      <Story />
-    </div>
-  ),
-];
-
 // Sets up a mutation observer to ensure that the storybook docs-root container doesn't get hidden by modals
 const observeDocsRoot = () => {
   // The target for the observer

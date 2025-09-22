@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks';
 import viewportImage from './images/responsive-viewport-toolbar.png';
 import searchBarImage from './images/search-bar.png';
 import canvasTabImage from './images/canvas-tab.png';
@@ -19,6 +19,7 @@ import canvasAccessibilityImage from './images/canvas-accessibility.png';
 
 <Meta title="About/How to use Storybook" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
+<Unstyled>
 # How to use Storybook
 
 ## Searching for stories
@@ -96,3 +97,4 @@ The **HTML** tab displays the HTML markup for the story. You can use this to und
 The **Accessibility** tab shows you the results of automated accessibility checks performed for a story. You can click through the results to learn more about each test.
 
 <img src={canvasAccessibilityImage} alt="A screenshot of the Accessibility addon in the Canvas tab" />
+</Unstyled>

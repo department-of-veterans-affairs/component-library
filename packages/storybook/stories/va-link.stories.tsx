@@ -54,33 +54,41 @@ const Template = ({
   label,
 }) => {
   return (
-    <p>
-      If you need help to gather your information or fill out your
-      application/form,{' '}
-      <va-link
-        abbr-title={abbrTitle}
-        active={active}
-        back={back}
-        calendar={calendar}
-        channel={channel}
-        disable-analytics={disableAnalytics}
-        download={download}
-        external={external}
-        href={href}
-        filename={filename}
-        filetype={filetype}
-        pages={pages}
-        reverse={reverse}
-        text={text}
-        video={video}
-        label={label}
-      />
-    </p>
+    <va-link
+      abbr-title={abbrTitle}
+      active={active}
+      back={back}
+      calendar={calendar}
+      channel={channel}
+      disable-analytics={disableAnalytics}
+      download={download}
+      external={external}
+      href={href}
+      filename={filename}
+      filetype={filetype}
+      pages={pages}
+      reverse={reverse}
+      text={text}
+      video={video}
+      label={label}
+    />
   );
 };
 
+const LinkWithTextTemplate = (args) => {
+  return (
+    <p>
+        If you need help to gather your information or fill out your
+        application/form,{' '}
+        {VariantTemplate(args)}
+    </p>
+  );
+}
+
 export const Default = Template.bind(null);
-Default.args = {
+
+export const LinkWithText = LinkWithTextTemplate.bind(null);
+LinkWithText.args = {
   ...defaultArgs,
   href: 'https://va.gov/vso/',
   text: 'contact a local Veterans Service Organization (VSO)',
@@ -108,28 +116,26 @@ const VariantTemplate = ({
   'icon-size': iconSize,
 }) => {
   return (
-    <p>
-      <va-link
-        abbr-title={abbrTitle}
-        active={active}
-        back={back}
-        calendar={calendar}
-        channel={channel}
-        disable-analytics={disableAnalytics}
-        download={download}
-        href={href}
-        filename={filename}
-        filetype={filetype}
-        pages={pages}
-        reverse={reverse}
-        text={text}
-        external={external}
-        video={video}
-        label={label}
-        icon-name={iconName}
-        icon-size={iconSize}
-      />
-    </p>
+    <va-link
+      abbr-title={abbrTitle}
+      active={active}
+      back={back}
+      calendar={calendar}
+      channel={channel}
+      disable-analytics={disableAnalytics}
+      download={download}
+      href={href}
+      filename={filename}
+      filetype={filetype}
+      pages={pages}
+      reverse={reverse}
+      text={text}
+      external={external}
+      video={video}
+      label={label}
+      icon-name={iconName}
+      icon-size={iconSize}
+    />
   );
 };
 
@@ -383,3 +389,35 @@ WithRouterLinkSupport.args = {
 WithRouterLinkSupport.parameters = {
   chromatic: { disableSnapshot: true },
 };
+
+const testWrapperElementsTemplate = () => {
+  return (
+    <>
+      <p>This story is a test to confirm that the font sizing for va-link matches the font size of the parent element.</p>
+
+      <hr/>
+
+      {VariantTemplate({
+        ...defaultArgs,
+        text: 'Example of va-link with no wrapper element',
+        href: 'https://va.gov'
+      })}
+
+      {['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'div'].map((Element) => {
+        const TagName = Element as keyof JSX.IntrinsicElements;
+        return (
+          <TagName key={Element}>
+            Example of va-link inside {['a', 'an'].includes(Element[0]) ? 'an' : 'a'} {Element} element, and {' '}
+            {VariantTemplate({
+              ...defaultArgs,
+              text: 'this is va-link text',
+              href: 'https://va.gov'
+            })}
+          </TagName>
+        );
+      })}
+    </>
+  );
+};
+
+export const TestWrapperElements = testWrapperElementsTemplate.bind(null);

@@ -1,4 +1,7 @@
+@import 'uswds-core/src/styles/mixins/typography/typeset';
+
 :host {
+  @include typeset('ui');
   display: block;
   position: relative;
   border: 1px solid var(--vads-color-gray-medium);

@@ -6,13 +6,13 @@
 /**
   Normalization for Source Sans Pro typeface.
 
-  Typefaces vary in optical size. This means that at any 
-  specific pixel  value, an optically small typeface like  
-  Source Sans Pro will appear smaller than an optically 
+  Typefaces vary in optical size. This means that at any
+  specific pixel  value, an optically small typeface like
+  Source Sans Pro will appear smaller than an optically
   large typeface like Merriweather.
 
-  The `typeset()` mixin will calculate the appropriate 
-  font-size for  a given typeface. The `ui` value will 
+  The `typeset()` mixin will calculate the appropriate
+  font-size for  a given typeface. The `ui` value will
   use the default value for $theme-body-font-family.
 
   font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
@@ -21,6 +21,17 @@
 
   https://designsystem.digital.gov/design-tokens/typesetting/overview/
 */
-p, a, ol, ul, li, dl, dt, dd, form, label, button {
+p, a, ol, ul, li, dl, dt, dd, form, label, button, legend {
   @include typeset('ui');
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  border: 0;
+  padding: 0;
 }

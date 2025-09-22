@@ -1,8 +1,10 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Unstyled } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
+import { Default as LinkActionDefault } from './va-link-action.stories';
 
 <Meta title="About/Introduction" parameters={{ previewTabs: { canvas: { hidden: true } } }} />
 
+<Unstyled>
 # Welcome to the Platform Design System Storybook!
 
 Here, you'll find the design system components available for use. Check out the
@@ -10,39 +12,49 @@ navigation in the left panel for that list. Each component will have one or more
 "stories" on it so you can see the various states it can have.
 
 If you have any questions or suggestions on how we might improve this, please
-reach out to us in #platform-design-system.
+reach out to us in Slack in #platform-design-system.
 
 Enjoy!
 
-# How to use Storybook
+## How to use Storybook
 
 See <LinkTo kind="About" story="How to use Storybook">How to use
 Storybook</LinkTo> for some quick guidance on how to get the most out of
 Storybook.
 
-# Using the Design System
+## Using the Design System
 
-<a href="https://design.va.gov/about/developers#using-the-design-system" target="_blank" rel="noopener noreferrer">
-  Implement and install the design system on your project.
-</a>
+<LinkActionDefault
+  text="Implement and install the design system on your project."
+  href="https://design.va.gov/about/developers#using-the-design-system"
+  target="_blank"
+  rel="noopener noreferrer"
+/>
 
-# Using Web components
+## Using Web components
 
-<a href="https://design.va.gov/about/developers#using-web-components" target="_blank" rel="noopener noreferrer">
-  Implement Web Components within your project.
-</a>
+<LinkActionDefault
+  text="Implement Web Components within your project."
+  href="https://design.va.gov/about/developers#using-web-components"
+  target="_blank"
+  rel="noopener noreferrer"
+/>
 
-# Contributing to the Design System
+## Contributing to the Design System
 
-<a href="https://design.va.gov/about/contributing-to-the-design-system" target="_blank" rel="noopener noreferrer">
-  Suggest a new component, update existing components, and retire components.
-</a>
+<LinkActionDefault
+  text="Suggest a new component, update existing components, and retire components."
+  href="https://design.va.gov/about/contributing-to-the-design-system"
+  target="_blank"
+  rel="noopener noreferrer"
+/>
 
-# Report an Issue
+## Report an Issue
 
 We are always looking to make improvements. If you notice anything on this site that is unclear or isn’t functioning in a way you expect, <a href="https://design.va.gov/about/feedback" target="_blank">
 please contact us so we can make it better for you.</a>
 
-# Maturity Scale
+## Maturity Scale
 
 The <a href="https://design.va.gov/about/maturity-scale" target="_blank" rel="noopener noreferrer">maturity scale</a> indicates the level of maturity of each component and pattern in the system. It helps designers and developers know if they should use the component and what level of caution they should have when doing so.
+</Unstyled>

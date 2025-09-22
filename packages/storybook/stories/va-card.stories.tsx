@@ -1,4 +1,5 @@
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { Default as LinkDefault } from './va-link.stories';
 
 const cardDocs = getWebComponentDocs('va-card');
 
@@ -24,6 +25,7 @@ const Template = ({ 'show-shadow': showShadow, 'background': background, 'icon-n
     <div>
       <h3 className='vads-u-margin-top--1'>Example card title</h3>
       <p>Example card content</p>
+      <LinkDefault {...LinkDefault.args} text="Example CTA link" href="#" />
     </div>
   </va-card>
 );

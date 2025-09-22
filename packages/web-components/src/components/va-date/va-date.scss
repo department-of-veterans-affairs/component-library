@@ -2,6 +2,7 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
+@import "~@department-of-veterans-affairs/css-library/src/stylesheets/uswds-typography";
 
 .usa-label--required {
   color: var(--vads-color-secondary-dark);
@@ -20,18 +21,6 @@
   margin-top: 1.875rem;
 }
 
-fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-legend {
-  border: 0;
-  font-size: 1.06rem;
-  padding: 0;
-}
-
 span.required {
   color: var(--vads-color-secondary-dark);
 }
@@ -43,10 +32,11 @@ span.required {
 }
 
 .date-container {
+  column-gap: var(--vads-spacing-2);
   display: flex;
-  margin-top: 12px;
+  margin-top: var(--vads-spacing-1p5);
   flex-wrap: wrap;
-  row-gap: 12px;
+  row-gap: var(--vads-spacing-1p5);
 }
 
 :host([error]:not([error=''])) .date-container {
@@ -54,23 +44,21 @@ span.required {
 }
 
 .select-month {
-  width: 8.125rem;
-  margin-right: 0.9375rem;
+  min-width: 18ch;
 }
 
 .select-day {
-  width: 5rem;
-  margin-right: 0.9375rem;
+  min-width: 12ch;
 }
 
 .input-year {
-  width: 5rem;
+  width: 12ch;
 }
 
 va-select::part(label),
 va-text-input::part(label) {
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: var(--vads-spacing-1p5);
 }
 
 va-text-input::part(validation) {
