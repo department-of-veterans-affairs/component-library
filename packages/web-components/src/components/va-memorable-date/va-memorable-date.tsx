@@ -415,6 +415,7 @@ export class VaMemorableDate {
           hideRequiredText={true}
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           showError={false}
+          messageAriaDescribedby={i18next.t('date-hint-month-select')}
         >
           {months &&
             months.map(monthOption => (
@@ -450,6 +451,7 @@ export class VaMemorableDate {
           hideRequiredText={true}
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           show-input-error="false"
+          messageAriaDescribedby={i18next.t('date-hint-month')}
         />
       </div>
     );
@@ -480,7 +482,7 @@ export class VaMemorableDate {
         <div class="input-wrap">
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClass} id="input-label" part="legend">
-               {label && HeaderLevel ? (
+              {label && HeaderLevel ? (
                   <HeaderLevel
                     aria-describedby={headerAriaDescribedbyId}
                   >
@@ -543,6 +545,7 @@ export class VaMemorableDate {
                     this.invalidDay ? getStandardErrorMessage(error) : null
                   }
                   show-input-error="false"
+                  messageAriaDescribedby={i18next.t('date-hint-day')}
                 />
               </div>
               <div class="usa-form-group usa-form-group--year">
@@ -568,6 +571,7 @@ export class VaMemorableDate {
                     this.invalidYear ? getStandardErrorMessage(error) : null
                   }
                   show-input-error="false"
+                  messageAriaDescribedby={i18next.t('date-hint-year')}
                 />
               </div>
             </div>
