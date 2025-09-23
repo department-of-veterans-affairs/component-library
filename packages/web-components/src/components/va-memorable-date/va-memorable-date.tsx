@@ -377,9 +377,12 @@ export class VaMemorableDate {
         ? true
         : false;
     const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
+
+    /* eslint-disable i18next/no-literal-string */
     const headerAriaDescribedbyId = headerAriaDescribedby
       ? 'header-message'
       : null;
+
     let formsHeading = null;
     if (isFormsPattern) {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
