@@ -6,6 +6,7 @@ export default {
   title: 'Patterns/Prefill/Usage Examples/Signed In Prefill Alert',
   id: 'patterns/va-prefill-signed-in',
   parameters: {
+    chromatic: { disableSnapshot: true },
     componentSubtitle: 'va prefill pattern signed in',
   },
 };

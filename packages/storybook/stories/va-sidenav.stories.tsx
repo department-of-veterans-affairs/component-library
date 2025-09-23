@@ -27,10 +27,10 @@ export default {
   parameters: {
     componentSubtitle: 'va-sidenav web component',
     docs: {
-      page: () => <StoryDocs 
-        storyDefault={Default} 
-        data={sidenavDocs} 
-        componentName="va-sidenav" 
+      page: () => <StoryDocs
+        storyDefault={Default}
+        data={sidenavDocs}
+        componentName="va-sidenav"
       />,
     },
     chromatic: {
@@ -67,33 +67,33 @@ const Template = (args) => {
   }
 
   return (
-    <va-sidenav 
+    <va-sidenav
       id={args.id}
       header={args.header}
       icon-name={args['icon-name']}
       icon-background-color={args['icon-background-color']}>
-      {sideNav.map((item, index) => 
+      {sideNav.map((item, index) =>
         item.submenu ? (
-          <va-sidenav-submenu 
-            {...withKey(`item-${index}`)} 
-            label={item.label} 
-            href={item.href} 
+          <va-sidenav-submenu
+            {...withKey(`item-${index}`)}
+            label={item.label}
+            href={item.href}
             onClick={ (e) => handleClick(e)}>
-            {item.submenu.map((submenuItem, submenuIndex) => 
-              <va-sidenav-item 
-                {...withKey(`item-${index}-${submenuIndex}`)} 
-                href={submenuItem.href} 
-                label={submenuItem.label} 
+            {item.submenu.map((submenuItem, submenuIndex) =>
+              <va-sidenav-item
+                {...withKey(`item-${index}-${submenuIndex}`)}
+                href={submenuItem.href}
+                label={submenuItem.label}
                 onClick={ (e) => handleClick(e)}>
               </va-sidenav-item>
             )}
           </va-sidenav-submenu>
         ) : (
-          <va-sidenav-item 
-            {...withKey(`item-${index}`)} 
-            current-page={item['current-page']} 
-            href={item.href} 
-            label={item.label} 
+          <va-sidenav-item
+            {...withKey(`item-${index}`)}
+            current-page={item['current-page']}
+            href={item.href}
+            label={item.label}
             onClick={ (e) => handleClick(e)}
           ></va-sidenav-item>
         )
@@ -120,9 +120,9 @@ const WithRouterTemplate = (args) => {
       <p>
         The navigation items in this example have a{' '}
         <code>router-link</code> property. When the corresponding anchor
-        tag is clicked, these links emit a <code>VaRouteChange</code> event that 
-        contains the href of the clicked link. This event can be handled in a 
-        React component where utilities provided by React Router can be used to 
+        tag is clicked, these links emit a <code>VaRouteChange</code> event that
+        contains the href of the clicked link. This event can be handled in a
+        React component where utilities provided by React Router can be used to
         change the page under view, as in the example below:
       </p>
       <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
@@ -176,31 +176,31 @@ const WithRouterTemplate = (args) => {
       <p id="route-change-message"></p>
 
       <va-sidenav
-        id="router-sidenav" 
+        id="router-sidenav"
         header={args.header}
         icon-name={args['icon-name']}
         icon-background-color={args['icon-background-color']}>
         <VaSidenavItem
-          href="/contact-info" 
+          href="/contact-info"
           label="Contact information"
           router-link={true}
           onClick={(e) => handleClick(e)}
           onVaRouteChange={handleRouteChange}></VaSidenavItem>
         <VaSidenavItem
-          href="/personal-info" 
-          label="Personal information" 
+          href="/personal-info"
+          label="Personal information"
           router-link={true}
           onClick={(e) => handleClick(e)}
           onVaRouteChange={handleRouteChange}></VaSidenavItem>
         <VaSidenavItem
-          href="/military-service" 
-          label="Military service" 
+          href="/military-service"
+          label="Military service"
           router-link={true}
           onClick={(e) => handleClick(e)}
           onVaRouteChange={handleRouteChange}></VaSidenavItem>
       </va-sidenav>
     </div>
-  ) 
+  )
 }
 
 function sideNavBaseline() {
@@ -334,3 +334,6 @@ WithRouterLinkSupport.args = {
   id: 'router-link-sidenav',
 };
 WithRouterLinkSupport.argTypes = propStructure(sidenavDocs);
+WithRouterLinkSupport.parameters = {
+  chromatic: { disableSnapshot: true },
+};

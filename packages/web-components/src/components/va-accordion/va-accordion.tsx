@@ -58,6 +58,7 @@ export class VaAccordion {
   expandCollapseBtn!: HTMLButtonElement;
 
   @State() expanded = false;
+  @State() collapsed = true;
 
   /**
    * True if only a single item can be opened at once
@@ -175,13 +176,22 @@ export class VaAccordion {
     }
 
     if (accordionItems[method](allClosed)) {
-      return (this.expanded = false);
+      return (
+        this.expanded = false,
+        this.collapsed = true
+      );
     }
+
+    return (
+      this.expanded = false,
+      this.collapsed = false
+    );
   }
 
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
+    this.collapsed = !expanded;
 
     const value = expanded ? 'allOpen' : 'allClosed';
     this.accordionExpandCollapseAll.emit({ status: value });
@@ -217,6 +227,8 @@ export class VaAccordion {
   // if one or more accordion-items are open on load, then we should put component in state to "Collapse all"
   componentWillLoad() {
     this.accordionsOpened('some');
+    this.expanded = false;
+    this.collapsed = false;
   }
 
   render() {
@@ -236,22 +248,32 @@ export class VaAccordion {
           }
         >
           {(!openSingle && !isInsideSearchFilter) ? (
-            <button
-              aria-expanded={`${this.expanded}`}
-              class="va-accordion__button"
-              data-testid="expand-all-accordions"
-              ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
-              onClick={() => this.expandCollapseAll(!this.expanded)}
-              aria-label={
-                this.expanded
-                  ? i18next.t('collapse-all-aria-label')
-                  : i18next.t('expand-all-aria-label')
-              }
-            >
-              {this.expanded
-                ? `${i18next.t('collapse-all')} -`
-                : `${i18next.t('expand-all')} +`}
-            </button>
+            <ul class="expand-collapse-list">
+              <li>
+                <button
+                  class="va-accordion__button"
+                  data-testid="expand-all-accordions"
+                  ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+                  onClick={() => this.expandCollapseAll(true)}
+                  aria-pressed={this.expanded ? 'true' : 'false'}
+                  aria-label={i18next.t('expand-all-aria-label')}
+                >
+                  {i18next.t('expand-all')}
+                </button>
+              </li>
+              <li>
+                <button
+                  class="va-accordion__button"
+                  data-testid="collapse-all-accordions"
+                  ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+                  onClick={() => this.expandCollapseAll(false)}
+                  aria-pressed={this.collapsed ? 'true' : 'false'}
+                  aria-label={i18next.t('collapse-all-aria-label')}
+                >
+                  {i18next.t('collapse-all')}
+                </button>
+              </li>
+            </ul>
           ) : null}
           <slot></slot>
         </div>

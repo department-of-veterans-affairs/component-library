@@ -1107,6 +1107,10 @@ export namespace Components {
          */
         "formHeadingLevel"?: number;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -1117,6 +1121,10 @@ export namespace Components {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * Whether or not to use the month as an input or select.
          */
@@ -2209,7 +2217,7 @@ export namespace Components {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
@@ -5070,6 +5078,10 @@ declare namespace LocalJSX {
          */
         "formHeadingLevel"?: number;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -5080,6 +5092,10 @@ declare namespace LocalJSX {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * Whether or not to use the month as an input or select.
          */
@@ -6336,7 +6352,7 @@ declare namespace LocalJSX {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */

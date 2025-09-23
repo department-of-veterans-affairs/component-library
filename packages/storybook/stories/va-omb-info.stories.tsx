@@ -97,3 +97,8 @@ Children.args = {
   ...defaultArgs,
   'benefit-type': undefined,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Children.parameters = {
+  chromatic: { disableSnapshot: true },
+};

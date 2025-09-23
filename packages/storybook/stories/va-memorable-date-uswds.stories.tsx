@@ -46,6 +46,7 @@ const Template = ({
   'month-select': monthSelect,  
   'remove-date-hint': removeDateHint,
   customYearErrorMessage,
+  labelHeaderLevel,
 }) => {
   return (
     <VaMemorableDate
@@ -60,6 +61,7 @@ const Template = ({
       customYearErrorMessage={customYearErrorMessage}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+      labelHeaderLevel={labelHeaderLevel}
     />
   );
 };
@@ -197,7 +199,7 @@ const FormsPatternSingleTemplate = ({
   required,
   error,
   value,
-  monthSelect,
+  'month-select': monthSelect,
   customYearErrorMessage,
 }) => {
   const id = Math.floor(Math.random() * 100) + 1;
@@ -380,6 +382,12 @@ CustomErrorMessage.args = {
   error: 'true',
 };
 
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  labelHeaderLevel: 2,
+};
+
 // export const Internationalization = I18nTemplate.bind(null);
 // Internationalization.args = {
 //   ...defaultArgs,
@@ -391,6 +399,7 @@ export const FormsPatternSingleWithMonthDropdown =
   FormsPatternSingleTemplate.bind(null);
 FormsPatternSingleWithMonthDropdown.args = {
   ...defaultArgs,
+  'month-select': true,
 };
 
 export const FormsPatternSingleWithoutMonthDropdown =

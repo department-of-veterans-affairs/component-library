@@ -122,6 +122,7 @@ The repository includes automated weekly reporting via GitHub Actions:
 - ESLint and Prettier for consistent formatting
 - Conventional commits for clear git history
 - Code review process for all changes
+- **Branch Protection Rules**: The repository requires all changes to be made through pull requests - direct pushes to main are not allowed
 
 ### Documentation
 - Comprehensive JSDoc for all public APIs
