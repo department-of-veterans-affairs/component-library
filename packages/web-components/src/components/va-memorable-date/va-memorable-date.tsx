@@ -330,10 +330,6 @@ export class VaMemorableDate {
     } = this;
 
     const { currentYear, currentMonth, currentDay } = this;
-    const describedbyIds = [
-      !removeDateHint ? 'dateHint' : '',
-      hint ? 'hint' : ''
-    ].filter(Boolean).join(' ');
 
     const hintText = monthSelect
       ? i18next.t('date-hint-with-select')
@@ -404,7 +400,6 @@ export class VaMemorableDate {
         <va-select
           label={i18next.t('month')}
           name={name ? `${name}Month` : 'Month'}
-          aria-describedby={describedbyIds}
           aria-labelledby={ariaLabeledByIds}
           invalid={this.invalidMonth}
           onVaSelect={this.handleMonthChange}
@@ -438,7 +433,6 @@ export class VaMemorableDate {
           name={name ? `${name}Month` : 'Month'}
           maxlength={2}
           pattern="[0-9]*"
-          aria-describedby={describedbyIds}
           aria-labelledby={ariaLabeledByIds}
           invalid={this.invalidMonth}
           // Value must be a string
@@ -531,7 +525,6 @@ export class VaMemorableDate {
                   name={name ? `${name}Day` : 'Day'}
                   maxlength={2}
                   pattern="[0-9]*"
-                  aria-describedby={describedbyIds}
                   invalid={this.invalidDay}
                   // Value must be a string
                   // if NaN provide empty string
@@ -557,7 +550,7 @@ export class VaMemorableDate {
                   name={name ? `${name}Year` : 'Year'}
                   maxlength={4}
                   pattern="[0-9]*"
-                  aria-describedby={describedbyIds}
+                  // aria-describedby={describedbyIds}
                   invalid={this.invalidYear}
                   // Value must be a string
                   // if NaN provide empty string
