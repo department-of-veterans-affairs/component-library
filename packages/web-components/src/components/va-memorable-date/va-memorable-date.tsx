@@ -550,7 +550,6 @@ export class VaMemorableDate {
                   name={name ? `${name}Year` : 'Year'}
                   maxlength={4}
                   pattern="[0-9]*"
-                  // aria-describedby={describedbyIds}
                   invalid={this.invalidYear}
                   // Value must be a string
                   // if NaN provide empty string
