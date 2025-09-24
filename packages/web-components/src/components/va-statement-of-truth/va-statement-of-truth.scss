@@ -4,16 +4,16 @@
 @import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
 :host :not(h3) {
-  font-size: 1.06 * $v3-font-base-size;
+  font-size: var(--vads-font-size-source-sans-normalized);
 }
 
 :host h3 {
   font-family: var(--font-serif);
-  margin: 24px 0;
+  margin: var(--units-3) 0;
 }
 
 :host > p {
-  margin: 24px;
+  margin: var(--units-3);
 }
 
 @media screen and (max-width: $small-screen) {
@@ -23,13 +23,13 @@
 }
 
 :host va-text-input {
-  margin-bottom: 24px;
+  margin-bottom: var(--units-3);
 }
 
 :host article {
   background-color: var(--vads-color-base-lightest);
-  padding: 1px 24px 24px 24px;
-  margin-bottom: 24px;
+  padding: 1px var(--units-3) var(--units-3) var(--units-3);
+  margin-bottom: var(--units-3);
 }
 
 va-checkbox::part(checkbox) {

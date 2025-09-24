@@ -14,7 +14,7 @@ va-checkbox::part(checkbox) {
 
 // Using Source Sans Pro normalization for v3. The base font size for v3 is 16px, which has been normalized to 16.96px
 :host .description {
-  font-size: 1.06 * $v3-font-base-size;
+  font-size: var(--vads-font-size-source-sans-normalized);
 }
 
 a {
