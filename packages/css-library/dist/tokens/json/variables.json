@@ -3012,44 +3012,6 @@
           "source-sans-normalized"
         ]
       },
-      "bitter-normalized": {
-        "value": "1.1rem",
-        "filePath": "tokens/fonts.json",
-        "isSource": true,
-        "original": {
-          "value": "1.1rem"
-        },
-        "name": "vads-font-size-bitter-normalized",
-        "attributes": {
-          "category": "vads-font",
-          "type": "size",
-          "item": "bitter-normalized"
-        },
-        "path": [
-          "vads-font",
-          "size",
-          "bitter-normalized"
-        ]
-      },
-      "monospace-normalized": {
-        "value": "1.01rem",
-        "filePath": "tokens/fonts.json",
-        "isSource": true,
-        "original": {
-          "value": "1.01rem"
-        },
-        "name": "vads-font-size-monospace-normalized",
-        "attributes": {
-          "category": "vads-font",
-          "type": "size",
-          "item": "monospace-normalized"
-        },
-        "path": [
-          "vads-font",
-          "size",
-          "monospace-normalized"
-        ]
-      },
       "root": {
         "value": "1rem",
         "filePath": "tokens/fonts.json",

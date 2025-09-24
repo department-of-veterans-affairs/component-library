@@ -53,8 +53,6 @@
     
     "size": {
       "source-sans-normalized": { "value": "1.06rem" },
-      "bitter-normalized": { "value": "1.1rem" },
-      "monospace-normalized": { "value": "1.01rem" },
       "root": { "value": "1rem" },
       "body": {
         "large": { "value": "20px" },
