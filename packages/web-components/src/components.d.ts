@@ -2217,7 +2217,7 @@ export namespace Components {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
@@ -6352,7 +6352,7 @@ declare namespace LocalJSX {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */

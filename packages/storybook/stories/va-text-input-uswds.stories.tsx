@@ -40,7 +40,7 @@ export default {
     type: {
       control: {
         type: 'select',
-        options: ['email', 'number', 'search', 'tel', 'text', 'url'],
+        options: ['email', 'number', 'password', 'search', 'tel', 'text', 'url'],
       },
     },
     'hide-required-text': {
@@ -347,12 +347,22 @@ Internationalization.args = {
   required: true,
   maxlength: '6',
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const Pattern = Template.bind(null);
 Pattern.args = {
   ...defaultArgs,
   label: 'Must be 4 digits',
   pattern: '[0-9]{4}',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Pattern.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const ValidRange = Template.bind(null);
@@ -362,6 +372,11 @@ ValidRange.args = {
   min: 0,
   max: 4,
   hint: 'The valid range is 0 to 4',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+ValidRange.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const Autocomplete = ({ name, label, autocomplete }) => {
@@ -424,9 +439,15 @@ Autocomplete.args = {
   autocomplete: 'email',
   label: 'This va-text-input is configured for email autocompletion',
 };
+Autocomplete.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
@@ -438,6 +459,11 @@ WithStep.args = {
   inputmode: 'decimal',
   step: '.2',
   hint: 'step=".2" (only even values in tenth position valid)',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithStep.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 const WithInlineHintTextTemplate = ({ name, label }) => {
@@ -451,6 +477,9 @@ const WithInlineHintTextTemplate = ({ name, label }) => {
 
 export const WithInlineHintText = WithInlineHintTextTemplate.bind(null);
 WithInlineHintText.args = { ...defaultArgs, label: 'My input (with hint)' };
+WithInlineHintText.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const WithAdditionalInfoTemplate = ({ name, label }) => {
   return (

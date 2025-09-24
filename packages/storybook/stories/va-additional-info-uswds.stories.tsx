@@ -59,3 +59,8 @@ NoBorder.args = {
   ...defaultArgs,
   'disable-border': true,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+NoBorder.parameters = {
+  chromatic: { disableSnapshot: true },
+};

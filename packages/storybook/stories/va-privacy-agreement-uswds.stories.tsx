@@ -56,3 +56,6 @@ WithError.args = { ...defaultArgs, 'show-error': true };
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};

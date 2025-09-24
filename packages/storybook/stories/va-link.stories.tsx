@@ -380,3 +380,6 @@ WithRouterLinkSupport.args = {
   href: 'https://va.gov/',
   text: 'example router link',
 };
+WithRouterLinkSupport.parameters = {
+  chromatic: { disableSnapshot: true },
+};

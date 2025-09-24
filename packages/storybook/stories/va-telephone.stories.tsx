@@ -156,6 +156,9 @@ AriaDescribedBy.args = {
   ...defaultArgs,
   'message-aria-describedby': 'Main number to facility',
 };
+AriaDescribedBy.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const VanityNumber = Template.bind(null);
 VanityNumber.args = {

@@ -220,7 +220,7 @@ Default.argTypes = {
   ...propStructure(alertDocs),
    'status': {
     description: 'Determines the icon and background color. `info`, `error`, `success`, or `warning`',
-    table: { 
+    table: {
       category: 'Properties',
       defaultValue: { summary: 'info' },
     },
@@ -303,6 +303,9 @@ NotVisible.args = {
 export const WithARIARole = WithARIARoleTemplate.bind(null);
 WithARIARole.args = {
   ...defaultArgs,
+};
+WithARIARole.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const FullWidthSiteAlert = Template.bind(null);

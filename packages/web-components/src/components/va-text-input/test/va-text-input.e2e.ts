@@ -24,7 +24,7 @@ describe('va-text-input', () => {
         </mock:shadow-root>
       </va-text-input>
     `);
-  });
+  })
 
   it('renders an error message', async () => {
     const page = await newE2EPage();
@@ -371,6 +371,7 @@ describe('va-text-input', () => {
       'email',
       'none',
       'numeric',
+      'password',
       'search',
       'tel',
       'text',
