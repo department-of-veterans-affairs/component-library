@@ -42,18 +42,19 @@ input.usa-input {
   display: flex;
   align-items: center;
 
-  > div {
+  #symbol {
+    font-size: 1rem;
     position: absolute;
-    left: 10px;
+    left: var(--units-1p5);
   }
 
   // for v3
   #symbol {
-    margin-top: 8px;
+    margin-top: var(--units-1);
   }
 
   #inputField {
-    padding-left: 25px;
+    padding-left: var(--units-3);
   }
 }
 

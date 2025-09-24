@@ -18,7 +18,7 @@
 :host {
   display: block;
   font-family: var(--font-source-sans);
-  margin-top: 24px;
+  margin-top: var(--units-3, 24px);
 }
 
 #error-message {
@@ -36,7 +36,7 @@ slot:not([name])::slotted(*:last-child) {
 va-select::part(label),
 va-text-input::part(label) {
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: var(--units-1p5);
 }
 
 va-text-input::part(validation) {
@@ -47,30 +47,27 @@ va-text-input::part(validation) {
   margin-top: 16px;
   // USWDS v3.7.1 set flex-wrap: wrap; This caused the year to always wrap when the month select option was active.
   flex-wrap: nowrap;
+  row-gap: var(--units-2);
 }
 
 .usa-memorable-date .usa-form-group {
-  margin-top: 0px;
-}
-
-.usa-form-group--month {
-  margin-right: 16px;
+  margin-top: 0;
 }
 
 .usa-form-group--month-input {
-  width: 48px;
+  width: 8ch;
 }
 
 .usa-form-group--month-select {
-  width: 15rem;
+  width: 18ch;
 }
 
 .usa-form-group--day-input {
-  width: 3rem;
+  width: 8ch;
 }
 
 .usa-form-group--year-input {
-  width: 4.5rem;
+  width: 12ch;
 }
 
 @media (max-width: 480px) {

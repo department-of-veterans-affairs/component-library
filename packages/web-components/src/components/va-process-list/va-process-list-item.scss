@@ -49,21 +49,21 @@ va-process-list-item[active='true'] .usa-process-list__heading {
 }
 
 h1.usa-process-list__heading {
-  font-size: 40px;
+  font-size: var(--vads-font-size-heading-level-1);
 }
 
 h2.usa-process-list__heading {
-  font-size: 30px;
+  font-size: var(--vads-font-size-heading-level-2);
 }
 
 h3.usa-process-list__heading {
-  font-size: 20px;
+  font-size: var(--vads-font-size-heading-level-3);
 }
 
 h4.usa-process-list__heading {
-  font-size: 17px;
+  font-size: var(--vads-font-size-heading-level-4);
 }
 
 h5.usa-process-list__heading, h6.usa-process-list__heading{
-  font-size: 15px;
+  font-size: var(--vads-font-size-heading-level-5);
 }

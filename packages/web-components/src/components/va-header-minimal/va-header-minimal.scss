@@ -6,11 +6,11 @@
   background-color: var(--vads-color-primary-darker);
   color: var(--vads-button-color-text-primary-alt-on-light);
   align-items: center;
-  padding: 10px 8px;
-  line-height: 22px;
+  padding: 10px var(--units-1, 0.5rem);
+  line-height: var(--vads-font-line-height-2, 1.5);
 
   @media (min-width: 481px) {
-    padding: 10px 16px;
+    padding: var(--units-1, 0.5rem) var(--units-1, 1rem);
   }
 }
 
@@ -19,30 +19,30 @@
 }
 
 .va-logo {
-  margin-right: 8px;
-  min-height: 30px;
-  min-width: 48px;
+  margin-right: var(--units-1);
+  min-height:  var(--units-4);
+  min-width: var(--units-6);
 
   @media (min-width: 481px) {
-    margin-right: 16px;
+    margin-right: var(--units-2);
   }
 }
 
 .header-container {
-  padding-left: 8px;
+  padding-left: var(--units-1);
   border-left: 1px solid var(--vads-color-white);
 
   @media (min-width: 481px) {
-    padding-left: 16px;
+    padding-left: var(--units-2);
   }
 
   h1, .header {
-    font-size: 20px;
+    font-size: var(--font-size-lg);
     margin: 0;
     font-weight: 700;
   }
   h2, .subheader {
-    font-size: 20px;
+    font-size: var(--font-size-lg);
     margin: 0;
     font-weight: 100;
   }
@@ -52,6 +52,6 @@
   va-crisis-line-modal::part(button) {
     position: absolute;
     right: 0;
-    bottom: -5px;
+    bottom: var(--units-neg-1);
   }
 }

@@ -44,7 +44,7 @@
 }
 
 .link-icon--left {
-  margin-right: 8px;
+  margin-right: var(--units-1);
   vertical-align: baseline;
   position: relative;
 }
@@ -84,7 +84,7 @@
 .link-text {
   display: inline-block;
   vertical-align: top;
-  max-width: calc(100% - 24px);
+  margin-right: var(--units-3);
   white-space: pre-wrap;
 }
 
@@ -93,18 +93,16 @@
 }
 
 :host a.va-link--primary-entry {
-  position: relative;
-  display: inline-block;
+  align-items: center;
   background-color: var(--vads-color-primary);
   color: var(--vads-color-white);
   text-decoration: none;
-  padding: 15px 15px 15px 45px;
-  margin: 0 1.5rem 0 0;
-  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%);
+  padding: var(--units-2) var(--units-2) var(--units-2) var(--units-1p5);
+  margin: 0 var(--units-3) 0 0;
+  clip-path: polygon(0 0, calc(100% - var(--units-2)) 0, 100% 50%, calc(100% - var(--units-2)) 100%, 0 100%);
   transition: all 0.2s ease-in-out;
   width: 95%;
-  line-height: 1.4;
-  min-height: 24px;
+  min-height: var(--units-3);
   max-width: var(--vads-size-line-length-5);
 
   @media (min-width: $medium-screen) {
@@ -112,18 +110,8 @@
   }
 
   & va-icon.link-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
     color: var(--vads-color-primary);
     background-color: var(--vads-color-white);
-  }
-
-  & .link-text {
-    font-weight: bold;
-    display: inline-block;
-    vertical-align: middle;
   }
 
   /* Hover state */
