@@ -30,7 +30,7 @@ export default {
   'december': 'December',
   'on-this-page': 'On this page',
   'date-hint': 'Enter 1 or 2 digits for the month and day and 4 digits for the year.',
-  'date-hint-with-select': 'Select a month. Enter 1 or 2 digits for the month and 4 digits for the year.',
+  'date-hint-with-select': 'Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.',
   'date-hint-month': 'Enter 1 or 2 digits for the month.',
   'date-hint-month-select': 'Select a month.',
   'date-hint-day': 'Enter 1 or 2 digits for the day.',

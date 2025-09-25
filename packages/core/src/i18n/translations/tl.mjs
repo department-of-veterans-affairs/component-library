@@ -16,7 +16,7 @@ export default {
   'collapse-all-aria-label': 'I-collapse ang lahat ng accordion',
   'on-this-page': 'Sa pahinang ito',
   'date-hint': 'Maglagay ng 1 o 2 numero para sa buwan at araw, at 4 na numero para sa taon.',
-  'date-hint-with-select': 'Pumili ng buwan. Maglagay ng 1 o 2 numero para sa buwan at araw, at 4 na numero para sa taon.',
+  'date-hint-with-select': 'Pumili ng buwan. Maglagay ng 1 o 2 numero para sa araw, at 4 na numero para sa taon.',
   'date-hint-month': 'Maglagay ng 1 o 2 numero para sa buwan.',
   'date-hint-month-select': 'Pumili ng buwan.',
   'date-hint-day': 'Maglagay ng 1 o 2 numero para sa araw.',
