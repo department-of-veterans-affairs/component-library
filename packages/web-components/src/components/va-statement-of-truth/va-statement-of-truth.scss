@@ -18,7 +18,7 @@
 
 @media screen and (max-width: $small-screen) {
   :host .short-line {
-    width: var(--vads-size-line-length-1);
+    text-wrap: pretty;
   }
 }
 
