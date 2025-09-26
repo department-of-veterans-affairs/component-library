@@ -22,7 +22,7 @@ describe('va-memorable-date', () => {
               <slot></slot>
               <div class="usa-memorable-date">
                 <div class="usa-form-group usa-form-group--select usa-form-group--month">
-                  <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select">
+                  <va-select class="hydrated usa-form-group--month-select">
                     <option value="1">
                       January
                     </option>
@@ -62,10 +62,10 @@ describe('va-memorable-date', () => {
                   </va-select>
                 </div>
                 <div class="usa-form-group usa-form-group--day">
-                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" show-input-error="false"></va-text-input>
+                  <va-text-input class="hydrated memorable-date-input usa-form-group--day-input" show-input-error="false"></va-text-input>
                 </div>
                 <div class="usa-form-group usa-form-group--year">
-                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--year-input" show-input-error="false" value=""></va-text-input>
+                  <va-text-input class="hydrated memorable-date-input usa-form-group--year-input" show-input-error="false" value=""></va-text-input>
                 </div>
               </div>
             </fieldset>
@@ -114,7 +114,7 @@ describe('va-memorable-date', () => {
             <slot></slot>
             <div class="usa-memorable-date">
               <div class="usa-form-group usa-form-group--select usa-form-group--month">
-                <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select">
+                <va-select class="hydrated usa-form-group--month-select">
                   <option value="1">
                     January
                   </option>
@@ -154,10 +154,10 @@ describe('va-memorable-date', () => {
                 </va-select>
               </div>
               <div class="usa-form-group usa-form-group--day">
-                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" show-input-error="false"></va-text-input>
+                <va-text-input class="hydrated memorable-date-input usa-form-group--day-input" show-input-error="false"></va-text-input>
               </div>
               <div class="usa-form-group usa-form-group--year">
-                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--year-input" show-input-error="false" value=""></va-text-input>
+                <va-text-input class="hydrated memorable-date-input usa-form-group--year-input" show-input-error="false" value=""></va-text-input>
               </div>
             </div>
           </fieldset>
@@ -175,25 +175,25 @@ describe('va-memorable-date', () => {
 
     const element = await page.find('va-memorable-date');
     expect(element).toHaveClass('hydrated');
-    
+
     // Check that the custom hint is still present (only removeDateHint affects dateHint)
     const hintElement = await page.find('va-memorable-date >>> div#hint');
     expect(hintElement).not.toBeNull();
     expect(await hintElement.innerText).toBe('custom date hint text');
-    
+
     // Check that the date hint element is not present in the DOM
     const dateHintElement = await page.find('va-memorable-date >>> span#dateHint');
     expect(dateHintElement).toBeNull();
-    
-    // Verify the aria-describedby only includes the custom hint when removeDateHint is true
-    const monthSelect = await page.find('va-memorable-date >>> va-select');
-    expect(monthSelect.getAttribute('aria-describedby')).toBe('hint');
-    
-    const dayInput = await page.find('va-memorable-date >>> .usa-form-group--day-input');
-    expect(dayInput.getAttribute('aria-describedby')).toBe('hint');
-    
-    const yearInput = await page.find('va-memorable-date >>> .usa-form-group--year-input');
-    expect(yearInput.getAttribute('aria-describedby')).toBe('hint');
+
+    // Verify the child components are still described by the default hint even if it is removed.
+    const monthSelect = await page.find('va-memorable-date >>> va-select >>> select');
+    expect(monthSelect.getAttribute('aria-describedby')).toBe('input-message');
+
+    const dayInput = await page.find('va-memorable-date >>> .usa-form-group--day-input >>> input');
+    expect(dayInput.getAttribute('aria-describedby')).toBe('input-message');
+
+    const yearInput = await page.find('va-memorable-date >>> .usa-form-group--year-input >>> input');
+    expect(yearInput.getAttribute('aria-describedby')).toBe('input-message');
   });
 
   it('renders an error message', async () => {
@@ -841,7 +841,7 @@ describe('va-memorable-date', () => {
 
       // Verify error is cleared
       expect(date.getAttribute('error')).toBe(null);
-      
+
       // Verify input fields updated correctly
       const elementMonth = await page.find(
         'va-memorable-date >>> .usa-form-group--month-select',
@@ -947,13 +947,13 @@ describe('va-memorable-date', () => {
               <slot></slot>
               <div class="usa-memorable-date">
                 <div class="usa-form-group usa-form-group--month">
-                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--month-input" show-input-error="false"></va-text-input>
+                  <va-text-input class="hydrated memorable-date-input usa-form-group--month-input" show-input-error="false"></va-text-input>
                 </div>
                 <div class="usa-form-group usa-form-group--day">
-                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" show-input-error="false"></va-text-input>
+                  <va-text-input class="hydrated memorable-date-input usa-form-group--day-input" show-input-error="false"></va-text-input>
                 </div>
                 <div class="usa-form-group usa-form-group--year">
-                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--year-input" show-input-error="false" value=""></va-text-input>
+                  <va-text-input class="hydrated memorable-date-input usa-form-group--year-input" show-input-error="false" value=""></va-text-input>
                 </div>
               </div>
             </fieldset>
@@ -1002,13 +1002,13 @@ describe('va-memorable-date', () => {
             <slot></slot>
             <div class="usa-memorable-date">
               <div class="usa-form-group usa-form-group--month">
-                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--month-input" show-input-error="false"></va-text-input>
+                <va-text-input class="hydrated memorable-date-input usa-form-group--month-input" show-input-error="false"></va-text-input>
               </div>
               <div class="usa-form-group usa-form-group--day">
-                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" show-input-error="false"></va-text-input>
+                <va-text-input class="hydrated memorable-date-input usa-form-group--day-input" show-input-error="false"></va-text-input>
               </div>
               <div class="usa-form-group usa-form-group--year">
-                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--year-input" show-input-error="false" value=""></va-text-input>
+                <va-text-input class="hydrated memorable-date-input usa-form-group--year-input" show-input-error="false" value=""></va-text-input>
               </div>
             </div>
           </fieldset>

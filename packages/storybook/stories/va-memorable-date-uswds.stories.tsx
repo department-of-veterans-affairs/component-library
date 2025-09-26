@@ -388,12 +388,10 @@ LabelHeader.args = {
   labelHeaderLevel: 2,
 };
 
-// export const Internationalization = I18nTemplate.bind(null);
-// Internationalization.args = {
-//   ...defaultArgs,
-//   error: 'Error Message Example',
-//   required: true,
-// };
+export const Internationalization = I18nTemplate.bind(null);
+Internationalization.args = {
+  ...defaultArgs,
+};
 
 export const FormsPatternSingleWithMonthDropdown =
   FormsPatternSingleTemplate.bind(null);
