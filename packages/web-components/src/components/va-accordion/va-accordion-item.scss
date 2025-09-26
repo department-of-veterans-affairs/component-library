@@ -48,8 +48,8 @@ button {
 
 .va-accordion__subheader {
   font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 1rem;
+  line-height: var(--vads-font-line-height-5);
   margin-top: 2px;
 }
 
@@ -66,7 +66,7 @@ button {
 
 .va-accordion__header ::slotted([slot=icon]),
 .va-accordion__subheader ::slotted([slot=subheader-icon]){
-  margin-right: 15px;
+  margin-right: var(--units-2);
   width: inherit;
 }
 
