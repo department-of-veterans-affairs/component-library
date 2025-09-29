@@ -28,8 +28,13 @@ fieldset {
 
 legend {
   border: 0;
-  font-size: 1.06rem;
   padding: 0;
+}
+
+legend,
+va-select,
+va-text-input {
+  font-size: var(--vads-font-size-source-sans-normalized);
 }
 
 span.required {
@@ -43,10 +48,11 @@ span.required {
 }
 
 .date-container {
+  column-gap: var(--units-2);
   display: flex;
-  margin-top: 12px;
+  margin-top: var(--units-1p5);
   flex-wrap: wrap;
-  row-gap: 12px;
+  row-gap: var(--units-1p5);
 }
 
 :host([error]:not([error=''])) .date-container {
@@ -54,23 +60,21 @@ span.required {
 }
 
 .select-month {
-  width: 8.125rem;
-  margin-right: 0.9375rem;
+  width: 16ch;
 }
 
 .select-day {
-  width: 5rem;
-  margin-right: 0.9375rem;
+  width: 12ch;
 }
 
 .input-year {
-  width: 5rem;
+  width: 10ch;
 }
 
 va-select::part(label),
 va-text-input::part(label) {
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: var(--vads-spacing-1p5);
 }
 
 va-text-input::part(validation) {
