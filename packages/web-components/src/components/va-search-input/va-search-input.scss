@@ -8,10 +8,10 @@
 @import '../../mixins/inputs.css';
 @import 'uswds-core/src/styles/functions/units/px-to-rem';
 
-// This values are inherited from USWDS' .usa-search__input
+// This values are inherited from the height values in USWDS' usa-search.scss
 $input-height: var(--units-4);
 $input-height--big: var(--units-6);
-// This value is inherited from focusable.css
+// This value is pulled from the focus outline and offset from focusable.css
 $focus-spacing: calc(2px + 2px);
 
 :host {
