@@ -2,17 +2,7 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
-
-.usa-label--required {
-  color: var(--vads-color-secondary-dark);
-}
-
-.usa-error-message {
-  color: var(--vads-color-secondary-dark);
-}
-
-
-/** Original Component Style **/
+@import 'uswds-core/src/styles/mixins/helpers/add-label-styles';
 
 :host {
   display: block;
@@ -20,15 +10,20 @@
   margin-top: 1.875rem;
 }
 
+#error-message {
+  margin-bottom: 0;
+}
+
+// TODO: Update markup so that can import and use usa-fieldset styles
 fieldset {
   border: none;
   margin: 0;
   padding: 0;
 }
 
+// TODO: Update markup so that can import and use usa-legend styles more directly
 legend {
-  border: 0;
-  padding: 0;
+  @include add-label-styles;
 }
 
 legend,
@@ -39,12 +34,6 @@ va-text-input {
 
 span.required {
   color: var(--vads-color-secondary-dark);
-}
-
-#error-message {
-  color: var(--vads-color-secondary-dark);
-  display: block;
-  margin-bottom: 0;
 }
 
 .date-container {
@@ -74,7 +63,7 @@ span.required {
 va-select::part(label),
 va-text-input::part(label) {
   margin-top: 0;
-  margin-bottom: var(--vads-spacing-1p5);
+  margin-bottom: var(--units-1);
 }
 
 va-text-input::part(validation) {
