@@ -14,10 +14,10 @@ describe('va-memorable-date', () => {
           <div class="input-wrap">
             <fieldset class="usa-fieldset usa-form">
               <legend class="usa-legend" id="input-label" part="legend">
+              </legend>
               <span class="usa-hint" id="dateHint">
                 date-hint-with-select
               </span>
-              </legend>
               <span id="error-message" role="alert"></span>
               <slot></slot>
               <div class="usa-memorable-date">
@@ -73,7 +73,7 @@ describe('va-memorable-date', () => {
         </mock:shadow-root>
       </va-memorable-date>
     `);
-  });
+  })
 
   it('passes an axe check', async () => {
     const page = await newE2EPage();
@@ -106,10 +106,10 @@ describe('va-memorable-date', () => {
               <div class="usa-hint" id="hint">
                 hint text
               </div>
-              <span class="usa-hint" id="dateHint">
-                date-hint-with-select
-              </span>
             </legend>
+            <span class="usa-hint" id="dateHint">
+              date-hint-with-select
+            </span>
             <span id="error-message" role="alert"></span>
             <slot></slot>
             <div class="usa-memorable-date">
@@ -939,10 +939,10 @@ describe('va-memorable-date', () => {
           <div class="input-wrap">
             <fieldset class="usa-fieldset usa-form">
               <legend class="usa-legend" id="input-label" part="legend">
+              </legend>
               <span class="usa-hint" id="dateHint">
               date-hint
               </span>
-              </legend>
               <span id="error-message" role="alert"></span>
               <slot></slot>
               <div class="usa-memorable-date">
@@ -994,10 +994,10 @@ describe('va-memorable-date', () => {
               <div class="usa-hint" id="hint">
                 hint text
               </div>
-              <span class="usa-hint" id="dateHint">
-                date-hint
-              </span>
             </legend>
+            <span class="usa-hint" id="dateHint">
+              date-hint
+            </span>
             <span id="error-message" role="alert"></span>
             <slot></slot>
             <div class="usa-memorable-date">

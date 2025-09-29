@@ -499,12 +499,14 @@ export class VaMemorableDate {
                   {hint}
                 </div>
               )}
-              {!removeDateHint && (
-                <span class="usa-hint" id="dateHint">
-                  {hintText}
-                </span>
-              )}
             </legend>
+
+            {!removeDateHint && (
+              <span class="usa-hint" id="dateHint">
+                {hintText}
+              </span>
+            )}
+
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
