@@ -55,7 +55,7 @@ $u-font: map-collect(
 );
 
 @each $family in map-keys($tokens-font-family) {
-  @each $size in ('xs', 'sm', 'md', 'lg', 'xl', '2xl') {
+  @each $size in ('2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl') {
     .vads-u-font--#{$family}-#{$size} {
       @include typeset($family, $size);
     }

@@ -4620,6 +4620,12 @@ through all possible variants
   }
 }
 /* stylelint-enable */
+.vads-u-font--sans-2xs {
+  font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
 .vads-u-font--sans-xs {
   font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
   font-size: 1rem;
@@ -4656,6 +4662,12 @@ through all possible variants
   line-height: 1.5;
 }
 
+.vads-u-font--serif-2xs {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 0.91rem;
+  line-height: 1.6;
+}
+
 .vads-u-font--serif-xs {
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 0.97rem;
@@ -4690,6 +4702,12 @@ through all possible variants
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 2.59rem;
   line-height: 1.6;
+}
+
+.vads-u-font--mono-2xs {
+  font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace;
+  font-size: 0.83rem;
+  line-height: 1.7;
 }
 
 .vads-u-font--mono-xs {
