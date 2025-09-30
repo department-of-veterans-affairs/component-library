@@ -1,72 +1,20 @@
+.sbdocs img {
+  max-width: 100%;
+}
 
-
-@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
-@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-eyebrow.css";
-
-@import '@department-of-veterans-affairs/css-library/dist/stylesheets/utilities.css';
-@import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-action-link.css';
-@import '@department-of-veterans-affairs/css-library/dist/stylesheets/_mixins.scss';
-@import '@department-of-veterans-affairs/css-library/dist/stylesheets/site/_m-crisis-line.scss';
-
-// Remove Negative Margin via Default Storybook CSS
-// This is causing the show code button to overlap with components
-// Height Auto fixes Firefox Bug with height being set to a fixed 70px value
-.docs-story {
-  &>div {
-    margin: 0;
-
-    &>div {
-      height: auto;
-    }
+.docblock-argstable td {
+  &,
+  p,
+  span,
+  code,
+  button {
+    font-size: .875rem;
+    line-height: var(--vads-font-line-height-4);
   }
-}
 
-.sb-anchor.expand .docs-story > div > div {
-  height: 400px;
-}
-
-.sbdocs-wrapper {
-  padding: 2.5rem 20px !important;
-}
-
-.sbdocs-wrapper tr p {
-  font-size: 14px;
-}
-
-p.sbdocs-p, p.component-details, .sbdocs-content p {
-  font-size: 1.06rem;
-}
-
-.sbdocs-h1 {
-  font-size: 32px !important;
-}
-
-a.sbdocs-a {
-  color: var(--color-link-default);
-  font-size: 1rem;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in-out;
-  transition-property: color, background-color, border-color;
-}
-
-a.sbdocs-a,
-a.sbdocs-a:hover {
-  text-decoration: underline;
-}
-
-.resize-y {
-  resize: vertical;
-}
-
-/** Global styles for USWDS 3 integration into Storybook **/
-.usa-label {
-  font-size: 15px !important;
-}
-
-button {
-  padding: 10px 20px !important;
-}
-
-.docblock-argstable a {
-  font-size: 14px;
+  button:hover {
+    border: none;
+    cursor: pointer !important;
+    margin: 0;
+  }
 }

@@ -7,6 +7,7 @@ import {
   Primary,
   Stories,
   Controls,
+  Unstyled
 } from '@storybook/addon-docs';
 
 import webComponentDocs from '../../web-components/component-docs.json';
@@ -326,7 +327,7 @@ export function StoryDocs({
     capitalize(_componentName)?.replaceAll('-', ' ');
 
   return (
-    <>
+    <Unstyled>
       <Title />
       <Subtitle />
       <MaturityScale category={maturityCategory} level={maturityLevel} />
@@ -339,7 +340,7 @@ export function StoryDocs({
       <Controls of={storyDefault} />
       <>{children}</>
       <Stories />
-    </>
+    </Unstyled>
   );
 }
 StoryDocs.propTypes = {
