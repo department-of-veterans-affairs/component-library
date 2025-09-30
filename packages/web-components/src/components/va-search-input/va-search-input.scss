@@ -6,7 +6,6 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/inputs.css';
-@import 'uswds-core/src/styles/functions/units/px-to-rem';
 
 // This values are inherited from the height values in USWDS' usa-search.scss
 $input-height: var(--units-4);
