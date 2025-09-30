@@ -78,7 +78,7 @@ slot:not([name])::slotted(*:last-child) {
 va-select::part(label),
 va-text-input::part(label) {
   margin-top: 0;
-  margin-bottom: var(--units-1);
+  margin-bottom: var(--units-1p5);
 }
 
 va-text-input::part(validation) {
