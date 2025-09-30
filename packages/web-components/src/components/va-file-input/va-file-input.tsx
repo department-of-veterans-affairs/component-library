@@ -189,7 +189,7 @@ export class VaFileInput {
         this.resetState();
       }
   }
-  
+
   /**
    * Return to initial visual state of component to display error and
    * allow user to try to add file again.
@@ -658,9 +658,8 @@ export class VaFileInput {
                   </div>
                 </div>
                 {(file || value || uploadedFile) && (
-                  <div>
-                    {this.showSeparator && <hr class="separator" />}
-                    {!readOnly && showProgBar && 
+                  <div class={this.showSeparator ? 'with-separator' : undefined}>
+                    {!readOnly && showProgBar &&
                       (
                         <Fragment>
                             <va-progress-bar percent={percentUploaded} />
@@ -671,14 +670,20 @@ export class VaFileInput {
                     {!showProgBar && (
                       <Fragment>
                         {encrypted && (
-                          <va-text-input onInput={(e) =>{this.handlePasswordChange(e)}} label="File password" required error={passwordError} />
+                          <va-text-input
+                            type="password"
+                            onInput={(e) =>{this.handlePasswordChange(e)}}
+                            label="File password"
+                            required
+                            error={passwordError}
+                          />
                         )}
                         <div class="additional-info-slot">
                           <slot></slot>
                         </div>
                       </Fragment>
                     )}
-                    {!readOnly && !showProgBar && 
+                    {!readOnly && !showProgBar &&
                       (
                         <Fragment>
                           <div class="file-button-section">

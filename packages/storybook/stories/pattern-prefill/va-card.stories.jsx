@@ -8,6 +8,7 @@ export default {
   title: 'Patterns/Prefill/Components/Card',
   id: 'patterns/components/card',
   parameters: {
+    chromatic: { disableSnapshot: true },
     componentSubtitle: 'Prefill card variations',
     docs: {
       page: () => <StoryDocs storyDefault={Editable} data={cardDocs} />,

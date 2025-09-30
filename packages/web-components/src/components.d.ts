@@ -2217,7 +2217,7 @@ export namespace Components {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
@@ -3719,6 +3719,7 @@ declare global {
     };
     interface HTMLVaTextInputElementEventMap {
         "component-library-analytics": any;
+        "vaInput": any;
     }
     /**
      * @nativeHandler onInput
@@ -6326,6 +6327,10 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaTextInputCustomEvent<any>) => void;
         /**
+          * The event emitted when the input value changes
+         */
+        "onVaInput"?: (event: VaTextInputCustomEvent<any>) => void;
+        /**
           * The regular expression that the input element's value is checked against on submission
          */
         "pattern"?: string;
@@ -6352,7 +6357,7 @@ declare namespace LocalJSX {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */

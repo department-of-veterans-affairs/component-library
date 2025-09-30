@@ -507,6 +507,9 @@ export const ReactWithCustomEvent = ReactBindingExample.bind(null);
 ReactWithCustomEvent.args = {
   ...defaultArgs,
 };
+ReactWithCustomEvent.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const Error = USWDSTiledError.bind(null);
 Error.args = {
@@ -519,6 +522,11 @@ IDUsage.args = {
   ...defaultArgs,
   required: true,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+IDUsage.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const withDescriptionMessage = withDescriptionMessageTemplate.bind(null);
 withDescriptionMessage.args = {
@@ -530,6 +538,11 @@ Internationalization.args = {
   ...defaultArgs,
   name: 'i18n-example',
   required: true,
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);

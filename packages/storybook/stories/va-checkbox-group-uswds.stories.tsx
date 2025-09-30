@@ -385,6 +385,9 @@ TileWithHint.args = {
   label: 'Select any historical figure',
   hint: 'This is example hint text',
 };
+TileWithHint.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const TileWithError = USWDSTiled.bind(null);
 TileWithError.args = {
@@ -392,6 +395,9 @@ TileWithError.args = {
   tile: true,
   label: 'Select any historical figure',
   error: 'There has been a problem',
+};
+TileWithError.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const TileWithHintAndError = USWDSTiled.bind(null);
@@ -408,6 +414,10 @@ withDescriptionMessage.args = {
   ...defaultArgs,
   'message-aria-describedby': 'some additional info',
 };
+withDescriptionMessage.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {

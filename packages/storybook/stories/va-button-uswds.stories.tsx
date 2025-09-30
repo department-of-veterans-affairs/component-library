@@ -131,6 +131,11 @@ Loading.args = {
     }, 5000);
   },
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Loading.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const FullWidth = Template.bind(null);
 FullWidth.args = {
@@ -191,4 +196,9 @@ Submitted.args = {
   },
   submit: 'prevent',
   text: 'Submit',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Submitted.parameters = {
+  chromatic: { disableSnapshot: true },
 };
