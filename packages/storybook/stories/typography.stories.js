@@ -35,13 +35,28 @@ export const Default = () => {
         </table>
       ))}
 
-      {['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((size) => (
-        <div key={size} className="vads-u-margin-y--2" style={{ borderTop: `1px solid black`, borderBottom: `1px solid black` }}>
-          <span className={`vads-u-font--sans-${size}`}>Font size sans {size}, </span>
-          <span className={`vads-u-font--mono-${size}`}>Font size mono {size}, </span>
-          <span className={`vads-u-font--serif-${size}`}>Font size serif {size} </span>
-        </div>
-      ))}
+      
     </>
   );
 };
+
+export const LineHeight = () => {
+    return (
+        <>
+            <div className="vads-u-margin--4">
+                {['sans', 'mono', 'serif'].map((font, idx) => (
+                    <div key={idx} className="vads-u-margin-y--2">
+                        <h4>{font}</h4>
+                        {['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((size) => (
+                            <div>
+                                <h5>{`vads-u-font--${font}-${size}`}</h5>
+                                <p className={`vads-u-font--${font}-${size}`}>We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</p>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+        </>
+    )
+
+}
