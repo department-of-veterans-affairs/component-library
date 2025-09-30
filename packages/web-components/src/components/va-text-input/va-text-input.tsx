@@ -246,6 +246,11 @@ export class VaTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * The event emitted when the input value changes
+   */
+  @Event() vaInput: EventEmitter;
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -317,6 +322,10 @@ export class VaTextInput {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
     this.debouncedUpdateScreenReaderCount(this.charCountElement, this.value, getMaxLength(this.maxlength));
+  
+    this.vaInput.emit({
+      value: this.value,
+    });
   }
 
   private handleBlur = (e: Event) => {
