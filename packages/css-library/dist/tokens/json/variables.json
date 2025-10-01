@@ -2990,6 +2990,44 @@
           "line-height",
           "heading"
         ]
+      },
+      "serif": {
+        "value": "1.7",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.7"
+        },
+        "name": "vads-font-line-height-serif",
+        "attributes": {
+          "category": "vads-font",
+          "type": "line-height",
+          "item": "serif"
+        },
+        "path": [
+          "vads-font",
+          "line-height",
+          "serif"
+        ]
+      },
+      "mono": {
+        "value": "1.7",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.7"
+        },
+        "name": "vads-font-line-height-mono",
+        "attributes": {
+          "category": "vads-font",
+          "type": "line-height",
+          "item": "mono"
+        },
+        "path": [
+          "vads-font",
+          "line-height",
+          "mono"
+        ]
       }
     },
     "size": {

@@ -6,9 +6,9 @@ export const Default = () => {
   const sample = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.split('');
   const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
   const fonts = [
-    { name: 'Sans', classPrefix: 'vads-u-font--sans-' },
-    { name: 'Mono', classPrefix: 'vads-u-font--mono-' },
-    { name: 'Serif', classPrefix: 'vads-u-font--serif-' },
+    { name: 'Sans', classPrefix: 'vads-u-font-size--sans-' },
+    { name: 'Mono', classPrefix: 'vads-u-font-size--mono-' },
+    { name: 'Serif', classPrefix: 'vads-u-font-size--serif-' },
   ];
   return (
     <>
@@ -26,7 +26,7 @@ export const Default = () => {
               <tr key={char + i}>
                 {fonts.map((font) => (
                   <td key={font.name} style={{ border: '1px solid #ccc', padding: '4px', textAlign: 'center' }}>
-                    <span className={`${font.classPrefix}${size}`}>{char}</span>
+                    <span className={`${font.classPrefix}${size} ${font.name === 'Sans'? 'vads-u-line-height--4' : `vads-u-line-height--${font.name.toLowerCase()}`}`}>{char}</span>
                   </td>
                 ))}
               </tr>
@@ -49,8 +49,8 @@ export const LineHeight = () => {
                         <h4>{font}</h4>
                         {['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((size) => (
                             <div>
-                                <h5>{`vads-u-font--${font}-${size}`}</h5>
-                                <p className={`vads-u-font--${font}-${size}`}>We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</p>
+                                <h5>{`vads-u-font-size--${font}-${size}`}</h5>
+                                <p className={`vads-u-font-size--${font}-${size} ${font === 'sans'? 'vads-u-line-height--4' : `vads-u-line-height--${font}`}`}>We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.</p>
                             </div>
                         ))}
                     </div>

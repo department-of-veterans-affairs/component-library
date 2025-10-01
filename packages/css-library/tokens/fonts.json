@@ -48,7 +48,9 @@
       "-6": { "value": "1.75"},
       "body-lead": { "value": "1.75" },
       "default": { "value": "1.5" },
-      "heading": { "value": "1.2" }
+      "heading": { "value": "1.2" },
+      "serif": { "value": "1.7" },
+      "mono": { "value": "1.7" }
     },
     
     "size": {

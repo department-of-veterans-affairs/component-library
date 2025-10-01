@@ -1,5 +1,5 @@
 @use 'uswds-core/src/styles/functions' as *;
-@use 'uswds-core/src/styles/mixins/typography/typeset' as *;
+@use 'uswds-core/src/styles/mixins/utilities/font' as *;
 @use '../tokens/font' as *;
 @use './settings' as *;
 
@@ -56,8 +56,8 @@ $u-font: map-collect(
 
 @each $family in map-keys($tokens-font-family) {
   @each $size in ('2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl') {
-    .vads-u-font--#{$family}-#{$size} {
-      @include typeset($family, $size);
+    .vads-u-font-size--#{$family}-#{$size} {
+      @include u-font($family, $size);
     }
   }
 }
