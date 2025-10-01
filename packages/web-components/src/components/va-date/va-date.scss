@@ -1,30 +1,24 @@
+@use 'usa-form/src/styles/usa-form';
+@use 'usa-fieldset/src/styles/usa-fieldset';
+@use 'usa-legend/src/styles/usa-legend';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'usa-error-message/src/styles/usa-error-message';
+
 @import '../../../src/mixins/accessibility.css';
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/form-field-error.css';
-@import '../../mixins/hint-text.css';
-@import 'uswds-core/src/styles/mixins/helpers/add-label-styles';
 
 :host {
   display: block;
   font-family: var(--font-source-sans);
-  margin-top: 1.875rem;
+  margin-top: var(--units-3);
 }
 
 #error-message {
   margin-bottom: 0;
 }
 
-// TODO: Update markup so that can import and use usa-fieldset styles
-fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-// TODO: Update markup so that can import and use usa-legend styles more directly
-legend {
-  @include add-label-styles;
-}
 
 legend,
 va-select,
@@ -32,15 +26,11 @@ va-text-input {
   font-size: var(--vads-font-size-source-sans-normalized);
 }
 
-span.required {
-  color: var(--vads-color-secondary-dark);
-}
-
 .date-container {
   column-gap: var(--units-2);
   display: flex;
-  margin-top: var(--units-1p5);
   flex-wrap: wrap;
+  margin-top: var(--units-2);
   row-gap: var(--units-1p5);
 }
 
