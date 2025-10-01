@@ -1,4 +1,5 @@
-import { Component, Host, State, h, Element, Listen } from '@stencil/core';
+/* eslint-disable i18next/no-literal-string */
+import { Component, Host, State, h, Element, Listen, Prop } from '@stencil/core';
 import { CONTACTS } from '../../contacts';
 
 /**
@@ -14,6 +15,14 @@ import { CONTACTS } from '../../contacts';
 })
 export class VACrisisLineModal {
   @Element() el: HTMLElement;
+
+  @Prop() chatUrl: string = "https://www.veteranscrisisline.net/get-help-now/chat/";
+
+  @Prop() phoneNumber: string = "988";
+
+  @Prop() smsNumber: string = "838255";
+
+  @Prop() ttyNumber: string = CONTACTS.CRISIS_TTY;
 
   @State() isOpen: boolean = false;
 
@@ -57,6 +66,8 @@ export class VACrisisLineModal {
   }
 
   render() {
+    const { chatUrl, phoneNumber, smsNumber, ttyNumber } = this;
+
     return (
       <Host>
         <div class="va-crisis-line-container">
@@ -98,7 +109,7 @@ export class VACrisisLineModal {
               <span>
                 Call{' '}
                 <strong>
-                  <va-telephone contact="988" /> and select 1
+                  <va-telephone contact={phoneNumber} /> and select 1
                 </strong>
               </span>
             </li>
@@ -111,7 +122,7 @@ export class VACrisisLineModal {
               <span>
                 Text&nbsp;
                 <strong>
-                  <va-telephone sms contact="838255" />
+                  <va-telephone sms contact={smsNumber} />
                 </strong>
               </span>
             </li>
@@ -119,7 +130,7 @@ export class VACrisisLineModal {
               <va-icon icon="chat" class="va-clm__icon" size={3}></va-icon>
               <a
                 class="no-external-icon"
-                href="https://www.veteranscrisisline.net/get-help-now/chat/"
+                href={chatUrl}
               >
                 Start a confidential chat
               </a>
@@ -129,7 +140,7 @@ export class VACrisisLineModal {
               <p>
                 Call TTY if you have hearing loss{' '}
                 <strong>
-                  <va-telephone tty contact={CONTACTS.CRISIS_TTY} />
+                  <va-telephone tty contact={ttyNumber} />
                 </strong>
               </p>
             </li>

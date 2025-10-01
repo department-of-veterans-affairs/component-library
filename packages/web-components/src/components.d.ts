@@ -590,6 +590,10 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        "chatUrl": string;
+        "phoneNumber": string;
+        "smsNumber": string;
+        "ttyNumber": string;
     }
     /**
      * @componentName Critical Action
@@ -4502,6 +4506,10 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        "chatUrl"?: string;
+        "phoneNumber"?: string;
+        "smsNumber"?: string;
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action
