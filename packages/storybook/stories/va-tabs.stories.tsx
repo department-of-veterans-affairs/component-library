@@ -20,30 +20,30 @@ const tabPanelDocs= getWebComponentDocs('va-tab-panel');
 
 const tabItems = [
   {
-    label: 'Status',
-    panelHeading: 'Status',
-    targetId: 'panel-1',
-    panelContent: 'Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances.',
-  },
-  {
-    label: 'Files',
-    panelHeading: 'Files',
-    targetId: 'panel-2',
-    panelContent: 'A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed.',
-  },
-  {
     label: 'Overview',
     panelHeading: 'Overview',
+    targetId: 'panel-1',
+    panelContent: 'This tab provides a general overview of the component functionality. Here you can find basic information and introductory content that helps users understand the purpose and main features of this section.',
+  },
+  {
+    label: 'Features',
+    panelHeading: 'Features',
+    targetId: 'panel-2',
+    panelContent: 'This section highlights the key features and capabilities available. It demonstrates various functionality options and shows how different aspects of the component work together to provide a comprehensive solution.',
+  },
+  {
+    label: 'Documentation',
+    panelHeading: 'Documentation',
     targetId: 'panel-3',
-    panelContent: 'No Soldier shall, in time of peace be quartered in any house, without the consent of the Owner, nor in time of war, but in a manner to be prescribed by law.'
+    panelContent: 'Find detailed documentation and implementation guidelines in this section. This includes technical specifications, usage examples, and best practices for implementing and customizing the component.'
   }
 ];
 
 const altPanelHeadings = [
-  'Status details',
-  'Files details',
-  'Overview of the claim process',
-  'Details of the claim'
+  'Overview details',
+  'Features details',
+  'Documentation guide',
+  'Additional information'
 ]
 
 export default {
@@ -90,7 +90,7 @@ export default {
   },
   args: {
     ...propDefaults(tabsDocs),
-    label: 'Status details',
+    label: 'Component details',
     tabItems: tabItems,
     initiallySelected: 0,
     templateKey: 0, // Used to differentiate between multiple instances in the DOM to prevent duplicate IDs
@@ -139,44 +139,44 @@ const Template = (args) => {
 const TemplateWithMeaningfulContent = (args) => {
   return (
     <va-tabs label={args.label} initially-selected={args.initiallySelected}>
-      <va-tab-item button-text="Status" target-id="meaningful-panel-1"></va-tab-item>
+      <va-tab-item button-text="Dashboard" target-id="meaningful-panel-1"></va-tab-item>
       <va-tab-panel panel-id="meaningful-panel-1">
         <div>
           <h2 className="vads-u-margin-y--0">
-            Claim status
+            Dashboard Overview
           </h2>
           <p>
-            Here's the latest information on your claim.
+            Here's the latest information and key metrics for your dashboard.
           </p>
           <CardDefault {...CardDefault.args} />
-          <h3>Additional evidence</h3>
+          <h3>Upload files</h3>
           <FileInputDefault {...FileInputDefault.args} />
         </div>
       </va-tab-panel>
 
-      <va-tab-item button-text="Issues" target-id="meaningful-panel-2"></va-tab-item>
+      <va-tab-item button-text="Data" target-id="meaningful-panel-2"></va-tab-item>
       <va-tab-panel panel-id="meaningful-panel-2">
         <div>
-          <h2 className="vads-u-margin-y--0">Claim files</h2>
+          <h2 className="vads-u-margin-y--0">Data Tables</h2>
           <p className="vads-u-margin-top--1 va-introtext">
-            If you need to add evidence, you can do that here. You can also review
-            the files associated with this claim.
+            View and manage your data in the table below. You can sort, filter,
+            and export the information as needed.
           </p>
 
           <TableDefault {...TableDefault.args} />
         </div>
       </va-tab-panel>
 
-      <va-tab-item button-text="Overview" target-id="meaningful-panel-3"></va-tab-item>
+      <va-tab-item button-text="Settings" target-id="meaningful-panel-3"></va-tab-item>
       <va-tab-panel panel-id="meaningful-panel-3">
         <div>
           <div className="claim-overview-header-container">
             <h2 className="vads-u-margin-y--0">
-              Overview of the claim process
+              Configuration Settings
             </h2>
             <p className="vads-u-margin-top--1 vads-u-margin-bottom--2 va-introtext">
-              There are 8 steps in the claim process. It's common for claims to
-              repeat steps 3 to 6 if we need more information.
+              Manage your application settings and preferences using the
+              configuration options below.
             </p>
           </div>
           <ManyAccordions {...ManyAccordions.args} />
@@ -255,10 +255,10 @@ WithAdditionalTabItem.args = {
   tabItems: [
     ...tabItems,
     {
-      label: 'Details',
-      panelHeading: 'Details',
+      label: 'Support',
+      panelHeading: 'Support',
       targetId: 'panel-4',
-      panelContent: 'The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause.'
+      panelContent: 'This section provides support information and resources. Find help documentation, contact information, and troubleshooting guides to assist with implementation and usage of the component.'
     }
   ],
 };
@@ -277,7 +277,7 @@ WithAdditionalTabItem.decorators = [(Story) => (
 export const WithMeaningfulContent = TemplateWithMeaningfulContent.bind(null);
 WithMeaningfulContent.args = {
   ...Default.args,
-  label: 'Claim details',
+  label: 'Application details',
   initiallySelected: 0,
   templateKey: 6,
 };
