@@ -4,10 +4,12 @@ import {
   Event,
   EventEmitter,
   Host,
+  Listen,
   Prop,
   h,
 } from '@stencil/core';
 import classNames from 'classnames';
+import { Sanitizer } from '../../utils/utils';
 
 @Component({
   tag: 'va-accordion-item',
@@ -77,7 +79,13 @@ export class VaAccordionItem {
     }
   }
 
-  private toggleOpen(e: MouseEvent): void {
+  /**
+   * Handle click events using @Listen decorator for better NVDA compatibility.
+   * This pattern matches va-button and works better with Shadow DOM + screen readers.
+   */
+  @Listen('click')
+  handleClick(e: MouseEvent) {
+    // Emit the event - let the parent accordion handle the logic
     this.accordionItemToggled.emit(e);
   }
 
@@ -98,7 +106,8 @@ export class VaAccordionItem {
     });
 
     const Header = () => {
-      const Tag = (headlineSlot && headlineSlot.tagName.includes("H"))
+      // Determine tag and attributes based on slot vs prop usage
+      const Tag = (headlineSlot && headlineSlot.tagName.toLowerCase().startsWith('h'))
         ? headlineSlot.tagName.toLowerCase()
         : `h${level}`;
 
@@ -112,14 +121,32 @@ export class VaAccordionItem {
         'va-accordion__subheader--has-icon': this.el.querySelector('[slot="subheader-icon"]'),
       });
 
+      let slotAttributes = {};
+      let headerContent;
+
+      if (headlineSlot) {
+        for (const attr of Array.from(headlineSlot.attributes)) {
+          if (attr.name !== 'slot') {
+            slotAttributes[attr.name] = attr.value;
+          }
+        }
+
+        const slotClasses = headlineSlot.className || '';
+        slotAttributes['class'] = classNames('usa-accordion__heading', slotClasses);
+
+        const sanitizedContent = Sanitizer.escapeHTML(headlineSlot.innerHTML);
+        headerContent = <span innerHTML={sanitizedContent}></span>;
+      } else {
+        headerContent = header;
+      }
+
       return (
-        <Tag class="usa-accordion__heading">
+        <Tag class={!headlineSlot ? "usa-accordion__heading" : undefined} {...slotAttributes}>
           <button
             type="button"
             class="usa-accordion__button"
             aria-expanded={open ? 'true' : 'false'}
             aria-controls="content"
-            onClick={this.toggleOpen.bind(this)}
             ref={el => {
               this.expandButton = el;
             }}
@@ -127,7 +154,7 @@ export class VaAccordionItem {
           >
             <span class={headerClass}>
               <slot name="icon" />
-              {headlineSlot ? <slot name="headline" /> : header}
+              {headerContent}
               {headerSrOnly && <span class="usa-sr-only">&nbsp;{headerSrOnly}</span>}
             </span>
             {this.subheader &&
@@ -136,7 +163,7 @@ export class VaAccordionItem {
                 {subheader}
               </span>}
           </button>
-        </Tag >
+        </Tag>
       );
     }
 
