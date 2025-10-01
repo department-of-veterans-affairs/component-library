@@ -113,6 +113,7 @@ export class VACrisisLineModal {
                 </strong>
               </span>
             </li>
+
             <li>
               <va-icon
                 icon="phone_iphone"
@@ -126,6 +127,7 @@ export class VACrisisLineModal {
                 </strong>
               </span>
             </li>
+
             <li>
               <va-icon icon="chat" class="va-clm__icon" size={3}></va-icon>
               <a
@@ -135,6 +137,7 @@ export class VACrisisLineModal {
                 Start a confidential chat
               </a>
             </li>
+
             <li>
               <va-icon icon="tty" class="va-clm__icon" size={3}></va-icon>
               <p>
