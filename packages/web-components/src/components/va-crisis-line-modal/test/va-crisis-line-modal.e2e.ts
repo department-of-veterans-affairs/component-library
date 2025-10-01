@@ -91,4 +91,45 @@ describe('va-crisis-line-modal', () => {
     // Check that the modal is visible
     expect(modal.getAttribute('visible')).not.toBe(null);
   });
+
+  it('respects phoneNumber, smsNumber, chatUrl, and ttyNumber props', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-crisis-line-modal phone-number="123" sms-number="456" chat-url="https://example.com/chat" tty-number="789" />`,
+    );
+
+    // Get all va telephone components and validate their contact props
+    const vaTelephoneComponents = await page.findAll(
+      'va-crisis-line-modal >>> va-telephone',
+    );
+    expect(vaTelephoneComponents.length).toBe(3);
+
+    const phoneNumber = vaTelephoneComponents[0];
+    expect(phoneNumber).not.toBeNull();
+    expect(await phoneNumber.getProperty('contact')).toBe('123');
+
+    const smsNumber = vaTelephoneComponents[1];
+    expect(smsNumber).not.toBeNull();
+    expect(await smsNumber.getProperty('contact')).toBe('456');
+
+    const ttyNumber = vaTelephoneComponents[2];
+    expect(ttyNumber).not.toBeNull();
+    expect(await ttyNumber.getProperty('contact')).toBe('789');
+
+    const chatLink = vaTelephoneComponents[2];
+    expect(chatLink).not.toBeNull();
+
+    // Get third list item to target chat link and validate href
+    const listItems = await page.findAll(
+      'va-crisis-line-modal >>> .va-crisis-panel-list li',
+    );
+    expect(listItems.length).toBe(4);
+
+    const chatListItem = listItems[2];
+    expect(chatListItem).not.toBeNull();
+
+    const chatAnchor = await chatListItem.find('a');
+    expect(chatAnchor).not.toBeNull();
+    expect(chatAnchor.getAttribute('href')).toBe('https://example.com/chat');
+  });
 });
