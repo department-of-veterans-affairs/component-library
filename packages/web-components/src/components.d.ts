@@ -1907,6 +1907,10 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
+        /**
           * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
          */
         "rightAlignCols"?: string;
@@ -1949,6 +1953,10 @@ export namespace Components {
           * When active, the table will expand to the full width of its container
          */
         "fullWidth": boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
         /**
           * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
          */
@@ -6027,6 +6035,10 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
+        /**
           * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
          */
         "rightAlignCols"?: string;
@@ -6069,6 +6081,10 @@ declare namespace LocalJSX {
           * When active, the table will expand to the full width of its container
          */
         "fullWidth"?: boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
         /**
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */

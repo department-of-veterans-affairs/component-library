@@ -80,8 +80,16 @@ export class VaTableInner {
    */
   @Prop() rightAlignCols?: string;
 
+  /**
+   * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+   */
+  @Prop() monoFontCols?: string;
+
   // Internal 'holder' for the array of columns to right-align, updated in componentWillRender
   colsToAlign: Array<number>;
+
+    // Internal 'holder' for the array of columns to right-align, updated in componentWillRender
+  colsToMonoFont: Array<number>;
 
   /**
    * If sortable is true, the direction of next sort for the column that was just sorted
@@ -185,6 +193,12 @@ export class VaTableInner {
           if (this.colsToAlign !== undefined && this.colsToAlign.includes(i)) {
             rightAlignClass = 'vads-u-text-align--right';
           }
+
+          let monoFontClass: string;
+          // Checks if this cell should be styled with monospace font and adds a class to make it so
+          if (this.colsToMonoFont !== undefined && this.colsToMonoFont.includes(i)) {
+            monoFontClass = 'vads-u-font-size--mono-sm vads-u-line-height--mono';
+          }
           const dataSortActive = row > 0 && this.sortindex === i ? true : false;
           return i === 0 || row === 0 ? (
             <th
@@ -200,7 +214,7 @@ export class VaTableInner {
             </th>
           ) : (
             <td
-              class={rightAlignClass}
+              class={`${rightAlignClass} ${monoFontClass}`}
               data-label={header}
               data-sort-active={dataSortActive}
             >
@@ -325,6 +339,17 @@ export class VaTableInner {
         );
       } else {
         this.colsToAlign = cols;
+      }
+    }
+    // If there are monospace font columns, split and format them and save in memory for performance reasons
+    if (this.monoFontCols !== undefined) {
+      const cols = this.monoFontCols.split(',').map(val => Number(val));
+      if (cols.some(col => isNaN(col))) {
+        console.warn(
+          'There was a non-number detected in the mono-font-cols/monoFontCols prop, please ensure that this value is a comma-separated string of zero-indexed numbers, where each number represents a column you wish to style with monospace font.',
+        );
+      } else {
+        this.colsToMonoFont = cols;
       }
     }
   }
