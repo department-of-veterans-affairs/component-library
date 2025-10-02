@@ -50,6 +50,7 @@ const Template = args => {
     striped,
     'full-width': fullWidth,
     'right-align-cols': rightAlignCols,
+    'mono-font-cols': monoFontCols,
   } = args;
 
   return (
@@ -62,6 +63,7 @@ const Template = args => {
       striped={striped}
       full-width={fullWidth}
       right-align-cols={rightAlignCols}
+      mono-font-cols={monoFontCols}
     >
       <va-table-row>
         {columns.map((col, i) => (
@@ -527,5 +529,16 @@ RightAlignedColumns.args = {
     'This is a regular table with the second and third column right-aligned.',
   'rows': FullWidthRows,
   'columns': FullWidthColumns,
+  'right-align-cols': '1,2',
+};
+
+
+export const MonoFontColumns = Template.bind(null);
+MonoFontColumns.args = {
+  'table-title':
+    'This is a regular table with the second and third column using a monospace font.',
+  'rows': FullWidthRows,
+  'columns': FullWidthColumns,
+  'mono-font-cols': '1,2',
   'right-align-cols': '1,2',
 };
