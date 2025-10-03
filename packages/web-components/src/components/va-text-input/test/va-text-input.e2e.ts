@@ -215,6 +215,62 @@ describe('va-text-input', () => {
     expect(secondValue).toEqual('as');
   });
 
+  it('emits vaInput custom event with correct value', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Input Field" />');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    const vaInputSpy = await page.spyOnEvent('vaInput');
+
+    await inputEl.press('h');
+    await inputEl.press('e');
+    await inputEl.press('l');
+    await inputEl.press('l');
+    await inputEl.press('o');
+
+    expect(vaInputSpy).toHaveReceivedEventTimes(5);
+    
+    // Check the last event detail contains the complete value
+    expect(vaInputSpy).toHaveReceivedEventDetail({
+      value: 'hello',
+    });
+  });
+
+  it('emits vaInput custom event when value is cleared', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Input Field" value="initial" />');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    const vaInputSpy = await page.spyOnEvent('vaInput');
+
+    await inputEl.click({ clickCount: 3 }); // Select all text
+    await inputEl.press('Backspace');
+
+    expect(vaInputSpy).toHaveReceivedEventTimes(1);
+    expect(vaInputSpy).toHaveReceivedEventDetail({
+      value: '',
+    });
+  });
+
+  it('emits vaInput custom event with updated value on paste', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Input Field" />');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    const vaInputSpy = await page.spyOnEvent('vaInput');
+
+    await inputEl.type('pasted text');
+
+    expect(vaInputSpy).toHaveReceivedEventTimes(11); // "pasted text" = 11 characters
+    
+    expect(vaInputSpy).toHaveReceivedEventDetail({
+      value: 'pasted text',
+    });
+  });
+
   it("doesn't fire analytics events", async () => {
     const page = await newE2EPage();
 

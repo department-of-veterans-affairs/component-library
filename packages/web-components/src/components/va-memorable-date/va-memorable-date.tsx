@@ -330,10 +330,6 @@ export class VaMemorableDate {
     } = this;
 
     const { currentYear, currentMonth, currentDay } = this;
-    const describedbyIds = [
-      !removeDateHint ? 'dateHint' : '',
-      hint ? 'hint' : ''
-    ].filter(Boolean).join(' ');
 
     const hintText = monthSelect
       ? i18next.t('date-hint-with-select')
@@ -377,9 +373,12 @@ export class VaMemorableDate {
         ? true
         : false;
     const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
+
+    /* eslint-disable i18next/no-literal-string */
     const headerAriaDescribedbyId = headerAriaDescribedby
       ? 'header-message'
       : null;
+
     let formsHeading = null;
     if (isFormsPattern) {
       const HeaderLevel = getHeaderLevel(formHeadingLevel);
@@ -401,7 +400,6 @@ export class VaMemorableDate {
         <va-select
           label={i18next.t('month')}
           name={name ? `${name}Month` : 'Month'}
-          aria-describedby={describedbyIds}
           aria-labelledby={ariaLabeledByIds}
           invalid={this.invalidMonth}
           onVaSelect={this.handleMonthChange}
@@ -415,6 +413,7 @@ export class VaMemorableDate {
           hideRequiredText={true}
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           showError={false}
+          messageAriaDescribedby={i18next.t('date-hint-month-select')}
         >
           {months &&
             months.map(monthOption => (
@@ -434,7 +433,6 @@ export class VaMemorableDate {
           name={name ? `${name}Month` : 'Month'}
           maxlength={2}
           pattern="[0-9]*"
-          aria-describedby={describedbyIds}
           aria-labelledby={ariaLabeledByIds}
           invalid={this.invalidMonth}
           // Value must be a string
@@ -450,6 +448,7 @@ export class VaMemorableDate {
           hideRequiredText={true}
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           show-input-error="false"
+          messageAriaDescribedby={i18next.t('date-hint-month')}
         />
       </div>
     );
@@ -480,7 +479,7 @@ export class VaMemorableDate {
         <div class="input-wrap">
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClass} id="input-label" part="legend">
-               {label && HeaderLevel ? (
+              {label && HeaderLevel ? (
                   <HeaderLevel
                     aria-describedby={headerAriaDescribedbyId}
                   >
@@ -500,12 +499,14 @@ export class VaMemorableDate {
                   {hint}
                 </div>
               )}
-              {!removeDateHint && (
-                <span class="usa-hint" id="dateHint">
-                  {hintText}
-                </span>
-              )}
             </legend>
+
+            {!removeDateHint && (
+              <span class="usa-hint" id="dateHint">
+                {hintText}
+              </span>
+            )}
+
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
@@ -526,7 +527,6 @@ export class VaMemorableDate {
                   name={name ? `${name}Day` : 'Day'}
                   maxlength={2}
                   pattern="[0-9]*"
-                  aria-describedby={describedbyIds}
                   invalid={this.invalidDay}
                   // Value must be a string
                   // if NaN provide empty string
@@ -543,6 +543,7 @@ export class VaMemorableDate {
                     this.invalidDay ? getStandardErrorMessage(error) : null
                   }
                   show-input-error="false"
+                  messageAriaDescribedby={i18next.t('date-hint-day')}
                 />
               </div>
               <div class="usa-form-group usa-form-group--year">
@@ -551,7 +552,6 @@ export class VaMemorableDate {
                   name={name ? `${name}Year` : 'Year'}
                   maxlength={4}
                   pattern="[0-9]*"
-                  aria-describedby={describedbyIds}
                   invalid={this.invalidYear}
                   // Value must be a string
                   // if NaN provide empty string
@@ -568,6 +568,7 @@ export class VaMemorableDate {
                     this.invalidYear ? getStandardErrorMessage(error) : null
                   }
                   show-input-error="false"
+                  messageAriaDescribedby={i18next.t('date-hint-year')}
                 />
               </div>
             </div>
