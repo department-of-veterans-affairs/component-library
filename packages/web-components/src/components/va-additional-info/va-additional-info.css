@@ -3,6 +3,7 @@
 
 :host {
   display: block;
+  font-size: 1rem;
 }
 
 /* Add left side blue border if disable border prop disabled or not present */

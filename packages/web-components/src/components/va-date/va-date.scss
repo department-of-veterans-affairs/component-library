@@ -1,52 +1,37 @@
+@use 'usa-form/src/styles/usa-form';
+@use 'usa-fieldset/src/styles/usa-fieldset';
+@use 'usa-legend/src/styles/usa-legend';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'usa-error-message/src/styles/usa-error-message';
+
 @import '../../../src/mixins/accessibility.css';
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/form-field-error.css';
-@import '../../mixins/hint-text.css';
-
-.usa-label--required {
-  color: var(--vads-color-secondary-dark);
-}
-
-.usa-error-message {
-  color: var(--vads-color-secondary-dark);
-}
-
-
-/** Original Component Style **/
 
 :host {
   display: block;
   font-family: var(--font-source-sans);
-  margin-top: 1.875rem;
-}
-
-fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-legend {
-  border: 0;
-  font-size: 1.06rem;
-  padding: 0;
-}
-
-span.required {
-  color: var(--vads-color-secondary-dark);
+  margin-top: var(--units-3);
 }
 
 #error-message {
-  color: var(--vads-color-secondary-dark);
-  display: block;
   margin-bottom: 0;
 }
 
+
+legend,
+va-select,
+va-text-input {
+  font-size: var(--vads-font-size-source-sans-normalized);
+}
+
 .date-container {
+  column-gap: var(--units-2);
   display: flex;
-  margin-top: 12px;
   flex-wrap: wrap;
-  row-gap: 12px;
+  margin-top: var(--units-2);
+  row-gap: var(--units-1p5);
 }
 
 :host([error]:not([error=''])) .date-container {
@@ -54,23 +39,21 @@ span.required {
 }
 
 .select-month {
-  width: 8.125rem;
-  margin-right: 0.9375rem;
+  width: 16ch;
 }
 
 .select-day {
-  width: 5rem;
-  margin-right: 0.9375rem;
+  width: 12ch;
 }
 
 .input-year {
-  width: 5rem;
+  width: 10ch;
 }
 
 va-select::part(label),
 va-text-input::part(label) {
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: var(--units-1p5);
 }
 
 va-text-input::part(validation) {
