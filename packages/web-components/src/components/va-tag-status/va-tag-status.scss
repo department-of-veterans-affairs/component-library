@@ -1,0 +1,53 @@
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
+
+:host(.va-tag-status) {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: auto;
+  gap: var(--vads-spacing-0p5);
+  padding: 1px var(--vads-spacing-1);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+}
+
+.va-tag-status__icon {
+  color: var(--vads-color-white);
+}
+
+:host(.va-tag-status[status='informational']) {
+  background: var(--vads-color-info-darker);
+  border-color: var(--vads-color-info-darker);
+}
+
+:host(.va-tag-status[status='success']) {
+  background: var(--vads-color-success-darker);
+  border-color: var(--vads-color-success-darker);
+}
+
+:host(.va-tag-status[status='error']) {
+  background: var(--vads-color-error-dark);
+  border-color: var(--vads-color-error-dark);
+}
+
+.va-tag-status__text {
+  color: var(--vads-color-white);
+  font-size: var(--vads-font-size-source-sans-normalized);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.5;
+}
+
+:host(.va-tag-status[status='warning']) {
+  background: var(--vads-color-feedback-border-warning-on-dark);
+  border-color: var(--vads-color-warning-darker);
+
+  .va-tag-status__icon {
+    color: unset;
+  }
+
+  .va-tag-status__text {
+    color: var(--vads-color-base);
+  }
+}
+

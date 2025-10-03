@@ -1997,6 +1997,21 @@ export namespace Components {
         "label": string;
     }
     /**
+     * @componentName Tag - Status
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTagStatus {
+        /**
+          * The status variant of the tag. Determines it's background color.
+         */
+        "status": 'informational' | 'warning' | 'success' | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "text": string;
+    }
+    /**
      * @componentName Telephone
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -3671,6 +3686,17 @@ declare global {
         prototype: HTMLVaTabsElement;
         new (): HTMLVaTabsElement;
     };
+    /**
+     * @componentName Tag - Status
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaTagStatusElement extends Components.VaTagStatus, HTMLStencilElement {
+    }
+    var HTMLVaTagStatusElement: {
+        prototype: HTMLVaTagStatusElement;
+        new (): HTMLVaTagStatusElement;
+    };
     interface HTMLVaTelephoneElementEventMap {
         "component-library-analytics": any;
     }
@@ -3835,6 +3861,7 @@ declare global {
         "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
         "va-tabs": HTMLVaTabsElement;
+        "va-tag-status": HTMLVaTagStatusElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-telephone-input": HTMLVaTelephoneInputElement;
         "va-text-input": HTMLVaTextInputElement;
@@ -6121,6 +6148,21 @@ declare namespace LocalJSX {
         "label"?: string;
     }
     /**
+     * @componentName Tag - Status
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTagStatus {
+        /**
+          * The status variant of the tag. Determines it's background color.
+         */
+        "status"?: 'informational' | 'warning' | 'success' | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "text": string;
+    }
+    /**
      * @componentName Telephone
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -6513,6 +6555,7 @@ declare namespace LocalJSX {
         "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
         "va-tabs": VaTabs;
+        "va-tag-status": VaTagStatus;
         "va-telephone": VaTelephone;
         "va-telephone-input": VaTelephoneInput;
         "va-text-input": VaTextInput;
@@ -6901,6 +6944,12 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-tabs": LocalJSX.VaTabs & JSXBase.HTMLAttributes<HTMLVaTabsElement>;
+            /**
+             * @componentName Tag - Status
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-tag-status": LocalJSX.VaTagStatus & JSXBase.HTMLAttributes<HTMLVaTagStatusElement>;
             /**
              * @componentName Telephone
              * @maturityCategory use
