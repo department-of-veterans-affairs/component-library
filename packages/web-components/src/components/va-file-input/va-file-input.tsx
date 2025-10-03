@@ -242,14 +242,20 @@ export class VaFileInput {
     }
   };
 
+  // get the extension from the file name if possible, else fallback on the mime type
+  private getExtension = (file: File) => {
+    const noLeadingDot = file.name.replace(/^\./, '');
+    const fileType = noLeadingDot.includes('.') ? `.${noLeadingDot.split('.').pop()}` : null;
+    return fileType || file.type;
+  }
+
   private handleFile = (file: File, emitChange: boolean = true) => {
     let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
         this.removeFile(false);
-        const fileType = file.name.split('.').pop().toLowerCase();
-        fileError = `We do not accept .${fileType} files. Choose a new file.`;
+        fileError = `We do not accept ${this.getExtension(file)} files. Choose a new file.`;
       }
     }
 
