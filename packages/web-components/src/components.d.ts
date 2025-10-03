@@ -8,12 +8,14 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 import { ButtonItem } from "./components/va-button-segmented/va-button-segmented.types";
 import { UploadedFile } from "./components/va-file-input/uploadedFile";
+import { CrisisLineModalOverridesProps } from "./components/va-header-minimal/va-header-minimal";
 import { Filter } from "./components/va-search-filter/va-search-filter";
 import { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 import { CountryCode } from "libphonenumber-js/min";
 export { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export { ButtonItem } from "./components/va-button-segmented/va-button-segmented.types";
 export { UploadedFile } from "./components/va-file-input/uploadedFile";
+export { CrisisLineModalOverridesProps } from "./components/va-header-minimal/va-header-minimal";
 export { Filter } from "./components/va-search-filter/va-search-filter";
 export { OptionalLink, ServiceAction, ServiceDetails } from "./components/va-service-list-item/va-service-list-item";
 export { CountryCode } from "libphonenumber-js/min";
@@ -838,6 +840,10 @@ export namespace Components {
      * @guidanceHref header/header-minimal
      */
     interface VaHeaderMinimal {
+        /**
+          * An object that can contain any of the following optional properties to override default values in the `va-crisis-line-modal` component: `chatUrl`, `phoneNumber`, `smsNumber`, and `ttyNumber`.
+         */
+        "crisisLineModalPropOverrides"?: Partial<CrisisLineModalOverridesProps>;
         /**
           * Enables use of heading tags in the minimal header instead of `<div>` tags. This is for when a heading level 1 needs to be used in the header, as there should only be one heading level 1 per page.
          */
@@ -4786,6 +4792,10 @@ declare namespace LocalJSX {
      * @guidanceHref header/header-minimal
      */
     interface VaHeaderMinimal {
+        /**
+          * An object that can contain any of the following optional properties to override default values in the `va-crisis-line-modal` component: `chatUrl`, `phoneNumber`, `smsNumber`, and `ttyNumber`.
+         */
+        "crisisLineModalPropOverrides"?: Partial<CrisisLineModalOverridesProps>;
         /**
           * Enables use of heading tags in the minimal header instead of `<div>` tags. This is for when a heading level 1 needs to be used in the header, as there should only be one heading level 1 per page.
          */

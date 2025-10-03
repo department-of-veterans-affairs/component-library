@@ -1,8 +1,8 @@
+import { VaHeaderMinimal } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
-  componentStructure,
 } from './wc-helpers';
 
 const minimalHeaderDocs = getWebComponentDocs('va-header-minimal');
@@ -21,18 +21,23 @@ export default {
 const defaultArgs = {
   'header': 'Authorization To Disclose Personal Information To A Third Party',
   'subheader': '',
-  'disable-headings': false,
+  'enable-headings': false,
+  'crisis-line-modal-prop-overrides': {},
 };
+
 const Template = ({
   header,
   subheader,
-  'disable-headings': disableHeadings,
+  enableHeadings,
+  crisisLineModalPropOverrides,
 }) => {
+
   return (
-    <va-header-minimal
+    <VaHeaderMinimal
       header={header}
       subheader={subheader}
-      disable-headings={disableHeadings}
+      enableHeadings={enableHeadings}
+      crisisLineModalPropOverrides={crisisLineModalPropOverrides}
     />
   );
 };
@@ -47,4 +52,19 @@ export const withSubheader = Template.bind(null);
 withSubheader.args = {
   ...defaultArgs,
   subheader: '(VA Form 21-0845)',
+};
+
+export const WithHeadingsEnabled = Template.bind(null);
+WithHeadingsEnabled.args = {
+  ...defaultArgs,
+  enableHeadings: true,
+};
+
+export const withCrisisLineModalOverrides = Template.bind(null);
+withCrisisLineModalOverrides.args = {
+  ...defaultArgs,
+  crisisLineModalPropOverrides: {
+    phoneNumber: '123',
+    smsNumber: '456789',
+  },
 };

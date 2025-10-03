@@ -9,13 +9,19 @@ import {
 } from '@stencil/core';
 import vaSeal from '../../assets/va-seal.svg';
 
+export type CrisisLineModalOverridesProps = {
+  chatUrl?: string;
+  phoneNumber?: string;
+  smsNumber?: string;
+  ttyNumber?: string;
+}
+
 /**
  * @componentName Header - Minimal
  * @maturityCategory caution
  * @maturityLevel available
  * @guidanceHref header/header-minimal
  */
-
 @Component({
   tag: 'va-header-minimal',
   styleUrl: 'va-header-minimal.scss',
@@ -31,6 +37,11 @@ export class VaHeaderMinimal {
 
   @Prop() header?: string;
   @Prop() subheader?: string;
+
+  /**
+   * An object that can contain any of the following optional properties to override default values in the `va-crisis-line-modal` component: `chatUrl`, `phoneNumber`, `smsNumber`, and `ttyNumber`.
+   */
+  @Prop({ mutable: true }) crisisLineModalPropOverrides?: Partial<CrisisLineModalOverridesProps>;
 
   /**
    * Enables use of heading tags in the minimal header instead of `<div>` tags. This is for when a heading level 1 needs to be used in the header, as there should only be one heading level 1 per page.
@@ -62,12 +73,17 @@ export class VaHeaderMinimal {
   }
 
   render() {
-    const { header, subheader, enableHeadings: enableHeadings } = this;
+    const {
+      header,
+      subheader,
+      enableHeadings: enableHeadings,
+      crisisLineModalPropOverrides,
+    } = this;
 
     return (
       <Host role="banner">
         <va-official-gov-banner />
-        <va-crisis-line-modal />
+        <va-crisis-line-modal {...crisisLineModalPropOverrides} />
         <div onFocusin={() => this.trapFocus()} class="va-header">
           <a href="/" title="Go to VA.gov" class="va-logo-link">
             <img class="va-logo" src={vaSeal} alt="VA logo and Seal, U.S. Department of Veterans Affairs" />
