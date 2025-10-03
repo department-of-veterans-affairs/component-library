@@ -17,13 +17,20 @@ const defaultArgs = {
   'show-shadow': false,
   'background': false,
   'icon-name': '',
+  'has-cta': false,
 };
 
-const Template = ({ 'show-shadow': showShadow, 'background': background, 'icon-name': iconName }) => (
+const Template = ({ 'show-shadow': showShadow, 'background': background, 'icon-name': iconName, 'has-cta': hasCta }) => (
   <va-card show-shadow={showShadow} background={background} icon-name={iconName}>
     <div>
       <h3 className='vads-u-margin-top--1'>Example card title</h3>
       <p>Example card content</p>
+      {hasCta ? (
+        <va-link
+          href="https://www.va.gov"
+          text="Example call to action link"
+        />
+      ) : null}
     </div>
   </va-card>
 );
@@ -57,4 +64,10 @@ withIcon.argTypes = {
     control: 'text',
     description: 'Displays an icon at the top of the card in a blue circle. Value is the icon name.',
   },
+};
+
+export const withCallToAction = Template.bind(null);
+withCallToAction.args = {
+  ...defaultArgs,
+  'has-cta': true,
 };
