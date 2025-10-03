@@ -4620,6 +4620,111 @@ through all possible variants
   }
 }
 /* stylelint-enable */
+.vads-u-font-size--sans-2xs {
+  font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
+  font-size: 0.93rem;
+}
+
+.vads-u-font-size--sans-xs {
+  font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
+  font-size: 1rem;
+}
+
+.vads-u-font-size--sans-sm {
+  font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
+  font-size: 1.06rem;
+}
+
+.vads-u-font-size--sans-md {
+  font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
+  font-size: 1.13rem;
+}
+
+.vads-u-font-size--sans-lg {
+  font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
+  font-size: 1.46rem;
+}
+
+.vads-u-font-size--sans-xl {
+  font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
+  font-size: 2.13rem;
+}
+
+.vads-u-font-size--sans-2xl {
+  font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
+  font-size: 2.66rem;
+}
+
+.vads-u-font-size--serif-2xs {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 0.87rem;
+}
+
+.vads-u-font-size--serif-xs {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 0.93rem;
+}
+
+.vads-u-font-size--serif-sm {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 0.99rem;
+}
+
+.vads-u-font-size--serif-md {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.05rem;
+}
+
+.vads-u-font-size--serif-lg {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.36rem;
+}
+
+.vads-u-font-size--serif-xl {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.98rem;
+}
+
+.vads-u-font-size--serif-2xl {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 2.48rem;
+}
+
+.vads-u-font-size--mono-2xs {
+  font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace;
+  font-size: 0.83rem;
+}
+
+.vads-u-font-size--mono-xs {
+  font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace;
+  font-size: 0.89rem;
+}
+
+.vads-u-font-size--mono-sm {
+  font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace;
+  font-size: 0.95rem;
+}
+
+.vads-u-font-size--mono-md {
+  font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace;
+  font-size: 1.01rem;
+}
+
+.vads-u-font-size--mono-lg {
+  font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace;
+  font-size: 1.31rem;
+}
+
+.vads-u-font-size--mono-xl {
+  font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace;
+  font-size: 1.91rem;
+}
+
+.vads-u-font-size--mono-2xl {
+  font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace;
+  font-size: 2.38rem;
+}
+
 .vads-u-visibility--screen-reader {
   position: absolute;
   left: -999em;
@@ -6198,7 +6303,7 @@ through all possible variants
   font-family: Bitter, Georgia, Cambria, Times New Roman, Times, serif !important;
 }
 
-.vads-u-font-family--monospace {
+.vads-u-font-family--mono {
   font-family: Roboto Mono Web, Bitstream Vera Sans Mono, Consolas, Courier, monospace !important;
 }
 
@@ -6324,6 +6429,14 @@ through all possible variants
 
 .vads-u-line-height--6 {
   line-height: 1.75 !important;
+}
+
+.vads-u-line-height--serif {
+  line-height: 1.9 !important;
+}
+
+.vads-u-line-height--mono {
+  line-height: 1.7 !important;
 }
 
 .vads-u-margin--0 {
@@ -8045,6 +8158,12 @@ through all possible variants
   .mobile\:vads-u-line-height--6 {
     line-height: 1.75 !important;
   }
+  .mobile\:vads-u-line-height--serif {
+    line-height: 1.9 !important;
+  }
+  .mobile\:vads-u-line-height--mono {
+    line-height: 1.7 !important;
+  }
   .mobile\:vads-u-margin--0 {
     margin: 0 !important;
   }
@@ -9434,6 +9553,12 @@ through all possible variants
   }
   .mobile-lg\:vads-u-line-height--6 {
     line-height: 1.75 !important;
+  }
+  .mobile-lg\:vads-u-line-height--serif {
+    line-height: 1.9 !important;
+  }
+  .mobile-lg\:vads-u-line-height--mono {
+    line-height: 1.7 !important;
   }
   .mobile-lg\:vads-u-margin--0 {
     margin: 0 !important;
@@ -10825,6 +10950,12 @@ through all possible variants
   .tablet\:vads-u-line-height--6 {
     line-height: 1.75 !important;
   }
+  .tablet\:vads-u-line-height--serif {
+    line-height: 1.9 !important;
+  }
+  .tablet\:vads-u-line-height--mono {
+    line-height: 1.7 !important;
+  }
   .tablet\:vads-u-margin--0 {
     margin: 0 !important;
   }
@@ -12214,6 +12345,12 @@ through all possible variants
   }
   .desktop\:vads-u-line-height--6 {
     line-height: 1.75 !important;
+  }
+  .desktop\:vads-u-line-height--serif {
+    line-height: 1.9 !important;
+  }
+  .desktop\:vads-u-line-height--mono {
+    line-height: 1.7 !important;
   }
   .desktop\:vads-u-margin--0 {
     margin: 0 !important;
@@ -13605,6 +13742,12 @@ through all possible variants
   .desktop-lg\:vads-u-line-height--6 {
     line-height: 1.75 !important;
   }
+  .desktop-lg\:vads-u-line-height--serif {
+    line-height: 1.9 !important;
+  }
+  .desktop-lg\:vads-u-line-height--mono {
+    line-height: 1.7 !important;
+  }
   .desktop-lg\:vads-u-margin--0 {
     margin: 0 !important;
   }
@@ -14995,6 +15138,12 @@ through all possible variants
   .widescreen\:vads-u-line-height--6 {
     line-height: 1.75 !important;
   }
+  .widescreen\:vads-u-line-height--serif {
+    line-height: 1.9 !important;
+  }
+  .widescreen\:vads-u-line-height--mono {
+    line-height: 1.7 !important;
+  }
   .widescreen\:vads-u-margin--0 {
     margin: 0 !important;
   }
@@ -16384,6 +16533,12 @@ through all possible variants
   }
   .medium-screen\:vads-u-line-height--6 {
     line-height: 1.75 !important;
+  }
+  .medium-screen\:vads-u-line-height--serif {
+    line-height: 1.9 !important;
+  }
+  .medium-screen\:vads-u-line-height--mono {
+    line-height: 1.7 !important;
   }
   .medium-screen\:vads-u-margin--0 {
     margin: 0 !important;

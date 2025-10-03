@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 19 Aug 2025 20:33:13 GMT
+ * Generated on Thu, 02 Oct 2025 20:58:27 GMT
  */
 
 :root {
@@ -132,10 +132,10 @@
   --vads-input-tile-border-on-light: rgba(27, 27, 27, 0.03);
   --font-family-sans: 'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
   --font-family-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-family-monospace: 'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace;
+  --font-family-mono: 'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace;
   --font-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-source-sans: 'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
-  --font-monospace: 'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace;
+  --font-mono: 'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
   --font-style-normal: normal;
@@ -162,6 +162,8 @@
   --vads-font-line-height-body-lead: 1.75;
   --vads-font-line-height-default: 1.5;
   --vads-font-line-height-heading: 1.2;
+  --vads-font-line-height-serif: 1.9;
+  --vads-font-line-height-mono: 1.7;
   --vads-font-size-source-sans-normalized: 1.06rem;
   --vads-font-size-root: 1rem;
   --vads-font-size-body-large: 20px;

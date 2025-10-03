@@ -2409,23 +2409,23 @@
           "serif"
         ]
       },
-      "monospace": {
+      "mono": {
         "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
           "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace"
         },
-        "name": "font-family-monospace",
+        "name": "font-family-mono",
         "attributes": {
           "category": "font",
           "type": "family",
-          "item": "monospace"
+          "item": "mono"
         },
         "path": [
           "font",
           "family",
-          "monospace"
+          "mono"
         ]
       }
     },
@@ -2467,21 +2467,21 @@
         ]
       }
     },
-    "monospace": {
+    "mono": {
       "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace",
       "filePath": "tokens/fonts.json",
       "isSource": true,
       "original": {
         "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace"
       },
-      "name": "font-monospace",
+      "name": "font-mono",
       "attributes": {
         "category": "font",
-        "type": "monospace"
+        "type": "mono"
       },
       "path": [
         "font",
-        "monospace"
+        "mono"
       ]
     },
     "weight": {
@@ -2989,6 +2989,44 @@
           "vads-font",
           "line-height",
           "heading"
+        ]
+      },
+      "serif": {
+        "value": "1.9",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.9"
+        },
+        "name": "vads-font-line-height-serif",
+        "attributes": {
+          "category": "vads-font",
+          "type": "line-height",
+          "item": "serif"
+        },
+        "path": [
+          "vads-font",
+          "line-height",
+          "serif"
+        ]
+      },
+      "mono": {
+        "value": "1.7",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.7"
+        },
+        "name": "vads-font-line-height-mono",
+        "attributes": {
+          "category": "vads-font",
+          "type": "line-height",
+          "item": "mono"
+        },
+        "path": [
+          "vads-font",
+          "line-height",
+          "mono"
         ]
       }
     },
