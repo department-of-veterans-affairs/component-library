@@ -248,7 +248,8 @@ export class VaFileInput {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
         this.removeFile(false);
-        fileError = 'This is not a valid file type.';
+        const fileType = file.name.split('.').pop().toLowerCase();
+        fileError = `We do not accept .${fileType} files. Choose a new file.`;
       }
     }
 
