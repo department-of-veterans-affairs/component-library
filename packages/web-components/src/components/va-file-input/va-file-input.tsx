@@ -249,13 +249,20 @@ export class VaFileInput {
     return fileType || file.type;
   }
 
+  // get the file type error message based on the file extension if possible
+  private getFileTypeErrorMessage = (file: File) => {
+    const extension = this.getExtension(file);
+    const fileWarning = extension ? `${extension} files` : 'this file type';
+    return `We do not accept ${fileWarning}. Choose a new file.`;
+  }
+
   private handleFile = (file: File, emitChange: boolean = true) => {
     let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
         this.removeFile(false);
-        fileError = `We do not accept ${this.getExtension(file)} files. Choose a new file.`;
+        fileError = this.getFileTypeErrorMessage(file);
       }
     }
 
