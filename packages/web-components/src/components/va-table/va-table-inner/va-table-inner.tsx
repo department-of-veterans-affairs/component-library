@@ -88,7 +88,7 @@ export class VaTableInner {
   // Internal 'holder' for the array of columns to right-align, updated in componentWillRender
   colsToAlign: Array<number>;
 
-    // Internal 'holder' for the array of columns to right-align, updated in componentWillRender
+  // Internal 'holder' for the array of columns to apply monospace font, updated in componentWillRender
   colsToMonoFont: Array<number>;
 
   /**
