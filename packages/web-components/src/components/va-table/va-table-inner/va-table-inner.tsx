@@ -214,7 +214,7 @@ export class VaTableInner {
             </th>
           ) : (
             <td
-              class={`${rightAlignClass} ${monoFontClass}`}
+              class={classnames(rightAlignClass, monoFontClass)}
               data-label={header}
               data-sort-active={dataSortActive}
             >
