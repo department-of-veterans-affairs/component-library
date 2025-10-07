@@ -2992,11 +2992,11 @@
         ]
       },
       "serif": {
-        "value": "1.7",
+        "value": "1.9",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "1.7"
+          "value": "1.9"
         },
         "name": "vads-font-line-height-serif",
         "attributes": {
