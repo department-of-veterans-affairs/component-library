@@ -158,17 +158,17 @@ const optGroupArgs = {
     <option key="chives" value="chives">Chives</option>,
     <option key="parsley" value="parsley">Parsley</option>,
     <optgroup key="fruits" label="Fruits">
-      <option value="apple">Apple</option>
-      <option value="apricot">Apricot</option>
-      <option value="cantaloupe">Cantaloupe</option>
-      <option value="cherry">Cherry</option>
-      <option value="peach">Peach</option>
+      <option key="apple" value="apple">Apple</option>
+      <option key="apricot" value="apricot">Apricot</option>
+      <option key="cantaloupe" value="cantaloupe">Cantaloupe</option>
+      <option key="cherry" value="cherry">Cherry</option>
+      <option key="peach" value="peach">Peach</option>
     </optgroup>,
-    <optgroup label="Vegetables">
-      <option value="bok-choy">Bok Choy</option>
-      <option value="cabbage">Cabbage</option>
-      <option value="chard">Chard</option>
-      <option value="potatoes">Potatoes</option>
+    <optgroup key="vegetables" label="Vegetables">
+      <option key="bok-choy" value="bok-choy">Bok Choy</option>
+      <option key="cabbage" value="cabbage">Cabbage</option>
+      <option key="chard" value="chard">Chard</option>
+      <option key="potatoes" value="potatoes">Potatoes</option>
     </optgroup>
   ],
 };
