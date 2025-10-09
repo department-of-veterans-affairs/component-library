@@ -27,6 +27,10 @@ export class VaTag {
   render() {
     const { text } = this;
 
-    return <Host class="va-tag">{text}</Host>;
+    return (
+      <Host>
+        <span class="usa-tag">{text}</span>
+      </Host>
+    );
   }
 }
