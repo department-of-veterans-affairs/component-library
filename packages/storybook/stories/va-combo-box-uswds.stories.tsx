@@ -4,6 +4,7 @@ import {
   useErrorToggle,
   errorToggleArgTypes,
  } from './wc-helpers';
+ import { VaComboBox } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const comboBoxDocs = getWebComponentDocs('va-combo-box');
 
@@ -31,28 +32,31 @@ const defaultArgs = {
   messageAriaDescribedby: undefined,
   showToggleFocusButton: false,
   focusEl: null,
+  onVaSelect: e => {
+    console.log('Selected value:', e.detail.value);
+  },
   options: [
-    <option value="apple">Apple</option>,
-    <option value="banana">Banana</option>,
-    <option value="blackberry">Blackberry</option>,
-    <option value="blueberry">Blueberry</option>,
-    <option value="boysenberry">Boysenberry</option>,
-    <option value="cherry">Cherry</option>,
-    <option value="crab apple">Crab Apple</option>,
-    <option value="cranberry">Cranberry</option>,
-    <option value="custard apple">Custard apple</option>,
-    <option value="date">Date</option>,
-    <option value="elderberry">Elderberry</option>,
-    <option value="fig">Fig</option>,
-    <option value="gooseberry">Gooseberry</option>,
-    <option value="mango">Mango</option>,
-    <option value="mangosteen">Mangosteen</option>,
-    <option value="marionberry">Marionberry</option>,
-    <option value="pineapple">Pineapple</option>,
-    <option value="raspberry">Raspberry</option>,
-    <option value="rambutan">Rambutan</option>,
-    <option value="starfruit">Starfruit</option>,
-    <option value="strawberry">Strawberry</option>,
+    <option key="apple" value="apple">Apple</option>,
+    <option key="banana" value="banana">Banana</option>,
+    <option key="blackberry" value="blackberry">Blackberry</option>,
+    <option key="blueberry" value="blueberry">Blueberry</option>,
+    <option key="boysenberry" value="boysenberry">Boysenberry</option>,
+    <option key="cherry" value="cherry">Cherry</option>,
+    <option key="crab-apple" value="crab apple">Crab Apple</option>,
+    <option key="cranberry" value="cranberry">Cranberry</option>,
+    <option key="custard-apple" value="custard apple">Custard apple</option>,
+    <option key="date" value="date">Date</option>,
+    <option key="elderberry" value="elderberry">Elderberry</option>,
+    <option key="fig" value="fig">Fig</option>,
+    <option key="gooseberry" value="gooseberry">Gooseberry</option>,
+    <option key="mango" value="mango">Mango</option>,
+    <option key="mangosteen" value="mangosteen">Mangosteen</option>,
+    <option key="marionberry" value="marionberry">Marionberry</option>,
+    <option key="pineapple" value="pineapple">Pineapple</option>,
+    <option key="raspberry" value="raspberry">Raspberry</option>,
+    <option key="rambutan" value="rambutan">Rambutan</option>,
+    <option key="starfruit" value="starfruit">Starfruit</option>,
+    <option key="strawberry" value="strawberry">Strawberry</option>,
   ],
 };
 
@@ -70,13 +74,14 @@ const Template = args => {
     messageAriaDescribedby,
     showToggleFocusButton,
     focusEl,
+    onVaSelect
   } = args;
 
   const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
 
   return (
     <>
-      <va-combo-box
+      <VaComboBox
         label={label}
         name={name}
         value={value}
@@ -87,9 +92,10 @@ const Template = args => {
         disabled={disabled}
         message-aria-describedby={messageAriaDescribedby}
         id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+        onVaSelect={onVaSelect}
       >
         {options}
-      </va-combo-box>
+      </VaComboBox>
       {showToggleFocusButton && (
         <va-button
           text="Toggle error state"
@@ -148,24 +154,22 @@ const optGroupArgs = {
   ...defaultArgs,
   label: 'Select produce',
   options: [
-    <>
-      <option value="basil">Basil</option>
-      <option value="chives">Chives</option>
-      <option value="parsley">Parsley</option>
-      <optgroup label="Fruits">
-        <option value="apple">Apple</option>
-        <option value="apricot">Apricot</option>
-        <option value="cantaloupe">Cantaloupe</option>
-        <option value="cherry">Cherry</option>
-        <option value="peach">Peach</option>
-      </optgroup>
-      <optgroup label="Vegetables">
-        <option value="bok-choy">Bok Choy</option>
-        <option value="cabbage">Cabbage</option>
-        <option value="chard">Chard</option>
-        <option value="Potatoes">Potatoes</option>
-      </optgroup>
-    </>,
+    <option key="basil" value="basil">Basil</option>,
+    <option key="chives" value="chives">Chives</option>,
+    <option key="parsley" value="parsley">Parsley</option>,
+    <optgroup key="fruits" label="Fruits">
+      <option value="apple">Apple</option>
+      <option value="apricot">Apricot</option>
+      <option value="cantaloupe">Cantaloupe</option>
+      <option value="cherry">Cherry</option>
+      <option value="peach">Peach</option>
+    </optgroup>,
+    <optgroup label="Vegetables">
+      <option value="bok-choy">Bok Choy</option>
+      <option value="cabbage">Cabbage</option>
+      <option value="chard">Chard</option>
+      <option value="potatoes">Potatoes</option>
+    </optgroup>
   ],
 };
 

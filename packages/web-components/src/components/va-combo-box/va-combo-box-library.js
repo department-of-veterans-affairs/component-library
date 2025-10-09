@@ -445,9 +445,11 @@ const noop = () => {};
 
           // Check if the option element is not a header optgroup
           // and has a header optgroup associated with it
+          // and that header optgroup has not already been added
           if (
             optionEl.getAttribute('data-optgroup-option') === 'true' &&
-            parentOptGroupId !== optionEl.getAttribute('aria-describedby')
+            parentOptGroupId !== optionEl.getAttribute('aria-describedby') &&
+            !el.querySelector(`#${optionEl.getAttribute('aria-describedby')}`)
           ) {
             // Get an associated header optgroup element
             parentOptGroupId = optionEl.getAttribute('aria-describedby');
@@ -651,7 +653,6 @@ const completeSelection = el => {
     statusEl.textContent = '';
 
     const inputValue = (inputEl.value || '').trim().toLowerCase();
-
     if (inputValue) {
       // Find a matching option
     const matchingFunc = comboBox.isInVaInputTelephone
@@ -660,7 +661,7 @@ const completeSelection = el => {
           return option.text.toLowerCase().startsWith(name.toLowerCase());
         })
         : (option => option.text.toLowerCase() === inputValue)
-      const matchingOption = Array.from(selectEl.options).find(matchingFunc)
+      const matchingOption = Array.from(selectEl.options).filter(opt => opt.dataset.optgroup !== 'true').find(matchingFunc)
 
       if (matchingOption) {
         // If a match is found, update the input and select values

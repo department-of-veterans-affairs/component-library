@@ -173,6 +173,7 @@ export class VaComboBox {
     const nodes = Array.from(allNodes);
     this.options = nodes.map((node: HTMLOptionElement | HTMLOptGroupElement, index) => {
       if (node.nodeName.toLowerCase() === 'optgroup') {
+        
         return (
           <Fragment>
             {/* adding data-optgroup attribute to identify this element as an optgroup header
