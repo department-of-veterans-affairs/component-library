@@ -653,6 +653,7 @@ const completeSelection = el => {
     statusEl.textContent = '';
 
     const inputValue = (inputEl.value || '').trim().toLowerCase();
+    
     if (inputValue) {
       // Find a matching option
     const matchingFunc = comboBox.isInVaInputTelephone
