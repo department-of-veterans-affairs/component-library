@@ -1997,17 +1997,6 @@ export namespace Components {
         "label": string;
     }
     /**
-     * @componentName Tag
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface VaTag {
-        /**
-          * The text to be displayed in the tag element.
-         */
-        "text": string;
-    }
-    /**
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -3698,17 +3687,6 @@ declare global {
         new (): HTMLVaTabsElement;
     };
     /**
-     * @componentName Tag
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface HTMLVaTagElement extends Components.VaTag, HTMLStencilElement {
-    }
-    var HTMLVaTagElement: {
-        prototype: HTMLVaTagElement;
-        new (): HTMLVaTagElement;
-    };
-    /**
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -3883,7 +3861,6 @@ declare global {
         "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
         "va-tabs": HTMLVaTabsElement;
-        "va-tag": HTMLVaTagElement;
         "va-tag-status": HTMLVaTagStatusElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-telephone-input": HTMLVaTelephoneInputElement;
@@ -6171,17 +6148,6 @@ declare namespace LocalJSX {
         "label"?: string;
     }
     /**
-     * @componentName Tag
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface VaTag {
-        /**
-          * The text to be displayed in the tag element.
-         */
-        "text": string;
-    }
-    /**
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
@@ -6589,7 +6555,6 @@ declare namespace LocalJSX {
         "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
         "va-tabs": VaTabs;
-        "va-tag": VaTag;
         "va-tag-status": VaTagStatus;
         "va-telephone": VaTelephone;
         "va-telephone-input": VaTelephoneInput;
@@ -6979,12 +6944,6 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-tabs": LocalJSX.VaTabs & JSXBase.HTMLAttributes<HTMLVaTabsElement>;
-            /**
-             * @componentName Tag
-             * @maturityCategory caution
-             * @maturityLevel candidate
-             */
-            "va-tag": LocalJSX.VaTag & JSXBase.HTMLAttributes<HTMLVaTagElement>;
             /**
              * @componentName Tag - Status
              * @maturityCategory caution
