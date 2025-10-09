@@ -54,7 +54,3 @@ Error.args = {
   status: 'error',
   text: 'Error Tag',
 };
-
-export const USWDSTag = {
-  render: () => <span className="usa-label">New</span>,
-};
