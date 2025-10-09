@@ -22,6 +22,6 @@ describe('va-tag', () => {
     await page.setContent('<va-tag text="Test tag"></va-tag>');
 
     const element = await page.find('va-tag');
-    expect(element.shadowRoot.querySelector('span').innerHTML).toBe('Test tag');
+    expect(element.shadowRoot.innerHTML).toBe('Test tag');
   });
 });
