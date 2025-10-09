@@ -17,9 +17,6 @@
 
 :host {
   color: var(--vads-color-base);
-}
-
-:host {
   display: block;
   font-family: var(--font-source-sans);
 }
@@ -36,24 +33,26 @@ input.usa-input {
   display: block;
 }
 
-
 .currency-wrapper {
-  position: relative;
-  display: flex;
   align-items: center;
+  display: flex;
+  margin-top: var(--units-1);
+  position: relative;
 
   > div {
     position: absolute;
-    left: 10px;
+    left: var(--units-1);
   }
 
   // for v3
   #symbol {
-    margin-top: 8px;
+    font-size: 1rem;
+    line-height: 1;
   }
 
-  #inputField {
-    padding-left: 25px;
+  .usa-input {
+    margin-top: 0;
+    padding-left: var(--units-3);
   }
 }
 
