@@ -8,7 +8,7 @@ export default {
   component: 'va-tag-status',
   decorators: [
     (Story) => (
-      <div className="vads-u-margin--2">
+      <div className="vads-u-margin--1">
         <Story />
       </div>
     ),
