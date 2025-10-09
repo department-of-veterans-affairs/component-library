@@ -494,4 +494,19 @@ describe('va-file-input', () => {
     expect(deleteBtn).not.toBeNull();
   });
 
+  it('correctly displays error message for MIME type failure', async () => { 
+    const page = await setUpPageWithUploadedFile(`<va-file-input accept="pdf" />`, '1x1.png');
+    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessage = await fileInfoCard.find('span.usa-error-message');
+    expect(errorMessage.innerHTML).toEqual("We do not accept .png files. Choose a new file.");
+  });
+
+  it('correctly displays error message for MIME type failure when file has no extension', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input accept="pdf" />`, '1x1-png-no-extension');
+    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const errorMessage = await fileInfoCard.find('span.usa-error-message');
+    expect(errorMessage.innerHTML).toEqual("We do not accept this file type. Choose a new file.");
+  });
+
+
 });
