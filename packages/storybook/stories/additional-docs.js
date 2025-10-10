@@ -49,4 +49,11 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
+  // MDX
+  'Tag': {
+    guidanceHref: 'tag',
+    guidanceName: 'Tag',
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
+  },
 };
