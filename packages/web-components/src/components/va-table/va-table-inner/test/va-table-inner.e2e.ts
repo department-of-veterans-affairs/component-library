@@ -148,6 +148,23 @@ describe('va-table-inner', () => {
     );
     expect(rightEl).toBeDefined();
   });
+  it('does not have any font-monospace columns by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const rightEl = await page.find(
+      'va-table-inner >>> .vads-u-font-size--mono-sm',
+    );
+    expect(rightEl).toBeNull();
+  });
+
+  it('has the font-size--mono-sm class when mono-font-cols is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable({ 'mono-font-cols': '2' }));
+    const rightEl = await page.find(
+      'va-table-inner >>> .vads-u-font-size--mono-sm',
+    );
+    expect(rightEl).toBeDefined();
+  });
 });
 
 describe('sorted va-table ', () => {
