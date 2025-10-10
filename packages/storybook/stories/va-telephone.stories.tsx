@@ -129,6 +129,9 @@ export const International = Template.bind(null);
 International.args = {
   ...defaultArgs,
   international: true,
+  'contact': '(02) 8555 8888',
+  'country-code': '63',
+  extension: '367'
 };
 
 export const CountryCode = Template.bind(null);
