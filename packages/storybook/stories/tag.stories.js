@@ -1,6 +1,9 @@
 export default {
-  title: 'Components/Tag',
+  title: 'Deprecated/Tag',
   id: 'components/tag',
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };
 
 export const Default = {
