@@ -3,13 +3,13 @@
     "family": {
       "sans": { "value": "'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
       "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" },
-      "monospace": { "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace" }
+      "mono": { "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace" }
     },
     "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" },
     "source": {
       "sans": { "value": "'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"}
     },
-    "monospace": { "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace" },
+    "mono": { "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace" },
     "weight": {
       "normal": { "value": "400"},
       "bold": { "value": "700"}
@@ -48,8 +48,11 @@
       "-6": { "value": "1.75"},
       "body-lead": { "value": "1.75" },
       "default": { "value": "1.5" },
-      "heading": { "value": "1.2" }
+      "heading": { "value": "1.2" },
+      "serif": { "value": "1.9" },
+      "mono": { "value": "1.7" }
     },
+    
     "size": {
       "source-sans-normalized": { "value": "1.06rem" },
       "root": { "value": "1rem" },
