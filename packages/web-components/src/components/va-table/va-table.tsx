@@ -70,6 +70,11 @@ export class VaTable {
    */
   @Prop() rightAlignCols?: string;
 
+    /**
+   * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+   */
+  @Prop() monoFontCols?: string;
+
   // The number of va-table-rows
   @State() rows: number;
 
@@ -175,6 +180,10 @@ export class VaTable {
 
     if (this.rightAlignCols) {
       vaTable.setAttribute('right-align-cols', this.rightAlignCols);
+    }
+
+    if (this.monoFontCols) {
+      vaTable.setAttribute('mono-font-cols', this.monoFontCols);
     }
 
     //make a fragment containing all the cells, one for each slot
