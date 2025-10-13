@@ -572,6 +572,7 @@ export class VaFileInput {
               class="thumbnail-preview"
               data={fileContents}
               type="application/pdf"
+              tabIndex={-1} // Prevents focus on object element and focus on links within a PDF preview
             />
           </div>
         );
