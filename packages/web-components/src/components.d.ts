@@ -2003,7 +2003,7 @@ export namespace Components {
      */
     interface VaTagStatus {
         /**
-          * The status variant of the tag. Determines it's background color.
+          * The status variant of the tag. Determines the background color.
          */
         "status": 'informational' | 'warning' | 'success' | 'error';
         /**
@@ -6154,7 +6154,7 @@ declare namespace LocalJSX {
      */
     interface VaTagStatus {
         /**
-          * The status variant of the tag. Determines it's background color.
+          * The status variant of the tag. Determines the background color.
          */
         "status"?: 'informational' | 'warning' | 'success' | 'error';
         /**
