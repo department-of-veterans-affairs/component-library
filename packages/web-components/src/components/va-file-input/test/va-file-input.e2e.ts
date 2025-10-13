@@ -488,10 +488,9 @@ describe('va-file-input', () => {
   it('shows change and delete buttons when file is present and not uploading', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'placeholder.png');
     const host = await page.find('va-file-input');
-    const changeBtnIcon = await host.find('va-file-input >>> va-button-icon');
-    const changeBtn = changeBtnIcon.find('button[aria-label="change file placeholder.png"]');
-    const deleteBtnIcon = await host.find('va-file-input >>> va-button-icon');
-    const deleteBtn = deleteBtnIcon.find('button[aria-label="delete file placeholder.png"]');
+    const buttons = await host.findAll('va-file-input >>> va-button-icon');
+    const changeBtn = await buttons[0].shadowRoot.querySelector('button[aria-label="change file placeholder.png"]');
+    const deleteBtn = await buttons[1].shadowRoot.querySelector('button[aria-label="delete file placeholder.png"]');
     expect(changeBtn).not.toBeNull();
     expect(deleteBtn).not.toBeNull();
   });
