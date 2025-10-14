@@ -321,16 +321,21 @@ export class VaSelect {
       >
         {label}
 
-        {useFormsPattern === 'multiple' && (
+        {useFormsPattern === 'multiple' && headerAriaDescribedby ? (
+          <span id="header-message" class="usa-sr-only">
+            <span>{label}</span>
+            <span>{headerAriaDescribedby}</span>
+          </span>
+        ) : useFormsPattern === 'multiple' ? (
           <span id="header-message" class="usa-sr-only">
             {label}
           </span>
-        )}
-        {headerAriaDescribedby && (
+        ) : headerAriaDescribedby ? (
           <span id="header-message" class="usa-sr-only">
             {headerAriaDescribedby}
           </span>
-        )}
+        ) : null}
+
         {required && !hideRequiredText && (
           <span class="usa-label--required">&nbsp;{i18next.t('required')}</span>
         )}
@@ -350,7 +355,7 @@ export class VaSelect {
             {InnerLabelPart}
           </HeaderLevel>
         ) : (
-          <Fragment>{InnerLabelPart}</Fragment>
+          InnerLabelPart
         )}
         {hint && (
           <span class="usa-hint" id="input-hint">
