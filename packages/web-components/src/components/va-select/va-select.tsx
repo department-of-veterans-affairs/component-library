@@ -339,7 +339,7 @@ export class VaSelect {
         {required && !hideRequiredText && (
           <span class="usa-label--required">&nbsp;{i18next.t('required')}</span>
         )}
-        {hint && <div class="usa-hint">{hint}</div>}
+        {hint && <div class="usa-hint" id="input-hint">{hint}</div>}
       </label>
     );
 
@@ -356,11 +356,6 @@ export class VaSelect {
           </HeaderLevel>
         ) : (
           InnerLabelPart
-        )}
-        {hint && (
-          <span class="usa-hint" id="input-hint">
-            {hint}
-          </span>
         )}
         <span id={errorID} role="alert">
           {showError && error && (
