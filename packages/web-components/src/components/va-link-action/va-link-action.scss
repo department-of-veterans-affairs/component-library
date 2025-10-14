@@ -30,7 +30,7 @@
 
 :host a.va-link--reverse {
   color: var(--vads-color-white);
-
+  transition: all 0.2s ease-in-out;
   &:hover, &:active {
     color: var(--vads-color-action-focus-on-light);
     background-color: transparent;
@@ -38,6 +38,7 @@
 }
 
 :host a.va-link--reverse va-icon {
+  transition: all 0.2s ease-in-out;
   &:hover, &:active {
     background-color: var(--vads-color-action-focus-on-light);
   }
