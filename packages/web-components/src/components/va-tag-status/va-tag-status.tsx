@@ -61,6 +61,7 @@ export class VaTagStatus {
           class='va-tag-status__icon'
           aria-hidden="true"
         />
+        <span class="usa-sr-only">Status</span>
         <span class="va-tag-status__text">{text}</span>
       </Host>
     );
