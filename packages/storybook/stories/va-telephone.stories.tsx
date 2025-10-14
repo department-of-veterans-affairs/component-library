@@ -136,6 +136,7 @@ CountryCode.args = {
   ...defaultArgs,
   'contact': '(02) 8555 8888',
   'country-code': '63',
+  extension: '367'
 };
 
 export const TTY = Template.bind(null);
