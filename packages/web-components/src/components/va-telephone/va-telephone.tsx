@@ -151,6 +151,9 @@ export class VaTelephone {
       } catch (error) {
         console.error('Error parsing phone number:', error);
       }
+      if (parsedPhoneNumber && extension) {
+        parsedPhoneNumber.setExt(extension);
+      }
       if (parsedPhoneNumber) {
         formattedNum = parsedPhoneNumber.formatInternational();
       } else {
