@@ -154,7 +154,7 @@ PRs must be labeled for release notes:
 - `major` - Breaking changes
 - `minor` - New features
 - `patch` - Bug fixes
-- `css-library` - CSS-specific changes
+- `css-library` - CSS-Library specific changes
 - `ignore-for-release` - Not included in release notes
 
 ### Version Update Process
@@ -163,7 +163,7 @@ When publishing changes:
 1. Update version in affected package(s):
    - `packages/core/package.json` (required)
    - `packages/web-components/package.json` (if web components changed)
-   - `packages/css-library/package.json` (if CSS changed)
+   - `packages/css-library/package.json` (if the CSS Library changed)
    - `packages/react-components/package.json` (if React components changed)
 
 2. Run `yarn install` in each updated package directory to update `yarn.lock`
