@@ -94,7 +94,7 @@
 
 :host a.va-link--primary-entry {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
   background-color: var(--vads-color-primary);
   color: var(--vads-color-white);
   text-decoration: none;
@@ -124,16 +124,17 @@
     font-weight: bold;
     display: inline-block;
     vertical-align: middle;
+    text-decoration: underline;
   }
 
   /* Hover state */
   &:hover:not(:focus) {
-    text-decoration: none;
-
+    
     & va-icon.link-icon {
       background-color: var(--vads-color-action-focus-on-light);
     }
     & .link-text {
+      text-decoration-color: var(--vads-color-action-focus-on-light);
       color: var(--vads-color-action-focus-on-light)
     }
   }
@@ -142,29 +143,29 @@
   &:focus,
   &:active {
     background-color: var(--vads-color-action-focus-on-light);
-    text-decoration: none;
     outline: none;
     transition: none;
-
+    
     & va-icon.link-icon {
       background-color: var(--vads-color-black);
       color: var(--vads-color-action-focus-on-light)
     }
     & .link-text {
-      color: var(--vads-color-black)
+      text-decoration: underline;
+      text-decoration-color: var(--vads-color-black);
+      color: var(--vads-color-black);
+      
     }
   }
 
   /* Focus + Hover state */
   &:focus:hover {
     background-color: var(--vads-color-action-focus-on-light);
-
     & va-icon.link-icon,
     & .link-text {
       text-decoration: underline;
       text-decoration-color: var(--vads-color-black);
-      text-decoration-thickness: 2px;
-      text-underline-offset: 4px;
+     
     }
   }
 }
