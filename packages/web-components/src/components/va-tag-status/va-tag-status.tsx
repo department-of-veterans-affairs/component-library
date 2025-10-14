@@ -22,7 +22,7 @@ export class VaTagStatus {
   @Element() el: HTMLElement;
 
   /**
-   * The status variant of the tag. Determines the background color.
+   * The status variant of the tag. Determines the background color and icon.
    */
   @Prop({ reflect: true, mutable: true }) status: 'informational' | 'warning' | 'success' | 'error' = 'informational';
 
