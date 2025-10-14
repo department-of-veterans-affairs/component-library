@@ -53,7 +53,7 @@ export const additionalDocs = {
   'Tag': {
     guidanceHref: 'tag',
     guidanceName: 'Tag',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
 };
