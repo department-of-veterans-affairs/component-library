@@ -11,7 +11,7 @@
   padding: 10px 8px;
   line-height: 22px;
 
-  @media (min-width: $mobile-lg) {
+  @media (min-width: $small-screen) {
     padding: 10px 16px;
   }
 }
@@ -25,7 +25,7 @@
   min-height: 30px;
   min-width: 48px;
 
-  @media (min-width: $mobile-lg) {
+  @media (min-width: $small-screen) {
     margin-right: 16px;
   }
 }
@@ -34,7 +34,7 @@
   padding-left: 8px;
   border-left: 1px solid var(--vads-color-white);
 
-  @media (min-width: $mobile-lg) {
+  @media (min-width: $small-screen) {
     padding-left: 16px;
   }
 
@@ -50,7 +50,7 @@
   }
 }
 
-@media(min-width: calc($desktop - 1px)) {
+@media(min-width: $desktop) {
   va-crisis-line-modal::part(button) {
     position: absolute;
     right: 0;

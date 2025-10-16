@@ -36,7 +36,7 @@
   overflow-wrap: anywhere; // Prevent text overflowing the modal when words are longer than the modal width
 }
 
-@media screen and (max-width: $mobile-lg) {
+@media screen and (max-width: $small-screen) {
   .usa-modal__content {
     width: 85%;
   }
@@ -277,7 +277,7 @@ h1 {
   }
 }
 
-@media screen and (max-width: $mobile-lg) {
+@media screen and (max-width: $small-screen) {
   :host([visible]:not([visible='false'])) {
     overflow-y: scroll;
   }
