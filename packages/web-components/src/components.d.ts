@@ -1903,6 +1903,10 @@ export namespace Components {
      */
     interface VaTable {
         /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
+        /**
           * When active, forces the table to expand to the full-width of its container
          */
         "fullWidth"?: boolean;
@@ -6030,6 +6034,10 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaTable {
+        /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
         /**
           * When active, forces the table to expand to the full-width of its container
          */
