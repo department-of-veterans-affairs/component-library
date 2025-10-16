@@ -1,3 +1,5 @@
+@use "@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
 va-table > va-table-row[slot] button {
   display: inline-flex;
   align-items: center;
@@ -14,7 +16,7 @@ va-table > va-table-row[slot] button svg {
   width: 1.5rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: $medium-screen) {
   va-table-row span.text-align-right {
     text-align: right !important;
   }

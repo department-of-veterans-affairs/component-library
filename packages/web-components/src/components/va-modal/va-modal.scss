@@ -9,6 +9,8 @@
 @use 'usa-icon/src/styles/usa-icon';
 @use 'usa-modal/src/styles/usa-modal';
 
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
 @import '../../mixins/uswds-error-border.scss';
 
 .usa-modal-alert {
@@ -34,7 +36,7 @@
   overflow-wrap: anywhere; // Prevent text overflowing the modal when words are longer than the modal width
 }
 
-@media screen and (max-width: 481px) {
+@media screen and (max-width: $mobile-lg) {
   .usa-modal__content {
     width: 85%;
   }
@@ -260,7 +262,7 @@ h1 {
   margin-left: 1.25rem;
 }
 
-@media (max-width: 320px) {
+@media (max-width: $mobile) {
   .alert-actions button {
     width: 100%;
   }
@@ -275,7 +277,7 @@ h1 {
   }
 }
 
-@media screen and (max-width: 481px) {
+@media screen and (max-width: $mobile-lg) {
   :host([visible]:not([visible='false'])) {
     overflow-y: scroll;
   }

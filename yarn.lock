@@ -3538,6 +3538,7 @@ __metadata:
     postcss-url: "npm:^10.1.1"
     puppeteer: "npm:21.0.0"
     react-dom: "npm:^19.1.0"
+    sass: "npm:^1.69.5"
     typescript: "npm:^5.5.4"
   peerDependencies:
     i18next: "*"
@@ -10648,6 +10649,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immutable@npm:^5.0.2":
+  version: 5.1.4
+  resolution: "immutable@npm:5.1.4"
+  checksum: 10/0655b33af249ff99c7a56f9e6d7aee632af2dc25758710ddf224bda645f66dd2dd98119c0d86986895ea52cc889b6c5127a848c6fba21aadabdc4c5ead04be2b
+  languageName: node
+  linkType: hard
+
 "import-fresh@npm:^3.0.0, import-fresh@npm:^3.2.1":
   version: 3.3.0
   resolution: "import-fresh@npm:3.3.0"
@@ -15391,6 +15399,23 @@ __metadata:
   bin:
     sass: sass.js
   checksum: 10/12e6089e8c571362f93b85fe213575af239f4fa32d335423e90374971814b6a5e13c761df4f8a527d7158b7e9a8293d0e3e01c60904831ff535782ac7d7bcf64
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.69.5":
+  version: 1.93.2
+  resolution: "sass@npm:1.93.2"
+  dependencies:
+    "@parcel/watcher": "npm:^2.4.1"
+    chokidar: "npm:^4.0.0"
+    immutable: "npm:^5.0.2"
+    source-map-js: "npm:>=0.6.2 <2.0.0"
+  dependenciesMeta:
+    "@parcel/watcher":
+      optional: true
+  bin:
+    sass: sass.js
+  checksum: 10/2fc0dcafdf3050f4131650a00ddd772790af1dc3e31a97c6533f323efabddce81bd139a920f13a88af80d630a255f51ee91067a7478364b2a13fcc6f5f7e8308
   languageName: node
   linkType: hard
 
