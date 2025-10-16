@@ -126,16 +126,6 @@ export const parameters = {
   docs: {
     codePanel: true
   },
-
-  chromatic: {
-    modes: {
-      xsmall: allModes.xsmall,
-      small: allModes.small,
-      medium: allModes.medium,
-      smallDesktop: allModes.smallDesktop,
-      large: allModes.large,
-    }
-  }
 };
 
 export const initialGlobals = {
