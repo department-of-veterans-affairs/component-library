@@ -137,13 +137,22 @@ const AcceptsFilePasswordTemplate = ({
   label,
   name,
   hint,
-  vaChange,
   encrypted,
   passwordError
 }) => {
 
   const [passwordSubmissionSuccess, setPasswordSubmissionSuccess] = useState(null);
   const [derivedPasswordError, setDerivedPasswordError] = useState(passwordError);
+
+  const handleChange = (event) => {
+    // Clear derived password error when no files are present (file removed)
+    if (!event?.detail?.files?.length) {
+      setDerivedPasswordError(null);
+      return;
+    }
+
+    alert(`File change event received: ${event?.detail?.files[0]?.name}`);
+  }
 
   return (
     <>
@@ -153,7 +162,7 @@ const AcceptsFilePasswordTemplate = ({
       />.
 
       <div
-        className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin-y--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
+        className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
         style={{ width: 'fit-content' }}
       >
         <p className="vads-u-margin-y--0">Simulate checking of submitted password (changes <code>passwordSubmissionSuccess</code> prop).</p>
@@ -175,7 +184,7 @@ const AcceptsFilePasswordTemplate = ({
         label={label}
         name={name}
         hint={hint}
-        onVaChange={vaChange}
+        onVaChange={handleChange}
         encrypted={encrypted}
         passwordError={derivedPasswordError}
         passwordSubmissionSuccess={passwordSubmissionSuccess}
