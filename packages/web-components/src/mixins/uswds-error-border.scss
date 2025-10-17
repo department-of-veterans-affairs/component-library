@@ -33,7 +33,7 @@
     }
 }
 
-@media screen and (max-width: $desktop) {
+@media screen and (max-width: ($desktop - 1px)) {
     :host([error]:not([error=''])[use-forms-pattern='multiple']), :host(.va-form-group--error[use-forms-pattern='multiple']) {
         padding-left: 0;
     }
