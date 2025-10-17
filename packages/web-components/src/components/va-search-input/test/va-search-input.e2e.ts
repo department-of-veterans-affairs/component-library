@@ -48,10 +48,12 @@ describe('va-search-input', () => {
         <form class="usa-search" role="search">
           <label class="usa-sr-only" for="search-field">Search</label>
           <div class="usa-search__input-wrapper">
-            <input class="usa-input" id="search-field" name="search" type="search" aria-label="Search" autocomplete="off">
-            <button aria-label="Clear the search contents" class="usa-search__clear-input  usa-search__clear-input_empty" type="button">
-              <va-icon class="hydrated usa-search__clear-icon"></va-icon>
-            </button>
+            <div>
+              <input class="usa-input" id="search-field" name="search" type="search" aria-label="Search" autocomplete="off">
+              <button aria-label="Clear the search contents" class="usa-search__clear-input  usa-search__clear-input_empty" type="button">
+                <va-icon class="hydrated usa-search__clear-icon"></va-icon>
+              </button>
+            </div>
             <button class="usa-button" type="submit">
               <span class="usa-search__submit-text">Search VA.gov</span>
               <va-icon class="hydrated usa-search__submit-icon"></va-icon>
@@ -179,7 +181,7 @@ describe('va-search-input', () => {
   it('clears input value when clear button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search-input value="benefits"></va-search-input>');
-    
+
     const button = await page.find('va-search-input >>> button.usa-search__clear-input');
     await button.click();
 

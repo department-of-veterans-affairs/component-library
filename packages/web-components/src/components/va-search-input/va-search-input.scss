@@ -7,6 +7,12 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/inputs.css';
 
+// This values are inherited from the height values in USWDS' usa-search.scss
+$input-height: var(--units-4);
+$input-height--big: var(--units-6);
+// This value is pulled from the focus outline and offset from focusable.css
+$focus-spacing: calc(2px + 2px);
+
 :host {
   display: block;
   border: none;
@@ -16,31 +22,59 @@
   input[type="search"]::-webkit-search-cancel-button,
   input[type="search"]::-webkit-search-results-button,
   input[type="search"]::-webkit-search-results-decoration {
-  -webkit-appearance:none;
+    -webkit-appearance:none;
+  }
 }
+
+.usa-search__input-wrapper {
+  width: 100%;
+  max-width: 1024px;
+  position: relative;
+}
+
+.usa-search__input-wrapper > div {
+  position: relative;
+  width: 100%;
 }
 
 .usa-input {
   margin-top: 0;
 }
 
-#va-search-listbox {
+.usa-search__clear-input {
+  cursor: pointer;
+  background-color: transparent;
+  opacity: .6;
+  border: 0;
+  bottom: 1px;
   position: absolute;
-  top: 37px;
+  right: 0;
+  top: 1px;
+  z-index: 100;
+}
+
+#va-search-listbox {
+  font-size: 1rem;
+  position: absolute;
+  top: calc($input-height + $focus-spacing);
   left: 0;
   right: 0;
   z-index: 1;
   background-color: var(--vads-color-white);
   box-shadow: 0px 2px 6px 1px rgba(20, 20, 20, 0.14);
-  line-height: 24px;
+  line-height: var(--vads-font-line-height-4);
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
+:host([big="true"]) #va-search-listbox  {
+  top: calc($input-height--big + $focus-spacing);
+}
+
 .va-search-suggestion {
   cursor: pointer;
-  padding: 8px;
+  padding: var(--units-1);
 }
 
 .va-search-suggestion[aria-selected='true'],
@@ -50,53 +84,16 @@
   color: var(--vads-color-white);
 }
 
-:host([big="true"]) #va-search-listbox  {
-  top: 52px;
-}
-
 .usa-input {
   max-width: 1024px;
 }
 
-@media screen and (min-width: 480px) {
-  :host .usa-search [type=submit] {
-    width: auto;
-  }
-}
-.usa-search__clear-input {
-  cursor: pointer;
-  background-color: transparent;
-  opacity: .6;
-  border: 0px;
-  bottom: 1px;
-  position: absolute;
-  top: 1px;
-  z-index: 100;
-  right: calc(3rem + 3px);
-  margin-right: 32px;
-}
 button.usa-search__clear-input:not([disabled]):focus {
   outline-offset: -4px;
 }
 
-:host([big="true"]) .usa-search__clear-input  {
-  right: calc(6rem + 6px);
-}
 
-:host([small="true"]) .usa-search__clear-input{
-  right: calc(0.5rem + 6px);
-}
-@media (max-width:29.99em) { 
-  .usa-search__clear-input  {
-    right: calc(0.5rem + 6px) !important;
-  }
-}
 
 .usa-search__clear-input_empty {
   display: none;
-}
-.usa-search__input-wrapper {
-  width: 100%;
-  max-width: 1024px;
-  position: relative;
 }
