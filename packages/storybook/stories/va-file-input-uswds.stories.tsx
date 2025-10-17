@@ -203,6 +203,8 @@ AcceptsFilePassword.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
+// TODO: Determine if this story is necessary after expanded password functionality and updates
+// to story above.
 export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
 WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
 // Snapshots disabled because visual difference is only apparent after interaction.
