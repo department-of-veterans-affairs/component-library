@@ -51,6 +51,7 @@ const Template = args => {
     'full-width': fullWidth,
     'right-align-cols': rightAlignCols,
     'mono-font-cols': monoFontCols,
+    'empty-cell-text': emptyCellText,
   } = args;
 
   return (
@@ -64,6 +65,7 @@ const Template = args => {
       full-width={fullWidth}
       right-align-cols={rightAlignCols}
       mono-font-cols={monoFontCols}
+      empty-cell-text={emptyCellText}
     >
       <va-table-row>
         {columns.map((col, i) => (
