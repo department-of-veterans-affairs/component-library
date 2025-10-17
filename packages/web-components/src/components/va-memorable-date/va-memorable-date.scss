@@ -12,9 +12,9 @@
 
 @use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 
+@import '../../mixins/form-field-error.scss';
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/focusable.css';
-@import '../../mixins/form-field-error.scss';
 @import '../../mixins/headers.css';
 
 :host {
