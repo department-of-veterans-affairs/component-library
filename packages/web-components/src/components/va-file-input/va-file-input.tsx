@@ -163,8 +163,10 @@ export class VaFileInput {
     }
 
     // If password submission failed, reset button state
-    this.passwordSubmitButton.removeAttribute('loading');
-    this.passwordSubmitButton.setAttribute('text', 'Submit password');
+    if (this.passwordSubmitButton) {
+      this.passwordSubmitButton.removeAttribute('loading');
+      this.passwordSubmitButton.setAttribute('text', 'Submit password');
+    }
   }
 
   /**
