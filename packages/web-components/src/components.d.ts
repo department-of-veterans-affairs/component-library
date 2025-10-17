@@ -709,6 +709,10 @@ export namespace Components {
          */
         "passwordError"?: string;
         /**
+          * Denotes if user submission of encrypted file password was successful.
+         */
+        "passwordSubmissionSuccess"?: null | boolean;
+        /**
           * Percent upload completed. For use with va-progress-bar component
          */
         "percentUploaded"?: number;
@@ -4683,6 +4687,10 @@ declare namespace LocalJSX {
           * Error message for the encrypted password input
          */
         "passwordError"?: string;
+        /**
+          * Denotes if user submission of encrypted file password was successful.
+         */
+        "passwordSubmissionSuccess"?: null | boolean;
         /**
           * Percent upload completed. For use with va-progress-bar component
          */
