@@ -4,6 +4,8 @@
 @use 'usa-search/src/styles/usa-search';
 @use 'usa-button/src/styles/usa-button';
 
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/inputs.css';
 
@@ -58,7 +60,7 @@
   max-width: 1024px;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: $mobile-lg) {
   :host .usa-search [type=submit] {
     width: auto;
   }
@@ -86,7 +88,7 @@ button.usa-search__clear-input:not([disabled]):focus {
 :host([small="true"]) .usa-search__clear-input{
   right: calc(0.5rem + 6px);
 }
-@media (max-width:29.99em) { 
+@media (max-width: $mobile-lg) { 
   .usa-search__clear-input  {
     right: calc(0.5rem + 6px) !important;
   }

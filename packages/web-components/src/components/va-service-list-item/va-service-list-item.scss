@@ -1,3 +1,4 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @use '../../../css-library/src/stylesheets/formation-overrides/elements/labels' as *;
 @import '../../mixins/focusable.css';
 @import '../../mixins/headers.css';
@@ -95,7 +96,7 @@
       }
 
       .chevron-icon {
-        @media (min-width: 768px) {
+        @media (min-width: $medium-screen) {
           margin-left: 0.938rem;
         }
       }
@@ -105,7 +106,7 @@
       margin-top: 0;
       width: 11.875rem;
       color: var(--vads-color-link);
-      @media (min-width: 768px) {
+      @media (min-width: $medium-screen) {
         width: auto;
       }
     }
@@ -118,7 +119,7 @@
       margin-left: auto;
       font-size: 24px;
       color: var(--vads-color-link);
-      @media (min-width: 768px) {
+      @media (min-width: $medium-screen) {
         margin-left: 0.938rem;
       }
     }

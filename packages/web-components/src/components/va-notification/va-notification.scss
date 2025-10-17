@@ -1,3 +1,5 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
 :host {
     display: block;
     position: relative;
@@ -58,7 +60,7 @@ h6 {
   line-height: 22px;
   width: 66%;
 
-  @media (min-width: 768px) {
+  @media (min-width: $medium-screen) {
         width: 100%;
     }
 }

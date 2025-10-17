@@ -1,3 +1,4 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
 :host {
@@ -64,7 +65,7 @@
   background-color: var(--vads-color-base-lightest);
 }
 
-@media screen and (min-width: 380px) {
+@media screen and (min-width: $xsmall-screen) {
   :host {
     min-width: 4rem;
   }

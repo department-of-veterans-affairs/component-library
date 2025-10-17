@@ -28,7 +28,7 @@ const DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_NAME = 'DISMISSED_PROMO_BANNERS';
  */
 @Component({
   tag: 'va-promo-banner',
-  styleUrl: 'va-promo-banner.css',
+  styleUrl: 'va-promo-banner.scss',
   shadow: true,
 })
 export class VaPromoBanner {

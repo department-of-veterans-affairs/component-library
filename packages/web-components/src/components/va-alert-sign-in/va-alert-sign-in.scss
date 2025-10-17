@@ -1,5 +1,6 @@
 @forward 'settings';
 @use 'usa-alert/src/styles/usa-alert';
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
 
 :host {
@@ -19,7 +20,7 @@
   left: 24px;
 }
 
-@media screen and (max-width: 64em) {
+@media screen and (max-width: $desktop) {
   .va-alert-sign-in__lock-icon {
     left: 12px;
   }

@@ -1,9 +1,10 @@
 @forward 'settings';
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @import '../../mixins/focusable.css';
 
 $red-70v: #8b0a03;
 
-$small-desktop-screen: 1008px;
+$small-desktop-screen: 1024px;
 
 .va-crisis-line-container {
   position: relative;
@@ -85,7 +86,7 @@ button.va-crisis-line {
   transition-timing-function: ease-in-out;
   transition-property: background-color;
 
-  @media (max-width: 480px) {
+  @media (max-width: $mobile-lg) {
     display: none;
   }
 

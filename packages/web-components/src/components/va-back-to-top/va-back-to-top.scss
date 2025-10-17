@@ -1,5 +1,5 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
-
 @import '../../../../../node_modules/animate.css/source/sliding_entrances/slideInUp.css';
 @import '../../../../../node_modules/animate.css/source/sliding_exits/slideOutDown.css';
 @import '../../mixins/buttons.css';
@@ -128,7 +128,7 @@ va-icon {
   margin-right: 0px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $medium-screen) {
   a {
     height: 44px;
     width: 44px;
