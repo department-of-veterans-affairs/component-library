@@ -137,35 +137,74 @@ const AcceptsFilePasswordTemplate = ({
   label,
   name,
   hint,
-  vaChange,
   encrypted,
   passwordError
 }) => {
+
+  const [passwordSubmissionSuccess, setPasswordSubmissionSuccess] = useState(null);
+  const [derivedPasswordError, setDerivedPasswordError] = useState(passwordError);
+
+  const handleChange = (event) => {
+    // Clear derived password error when no files are present (file removed)
+    if (!event?.detail?.files?.length) {
+      setDerivedPasswordError(null);
+      return;
+    }
+
+    alert(`File change event received: ${event?.detail?.files[0]?.name}`);
+  }
+
   return (
     <>
       To learn how to check for an encrypted PDF <va-link
         text='see platform documentation'
         href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted'
       />.
+
+      <div
+        className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
+        style={{ width: 'fit-content' }}
+      >
+        <p className="vads-u-margin-y--0">Simulate checking of submitted password (changes <code>passwordSubmissionSuccess</code> prop).</p>
+        <va-button
+          class="vads-u-margin-y--1"
+          text="Submission status - success"
+          onClick={() => setPasswordSubmissionSuccess(true)}
+        />
+        <va-button
+          text="Submission status - error"
+          onClick={() => {
+            setPasswordSubmissionSuccess(false);
+            setDerivedPasswordError('Incorrect password. Try again or delete file.');
+          }}
+        />
+      </div>
+
       <VaFileInput
         label={label}
         name={name}
         hint={hint}
-        onVaChange={vaChange}
+        onVaChange={handleChange}
         encrypted={encrypted}
-        passwordError={passwordError}
+        passwordError={derivedPasswordError}
+        passwordSubmissionSuccess={passwordSubmissionSuccess}
       />
     </>
   );
 };
 export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
-AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
+AcceptsFilePassword.args = {
+  ...defaultArgs,
+  encrypted: true,
+};
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 AcceptsFilePassword.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
+// TODO: Determine if this story is necessary after expanded password functionality and updates
+// to story above.
 export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
 WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
 // Snapshots disabled because visual difference is only apparent after interaction.

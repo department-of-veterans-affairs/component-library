@@ -226,3 +226,44 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: initial;
   }
 }
+
+.password-input-section {
+  &:not(.password-submission-success) {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--vads-color-base-lighter);
+  }
+
+  &.password-submission-success {
+    va-alert {
+      .password-alert-text {
+        margin: 0;
+      }
+    }
+  }
+
+  va-alert {
+    margin: 1.5rem 0;
+
+    .password-alert-text {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  va-button {
+    margin-top: 0.5rem;
+    width: 100%;
+
+    &.usa-button {
+      width: unset;
+    }
+  }
+}
+
+@media screen and (min-width: $mobile-lg) {
+  .password-input-section {
+    va-button {
+      width: auto;
+    }
+  }
+}

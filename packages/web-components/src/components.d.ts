@@ -709,6 +709,10 @@ export namespace Components {
          */
         "passwordError"?: string;
         /**
+          * Denotes if user submission of encrypted file password was successful.
+         */
+        "passwordSubmissionSuccess"?: null | boolean;
+        /**
           * Percent upload completed. For use with va-progress-bar component
          */
         "percentUploaded"?: number;
@@ -794,6 +798,10 @@ export namespace Components {
           * Array of password error messages corresponding to each file input. The length and order match the files array.
          */
         "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of booleans corresponding to the password submission success state of each file.
+         */
+        "passwordSubmissionSuccessList"?: boolean[];
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
          */
@@ -4692,6 +4700,10 @@ declare namespace LocalJSX {
          */
         "passwordError"?: string;
         /**
+          * Denotes if user submission of encrypted file password was successful.
+         */
+        "passwordSubmissionSuccess"?: null | boolean;
+        /**
           * Percent upload completed. For use with va-progress-bar component
          */
         "percentUploaded"?: number;
@@ -4781,6 +4793,10 @@ declare namespace LocalJSX {
           * Array of password error messages corresponding to each file input. The length and order match the files array.
          */
         "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of booleans corresponding to the password submission success state of each file.
+         */
+        "passwordSubmissionSuccessList"?: boolean[];
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
          */
