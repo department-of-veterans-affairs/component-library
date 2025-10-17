@@ -101,6 +101,11 @@ export class VaFileInputMultiple {
   @Prop() slotFieldIndexes?: Number[] = null;
 
   /**
+   * Array of booleans corresponding to the password submission success state of each file.
+   */
+  @Prop() passwordSubmissionSuccessList?: boolean[] = [];
+
+  /**
    * Array of numbers corresponding to the progress of the upload of each file.
    */
   @Prop() percentUploaded?: number[] = [];
@@ -252,6 +257,7 @@ export class VaFileInputMultiple {
       // Deleted file
       action = 'FILE_REMOVED';
       actionFile = this.files[pageIndex].file;
+      actionFile['deletedIndex'] = pageIndex;
       this.files.splice(pageIndex, 1);
       const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
       // empty status message so it is read when updated
@@ -412,7 +418,7 @@ export class VaFileInputMultiple {
    * The render method to display the component structure.
    * @returns {JSX.Element} The rendered component.
    */
-  render() {
+  render(): JSX.Element {
     const {
       label,
       required,
@@ -426,6 +432,7 @@ export class VaFileInputMultiple {
       percentUploaded,
       resetVisualState,
       passwordErrors,
+      passwordSubmissionSuccessList,
       enableAnalytics,
       readOnly,
       maxFileSize,
@@ -481,6 +488,7 @@ export class VaFileInputMultiple {
                 percentUploaded={_percentUploaded}
                 resetVisualState={_resetVisualState}
                 passwordError={_passwordError}
+                passwordSubmissionSuccess={passwordSubmissionSuccessList[pageIndex]}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
