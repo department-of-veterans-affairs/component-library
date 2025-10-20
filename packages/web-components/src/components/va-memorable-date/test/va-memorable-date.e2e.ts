@@ -1609,4 +1609,47 @@ describe('va-memorable-date', () => {
     expect(header).not.toBeNull();
     expect(header.textContent).toContain('Test Label');
   });
+
+  it('fires the dateBlur event even if there is an error when externalValidation is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date name="test" required month-select="true" external-validation="true" />',
+    );
+    const dateBlurSpy = await page.spyOnEvent('dateBlur');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+
+    // Trigger Blur
+    await handleMonth.press('Tab');
+    await handleYear.press('1');
+    await handleYear.press('Tab');
+    await page.waitForChanges();    
+
+    expect(dateBlurSpy).toHaveReceivedEvent();
+  });
+
+  it('uses external validation error message when present even if internal validation set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date name="test" required month-select="true" external-validation="true" />',
+    );
+    const date = await page.find('va-memorable-date');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+
+    // Trigger Blur
+    await handleMonth.press('Tab');
+    await handleYear.press('1');
+    await handleYear.press('Tab');
+    await page.waitForChanges();    
+
+    date.setAttribute('error', 'This is an external error message');
+    await handleYear.press('Tab');
+    await page.waitForChanges();    
+    const errorSpan = await page.find(
+      'va-memorable-date >>> span.usa-error-message',
+    );
+    expect(errorSpan).not.toBeNull();
+    expect(errorSpan.innerHTML).toEqual('This is an external error message');
+  })
 });
