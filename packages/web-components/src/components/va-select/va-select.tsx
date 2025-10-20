@@ -83,6 +83,17 @@ export class VaSelect {
   @Prop() enableAnalytics?: boolean = false;
 
   /**
+   * Insert a header with defined level inside the label
+   */
+  @Prop() labelHeaderLevel?: string;
+
+  /**
+   * An optional message that will be read by screen readers when the header is focused. The label-header-level
+   * prop must be set for this to be active.
+   */
+  @Prop() headerAriaDescribedby?: string;
+
+  /**
    * Optional hint text.
    */
   @Prop() hint?: string;
@@ -259,6 +270,7 @@ export class VaSelect {
       showError,
       useFormsPattern,
       formHeadingLevel,
+      headerAriaDescribedby,
       formHeading,
     } = this;
 
@@ -268,6 +280,10 @@ export class VaSelect {
         error ? errorID : ''
       } ${hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
+    const headerAriaDescribedbyId = headerAriaDescribedby
+      ? 'header-message'
+      : null;
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
@@ -297,19 +313,51 @@ export class VaSelect {
       );
     }
 
+    const InnerLabelPart = (
+      <label
+        htmlFor="options"
+        class={labelClass}
+        part="label"
+      >
+        {label}
+
+        {useFormsPattern === 'multiple' && headerAriaDescribedby ? (
+          <span id="header-message" class="usa-sr-only">
+            <span>{label}</span>
+            <span>{headerAriaDescribedby}</span>
+          </span>
+        ) : useFormsPattern === 'multiple' ? (
+          <span id="header-message" class="usa-sr-only">
+            {label}
+          </span>
+        ) : headerAriaDescribedby ? (
+          <span id="header-message" class="usa-sr-only">
+            {headerAriaDescribedby}
+          </span>
+        ) : null}
+
+        {required && !hideRequiredText && (
+          <span class="usa-label--required">&nbsp;{i18next.t('required')}</span>
+        )}
+      </label>
+    );
+
     return (
       <Host>
         {formsHeading}
-        {label && (
-          <label htmlFor="options" class={labelClass} part="label">
-            {label}
-            {required && !hideRequiredText && (
-              <span class="usa-label--required"> {i18next.t('required')}</span>
-            )}
-          </label>
+
+        {label && HeaderLevel ? (
+          <HeaderLevel
+            part="header"
+            aria-describedby={headerAriaDescribedbyId}
+          >
+            {InnerLabelPart}
+          </HeaderLevel>
+        ) : (
+          InnerLabelPart
         )}
         {hint && (
-          <span class="usa-hint" id="input-hint">
+          <span class="usa-hint" >
             {hint}
           </span>
         )}
