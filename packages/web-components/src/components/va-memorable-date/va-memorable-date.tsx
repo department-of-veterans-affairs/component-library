@@ -122,6 +122,13 @@ export class VaMemorableDate {
   @Prop() removeDateHint?: boolean = false;
 
   /**
+   * Set this flag to true if component will recieve external validation that might conflict 
+   * with internal validation due to race conditions,
+   * i.e. if both internal and external validation will be set in response to same user input.
+   */
+  @Prop() externalValidation?: boolean = false;
+
+  /**
    * Fires when the date input loses focus after its value was changed
    */
   @Event({
@@ -159,20 +166,24 @@ export class VaMemorableDate {
     const monthNum = Number(currentMonth || undef);
     const dayNum = Number(currentDay || undef);
 
-    validate({
-      component: this,
-      year: yearNum,
-      month: monthNum,
-      day: dayNum,
-      yearTouched: this.yearTouched,
-      monthTouched: this.monthTouched,
-      dayTouched: this.dayTouched,
-      monthSelect: this.monthSelect,
-    });
+      validate({
+        component: this,
+        year: yearNum,
+        month: monthNum,
+        day: dayNum,
+        yearTouched: this.yearTouched,
+        monthTouched: this.monthTouched,
+        dayTouched: this.dayTouched,
+        monthSelect: this.monthSelect,
+      });
 
-    if (this.error) {
-      return;
-    }
+      if (this.error) {
+        // fire blur event for external validation handling
+        if (this.externalValidation) {
+          this.dateBlur.emit(event);
+        }
+        return;
+      }
 
     /* eslint-disable i18next/no-literal-string */
     this.value =
@@ -187,7 +198,7 @@ export class VaMemorableDate {
 
     // Any custom validation will happen first; otherwise consumer code clearing
     // errors will also remove internal errors.
-    this.dateBlur.emit(event);
+      this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
       const detail = {
@@ -329,6 +340,10 @@ export class VaMemorableDate {
       headerAriaDescribedby
     } = this;
 
+    // due to race conditions with external validation and internal validation, 
+    // sometimes the error prop is not set to the most recent error, which is the error attribute in the DOM
+    const _error = !this.externalValidation ? error : this.el?.getAttribute('error') || error;
+
     const { currentYear, currentMonth, currentDay } = this;
 
     const hintText = monthSelect
@@ -405,13 +420,13 @@ export class VaMemorableDate {
           onVaSelect={this.handleMonthChange}
           onBlur={this.handleMonthBlur}
           class="usa-form-group--month-select"
-          reflectInputError={error === 'month-range' ? true : false}
+          reflectInputError={_error === 'month-range' ? true : false}
           value={
             currentMonth ? String(parseInt(currentMonth, 10)) : currentMonth
           }
           required={required}
           hideRequiredText={true}
-          error={this.invalidMonth ? getStandardErrorMessage(error) : null}
+          error={this.invalidMonth ? getStandardErrorMessage(_error) : null}
           showError={false}
           messageAriaDescribedby={i18next.t('date-hint-month-select')}
         >
@@ -441,12 +456,12 @@ export class VaMemorableDate {
           onInput={this.handleMonthChange}
           onBlur={this.handleMonthBlur}
           class="usa-form-group--month-input memorable-date-input"
-          reflectInputError={error === 'month-range' ? true : false}
+          reflectInputError={_error === 'month-range' ? true : false}
           inputmode="numeric"
           type="text"
           required={required}
           hideRequiredText={true}
-          error={this.invalidMonth ? getStandardErrorMessage(error) : null}
+          error={this.invalidMonth ? getStandardErrorMessage(_error) : null}
           show-input-error="false"
           messageAriaDescribedby={i18next.t('date-hint-month')}
         />
@@ -454,7 +469,7 @@ export class VaMemorableDate {
     );
     const legendClass = classnames({
       'usa-legend': true,
-      'usa-label--error': error,
+      'usa-label--error': _error,
     });
 
     const InnerLabelPart = (
@@ -508,11 +523,11 @@ export class VaMemorableDate {
             )}
 
             <span id="error-message" role="alert">
-              {error && (
+              {_error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span>
                   <span class="usa-error-message">
-                    {getErrorMessage(error)}
+                    {getErrorMessage(_error)}
                   </span>
                 </Fragment>
               )}
@@ -534,13 +549,13 @@ export class VaMemorableDate {
                   onInput={this.handleDayChange}
                   onBlur={this.handleDayBlur}
                   class="usa-form-group--day-input memorable-date-input"
-                  reflectInputError={error === 'day-range' ? true : false}
+                  reflectInputError={_error === 'day-range' ? true : false}
                   inputmode="numeric"
                   type="text"
                   required={required}
                   hideRequiredText={true}
                   error={
-                    this.invalidDay ? getStandardErrorMessage(error) : null
+                    this.invalidDay ? getStandardErrorMessage(_error) : null
                   }
                   show-input-error="false"
                   messageAriaDescribedby={i18next.t('date-hint-day')}
@@ -559,13 +574,13 @@ export class VaMemorableDate {
                   onInput={this.handleYearChange}
                   onBlur={this.handleYearBlur}
                   class="usa-form-group--year-input memorable-date-input"
-                  reflectInputError={error === 'year-range' ? true : false}
+                  reflectInputError={_error === 'year-range' ? true : false}
                   inputmode="numeric"
                   type="text"
                   required={required}
                   hideRequiredText={true}
                   error={
-                    this.invalidYear ? getStandardErrorMessage(error) : null
+                    this.invalidYear ? getStandardErrorMessage(_error) : null
                   }
                   show-input-error="false"
                   messageAriaDescribedby={i18next.t('date-hint-year')}
