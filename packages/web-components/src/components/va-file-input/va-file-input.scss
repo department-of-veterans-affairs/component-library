@@ -247,6 +247,10 @@ h1, h2, h3, h4, h5, h6 {
     .password-alert-text {
       margin-top: 0;
       margin-bottom: 0.5rem;
+
+      .password-alert-file-name {
+        font-weight: var(--font-weight-bold);
+      }
     }
   }
 

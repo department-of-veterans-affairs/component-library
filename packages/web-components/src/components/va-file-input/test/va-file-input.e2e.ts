@@ -339,7 +339,7 @@ describe('va-file-input', () => {
 
     const warningAlert = await page.find('va-file-input >>> va-alert');
     expect(warningAlert).not.toBeNull();
-    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text">We can\'t open <strong>1x1.png</strong> without its password</p>')
+    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text">We can\'t open <span class="password-alert-file-name">1x1.png</span> without its password</p>')
 
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).not.toBeNull();
@@ -426,7 +426,7 @@ describe('va-file-input', () => {
     const textInput = await page.find('va-file-input >>> va-text-input');
     const errorSpan = await textInput.find('>>> span.usa-error-message');
     expect(errorSpan).not.toBeNull();
-    expect(errorSpan).toEqualText('Encrypted file requires a password.');
+    expect(errorSpan).toEqualText('Password cannot be blank');
   });
 
   it('does not render file password field if encrypted is unset', async () => {
