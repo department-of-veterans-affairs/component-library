@@ -2,8 +2,6 @@
 @use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @import '../../mixins/focusable.css';
 
-$red-70v: #8b0a03;
-
 $small-desktop-screen: 1024px;
 
 .va-crisis-line-container {
@@ -45,7 +43,7 @@ button.va-crisis-line {
   }
 
   &:hover, &:active {
-    background-color: $red-70v;
+    background-color: $vads-color-secondary-darkest;
     .va-crisis-line-icon {
       @media(min-width: $small-desktop-screen) {
         background-color: #b51d09;

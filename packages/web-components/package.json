@@ -17,16 +17,14 @@
     "react-bindings/"
   ],
   "scripts": {
-    "build": "npm run sass:compile && stencil build --docs-json component-docs.json",
+    "build": "stencil build --docs-json component-docs.json",
     "build-bindings": "tsc -p tsconfig.bindings.json",
     "lint": "eslint src/**/*{.ts,.tsx}",
-    "watch:stencil": "npm run sass:compile && stencil build --watch",
-    "test": "npm run sass:compile && stencil test --spec --e2e",
-    "test.watch": "npm run sass:compile && stencil test --spec --e2e --watchAll",
-    "generate": "npm run sass:compile && stencil generate",
-    "serve": "npm run sass:compile && stencil build --dev --watch --serve",
-    "sass:compile": "sass src/global/main.scss:src/global/main.css --style=compressed --no-source-map --load-path=../../node_modules",
-    "sass:watch": "sass src/global/main.scss:src/global/main.css --watch --style=compressed --no-source-map --load-path=../../node_modules"
+    "watch:stencil": "stencil build --watch",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate",
+    "serve": "stencil build --dev --watch --serve"
   },
   "dependencies": {
     "@stencil/core": "4.20.0",
