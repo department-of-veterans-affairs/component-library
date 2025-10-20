@@ -583,7 +583,7 @@ export class VaFileInput {
 
     // Stop here if no password entered
     if (!this.passwordValue || this.passwordValue.length === 0) {
-      this.passwordError = 'Encrypted file requires a password.';
+      this.passwordError = 'Password cannot be blank';
       return;
     }
 
