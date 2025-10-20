@@ -262,16 +262,21 @@ export class VaTextarea {
       >
         {label}
 
-        {useFormsPattern === 'multiple' && (
+        {useFormsPattern === 'multiple' && headerAriaDescribedby ? (
+          <span id="header-message" class="usa-sr-only">
+            <span>{label}</span>
+            <span>{headerAriaDescribedby}</span>
+          </span>
+        ) : useFormsPattern === 'multiple' ? (
           <span id="header-message" class="usa-sr-only">
             {label}
           </span>
-        )}
-        {headerAriaDescribedby && (
+        ) : headerAriaDescribedby ? (
           <span id="header-message" class="usa-sr-only">
             {headerAriaDescribedby}
           </span>
-        )}
+        ) : null}
+
         {required && (
           <span class="usa-label--required">&nbsp;{i18next.t('required')}</span>
         )}
@@ -291,7 +296,7 @@ export class VaTextarea {
               {InnerLabelPart}
             </HeaderLevel>
           ) : (
-            <Fragment>{InnerLabelPart}</Fragment>
+            InnerLabelPart
           )}
           <slot></slot>
           <span id="input-error-message" role="alert">
