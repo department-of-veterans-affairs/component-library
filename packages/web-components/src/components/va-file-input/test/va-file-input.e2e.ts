@@ -339,7 +339,7 @@ describe('va-file-input', () => {
 
     const warningAlert = await page.find('va-file-input >>> va-alert');
     expect(warningAlert).not.toBeNull();
-    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text">We can\'t open <span class="password-alert-file-name">1x1.png</span> without its password</p>')
+    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text">We can\'t open <span class="password-alert-text__file-name">1x1.png</span> without its password</p>')
 
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).not.toBeNull();

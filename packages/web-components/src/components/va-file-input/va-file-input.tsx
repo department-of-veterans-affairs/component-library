@@ -481,7 +481,7 @@ export class VaFileInput {
           (
             <va-alert slim={true} status="warning">
               <p class="password-alert-text">
-                We can't open <span class="password-alert-file-name">{this.file.name}</span> without its password
+                We can't open <span class="password-alert-text__file-name">{this.file.name}</span> without its password
               </p>
             </va-alert>
           )
