@@ -161,6 +161,18 @@ const AcceptsFilePasswordTemplate = ({
         href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted'
       />.
 
+      <VaFileInput
+        label={label}
+        name={name}
+        hint={hint}
+        onVaChange={handleChange}
+        encrypted={encrypted}
+        passwordError={derivedPasswordError}
+        passwordSubmissionSuccess={passwordSubmissionSuccess}
+      />
+
+      <hr />
+
       <div
         className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
         style={{ width: 'fit-content' }}
@@ -179,16 +191,6 @@ const AcceptsFilePasswordTemplate = ({
           }}
         />
       </div>
-
-      <VaFileInput
-        label={label}
-        name={name}
-        hint={hint}
-        onVaChange={handleChange}
-        encrypted={encrypted}
-        passwordError={derivedPasswordError}
-        passwordSubmissionSuccess={passwordSubmissionSuccess}
-      />
     </>
   );
 };

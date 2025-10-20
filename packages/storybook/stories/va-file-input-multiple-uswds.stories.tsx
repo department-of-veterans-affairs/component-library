@@ -519,6 +519,17 @@ const EncryptedTemplate = ({ label, name }) => {
         href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted'
       />.
 
+      <VaFileInputMultiple
+        label={label}
+        name={name}
+        hint={"This example shows a password field when a .pdf file is uploaded."}
+        encrypted={encryptedList}
+        passwordSubmissionSuccessList={passwordSubmissionSuccessList}
+        passwordErrors={derivedPasswordErrorList}
+        onVaMultipleChange={handleChange}
+      />
+      <hr />
+
       <div
         className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
         style={{ width: 'fit-content' }}
@@ -556,16 +567,6 @@ const EncryptedTemplate = ({ label, name }) => {
         }
       </div>
 
-      <VaFileInputMultiple
-        label={label}
-        name={name}
-        hint={"This example shows a password field when a .pdf file is uploaded."}
-        encrypted={encryptedList}
-        passwordSubmissionSuccessList={passwordSubmissionSuccessList}
-        passwordErrors={derivedPasswordErrorList}
-        onVaMultipleChange={handleChange}
-      />
-      <hr />
       <div>
         <p>
           Parent components are responsible for managing if a password
