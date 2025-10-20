@@ -1099,6 +1099,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
+        /**
           * The content of the heading if `useFormsPattern`.
          */
         "formHeading"?: string;
@@ -5105,6 +5109,10 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
         /**
           * The content of the heading if `useFormsPattern`.
          */
