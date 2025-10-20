@@ -228,18 +228,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .password-input-section {
-  &:not(.password-submission-success) {
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--vads-color-base-lighter);
-  }
-
-  &.password-submission-success {
-    va-alert {
-      .password-alert-text {
-        margin: 0;
-      }
-    }
-  }
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--vads-color-base-lighter);
 
   va-alert {
     margin: 1.5rem 0;
@@ -260,6 +250,17 @@ h1, h2, h3, h4, h5, h6 {
 
     &.usa-button {
       width: unset;
+    }
+  }
+}
+
+.password-input-section.password-input-section--success {
+  padding-bottom: unset;
+  border-bottom: none;
+
+  va-alert {
+    .password-alert-text {
+      margin: 0;
     }
   }
 }

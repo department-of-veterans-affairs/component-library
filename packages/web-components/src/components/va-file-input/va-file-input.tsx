@@ -467,7 +467,7 @@ export class VaFileInput {
 
     const passwordSectionClasses = classNames({
       'password-input-section': true,
-      'password-submission-success': this.passwordSubmissionSuccess === true,
+      'password-input-section--success': this.passwordSubmissionSuccess === true,
     });
 
     return (
