@@ -488,31 +488,33 @@ export class VaSearchInput {
             {label}
           </label>
           <div class='usa-search__input-wrapper'>
-            <input
-              class="usa-input"
-              id="search-field"
-              name="search"
-              type="search"
-              ref={el => (this.inputRef = el as HTMLInputElement)}
-              aria-autocomplete={ariaAutoComplete}
-              aria-controls={ariaControls}
-              aria-expanded={ariaExpanded}
-              aria-haspopup={ariaHasPopup}
-              aria-label={label}
-              autocomplete="off"
-              onFocus={handleInputFocus}
-              onInput={handleInput}
-              onKeyDown={handleInputKeyDown}
-              role={role}
-              value={value}
-            />
-            <button type="button" onClick={handleClearButtonClick} class={clearButtonClasses} aria-label="Clear the search contents">
-              <va-icon
-                class="usa-search__clear-icon"
-                icon="close"
-                size={3}
+            <div>
+              <input
+                class="usa-input"
+                id="search-field"
+                name="search"
+                type="search"
+                ref={el => (this.inputRef = el as HTMLInputElement)}
+                aria-autocomplete={ariaAutoComplete}
+                aria-controls={ariaControls}
+                aria-expanded={ariaExpanded}
+                aria-haspopup={ariaHasPopup}
+                aria-label={label}
+                autocomplete="off"
+                onFocus={handleInputFocus}
+                onInput={handleInput}
+                onKeyDown={handleInputKeyDown}
+                role={role}
+                value={value}
               />
-            </button>
+              <button type="button" onClick={handleClearButtonClick} class={clearButtonClasses} aria-label="Clear the search contents">
+                <va-icon
+                  class="usa-search__clear-icon"
+                  icon="close"
+                  size={3}
+                />
+              </button>
+            </div>
             <button
               class="usa-button"
               type="submit"

@@ -17,6 +17,7 @@ import {
   zeroPadStart,
   daysForSelectedMonth,
 } from '../../utils/date-utils';
+import classnames from 'classnames';
 
 /**
  * By default all date components have the following validation:
@@ -247,20 +248,33 @@ export class VaDate {
     const errorParameters = (error: string) => {
       return getErrorParameters(error, year, month);
     };
+    const legendClass = classnames({
+      'usa-legend': true,
+      'usa-label--error': error,
+    });
+
     // Fieldset has an implicit aria role of group
     return (
       <Host onBlur={handleDateBlur}>
-        <fieldset>
-          <legend>
-            {label} {required && <span class="required">(*Required)</span>}
+        <fieldset class="usa-fieldset">
+          <legend class={legendClass}>
+            {label}
+            {required && (
+              <span class="usa-label--required">
+                {' '}
+                {i18next.t('required')}
+              </span>
+            )}
           </legend>
-          {hint && <span class="hint-text">{hint}</span>}
+          {hint && <span class="usa-hint">{hint}</span>}
           <slot />
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">Error</span>{' '}
-                {i18next.t(error, errorParameters(error))}
+                <span class="sr-only">{i18next.t('error')}</span>
+                <span class="usa-error-message">
+                  {i18next.t(error, errorParameters(error))}
+                </span>
               </Fragment>
             )}
           </span>

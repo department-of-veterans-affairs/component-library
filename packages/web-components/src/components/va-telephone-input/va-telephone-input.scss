@@ -17,7 +17,7 @@
   va-combo-box, va-text-input {
     width: 100%;
     max-width: 100% !important;
-    margin-top: 16px;
+    margin-top: var(--units-2);
     flex: 0;
   }
 
@@ -28,12 +28,16 @@
 
 :host {
   display: block;
-  margin-top: 24px;
+  margin-top: var(--units-3);
 }
 
-va-text-input::part(label),
-va-combo-box::part(label) {
-  margin-top: 0;
+va-text-input,
+va-combo-box {
+  font-size: 1rem;
+
+  &::part(label) {
+    margin-top: 0;
+  }
 }
 
 div.input-wrap {
@@ -47,20 +51,19 @@ fieldset {
 }
 
 va-combo-box {
-  flex: 1;
-  min-width: 216px;
+  width: 38ch;
 }
 
 va-text-input {
-  width: 20ch;
+  width: 18ch;
 }
 
 .va-input-telephone-wrapper {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+  gap: var(--units-1);
+  margin-top: var(--units-1);
   width: 100%;
   max-width: var(--mobile-lg);
 }

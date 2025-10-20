@@ -94,7 +94,7 @@ describe('va-date', () => {
     await page.setContent('<va-date hint="This is hint text" />');
 
     // Render the hint text
-    const hintTextElement = await page.find('va-date >>> span.hint-text');
+    const hintTextElement = await page.find('va-date >>> span.usa-hint');
     expect(hintTextElement.innerText).toContain('This is hint text');
   });
 
@@ -120,7 +120,7 @@ describe('va-date', () => {
     const page = await newE2EPage();
     await page.setContent('<va-date label="This is a field" required />');
 
-    const requiredSpan = await page.find('va-date >>> span.required');
+    const requiredSpan = await page.find('va-date >>> span.usa-label--required');
     expect(requiredSpan).not.toBeNull();
   });
 
