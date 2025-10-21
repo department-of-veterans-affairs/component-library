@@ -1,3 +1,5 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
 :host {
   display: table-row;
 }
@@ -27,7 +29,7 @@
   content: '---';
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $medium-screen) {
   :host {
     border-bottom: 1px solid var(--vads-color-gray-medium);
   }
