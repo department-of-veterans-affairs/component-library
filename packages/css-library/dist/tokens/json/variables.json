@@ -2369,6 +2369,124 @@
       }
     }
   },
+  "vads-elevation": {
+    "shadow": {
+      "1": {
+        "value": "0px 1px 4px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 1px 4px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-1",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "1"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "1"
+        ]
+      },
+      "2": {
+        "value": "0px 4px 8px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 4px 8px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-2",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "2"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "2"
+        ]
+      },
+      "3": {
+        "value": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-3",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "3"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "3"
+        ]
+      },
+      "4": {
+        "value": "0px 12px 24px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 12px 24px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-4",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "4"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "4"
+        ]
+      },
+      "5": {
+        "value": "0px 16px 32px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 16px 32px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-5",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "5"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "5"
+        ]
+      },
+      "none": {
+        "value": "none",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "none"
+        },
+        "name": "vads-elevation-shadow-none",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "none"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "none"
+        ]
+      }
+    }
+  },
   "font": {
     "family": {
       "sans": {
