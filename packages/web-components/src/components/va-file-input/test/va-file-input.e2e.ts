@@ -450,5 +450,27 @@ describe('va-file-input', () => {
     expect(errorMessage.innerHTML).toEqual("We do not accept this file type. Choose a new file.");
   });
 
-
+  it('shows change and delete buttons when in error state', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input accept=".pdf" />`, '1x1.png');
+    const result = await page.evaluate(() => {
+      const vaFileInput = document.querySelector('va-file-input');
+      const card = vaFileInput.shadowRoot.querySelector('va-card');
+      const errorMsg = card.querySelector('span.usa-error-message');
+      const buttonIcons = Array.from(card.querySelectorAll('va-button-icon'));
+      const buttons = buttonIcons.map(btnIcon => {
+        const btn = btnIcon.shadowRoot.querySelector('button');
+        return {
+          ariaLabel: btn.getAttribute('aria-label'),
+          innerText: btn.innerText,
+        };
+      });
+        return {
+          errorMessage: errorMsg ? errorMsg.innerHTML : null,
+          buttons,
+        };  
+    });
+    expect(result.errorMessage).toEqual("We do not accept .png files. Choose a new file.");
+    expect(result.buttons[0].innerText).toEqual('CHANGE FILE');
+    expect(result.buttons[1].innerText).toEqual('DELETE');
+  });
 });
