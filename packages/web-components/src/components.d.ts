@@ -2948,7 +2948,7 @@ declare global {
     };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
-        "vaPasswordChange": any;
+        "vaPasswordSubmit": any;
         "vaFileInputError": any;
         "component-library-analytics": any;
     }
@@ -4692,9 +4692,9 @@ declare namespace LocalJSX {
          */
         "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
-          * The event emitted when the file input password value changes.
+          * The event emitted when the file input password is submitted.
          */
-        "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        "onVaPasswordSubmit"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * Error message for the encrypted password input
          */

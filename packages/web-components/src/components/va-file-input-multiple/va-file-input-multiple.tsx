@@ -278,12 +278,11 @@ export class VaFileInputMultiple {
   }
 
   /**
-   * Handles file input changes by updating, adding, or removing files based on user interaction.
+   * Handles submission of passwords for encrypted files.
    * @param {any} event - The event object containing file details.
    * @param {number} fileKey - The key of the file being changed.
-   * @param {number} pageIndex - The index of the file in the files array.
    */
-  private handlePasswordChange(event: any, fileKey: number) {
+  private handlePasswordSubmit(event: any, fileKey: number) {
     const fileObject = this.findFileByKey(fileKey);
     fileObject.password = event.detail.password;
     const filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
@@ -492,8 +491,8 @@ export class VaFileInputMultiple {
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
-                onVaPasswordChange={event =>
-                  this.handlePasswordChange(event, fileEntry.key)
+                onVaPasswordSubmit={event =>
+                  this.handlePasswordSubmit(event, fileEntry.key)
                 }
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}

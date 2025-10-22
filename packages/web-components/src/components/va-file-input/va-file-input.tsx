@@ -180,9 +180,9 @@ export class VaFileInput {
   @Event() vaChange: EventEmitter;
 
   /**
-   * The event emitted when the file input password value changes.
+   * The event emitted when the file input password is submitted.
    */
-  @Event() vaPasswordChange: EventEmitter;
+  @Event() vaPasswordSubmit: EventEmitter;
 
   /**
    * The event emitted when adding a file results in an error, e.g. exceeding max file size
@@ -574,7 +574,7 @@ export class VaFileInput {
   /**
    * Callback passed to `onClick` for password submit button instance of `va-button`. Updates the
    * password error state if no password has been entered, updates button text and loading props,
-   * and emits the `vaPasswordChange` event when a password has been entered.
+   * and emits the `vaPasswordSubmit` event when a password has been entered.
    * @param e {Event} click event
    * @returns {void}
    */
@@ -592,9 +592,7 @@ export class VaFileInput {
     target.setAttribute('loading', 'true');
     target.setAttribute('text', 'Verifying password...');
 
-    // TODO: Figure out if we need a vaPasswordSubmit event here, but for now
-    // just emit vaPasswordChange
-    this.vaPasswordChange.emit( { password: this.passwordValue } );
+    this.vaPasswordSubmit.emit( { password: this.passwordValue } );
   }
 
   render() {

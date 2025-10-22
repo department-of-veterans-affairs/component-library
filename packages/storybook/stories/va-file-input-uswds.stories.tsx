@@ -45,7 +45,7 @@ const defaultArgs = {
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
-  'vaPasswordChange': null,
+  'vaPasswordSubmit': null,
   'vaFileInputError': event =>
     alert(`File input error event received: ${event?.detail?.error}`),
   'header-size': null,
@@ -71,7 +71,7 @@ const Template = ({
   hint,
   enableAnalytics,
   vaChange,
-  vaPasswordChange,
+  vaPasswordSubmit,
   vaFileInputError,
   headerSize,
   readOnly,
@@ -100,7 +100,7 @@ const Template = ({
         hint={hint}
         enable-analytics={enableAnalytics}
         onVaChange={vaChange}
-        onVaPasswordChange={vaPasswordChange}
+        onVaPasswordSubmit={vaPasswordSubmit}
         onVaFileInputError={vaFileInputError}
         header-size={headerSize}
         readOnly={readOnly}
@@ -138,7 +138,8 @@ const AcceptsFilePasswordTemplate = ({
   name,
   hint,
   encrypted,
-  passwordError
+  passwordError,
+  vaPasswordSubmit,
 }) => {
 
   const [passwordSubmissionSuccess, setPasswordSubmissionSuccess] = useState(null);
@@ -150,8 +151,6 @@ const AcceptsFilePasswordTemplate = ({
       setDerivedPasswordError(null);
       return;
     }
-
-    alert(`File change event received: ${event?.detail?.files[0]?.name}`);
   }
 
   return (
@@ -166,6 +165,7 @@ const AcceptsFilePasswordTemplate = ({
         name={name}
         hint={hint}
         onVaChange={handleChange}
+        onVaPasswordSubmit={vaPasswordSubmit}
         encrypted={encrypted}
         passwordError={derivedPasswordError}
         passwordSubmissionSuccess={passwordSubmissionSuccess}
@@ -198,6 +198,7 @@ export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
 AcceptsFilePassword.args = {
   ...defaultArgs,
   encrypted: true,
+  vaPasswordSubmit: () => console.log('File input password submitted'),
 };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
