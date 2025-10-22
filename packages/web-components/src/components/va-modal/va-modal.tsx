@@ -304,6 +304,7 @@ export class VaModal {
       this.closeButton, // close button first
       ...modalContent,
       ...actionButtons, // action buttons last
+      // ...this.ariaHiddenNodeExceptions,
     ].reduce((focusableElms, elm: HTMLElement) => {
       // find not-hidden elements
       if (elm && (elm.offsetWidth || elm.offsetHeight)) {
@@ -364,6 +365,22 @@ export class VaModal {
     return activeElement;
   }
 
+  private hideOrShowAriaHiddenExceptionsSiblings(show: boolean = false): void {
+    for (const element of this.ariaHiddenNodeExceptions) {
+      // Get all siblings of the passed element
+      const parent = element.parentElement;
+      if (parent) {
+        const siblings = Array.from(parent.children) as HTMLElement[];
+        // Hide/show all siblings except the passed element
+        siblings.forEach(sibling => {
+          if (sibling !== element) {
+            show ? sibling.removeAttribute('aria-hidden') : sibling.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }
+    }
+  }
+
   // This method traps the focus inside our web component, prevents scrolling outside
   // the modal, and adds aria-hidden="true" to all elements outside the web component.
   // Fires analytics event unless disableAnalytics is true.
@@ -384,9 +401,35 @@ export class VaModal {
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
 
+    // Get parents of component all the way up to body element while accounting
+    // for shadowRoot of web components, which is a boundary. This is necessary
+    // to prevent aria-hidden from trickling down from parents components and disabling
+    // content inside the modal, notably on Firefox and Safari.
+    const parents = [];
+    let current = this.el.parentElement || (this.el.parentNode as ShadowRoot).host;
+;
+    while (current && current !== document.body) {
+      parents.push(current);
+
+      // Check if we need to traverse up through a shadow root
+      if (current.parentElement) {
+        current = current.parentElement;
+      } else if (current.parentNode && (current.parentNode as ShadowRoot).host) {
+        // We've hit a shadow root boundary, jump to the host element
+        current = (current.parentNode as ShadowRoot).host as HTMLElement;
+      } else {
+        // No more parents to traverse
+        break;
+      }
+    }
+
+    // Ensure that siblings of exceptions are hidden
+    this.hideOrShowAriaHiddenExceptionsSiblings(false);
+
     // The elements to exclude from aria-hidden.
     const hideExceptions = [
-      ...this.ariaHiddenNodeExceptions,
+      // ...this.ariaHiddenNodeExceptions,
+      ...parents,
       this.el,
     ] as HTMLElement[];
 
@@ -416,6 +459,7 @@ export class VaModal {
   private teardownModal() {
     clearAllBodyScrollLocks();
     this.undoAriaHidden?.();
+    this.hideOrShowAriaHiddenExceptionsSiblings(true);
     this.savedFocus?.focus();
   }
 
