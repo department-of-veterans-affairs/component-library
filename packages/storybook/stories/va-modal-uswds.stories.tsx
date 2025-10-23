@@ -377,8 +377,7 @@ export const WithAriaHiddenNodeExceptions = ({
   }, [isVisible]);
 
   useEffect(() => {
-    // setAriaHiddenNodeExceptions([firstInputRef.current, secondInputRef.current]);
-    setAriaHiddenNodeExceptions([secondInputRef.current, firstInputRef.current]);
+    setAriaHiddenNodeExceptions([firstInputRef.current, secondInputRef.current]);
   }, [firstInputRef.current, secondInputRef.current]);
 
   return (
