@@ -208,9 +208,9 @@ export class VaFileInput {
       }
   }
 
- /**
-  * If component gets two consecutive errors make sure state resets both times
-  */
+  /**
+   * If component gets two consecutive errors make sure state resets both times
+   */
   @Watch('error')
   handleError(newError: string, oldError: string) {
     if (oldError && newError) {
@@ -295,11 +295,11 @@ export class VaFileInput {
       this.resetState();
       return;
     }
-  
+
     if (emitChange) {
       this.vaChange.emit({ files: [this.file] });
     }
-    
+
     this.uploadStatus = 'success';
     this.internalError = null;
     if (file.size < this.FILE_PREVIEW_SIZE_LIMIT) {
@@ -602,8 +602,6 @@ export class VaFileInput {
       statusText,
       uploadedFile,
       percentUploaded,
-      resetVisualState,
-      passwordError,
     } = this;
 
     if (value && !this.file) {
@@ -705,7 +703,7 @@ export class VaFileInput {
             aria-describedby={ariaDescribedbyIds}
             onChange={this.handleChange}
           />
-          { !uploadedFile && !file  ? 
+          { !uploadedFile && !file  ?
             <div>
               <span id="file-input-error-alert" role="alert">
                 {displayError && (
