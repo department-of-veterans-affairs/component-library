@@ -356,7 +356,7 @@ export const WithAriaHiddenNodeExceptions = ({
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
-  const [ariaHiddenNodeExceptions, setAriaHiddenNodeExceptions] = useState([]);
+  const [didRender, setDidRender] = useState(false);
 
   const wrapRef = useRef(null);
   const firstInputRef = useRef(null);
@@ -377,8 +377,10 @@ export const WithAriaHiddenNodeExceptions = ({
   }, [isVisible]);
 
   useEffect(() => {
-    setAriaHiddenNodeExceptions([firstInputRef.current, secondInputRef.current]);
-  }, [firstInputRef.current, secondInputRef.current]);
+    // Set didRender to true after initial mount to ensure refs are populated.
+    // Modal won't render until this state flag is true.
+    setDidRender(true);
+  }, []);
 
   return (
     <div ref={wrapRef}>
@@ -387,7 +389,7 @@ export const WithAriaHiddenNodeExceptions = ({
       <input id="pre-modal-input" type="checkbox" ref={firstInputRef} />
       <label htmlFor="pre-modal-input">Checkbox before the modal</label>
 
-      <VaModal
+      {didRender &&(<VaModal
         forcedModal={forcedModal}
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
@@ -401,14 +403,14 @@ export const WithAriaHiddenNodeExceptions = ({
         secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
-        ariaHiddenNodeExceptions={ariaHiddenNodeExceptions}
+        ariaHiddenNodeExceptions={[firstInputRef.current, secondInputRef.current]}
       >
         <p>
           A modal may pass any React nodes as children to be displayed within
           it.
         </p>
         <va-checkbox label="va-checkbox" />
-      </VaModal>
+      </VaModal>)}
 
       <input id="post-modal-input" type="checkbox" ref={secondInputRef} />
       <label htmlFor="post-modal-input">Checkbox after the modal</label>
