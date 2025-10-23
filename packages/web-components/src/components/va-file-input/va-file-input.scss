@@ -235,8 +235,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 1.5rem 0;
 
     .password-alert-text {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
+      margin: 0;
 
       .password-alert-text__file-name {
         font-weight: var(--font-weight-bold);
@@ -257,12 +256,6 @@ h1, h2, h3, h4, h5, h6 {
 .password-input-section.password-input-section--success {
   padding-bottom: unset;
   border-bottom: none;
-
-  va-alert {
-    .password-alert-text {
-      margin: 0;
-    }
-  }
 }
 
 @media screen and (min-width: $mobile-lg) {
