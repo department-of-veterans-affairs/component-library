@@ -1091,6 +1091,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
+        /**
           * The content of the heading if `useFormsPattern`.
          */
         "formHeading"?: string;
@@ -1672,6 +1676,10 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Whether or not to show the (*Required) text.
          */
         "hideRequiredText"?: boolean;
@@ -1687,6 +1695,10 @@ export namespace Components {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */
@@ -5090,6 +5102,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
+        /**
           * The content of the heading if `useFormsPattern`.
          */
         "formHeading"?: string;
@@ -5775,6 +5791,10 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Whether or not to show the (*Required) text.
          */
         "hideRequiredText"?: boolean;
@@ -5790,6 +5810,10 @@ declare namespace LocalJSX {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */

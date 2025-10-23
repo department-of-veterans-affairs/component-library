@@ -1,6 +1,7 @@
 @forward 'settings';
 @use 'usa-table/src/styles/usa-table';
 @use 'uswds-helpers/src/styles/usa-sr-only';
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @import '~@department-of-veterans-affairs/css-library/dist/stylesheets/utilities.css';
 
 :host {
@@ -29,7 +30,7 @@
   }
 }
 
-@media screen and (max-width: var(--mobile-lg)) {
+@media screen and (max-width: $mobile-lg) {
   :host div {
     display: flex;
     width: 100%;
@@ -77,7 +78,7 @@ caption {
   margin-bottom: 0.75rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $medium-screen) {
   ::slotted(va-table-row) {
     border-bottom: 1px solid var(--vads-color-gray-medium);
   }
@@ -86,7 +87,7 @@ caption {
   }
 }
 
-@media screen and (max-width: 29.99em) {
+@media screen and (max-width: $mobile-lg) {
   .usa-table--stacked th,
   .usa-table--stacked td {
     width: auto;
