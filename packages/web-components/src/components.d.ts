@@ -721,10 +721,6 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
-        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -806,10 +802,6 @@ export namespace Components {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
-        /**
-          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-         */
-        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
@@ -4708,10 +4700,6 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
-        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -4797,10 +4785,6 @@ declare namespace LocalJSX {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
-        /**
-          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-         */
-        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
