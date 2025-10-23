@@ -415,7 +415,7 @@ export class VaModal {
         const siblings = Array.from(parent.children) as HTMLElement[];
         // Hide/show all siblings except the passed element
         siblings.forEach(sibling => {
-          if (sibling !== element) {
+          if (sibling !== element && sibling !== this.el) {
             show ? sibling.removeAttribute('aria-hidden') : sibling.setAttribute('aria-hidden', 'true');
           }
         });
