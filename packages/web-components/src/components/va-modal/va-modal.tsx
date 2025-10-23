@@ -284,8 +284,6 @@ export class VaModal {
         ariaHiddenNodeExceptions[ariaHiddenNodeExceptions.length - 1].focus() :
         lastElement.focus();
     }
-
-    console.log(' ');
   }
 
   private handleClose(e: KeyboardEvent | MouseEvent) {
@@ -407,6 +405,11 @@ export class VaModal {
     return activeElement;
   }
 
+  /**
+   * Helper function to hide or show siblings of ariaHiddenNodeExceptions elements during modal setup/teardown.
+   * @param {boolean} show - Determines whether to show or hide siblings by setting or removing aria-hidden attribute
+   * @returns {void}
+   */
   private hideOrShowAriaHiddenExceptionsSiblings(show: boolean = false): void {
     for (const element of this.ariaHiddenNodeExceptions) {
       // Get all siblings of the passed element
