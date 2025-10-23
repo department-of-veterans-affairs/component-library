@@ -232,17 +232,60 @@ export class VaModal {
     // point forward in the function.
     if (keyCode !== 'Tab') return;
 
+    const { ariaHiddenNodeExceptions } = this;
+
     const activeElement = this.getRealActiveElement();
     const firstElement = this.focusableChildren[0] as HTMLElement;
     const lastElement = this.focusableChildren[this.focusableChildren.length - 1] as HTMLElement;
 
+    // Tab handling for nodes included in ariaHiddenNodeExceptions
+    if (ariaHiddenNodeExceptions.includes(activeElement)) {
+      const isFirstException = activeElement === ariaHiddenNodeExceptions[0];
+      const isLastException = activeElement === ariaHiddenNodeExceptions[ariaHiddenNodeExceptions.length - 1];
+
+      // Get index of activeElement in ariaHiddenNodeExceptions array
+      const activeElementIndex = ariaHiddenNodeExceptions.indexOf(activeElement);
+
+      // Forward tabbing
+      if (!e.shiftKey) {
+        e.preventDefault();
+        // Either focus on first element in modal focusableChildren or the next
+        // element in ariaHiddenNodeExceptions
+        isLastException ? firstElement.focus() : ariaHiddenNodeExceptions[activeElementIndex + 1].focus();
+      }
+      // Backward tabbing (Shift + Tab)
+      else if (e.shiftKey) {
+        e.preventDefault();
+        // Either focus on last element in modal focusableChildren or the previous
+        // element in ariaHiddenNodeExceptions
+        isFirstException ? lastElement.focus() : ariaHiddenNodeExceptions[activeElementIndex - 1].focus();
+      }
+
+      // End function at this point since following logic does not apply to the
+      // elements in ariaHiddenNodeExceptions
+      return;
+    }
+
+    // Forward tabbing on last element in focusableChildren
     if (!e.shiftKey && activeElement === lastElement) {
       e.preventDefault();
-      firstElement.focus();
-    } else if (e.shiftKey && activeElement === firstElement) {
-      e.preventDefault();
-      lastElement.focus();
+      // Focus on the first element in the ariaHiddenNodeExceptions array if it
+      // exists, otherwise focus the first element in the focusableChildren array.
+      ariaHiddenNodeExceptions?.length ?
+        ariaHiddenNodeExceptions[0].focus() :
+        firstElement.focus();
     }
+    // Backward tabbing on first element in focusableChildren
+    else if (e.shiftKey && activeElement === firstElement) {
+      e.preventDefault();
+      // Focus on the last element in the ariaHiddenNodeExceptions array if it exists,
+      // otherwise focus the last element in the focusableChildren array.
+      ariaHiddenNodeExceptions?.length ?
+        ariaHiddenNodeExceptions[ariaHiddenNodeExceptions.length - 1].focus() :
+        lastElement.focus();
+    }
+
+    console.log(' ');
   }
 
   private handleClose(e: KeyboardEvent | MouseEvent) {
@@ -304,7 +347,6 @@ export class VaModal {
       this.closeButton, // close button first
       ...modalContent,
       ...actionButtons, // action buttons last
-      // ...this.ariaHiddenNodeExceptions,
     ].reduce((focusableElms, elm: HTMLElement) => {
       // find not-hidden elements
       if (elm && (elm.offsetWidth || elm.offsetHeight)) {
@@ -407,7 +449,6 @@ export class VaModal {
     // content inside the modal, notably on Firefox and Safari.
     const parents = [];
     let current = this.el.parentElement || (this.el.parentNode as ShadowRoot).host;
-;
     while (current && current !== document.body) {
       parents.push(current);
 
@@ -428,7 +469,7 @@ export class VaModal {
 
     // The elements to exclude from aria-hidden.
     const hideExceptions = [
-      // ...this.ariaHiddenNodeExceptions,
+      ...this.ariaHiddenNodeExceptions,
       ...parents,
       this.el,
     ] as HTMLElement[];
