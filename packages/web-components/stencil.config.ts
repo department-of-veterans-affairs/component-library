@@ -8,13 +8,14 @@ import * as path from 'path';
 
 export const config: Config = {
   namespace: 'component-library',
-  globalStyle: 'src/global/main.css',
+  globalStyle: 'src/global/main.scss',
   sourceMap: false,
   plugins: [
     sass({
       includePaths: [
         '../../node_modules/@uswds/uswds/packages/',
         'src/global/',
+        '../../node_modules'
       ],
     }),
     postcss({

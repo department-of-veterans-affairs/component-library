@@ -56,11 +56,6 @@ export class VaFileInputMultiple {
   @Prop() errors: string[] = [];
 
   /**
-   * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-   */
-  @Prop() resetVisualState?: boolean[] = [];
-
-  /**
    * Array of password error messages corresponding to each file input. The length and order match the files array.
    */
   @Prop() passwordErrors?: Array<string | null> = [];
@@ -429,7 +424,6 @@ export class VaFileInputMultiple {
       errors,
       encrypted,
       percentUploaded,
-      resetVisualState,
       passwordErrors,
       passwordSubmissionSuccessList,
       enableAnalytics,
@@ -460,8 +454,6 @@ export class VaFileInputMultiple {
             </div>
           )}
           {files.map((fileEntry, pageIndex) => {
-            const _resetVisualState = resetVisualState && resetVisualState.length >= pageIndex
-              ? resetVisualState[pageIndex] : null;
             const _percentUploaded = percentUploaded && percentUploaded.length >= pageIndex
               ? percentUploaded[pageIndex] : null;
             const _passwordError = passwordErrors && passwordErrors.length >= pageIndex
@@ -485,7 +477,6 @@ export class VaFileInputMultiple {
                 error={errors[pageIndex]}
                 encrypted={encrypted[pageIndex]}
                 percentUploaded={_percentUploaded}
-                resetVisualState={_resetVisualState}
                 passwordError={_passwordError}
                 passwordSubmissionSuccess={passwordSubmissionSuccessList[pageIndex]}
                 onVaChange={event =>

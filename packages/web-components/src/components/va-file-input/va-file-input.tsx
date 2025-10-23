@@ -170,11 +170,6 @@ export class VaFileInput {
   }
 
   /**
-   * Reset to initial visual state. Useful in conjunction with errors
-   */
-  @Prop({ mutable: true }) resetVisualState?: boolean = false;
-
-  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -213,18 +208,7 @@ export class VaFileInput {
       }
   }
 
-  /**
-   * Return to initial visual state of component to display error and
-   * allow user to try to add file again.
-   */
-  @Watch('resetVisualState')
-  handleResetVisualState(value: boolean) {
-    if (value) {
-      this.resetState();
-    }
-  }
-
-  /**
+ /**
   * If component gets two consecutive errors make sure state resets both times
   */
   @Watch('error')
@@ -247,7 +231,6 @@ export class VaFileInput {
   }
 
   private handleChange = (e: Event) => {
-    this.resetVisualState = false;
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0]);
@@ -302,18 +285,21 @@ export class VaFileInput {
       fileError = `We can't upload your file because it's too small. Files must be at least ${this.formatFileSize(this.minFileSize)}.`;
     }
 
+    // we need the file if there is an error to display its properties
+    this.uploadedFile = null;
+    this.file = file;
+
     if (fileError) {
       this.internalError = fileError;
       this.vaFileInputError.emit({ error: fileError });
       this.resetState();
       return;
     }
-
-    this.uploadedFile = null;
-    this.file = file;
+  
     if (emitChange) {
       this.vaChange.emit({ files: [this.file] });
     }
+    
     this.uploadStatus = 'success';
     this.internalError = null;
     if (file.size < this.FILE_PREVIEW_SIZE_LIMIT) {
@@ -617,6 +603,7 @@ export class VaFileInput {
       uploadedFile,
       percentUploaded,
       resetVisualState,
+      passwordError,
     } = this;
 
     if (value && !this.file) {
@@ -648,7 +635,7 @@ export class VaFileInput {
         </svg>
       </div>
     );
-    if (error) {
+    if (displayError) {
       fileThumbnail = (
         <div class="thumbnail-container">
           <va-icon
@@ -709,7 +696,7 @@ export class VaFileInput {
             class="file-input"
             aria-label={`${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`}
             style={{
-              visibility: (this.uploadStatus === 'success' || uploadedFile) ? 'hidden' : 'unset',
+              visibility: (uploadStatus === 'success' || uploadedFile || displayError) ? 'hidden' : 'unset',
             }}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
@@ -718,7 +705,7 @@ export class VaFileInput {
             aria-describedby={ariaDescribedbyIds}
             onChange={this.handleChange}
           />
-          {(uploadStatus === 'idle' && (!uploadedFile || resetVisualState)) && (
+          { !uploadedFile && !file  ? 
             <div>
               <span id="file-input-error-alert" role="alert">
                 {displayError && (
@@ -740,9 +727,8 @@ export class VaFileInput {
                 </div>
               </div>
             </div>
-          )}
-          {(!resetVisualState && (uploadStatus !== 'idle' || uploadedFile)) && (
-            <div class={selectedFileClassName}>
+          : (
+          <div class={selectedFileClassName}>
               {!headless && (
                 <div class="selected-files-label">
                   {readOnly ? 'Files you uploaded' : 'Selected files'}
@@ -772,7 +758,6 @@ export class VaFileInput {
                       </span>
                   </div>
                 </div>
-                {(file || value || uploadedFile) && (
                   <div class={this.showSeparator ? 'with-separator' : undefined}>
                     {!readOnly && showProgBar &&
                       (
@@ -821,7 +806,6 @@ export class VaFileInput {
                       )
                     }
                   </div>
-                )}
               </va-card>
             </div>
           )}

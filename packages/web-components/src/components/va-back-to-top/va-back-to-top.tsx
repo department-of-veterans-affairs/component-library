@@ -21,7 +21,7 @@ import 'intersection-observer';
  */
 @Component({
   tag: 'va-back-to-top',
-  styleUrl: 'va-back-to-top.css',
+  styleUrl: 'va-back-to-top.scss',
   shadow: true,
 })
 export class VaBackToTop {
