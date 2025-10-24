@@ -593,7 +593,7 @@ export namespace Components {
     }
     /**
      * @componentName Critical Action
-     * @maturityCategory caution
+     * @maturityCategory available
      * @maturityLevel candidate
      */
     interface VaCriticalAction {
@@ -1734,7 +1734,7 @@ export namespace Components {
     }
     /**
      * @componentName Service List Item
-     * @maturityCategory caution
+     * @maturityCategory available
      * @maturityLevel candidate
      */
     interface VaServiceListItem {
@@ -2900,7 +2900,7 @@ declare global {
     };
     /**
      * @componentName Critical Action
-     * @maturityCategory caution
+     * @maturityCategory available
      * @maturityLevel candidate
      */
     interface HTMLVaCriticalActionElement extends Components.VaCriticalAction, HTMLStencilElement {
@@ -3535,7 +3535,7 @@ declare global {
     };
     /**
      * @componentName Service List Item
-     * @maturityCategory caution
+     * @maturityCategory available
      * @maturityLevel candidate
      */
     interface HTMLVaServiceListItemElement extends Components.VaServiceListItem, HTMLStencilElement {
@@ -4544,7 +4544,7 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Critical Action
-     * @maturityCategory caution
+     * @maturityCategory available
      * @maturityLevel candidate
      */
     interface VaCriticalAction {
@@ -5865,7 +5865,7 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Service List Item
-     * @maturityCategory caution
+     * @maturityCategory available
      * @maturityLevel candidate
      */
     interface VaServiceListItem {
@@ -6718,7 +6718,7 @@ declare module "@stencil/core" {
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             /**
              * @componentName Critical Action
-             * @maturityCategory caution
+             * @maturityCategory available
              * @maturityLevel candidate
              */
             "va-critical-action": LocalJSX.VaCriticalAction & JSXBase.HTMLAttributes<HTMLVaCriticalActionElement>;
@@ -6923,7 +6923,7 @@ declare module "@stencil/core" {
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             /**
              * @componentName Service List Item
-             * @maturityCategory caution
+             * @maturityCategory available
              * @maturityLevel candidate
              */
             "va-service-list-item": LocalJSX.VaServiceListItem & JSXBase.HTMLAttributes<HTMLVaServiceListItemElement>;
