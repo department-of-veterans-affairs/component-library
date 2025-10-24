@@ -45,7 +45,7 @@ const defaultArgs = {
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
-  'vaPasswordChange': null,
+  'vaPasswordSubmit': null,
   'vaFileInputError': event =>
     alert(`File input error event received: ${event?.detail?.error}`),
   'header-size': null,
@@ -71,7 +71,7 @@ const Template = ({
   hint,
   enableAnalytics,
   vaChange,
-  vaPasswordChange,
+  vaPasswordSubmit,
   vaFileInputError,
   headerSize,
   readOnly,
@@ -100,7 +100,7 @@ const Template = ({
         hint={hint}
         enable-analytics={enableAnalytics}
         onVaChange={vaChange}
-        onVaPasswordChange={vaPasswordChange}
+        onVaPasswordSubmit={vaPasswordSubmit}
         onVaFileInputError={vaFileInputError}
         header-size={headerSize}
         readOnly={readOnly}
@@ -137,40 +137,72 @@ const AcceptsFilePasswordTemplate = ({
   label,
   name,
   hint,
-  vaChange,
   encrypted,
-  passwordError
+  passwordError,
+  vaPasswordSubmit,
 }) => {
+
+  const [passwordSubmissionSuccess, setPasswordSubmissionSuccess] = useState(null);
+  const [derivedPasswordError, setDerivedPasswordError] = useState(passwordError);
+
+  const handleChange = (event) => {
+    // Clear derived password error when no files are present (file removed)
+    if (!event?.detail?.files?.length) {
+      setDerivedPasswordError(null);
+      return;
+    }
+  }
+
   return (
     <>
       To learn how to check for an encrypted PDF <va-link
         text='see platform documentation'
         href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted'
       />.
+
       <VaFileInput
         label={label}
         name={name}
         hint={hint}
-        onVaChange={vaChange}
+        onVaChange={handleChange}
+        onVaPasswordSubmit={vaPasswordSubmit}
         encrypted={encrypted}
-        passwordError={passwordError}
+        passwordError={derivedPasswordError}
+        passwordSubmissionSuccess={passwordSubmissionSuccess}
       />
+
+      <hr />
+
+      <div
+        className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
+        style={{ width: 'fit-content' }}
+      >
+        <p className="vads-u-margin-y--0">Simulate checking of submitted password (changes <code>passwordSubmissionSuccess</code> prop).</p>
+        <va-button
+          class="vads-u-margin-y--1"
+          text="Submission status - success"
+          onClick={() => setPasswordSubmissionSuccess(true)}
+        />
+        <va-button
+          text="Submission status - error"
+          onClick={() => {
+            setPasswordSubmissionSuccess(false);
+            setDerivedPasswordError('Incorrect password. Try again or delete file.');
+          }}
+        />
+      </div>
     </>
   );
 };
 export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
-AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
+AcceptsFilePassword.args = {
+  ...defaultArgs,
+  encrypted: true,
+  vaPasswordSubmit: () => console.log('File input password submitted'),
+};
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 AcceptsFilePassword.parameters = {
-  chromatic: { disableSnapshot: true },
-};
-
-export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
-WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
-// Snapshots disabled because visual difference is only apparent after interaction.
-// TODO: Enable snapshots after integrating Storybook play function
-WithFilePasswordError.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
