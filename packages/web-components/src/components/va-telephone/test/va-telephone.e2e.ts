@@ -140,6 +140,17 @@ describe('va-telephone', () => {
     expect(link.innerText).toEqual('+63 2 8555 8888');
   });
 
+  it('handles a phone number with a country code and extension', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone country-code="63" contact="(02) 8555 8888" extension="367"></va-telephone>',
+    );
+    
+    const link = await page.find('va-telephone >>> a');
+    expect(link.getAttribute('href')).toEqual('tel:+630285558888,367');
+    expect(link.innerText).toEqual('+63 2 8555 8888 ext. 367');
+  });
+
   it('handles a 3 digit contact prop', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-telephone contact="711"></va-telephone>');
