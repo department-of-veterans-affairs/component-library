@@ -208,6 +208,7 @@ export class VaFileInput {
   }
 
   private handleChange = (e: Event) => {
+    console.log('handleChange...');
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0]);
@@ -216,8 +217,11 @@ export class VaFileInput {
   };
 
   private handleDrop = (event: DragEvent) => {
+    console.log('handleDrop...');
     event.preventDefault();
     event.stopPropagation();
+
+    this.el.focus();
 
     const files = event.dataTransfer.files;
     if (files.length > 0) {
@@ -240,6 +244,8 @@ export class VaFileInput {
   }
 
   private handleFile = (file: File, emitChange: boolean = true) => {
+    console.log('handleFile...');
+
     let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
@@ -249,7 +255,7 @@ export class VaFileInput {
       }
     }
 
-     if (file.size === 0) {
+    if (file.size === 0) {
       fileError = `The file you selected is empty. Files must be larger than 0B.`;
     }
 
@@ -272,11 +278,11 @@ export class VaFileInput {
       this.resetState();
       return;
     }
-  
+
     if (emitChange) {
       this.vaChange.emit({ files: [this.file] });
     }
-    
+
     this.uploadStatus = 'success';
     this.internalError = null;
     if (file.size < this.FILE_PREVIEW_SIZE_LIMIT) {
@@ -306,7 +312,7 @@ export class VaFileInput {
     this.file = null;
     this.uploadedFile = null;
     this.updateStatusMessage(`File deleted. No file selected.`);
-    this.el.focus();
+    // this.el.focus();
   };
 
   private openModal = () => {
@@ -462,11 +468,14 @@ export class VaFileInput {
 
   connectedCallback() {
     this.el.addEventListener('change', this.handleChange);
+    this.el.addEventListener('drop', this.handleDrop);
   }
 
   disconnectedCallback() {
     this.el.removeEventListener('change', this.handleChange);
+    this.el.removeEventListener('drop', this.handleDrop);
   }
+
   private getDefaultUploadMessage() {
     return (
       <span>
@@ -485,7 +494,7 @@ export class VaFileInput {
       label,
       name,
       required,
-      accept,
+      // accept,
       error,
       hint,
       dragFileString,
@@ -599,11 +608,11 @@ export class VaFileInput {
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
             name={name}
-            accept={accept}
+            // accept={accept}
             aria-describedby={ariaDescribedbyIds}
             onChange={this.handleChange}
           />
-          { !uploadedFile && !file  ? 
+          { !uploadedFile && !file  ?
             <div>
               <span id="file-input-error-alert" role="alert">
                 {displayError && (
@@ -613,11 +622,7 @@ export class VaFileInput {
                   </Fragment>
                 )}
               </span>
-              <div
-                class="usa-sr-only"
-                aria-live="polite"
-                id="statusMessage"
-              ></div>
+
               <div class={fileInputTargetClasses}>
                 <div class="file-input-box"></div>
                 <div class="file-input-instructions">
@@ -632,28 +637,28 @@ export class VaFileInput {
                   {readOnly ? 'Files you uploaded' : 'Selected files'}
                 </div>
               )}
-              <div
-                class="usa-sr-only"
-                aria-live="polite"
-                id="statusMessage"
-              ></div>
               <va-card class="va-card">
                 <div class="file-info-section">
                   {fileThumbnail}
                   <div class="file-info-group vads-u-line-height--2">
                     <span class="file-label">{file ? file.name : uploadedFile.name}</span>
                     {displayError && (
-                      <span id="input-error-message" role="alert">
-                        <span class="usa-sr-only">{i18next.t('error')}</span>
-                        <span aria-live="polite" class="usa-error-message">{displayError}</span>
-                      </span>
+                      <span id="input-error-message" role="alert" class="usa-error-message">{displayError}</span>
+                      // <span id="input-error-message" role="alert">
+                      //   <span class="usa-sr-only">{i18next.t('error')}</span>
+                      //   <span aria-live="polite" class="usa-error-message">{displayError}</span>
+                      // </span>
                     )}
                     {!showProgBar && <span class="file-size-label">
                       {this.formatFileSize(file ? file.size : uploadedFile.size)}
                     </span>}
+
+                    {(showProgBar || statusText) &&
                       <span class={statusClassNames} aria-live="polite">
                         {showProgBar ? 'Uploading...' : statusText}
                       </span>
+                    }
+
                   </div>
                 </div>
                   <div class={this.showSeparator ? 'with-separator' : undefined}>
