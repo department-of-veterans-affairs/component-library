@@ -91,8 +91,8 @@ export class VaAccordionItem {
       headerSrOnly,
     } = this;
 
-    const headlineSlot = this.el.querySelector('[slot="headline"]');
-
+    const headlineSlot = this.el.querySelector(':scope > [slot="headline"]');
+    
     const accordionItemClass = classNames({
       'usa-accordion--bordered': bordered,
     });
