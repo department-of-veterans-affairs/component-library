@@ -4,6 +4,7 @@
 @use 'usa-hint/src/styles/usa-hint';
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-error-message/src/styles/usa-error-message';
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/focusable.css';
@@ -162,10 +163,8 @@
     }
   }
 
-  .separator {
-    border: 0;
+  .with-separator {
     border-top: 1px solid var(--vads-color-base-lighter);
-    margin: 0;
   }
 
   /* copied from Formation
@@ -211,7 +210,7 @@
   padding-left: 1rem;
   position: relative;
 
-  @media screen and (min-width: 1008px) {
+  @media screen and (min-width: $desktop) {
     margin-left: -0.9rem;
   }
 }

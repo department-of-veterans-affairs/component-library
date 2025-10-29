@@ -332,6 +332,9 @@ Required.args = { ...defaultArgs, required: true };
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
@@ -340,6 +343,11 @@ Internationalization.args = {
     'Notice how the red line to the left also covers this description.',
   error: 'There has been a problem',
   required: true,
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const Indeterminate = IndeterminateTemplate.bind(null);

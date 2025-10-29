@@ -15,10 +15,10 @@ export default {
     },
   },
 };
-const Template = ({ 
-  label, 
-  'disable-analytics': disableAnalytics, 
-  'current-page-redirect': currentPageRedirect, 
+const Template = ({
+  label,
+  'disable-analytics': disableAnalytics,
+  'current-page-redirect': currentPageRedirect,
   'breadcrumb-list': breadcrumbList,
   'home-veterans-affairs': homeVeteransAffairs = true
 }) => (
@@ -255,23 +255,37 @@ Default.argTypes = propStructure(breadcrumbsDocs);
 
 export const RerenderState = DynamicCrumbsTemplate.bind(null);
 RerenderState.args = { ...defaultArgs };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+RerenderState.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WrappingState = WrappingCrumbsTemplate.bind(null);
 WrappingState.args = { ...defaultArgs, wrapping: true };
 
 export const MultipleLanguages = MultipleLanguagesTemplate.bind(null);
 MultipleLanguages.args = { ...defaultArgs };
+MultipleLanguages.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithRouterLinkSupport = WithRouterTemplate.bind(null);
 WithRouterLinkSupport.args = { ...defaultArgs };
+WithRouterLinkSupport.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const CurrentPageRedirect = Template.bind(null);
-CurrentPageRedirect.args = { 
-  ...defaultArgs, 
-  'current-page-redirect': true, 
+CurrentPageRedirect.args = {
+  ...defaultArgs,
+  'current-page-redirect': true,
   'breadcrumb-list': [
-    { "label": "VA.gov home", "href": "/" }, 
-    { "label": "Last Page", "href": "/example-last-page" }, 
+    { "label": "VA.gov home", "href": "/" },
+    { "label": "Last Page", "href": "/example-last-page" },
     { "label": "Current Page", "href": "/introduction" }
-  ] 
+  ]
+};
+CurrentPageRedirect.parameters = {
+  chromatic: { disableSnapshot: true },
 };

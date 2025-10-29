@@ -1,3 +1,5 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
 va-breadcrumbs .va-breadcrumbs-li {
   display: inline-block;
   line-height: 1.5;
@@ -16,7 +18,7 @@ va-breadcrumbs .va-breadcrumbs-li:last-child::after {
   content: '';
 }
 
-@media screen and (max-width: 481px) {
+@media screen and (max-width: $small-screen) {
   va-breadcrumbs .va-breadcrumbs-li {
     display: none;
   }

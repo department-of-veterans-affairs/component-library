@@ -54,7 +54,7 @@ export class VaTextInput {
    * Input types we will allow to be specified with the "type" prop.
    */
   /* eslint-disable-next-line i18next/no-literal-string */
-  allowedInputTypes = ['email', 'number', 'search', 'tel', 'text', 'url'];
+  allowedInputTypes = ['email', 'number', 'password', 'search', 'tel', 'text', 'url'];
 
   /**
    * The label for the text input.
@@ -114,7 +114,7 @@ export class VaTextInput {
   /**
    * The type attribute.
    */
-  @Prop() type?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url' =
+  @Prop() type?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' =
     'text';
 
   /**
@@ -246,6 +246,11 @@ export class VaTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * The event emitted when the input value changes
+   */
+  @Event() vaInput: EventEmitter;
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -317,6 +322,10 @@ export class VaTextInput {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
     this.debouncedUpdateScreenReaderCount(this.charCountElement, this.value, getMaxLength(this.maxlength));
+  
+    this.vaInput.emit({
+      value: this.value,
+    });
   }
 
   private handleBlur = (e: Event) => {

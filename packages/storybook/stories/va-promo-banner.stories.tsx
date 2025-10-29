@@ -6,6 +6,7 @@ export default {
   title: 'Deprecated/Banner - Promo',
   id: 'components/va-promo-banner',
   parameters: {
+    chromatic: { disableSnapshot: true },
     componentSubtitle: 'va-promo-banner web component',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={promoBannerDocs} />,

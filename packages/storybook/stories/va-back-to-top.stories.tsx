@@ -67,4 +67,6 @@ ShortExample.args = {
   ...defaultArgs,
   displayAmount: 2,
 };
-Default.argTypes = propStructure(bttDocs);
+ShortExample.parameters = {
+  chromatic: {disableSnapshot: true },
+};

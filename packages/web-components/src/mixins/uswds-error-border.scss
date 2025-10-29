@@ -22,7 +22,7 @@
     }
 }
 
-@media screen and (min-width: 1008px) {
+@media screen and (min-width: $desktop) {
     :host([error]:not([error=''])), :host(.va-form-group--error) {
         margin-left: -0.9rem;
     }
@@ -33,7 +33,7 @@
     }
 }
 
-@media screen and (max-width: 1008px) {
+@media screen and (max-width: ($desktop - 1px)) {
     :host([error]:not([error=''])[use-forms-pattern='multiple']), :host(.va-form-group--error[use-forms-pattern='multiple']) {
         padding-left: 0;
     }
