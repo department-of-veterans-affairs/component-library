@@ -148,12 +148,11 @@ export class VaAlertExpandable {
                 class="alert-expandable__status-icon"
                 icon={statusIcons[status] || 'info'}
                 size={3}
-                sr-text={`${statusLabels[status] || 'Information'} Alert`}
               ></va-icon>
             )}
             <div>
               <span class="alert-expandable-title">
-                <span class="sr-only">Alert:&nbsp;</span>
+                <span class="sr-only">{`${statusLabels[status] || 'Information'} Alert`}&nbsp;</span>
                 {this.trigger}
               </span>
               <va-icon
