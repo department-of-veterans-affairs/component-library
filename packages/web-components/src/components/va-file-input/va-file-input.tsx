@@ -241,8 +241,6 @@ export class VaFileInput {
   }
 
   private handleFile = (file: File, emitChange: boolean = true) => {
-    console.log('handleFile...');
-
     let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
