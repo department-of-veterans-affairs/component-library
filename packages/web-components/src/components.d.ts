@@ -590,6 +590,30 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl": string;
+        /**
+          * Opens the crisis line modal programmatically.
+         */
+        "open": () => Promise<void>;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber": string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber": string;
+        /**
+          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+         */
+        "triggerRef": string;
+        /**
+          * TTY number for the crisis line. Defaults to CONTACTS.CRISIS_TTY.
+         */
+        "ttyNumber": string;
     }
     /**
      * @componentName Critical Action
@@ -4541,6 +4565,26 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl"?: string;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber"?: string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber"?: string;
+        /**
+          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+         */
+        "triggerRef"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to CONTACTS.CRISIS_TTY.
+         */
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action

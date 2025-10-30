@@ -42,6 +42,7 @@ export class VaFileInput {
   @State() internalError?: string;
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
+  @State() showPassword: boolean = false;
 
   // don't generate previews for files bigger than limit because this can lock main thread
   FILE_PREVIEW_SIZE_LIMIT = 1024 * 1024 * 5;
@@ -480,6 +481,10 @@ export class VaFileInput {
     this.vaPasswordChange.emit( {password: e.target.value} );
   }
 
+  private togglePasswordVisibility = () => {
+    this.showPassword = !this.showPassword;
+  };
+
   render() {
     const {
       label,
@@ -668,13 +673,22 @@ export class VaFileInput {
                     {!showProgBar && (
                       <Fragment>
                         {encrypted && (
-                          <va-text-input
-                            type="password"
-                            onInput={(e) =>{this.handlePasswordChange(e)}}
-                            label="File password"
-                            required
-                            error={passwordError}
-                          />
+                          <div class="password-input-wrapper">
+                            <va-text-input
+                              type={this.showPassword ? 'text' : 'password'}
+                              onInput={(e) =>{this.handlePasswordChange(e)}}
+                              label="File password"
+                              required
+                              error={passwordError}
+                            />
+                            <va-button
+                              secondary
+                              onClick={this.togglePasswordVisibility}
+                              label={this.showPassword ? 'Hide password' : 'Show password'}
+                              class="password-toggle-button"
+                              text={this.showPassword ? 'Hide' : 'Show'}
+                            />
+                          </div>
                         )}
                         <div class="additional-info-slot">
                           <slot></slot>
