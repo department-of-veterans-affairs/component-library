@@ -141,7 +141,7 @@ describe('va-file-input', () => {
       '.file-info-group .file-status-label',
     );
     expect(statusTextCont).toEqualText('Uploading...');
-  });
+  })
 
 
   it('emits the vaChange event only once', async () => {
@@ -340,19 +340,18 @@ describe('va-file-input', () => {
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).not.toBeNull();
     const label = await textInput.find(' >>> label');
+    expect(label).not.toBeNull();
     expect(label).toEqualText('File password required')
-    
   });
 
   it('renders error on password input if password-error is set', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted password-error="Encrypted file requires a password."/>`);
 
-    const textInput = await page.find('va-file-input >>> va-text-input');
-    const errorSpan = await textInput.find('>>> span.usa-error-message');
-    expect(errorSpan).not.toBeNull();
-    expect(errorSpan).toEqualText('Encrypted file requires a password.');
+    const inputErrorSpan = await page.find('va-file-input >>> va-text-input >>> span.usa-error-message');
+    expect(inputErrorSpan).not.toBeNull();
+    expect(inputErrorSpan).toEqualText('Encrypted file requires a password.');
   })
-  
+
   it('does not render file password field if encrypted is unset', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`);
 
@@ -382,16 +381,16 @@ describe('va-file-input', () => {
   it('handles placeholder file upload and shows default file icon', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'placeholder.png');
     const host = await page.find('va-file-input');
-    
+
     // Check that the file was uploaded (container should exist)
     const containerSelector = 'va-file-input >>> div.selected-files-wrapper';
     const container = await host.find(containerSelector);
     expect(container).not.toBeNull();
-    
+
     // Check that no image preview is generated (should show default file icon)
     const imagePreview = await host.find('va-file-input >>> .thumbnail-preview');
     expect(imagePreview).toBeNull();
-    
+
     // Check that the default file icon (svg) is displayed
     const defaultIcon = await host.find('va-file-input >>> .thumbnail-container svg');
     expect(defaultIcon).not.toBeNull();
@@ -435,7 +434,7 @@ describe('va-file-input', () => {
     expect(deleteBtn).not.toBeNull();
   });
 
-  it('correctly displays error message for MIME type failure', async () => { 
+  it('correctly displays error message for MIME type failure', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input accept="pdf" />`, '1x1.png');
     const fileInfoCard = await page.find('va-file-input >>> va-card');
 
@@ -467,7 +466,7 @@ describe('va-file-input', () => {
         return {
           errorMessage: errorMsg ? errorMsg.innerHTML : null,
           buttons,
-        };  
+        };
     });
     expect(result.errorMessage).toEqual("We do not accept .png files. Choose a new file.");
     expect(result.buttons[0].innerText).toEqual('CHANGE FILE');
