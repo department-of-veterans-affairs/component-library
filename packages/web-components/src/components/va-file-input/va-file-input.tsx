@@ -40,6 +40,7 @@ export class VaFileInput {
   @State() file?: File;
   @State() fileContents?: string;
   @State() internalError?: string;
+  @State() processStatusMessage: string | null = null;
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
 
@@ -173,8 +174,8 @@ export class VaFileInput {
   componentLibraryAnalytics: EventEmitter;
 
   @Watch('statusText')
-    handleValueChange(value) {
-      //This won't be read if its not in a timeout due to other messages being read.
+    handleValueChange(value: string) {
+      // This won't be read if its not in a timeout due to other messages being read.
       setTimeout(() => {this.updateStatusMessage(value)});
   }
 
@@ -185,7 +186,7 @@ export class VaFileInput {
       }
   }
 
- /**
+  /**
   * If component gets two consecutive errors make sure state resets both times
   */
   @Watch('error')
@@ -208,7 +209,6 @@ export class VaFileInput {
   }
 
   private handleChange = (e: Event) => {
-    console.log('handleChange...');
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0]);
@@ -217,11 +217,8 @@ export class VaFileInput {
   };
 
   private handleDrop = (event: DragEvent) => {
-    console.log('handleDrop...');
     event.preventDefault();
     event.stopPropagation();
-
-    this.el.focus();
 
     const files = event.dataTransfer.files;
     if (files.length > 0) {
@@ -288,8 +285,7 @@ export class VaFileInput {
     if (file.size < this.FILE_PREVIEW_SIZE_LIMIT) {
       this.generateFileContents(this.file);
     }
-    this.updateStatusMessage(`You have selected the file: ${this.file.name}`);
-    this.el.focus();
+    this.processStatusMessage = `You have selected the file: ${this.file.name}`;
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
@@ -311,8 +307,7 @@ export class VaFileInput {
     }
     this.file = null;
     this.uploadedFile = null;
-    this.updateStatusMessage(`File deleted. No file selected.`);
-    // this.el.focus();
+    this.processStatusMessage = `File deleted. No file selected.`;
   };
 
   private openModal = () => {
@@ -326,6 +321,8 @@ export class VaFileInput {
     this.showModal = false;
     // wait a tick for modal to close before setting focus
     setTimeout(() => {
+      // This is the only place in this component where focus should be set programmatically.
+      // We should rely on updating the alert="role" value for all other cases.
       this.fileInputRef.focus();
     }, 0);
   };
@@ -340,7 +337,7 @@ export class VaFileInput {
     // Add delay to encourage screen reader readout
     setTimeout(() => {
       const statusMessageDiv =
-        this.el.shadowRoot.querySelector('#statusMessage');
+        this.el.shadowRoot.querySelector('#status-message');
       statusMessageDiv ? (statusMessageDiv.textContent = message) : '';
     }, 1000);
   }
@@ -485,6 +482,67 @@ export class VaFileInput {
     )
   }
 
+  /**
+   * Renderer for the screen-reader-only status message, which is updated dynamically
+   * to inform users of change of `statusText` prop, upload success, file deletion,
+   * errors or upload progress.
+   * @returns {JSX.Element}
+   */
+  private renderSrOnlyStatusMessage(): JSX.Element {
+    let textContent: string = '';
+
+    // Determine which error message to display (if any). Priority to external error
+    // to give teams using the component to programmatically control the error state.
+    const displayError: string | undefined = this.error || this.internalError;
+
+    const showProgBar: boolean = this.percentUploaded !== null && this.percentUploaded < 100;
+
+    // Give priority to error messages for screen readers
+    if (displayError) {
+      textContent = `${i18next.t('error')}: ${displayError}`;
+    }
+    else if (this.file && showProgBar) {
+      textContent = `Uploading... ${this.percentUploaded}% complete.`;
+    }
+
+    return (
+      <span
+        class="usa-sr-only"
+        aria-live="polite"
+        id="status-message"
+      >
+        {textContent || this.processStatusMessage}
+      </span>
+    )
+  }
+
+  /**
+   * Renderer for the displayed error alert that is hidden from screen readers.
+   *
+   * @param {boolean} noFileUploaded - Denotes if there is not a currently active uploaded file. Used for conditional rendering.
+   * @returns {null | JSX.Element}
+   */
+  private renderErrorAlert(noFileUploaded: boolean = false): null | JSX.Element {
+    // Determine which error message to display (if any). Priority to external error
+    // to give teams using the component to programmatically control the error state.
+    let displayError: string | undefined = this.error || this.internalError;
+
+    // Stop here if no file is uploaded and no error to display, as nothing to show
+    if (noFileUploaded && !displayError) {
+      return null;
+    }
+
+    return (
+      <span
+        id="input-status-message"
+        aria-hidden="true"
+        class='usa-error-message'
+      >
+        {displayError}
+      </span>
+    )
+  }
+
   private handlePasswordChange(e) {
     this.vaPasswordChange.emit( {password: e.target.value} );
   }
@@ -494,7 +552,7 @@ export class VaFileInput {
       label,
       name,
       required,
-      // accept,
+      accept,
       error,
       hint,
       dragFileString,
@@ -575,8 +633,8 @@ export class VaFileInput {
     let selectedFileClassName = headless
       ? 'headless-selected-files-wrapper'
       : 'selected-files-wrapper';
-    const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
 
+    const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
 
     const showProgBar = percentUploaded !== null && percentUploaded < 100;
 
@@ -608,19 +666,17 @@ export class VaFileInput {
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
             name={name}
-            // accept={accept}
+            accept={accept}
             aria-describedby={ariaDescribedbyIds}
             onChange={this.handleChange}
           />
+
+          {this.renderSrOnlyStatusMessage()}
+
           { !uploadedFile && !file  ?
             <div>
-              <span id="file-input-error-alert" role="alert">
-                {displayError && (
-                  <Fragment>
-                    <span class="usa-sr-only">{i18next.t('error')}</span>
-                    <span class="usa-error-message">{displayError}</span>
-                  </Fragment>
-                )}
+              <span id="file-input-error-alert">
+                {this.renderErrorAlert(true)}
               </span>
 
               <div class={fileInputTargetClasses}>
@@ -637,24 +693,21 @@ export class VaFileInput {
                   {readOnly ? 'Files you uploaded' : 'Selected files'}
                 </div>
               )}
+
               <va-card class="va-card">
                 <div class="file-info-section">
                   {fileThumbnail}
                   <div class="file-info-group vads-u-line-height--2">
                     <span class="file-label">{file ? file.name : uploadedFile.name}</span>
-                    {displayError && (
-                      <span id="input-error-message" role="alert" class="usa-error-message">{displayError}</span>
-                      // <span id="input-error-message" role="alert">
-                      //   <span class="usa-sr-only">{i18next.t('error')}</span>
-                      //   <span aria-live="polite" class="usa-error-message">{displayError}</span>
-                      // </span>
-                    )}
+
+                    {this.renderErrorAlert()}
+
                     {!showProgBar && <span class="file-size-label">
                       {this.formatFileSize(file ? file.size : uploadedFile.size)}
                     </span>}
 
                     {(showProgBar || statusText) &&
-                      <span class={statusClassNames} aria-live="polite">
+                      <span class={statusClassNames}>
                         {showProgBar ? 'Uploading...' : statusText}
                       </span>
                     }
