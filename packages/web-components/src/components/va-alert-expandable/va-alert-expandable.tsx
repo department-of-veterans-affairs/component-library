@@ -123,6 +123,14 @@ export class VaAlertExpandable {
       success: 'check_circle',
     };
 
+    const statusLabels = {
+      continue: 'Continue',
+      error: 'Error',
+      warning: 'Warning',
+      info: 'Information',
+      success: 'Success',
+    };
+
     return (
       <Host>
         <div class={alertClasses}>
@@ -140,7 +148,7 @@ export class VaAlertExpandable {
                 class="alert-expandable__status-icon"
                 icon={statusIcons[status] || 'info'}
                 size={3}
-                sr-text={`${status} alert`}
+                sr-text={`${statusLabels[status] || 'Information'} Alert`}
               ></va-icon>
             )}
             <div>

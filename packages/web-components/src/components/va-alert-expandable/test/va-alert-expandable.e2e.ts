@@ -273,7 +273,7 @@ describe('va-alert-expandable', () => {
     const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
     const srText = await statusIcon.getAttribute('sr-text');
 
-    expect(srText).toEqual('warning alert');
+    expect(srText).toEqual('Warning Alert');
   });
 
   it('sets sr-text on status icon for info status', async () => {
@@ -285,7 +285,7 @@ describe('va-alert-expandable', () => {
     const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
     const srText = await statusIcon.getAttribute('sr-text');
 
-    expect(srText).toEqual('info alert');
+    expect(srText).toEqual('Information Alert');
   });
 
   it('sets sr-text on status icon for error status', async () => {
@@ -297,7 +297,7 @@ describe('va-alert-expandable', () => {
     const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
     const srText = await statusIcon.getAttribute('sr-text');
 
-    expect(srText).toEqual('error alert');
+    expect(srText).toEqual('Error Alert');
   });
 
   it('sets sr-text on status icon for success status', async () => {
@@ -309,7 +309,7 @@ describe('va-alert-expandable', () => {
     const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
     const srText = await statusIcon.getAttribute('sr-text');
 
-    expect(srText).toEqual('success alert');
+    expect(srText).toEqual('Success Alert');
   });
 
   it('does not render status icon when iconless is true', async () => {
