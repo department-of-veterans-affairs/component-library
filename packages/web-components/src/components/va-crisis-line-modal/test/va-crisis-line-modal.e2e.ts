@@ -33,7 +33,7 @@ describe('va-crisis-line-modal', () => {
 
     // Check default TTY number
     const ttyElement = (await page.findAll('va-crisis-line-modal >>> va-telephone'))[2];
-    const defaultTtyLink = await ttyElement.shadowRoot.querySelector('a[href="tel:+18007994889"]');
+    const defaultTtyLink = await ttyElement.shadowRoot.querySelector('a[href="tel:711"]');
     expect(defaultTtyLink).toBeTruthy();
   });
 

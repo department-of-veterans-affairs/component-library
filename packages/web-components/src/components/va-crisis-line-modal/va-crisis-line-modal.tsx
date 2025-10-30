@@ -1,5 +1,5 @@
 import { Component, Host, State, h, Element, Listen, Prop, Watch, Method } from '@stencil/core';
-import { CONTACTS } from '../../contacts';
+import { CONTACTS_WITH_EXTENSION } from '../../contacts';
 
 /**
  * @componentName Crisis Line Modal
@@ -21,6 +21,11 @@ export class VACrisisLineModal {
   @Prop() phoneNumber: string = '988';
 
   /**
+   * Phone extension for the crisis line. Defaults to 1.
+   */
+  @Prop() phoneExtension: string = '1';
+
+  /**
    * Text number for the crisis line. Defaults to 838255.
    */
   @Prop() textNumber: string = '838255';
@@ -31,9 +36,14 @@ export class VACrisisLineModal {
   @Prop() chatUrl: string = 'https://www.veteranscrisisline.net/get-help-now/chat/';
 
   /**
-   * TTY number for the crisis line. Defaults to CONTACTS.CRISIS_TTY.
+   * TTY number for the crisis line. Defaults to 711.
    */
-  @Prop() ttyNumber: string = CONTACTS.CRISIS_TTY;
+  @Prop() ttyNumber: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.phoneNumber;
+
+  /**
+   * TTY extension for the crisis line. Defaults to 988.
+   */
+  @Prop() ttyCrisisExtension: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.extension;
 
   /**
    * Selector for an external button that should trigger the modal.
@@ -144,9 +154,11 @@ export class VACrisisLineModal {
   render() {
     const {
       phoneNumber,
+      phoneExtension,
       textNumber,
       chatUrl,
       ttyNumber,
+      ttyCrisisExtension,
       triggerRef
     } = this;
     return (
@@ -189,7 +201,7 @@ export class VACrisisLineModal {
           <ul class="va-crisis-panel-list">
             <li>
               <va-icon class="va-clm__icon" icon="phone" size={3}></va-icon>
-              <span>Call{' '}<strong><va-telephone contact={phoneNumber} /> and select 1</strong></span>
+              <span>Call{' '}<strong><va-telephone contact={phoneNumber} /> and select {phoneExtension}</strong></span>
             </li>
             <li>
               <va-icon
@@ -207,9 +219,10 @@ export class VACrisisLineModal {
             </li>
             <li>
               <va-icon icon="tty" class="va-clm__icon" size={3}></va-icon>
-              <p>Call TTY if you have hearing loss{' '}
+              <p>For TTY, call{' '}
               <strong>
-                <va-telephone tty contact={ttyNumber} />
+                <va-telephone contact={ttyNumber} />
+                {' '}then {ttyCrisisExtension}
               </strong>
               </p>
             </li>

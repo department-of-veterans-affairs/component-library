@@ -599,6 +599,10 @@ export namespace Components {
          */
         "open": () => Promise<void>;
         /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension": string;
+        /**
           * Phone number for the crisis line. Defaults to 988.
          */
         "phoneNumber": string;
@@ -611,7 +615,11 @@ export namespace Components {
          */
         "triggerRef": string;
         /**
-          * TTY number for the crisis line. Defaults to CONTACTS.CRISIS_TTY.
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension": string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
          */
         "ttyNumber": string;
     }
@@ -4570,6 +4578,10 @@ declare namespace LocalJSX {
          */
         "chatUrl"?: string;
         /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension"?: string;
+        /**
           * Phone number for the crisis line. Defaults to 988.
          */
         "phoneNumber"?: string;
@@ -4582,7 +4594,11 @@ declare namespace LocalJSX {
          */
         "triggerRef"?: string;
         /**
-          * TTY number for the crisis line. Defaults to CONTACTS.CRISIS_TTY.
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
          */
         "ttyNumber"?: string;
     }

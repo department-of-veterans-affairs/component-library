@@ -21,7 +21,8 @@ export const contactsMap = Object.freeze({
     description: 'Veterans Crisis hotline',
   },
   CRISIS_TTY: {
-    phoneNumber: '8007994889',
+    phoneNumber: '711',
+    extension: '988',
     description: 'Veterans Crisis hotline TTY',
   },
   DMC: { phoneNumber: '8008270648', description: 'Debt Management Center' },
@@ -102,6 +103,28 @@ export const CONTACTS: { [x: string]: string } = Object.freeze(
     (allContacts, currentContact) => ({
       ...allContacts,
       [currentContact[0]]: currentContact[1].phoneNumber,
+    }),
+    {},
+  ),
+);
+
+// New: full contact info including optional extension
+export interface ContactInfo {
+  phoneNumber: string;
+  extension?: string;
+}
+
+/**
+ * Map of contact objects that include phoneNumber and (if defined) extension.
+ * Use CONTACTS for legacy string-only access or CONTACTS_WITH_EXTENSION for full data.
+ */
+export const CONTACTS_WITH_EXTENSION: { [key: string]: ContactInfo } = Object.freeze(
+  Object.entries(contactsMap).reduce(
+    (all, [key, value]: [string, any]) => ({
+      ...all,
+      [key]: value.extension
+        ? { phoneNumber: value.phoneNumber, extension: value.extension }
+        : { phoneNumber: value.phoneNumber },
     }),
     {},
   ),
