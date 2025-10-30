@@ -18,22 +18,22 @@ export class VACrisisLineModal {
   /**
    * Phone number for the crisis line. Defaults to 988.
    */
-  @Prop() phoneNumber: string;
+  @Prop() phoneNumber: string = '988';
 
   /**
    * Text number for the crisis line. Defaults to 838255.
    */
-  @Prop() textNumber: string;
+  @Prop() textNumber: string = '838255';
 
   /**
    * URL for the chat service. Defaults to Veterans Crisis Line chat.
    */
-  @Prop() chatUrl: string;
+  @Prop() chatUrl: string = 'https://www.veteranscrisisline.net/get-help-now/chat/';
 
   /**
    * TTY number for the crisis line. Defaults to CONTACTS.CRISIS_TTY.
    */
-  @Prop() ttyNumber: string;
+  @Prop() ttyNumber: string = CONTACTS.CRISIS_TTY;
 
   /**
    * Selector for an external button that should trigger the modal.
@@ -141,16 +141,6 @@ export class VACrisisLineModal {
     }
   }
 
-  /* eslint-disable i18next/no-literal-string */
-  private defaultContact = {
-    phone: "988",
-    text: "838255",
-    chatUrl: "https://www.veteranscrisisline.net/get-help-now/chat/",
-    tty: CONTACTS.CRISIS_TTY,
-  }
-  /* eslint-enable i18next/no-literal-string */
-
-
   render() {
     const {
       phoneNumber,
@@ -199,7 +189,7 @@ export class VACrisisLineModal {
           <ul class="va-crisis-panel-list">
             <li>
               <va-icon class="va-clm__icon" icon="phone" size={3}></va-icon>
-              <span>Call{' '}<strong><va-telephone contact={phoneNumber || this.defaultContact.phone} /> and select 1</strong></span>
+              <span>Call{' '}<strong><va-telephone contact={phoneNumber} /> and select 1</strong></span>
             </li>
             <li>
               <va-icon
@@ -207,11 +197,11 @@ export class VACrisisLineModal {
                 class="va-clm__icon"
                 size={3}
               ></va-icon>
-              <span>Text&nbsp;<strong><va-telephone sms contact={textNumber || this.defaultContact.text} /></strong></span>
+              <span>Text&nbsp;<strong><va-telephone sms contact={textNumber} /></strong></span>
             </li>
             <li>
               <va-icon icon="chat" class="va-clm__icon" size={3}></va-icon>
-              <a class="no-external-icon" href={chatUrl || this.defaultContact.chatUrl}>
+              <a class="no-external-icon" href={chatUrl}>
                 Start a confidential chat
               </a>
             </li>
@@ -219,7 +209,7 @@ export class VACrisisLineModal {
               <va-icon icon="tty" class="va-clm__icon" size={3}></va-icon>
               <p>Call TTY if you have hearing loss{' '}
               <strong>
-                <va-telephone tty contact={ttyNumber || this.defaultContact.tty} />
+                <va-telephone tty contact={ttyNumber} />
               </strong>
               </p>
             </li>
