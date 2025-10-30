@@ -128,7 +128,7 @@ describe('va-crisis-line-modal', () => {
 
     const modal = await page.find('va-crisis-line-modal');
 
-    // Check custom phone number (988)
+    // Check custom phone number (555-111-2222)
     const phoneElement = await modal.find('>>> va-telephone');
     const customPhoneLink = await phoneElement.shadowRoot.querySelector('a[href="tel:+15551112222"]');
     expect(customPhoneLink).toBeTruthy();
