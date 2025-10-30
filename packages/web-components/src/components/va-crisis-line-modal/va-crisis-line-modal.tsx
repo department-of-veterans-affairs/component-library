@@ -221,7 +221,7 @@ export class VACrisisLineModal {
               <strong>
                 <va-telephone tty contact={ttyNumber || this.defaultContact.tty} />
               </strong>
-          </p>
+              </p>
             </li>
           </ul>
           <p>
