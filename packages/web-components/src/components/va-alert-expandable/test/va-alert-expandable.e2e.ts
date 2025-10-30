@@ -263,4 +263,63 @@ describe('va-alert-expandable', () => {
 
     expect(true).toBe(true); // If no error, the test passes
   });
+
+  it('sets sr-text on status icon for warning status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="warning" trigger="Limited services and hours"></va-alert-expandable>',
+    );
+
+    const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
+    const srText = await statusIcon.getAttribute('sr-text');
+
+    expect(srText).toEqual('warning alert');
+  });
+
+  it('sets sr-text on status icon for info status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="info" trigger="Information"></va-alert-expandable>',
+    );
+
+    const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
+    const srText = await statusIcon.getAttribute('sr-text');
+
+    expect(srText).toEqual('info alert');
+  });
+
+  it('sets sr-text on status icon for error status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="error" trigger="Error message"></va-alert-expandable>',
+    );
+
+    const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
+    const srText = await statusIcon.getAttribute('sr-text');
+
+    expect(srText).toEqual('error alert');
+  });
+
+  it('sets sr-text on status icon for success status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="success" trigger="Success message"></va-alert-expandable>',
+    );
+
+    const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
+    const srText = await statusIcon.getAttribute('sr-text');
+
+    expect(srText).toEqual('success alert');
+  });
+
+  it('does not render status icon when iconless is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="warning" trigger="Limited services" iconless></va-alert-expandable>',
+    );
+
+    const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
+
+    expect(statusIcon).toBeNull();
+  });
 });

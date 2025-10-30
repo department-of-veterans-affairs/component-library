@@ -140,6 +140,7 @@ export class VaAlertExpandable {
                 class="alert-expandable__status-icon"
                 icon={statusIcons[status] || 'info'}
                 size={3}
+                sr-text={`${status} alert`}
               ></va-icon>
             )}
             <div>
