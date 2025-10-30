@@ -1,6 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-import { axeCheck } from '../../testing/test-helpers';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-accordion', () => {
   it('renders', async () => {

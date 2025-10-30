@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-import { axeCheck } from '../../testing/test-helpers';
+import { axeCheck } from '../../../testing/test-helpers';
 
 // **NOTE** Duplicate tests written to handle scenario of both Props and Slot Usage of Component
 describe('va-accordion-item', () => {
@@ -54,6 +54,29 @@ describe('va-accordion-item', () => {
     let header = element.shadowRoot.childNodes[0].childNodes[0];
 
     expect(header.nodeName).toEqual('H6');
+  });
+
+  it('only selects direct children with slot="headline" attribute', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion-item header="The header" level="2">
+        <va-alert>
+          <h4 slot="headline">Nested Header</h4>
+          Content with nested headline slot
+        </va-alert>
+        Some accordion content
+      </va-accordion-item>
+    `);
+
+    const element = await page.find('va-accordion-item');
+    const header = element.shadowRoot.childNodes[0].childNodes[0];
+    
+    // Should use the direct child h3, not the nested h4
+    expect(header.nodeName).toEqual('H2');
+    
+    // The header text should be from the direct child only
+    const headerSpan = await page.find('va-accordion-item >>> .va-accordion__header');
+    expect(headerSpan.textContent.trim()).toEqual('The header');
   });
 
   it('passes an axe check when open', async () => {
