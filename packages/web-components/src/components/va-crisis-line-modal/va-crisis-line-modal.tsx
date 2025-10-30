@@ -213,7 +213,7 @@ export class VACrisisLineModal {
               <va-icon icon="chat" class="va-clm__icon" size={3}></va-icon>
               <a class="no-external-icon" href={chatUrl || this.defaultContact.chatUrl}>
                 Start a confidential chat
-            </a>
+              </a>
             </li>
             <li>
               <va-icon icon="tty" class="va-clm__icon" size={3}></va-icon>
