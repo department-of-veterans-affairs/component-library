@@ -18,7 +18,7 @@ describe('va-alert-expandable', () => {
             <va-icon class="alert-expandable__status-icon hydrated"></va-icon>
             <div>
               <span class="alert-expandable-title">
-                <span class="sr-only">Warning Alert&nbsp;</span>
+                <span class="usa-sr-only">Warning Alert&nbsp;</span>
                 Limited services and hours
               </span>
               <va-icon class="alert-expandable-icon hydrated"></va-icon>
@@ -281,7 +281,7 @@ describe('va-alert-expandable', () => {
       '<va-alert-expandable status="warning" trigger="Limited services"></va-alert-expandable>',
     );
 
-    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .sr-only');
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
     const text = await srText.innerText;
 
     expect(text).toContain('Warning Alert');
@@ -293,7 +293,7 @@ describe('va-alert-expandable', () => {
       '<va-alert-expandable status="info" trigger="Information"></va-alert-expandable>',
     );
 
-    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .sr-only');
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
     const text = await srText.innerText;
 
     expect(text).toContain('Information Alert');
@@ -305,7 +305,7 @@ describe('va-alert-expandable', () => {
       '<va-alert-expandable status="error" trigger="Error message"></va-alert-expandable>',
     );
 
-    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .sr-only');
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
     const text = await srText.innerText;
 
     expect(text).toContain('Error Alert');
@@ -317,7 +317,7 @@ describe('va-alert-expandable', () => {
       '<va-alert-expandable status="success" trigger="Success message"></va-alert-expandable>',
     );
 
-    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .sr-only');
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
     const text = await srText.innerText;
 
     expect(text).toContain('Success Alert');
@@ -329,7 +329,7 @@ describe('va-alert-expandable', () => {
       '<va-alert-expandable status="continue" trigger="Continue message"></va-alert-expandable>',
     );
 
-    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .sr-only');
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
     const text = await srText.innerText;
 
     expect(text).toContain('Continue Alert');
