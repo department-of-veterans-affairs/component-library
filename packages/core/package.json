@@ -19,10 +19,7 @@
     "@department-of-veterans-affairs/web-components": "workspace:*",
     "i18next": "^21.6.14",
     "i18next-browser-languagedetector": "^6.1.4",
-    "react-focus-on": "^3.5.1",
-    "react-transition-group": "^1.0.0",
-    "verdaccio": "^5.5.0",
-    "yarn": "^1.22.22"
+    "react-focus-on": "^3.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
