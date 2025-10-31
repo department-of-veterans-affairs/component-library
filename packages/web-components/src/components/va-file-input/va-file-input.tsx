@@ -320,7 +320,8 @@ export class VaFileInput {
     // wait a tick for modal to close before setting focus
     setTimeout(() => {
       // This is the only place in this component where focus should be set programmatically.
-      // We should rely on updating the alert="role" value for all other cases.
+      // We should rely on updating the value of `#status-message` (with aria-live="polite")
+      // for all other cases.
       this.fileInputRef.focus();
     }, 0);
   };
@@ -534,7 +535,7 @@ export class VaFileInput {
       <span
         id="input-status-message"
         aria-hidden="true"
-        class='usa-error-message'
+        class="usa-error-message"
       >
         {displayError}
       </span>
