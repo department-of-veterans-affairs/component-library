@@ -212,6 +212,24 @@ export class VaFileInputMultiple {
   }
 
   /**
+   * Ensures there is always an empty placeholder file input (unless readOnly).
+   * This prevents loss of the add-another-file field when a validation-failed
+   * empty file input is removed.
+   */
+  public ensurePlaceholder() {
+    if (this.readOnly) return;
+    const hasPlaceholder = this.files.some(f => f.file === null);
+    if (!hasPlaceholder) {
+      this.fileKeyCounter++;
+      this.files.push({
+        file: null,
+        key: this.fileKeyCounter,
+        content: null,
+      });
+    }
+  }
+
+  /**
    * Handles file input changes by updating, adding, or removing files based on user interaction.
    * @param {any} event - The event object containing file details.
    * @param {number} fileKey - The key of the file being changed.
@@ -244,10 +262,12 @@ export class VaFileInputMultiple {
       }
       filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
     } else {
-      // Deleted file
+      // Deleted file (could be a failed validation empty placeholder)
       action = 'FILE_REMOVED';
       actionFile = this.files[pageIndex].file;
       this.files.splice(pageIndex, 1);
+      // Ensure we still have a placeholder to allow adding another file
+      this.ensurePlaceholder();
       const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
       // empty status message so it is read when updated
       statusMessageDiv.textContent = ""

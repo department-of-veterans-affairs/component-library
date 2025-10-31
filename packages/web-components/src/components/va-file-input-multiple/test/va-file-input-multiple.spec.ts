@@ -112,4 +112,31 @@ describe('checking buildFilesArray output', ()=> {
     }];
     expect(filesArray).toEqual(expectedOutput);
   });
+
+  it('adds a placeholder when none exists and not readOnly', () => {
+    const component = new VaFileInputMultiple();
+    component['files'] = [{ key: 0, file: ({ name: 'a', size: 1, type: 'text/plain' } as unknown as File), content: null }];
+    const beforeLen = component['files'].length;
+    component.ensurePlaceholder();
+    expect(component['files'].length).toBe(beforeLen + 1);
+    expect(component['files'].some(f => f.file === null)).toBe(true);
+  });
+
+  it('does not add a placeholder when readOnly', () => {
+    const component = new VaFileInputMultiple();
+    component.readOnly = true;
+    component['files'] = [{ key: 0, file: ({ name: 'a', size: 1, type: 'text/plain' } as unknown as File), content: null }];
+    const beforeLen = component['files'].length;
+    component.ensurePlaceholder();
+    expect(component['files'].length).toBe(beforeLen);
+  });
+
+  it('does not add a second placeholder if one already exists', () => {
+    const component = new VaFileInputMultiple();
+    component['files'] = [{ key: 0, file: null, content: null }];
+    const beforeLen = component['files'].length;
+    component.ensurePlaceholder();
+    expect(component['files'].length).toBe(beforeLen);
+  });
 });
+
