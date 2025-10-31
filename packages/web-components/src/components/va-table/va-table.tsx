@@ -75,6 +75,11 @@ export class VaTable {
    */
   @Prop() monoFontCols?: string;
 
+  /**
+  * Text to display in empty cells. Needed for screen readers to announce empty cells.
+  */
+  @Prop() emptyCellText?: string = 'Not available';
+
   // The number of va-table-rows
   @State() rows: number;
 
@@ -132,12 +137,27 @@ export class VaTable {
     this.cells = cells;
   }
 
+   /**
+   * Check for empty cells and add text if needed
+   */
+  checkForEmptyCells() {
+    this.cells.map(cell => {
+      if(cell.innerHTML.trim() === '' && cell.innerText.trim() === '') {
+        cell.innerText = this.emptyCellText;
+        cell.innerHTML = this.emptyCellText;
+        return cell;
+      }
+      return cell;
+    });
+  }
+
   /**
    * Generate a DocumentFragment that holds the cells
    * to be slotted into a va-table-inner component
    */
   makeFragment(): DocumentFragment {
     const frag = document.createDocumentFragment();
+    this.checkForEmptyCells();
     this.cells.forEach(cell => {
       this.sortable ? frag.appendChild(cell.cloneNode(true)) : frag.appendChild(cell);
     });

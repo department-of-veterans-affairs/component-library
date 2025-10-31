@@ -51,6 +51,7 @@ const Template = args => {
     'full-width': fullWidth,
     'right-align-cols': rightAlignCols,
     'mono-font-cols': monoFontCols,
+    'empty-cell-text': emptyCellText,
   } = args;
 
   return (
@@ -64,6 +65,7 @@ const Template = args => {
       full-width={fullWidth}
       right-align-cols={rightAlignCols}
       mono-font-cols={monoFontCols}
+      empty-cell-text={emptyCellText}
     >
       <va-table-row>
         {columns.map((col, i) => (
@@ -460,6 +462,22 @@ WithMissingData.args = {
     ],
   ],
   'columns': defaultColumns,
+  'empty-cell-text': 'Not available',
+};
+
+export const WithMissingDataCustomText = Template.bind(null);
+WithMissingDataCustomText.args = {
+  'table-title': 'This table has empty cells with custom empty cell text',
+  'rows': [
+    ['A document', '', ''],
+    [
+      'Bill of Rights',
+      'The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms',
+      '1791',
+    ],
+  ],
+  'columns': defaultColumns,
+  'empty-cell-text': 'N/A',
 };
 
 export const Sortable = Template.bind(null);
