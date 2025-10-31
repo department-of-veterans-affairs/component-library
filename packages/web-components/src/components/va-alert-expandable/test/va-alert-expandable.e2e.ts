@@ -18,7 +18,7 @@ describe('va-alert-expandable', () => {
             <va-icon class="alert-expandable__status-icon hydrated"></va-icon>
             <div>
               <span class="alert-expandable-title">
-                <span class="sr-only">Alert:&nbsp;</span>
+                <span class="usa-sr-only">Warning Alert&nbsp;</span>
                 Limited services and hours
               </span>
               <va-icon class="alert-expandable-icon hydrated"></va-icon>
@@ -262,5 +262,76 @@ describe('va-alert-expandable', () => {
     await page.evaluate(() => window.dispatchEvent(new Event('resize')));
 
     expect(true).toBe(true); // If no error, the test passes
+  });
+
+  it('does not render status icon when iconless is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="warning" trigger="Limited services" iconless></va-alert-expandable>',
+    );
+
+    const statusIcon = await page.find('va-alert-expandable >>> .alert-expandable__status-icon');
+
+    expect(statusIcon).toBeNull();
+  });
+
+  it('announces "Warning Alert" for warning status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="warning" trigger="Limited services"></va-alert-expandable>',
+    );
+
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
+    const text = await srText.innerText;
+
+    expect(text).toContain('Warning Alert');
+  });
+
+  it('announces "Information Alert" for info status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="info" trigger="Information"></va-alert-expandable>',
+    );
+
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
+    const text = await srText.innerText;
+
+    expect(text).toContain('Information Alert');
+  });
+
+  it('announces "Error Alert" for error status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="error" trigger="Error message"></va-alert-expandable>',
+    );
+
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
+    const text = await srText.innerText;
+
+    expect(text).toContain('Error Alert');
+  });
+
+  it('announces "Success Alert" for success status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="success" trigger="Success message"></va-alert-expandable>',
+    );
+
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
+    const text = await srText.innerText;
+
+    expect(text).toContain('Success Alert');
+  });
+
+  it('announces "Continue Alert" for continue status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert-expandable status="continue" trigger="Continue message"></va-alert-expandable>',
+    );
+
+    const srText = await page.find('va-alert-expandable >>> .alert-expandable-title .usa-sr-only');
+    const text = await srText.innerText;
+
+    expect(text).toContain('Continue Alert');
   });
 });

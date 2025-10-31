@@ -20,7 +20,7 @@ export default {
 
 const defaultArgs = {
   'status': 'info',
-  'trigger': 'Alert Headline',
+  'trigger': 'Example Headline',
   'iconless': false,
   'disable-analytics': false,
 };

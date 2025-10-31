@@ -19,7 +19,7 @@ import classnames from 'classnames';
  */
 @Component({
   tag: 'va-alert-expandable',
-  styleUrl: 'va-alert-expandable.css',
+  styleUrl: 'va-alert-expandable.scss',
   shadow: true,
 })
 export class VaAlertExpandable {
@@ -123,6 +123,14 @@ export class VaAlertExpandable {
       success: 'check_circle',
     };
 
+    const statusLabels = {
+      continue: 'Continue',
+      error: 'Error',
+      warning: 'Warning',
+      info: 'Information',
+      success: 'Success',
+    };
+
     return (
       <Host>
         <div class={alertClasses}>
@@ -144,7 +152,7 @@ export class VaAlertExpandable {
             )}
             <div>
               <span class="alert-expandable-title">
-                <span class="sr-only">Alert:&nbsp;</span>
+                <span class="usa-sr-only">{`${statusLabels[status] || 'Information'} Alert`}&nbsp;</span>
                 {this.trigger}
               </span>
               <va-icon
