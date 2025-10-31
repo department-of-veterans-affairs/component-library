@@ -141,7 +141,7 @@ describe('va-file-input', () => {
       '.file-info-group .file-status-label',
     );
     expect(statusTextCont).toEqualText('Uploading...');
-  })
+  });
 
 
   it('emits the vaChange event only once', async () => {
