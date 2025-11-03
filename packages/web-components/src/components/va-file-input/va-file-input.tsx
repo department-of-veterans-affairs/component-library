@@ -693,6 +693,9 @@ export class VaFileInput {
 
           <span
             class="usa-sr-only"
+            // TODO: (Remove this note) - Switched to using role="alert" due to
+            // inconsistent behavior across browsers when this was using
+            // aria-live="polite"
             aria-atomic="true"
             role="alert"
             id="status-message"
