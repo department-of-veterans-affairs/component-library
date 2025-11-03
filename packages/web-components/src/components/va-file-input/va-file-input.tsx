@@ -35,9 +35,20 @@ export class VaFileInput {
   private fileType?: string;
   private chooseFileString: string ='choose from folder';
   private dragFileString: string = 'Drag a file here or ';
+  private delayedStatusMessageValue: string | null = null;
 
   @Element() el: HTMLElement;
+
   @State() file?: File;
+  @Watch('file')
+  watchFile(newFile: File | undefined) {
+    if (newFile) {
+      const showProgBar: boolean = this.percentUploaded !== null && this.percentUploaded < 100;
+      if (showProgBar) {
+        this.updateStatusMessage(`Uploading... ${this.percentUploaded}% complete.`);
+      }
+    }
+  }
   @State() fileContents?: string;
   @State() internalError?: string;
   @State() processStatusMessage: string | null = null;
@@ -220,11 +231,25 @@ export class VaFileInput {
     event.preventDefault();
     event.stopPropagation();
 
+    const hasFocusOnDrop = document.hasFocus();
+    console.log('Document object has focus on drop? ', hasFocusOnDrop);
+
     const files = event.dataTransfer.files;
     if (files.length > 0) {
-      this.handleFile(files[0]);
+      this.handleFile(files[0], true, !hasFocusOnDrop);
     }
   };
+
+  private handleWindowFocus = () => {
+    console.log('Window received focus event. Does document have focus? ', document.hasFocus());
+
+    // When the window regains focus, then update the status message to trigger screen reader readout
+    if (this.delayedStatusMessageValue) {
+      console.log('Updating with delayed status message...')
+      this.updateStatusMessage(this.delayedStatusMessageValue);
+      this.delayedStatusMessageValue = null;
+    }
+  }
 
   // get the extension from the file name if possible, else fallback on the mime type
   private getExtension = (file: File) => {
@@ -240,7 +265,7 @@ export class VaFileInput {
     return `We do not accept ${fileWarning}. Choose a new file.`;
   }
 
-  private handleFile = (file: File, emitChange: boolean = true) => {
+  private handleFile = (file: File, emitChange: boolean = true, deferStatusMessageUpdate: boolean = false) => {
     let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
@@ -269,6 +294,19 @@ export class VaFileInput {
 
     if (fileError) {
       this.internalError = fileError;
+
+      // Either store the error status message for when window regains focus or
+      // update it now.
+      if (deferStatusMessageUpdate) {
+        console.log('storing delayed error message for later readout');
+        this.delayedStatusMessageValue = `${i18next.t('error')}: ${fileError}`;
+      } else {
+        console.log('updating error message now for immediate readout');
+        this.updateStatusMessage(`${i18next.t('error')}: ${fileError}`);
+      }
+
+      console.log(' ');
+
       this.vaFileInputError.emit({ error: fileError });
       this.resetState();
       return;
@@ -283,7 +321,19 @@ export class VaFileInput {
     if (file.size < this.FILE_PREVIEW_SIZE_LIMIT) {
       this.generateFileContents(this.file);
     }
-    this.processStatusMessage = `You have selected the file: ${this.file.name}`;
+
+    const successMessage = `You have selected the file: ${this.file.name}`;
+
+    // Either store the success status message for when window regains focus or
+    // update it now.
+    if (deferStatusMessageUpdate) {
+      this.delayedStatusMessageValue = successMessage;
+      console.log('storing delayed success message for later readout');
+    } else {
+      this.updateStatusMessage(successMessage);
+      console.log('updating success message now for immediate readout');
+    }
+    console.log(' ');
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
@@ -305,7 +355,7 @@ export class VaFileInput {
     }
     this.file = null;
     this.uploadedFile = null;
-    this.processStatusMessage = `File deleted. No file selected.`;
+    this.updateStatusMessage(`File deleted. No file selected.`);
   };
 
   private openModal = () => {
@@ -327,6 +377,9 @@ export class VaFileInput {
   };
 
   private changeFile = () => {
+    // Reset status message to ensure that screen readers read out the new status
+    // including if the same file is re-selected, same error occurs, etc.
+    this.updateStatusMessage(null);
     if (this.fileInputRef) {
       this.fileInputRef.click();
     }
@@ -463,11 +516,13 @@ export class VaFileInput {
   }
 
   connectedCallback() {
+    window.addEventListener('focus', this.handleWindowFocus);
     this.el.addEventListener('change', this.handleChange);
     this.el.addEventListener('drop', this.handleDrop);
   }
 
   disconnectedCallback() {
+    window.removeEventListener('focus', this.handleWindowFocus);
     this.el.removeEventListener('change', this.handleChange);
     this.el.removeEventListener('drop', this.handleDrop);
   }
@@ -477,40 +532,6 @@ export class VaFileInput {
       <span>
         {this.dragFileString}
         <span class="file-input-choose-text">{this.chooseFileString}</span>
-      </span>
-    )
-  }
-
-  /**
-   * Renderer for the screen-reader-only status message, which is updated dynamically
-   * to inform users of change of `statusText` prop, upload success, file deletion,
-   * errors or upload progress.
-   * @returns {JSX.Element}
-   */
-  private renderSrOnlyStatusMessage(): JSX.Element {
-    let textContent: string = '';
-
-    // Determine which error message to display (if any). Priority to external error
-    // to give teams using the component to programmatically control the error state.
-    const displayError: string | undefined = this.error || this.internalError;
-
-    const showProgBar: boolean = this.percentUploaded !== null && this.percentUploaded < 100;
-
-    // Give priority to error messages for screen readers
-    if (displayError) {
-      textContent = `${i18next.t('error')}: ${displayError}`;
-    }
-    else if (this.file && showProgBar) {
-      textContent = `Uploading... ${this.percentUploaded}% complete.`;
-    }
-
-    return (
-      <span
-        class="usa-sr-only"
-        aria-live="polite"
-        id="status-message"
-      >
-        {textContent || this.processStatusMessage}
       </span>
     )
   }
@@ -670,7 +691,13 @@ export class VaFileInput {
             onChange={this.handleChange}
           />
 
-          {this.renderSrOnlyStatusMessage()}
+          <span
+            class="usa-sr-only"
+            aria-atomic="true"
+            role="alert"
+            id="status-message"
+          >
+          </span>
 
           { !uploadedFile && !file  ?
             <div>
