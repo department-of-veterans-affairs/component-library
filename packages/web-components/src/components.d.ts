@@ -721,10 +721,6 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
-        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -806,10 +802,6 @@ export namespace Components {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
-        /**
-          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-         */
-        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
@@ -1098,6 +1090,10 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
         /**
           * The content of the heading if `useFormsPattern`.
          */
@@ -1680,6 +1676,10 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Whether or not to show the (*Required) text.
          */
         "hideRequiredText"?: boolean;
@@ -1695,6 +1695,10 @@ export namespace Components {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */
@@ -4700,10 +4704,6 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
-        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -4789,10 +4789,6 @@ declare namespace LocalJSX {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
-        /**
-          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-         */
-        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
@@ -5109,6 +5105,10 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
         /**
           * The content of the heading if `useFormsPattern`.
          */
@@ -5795,6 +5795,10 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Whether or not to show the (*Required) text.
          */
         "hideRequiredText"?: boolean;
@@ -5810,6 +5814,10 @@ declare namespace LocalJSX {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */

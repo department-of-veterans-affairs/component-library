@@ -1,16 +1,13 @@
 @forward 'settings';
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @import '../../mixins/focusable.css';
-
-$red-70v: #8b0a03;
-
-$small-desktop-screen: 1008px;
 
 .va-crisis-line-container {
   position: relative;
   margin: auto;
   background-color: var(--vads-color-secondary-dark);
 
-  @media(min-width: $small-desktop-screen) {
+  @media(min-width: $desktop) {
     max-width: 60.938rem;
     background-color: transparent;
   }
@@ -44,15 +41,15 @@ button.va-crisis-line {
   }
 
   &:hover, &:active {
-    background-color: $red-70v;
+    background-color: $vads-color-secondary-darkest;
     .va-crisis-line-icon {
-      @media(min-width: $small-desktop-screen) {
+      @media(min-width: $desktop) {
         background-color: #b51d09;
       }
     }
   }
 
-  @media(min-width: $small-desktop-screen) {
+  @media(min-width: $desktop) {
     width: auto;
     border-radius: 0 0 2.3px 2.3px;
     box-shadow: 0 2px 5px var(--vads-color-base);
@@ -66,7 +63,7 @@ button.va-crisis-line {
   margin: auto;
 
 
-  @media(min-width: $small-desktop-screen) {
+  @media(min-width: $desktop) {
     text-align: left;
     justify-content: space-between;
   }
@@ -85,11 +82,11 @@ button.va-crisis-line {
   transition-timing-function: ease-in-out;
   transition-property: background-color;
 
-  @media (max-width: 480px) {
+  @media (max-width: $mobile-lg) {
     display: none;
   }
 
-  @media(min-width: $small-desktop-screen) {
+  @media(min-width: $desktop) {
     border-bottom-left-radius: 3.2px;
   }
 }
