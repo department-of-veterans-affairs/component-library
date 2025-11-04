@@ -140,8 +140,8 @@
   .file-size-label, .file-status-label {
     color: var(--vads-color-base-dark);
     font-weight: var(--font-weight-normal);
-    font-size: 1.06rem;
-    line-height: 1;
+    font-size: var(--vads-font-size-source-sans-normalized);
+    line-height: var(--vads-font-line-height-1);
     display: block;
   }
 
