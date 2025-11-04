@@ -38,12 +38,12 @@ export class VACrisisLineModal {
   /**
    * TTY number for the crisis line. Defaults to 711.
    */
-  @Prop() ttyNumber: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.phoneNumber;
+  @Prop() ttyNumber: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.phoneNumber || '711';
 
   /**
    * TTY extension for the crisis line. Defaults to 988.
    */
-  @Prop() ttyCrisisExtension: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.extension;
+  @Prop() ttyCrisisExtension: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.extension || '988';
 
   /**
    * Selector for an external button that should trigger the modal.
@@ -201,7 +201,7 @@ export class VACrisisLineModal {
           <ul class="va-crisis-panel-list">
             <li>
               <va-icon class="va-clm__icon" icon="phone" size={3}></va-icon>
-              <span>Call{' '}<strong><va-telephone contact={phoneNumber} /> and select {phoneExtension}</strong></span>
+              <span>Call{' '}<strong><va-telephone contact={phoneNumber} />{phoneExtension ? ` and select ${phoneExtension}` : null}</strong></span>
             </li>
             <li>
               <va-icon
@@ -222,7 +222,7 @@ export class VACrisisLineModal {
               <p>For TTY, call{' '}
               <strong>
                 <va-telephone contact={ttyNumber} />
-                {' '}then {ttyCrisisExtension}
+                {ttyCrisisExtension ? ` then ${ttyCrisisExtension}` : null}
               </strong>
               </p>
             </li>

@@ -1,5 +1,4 @@
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { VaCrisisLineModal } from '@department-of-veterans-affairs/web-components/react-bindings';
 const crisisLineModalDocs = getWebComponentDocs('va-crisis-line-modal');
 
 export default {
@@ -8,45 +7,49 @@ export default {
   parameters: {
     componentSubtitle: 'va-crisis-line-modal web component',
     docs: {
-      page: () => (
-        <StoryDocs storyDefault={Default} data={crisisLineModalDocs} />
-      ),
+      page: () => <StoryDocs storyDefault={Default} data={crisisLineModalDocs} />,
     },
   },
 };
 
 const defaultArgs = {
-  phoneNumber: undefined,
-  textNumber: undefined,
-  chatUrl: undefined,
-  ttyNumber: undefined,
-  // Added for external trigger story
-  triggerRef: undefined,
+  'phone-number': undefined,
+  'phone-extension': undefined,
+  'text-number': undefined,
+  'chat-url': undefined,
+  'tty-number': '711',
+  'tty-crisis-extension': '988',
+  'trigger-ref': undefined,
 };
 
 const Template = ({
-  phoneNumber,
-  textNumber,
-  chatUrl,
-  ttyNumber,
+  'phone-number': phoneNumber,
+  'phone-extension': phoneExtension,
+  'text-number': textNumber,
+  'chat-url': chatUrl,
+  'tty-number': ttyNumber,
+  'tty-crisis-extension': ttyCrisisExtension,
 }) => {
   return (
-    <VaCrisisLineModal
-      phoneNumber={phoneNumber}
-      textNumber={textNumber}
-      chatUrl={chatUrl}
-      ttyNumber={ttyNumber}
+    <va-crisis-line-modal
+      phone-number={phoneNumber}
+      phone-extension={phoneExtension}
+      text-number={textNumber}
+      chat-url={chatUrl}
+      tty-number={ttyNumber}
+      tty-crisis-extension={ttyCrisisExtension}
     />
   );
 };
 
-// External trigger template
 const ExternalTriggerTemplate = ({
-  phoneNumber,
-  textNumber,
-  chatUrl,
-  ttyNumber,
-  triggerRef,
+  'phone-number': phoneNumber,
+  'phone-extension': phoneExtension,
+  'text-number': textNumber,
+  'chat-url': chatUrl,
+  'tty-number': ttyNumber,
+  'tty-crisis-extension': ttyCrisisExtension,
+  'trigger-ref': triggerRef,
 }) => {
   const resolvedTrigger = triggerRef || '#external-clm-trigger';
   return (
@@ -54,46 +57,77 @@ const ExternalTriggerTemplate = ({
       <button id="external-clm-trigger" type="button">
         Open Crisis Line Modal
       </button>
-      <VaCrisisLineModal
-        triggerRef={resolvedTrigger}
-        phoneNumber={phoneNumber}
-        textNumber={textNumber}
-        chatUrl={chatUrl}
-        ttyNumber={ttyNumber}
+      <va-crisis-line-modal
+        trigger-ref={resolvedTrigger}
+        phone-number={phoneNumber}
+        phone-extension={phoneExtension}
+        text-number={textNumber}
+        chat-url={chatUrl}
+        tty-number={ttyNumber}
+        tty-crisis-extension={ttyCrisisExtension}
       />
     </div>
   );
 };
 
+const baseArgTypes = propStructure(crisisLineModalDocs);
+const overrideArgTypes = {
+  ...baseArgTypes,
+  'tty-number': {
+    ...baseArgTypes['tty-number'],
+    table: {
+      ...baseArgTypes['tty-number']?.table,
+      defaultValue: { summary: '711' },
+    },
+  },
+  'tty-crisis-extension': {
+    ...baseArgTypes['tty-crisis-extension'],
+    table: {
+      ...baseArgTypes['tty-crisis-extension']?.table,
+      defaultValue: { summary: '988' },
+    },
+  },
+  'trigger-ref': {
+    control: 'text',
+    description:
+      'CSS selector or HTMLElement reference of an external trigger element that opens the modal.',
+    table: { category: 'accessibility' },
+  },
+};
+
 export const Default = Template.bind(null);
-Default.argTypes = propStructure(crisisLineModalDocs);
+Default.argTypes = overrideArgTypes;
 Default.args = { ...defaultArgs };
 
 export const CustomContacts = Template.bind(null);
-CustomContacts.argTypes = propStructure(crisisLineModalDocs);
+CustomContacts.argTypes = overrideArgTypes;
 CustomContacts.args = {
-  phoneNumber: '123-456-7890',
-  textNumber: '98765',
-  chatUrl: 'https://customchat.example.com',
-  ttyNumber: '111-222-3333',
+  ...defaultArgs,
+  'phone-number': '123-456-7890',
+  'phone-extension': '5',
+  'text-number': '98765',
+  'chat-url': 'https://customchat.example.com',
+  'tty-number': '111-222-3333',
+  'tty-crisis-extension': '123',
 };
 
 export const ExternalTrigger = ExternalTriggerTemplate.bind(null);
-ExternalTrigger.argTypes = propStructure(crisisLineModalDocs);
+ExternalTrigger.argTypes = overrideArgTypes;
 ExternalTrigger.args = {
   ...defaultArgs,
-  triggerRef: '#external-clm-trigger',
-  phoneNumber: '123-456-7890',
-  textNumber: '77777',
-  chatUrl: 'https://external-trigger-chat.example.com',
-  ttyNumber: '999-888-7777',
+  'trigger-ref': '#external-clm-trigger',
+  'phone-number': '123-456-7890',
+  'phone-extension': '7',
+  'text-number': '77777',
+  'chat-url': 'https://external-trigger-chat.example.com',
+  'tty-number': '999-888-7777',
+  'tty-crisis-extension': '321',
 };
 ExternalTrigger.parameters = {
   docs: {
     description: {
       story:
-        'Demonstrates opening the modal from an existing external button using the triggerRef prop. The internal trigger button is not rendered.',
+        'Demonstrates opening the modal from an existing external button using the trigger-ref attribute. Internal trigger is omitted. Shows explicit TTY defaults.',
     },
   },
 };
-
