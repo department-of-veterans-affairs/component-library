@@ -1,0 +1,106 @@
+Non-form applications using the forms library: 100 
+
+┌─────────┬───────────────────────────────────────────────────────────────────────────────────────────────┬───────────────────────────────┐
+│ (index) │ Application Name                                                                              │ Files Using the Forms Library │
+├─────────┼───────────────────────────────────────────────────────────────────────────────────────────────┼───────────────────────────────┤
+│ 0       │ '10275'                                                                                       │ 14                            │
+│ 1       │ '10297'                                                                                       │ 16                            │
+│ 2       │ 'Authenticated Experience Design Patterns'                                                    │ 122                           │
+│ 3       │ '21a Apply to become a VA-accredited attorney or claims agent'                                │ 17                            │
+│ 4       │ 'Accredited Representative Portal'                                                            │ 1                             │
+│ 5       │ 'Request a Board Appeal'                                                                      │ 31                            │
+│ 6       │ 'File a Supplemental Claim'                                                                   │ 28                            │
+│ 7       │ 'Request for Higher-Level Review'                                                             │ 13                            │
+│ 8       │ 'Platform(ish)'                                                                               │ 65                            │
+│ 9       │ 'Submitted Appeals view &amp; download'                                                       │ 1                             │
+│ 10      │ 'HLR testing'                                                                                 │ 12                            │
+│ 11      │ 'SC testing'                                                                                  │ 27                            │
+│ 12      │ 'Contact Us'                                                                                  │ 13                            │
+│ 13      │ 'Ask VA'                                                                                      │ 29                            │
+│ 14      │ '21-0779 Nursing Home Information'                                                            │ 7                             │
+│ 15      │ '21-2680 House Bound Status'                                                                  │ 7                             │
+│ 16      │ '21-4192 Employment Information'                                                              │ 6                             │
+│ 17      │ '21P-530a Interment Allowance'                                                                │ 7                             │
+│ 18      │ '21P-530EZ Burials benefits form'                                                             │ 13                            │
+│ 19      │ '10-10CG'                                                                                     │ 29                            │
+│ 20      │ '686C-674'                                                                                    │ 27                            │
+│ 21      │ '686C-674-v2'                                                                                 │ 35                            │
+│ 22      │ '21-0538 Dependents verification'                                                             │ 21                            │
+│ 23      │ 'View Dependents'                                                                             │ 5                             │
+│ 24      │ '21-526EZ disability compensation claim form'                                                 │ 83                            │
+│ 25      │ 'Discover Your Benefits'                                                                      │ 8                             │
+│ 26      │ 'Dispute your VA debt'                                                                        │ 14                            │
+│ 27      │ '0839'                                                                                        │ 17                            │
+│ 28      │ '22-0994 Education benefits form'                                                             │ 14                            │
+│ 29      │ '22-10203 Education benefits form'                                                            │ 15                            │
+│ 30      │ '22-10215 Statement of Assurance of Compliance with 95 Percent Enrollment Ratios'             │ 10                            │
+│ 31      │ '35% exemption of the routine reporting'                                                      │ 10                            │
+│ 32      │ '22-10282 IBM Skillsbuild Training Program Intake Application'                                │ 7                             │
+│ 33      │ 'Conflicting Interests Certification For Proprietary Schools'                                 │ 11                            │
+│ 34      │ '22-1995 Education benefits form'                                                             │ 15                            │
+│ 35      │ 'Designation Of Certifying Official(S)'                                                       │ 22                            │
+│ 36      │ 'GI Bill School Feedback Tool'                                                                │ 7                             │
+│ 37      │ 'Education Letters'                                                                           │ 1                             │
+│ 38      │ '10-10EZR Update health benefits info form'                                                   │ 39                            │
+│ 39      │ 'Financial Status Report'                                                                     │ 75                            │
+│ 40      │ 'Fry/DEA — VA Education Benefits For Survivors And Dependents'                                │ 8                             │
+│ 41      │ 'GI Bill Comparison Tool'                                                                     │ 2                             │
+│ 42      │ '1010ez Health Care Application form'                                                         │ 52                            │
+│ 43      │ 'Order hearing aid or CPAP supplies'                                                          │ 7                             │
+│ 44      │ '21P-0969 Income and Asset Statement Form'                                                    │ 23                            │
+│ 45      │ '10-10d Extended'                                                                             │ 16                            │
+│ 46      │ '10-10d Application for CHAMPVA benefits'                                                     │ 9                             │
+│ 47      │ 'File a CHAMPVA claim'                                                                        │ 11                            │
+│ 48      │ '10-7959C CHAMPVA Other Health Insurance Certification form'                                  │ 7                             │
+│ 49      │ 'Register for the Foreign Medical Program (FMP)'                                              │ 6                             │
+│ 50      │ 'Foreign Medical Program Cover Sheet'                                                         │ 6                             │
+│ 51      │ 'Letters'                                                                                     │ 1                             │
+│ 52      │ 'Apply for Certificate of Eligibility'                                                        │ 14                            │
+│ 53      │ 'Your VA home loan COE'                                                                       │ 1                             │
+│ 54      │ '1330M Apply for a medallion in a private cemetery'                                           │ 14                            │
+│ 55      │ '1330M2 Apply for a medallion in a private cemetery'                                          │ 5                             │
+│ 56      │ 'Submit Medical Expenses To Support A Pension or DIC Claim'                                   │ 14                            │
+│ 57      │ 'MHV Secure Messaging'                                                                        │ 1                             │
+│ 58      │ 'Order medical supplies'                                                                      │ 8                             │
+│ 59      │ 'Mock SIP Form'                                                                               │ 5                             │
+│ 60      │ 'My Education Benefits'                                                                       │ 17                            │
+│ 61      │ 'New 28-1900 Veteran Readiness'                                                               │ 9                             │
+│ 62      │ 'Personalized Career Planning and Guidance/Chapter 36 (VA Form 27-8832)'                      │ 6                             │
+│ 63      │ '21-527EZ pension benefits form'                                                              │ 35                            │
+│ 64      │ 'Dashboard'                                                                                   │ 3                             │
+│ 65      │ 'VA Profile'                                                                                  │ 4                             │
+│ 66      │ 'Welcome VA Setup Review Information Form'                                                    │ 4                             │
+│ 67      │ '40-10007 pre need burial planning form'                                                      │ 75                            │
+│ 68      │ 'Fill out your form to appoint a VA accredited representative or VSO'                         │ 17                            │
+│ 69      │ 'Representative Form Upload'                                                                  │ 8                             │
+│ 70      │ 'Apply for Specially Adapted Housing Grant'                                                   │ 6                             │
+│ 71      │ 'Request personal records'                                                                    │ 12                            │
+│ 72      │ 'Request priority processing for an existing claim'                                           │ 22                            │
+│ 73      │ 'Authorize VA to release your information to a third-party source'                            │ 10                            │
+│ 74      │ 'Submit an intent to file'                                                                    │ 10                            │
+│ 75      │ 'Sign VA claim forms as an alternate signer'                                                  │ 6                             │
+│ 76      │ 'Submit a lay or witness statement to support a VA claim'                                     │ 12                            │
+│ 77      │ 'Submit a statement to support a claim'                                                       │ 12                            │
+│ 78      │ 'Submit Employment Questionnaire'                                                             │ 7                             │
+│ 79      │ 'Authorize the release of non-VA medical information to VA'                                   │ 6                             │
+│ 80      │ 'Apply for additional compensation based on inability to work'                                │ 10                            │
+│ 81      │ 'Marital Status Questionnaire (21P-0537)'                                                     │ 6                             │
+│ 82      │ 'Request to be a substitute claimant for a deceased claimant'                                 │ 6                             │
+│ 83      │ 'Application for Accrued Amounts Due a Deceased Beneficiary'                                  │ 8                             │
+│ 84      │ '26-4555 Application in Acquiring Specially Adapted Housing or Special Home Adaptation Grant' │ 11                            │
+│ 85      │ 'Request a Presidential Memorial Certificate'                                                 │ 8                             │
+│ 86      │ 'Form Upload'                                                                                 │ 8                             │
+│ 87      │ 'Mock form minimal header'                                                                    │ 6                             │
+│ 88      │ 'Mock Form Patterns'                                                                          │ 7                             │
+│ 89      │ 'Simple Forms Patterns'                                                                       │ 10                            │
+│ 90      │ 'Static pages'                                                                                │ 2                             │
+│ 91      │ 'Survivor and Dependent Benefits 22-5490'                                                     │ 14                            │
+│ 92      │ 'Apply For DIC, Survivors Pension, Or Accrued Benefits Online'                                │ 22                            │
+│ 93      │ 'Apply for burial in a VA national cemetery'                                                  │ 17                            │
+│ 94      │ 'Apply to use transferred education benefits'                                                 │ 13                            │
+│ 95      │ 'Demo: File for disability compensation - Conditions'                                         │ 8                             │
+│ 96      │ 'Appointments'                                                                                │ 6                             │
+│ 97      │ 'Verify Your Enrollment'                                                                      │ 3                             │
+│ 98      │ 'Apply for Personalized Career Planning and Guidance with VA Form 25-8832'                    │ 9                             │
+│ 99      │ '28-1900 Veteran Readiness'                                                                   │ 7                             │
+└─────────┴───────────────────────────────────────────────────────────────────────────────────────────────┴───────────────────────────────┘
