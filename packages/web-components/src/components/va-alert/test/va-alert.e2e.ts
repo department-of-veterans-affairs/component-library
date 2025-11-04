@@ -14,6 +14,9 @@ describe('va-alert', () => {
           <div class="usa-alert usa-alert--info">
             <div class="usa-alert__body">
               <div>
+                <span class="usa-sr-only">
+                  Information Alert
+                </span>
                 <slot name="headline"></slot>
                 <slot></slot>
               </div>
