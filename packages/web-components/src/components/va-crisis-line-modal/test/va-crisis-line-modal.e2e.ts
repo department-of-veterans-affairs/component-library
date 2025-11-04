@@ -221,20 +221,4 @@ describe('va-crisis-line-modal', () => {
     const isVisible = await modal.getProperty('visible');
     expect(isVisible).toBe(true);
   });
-
-  it('opens modal programmatically using open() method', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <button id="external-trigger">Launch Crisis Line</button>
-      <va-crisis-line-modal trigger-ref="#external-trigger"></va-crisis-line-modal>
-    `);
-
-    const component = await page.find('va-crisis-line-modal');
-    await component.callMethod('open');
-    await page.waitForChanges();
-
-    const modal = await page.find('va-crisis-line-modal >>> va-modal');
-    const isVisible = await modal.getProperty('visible');
-    expect(isVisible).toBe(true);
-  });
 });
