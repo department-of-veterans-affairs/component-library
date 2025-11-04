@@ -1,4 +1,4 @@
-import { Component, Host, State, h, Element, Listen, Prop, Watch, Method } from '@stencil/core';
+import { Component, Host, State, h, Element, Listen, Prop, Watch } from '@stencil/core';
 import { CONTACTS_WITH_EXTENSION } from '../../contacts';
 
 /**
@@ -18,39 +18,39 @@ export class VACrisisLineModal {
   /**
    * Phone number for the crisis line. Defaults to 988.
    */
-  @Prop() phoneNumber: string = '988';
+  @Prop() phoneNumber?: string = '988';
 
   /**
    * Phone extension for the crisis line. Defaults to 1.
    */
-  @Prop() phoneExtension: string = '1';
+  @Prop() phoneExtension?: string = '1';
 
   /**
    * Text number for the crisis line. Defaults to 838255.
    */
-  @Prop() textNumber: string = '838255';
+  @Prop() textNumber?: string = '838255';
 
   /**
    * URL for the chat service. Defaults to Veterans Crisis Line chat.
    */
-  @Prop() chatUrl: string = 'https://www.veteranscrisisline.net/get-help-now/chat/';
+  @Prop() chatUrl?: string = 'https://www.veteranscrisisline.net/get-help-now/chat/';
 
   /**
    * TTY number for the crisis line. Defaults to 711.
    */
-  @Prop() ttyNumber: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.phoneNumber || '711';
+  @Prop() ttyNumber?: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.phoneNumber || '711';
 
   /**
    * TTY extension for the crisis line. Defaults to 988.
    */
-  @Prop() ttyCrisisExtension: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.extension || '988';
+  @Prop() ttyCrisisExtension?: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.extension || '988';
 
   /**
    * Selector for an external button that should trigger the modal.
    * When provided, the internal trigger button will not be rendered.
    * Accepts ID (#myButton), class (.my-button), or attribute selector.
    */
-  @Prop() triggerRef: string;
+  @Prop() triggerRef?: string;
 
   @State() isOpen: boolean = false;
 
@@ -109,11 +109,7 @@ export class VACrisisLineModal {
     this.trapFocus();
   };
 
-  /**
-   * Opens the crisis line modal programmatically.
-   */
-  @Method()
-  async open() {
+ open() {
     this.setVisible();
   }
 
