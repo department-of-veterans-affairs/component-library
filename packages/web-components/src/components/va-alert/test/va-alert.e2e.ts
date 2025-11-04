@@ -272,5 +272,117 @@ describe('va-alert', () => {
 
     expect(element.classList.contains('usa-alert--slim')).toBeFalsy();
     expect(alert).not.toHaveAttribute('slim');
-  }); 
+  });
+
+  describe('SR-only status text', () => {
+    it('announces "Warning Alert" for warning status with headline', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="warning"><h4 slot="headline">Your balance may be overdue</h4></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Warning Alert');
+    });
+
+    it('announces "Error Alert" for error status with headline', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="error"><h4 slot="headline">There was an error</h4></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Error Alert');
+    });
+
+    it('announces "Success Alert" for success status with headline', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="success"><h4 slot="headline">Success</h4></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Success Alert');
+    });
+
+    it('announces "Information Alert" for info status with headline', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="info"><h4 slot="headline">Information</h4></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Information Alert');
+    });
+
+    it('announces "Continue Alert" for continue status with headline', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="continue"><h4 slot="headline">Continue</h4></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Continue Alert');
+    });
+
+    it('announces "Warning Alert" for warning status in slim variant', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="warning"><p>Your balance may be overdue</p></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Warning Alert');
+    });
+
+    it('announces "Error Alert" for error status in slim variant', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="error"><p>There was an error</p></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Error Alert');
+    });
+
+    it('announces "Success Alert" for success status in slim variant', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="success"><p>Success</p></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Success Alert');
+    });
+
+    it('announces "Information Alert" for info status in slim variant', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="info"><p>Information</p></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Information Alert');
+    });
+
+    it('announces "Continue Alert" for continue status in slim variant', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="continue"><p>Continue</p></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Continue Alert');
+    });
+
+    it('defaults to "Information Alert" for undefined status', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-alert status="invalid"><h4 slot="headline">Alert</h4></va-alert>');
+      
+      const srText = await page.find('va-alert >>> .usa-sr-only');
+      const text = await srText.getProperty('textContent');
+      
+      expect(text).toBe('Information Alert');
+    });
+  });
 });
