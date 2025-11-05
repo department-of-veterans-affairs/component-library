@@ -88,7 +88,6 @@ export class VaFileInput {
   @Watch('error')
   handleExternalErrorChange(value: string) {
     if (value) {
-      console.log('External error change');
       this.focusOnErrorMessage();
     }
   }
