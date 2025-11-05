@@ -69,6 +69,7 @@ const Template = ({
       read-only={readOnly}
       children={children}
       slot-field-indexes={slotFieldIndexes}
+      maxFileSize={400000}
     />
   );
 };
