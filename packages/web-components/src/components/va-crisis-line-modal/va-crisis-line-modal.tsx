@@ -38,12 +38,12 @@ export class VACrisisLineModal {
   /**
    * TTY number for the crisis line. Defaults to 711.
    */
-  @Prop() ttyNumber?: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.phoneNumber || '711';
+  @Prop() ttyNumber?: string = CONTACTS_WITH_EXTENSION.CRISIS_MODAL_TTY.phoneNumber || '711';
 
   /**
    * TTY extension for the crisis line. Defaults to 988.
    */
-  @Prop() ttyCrisisExtension?: string = CONTACTS_WITH_EXTENSION.CRISIS_TTY.extension || '988';
+  @Prop() ttyCrisisExtension?: string = CONTACTS_WITH_EXTENSION.CRISIS_MODAL_TTY.extension || '988';
 
   /**
    * Selector for an external button that should trigger the modal.

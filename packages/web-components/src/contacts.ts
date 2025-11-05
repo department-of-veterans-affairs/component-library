@@ -21,6 +21,10 @@ export const contactsMap = Object.freeze({
     description: 'Veterans Crisis hotline',
   },
   CRISIS_TTY: {
+    phoneNumber: '8002738255',
+    description: 'Veterans Crisis hotline TTY',
+  },
+  CRISIS_MODAL_TTY: {
     phoneNumber: '711',
     extension: '988',
     description: 'Veterans Crisis hotline TTY',
