@@ -244,6 +244,9 @@ export class VaFileInputMultiple {
 
     if (newFile) {
       const fileObject = this.findFileByKey(fileKey);
+      if (fileObject.hasError) {
+        fileObject.hasError = false;
+      }
       if (fileObject.file) {
         // Change file
         action = 'FILE_UPDATED';
@@ -256,13 +259,8 @@ export class VaFileInputMultiple {
         fileObject.file = newFile;
         fileObject.content = this.getAdditionalContent();
         this.fileKeyCounter++;
-        const newPlaceholder = {
-          file: null,
-          key: this.fileKeyCounter,
-            content: null,
-            error: false,
-        };
-        this.files = [...this.files, newPlaceholder];
+        this.files = [...this.files];
+        this.ensurePlaceholder();
       }
       filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey));
     } else {
