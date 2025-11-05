@@ -472,4 +472,106 @@ describe('va-file-input', () => {
     expect(result.buttons[0].innerText).toEqual('CHANGE FILE');
     expect(result.buttons[1].innerText).toEqual('DELETE');
   });
+
+  it('renders a screen-reader-only message with uploaded file\'s name when a file is uploaded successfully', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input />`);
+
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    // Wait 250ms for the status message text content to update (debounced in
+    // component to help with screen reader announcements).
+    await new Promise((r) => setTimeout(r, 250));
+
+    // Get status message and ensure that it has been updated to reflect file upload.
+    const srStatusMessage = await page.find('va-file-input >>> #input-status-message');
+    expect(srStatusMessage).not.toBeNull();
+    expect(srStatusMessage.getAttribute('class')).toContain('usa-sr-only');
+    expect(srStatusMessage.innerText).toBe('You have selected the file: 1x1.png');
+  });
+
+  it('renders a screen-reader-only message when an uploaded file is deleted', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input />`);
+
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (
+      await page.waitForFunction(() =>
+        document
+          .querySelector('va-file-input')
+          .shadowRoot.querySelector('input[type=file]'),
+      )
+    ) as ElementHandle<HTMLInputElement>;
+
+    await page.waitForChanges();
+
+    expect(input).not.toBeNull();
+
+    const fileLabel = await page.find('va-file-input >>> .file-label');
+    expect(fileLabel).toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    // get delete button
+    const [_, deleteButton] = await page.findAll('va-file-input >>> va-button-icon');
+    deleteButton.click();
+    await new Promise((r) => setTimeout(r, 100));
+
+    // make sure modal opens
+    const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
+
+    expect(modalCheck).not.toBeNull();
+
+    const yesButton = (
+      await page.waitForFunction(() =>
+        document.querySelector('va-file-input').shadowRoot.querySelector('va-modal').shadowRoot.querySelector('va-button')
+      )
+    );
+
+    // yes we want to remove the file
+    yesButton.click();
+
+    await page.waitForChanges();
+
+    // Wait 250ms for the status message text content to update (debounced in
+    // component to help with screen reader announcements).
+    await new Promise((r) => setTimeout(r, 250));
+
+    // Get status message and ensure that it has been updated to reflect file deletion.
+    const srStatusMessage = await page.find('va-file-input >>> #input-status-message');
+    expect(srStatusMessage).not.toBeNull();
+    expect(srStatusMessage.getAttribute('class')).toContain('usa-sr-only');
+    expect(srStatusMessage.innerText).toBe('File deleted. No file selected.');
+  });
+
+  it('renders a error message when there is a file input error', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input max-file-size="1" />`);
+
+    await page.$eval('va-file-input', (elm: any) => {
+      // within the browser's context
+      // let's set new property values on the component
+      elm.uploadedFile = {name: 'test.jpg', size: 7000, type: 'jpg'};
+    });
+    await page.waitForChanges();
+
+    const errorMessage = await page.find('va-file-input >>> #input-error-message');
+    expect(errorMessage).not.toBeNull();
+    expect(errorMessage.getAttribute('class')).toContain('usa-error-message');
+
+    await page.waitForChanges();
+
+    expect(errorMessage.innerText.trim()).toBe("We can't upload your file because it's too big. Files must be less than 1 B.");
+  });
 });
