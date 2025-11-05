@@ -243,7 +243,11 @@ export class VaFileInput {
     }
   };
 
-  private focusOnErrorMessage() {
+  /**
+   * Focuses on the displayed error message element after a short delay to help with screen reader announcement.
+   * @returns {void}
+   */
+  private focusOnErrorMessage(): void {
     setTimeout(() => {
       const errorMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-error-message');
       if (errorMessage && errorMessage.textContent) {
@@ -252,7 +256,11 @@ export class VaFileInput {
     }, 250);
   }
 
-  private focusOnStatusMessage() {
+  /**
+   * Focuses on the sr-only status message after a short delay to help with screen reader announcement.
+   * @returns {void}
+   */
+  private focusOnStatusMessage(): void {
     setTimeout(() => {
       const statusMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-status-message');
       if (statusMessage && statusMessage.textContent) {
@@ -261,7 +269,12 @@ export class VaFileInput {
     }, 250);
   }
 
-  private updateStatusMessage(message: string, focusAfterUpdate: boolean = false) {
+  /**
+   * Updates the sr-only status message element's text content and optionally focuses on it.
+   * @param {string} message - The value to update the element's text content to.
+   * @param {boolean} focusAfterUpdate - Whether to focus the element after updating.
+   */
+  private updateStatusMessage( message: string, focusAfterUpdate: boolean = false): void {
     setTimeout(() => {
       const statusMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-status-message');
       if (statusMessage) {
@@ -274,7 +287,16 @@ export class VaFileInput {
     }, 250);
   }
 
-  private handleWindowFocus = () => {
+  /**
+   * Handles the window focus event to manage focus on error and status messages.
+   * This is necessary due to the way that browsers handle focus and screen reader
+   * announcements differently after users interact with native file dialogs. For
+   * example, Chrome will announce the focused element as soon as a file is input,
+   * but Safari and Firefox will not make the announcement until the browser window
+   * regains focus.
+   * @returns {void}
+   */
+  private handleWindowFocus = (): void => {
     // When the window regains focus and file value is nullish, attempt to focus
     // on the error message.
     if (this.internalError && this.delayErrorMessageFocusUntilWindowFocus) {
@@ -282,6 +304,8 @@ export class VaFileInput {
       this.delayErrorMessageFocusUntilWindowFocus = false;
     }
 
+    // When the window regains focus and there is a file value, attempt to focus
+    // on the status message.
     if (this.delayStatusMessageFocusUntilWindowFocus) {
       this.focusOnStatusMessage();
       this.delayStatusMessageFocusUntilWindowFocus = false;
