@@ -315,56 +315,37 @@ export class VaSearchFilter {
     };
 
     const renderFacet = (facet: FilterFacet) => {
-      // if (facet.isRadio === true) {
-      //   console.log("Blah blah blah");
-      // }
       if (facet.isRadio === true) {
-        if (isDesktop) {
-          return <va-radio
-            error={null}
-            header-aria-describedby={null}
-            hint=""
-            label={facet.label}
-            label-header-level=""
-          >
-            {facet.category.map((category: FilterCategory) =>
-              renderRadioButton(category))}
-          </va-radio>
-        }
-        else {
-          return <va-radio
-            error={null}
-            header-aria-describedby={null}
-            hint=""
-            label={facet.label}
-            label-header-level=""
-          >
-            {facet.category.map((category: FilterCategory) =>
-              renderRadioButton(category))}
-          </va-radio>
-        }
+        return <va-radio
+          error={null}
+          header-aria-describedby={null}
+          hint=""
+          label={facet.label}
+          label-header-level=""
+        >
+          {facet.category.map((category: FilterCategory) =>
+            renderRadioButton(category))}
+        </va-radio>
+      }
+      if (isDesktop) {
+        return <va-checkbox-group
+          label={facet.label}
+          class="va-search-filter__checkbox-group"
+        >
+          {facet.category.map((category: FilterCategory) =>
+            renderCheckbox(facet, category))}
+        </va-checkbox-group>
       }
       else {
-        if (isDesktop) {
-          return <va-checkbox-group
-            label={facet.label}
-            class="va-search-filter__checkbox-group"
-          >
-            {facet.category.map((category: FilterCategory) =>
-              renderCheckbox(facet, category))}
-          </va-checkbox-group>
-        }
-        else {
-          return <va-checkbox-group
-            label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
-            {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
-            key={facet.id}
-            label-header-level="3"
-          >
-            {facet.category.map((category: FilterCategory) =>
-              renderCheckbox(facet, category))}
-          </va-checkbox-group>
-        }
+        return <va-checkbox-group
+          label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
+          {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
+          key={facet.id}
+          label-header-level="3"
+        >
+          {facet.category.map((category: FilterCategory) =>
+            renderCheckbox(facet, category))}
+        </va-checkbox-group>
       }
     };
 
