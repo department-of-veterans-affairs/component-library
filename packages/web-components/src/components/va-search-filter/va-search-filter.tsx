@@ -18,11 +18,11 @@ export type FilterCategory = {
 
 export type Filter = FilterFacet;
 
-// interface FilterChangeParams {
-//   facetId: number | string;
-//   categoryId: number | string;
-//   active: boolean;
-// }
+interface FilterChangeParams {
+  facetId: number | string;
+  categoryId: number | string;
+  active: boolean;
+}
 
 /**
  * Value corresponds with the --tablet breakpoint size.
@@ -105,36 +105,36 @@ export class VaSearchFilter {
 
   private isDesktop: boolean = window.innerWidth > TABLET_BREAKPOINT;
 
-  // private handleFilterChange = ({ facetId, categoryId, active }: FilterChangeParams) => {
-  //   // find the matching facet and category by ID and update the active state
-  //   this.filterOptions = this.filterOptions.map((facet) => {
-  //     if (facet.id === facetId) {
-  //       return {
-  //         ...facet,
-  //         category: facet.category.map((category) => {
-  //           if (category.id === categoryId) {
-  //             return { ...category, active };
-  //           }
-  //           return category;
-  //         }),
-  //       };
-  //     }
-  //     return facet;
-  //   });
+  private handleFilterChange = ({ facetId, categoryId, active }: FilterChangeParams) => {
+    // find the matching facet and category by ID and update the active state
+    this.filterOptions = this.filterOptions.map((facet) => {
+      if (facet.id === facetId) {
+        return {
+          ...facet,
+          category: facet.category.map((category) => {
+            if (category.id === categoryId) {
+              return { ...category, active };
+            }
+            return category;
+          }),
+        };
+      }
+      return facet;
+    });
 
-  //   this.totalActiveFilters = this.getTotalActiveFilters()
+    this.totalActiveFilters = this.getTotalActiveFilters()
 
-  //   // update filterOptions with getTotalActiveFiltersByFacet for each facet
-  //   this.filterOptions = this.filterOptions.map((facet) => {
-  //     return {
-  //       ...facet,
-  //       activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
-  //     };
-  //   });
+    // update filterOptions with getTotalActiveFiltersByFacet for each facet
+    this.filterOptions = this.filterOptions.map((facet) => {
+      return {
+        ...facet,
+        activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
+      };
+    });
 
-  //   // Emit the event with all active filters
-  //   this.vaFilterChange.emit(this.getActiveFiltersWithCategories());
-  // };
+    // Emit the event with all active filters
+    this.vaFilterChange.emit(this.getActiveFiltersWithCategories());
+  };
 
   handleClearAllFilters = () => {
     this.filterOptions = this.filterOptions.map((facet) => {
@@ -269,7 +269,7 @@ export class VaSearchFilter {
       filterOptions,
       isDesktop,
       totalActiveFilters,
-      // handleFilterChange,
+      handleFilterChange,
       handleClearAllFilters,
       handleApplyFilters,
     } = this;
@@ -292,18 +292,18 @@ export class VaSearchFilter {
     );
 
     // Helper method to render checkbox for both mobile and desktop views
-    // const renderCheckbox = (facet: FilterFacet, category: FilterCategory) => (
-    //   <va-checkbox
-    //     label={category.label}
-    //     key={category.id}
-    //     checked={category.active}
-    //     onVaChange={(e) => handleFilterChange({
-    //       facetId: facet.id,
-    //       categoryId: category.id,
-    //       active: e.target.checked,
-    //     })}
-    //   />
-    // );
+    const renderCheckbox = (facet: FilterFacet, category: FilterCategory) => (
+      <va-checkbox
+        label={category.label}
+        key={category.id}
+        checked={category.active}
+        onVaChange={(e) => handleFilterChange({
+          facetId: facet.id,
+          categoryId: category.id,
+          active: e.target.checked,
+        })}
+      />
+    );
 
     // Helper method to render checkbox for both mobile and desktop views
     const renderRadioButton = (category: FilterCategory) => {
@@ -315,62 +315,57 @@ export class VaSearchFilter {
     };
 
     const renderFacet = (facet: FilterFacet) => {
+      // if (facet.isRadio === true) {
+      //   console.log("Blah blah blah");
+      // }
       if (facet.isRadio === true) {
-        console.log("Blah blah blah");
+        if (isDesktop) {
+          return <va-radio
+            error={null}
+            header-aria-describedby={null}
+            hint=""
+            label={facet.label}
+            label-header-level=""
+          >
+            {facet.category.map((category: FilterCategory) =>
+              renderRadioButton(category))}
+          </va-radio>
+        }
+        else {
+          return <va-radio
+            error={null}
+            header-aria-describedby={null}
+            hint=""
+            label={facet.label}
+            label-header-level=""
+          >
+            {facet.category.map((category: FilterCategory) =>
+              renderRadioButton(category))}
+          </va-radio>
+        }
       }
-      return <va-radio
-        error={null}
-        header-aria-describedby={null}
-        hint=""
-        label={facet.label}
-        label-header-level=""
-      >
-        {facet.category.map((category: FilterCategory) =>
-          renderRadioButton(category))}
-      </va-radio>
-      // if (facet.isRadio === 1) {
-      // if (isDesktop) {
-      //   return <va-radio
-      //     label={facet.label}
-      //   >
-      //     {facet.category.map((category: FilterCategory) =>
-      //       renderRadioButton(facet, category))}
-      //   </va-radio>
-      // // }
-      // else {
-      //   return <va-radio
-      //     label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
-      //     {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
-      //     key={facet.id}
-      //     label-header-level="3"
-      //   >
-      //     {facet.category.map((category: FilterCategory) =>
-      //       renderRadioButton(facet, category))}
-      //   </va-radio>
-      // }
-      // } 
-      // else {
-      // if (isDesktop) {
-      //   return <va-checkbox-group
-      //     label={facet.label}
-      //     class="va-search-filter__checkbox-group"
-      //   >
-      //     {facet.category.map((category: FilterCategory) =>
-      //       renderCheckbox(facet, category))}
-      //   </va-checkbox-group>
-      // }
-      // else {
-      //   return <va-checkbox-group
-      //     label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
-      //     {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
-      //     key={facet.id}
-      //     label-header-level="3"
-      //   >
-      //     {facet.category.map((category: FilterCategory) =>
-      //       renderCheckbox(facet, category))}
-      //   </va-checkbox-group>
-      // }
-      // }
+      else {
+        if (isDesktop) {
+          return <va-checkbox-group
+            label={facet.label}
+            class="va-search-filter__checkbox-group"
+          >
+            {facet.category.map((category: FilterCategory) =>
+              renderCheckbox(facet, category))}
+          </va-checkbox-group>
+        }
+        else {
+          return <va-checkbox-group
+            label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
+            {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
+            key={facet.id}
+            label-header-level="3"
+          >
+            {facet.category.map((category: FilterCategory) =>
+              renderCheckbox(facet, category))}
+          </va-checkbox-group>
+        }
+      }
     };
 
     if (isDesktop) {
