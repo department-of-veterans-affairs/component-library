@@ -20,7 +20,7 @@ describe('va-table-inner', () => {
       <va-table-row>
         <span>Dog</span>
         <span>Cat</span>
-        <span>Mouse</span>
+        <span></span>
       </va-table-row>
     </va-table>`;
   }
@@ -101,6 +101,13 @@ describe('va-table-inner', () => {
     const rowHeader = await page.find('va-table-inner >>> tbody >>> th');
     expect(columnHeader.getAttribute('scope')).toEqual('col');
     expect(rowHeader.getAttribute('scope')).toEqual('row');
+  });
+
+  it('sets the proper text for empty cells', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const rowSpans = await page.findAll('span');
+    expect(rowSpans[5].innerHTML).toEqual('Not available');
   });
 
   it('is not striped by default', async () => {
