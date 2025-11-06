@@ -114,6 +114,9 @@ export class VaSearchFilter {
           category: facet.category.map((category) => {
             if (category.id === categoryId) {
               return { ...category, active };
+              // Set all other categories' active status to false for radio facets.
+            } else if (facet.isRadio === true) {
+              return { ...category, active: false }
             }
             return category;
           }),
@@ -322,6 +325,11 @@ export class VaSearchFilter {
           hint=""
           label={facet.label}
           label-header-level=""
+          onVaValueChange={(e) => handleFilterChange({
+            facetId: facet.id,
+            categoryId: parseInt(e.detail.value),
+            active: true,
+          })}
         >
           {facet.category.map((category: FilterCategory) =>
             renderRadioButton(category))}
