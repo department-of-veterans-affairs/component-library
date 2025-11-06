@@ -55,7 +55,7 @@ const ExternalTriggerTemplate = ({
   return (
     <div style={{ display: 'grid', gap: '1rem' }}>
       <button id="external-clm-trigger" type="button">
-        Open Crisis Line Modal
+        Open crisis line modal
       </button>
       <va-crisis-line-modal
         trigger-ref={resolvedTrigger}
