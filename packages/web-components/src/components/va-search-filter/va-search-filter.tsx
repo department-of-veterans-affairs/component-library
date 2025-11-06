@@ -1,11 +1,13 @@
 import { Component, Host, h, Prop, Event, EventEmitter, Listen, forceUpdate, State, Watch } from '@stencil/core';
 import { deepEquals } from '../../utils/utils';
+// import { VaRadioOption } from '../va-radio-option/va-radio-option';
 
 export type FilterFacet = {
   label: string;
   category: FilterCategory[];
   id?: number | string;
   activeFiltersCount?: number;
+  isRadio?: boolean;
 };
 
 export type FilterCategory = {
@@ -16,11 +18,11 @@ export type FilterCategory = {
 
 export type Filter = FilterFacet;
 
-interface FilterChangeParams {
-  facetId: number | string;
-  categoryId: number | string;
-  active: boolean;
-}
+// interface FilterChangeParams {
+//   facetId: number | string;
+//   categoryId: number | string;
+//   active: boolean;
+// }
 
 /**
  * Value corresponds with the --tablet breakpoint size.
@@ -83,17 +85,17 @@ export class VaSearchFilter {
   /**
    * A custom event emitted when the filter changes. The payload will provide all active categories.
    */
-  @Event() vaFilterChange : EventEmitter<Filter[]>;
+  @Event() vaFilterChange: EventEmitter<Filter[]>;
 
   /**
    * A custom event emitted when the apply filters button is clicked.
    */
-  @Event() vaFilterApply : EventEmitter<Filter[]>;
+  @Event() vaFilterApply: EventEmitter<Filter[]>;
 
   /**
    * A custom event emitted when the clear all filters button is clicked.
    */
-  @Event() vaFilterClearAll : EventEmitter<void>;
+  @Event() vaFilterClearAll: EventEmitter<void>;
 
   @Listen('resize', { target: 'window' })
   handleResize() {
@@ -103,36 +105,36 @@ export class VaSearchFilter {
 
   private isDesktop: boolean = window.innerWidth > TABLET_BREAKPOINT;
 
-  private handleFilterChange = ({ facetId, categoryId, active }: FilterChangeParams) => {
-    // find the matching facet and category by ID and update the active state
-    this.filterOptions = this.filterOptions.map((facet) => {
-      if (facet.id === facetId) {
-        return {
-          ...facet,
-          category: facet.category.map((category) => {
-            if (category.id === categoryId) {
-              return { ...category, active };
-            }
-            return category;
-          }),
-        };
-      }
-      return facet;
-    });
+  // private handleFilterChange = ({ facetId, categoryId, active }: FilterChangeParams) => {
+  //   // find the matching facet and category by ID and update the active state
+  //   this.filterOptions = this.filterOptions.map((facet) => {
+  //     if (facet.id === facetId) {
+  //       return {
+  //         ...facet,
+  //         category: facet.category.map((category) => {
+  //           if (category.id === categoryId) {
+  //             return { ...category, active };
+  //           }
+  //           return category;
+  //         }),
+  //       };
+  //     }
+  //     return facet;
+  //   });
 
-    this.totalActiveFilters = this.getTotalActiveFilters()
+  //   this.totalActiveFilters = this.getTotalActiveFilters()
 
-    // update filterOptions with getTotalActiveFiltersByFacet for each facet
-    this.filterOptions = this.filterOptions.map((facet) => {
-      return {
-        ...facet,
-        activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
-      };
-    });
+  //   // update filterOptions with getTotalActiveFiltersByFacet for each facet
+  //   this.filterOptions = this.filterOptions.map((facet) => {
+  //     return {
+  //       ...facet,
+  //       activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
+  //     };
+  //   });
 
-    // Emit the event with all active filters
-    this.vaFilterChange.emit(this.getActiveFiltersWithCategories());
-  };
+  //   // Emit the event with all active filters
+  //   this.vaFilterChange.emit(this.getActiveFiltersWithCategories());
+  // };
 
   handleClearAllFilters = () => {
     this.filterOptions = this.filterOptions.map((facet) => {
@@ -215,15 +217,15 @@ export class VaSearchFilter {
       return null;
     }
 
-  /**
-   * Checks that the top-level facet:
-   * - Has a valid label (string and non-empty)
-   * - Has a valid ID (number or string)
-   * - Has a category array
-   * Checks that each facet category item:
-   * - Has a valid label (string and non-empty)
-   * - Has a valid ID (number or string)
-   */
+    /**
+     * Checks that the top-level facet:
+     * - Has a valid label (string and non-empty)
+     * - Has a valid ID (number or string)
+     * - Has a category array
+     * Checks that each facet category item:
+     * - Has a valid label (string and non-empty)
+     * - Has a valid ID (number or string)
+     */
     const validOptions = options.every(option => {
       const hasValidLabel = typeof option.label === 'string' && option.label.length > 0;
       const hasValidCategory = Array.isArray(option.category) && option.category.length > 0 && option.category.every(cat => {
@@ -267,7 +269,7 @@ export class VaSearchFilter {
       filterOptions,
       isDesktop,
       totalActiveFilters,
-      handleFilterChange,
+      // handleFilterChange,
       handleClearAllFilters,
       handleApplyFilters,
     } = this;
@@ -290,18 +292,86 @@ export class VaSearchFilter {
     );
 
     // Helper method to render checkbox for both mobile and desktop views
-    const renderCheckbox = (facet: FilterFacet, category: FilterCategory) => (
-      <va-checkbox
+    // const renderCheckbox = (facet: FilterFacet, category: FilterCategory) => (
+    //   <va-checkbox
+    //     label={category.label}
+    //     key={category.id}
+    //     checked={category.active}
+    //     onVaChange={(e) => handleFilterChange({
+    //       facetId: facet.id,
+    //       categoryId: category.id,
+    //       active: e.target.checked,
+    //     })}
+    //   />
+    // );
+
+    // Helper method to render checkbox for both mobile and desktop views
+    const renderRadioButton = (category: FilterCategory) => {
+      return <va-radio-option
         label={category.label}
-        key={category.id}
-        checked={category.active}
-        onVaChange={(e) => handleFilterChange({
-          facetId: facet.id,
-          categoryId: category.id,
-          active: e.target.checked,
-        })}
+        name={category.label}
+        value={category.id.toString()}
       />
-    );
+    };
+
+    const renderFacet = (facet: FilterFacet) => {
+      if (facet.isRadio === true) {
+        console.log("Blah blah blah");
+      }
+      return <va-radio
+        error={null}
+        header-aria-describedby={null}
+        hint=""
+        label={facet.label}
+        label-header-level=""
+      >
+        {facet.category.map((category: FilterCategory) =>
+          renderRadioButton(category))}
+      </va-radio>
+      // if (facet.isRadio === 1) {
+      // if (isDesktop) {
+      //   return <va-radio
+      //     label={facet.label}
+      //   >
+      //     {facet.category.map((category: FilterCategory) =>
+      //       renderRadioButton(facet, category))}
+      //   </va-radio>
+      // // }
+      // else {
+      //   return <va-radio
+      //     label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
+      //     {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
+      //     key={facet.id}
+      //     label-header-level="3"
+      //   >
+      //     {facet.category.map((category: FilterCategory) =>
+      //       renderRadioButton(facet, category))}
+      //   </va-radio>
+      // }
+      // } 
+      // else {
+      // if (isDesktop) {
+      //   return <va-checkbox-group
+      //     label={facet.label}
+      //     class="va-search-filter__checkbox-group"
+      //   >
+      //     {facet.category.map((category: FilterCategory) =>
+      //       renderCheckbox(facet, category))}
+      //   </va-checkbox-group>
+      // }
+      // else {
+      //   return <va-checkbox-group
+      //     label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
+      //     {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
+      //     key={facet.id}
+      //     label-header-level="3"
+      //   >
+      //     {facet.category.map((category: FilterCategory) =>
+      //       renderCheckbox(facet, category))}
+      //   </va-checkbox-group>
+      // }
+      // }
+    };
 
     if (isDesktop) {
       return (
@@ -321,14 +391,7 @@ export class VaSearchFilter {
                   level={3}
                   open
                 >
-                  <va-checkbox-group 
-                    label={facet.label} 
-                    class="va-search-filter__checkbox-group"
-                  >
-                    {facet.category.map((category: FilterCategory) =>
-                      renderCheckbox(facet, category)
-                    )}
-                  </va-checkbox-group>
+                  {renderFacet(facet)}
                 </va-accordion-item>
               ))}
             </va-accordion>
@@ -349,16 +412,7 @@ export class VaSearchFilter {
             >
               <span slot="icon"><va-icon icon="filter_list" /></span>
               {filterOptions.map((facet: FilterFacet) => (
-                <va-checkbox-group
-                  label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
-                  {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
-                  key={facet.id}
-                  label-header-level="3"
-                >
-                  {facet.category.map((category: FilterCategory) =>
-                    renderCheckbox(facet, category)
-                  )}
-                </va-checkbox-group>
+                renderFacet(facet)
               ))}
               {filterButtons}
             </va-accordion-item>
