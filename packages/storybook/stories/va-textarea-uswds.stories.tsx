@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
   applyFocus,
-  useErrorToggle,
-  errorToggleArgTypes,
 } from './wc-helpers';
-
+import { useValidateInput } from './useValidateInput';
 const textareaDocs = getWebComponentDocs('va-textarea');
 
 export default {
@@ -21,7 +19,6 @@ export default {
   },
   argTypes: {
     ...propStructure(textareaDocs),
-    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
   },
 };
 
@@ -43,8 +40,6 @@ const defaultArgs = {
   'form-description': null,
   'label-header-level': null,
   'header-aria-describedby': null,
-  'showToggleFocusButton': false,
-  'focusEl': null,
 };
 
 const Template = ({
@@ -61,15 +56,18 @@ const Template = ({
   'message-aria-describedby': messageAriaDescribedby,
   'label-header-level': labelHeaderLevel,
   'header-aria-describedby': headerAriaDescribedby,
-  showToggleFocusButton,
-  focusEl
 }) => {
+  const componentRef = useRef(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
 
-  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+  const handleSubmit = () => {
+    triggerValidation();
+  };
 
   return (
     <>
       <va-textarea
+        ref={componentRef}
         name={name}
         label={label}
         enable-analytics={enableAnalytics}
@@ -87,15 +85,12 @@ const Template = ({
         message-aria-describedby={messageAriaDescribedby}
         label-header-level={labelHeaderLevel}
         header-aria-describedby={headerAriaDescribedby}
-        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       />
-      {showToggleFocusButton && (
-          <va-button
-            text="Toggle error state"
-            onClick={handleClick}
-            class="vads-u-margin-top--2"
-          ></va-button>
-      )}
+      <va-button
+        text="Submit"
+        onClick={handleSubmit}
+        class="vads-u-margin-top--2"
+      ></va-button>
     </>
   );
 };

@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
-  useErrorToggle,
-  errorToggleArgTypes,
-  applyFocus,
 } from './wc-helpers';
+import { useValidateInput } from './useValidateInput';
 import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
@@ -22,7 +20,6 @@ export default {
   },
   argTypes: {
     ...propStructure(textInputDocs),
-    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
     inputmode: {
       control: {
         type: 'select',
@@ -81,8 +78,6 @@ const defaultArgs = {
   'input-suffix': undefined,
   'input-icon-suffix': undefined,
   'show-input-error': true,
-  'showToggleFocusButton': false,
-  'focusEl': null,
 };
 
 const Template = ({
@@ -110,15 +105,18 @@ const Template = ({
   'input-suffix': inputSuffix,
   'input-icon-suffix': inputIconSuffix,
   'show-input-error': showInputError,
-  showToggleFocusButton,
-  focusEl
 }) => {
+  const componentRef = useRef(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
 
-  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+  const handleSubmit = () => {
+    triggerValidation();
+  };
 
   return (
     <>
       <va-text-input
+        ref={componentRef}
         name={name}
         label={label}
         autocomplete={autocomplete}
@@ -147,15 +145,12 @@ const Template = ({
         input-suffix={inputSuffix}
         input-icon-suffix={inputIconSuffix}
         show-input-error={showInputError}
-        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       />
-      {showToggleFocusButton && (
-          <va-button
-            text="Toggle error state"
-            onClick={handleClick}
-            class="vads-u-margin-top--2"
-          ></va-button>
-      )}
+      <va-button
+        text="Submit"
+        onClick={handleSubmit}
+        class="vads-u-margin-top--2"
+      ></va-button>
     </>
   );
 };
