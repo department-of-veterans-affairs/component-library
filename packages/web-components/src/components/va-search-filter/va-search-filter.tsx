@@ -313,7 +313,10 @@ export class VaSearchFilter {
       return <va-radio-option
         label={category.label}
         name={category.label}
-        value={category.id.toString()}
+        // what if the id is a string?
+        value={typeof category.id === "string" ? category.id : category.id.toString()}
+        // Is it possible for there to be multiple radio buttons selected?
+        checked={category.active === true}
       />
     };
 
@@ -327,7 +330,7 @@ export class VaSearchFilter {
           label-header-level=""
           onVaValueChange={(e) => handleFilterChange({
             facetId: facet.id,
-            categoryId: parseInt(e.detail.value),
+            categoryId: isNaN(e.detail.value) ? e.detail.value :  parseInt(e.detail.value),
             active: true,
           })}
         >
