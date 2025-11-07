@@ -412,15 +412,15 @@ const noop = () => {};
     const inputValue = (inputEl.value || '').trim().toLowerCase();
     const filter = comboBoxEl.dataset.filter || DEFAULT_FILTER;
     const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
+    const filterKey = comboBox.isInVaInputTelephone ? 'innerHTML' : 'text';
+    const filteredOptions = [...selectEl.options].filter(opt => regex.test(opt[filterKey]) && opt.getAttribute('data-optgroup') !== 'true');
 
     const options = [];
     let parentOptGroupId = '';
     for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
-      const filterKey = comboBox.isInVaInputTelephone ? 'innerHTML' : 'text';
       const filterValue = optionEl[filterKey];
-      const filteredOptions = [...selectEl.options].filter(opt => regex.test(opt[filterKey]) && opt.getAttribute('data-optgroup') !== 'true');
       
       if (
         optionEl.value &&
