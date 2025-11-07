@@ -394,6 +394,57 @@ export function getMaxLength(maxLength?: number | string): number | undefined {
 
   return maxLengthNumber;
 }
+
+/**
+ * Utilities to generate aria-labelledby error string for screen readers.
+ */
+export const ERROR_PREFIX = 'Error';
+export const ERROR_LABEL_ID = 'sr-input-error-label';
+interface BuildErrorAriaLabelOptions {
+  errorText?: string;
+  labelText?: string;
+  hintText?: string;
+}
+
+const SENTENCE_TERMINATORS = ['.', '!', '?'];
+
+/**
+ * Ensures a string is sentence-ready by trimming and appending a period when needed.
+ */
+function ensureSentence(text?: string): string | null {
+  if (!text) {
+    return null;
+  }
+
+  const trimmed = text.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  const lastChar = trimmed.charAt(trimmed.length - 1);
+  return SENTENCE_TERMINATORS.includes(lastChar) ? trimmed : `${trimmed}.`;
+}
+
+export function buildErrorAriaLabel({
+  errorText,
+  labelText,
+  hintText,
+}: BuildErrorAriaLabelOptions): string | null {
+  if (!errorText) {
+    return null;
+  }
+
+  const sentences = [
+    // eslint-disable-next-line i18next/no-literal-string
+    ensureSentence(`${ERROR_PREFIX}: ${errorText}`),
+    ensureSentence(labelText),
+    ensureSentence(hintText),
+  ].filter(Boolean) as string[];
+
+  return sentences.length ? sentences.join(' ') : null;
+}
+/* eslint-enable i18next/no-literal-string */
+
 /**
  * Updates the screen reader count for a character count element (va-input or va-textarea).
  * NOTE: This function should be debounced with a 1000ms to avoid excessive updates.

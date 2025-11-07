@@ -8,6 +8,8 @@ import {
   truncate,
   getArticle,
   getMaxLength,
+  ERROR_PREFIX,
+  buildErrorAriaLabel,
 } from './utils';
 
 describe('format', () => {
@@ -361,3 +363,29 @@ describe('truncate()', () => {
     expect(getMaxLength(undefined)).toEqual(undefined);
   });
 })
+
+describe('buildErrorAriaLabel', () => {
+  it('returns null when error text is missing', () => {
+    expect(buildErrorAriaLabel({ errorText: null, labelText: 'Label', hintText: 'Hint' })).toBeNull();
+  });
+
+  it('joins provided values into sentences with punctuation', () => {
+    expect(
+      buildErrorAriaLabel({
+        errorText: 'Missing value',
+        labelText: 'Favorite color',
+        hintText: 'Enter a color',
+      }),
+    ).toEqual(`${ERROR_PREFIX}: Missing value. Favorite color. Enter a color.`);
+  });
+
+  it('does not duplicate punctuation when sentences already end with punctuation', () => {
+    expect(
+      buildErrorAriaLabel({
+        errorText: 'Missing value!',
+        labelText: 'Favorite color?',
+        hintText: 'Enter a color.',
+      }),
+    ).toEqual(`${ERROR_PREFIX}: Missing value. Favorite color?. Enter a color.`);
+  });
+});

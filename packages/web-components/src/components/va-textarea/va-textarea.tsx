@@ -19,6 +19,8 @@ import {
   getMaxLength,
   updateScreenReaderCount,
   isMessageSet,
+  buildErrorAriaLabel,
+  ERROR_LABEL_ID,
 } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -208,21 +210,34 @@ export class VaTextarea {
     } = this;
 
     const maxlength = getMaxLength(this.maxlength);
-    const ariaDescribedbyIds =
-      `${error ? 'input-error-message' : ''} ${
-        charcount && maxlength ? 'charcount-message' : ''
-      } ${messageAriaDescribedby ? 'input-message' : ''}`.trim() || null;
 
-    const ariaLabeledByIds =
-      `${useFormsPattern && formHeading ? 'form-question' : ''} ${
-        useFormsPattern ? 'form-description' : ''
-      } ${useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+    const errorLabelText = buildErrorAriaLabel({
+      errorText: error,
+      labelText: label,
+      hintText: hint,
+    });
 
-    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
+    const ariaLabelledByIds = [
+      errorLabelText ? ERROR_LABEL_ID : '',
+      useFormsPattern && formHeading ? 'form-question' : '',
+      useFormsPattern ? 'form-description' : '',
+      useFormsPattern && label ? 'input-label' : '',
+    ]
+      .filter(Boolean)
+      .join(' ') || null;
+
+    const ariaDescribedbyIds = [
+      charcount && maxlength ? 'charcount-message' : '',
+      messageAriaDescribedby ? 'input-message' : '',
+    ]
+      .filter(Boolean)
+      .join(' ') || null;
+
     const headerAriaDescribedbyId = headerAriaDescribedby
       ? 'header-message'
-      : null;
+      : '';
 
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
     const charCountTooHigh = charcount && value?.length > maxlength;
     const labelClass = classnames({
       'usa-label': true,
@@ -306,7 +321,7 @@ export class VaTextarea {
             InnerLabelPart
           )}
           <slot></slot>
-          <span id="input-error-message" role="alert">
+          <span id="input-error-message">
             {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span>
@@ -318,7 +333,7 @@ export class VaTextarea {
             class={inputClass}
             aria-describedby={ariaDescribedbyIds}
             aria-invalid={error || charCountTooHigh ? 'true' : 'false'}
-            aria-labelledby={ariaLabeledByIds}
+            aria-labelledby={ariaLabelledByIds}
             onInput={this.handleInput}
             onBlur={this.handleBlur}
             id="input-type-textarea"
@@ -328,6 +343,11 @@ export class VaTextarea {
             value={value}
             part="input-type-textarea"
           />
+          {errorLabelText && (
+            <span id={ERROR_LABEL_ID} class="usa-sr-only">
+              {errorLabelText}
+            </span>
+          )}
           {!charcount && maxlength && value?.length >= maxlength && (
             <span class={messageClass} aria-live="polite">
               {i18next.t('max-chars', { length: maxlength })}

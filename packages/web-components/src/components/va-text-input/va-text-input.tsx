@@ -21,6 +21,8 @@ import {
   isMessageSet,
   getMaxLength,
   updateScreenReaderCount,
+  buildErrorAriaLabel,
+  ERROR_LABEL_ID,
 } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -433,15 +435,27 @@ export class VaTextInput {
     const inputmode = this.getInputmode();
     const step = this.getStep();
 
-    const ariaDescribedbyIds =
-      `${messageAriaDescribedby ? 'input-message' : ''} ${
-        error ? 'input-error-message' : ''
-      } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+    const errorLabelText = buildErrorAriaLabel({
+      errorText: error,
+      labelText: label,
+      hintText: hint,
+    });
 
-    const ariaLabeledByIds =
-      `${useFormsPattern && formHeading ? 'form-question' : ''} ${
-        useFormsPattern ? 'form-description' : ''
-      } ${useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+    const ariaLabelledByIds = [
+      errorLabelText ? ERROR_LABEL_ID : '',
+      useFormsPattern && formHeading ? 'form-question' : '',
+      useFormsPattern ? 'form-description' : '',
+      useFormsPattern && label ? 'input-label' : '',
+    ]
+      .filter(Boolean)
+      .join(' ') || null;
+
+    const ariaDescribedbyIds = [
+      charcount && maxlength ? 'charcount-message' : '',
+      messageAriaDescribedby ? 'input-message' : '',
+    ]
+      .filter(Boolean)
+      .join(' ') || null;
 
     const pattern = this.getPattern();
 
@@ -533,7 +547,7 @@ export class VaTextInput {
             </label>
           )}
           <slot></slot>
-          <span id="input-error-message" role="alert" class={errorClass}>
+          <span id="input-error-message" class={errorClass}>
             {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span>
@@ -547,6 +561,7 @@ export class VaTextInput {
             )}
           </span>
           <div class={currencyWrapper}>
+            {/* eslint-disable-next-line i18next/no-literal-string */}
             {currency && <div id="symbol">$</div>}
             {inputPrefix && (
               <div class="usa-input-prefix" part="input-prefix">
@@ -567,7 +582,7 @@ export class VaTextInput {
               onBlur={handleBlur}
               aria-describedby={ariaDescribedbyIds}
               style={style}
-              aria-labelledby={ariaLabeledByIds}
+              aria-labelledby={ariaLabelledByIds}
               aria-invalid={
                 invalid || error || charCountTooHigh ? 'true' : 'false'
               }
@@ -583,6 +598,11 @@ export class VaTextInput {
               max={max}
               value={value}
             />
+            {errorLabelText && (
+              <span id={ERROR_LABEL_ID} class="usa-sr-only">
+                {errorLabelText}
+              </span>
+            )}
             {inputSuffix && (
               <div class="usa-input-suffix" part="suffix" aria-hidden="true">
                 {inputSuffix.substring(0, 25)}

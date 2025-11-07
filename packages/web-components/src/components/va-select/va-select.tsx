@@ -17,6 +17,8 @@ import {
   getSlottedNodes,
   getHeaderLevel,
   isMessageSet,
+  buildErrorAriaLabel,
+  ERROR_LABEL_ID,
 } from '../../utils/utils';
 /**
  * @nativeHandler onKeyDown
@@ -275,15 +277,30 @@ export class VaSelect {
     } = this;
 
     const errorID = 'input-error-message';
-    const ariaDescribedbyIds =
-      `${messageAriaDescribedby ? 'input-message' : ''} ${
-        error ? errorID : ''
-      } ${hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
-    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
+    const errorLabelText = buildErrorAriaLabel({
+      errorText: error,
+      labelText: label,
+      hintText: hint,
+    });
+
+    const arialabelledById = errorLabelText
+    ? ERROR_LABEL_ID
+    : '';
+
+    const ariaDescribedbyIds = [
+      messageAriaDescribedby ? 'input-message' : '',
+      hint ? 'input-hint' : '',
+    ]
+      .filter(Boolean)
+      .join(' ') || null;
+
     const headerAriaDescribedbyId = headerAriaDescribedby
       ? 'header-message'
-      : null;
+      : '';
+
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
+
     const labelClass = classnames({
       'usa-label': true,
       'usa-label--error': error,
@@ -361,7 +378,7 @@ export class VaSelect {
             {hint}
           </span>
         )}
-        <span id={errorID} role="alert">
+        <span id={errorID}>
           {showError && error && (
             <Fragment>
               <span class="usa-sr-only">{i18next.t('error')}</span>
@@ -373,6 +390,7 @@ export class VaSelect {
           <slot onSlotchange={() => this.populateOptions()}></slot>
           <select
             class={selectClass}
+            aria-labelledby={arialabelledById}
             aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             id="options"
@@ -388,6 +406,11 @@ export class VaSelect {
             </option>
             {this.options}
           </select>
+          {errorLabelText && (
+            <span id={ERROR_LABEL_ID} class="usa-sr-only">
+              {errorLabelText}
+            </span>
+          )}
         </div>
         {isMessageSet(messageAriaDescribedby) && (
           <span id="input-message" class="usa-sr-only dd-privacy-hidden">
