@@ -469,7 +469,7 @@ const noop = () => {};
           }
         }
         // Add the option element
-          options.push(optionEl);
+        options.push(optionEl);
       }
     }
 
