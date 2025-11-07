@@ -209,6 +209,7 @@ export class VaFileInput {
 
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
+    this.fileContents = null;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0]);
     }
@@ -438,7 +439,7 @@ export class VaFileInput {
     if (
       this.fileType &&
       (this.fileType === 'application/pdf' ||
-        this.fileType.startsWith('image/'))
+        this.fileType.startsWith('image/')) && ! this.fileType.includes('heic')
     ) {
       reader.readAsDataURL(file);
     }

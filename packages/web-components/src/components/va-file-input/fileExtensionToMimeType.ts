@@ -51,4 +51,5 @@ export const extensionToMimeType: { [key: string]: string } = {
   '.htm': 'text/html',
   '.css': 'text/css',
   '.js': 'application/javascript',
+  '.heic': 'image/heic',
 };

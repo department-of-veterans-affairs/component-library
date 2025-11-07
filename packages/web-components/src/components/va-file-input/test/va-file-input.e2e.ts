@@ -473,4 +473,10 @@ describe('va-file-input', () => {
     expect(result.buttons[0].innerText).toEqual('CHANGE FILE');
     expect(result.buttons[1].innerText).toEqual('DELETE');
   });
+
+  it('accepts an .heic file and displays a generic image icon', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input accept=".heic" />`, 'test-image.heic');
+    const thumbnail = await page.find('va-file-input >>> svg')
+    expect(thumbnail).not.toBeNull();
+  })
 });
