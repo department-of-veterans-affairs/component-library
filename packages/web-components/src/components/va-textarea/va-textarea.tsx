@@ -342,6 +342,7 @@ export class VaTextarea {
             maxLength={charcount ? undefined : maxlength}
             value={value}
             part="input-type-textarea"
+            required={required || null}
           />
           {errorLabelText && (
             <span id={ERROR_LABEL_ID} class="usa-sr-only">
