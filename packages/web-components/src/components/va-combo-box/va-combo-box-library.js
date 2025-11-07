@@ -459,7 +459,7 @@ const noop = () => {};
             // Get an associated header optgroup element
             parentOptGroupId = optionEl.getAttribute('aria-describedby');
             // Ensure the header optgroup element is not already in the options array
-            if ((options.find(option => option.id === parentOptGroupId) === undefined)) {
+            if (options.find(option => option.id === parentOptGroupId) === undefined) {
               const parentOptgroupEl = selectEl.querySelector(
                 '#' + parentOptGroupId,
               );
