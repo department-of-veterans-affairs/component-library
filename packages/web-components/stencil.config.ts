@@ -33,10 +33,15 @@ export const config: Config = {
   },
   outputTargets: [
     reactOutputTarget({
-      componentCorePackage:
-        '@department-of-veterans-affairs/web-components/dist/types',
-      proxiesFile: './react-bindings/index.ts',
-      includeImportCustomElements: false,
+      outDir: './react-bindings',
+      /**
+       * give Stencil the import name of the hydrate module
+       */
+      hydrateModule: '@department-of-veterans-affairs/web-components/hydrate',
+      /**
+       * tell the server component where it would import the client version of the components
+       */
+      clientModule: '@department-of-veterans-affairs/web-components/react-bindings'
     }),
     {
       type: 'dist',
@@ -56,6 +61,11 @@ export const config: Config = {
     {
       type: 'dist-custom-elements',
       customElementsExportBehavior: 'single-export-module',
+      externalRuntime: false,
+    },
+    {
+      type: 'dist-hydrate-script',
+      dir: './hydrate',
     },
   ],
   testing: {

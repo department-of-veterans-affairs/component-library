@@ -24,6 +24,7 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 .env
 
+hydrate/
 react-bindings/
 component-docs.d.ts
 component-docs.json
