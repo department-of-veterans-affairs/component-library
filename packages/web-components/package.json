@@ -23,6 +23,8 @@
     "watch:stencil": "stencil build --watch",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
+    "typecheck": "tsc --noEmit",
+    "typecheck-bindings": "tsc -p tsconfig.bindings.json --noEmit",
     "generate": "stencil generate",
     "serve": "stencil build --dev --watch --serve"
   },
