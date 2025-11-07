@@ -2,15 +2,15 @@ name: 'Chromatic'
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize, ready_for_review]
+    types: [opened, reopened, synchronize, ready_for_review, labeled, unlabeled]
   push:
     branches:
       - main
 
 jobs:
   chromatic-deployment:
-    # Run if it's a push to main OR a PR that is NOT a draft
-    if: github.ref == 'refs/heads/main' || github.event.pull_request.draft == false
+    # Run if it's a push to main OR is a PR NOT a draft OR a PR that has the 'run chromatic workflow' label
+    if: github.ref == 'refs/heads/main' || github.event.pull_request.draft == false || contains(github.event.pull_request.labels.*.name, 'run chromatic workflow')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
