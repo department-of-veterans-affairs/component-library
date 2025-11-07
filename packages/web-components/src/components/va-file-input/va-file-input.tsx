@@ -595,7 +595,7 @@ export class VaFileInput {
             class="file-input"
             aria-label={`${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`}
             style={{
-              visibility: (uploadStatus === 'success' || uploadedFile || displayError) ? 'hidden' : 'unset',
+              visibility: (uploadStatus === 'success' || uploadedFile ||  this.internalError) ? 'hidden' : 'unset',
             }}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
