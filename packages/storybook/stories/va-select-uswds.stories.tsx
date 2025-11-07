@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
   applyFocus,
-  useErrorToggle,
-  errorToggleArgTypes,
 } from './wc-helpers';
-
+import { useValidateInput } from './useValidateInput';
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
@@ -21,7 +19,6 @@ export default {
   },
   argTypes: {
     ...propStructure(selectDocs),
-    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message']),
     'hide-required-text': {
       table: {
         disable: true,
@@ -60,8 +57,6 @@ const defaultArgs = {
   ],
   'use-add-button': false,
   'full-width': false,
-  'showToggleFocusButton': false,
-  'focusEl': null,
 };
 
 const Template = ({
@@ -78,12 +73,14 @@ const Template = ({
   'full-width': fullWidth,
   'label-header-level': labelHeaderLevel,
   'header-aria-describedby': headerAriaDescribedby,
-  showToggleFocusButton,
-  focusEl
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
-  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+  const componentRef = useRef(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
 
+  const handleSubmit = () => {
+    triggerValidation();
+  };
   return (
     <>
       {useAddButton && (
@@ -100,6 +97,7 @@ const Template = ({
         />
       )}
       <va-select
+        ref={componentRef}
         label={label}
         name={name}
         value={value}
@@ -112,17 +110,14 @@ const Template = ({
         full-width={fullWidth}
         label-header-level={labelHeaderLevel}
         header-aria-describedby={headerAriaDescribedby}
-        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         {modifiedOptions}
       </va-select>
-      {showToggleFocusButton && (
-          <va-button
-            text="Toggle error state"
-            onClick={handleClick}
-            class="vads-u-margin-top--2"
-          ></va-button>
-      )}
+      <va-button
+        text="Submit"
+        onClick={handleSubmit}
+        class="vads-u-margin-top--2"
+      ></va-button>
     </>
   );
 };
