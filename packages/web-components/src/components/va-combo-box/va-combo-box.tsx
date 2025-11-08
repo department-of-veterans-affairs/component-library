@@ -9,13 +9,17 @@ import {
   h,
   State,
   Fragment,
-  Watch, 
+  Watch,
   Listen
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
 import { comboBox } from './va-combo-box-library.js';
-import { isMessageSet } from '../../utils/utils';
+import {
+  isMessageSet,
+  buildErrorAriaLabel,
+  ERROR_LABEL_ID,
+} from '../../utils/utils';
 import { manageFlagIcon, handleRerender } from './utils';
 
 /**
@@ -88,7 +92,7 @@ export class VaComboBox {
 
 
   /**
-   * Whether to show error message text 
+   * Whether to show error message text
    */
   @Prop() showInputError?: boolean = true;
 
@@ -96,6 +100,7 @@ export class VaComboBox {
   updateErrorClass(newValue: string) {
     const input = this.el.shadowRoot.querySelector('input');
     if (input) {
+      input.setAttribute('aria-labelledby', ERROR_LABEL_ID);
       if (newValue) {
         input.classList.add('usa-input--error');
       } else {
@@ -131,12 +136,14 @@ export class VaComboBox {
       flagSpan.classList.add('flag', `flag-${this.value.toLowerCase()}`, 'dynamic-flag');
       comboBoxEl.appendChild(flagSpan);
     }
-    
     if (comboBoxElement) {
       comboBox.init(comboBoxElement, labelElement, this.value, this.isInVaInputTelephone);
       comboBox.on(comboBoxElement);
     }
     const inputElement = this.el.shadowRoot.querySelector('input');
+    if (inputElement && this.required) {
+      inputElement.setAttribute('required', true);
+    }
     if (inputElement && this.error) {
       inputElement.classList.add('usa-input--error');
     }
@@ -258,6 +265,12 @@ export class VaComboBox {
       'usa-combo-box': true,
       'input-telephone-wrapper': this.isInVaInputTelephone
     })
+    const errorLabelText = buildErrorAriaLabel({
+      errorText: error,
+      labelText: label,
+      hintText: hint,
+    });
+
     return (
       <Host>
         <label htmlFor="options" class={labelClass} id="options-label" part="label">
@@ -271,7 +284,7 @@ export class VaComboBox {
             {hint}
           </span>
         )}
-        <span id="input-error-message" role="alert">
+        <span id="input-error-message">
           {showInputError && error && (
             <Fragment>
               <span class="usa-sr-only">{i18next.t('error')}</span>
@@ -295,6 +308,11 @@ export class VaComboBox {
           >
             {this.options}
           </select>
+          {errorLabelText && (
+            <span id={ERROR_LABEL_ID} class="usa-sr-only">
+              {errorLabelText}
+            </span>
+          )}
         </div>
         {isMessageSet(messageAriaDescribedby) && (
           <span id="input-message" class="usa-sr-only dd-privacy-hidden">

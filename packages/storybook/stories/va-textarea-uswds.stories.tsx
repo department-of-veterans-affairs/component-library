@@ -4,8 +4,9 @@ import {
   propStructure,
   StoryDocs,
   applyFocus,
+  internalTestingAlert,
 } from './wc-helpers';
-import { useValidateInput } from './useValidateInput';
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
 const textareaDocs = getWebComponentDocs('va-textarea');
 
 export default {
@@ -40,6 +41,7 @@ const defaultArgs = {
   'form-description': null,
   'label-header-level': null,
   'header-aria-describedby': null,
+  'demoFocus': false,
 };
 
 const Template = ({
@@ -56,6 +58,7 @@ const Template = ({
   'message-aria-describedby': messageAriaDescribedby,
   'label-header-level': labelHeaderLevel,
   'header-aria-describedby': headerAriaDescribedby,
+  demoFocus,
 }) => {
   const componentRef = useRef(null);
   const { errorMsg, triggerValidation } = useValidateInput(componentRef);
@@ -66,13 +69,15 @@ const Template = ({
 
   return (
     <>
+      {demoFocus && internalTestingAlert(INTERNAL_TESTING_NOTE)}
       <va-textarea
+        // @ts-ignore - ref used for Storybook validation helper
         ref={componentRef}
         name={name}
         label={label}
         enable-analytics={enableAnalytics}
         required={required}
-        error={errorMsg}
+        error={error || errorMsg}
         hint={hint}
         maxlength={maxlength}
         value={value}
@@ -86,11 +91,13 @@ const Template = ({
         label-header-level={labelHeaderLevel}
         header-aria-describedby={headerAriaDescribedby}
       />
-      <va-button
-        text="Submit"
-        onClick={handleSubmit}
-        class="vads-u-margin-top--2"
-      ></va-button>
+      {demoFocus && (
+        <va-button
+          text="Submit"
+          onClick={handleSubmit}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
     </>
   );
 };
@@ -328,4 +335,15 @@ export const FormsPatternMultipleError =
 FormsPatternMultipleError.args = {
   ...defaultArgs,
   error: 'This is an error message',
+};
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
 };
