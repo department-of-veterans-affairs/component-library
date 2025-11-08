@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   getWebComponentDocs,
-  propStructure, StoryDocs,
+  propStructure,
+  StoryDocs,
+  internalTestingAlert,
 } from './wc-helpers';
-import { useValidateInput } from './useValidateInput';
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
 import { VaComboBox } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const comboBoxDocs = getWebComponentDocs('va-combo-box');
@@ -29,6 +31,7 @@ const defaultArgs = {
   required: false,
   error: undefined,
   messageAriaDescribedby: undefined,
+  demoFocus: false,
   onVaSelect: e => {
     console.log('Selected value:', e.detail.value);
   },
@@ -69,11 +72,13 @@ const Template = args => {
     placeholder,
     disabled,
     messageAriaDescribedby,
-    onVaSelect
+    onVaSelect,
+    demoFocus,
   } = args;
 
   const componentRef = useRef(null);
   const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+  const resolvedError = error ?? errorMsg ?? undefined;
 
   const handleSubmit = () => {
     triggerValidation();
@@ -81,6 +86,7 @@ const Template = args => {
 
   return (
     <>
+      {demoFocus && internalTestingAlert(INTERNAL_TESTING_NOTE)}
       <VaComboBox
         ref={componentRef}
         label={label}
@@ -96,11 +102,13 @@ const Template = args => {
       >
         {options}
       </VaComboBox>
-      <va-button
-        text="Submit"
-        onClick={handleSubmit}
-        class="vads-u-margin-top--2"
-      ></va-button>
+      {demoFocus && (
+        <va-button
+          text="Submit"
+          onClick={handleSubmit}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
     </>
   );
 };
@@ -181,3 +189,13 @@ OptionGroups.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
+};
