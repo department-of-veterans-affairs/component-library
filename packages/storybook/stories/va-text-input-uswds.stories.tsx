@@ -3,8 +3,10 @@ import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
+  internalTestingAlert,
 } from './wc-helpers';
-import { useValidateInput } from './useValidateInput';
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
+
 import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
@@ -78,6 +80,7 @@ const defaultArgs = {
   'input-suffix': undefined,
   'input-icon-suffix': undefined,
   'show-input-error': true,
+  'demoFocus': false,
 };
 
 const Template = ({
@@ -105,9 +108,11 @@ const Template = ({
   'input-suffix': inputSuffix,
   'input-icon-suffix': inputIconSuffix,
   'show-input-error': showInputError,
+  demoFocus,
 }) => {
   const componentRef = useRef(null);
   const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+  const resolvedError = error ?? errorMsg ?? undefined;
 
   const handleSubmit = () => {
     triggerValidation();
@@ -115,14 +120,16 @@ const Template = ({
 
   return (
     <>
+      {demoFocus && internalTestingAlert(INTERNAL_TESTING_NOTE)}
       <va-text-input
+        // @ts-ignore - ref used for Storybook validation helper
         ref={componentRef}
         name={name}
         label={label}
         autocomplete={autocomplete}
         enable-analytics={enableAnalytics}
         required={required}
-        error={errorMsg}
+        error={resolvedError}
         hint={hint}
         maxlength={maxlength}
         value={value}
@@ -146,11 +153,13 @@ const Template = ({
         input-icon-suffix={inputIconSuffix}
         show-input-error={showInputError}
       />
-      <va-button
-        text="Submit"
-        onClick={handleSubmit}
-        class="vads-u-margin-top--2"
-      ></va-button>
+      {demoFocus && (
+        <va-button
+          text="Submit"
+          onClick={handleSubmit}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
     </>
   );
 };
@@ -587,4 +596,15 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
+};
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
 };

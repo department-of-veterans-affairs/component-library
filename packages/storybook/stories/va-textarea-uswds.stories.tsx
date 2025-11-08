@@ -62,6 +62,7 @@ const Template = ({
 }) => {
   const componentRef = useRef(null);
   const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+  const resolvedError = error ?? errorMsg ?? undefined;
 
   const handleSubmit = () => {
     triggerValidation();
@@ -77,7 +78,7 @@ const Template = ({
         label={label}
         enable-analytics={enableAnalytics}
         required={required}
-        error={error || errorMsg}
+        error={resolvedError}
         hint={hint}
         maxlength={maxlength}
         value={value}

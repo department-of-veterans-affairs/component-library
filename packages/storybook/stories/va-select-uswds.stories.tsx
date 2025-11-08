@@ -4,8 +4,10 @@ import {
   propStructure,
   StoryDocs,
   applyFocus,
+  internalTestingAlert,
 } from './wc-helpers';
-import { useValidateInput } from './useValidateInput';
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
+
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
@@ -57,6 +59,7 @@ const defaultArgs = {
   ],
   'use-add-button': false,
   'full-width': false,
+  'demoFocus': false,
 };
 
 const Template = ({
@@ -73,10 +76,12 @@ const Template = ({
   'full-width': fullWidth,
   'label-header-level': labelHeaderLevel,
   'header-aria-describedby': headerAriaDescribedby,
+  demoFocus,
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
   const componentRef = useRef(null);
   const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+  const resolvedError = error ?? errorMsg ?? undefined;
 
   const handleSubmit = () => {
     triggerValidation();
@@ -97,12 +102,13 @@ const Template = ({
         />
       )}
       <va-select
+        // @ts-ignore - ref used for Storybook validation helper
         ref={componentRef}
         label={label}
         name={name}
         value={value}
         required={required}
-        error={errorMsg}
+        error={resolvedError}
         hint={hint}
         aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
@@ -113,11 +119,13 @@ const Template = ({
       >
         {modifiedOptions}
       </va-select>
-      <va-button
-        text="Submit"
-        onClick={handleSubmit}
-        class="vads-u-margin-top--2"
-      ></va-button>
+      {demoFocus && (
+        <va-button
+          text="Submit"
+          onClick={handleSubmit}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
     </>
   );
 };
@@ -418,4 +426,15 @@ FormsPatternMultiple.args = {
   'use-forms-pattern': 'multiple',
   'form-heading-level': 1,
   'form-heading': 'Select a branch of the armed forces',
+};
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
 };
