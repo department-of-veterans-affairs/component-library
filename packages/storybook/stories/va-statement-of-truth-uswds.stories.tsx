@@ -1,5 +1,11 @@
+import { useState, useEffect, useRef } from 'react';
 import { VaStatementOfTruth } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, StoryDocs } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  StoryDocs,
+  internalTestingAlert,
+} from './wc-helpers';
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
 
 VaStatementOfTruth.displayName = 'VaStatementOftruth';
 
@@ -29,6 +35,7 @@ const defaultArgs = {
   inputLabel: 'Your full name',
   checkboxLabel:
     'I certify the information above is correct and true to the best of my knowledge and belief.',
+  'demoFocus': false,
 };
 
 const Template = ({
@@ -41,14 +48,27 @@ const Template = ({
   checked,
   inputLabel,
   checkboxLabel,
+  demoFocus
 }) => {
+  const componentRef = useRef(null);
+  const { errorMsg, fieldErrors, triggerValidation } = useValidateInput(componentRef);
+  const resolvedInputError = inputError ?? fieldErrors['veteran-signature'] ?? errorMsg ?? undefined;
+  const resolvedCheckboxError = checkboxError ?? fieldErrors['veteran-certify'] ?? errorMsg ?? undefined;
+
+  const handleSubmit = () => {
+    triggerValidation();
+  };
+
   return (
     <div style={{ maxWidth: 600 }}>
+      {demoFocus && internalTestingAlert(INTERNAL_TESTING_NOTE)}
       <VaStatementOfTruth
+        // @ts-ignore - ref used for Storybook validation helper
+        ref={componentRef}
         heading={heading}
         inputValue={inputValue}
-        inputError={inputError}
-        checkboxError={checkboxError}
+        inputError={resolvedInputError}
+        checkboxError={resolvedCheckboxError}
         inputMessageAriaDescribedby={inputMessageAriaDescribedy}
         hideLegalNote={hideLegalNote}
         checked={checked}
@@ -62,6 +82,13 @@ const Template = ({
         architecto sequi minus. Ab iusto adipisci natus error repudiandae totam
         quo earum dolorum ullam sed, dicta quidem quod at sapiente. Obcaecati?
       </VaStatementOfTruth>
+      {demoFocus && (
+        <va-button
+          text="Submit"
+          onClick={handleSubmit}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
     </div>
   );
 };
@@ -120,4 +147,15 @@ export const WithoutLegalNote = DualTemplate.bind(null);
 WithoutLegalNote.args = {
   component1Args: { ...defaultArgs },
   component2Args: { ...defaultArgs, hideLegalNote: true },
+};
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
 };
