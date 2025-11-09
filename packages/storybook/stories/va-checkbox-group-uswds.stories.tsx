@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
   StoryDocs,
-  useErrorToggle,
-  errorToggleArgTypes,
   applyFocus,
 } from './wc-helpers';
+import { useValidateInput } from './useValidateInput';
 
 const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
 const checkbox = getWebComponentDocs('va-checkbox');
@@ -27,7 +26,6 @@ export default {
   },
   argTypes: {
     ...propStructure(checkBoxGroupDocs),
-    ...errorToggleArgTypes(['#error-demo-wrapper','#checkbox-error-message','.input-wrap']),
   }
 };
 
@@ -40,33 +38,39 @@ const Template = args => {
     hint,
     'label-header-level': labelHeaderLevel,
     'message-aria-describedby': messageAriaDescribedby,
-    showToggleFocusButton,
-    focusEl
+    demoFocus
   } = args;
 
-  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+  const componentRef = useRef(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+  const resolvedError = errorMsg ?? error;
+
+  const handleSubmit = () => {
+    triggerValidation();
+  };
 
   return (
     <>
       <va-checkbox-group
+        // @ts-ignore - ref used for Storybook validation helper
+        ref={componentRef}
         enable-analytics={enableAnalytics}
-        error={errorMsg}
+        error={resolvedError}
         label={label}
         required={required}
         hint={hint}
         label-header-level={labelHeaderLevel}
         message-aria-describedby={messageAriaDescribedby}
-        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         <va-checkbox label="Sojourner Truth" name="example" value="1" />
         <va-checkbox label="Frederick Douglass" name="example" value="2" />
         <va-checkbox label="Booker T. Washington" name="example" value="3" />
         <va-checkbox label="George Washington Carver" name="example" value="4" />
       </va-checkbox-group>
-      {showToggleFocusButton && (
+      {demoFocus && (
         <va-button
-          text="Toggle error state"
-          onClick={handleClick}
+          text="Submit"
+          onClick={handleSubmit}
           class="vads-u-margin-top--2"
         ></va-button>
       )}
@@ -165,8 +169,7 @@ const defaultArgs = {
   'form-heading': null,
   'form-description': null,
   'message-aria-describedby': null,
-  'showToggleFocusButton': false,
-  'focusEl': null,
+  'demoFocus': false,
 };
 
 export const Default = Template.bind(null);
@@ -442,4 +445,15 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
+};
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
 };

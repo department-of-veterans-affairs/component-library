@@ -3,29 +3,141 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 // Note to explain intent of storybook demo
 export const INTERNAL_TESTING_NOTE =
     'recommended focus management when simulated validation runs on the component. ' +
-    'When the field is empty, clicking the "Submit" button should trigger required ' +
+    'When the field is empty, clicking the \"Submit\" button should trigger required ' +
     'field validation and move focus inside the form field. Screen reader users ' +
     'should hear the error message and other relevant context';
 
-// DOM traversal utilities
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
 const HIDDEN_FILTER = ':not([aria-hidden="true"]):not([hidden])';
 const INPUT_SELECTOR = `input${HIDDEN_FILTER}, textarea${HIDDEN_FILTER}, select${HIDDEN_FILTER}`;
-const ERROR_ATTRIBUTES = ['error', 'input-error', 'checkbox-error'] as const;
+const ERROR_ATTRIBUTES = ['error', 'input-error', 'checkbox-error', 'group-option-error'] as const;
 
-// Component type detection
+// ============================================================================
+// COMPONENT TYPE DETECTION
+//
+// VA form components fall into three error structure categories:
+//
+// CATEGORY 1 - DIRECT ERROR
+//   Component receives error, input is in shadow DOM, no child VA components
+//   Examples: va-text-input, va-textarea, va-select, va-memorable-date
+//   Error handling: Set 'error' attribute on component only
+//
+// CATEGORY 2 - CASCADING ERROR
+//   Both parent and child VA components receive error
+//   Examples: (Future/theoretical - not currently implemented)
+//   Error handling: Set 'error' attribute on both parent and children
+//
+// CATEGORY 3 - GROUP COMPONENTS
+//   Parent gets error, children get alternative error prop
+//   Examples: va-radio (with va-radio-option), va-checkbox-group (with va-checkbox)
+//   Error handling: Set 'error' on parent, 'groupOptionError' on children
+// ============================================================================
+
 const isVaComponent = (node: Element | null | undefined): node is HTMLElement =>
   !!node && node.tagName.toLowerCase().startsWith('va-');
 
+// Category 3: Group component type detection
 const isCheckboxComponent = (component: HTMLElement): boolean =>
   component.tagName.toLowerCase().includes('checkbox');
 
-// Label extraction utility
+const isRadioComponent = (component: HTMLElement): boolean =>
+  component.tagName.toLowerCase() === 'va-radio';
+
+const isCheckboxGroupComponent = (component: HTMLElement): boolean =>
+  component.tagName.toLowerCase() === 'va-checkbox-group';
+
+const isGroupComponent = (component: HTMLElement): boolean =>
+  isRadioComponent(component) || isCheckboxGroupComponent(component);
+
+// ============================================================================
+// CATEGORY 3: GROUP COMPONENT UTILITIES
+// Helpers specific to va-radio and va-checkbox-group
+// ============================================================================
+
+const getCheckboxElements = (component: HTMLElement): HTMLElement[] =>
+  Array.from(component.querySelectorAll('va-checkbox')) as HTMLElement[];
+
+const getRadioOptionElements = (component: HTMLElement): HTMLElement[] =>
+  Array.from(component.querySelectorAll('va-radio-option')) as HTMLElement[];
+
+const getCheckboxInput = (checkbox: HTMLElement): HTMLInputElement | null =>
+  queryInBothDOMs<HTMLInputElement>(checkbox, 'input[type="checkbox"]');
+
+const getRadioInput = (option: HTMLElement): HTMLInputElement | null =>
+  queryInBothDOMs<HTMLInputElement>(option, 'input[type="radio"]');
+
+const toBoolean = (value: unknown): boolean | null => {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim().toLowerCase();
+    if (normalized === 'true') return true;
+    if (normalized === 'false') return false;
+  }
+
+  return null;
+};
+
+const getBooleanAttribute = (element: HTMLElement, attributeName: string): boolean | null => {
+  if (!element.hasAttribute(attributeName)) {
+    return null;
+  }
+
+  const value = element.getAttribute(attributeName);
+  if (value === null || value === '') {
+    return true;
+  }
+
+  const normalized = value.trim().toLowerCase();
+  if (normalized === 'false') return false;
+  if (normalized === 'true') return true;
+
+  return true;
+};
+
+const isElementChecked = (
+  element: HTMLElement,
+  input: HTMLInputElement | null
+): boolean => {
+  if (input?.checked) {
+    return true;
+  }
+
+  const ariaChecked = input?.getAttribute('aria-checked');
+  if (ariaChecked === 'true') {
+    return true;
+  }
+  if (ariaChecked === 'false') {
+    return false;
+  }
+
+  const propValue = toBoolean((element as any).checked);
+  if (propValue !== null) {
+    return propValue;
+  }
+
+  const attrValue = getBooleanAttribute(element, 'checked');
+  if (attrValue !== null) {
+    return attrValue;
+  }
+
+  return false;
+};
+
+// ============================================================================
+// SHARED UTILITIES (All Categories)
+// ============================================================================
+
 const getComponentLabel = (component: HTMLElement): string =>
   component.getAttribute('label') ||
   component.getAttribute('name') ||
   component.tagName.toLowerCase().replace('va-', '');
 
-// Error message generation
 const createErrorMessage = (component: HTMLElement, defaultError: string): string => {
   const label = getComponentLabel(component);
   return isCheckboxComponent(component)
@@ -33,14 +145,13 @@ const createErrorMessage = (component: HTMLElement, defaultError: string): strin
     : `${defaultError}: ${label} is required`;
 };
 
-
 /**
  * Queries for an element in both shadow DOM and light DOM, prioritizing shadow DOM.
  *
  * This function first searches within the shadow DOM of the provided element,
  * and falls back to searching the light DOM if no match is found in the shadow DOM.
- * This is particularly useful for VA (Veterans Affairs) components that typically
- * place their elements within shadow DOM.
+ * This is particularly useful for VA components that typically
+ * place their elements within shadow DOM, but sometimes do not.
  *
  * @template T - The type of element to return, extending Element
  * @param element - The HTML element to search within
@@ -69,13 +180,60 @@ const queryInBothDOMs = <T extends Element = Element>(
  * @param defaultError - The default error message to exclude from results
  * @returns The custom error text if found, otherwise null
  */
-const getErrorText = (element: HTMLElement, defaultError: string): string | null => {
+const readErrorFromElement = (
+  element: HTMLElement | null,
+  defaultError: string
+): string | null => {
+  if (!element) return null;
+
   for (const attr of ERROR_ATTRIBUTES) {
     const value = element.getAttribute(attr);
-    if (value && value.trim() && !value.startsWith(defaultError)) {
-      return value;
+    const normalizedValue = value?.trim();
+    if (!normalizedValue) continue;
+
+    if (normalizedValue.startsWith(defaultError)) continue;
+
+    return value;
+  }
+
+  return null;
+};
+
+/**
+ * Retrieves error text from an HTML element, optionally checking descendant elements.
+ *
+ * @param element - The HTML element to check for error text
+ * @param defaultError - The default error message to use if no specific error is found
+ * @param includeDescendants - Whether to search descendant VA components for errors (defaults to false)
+ * @returns The error text if found, or null if no errors are present
+ *
+ * @remarks
+ * This function first checks the provided element directly for error text. If no error is found
+ * and includeDescendants is true, it will search through all descendant VA components for errors.
+ * The first error found is returned.
+ */
+const getErrorText = (
+  element: HTMLElement,
+  defaultError: string,
+  includeDescendants: boolean = false
+): string | null => {
+  const directError = readErrorFromElement(element, defaultError);
+  if (directError) {
+    return directError;
+  }
+
+  if (!includeDescendants) {
+    return null;
+  }
+
+  const childComponents = getDescendantVaComponents(element);
+  for (const child of childComponents) {
+    const groupOptionError = readErrorFromElement(child, defaultError);
+    if (groupOptionError) {
+      return groupOptionError;
     }
   }
+
   return null;
 };
 
@@ -165,7 +323,6 @@ const getDescendantVaComponents = (parent: HTMLElement): HTMLElement[] => {
   return results;
 };
 
-
 /**
  * Retrieves the components that need to be validated within a given HTML element.
  *
@@ -182,31 +339,66 @@ const getComponentsToValidate = (component: HTMLElement): HTMLElement[] => {
   const childComponents = getDescendantVaComponents(component);
 
   if (childComponents.length > 0) {
-    return childComponents;
+    return [component, ...childComponents];
   }
 
   return [component];
 };
 
-/**
- * Determines whether a given HTML element component has a meaningful value.
- *
- * For checkbox-like components (elements with 'checkbox' in tag name, 'checked' attribute,
- * or 'checked' property), this function checks if the component is checked.
- *
- * For all other components, this function retrieves the current value and checks
- * if it contains non-whitespace content.
- *
- * @param component - The HTML element to validate for having a value
- * @returns `true` if the component has a meaningful value, `false` otherwise
- */
-/**
- * Checks if a checkbox component is checked
- */
-const isCheckboxChecked = (component: HTMLElement): boolean =>
-  !!(component as any).checked || component.hasAttribute('checked');
+// ============================================================================
+// VALUE DETECTION (All Categories)
+// ============================================================================
 
+// Category 1: Direct error components (single checkbox)
+const isCheckboxChecked = (component: HTMLElement): boolean =>
+  isElementChecked(component, getCheckboxInput(component));
+
+// Category 3: Group component - va-radio
+const radioHasValue = (component: HTMLElement): boolean => {
+  const options = getRadioOptionElements(component);
+  return options.some(option => isElementChecked(option, getRadioInput(option)));
+};
+
+// Category 3: Group component - va-checkbox-group
+/**
+ * Checks if any checkbox within a checkbox group has a checked value.
+ *
+ * This function examines multiple sources to determine if a checkbox is checked:
+ * - The input element's `checked` property
+ * - The `aria-checked` attribute value
+ * - The component's `checked` property
+ * - The `checked` attribute on the element
+ *
+ * @param component - The HTML element containing the checkbox group
+ * @returns `true` if at least one checkbox in the group is checked, `false` otherwise
+ */
+const checkboxGroupHasValue = (component: HTMLElement): boolean => {
+  return getCheckboxElements(component).some(checkbox => {
+    return isElementChecked(checkbox, getCheckboxInput(checkbox));
+  });
+};
+
+/**
+ * Determines whether a given HTML component has a value.
+ *
+ * Handles different component types including radio buttons, checkbox groups,
+ * individual checkboxes, and text-based inputs. For radio and checkbox components,
+ * it checks if they are selected/checked. For other components, it validates
+ * that the trimmed value has a length greater than 0.
+ *
+ * @param component - The HTML element to check for a value
+ * @returns `true` if the component has a value, `false` otherwise
+ */
 const componentHasValue = (component: HTMLElement): boolean => {
+
+  if (isRadioComponent(component)) {
+    return radioHasValue(component);
+  }
+
+  if (isCheckboxGroupComponent(component)) {
+    return checkboxGroupHasValue(component);
+  }
+
   if (isCheckboxComponent(component)) {
     return isCheckboxChecked(component);
   }
@@ -215,31 +407,101 @@ const componentHasValue = (component: HTMLElement): boolean => {
   return value.trim().length > 0;
 };
 
+// ============================================================================
+// ERROR HANDLING BY CATEGORY
+// ============================================================================
+
 /**
- * Sets or removes an error attribute on a DOM element.
+ * CATEGORY 3 HELPER: Retrieves child elements from a group component.
  *
- * @param component - The HTML element to modify
- * @param errorMessage - The error message to set as an attribute value, or null to remove the error attribute
- * @returns void
+ * @param component - The HTML element to extract children from
+ * @returns An array of HTML elements that are children of the group component.
+ *          Returns checkbox elements if the component is a checkbox group,
+ *          radio option elements if the component is a radio component,
+ *          or an empty array if the component is neither type.
  */
-const setComponentError = (component: HTMLElement, errorMessage: string | null): void => {
-  if (errorMessage) {
-    component.setAttribute('error', errorMessage);
+const getGroupChildren = (component: HTMLElement): HTMLElement[] => {
+  if (isCheckboxGroupComponent(component)) {
+    return getCheckboxElements(component);
+  }
+
+  if (isRadioComponent(component)) {
+    return getRadioOptionElements(component);
+  }
+
+  return [];
+};
+
+type ErrorProperty = 'error' | 'groupOptionError';
+
+const syncAttributeAndProperty = (
+  element: HTMLElement,
+  attributeName: string,
+  propertyName: ErrorProperty,
+  message: string | null
+): void => {
+  if (message) {
+    element.setAttribute(attributeName, message);
   } else {
-    component.removeAttribute('error');
+    element.removeAttribute(attributeName);
+  }
+
+  if (propertyName in element) {
+    try {
+      (element as any)[propertyName] = message ?? undefined;
+    } catch (err) {
+      // Ignore read-only props
+    }
   }
 };
 
 /**
- * Validates all required components, sets errors on all invalid ones,
- * and returns the first error found (for focus management)
+ * CATEGORY 3: Applies alternative error state to children of group components.
+ *
+ * Group components (va-radio, va-checkbox-group) use a different error property
+ * for their children: 'groupOptionError' instead of 'error'. This allows the parent
+ * to display error styling while children display alternative visual indicators.
+ *
+ * @param component - The HTML element to check and potentially apply child errors to
+ * @param message - The error message to apply to child components, or null to clear the error
+ * @returns void
  */
+const applygroupOptionErrorToGroup = (component: HTMLElement, message: string | null): void => {
+  if (!isGroupComponent(component)) {
+    return;
+  }
+
+  const children = getGroupChildren(component);
+  children.forEach(child => syncAttributeAndProperty(child, 'group-option-error', 'groupOptionError', message));
+};
+
+/**
+ * Sets or removes error on a component, handling all three error structure categories.
+ *
+ * CATEGORY 1 (Direct Error): Sets 'error' on the component only
+ * CATEGORY 2 (Cascading Error): Would set 'error' on parent and children (not yet implemented)
+ * CATEGORY 3 (Group Components): Sets 'error' on parent, 'groupOptionError' on children
+ *
+ * @param component - The HTML element to modify
+ * @param errorMessage - The error message to set, or null to remove error attributes
+ */
+const setComponentError = (component: HTMLElement, errorMessage: string | null): void => {
+  // Category 3: Set alternative error on children for group components
+  applygroupOptionErrorToGroup(component, errorMessage);
+
+  // All categories: Set error on the parent component
+  syncAttributeAndProperty(component, 'error', 'error', errorMessage);
+};
+
+// ============================================================================
+// VALIDATION (All Categories)
+// ============================================================================
+
 /**
  * Validates a collection of HTML form components and manages their error states.
  *
- * This function iterates through the provided components, checks if required components
- * have values, and sets appropriate error messages. It handles both regular form inputs
- * and checkbox components with different error message formats.
+ * Handles all three error structure categories by delegating to setComponentError,
+ * which applies the appropriate error handling based on component type.
  *
  * @param componentsToCheck - Array of HTML elements to validate
  * @param defaultError - Base error message to prepend to specific field errors
@@ -285,11 +547,41 @@ const validateComponents = (
   };
 };
 
+// ============================================================================
+// FOCUS MANAGEMENT (All Categories)
+// ============================================================================
+
+/**
+ * CATEGORY 3: Finds the appropriate focus target for group components.
+ * Returns the input element of the first child (va-radio-option or va-checkbox).
+ */
+const findGroupFocusTarget = (component: HTMLElement): HTMLElement | null => {
+  if (isRadioComponent(component)) {
+    const firstOption = component.querySelector('va-radio-option') as HTMLElement | null;
+    if (firstOption) {
+      const input = getRadioInput(firstOption);
+      return input || firstOption;
+    }
+  }
+
+  if (isCheckboxGroupComponent(component)) {
+    const firstCheckbox = component.querySelector('va-checkbox') as HTMLElement | null;
+    if (firstCheckbox) {
+      const input = getCheckboxInput(firstCheckbox);
+      return input || firstCheckbox;
+    }
+  }
+
+  return null;
+};
+
 /**
  * Finds the appropriate HTML element to focus within a given component.
  *
- * This function searches for focusable input elements, prioritizing shadow DOM
- * for VA components before falling back to light DOM.
+ * This function searches for focusable input elements with special handling for:
+ * - CATEGORY 3 (Group components): focuses the first child's input
+ * - CATEGORY 1/2 (VA components): prioritizes shadow DOM over light DOM
+ * - Components with group-option-error attributes: recursively finds focus target
  *
  * @param component - The HTML element to search within, or null
  * @returns The focusable HTML element if found, the original component as fallback, or null if no component provided
@@ -297,7 +589,13 @@ const validateComponents = (
 const findFocusTarget = (component: HTMLElement | null): HTMLElement | null => {
   if (!component) return null;
 
-  // For VA components, check shadow DOM first
+  // Special handling for group components (Category 3)
+  if (isGroupComponent(component)) {
+    const groupTarget = findGroupFocusTarget(component);
+    if (groupTarget) return groupTarget;
+  }
+
+  // For VA components, check shadow DOM first (Category 1)
   if (isVaComponent(component)) {
     const shadowInput = component.shadowRoot?.querySelector(INPUT_SELECTOR) as HTMLElement | null;
     if (shadowInput) return shadowInput;
@@ -305,8 +603,24 @@ const findFocusTarget = (component: HTMLElement | null): HTMLElement | null => {
 
   // Fall back to light DOM
   const lightInput = component.querySelector(INPUT_SELECTOR) as HTMLElement | null;
-  return lightInput || component;
+  if (lightInput) return lightInput;
+
+  // If no direct focus target found, attempt to focus the first descendant with a group-option-error
+  const descendantWithGroupOptionError = getDescendantVaComponents(component).find(descendant =>
+    descendant.hasAttribute('group-option-error') && descendant.getAttribute('group-option-error')?.trim()
+  );
+
+  if (descendantWithGroupOptionError) {
+    const childTarget = findFocusTarget(descendantWithGroupOptionError);
+    if (childTarget) return childTarget;
+  }
+
+  return component;
 };
+
+// ============================================================================
+// REACT HOOK (Main Export)
+// ============================================================================
 
 /**
  * Hook for simulating form validation and focus management in Storybook stories.
@@ -347,7 +661,7 @@ export function useValidateInput(
     if (!element) return;
 
     // Priority 1: Check for existing internal component errors (exclude demo errors)
-    const internalError = getErrorText(element, defaultError);
+  const internalError = getErrorText(element, defaultError, true);
     if (internalError) {
       setValidationState(internalError, true, findFocusTarget(element));
       return;

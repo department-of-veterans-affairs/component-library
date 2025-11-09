@@ -6,6 +6,10 @@ import {
   Prop,
   h,
 } from '@stencil/core';
+import {
+  buildErrorAriaLabel,
+  ERROR_LABEL_ID,
+} from '../../utils/utils';
 import classnames from 'classnames';
 
 @Component({
@@ -30,6 +34,17 @@ export class VaRadioOption {
    * The value attribute for the input element.
    */
   @Prop() value!: string;
+
+  /**
+   * Optional error message applied directly to this option.
+   */
+  @Prop() error?: string;
+
+  /**
+   * Error message forwarded from a parent component.
+   * @internal
+   */
+  @Prop({ attribute: 'group-option-error' }) groupOptionError?: string;
 
   /**
    * Whether or not the option is selected.
@@ -70,13 +85,32 @@ export class VaRadioOption {
   }
 
   render() {
-    const { checked, name, value, label, disabled, tile, description } = this;
+    const {
+      checked,
+      name,
+      value,
+      label,
+      disabled,
+      tile,
+      description,
+    } = this;
     const id = this.el.id || name + value;
 
     const containerClass = classnames('usa-radio', {
       'va-radio-option__container--tile': tile,
       'va-radio-option__container--tile--checked': tile && checked,
     });
+
+    const resolvedError = this.groupOptionError || '';
+
+    const errorLabelText = buildErrorAriaLabel({
+      errorText: resolvedError,
+      labelText: label,
+    });
+
+    const ariaLabelledById = errorLabelText
+    ? ERROR_LABEL_ID
+    : '';
     return (
       <div class={containerClass} onClick={() => this.handleChange()}>
         <input
@@ -87,6 +121,7 @@ export class VaRadioOption {
           checked={checked}
           disabled={disabled}
           id={id + 'input'}
+          aria-labelledby={ariaLabelledById}
         />
         <label class="usa-radio__label" htmlFor={id + 'input'}>
           {label}
@@ -99,6 +134,11 @@ export class VaRadioOption {
             </span>
           )}
         </label>
+        {errorLabelText && (
+          <span id={ariaLabelledById} class="usa-sr-only">
+            {errorLabelText}
+          </span>
+        )}
       </div>
     );
   }

@@ -12,7 +12,12 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
-import { isInteractiveLinkOrButton, isMessageSet } from '../../utils/utils';
+import {
+  isInteractiveLinkOrButton,
+  isMessageSet,
+  buildErrorAriaLabel,
+  ERROR_LABEL_ID,
+} from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -51,6 +56,12 @@ export class VaCheckbox {
    * The error message to render.
    */
   @Prop({ reflect: true }) error?: string;
+
+  /**
+   * The error message forwarded from a parent component for accessibility context.
+   * @internal
+   */
+  @Prop({ attribute: 'group-option-error' }) groupOptionError?: string;
 
   /**
    * The description to render. If this prop exists, va-checkbox will render it
@@ -224,7 +235,6 @@ export class VaCheckbox {
     const ariaDescribedbyIds =
       [
         messageAriaDescribedby ? 'input-message' : '',
-        error ? 'checkbox-error-message' : '',
         description || hasDescriptionSlot ? 'description' : '',
       ]
         .filter(Boolean)
@@ -241,6 +251,18 @@ export class VaCheckbox {
       ariaChecked = checked;
     }
 
+    const resolvedError = error || this.groupOptionError || '';
+
+    const errorLabelText = buildErrorAriaLabel({
+      errorText: resolvedError,
+      labelText: label,
+      hintText: hint,
+    });
+
+    const ariaLabelledById = errorLabelText
+    ? ERROR_LABEL_ID
+    : '';
+
     return (
       <Host>
         {description && (
@@ -255,7 +277,7 @@ export class VaCheckbox {
         )}
 
         {hint && <span class="usa-hint">{hint}</span>}
-        <span id="checkbox-error-message" role="alert">
+        <span id="checkbox-error-message">
           {error && (
             <Fragment>
               <span class="usa-sr-only">{i18next.t('error')}</span>
@@ -271,10 +293,12 @@ export class VaCheckbox {
             id="checkbox-element"
             checked={checked}
             aria-describedby={ariaDescribedbyIds}
-            aria-invalid={error ? 'true' : 'false'}
+            aria-labelledby={ariaLabelledById}
+            aria-invalid={resolvedError ? 'true' : 'false'}
             disabled={disabled}
             data-indeterminate={indeterminate && !checked}
             aria-checked={ariaChecked}
+            required={required}
           />
           <label htmlFor="checkbox-element" class="va-checkbox__label">
             <span part="label">{label}</span>&nbsp;
@@ -288,6 +312,11 @@ export class VaCheckbox {
             )}
             <slot name="internal-description" />
           </label>
+          {errorLabelText && (
+            <span id={ERROR_LABEL_ID} class="usa-sr-only">
+              {errorLabelText}
+            </span>
+          )}
           {isMessageSet(messageAriaDescribedby) && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">
               {messageAriaDescribedby}

@@ -1,9 +1,15 @@
-import { useState, useEffect } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { useState, useEffect, useRef } from 'react';
+import {
+  getWebComponentDocs,
+  propStructure,
+  StoryDocs,
+  internalTestingAlert,
+ } from './wc-helpers';
 import {
   VaCheckbox,
   VaModal,
 } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
 
 VaCheckbox.displayName = 'VaCheckbox';
 
@@ -32,6 +38,7 @@ const defaultArgs = {
   'message-aria-describedby': 'Optional description text for screen readers',
   'indeterminate': false,
   'value': 'Test',
+  'demoFocus': false,
 };
 
 const vaCheckbox = args => {
@@ -47,24 +54,43 @@ const vaCheckbox = args => {
     tile,
     'message-aria-describedby': messageAriaDescribedBy,
     indeterminate,
+    demoFocus,
     ...rest
   } = args;
+    const componentRef = useRef(null);
+    const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+    const resolvedError = error ?? errorMsg ?? undefined;
+    const handleSubmit = () => {
+      triggerValidation();
+    };
+
   return (
-    <va-checkbox
-      checked={checked}
-      description={description}
-      enable-analytics={enableAnalytics}
-      checkbox-description={checkboxDescription}
-      error={error}
-      label={label}
-      hint={hint}
-      required={required}
-      tile={tile}
-      onBlur={e => console.log(e)}
-      message-aria-describedby={messageAriaDescribedBy}
-      indeterminate={indeterminate}
-      value={rest.value}
-    />
+    <>
+      <va-checkbox
+        // @ts-ignore - ref used for Storybook validation helper
+        ref={componentRef}
+        checked={checked}
+        description={description}
+        enable-analytics={enableAnalytics}
+        checkbox-description={checkboxDescription}
+        error={resolvedError}
+        label={label}
+        hint={hint}
+        required={required}
+        tile={tile}
+        onBlur={e => console.log(e)}
+        message-aria-describedby={messageAriaDescribedBy}
+        indeterminate={indeterminate}
+        value={rest.value}
+      />
+      {demoFocus && (
+        <va-button
+          text="Submit"
+          onClick={handleSubmit}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
   );
 };
 
@@ -352,3 +378,14 @@ Internationalization.parameters = {
 
 export const Indeterminate = IndeterminateTemplate.bind(null);
 Indeterminate.args = { ...defaultArgs };
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
+};
