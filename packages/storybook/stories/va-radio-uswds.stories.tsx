@@ -1,20 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   VaRadio,
   VaRadioOption,
 } from '@department-of-veterans-affairs/web-components/react-bindings';
-import {
-  applyFocus,
-  useErrorToggle,
-  errorToggleArgTypes,
-} from './wc-helpers';
-
+import { applyFocus } from './wc-helpers';
 import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
   StoryDocs,
+  internalTestingAlert,
 } from './wc-helpers';
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
 
 VaRadio.displayName = 'VaRadio';
 VaRadioOption.displayName = 'VaRadioOption';
@@ -33,12 +30,11 @@ export default {
     },
   },
   argTypes: {
-      ...propStructure(radioDocs),
-      ...errorToggleArgTypes(['#error-demo-wrapper','#radio-error-message','.input-wrap']),
+    ...propStructure(radioDocs),
   },
 };
 
-const vaRadioConst = args => {
+const VaRadioStory = args => {
   const {
     'enable-analytics': enableAnalytics,
     error,
@@ -48,33 +44,40 @@ const vaRadioConst = args => {
     required,
     'label-header-level': labelHeaderLevel,
     'header-aria-describedby': headerAriaDescribedby,
-    showToggleFocusButton,
-    focusEl
+    demoFocus,
   } = args;
 
-  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+  const componentRef = useRef<HTMLElement | null>(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+  const resolvedError = error ?? errorMsg ?? undefined;
+
+  const handleSubmit = () => {
+    triggerValidation();
+  };
 
   return (
     <>
+      {demoFocus && internalTestingAlert(INTERNAL_TESTING_NOTE)}
       <va-radio
+        // @ts-ignore - ref used for Storybook validation helper
+        ref={componentRef}
         enable-analytics={enableAnalytics}
-        error={errorMsg}
+        error={resolvedError}
         label={label}
         required={required}
         hint={hint}
         label-header-level={labelHeaderLevel}
         header-aria-describedby={headerAriaDescribedby}
-        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         <va-radio-option label="Sojourner Truth" name={name} value="1" />
         <va-radio-option label="Frederick Douglass" name={name} value="2" />
         <va-radio-option label="Booker T. Washington" name={name} value="3" />
         <va-radio-option label="George Washington Carver" name={name} value="4" />
       </va-radio>
-      {showToggleFocusButton && (
+      {demoFocus && (
         <va-button
-          text="Toggle error state"
-          onClick={handleClick}
+          text="Submit"
+          onClick={handleSubmit}
           class="vads-u-margin-top--2"
         ></va-button>
       )}
@@ -83,7 +86,7 @@ const vaRadioConst = args => {
   );
 };
 
-const Template = args => vaRadioConst(args);
+const Template = args => <VaRadioStory {...args} />;
 
 const I18nTemplate = args => {
   const [lang, setLang] = useState('en');
@@ -99,7 +102,7 @@ const I18nTemplate = args => {
       <va-button onClick={e => setLang('tl')} text="Tagalog" />
       <br />
       <br />
-      {vaRadioConst(args)}
+      <VaRadioStory {...args} />
     </div>
   );
 };
@@ -176,11 +179,22 @@ const USWDSTiled = ({
   required,
   hint,
 }) => {
+  const componentRef = useRef<HTMLElement | null>(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+
+  const handleSubmit = () => {
+    triggerValidation();
+  };
+
+  const resolvedError = errorMsg ?? error ?? undefined;
+
   return (
     <>
       <va-radio
+        // @ts-ignore - ref used for Storybook validation helper
+        ref={componentRef}
         enable-analytics={enableAnalytics}
-        error={error}
+        error={resolvedError}
         label={label}
         required={required}
         hint={hint}
@@ -225,21 +239,26 @@ const USWDSTiledError = ({
   label,
   required,
   hint,
-  showToggleFocusButton,
-  focusEl
 }) => {
+  const componentRef = useRef<HTMLElement | null>(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
 
-  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+  const handleSubmit = () => {
+    triggerValidation();
+  };
+
+  const resolvedError = errorMsg ?? error ?? undefined;
 
   return (
     <>
       <va-radio
+        // @ts-ignore - ref used for Storybook validation helper
+        ref={componentRef}
         enable-analytics={enableAnalytics}
-        error={errorMsg}
+        error={resolvedError}
         label={label}
         required={required}
         hint={hint}
-        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         <va-radio-option
           id="sojourner-truth2"
@@ -264,13 +283,11 @@ const USWDSTiledError = ({
           tile
         />
       </va-radio>
-      {showToggleFocusButton && (
-        <va-button
-          text="Toggle error state"
-          onClick={handleClick}
-          class="vads-u-margin-top--2"
-        ></va-button>
-      )}
+      <va-button
+        text="Submit"
+        onClick={handleSubmit}
+        class="vads-u-margin-top--2"
+      ></va-button>
     </>
   );
 };
@@ -431,8 +448,7 @@ const defaultArgs = {
   'form-heading-level': null,
   'form-heading': null,
   'form-description': null,
-  'showToggleFocusButton': false,
-  'focusEl': null,
+  'demoFocus': false,
 };
 
 export const Default = Template.bind(null);
@@ -440,6 +456,12 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(radioDocs);
+
+export const Required = Template.bind(null);
+Required.args = {
+  ...defaultArgs,
+  required: true,
+};
 
 export const Tile = USWDSTiled.bind(null);
 Tile.args = {
@@ -562,4 +584,16 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
+};
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+  name: 'demoFocus'
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
 };

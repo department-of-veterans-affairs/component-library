@@ -132,7 +132,8 @@ export class VaComboBox {
     if (this.isInVaInputTelephone) {
       const comboBoxEl = this.el.shadowRoot.querySelector('div.usa-combo-box');
       const flagSpan = document.createElement('span');
-      this.value = !!this.value ? this.value : 'US';
+  // eslint-disable-next-line i18next/no-literal-string
+  this.value = !!this.value ? this.value : 'US';
       flagSpan.classList.add('flag', `flag-${this.value.toLowerCase()}`, 'dynamic-flag');
       comboBoxEl.appendChild(flagSpan);
     }
@@ -141,13 +142,42 @@ export class VaComboBox {
       comboBox.on(comboBoxElement);
     }
     const inputElement = this.el.shadowRoot.querySelector('input');
-    if (inputElement && this.required) {
-      inputElement.setAttribute('required', true);
-    }
-    if (inputElement && this.error) {
-      inputElement.classList.add('usa-input--error');
+    if (!inputElement) {
+      return;
     }
 
+    // eslint-disable-next-line i18next/no-literal-string
+    inputElement.toggleAttribute('required', !!this.required);
+
+    const errorLabelText = buildErrorAriaLabel({
+      errorText: this.error,
+      labelText: this.label,
+      hintText: this.hint,
+    });
+
+    if (errorLabelText) {
+      const existingAriaLabelledby = inputElement.getAttribute('aria-labelledby');
+      const labelledByIds = [existingAriaLabelledby, ERROR_LABEL_ID]
+        .filter(Boolean)
+        .join(' ')
+        .trim();
+
+      if (labelledByIds) {
+        // eslint-disable-next-line i18next/no-literal-string
+        inputElement.setAttribute('aria-labelledby', labelledByIds);
+      }
+    } else {
+      // eslint-disable-next-line i18next/no-literal-string
+      inputElement.removeAttribute('aria-labelledby');
+    }
+
+    if (this.error) {
+      inputElement.classList.add('usa-input--error');
+    } else {
+      inputElement.classList.remove('usa-input--error');
+    }
+
+    // eslint-disable-next-line i18next/no-literal-string
     const errorID = 'input-error-message';
     const ariaDescribedbyIds = `${
       this.messageAriaDescribedby ? 'input-message' : ''
@@ -155,6 +185,7 @@ export class VaComboBox {
       this.hint ? 'input-hint' : ''
     } ${inputElement.getAttribute('aria-describedby')}`.trim();
     // need to append to existing attribute which is set during initialization and contains USWDS "options--assistiveHint"
+    // eslint-disable-next-line i18next/no-literal-string
     inputElement.setAttribute('aria-describedby', ariaDescribedbyIds);
   }
 

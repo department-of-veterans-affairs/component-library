@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { VaMemorableDate } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
   applyFocus,
+  internalTestingAlert,
 } from './wc-helpers';
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
 
 VaMemorableDate.displayName = 'VaMemorableDate';
 
@@ -22,6 +24,9 @@ export default {
       ),
     },
   },
+  argTypes: {
+    ...propStructure(memorableDateInputDocs),
+  }
 };
 
 const defaultArgs = {
@@ -34,6 +39,7 @@ const defaultArgs = {
   'month-select': false,
   'remove-date-hint': false,
   customYearErrorMessage: `Please enter a year between 1900 and ${new Date().getFullYear()}`,
+  'demoFocus': false,
 };
 
 const Template = ({
@@ -43,26 +49,47 @@ const Template = ({
   required,
   error,
   value,
-  'month-select': monthSelect,  
+  'month-select': monthSelect,
   'remove-date-hint': removeDateHint,
   customYearErrorMessage,
   labelHeaderLevel,
+  demoFocus,
 }) => {
+  const componentRef = useRef(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+  const resolvedError = error ?? errorMsg ?? undefined;
+
+  const handleSubmit = () => {
+    triggerValidation();
+  };
+
   return (
-    <VaMemorableDate
-      monthSelect={monthSelect}
-      label={label}
-      name={name}
-      hint={hint}
-      required={required}
-      error={error}  
-      value={value}
-      removeDateHint={removeDateHint}
-      customYearErrorMessage={customYearErrorMessage}
-      onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
-      onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
-      labelHeaderLevel={labelHeaderLevel}
-    />
+    <>
+      {demoFocus && internalTestingAlert(INTERNAL_TESTING_NOTE)}
+      <VaMemorableDate
+        // @ts-ignore - ref is used for Storybook validation helper
+        ref={componentRef}
+        monthSelect={monthSelect}
+        label={label}
+        name={name}
+        hint={hint}
+        required={required}
+        error={resolvedError}
+        value={value}
+        removeDateHint={removeDateHint}
+        customYearErrorMessage={customYearErrorMessage}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        labelHeaderLevel={labelHeaderLevel}
+      />
+      {demoFocus && (
+        <va-button
+          text="Submit"
+          onClick={handleSubmit}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
   );
 };
 
@@ -295,7 +322,6 @@ const FormsPatternMultipleTemplate = ({
         customYearErrorMessage={customYearErrorMessage}
       />
       <hr />
-
       <va-button text="Click to focus header" onClick={handleClick}></va-button>
     </>
   );
@@ -340,6 +366,12 @@ const CustomErrorMessageTemplate = ({
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
+
+export const Required = Template.bind(null);
+Required.args = {
+  ...defaultArgs,
+  required: true,
+};
 
 export const Error = Template.bind(null);
 Error.args = {
@@ -423,4 +455,15 @@ export const FormsPatternMultipleError =
 FormsPatternMultipleError.args = {
   ...defaultArgs,
   error: 'Error Message Example',
+};
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
 };

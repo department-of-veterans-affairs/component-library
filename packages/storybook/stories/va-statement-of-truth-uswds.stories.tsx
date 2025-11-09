@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { VaStatementOfTruth } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
