@@ -541,7 +541,7 @@ export class VaTextInput {
                   class={errorMessageClass}
                   data-dd-action-name={errorHasPii ? 'input error' : undefined}
                 >
-                  {error}
+                  &nbsp;{error}
                 </span>
               </Fragment>
             )}
