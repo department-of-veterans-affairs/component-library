@@ -288,6 +288,25 @@ export class VaFileInput {
   }
 
   /**
+   * Focuses on the error message in `<va-text-input>` for an encrypted file's password after a short delay to help with screen reader announcement.
+   * @returns {void}
+   */
+  private focusOnPasswordInputError(): void {
+    setTimeout(() => {
+      const passwordTextInput = this.el.shadowRoot.querySelector('va-text-input');
+      let errorMessage: HTMLElement;
+
+      if (passwordTextInput) {
+        errorMessage = passwordTextInput.shadowRoot.querySelector('#input-error-message');
+      }
+
+      if (errorMessage && errorMessage.textContent) {
+        errorMessage.focus();
+      }
+    }, 250);
+  }
+
+  /**
    * Handles the window focus event to manage focus on error and status messages.
    * This is necessary due to the way that browsers handle focus and screen reader
    * announcements differently after users interact with native file dialogs. For
@@ -327,6 +346,10 @@ export class VaFileInput {
   }
 
   private handleFile = (file: File, emitChange: boolean = true, deferMessageUpdate: boolean = false) => {
+    if (this.encrypted) {
+      this.focusOnPasswordInputError();
+    }
+
     let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
@@ -375,9 +398,18 @@ export class VaFileInput {
       this.generateFileContents(this.file);
     }
 
-    this.updateStatusMessage(`You have selected the file: ${file.name}`, !deferMessageUpdate);
+    let focusOnStatusMessage = !deferMessageUpdate;
 
-    if (deferMessageUpdate) {
+    // If the file is encrypted, we do not want to focus on the status message
+    // since the focus will be on the error message in the `va-text-input` for
+    // the file's password.
+    if (this.encrypted) {
+      focusOnStatusMessage = false;
+    }
+
+    this.updateStatusMessage(`You have selected the file: ${file.name}`, focusOnStatusMessage);
+
+    if (deferMessageUpdate && focusOnStatusMessage) {
       this.delayStatusMessageFocusUntilWindowFocus = true;
     }
 
