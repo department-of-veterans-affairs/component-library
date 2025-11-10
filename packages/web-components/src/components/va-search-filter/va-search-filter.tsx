@@ -145,7 +145,7 @@ export class VaSearchFilter {
   };
 
   handleClearAllFilters = () => {
-    this.filterOptions = this.defaultState.map(facet => ({...facet}));
+    this.filterOptions = this.defaultState.map(facet => ({ ...facet }));
 
     this.totalActiveFilters = this.getTotalActiveFilters();
 
@@ -258,7 +258,7 @@ export class VaSearchFilter {
           activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
         };
       });
-      this.defaultState = this.filterOptions.map(facet => ({...facet }));
+      this.defaultState = this.filterOptions.map(facet => ({ ...facet }));
     } else {
       this.filterOptions = [];
     }
@@ -319,16 +319,34 @@ export class VaSearchFilter {
     };
 
     const renderFacet = (facet: FilterFacet) => {
-      if (facet.isRadio === true) {
+      if (facet.isRadio && isDesktop) {
         return <va-radio
           error={null}
           header-aria-describedby={null}
           hint=""
           label={facet.label}
-          label-header-level=""
+          label-header-level="3"
           onVaValueChange={(e) => handleFilterChange({
             facetId: facet.id,
-            categoryId: isNaN(e.detail.value) ? e.detail.value :  parseInt(e.detail.value),
+            categoryId: isNaN(e.detail.value) ? e.detail.value : parseInt(e.detail.value),
+            active: true,
+          })}
+        >
+          {facet.category.map((category: FilterCategory) =>
+            renderRadioButton(category))}
+        </va-radio>
+      }
+      if (facet.isRadio) {
+        return <va-radio
+          error={null}
+          header-aria-describedby={null}
+          hint=""
+          label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
+          {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
+          label-header-level="3"
+          onVaValueChange={(e) => handleFilterChange({
+            facetId: facet.id,
+            categoryId: isNaN(e.detail.value) ? e.detail.value : parseInt(e.detail.value),
             active: true,
           })}
         >
@@ -391,7 +409,6 @@ export class VaSearchFilter {
         {filterOptions.length > 0 && (
           <va-accordion class="va-search-filter__accordion">
             <va-accordion-item
-              header={header + (totalActiveFilters > 0 ? ` (${totalActiveFilters})` : '')}
               headerSrOnly="applied"
               open
             >
