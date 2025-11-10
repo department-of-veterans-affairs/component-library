@@ -574,4 +574,10 @@ describe('va-file-input', () => {
 
     expect(errorMessage.innerText.trim()).toBe("We can't upload your file because it's too big. Files must be less than 1 B.");
   });
+
+  it('accepts an .heic file and displays a generic image icon', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input accept=".heic" />`, 'test-image.heic');
+    const thumbnail = await page.find('va-file-input >>> svg')
+    expect(thumbnail).not.toBeNull();
+  })
 });

@@ -590,6 +590,34 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl"?: string;
+        /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension"?: string;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber"?: string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber"?: string;
+        /**
+          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+         */
+        "triggerRef"?: string;
+        /**
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
+         */
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action
@@ -1906,6 +1934,10 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaTable {
+        /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
         /**
           * When active, forces the table to expand to the full-width of its container
          */
@@ -4541,6 +4573,34 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl"?: string;
+        /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension"?: string;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber"?: string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber"?: string;
+        /**
+          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+         */
+        "triggerRef"?: string;
+        /**
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
+         */
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action
@@ -6065,6 +6125,10 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaTable {
+        /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
         /**
           * When active, forces the table to expand to the full-width of its container
          */

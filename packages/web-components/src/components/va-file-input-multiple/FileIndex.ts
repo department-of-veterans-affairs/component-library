@@ -14,4 +14,5 @@ export interface FileIndex {
   key: number;
   content: Node[];
   password?: string;
+  hasError?: boolean;
 }
