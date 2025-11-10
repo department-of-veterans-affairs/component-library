@@ -59,6 +59,11 @@ export class VaSearchFilter {
   @State() totalActiveFilters: number = 0;
 
   /**
+   * Keeps track of the inital state to revert back to on reset.
+   */
+  @State() defaultState: Filter[] = [];
+
+  /**
    * Watch for changes to filterOptions and update totalActiveFilters
    */
   @Watch('filterOptions')
@@ -140,18 +145,9 @@ export class VaSearchFilter {
   };
 
   handleClearAllFilters = () => {
-    this.filterOptions = this.filterOptions.map((facet) => {
-      const updatedFacet = {
-        ...facet,
-        category: facet.category.map((category) => ({ ...category, active: false })),
-      };
-      return {
-        ...updatedFacet,
-        activeFiltersCount: 0,
-      };
-    });
+    this.filterOptions = this.defaultState.map(facet => ({...facet}));
 
-    this.totalActiveFilters = 0;
+    this.totalActiveFilters = this.getTotalActiveFilters();
 
     // Emit event to signal that all filters have been cleared.
     this.vaFilterClearAll.emit();
@@ -256,15 +252,13 @@ export class VaSearchFilter {
     if (validatedOptions) {
       // update filterOptions with validated options and initial active filter counts.
       this.totalActiveFilters = this.getTotalActiveFilters();
-      /** TODO
-       * Set default state here
-       */
       this.filterOptions = validatedOptions.map((facet) => {
         return {
           ...facet,
           activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
         };
       });
+      this.defaultState = this.filterOptions.map(facet => ({...facet }));
     } else {
       this.filterOptions = [];
     }
@@ -291,7 +285,7 @@ export class VaSearchFilter {
         />
         <va-button
           onClick={handleClearAllFilters}
-          text="Clear all filters"
+          text="Reset filters"
           secondary
           full-width
         />
