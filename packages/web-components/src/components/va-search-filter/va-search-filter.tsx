@@ -236,8 +236,9 @@ export class VaSearchFilter {
         const hasValidCatId = typeof cat.id === 'number' || typeof cat.id === 'string';
         return hasValidCatLabel && hasValidCatId;
       });
+      const hasValidRadioButtons = option.isRadio && hasValidCategory ? option.category.filter(cat => cat.active).length <= 1 : true;
       const hasValidId = typeof option.id === 'number' || typeof option.id === 'string';
-      return hasValidLabel && hasValidCategory && hasValidId;
+      return hasValidLabel && hasValidCategory && hasValidId && hasValidRadioButtons;
     });
 
     return validOptions ? options : null;
@@ -255,6 +256,9 @@ export class VaSearchFilter {
     if (validatedOptions) {
       // update filterOptions with validated options and initial active filter counts.
       this.totalActiveFilters = this.getTotalActiveFilters();
+      /** TODO
+       * Set default state here
+       */
       this.filterOptions = validatedOptions.map((facet) => {
         return {
           ...facet,
