@@ -503,6 +503,7 @@ export class VaFileInput {
       uploadedFile,
       percentUploaded,
       passwordError,
+      internalError,
     } = this;
 
     if (value && !this.file) {
@@ -512,7 +513,7 @@ export class VaFileInput {
     // these values may get updated after call to this.handleFile above
     const { uploadStatus, file, } = this;
 
-    const displayError = error || this.internalError;
+    const displayError = error || internalError;
     const ariaDescribedbyIds =
       `${hint ? 'input-hint-message' : ''} ${
         displayError ? 'input-error-message' : ''
@@ -595,7 +596,7 @@ export class VaFileInput {
             class="file-input"
             aria-label={`${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`}
             style={{
-              visibility: (uploadStatus === 'success' || uploadedFile || displayError) ? 'hidden' : 'unset',
+              visibility: (uploadStatus === 'success' || uploadedFile || internalError) ? 'hidden' : 'unset',
             }}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
