@@ -412,21 +412,26 @@ const noop = () => {};
     const inputValue = (inputEl.value || '').trim().toLowerCase();
     const filter = comboBoxEl.dataset.filter || DEFAULT_FILTER;
     const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
+    const filterKey = comboBox.isInVaInputTelephone ? 'innerHTML' : 'text';
+    const filteredOptions = [...selectEl.options].filter(opt => regex.test(opt[filterKey]) && opt.getAttribute('data-optgroup') !== 'true');
 
     const options = [];
     let parentOptGroupId = '';
     for (let i = 0, len = selectEl.options.length; i < len; i += 1) {
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
-      const filterKey = comboBox.isInVaInputTelephone ? 'innerHTML' : 'text';
       const filterValue = optionEl[filterKey];
-
+      
       if (
         optionEl.value &&
-        (disableFiltering ||
+        (
+          disableFiltering ||
           isPristine ||
           !inputValue ||
-          regex.test(filterValue))
+          regex.test(filterValue) ||
+          // Include optgroup headers if any of their options are visible
+          (optionEl.getAttribute('data-optgroup') === 'true' && filteredOptions.find(opt => opt.getAttribute('aria-describedby') === optionEl.id))
+        )
       ) {
         if (selectEl.value && optionEl.value === selectEl.value) {
           selectedItemId = optionId;
@@ -437,27 +442,30 @@ const noop = () => {};
         }
 
         // handle filtering when input contains a value
+        
         if (
           inputValue &&
           regex.test(filterValue) &&
           optionEl.getAttribute('data-optgroup') !== 'true'
         ) {
-
           // Check if the option element is not a header optgroup
           // and has a header optgroup associated with it
           // and that header optgroup has not already been added
           if (
             optionEl.getAttribute('data-optgroup-option') === 'true' &&
             parentOptGroupId !== optionEl.getAttribute('aria-describedby') &&
-            !el.querySelector(`#${optionEl.getAttribute('aria-describedby')}`)
+            !el.querySelector(`li#${optionEl.getAttribute('aria-describedby')}`)
           ) {
             // Get an associated header optgroup element
             parentOptGroupId = optionEl.getAttribute('aria-describedby');
-            const parentOptgroupEl = selectEl.querySelector(
-              '#' + parentOptGroupId,
-            );
-            // Add the header optgroup element first
-            options.push(parentOptgroupEl);
+            // Ensure the header optgroup element is not already in the options array
+            if (options.find(option => option.id === parentOptGroupId) === undefined) {
+              const parentOptgroupEl = selectEl.querySelector(
+                '#' + parentOptGroupId,
+              );
+              // Add the header optgroup element first
+              options.push(parentOptgroupEl);
+            }
           }
         }
         // Add the option element
