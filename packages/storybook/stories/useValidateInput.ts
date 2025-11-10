@@ -22,18 +22,21 @@ const ERROR_ATTRIBUTES = ['error', 'input-error', 'checkbox-error', 'group-optio
 //
 // CATEGORY 1 - DIRECT ERROR
 //   Component receives error, input is in shadow DOM, no child VA components
-//   Examples: va-text-input, va-textarea, va-select, va-memorable-date
+//   Examples: va-text-input, va-textarea, va-select
 //   Error handling: Set 'error' attribute on component only
+//   Screen reader error message gets added to each erroring element
 //
-// CATEGORY 2 - CASCADING ERROR
-//   Both parent and child VA components receive error
-//   Examples: (Future/theoretical - not currently implemented)
-//   Error handling: Set 'error' attribute on both parent and children
+// CATEGORY 2 - CHILD COMPONENT ERROR
+//   Only the child VA components receive error prop
+//   Examples: va-memorable-date, va-statement-of-truth
+//   Error handling: Set 'error' attribute on the children
+//   Screen reader error message gets added to each erroring child element
 //
-// CATEGORY 3 - GROUP COMPONENTS
+// CATEGORY 3 - GROUP COMPONENT ERROR
 //   Parent gets error, children get alternative error prop
 //   Examples: va-radio (with va-radio-option), va-checkbox-group (with va-checkbox)
 //   Error handling: Set 'error' on parent, 'groupOptionError' on children
+//   Screen reader error message gets added to each option element
 // ============================================================================
 
 const isVaComponent = (node: Element | null | undefined): node is HTMLElement =>
@@ -219,10 +222,12 @@ const getErrorText = (
 ): string | null => {
   const directError = readErrorFromElement(element, defaultError);
   if (directError) {
+    console.log('direct error', directError)
     return directError;
   }
 
   if (!includeDescendants) {
+    console.log('no include descendants')
     return null;
   }
 
@@ -230,6 +235,7 @@ const getErrorText = (
   for (const child of childComponents) {
     const groupOptionError = readErrorFromElement(child, defaultError);
     if (groupOptionError) {
+      console.log('group option error', groupOptionError);
       return groupOptionError;
     }
   }
@@ -336,12 +342,16 @@ const getDescendantVaComponents = (parent: HTMLElement): HTMLElement[] => {
  *          VA components if found, otherwise returns the input component in an array.
  */
 const getComponentsToValidate = (component: HTMLElement): HTMLElement[] => {
+  const groupComponent = isGroupComponent(component);
   const childComponents = getDescendantVaComponents(component);
 
-  if (childComponents.length > 0) {
+  if (childComponents.length > 0 && groupComponent) {
+    console.log('child components found for validation:', childComponents);
     return [component, ...childComponents];
+  } else if (childComponents.length > 0) {
+    return childComponents;
   }
-
+  console.log('no child components found for validation');
   return [component];
 };
 
@@ -530,7 +540,22 @@ const validateComponents = (
 
     // Component is required but has no value
     const errorMessage = createErrorMessage(component, defaultError);
-    setComponentError(component, errorMessage);
+    // Check if this component has child VA components
+    const childComponents = getDescendantVaComponents(component);
+    const hasChildComponents = childComponents.length > 0;
+    console.log('error message found during validation', errorMessage)
+
+    console.log('child components', childComponents)
+    console.log('has child components?', hasChildComponents)
+    if (hasChildComponents) {
+      // Only set error on child components, not the parent
+      childComponents.forEach(child => {
+      setComponentError(child, errorMessage);
+      });
+    } else {
+      // No child components, set error on the parent component
+      setComponentError(component, errorMessage);
+    }
     hasAnyError = true;
 
     // Store first error for focus management
@@ -539,6 +564,10 @@ const validateComponents = (
       firstFocusTarget = findFocusTarget(component);
     }
   }
+
+  console.log('has error', hasAnyError);
+  console.log('errorMessage', firstError);
+  console.log('focus target', firstFocusTarget);
 
   return {
     hasError: hasAnyError,
@@ -661,7 +690,9 @@ export function useValidateInput(
     if (!element) return;
 
     // Priority 1: Check for existing internal component errors (exclude demo errors)
-  const internalError = getErrorText(element, defaultError, true);
+    const internalError = getErrorText(element, defaultError, true);
+    console.log('internal error:', internalError);
+
     if (internalError) {
       setValidationState(internalError, true, findFocusTarget(element));
       return;
@@ -669,8 +700,14 @@ export function useValidateInput(
 
     // Priority 2: Validate components (either children if present, or parent component)
     const componentsToCheck = getComponentsToValidate(element);
-    const validation = validateComponents(componentsToCheck, defaultError);
+    console.log('element to validate', element);
 
+    console.log('components to check', componentsToCheck);
+    const validation = validateComponents(componentsToCheck, defaultError);
+    console.log('validation result', validation);
+    console.log('validation result has error', validation.hasError);
+    console.log('validation result has error message', validation.errorMessage);
+    console.log('validation result has focus target', validation.focusTarget);
     if (validation.hasError) {
       setValidationState(validation.errorMessage, true, validation.focusTarget);
       return;
