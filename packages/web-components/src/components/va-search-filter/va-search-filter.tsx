@@ -321,9 +321,6 @@ export class VaSearchFilter {
     const renderFacet = (facet: FilterFacet) => {
       if (facet.isRadio && isDesktop) {
         return <va-radio
-          error={null}
-          header-aria-describedby={null}
-          hint=""
           label={facet.label}
           label-header-level="3"
           onVaValueChange={(e) => handleFilterChange({
@@ -338,9 +335,6 @@ export class VaSearchFilter {
       }
       if (facet.isRadio) {
         return <va-radio
-          error={null}
-          header-aria-describedby={null}
-          hint=""
           label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
           {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
           label-header-level="3"
