@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { VaTelephoneInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
+  internalTestingAlert,
 } from './wc-helpers';
-
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
 VaTelephoneInput.displayName = 'VaTelephoneInput';
 const inputTelephoneDocs = getWebComponentDocs('va-telephone-input');
 
@@ -28,7 +29,8 @@ const defaultArgs = {
   error: "",
   required: false,
   label: "",
-  'show-external-errors': true
+  'show-external-errors': true,
+  demoFocus: false,
 };
 
 const Template = ({
@@ -39,20 +41,38 @@ const Template = ({
   error,
   label,
   required,
-  'show-internal-errors': showInternalErrors
+  'show-internal-errors': showInternalErrors,
+  demoFocus,
 }) => {
+  const componentRef = useRef(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+  const resolvedError = error ?? errorMsg ?? undefined;
+
+  const handleSubmit = () => {
+    triggerValidation();
+  };
+
   return (
-    // @ts-ignore - Custom web component
-    <va-telephone-input
-      hint={hint}
-      label={label ? label : null}
-      country={country}
-      contact={contact}
-      no-country={noCountry}
-      error={error}
-      required={required}
-      show-internal-errors={showInternalErrors}
-    />
+    <>
+      <VaTelephoneInput
+        ref={componentRef}
+        hint={hint}
+        label={label ? label : null}
+        country={country}
+        contact={contact}
+        no-country={noCountry}
+        error={error}
+        required={required}
+        show-internal-errors={showInternalErrors}
+      />
+      {demoFocus && (
+        <va-button
+          text="Submit"
+          onClick={handleSubmit}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
   );
 };
 
@@ -128,3 +148,14 @@ WithShowInternalErrors.args = {
   hint: 'This component will only show external errors.',
   error: 'This error is externally passed to the component.'
 }
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
+  chromatic: { disableSnapshot: true },
+};

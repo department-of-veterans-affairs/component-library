@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
-  useErrorToggle,
-  errorToggleArgTypes,
+  internalTestingAlert,
 } from './wc-helpers';
 // @ts-ignore
 import testImage from './images/search-bar.png';
+import { useValidateInput, INTERNAL_TESTING_NOTE } from './useValidateInput';
 
 VaFileInput.displayName = 'VaFileInput';
 
@@ -25,7 +25,6 @@ export default {
   },
   argTypes: {
     ...propStructure(fileInputDocs),
-    ...errorToggleArgTypes(['#error-demo-wrapper','#file-input-error-alert']),
     // hide the uploadMessage prop from the properties table in storybook
     uploadMessage: {
       table: {
@@ -40,7 +39,7 @@ const defaultArgs = {
   'name': 'my-file-input',
   'accept': null,
   'required': false,
-  'error': '',
+  'error': null,
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaChange': event =>
@@ -58,8 +57,8 @@ const defaultArgs = {
   'maxFileSize': Infinity,
   'minFileSize': 0,
   'password-error': false,
-  'showToggleFocusButton': false,
   'focusEl': null,
+  'demoFocus': false,
 };
 
 const Template = ({
@@ -83,20 +82,26 @@ const Template = ({
   maxFileSize,
   minFileSize,
   passwordError,
-  showToggleFocusButton,
-  focusEl
+  demoFocus
 }) => {
+  const componentRef = useRef(null);
+  const { errorMsg, triggerValidation } = useValidateInput(componentRef);
+  const resolvedError = error ?? errorMsg ?? undefined;
 
-  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
-
+  const handleSubmit = () => {
+    triggerValidation();
+  };
   return (
     <>
+      {demoFocus && internalTestingAlert(INTERNAL_TESTING_NOTE)}
       <VaFileInput
+      // @ts-ignore - ref used for Storybook validation helper
+        ref={componentRef}
         label={label}
         name={name}
         accept={accept}
         required={required}
-        error={errorMsg}
+        error={resolvedError}
         hint={hint}
         enable-analytics={enableAnalytics}
         onVaChange={vaChange}
@@ -112,12 +117,11 @@ const Template = ({
         maxFileSize={maxFileSize}
         minFileSize={minFileSize}
         passwordError={passwordError}
-        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       />
-      {showToggleFocusButton && (
+      {demoFocus && (
         <va-button
-          text="Toggle error state"
-          onClick={handleClick}
+          text="Submit"
+          onClick={handleSubmit}
           class="vads-u-margin-top--2"
         ></va-button>
       )}
@@ -501,5 +505,16 @@ WithPercentUploaded.args = { ...defaultArgs };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 WithPercentUploaded.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
+export const DemoErrorFocus = Template.bind(null);
+DemoErrorFocus.args = {
+  ...defaultArgs,
+  demoFocus: true,
+  hint: 'This is example hint text',
+  required: true,
+};
+DemoErrorFocus.parameters = {
   chromatic: { disableSnapshot: true },
 };
