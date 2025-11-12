@@ -306,7 +306,7 @@ export class VaSearchFilter {
       />
     );
 
-    // Helper method to render checkbox for both mobile and desktop views
+    // Helper method to render radio buttons for both mobile and desktop views
     const renderRadioButton = (category: FilterCategory) => {
       return <va-radio-option
         label={category.label}
