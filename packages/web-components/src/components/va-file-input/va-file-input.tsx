@@ -438,7 +438,6 @@ export class VaFileInput {
     this.uploadedFile = null;
 
     if (updateStatusMessage) {
-      console.log('Internal error: ', this.internalError);
       this.updateStatusMessage(`File deleted. No file selected.`, true);
     }
   };
