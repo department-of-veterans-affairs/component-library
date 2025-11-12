@@ -318,7 +318,7 @@ export class VaSearchFilter {
 
     const renderFacet = (facet: FilterFacet) => {
       const srProps = !isDesktop ? VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly') : {};
-      const label = (facet.activeFiltersCount > 0 && !isDesktop ? `${facet.label} (${facet.activeFiltersCount})` : '');
+      const label = (isDesktop ? '' : facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : ''));
       if (facet.isRadio) {
         return <va-radio
           label={label}
@@ -334,26 +334,15 @@ export class VaSearchFilter {
             renderRadioButton(category))}
         </va-radio>
       }
-      if (isDesktop) {
-        return <va-checkbox-group
-          label={facet.label}
-          class="va-search-filter__checkbox-group"
-        >
-          {facet.category.map((category: FilterCategory) =>
-            renderCheckbox(facet, category))}
-        </va-checkbox-group>
-      }
-      else {
-        return <va-checkbox-group
-          label={label}
-          {...srProps}
-          key={facet.id}
-          label-header-level="3"
-        >
-          {facet.category.map((category: FilterCategory) =>
-            renderCheckbox(facet, category))}
-        </va-checkbox-group>
-      }
+      return <va-checkbox-group
+        label={label}
+        {...srProps}
+        key={facet.id}
+        label-header-level={!isDesktop ? "3" : ""}
+      >
+        {facet.category.map((category: FilterCategory) =>
+          renderCheckbox(facet, category))}
+      </va-checkbox-group>
     };
 
     if (isDesktop) {
