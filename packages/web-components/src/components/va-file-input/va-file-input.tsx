@@ -259,15 +259,17 @@ export class VaFileInput {
 
   /**
    * Focuses on the sr-only status message after a short delay to help with screen reader announcement.
+   * @param {boolean} useDelay - Whether to use a delay before focusing.
    * @returns {void}
    */
-  private focusOnStatusMessage(): void {
+  private focusOnStatusMessage(useDelay: boolean = true): void {
+    const delay = useDelay ? 250 : 0;
     setTimeout(() => {
       const statusMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-status-message');
       if (statusMessage && statusMessage.textContent) {
         statusMessage.focus();
       }
-    }, 250);
+    }, delay);
   }
 
   /**
@@ -283,7 +285,7 @@ export class VaFileInput {
       }
 
       if (focusAfterUpdate) {
-        this.focusOnStatusMessage();
+        this.focusOnStatusMessage(false);
       }
     }, 250);
   }
@@ -436,6 +438,7 @@ export class VaFileInput {
     this.uploadedFile = null;
 
     if (updateStatusMessage) {
+      console.log('Internal error: ', this.internalError);
       this.updateStatusMessage(`File deleted. No file selected.`, true);
     }
   };
