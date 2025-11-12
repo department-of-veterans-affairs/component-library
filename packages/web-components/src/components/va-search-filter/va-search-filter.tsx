@@ -311,20 +311,19 @@ export class VaSearchFilter {
       return <va-radio-option
         label={category.label}
         name={category.label}
-        // what if the id is a string?
         value={typeof category.id === "string" ? category.id : category.id.toString()}
-        // Is it possible for there to be multiple radio buttons selected?
         checked={category.active === true}
       />
     };
 
     const renderFacet = (facet: FilterFacet) => {
+      const srProps = !isDesktop ? VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly') : {};
+      const label = (facet.activeFiltersCount > 0 && !isDesktop ? `${facet.label} (${facet.activeFiltersCount})` : '');
       if (facet.isRadio) {
-        const srProps = !isDesktop ? VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly') : {};
         return <va-radio
-          label={facet.label + (facet.activeFiltersCount > 0 && !isDesktop ? ` (${facet.activeFiltersCount})` : '')}
+          label={label}
           {...srProps}
-          label-header-level="3"
+          label-header-level={!isDesktop ? "3" : ""}
           onVaValueChange={(e) => handleFilterChange({
             facetId: facet.id,
             categoryId: isNaN(e.detail.value) ? e.detail.value : parseInt(e.detail.value),
@@ -346,8 +345,8 @@ export class VaSearchFilter {
       }
       else {
         return <va-checkbox-group
-          label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
-          {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
+          label={label}
+          {...srProps}
           key={facet.id}
           label-header-level="3"
         >
