@@ -1190,10 +1190,6 @@ export namespace Components {
      */
     interface VaModal {
         /**
-          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
-         */
-        "ariaHiddenNodeExceptions"?: HTMLElement[];
-        /**
           * Click outside modal will trigger closeEvent
          */
         "clickToClose"?: boolean;
@@ -5244,10 +5240,6 @@ declare namespace LocalJSX {
      * @maturityLevel best_practice
      */
     interface VaModal {
-        /**
-          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
-         */
-        "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
           * Click outside modal will trigger closeEvent
          */
