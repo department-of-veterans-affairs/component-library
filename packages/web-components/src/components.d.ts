@@ -590,6 +590,34 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl"?: string;
+        /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension"?: string;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber"?: string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber"?: string;
+        /**
+          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+         */
+        "triggerRef"?: string;
+        /**
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
+         */
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action
@@ -721,10 +749,6 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
-        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -806,10 +830,6 @@ export namespace Components {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
-        /**
-          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-         */
-        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
@@ -1099,6 +1119,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
+        /**
           * The content of the heading if `useFormsPattern`.
          */
         "formHeading"?: string;
@@ -1106,6 +1130,10 @@ export namespace Components {
           * The heading level for the heading if `useFormsPattern`.
          */
         "formHeadingLevel"?: number;
+        /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
         /**
           * Hint text string
          */
@@ -1117,6 +1145,10 @@ export namespace Components {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * Whether or not to use the month as an input or select.
          */
@@ -1672,6 +1704,10 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Whether or not to show the (*Required) text.
          */
         "hideRequiredText"?: boolean;
@@ -1687,6 +1723,10 @@ export namespace Components {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */
@@ -1895,9 +1935,17 @@ export namespace Components {
      */
     interface VaTable {
         /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
+        /**
           * When active, forces the table to expand to the full-width of its container
          */
         "fullWidth"?: boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
         /**
           * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
          */
@@ -1941,6 +1989,10 @@ export namespace Components {
           * When active, the table will expand to the full width of its container
          */
         "fullWidth": boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
         /**
           * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
          */
@@ -1987,6 +2039,21 @@ export namespace Components {
           * A unique name for the rendered div serving as `role="tablist"`. To be set as value for wrapper's `aria-label` attribute.
          */
         "label": string;
+    }
+    /**
+     * @componentName Tag - Status
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTagStatus {
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "status": 'informational' | 'warning' | 'success' | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "text": string;
     }
     /**
      * @componentName Telephone
@@ -2209,7 +2276,7 @@ export namespace Components {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
@@ -3663,6 +3730,17 @@ declare global {
         prototype: HTMLVaTabsElement;
         new (): HTMLVaTabsElement;
     };
+    /**
+     * @componentName Tag - Status
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaTagStatusElement extends Components.VaTagStatus, HTMLStencilElement {
+    }
+    var HTMLVaTagStatusElement: {
+        prototype: HTMLVaTagStatusElement;
+        new (): HTMLVaTagStatusElement;
+    };
     interface HTMLVaTelephoneElementEventMap {
         "component-library-analytics": any;
     }
@@ -3711,6 +3789,7 @@ declare global {
     };
     interface HTMLVaTextInputElementEventMap {
         "component-library-analytics": any;
+        "vaInput": any;
     }
     /**
      * @nativeHandler onInput
@@ -3826,6 +3905,7 @@ declare global {
         "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
         "va-tabs": HTMLVaTabsElement;
+        "va-tag-status": HTMLVaTagStatusElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-telephone-input": HTMLVaTelephoneInputElement;
         "va-text-input": HTMLVaTextInputElement;
@@ -4493,6 +4573,34 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl"?: string;
+        /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension"?: string;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber"?: string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber"?: string;
+        /**
+          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+         */
+        "triggerRef"?: string;
+        /**
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
+         */
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action
@@ -4652,10 +4760,6 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
-        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -4741,10 +4845,6 @@ declare namespace LocalJSX {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
-        /**
-          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-         */
-        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
@@ -5062,6 +5162,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
+        /**
           * The content of the heading if `useFormsPattern`.
          */
         "formHeading"?: string;
@@ -5069,6 +5173,10 @@ declare namespace LocalJSX {
           * The heading level for the heading if `useFormsPattern`.
          */
         "formHeadingLevel"?: number;
+        /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
         /**
           * Hint text string
          */
@@ -5080,6 +5188,10 @@ declare namespace LocalJSX {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * Whether or not to use the month as an input or select.
          */
@@ -5739,6 +5851,10 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Whether or not to show the (*Required) text.
          */
         "hideRequiredText"?: boolean;
@@ -5754,6 +5870,10 @@ declare namespace LocalJSX {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */
@@ -6006,9 +6126,17 @@ declare namespace LocalJSX {
      */
     interface VaTable {
         /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
+        /**
           * When active, forces the table to expand to the full-width of its container
          */
         "fullWidth"?: boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
         /**
           * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
          */
@@ -6052,6 +6180,10 @@ declare namespace LocalJSX {
           * When active, the table will expand to the full width of its container
          */
         "fullWidth"?: boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
         /**
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
@@ -6102,6 +6234,21 @@ declare namespace LocalJSX {
           * A unique name for the rendered div serving as `role="tablist"`. To be set as value for wrapper's `aria-label` attribute.
          */
         "label"?: string;
+    }
+    /**
+     * @componentName Tag - Status
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTagStatus {
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "status"?: 'informational' | 'warning' | 'success' | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "text": string;
     }
     /**
      * @componentName Telephone
@@ -6310,6 +6457,10 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaTextInputCustomEvent<any>) => void;
         /**
+          * The event emitted when the input value changes
+         */
+        "onVaInput"?: (event: VaTextInputCustomEvent<any>) => void;
+        /**
           * The regular expression that the input element's value is checked against on submission
          */
         "pattern"?: string;
@@ -6336,7 +6487,7 @@ declare namespace LocalJSX {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
@@ -6492,6 +6643,7 @@ declare namespace LocalJSX {
         "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
         "va-tabs": VaTabs;
+        "va-tag-status": VaTagStatus;
         "va-telephone": VaTelephone;
         "va-telephone-input": VaTelephoneInput;
         "va-text-input": VaTextInput;
@@ -6880,6 +7032,12 @@ declare module "@stencil/core" {
              * @maturityLevel candidate
              */
             "va-tabs": LocalJSX.VaTabs & JSXBase.HTMLAttributes<HTMLVaTabsElement>;
+            /**
+             * @componentName Tag - Status
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-tag-status": LocalJSX.VaTagStatus & JSXBase.HTMLAttributes<HTMLVaTagStatusElement>;
             /**
              * @componentName Telephone
              * @maturityCategory use
