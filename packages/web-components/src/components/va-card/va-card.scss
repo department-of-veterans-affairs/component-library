@@ -1,3 +1,7 @@
+@use 'usa-error-message/src/styles/usa-error-message';
+@import '../../../src/mixins/accessibility.css';
+@import '../../mixins/hint-text.css';
+
 :host {
   display: block;
   position: relative;
@@ -5,6 +9,10 @@
   background-color: var(--vads-color-white);
   font-size: 1rem;
   padding: var(--vads-spacing-2);
+
+  .card-status-header {
+    margin: 0.5rem 0 1rem 0;
+  }
 }
 
 :host([show-shadow]:not([show-shadow='false'])),
@@ -40,7 +48,7 @@
   border-radius: 50%;
   width: 56px;
   height: 56px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .va-card__icon-circle va-icon {
@@ -53,4 +61,19 @@
 :host([icon-name]:not([icon-name=''])) {
   padding-top: var(--vads-spacing-4);
   margin-top: 28px;
+}
+
+:host([error]:not([error=''])) {
+  border: 0;
+  border-left: 0.25rem solid var(--vads-color-secondary-dark);
+  padding: 0 0 0 1rem;
+  position: relative;
+
+  article {
+    border-width: 0.25rem;
+    border-color: var(--vads-color-secondary-dark);
+    border-style: solid;
+    font-size: 1rem;
+    padding: var(--vads-spacing-2);
+  }
 }

@@ -406,32 +406,21 @@ export namespace Components {
          */
         "background"?: boolean;
         /**
-          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
-         */
-        "iconName"?: string;
-        /**
-          * If `true`, a drop-shadow will be displayed with a white background.
-         */
-        "showShadow"?: boolean;
-    }
-    /**
-     * @componentName Card Status
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface VaCardStatus {
-        /**
           * The error message to render.
          */
-        "error"?: string;
+        "errorMessage"?: string;
         /**
           * Header level. Must be between 1 and 6
          */
         "headingLevel"?: number;
         /**
-          * Header level. Must be between 1 and 6
+          * Text to be displayed in the card header.
          */
         "headingText"?: string;
+        /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
         /**
           * Set the href for the card link.
          */
@@ -441,10 +430,6 @@ export namespace Components {
          */
         "linkText"?: string;
         /**
-          * Set the card to required and render the (Required) text.
-         */
-        "required"?: boolean;
-        /**
           * When `false`, hides the error message from view, but not from the screen reader.
          */
         "showError"?: boolean;
@@ -452,6 +437,17 @@ export namespace Components {
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "tagStatus": | 'informational'
+    | 'warning'
+    | 'success'
+    | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "tagText"?: string;
     }
     /**
      * @nativeHandler onBlur
@@ -2846,17 +2842,6 @@ declare global {
         prototype: HTMLVaCardElement;
         new (): HTMLVaCardElement;
     };
-    /**
-     * @componentName Card Status
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface HTMLVaCardStatusElement extends Components.VaCardStatus, HTMLStencilElement {
-    }
-    var HTMLVaCardStatusElement: {
-        prototype: HTMLVaCardStatusElement;
-        new (): HTMLVaCardStatusElement;
-    };
     interface HTMLVaCheckboxElementEventMap {
         "vaChange": any;
         "component-library-analytics": any;
@@ -3876,7 +3861,6 @@ declare global {
         "va-button-pair": HTMLVaButtonPairElement;
         "va-button-segmented": HTMLVaButtonSegmentedElement;
         "va-card": HTMLVaCardElement;
-        "va-card-status": HTMLVaCardStatusElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-combo-box": HTMLVaComboBoxElement;
@@ -4392,32 +4376,21 @@ declare namespace LocalJSX {
          */
         "background"?: boolean;
         /**
-          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
-         */
-        "iconName"?: string;
-        /**
-          * If `true`, a drop-shadow will be displayed with a white background.
-         */
-        "showShadow"?: boolean;
-    }
-    /**
-     * @componentName Card Status
-     * @maturityCategory caution
-     * @maturityLevel candidate
-     */
-    interface VaCardStatus {
-        /**
           * The error message to render.
          */
-        "error"?: string;
+        "errorMessage"?: string;
         /**
           * Header level. Must be between 1 and 6
          */
         "headingLevel"?: number;
         /**
-          * Header level. Must be between 1 and 6
+          * Text to be displayed in the card header.
          */
         "headingText"?: string;
+        /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
         /**
           * Set the href for the card link.
          */
@@ -4427,10 +4400,6 @@ declare namespace LocalJSX {
          */
         "linkText"?: string;
         /**
-          * Set the card to required and render the (Required) text.
-         */
-        "required"?: boolean;
-        /**
           * When `false`, hides the error message from view, but not from the screen reader.
          */
         "showError"?: boolean;
@@ -4438,6 +4407,17 @@ declare namespace LocalJSX {
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "tagStatus"?: | 'informational'
+    | 'warning'
+    | 'success'
+    | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "tagText"?: string;
     }
     /**
      * @nativeHandler onBlur
@@ -6622,7 +6602,6 @@ declare namespace LocalJSX {
         "va-button-pair": VaButtonPair;
         "va-button-segmented": VaButtonSegmented;
         "va-card": VaCard;
-        "va-card-status": VaCardStatus;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
         "va-combo-box": VaComboBox;
@@ -6770,12 +6749,6 @@ declare module "@stencil/core" {
              * @maturityLevel deployed
              */
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
-            /**
-             * @componentName Card Status
-             * @maturityCategory caution
-             * @maturityLevel candidate
-             */
-            "va-card-status": LocalJSX.VaCardStatus & JSXBase.HTMLAttributes<HTMLVaCardStatusElement>;
             /**
              * @nativeHandler onBlur
              * @componentName Checkbox
