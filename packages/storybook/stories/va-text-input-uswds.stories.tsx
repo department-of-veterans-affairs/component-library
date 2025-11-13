@@ -466,6 +466,22 @@ WithStep.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
+export const Password = Template.bind(null);
+Password.args = {
+  ...defaultArgs,
+  type: 'password',
+  label: 'Password',
+  hint: 'Enter your password',
+  required: true,
+};
+Password.parameters = {
+  docs: {
+    description: {
+      story: 'A password input that masks the entered text for security purposes.'
+    }
+  }
+};
+
 const WithInlineHintTextTemplate = ({ name, label }) => {
   return (
     <>

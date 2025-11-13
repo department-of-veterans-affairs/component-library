@@ -209,6 +209,7 @@ export class VaFileInput {
 
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
+    this.fileContents = null;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0]);
     }
@@ -438,7 +439,7 @@ export class VaFileInput {
     if (
       this.fileType &&
       (this.fileType === 'application/pdf' ||
-        this.fileType.startsWith('image/'))
+        this.fileType.startsWith('image/')) && ! this.fileType.includes('heic')
     ) {
       reader.readAsDataURL(file);
     }
@@ -502,6 +503,7 @@ export class VaFileInput {
       uploadedFile,
       percentUploaded,
       passwordError,
+      internalError,
     } = this;
 
     if (value && !this.file) {
@@ -511,7 +513,7 @@ export class VaFileInput {
     // these values may get updated after call to this.handleFile above
     const { uploadStatus, file, } = this;
 
-    const displayError = error || this.internalError;
+    const displayError = error || internalError;
     const ariaDescribedbyIds =
       `${hint ? 'input-hint-message' : ''} ${
         displayError ? 'input-error-message' : ''
@@ -594,7 +596,7 @@ export class VaFileInput {
             class="file-input"
             aria-label={`${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`}
             style={{
-              visibility: (uploadStatus === 'success' || uploadedFile || displayError) ? 'hidden' : 'unset',
+              visibility: (uploadStatus === 'success' || uploadedFile || internalError) ? 'hidden' : 'unset',
             }}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
