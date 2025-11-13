@@ -14,7 +14,7 @@ va-accordion-item::part(accordion-content) {
   padding-top: 0;
 }
 
-va-checkbox-group {
+va-checkbox-group, va-radio {
   margin-top: 10px;
   &::part(legend) {
     font-weight: bold;
