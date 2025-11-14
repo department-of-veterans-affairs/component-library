@@ -490,7 +490,7 @@ export class VaModal {
    * - Any ariaHiddenNodeExceptions that belong to this shadow root
    *
    * @param root - The ShadowRoot context to collect targets for
-   * @returns Deduplicated array of HTMLElements to exclude from aria-hidden in this shadow root
+   * @returns Array of HTMLElements to exclude from aria-hidden in this shadow root
    */
   private getTargetElementsForShadowRoot(root: ShadowRoot): HTMLElement[] {
     const targets: HTMLElement[] = [this.el];
