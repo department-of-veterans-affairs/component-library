@@ -39,8 +39,8 @@ export class VaModal {
   // set up or tear down the modal.
   isVisibleDirty: boolean;
 
-  // This variable is used to undo aria-hidden on modal close.
-  undoAriaHidden: Undo;
+  // Track cleanup handlers returned by hideOthers so we can restore DOM state on close.
+  undoAriaHidden: Undo[] = [];
 
   // This stores reference to previously focused element
   savedFocus: HTMLElement;
@@ -384,16 +384,28 @@ export class VaModal {
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
 
-    // The elements to exclude from aria-hidden.
-    const hideExceptions = [
-      ...this.ariaHiddenNodeExceptions,
-      this.el,
-    ] as HTMLElement[];
+    // Reset any previous hide handlers before applying new ones.
+    this.undoAriaHidden = [];
 
-    // Sets aria-hidden="true" to all elements outside of the modal except
-    // for the elements in the hideExceptions array.
-    // This is used to limit the screen reader to content inside the modal.
-    this.undoAriaHidden = hideOthers(hideExceptions);
+    // Collect all elements that should not be hidden (modal + ancestors + exceptions)
+    const { ancestors, shadowRoots } = this.getModalHierarchy();
+    const globalExceptions = [
+      ...ancestors,
+      ...(this.ariaHiddenNodeExceptions || []),
+    ];
+
+    // Sets aria-hidden="true" on all elements except globalExceptions
+    this.undoAriaHidden.push(hideOthers(globalExceptions));
+
+    // Additionally set aria-hidden="true" on va-modal siblings that live inside the same shadow root
+    shadowRoots.forEach(root => {
+      const targets = this.getTargetElementsForShadowRoot(root);
+      if (targets.length > 0) {
+        this.undoAriaHidden.push(
+          hideOthers(targets, root as unknown as HTMLElement),
+        );
+      }
+    });
 
     // Conditionally track the event.
     if (!this.disableAnalytics) {
@@ -415,8 +427,78 @@ export class VaModal {
   // removes aria-hidden="true" from external elements.
   private teardownModal() {
     clearAllBodyScrollLocks();
-    this.undoAriaHidden?.();
+    this.undoAriaHidden.forEach(undo => undo?.());
+    this.undoAriaHidden = [];
     this.savedFocus?.focus();
+  }
+
+
+  /**
+   * Maps the modal's position in nested shadow DOMs by traversing up the DOM tree.
+   * Returns both the elements and shadow roots needed for proper aria-hidden handling.
+   *
+   * Why this matters: When va-modal is nested in another web component (e.g., va-file-input),
+   * we need:
+   * 1. The element chain to hide everything except the modal's ancestors
+   * 2. The shadow roots to separately hide siblings within each root's context
+   *
+   * @returns Object with:
+   *   - ancestors: Array of HTMLElements from modal up the shadow DOM chain
+   *   - shadowRoots: Array of ShadowRoots encountered during traversal
+   */
+  private getModalHierarchy(): { ancestors: HTMLElement[]; shadowRoots: ShadowRoot[] } {
+    const ancestors: HTMLElement[] = [];
+    const shadowRoots: ShadowRoot[] = [];
+
+    if (!this.el) {
+      return { ancestors, shadowRoots };
+    }
+
+    // Start with the modal element itself
+    ancestors.push(this.el);
+
+    let current: Node | null = this.el;
+
+    while (current) {
+      const root = current.getRootNode?.();
+
+      // Stop if we've reached the document root
+      if (!(root instanceof ShadowRoot)) {
+        break;
+      }
+
+      shadowRoots.push(root);
+
+      // Move up to the shadow root's host element
+      const host = root.host as HTMLElement;
+      if (!host) {
+        break;
+      }
+
+      ancestors.push(host);
+      current = host;
+    }
+
+    return { ancestors, shadowRoots };
+  }
+
+  /**
+   * Collects elements within a specific shadow root that should remain visible (not aria-hidden).
+   *
+   * Elements included:
+   * - The modal element itself (always)
+   * - Any ariaHiddenNodeExceptions that belong to this shadow root
+   *
+   * @param root - The ShadowRoot context to collect targets for
+   * @returns Deduplicated array of HTMLElements to exclude from aria-hidden in this shadow root
+   */
+  private getTargetElementsForShadowRoot(root: ShadowRoot): HTMLElement[] {
+    const targets: HTMLElement[] = [this.el];
+
+    const exceptionsInRoot = (this.ariaHiddenNodeExceptions || []).filter(node => {
+      return node?.getRootNode?.() === root;
+    });
+    return [...targets, ...exceptionsInRoot];
   }
 
   render() {
