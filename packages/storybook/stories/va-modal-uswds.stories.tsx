@@ -311,6 +311,12 @@ export const WithNestedWebComponents = ({
     <div ref={wrapRef}>
       <h1>Testing h1 heading</h1>
       <va-button onClick={openModal} text="Click here to open modal" />
+
+      <h2>Testing h2 heading</h2>
+      <h3>Testing h3 heading</h3>
+
+      <div>
+      <h4>Testing h4 heading</h4>
       <input id="pre-modal-input" type="checkbox" />
       <label htmlFor="pre-modal-input">Checkbox before the modal</label>
       <VaModal
@@ -334,6 +340,7 @@ export const WithNestedWebComponents = ({
         </p>
         <va-checkbox label="va-checkbox" />
       </VaModal>
+      </div>
       <input id="post-modal-input" type="checkbox" />
       <label htmlFor="post-modal-input">Checkbox after the modal</label>
     </div>

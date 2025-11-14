@@ -115,12 +115,6 @@ export class VaModal {
   }
 
   /**
-   * Additional DOM-nodes that should not be hidden from screen readers.
-   * Useful when an open modal shouldn't hide all content behind the overlay.
-   */
-  @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
-
-  /**
    * Label for the modal, to be set as aria-label. Will take precedence over modalTitle
    * in settings of aria-label.
    */
@@ -364,6 +358,22 @@ export class VaModal {
     return activeElement;
   }
 
+  /**
+   * Either sets or removes aria-hidden="true" on all heading level elements (h1-h6). Necessary since heading elements are still visible in DOM while using the `hideOthers` function with parents components of the modal passed as exceptions.
+   * @param {boolean} hide - Whether the heading elements should have aria-hidden set or removed.
+   * @returns {void}
+   */
+  private showOrHideHeadingLevelElements(hide: boolean): void {
+    const headingLevelElements = Array.from(document.body.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+    headingLevelElements.forEach((el) => {
+      if (hide) {
+        el.setAttribute('aria-hidden', 'true');
+      } else {
+        el.removeAttribute('aria-hidden');
+      }
+    });
+  }
+
   // This method traps the focus inside our web component, prevents scrolling outside
   // the modal, and adds aria-hidden="true" to all elements outside the web component.
   // Fires analytics event unless disableAnalytics is true.
@@ -384,9 +394,34 @@ export class VaModal {
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
 
+    // Get parents of component all the way up to body element while accounting
+    // for shadowRoot of web components, which is a boundary. This is necessary
+    // to prevent aria-hidden from trickling down from parents components and disabling
+    // content inside the modal, making them inaccessible to screen readers, notably
+    // on iOS VoiceOver.
+    const parents = [];
+    let current = this.el.parentElement || (this.el.parentNode as ShadowRoot).host;
+    while (current && current !== document.body) {
+      parents.push(current);
+
+      // Check if we need to traverse up through a shadow root
+      if (current.parentElement) {
+        current = current.parentElement;
+      } else if (current.parentNode && (current.parentNode as ShadowRoot).host) {
+        // We've hit a shadow root boundary, jump to the host element
+        current = (current.parentNode as ShadowRoot).host as HTMLElement;
+      } else {
+        // No more parents to traverse
+        break;
+      }
+    }
+
+    // Ensure that heading level elements are hidden
+    this.showOrHideHeadingLevelElements(true);
+
     // The elements to exclude from aria-hidden.
     const hideExceptions = [
-      ...this.ariaHiddenNodeExceptions,
+      ...parents,
       this.el,
     ] as HTMLElement[];
 
@@ -416,6 +451,7 @@ export class VaModal {
   private teardownModal() {
     clearAllBodyScrollLocks();
     this.undoAriaHidden?.();
+    this.showOrHideHeadingLevelElements(false);
     this.savedFocus?.focus();
   }
 
