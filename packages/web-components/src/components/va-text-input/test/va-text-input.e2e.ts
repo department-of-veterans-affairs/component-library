@@ -16,7 +16,7 @@ describe('va-text-input', () => {
             Hello, world
             </label>
             <slot></slot>
-            <span id="input-error-message" role="alert"></span>
+            <span id="input-error-message" role="alert" tabindex="-1"></span>
             <div>
               <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
             </div>
@@ -230,7 +230,7 @@ describe('va-text-input', () => {
     await inputEl.press('o');
 
     expect(vaInputSpy).toHaveReceivedEventTimes(5);
-    
+
     // Check the last event detail contains the complete value
     expect(vaInputSpy).toHaveReceivedEventDetail({
       value: 'hello',
@@ -265,7 +265,7 @@ describe('va-text-input', () => {
     await inputEl.type('pasted text');
 
     expect(vaInputSpy).toHaveReceivedEventTimes(11); // "pasted text" = 11 characters
-    
+
     expect(vaInputSpy).toHaveReceivedEventDetail({
       value: 'pasted text',
     });
