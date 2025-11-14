@@ -459,22 +459,19 @@ export class VaModal {
 
     let current: Node | null = this.el;
 
+    // Traverse up the DOM tree through shadow hosts
     while (current) {
       const root = current.getRootNode?.();
-
-      // Stop if we've reached the document root
       if (!(root instanceof ShadowRoot)) {
         break;
       }
-
+      // if it finds shadow root, store it and move to its host
       shadowRoots.push(root);
-
-      // Move up to the shadow root's host element
       const host = root.host as HTMLElement;
       if (!host) {
         break;
       }
-
+      // store the host and continue up the tree
       ancestors.push(host);
       current = host;
     }
