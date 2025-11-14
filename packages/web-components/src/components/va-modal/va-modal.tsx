@@ -114,11 +114,6 @@ export class VaModal {
     this.isVisibleDirty = true;
   }
 
-  /**
-   * Additional DOM-nodes that should not be hidden from screen readers.
-   * Useful when an open modal shouldn't hide all content behind the overlay.
-   */
-  @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
 
   /**
    * Label for the modal, to be set as aria-label. Will take precedence over modalTitle
@@ -387,24 +382,17 @@ export class VaModal {
     // Reset any previous hide handlers before applying new ones.
     this.undoAriaHidden = [];
 
-    // Collect all elements that should not be hidden (modal + ancestors + exceptions)
+    // Collect all elements that should not be hidden (modal + ancestors)
     const { ancestors, shadowRoots } = this.getModalHierarchy();
-    const globalExceptions = [
-      ...ancestors,
-      ...(this.ariaHiddenNodeExceptions || []),
-    ];
 
-    // Sets aria-hidden="true" on all elements except globalExceptions
-    this.undoAriaHidden.push(hideOthers(globalExceptions));
+    // Sets aria-hidden="true" on all elements except the modal and its ancestors
+    this.undoAriaHidden.push(hideOthers(ancestors));
 
     // Additionally set aria-hidden="true" on va-modal siblings that live inside the same shadow root
     shadowRoots.forEach(root => {
-      const targets = this.getTargetElementsForShadowRoot(root);
-      if (targets.length > 0) {
-        this.undoAriaHidden.push(
-          hideOthers(targets, root as unknown as HTMLElement),
-        );
-      }
+      this.undoAriaHidden.push(
+        hideOthers([this.el], root as unknown as HTMLElement),
+      );
     });
 
     // Conditionally track the event.
@@ -479,24 +467,6 @@ export class VaModal {
     return { ancestors, shadowRoots };
   }
 
-  /**
-   * Collects elements within a specific shadow root that should remain visible (not aria-hidden).
-   *
-   * Elements included:
-   * - The modal element itself (always)
-   * - Any ariaHiddenNodeExceptions that belong to this shadow root
-   *
-   * @param root - The ShadowRoot context to collect targets for
-   * @returns Array of HTMLElements to exclude from aria-hidden in this shadow root
-   */
-  private getTargetElementsForShadowRoot(root: ShadowRoot): HTMLElement[] {
-    const targets: HTMLElement[] = [this.el];
-
-    const exceptionsInRoot = (this.ariaHiddenNodeExceptions || []).filter(node => {
-      return node?.getRootNode?.() === root;
-    });
-    return [...targets, ...exceptionsInRoot];
-  }
 
   render() {
     const {
