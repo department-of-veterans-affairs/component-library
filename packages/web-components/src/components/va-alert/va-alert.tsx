@@ -165,6 +165,8 @@ export class VaAlert {
   }
 
   componentDidRender() {
+    if (!this.visible) return;
+
     if (!this.closeBtnAriaLabel) {
       this.updateCloseAriaLabelWithHeadlineText();
     }
