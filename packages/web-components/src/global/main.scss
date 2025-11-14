@@ -10,6 +10,6 @@ va-process-list li :is(h2, h3, h4, h5) {
   padding-top: 0.188rem;
 }
 
-va-promo-banner[href]:focus {
+va-promo-banner[href]:focus, va-link-action[href]:not([type="primary-entry"]):focus {
   outline: none;
 }
