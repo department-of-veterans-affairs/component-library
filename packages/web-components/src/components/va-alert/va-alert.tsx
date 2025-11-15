@@ -188,6 +188,15 @@ export class VaAlert {
     if (definedStatuses.indexOf(status) === -1) {
       status = 'info';
     }
+
+    // Status labels for screen reader announcements
+    const statusLabels = {
+      warning: 'Warning',
+      error: 'Error',
+      success: 'Success',
+      info: 'Information',
+      continue: 'Continue',
+    };
     /* eslint-enable i18next/no-literal-string */
 
     if (!visible) return <div aria-live="polite" />;
@@ -216,7 +225,15 @@ export class VaAlert {
                 size={slim ? 3 : 4}
               ></va-icon>
             )}
-            {!slim && <slot name="headline"></slot>}
+            {!slim && (
+              <Fragment>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
+                <span class="usa-sr-only">{statusLabels[status] || 'Information'} Alert</span>
+                <slot name="headline"></slot>
+              </Fragment>
+            )}
+            {/* eslint-disable-next-line i18next/no-literal-string */}
+            {slim && <span class="usa-sr-only">{statusLabels[status] || 'Information'} Alert</span>}
             <slot></slot>
           </div>
         </div>
