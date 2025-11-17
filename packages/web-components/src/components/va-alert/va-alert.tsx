@@ -133,11 +133,14 @@ export class VaAlert {
     }
   }
 
-  // check if user provided a headline slot in light DOM
-  private hasHeadlineSlot(): boolean {
+  // Check light DOM instead of shadow DOM because the
+  // slot might be removed based on {!slim && <slot name="headline"></slot>}
+  private hasHeadlineContent(): boolean {
     if (this.el) {
       for (const child of this.el.children) {
-        if (child.slot === "headline") return true;
+        if (child.slot === "headline" && child.textContent?.trim()) {
+          return true;
+        }
       }
     }
 
@@ -175,18 +178,18 @@ export class VaAlert {
     this.vaComponentDidLoad.emit();
   }
 
-  componentWillRender() {
-    const isBannerAlert = this.el.id === 'va-banner-alert';
-
-    // Apply the slim property if there is no headline slot and this alert is not used by va-banner
-    if (!isBannerAlert && this.visible) {
-      this.slim = !this.hasHeadlineSlot();
-    }
-  }
-
   componentDidRender() {
     if (!this.closeBtnAriaLabel) {
       this.updateCloseAriaLabelWithHeadlineText();
+    }
+  }
+
+  componentWillRender() {
+    const isBannerAlert = this.el.id === 'va-banner-alert';
+
+    // Apply the slim property if there is no headline text and this alert is not used by va-banner
+    if (!isBannerAlert && !this.hasHeadlineContent()) {
+      this.slim = true;
     }
   }
 
