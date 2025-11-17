@@ -46,7 +46,7 @@ export class VaFileInput {
   @Watch('internalError')
   handleInternalErrorChange(value: string) {
     if (value && document.hasFocus()) {
-      this.focusOnErrorMessage();
+      this.focusOnChangeButton();
     }
   }
   @State() processStatusMessage: string | null = null;
@@ -88,7 +88,7 @@ export class VaFileInput {
   @Watch('error')
   handleExternalErrorChange(value: string) {
     if (value) {
-      this.focusOnErrorMessage();
+      // this.focusOnErrorMessage();
     }
   }
 
@@ -190,7 +190,7 @@ export class VaFileInput {
 
   @Watch('statusText')
     handleValueChange(value: string) {
-      this.updateStatusMessage(value, true);
+      this.updateStatusMessage(value);
   }
 
   @Watch('percentUploaded')
@@ -245,14 +245,17 @@ export class VaFileInput {
   };
 
   /**
-   * Focuses on the displayed error message element after a short delay to help with screen reader announcement.
+   * Focuses on the nested `<button>` element in the "Change File" `<va-button-icon>` after a short delay to help with screen reader announcement.
    * @returns {void}
    */
-  private focusOnErrorMessage(): void {
+  private focusOnChangeButton(): void {
     setTimeout(() => {
-      const errorMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-error-message');
-      if (errorMessage && errorMessage.textContent) {
-        errorMessage.focus();
+      const changeButton: HTMLElement = this.el.shadowRoot.querySelector('va-button-icon');
+      const innerButton: HTMLElement = changeButton?.shadowRoot.querySelector('button');
+      // console.log('changeButton', changeButton);
+      if (innerButton) {
+        // console.log('focusing on change button ', innerButton);
+        innerButton.focus();
       }
     }, 250);
   }
@@ -277,36 +280,51 @@ export class VaFileInput {
    * @param {string} message - The value to update the element's text content to.
    * @param {boolean} focusAfterUpdate - Whether to focus the element after updating.
    */
-  private updateStatusMessage( message: string, focusAfterUpdate: boolean = false): void {
+  private updateStatusMessage( message: string): void {
     setTimeout(() => {
       const statusMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-status-message');
       if (statusMessage) {
         statusMessage.textContent = message;
       }
-
-      if (focusAfterUpdate) {
-        this.focusOnStatusMessage(false);
-      }
     }, 250);
   }
 
   /**
-   * Focuses on the error message in `<va-text-input>` for an encrypted file's password after a short delay to help with screen reader announcement.
+   * Focuses on the password input field using MutationObserver to wait for DOM readiness.
    * @returns {void}
    */
-  private focusOnPasswordInputError(): void {
-    setTimeout(() => {
+  private focusOnPasswordInput(): void {
+    const focusPasswordField = () => {
       const passwordTextInput = this.el.shadowRoot.querySelector('va-text-input');
-      let errorMessage: HTMLElement;
-
-      if (passwordTextInput) {
-        errorMessage = passwordTextInput.shadowRoot.querySelector('#input-error-message');
+      if (passwordTextInput?.shadowRoot) {
+        const inputElement = passwordTextInput.shadowRoot.querySelector('input');
+        if (inputElement) {
+          inputElement.focus();
+          return true; // Successfully focused
+        }
       }
+      return false; // Not ready yet
+    };
 
-      if (errorMessage && errorMessage.textContent) {
-        errorMessage.focus();
+    // Try immediate focus first
+    if (focusPasswordField()) return;
+
+    // Fall back to MutationObserver with timeout
+    const observer = new MutationObserver(() => {
+      if (focusPasswordField()) {
+        observer.disconnect();
       }
-    }, 250);
+    });
+
+    observer.observe(this.el.shadowRoot, {
+      childList: true,
+      subtree: true,
+    });
+
+    // Safety timeout to avoid infinite observation
+    setTimeout(() => {
+      observer.disconnect();
+    }, 2000);
   }
 
   /**
@@ -319,10 +337,12 @@ export class VaFileInput {
    * @returns {void}
    */
   private handleWindowFocus = (): void => {
+    // console.log('Window regained focus');
     // When the window regains focus and file value is nullish, attempt to focus
     // on the error message.
     if (this.internalError && this.delayErrorMessageFocusUntilWindowFocus) {
-      this.focusOnErrorMessage();
+      // console.log('Focusing on error message after window focus');
+      // this.focusOnErrorMessage();
       this.delayErrorMessageFocusUntilWindowFocus = false;
     }
 
@@ -349,15 +369,11 @@ export class VaFileInput {
   }
 
   private handleFile = (file: File, emitChange: boolean = true, deferMessageUpdate: boolean = false) => {
-    if (this.encrypted) {
-      this.focusOnPasswordInputError();
-    }
-
     let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
-        this.removeFile(false, true);
+        this.removeFile(false, false);
         fileError = this.getFileTypeErrorMessage(file);
       }
     }
@@ -403,14 +419,15 @@ export class VaFileInput {
 
     let focusOnStatusMessage = !deferMessageUpdate;
 
-    // If the file is encrypted, we do not want to focus on the status message
-    // since the focus will be on the error message in the `va-text-input` for
-    // the file's password.
+    // If the file is encrypted, we do not want to focus on the status message.
+    // Instead the focus will be on the nested `input` element in the `va-text-input`
+    // for the file's password.
     if (this.encrypted) {
+      this.focusOnPasswordInput();
       focusOnStatusMessage = false;
     }
 
-    this.updateStatusMessage(`You have selected the file: ${file.name}`, focusOnStatusMessage);
+    this.updateStatusMessage(`You have selected the file: ${file.name}`);
 
     if (deferMessageUpdate && focusOnStatusMessage) {
       this.delayStatusMessageFocusUntilWindowFocus = true;
@@ -438,7 +455,7 @@ export class VaFileInput {
     this.uploadedFile = null;
 
     if (updateStatusMessage) {
-      this.updateStatusMessage(`File deleted. No file selected.`, true);
+      this.updateStatusMessage(`File deleted. No file selected.`);
     }
   };
 
@@ -582,7 +599,7 @@ export class VaFileInput {
 
   componentDidLoad() {
     fileInput.init(this.el);
-    this.focusOnErrorMessage();
+    // this.focusOnErrorMessage();
   }
 
   connectedCallback() {
@@ -616,10 +633,10 @@ export class VaFileInput {
     let displayError: string | undefined = this.error || this.internalError;
 
     return (
-      <span id="input-error-message" class="usa-error-message" tabIndex={-1}>
+      <span id="input-error-message" class="usa-error-message">
         {displayError}
       </span>
-    )
+    );
   }
 
   private handlePasswordChange(e) {
@@ -723,6 +740,16 @@ export class VaFileInput {
       statusClassNames = `${statusClassNames} uploading-status`;
     }
 
+    // Establish the aria-label for the "change file" button based on the current state
+    let changeFileAriaLabel: string | undefined = undefined;
+    if (file && !displayError) {
+      changeFileAriaLabel = `change file ${file.name}`;
+    } else if (uploadedFile && !displayError) {
+      changeFileAriaLabel = `change file ${uploadedFile.name}`;
+    } else if (displayError) {
+      changeFileAriaLabel = `change file. ${displayError}`;
+    }
+
     return (
       <Host class={{ 'has-error': !!displayError }}>
         {!readOnly && (
@@ -730,11 +757,13 @@ export class VaFileInput {
             {label && this.renderLabelOrHeader(label, required, headerSize)}
           </span>
         )}
+
         {hint && !readOnly && (
           <div class={hintClass} id="input-hint-message">
             {hint}
           </div>
         )}
+
         <div class="file-input-wrapper" onDrop={this.handleDrop}>
           <input
             id="fileInputField"
@@ -760,7 +789,8 @@ export class VaFileInput {
               <span
                 id="input-status-message"
                 class="usa-sr-only"
-                tabIndex={-1}
+                // tabIndex={-1}
+                aria-live="polite"
               ></span>
 
               <div class={fileInputTargetClasses}>
@@ -813,6 +843,7 @@ export class VaFileInput {
                           </Fragment>
                       )
                     }
+
                     {!showProgBar && (
                       <Fragment>
                         {encrypted && (
@@ -829,6 +860,7 @@ export class VaFileInput {
                         </div>
                       </Fragment>
                     )}
+
                     {!readOnly && !showProgBar &&
                       (
                         <Fragment>
@@ -836,7 +868,7 @@ export class VaFileInput {
                             <va-button-icon
                               buttonType="change-file"
                               onClick={this.changeFile}
-                              label={`change file ${file ? file.name : uploadedFile.name}`}
+                              label={changeFileAriaLabel}
                               ></va-button-icon>
                             <va-button-icon
                               buttonType="delete"
@@ -844,6 +876,7 @@ export class VaFileInput {
                               label={`delete file ${file ? file.name : uploadedFile.name}`}
                             ></va-button-icon>
                           </div>
+
                           <va-modal
                             modalTitle="Delete this file?"
                             visible={this.showModal}
