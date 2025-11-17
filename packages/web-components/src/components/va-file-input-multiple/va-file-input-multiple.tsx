@@ -361,8 +361,10 @@ export class VaFileInputMultiple {
     } else {
       return (
         <div class="label-header">
-          <span part="label" class="usa-label">{label}</span>
-          {requiredSpan}
+          <label htmlFor="fileInputField" part="label" class="usa-label">
+            {label}
+            {requiredSpan}
+          </label>
         </div>
       );
     }
