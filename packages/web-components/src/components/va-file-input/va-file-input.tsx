@@ -52,6 +52,26 @@ export class VaFileInput {
   }
   @State() processStatusMessage: string | null = null;
   @State() showModal: boolean = false;
+  @Watch('showModal')
+  handleShowModalChange(value: boolean) {
+    if (!value && this.file) {
+      this.focusOnChangeButton();
+    }
+    else if (!value && !this.file) {
+      // Determine if active element is the component or a child element
+      const componentOrChildHasFocus = this.el.contains(document.activeElement);
+
+      const statusMessage = `File deleted. No file selected.`;
+
+      if (!componentOrChildHasFocus) {
+        this.delayStatusMessageUpdateUntilWindowFocus = true;
+        this.deferredStatusMessage = statusMessage;
+      }
+      else {
+        this.updateStatusMessage(statusMessage);
+      }
+    }
+  }
   @State() showSeparator: boolean = true;
 
   // don't generate previews for files bigger than limit because this can lock main thread
@@ -270,6 +290,8 @@ export class VaFileInput {
       const statusMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-status-message');
       if (statusMessage) {
         statusMessage.textContent = message;
+        this.delayStatusMessageUpdateUntilWindowFocus = false;
+        this.deferredStatusMessage = null;
       }
     }, 250);
   }
@@ -342,9 +364,6 @@ export class VaFileInput {
     // 2. There is a delayed status message update (successful input or deletion of file).
     else if (this.delayStatusMessageUpdateUntilWindowFocus && !this.encrypted) {
       this.updateStatusMessage(this.deferredStatusMessage);
-      // Also need to reset the deferred status message and flag
-      this.delayStatusMessageUpdateUntilWindowFocus = false;
-      this.deferredStatusMessage = null;
       return;
     }
     // 3. There is a password input to focus on.
@@ -447,10 +466,6 @@ export class VaFileInput {
   };
 
   private removeFile = (notifyParent: boolean = true) => {
-    // Determine if active element is the component or a child element
-    const isFocusInsideComponent = this.el.contains(document.activeElement);
-
-    this.closeModal();
     this.uploadStatus = 'idle';
     this.internalError = null;
     if (notifyParent) {
@@ -459,15 +474,7 @@ export class VaFileInput {
     this.file = null;
     this.uploadedFile = null;
 
-    const statusMessage = `File deleted. No file selected.`;
-
-    if (!isFocusInsideComponent) {
-      this.delayStatusMessageUpdateUntilWindowFocus = true;
-      this.deferredStatusMessage = statusMessage;
-    }
-    else {
-      this.updateStatusMessage(statusMessage);
-    }
+    this.closeModal();
   };
 
   private openModal = () => {
@@ -770,6 +777,10 @@ export class VaFileInput {
           </div>
         )}
 
+        {/*
+          Using "zero-width space" character as initial value due to some browsers
+          ignoring changes to aria-live regions that start out empty.
+        */}
         <span
           id="input-status-message"
           class="usa-sr-only"
