@@ -110,7 +110,7 @@ export class VaAlert {
   private getHeadlineText(): string | null {
     let headlineText: string | null = null;
 
-    try { 
+    try {
       // This is the happy path, meaning the user isn't using IE11
       const headlineSlot = this.el.shadowRoot?.querySelector('slot[name="headline"]');
       if (headlineSlot) {
@@ -131,6 +131,17 @@ export class VaAlert {
     } finally {
       return headlineText;
     }
+  }
+
+  // check if user provided a headline slot in light DOM
+  private hasHeadlineSlot(): boolean {
+    if (this.el) {
+      for (const child of this.el.children) {
+        if (child.slot === "headline") return true;
+      }
+    }
+
+    return false;
   }
 
   private updateCloseAriaLabelWithHeadlineText(): void {
@@ -164,19 +175,18 @@ export class VaAlert {
     this.vaComponentDidLoad.emit();
   }
 
-  componentDidRender() {
-    if (!this.visible) return;
-
-    if (!this.closeBtnAriaLabel) {
-      this.updateCloseAriaLabelWithHeadlineText();
-    }
-
+  componentWillRender() {
     const isBannerAlert = this.el.id === 'va-banner-alert';
 
-    // Apply the slim property if there is no headline text and this alert is not used by va-banner
-    if (!isBannerAlert) {
-      const headlineText = this.getHeadlineText();
-      this.slim = !headlineText;
+    // Apply the slim property if there is no headline slot and this alert is not used by va-banner
+    if (!isBannerAlert && this.visible) {
+      this.slim = !this.hasHeadlineSlot();
+    }
+  }
+
+  componentDidRender() {
+    if (!this.closeBtnAriaLabel) {
+      this.updateCloseAriaLabelWithHeadlineText();
     }
   }
 
