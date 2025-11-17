@@ -37,7 +37,6 @@ const defaultArgs = {
   'required': false,
   'error': undefined,
   'hint': null,
-  'aria-live-region-text': 'You selected',
   'aria-describedby-message': 'Optional description text for screen readers',
   'label-header-level': null,
   'header-aria-describedby': null,
@@ -71,7 +70,6 @@ const Template = ({
   required,
   error,
   hint,
-  'aria-live-region-text': ariaLiveRegionText,
   'aria-describedby-message': ariaDescribedbyMessage,
   options,
   'use-add-button': useAddButton,
@@ -106,7 +104,6 @@ const Template = ({
         required={required}
         error={errorMsg}
         hint={hint}
-        aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
         full-width={fullWidth}
@@ -134,7 +131,6 @@ const InertTemplate = ({
   required,
   error,
   hint,
-  'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
 }) => {
@@ -167,7 +163,6 @@ const InertTemplate = ({
         error={error}
         hint={hint}
         inert
-        aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
       >
         {modifiedOptions}
@@ -285,7 +280,6 @@ const WidthsTemplate = ({
   required,
   error,
   hint,
-  'aria-live-region-text': ariaLiveRegionText,
   'aria-describedby-message': ariaDescribedbyMessage,
   options,
 }) => {
@@ -298,7 +292,6 @@ const WidthsTemplate = ({
         required={required}
         error={error}
         hint={hint}
-        aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         width={width}
       >

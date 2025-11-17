@@ -232,57 +232,16 @@ export class VaModal {
     // point forward in the function.
     if (keyCode !== 'Tab') return;
 
-    const { ariaHiddenNodeExceptions } = this;
-
     const activeElement = this.getRealActiveElement();
     const firstElement = this.focusableChildren[0] as HTMLElement;
     const lastElement = this.focusableChildren[this.focusableChildren.length - 1] as HTMLElement;
 
-    // Tab handling for nodes included in ariaHiddenNodeExceptions
-    if (ariaHiddenNodeExceptions.includes(activeElement)) {
-      const isFirstException = activeElement === ariaHiddenNodeExceptions[0];
-      const isLastException = activeElement === ariaHiddenNodeExceptions[ariaHiddenNodeExceptions.length - 1];
-
-      // Get index of activeElement in ariaHiddenNodeExceptions array
-      const activeElementIndex = ariaHiddenNodeExceptions.indexOf(activeElement);
-
-      // Forward tabbing
-      if (!e.shiftKey) {
-        e.preventDefault();
-        // Either focus on first element in modal focusableChildren or the next
-        // element in ariaHiddenNodeExceptions
-        isLastException ? firstElement.focus() : ariaHiddenNodeExceptions[activeElementIndex + 1].focus();
-      }
-      // Backward tabbing (Shift + Tab)
-      else if (e.shiftKey) {
-        e.preventDefault();
-        // Either focus on last element in modal focusableChildren or the previous
-        // element in ariaHiddenNodeExceptions
-        isFirstException ? lastElement.focus() : ariaHiddenNodeExceptions[activeElementIndex - 1].focus();
-      }
-
-      // End function at this point since following logic does not apply to the
-      // elements in ariaHiddenNodeExceptions
-      return;
-    }
-
-    // Forward tabbing on last element in focusableChildren
     if (!e.shiftKey && activeElement === lastElement) {
       e.preventDefault();
-      // Focus on the first element in the ariaHiddenNodeExceptions array if it
-      // exists, otherwise focus the first element in the focusableChildren array.
-      ariaHiddenNodeExceptions?.length ?
-        ariaHiddenNodeExceptions[0].focus() :
-        firstElement.focus();
-    }
-    // Backward tabbing on first element in focusableChildren
-    else if (e.shiftKey && activeElement === firstElement) {
+      firstElement.focus();
+    } else if (e.shiftKey && activeElement === firstElement) {
       e.preventDefault();
-      // Focus on the last element in the ariaHiddenNodeExceptions array if it exists,
-      // otherwise focus the last element in the focusableChildren array.
-      ariaHiddenNodeExceptions?.length ?
-        ariaHiddenNodeExceptions[ariaHiddenNodeExceptions.length - 1].focus() :
-        lastElement.focus();
+      lastElement.focus();
     }
   }
 
@@ -405,27 +364,6 @@ export class VaModal {
     return activeElement;
   }
 
-  /**
-   * Helper function to hide or show siblings of ariaHiddenNodeExceptions elements during modal setup/teardown.
-   * @param {boolean} show - Determines whether to show or hide siblings by setting or removing aria-hidden attribute
-   * @returns {void}
-   */
-  private hideOrShowAriaHiddenExceptionsSiblings(show: boolean = false): void {
-    for (const element of this.ariaHiddenNodeExceptions) {
-      // Get all siblings of the passed element
-      const parent = element.parentElement;
-      if (parent) {
-        const siblings = Array.from(parent.children) as HTMLElement[];
-        // Hide/show all siblings except the passed element
-        siblings.forEach(sibling => {
-          if (sibling !== element && sibling !== this.el) {
-            show ? sibling.removeAttribute('aria-hidden') : sibling.setAttribute('aria-hidden', 'true');
-          }
-        });
-      }
-    }
-  }
-
   // This method traps the focus inside our web component, prevents scrolling outside
   // the modal, and adds aria-hidden="true" to all elements outside the web component.
   // Fires analytics event unless disableAnalytics is true.
@@ -446,34 +384,9 @@ export class VaModal {
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
 
-    // Get parents of component all the way up to body element while accounting
-    // for shadowRoot of web components, which is a boundary. This is necessary
-    // to prevent aria-hidden from trickling down from parents components and disabling
-    // content inside the modal, notably on Firefox and Safari.
-    const parents = [];
-    let current = this.el.parentElement || (this.el.parentNode as ShadowRoot).host;
-    while (current && current !== document.body) {
-      parents.push(current);
-
-      // Check if we need to traverse up through a shadow root
-      if (current.parentElement) {
-        current = current.parentElement;
-      } else if (current.parentNode && (current.parentNode as ShadowRoot).host) {
-        // We've hit a shadow root boundary, jump to the host element
-        current = (current.parentNode as ShadowRoot).host as HTMLElement;
-      } else {
-        // No more parents to traverse
-        break;
-      }
-    }
-
-    // Ensure that siblings of exceptions are hidden
-    this.hideOrShowAriaHiddenExceptionsSiblings(false);
-
     // The elements to exclude from aria-hidden.
     const hideExceptions = [
       ...this.ariaHiddenNodeExceptions,
-      ...parents,
       this.el,
     ] as HTMLElement[];
 
@@ -503,7 +416,6 @@ export class VaModal {
   private teardownModal() {
     clearAllBodyScrollLocks();
     this.undoAriaHidden?.();
-    this.hideOrShowAriaHiddenExceptionsSiblings(true);
     this.savedFocus?.focus();
   }
 
