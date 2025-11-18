@@ -188,8 +188,8 @@ export class VaAlert {
     const isBannerAlert = this.el.id === 'va-banner-alert';
 
     // Apply the slim property if there is no headline text and this alert is not used by va-banner
-    if (!isBannerAlert && !this.hasHeadlineContent()) {
-      this.slim = true;
+    if (!isBannerAlert) {
+      this.slim = !this.hasHeadlineContent()
     }
   }
 
@@ -231,7 +231,7 @@ export class VaAlert {
                 size={slim ? 3 : 4}
               ></va-icon>
             )}
-            <slot name="headline"></slot>
+            {!slim && <slot name="headline"></slot>}
             <slot></slot>
           </div>
         </div>
