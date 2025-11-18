@@ -133,8 +133,8 @@ export class VaAlert {
     }
   }
 
-  // Check light DOM instead of shadow DOM because the
-  // slot might be removed based on {!slim && <slot name="headline"></slot>}
+  // Check light DOM instead of shadow DOM because it
+  // will be present during willRender
   private hasHeadlineContent(): boolean {
     if (this.el) {
       for (const child of this.el.children) {
@@ -231,7 +231,7 @@ export class VaAlert {
                 size={slim ? 3 : 4}
               ></va-icon>
             )}
-            {!slim && <slot name="headline"></slot>}
+            <slot name="headline"></slot>
             <slot></slot>
           </div>
         </div>
