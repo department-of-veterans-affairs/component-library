@@ -22,7 +22,7 @@ export default {
     },
     'filter-options': {
       table: {
-        disable: true,    
+        disable: true,
       },
     },
   },
@@ -30,18 +30,28 @@ export default {
 
 const defaultArgs = {
   'header': 'Filters',
-  'filter-options': [ 
-    { 
+  'filter-options': [
+    {
+      id: 7,
+      label: "Test",
+      isRadio: true,
+      category: [
+        { label: "one", id: 1, active: true },
+        { label: "two", id: 2 },
+        { label: "three", id: 3 },
+      ]
+    },
+    {
       id: 1,
-      label: "Benefits",
+      label: "Test",
       category: [
         { label: "Health Care", id: 2 },
         { label: "Education", id: 3 },
-        { label: "Housing", id: 4 }
+        { label: "Housing", id: 4 },
       ]
     },
-    { 
-      label:"Service Status",
+    {
+      label: "Service Status",
       id: 5,
       category: [
         { label: "Veteran", id: 6 },
@@ -51,6 +61,20 @@ const defaultArgs = {
         { label: "Retired", id: 10 },
         { label: "Disabled", id: 11 },
         { label: "Other", id: 12 }
+      ]
+    },
+    {
+      label: "another test",
+      id: 10,
+      isRadio: true,
+      category: [
+        { label: "asfasdf", id: 6 },
+        { label: "asdfasfa Duty", id: 7 },
+        { label: "hqw345", id: 8 },
+        { label: "2345 Guard", id: 9 },
+        { label: "Retiredsfs", id: 10 },
+        { label: "Disasdfbled", id: 11 },
+        { label: "Othsder", id: 12 }
       ]
     }
   ],
@@ -65,7 +89,7 @@ const Template = ({
   'header': header,
   'filter-options': filterOptions,
 }) => (
-  <VaSearchFilter 
+  <VaSearchFilter
     header={header}
     filterOptions={filterOptions}
     style={styles}
@@ -83,8 +107,8 @@ Default.args = {
 export const ActiveFilters = Template.bind(null);
 ActiveFilters.args = {
   ...defaultArgs,
-  'filter-options': [ 
-    { 
+  'filter-options': [
+    {
       id: 1,
       label: "Benefits",
       category: [
@@ -93,8 +117,8 @@ ActiveFilters.args = {
         { label: "Housing", id: 4 }
       ]
     },
-    { 
-      label:"Service Status",
+    {
+      label: "Service Status",
       id: 5,
       category: [
         { label: "Veteran", id: 6 },
