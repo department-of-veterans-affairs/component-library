@@ -38,6 +38,7 @@ export class VaFileInput {
   private delayStatusMessageUpdateUntilWindowFocus: boolean = false;
   private deferredStatusMessage: string = null;
   private delayPasswordInputFocusUntilWindowFocus: boolean = false;
+  private slottedContent: HTMLElement[] = null;
 
   @Element() el: HTMLElement;
 
@@ -374,6 +375,48 @@ export class VaFileInput {
     }
   }
 
+  /**
+   * Attempts to focus on a nested input element within slotted content, if present.
+   * This is useful for scenarios where the slotted content includes form inputs
+   * that should receive focus after a file is selected.
+   * @returns {void}
+   */
+  private attemptToFocusOnSlottedElement = (): void => {
+    // Stop here if no slotted content or if encrypted (to avoid conflicting focus)
+    if (this.slottedContent.length === 0 || this.encrypted) {
+      return;
+    }
+
+    // Find first instance of either `<va-select>` or `<va-text-input>` in slotted content
+    let supportedNestedInputElements = [];
+    for (const element of this.slottedContent) {
+      const found = element.querySelectorAll('va-select, va-text-input');
+      if (found.length > 0) {
+        supportedNestedInputElements.push(...Array.from(found));
+        break; // Stop at the first element that contains supported input elements
+      }
+    }
+
+    // Determine the first supported nested input element to focus on
+    let nestedElementForFocus = null;
+    if (supportedNestedInputElements.length > 0) {
+      const firstEl = supportedNestedInputElements[0] as HTMLElement;
+
+      if (firstEl.tagName === 'VA-TEXT-INPUT') {
+        nestedElementForFocus = firstEl.shadowRoot.querySelector('input');
+      } else if (firstEl.tagName === 'VA-SELECT') {
+        nestedElementForFocus = firstEl.shadowRoot.querySelector('select');
+      }
+    }
+
+    // Focus on the nested element after a short delay to help with screen reader announcement
+    if (nestedElementForFocus) {
+      setTimeout(() => {
+        nestedElementForFocus.focus();
+      }, 250);
+    }
+  }
+
   // get the extension from the file name if possible, else fallback on the mime type
   private getExtension = (file: File) => {
     const noLeadingDot = file.name.replace(/^\./, '');
@@ -388,7 +431,6 @@ export class VaFileInput {
     return `We do not accept ${fileWarning}. Choose a new file.`;
   }
 
-  // private handleFile = (file: File, emitChange: boolean = true, deferMessageUpdate = false) => {
   private handleFile = (file: File, emitChange: boolean = true) => {
     const componentOrChildHasFocus = this.el.contains(document.activeElement);
 
@@ -452,6 +494,14 @@ export class VaFileInput {
     }
     else {
       this.updateStatusMessage(statusMsg);
+    }
+
+    // Attempt to focus on slotted content input element if present. This should
+    // happen last to avoid focus conflicts, as this announcement should take
+    // priority over the status message update. Skip since the text input for
+    // file password should take priority.
+    if (!this.encrypted && this.slottedContent.length > 0) {
+      this.attemptToFocusOnSlottedElement();
     }
 
     if (this.enableAnalytics) {
@@ -605,10 +655,10 @@ export class VaFileInput {
    * and shows or hides the "separator" horizontal rule as needed.
    */
   componentWillRender() {
-    const hasSlottedContent = !!this.el.querySelector(':scope > *');
+    this.slottedContent = Array.from(this.el.querySelectorAll(':scope > *'));
     const needsButtons = (!!this.value || !!this.file) && !this.readOnly;
     this.showSeparator =
-      hasSlottedContent || needsButtons;
+      this.slottedContent.length > 0 || needsButtons;
   }
 
   componentDidLoad() {
