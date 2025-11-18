@@ -55,10 +55,12 @@ export class VaFileInput {
   @State() showModal: boolean = false;
   @Watch('showModal')
   handleShowModalChange(value: boolean) {
-    if (!value && this.file) {
-      this.focusOnChangeButton();
-    }
-    else if (!value && !this.file) {
+    // Note: When modal is closed but the user did not delete the file, focus
+    // should automatically return to the button that triggered the event ("Delete"
+    // button), so we do not need to do anything for that case.
+
+    // When the modal is closed and there is no file, update status message
+    if (!value && !this.file) {
       // Determine if active element is the component or a child element
       const componentOrChildHasFocus = this.el.contains(document.activeElement);
 
@@ -67,8 +69,9 @@ export class VaFileInput {
       if (!componentOrChildHasFocus) {
         this.delayStatusMessageUpdateUntilWindowFocus = true;
         this.deferredStatusMessage = statusMessage;
-      }
-      else {
+      } else {
+        // No need to check for slotted content since this.file is nullish
+        // and the additional-info-slot won't be rendered
         this.updateStatusMessage(statusMessage);
       }
     }
@@ -298,6 +301,35 @@ export class VaFileInput {
   }
 
   /**
+   * Updates the status message content without triggering aria-live announcements.
+   * Temporarily removes aria-live, updates content, then restores aria-live.
+   * @param {string} message - The value to update the element's text content to.
+   * @returns {void}
+   */
+  private updateStatusMessageSilently(message: string): void {
+    setTimeout(() => {
+      const statusMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-status-message');
+      if (statusMessage) {
+        // Temporarily disable aria-live
+        const originalAriaLive = statusMessage.getAttribute('aria-live');
+        statusMessage.removeAttribute('aria-live');
+
+        // Update content silently
+        statusMessage.textContent = message;
+        this.delayStatusMessageUpdateUntilWindowFocus = false;
+        this.deferredStatusMessage = null;
+
+        // Restore aria-live after a brief delay
+        setTimeout(() => {
+          if (originalAriaLive) {
+            statusMessage.setAttribute('aria-live', originalAriaLive);
+          }
+        }, 100);
+      }
+    }, 250);
+  }
+
+  /**
    * Focuses on the password input field using MutationObserver to wait for DOM readiness.
    * @returns {void}
    */
@@ -376,6 +408,26 @@ export class VaFileInput {
   }
 
   /**
+   * Checks if there are focusable web components (va-select or va-text-input) in slotted content.
+   * @returns {boolean} True if focusable web components are found in slotted content.
+   */
+  private hasFocusableWebComponents(): boolean {
+    if (this.slottedContent.length === 0) {
+      return false;
+    }
+
+    // Check each slotted element for supported web components
+    for (const element of this.slottedContent) {
+      const found = element.querySelectorAll('va-select, va-text-input');
+      if (found.length > 0) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
    * Attempts to focus on a nested input element within slotted content, if present.
    * This is useful for scenarios where the slotted content includes form inputs
    * that should receive focus after a file is selected.
@@ -383,7 +435,7 @@ export class VaFileInput {
    */
   private attemptToFocusOnSlottedElement = (): void => {
     // Stop here if no slotted content or if encrypted (to avoid conflicting focus)
-    if (this.slottedContent.length === 0 || this.encrypted) {
+    if (!this.file || this.slottedContent.length === 0 || this.encrypted) {
       return;
     }
 
@@ -413,7 +465,7 @@ export class VaFileInput {
     if (nestedElementForFocus) {
       setTimeout(() => {
         nestedElementForFocus.focus();
-      }, 250);
+      }, 300);
     }
   }
 
@@ -493,14 +545,23 @@ export class VaFileInput {
       this.deferredStatusMessage = statusMsg;
     }
     else {
-      this.updateStatusMessage(statusMsg);
+      // Check if we have focusable web components in slotted content
+      const hasFocusableSlottedContent = this.file && !this.encrypted && this.hasFocusableWebComponents();
+
+      if (!hasFocusableSlottedContent) {
+        // Only update status message if we're not focusing on slotted content
+        this.updateStatusMessage(statusMsg);
+      } else {
+        // Update status message content but don't announce it via aria-live
+        this.updateStatusMessageSilently(statusMsg);
+      }
     }
 
     // Attempt to focus on slotted content input element if present. This should
     // happen last to avoid focus conflicts, as this announcement should take
     // priority over the status message update. Skip since the text input for
     // file password should take priority.
-    if (!this.encrypted && this.slottedContent.length > 0) {
+    if (this.file && !this.encrypted && this.hasFocusableWebComponents()) {
       this.attemptToFocusOnSlottedElement();
     }
 
