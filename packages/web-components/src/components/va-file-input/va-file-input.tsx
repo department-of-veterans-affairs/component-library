@@ -581,7 +581,7 @@ export class VaFileInput {
 
     return (
       <Host class={{ 'has-error': !!displayError }}>
-        {!readOnly && !headless &&(
+        {!readOnly && !headless && (
           <span>
             {label && this.renderLabelOrHeader(label, required, headerSize)}
           </span>
