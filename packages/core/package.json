@@ -3,6 +3,10 @@
   "description": "VA.gov component library. Includes React and web components.",
   "version": "54.1.2",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/department-of-veterans-affairs/component-library.git"
+  },
   "scripts": {
     "build": "webpack"
   },
