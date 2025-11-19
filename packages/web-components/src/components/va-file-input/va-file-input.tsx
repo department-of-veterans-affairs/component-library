@@ -336,6 +336,10 @@ export class VaFileInput {
       const statusMessageDiv =
         this.el.shadowRoot.querySelector('#statusMessage');
       statusMessageDiv ? (statusMessageDiv.textContent = message) : '';
+
+      setTimeout(() => {
+        statusMessageDiv ? (statusMessageDiv.textContent = '') : '';
+      }, 10000);
     }, 1000);
   }
 
@@ -567,8 +571,6 @@ export class VaFileInput {
     let selectedFileClassName = headless
       ? 'headless-selected-files-wrapper'
       : 'selected-files-wrapper';
-    const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
-
 
     const showProgBar = percentUploaded !== null && percentUploaded < 100;
 
@@ -579,13 +581,13 @@ export class VaFileInput {
 
     return (
       <Host class={{ 'has-error': !!displayError }}>
-        {!readOnly && (
-          <span class={{ 'usa-sr-only': !!headless }}>
+        {!readOnly && !headless &&(
+          <span>
             {label && this.renderLabelOrHeader(label, required, headerSize)}
           </span>
         )}
-        {hint && !readOnly && (
-          <div class={hintClass} id="input-hint-message">
+        {hint && !readOnly && !headless && (
+          <div class="usa-hint" id="input-hint-message">
             {hint}
           </div>
         )}
