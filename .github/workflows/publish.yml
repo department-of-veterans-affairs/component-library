@@ -42,4 +42,5 @@ jobs:
       - run: yarn workspace @department-of-veterans-affairs/web-components run build-bindings
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
       - run: yarn workspace @department-of-veterans-affairs/css-library run build
-      - run: npm publish --workspace @department-of-veterans-affairs/web-components --workspace @department-of-veterans-affairs/component-library --workspace @department-of-veterans-affairs/react-components --workspace @department-of-veterans-affairs/css-library --access public --provenance
+      - name: Publish packages
+      - run: yarn workspaces foreach --all --verbose --no-private npm publish --access public --tolerate-republish
