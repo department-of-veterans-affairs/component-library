@@ -119,4 +119,13 @@ describe('va-progress-bar', () => {
       </va-progress-bar>
     `);
   });
+
+  it('does not render the sr span if noSr present', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-progress-bar percent="5" no-sr="true"></va-progress-bar>',
+    );
+    const srSpan = await page.find('va-progress-bar >>> span.sr-only');
+    expect(srSpan).toBeNull();
+  })
 });
