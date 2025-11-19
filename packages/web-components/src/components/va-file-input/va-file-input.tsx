@@ -35,9 +35,9 @@ export class VaFileInput {
   private fileType?: string;
   private chooseFileString: string ='choose from folder';
   private dragFileString: string = 'Drag a file here or ';
-  private componentHasFocus: boolean = false;
+  private delayStatusMessageUpdateUntilWindowFocus: boolean = false;
   private deferredStatusMessage: string = null;
-  private shouldDeferStatusAnnouncement: boolean = false;
+  private delayPasswordInputFocusUntilWindowFocus: boolean = false;
   private slottedContent: HTMLElement[] = null;
 
   @Element() el: HTMLElement;
@@ -47,7 +47,7 @@ export class VaFileInput {
   @State() internalError?: string;
   @Watch('internalError')
   handleInternalErrorChange(value: string) {
-    if (value && this.componentHasFocus) {
+    if (value && document.hasFocus()) {
       this.focusOnChangeButton();
     }
   }
@@ -61,15 +61,18 @@ export class VaFileInput {
 
     // When the modal is closed and there is no file, update status message
     if (!value && !this.file) {
+      // Determine if active element is the component or a child element
+      const componentOrChildHasFocus = this.el.contains(document.activeElement);
+
       const statusMessage = `File deleted. No file selected.`;
 
-      // Check if component has focus - if not, defer the announcement
-      if (this.componentHasFocus) {
-        this.updateStatusMessage(statusMessage);
-      } else {
-        // Defer announcement until window regains focus (modal focus transitions)
+      if (!componentOrChildHasFocus) {
+        this.delayStatusMessageUpdateUntilWindowFocus = true;
         this.deferredStatusMessage = statusMessage;
-        this.shouldDeferStatusAnnouncement = true;
+      } else {
+        // No need to check for slotted content since this.file is nullish
+        // and the additional-info-slot won't be rendered
+        this.updateStatusMessage(statusMessage);
       }
     }
   }
@@ -283,7 +286,7 @@ export class VaFileInput {
   }
 
   /**
-   * Updates the sr-only status message element's text content.
+   * Updates the sr-only status message element's text content and optionally focuses on it.
    * @param {string} message - The value to update the element's text content to.
    */
   private updateStatusMessage( message: string): void {
@@ -291,6 +294,8 @@ export class VaFileInput {
       const statusMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-status-message');
       if (statusMessage) {
         statusMessage.textContent = message;
+        this.delayStatusMessageUpdateUntilWindowFocus = false;
+        this.deferredStatusMessage = null;
       }
     }, 250);
   }
@@ -311,6 +316,8 @@ export class VaFileInput {
 
         // Update content silently
         statusMessage.textContent = message;
+        this.delayStatusMessageUpdateUntilWindowFocus = false;
+        this.deferredStatusMessage = null;
 
         // Restore aria-live after a brief delay
         setTimeout(() => {
@@ -363,36 +370,40 @@ export class VaFileInput {
   }
 
   /**
-   * Handles when focus enters the component or any of its children.
-   * @returns {void}
-   */
-  private handleFocusIn = (): void => {
-    this.componentHasFocus = true;
-  }
-
-  /**
-   * Handles when focus leaves the component and all of its children.
-   * @param {FocusEvent} e - The focus event
-   * @returns {void}
-   */
-  private handleFocusOut = (e: FocusEvent): void => {
-    // Check if focus moved to an element outside the component
-    if (!this.el.contains(e.relatedTarget as HTMLElement)) {
-      this.componentHasFocus = false;
-    }
-  }
-
-  /**
-   * Handles window focus events to manage deferred status announcements.
-   * This handles cases where the OS file dialog causes focus to return to <body>
-   * instead of the component, which breaks aria-live announcements on Chrome/Firefox.
+   * Handles the window focus event to manage focus on error and status messages.
+   * This is necessary due to the way that browsers handle focus and screen reader
+   * announcements differently after users interact with native file dialogs. For
+   * example, Chrome will announce the focused element as soon as a file is input,
+   * but Safari and Firefox will not make the announcement until the browser window
+   * regains focus.
    * @returns {void}
    */
   private handleWindowFocus = (): void => {
-    if (this.shouldDeferStatusAnnouncement && this.deferredStatusMessage) {
-      this.shouldDeferStatusAnnouncement = false;
+    // Determine if active element is the component or a child element
+    const isFocusInsideComponent = this.el.contains(document.activeElement);
+
+    if (isFocusInsideComponent) {
+      return;
+    }
+
+    // If focus is outside of component, we need to set focus on an interactive
+    // element based on the current state.
+    // States to consider:
+    // 1. There is an error message to focus on.
+    if (this.internalError) {
+      this.focusOnChangeButton();
+      return;
+    }
+    // 2. There is a delayed status message update (successful input or deletion of file).
+    else if (this.delayStatusMessageUpdateUntilWindowFocus && !this.encrypted) {
       this.updateStatusMessage(this.deferredStatusMessage);
-      this.deferredStatusMessage = null;
+      return;
+    }
+    // 3. There is a password input to focus on.
+    else if (this.delayPasswordInputFocusUntilWindowFocus && (this.encrypted || this.passwordError)) {
+      this.delayPasswordInputFocusUntilWindowFocus = false;
+      this.focusOnPasswordInput();
+      return;
     }
   }
 
@@ -473,6 +484,8 @@ export class VaFileInput {
   }
 
   private handleFile = (file: File, emitChange: boolean = true) => {
+    const componentOrChildHasFocus = this.el.contains(document.activeElement);
+
     let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
@@ -519,22 +532,25 @@ export class VaFileInput {
 
     const statusMsg = `You have selected the file: ${file.name}`;
 
-    // Handle focus for encrypted files or update status message
-    if (this.encrypted) {
+    // Either defer the status message update if specified, focus on password input
+    // for encrypted files, or update status immediately.
+    if (this.encrypted && !componentOrChildHasFocus) {
+      this.delayPasswordInputFocusUntilWindowFocus = true;
+    }
+    else if (this.encrypted) {
       this.focusOnPasswordInput();
-    } else {
+    }
+    else if (!this.encrypted && !componentOrChildHasFocus) {
+      this.delayStatusMessageUpdateUntilWindowFocus = true;
+      this.deferredStatusMessage = statusMsg;
+    }
+    else {
       // Check if we have focusable web components in slotted content
       const hasFocusableSlottedContent = this.file && !this.encrypted && this.hasFocusableWebComponents();
 
       if (!hasFocusableSlottedContent) {
-        // Check if component has focus - if not, defer the announcement
-        if (this.componentHasFocus) {
-          this.updateStatusMessage(statusMsg);
-        } else {
-          // Defer announcement until window regains focus (file dialog closes)
-          this.deferredStatusMessage = statusMsg;
-          this.shouldDeferStatusAnnouncement = true;
-        }
+        // Only update status message if we're not focusing on slotted content
+        this.updateStatusMessage(statusMsg);
       } else {
         // Update status message content but don't announce it via aria-live
         this.updateStatusMessageSilently(statusMsg);
@@ -711,19 +727,15 @@ export class VaFileInput {
   }
 
   connectedCallback() {
-    this.el.addEventListener('focusin', this.handleFocusIn);
-    this.el.addEventListener('focusout', this.handleFocusOut);
+    window.addEventListener('focus', this.handleWindowFocus);
     this.el.addEventListener('change', this.handleChange);
     this.el.addEventListener('drop', this.handleDrop);
-    window.addEventListener('focus', this.handleWindowFocus);
   }
 
   disconnectedCallback() {
-    this.el.removeEventListener('focusin', this.handleFocusIn);
-    this.el.removeEventListener('focusout', this.handleFocusOut);
+    window.removeEventListener('focus', this.handleWindowFocus);
     this.el.removeEventListener('change', this.handleChange);
     this.el.removeEventListener('drop', this.handleDrop);
-    window.removeEventListener('focus', this.handleWindowFocus);
   }
 
   private getDefaultUploadMessage() {
