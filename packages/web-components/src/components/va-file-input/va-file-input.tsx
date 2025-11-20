@@ -10,7 +10,8 @@ import {
   EventEmitter,
   State,
   Watch,
-  forceUpdate
+  forceUpdate,
+  Listen
 } from '@stencil/core';
 import { i18next } from '../..';
 import { fileInput } from './va-file-input-upgrader';
@@ -35,10 +36,11 @@ export class VaFileInput {
   private fileType?: string;
   private chooseFileString: string ='choose from folder';
   private dragFileString: string = 'Drag a file here or ';
-  private componentHasFocus: boolean = false;
-  private deferredStatusMessage: string = null;
-  private shouldDeferStatusAnnouncement: boolean = false;
+  private delayPasswordInputFocusUntilWindowFocus: boolean = false;
+  private delaySlottedElementFocusUntilWindowFocus: boolean = false;
+  private delayChangeButtonFocusUntilWindowFocus: boolean = false;
   private slottedContent: HTMLElement[] = null;
+  private windowHasFocus: boolean = true;
 
   @Element() el: HTMLElement;
 
@@ -47,30 +49,19 @@ export class VaFileInput {
   @State() internalError?: string;
   @Watch('internalError')
   handleInternalErrorChange(value: string) {
-    if (value && this.componentHasFocus) {
+    console.log('[component] internalError changed: ', value, 'window focus? ', this.windowHasFocus);
+    if (value && this.windowHasFocus) {
       this.focusOnChangeButton();
+    } else if (value && !this.windowHasFocus) {
+      this.delayChangeButtonFocusUntilWindowFocus = true;
     }
   }
   @State() processStatusMessage: string | null = null;
   @State() showModal: boolean = false;
   @Watch('showModal')
   handleShowModalChange(value: boolean) {
-    // Note: When modal is closed but the user did not delete the file, focus
-    // should automatically return to the button that triggered the event ("Delete"
-    // button), so we do not need to do anything for that case.
-
-    // When the modal is closed and there is no file, update status message
     if (!value && !this.file) {
-      const statusMessage = `File deleted. No file selected.`;
-
-      // Check if component has focus - if not, defer the announcement
-      if (this.componentHasFocus) {
-        this.updateStatusMessage(statusMessage);
-      } else {
-        // Defer announcement until window regains focus (modal focus transitions)
-        this.deferredStatusMessage = statusMessage;
-        this.shouldDeferStatusAnnouncement = true;
-      }
+      this.updateStatusMessage(`File deleted. No file selected.`);
     }
   }
   @State() showSeparator: boolean = true;
@@ -232,6 +223,67 @@ export class VaFileInput {
     }
   }
 
+  @Listen('drop')
+  handleDropEvent(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+      this.handleFile(files[0], true);
+    }
+  }
+
+
+  @Listen('blur', { target: 'window' })
+  handleWindowBlur(): void {
+    this.windowHasFocus = false;
+    console.log('[component] Window blurred');
+  }
+
+  @Listen('focus', { target: 'window' })
+  /**
+   * Handles the window focus event to manage focus on error and status messages.
+   * This is necessary due to the way that browsers handle focus and screen reader
+   * announcements differently after users interact with native file dialogs. For
+   * example, Chrome will announce the focused element as soon as a file is input,
+   * but Safari and Firefox will not make the announcement until the browser window
+   * regains focus.
+   * @returns {void}
+   */
+  handleWindowFocus(): void {
+    this.windowHasFocus = true;
+    console.log('[component] Window focused');
+
+    // If focus is outside of component, we need to set focus on an interactive
+    // element based on the current state.
+    // States to consider:
+    // 1. There is an error message to focus on.
+    if (this.internalError) {
+      this.focusOnChangeButton();
+      return;
+    }
+    // 2. There is a password input to focus on.
+    else if (this.delayPasswordInputFocusUntilWindowFocus && (this.encrypted || this.passwordError)) {
+      console.log('[component] Trying to focus on password input after delay');
+      this.delayPasswordInputFocusUntilWindowFocus = false;
+      this.focusOnPasswordInput();
+      return;
+    }
+    // 3. There is a nested element in slotted content to focus on.
+    else if (this.delaySlottedElementFocusUntilWindowFocus && this.slottedContent.length > 0) {
+      console.log('[component] Trying to focus on slotted element after delay');
+      this.delaySlottedElementFocusUntilWindowFocus = false;
+      this.attemptToFocusOnSlottedElement();
+    }
+    // 4. There is a change button to focus on.
+    else if (this.delayChangeButtonFocusUntilWindowFocus) {
+      console.log('[component] Trying to focus on change button after delay');
+      this.delayChangeButtonFocusUntilWindowFocus = false;
+      this.focusOnChangeButton();
+    }
+  }
+
   /**
    * called when file has been uploaded
    * or file upload has been cancelled
@@ -245,27 +297,13 @@ export class VaFileInput {
   }
 
   private handleChange = (e: Event) => {
-    // const hasFocusOnDrop = document.hasFocus();
     const input = e.target as HTMLInputElement;
     this.fileContents = null;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0], true);
     }
     input.value = '';
-  };
-
-  private handleDrop = (event: DragEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    // const hasFocusOnDrop = document.hasFocus();
-
-    const files = event.dataTransfer.files;
-    if (files.length > 0) {
-      // this.handleFile(files[0], true, !hasFocusOnDrop);
-      this.handleFile(files[0], true);
-    }
-  };
+  }
 
   /**
    * Focuses on the nested `<button>` element in the "Change File" `<va-button-icon>` after a short delay to help with screen reader announcement.
@@ -277,13 +315,14 @@ export class VaFileInput {
       const innerButton: HTMLElement = changeButton?.shadowRoot.querySelector('button');
 
       if (innerButton) {
+        console.log('[component] Focusing on change file button for error state: ', innerButton);
         innerButton.focus();
       }
     }, 250);
   }
 
   /**
-   * Updates the sr-only status message element's text content.
+   * Updates the sr-only status message element's text content and optionally focuses on it.
    * @param {string} message - The value to update the element's text content to.
    */
   private updateStatusMessage( message: string): void {
@@ -296,125 +335,31 @@ export class VaFileInput {
   }
 
   /**
-   * Updates the status message content without triggering aria-live announcements.
-   * Temporarily removes aria-live, updates content, then restores aria-live.
-   * @param {string} message - The value to update the element's text content to.
-   * @returns {void}
-   */
-  private updateStatusMessageSilently(message: string): void {
-    setTimeout(() => {
-      const statusMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-status-message');
-      if (statusMessage) {
-        // Temporarily disable aria-live
-        const originalAriaLive = statusMessage.getAttribute('aria-live');
-        statusMessage.removeAttribute('aria-live');
-
-        // Update content silently
-        statusMessage.textContent = message;
-
-        // Restore aria-live after a brief delay
-        setTimeout(() => {
-          if (originalAriaLive) {
-            statusMessage.setAttribute('aria-live', originalAriaLive);
-          }
-        }, 100);
-      }
-    }, 250);
-  }
-
-  /**
    * Focuses on the password input field using MutationObserver to wait for DOM readiness.
    * @returns {void}
    */
   private focusOnPasswordInput(): void {
-    const focusPasswordField = () => {
-      const passwordTextInput = this.el.shadowRoot.querySelector('va-text-input');
-      if (passwordTextInput?.shadowRoot) {
-        const inputElement = passwordTextInput.shadowRoot.querySelector('input');
-        if (inputElement) {
-          setTimeout(() => {
-            inputElement.focus();
-          }, 250);
-          return true; // Successfully focused
-        }
-      }
-      return false; // Not ready yet
-    };
+  let attempts = 0;
+  const maxAttempts = 10;
 
-    // Try immediate focus first
-    if (focusPasswordField()) return;
+  console.log('[component] Window focus on password input focus attempt', this.windowHasFocus);
 
-    // Fall back to MutationObserver with timeout
-    const observer = new MutationObserver(() => {
-      if (focusPasswordField()) {
-        observer.disconnect();
-      }
-    });
+  const tryFocus = () => {
+    const passwordTextInput = this.el.shadowRoot.querySelector('va-text-input');
+    const inputElement = passwordTextInput?.shadowRoot?.querySelector('input');
 
-    observer.observe(this.el.shadowRoot, {
-      childList: true,
-      subtree: true,
-    });
-
-    // Safety timeout to avoid infinite observation
-    setTimeout(() => {
-      observer.disconnect();
-    }, 2000);
-  }
-
-  /**
-   * Handles when focus enters the component or any of its children.
-   * @returns {void}
-   */
-  private handleFocusIn = (): void => {
-    this.componentHasFocus = true;
-  }
-
-  /**
-   * Handles when focus leaves the component and all of its children.
-   * @param {FocusEvent} e - The focus event
-   * @returns {void}
-   */
-  private handleFocusOut = (e: FocusEvent): void => {
-    // Check if focus moved to an element outside the component
-    if (!this.el.contains(e.relatedTarget as HTMLElement)) {
-      this.componentHasFocus = false;
+    if (inputElement) {
+      console.log('[component] Element found on attempt ', attempts);
+      inputElement.focus();
+      return; // Successfully focused
+    } else if (attempts < maxAttempts) {
+      attempts++;
+      setTimeout(tryFocus, 100); // Try every 100ms
     }
-  }
+  };
 
-  /**
-   * Handles window focus events to manage deferred status announcements.
-   * This handles cases where the OS file dialog causes focus to return to <body>
-   * instead of the component, which breaks aria-live announcements on Chrome/Firefox.
-   * @returns {void}
-   */
-  private handleWindowFocus = (): void => {
-    if (this.shouldDeferStatusAnnouncement && this.deferredStatusMessage) {
-      this.shouldDeferStatusAnnouncement = false;
-      this.updateStatusMessage(this.deferredStatusMessage);
-      this.deferredStatusMessage = null;
-    }
-  }
-
-  /**
-   * Checks if there are focusable web components (va-select or va-text-input) in slotted content.
-   * @returns {boolean} True if focusable web components are found in slotted content.
-   */
-  private hasFocusableWebComponents(): boolean {
-    if (this.slottedContent.length === 0) {
-      return false;
-    }
-
-    // Check each slotted element for supported web components
-    for (const element of this.slottedContent) {
-      const found = element.querySelectorAll('va-select, va-text-input');
-      if (found.length > 0) {
-        return true;
-      }
-    }
-
-    return false;
-  }
+  tryFocus();
+}
 
   /**
    * Attempts to focus on a nested input element within slotted content, if present.
@@ -424,7 +369,7 @@ export class VaFileInput {
    */
   private attemptToFocusOnSlottedElement = (): void => {
     // Stop here if no slotted content or if encrypted (to avoid conflicting focus)
-    if (!this.file || this.slottedContent.length === 0 || this.encrypted) {
+    if (this.slottedContent.length === 0 || this.encrypted) {
       return;
     }
 
@@ -450,11 +395,14 @@ export class VaFileInput {
       }
     }
 
+    console.log('[component] nestedElementFocus: ', nestedElementForFocus);
+
     // Focus on the nested element after a short delay to help with screen reader announcement
     if (nestedElementForFocus) {
       setTimeout(() => {
+        console.log('[component] Focusing on nested slotted element for focus');
         nestedElementForFocus.focus();
-      }, 300);
+      }, 250);
     }
   }
 
@@ -472,7 +420,7 @@ export class VaFileInput {
     return `We do not accept ${fileWarning}. Choose a new file.`;
   }
 
-  private handleFile = (file: File, emitChange: boolean = true) => {
+  private handleFile(file: File, emitChange: boolean = true) {
     let fileError = null;
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
@@ -519,35 +467,23 @@ export class VaFileInput {
 
     const statusMsg = `You have selected the file: ${file.name}`;
 
-    // Handle focus for encrypted files or update status message
+    console.log('[component] Window focus on handle file? ', this.windowHasFocus);
+
+    // Either defer the status message update if specified, focus on password input
+    // for encrypted files, or update status immediately.
+
+    // Delay focusing on password input if window does not have focus and file is
+    // encrypted
     if (this.encrypted) {
-      this.focusOnPasswordInput();
-    } else {
-      // Check if we have focusable web components in slotted content
-      const hasFocusableSlottedContent = this.file && !this.encrypted && this.hasFocusableWebComponents();
-
-      if (!hasFocusableSlottedContent) {
-        // Check if component has focus - if not, defer the announcement
-        if (this.componentHasFocus) {
-          this.updateStatusMessage(statusMsg);
-        } else {
-          // Defer announcement until window regains focus (file dialog closes)
-          this.deferredStatusMessage = statusMsg;
-          this.shouldDeferStatusAnnouncement = true;
-        }
-      } else {
-        // Update status message content but don't announce it via aria-live
-        this.updateStatusMessageSilently(statusMsg);
-      }
+      this.windowHasFocus ? this.focusOnPasswordInput() : this.delayPasswordInputFocusUntilWindowFocus = true;
+    }
+    else if (!this.encrypted && this.slottedContent.length > 0) {
+      this.windowHasFocus ? this.attemptToFocusOnSlottedElement() : this.delaySlottedElementFocusUntilWindowFocus = true;
     }
 
-    // Attempt to focus on slotted content input element if present. This should
-    // happen last to avoid focus conflicts, as this announcement should take
-    // priority over the status message update. Skip since the text input for
-    // file password should take priority.
-    if (this.file && !this.encrypted && this.hasFocusableWebComponents()) {
-      this.attemptToFocusOnSlottedElement();
-    }
+    // For now we aren't worrying about delaying status message updates, focusing
+    // on optimizing setting focus on interactive elements.
+    this.updateStatusMessage(statusMsg);
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
@@ -558,7 +494,7 @@ export class VaFileInput {
         },
       });
     }
-  };
+  }
 
   private removeFile = (notifyParent: boolean = true) => {
     this.uploadStatus = 'idle';
@@ -710,22 +646,6 @@ export class VaFileInput {
     fileInput.init(this.el);
   }
 
-  connectedCallback() {
-    this.el.addEventListener('focusin', this.handleFocusIn);
-    this.el.addEventListener('focusout', this.handleFocusOut);
-    this.el.addEventListener('change', this.handleChange);
-    this.el.addEventListener('drop', this.handleDrop);
-    window.addEventListener('focus', this.handleWindowFocus);
-  }
-
-  disconnectedCallback() {
-    this.el.removeEventListener('focusin', this.handleFocusIn);
-    this.el.removeEventListener('focusout', this.handleFocusOut);
-    this.el.removeEventListener('change', this.handleChange);
-    this.el.removeEventListener('drop', this.handleDrop);
-    window.removeEventListener('focus', this.handleWindowFocus);
-  }
-
   private getDefaultUploadMessage() {
     return (
       <span>
@@ -862,6 +782,8 @@ export class VaFileInput {
       changeFileAriaLabel = `change file. ${displayError}`;
     }
 
+    console.log('[component] changeFileAriaLabel: ', changeFileAriaLabel);
+
     return (
       <Host class={{ 'has-error': !!displayError }}>
         {!readOnly && (
@@ -883,11 +805,12 @@ export class VaFileInput {
         <span
           id="input-status-message"
           class="usa-sr-only"
-          aria-live="polite"
-          aria-atomic="true"
+          // aria attributes disabled for now while dealing with interactive elements
+          // aria-live="polite"
+          // aria-atomic="true"
         >{"\u200B"}</span>
 
-        <div class="file-input-wrapper" onDrop={this.handleDrop}>
+        <div class="file-input-wrapper">
           <input
             id="fileInputField"
             class="file-input"
