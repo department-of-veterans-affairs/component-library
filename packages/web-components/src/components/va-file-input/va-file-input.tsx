@@ -225,19 +225,11 @@ export class VaFileInput {
     }
   }
 
-  @Listen('drop')
-  handleDropEvent(event: DragEvent): void {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const files = event.dataTransfer.files;
-    if (files.length > 0) {
-      this.handleFile(files[0], true);
-    }
-  }
-
-
   @Listen('blur', { target: 'window' })
+  /**
+   * Handles the window blur event to track when the browser window loses focus.
+   * @returns {void}
+   */
   handleWindowBlur(): void {
     this.windowHasFocus = false;
     console.log('[component] (handleWindowBlur) Window blurred');
@@ -434,8 +426,34 @@ export class VaFileInput {
     return `We do not accept ${fileWarning}. Choose a new file.`;
   }
 
-  private handleFile(file: File, emitChange: boolean = true) {
-    let fileError = null;
+  /**
+   * Handler for the drop event when a file is dragged and dropped onto the file input area.
+   * Prevents default browser behavior for the event and calls handleFile method
+   * to process the dropped file.
+   * @param {DragEvent} event - The drag event object.
+   * @returns {void}
+   */
+  private handleDrop = (event: DragEvent): void => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+      this.handleFile(files[0], true);
+    }
+  }
+
+  /**
+   * Function to process a file after it has been selected or dropped.
+   * Validates the file type and size, updates component state, and emits events as needed.
+   * @param {File} file - The file to be processed.
+   * @param {boolean} emitChange - Whether to emit a change event.
+   * @returns {void}
+   */
+  private handleFile(file: File, emitChange: boolean = true): void {
+    let fileError: string | null = null;
+
+    // Validate file against accept types (i.e. if only PDF files are accepted)
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
@@ -483,20 +501,22 @@ export class VaFileInput {
 
     console.log('[component] (handleFile) Window focus on handle file? ', this.windowHasFocus);
 
-    // Either defer the status message update if specified, focus on password input
-    // for encrypted files, or update status immediately.
-
-    // Delay focusing on password input if window does not have focus and file is
-    // encrypted
+    // Check for conditions where focus needs to be manually set, or if the flags
+    // to delay focus until window focus are should be set. Note that focusing
+    // on the password input for encrypted files takes priority over slotted content.
     if (this.encrypted) {
-      this.windowHasFocus ? this.focusOnPasswordInput() : this.delayPasswordInputFocusUntilWindowFocus = true;
+      this.windowHasFocus
+        ? this.focusOnPasswordInput()
+        : this.delayPasswordInputFocusUntilWindowFocus = true;
     }
     else if (!this.encrypted && this.slottedContent.length > 0) {
-      this.windowHasFocus ? this.attemptToFocusOnSlottedElement() : this.delaySlottedElementFocusUntilWindowFocus = true;
+      this.windowHasFocus
+        ? this.attemptToFocusOnSlottedElement()
+        : this.delaySlottedElementFocusUntilWindowFocus = true;
     }
 
-    // For now we aren't worrying about delaying status message updates, focusing
-    // on optimizing setting focus on interactive elements.
+    // For now we aren't worrying about delaying status message updates, instead
+    // focusing on optimizing setting focus on interactive elements.
     this.updateStatusMessage(statusMsg);
 
     if (this.enableAnalytics) {
@@ -822,7 +842,13 @@ export class VaFileInput {
           // aria-atomic="true"
         >{"\u200B"}</span>
 
-        <div class="file-input-wrapper">
+        {/*
+          Note: ideally we would handle the drop event via Stencil's Listen() decorator,
+          but that does not consistently work across browsers, likely due to
+          the event not bubbling up through the Shadow DOM consistently (i.e. Chrome
+          does not recognize the drop event for child elements).
+        */}
+        <div class="file-input-wrapper" onDrop={this.handleDrop}>
           <input
             id="fileInputField"
             class="file-input"
