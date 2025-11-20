@@ -25,7 +25,7 @@ describe('va-progress-bar', () => {
               style="width: 35%;"
             ></div>
             </div>
-            <span aria-atomic="true" aria-live="polite" class="sr-only">
+            <span aria-atomic="true" aria-live="polite" class="usa-sr-only">
               35% complete
             </span>
         </mock:shadow-root>
@@ -112,7 +112,7 @@ describe('va-progress-bar', () => {
               style="width: 17.3098%;"
             ></div>
           </div>
-          <span aria-atomic="true" aria-live="polite" class="sr-only">
+          <span aria-atomic="true" aria-live="polite" class="usa-sr-only">
             17% complete
           </span>
         </mock:shadow-root>
@@ -123,9 +123,9 @@ describe('va-progress-bar', () => {
   it('does not render the sr span if noSr present', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-progress-bar percent="5" no-sr="true"></va-progress-bar>',
+      '<va-progress-bar percent="5" no-percent-screen-reader="true"></va-progress-bar>',
     );
-    const srSpan = await page.find('va-progress-bar >>> span.sr-only');
+    const srSpan = await page.find('va-progress-bar >>> span.usa-sr-only');
     expect(srSpan).toBeNull();
   })
 });

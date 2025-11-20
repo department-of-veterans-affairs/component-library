@@ -1458,7 +1458,7 @@ export namespace Components {
         /**
           * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
          */
-        "noSr"?: boolean;
+        "noPercentScreenReader"?: boolean;
         /**
           * Percent of progress made. 0 to 100.
          */
@@ -5565,7 +5565,7 @@ declare namespace LocalJSX {
         /**
           * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
          */
-        "noSr"?: boolean;
+        "noPercentScreenReader"?: boolean;
         /**
           * The event used to track usage of the component. This is emitted when percent is 0 or 100 and enableAnalytics is true.
          */

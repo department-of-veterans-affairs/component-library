@@ -30,7 +30,7 @@ export class VaProgressBar {
   /**
    * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
    */
-  @Prop() noSr?: boolean = false
+  @Prop() noPercentScreenReader?: boolean = false
 
   /**
    * The event used to track usage of the component. This is emitted when percent
@@ -57,7 +57,7 @@ export class VaProgressBar {
   }
 
   render() {
-    const { label = `${this.percent.toFixed(0)}% complete`, percent } = this;
+    const { label = `${this.percent.toFixed(0)}% complete`, percent, noPercentScreenReader } = this;
 
     return (
       <Host>
@@ -73,7 +73,7 @@ export class VaProgressBar {
         >
           <div class="progress-bar-inner" style={{ width: `${percent}%` }} />
         </div>
-        { this.noSr ? null : <span aria-atomic="true" aria-live="polite" class="sr-only">
+        { noPercentScreenReader ? null : <span aria-atomic="true" aria-live="polite" class="usa-sr-only">
           {percent.toFixed(0)}% complete
         </span> }
       </Host>
