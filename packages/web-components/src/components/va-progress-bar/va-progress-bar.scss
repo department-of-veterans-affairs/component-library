@@ -1,0 +1,23 @@
+@use 'uswds-helpers/src/styles/usa-sr-only'; 
+@import '../../mixins/accessibility.css';
+
+div {
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  border: 2px solid var(--vads-color-primary);
+  border-radius: 1em;
+  display: block;
+  height: 1em;
+  margin: 1em 0;
+  width: 100%;
+}
+
+.progress-bar-inner {
+  background-color: var(--vads-color-primary);
+  content: '&nbsp;';
+  display: block;
+  height: 100%;
+  max-width: 100%;
+}
