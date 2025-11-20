@@ -36,6 +36,10 @@
     "libphonenumber-js": "^1.12.7"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/department-of-veterans-affairs/component-library.git"
+  },
   "devDependencies": {
     "@axe-core/puppeteer": "^4.10.0",
     "@babel/core": "^7.12.13",

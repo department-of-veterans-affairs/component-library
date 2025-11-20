@@ -133,7 +133,7 @@ export class VaFileInputMultiple {
   /**
    * Internal state to track files and their unique keys.
    */
-  @State() files: FileIndex[] = [{ key: 0, file: null, content: null }];
+  @State() files: FileIndex[] = [{ key: 0, file: null, content: null, hasError: false }];
 
   /**
    * Internal state to track whether files added via the "value" prop have already been added to the "files" state or not.
@@ -180,7 +180,7 @@ export class VaFileInputMultiple {
    * @returns {boolean} True if the first file input has no file, false otherwise.
    */
   private isEmpty(): boolean {
-    return this.files[0].file === null;
+    return this.files[0].file === null && this.files[0].hasError !== true;
   }
 
   /**
@@ -212,6 +212,26 @@ export class VaFileInputMultiple {
   }
 
   /**
+   * Ensures there is always an empty placeholder file input (unless readOnly).
+   * This prevents loss of the add-another-file field when a validation-failed
+   * empty file input is removed.
+   */
+  public ensurePlaceholder() {
+    if (this.readOnly) return;
+    const hasPlaceholder = this.files.some(f => f.file === null && f.hasError !== true);
+    if (!hasPlaceholder) {
+      this.fileKeyCounter++;
+      const newPlaceholder = {
+        file: null,
+        key: this.fileKeyCounter,
+        content: null,
+        error: false,
+      };
+      this.files = [...this.files, newPlaceholder];
+    }
+  }
+
+  /**
    * Handles file input changes by updating, adding, or removing files based on user interaction.
    * @param {any} event - The event object containing file details.
    * @param {number} fileKey - The key of the file being changed.
@@ -219,11 +239,14 @@ export class VaFileInputMultiple {
    */
   private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
-    let filesArray:FileDetails[];
-    let action,
-        actionFile;
+    let filesArray: FileDetails[];
+    let action, actionFile;
+
     if (newFile) {
       const fileObject = this.findFileByKey(fileKey);
+      if (fileObject.hasError) {
+        fileObject.hasError = false;
+      }
       if (fileObject.file) {
         // Change file
         action = 'FILE_UPDATED';
@@ -236,33 +259,34 @@ export class VaFileInputMultiple {
         fileObject.file = newFile;
         fileObject.content = this.getAdditionalContent();
         this.fileKeyCounter++;
-        this.files.push({
-          file: null,
-          key: this.fileKeyCounter,
-          content: null,
-        });
+        this.files = [...this.files];
+        this.ensurePlaceholder();
       }
-      filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
+      filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey));
     } else {
-      // Deleted file
+      // Deleted file (could be a failed validation empty placeholder)
       action = 'FILE_REMOVED';
       actionFile = this.files[pageIndex].file;
-      this.files.splice(pageIndex, 1);
-      const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
-      // empty status message so it is read when updated
-      statusMessageDiv.textContent = ""
+      const next = [...this.files];
+      next.splice(pageIndex, 1);
+      this.files = next;
+      const statusMessageDiv = this.el.shadowRoot.querySelector('#statusMessage');
+      statusMessageDiv.textContent = '';
       setTimeout(() => {
-        statusMessageDiv.textContent = "File deleted."
+        statusMessageDiv.textContent = 'File deleted.';
       }, 1000);
       filesArray = this.buildFilesArray(this.files, true);
     }
-    const result = {
+    // Ensure placeholder ALWAYS exists (even after error/removal/update)
+    this.ensurePlaceholder();
+    this.updateFilesState();
+
+    this.vaMultipleChange.emit({
       action,
       file: actionFile,
-      state: filesArray
-    }
-    this.vaMultipleChange.emit(result);
-    this.files = Array.of(...this.files);
+      state: filesArray,
+      index: pageIndex
+    });
     return;
   }
 
@@ -272,17 +296,23 @@ export class VaFileInputMultiple {
    * @param {number} fileKey - The key of the file being changed.
    * @param {number} pageIndex - The index of the file in the files array.
    */
-  private handlePasswordChange(event: any, fileKey: number) {
+  private handlePasswordChange(event: any, fileKey: number, pageIndex: number) {
     const fileObject = this.findFileByKey(fileKey);
     fileObject.password = event.detail.password;
     const filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
     const result = {
       action: "PASSWORD_UPDATE",
       file: fileObject.file,
-      state: filesArray
+      state: filesArray,
+      index: pageIndex
     }
     this.vaMultipleChange.emit(result);
 
+  }
+
+  private updateFilesState() {
+    // Replace array reference to trigger re-render
+    this.files = [...this.files];
   }
 
   public buildFilesArray (fileIndexes: FileIndex[], deleted?: boolean, changedFileIndex?: number) {
@@ -319,7 +349,6 @@ export class VaFileInputMultiple {
       return (
         <div class="label-header">
           <HeaderTag
-            htmlFor="fileInputField"
             part="label"
             class="label-header-tag"
           >
@@ -331,8 +360,10 @@ export class VaFileInputMultiple {
     } else {
       return (
         <div class="label-header">
-          <span part="label" class="usa-label">{label}</span>
-          {requiredSpan}
+          <label part="label" class="usa-label">
+            {label}
+            {requiredSpan}
+          </label>
         </div>
       );
     }
@@ -475,8 +506,19 @@ export class VaFileInputMultiple {
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
+                onVaFileInputError={() => {
+                  const idx = this.findIndexByKey(fileEntry.key);
+                  if (idx > -1) {
+                    this.files[idx] = {
+                      ...this.files[idx],
+                      hasError: true,
+                    };
+                    this.updateFilesState();
+                    this.ensurePlaceholder();
+                  }
+                }}
                 onVaPasswordChange={event =>
-                  this.handlePasswordChange(event, fileEntry.key)
+                  this.handlePasswordChange(event, fileEntry.key, pageIndex)
                 }
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}
@@ -485,7 +527,7 @@ export class VaFileInputMultiple {
                 minFileSize={minFileSize}
                 statusText={statusText}
                 uploadedFile={_uploadedFile}
-                class={fileEntry.file ? 'has-file' : 'no-file'}
+                class={fileEntry.file || fileEntry.hasError ? 'has-file' : 'no-file'}
                 max-file-size={maxFileSize}
                 min-file-size={minFileSize}
               />

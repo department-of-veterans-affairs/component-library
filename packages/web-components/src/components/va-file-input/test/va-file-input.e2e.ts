@@ -189,7 +189,7 @@ describe('va-file-input', () => {
     const summaryCard = await page.find('va-file-input >>> va-card');
     expect(summaryCard).not.toBeNull();
     expect(await summaryCard.find('.file-label')).toEqualText('test.jpg');
-    expect(await summaryCard.find('.file-size-label')).toEqualHtml('<span class="file-size-label">7&nbsp;KB</span>');
+    expect(await summaryCard.find('.file-size-label')).toEqualHtml('<span class="file-size-label">7&nbsp;kilobytes</span>');
   })
 
   // this test usually passes but it is too flaky to enable
@@ -299,21 +299,21 @@ describe('va-file-input', () => {
 
     const fileInfoCard = await page.find('va-file-input >>> va-card');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
-    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too big. Files must be less than 1 B.");
+    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too big. Files must be less than 1 bytes.");
   });
 
   it('displays an error if file size is zero bytes', async () => {
     const page = await setUpPageWithUploadedFile('<va-file-input />', 'zero.png');
     const fileInfoCard = await page.find('va-file-input >>> va-card');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
-    expect(errorMessage.innerHTML).toEqual("The file you selected is empty. Files must be larger than 0B.");
+    expect(errorMessage.innerHTML).toEqual("The file you selected is empty. Files must be larger than 0 bytes.");
   });
 
   it('displays an error if file size is too small', async () => {
     const page = await setUpPageWithUploadedFile('<va-file-input min-file-size="1024"/>');
     const fileInfoCard = await page.find('va-file-input >>> va-card');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
-    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too small. Files must be at least 1&nbsp;KB.");
+    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too small. Files must be at least 1&nbsp;kilobytes.");
   });
 
   it('renders a progress bar if percent-uploaded prop is set', async () => {
@@ -375,7 +375,7 @@ describe('va-file-input', () => {
       .catch(e => console.log('uploadFile error', e));
 
      expect(fileUploadSpy).toHaveReceivedEventDetail({
-      error: "We can't upload your file because it's too small. Files must be at least 1\xa0KB."
+      error: "We can't upload your file because it's too small. Files must be at least 1\xa0kilobytes."
     });
   });
 
@@ -473,4 +473,10 @@ describe('va-file-input', () => {
     expect(result.buttons[0].innerText).toEqual('CHANGE FILE');
     expect(result.buttons[1].innerText).toEqual('DELETE');
   });
+
+  it('accepts an .heic file and displays a generic image icon', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input accept=".heic" />`, 'test-image.heic');
+    const thumbnail = await page.find('va-file-input >>> svg')
+    expect(thumbnail).not.toBeNull();
+  })
 });

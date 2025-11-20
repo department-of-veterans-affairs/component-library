@@ -209,6 +209,7 @@ export class VaFileInput {
 
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
+    this.fileContents = null;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0]);
     }
@@ -250,9 +251,8 @@ export class VaFileInput {
     }
 
      if (file.size === 0) {
-      fileError = `The file you selected is empty. Files must be larger than 0B.`;
+      fileError = `The file you selected is empty. Files must be larger than 0 bytes.`;
     }
-
     if (file.size > this.maxFileSize) {
       fileError = `
         We can't upload your file because it's too big. Files must be less than ${this.formatFileSize(this.maxFileSize)}.`;
@@ -350,8 +350,8 @@ export class VaFileInput {
    * @returns {string} The file size formatted as a string with the appropriate unit.
    */
   private formatFileSize = (filesSize): string => {
-    const units = ['B', 'KB', 'MB', 'GB', 'TB'];
-    if (filesSize === 0) return '0 B';
+    const units = ['bytes', 'kilobytes', 'megabytes', 'gigabytes', 'terabytes'];
+    if (filesSize === 0) return '0 bytes';
 
     const unitIndex = Math.floor(Math.log(filesSize) / Math.log(1024));
     if (unitIndex === 0) return `${filesSize} ${units[unitIndex]}`;
@@ -438,7 +438,7 @@ export class VaFileInput {
     if (
       this.fileType &&
       (this.fileType === 'application/pdf' ||
-        this.fileType.startsWith('image/'))
+        this.fileType.startsWith('image/')) && ! this.fileType.includes('heic')
     ) {
       reader.readAsDataURL(file);
     }
@@ -502,6 +502,7 @@ export class VaFileInput {
       uploadedFile,
       percentUploaded,
       passwordError,
+      internalError,
     } = this;
 
     if (value && !this.file) {
@@ -511,7 +512,7 @@ export class VaFileInput {
     // these values may get updated after call to this.handleFile above
     const { uploadStatus, file, } = this;
 
-    const displayError = error || this.internalError;
+    const displayError = error || internalError;
     const ariaDescribedbyIds =
       `${hint ? 'input-hint-message' : ''} ${
         displayError ? 'input-error-message' : ''
@@ -594,7 +595,7 @@ export class VaFileInput {
             class="file-input"
             aria-label={`${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`}
             style={{
-              visibility: (uploadStatus === 'success' || uploadedFile || displayError) ? 'hidden' : 'unset',
+              visibility: (uploadStatus === 'success' || uploadedFile || internalError) ? 'hidden' : 'unset',
             }}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
