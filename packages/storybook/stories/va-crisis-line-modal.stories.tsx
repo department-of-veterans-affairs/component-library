@@ -54,7 +54,7 @@ const ExternalOpenEventTemplate = ({
   'tty-crisis-extension': ttyCrisisExtension,
 }) => (
   <div style={{ display: 'grid', gap: '1rem' }}>
-    <va-button text='Open crisis line modal'
+    <va-button text="Open crisis line modal"
       onClick={() => document.dispatchEvent(new CustomEvent('va-crisis-line-modal:open'))}
     ></va-button>
     <va-crisis-line-modal
