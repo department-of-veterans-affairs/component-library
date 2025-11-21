@@ -200,18 +200,18 @@ describe('va-crisis-line-modal', () => {
     expect(ariaHidden).toBe('true');
   });
 
-  it('opens modal via external trigger button when triggerRef is provided', async () => {
+  it('opens modal via document event when rendered without trigger button (modal-only)', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <button id="external-trigger">Launch Crisis Line</button>
-      <va-crisis-line-modal trigger-ref="#external-trigger"></va-crisis-line-modal>
+      <button id="external-trigger" type="button" onclick="document.dispatchEvent(new CustomEvent('va-crisis-line-modal:open'))">Launch Crisis Line</button>
+      <va-crisis-line-modal modal-only></va-crisis-line-modal>
     `);
 
     // Internal trigger button should NOT exist
     const internalTrigger = await page.find('va-crisis-line-modal >>> .va-crisis-line');
     expect(internalTrigger).toBeNull();
 
-    // Click external button
+    // Click external button to dispatch event
     const externalTrigger = await page.find('#external-trigger');
     await externalTrigger.click();
     await page.waitForChanges();
@@ -220,5 +220,16 @@ describe('va-crisis-line-modal', () => {
     const modal = await page.find('va-crisis-line-modal >>> va-modal');
     const isVisible = await modal.getProperty('visible');
     expect(isVisible).toBe(true);
+  });
+  it('only renders a single modal when multiple instances are on the page', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-crisis-line-modal></va-crisis-line-modal>
+      <va-crisis-line-modal></va-crisis-line-modal>
+    `);
+
+    // Check that only one modal is in the DOM
+    const modals = await page.findAll('va-crisis-line-modal >>> va-modal');
+    expect(modals.length).toBe(1);
   });
 });

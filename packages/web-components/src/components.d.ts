@@ -595,6 +595,10 @@ export namespace Components {
          */
         "chatUrl"?: string;
         /**
+          * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.
+         */
+        "modalOnly"?: boolean;
+        /**
           * Phone extension for the crisis line. Defaults to 1.
          */
         "phoneExtension"?: string;
@@ -607,9 +611,9 @@ export namespace Components {
          */
         "textNumber"?: string;
         /**
-          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+          * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.
          */
-        "triggerRef"?: string;
+        "triggerOnly"?: boolean;
         /**
           * TTY extension for the crisis line. Defaults to 988.
          */
@@ -4578,6 +4582,10 @@ declare namespace LocalJSX {
          */
         "chatUrl"?: string;
         /**
+          * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.
+         */
+        "modalOnly"?: boolean;
+        /**
           * Phone extension for the crisis line. Defaults to 1.
          */
         "phoneExtension"?: string;
@@ -4590,9 +4598,9 @@ declare namespace LocalJSX {
          */
         "textNumber"?: string;
         /**
-          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+          * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.
          */
-        "triggerRef"?: string;
+        "triggerOnly"?: boolean;
         /**
           * TTY extension for the crisis line. Defaults to 988.
          */
