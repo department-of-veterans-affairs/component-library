@@ -39,8 +39,8 @@ export class VaModal {
   // set up or tear down the modal.
   isVisibleDirty: boolean;
 
-  // This variable is used to undo aria-hidden on modal close.
-  undoAriaHidden: Undo;
+  // Track cleanup handlers returned by hideOthers so we can restore DOM state on close.
+  undoAriaHidden: Undo[] = [];
 
   // This stores reference to previously focused element
   savedFocus: HTMLElement;
@@ -114,11 +114,6 @@ export class VaModal {
     this.isVisibleDirty = true;
   }
 
-  /**
-   * Additional DOM-nodes that should not be hidden from screen readers.
-   * Useful when an open modal shouldn't hide all content behind the overlay.
-   */
-  @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
 
   /**
    * Label for the modal, to be set as aria-label. Will take precedence over modalTitle
@@ -384,16 +379,21 @@ export class VaModal {
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
 
-    // The elements to exclude from aria-hidden.
-    const hideExceptions = [
-      ...this.ariaHiddenNodeExceptions,
-      this.el,
-    ] as HTMLElement[];
+    // Reset any previous hide handlers before applying new ones.
+    this.undoAriaHidden = [];
 
-    // Sets aria-hidden="true" to all elements outside of the modal except
-    // for the elements in the hideExceptions array.
-    // This is used to limit the screen reader to content inside the modal.
-    this.undoAriaHidden = hideOthers(hideExceptions);
+    // Collect all elements that should not be hidden (modal + ancestors)
+    const { ancestors, shadowRoots } = this.getModalHierarchy();
+
+    // Sets aria-hidden="true" on all elements except the modal and its ancestors
+    this.undoAriaHidden.push(hideOthers(ancestors));
+
+    // Additionally set aria-hidden="true" on va-modal siblings that live inside the same shadow root
+    shadowRoots.forEach(root => {
+      this.undoAriaHidden.push(
+        hideOthers([this.el], root as unknown as HTMLElement),
+      );
+    });
 
     // Conditionally track the event.
     if (!this.disableAnalytics) {
@@ -415,9 +415,58 @@ export class VaModal {
   // removes aria-hidden="true" from external elements.
   private teardownModal() {
     clearAllBodyScrollLocks();
-    this.undoAriaHidden?.();
+    this.undoAriaHidden.forEach(undo => undo?.());
+    this.undoAriaHidden = [];
     this.savedFocus?.focus();
   }
+
+
+  /**
+   * Maps the modal's position in nested shadow DOMs by traversing up the DOM tree.
+   * Returns both the elements and shadow roots needed for proper aria-hidden handling.
+   *
+   * Why this matters: When va-modal is nested in another web component (e.g., va-file-input),
+   * we need:
+   * 1. The element chain to hide everything except the modal's ancestors
+   * 2. The shadow roots to separately hide siblings within each root's context
+   *
+   * @returns Object with:
+   *   - ancestors: Array of HTMLElements from modal up the shadow DOM chain
+   *   - shadowRoots: Array of ShadowRoots encountered during traversal
+   */
+  private getModalHierarchy(): { ancestors: HTMLElement[]; shadowRoots: ShadowRoot[] } {
+    const ancestors: HTMLElement[] = [];
+    const shadowRoots: ShadowRoot[] = [];
+
+    if (!this.el) {
+      return { ancestors, shadowRoots };
+    }
+
+    // Start with the modal element itself
+    ancestors.push(this.el);
+
+    let current: Node | null = this.el;
+
+    // Traverse up the DOM tree through shadow hosts
+    while (current) {
+      const root = current.getRootNode?.();
+      if (!(root instanceof ShadowRoot)) {
+        break;
+      }
+      // if it finds shadow root, store it and move to its host
+      shadowRoots.push(root);
+      const host = root.host as HTMLElement;
+      if (!host) {
+        break;
+      }
+      // store the host and continue up the tree
+      ancestors.push(host);
+      current = host;
+    }
+
+    return { ancestors, shadowRoots };
+  }
+
 
   render() {
     const {
