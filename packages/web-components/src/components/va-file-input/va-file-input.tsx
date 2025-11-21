@@ -788,14 +788,24 @@ export class VaFileInput {
       statusClassNames = `${statusClassNames} uploading-status`;
     }
 
-    // Establish the aria-label for the "change file" button based on the current state
+    // Determine the aria-label for the "change file" button based on the current state
     let changeFileAriaLabel: string | undefined = undefined;
     if (file && !displayError) {
       changeFileAriaLabel = `change file ${file.name}`;
     } else if (uploadedFile && !displayError) {
       changeFileAriaLabel = `change file ${uploadedFile.name}`;
     } else if (displayError) {
-      changeFileAriaLabel = `change file. ${displayError}`;
+      changeFileAriaLabel = `change file. Error. ${displayError}`;
+    }
+
+    // Determine the aria-label for the "Delete" button based on the current state
+    let deleteFileAriaLabel: string | undefined = undefined;
+    if (file && !displayError) {
+      deleteFileAriaLabel = `delete file ${file.name}`;
+    } else if (uploadedFile && !displayError) {
+      deleteFileAriaLabel = `delete file ${uploadedFile.name}`;
+    } else if (displayError) {
+      deleteFileAriaLabel = `delete file. Error. ${displayError}`;
     }
 
     return (
@@ -926,7 +936,7 @@ export class VaFileInput {
                             <va-button-icon
                               buttonType="delete"
                               onClick={this.openModal}
-                              label={`delete file ${file ? file.name : uploadedFile.name}`}
+                              label={deleteFileAriaLabel}
                             ></va-button-icon>
                           </div>
 
