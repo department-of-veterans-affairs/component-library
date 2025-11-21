@@ -31,7 +31,7 @@ if (Build.isTesting) {
  */
 @Component({
   tag: 'va-on-this-page',
-  styleUrl: 'va-on-this-page.css',
+  styleUrl: 'va-on-this-page.scss',
   shadow: true,
 })
 export class VaOnThisPage {

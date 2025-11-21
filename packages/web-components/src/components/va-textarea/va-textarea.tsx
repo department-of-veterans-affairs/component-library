@@ -158,6 +158,13 @@ export class VaTextarea {
         this.value,
         getMaxLength(this.maxlength),
       );
+
+      // Add aria-live after initial render to prevent value being read on render
+      // thanks to it being programmatically set in this lifecycle method.
+      setTimeout(() => {
+        /* eslint-disable-next-line i18next/no-literal-string */
+        this.charCountElement.setAttribute('aria-live', 'polite');
+      }, 0);
     }
   }
 
@@ -262,16 +269,21 @@ export class VaTextarea {
       >
         {label}
 
-        {useFormsPattern === 'multiple' && (
+        {useFormsPattern === 'multiple' && headerAriaDescribedby ? (
+          <span id="header-message" class="usa-sr-only">
+            <span>{label}</span>
+            <span>{headerAriaDescribedby}</span>
+          </span>
+        ) : useFormsPattern === 'multiple' ? (
           <span id="header-message" class="usa-sr-only">
             {label}
           </span>
-        )}
-        {headerAriaDescribedby && (
+        ) : headerAriaDescribedby ? (
           <span id="header-message" class="usa-sr-only">
             {headerAriaDescribedby}
           </span>
-        )}
+        ) : null}
+
         {required && (
           <span class="usa-label--required">&nbsp;{i18next.t('required')}</span>
         )}
@@ -291,7 +303,7 @@ export class VaTextarea {
               {InnerLabelPart}
             </HeaderLevel>
           ) : (
-            <Fragment>{InnerLabelPart}</Fragment>
+            InnerLabelPart
           )}
           <slot></slot>
           <span id="input-error-message" role="alert">
@@ -328,14 +340,15 @@ export class VaTextarea {
               </span>
               <span
                 id="charcount-message"
-                aria-live="polite"
                 class="usa-sr-only"
                 ref={(el) => (this.charCountElement = el as HTMLSpanElement)}
               >
                 {/*
                   Element inner text is empty because it's initially set in componentDidRender
                   and programmatically updated `getCharacterMessage` on input. This
-                  is to avoid obtrusive updates for screen readers.
+                  is to avoid obtrusive updates for screen readers. Note that the aria-live
+                  attribute is also added programmatically after initial render. This is
+                  to prevent the screen reader from reading the value set on render.
                 */}
               </span>
             </Fragment>

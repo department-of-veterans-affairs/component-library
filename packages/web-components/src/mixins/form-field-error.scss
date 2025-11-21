@@ -1,3 +1,5 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
 #error-message {
   margin-bottom: 0.75rem;
 }
@@ -16,7 +18,7 @@
   position: relative;
 }
 
-@media screen and (min-width: 1008px) {
+@media screen and (min-width: $desktop) {
   :host([error]:not([error=''])), :host(.va-form-group--error) {
     margin-left: -1.4375rem; /* padding left + border left */
   }

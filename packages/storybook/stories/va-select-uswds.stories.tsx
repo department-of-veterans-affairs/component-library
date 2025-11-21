@@ -37,8 +37,9 @@ const defaultArgs = {
   'required': false,
   'error': undefined,
   'hint': null,
-  'aria-live-region-text': 'You selected',
   'aria-describedby-message': 'Optional description text for screen readers',
+  'label-header-level': null,
+  'header-aria-describedby': null,
   'options': [
     <option key="1" value="navy">
       Navy
@@ -69,11 +70,12 @@ const Template = ({
   required,
   error,
   hint,
-  'aria-live-region-text': ariaLiveRegionText,
   'aria-describedby-message': ariaDescribedbyMessage,
   options,
   'use-add-button': useAddButton,
   'full-width': fullWidth,
+  'label-header-level': labelHeaderLevel,
+  'header-aria-describedby': headerAriaDescribedby,
   showToggleFocusButton,
   focusEl
 }) => {
@@ -102,10 +104,11 @@ const Template = ({
         required={required}
         error={errorMsg}
         hint={hint}
-        aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
         full-width={fullWidth}
+        label-header-level={labelHeaderLevel}
+        header-aria-describedby={headerAriaDescribedby}
         id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         {modifiedOptions}
@@ -128,7 +131,6 @@ const InertTemplate = ({
   required,
   error,
   hint,
-  'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
 }) => {
@@ -161,7 +163,6 @@ const InertTemplate = ({
         error={error}
         hint={hint}
         inert
-        aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
       >
         {modifiedOptions}
@@ -176,6 +177,15 @@ Default.argTypes = propStructure(selectDocs);
 
 export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
+
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  'label-header-level': '3',
+  'name': 'header-example',
+  'header-aria-describedby': 'Optional description text for screen readers',
+  'required': true,
+};
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is example hint text' };
@@ -270,7 +280,6 @@ const WidthsTemplate = ({
   required,
   error,
   hint,
-  'aria-live-region-text': ariaLiveRegionText,
   'aria-describedby-message': ariaDescribedbyMessage,
   options,
 }) => {
@@ -283,7 +292,6 @@ const WidthsTemplate = ({
         required={required}
         error={error}
         hint={hint}
-        aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         width={width}
       >

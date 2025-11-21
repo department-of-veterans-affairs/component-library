@@ -590,6 +590,34 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl"?: string;
+        /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension"?: string;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber"?: string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber"?: string;
+        /**
+          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+         */
+        "triggerRef"?: string;
+        /**
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
+         */
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action
@@ -721,10 +749,6 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
-        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -806,10 +830,6 @@ export namespace Components {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
-        /**
-          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-         */
-        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
@@ -1098,6 +1118,10 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
         /**
           * The content of the heading if `useFormsPattern`.
          */
@@ -1432,6 +1456,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
+        /**
           * Percent of progress made. 0 to 100.
          */
         "percent": number;
@@ -1680,6 +1708,10 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Whether or not to show the (*Required) text.
          */
         "hideRequiredText"?: boolean;
@@ -1695,6 +1727,10 @@ export namespace Components {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */
@@ -1902,6 +1938,10 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaTable {
+        /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
         /**
           * When active, forces the table to expand to the full-width of its container
          */
@@ -4537,6 +4577,34 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl"?: string;
+        /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension"?: string;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber"?: string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber"?: string;
+        /**
+          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
+         */
+        "triggerRef"?: string;
+        /**
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
+         */
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action
@@ -4696,10 +4764,6 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
-        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -4785,10 +4849,6 @@ declare namespace LocalJSX {
           * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
-        /**
-          * Array of booleans corresponding to each file input - if true, resets component instance to initial visual state.
-         */
-        "resetVisualState"?: boolean[];
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
@@ -5105,6 +5165,10 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
         /**
           * The content of the heading if `useFormsPattern`.
          */
@@ -5499,6 +5563,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
+        /**
           * The event used to track usage of the component. This is emitted when percent is 0 or 100 and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: VaProgressBarCustomEvent<any>) => void;
@@ -5791,6 +5859,10 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Whether or not to show the (*Required) text.
          */
         "hideRequiredText"?: boolean;
@@ -5806,6 +5878,10 @@ declare namespace LocalJSX {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */
@@ -6057,6 +6133,10 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaTable {
+        /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
         /**
           * When active, forces the table to expand to the full-width of its container
          */

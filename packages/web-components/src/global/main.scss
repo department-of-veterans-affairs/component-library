@@ -1,0 +1,15 @@
+@use '../components/va-modal/va-modal-slot.scss';
+@use '../components/va-alert/va-alert-slot.scss';
+@use '../components/va-table/va-table-inner/va-table-slot.scss';
+@use '../components/va-breadcrumbs/va-breadcrumbs-slot.scss';
+@use '~@department-of-veterans-affairs/css-library/dist/tokens/css/variables.css';
+
+va-process-list li :is(h2, h3, h4, h5) {
+  margin-top: 0;
+  clear: none;
+  padding-top: 0.188rem;
+}
+
+va-promo-banner[href]:focus, va-link-action[href]:not([type="primary-entry"]):focus {
+  outline: none;
+}

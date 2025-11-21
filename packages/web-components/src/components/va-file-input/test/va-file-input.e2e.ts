@@ -189,7 +189,7 @@ describe('va-file-input', () => {
     const summaryCard = await page.find('va-file-input >>> va-card');
     expect(summaryCard).not.toBeNull();
     expect(await summaryCard.find('.file-label')).toEqualText('test.jpg');
-    expect(await summaryCard.find('.file-size-label')).toEqualHtml('<span class="file-size-label">7&nbsp;KB</span>');
+    expect(await summaryCard.find('.file-size-label')).toEqualHtml('<span class="file-size-label">7&nbsp;kilobytes</span>');
   })
 
   // this test usually passes but it is too flaky to enable
@@ -297,23 +297,23 @@ describe('va-file-input', () => {
   it('displays an error if the file size exceeds max allowed file size', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input max-file-size="1" />`);
 
-    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const fileInfoCard = await page.find('va-file-input >>> va-card');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
-    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too big. Files must be less than 1 B.");
+    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too big. Files must be less than 1 bytes.");
   });
 
   it('displays an error if file size is zero bytes', async () => {
     const page = await setUpPageWithUploadedFile('<va-file-input />', 'zero.png');
-    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const fileInfoCard = await page.find('va-file-input >>> va-card');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
-    expect(errorMessage.innerHTML).toEqual("The file you selected is empty. Files must be larger than 0B.");
+    expect(errorMessage.innerHTML).toEqual("The file you selected is empty. Files must be larger than 0 bytes.");
   });
 
   it('displays an error if file size is too small', async () => {
     const page = await setUpPageWithUploadedFile('<va-file-input min-file-size="1024"/>');
-    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const fileInfoCard = await page.find('va-file-input >>> va-card');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
-    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too small. Files must be at least 1&nbsp;KB.");
+    expect(errorMessage.innerHTML).toEqual("We can't upload your file because it's too small. Files must be at least 1&nbsp;kilobytes.");
   });
 
   it('renders a progress bar if percent-uploaded prop is set', async () => {
@@ -360,31 +360,6 @@ describe('va-file-input', () => {
     expect(textInput).toBeNull();
   });
 
-  it('resets visual state if component receives resetVisualState prop', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input error="network error"/>`);
-    const host = await page.find('va-file-input');
-   
-    // check that file is in file added state
-    const containerSelector = 'va-file-input >>> div.selected-files-wrapper'
-    const containerBefore = await host.find(containerSelector);
-    expect(containerBefore).not.toBeNull();
-    
-    // check that error appears 
-    const errorMessage = await page.find('va-file-input >>> span.usa-error-message');
-    expect(errorMessage).not.toBeNull();
-    
-    // check that component resets visual state
-    host.setAttribute('reset-visual-state', 'true');
-    await page.waitForChanges();
-    const containerAfter = await host.find(containerSelector)
-    expect(containerAfter).toBeNull();
-
-    // check that error still present
-    const fileInfoCardAfter = await page.find('va-file-input >>> #file-input-error-alert');
-    const errorMessageAfter = await fileInfoCardAfter.find('span.usa-error-message');
-    expect(errorMessageAfter).not.toBeNull();
-  });
-
    it('emits the vaChange event only once', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input min-file-size="1024"/>`);
@@ -400,43 +375,8 @@ describe('va-file-input', () => {
       .catch(e => console.log('uploadFile error', e));
 
      expect(fileUploadSpy).toHaveReceivedEventDetail({
-      error: "We can't upload your file because it's too small. Files must be at least 1\xa0KB."
+      error: "We can't upload your file because it's too small. Files must be at least 1\xa0kilobytes."
     });
-  });
-
-  it('resets component state when receiving two consecutive errors', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input />`);
-    const host = await page.find('va-file-input');
-    
-    // Verify file is uploaded and component is in success state
-    const containerSelector = 'va-file-input >>> div.selected-files-wrapper';
-    const containerBefore = await host.find(containerSelector);
-    expect(containerBefore).not.toBeNull();
-    
-    // Set first error - this should reset component to initial state
-    host.setAttribute('error', 'first error message');
-    await page.waitForChanges();
-
-    expect(host.classList.contains('has-error'));
-    
-    // Check that first error appears
-    const firstErrorMessage = await page.find('va-file-input >>> span.usa-error-message');
-    expect(firstErrorMessage).toEqualText('first error message');
-  
-    
-    // Set second error (consecutive error) - component should stay in initial state but update message
-    host.setAttribute('error', 'second error message');
-    await page.waitForChanges();
-
-    expect(host.classList.contains('has-error'));
-    
-    // Check that second error appears (message updated)
-    const secondErrorMessage = await page.find('va-file-input >>> span.usa-error-message');
-    expect(secondErrorMessage).toEqualText('second error message');
-    
-    // Component should still be in initial state (container still gone)
-    const containerAfterSecondError = await host.find(containerSelector);
-    expect(containerAfterSecondError).toBeNull();
   });
 
   it('handles placeholder file upload and shows default file icon', async () => {
@@ -497,17 +437,46 @@ describe('va-file-input', () => {
 
   it('correctly displays error message for MIME type failure', async () => { 
     const page = await setUpPageWithUploadedFile(`<va-file-input accept="pdf" />`, '1x1.png');
-    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const fileInfoCard = await page.find('va-file-input >>> va-card');
+
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
     expect(errorMessage.innerHTML).toEqual("We do not accept .png files. Choose a new file.");
   });
 
   it('correctly displays error message for MIME type failure when file has no extension', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input accept="pdf" />`, '1x1-png-no-extension');
-    const fileInfoCard = await page.find('va-file-input >>> #file-input-error-alert');
+    const fileInfoCard = await page.find('va-file-input >>> va-card');
     const errorMessage = await fileInfoCard.find('span.usa-error-message');
     expect(errorMessage.innerHTML).toEqual("We do not accept this file type. Choose a new file.");
   });
 
+  it('shows change and delete buttons when in error state', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input accept=".pdf" />`, '1x1.png');
+    const result = await page.evaluate(() => {
+      const vaFileInput = document.querySelector('va-file-input');
+      const card = vaFileInput.shadowRoot.querySelector('va-card');
+      const errorMsg = card.querySelector('span.usa-error-message');
+      const buttonIcons = Array.from(card.querySelectorAll('va-button-icon'));
+      const buttons = buttonIcons.map(btnIcon => {
+        const btn = btnIcon.shadowRoot.querySelector('button');
+        return {
+          ariaLabel: btn.getAttribute('aria-label'),
+          innerText: btn.innerText,
+        };
+      });
+        return {
+          errorMessage: errorMsg ? errorMsg.innerHTML : null,
+          buttons,
+        };  
+    });
+    expect(result.errorMessage).toEqual("We do not accept .png files. Choose a new file.");
+    expect(result.buttons[0].innerText).toEqual('CHANGE FILE');
+    expect(result.buttons[1].innerText).toEqual('DELETE');
+  });
 
+  it('accepts an .heic file and displays a generic image icon', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input accept=".heic" />`, 'test-image.heic');
+    const thumbnail = await page.find('va-file-input >>> svg')
+    expect(thumbnail).not.toBeNull();
+  })
 });
