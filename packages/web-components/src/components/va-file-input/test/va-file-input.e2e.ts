@@ -488,9 +488,9 @@ describe('va-file-input', () => {
 
     await page.waitForChanges();
 
-    // Wait 250ms for the status message text content to update (debounced in
+    // Wait 1000ms for the status message text content to update (debounced in
     // component to help with screen reader announcements).
-    await new Promise((r) => setTimeout(r, 250));
+    await new Promise((r) => setTimeout(r, 1000));
 
     // Get status message and ensure that it has been updated to reflect file upload.
     const srStatusMessage = await page.find('va-file-input >>> #input-status-message');
@@ -545,9 +545,9 @@ describe('va-file-input', () => {
 
     await page.waitForChanges();
 
-    // Wait 250ms for the status message text content to update (debounced in
+    // Wait 1000ms for the status message text content to update (debounced in
     // component to help with screen reader announcements).
-    await new Promise((r) => setTimeout(r, 250));
+    await new Promise((r) => setTimeout(r, 1000));
 
     // Get status message and ensure that it has been updated to reflect file deletion.
     const srStatusMessage = await page.find('va-file-input >>> #input-status-message');
