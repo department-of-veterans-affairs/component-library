@@ -661,7 +661,7 @@ export class VaFileInput {
                     {!readOnly && showProgBar &&
                       (
                         <Fragment>
-                            <va-progress-bar percent={percentUploaded} />
+                            <va-progress-bar percent={percentUploaded} noPercentScreenReader />
                             <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
                           </Fragment>
                       )
