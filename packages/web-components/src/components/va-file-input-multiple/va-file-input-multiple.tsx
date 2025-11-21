@@ -274,6 +274,9 @@ export class VaFileInputMultiple {
       statusMessageDiv.textContent = '';
       setTimeout(() => {
         statusMessageDiv.textContent = 'File deleted.';
+        setTimeout(() => {
+          statusMessageDiv.textContent = '';
+        }, 10000);
       }, 1000);
       filesArray = this.buildFilesArray(this.files, true);
     }
@@ -349,7 +352,6 @@ export class VaFileInputMultiple {
       return (
         <div class="label-header">
           <HeaderTag
-            htmlFor="fileInputField"
             part="label"
             class="label-header-tag"
           >
@@ -361,8 +363,10 @@ export class VaFileInputMultiple {
     } else {
       return (
         <div class="label-header">
-          <span part="label" class="usa-label">{label}</span>
-          {requiredSpan}
+          <label part="label" class="usa-label">
+            {label}
+            {requiredSpan}
+          </label>
         </div>
       );
     }
