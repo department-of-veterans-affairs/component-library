@@ -49,12 +49,11 @@ export class VaFileInput {
   @State() internalError?: string;
   @Watch('internalError')
   handleInternalErrorChange(value: string) {
-    console.log('[component] (handleInternalErrorChange) internalError changed: ', value, 'window focus? ', this.windowHasFocus);
+    // Either focus on change button immediately or flip flag to delay focus based
+    // on current window focus state.
     if (value && this.windowHasFocus) {
-      console.log('[component] (handleInternalErrorChange) Focusing on change button immediately due to internal error');
       this.focusOnChangeButton();
     } else if (value && !this.windowHasFocus) {
-      console.log('[component] (handleInternalErrorChange) Delaying focus on change button due to internal error');
       this.delayChangeButtonFocusUntilWindowFocus = true;
     }
   }
@@ -232,7 +231,6 @@ export class VaFileInput {
    */
   handleWindowBlur(): void {
     this.windowHasFocus = false;
-    console.log('[component] (handleWindowBlur) Window blurred');
   }
 
   @Listen('focus', { target: 'window' })
@@ -247,7 +245,6 @@ export class VaFileInput {
    */
   handleWindowFocus(): void {
     this.windowHasFocus = true;
-    console.log('[component] (handleWindowFocus) Window focused');
 
     // Stop if no focus delays are pending
     if (!this.delayChangeButtonFocusUntilWindowFocus &&
@@ -270,21 +267,18 @@ export class VaFileInput {
     //
     // Change file button
     if (this.delayChangeButtonFocusUntilWindowFocus) {
-      console.log('[component] (handleWindowFocus) focusing on change button because there is an internal error on window focus')
       this.delayChangeButtonFocusUntilWindowFocus = false;
       this.focusOnChangeButton();
       return;
     }
     // Password input
     else if (this.delayPasswordInputFocusUntilWindowFocus && (this.encrypted || this.passwordError)) {
-      console.log('[component] (handleWindowFocus) Trying to focus on password input after delay');
       this.delayPasswordInputFocusUntilWindowFocus = false;
       this.focusOnPasswordInput();
       return;
     }
     // Slotted content nested element
     else if (this.delaySlottedElementFocusUntilWindowFocus && this.slottedContent.length > 0) {
-      console.log('[component] (handleWindowFocus) Trying to focus on slotted element after delay');
       this.delaySlottedElementFocusUntilWindowFocus = false;
       this.attemptToFocusOnSlottedElement();
     }
@@ -321,7 +315,6 @@ export class VaFileInput {
       const innerButton: HTMLElement = changeButton?.shadowRoot.querySelector('button');
 
       if (innerButton) {
-        console.log('[component] (focusOnChangeButton) Focusing on change file button for error state: ', innerButton);
         innerButton.focus();
       }
     }, 250);
@@ -341,14 +334,14 @@ export class VaFileInput {
   }
 
   /**
-   * Focuses on the password input field using MutationObserver to wait for DOM readiness.
+   * Attempts to focus on the password input element within the va-text-input component.
+   * Using a multi-attempt approach to handle cases where the input element may
+   * not be immediately available in the DOM.
    * @returns {void}
    */
   private focusOnPasswordInput(): void {
   let attempts = 0;
   const maxAttempts = 10;
-
-  console.log('[component] (focusOnPasswordInput) Window focus on password input focus attempt', this.windowHasFocus);
 
   const tryFocus = () => {
     const passwordTextInput = this.el.shadowRoot.querySelector('va-text-input');
@@ -401,12 +394,9 @@ export class VaFileInput {
       }
     }
 
-    console.log('[component] (attemptToFocusOnSlottedElement) nestedElementFocus: ', nestedElementForFocus);
-
     // Focus on the nested element after a short delay to help with screen reader announcement
     if (nestedElementForFocus) {
       setTimeout(() => {
-        console.log('[component] (attemptToFocusOnSlottedElement) Focusing on nested slotted element for focus');
         nestedElementForFocus.focus();
       }, 250);
     }
@@ -498,8 +488,6 @@ export class VaFileInput {
     }
 
     const statusMsg = `You have selected the file: ${file.name}`;
-
-    console.log('[component] (handleFile) Window focus on handle file? ', this.windowHasFocus);
 
     // Check for conditions where focus needs to be manually set, or if the flags
     // to delay focus until window focus are should be set. Note that focusing
