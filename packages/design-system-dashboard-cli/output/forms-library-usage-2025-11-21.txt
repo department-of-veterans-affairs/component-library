@@ -29,7 +29,7 @@ Non-form applications using the forms library: 101
 │ 23      │ '686C-674-v2'                                                                                 │ 34                            │
 │ 24      │ '21-0538 Dependents verification'                                                             │ 21                            │
 │ 25      │ 'View Dependents'                                                                             │ 5                             │
-│ 26      │ '21-526EZ disability compensation claim form'                                                 │ 87                            │
+│ 26      │ '21-526EZ disability compensation claim form'                                                 │ 84                            │
 │ 27      │ 'Discover Your Benefits'                                                                      │ 8                             │
 │ 28      │ 'Dispute your VA debt'                                                                        │ 14                            │
 │ 29      │ '0839'                                                                                        │ 18                            │
