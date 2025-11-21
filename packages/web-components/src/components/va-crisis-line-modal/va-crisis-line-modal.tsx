@@ -125,6 +125,7 @@ export class VACrisisLineModal {
   disconnectedCallback() {
     if (this.allowModalRender) {
       this.el.removeAttribute('data-has-crisis-modal');
+      window.hasCrisisLineModal = false;
     }
   }
 
