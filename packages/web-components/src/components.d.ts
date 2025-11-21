@@ -1452,6 +1452,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
+        /**
           * Percent of progress made. 0 to 100.
          */
         "percent": number;
@@ -5550,6 +5554,10 @@ declare namespace LocalJSX {
           * The text label for the progress bar.
          */
         "label"?: string;
+        /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
         /**
           * The event used to track usage of the component. This is emitted when percent is 0 or 100 and enableAnalytics is true.
          */

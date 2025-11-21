@@ -251,9 +251,8 @@ export class VaFileInput {
     }
 
      if (file.size === 0) {
-      fileError = `The file you selected is empty. Files must be larger than 0B.`;
+      fileError = `The file you selected is empty. Files must be larger than 0 bytes.`;
     }
-
     if (file.size > this.maxFileSize) {
       fileError = `
         We can't upload your file because it's too big. Files must be less than ${this.formatFileSize(this.maxFileSize)}.`;
@@ -351,8 +350,8 @@ export class VaFileInput {
    * @returns {string} The file size formatted as a string with the appropriate unit.
    */
   private formatFileSize = (filesSize): string => {
-    const units = ['B', 'KB', 'MB', 'GB', 'TB'];
-    if (filesSize === 0) return '0 B';
+    const units = ['bytes', 'kilobytes', 'megabytes', 'gigabytes', 'terabytes'];
+    if (filesSize === 0) return '0 bytes';
 
     const unitIndex = Math.floor(Math.log(filesSize) / Math.log(1024));
     if (unitIndex === 0) return `${filesSize} ${units[unitIndex]}`;
@@ -662,7 +661,7 @@ export class VaFileInput {
                     {!readOnly && showProgBar &&
                       (
                         <Fragment>
-                            <va-progress-bar percent={percentUploaded} />
+                            <va-progress-bar percent={percentUploaded} noPercentScreenReader />
                             <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
                           </Fragment>
                       )
