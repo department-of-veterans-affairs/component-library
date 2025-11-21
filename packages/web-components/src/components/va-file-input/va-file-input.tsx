@@ -321,19 +321,6 @@ export class VaFileInput {
   }
 
   /**
-   * Updates the sr-only status message element's text content and optionally focuses on it.
-   * @param {string} message - The value to update the element's text content to.
-   */
-  private updateStatusMessage( message: string): void {
-    setTimeout(() => {
-      const statusMessage: HTMLElement = this.el.shadowRoot.querySelector('#input-status-message');
-      if (statusMessage) {
-        statusMessage.textContent = message;
-      }
-    }, 250);
-  }
-
-  /**
    * Attempts to focus on the password input element within the va-text-input component.
    * Using a multi-attempt approach to handle cases where the input element may
    * not be immediately available in the DOM.
@@ -547,13 +534,19 @@ export class VaFileInput {
     }
   };
 
-  private updateStatusMessage(message: string) {
+  /**
+   * Updates the sr-only status message element's text content and optionally focuses on it.
+   * @param {string} message - The value to update the element's text content to.
+   * @returns {void}
+   */
+  private updateStatusMessage(message: string): void {
     // Add delay to encourage screen reader readout
     setTimeout(() => {
       const statusMessageDiv =
-        this.el.shadowRoot.querySelector('#statusMessage');
+        this.el.shadowRoot.querySelector('#input-status-message');
       statusMessageDiv ? (statusMessageDiv.textContent = message) : '';
 
+      // Clear the status message after 10 seconds to prevent repeated announcements
       setTimeout(() => {
         statusMessageDiv ? (statusMessageDiv.textContent = '') : '';
       }, 10000);
@@ -825,9 +818,8 @@ export class VaFileInput {
         <span
           id="input-status-message"
           class="usa-sr-only"
-          // aria attributes disabled for now while dealing with interactive elements
-          // aria-live="polite"
-          // aria-atomic="true"
+          aria-live="polite"
+          aria-atomic="true"
         >{"\u200B"}</span>
 
         {/*
