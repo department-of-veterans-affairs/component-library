@@ -527,7 +527,8 @@ describe('va-file-input', () => {
     // get delete button
     const [_, deleteButton] = await page.findAll('va-file-input >>> va-button-icon');
     deleteButton.click();
-    await new Promise((r) => setTimeout(r, 100));
+
+    await page.waitForChanges();
 
     // make sure modal opens
     const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
