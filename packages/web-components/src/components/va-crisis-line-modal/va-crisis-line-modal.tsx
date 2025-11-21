@@ -57,11 +57,17 @@ export class VACrisisLineModal {
 
   /**
    * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.
+   * 
+   * **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration.
+   * If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
    */
   @Prop() triggerOnly?: boolean = false;
 
   /**
    * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.
+   * 
+   * **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration.
+   * If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
    */
   @Prop() modalOnly?: boolean = false;
 
@@ -100,21 +106,15 @@ export class VACrisisLineModal {
    * It will render only if:
    *  - `modalOnly` is true OR `triggerOnly` is false
    *  - AND no other crisis line modal has already marked itself as a modal renderer.
-   * Ownership is tracked via a `data-has-crisis-modal` attribute on the host element.
+   * Ownership is tracked via a `data-has-crisis-modal` attribute on the host element and window property.
+   * Both are set in this method to prevent race conditions.
    */
   componentWillLoad() {
     const hasExistingModal = window.hasCrisisLineModal || document.querySelector('va-crisis-line-modal[data-has-crisis-modal="true"]');
     if (!hasExistingModal && (this.modalOnly || !this.triggerOnly)) {
       this.allowModalRender = true;
+      // Set both markers to prevent race conditions with simultaneous instances
       window.hasCrisisLineModal = true;
-    }
-  }
-
-  /**
-   * After load, if this instance is the modal renderer, mark it so later instances skip rendering.
-   */
-  componentDidLoad() {
-    if (this.allowModalRender) {
       this.el.setAttribute('data-has-crisis-modal', 'true');
     }
   }
@@ -167,8 +167,15 @@ export class VACrisisLineModal {
       modalOnly
     } = this;
 
-    // If both props are set, render both (failsafe)
+    // Detect invalid configuration where both triggerOnly and modalOnly are true
     const conflict = triggerOnly && modalOnly;
+    if (conflict) {
+      console.warn(
+        'va-crisis-line-modal: Invalid configuration detected. Both triggerOnly and modalOnly props are set to true. ' +
+        'This is not a valid configuration. As a failsafe, both trigger and modal will be rendered, but you should ' +
+        'only set one of these props to true, or leave both false for default behavior.'
+      );
+    }
     const showTrigger = conflict ? true : !modalOnly;
     // Only render modal if this instance was granted permission by DOM query.
     const showModal = this.allowModalRender && (conflict ? true : !triggerOnly);

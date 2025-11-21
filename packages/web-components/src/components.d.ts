@@ -595,7 +595,7 @@ export namespace Components {
          */
         "chatUrl"?: string;
         /**
-          * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.
+          * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.  **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration. If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
          */
         "modalOnly"?: boolean;
         /**
@@ -611,7 +611,7 @@ export namespace Components {
          */
         "textNumber"?: string;
         /**
-          * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.
+          * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.  **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration. If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
          */
         "triggerOnly"?: boolean;
         /**
@@ -4582,7 +4582,7 @@ declare namespace LocalJSX {
          */
         "chatUrl"?: string;
         /**
-          * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.
+          * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.  **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration. If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
          */
         "modalOnly"?: boolean;
         /**
@@ -4598,7 +4598,7 @@ declare namespace LocalJSX {
          */
         "textNumber"?: string;
         /**
-          * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.
+          * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.  **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration. If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
          */
         "triggerOnly"?: boolean;
         /**
