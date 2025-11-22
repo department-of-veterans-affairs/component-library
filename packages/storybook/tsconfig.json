@@ -6,6 +6,8 @@
     "lib": ["ES2024", "DOM"],
     "outDir": "build",
     "resolveJsonModule": true,
-    "types": ["./types"]
+    "types": ["./types"],
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext"
   }
 }
