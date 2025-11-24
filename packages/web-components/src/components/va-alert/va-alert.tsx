@@ -260,10 +260,12 @@ export class VaAlert {
     let status = this.status;
 
     // Enforce pre-defined statuses
+    /* eslint-disable i18next/no-literal-string */
     const definedStatuses = ['info', 'warning', 'error', 'success', 'continue'];
     if (definedStatuses.indexOf(status) === -1) {
       status = 'info';
     }
+    /* eslint-enable i18next/no-literal-string */
 
     if (!visible) return <div aria-live="polite" />;
 
