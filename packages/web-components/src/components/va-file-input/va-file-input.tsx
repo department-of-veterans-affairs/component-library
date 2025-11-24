@@ -788,6 +788,15 @@ export class VaFileInput {
       statusClassNames = `${statusClassNames} uploading-status`;
     }
 
+    // Determine the aria-label for the file input based on if input is required
+    // and if there is an error.
+    let inputAriaLabel: string =
+      `${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`;
+
+    if (displayError) {
+      inputAriaLabel = `Error: ${displayError}. ${inputAriaLabel}`;
+    }
+
     // Determine the aria-label for the "change file" button based on the current state
     let changeFileAriaLabel: string | undefined = undefined;
     if (file && !displayError) {
@@ -842,7 +851,7 @@ export class VaFileInput {
           <input
             id="fileInputField"
             class="file-input"
-            aria-label={`${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`}
+            aria-label={inputAriaLabel}
             style={{
               visibility: (uploadStatus === 'success' || uploadedFile || internalError) ? 'hidden' : 'unset',
             }}
