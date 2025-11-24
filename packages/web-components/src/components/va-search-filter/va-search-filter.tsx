@@ -1,11 +1,13 @@
 import { Component, Host, h, Prop, Event, EventEmitter, Listen, forceUpdate, State, Watch } from '@stencil/core';
 import { deepEquals } from '../../utils/utils';
+// import { VaRadioOption } from '../va-radio-option/va-radio-option';
 
 export type FilterFacet = {
   label: string;
   category: FilterCategory[];
   id?: number | string;
   activeFiltersCount?: number;
+  isRadio?: boolean;
 };
 
 export type FilterCategory = {
@@ -57,6 +59,11 @@ export class VaSearchFilter {
   @State() totalActiveFilters: number = 0;
 
   /**
+   * Keeps track of the inital state to revert back to on reset.
+   */
+  @State() defaultState: Filter[] = [];
+
+  /**
    * Watch for changes to filterOptions and update totalActiveFilters
    */
   @Watch('filterOptions')
@@ -83,17 +90,17 @@ export class VaSearchFilter {
   /**
    * A custom event emitted when the filter changes. The payload will provide all active categories.
    */
-  @Event() vaFilterChange : EventEmitter<Filter[]>;
+  @Event() vaFilterChange: EventEmitter<Filter[]>;
 
   /**
    * A custom event emitted when the apply filters button is clicked.
    */
-  @Event() vaFilterApply : EventEmitter<Filter[]>;
+  @Event() vaFilterApply: EventEmitter<Filter[]>;
 
   /**
    * A custom event emitted when the clear all filters button is clicked.
    */
-  @Event() vaFilterClearAll : EventEmitter<void>;
+  @Event() vaFilterClearAll: EventEmitter<void>;
 
   @Listen('resize', { target: 'window' })
   handleResize() {
@@ -112,6 +119,9 @@ export class VaSearchFilter {
           category: facet.category.map((category) => {
             if (category.id === categoryId) {
               return { ...category, active };
+              // Set all other categories' active status to false for radio facets.
+            } else if (facet.isRadio === true) {
+              return { ...category, active: false }
             }
             return category;
           }),
@@ -135,18 +145,9 @@ export class VaSearchFilter {
   };
 
   handleClearAllFilters = () => {
-    this.filterOptions = this.filterOptions.map((facet) => {
-      const updatedFacet = {
-        ...facet,
-        category: facet.category.map((category) => ({ ...category, active: false })),
-      };
-      return {
-        ...updatedFacet,
-        activeFiltersCount: 0,
-      };
-    });
+    this.filterOptions = this.defaultState.map(facet => ({ ...facet }));
 
-    this.totalActiveFilters = 0;
+    this.totalActiveFilters = this.getTotalActiveFilters();
 
     // Emit event to signal that all filters have been cleared.
     this.vaFilterClearAll.emit();
@@ -215,15 +216,15 @@ export class VaSearchFilter {
       return null;
     }
 
-  /**
-   * Checks that the top-level facet:
-   * - Has a valid label (string and non-empty)
-   * - Has a valid ID (number or string)
-   * - Has a category array
-   * Checks that each facet category item:
-   * - Has a valid label (string and non-empty)
-   * - Has a valid ID (number or string)
-   */
+    /**
+     * Checks that the top-level facet:
+     * - Has a valid label (string and non-empty)
+     * - Has a valid ID (number or string)
+     * - Has a category array
+     * Checks that each facet category item:
+     * - Has a valid label (string and non-empty)
+     * - Has a valid ID (number or string)
+     */
     const validOptions = options.every(option => {
       const hasValidLabel = typeof option.label === 'string' && option.label.length > 0;
       const hasValidCategory = Array.isArray(option.category) && option.category.length > 0 && option.category.every(cat => {
@@ -231,8 +232,10 @@ export class VaSearchFilter {
         const hasValidCatId = typeof cat.id === 'number' || typeof cat.id === 'string';
         return hasValidCatLabel && hasValidCatId;
       });
+      // Ensure that there is always one radio button selected.
+      const hasValidRadioButtons = option.isRadio && hasValidCategory ? option.category.filter(cat => cat.active).length === 1 : true;
       const hasValidId = typeof option.id === 'number' || typeof option.id === 'string';
-      return hasValidLabel && hasValidCategory && hasValidId;
+      return hasValidLabel && hasValidCategory && hasValidId && hasValidRadioButtons;
     });
 
     return validOptions ? options : null;
@@ -256,6 +259,7 @@ export class VaSearchFilter {
           activeFiltersCount: VaSearchFilter.getTotalActiveFiltersByFacet(facet),
         };
       });
+      this.defaultState = this.filterOptions.map(facet => ({ ...facet }));
     } else {
       this.filterOptions = [];
     }
@@ -282,7 +286,7 @@ export class VaSearchFilter {
         />
         <va-button
           onClick={handleClearAllFilters}
-          text="Clear all filters"
+          text="Reset filters"
           secondary
           full-width
         />
@@ -303,6 +307,45 @@ export class VaSearchFilter {
       />
     );
 
+    // Helper method to render radio buttons for both mobile and desktop views
+    const renderRadioButton = (category: FilterCategory) => {
+      return <va-radio-option
+        label={category.label}
+        name={category.label}
+        value={typeof category.id === "string" ? category.id : category.id.toString()}
+        checked={category.active === true}
+      />
+    };
+
+    const renderFacet = (facet: FilterFacet) => {
+      const srProps = !isDesktop ? VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly') : {};
+      const label = (isDesktop ? '' : facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : ''));
+      if (facet.isRadio) {
+        return <va-radio
+          label={label}
+          {...srProps}
+          label-header-level={!isDesktop ? "3" : ""}
+          onVaValueChange={(e) => handleFilterChange({
+            facetId: facet.id,
+            categoryId: isNaN(e.detail.value) ? e.detail.value : parseInt(e.detail.value),
+            active: true,
+          })}
+        >
+          {facet.category.map((category: FilterCategory) =>
+            renderRadioButton(category))}
+        </va-radio>
+      }
+      return <va-checkbox-group
+        label={label}
+        {...srProps}
+        key={facet.id}
+        label-header-level={!isDesktop ? "3" : ""}
+      >
+        {facet.category.map((category: FilterCategory) =>
+          renderCheckbox(facet, category))}
+      </va-checkbox-group>
+    };
+
     if (isDesktop) {
       return (
         <Host>
@@ -321,14 +364,7 @@ export class VaSearchFilter {
                   level={3}
                   open
                 >
-                  <va-checkbox-group 
-                    label={facet.label} 
-                    class="va-search-filter__checkbox-group"
-                  >
-                    {facet.category.map((category: FilterCategory) =>
-                      renderCheckbox(facet, category)
-                    )}
-                  </va-checkbox-group>
+                  {renderFacet(facet)}
                 </va-accordion-item>
               ))}
             </va-accordion>
@@ -349,16 +385,7 @@ export class VaSearchFilter {
             >
               <span slot="icon"><va-icon icon="filter_list" /></span>
               {filterOptions.map((facet: FilterFacet) => (
-                <va-checkbox-group
-                  label={facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : '')}
-                  {...VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly')}
-                  key={facet.id}
-                  label-header-level="3"
-                >
-                  {facet.category.map((category: FilterCategory) =>
-                    renderCheckbox(facet, category)
-                  )}
-                </va-checkbox-group>
+                renderFacet(facet)
               ))}
               {filterButtons}
             </va-accordion-item>

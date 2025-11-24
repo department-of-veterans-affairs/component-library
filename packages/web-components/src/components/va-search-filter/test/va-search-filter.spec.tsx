@@ -55,6 +55,54 @@ describe('validateFilterOptions', () => {
     })
 });
 
+describe('radio validateFilterOptions', () => {
+    const validOptions = [
+        {
+            label: "Benefits",
+            id: 1,
+            isRadio: true,
+            category: [
+                { label: "Health Care", id: 2, active: true },
+                { label: "Education", id: 3 },
+            ]
+        }
+    ];
+
+    const invalidOptions1 = [
+        {
+            label: "Benefits", // no active category
+            id: 1,
+            isRadio: true,
+            category: [
+                { label: "Health Care", id: 2 },
+                { label: "Education", id: 3 },
+            ]
+        }
+    ];
+
+    const invalidOptions2 = [
+        {
+            label: "Benefits",
+            id: 1,
+            category: [
+                { label: "Health Care", id: 2, active: true }, // more than one active category
+                { label: "Education", id: 3, active: true },
+            ]
+        }
+    ];
+
+
+    it('validates that radio filter facets have a label, id, and category array with one active category', () => {
+        expect(VaSearchFilter.validateFilterOptions(validOptions)).not.toBeNull();
+    })
+    it('returns null for radio facet with no active category', () => {
+        expect(VaSearchFilter.validateFilterOptions(invalidOptions1)).toBeNull();
+    })
+    it('returns null for radio facet with multiple active categories', () => {
+        expect(VaSearchFilter.validateFilterOptions(invalidOptions2)).toBeNull();
+    })
+});
+
 describe('getTotalActiveFiltersByFacet', () => {
     const activeFilters1 = {
         label: "Benefits",
