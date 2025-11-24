@@ -216,6 +216,11 @@ export class VaAlert {
         existingSrOnly.remove();
       }
 
+      // Check if the target element has any text content
+      // Don't add sr-only if the element is empty
+      const hasContent = targetElement.textContent?.trim();
+      if (!hasContent) return;
+
       // Create and prepend the sr-only span
       const srOnlySpan = document.createElement('span');
       /* eslint-disable-next-line i18next/no-literal-string */
