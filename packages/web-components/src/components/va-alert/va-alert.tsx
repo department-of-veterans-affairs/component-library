@@ -149,7 +149,7 @@ export class VaAlert {
 
   private updateCloseAriaLabelWithHeadlineText(): void {
     const headlineText = this.getHeadlineText();
-    this.closeBtnAriaLabel = `Close ${headlineText ?? 'this'} notification`
+    this.closeBtnAriaLabel = `Close ${headlineText ?? 'this'} notification`;
   }
 
   private handleAlertBodyClick(e: MouseEvent): void {
@@ -174,11 +174,68 @@ export class VaAlert {
     }
   }
 
+  private addSrOnlyToSlot(): void {
+    const { status, slim } = this;
+
+    const statusLabels = {
+      warning: 'Warning',
+      error: 'Error',
+      success: 'Success',
+      info: 'Information',
+      continue: 'Continue',
+    };
+
+    try {
+      // Get the appropriate slot based on alert type
+      const slot = slim
+        ? this.el.shadowRoot?.querySelector('slot:not([name])')
+        : this.el.shadowRoot?.querySelector('slot[name="headline"]');
+      
+      if (!slot) return;
+
+      // Get the target element to prepend the sr-only span to
+      let targetElement: HTMLElement | null = null;
+      
+      if (slim) {
+        // For slim alerts, find the first element node in the default slot
+        const assignedNodes = (slot as HTMLSlotElement).assignedNodes();
+        targetElement = Array.from(assignedNodes).find(
+          node => node.nodeType === Node.ELEMENT_NODE
+        ) as HTMLElement;
+      } else {
+        // For non-slim alerts, get the first assigned element from headline slot
+        const assignedElements = (slot as HTMLSlotElement).assignedElements();
+        targetElement = assignedElements.length > 0 ? assignedElements[0] as HTMLElement : null;
+      }
+
+      if (!targetElement) return;
+
+      // Remove existing sr-only span if present (for status updates)
+      const existingSrOnly = targetElement.querySelector('.usa-sr-only');
+      if (existingSrOnly) {
+        existingSrOnly.remove();
+      }
+
+      // Create and prepend the sr-only span
+      const srOnlySpan = document.createElement('span');
+      /* eslint-disable-next-line i18next/no-literal-string */
+      srOnlySpan.className = 'usa-sr-only';
+      srOnlySpan.textContent = `${statusLabels[status] || 'Information'} Alert `;
+      
+      targetElement.prepend(srOnlySpan);
+    } catch (e) {
+      // Silently fail if there's an issue accessing the slot
+      /* eslint-disable-next-line i18next/no-literal-string */
+      console.error('Error adding sr-only to alert content:', e);
+    }
+  }
+
   componentDidLoad() {
     this.vaComponentDidLoad.emit();
   }
 
   componentDidRender() {
+    this.addSrOnlyToSlot();
     if (!this.closeBtnAriaLabel) {
       this.updateCloseAriaLabelWithHeadlineText();
     }
@@ -196,23 +253,12 @@ export class VaAlert {
   render() {
     const { visible, closeable, slim, fullWidth } = this;
     let status = this.status;
-    /* eslint-disable i18next/no-literal-string */
 
     // Enforce pre-defined statuses
     const definedStatuses = ['info', 'warning', 'error', 'success', 'continue'];
     if (definedStatuses.indexOf(status) === -1) {
       status = 'info';
     }
-
-    // Status labels for screen reader announcements
-    const statusLabels = {
-      warning: 'Warning',
-      error: 'Error',
-      success: 'Success',
-      info: 'Information',
-      continue: 'Continue',
-    };
-    /* eslint-enable i18next/no-literal-string */
 
     if (!visible) return <div aria-live="polite" />;
 
@@ -241,14 +287,8 @@ export class VaAlert {
               ></va-icon>
             )}
             {!slim && (
-              <Fragment>
-                {/* eslint-disable-next-line i18next/no-literal-string */}
-                <span class="usa-sr-only">{statusLabels[status] || 'Information'} Alert</span>
-                <slot name="headline"></slot>
-              </Fragment>
+              <slot name="headline"></slot>
             )}
-            {/* eslint-disable-next-line i18next/no-literal-string */}
-            {slim && <span class="usa-sr-only">{statusLabels[status] || 'Information'} Alert</span>}
             <slot></slot>
           </div>
         </div>

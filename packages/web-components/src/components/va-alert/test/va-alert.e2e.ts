@@ -16,9 +16,6 @@ describe('va-alert', () => {
           <div class="usa-alert usa-alert--info">
             <div class="usa-alert__body">
               <div>
-                <span class="usa-sr-only">
-                  Information Alert
-                </span>
                 <slot name="headline"></slot>
                 <slot></slot>
               </div>
@@ -26,6 +23,9 @@ describe('va-alert', () => {
           </div>
         </mock:shadow-root>
         <h4 slot="headline">
+          <span class="usa-sr-only">
+            Information Alert 
+          </span>
           This is an alert
         </h4>
         <div>
@@ -84,7 +84,7 @@ describe('va-alert', () => {
     let button = await page.find('va-alert >>> button');
 
     expect(button.getAttribute('aria-label')).toEqual(
-      'Close This is an alert notification',
+      'Close Information Alert This is an alert notification',
     );
   });
 
@@ -143,7 +143,7 @@ describe('va-alert', () => {
       action: 'linkClick',
       componentName: 'va-alert',
       details: {
-        headline: 'This is an alert',
+        headline: 'Information Alert This is an alert',
         clickLabel: 'This is a link',
         status: 'info',
         closeable: false,
@@ -167,7 +167,7 @@ describe('va-alert', () => {
       componentName: 'va-alert',
       details: {
         headline: null,
-        clickLabel: 'This is a link',
+        clickLabel: 'Information Alert\nThis is a link',
         status: 'info',
         closeable: false,
       },
@@ -369,5 +369,190 @@ describe('va-alert', () => {
 
     headlineSlot = await page.find('va-alert >>> slot[name="headline"]');
     expect(headlineSlot).not.toBeNull(); // Headline slot should be rendered
+  });
+
+  describe('sr-only status announcement', () => {
+    it('adds sr-only span to headline slot content for non-slim alerts', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="warning">
+          <h3 slot="headline">Important warning</h3>
+          <p>This is the alert content</p>
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // Get the headline element in the light DOM
+      const headline = await page.find('va-alert h3[slot="headline"]');
+      expect(headline).not.toBeNull();
+
+      // Check that sr-only span was added to the headline
+      const srOnlySpan = await page.find('va-alert h3[slot="headline"] .usa-sr-only');
+      expect(srOnlySpan).not.toBeNull();
+      
+      const srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Warning Alert ');
+    });
+
+    it('adds sr-only span to default slot content for slim alerts', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="error">
+          <p>This is a slim alert without a headline</p>
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // Verify it's a slim alert
+      const alert = await page.find('va-alert');
+      expect(alert).toHaveAttribute('slim');
+
+      // Get the paragraph element in the light DOM
+      const paragraph = await page.find('va-alert p');
+      expect(paragraph).not.toBeNull();
+
+      // Check that sr-only span was added to the paragraph
+      const srOnlySpan = await page.find('va-alert p .usa-sr-only');
+      expect(srOnlySpan).not.toBeNull();
+      
+      const srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Error Alert ');
+    });
+
+    it('uses correct status labels for different alert types', async () => {
+      const statuses = [
+        { status: 'info', expectedText: 'Information Alert ' },
+        { status: 'warning', expectedText: 'Warning Alert ' },
+        { status: 'error', expectedText: 'Error Alert ' },
+        { status: 'success', expectedText: 'Success Alert ' },
+        { status: 'continue', expectedText: 'Continue Alert ' },
+      ];
+
+      for (const { status, expectedText } of statuses) {
+        const page = await newE2EPage();
+        await page.setContent(`
+          <va-alert status="${status}">
+            <h3 slot="headline">Headline</h3>
+            <p>Content</p>
+          </va-alert>
+        `);
+
+        await page.waitForChanges();
+
+        const srOnlySpan = await page.find('va-alert h3[slot="headline"] .usa-sr-only');
+        expect(srOnlySpan).not.toBeNull();
+        
+        const srOnlyText = await srOnlySpan.textContent;
+        expect(srOnlyText).toBe(expectedText);
+      }
+    });
+
+    it('maintains sr-only span on re-render', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="warning">
+          <h3 slot="headline">Warning headline</h3>
+          <p>Content</p>
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // Trigger a re-render by changing a property
+      const alert = await page.find('va-alert');
+      alert.setProperty('closeable', true);
+      await page.waitForChanges();
+
+      // Check that there's still exactly one sr-only span with correct text
+      const srOnlySpans = await page.findAll('va-alert h3[slot="headline"] .usa-sr-only');
+      expect(srOnlySpans.length).toBe(1);
+      
+      const srOnlyText = await srOnlySpans[0].textContent;
+      expect(srOnlyText).toBe('Warning Alert ');
+    });
+
+    it('adds sr-only span when alert becomes visible', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="success" visible="false">
+          <h3 slot="headline">Success message</h3>
+          <p>Content</p>
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // Initially no sr-only span since alert is not visible
+      let srOnlySpan = await page.find('va-alert h3[slot="headline"] .usa-sr-only');
+      expect(srOnlySpan).toBeNull();
+
+      // Make alert visible
+      const alert = await page.find('va-alert');
+      alert.setProperty('visible', true);
+      await page.waitForChanges();
+
+      // Now sr-only span should be present
+      srOnlySpan = await page.find('va-alert h3[slot="headline"] .usa-sr-only');
+      expect(srOnlySpan).not.toBeNull();
+      
+      const srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Success Alert ');
+    });
+
+    it('updates sr-only text when status changes', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="info">
+          <h3 slot="headline">Headline</h3>
+          <p>Content</p>
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // Check initial sr-only text
+      let srOnlySpan = await page.find('va-alert h3[slot="headline"] .usa-sr-only');
+      let srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Information Alert ');
+
+      // Change status
+      const alert = await page.find('va-alert');
+      alert.setProperty('status', 'error');
+      await page.waitForChanges();
+
+      // Check updated sr-only text
+      srOnlySpan = await page.find('va-alert h3[slot="headline"] .usa-sr-only');
+      srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Error Alert ');
+    });
+
+    it('handles alerts with multiple child elements in default slot', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="warning">
+          <p>First paragraph</p>
+          <p>Second paragraph</p>
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // Verify it's a slim alert
+      const alert = await page.find('va-alert');
+      expect(alert).toHaveAttribute('slim');
+
+      // Check that sr-only span was added to the first element only
+      const srOnlySpan = await page.find('va-alert p:first-of-type .usa-sr-only');
+      expect(srOnlySpan).not.toBeNull();
+
+      const srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Warning Alert ');
+
+      // Verify second paragraph doesn't have sr-only span
+      const secondParagraphSrOnly = await page.find('va-alert p:nth-of-type(2) .usa-sr-only');
+      expect(secondParagraphSrOnly).toBeNull();
+    });
   });
 });
