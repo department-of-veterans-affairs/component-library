@@ -5706,6 +5706,8 @@ declare namespace LocalJSX {
     interface VaSearchFilter {
         /**
           * Represents a list of filter facets and their categories. Use a JSON array of objects with label and id properties.
+          * Set 'isRadio' to true on a filter to use radio buttons instead of checkboxes. If 'isRadio' is set to true, then one
+          * category must be set to active.
          */
         "filterOptions"?: Filter[];
         /**
