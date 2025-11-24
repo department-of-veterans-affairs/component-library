@@ -110,7 +110,7 @@ export class VaAlert {
   private getHeadlineText(): string | null {
     let headlineText: string | null = null;
 
-    try { 
+    try {
       // This is the happy path, meaning the user isn't using IE11
       const headlineSlot = this.el.shadowRoot?.querySelector('slot[name="headline"]');
       if (headlineSlot) {
@@ -131,6 +131,20 @@ export class VaAlert {
     } finally {
       return headlineText;
     }
+  }
+
+  // Check light DOM instead of shadow DOM because it
+  // will be present during willRender
+  private hasHeadlineContent(): boolean {
+    if (this.el) {
+      for (const child of this.el.children) {
+        if (child.slot === "headline" && child.textContent?.trim()) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
   private updateCloseAriaLabelWithHeadlineText(): void {
@@ -168,13 +182,14 @@ export class VaAlert {
     if (!this.closeBtnAriaLabel) {
       this.updateCloseAriaLabelWithHeadlineText();
     }
+  }
 
+  componentWillRender() {
     const isBannerAlert = this.el.id === 'va-banner-alert';
 
     // Apply the slim property if there is no headline text and this alert is not used by va-banner
-    if (!isBannerAlert) {
-      const headlineText = this.getHeadlineText();
-      this.slim = !headlineText;
+    if (!isBannerAlert && !this.hasHeadlineContent()) {
+      this.slim = true;
     }
   }
 

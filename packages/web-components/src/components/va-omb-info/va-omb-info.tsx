@@ -187,7 +187,6 @@ export class VaOmbInfo {
           modalTitle="Privacy Act Statement"
           onCloseEvent={toggleModalVisible}
           visible={visible}
-          ariaHiddenNodeExceptions={[this.el]}
         >
           <slot onSlotchange={handleSlotChange}></slot>
           {modalContents}

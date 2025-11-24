@@ -209,6 +209,7 @@ export class VaFileInput {
 
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
+    this.fileContents = null;
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0]);
     }
@@ -336,6 +337,10 @@ export class VaFileInput {
       const statusMessageDiv =
         this.el.shadowRoot.querySelector('#statusMessage');
       statusMessageDiv ? (statusMessageDiv.textContent = message) : '';
+
+      setTimeout(() => {
+        statusMessageDiv ? (statusMessageDiv.textContent = '') : '';
+      }, 10000);
     }, 1000);
   }
 
@@ -438,7 +443,7 @@ export class VaFileInput {
     if (
       this.fileType &&
       (this.fileType === 'application/pdf' ||
-        this.fileType.startsWith('image/'))
+        this.fileType.startsWith('image/')) && ! this.fileType.includes('heic')
     ) {
       reader.readAsDataURL(file);
     }
@@ -502,6 +507,7 @@ export class VaFileInput {
       uploadedFile,
       percentUploaded,
       passwordError,
+      internalError,
     } = this;
 
     if (value && !this.file) {
@@ -511,7 +517,7 @@ export class VaFileInput {
     // these values may get updated after call to this.handleFile above
     const { uploadStatus, file, } = this;
 
-    const displayError = error || this.internalError;
+    const displayError = error || internalError;
     const ariaDescribedbyIds =
       `${hint ? 'input-hint-message' : ''} ${
         displayError ? 'input-error-message' : ''
@@ -521,7 +527,7 @@ export class VaFileInput {
     }`.trim();
 
     let fileThumbnail = (
-      <div class="thumbnail-container">
+      <div class="thumbnail-container" aria-hidden="true">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 384 512"
@@ -550,24 +556,12 @@ export class VaFileInput {
             <img class="thumbnail-preview" src={fileContents} alt="image" />
           </div>
         );
-      } else if (fileType === 'application/pdf') {
-        fileThumbnail = (
-          <div class="thumbnail-container" aria-hidden="true">
-            <object
-              class="thumbnail-preview"
-              data={fileContents}
-              type="application/pdf"
-              tabIndex={-1} // Prevents focus on object element and focus on links within a PDF preview
-            />
-          </div>
-        );
       }
     }
+
     let selectedFileClassName = headless
       ? 'headless-selected-files-wrapper'
       : 'selected-files-wrapper';
-    const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
-
 
     const showProgBar = percentUploaded !== null && percentUploaded < 100;
 
@@ -578,13 +572,13 @@ export class VaFileInput {
 
     return (
       <Host class={{ 'has-error': !!displayError }}>
-        {!readOnly && (
-          <span class={{ 'usa-sr-only': !!headless }}>
+        {!readOnly && !headless && (
+          <span>
             {label && this.renderLabelOrHeader(label, required, headerSize)}
           </span>
         )}
-        {hint && !readOnly && (
-          <div class={hintClass} id="input-hint-message">
+        {hint && !readOnly && !headless && (
+          <div class="usa-hint" id="input-hint-message">
             {hint}
           </div>
         )}
@@ -594,7 +588,7 @@ export class VaFileInput {
             class="file-input"
             aria-label={`${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`}
             style={{
-              visibility: (uploadStatus === 'success' || uploadedFile || displayError) ? 'hidden' : 'unset',
+              visibility: (uploadStatus === 'success' || uploadedFile || internalError) ? 'hidden' : 'unset',
             }}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
@@ -660,7 +654,7 @@ export class VaFileInput {
                     {!readOnly && showProgBar &&
                       (
                         <Fragment>
-                            <va-progress-bar percent={percentUploaded} />
+                            <va-progress-bar percent={percentUploaded} noPercentScreenReader />
                             <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
                           </Fragment>
                       )

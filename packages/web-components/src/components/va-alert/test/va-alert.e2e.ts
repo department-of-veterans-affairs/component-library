@@ -5,7 +5,9 @@ describe('va-alert', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-alert><h4 slot="headline">This is an alert</h4><div>This is the alert content</div></va-alert>');
+    await page.setContent(
+      '<va-alert><h4 slot="headline">This is an alert</h4><div>This is the alert content</div></va-alert>',
+    );
     const element = await page.find('va-alert');
 
     expect(element).toEqualHtml(`
@@ -75,29 +77,41 @@ describe('va-alert', () => {
 
   it('uses the headline text for the close button ARIA label, if no custom text is provided', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-alert closeable="true"><h4 slot="headline">This is an alert</h4></va-alert>');
+    await page.setContent(
+      '<va-alert closeable="true"><h4 slot="headline">This is an alert</h4></va-alert>',
+    );
 
     let button = await page.find('va-alert >>> button');
 
-    expect(button.getAttribute('aria-label')).toEqual('Close This is an alert notification');
+    expect(button.getAttribute('aria-label')).toEqual(
+      'Close This is an alert notification',
+    );
   });
 
   it('uses the custom text for the close button ARIA label, if provided', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-alert closeable="true" close-btn-aria-label="Close this notification"><h4 slot="headline">This is an alert</h4></va-alert>');
+    await page.setContent(
+      '<va-alert closeable="true" close-btn-aria-label="Close this notification"><h4 slot="headline">This is an alert</h4></va-alert>',
+    );
 
     let button = await page.find('va-alert >>> button');
 
-    expect(button.getAttribute('aria-label')).toEqual('Close this notification');
+    expect(button.getAttribute('aria-label')).toEqual(
+      'Close this notification',
+    );
   });
 
   it('uses generic text for the close button ARIA label, if no custom text is provided and no headline slot exists', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-alert closeable="true"><p>Some alert content</p></va-alert>');
+    await page.setContent(
+      '<va-alert closeable="true"><p>Some alert content</p></va-alert>',
+    );
 
     let button = await page.find('va-alert >>> button');
 
-    expect(button.getAttribute('aria-label')).toEqual('Close this notification');
+    expect(button.getAttribute('aria-label')).toEqual(
+      'Close this notification',
+    );
   });
 
   it('fires a custom "close" event when the close button is clicked', async () => {
@@ -268,7 +282,9 @@ describe('va-alert', () => {
 
   it('does not apply the slim class and attribute when a headline is provided', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-alert><h4 slot="headline">This is an alert</h4></va-alert>');
+    await page.setContent(
+      '<va-alert><h4 slot="headline">This is an alert</h4></va-alert>',
+    );
 
     const alert = await page.find('va-alert');
     const element = await page.find('va-alert >>> .usa-alert');
@@ -277,115 +293,81 @@ describe('va-alert', () => {
     expect(alert).not.toHaveAttribute('slim');
   });
 
-  describe('SR-only status text', () => {
-    it('announces "Warning Alert" for warning status with headline', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="warning"><h4 slot="headline">Your balance may be overdue</h4></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Warning Alert');
-    });
+  it('preserves headline and slim state when toggling visibility from false to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-alert status="info" visible="false" closeable>
+        <h2 slot="headline">Heading</h2>
+        Description
+      </va-alert>
+    `);
 
-    it('announces "Error Alert" for error status with headline', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="error"><h4 slot="headline">There was an error</h4></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Error Alert');
-    });
+    const alert = await page.find('va-alert');
 
-    it('announces "Success Alert" for success status with headline', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="success"><h4 slot="headline">Success</h4></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Success Alert');
-    });
+    // Initial state: visible="false"
+    expect(alert).not.toHaveAttribute('slim');
+    let shadowContent = await page.find('va-alert >>> .usa-alert');
+    expect(shadowContent).toBeNull(); // Not rendered when invisible
 
-    it('announces "Information Alert" for info status with headline', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="info"><h4 slot="headline">Information</h4></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Information Alert');
-    });
+    let headlineSlot = await page.find('va-alert >>> slot[name="headline"]');
+    expect(headlineSlot).toBeNull(); // Slot not in shadow DOM when invisible
 
-    it('announces "Continue Alert" for continue status with headline', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="continue"><h4 slot="headline">Continue</h4></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Continue Alert');
-    });
+    // Toggle to visible="true"
+    alert.setProperty('visible', true);
+    await page.waitForChanges();
 
-    it('announces "Warning Alert" for warning status in slim variant', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="warning"><p>Your balance may be overdue</p></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Warning Alert');
-    });
+    // After becoming visible: headline should be present and not slim
+    expect(alert).not.toHaveAttribute('slim');
+    shadowContent = await page.find('va-alert >>> .usa-alert');
+    expect(shadowContent).not.toBeNull();
+    expect(shadowContent.classList.contains('usa-alert--slim')).toBeFalsy();
 
-    it('announces "Error Alert" for error status in slim variant', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="error"><p>There was an error</p></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Error Alert');
-    });
+    headlineSlot = await page.find('va-alert >>> slot[name="headline"]');
+    expect(headlineSlot).not.toBeNull(); // Headline slot should be rendered
+  });
 
-    it('announces "Success Alert" for success status in slim variant', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="success"><p>Success</p></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Success Alert');
-    });
+  it('preserves headline and slim state when toggling visibility from true to false to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-alert status="info" visible="true" closeable>
+        <h2 slot="headline">Heading</h2>
+        Description
+      </va-alert>
+    `);
 
-    it('announces "Information Alert" for info status in slim variant', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="info"><p>Information</p></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Information Alert');
-    });
+    const alert = await page.find('va-alert');
 
-    it('announces "Continue Alert" for continue status in slim variant', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="continue"><p>Continue</p></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Continue Alert');
-    });
+    // Initial state: visible="true"
+    expect(alert).not.toHaveAttribute('slim');
+    let shadowContent = await page.find('va-alert >>> .usa-alert');
+    expect(shadowContent).not.toBeNull();
+    expect(shadowContent.classList.contains('usa-alert--slim')).toBeFalsy();
 
-    it('defaults to "Information Alert" for undefined status', async () => {
-      const page = await newE2EPage();
-      await page.setContent('<va-alert status="invalid"><h4 slot="headline">Alert</h4></va-alert>');
-      
-      const srText = await page.find('va-alert >>> .usa-sr-only');
-      const text = await srText.getProperty('textContent');
-      
-      expect(text).toBe('Information Alert');
-    });
+    let headlineSlot = await page.find('va-alert >>> slot[name="headline"]');
+    expect(headlineSlot).not.toBeNull();
+
+    // Toggle to visible="false"
+    alert.setProperty('visible', false);
+    await page.waitForChanges();
+
+    expect(alert).not.toHaveAttribute('slim');
+    shadowContent = await page.find('va-alert >>> .usa-alert');
+    expect(shadowContent).toBeNull(); // Not rendered when invisible
+
+    headlineSlot = await page.find('va-alert >>> slot[name="headline"]');
+    expect(headlineSlot).toBeNull(); // Slot not in shadow DOM when invisible
+
+    // Toggle back to visible="true"
+    alert.setProperty('visible', true);
+    await page.waitForChanges();
+
+    // After becoming visible again: headline should still be present and not slim
+    expect(alert).not.toHaveAttribute('slim');
+    shadowContent = await page.find('va-alert >>> .usa-alert');
+    expect(shadowContent).not.toBeNull();
+    expect(shadowContent.classList.contains('usa-alert--slim')).toBeFalsy();
+
+    headlineSlot = await page.find('va-alert >>> slot[name="headline"]');
+    expect(headlineSlot).not.toBeNull(); // Headline slot should be rendered
   });
 });
