@@ -1119,7 +1119,7 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+          * Set this flag to true if component will recieve external validation that might conflict with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
          */
         "externalValidation"?: boolean;
         /**
@@ -1169,6 +1169,11 @@ export namespace Components {
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
+        /**
+          * Public method to programmatically validate the component. This can be called by external form systems before running their own validation. Ignores touched state - only validates required fields and value ranges.
+          * @returns - Returns true if valid, false if there are errors
+         */
+        "validateComponent": () => Promise<boolean>;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
@@ -5162,7 +5167,7 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+          * Set this flag to true if component will recieve external validation that might conflict with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
          */
         "externalValidation"?: boolean;
         /**

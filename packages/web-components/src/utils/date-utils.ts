@@ -159,14 +159,6 @@ export const internalErrors = [
   'month-select',
 ];
 
-/**
- the month error key for a va-select instance varies if
- the instance is inside va-date or va-memorable-date
- */
-function getMonthErrorKey(monthSelect: boolean): string {
-  return monthSelect ? 'month-select' : 'month-range';
-}
-
 interface ValidateConfig {
   component: Components.VaDate | Components.VaMemorableDate;
   year: number;
@@ -180,7 +172,12 @@ interface ValidateConfig {
   monthOptional?: boolean;
 }
 
-export function validate({
+/**
+ * Core validation function for date components.
+ * @param requireTouched - If true, only validate if component has been touched (blur validation).
+ *                        If false, validate all fields regardless of touched state (submit validation).
+ */
+function validateCore({
   component,
   year,
   month,
@@ -191,126 +188,100 @@ export function validate({
   dayTouched,
   monthSelect,
   monthOptional,
-}: ValidateConfig): void {
+  requireTouched,
+}: ValidateConfig & { requireTouched: boolean }): void {
+  // Helper functions for value state checks
+  const inputHasValue = (input?: number) =>
+    typeof input === 'number' && !Number.isNaN(input);
+  const isNaN = (input?: number) =>
+    typeof input === 'number' && Number.isNaN(input);
 
-  // Don't validate if all values are empty
-  if ((!year) && !month && !day) {
-    return;
-  }
-  const maxDays = daysForSelectedMonth(year, month);
+  // Determine which fields are present/active
+  const hasDayField = !monthYearOnly;
+
+  // Check if values exist
+  const monthHasValue = inputHasValue(month);
+  const dayHasValue = hasDayField && inputHasValue(day);
+  const yearHasValue = inputHasValue(year);
+
+  // Check if values are invalid numbers
+  const monthIsNaN = isNaN(month);
+  const dayIsNaN = hasDayField && isNaN(day);
+  const yearIsNaN = isNaN(year);
+
+  // Determine if validation should run
+  const anyValueEntered = monthHasValue || dayHasValue || yearHasValue;
+  const anyInvalidNumber = monthIsNaN || dayIsNaN || yearIsNaN;
+  const anyFieldTouched = Boolean(yearTouched || monthTouched || dayTouched);
+  const componentTouched = anyFieldTouched || anyValueEntered || anyInvalidNumber;
+  const shouldValidate = !requireTouched || componentTouched;
 
   // Reset previous invalid states
   component.invalidYear = false;
   component.invalidMonth = false;
   component.invalidDay = false;
 
-  const monthRequired = !(monthYearOnly && monthOptional);
-
-  // Check NaN and set errors based on NaN values
-  if (monthRequired && isNaN(month) && monthTouched) {
-    component.invalidMonth = true;
-    component.error = getMonthErrorKey(monthSelect);
+  if (!shouldValidate) {
     return;
   }
-  if (!monthYearOnly && isNaN(day) && dayTouched) {
+
+  // Determine field requirements
+  const monthRequired = component.required && !(monthYearOnly && monthOptional);
+  const dayRequired = component.required && hasDayField;
+  const yearRequired = component.required;
+
+  // Calculate range limits
+  const maxDays = daysForSelectedMonth(year, month);
+  const monthErrorKey = monthSelect ? 'month-select' : 'month-range';
+
+  const monthOutOfRange = monthHasValue && (month < minMonths || month > maxMonths);
+  const dayOutOfRange = dayHasValue && (day < minDays || day > maxDays);
+  const yearOutOfRange = yearHasValue && (year < minYear || year > maxYear);
+
+  // Validate in visual order: month → day → year
+  // First invalid field found will set error and return
+
+  // Validate month
+  if (monthIsNaN || monthOutOfRange || monthRequired && !monthHasValue) {
+    component.invalidMonth = true;
+    component.error = monthErrorKey;
+    return;
+  }
+
+// If there is a day field, validate day
+  if (dayIsNaN || dayOutOfRange || dayRequired && !dayHasValue) {
     component.invalidDay = true;
     component.error = 'day-range';
     return;
   }
-  if (isNaN(year) && yearTouched) {
+
+  // Validate year
+  if (yearIsNaN || yearOutOfRange || yearRequired && !yearHasValue) {
     component.invalidYear = true;
     component.error = 'year-range';
     return;
   }
 
-  // Validate required fields
-  if (
-    component.required &&
-    (!year || (monthRequired && !month) || (!monthYearOnly && !day))
-  ) {
-    if (monthRequired && monthTouched && !month) {
-      component.invalidMonth = true;
-      component.error = 'date-error';
-      return;
-    } else if (dayTouched && !day && !monthYearOnly) {
-      component.invalidDay = true;
-      component.error = 'date-error';
-      return;
-    } else if (yearTouched && !year) {
-      component.invalidYear = true;
-      component.error = 'date-error';
-      return;
-    }
+  // Clear errors when all fields are valid
+  if (!component.error || internalErrors.includes(component.error)) {
+    component.error = null;
   }
+}
 
-  // Check for empty values after the fields are touched
-  if (monthRequired && !month && monthTouched) {
-    component.invalidMonth = true;
-    component.error = getMonthErrorKey(monthSelect);
-    return;
-  }
-  if (!day && !monthYearOnly && dayTouched) {
-    component.invalidDay = true;
-    component.error = 'day-range';
-    return;
-  }
-  if (!year && yearTouched) {
-    component.invalidYear = true;
-    component.error = 'year-range';
-    return;
-  }
+/**
+ * Validate for blur - only validates fields that have been touched.
+ * Used by handleDateBlur in date components.
+ */
+export function validate(config: ValidateConfig): void {
+  validateCore({ ...config, requireTouched: true });
+}
 
-  // Validate year, month, and day ranges if they have a value regardless of whether they are required
-  if (
-    monthRequired &&
-    month &&
-    (month < minMonths || month > maxMonths) &&
-    monthTouched
-  ) {
-    component.invalidMonth = true;
-    component.error = getMonthErrorKey(monthSelect);
-    return;
-  }
-  if (day && !monthYearOnly && (day < minDays || day > maxDays) && dayTouched) {
-    component.invalidDay = true;
-    component.error = 'day-range';
-    return;
-  }
-  if (year && (year < minYear || year > maxYear) && yearTouched) {
-    component.invalidYear = true;
-    component.error = 'year-range';
-    return;
-  }
-
-  // If month is selected but day and year have not been touched, set error for untouched fields
-  if (month && monthTouched && !dayTouched && !yearTouched) {
-    if (!monthYearOnly) {
-      component.invalidDay = true;
-      component.error = 'date-error';
-    } else {
-      component.invalidYear = true;
-      component.error = 'date-error';
-    }
-    return;
-  }
-
-  // If month and day is set but year has not been touched, set error
-  if (month && monthTouched && day && dayTouched && !yearTouched) {
-    component.invalidYear = true;
-    component.error = 'date-error';
-    return;
-  }
-
-  // Remove any error message if none of the fields are invalid
-  if (
-    !component.invalidYear &&
-    !component.invalidMonth &&
-    !component.invalidDay
-  ) {
-    if (!component.error || internalErrors.includes(component.error)) {
-      component.error = null;
-    }
-  }
+/**
+ * Validate for submit - validates all fields regardless of touched state.
+ * Used by validateComponent() method for programmatic form submission validation.
+ */
+export function validateForSubmit(config: ValidateConfig): void {
+  validateCore({ ...config, requireTouched: false });
 }
 
 export function getErrorParameters(error: string, year: number, month: number) {

@@ -34,6 +34,7 @@ const defaultArgs = {
   'month-select': false,
   'remove-date-hint': false,
   customYearErrorMessage: `Please enter a year between 1900 and ${new Date().getFullYear()}`,
+  testValidation: false,
 };
 
 const Template = ({
@@ -43,26 +44,48 @@ const Template = ({
   required,
   error,
   value,
-  'month-select': monthSelect,  
+  'month-select': monthSelect,
   'remove-date-hint': removeDateHint,
   customYearErrorMessage,
   labelHeaderLevel,
+  testValidation,
 }) => {
+  const [dateVal, setDateVal] = useState(value || '');
+
+  const handleValidate = async () => {
+    const dateComponent = document.querySelector(`va-memorable-date[name="${name}"]`);
+    if (dateComponent) {
+      await dateComponent.validateComponent();
+    }
+  };
+
   return (
-    <VaMemorableDate
-      monthSelect={monthSelect}
-      label={label}
-      name={name}
-      hint={hint}
-      required={required}
-      error={error}  
-      value={value}
-      removeDateHint={removeDateHint}
-      customYearErrorMessage={customYearErrorMessage}
-      onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
-      onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
-      labelHeaderLevel={labelHeaderLevel}
-    />
+    <>
+      <VaMemorableDate
+        monthSelect={monthSelect}
+        label={label}
+        name={name}
+        hint={hint}
+        required={required}
+        error={error}
+        value={dateVal}
+        removeDateHint={removeDateHint}
+        customYearErrorMessage={customYearErrorMessage}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => {
+          setDateVal(e.target.value);
+          console.log(e, 'DATE CHANGE FIRED');
+        }}
+        labelHeaderLevel={labelHeaderLevel}
+      />
+      {testValidation && (
+        <div className="vads-u-margin-top--2">
+          <button onClick={handleValidate} className="usa-button">
+            Validate
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -341,6 +364,12 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
 
+export const Required = Template.bind(null);
+Required.args = {
+  ...defaultArgs,
+  required: true,
+};
+
 export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
@@ -352,6 +381,13 @@ WithMonthSelect.args = {
   ...defaultArgs,
   'month-select': true,
   value: '2022-04-19',
+};
+
+export const RequiredMonthSelect = Template.bind(null);
+RequiredMonthSelect.args = {
+  ...defaultArgs,
+  required: true,
+  'month-select': true,
 };
 
 export const ExtraHintText = Template.bind(null);
@@ -423,4 +459,15 @@ export const FormsPatternMultipleError =
 FormsPatternMultipleError.args = {
   ...defaultArgs,
   error: 'Error Message Example',
+};
+
+export const TestValidation = Template.bind(null);
+TestValidation.args = {
+  ...defaultArgs,
+  label: 'Date of birth',
+  name: 'programmatic',
+  hint: 'Try validating with empty or invalid values',
+  required: true,
+  'month-select': true,
+  testValidation: true,
 };

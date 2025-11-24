@@ -109,10 +109,6 @@ export class VaDate {
   @Prop({ mutable: true }) invalidMonth?: boolean = false;
   @Prop({ mutable: true }) invalidYear?: boolean = false;
 
-  private dayTouched: boolean = false;
-  private monthTouched: boolean = false;
-  private yearTouched: boolean = false;
-
   /**
    * Whether or not an analytics event will be fired.
    */
@@ -147,18 +143,24 @@ export class VaDate {
   }
 
   private handleDateBlur = (event: FocusEvent) => {
-    const [year, month, day] = (this.value || '')
-      .split('-')
-      .map(val => Number(val));
+    let undef;
+    const parts = (this.value || '').split('-');
+    // Convert to number only if non-empty and numeric, otherwise undefined
+    const year = parts[0] && !isNaN(Number(parts[0])) ? Number(parts[0]) : undef;
+    const month = parts[1] && !isNaN(Number(parts[1])) ? Number(parts[1]) : undef;
+    const day = parts[2] && !isNaN(Number(parts[2])) ? Number(parts[2]) : undef;
+
+    // Component is "touched" if any child has a value (not just focused/blurred)
+    const componentTouched = !!(parts[0] || parts[1] || parts[2]);
 
     validate({
       component: this,
       year,
       month,
       day,
-      yearTouched: this.yearTouched,
-      monthTouched: this.monthTouched,
-      dayTouched: this.dayTouched,
+      yearTouched: componentTouched,
+      monthTouched: componentTouched,
+      dayTouched: componentTouched,
       monthSelect: true,
       monthYearOnly: this.monthYearOnly,
       monthOptional: this.monthOptional,
@@ -211,15 +213,15 @@ export class VaDate {
   };
 
   private handleMonthBlur = () => {
-    this.monthTouched = true;
+    // No longer tracking individual blur events
   };
 
   private handleDayBlur = () => {
-    this.dayTouched = true;
+    // No longer tracking individual blur events
   };
 
   private handleYearBlur = () => {
-    this.yearTouched = true;
+    // No longer tracking individual blur events
   };
 
   render() {
@@ -259,7 +261,7 @@ export class VaDate {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">Error</span>{' '}
+                <span class="usa-sr-only">Error</span>{' '}
                 {i18next.t(error, errorParameters(error))}
               </Fragment>
             )}
@@ -277,7 +279,7 @@ export class VaDate {
               class="select-month"
               required={required}
               hideRequiredText={true}
-              error={this.monthTouched && this.invalidMonth ? error : null}
+              error={this.invalidMonth ? error : null}
               showError={false}
             >
               {months &&
@@ -300,7 +302,7 @@ export class VaDate {
                 class="select-day"
                 required={required}
                 hideRequiredText={true}
-                error={this.dayTouched && this.invalidDay ? this.error : null}
+                error={this.invalidDay ? this.error : null}
                 showError={false}
               >
                 {arrayDaysForSelectedMonth.map(day => (
@@ -322,7 +324,7 @@ export class VaDate {
               onBlur={this.handleYearBlur}
               required={required}
               hideRequiredText={true}
-              error={this.yearTouched && this.invalidYear ? error : null}
+              error={this.invalidYear ? error : null}
               show-input-error="false"
               class="input-year"
               inputmode="numeric"
