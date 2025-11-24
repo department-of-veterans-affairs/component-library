@@ -232,7 +232,8 @@ export class VaSearchFilter {
         const hasValidCatId = typeof cat.id === 'number' || typeof cat.id === 'string';
         return hasValidCatLabel && hasValidCatId;
       });
-      const hasValidRadioButtons = option.isRadio && hasValidCategory ? option.category.filter(cat => cat.active).length <= 1 : true;
+      // Ensure that there is always one radio button selected.
+      const hasValidRadioButtons = option.isRadio && hasValidCategory ? option.category.filter(cat => cat.active).length === 1 : true;
       const hasValidId = typeof option.id === 'number' || typeof option.id === 'string';
       return hasValidLabel && hasValidCategory && hasValidId && hasValidRadioButtons;
     });
