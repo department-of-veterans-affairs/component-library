@@ -2047,6 +2047,10 @@ export namespace Components {
      */
     interface VaTagStatus {
         /**
+          * Screen reader text to provide context about the status tag. Defaults to `Status {status}:`.
+         */
+        "screenReaderText": string;
+        /**
           * The status variant of the tag. Determines the background color and icon.
          */
         "status": 'informational' | 'warning' | 'success' | 'error';
@@ -6241,6 +6245,10 @@ declare namespace LocalJSX {
      * @maturityLevel candidate
      */
     interface VaTagStatus {
+        /**
+          * Screen reader text to provide context about the status tag. Defaults to `Status {status}:`.
+         */
+        "screenReaderText"?: string;
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
