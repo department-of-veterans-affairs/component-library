@@ -1,12 +1,6 @@
 import { Component, Host, State, h, Element, Listen, Prop } from '@stencil/core';
 import { CONTACTS_WITH_EXTENSION } from '../../contacts';
 
-declare global {
-  interface Window {
-    hasCrisisLineModal?: boolean;
-  }
-}
-
 /**
  * @componentName Crisis Line Modal
  * @maturityCategory caution
@@ -20,7 +14,11 @@ declare global {
 })
 
 export class VACrisisLineModal {
+  
   @Element() el: HTMLElement;
+
+  /** Tracks the element that owns the modal rendering to prevent multiple modals. */
+  private static modalOwner: HTMLElement | null = null;
 
   /** Internal flag: this instance will render the modal (determined by DOM query). */
   private allowModalRender: boolean = false;
@@ -110,12 +108,9 @@ export class VACrisisLineModal {
    * Both are set in this method to prevent race conditions.
    */
   componentWillLoad() {
-    const hasExistingModal = window.hasCrisisLineModal || document.querySelector('va-crisis-line-modal[data-has-crisis-modal="true"]');
-    if (!hasExistingModal && (this.modalOnly || !this.triggerOnly)) {
+    if (!VACrisisLineModal.modalOwner && (this.modalOnly || !this.triggerOnly)) {
       this.allowModalRender = true;
-      // Set both markers to prevent race conditions with simultaneous instances
-      window.hasCrisisLineModal = true;
-      this.el.setAttribute('data-has-crisis-modal', 'true');
+      VACrisisLineModal.modalOwner = this.el;
     }
   }
 
@@ -123,9 +118,8 @@ export class VACrisisLineModal {
    * If the owning instance disconnects, remove the marker so a newly added instance can provide a modal.
    */
   disconnectedCallback() {
-    if (this.allowModalRender) {
-      this.el.removeAttribute('data-has-crisis-modal');
-      window.hasCrisisLineModal = false;
+    if (VACrisisLineModal.modalOwner === this.el) {
+      VACrisisLineModal.modalOwner = null;
     }
   }
 
