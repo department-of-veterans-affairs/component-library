@@ -226,9 +226,9 @@ function validateCore({
   }
 
   // Determine field requirements
-  const monthRequired = component.required && !(monthYearOnly && monthOptional);
-  const dayRequired = component.required ;
-  const yearRequired = component.required;
+  const monthNotOptional = !(monthYearOnly && monthOptional);
+  // Validate all fields when siblings have value
+  const childrenRequired = componentTouched || component.required;
 
   // Calculate range limits
   const maxDays = daysForSelectedMonth(year, month);
@@ -239,9 +239,9 @@ function validateCore({
   const yearOutOfRange = yearHasValue && (year < minYear || year > maxYear);
 
   // Check for empty fields when either required or when siblings have value
-  const monthEmpty = (componentTouched || monthRequired) && !monthHasValue;
-  const dayEmpty = hasDayField && (componentTouched || dayRequired) && !dayHasValue;
-  const yearEmpty = (componentTouched || yearRequired) && !yearHasValue;
+  const monthEmpty = monthNotOptional && childrenRequired && !monthHasValue;
+  const dayEmpty = hasDayField && childrenRequired && !dayHasValue;
+  const yearEmpty = childrenRequired && !yearHasValue;
 
   // Validate in visual order: month → day → year
   // First invalid field found will set error and return
