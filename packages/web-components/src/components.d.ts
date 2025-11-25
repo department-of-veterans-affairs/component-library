@@ -1081,6 +1081,10 @@ export namespace Components {
          */
         "maintenanceTitle": string;
         /**
+          * The level of the header for the maintenance title. Default is h2.
+         */
+        "maintenanceTitleHeaderLevel": number;
+        /**
           * The Date/Time of when to be begin warning users of upcoming site maintenance.
          */
         "upcomingWarnStartDateTime": string;
@@ -5115,6 +5119,10 @@ declare namespace LocalJSX {
           * The title of the banner shown during active maintenance.
          */
         "maintenanceTitle"?: string;
+        /**
+          * The level of the header for the maintenance title. Default is h2.
+         */
+        "maintenanceTitleHeaderLevel"?: number;
         /**
           * Fires when the component is closed by clicking on the close icon.
          */

@@ -20,9 +20,9 @@ describe('maintenance-banner', () => {
           <div class="maintenance-banner maintenance-banner--error">
             <va-icon class="hydrated maintenance-banner__icon"></va-icon>
             <div class="maintenance-banner__body">
-              <h4 class="maintenance-banner__title">
+              <h2 class="maintenance-banner__title">
                 Site maintenance
-              </h4>
+              </h2>
               <div class="maintenance-banner__content">
                 <slot name="maintenance-content"></slot>
               </div>
@@ -123,9 +123,9 @@ describe('maintenance-banner', () => {
           <div class="maintenance-banner maintenance-banner--warning">
             <va-icon class="hydrated maintenance-banner__icon"></va-icon>
             <div class="maintenance-banner__body">
-              <h4 class="maintenance-banner__title">
+              <h2 class="maintenance-banner__title">
                 Upcoming site maintenance
-              </h4>
+              </h2>
               <div class="maintenance-banner__content">
               <slot name="warn-content"></slot>
               </div>
@@ -190,9 +190,9 @@ describe('maintenance-banner', () => {
           <div class="maintenance-banner maintenance-banner--error">
             <va-icon class="hydrated maintenance-banner__icon"></va-icon>
             <div class="maintenance-banner__body">
-              <h4 class="maintenance-banner__title">
+              <h2 class="maintenance-banner__title">
                 Site maintenance
-              </h4>
+              </h2>
               <div class="maintenance-banner__content">
                 <slot name="maintenance-content"></slot>
               </div>
@@ -247,5 +247,124 @@ describe('maintenance-banner', () => {
     });
     await axeCheck(page);
   });
-});
 
+  describe('maintenanceTitleHeaderLevel prop', () => {
+    it('renders h2 by default for maintenance banner', async () => {
+      let startsAt = new Date(),
+        expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 1);
+      const page = await newE2EPage({
+        html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" upcoming-warn-title="Upcoming site maintenance" maintenance-start-date-time="${startsAt}" maintenance-end-date-time="${expiresAt}" upcoming-warn-start-date-time="${startsAt}">
+                <div slot="maintenance-content">Maintenance content</div>
+                <div slot="warn-content">Warning content</div>
+              </va-maintenance-banner>`,
+      });
+      const element = await page.find('va-maintenance-banner >>> .maintenance-banner__title');
+      expect(element.tagName).toBe('H2');
+    });
+
+    it('renders h1 when maintenanceTitleHeaderLevel is 1', async () => {
+      let startsAt = new Date(),
+        expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 1);
+      const page = await newE2EPage({
+        html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" upcoming-warn-title="Upcoming site maintenance" maintenance-title-header-level="1" maintenance-start-date-time="${startsAt}" maintenance-end-date-time="${expiresAt}" upcoming-warn-start-date-time="${startsAt}">
+                <div slot="maintenance-content">Maintenance content</div>
+                <div slot="warn-content">Warning content</div>
+              </va-maintenance-banner>`,
+      });
+      const element = await page.find('va-maintenance-banner >>> .maintenance-banner__title');
+      expect(element.tagName).toBe('H1');
+    });
+
+    it('renders h3 when maintenanceTitleHeaderLevel is 3', async () => {
+      let startsAt = new Date(),
+        expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 1);
+      const page = await newE2EPage({
+        html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" upcoming-warn-title="Upcoming site maintenance" maintenance-title-header-level="3" maintenance-start-date-time="${startsAt}" maintenance-end-date-time="${expiresAt}" upcoming-warn-start-date-time="${startsAt}">
+                <div slot="maintenance-content">Maintenance content</div>
+                <div slot="warn-content">Warning content</div>
+              </va-maintenance-banner>`,
+      });
+      const element = await page.find('va-maintenance-banner >>> .maintenance-banner__title');
+      expect(element.tagName).toBe('H3');
+    });
+
+    it('renders h4 when maintenanceTitleHeaderLevel is 4', async () => {
+      let startsAt = new Date(),
+        expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 1);
+      const page = await newE2EPage({
+        html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" upcoming-warn-title="Upcoming site maintenance" maintenance-title-header-level="4" maintenance-start-date-time="${startsAt}" maintenance-end-date-time="${expiresAt}" upcoming-warn-start-date-time="${startsAt}">
+                <div slot="maintenance-content">Maintenance content</div>
+                <div slot="warn-content">Warning content</div>
+              </va-maintenance-banner>`,
+      });
+      const element = await page.find('va-maintenance-banner >>> .maintenance-banner__title');
+      expect(element.tagName).toBe('H4');
+    });
+
+    it('renders h5 when maintenanceTitleHeaderLevel is 5', async () => {
+      let startsAt = new Date(),
+        expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 1);
+      const page = await newE2EPage({
+        html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" upcoming-warn-title="Upcoming site maintenance" maintenance-title-header-level="5" maintenance-start-date-time="${startsAt}" maintenance-end-date-time="${expiresAt}" upcoming-warn-start-date-time="${startsAt}">
+                <div slot="maintenance-content">Maintenance content</div>
+                <div slot="warn-content">Warning content</div>
+              </va-maintenance-banner>`,
+      });
+      const element = await page.find('va-maintenance-banner >>> .maintenance-banner__title');
+      expect(element.tagName).toBe('H5');
+    });
+
+    it('renders h6 when maintenanceTitleHeaderLevel is 6', async () => {
+      let startsAt = new Date(),
+        expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 1);
+      const page = await newE2EPage({
+        html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" upcoming-warn-title="Upcoming site maintenance" maintenance-title-header-level="6" maintenance-start-date-time="${startsAt}" maintenance-end-date-time="${expiresAt}" upcoming-warn-start-date-time="${startsAt}">
+                <div slot="maintenance-content">Maintenance content</div>
+                <div slot="warn-content">Warning content</div>
+              </va-maintenance-banner>`,
+      });
+      const element = await page.find('va-maintenance-banner >>> .maintenance-banner__title');
+      expect(element.tagName).toBe('H6');
+    });
+
+    it('renders correct header level for warning banner', async () => {
+      let startsAt = new Date(),
+        expiresAt = new Date(),
+        warnStartsAt = new Date();
+      startsAt.setDate(startsAt.getDate() + 1);
+      expiresAt.setDate(expiresAt.getDate() + 2);
+      const page = await newE2EPage({
+        html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" upcoming-warn-title="Upcoming site maintenance" maintenance-title-header-level="3" maintenance-start-date-time="${startsAt}" maintenance-end-date-time="${expiresAt}" upcoming-warn-start-date-time="${warnStartsAt}">
+                <div slot="maintenance-content">Maintenance content</div>
+                <div slot="warn-content">Warning content</div>
+              </va-maintenance-banner>`,
+      });
+      const element = await page.find('va-maintenance-banner >>> .maintenance-banner__title');
+      expect(element.tagName).toBe('H3');
+      const text = await element.innerText;
+      expect(text).toBe('Upcoming site maintenance');
+    });
+
+    it('renders correct header level for error banner', async () => {
+      let startsAt = new Date(),
+        expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 1);
+      const page = await newE2EPage({
+        html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" upcoming-warn-title="Upcoming site maintenance" maintenance-title-header-level="1" maintenance-start-date-time="${startsAt}" maintenance-end-date-time="${expiresAt}" upcoming-warn-start-date-time="${startsAt}">
+                <div slot="maintenance-content">Maintenance content</div>
+                <div slot="warn-content">Warning content</div>
+              </va-maintenance-banner>`,
+      });
+      const element = await page.find('va-maintenance-banner >>> .maintenance-banner__title');
+      expect(element.tagName).toBe('H1');
+      const text = await element.innerText;
+      expect(text).toBe('Site maintenance');
+    });
+  });
+});

@@ -6,6 +6,7 @@ import {
   isDateBefore,
   isDateSameDay,
 } from '../../utils/date-utils';
+import { getHeaderLevel } from '../../utils/utils';
 
 /**
  * @componentName Banner - Maintenance
@@ -41,6 +42,10 @@ export class VaMaintenanceBanner {
    * The title of the banner shown during active maintenance.
    */
   @Prop() maintenanceTitle: string;
+  /**
+   * The level of the header for the maintenance title. Default is h2.
+   */
+  @Prop() maintenanceTitleHeaderLevel: number = 2;
   /**
    * The Date/Time of when to be begin warning users of upcoming site maintenance.
    */
@@ -133,8 +138,10 @@ export class VaMaintenanceBanner {
   };
 
   render() {
-    const {upcomingWarnStartDateTime, maintenanceEndDateTime, isError} = this,
+    const {upcomingWarnStartDateTime, maintenanceEndDateTime, isError, maintenanceTitleHeaderLevel} = this,
       now = new Date();
+
+    const HeaderLevel = getHeaderLevel(maintenanceTitleHeaderLevel);
 
     // Escape early if it's before when it should show.
     if (isDateBefore(now, new Date(upcomingWarnStartDateTime))) {
@@ -169,9 +176,9 @@ export class VaMaintenanceBanner {
               size={4}
             ></va-icon>
             <div class="maintenance-banner__body">
-              <h4 class="maintenance-banner__title">
+              <HeaderLevel class="maintenance-banner__title">
                 {isWarning ? upcomingWarnTitle : maintenanceTitle}
-              </h4>
+              </HeaderLevel>
               <div
                 class="maintenance-banner__content"
                 ref={el =>

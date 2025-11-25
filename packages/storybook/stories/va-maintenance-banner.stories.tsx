@@ -44,6 +44,7 @@ const defaultArgs = {
   'upcoming-warn-title': 'Upcoming site maintenance',
   'upcoming-warn-start-date-time': `${upcomingWarnStartDateTime}`,
   'maintenance-title': 'Site maintenance',
+  'maintenance-title-header-level': 2,
   'maintenance-start-date-time': `${new Date(maintenanceTime)}`,
   'maintenance-end-date-time': `${maintenanceEndDateTime}`,
 };
