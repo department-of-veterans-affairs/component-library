@@ -406,13 +406,48 @@ export namespace Components {
          */
         "background"?: boolean;
         /**
+          * The error message to render.
+         */
+        "errorMessage"?: string;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headingLevel"?: number;
+        /**
+          * Text to be displayed in the card header.
+         */
+        "headingText"?: string;
+        /**
           * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
          */
         "iconName"?: string;
         /**
+          * Set the href for the card link.
+         */
+        "linkHref"?: string;
+        /**
+          * Set the text for the card link.
+         */
+        "linkText"?: string;
+        /**
+          * When `false`, hides the error message from view, but not from the screen reader.
+         */
+        "showError"?: boolean;
+        /**
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "tagStatus": | 'informational'
+    | 'warning'
+    | 'success'
+    | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "tagText"?: string;
     }
     /**
      * @nativeHandler onBlur
@@ -4373,13 +4408,48 @@ declare namespace LocalJSX {
          */
         "background"?: boolean;
         /**
+          * The error message to render.
+         */
+        "errorMessage"?: string;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headingLevel"?: number;
+        /**
+          * Text to be displayed in the card header.
+         */
+        "headingText"?: string;
+        /**
           * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
          */
         "iconName"?: string;
         /**
+          * Set the href for the card link.
+         */
+        "linkHref"?: string;
+        /**
+          * Set the text for the card link.
+         */
+        "linkText"?: string;
+        /**
+          * When `false`, hides the error message from view, but not from the screen reader.
+         */
+        "showError"?: boolean;
+        /**
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "tagStatus"?: | 'informational'
+    | 'warning'
+    | 'success'
+    | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "tagText"?: string;
     }
     /**
      * @nativeHandler onBlur
