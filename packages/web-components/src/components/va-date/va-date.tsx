@@ -7,12 +7,14 @@ import {
   h,
   Element,
   Fragment,
+  Method,
 } from '@stencil/core';
 import { i18next } from '../..';
 
 import {
   months,
   validate,
+  validateForSubmit,
   getErrorParameters,
   zeroPadStart,
   daysForSelectedMonth,
@@ -142,22 +144,46 @@ export class VaDate {
     this.value = val ? val : null;
   }
 
-  private handleDateBlur = (event: FocusEvent) => {
-    let undef;
-    const parts = (this.value || '').split('-');
-    // Convert to number only if non-empty and numeric, otherwise undefined
-    const year = parts[0] && !isNaN(Number(parts[0])) ? Number(parts[0]) : undef;
-    const month = parts[1] && !isNaN(Number(parts[1])) ? Number(parts[1]) : undef;
-    const day = parts[2] && !isNaN(Number(parts[2])) ? Number(parts[2]) : undef;
+  /**
+   * Parses the component's date value and returns an object containing the date parts.
+   *
+   * Splits the `value` property (expected in 'YYYY-MM-DD' format) into year, month, and day components.
+   * Converts valid numeric strings to numbers, returning undefined for invalid or missing values.
+   *
+   * @returns An object containing the original string date parts, their numeric
+   *          counterparts when valid, and helper booleans for interaction and parsing state.
+   */
+  private getDateValues() {
+    const toNumber = (value?: string) =>
+      value && !isNaN(Number(value)) ? Number(value) : undefined;
 
-    // Component is "touched" if any child has a value (not just focused/blurred)
-    const componentTouched = !!(parts[0] || parts[1] || parts[2]);
+    const [year, month, day] = (this.value || '').split('-');
+    const yearNum = toNumber(year);
+    const monthNum = toNumber(month);
+    const dayNum = toNumber(day);
+    const componentTouched = Boolean(year || month || day);
+
+    return {
+      yearNum,
+      monthNum,
+      dayNum,
+      componentTouched,
+    };
+  }
+
+  private handleDateBlur = (event: FocusEvent) => {
+    const {
+      yearNum,
+      monthNum,
+      dayNum,
+      componentTouched,
+    } = this.getDateValues();
 
     validate({
       component: this,
-      year,
-      month,
-      day,
+      year: yearNum,
+      month: monthNum,
+      day: dayNum,
       yearTouched: componentTouched,
       monthTouched: componentTouched,
       dayTouched: componentTouched,
@@ -170,7 +196,7 @@ export class VaDate {
       return;
     }
 
-    this.setValue(year, month, day);
+    this.setValue(yearNum, monthNum, dayNum);
     this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
@@ -178,9 +204,9 @@ export class VaDate {
         componentName: 'va-date',
         action: 'blur',
         details: {
-          year,
-          month,
-          day,
+          year: yearNum,
+          month: monthNum,
+          day: dayNum,
           'month-year-only': this.monthYearOnly,
         },
       };
@@ -223,6 +249,29 @@ export class VaDate {
   private handleYearBlur = () => {
     // No longer tracking individual blur events
   };
+  /**
+   * Public method to programmatically validate the component.
+   * This can be called by external form systems before running their own validation.
+   * Ignores touched state - only validates required fields and value ranges.
+   *
+   * @returns {Promise<boolean>} - Returns true if valid, false if there are errors
+   */
+  @Method()
+  async validateComponent(): Promise<boolean> {
+    const { yearNum, monthNum, dayNum } = this.getDateValues();
+
+    validateForSubmit({
+      component: this,
+      year: yearNum,
+      month: monthNum,
+      day: dayNum,
+      monthSelect: true,
+      monthYearOnly: this.monthYearOnly,
+      monthOptional: this.monthOptional,
+    });
+
+    return !this.error;
+  }
 
   render() {
     const {

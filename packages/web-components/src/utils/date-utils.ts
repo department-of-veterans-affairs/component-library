@@ -227,7 +227,7 @@ function validateCore({
 
   // Determine field requirements
   const monthRequired = component.required && !(monthYearOnly && monthOptional);
-  const dayRequired = component.required && hasDayField;
+  const dayRequired = component.required ;
   const yearRequired = component.required;
 
   // Calculate range limits
@@ -238,25 +238,30 @@ function validateCore({
   const dayOutOfRange = dayHasValue && (day < minDays || day > maxDays);
   const yearOutOfRange = yearHasValue && (year < minYear || year > maxYear);
 
+  // Check for empty fields when either required or when siblings have value
+  const monthEmpty = (componentTouched || monthRequired) && !monthHasValue;
+  const dayEmpty = hasDayField && (componentTouched || dayRequired) && !dayHasValue;
+  const yearEmpty = (componentTouched || yearRequired) && !yearHasValue;
+
   // Validate in visual order: month → day → year
   // First invalid field found will set error and return
 
   // Validate month
-  if (monthIsNaN || monthOutOfRange || monthRequired && !monthHasValue) {
+  if (monthIsNaN || monthOutOfRange || monthEmpty) {
     component.invalidMonth = true;
     component.error = monthErrorKey;
     return;
   }
 
 // If there is a day field, validate day
-  if (dayIsNaN || dayOutOfRange || dayRequired && !dayHasValue) {
+  if (dayIsNaN || dayOutOfRange || dayEmpty) {
     component.invalidDay = true;
     component.error = 'day-range';
     return;
   }
 
   // Validate year
-  if (yearIsNaN || yearOutOfRange || yearRequired && !yearHasValue) {
+  if (yearIsNaN || yearOutOfRange || yearEmpty) {
     component.invalidYear = true;
     component.error = 'year-range';
     return;

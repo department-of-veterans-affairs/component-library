@@ -677,6 +677,11 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Public method to programmatically validate the component. This can be called by external form systems before running their own validation. Ignores touched state - only validates required fields and value ranges.
+          * @returns - Returns true if valid, false if there are errors
+         */
+        "validateComponent": () => Promise<boolean>;
+        /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
         "value"?: string;
