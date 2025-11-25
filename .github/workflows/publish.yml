@@ -3,32 +3,28 @@ name: Yarn publish
 on:
   release:
     types: [published]
-  workflow_dispatch:
-
-permissions:
-  id-token: write # Required for OIDC trusted publishing
-  contents: read
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: 22.x
           cache: 'yarn'
-          registry-url: 'https://registry.npmjs.org'
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: 'us-gov-west-1'
 
-      # Ensure npm 11.5.1 or later is installed for trusted publishing support
-      - name: Update npm
-        run: npm install -g npm@latest
+      - name: Get bot token from Parameter Store
+        uses: marvinpinto/action-inject-ssm-secrets@v1.2.1
+        with:
+          ssm_parameter: /devops/VA_VSP_BOT_NPM_TOKEN
+          env_variable_name: VA_VSP_BOT_NPM_TOKEN
 
       - run: yarn install
       - name: Install dependencies in react-components
@@ -42,4 +38,6 @@ jobs:
       - run: yarn workspace @department-of-veterans-affairs/web-components run build-bindings
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
       - run: yarn workspace @department-of-veterans-affairs/css-library run build
-      - run: yarn workspaces foreach --all --verbose --no-private npm publish --access public --tolerate-republish --provenance
+      - run: yarn workspaces foreach --all --verbose --no-private npm publish --access public --tolerate-republish
+        env:
+          YARN_NPM_AUTH_TOKEN: ${{ env.VA_VSP_BOT_NPM_TOKEN }}
