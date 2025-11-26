@@ -200,11 +200,11 @@ describe('va-crisis-line-modal', () => {
     expect(ariaHidden).toBe('true');
   });
 
-  it('opens modal via document event when rendered without trigger button (modal-only)', async () => {
+  it('opens modal via document event when rendered without trigger button (mode="modal")', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <button id="external-trigger" type="button" onclick="document.dispatchEvent(new CustomEvent('va-crisis-line-modal:open'))">Launch Crisis Line</button>
-      <va-crisis-line-modal modal-only></va-crisis-line-modal>
+      <button id="external-trigger" type="button" onclick="document.dispatchEvent(new CustomEvent('vaCrisisLineModalOpen'))">Launch Crisis Line</button>
+      <va-crisis-line-modal mode="modal"></va-crisis-line-modal>
     `);
 
     // Internal trigger button should NOT exist

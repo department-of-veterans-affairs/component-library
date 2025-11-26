@@ -19,8 +19,7 @@ const defaultArgs = {
   'chat-url': undefined,
   'tty-number': '711',
   'tty-crisis-extension': '988',
-  'trigger-only': false,
-  'modal-only': false,
+  'mode': undefined,
 };
 
 const Template = ({
@@ -30,8 +29,7 @@ const Template = ({
   'chat-url': chatUrl,
   'tty-number': ttyNumber,
   'tty-crisis-extension': ttyCrisisExtension,
-  'trigger-only': triggerOnly,
-  'modal-only': modalOnly,
+  'mode': mode,
 }) => (
   <va-crisis-line-modal
     phone-number={phoneNumber}
@@ -40,8 +38,7 @@ const Template = ({
     chat-url={chatUrl}
     tty-number={ttyNumber}
     tty-crisis-extension={ttyCrisisExtension}
-    trigger-only={triggerOnly}
-    modal-only={modalOnly}
+    mode={mode}
   />
 );
 
@@ -55,10 +52,10 @@ const ExternalOpenEventTemplate = ({
 }) => (
   <div style={{ display: 'grid', gap: '1rem' }}>
     <va-button text="Open crisis line modal"
-      onClick={() => document.dispatchEvent(new CustomEvent('va-crisis-line-modal:open'))}
+      onClick={() => document.dispatchEvent(new CustomEvent('vaCrisisLineModalOpen'))}
     ></va-button>
     <va-crisis-line-modal
-      modal-only
+      mode="modal"
       phone-number={phoneNumber}
       phone-extension={phoneExtension}
       text-number={textNumber}
@@ -86,9 +83,9 @@ const overrideArgTypes = {
       defaultValue: { summary: '988' },
     },
   },
-  'va-crisis-line-modal:open': {
+  'vaCrisisLineModalOpen': {
     control: { disable: true },
-    description: 'Dispatch `document.dispatchEvent(new CustomEvent(\'va-crisis-line-modal:open\'))` to open a modal instance.',
+    description: 'Dispatch `document.dispatchEvent(new CustomEvent(\'vaCrisisLineModalOpen\'))` to open a modal instance.',
     table: { category: 'Events' },
   },
 };
@@ -113,13 +110,12 @@ export const ExternalOpenEvent = ExternalOpenEventTemplate.bind(null);
 ExternalOpenEvent.argTypes = overrideArgTypes;
 ExternalOpenEvent.args = {
   ...defaultArgs,
-  'modal-only': true,
 };
 ExternalOpenEvent.parameters = {
   docs: {
     description: {
       story:
-        'Demonstrates opening the modal by dispatching the document event `va-crisis-line-modal:open` from an external button while rendering only the modal instance.',
+        'Demonstrates opening the modal by dispatching the document event `vaCrisisLineModalOpen` from an external button while rendering only the modal instance.',
     },
   },
 };

@@ -54,20 +54,12 @@ export class VACrisisLineModal {
   @Prop() ttyCrisisExtension?: string = CONTACTS_WITH_EXTENSION.CRISIS_MODAL_TTY.extension || '988';
 
   /**
-   * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.
-   * 
-   * **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration.
-   * If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
+   * Determines what to render:
+   * - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.
+   * - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it.
+   * - `null` or `undefined`: Renders both trigger and modal (default behavior).
    */
-  @Prop() triggerOnly?: boolean = false;
-
-  /**
-   * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.
-   * 
-   * **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration.
-   * If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
-   */
-  @Prop() modalOnly?: boolean = false;
+  @Prop() mode?: 'trigger' | 'modal' = undefined;
 
   @State() isOpen: boolean = false;
 
@@ -78,9 +70,9 @@ export class VACrisisLineModal {
 
   /**
    * Listen for the global document event to open the modal. Any code can trigger:
-   * `document.dispatchEvent(new CustomEvent('va-crisis-line-modal:open'))` to open a modal instance.
+   * `document.dispatchEvent(new CustomEvent('vaCrisisLineModalOpen'))` to open a modal instance.
    */
-  @Listen('va-crisis-line-modal:open', { target: 'document' })
+  @Listen('vaCrisisLineModalOpen', { target: 'document' })
   handleGlobalOpen() {
     if (this.allowModalRender) {
       this.open();
@@ -102,13 +94,12 @@ export class VACrisisLineModal {
   /**
    * Before first render decide if this instance should render the modal.
    * It will render only if:
-   *  - `modalOnly` is true OR `triggerOnly` is false
+   *  - `mode` is 'modal' OR `mode` is undefined/null
    *  - AND no other crisis line modal has already marked itself as a modal renderer.
-   * Ownership is tracked via a `data-has-crisis-modal` attribute on the host element and window property.
-   * Both are set in this method to prevent race conditions.
+   * Ownership is tracked via a static property to prevent race conditions.
    */
   componentWillLoad() {
-    if (!VACrisisLineModal.modalOwner && (this.modalOnly || !this.triggerOnly)) {
+    if (!VACrisisLineModal.modalOwner && this.mode !== 'trigger') {
       this.allowModalRender = true;
       VACrisisLineModal.modalOwner = this.el;
     }
@@ -157,29 +148,18 @@ export class VACrisisLineModal {
       chatUrl,
       ttyNumber,
       ttyCrisisExtension,
-      triggerOnly,
-      modalOnly
+      mode
     } = this;
 
-    // Detect invalid configuration where both triggerOnly and modalOnly are true
-    const conflict = triggerOnly && modalOnly;
-    if (conflict) {
-      console.warn(
-        'va-crisis-line-modal: Invalid configuration detected. Both triggerOnly and modalOnly props are set to true. ' +
-        'This is not a valid configuration. As a failsafe, both trigger and modal will be rendered, but you should ' +
-        'only set one of these props to true, or leave both false for default behavior.'
-      );
-    }
-    const showTrigger = conflict ? true : !modalOnly;
-    // Only render modal if this instance was granted permission by DOM query.
-    const showModal = this.allowModalRender && (conflict ? true : !triggerOnly);
+    const showTrigger = mode !== 'modal';
+    const showModal = this.allowModalRender && mode !== 'trigger';
 
     return (
       <Host>
         {showTrigger && (
           <div class="va-crisis-line-container">
             <button
-              onClick={() => document.dispatchEvent(new CustomEvent('va-crisis-line-modal:open'))}
+              onClick={() => document.dispatchEvent(new CustomEvent('vaCrisisLineModalOpen'))}
               onFocusin={() => this.trapFocus()}
               data-show="#modal-crisisline"
               class="va-crisis-line va-overlay-trigger"

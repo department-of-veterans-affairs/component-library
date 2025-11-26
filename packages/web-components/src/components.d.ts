@@ -595,9 +595,9 @@ export namespace Components {
          */
         "chatUrl"?: string;
         /**
-          * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.  **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration. If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
+          * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
          */
-        "modalOnly"?: boolean;
+        "mode"?: 'trigger' | 'modal';
         /**
           * Phone extension for the crisis line. Defaults to 1.
          */
@@ -610,10 +610,6 @@ export namespace Components {
           * Text number for the crisis line. Defaults to 838255.
          */
         "textNumber"?: string;
-        /**
-          * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.  **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration. If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
-         */
-        "triggerOnly"?: boolean;
         /**
           * TTY extension for the crisis line. Defaults to 988.
          */
@@ -4582,9 +4578,9 @@ declare namespace LocalJSX {
          */
         "chatUrl"?: string;
         /**
-          * When true, renders only the modal (no trigger button). Dispatch the custom event `va-crisis-line-modal:open` on `document` to open it.  **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration. If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
+          * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
          */
-        "modalOnly"?: boolean;
+        "mode"?: 'trigger' | 'modal';
         /**
           * Phone extension for the crisis line. Defaults to 1.
          */
@@ -4597,10 +4593,6 @@ declare namespace LocalJSX {
           * Text number for the crisis line. Defaults to 838255.
          */
         "textNumber"?: string;
-        /**
-          * When true, renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance.  **Warning**: Do not set both `triggerOnly` and `modalOnly` to true. This is an invalid configuration. If both are true, a console warning will be logged and both trigger and modal will render (failsafe behavior).
-         */
-        "triggerOnly"?: boolean;
         /**
           * TTY extension for the crisis line. Defaults to 988.
          */
