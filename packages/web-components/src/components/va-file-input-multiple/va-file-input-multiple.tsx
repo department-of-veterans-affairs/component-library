@@ -274,6 +274,9 @@ export class VaFileInputMultiple {
       statusMessageDiv.textContent = '';
       setTimeout(() => {
         statusMessageDiv.textContent = 'File deleted.';
+        setTimeout(() => {
+          statusMessageDiv.textContent = '';
+        }, 10000);
       }, 1000);
       filesArray = this.buildFilesArray(this.files, true);
     }

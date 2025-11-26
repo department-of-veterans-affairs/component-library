@@ -1200,10 +1200,6 @@ export namespace Components {
      */
     interface VaModal {
         /**
-          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
-         */
-        "ariaHiddenNodeExceptions"?: HTMLElement[];
-        /**
           * Click outside modal will trigger closeEvent
          */
         "clickToClose"?: boolean;
@@ -1465,6 +1461,10 @@ export namespace Components {
           * The text label for the progress bar.
          */
         "label"?: string;
+        /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
         /**
           * Percent of progress made. 0 to 100.
          */
@@ -5255,10 +5255,6 @@ declare namespace LocalJSX {
      */
     interface VaModal {
         /**
-          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
-         */
-        "ariaHiddenNodeExceptions"?: HTMLElement[];
-        /**
           * Click outside modal will trigger closeEvent
          */
         "clickToClose"?: boolean;
@@ -5568,6 +5564,10 @@ declare namespace LocalJSX {
           * The text label for the progress bar.
          */
         "label"?: string;
+        /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
         /**
           * The event used to track usage of the component. This is emitted when percent is 0 or 100 and enableAnalytics is true.
          */

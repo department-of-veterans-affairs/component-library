@@ -337,6 +337,10 @@ export class VaFileInput {
       const statusMessageDiv =
         this.el.shadowRoot.querySelector('#statusMessage');
       statusMessageDiv ? (statusMessageDiv.textContent = message) : '';
+
+      setTimeout(() => {
+        statusMessageDiv ? (statusMessageDiv.textContent = '') : '';
+      }, 10000);
     }, 1000);
   }
 
@@ -523,7 +527,7 @@ export class VaFileInput {
     }`.trim();
 
     let fileThumbnail = (
-      <div class="thumbnail-container">
+      <div class="thumbnail-container" aria-hidden="true">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 384 512"
@@ -552,24 +556,12 @@ export class VaFileInput {
             <img class="thumbnail-preview" src={fileContents} alt="image" />
           </div>
         );
-      } else if (fileType === 'application/pdf') {
-        fileThumbnail = (
-          <div class="thumbnail-container" aria-hidden="true">
-            <object
-              class="thumbnail-preview"
-              data={fileContents}
-              type="application/pdf"
-              tabIndex={-1} // Prevents focus on object element and focus on links within a PDF preview
-            />
-          </div>
-        );
       }
     }
+
     let selectedFileClassName = headless
       ? 'headless-selected-files-wrapper'
       : 'selected-files-wrapper';
-    const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
-
 
     const showProgBar = percentUploaded !== null && percentUploaded < 100;
 
@@ -580,13 +572,13 @@ export class VaFileInput {
 
     return (
       <Host class={{ 'has-error': !!displayError }}>
-        {!readOnly && (
-          <span class={{ 'usa-sr-only': !!headless }}>
+        {!readOnly && !headless && (
+          <span>
             {label && this.renderLabelOrHeader(label, required, headerSize)}
           </span>
         )}
-        {hint && !readOnly && (
-          <div class={hintClass} id="input-hint-message">
+        {hint && !readOnly && !headless && (
+          <div class="usa-hint" id="input-hint-message">
             {hint}
           </div>
         )}
@@ -662,7 +654,7 @@ export class VaFileInput {
                     {!readOnly && showProgBar &&
                       (
                         <Fragment>
-                            <va-progress-bar percent={percentUploaded} />
+                            <va-progress-bar percent={percentUploaded} noPercentScreenReader />
                             <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
                           </Fragment>
                       )
