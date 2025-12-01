@@ -447,8 +447,7 @@ export namespace Components {
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
-        "tagStatus": | 'informational'
-    | 'error';
+        "tagStatus": 'informational' | 'error';
         /**
           * The text to be displayed in the tag element.
          */
@@ -4466,8 +4465,7 @@ declare namespace LocalJSX {
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
-        "tagStatus"?: | 'informational'
-    | 'error';
+        "tagStatus"?: 'informational' | 'error';
         /**
           * The text to be displayed in the tag element.
          */
