@@ -406,6 +406,21 @@ export namespace Components {
          */
         "background"?: boolean;
         /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
+        /**
+          * If `true`, a drop-shadow will be displayed with a white background.
+         */
+        "showShadow"?: boolean;
+    }
+    /**
+     * @componentName Card Status
+     * @maturityCategory use
+     * @maturityLevel deployed
+     */
+    interface VaCardStatus {
+        /**
           * The error message to render.
          */
         "errorMessage"?: string;
@@ -418,10 +433,6 @@ export namespace Components {
          */
         "headingText"?: string;
         /**
-          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
-         */
-        "iconName"?: string;
-        /**
           * Set the href for the card link.
          */
         "linkHref"?: string;
@@ -430,19 +441,13 @@ export namespace Components {
          */
         "linkText"?: string;
         /**
-          * When `false`, hides the error message from view, but not from the screen reader.
+          * Sets the card to required and renders the (*Required) text.
          */
-        "showError"?: boolean;
-        /**
-          * If `true`, a drop-shadow will be displayed with a white background.
-         */
-        "showShadow"?: boolean;
+        "required"?: boolean;
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
         "tagStatus": | 'informational'
-    | 'warning'
-    | 'success'
     | 'error';
         /**
           * The text to be displayed in the tag element.
@@ -2842,6 +2847,17 @@ declare global {
         prototype: HTMLVaCardElement;
         new (): HTMLVaCardElement;
     };
+    /**
+     * @componentName Card Status
+     * @maturityCategory use
+     * @maturityLevel deployed
+     */
+    interface HTMLVaCardStatusElement extends Components.VaCardStatus, HTMLStencilElement {
+    }
+    var HTMLVaCardStatusElement: {
+        prototype: HTMLVaCardStatusElement;
+        new (): HTMLVaCardStatusElement;
+    };
     interface HTMLVaCheckboxElementEventMap {
         "vaChange": any;
         "component-library-analytics": any;
@@ -3861,6 +3877,7 @@ declare global {
         "va-button-pair": HTMLVaButtonPairElement;
         "va-button-segmented": HTMLVaButtonSegmentedElement;
         "va-card": HTMLVaCardElement;
+        "va-card-status": HTMLVaCardStatusElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-combo-box": HTMLVaComboBoxElement;
@@ -4376,6 +4393,21 @@ declare namespace LocalJSX {
          */
         "background"?: boolean;
         /**
+          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
+         */
+        "iconName"?: string;
+        /**
+          * If `true`, a drop-shadow will be displayed with a white background.
+         */
+        "showShadow"?: boolean;
+    }
+    /**
+     * @componentName Card Status
+     * @maturityCategory use
+     * @maturityLevel deployed
+     */
+    interface VaCardStatus {
+        /**
           * The error message to render.
          */
         "errorMessage"?: string;
@@ -4388,10 +4420,6 @@ declare namespace LocalJSX {
          */
         "headingText"?: string;
         /**
-          * If set, displays an icon at the top of the card in a blue circle. The value should be the icon name to use. Icons can be found at https://design.va.gov/components/icon
-         */
-        "iconName"?: string;
-        /**
           * Set the href for the card link.
          */
         "linkHref"?: string;
@@ -4400,19 +4428,13 @@ declare namespace LocalJSX {
          */
         "linkText"?: string;
         /**
-          * When `false`, hides the error message from view, but not from the screen reader.
+          * Sets the card to required and renders the (*Required) text.
          */
-        "showError"?: boolean;
-        /**
-          * If `true`, a drop-shadow will be displayed with a white background.
-         */
-        "showShadow"?: boolean;
+        "required"?: boolean;
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
         "tagStatus"?: | 'informational'
-    | 'warning'
-    | 'success'
     | 'error';
         /**
           * The text to be displayed in the tag element.
@@ -6602,6 +6624,7 @@ declare namespace LocalJSX {
         "va-button-pair": VaButtonPair;
         "va-button-segmented": VaButtonSegmented;
         "va-card": VaCard;
+        "va-card-status": VaCardStatus;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
         "va-combo-box": VaComboBox;
@@ -6749,6 +6772,12 @@ declare module "@stencil/core" {
              * @maturityLevel deployed
              */
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
+            /**
+             * @componentName Card Status
+             * @maturityCategory use
+             * @maturityLevel deployed
+             */
+            "va-card-status": LocalJSX.VaCardStatus & JSXBase.HTMLAttributes<HTMLVaCardStatusElement>;
             /**
              * @nativeHandler onBlur
              * @componentName Checkbox
