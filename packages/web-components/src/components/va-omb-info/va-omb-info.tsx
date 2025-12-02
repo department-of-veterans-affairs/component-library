@@ -54,9 +54,9 @@ export class VaOmbInfo {
    */
   @Prop() resBurden?: number;
 
-/**
- * If `true`, clicking outside the modal will close it.
- */
+  /**
+   * If `true`, clicking outside the modal will close it.
+   */
   @Prop() modalClickToClose?: boolean = true;
 
   private toggleModalVisible = () => {
