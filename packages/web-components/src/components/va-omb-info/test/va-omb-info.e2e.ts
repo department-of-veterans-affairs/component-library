@@ -100,4 +100,24 @@ describe('va-omb-info', () => {
     
     expect(isFocusCorrect).toBe(true);
   });
+
+  it('does not close when clicking overlay if modalClickToClose=false', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-omb-info exp-date="12/31/2077" modal-click-to-close="false"></va-omb-info>');
+
+    const openButton = await page.find('va-omb-info >>> va-button');
+    await openButton.click();
+    await page.waitForChanges();
+
+    // Verify modal is open
+    let modal = await page.find('va-omb-info >>> va-modal');
+    expect(await modal.isVisible()).toBe(true);
+
+    // Attempt to close by clicking overlay
+    await modal.click();
+    await page.waitForChanges();
+
+    // Modal should still be open
+    expect(await modal.isVisible()).toBe(true);
+  });
 });
