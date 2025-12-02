@@ -116,7 +116,13 @@ WithDefaultValue.args = {
   value: 'banana',
 };
 
-export const WithError = Template.bind({});
+const ErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {Template(args)}
+  </div>
+);
+
+export const WithError = ErrorTemplate.bind({});
 WithError.args = {
   ...defaultArgs,
   error: 'This field contains an error.',

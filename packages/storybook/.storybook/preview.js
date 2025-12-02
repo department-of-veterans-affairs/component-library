@@ -134,8 +134,7 @@ export const initialGlobals = {
 
 export const decorators = [
   Story => (
-    // Padding added to accommodate left border error states
-    <div style={{ paddingLeft: '1rem' }}>
+    <div>
       <Story />
     </div>
   ),

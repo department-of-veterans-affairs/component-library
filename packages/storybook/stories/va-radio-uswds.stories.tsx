@@ -232,7 +232,7 @@ const USWDSTiledError = ({
   const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
 
   return (
-    <>
+    <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
       <va-radio
         enable-analytics={enableAnalytics}
         error={errorMsg}
@@ -271,7 +271,7 @@ const USWDSTiledError = ({
           class="vads-u-margin-top--2"
         ></va-button>
       )}
-    </>
+    </div>
   );
 };
 
@@ -456,7 +456,7 @@ TileWithHint.args = {
   hint: 'This is a hint for the tile',
 };
 
-export const TileWithError = USWDSTiled.bind(null);
+export const TileWithError = USWDSTiledError.bind(null);
 TileWithError.args = {
   ...defaultArgs,
   name: 'tile-example',
@@ -464,7 +464,7 @@ TileWithError.args = {
   error: 'There has been an error',
 };
 
-export const TileWithHintAndError = USWDSTiled.bind(null);
+export const TileWithHintAndError = USWDSTiledError.bind(null);
 TileWithHintAndError.args = {
   ...defaultArgs,
   name: 'tile-example',
@@ -511,7 +511,13 @@ ReactWithCustomEvent.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-export const Error = USWDSTiledError.bind(null);
+const ErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {USWDSTiledError(args)}
+  </div>
+);
+
+export const Error = ErrorTemplate.bind(null);
 Error.args = {
   ...defaultArgs,
   error: 'There has been an error',

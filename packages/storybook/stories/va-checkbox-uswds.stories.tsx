@@ -319,7 +319,13 @@ export const OnBackground = props => (
 );
 OnBackground.args = { ...defaultArgs };
 
-export const Error = Template.bind(null);
+const ErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {Template(args)}
+  </div>
+);
+
+export const Error = ErrorTemplate.bind(null);
 Error.args = {
   ...defaultArgs,
   description:

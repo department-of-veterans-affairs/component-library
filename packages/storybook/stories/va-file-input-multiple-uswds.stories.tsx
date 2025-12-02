@@ -333,7 +333,13 @@ const ErrorsTemplate = ({ label, name, hint }) => {
   );
 };
 
-export const Errors = ErrorsTemplate.bind(null);
+const ErrorsWithPadding = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {ErrorsTemplate(args)}
+  </div>
+);
+
+export const Errors = ErrorsWithPadding.bind(null);
 Errors.args = {
   ...defaultArgs,
   label: 'Label Header',

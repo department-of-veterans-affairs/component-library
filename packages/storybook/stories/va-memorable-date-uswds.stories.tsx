@@ -341,7 +341,13 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
 
-export const Error = Template.bind(null);
+const ErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {Template(args)}
+  </div>
+);
+
+export const Error = ErrorTemplate.bind(null);
 Error.args = {
   ...defaultArgs,
   error: 'Error Message Example',
@@ -361,7 +367,7 @@ ExtraHintText.args = {
   hint: 'Extra hint text',
 };
 
-export const ErrorWithMonthSelect = Template.bind(null);
+export const ErrorWithMonthSelect = ErrorTemplate.bind(null);
 ErrorWithMonthSelect.args = {
   ...defaultArgs,
   error: 'Error Message Example',

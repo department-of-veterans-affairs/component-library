@@ -332,7 +332,13 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
 
-export const Error = Template.bind(null);
+const ErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {Template(args)}
+  </div>
+);
+
+export const Error = ErrorTemplate.bind(null);
 Error.args = { ...defaultArgs, error: 'This is an error message' };
 
 export const Success = Template.bind(null);
@@ -571,7 +577,7 @@ Widths.args = {
   ...defaultArgs,
 };
 
-export const hideInputError = Template.bind(null);
+export const hideInputError = ErrorTemplate.bind(null);
 hideInputError.args = {
   ...defaultArgs,
   'show-input-error': false,
@@ -583,7 +589,13 @@ FormsPatternSingle.args = {
   ...defaultArgs,
 };
 
-export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+const FormsPatternSingleErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {FormsPatternSingleTemplate(args)}
+  </div>
+);
+
+export const FormsPatternSingleError = FormsPatternSingleErrorTemplate.bind(null);
 FormsPatternSingleError.args = {
   ...defaultArgs,
   error: 'This is an error message',

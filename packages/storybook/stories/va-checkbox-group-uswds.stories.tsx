@@ -124,6 +124,56 @@ const USWDSTiled = ({
   );
 };
 
+const USWDSTiledError = ({
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+  hint,
+}) => {
+  return (
+    <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+      <va-checkbox-group
+        enable-analytics={enableAnalytics}
+        error={error}
+        label={label}
+        required={required}
+        hint={hint}
+      >
+        <va-checkbox
+          id="sojourner-truth"
+          label="Sojourner Truth"
+          checkbox-description="This is optional text that can be used to describe the label in more detail."
+          name="group1"
+          value="1"
+          tile
+        />
+        <va-checkbox
+          id="frederick-douglass"
+          label="Frederick Douglass"
+          name="group1"
+          value="2"
+          tile
+        />
+        <va-checkbox
+          id="booker-t-washington"
+          label="Booker T. Washington"
+          name="group1"
+          value="3"
+          tile
+        />
+        <va-checkbox
+          id="george-washington-carver"
+          label="George Washington Carver"
+          name="group1"
+          value="4"
+          tile
+        />
+      </va-checkbox-group>
+    </div>
+  );
+};
+
 const I18nTemplate  = args => {
   const [lang, setLang] = useState('en');
 
@@ -188,7 +238,13 @@ WithHintText.args = {
   hint: 'This is example hint text',
 };
 
-export const Error = Template.bind(null);
+const ErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {Template(args)}
+  </div>
+);
+
+export const Error = ErrorTemplate.bind(null);
 Error.args = {
   ...defaultArgs,
   error: 'There has been an error',
@@ -389,7 +445,7 @@ TileWithHint.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-export const TileWithError = USWDSTiled.bind(null);
+export const TileWithError = USWDSTiledError.bind(null);
 TileWithError.args = {
   ...defaultArgs,
   tile: true,
@@ -400,7 +456,7 @@ TileWithError.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-export const TileWithHintAndError = USWDSTiled.bind(null);
+export const TileWithHintAndError = USWDSTiledError.bind(null);
 TileWithHintAndError.args = {
   ...defaultArgs,
   tile: true,

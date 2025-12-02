@@ -80,7 +80,13 @@ WithCustomLabel.args = {
   label: 'Secondary phone number'
 }
 
-export const WithCustomError = Template.bind(null);
+const ErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {Template(args)}
+  </div>
+);
+
+export const WithCustomError = ErrorTemplate.bind(null);
 WithCustomError.args = {
   ...defaultArgs,
   error: 'This is a custom error message'
@@ -101,7 +107,13 @@ const WithPhoneFormatTemplate = ({}) => {
   );
 };
 
-export const WithPhoneFormatError = WithPhoneFormatTemplate.bind(null);
+const WithPhoneFormatErrorWithPadding = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {WithPhoneFormatTemplate(args)}
+  </div>
+);
+
+export const WithPhoneFormatError = WithPhoneFormatErrorWithPadding.bind(null);
 
 export const WithHint = Template.bind(null);
 WithHint.args = {
@@ -121,7 +133,7 @@ WithNoCountry.args = {
   'no-country': true,
 }
 
-export const WithShowInternalErrors = Template.bind(null);
+export const WithShowInternalErrors = ErrorTemplate.bind(null);
 WithShowInternalErrors.args = {
   ...defaultArgs,
   'show-internal-errors': false,

@@ -201,8 +201,13 @@ AcceptsAnyKindOfImage.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
+const ErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {Template(args)}
+  </div>
+);
 
-export const ErrorMessage = Template.bind(null);
+export const ErrorMessage = ErrorTemplate.bind(null);
 ErrorMessage.args = {
   ...defaultArgs,
   label: 'Input has an error',

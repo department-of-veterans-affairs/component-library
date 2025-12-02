@@ -160,7 +160,13 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(dateDocs);
 
-export const Error = Template.bind(null);
+const ErrorTemplate = (args) => (
+  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    {Template(args)}
+  </div>
+);
+
+export const Error = ErrorTemplate.bind(null);
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
 
 export const WithHintText = WithHintTextTemplate.bind(null);
