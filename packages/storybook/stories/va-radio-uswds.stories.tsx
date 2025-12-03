@@ -242,24 +242,31 @@ const USWDSTiledError = ({
         id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         <va-radio-option
-          id="sojourner-truth2"
+          id="sojourner-truth1"
           label="Sojourner Truth"
-          name="group4"
+          name="group3"
           value="1"
           tile
         />
         <va-radio-option
-          id="frederick-douglass2"
+          id="frederick-douglass1"
           label="Frederick Douglass"
-          name="group4"
+          name="group3"
           value="2"
           tile
         />
         <va-radio-option
-          id="booker-t-washington2"
+          id="booker-t-washington1"
           label="Booker T. Washington"
-          name="group4"
+          name="group3"
           value="3"
+          tile
+        />
+        <va-radio-option
+          id="george-washington-carver1"
+          label="George Washington Carver"
+          name="group3"
+          value="4"
           description="This is optional text that can be used to describe the label in more detail."
           tile
         />
