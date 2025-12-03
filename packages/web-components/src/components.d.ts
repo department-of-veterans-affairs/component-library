@@ -1081,6 +1081,10 @@ export namespace Components {
          */
         "maintenanceTitle": string;
         /**
+          * The level of the header for the maintenance title. Default is h2.
+         */
+        "maintenanceTitleHeaderLevel": number;
+        /**
           * The Date/Time of when to be begin warning users of upcoming site maintenance.
          */
         "upcomingWarnStartDateTime": string;
@@ -1189,10 +1193,6 @@ export namespace Components {
      * @maturityLevel best_practice
      */
     interface VaModal {
-        /**
-          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
-         */
-        "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
           * Click outside modal will trigger closeEvent
          */
@@ -1455,6 +1455,10 @@ export namespace Components {
           * The text label for the progress bar.
          */
         "label"?: string;
+        /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
         /**
           * Percent of progress made. 0 to 100.
          */
@@ -5116,6 +5120,10 @@ declare namespace LocalJSX {
          */
         "maintenanceTitle"?: string;
         /**
+          * The level of the header for the maintenance title. Default is h2.
+         */
+        "maintenanceTitleHeaderLevel"?: number;
+        /**
           * Fires when the component is closed by clicking on the close icon.
          */
         "onCloseEvent"?: (event: VaMaintenanceBannerCustomEvent<any>) => void;
@@ -5244,10 +5252,6 @@ declare namespace LocalJSX {
      * @maturityLevel best_practice
      */
     interface VaModal {
-        /**
-          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
-         */
-        "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
           * Click outside modal will trigger closeEvent
          */
@@ -5558,6 +5562,10 @@ declare namespace LocalJSX {
           * The text label for the progress bar.
          */
         "label"?: string;
+        /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
         /**
           * The event used to track usage of the component. This is emitted when percent is 0 or 100 and enableAnalytics is true.
          */
