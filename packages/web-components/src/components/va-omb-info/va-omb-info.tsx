@@ -57,7 +57,7 @@ export class VaOmbInfo {
   /**
    * If `true`, clicking outside the modal will close it.
    */
-  @Prop() modalClickToClose?: boolean = true;
+  @Prop() modalClickToClose?: boolean = false;
 
   private toggleModalVisible = () => {
     this.visible = !this.visible;
