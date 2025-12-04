@@ -201,7 +201,7 @@ export class VACrisisLineModal {
             <ul class="va-crisis-panel-list">
               <li>
                 <va-icon class="va-clm__icon" icon="phone" size={3}></va-icon>
-                <span>{i18next.t('crisis-line-phone-label') + ' '} <strong><va-telephone contact={phoneNumber} />{phoneExtension ? ` ${i18next.t('crisis-line-phone-extenstion-label')} ${phoneExtension}` : null}</strong></span>
+                <span>{i18next.t('crisis-line-phone-label') + ' '} <strong><va-telephone contact={phoneNumber} />{phoneExtension ? ` ${i18next.t('crisis-line-phone-extension-label')} ${phoneExtension}` : null}</strong></span>
               </li>
               <li>
                 <va-icon

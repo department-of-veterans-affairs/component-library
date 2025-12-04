@@ -49,7 +49,7 @@ export default {
   'crisis-line-modal-title': 'We’re here anytime, day or night – 24/7',
   'crisis-line-intro': 'If you are a Veteran in crisis or concerned about one, connect with our caring, qualified responders for confidential help. Many of them are Veterans themselves.',
   'crisis-line-phone-label': 'Call',
-  'crisis-line-phone-extenstion-label': 'and select',
+  'crisis-line-phone-extension-label': 'and select',
   'crisis-line-text-label': 'Text',
   'crisis-line-chat-label': 'Start a confidential chat',
   'crisis-line-tty-label': 'For TTY, call',
