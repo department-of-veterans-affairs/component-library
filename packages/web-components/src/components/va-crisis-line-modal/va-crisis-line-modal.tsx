@@ -1,6 +1,6 @@
 import { Component, Host, State, h, Element, Listen, Prop } from '@stencil/core';
 import { CONTACTS_WITH_EXTENSION } from '../../contacts';
-
+/* eslint-disable i18next/no-literal-string */
 /**
  * @componentName Crisis Line Modal
  * @maturityCategory caution
