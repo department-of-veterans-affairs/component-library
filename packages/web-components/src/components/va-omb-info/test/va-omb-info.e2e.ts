@@ -100,4 +100,50 @@ describe('va-omb-info', () => {
     
     expect(isFocusCorrect).toBe(true);
   });
+
+  it('closes when clicking overlay when modalClickToClose=true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-omb-info exp-date="12/31/2077" modal-click-to-close="true"></va-omb-info>');
+
+    const openButton = await page.find('va-omb-info >>> va-button');
+    await openButton.click();
+    await page.waitForChanges();
+
+    // Verify modal is open
+    let modal = await page.find('va-omb-info >>> va-modal');
+    expect(await modal.getProperty('visible')).toBe(true);
+
+    // Click the modal host element directly to trigger clickToClose
+    await page.evaluate(() => {
+      const ombInfo = document.querySelector('va-omb-info');
+      const modal = ombInfo?.shadowRoot?.querySelector('va-modal');
+      modal?.click();
+    });
+    await page.waitForChanges();
+
+    expect(await modal.getProperty('visible')).toBe(false);
+  });
+
+  it('does not close when clicking overlay by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-omb-info exp-date="12/31/2077" modal-click-to-close="false"></va-omb-info>');
+
+    const openButton = await page.find('va-omb-info >>> va-button');
+    await openButton.click();
+    await page.waitForChanges();
+
+    // Verify modal is open
+    let modal = await page.find('va-omb-info >>> va-modal');
+    expect(await modal.getProperty('visible')).toBe(true);
+
+    // Click the modal host element - should not close when clickToClose is false
+    await page.evaluate(() => {
+      const ombInfo = document.querySelector('va-omb-info');
+      const modal = ombInfo?.shadowRoot?.querySelector('va-modal');
+      modal?.click();
+    });
+    await page.waitForChanges();
+
+    expect(await modal.getProperty('visible')).toBe(true);
+  });
 });
