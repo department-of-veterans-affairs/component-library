@@ -1,6 +1,7 @@
 import { Component, Host, State, h, Element, Listen, Prop } from '@stencil/core';
 import { CONTACTS_WITH_EXTENSION } from '../../contacts';
-/* eslint-disable i18next/no-literal-string */
+import { i18next } from '../..';
+
 /**
  * @componentName Crisis Line Modal
  * @maturityCategory caution
@@ -26,7 +27,9 @@ export class VACrisisLineModal {
   /**
    * Phone number for the crisis line. Defaults to 988.
    */
+  /* eslint-disable i18next/no-literal-string */
   @Prop() phoneNumber?: string = '988';
+  /* eslint-enable i18next/no-literal-string */
 
   /**
    * Phone extension for the crisis line. Defaults to 1.
@@ -36,22 +39,30 @@ export class VACrisisLineModal {
   /**
    * Text number for the crisis line. Defaults to 838255.
    */
+  /* eslint-disable i18next/no-literal-string */
   @Prop() textNumber?: string = '838255';
+  /* eslint-enable i18next/no-literal-string */
 
   /**
    * URL for the chat service. Defaults to Veterans Crisis Line chat.
    */
+  /* eslint-disable i18next/no-literal-string */
   @Prop() chatUrl?: string = 'https://www.veteranscrisisline.net/get-help-now/chat/';
+  /* eslint-enable i18next/no-literal-string */
 
   /**
    * TTY number for the crisis line. Defaults to 711.
    */
+  /* eslint-disable i18next/no-literal-string */
   @Prop() ttyNumber?: string = CONTACTS_WITH_EXTENSION.CRISIS_MODAL_TTY.phoneNumber || '711';
+  /* eslint-enable i18next/no-literal-string */
 
   /**
    * TTY extension for the crisis line. Defaults to 988.
    */
+  /* eslint-disable i18next/no-literal-string */
   @Prop() ttyCrisisExtension?: string = CONTACTS_WITH_EXTENSION.CRISIS_MODAL_TTY.extension || '988';
+  /* eslint-enable i18next/no-literal-string */
 
   /**
    * Determines what to render:
@@ -167,8 +178,7 @@ export class VACrisisLineModal {
             >
               <div class="va-crisis-line-inner">
                 <span class="va-crisis-line-icon" aria-hidden="true"></span>
-                <span class="va-crisis-line-text">
-                  Talk to the <strong>Veterans Crisis Line</strong> now
+                <span class="va-crisis-line-text" innerHTML={i18next.t('crisis-line-trigger-text')}>
                 </span>
                 <va-icon
                   class="va-icon__right-arrow"
@@ -181,21 +191,17 @@ export class VACrisisLineModal {
         )}
         {showModal && (
           <va-modal
-            modalTitle="We’re here anytime, day or night – 24/7"
+            modalTitle={i18next.t('crisis-line-modal-title')}
             onPrimaryButtonClick={() => this.setNotVisible()}
             onCloseEvent={() => this.setNotVisible()}
             visible={this.isOpen}
             large={true}
           >
-            <p>
-              If you are a Veteran in crisis or concerned about one, connect with
-              our caring, qualified responders for confidential help. Many of them
-              are Veterans themselves.
-            </p>
+            <p>{i18next.t('crisis-line-intro')}</p>
             <ul class="va-crisis-panel-list">
               <li>
                 <va-icon class="va-clm__icon" icon="phone" size={3}></va-icon>
-                <span>Call{' '}<strong><va-telephone contact={phoneNumber} />{phoneExtension ? ` and select ${phoneExtension}` : null}</strong></span>
+                <span>{i18next.t('crisis-line-phone-label') + ' '} <strong><va-telephone contact={phoneNumber} />{phoneExtension ? ` ${i18next.t('crisis-line-phone-extenstion-label')} ${phoneExtension}` : null}</strong></span>
               </li>
               <li>
                 <va-icon
@@ -203,31 +209,31 @@ export class VACrisisLineModal {
                   class="va-clm__icon"
                   size={3}
                 ></va-icon>
-                <span>Text&nbsp;<strong><va-telephone sms contact={textNumber} /></strong></span>
+                <span>{i18next.t('crisis-line-text-label') + ' '} <strong><va-telephone sms contact={textNumber} /></strong></span>
               </li>
               <li>
                 <va-icon icon="chat" class="va-clm__icon" size={3}></va-icon>
                 <a class="no-external-icon" href={chatUrl}>
-                  Start a confidential chat
+                  {i18next.t('crisis-line-chat-label')}
                 </a>
               </li>
               <li>
                 <va-icon icon="tty" class="va-clm__icon" size={3}></va-icon>
-                <p>For TTY, call{' '}
+                <p>{i18next.t('crisis-line-tty-label') + ' '}
                 <strong>
                   <va-telephone contact={ttyNumber} />
-                  {ttyCrisisExtension ? ` then ${ttyCrisisExtension}` : null}
+                  {ttyCrisisExtension ? ` ${i18next.t('crisis-line-tty-extension-label')} ${ttyCrisisExtension}` : null}
                 </strong>
                 </p>
               </li>
             </ul>
             <p>
-              Get more resources at{' '}
+              {i18next.t('crisis-line-resources-link-label') + ' '}
               <a
                 class="no-external-icon"
                 href="https://www.veteranscrisisline.net/"
               >
-                VeteransCrisisLine.net
+                {i18next.t('crisis-line-resources-link-text')}
               </a>
             </p>
           </va-modal>

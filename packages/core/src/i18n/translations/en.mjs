@@ -44,5 +44,16 @@ export default {
   'gov-site-https': 'Secure .{{tld}} websites use HTTPS',
   'gov-site-lock': "A lock {{image}} or https:// means you've safely connected to the .{{tld}} website. Share sensitive information only on official, secure websites.",
   'next': 'Next',
-  'previous': 'Previous'
+  'previous': 'Previous',
+  'crisis-line-trigger-text': 'Talk to the <strong>Veterans Crisis Line</strong> now',
+  'crisis-line-modal-title': 'We’re here anytime, day or night – 24/7',
+  'crisis-line-intro': 'If you are a Veteran in crisis or concerned about one, connect with our caring, qualified responders for confidential help. Many of them are Veterans themselves.',
+  'crisis-line-phone-label': 'Call',
+  'crisis-line-phone-extenstion-label': 'and select',
+  'crisis-line-text-label': 'Text',
+  'crisis-line-chat-label': 'Start a confidential chat',
+  'crisis-line-tty-label': 'For TTY, call',
+  'crisis-line-tty-extension-label': 'then',
+  'crisis-line-resources-link-label': 'Get more resources at',
+  'crisis-line-resources-link-text': 'VeteransCrisisLine.net',
 };
