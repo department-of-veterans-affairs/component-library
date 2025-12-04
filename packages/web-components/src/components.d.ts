@@ -1336,6 +1336,10 @@ export namespace Components {
          */
         "formId"?: string;
         /**
+          * If `true`, clicking outside the modal will close it.
+         */
+        "modalClickToClose"?: boolean;
+        /**
           * The OMB control number
          */
         "ombNumber"?: string;
@@ -5422,6 +5426,10 @@ declare namespace LocalJSX {
           * The form number to display in the Privacy Act Statement button text. When provided, the button reads "Privacy Act Statement for VA Form {formId}". This improves accessibility when multiple instances exist on the same page.
          */
         "formId"?: string;
+        /**
+          * If `true`, clicking outside the modal will close it.
+         */
+        "modalClickToClose"?: boolean;
         /**
           * The OMB control number
          */
