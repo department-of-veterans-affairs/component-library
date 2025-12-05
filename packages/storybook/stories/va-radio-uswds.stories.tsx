@@ -264,7 +264,6 @@ const USWDSTiledError = ({
           description="This is optional text that can be used to describe the label in more detail."
           tile
         />
-        
       </va-radio>
       {showToggleFocusButton && (
         <va-button

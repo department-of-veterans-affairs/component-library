@@ -572,7 +572,7 @@ Widths.args = {
   ...defaultArgs,
 };
 
-export const hideInputError = Error.bind(null);
+export const hideInputError = Template.bind(null);
 hideInputError.args = {
   ...defaultArgs,
   'show-input-error': false,
@@ -585,7 +585,6 @@ FormsPatternSingle.args = {
 };
 
 export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
-
 FormsPatternSingleError.args = {
   ...defaultArgs,
   error: 'This is an error message',
