@@ -43,11 +43,9 @@ const defaultArgs = {
   'error': '',
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
-  'vaChange': event =>
-    alert(`File change event received: ${event?.detail?.files[0]?.name}`),
+  'vaChange': null,
   'vaPasswordChange': null,
-  'vaFileInputError': event =>
-    alert(`File input error event received: ${event?.detail?.error}`),
+  'vaFileInputError': null,
   'header-size': null,
   'children': null,
   'value': null,
@@ -172,6 +170,51 @@ WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: '
 // TODO: Enable snapshots after integrating Storybook play function
 WithFilePasswordError.parameters = {
   chromatic: { disableSnapshot: true },
+};
+
+const WithMinimumPasswordRequirementTemplate = ({
+  label,
+  name,
+  accept,
+  required,
+  error,
+  hint,
+}) => {
+  const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
+
+  const handleVaPasswordChange = (e: CustomEvent) => {
+    let newPasswordError: string | undefined;
+
+    const { password } = e.detail;
+
+    if (!password || password.length < 4) {
+      newPasswordError = 'Encrypted file requires a password.';
+    } else if (password.length >= 4) {
+      newPasswordError = null;
+    }
+
+    setPasswordError(newPasswordError);
+  };
+
+  return (
+    <VaFileInput
+      label={label}
+      name={name}
+      accept={accept}
+      required={required}
+      error={error}
+      hint={hint}
+      encrypted={true}
+      onVaPasswordChange={handleVaPasswordChange}
+      passwordError={passwordError}
+    />
+  );
+};
+export const WithMinimumPasswordRequirement = WithMinimumPasswordRequirementTemplate.bind(null);
+WithMinimumPasswordRequirement.args = {
+  ...defaultArgs,
+  label: 'With minimum password length requirement',
+  hint: 'Password must be at least 4 characters long',
 };
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
