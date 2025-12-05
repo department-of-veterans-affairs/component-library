@@ -67,8 +67,8 @@ button {
 }
 
 /**
-* Layout for form element stories to allow for error border-left to be seen
-*/ 
+* Applies left margin for form element stories to allow the error border-left to be visible.
+*/
 .sb-layout--form {
   @include media($small-desktop-screen) {
     margin-left: .9rem;
