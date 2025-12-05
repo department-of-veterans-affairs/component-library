@@ -21,7 +21,7 @@ export default {
         <StoryDocs storyDefault={Default} data={memorableDateInputDocs} />
       ),
     },
-    layoutName: 'form',
+    storyType: 'form',
   },
 };
 

@@ -31,7 +31,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={radioDocs} />,
     },
-    layoutName: 'form',
+    storyType: 'form',
   },
   argTypes: {
       ...propStructure(radioDocs),

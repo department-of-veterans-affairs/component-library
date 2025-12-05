@@ -135,11 +135,11 @@ export const initialGlobals = {
 export const decorators = [
   (Story, { parameters }) => 
   {
-    const pageLayout = parameters.layoutName;
+    const pageLayout = parameters.storyType;
     switch (pageLayout) {
       case 'form':
         return (
-          <div className='sb-layout--form'>
+          <div className='sb-type--form'>
             <Story />
           </div>
         );

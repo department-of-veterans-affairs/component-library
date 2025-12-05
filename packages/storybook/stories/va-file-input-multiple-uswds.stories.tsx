@@ -17,7 +17,7 @@ export default {
         <StoryDocs storyDefault={Default} data={fileInputMultipleDocs} />
       ),
     },
-    layoutName: 'form',
+    storyType: 'form',
   },
 };
 
