@@ -31,6 +31,11 @@ export class VaTagStatus {
    */
   @Prop() text!: string;
 
+  /**
+   * Screen reader text to provide context about the status tag. Defaults to `Status {status}:`.
+   */
+  @Prop() screenReaderText: string = `Status ${this.status}:`;
+
   // Ensure that a valid status is provided
   componentWillLoad() {
     if (!['informational', 'warning', 'success', 'error'].includes(this.status)) {
@@ -39,7 +44,7 @@ export class VaTagStatus {
   }
 
   render() {
-    const { status, text } = this;
+    const { screenReaderText, status, text,  } = this;
 
     const tagClasses = classnames({
       'va-tag-status': true,
@@ -61,7 +66,7 @@ export class VaTagStatus {
           class='va-tag-status__icon'
           aria-hidden="true"
         />
-        <span class="usa-sr-only">Status</span>
+        <span class="usa-sr-only">{screenReaderText}</span>
         <span class="va-tag-status__text">{text}</span>
       </Host>
     );
