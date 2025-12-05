@@ -54,6 +54,11 @@ export class VaOmbInfo {
    */
   @Prop() resBurden?: number;
 
+  /**
+   * If `true`, clicking outside the modal will close it.
+   */
+  @Prop() modalClickToClose?: boolean = false;
+
   private toggleModalVisible = () => {
     this.visible = !this.visible;
   };
@@ -187,6 +192,7 @@ export class VaOmbInfo {
           modalTitle="Privacy Act Statement"
           onCloseEvent={toggleModalVisible}
           visible={visible}
+          clickToClose={this.modalClickToClose}
         >
           <slot onSlotchange={handleSlotChange}></slot>
           {modalContents}
