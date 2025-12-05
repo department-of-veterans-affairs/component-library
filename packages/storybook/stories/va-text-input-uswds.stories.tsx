@@ -16,6 +16,7 @@ export default {
   id: 'uswds/va-text-input',
   parameters: {
     componentSubtitle: 'va-text-input web component',
+    layout: 'form',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={textInputDocs} />,
     },
@@ -332,13 +333,7 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
 
-const ErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {Template(args)}
-  </div>
-);
-
-export const Error = ErrorTemplate.bind(null);
+export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'This is an error message' };
 
 export const Success = Template.bind(null);
@@ -577,7 +572,7 @@ Widths.args = {
   ...defaultArgs,
 };
 
-export const hideInputError = ErrorTemplate.bind(null);
+export const hideInputError = Error.bind(null);
 hideInputError.args = {
   ...defaultArgs,
   'show-input-error': false,
@@ -589,13 +584,8 @@ FormsPatternSingle.args = {
   ...defaultArgs,
 };
 
-const FormsPatternSingleErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {FormsPatternSingleTemplate(args)}
-  </div>
-);
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
 
-export const FormsPatternSingleError = FormsPatternSingleErrorTemplate.bind(null);
 FormsPatternSingleError.args = {
   ...defaultArgs,
   error: 'This is an error message',

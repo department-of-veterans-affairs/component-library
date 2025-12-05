@@ -14,6 +14,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={dateDocs} />,
     },
+    layout: 'form',
   },
 };
 
@@ -160,13 +161,7 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(dateDocs);
 
-const ErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {Template(args)}
-  </div>
-);
-
-export const Error = ErrorTemplate.bind(null);
+export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
 
 export const WithHintText = WithHintTextTemplate.bind(null);

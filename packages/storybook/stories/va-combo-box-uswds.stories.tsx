@@ -16,6 +16,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={comboBoxDocs} />,
     },
+    layout: 'form',
   },
   argTypes: {
     ...propStructure(comboBoxDocs),
@@ -116,13 +117,7 @@ WithDefaultValue.args = {
   value: 'banana',
 };
 
-const ErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {Template(args)}
-  </div>
-);
-
-export const WithError = ErrorTemplate.bind({});
+export const WithError = Template.bind({});
 WithError.args = {
   ...defaultArgs,
   error: 'This field contains an error.',

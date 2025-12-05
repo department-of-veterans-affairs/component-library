@@ -17,6 +17,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={inputTelephoneDocs} />,
     },
+    layout: 'form',
   },
 };
 
@@ -80,13 +81,7 @@ WithCustomLabel.args = {
   label: 'Secondary phone number'
 }
 
-const ErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {Template(args)}
-  </div>
-);
-
-export const WithCustomError = ErrorTemplate.bind(null);
+export const WithCustomError = Template.bind(null);
 WithCustomError.args = {
   ...defaultArgs,
   error: 'This is a custom error message'
@@ -107,13 +102,7 @@ const WithPhoneFormatTemplate = ({}) => {
   );
 };
 
-const WithPhoneFormatErrorWithPadding = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {WithPhoneFormatTemplate(args)}
-  </div>
-);
-
-export const WithPhoneFormatError = WithPhoneFormatErrorWithPadding.bind(null);
+export const WithPhoneFormatError = WithPhoneFormatTemplate.bind(null);
 
 export const WithHint = Template.bind(null);
 WithHint.args = {
@@ -133,7 +122,7 @@ WithNoCountry.args = {
   'no-country': true,
 }
 
-export const WithShowInternalErrors = ErrorTemplate.bind(null);
+export const WithShowInternalErrors = Template.bind(null);
 WithShowInternalErrors.args = {
   ...defaultArgs,
   'show-internal-errors': false,

@@ -31,6 +31,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={radioDocs} />,
     },
+    layout: 'form',
   },
   argTypes: {
       ...propStructure(radioDocs),
@@ -232,7 +233,7 @@ const USWDSTiledError = ({
   const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
 
   return (
-    <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
+    <>
       <va-radio
         enable-analytics={enableAnalytics}
         error={errorMsg}
@@ -242,34 +243,28 @@ const USWDSTiledError = ({
         id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         <va-radio-option
-          id="sojourner-truth1"
+          id="sojourner-truth2"
           label="Sojourner Truth"
-          name="group3"
+          name="group4"
           value="1"
           tile
         />
         <va-radio-option
-          id="frederick-douglass1"
+          id="frederick-douglass2"
           label="Frederick Douglass"
-          name="group3"
+          name="group4"
           value="2"
           tile
         />
         <va-radio-option
-          id="booker-t-washington1"
+          id="booker-t-washington2"
           label="Booker T. Washington"
-          name="group3"
+          name="group4"
           value="3"
-          tile
-        />
-        <va-radio-option
-          id="george-washington-carver1"
-          label="George Washington Carver"
-          name="group3"
-          value="4"
           description="This is optional text that can be used to describe the label in more detail."
           tile
         />
+        
       </va-radio>
       {showToggleFocusButton && (
         <va-button
@@ -278,7 +273,7 @@ const USWDSTiledError = ({
           class="vads-u-margin-top--2"
         ></va-button>
       )}
-    </div>
+    </>
   );
 };
 
@@ -463,7 +458,7 @@ TileWithHint.args = {
   hint: 'This is a hint for the tile',
 };
 
-export const TileWithError = USWDSTiledError.bind(null);
+export const TileWithError = USWDSTiled.bind(null);
 TileWithError.args = {
   ...defaultArgs,
   name: 'tile-example',
@@ -471,7 +466,7 @@ TileWithError.args = {
   error: 'There has been an error',
 };
 
-export const TileWithHintAndError = USWDSTiledError.bind(null);
+export const TileWithHintAndError = USWDSTiled.bind(null);
 TileWithHintAndError.args = {
   ...defaultArgs,
   name: 'tile-example',
@@ -518,13 +513,7 @@ ReactWithCustomEvent.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-const ErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {USWDSTiledError(args)}
-  </div>
-);
-
-export const Error = ErrorTemplate.bind(null);
+export const Error = USWDSTiledError.bind(null);
 Error.args = {
   ...defaultArgs,
   error: 'There has been an error',

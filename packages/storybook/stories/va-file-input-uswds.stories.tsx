@@ -22,6 +22,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={fileInputDocs} />,
     },
+    layout: 'form',
   },
   argTypes: {
     ...propStructure(fileInputDocs),
@@ -201,13 +202,7 @@ AcceptsAnyKindOfImage.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-const ErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {Template(args)}
-  </div>
-);
-
-export const ErrorMessage = ErrorTemplate.bind(null);
+export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = {
   ...defaultArgs,
   label: 'Input has an error',

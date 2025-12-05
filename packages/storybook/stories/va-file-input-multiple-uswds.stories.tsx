@@ -17,6 +17,7 @@ export default {
         <StoryDocs storyDefault={Default} data={fileInputMultipleDocs} />
       ),
     },
+    layout: 'form',
   },
 };
 
@@ -333,13 +334,7 @@ const ErrorsTemplate = ({ label, name, hint }) => {
   );
 };
 
-const ErrorsWithPadding = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {ErrorsTemplate(args)}
-  </div>
-);
-
-export const Errors = ErrorsWithPadding.bind(null);
+export const Errors = ErrorsTemplate.bind(null);
 Errors.args = {
   ...defaultArgs,
   label: 'Label Header',

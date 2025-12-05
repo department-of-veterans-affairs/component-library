@@ -21,6 +21,7 @@ export default {
         <StoryDocs storyDefault={Default} data={memorableDateInputDocs} />
       ),
     },
+    layout: 'form',
   },
 };
 
@@ -341,13 +342,7 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
 
-const ErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {Template(args)}
-  </div>
-);
-
-export const Error = ErrorTemplate.bind(null);
+export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
   error: 'Error Message Example',
@@ -367,7 +362,7 @@ ExtraHintText.args = {
   hint: 'Extra hint text',
 };
 
-export const ErrorWithMonthSelect = ErrorTemplate.bind(null);
+export const ErrorWithMonthSelect = Template.bind(null);
 ErrorWithMonthSelect.args = {
   ...defaultArgs,
   error: 'Error Message Example',

@@ -17,6 +17,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={checkboxDocs} />,
     },
+    layout: 'form',
   },
 };
 
@@ -319,13 +320,7 @@ export const OnBackground = props => (
 );
 OnBackground.args = { ...defaultArgs };
 
-const ErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {Template(args)}
-  </div>
-);
-
-export const Error = ErrorTemplate.bind(null);
+export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
   description:

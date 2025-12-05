@@ -133,11 +133,26 @@ export const initialGlobals = {
 };
 
 export const decorators = [
-  Story => (
-    <div>
-      <Story />
-    </div>
-  ),
+  (Story, { parameters }) => 
+  {
+    const pageLayout = parameters.layout;
+    switch (pageLayout) {
+      case 'form':
+        return (
+          <div style={{ padding: window.innerWidth >= 1024 ? '32px 0' : 0 }}>
+            <div style={{ marginLeft: window.innerWidth >= 1024 ? '.9rem' : 0 }}>
+              <Story />
+            </div>
+          </div>
+        );
+      default: 
+        return (
+          <div>
+            <Story />
+          </div>
+        );
+    }
+  },
 ];
 
 // Sets up a mutation observer to ensure that the storybook docs-root container doesn't get hidden by modals

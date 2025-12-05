@@ -18,6 +18,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={selectDocs} />,
     },
+    layout: 'form',
   },
   argTypes: {
     ...propStructure(selectDocs),
@@ -190,13 +191,7 @@ LabelHeader.args = {
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is example hint text' };
 
-const ErrorTemplate = (args) => (
-  <div style={{ paddingLeft: window.innerWidth >= 1024 ? '1rem' : 0 }}>
-    {Template(args)}
-  </div>
-);
-
-export const ErrorMessage = ErrorTemplate.bind(null);
+export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 
 export const DynamicOptions = Template.bind(null);
