@@ -138,6 +138,8 @@ export const decorators = [
     const pageLayout = parameters.layout;
     switch (pageLayout) {
       case 'form':
+        // Storybook wrapper adds 32px padding to default stories, but not to any others.
+        // Adding .9rem left margin to allow for border-left to be seen on form element error stories
         return (
           <div style={{ padding: window.innerWidth >= 1024 ? '32px 0' : 0 }}>
             <div style={{ marginLeft: window.innerWidth >= 1024 ? '.9rem' : 0 }}>
