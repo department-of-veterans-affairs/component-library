@@ -268,11 +268,17 @@ const Pagination = args => {
 
   const numPages = Math.ceil(rows.length / MAX_ROWS);
 
+  // Dynamic pagination summary
+  const totalRows = rows.length;
+  const startRow = (currentPage - 1) * MAX_ROWS + 1;
+  const endRow = Math.min(currentPage * MAX_ROWS, totalRows);
+  const tableTitleSummary = `Showing ${startRow}-${endRow} of ${totalRows} payments`;
+
   return (
     <main>
       {/* Force re-render by wrapping in a div with changing key */}
       <div key={`table-wrapper-${currentPage}`}>
-        <va-table table-title={tableTitle} scrollable={scrollable} mono-font-cols='1' right-align-cols='1'>
+        <va-table table-title={tableTitle} table-title-summary={tableTitleSummary} scrollable={scrollable} mono-font-cols='1' right-align-cols='1'>
           <va-table-row>
             {columns.map((col, index) => (
               <span key={`table-header-${index}`}>{col}</span>
