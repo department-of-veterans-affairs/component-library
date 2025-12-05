@@ -595,6 +595,10 @@ export namespace Components {
          */
         "chatUrl"?: string;
         /**
+          * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
+         */
+        "mode"?: 'trigger' | 'modal';
+        /**
           * Phone extension for the crisis line. Defaults to 1.
          */
         "phoneExtension"?: string;
@@ -606,10 +610,6 @@ export namespace Components {
           * Text number for the crisis line. Defaults to 838255.
          */
         "textNumber"?: string;
-        /**
-          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
-         */
-        "triggerRef"?: string;
         /**
           * TTY extension for the crisis line. Defaults to 988.
          */
@@ -4586,6 +4586,10 @@ declare namespace LocalJSX {
          */
         "chatUrl"?: string;
         /**
+          * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
+         */
+        "mode"?: 'trigger' | 'modal';
+        /**
           * Phone extension for the crisis line. Defaults to 1.
          */
         "phoneExtension"?: string;
@@ -4597,10 +4601,6 @@ declare namespace LocalJSX {
           * Text number for the crisis line. Defaults to 838255.
          */
         "textNumber"?: string;
-        /**
-          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
-         */
-        "triggerRef"?: string;
         /**
           * TTY extension for the crisis line. Defaults to 988.
          */
