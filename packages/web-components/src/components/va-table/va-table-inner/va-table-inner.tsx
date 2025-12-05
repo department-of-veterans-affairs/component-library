@@ -417,7 +417,7 @@ export class VaTableInner {
         <table class={tableClasses}>
           {tableTitle && <caption>
             {tableTitle}
-            {tableTitleSummary && <span>&nbsp;{tableTitleSummary}</span>}
+            {tableTitleSummary && <span>{tableTitleSummary}</span>}
           </caption>}
           <thead>{this.makeRow(0)}</thead>
           <tbody id="va-table-body">{this.getBodyRows()}</tbody>
