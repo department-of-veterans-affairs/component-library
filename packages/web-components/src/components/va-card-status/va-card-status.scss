@@ -1,0 +1,36 @@
+@use 'usa-error-message/src/styles/usa-error-message';
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@import '../../../src/mixins/accessibility.css';
+@import '../../mixins/hint-text.css';
+
+:host {
+  .va-card-status__header {
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  .va-card-status__tag {
+    display: block;
+  }
+}
+
+:host([error]:not([error=''])) .va-card-status__wrapper {
+  border-left: 0.25rem solid var(--vads-color-secondary-dark);
+  padding-left: 1rem;
+  position: relative;
+
+  va-card {
+    border-width: 0.25rem;
+    border-color: var(--vads-color-secondary-dark);
+  }
+
+  .required {
+    font-weight: 600;
+  }
+}
+
+.required {
+  color: var(--vads-color-secondary-dark);
+  margin-left: 0.25rem;
+  font-size: initial;
+  font-weight: initial;
+}
