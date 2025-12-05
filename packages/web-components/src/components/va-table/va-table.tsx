@@ -35,6 +35,12 @@ export class VaTable {
   @Prop() tableTitle?: string;
 
   /**
+   * Additional context for the table. For example, pagination information.
+   * e.g. "Showing 1-10 of 13 charges"
+   */
+  @Prop() tableTitleSummary?: string;
+
+  /**
    * The type of table
    */
   @Prop() tableType?: 'borderless' = 'borderless';
@@ -188,6 +194,10 @@ export class VaTable {
 
     if (this.tableTitle) {
       vaTable.setAttribute('table-title', this.tableTitle);
+    }
+
+    if (this.tableTitleSummary) {
+      vaTable.setAttribute('table-title-summary', this.tableTitleSummary);
     }
 
     if (this.tableType) {

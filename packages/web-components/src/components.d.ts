@@ -1979,6 +1979,10 @@ export namespace Components {
          */
         "tableTitle"?: string;
         /**
+          * Additional context for the table. For example, pagination information. e.g. "Showing 1-10 of 13 charges"
+         */
+        "tableTitleSummary"?: string;
+        /**
           * The type of table
          */
         "tableType"?: 'borderless';
@@ -2026,6 +2030,10 @@ export namespace Components {
           * The title of the table
          */
         "tableTitle": string;
+        /**
+          * Additional context for the table. For example, pagination information. e.g. "Showing 1-10 of 13 charges"
+         */
+        "tableTitleSummary"?: string;
         /**
           * The type of table to be used
          */
@@ -6178,6 +6186,10 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
+          * Additional context for the table. For example, pagination information. e.g. "Showing 1-10 of 13 charges"
+         */
+        "tableTitleSummary"?: string;
+        /**
           * The type of table
          */
         "tableType"?: 'borderless';
@@ -6229,6 +6241,10 @@ declare namespace LocalJSX {
           * The title of the table
          */
         "tableTitle"?: string;
+        /**
+          * Additional context for the table. For example, pagination information. e.g. "Showing 1-10 of 13 charges"
+         */
+        "tableTitleSummary"?: string;
         /**
           * The type of table to be used
          */

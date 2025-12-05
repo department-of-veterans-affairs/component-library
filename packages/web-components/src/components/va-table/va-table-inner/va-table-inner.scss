@@ -76,6 +76,10 @@ caption {
   font-size: 1.25rem;
   font-family: var(--font-serif);
   margin-bottom: 0.75rem;
+  span {
+    display: block;
+    font-weight: normal;
+  }
 }
 
 @media screen and (max-width: $medium-screen) {
