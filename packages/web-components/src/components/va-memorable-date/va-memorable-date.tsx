@@ -9,12 +9,14 @@ import {
   Element,
   Fragment,
   Watch,
+  Method,
 } from '@stencil/core';
 
 import {
   getErrorParameters,
   months,
   validate,
+  validateForSubmit,
   zeroPadStart,
 } from '../../utils/date-utils';
 import { getHeaderLevel } from '../../utils/utils';
@@ -122,7 +124,7 @@ export class VaMemorableDate {
   @Prop() removeDateHint?: boolean = false;
 
   /**
-   * Set this flag to true if component will recieve external validation that might conflict 
+   * Set this flag to true if component will recieve external validation that might conflict
    * with internal validation due to race conditions,
    * i.e. if both internal and external validation will be set in response to same user input.
    */
@@ -154,26 +156,51 @@ export class VaMemorableDate {
   private currentMonth: string;
   private currentYear: string;
 
-  private dayTouched: boolean = false;
-  private monthTouched: boolean = false;
-  private yearTouched: boolean = false;
+  /**
+   * Normalizes the component's currently entered (string) date parts and supplies
+   * convenient numeric forms and state flags.
+   *
+   * - Converts each of currentYear, currentMonth, and currentDay from string to number
+   *   only if the string is non-empty and can be coerced to a valid Number (not NaN).
+   * - Invalid or empty inputs yield `undefined` for their numeric counterparts.
+   *
+   * @returns An object containing the original string date parts, their numeric
+   *          counterparts when valid, and helper booleans for interaction and parsing state.
+   */
+  private getDateValues() {
+    const toNumber = (value?: string) =>
+      value && !isNaN(Number(value)) ? Number(value) : undefined;
+
+    const { currentYear, currentMonth, currentDay } = this;
+    const yearNum = toNumber(currentYear);
+    const monthNum = toNumber(currentMonth);
+    const dayNum = toNumber(currentDay);
+    const componentTouched = Boolean(currentYear || currentMonth || currentDay);
+
+    return {
+      yearNum,
+      monthNum,
+      dayNum,
+      componentTouched,
+    };
+  }
 
   private handleDateBlur = (event: FocusEvent) => {
-    let undef;
-    const { currentYear, currentMonth, currentDay } = this;
-    // Fallback to undefined to preserve validation of empty strings
-    const yearNum = Number(currentYear || undef);
-    const monthNum = Number(currentMonth || undef);
-    const dayNum = Number(currentDay || undef);
+    const {
+      yearNum,
+      monthNum,
+      dayNum,
+      componentTouched,
+    } = this.getDateValues();
 
       validate({
         component: this,
         year: yearNum,
         month: monthNum,
         day: dayNum,
-        yearTouched: this.yearTouched,
-        monthTouched: this.monthTouched,
-        dayTouched: this.dayTouched,
+        yearTouched: componentTouched,
+        monthTouched: componentTouched,
+        dayTouched: componentTouched,
         monthSelect: this.monthSelect,
       });
 
@@ -187,11 +214,11 @@ export class VaMemorableDate {
 
     /* eslint-disable i18next/no-literal-string */
     this.value =
-      currentYear || currentMonth || currentDay
+      yearNum || monthNum || dayNum
         ? [
-            currentYear,
-            currentMonth ? zeroPadStart(monthNum) : '',
-            currentDay ? zeroPadStart(dayNum) : '',
+            yearNum,
+            monthNum ? zeroPadStart(monthNum) : '',
+            dayNum ? zeroPadStart(dayNum) : '',
           ].join('-')
         : '';
     /* eslint-enable i18next/no-literal-string */
@@ -247,16 +274,39 @@ export class VaMemorableDate {
   };
 
   private handleMonthBlur = () => {
-    this.monthTouched = true;
+    // No longer tracking individual blur events
   };
 
   private handleDayBlur = () => {
-    this.dayTouched = true;
+    // No longer tracking individual blur events
   };
 
   private handleYearBlur = () => {
-    this.yearTouched = true;
+    // No longer tracking individual blur events
   };
+
+  /**
+   * Public method to programmatically validate the component.
+   * This can be called by external form systems before running their own validation.
+   * Ignores touched state - only validates required fields and value ranges.
+   *
+   * @returns {Promise<boolean>} - Returns true if valid, false if there are errors
+   */
+  @Method()
+  async validateComponent(): Promise<boolean> {
+    const { yearNum, monthNum, dayNum } = this.getDateValues();
+
+    validateForSubmit({
+      component: this,
+      year: yearNum,
+      month: monthNum,
+      day: dayNum,
+      monthSelect: this.monthSelect,
+    });
+
+    // Return true if valid (no error), false if invalid (has error)
+    return !this.error;
+  }
 
   /**
    * Whether or not an analytics event will be fired.
@@ -340,7 +390,7 @@ export class VaMemorableDate {
       headerAriaDescribedby
     } = this;
 
-    // due to race conditions with external validation and internal validation, 
+    // due to race conditions with external validation and internal validation,
     // sometimes the error prop is not set to the most recent error, which is the error attribute in the DOM
     const _error = !this.externalValidation ? error : this.el?.getAttribute('error') || error;
 
@@ -420,7 +470,7 @@ export class VaMemorableDate {
           onVaSelect={this.handleMonthChange}
           onBlur={this.handleMonthBlur}
           class="usa-form-group--month-select"
-          reflectInputError={_error === 'month-range' ? true : false}
+          reflectInputError={this.invalidMonth}
           value={
             currentMonth ? String(parseInt(currentMonth, 10)) : currentMonth
           }
@@ -456,7 +506,7 @@ export class VaMemorableDate {
           onInput={this.handleMonthChange}
           onBlur={this.handleMonthBlur}
           class="usa-form-group--month-input memorable-date-input"
-          reflectInputError={_error === 'month-range' ? true : false}
+          reflectInputError={this.invalidMonth}
           inputmode="numeric"
           type="text"
           required={required}
@@ -549,7 +599,7 @@ export class VaMemorableDate {
                   onInput={this.handleDayChange}
                   onBlur={this.handleDayBlur}
                   class="usa-form-group--day-input memorable-date-input"
-                  reflectInputError={_error === 'day-range' ? true : false}
+                  reflectInputError={this.invalidDay}
                   inputmode="numeric"
                   type="text"
                   required={required}
@@ -574,7 +624,7 @@ export class VaMemorableDate {
                   onInput={this.handleYearChange}
                   onBlur={this.handleYearBlur}
                   class="usa-form-group--year-input memorable-date-input"
-                  reflectInputError={_error === 'year-range' ? true : false}
+                  reflectInputError={this.invalidYear}
                   inputmode="numeric"
                   type="text"
                   required={required}

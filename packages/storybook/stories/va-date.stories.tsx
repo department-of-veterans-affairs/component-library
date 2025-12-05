@@ -16,10 +16,9 @@ export default {
     },
   },
 };
-
 const defaultArgs = {
   'label':
-    'What’s the date or anticipated date of your release from active duty?',
+    "What's the date or anticipated date of your release from active duty?",
   'name': 'discharge-date',
   'required': false,
   'error': undefined,
@@ -27,6 +26,7 @@ const defaultArgs = {
   'month-year-only': undefined,
   'month-optional': false,
   'enable-analytics': false,
+  'testValidation': false,
 };
 
 const Template = ({
@@ -38,23 +38,45 @@ const Template = ({
   value,
   'enable-analytics': enableAnalytics,
   'month-optional': monthOptional,
+  testValidation,
 }) => {
+  const [dateVal, setDateVal] = useState(value || '');
+
+  const handleValidate = async () => {
+    const dateComponent = document.querySelector(`va-date[name="${name}"]`);
+    if (dateComponent) {
+      await dateComponent.validateComponent();
+    }
+  };
+
   return (
-    <VaDate
-      label={label}
-      name={name}
-      required={required}
-      error={error}
-      value={value}
-      monthYearOnly={monthYearOnly}
-      monthOptional={monthOptional}
-      onDateBlur={e => {
-        console.log(e, 'DATE BLUR FIRED');
-        console.log(e.target.value);
-      }}
-      onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
-      enableAnalytics={enableAnalytics}
-    />
+    <>
+      <VaDate
+        label={label}
+        name={name}
+        required={required}
+        error={error}
+        value={dateVal}
+        monthYearOnly={monthYearOnly}
+        monthOptional={monthOptional}
+        onDateBlur={e => {
+          console.log(e, 'DATE BLUR FIRED');
+          console.log(e.target.value);
+        }}
+        onDateChange={e => {
+          setDateVal(e.target.value);
+          console.log(e, 'DATE CHANGE FIRED');
+        }}
+        enableAnalytics={enableAnalytics}
+      />
+      {testValidation && (
+        <div className="vads-u-margin-top--2">
+          <button onClick={handleValidate} className="usa-button">
+            Validate
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -160,6 +182,9 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(dateDocs);
 
+export const Required = Template.bind(null);
+Required.args = { ...defaultArgs, required: true };
+
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
 
@@ -218,5 +243,17 @@ CustomValidation.parameters = {
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
+export const TestValidation = Template.bind(null);
+TestValidation.args = {
+  ...defaultArgs,
+  label: 'Date of discharge',
+  name: 'test-validation',
+  required: true,
+  testValidation: true,
+};
+TestValidation.parameters = {
   chromatic: { disableSnapshot: true },
 };

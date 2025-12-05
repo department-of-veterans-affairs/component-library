@@ -7,12 +7,14 @@ import {
   h,
   Element,
   Fragment,
+  Method,
 } from '@stencil/core';
 import { i18next } from '../..';
 
 import {
   months,
   validate,
+  validateForSubmit,
   getErrorParameters,
   zeroPadStart,
   daysForSelectedMonth,
@@ -109,10 +111,6 @@ export class VaDate {
   @Prop({ mutable: true }) invalidMonth?: boolean = false;
   @Prop({ mutable: true }) invalidYear?: boolean = false;
 
-  private dayTouched: boolean = false;
-  private monthTouched: boolean = false;
-  private yearTouched: boolean = false;
-
   /**
    * Whether or not an analytics event will be fired.
    */
@@ -146,19 +144,49 @@ export class VaDate {
     this.value = val ? val : null;
   }
 
+  /**
+   * Parses the component's date value and returns an object containing the date parts.
+   *
+   * Splits the `value` property (expected in 'YYYY-MM-DD' format) into year, month, and day components.
+   * Converts valid numeric strings to numbers, returning undefined for invalid or missing values.
+   *
+   * @returns An object containing the original string date parts, their numeric
+   *          counterparts when valid, and helper booleans for interaction and parsing state.
+   */
+  private getDateValues() {
+    const toNumber = (value?: string) =>
+      value && !isNaN(Number(value)) ? Number(value) : undefined;
+
+    const [year, month, day] = (this.value || '').split('-');
+    const yearNum = toNumber(year);
+    const monthNum = toNumber(month);
+    const dayNum = toNumber(day);
+    const componentTouched = Boolean(year || month || day);
+
+    return {
+      yearNum,
+      monthNum,
+      dayNum,
+      componentTouched,
+    };
+  }
+
   private handleDateBlur = (event: FocusEvent) => {
-    const [year, month, day] = (this.value || '')
-      .split('-')
-      .map(val => Number(val));
+    const {
+      yearNum,
+      monthNum,
+      dayNum,
+      componentTouched,
+    } = this.getDateValues();
 
     validate({
       component: this,
-      year,
-      month,
-      day,
-      yearTouched: this.yearTouched,
-      monthTouched: this.monthTouched,
-      dayTouched: this.dayTouched,
+      year: yearNum,
+      month: monthNum,
+      day: dayNum,
+      yearTouched: componentTouched,
+      monthTouched: componentTouched,
+      dayTouched: componentTouched,
       monthSelect: true,
       monthYearOnly: this.monthYearOnly,
       monthOptional: this.monthOptional,
@@ -168,7 +196,7 @@ export class VaDate {
       return;
     }
 
-    this.setValue(year, month, day);
+    this.setValue(yearNum, monthNum, dayNum);
     this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
@@ -176,9 +204,9 @@ export class VaDate {
         componentName: 'va-date',
         action: 'blur',
         details: {
-          year,
-          month,
-          day,
+          year: yearNum,
+          month: monthNum,
+          day: dayNum,
           'month-year-only': this.monthYearOnly,
         },
       };
@@ -211,16 +239,39 @@ export class VaDate {
   };
 
   private handleMonthBlur = () => {
-    this.monthTouched = true;
+    // No longer tracking individual blur events
   };
 
   private handleDayBlur = () => {
-    this.dayTouched = true;
+    // No longer tracking individual blur events
   };
 
   private handleYearBlur = () => {
-    this.yearTouched = true;
+    // No longer tracking individual blur events
   };
+  /**
+   * Public method to programmatically validate the component.
+   * This can be called by external form systems before running their own validation.
+   * Ignores touched state - only validates required fields and value ranges.
+   *
+   * @returns {Promise<boolean>} - Returns true if valid, false if there are errors
+   */
+  @Method()
+  async validateComponent(): Promise<boolean> {
+    const { yearNum, monthNum, dayNum } = this.getDateValues();
+
+    validateForSubmit({
+      component: this,
+      year: yearNum,
+      month: monthNum,
+      day: dayNum,
+      monthSelect: true,
+      monthYearOnly: this.monthYearOnly,
+      monthOptional: this.monthOptional,
+    });
+
+    return !this.error;
+  }
 
   render() {
     const {
@@ -259,7 +310,7 @@ export class VaDate {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">Error</span>{' '}
+                <span class="usa-sr-only">Error</span>{' '}
                 {i18next.t(error, errorParameters(error))}
               </Fragment>
             )}
@@ -277,7 +328,7 @@ export class VaDate {
               class="select-month"
               required={required}
               hideRequiredText={true}
-              error={this.monthTouched && this.invalidMonth ? error : null}
+              error={this.invalidMonth ? error : null}
               showError={false}
             >
               {months &&
@@ -300,7 +351,7 @@ export class VaDate {
                 class="select-day"
                 required={required}
                 hideRequiredText={true}
-                error={this.dayTouched && this.invalidDay ? this.error : null}
+                error={this.invalidDay ? this.error : null}
                 showError={false}
               >
                 {arrayDaysForSelectedMonth.map(day => (
@@ -322,7 +373,7 @@ export class VaDate {
               onBlur={this.handleYearBlur}
               required={required}
               hideRequiredText={true}
-              error={this.yearTouched && this.invalidYear ? error : null}
+              error={this.invalidYear ? error : null}
               show-input-error="false"
               class="input-year"
               inputmode="numeric"
