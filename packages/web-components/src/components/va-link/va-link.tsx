@@ -261,6 +261,8 @@ export class VaLink {
             download={filename}
             aria-label={label}
             onClick={handleClick}
+            rel={external ? "noreferrer" : null}
+            target={external ? "_blank" : null}
           >
             <va-icon class="link-icon--left" icon="file_download"></va-icon>
             {text}{' '}
