@@ -26,7 +26,7 @@ const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
  */
 @Component({
   tag: 'va-banner',
-  styleUrl: 'va-banner.css',
+  styleUrl: 'va-banner.scss',
   shadow: true,
 })
 export class VaBanner {
