@@ -64,3 +64,15 @@ button {
 .docblock-argstable a {
   font-size: 14px;
 }
+
+/**
+* Layout for form element stories to allow for error border-left to be seen
+* Storybook wrapper adds 32px padding to default stories, but not to any others.
+*/ 
+.sb-layout--form {
+  @media screen and (min-width: 1024px) {
+    margin-left: .9rem;
+    padding: 32px 0;
+  }
+}
+
