@@ -16,7 +16,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={comboBoxDocs} />,
     },
-    layout: 'form',
+    layoutName: 'form',
   },
   argTypes: {
     ...propStructure(comboBoxDocs),

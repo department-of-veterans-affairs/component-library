@@ -18,7 +18,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={textareaDocs} />,
     },
-    layout: 'form',
+    layoutName: 'form',
   },
   argTypes: {
     ...propStructure(textareaDocs),

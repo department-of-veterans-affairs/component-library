@@ -135,7 +135,7 @@ export const initialGlobals = {
 export const decorators = [
   (Story, { parameters }) => 
   {
-    const pageLayout = parameters.layout;
+    const pageLayout = parameters.layoutName;
     switch (pageLayout) {
       case 'form':
         return (

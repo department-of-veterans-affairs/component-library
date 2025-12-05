@@ -68,12 +68,10 @@ button {
 
 /**
 * Layout for form element stories to allow for error border-left to be seen
-* Storybook wrapper adds 32px padding to default stories, but not to any others.
 */ 
 .sb-layout--form {
   @include media($small-desktop-screen) {
     margin-left: .9rem;
-    padding: 32px 0;
   }
 }
 

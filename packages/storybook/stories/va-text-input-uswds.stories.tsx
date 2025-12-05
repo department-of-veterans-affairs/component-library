@@ -16,7 +16,7 @@ export default {
   id: 'uswds/va-text-input',
   parameters: {
     componentSubtitle: 'va-text-input web component',
-    layout: 'form',
+    layoutName: 'form',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={textInputDocs} />,
     },

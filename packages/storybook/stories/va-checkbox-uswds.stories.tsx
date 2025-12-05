@@ -17,7 +17,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={checkboxDocs} />,
     },
-    layout: 'form',
+    layoutName: 'form',
   },
 };
 

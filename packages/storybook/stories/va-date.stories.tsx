@@ -14,7 +14,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={dateDocs} />,
     },
-    layout: 'form',
+    layoutName: 'form',
   },
 };
 
