@@ -201,6 +201,8 @@ AcceptsAnyKindOfImage.args = {
 AcceptsAnyKindOfImage.parameters = {
   chromatic: { disableSnapshot: true },
 };
+
+
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = {
   ...defaultArgs,
