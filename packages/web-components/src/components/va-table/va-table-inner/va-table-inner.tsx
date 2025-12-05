@@ -416,8 +416,8 @@ export class VaTableInner {
       <div tabIndex={scrollable ? 0 : null} class={containerClasses}>
         <table class={tableClasses}>
           {tableTitle && <caption>
-            {tableTitle}&nbsp;
-            <span>{tableTitleSummary}</span>
+            {tableTitle}
+            {tableTitleSummary && <span>&nbsp;{tableTitleSummary}</span>}
           </caption>}
           <thead>{this.makeRow(0)}</thead>
           <tbody id="va-table-body">{this.getBodyRows()}</tbody>
