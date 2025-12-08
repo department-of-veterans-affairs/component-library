@@ -1327,6 +1327,12 @@ export namespace Components {
           * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
          */
         "benefitType"?: string;
+
+        /*
+         * If `true`, the text for the respondent burden value will be rendered as "hours" instead of "minutes".
+         */
+        "displayResBurdenInHours"?: boolean;
+
         /**
           * The form expiration date.
          */
@@ -5422,6 +5428,10 @@ declare namespace LocalJSX {
           * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
          */
         "benefitType"?: string;
+        /*
+         * If `true`, the text for the respondent burden value will be rendered as "hours" instead of "minutes".
+         */
+        "displayResBurdenInHours"?: boolean;
         /**
           * The form expiration date.
          */

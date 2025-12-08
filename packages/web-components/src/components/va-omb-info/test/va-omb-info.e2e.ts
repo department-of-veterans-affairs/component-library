@@ -57,6 +57,21 @@ describe('va-omb-info', () => {
     expect(resBurden).toBeTruthy();
   });
 
+  it('display respondent burden in hours when display-res-burden-in-hours is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-omb-info exp-date="12/31/2077" res-burden="14" display-res-burden-in-hours></va-omb-info>',
+    );
+    const divElements = await page.findAll(`va-omb-info >>> div`);
+    let resBurden;
+    divElements.map(div => {
+      if (div.innerText.includes('Respondent burden: 14 hours'))
+        resBurden = div;
+    });
+
+    expect(resBurden).toBeTruthy();
+  });
+
   it('displays omb number when given a value for omb-number', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -92,12 +107,12 @@ describe('va-omb-info', () => {
       const ombInfo = document.querySelector('va-omb-info');
       const vaButton = ombInfo?.shadowRoot?.querySelector('va-button');
       const internalButton = vaButton?.shadowRoot?.querySelector('button');
-      
+
       // Focus should be on the host element with internal button focused in shadow DOM
-      return document.activeElement === ombInfo && 
+      return document.activeElement === ombInfo &&
              vaButton?.shadowRoot?.activeElement === internalButton;
     });
-    
+
     expect(isFocusCorrect).toBe(true);
   });
 

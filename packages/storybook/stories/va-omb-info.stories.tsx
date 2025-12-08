@@ -30,6 +30,7 @@ const Template = ({
   'omb-number': ombNumber,
   'res-burden': resBurden,
   'form-id': formId,
+  'display-res-burden-in-hours': displayResBurdenInHours, 
 }) => {
   return (
     // @ts-ignore ignoring the hyphenated prop names
@@ -39,6 +40,7 @@ const Template = ({
       omb-number={ombNumber}
       res-burden={resBurden}
       form-id={formId ? formId : undefined}
+      display-res-burden-in-hours={displayResBurdenInHours}
     />
   );
 };
@@ -61,6 +63,13 @@ export const WithoutResponseBurden = Template.bind(null);
 WithoutResponseBurden.args = {
   ...defaultArgs,
   'res-burden': undefined,
+};
+
+export const WithResponseBurdenInHours = Template.bind(null);
+WithResponseBurdenInHours.args = {
+  ...defaultArgs,
+  'res-burden': 14,
+  'display-res-burden-in-hours': true,
 };
 
 

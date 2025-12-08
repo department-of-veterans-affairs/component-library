@@ -54,6 +54,11 @@ export class VaOmbInfo {
    */
   @Prop() resBurden?: number;
 
+  /*
+   * If `true`, the text for the respondent burden value will be rendered as "hours" instead of "minutes".
+   */
+  @Prop() displayResBurdenInHours?: boolean = false;
+
   /**
    * If `true`, clicking outside the modal will close it.
    */
@@ -160,7 +165,8 @@ export class VaOmbInfo {
       resBurden,
       toggleModalVisible,
       visible,
-      formId
+      formId,
+      displayResBurdenInHours
     } = this;
 
     /* eslint-disable i18next/no-literal-string */
@@ -168,7 +174,7 @@ export class VaOmbInfo {
       <Host>
         {resBurden && (
           <div>
-            Respondent burden: <strong>{resBurden} minutes</strong>
+            Respondent burden: <strong>{resBurden} {displayResBurdenInHours ? 'hours' : 'minutes'}</strong>
           </div>
         )}
         {ombNumber && (
