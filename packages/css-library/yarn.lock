@@ -9,15 +9,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:."
   dependencies:
-    "@divriots/style-dictionary-to-figma": "npm:^0.4.0"
-    "@uswds/uswds": "npm:^3.9.0"
-    rimraf: "npm:^5.0.5"
-    sass: "npm:^1.64.1"
+    "@divriots/style-dictionary-to-figma": "npm:0.4.0"
+    "@uswds/uswds": "npm:3.9.0"
+    rimraf: "npm:5.0.5"
+    sass: "npm:1.64.1"
     style-dictionary: "npm:3.8.0"
   languageName: unknown
   linkType: soft
 
-"@divriots/style-dictionary-to-figma@npm:^0.4.0":
+"@divriots/style-dictionary-to-figma@npm:0.4.0":
   version: 0.4.0
   resolution: "@divriots/style-dictionary-to-figma@npm:0.4.0"
   checksum: 10/c3898cbd184854697b80e6ac8e4165dc30f2712aebd14879e2b6013140ba28d7f2bcbac6754c4e4bddcd84855c1f68b5fdfb0d2dd375a67b82a38355eda27027
@@ -67,7 +67,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:^3.9.0":
+"@uswds/uswds@npm:3.9.0":
   version: 3.9.0
   resolution: "@uswds/uswds@npm:3.9.0"
   dependencies:
@@ -1126,14 +1126,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^5.0.5":
-  version: 5.0.7
-  resolution: "rimraf@npm:5.0.7"
+"rimraf@npm:5.0.5":
+  version: 5.0.5
+  resolution: "rimraf@npm:5.0.5"
   dependencies:
     glob: "npm:^10.3.7"
   bin:
     rimraf: dist/esm/bin.mjs
-  checksum: 10/1e3cecfe59ee2383dfd9ba5373caeed48ed941318a0360119419b7dffc63115661408b9427f67e1f66b5bbb8855a3953db09e55a7362b3df904a44453dfa22fb
+  checksum: 10/a612c7184f96258b7d1328c486b12ca7b60aa30e04229a08bbfa7e964486deb1e9a1b52d917809311bdc39a808a4055c0f950c0280fba194ba0a09e6f0d404f6
   languageName: node
   linkType: hard
 
@@ -1144,16 +1144,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.64.1":
-  version: 1.77.4
-  resolution: "sass@npm:1.77.4"
+"sass@npm:1.64.1":
+  version: 1.64.1
+  resolution: "sass@npm:1.64.1"
   dependencies:
     chokidar: "npm:>=3.0.0 <4.0.0"
     immutable: "npm:^4.0.0"
     source-map-js: "npm:>=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 10/04e31ce4961a7b90238c274a268945cd67177d992273073e6fa5df09fe7a03ff378f1608fe646ec512c8691038ac9487e06ef5abb2185f56eb36204952538eea
+  checksum: 10/77da9edc7b6db33a8ff408ffa6ff02884465eae64ef6b2ba5caf29325ea6bdc88eb213ff0762bec79487c8b081d532199430f9db5808c0dee6814e0a4189d375
   languageName: node
   linkType: hard
 
