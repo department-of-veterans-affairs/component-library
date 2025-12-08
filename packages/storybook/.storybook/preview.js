@@ -23,6 +23,7 @@ import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-n
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/shame.css';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
+import { allModes } from "./modes";
 import {
   applyPolyfills,
   defineCustomElements,
@@ -85,7 +86,7 @@ const viewports = {
     name: 'Small Desktop',
     styles: {
       height: '1400px',
-      width: '1008px',
+      width: '1024px',
     },
     type: 'desktop',
   },
@@ -93,7 +94,7 @@ const viewports = {
     name: 'Large',
     styles: {
       height: '1600px',
-      width: '1601px',
+      width: '1201px',
     },
     type: 'desktop',
   },
@@ -124,7 +125,7 @@ export const parameters = {
 
   docs: {
     codePanel: true
-  }
+  },
 };
 
 export const initialGlobals = {
@@ -132,11 +133,24 @@ export const initialGlobals = {
 };
 
 export const decorators = [
-  Story => (
-    <div>
-      <Story />
-    </div>
-  ),
+  (Story, { parameters }) => 
+  {
+    const pageLayout = parameters.storyType;
+    switch (pageLayout) {
+      case 'form':
+        return (
+          <div className='sb-type--form'>
+            <Story />
+          </div>
+        );
+      default: 
+        return (
+          <div>
+            <Story />
+          </div>
+        );
+    }
+  },
 ];
 
 // Sets up a mutation observer to ensure that the storybook docs-root container doesn't get hidden by modals

@@ -4,6 +4,8 @@ import {
   componentStructure,
   propStructure,
   StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
   applyFocus,
 } from './wc-helpers';
 
@@ -22,10 +24,15 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={checkBoxGroupDocs} />,
     },
+    storyType: 'form',
   },
+  argTypes: {
+    ...propStructure(checkBoxGroupDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#checkbox-error-message','.input-wrap']),
+  }
 };
 
-const vaCheckboxGroup = args => {
+const Template = args => {
   const {
     'enable-analytics': enableAnalytics,
     error,
@@ -34,27 +41,39 @@ const vaCheckboxGroup = args => {
     hint,
     'label-header-level': labelHeaderLevel,
     'message-aria-describedby': messageAriaDescribedby,
-    ...rest
+    showToggleFocusButton,
+    focusEl
   } = args;
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-checkbox-group
-      enable-analytics={enableAnalytics}
-      error={error}
-      label={label}
-      required={required}
-      hint={hint}
-      label-header-level={labelHeaderLevel}
-      message-aria-describedby={messageAriaDescribedby}
-    >
-      <va-checkbox label="Sojourner Truth" name="example" value="1" />
-      <va-checkbox label="Frederick Douglass" name="example" value="2" />
-      <va-checkbox label="Booker T. Washington" name="example" value="3" />
-      <va-checkbox label="George Washington Carver" name="example" value="4" />
-    </va-checkbox-group>
+    <>
+      <va-checkbox-group
+        enable-analytics={enableAnalytics}
+        error={errorMsg}
+        label={label}
+        required={required}
+        hint={hint}
+        label-header-level={labelHeaderLevel}
+        message-aria-describedby={messageAriaDescribedby}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      >
+        <va-checkbox label="Sojourner Truth" name="example" value="1" />
+        <va-checkbox label="Frederick Douglass" name="example" value="2" />
+        <va-checkbox label="Booker T. Washington" name="example" value="3" />
+        <va-checkbox label="George Washington Carver" name="example" value="4" />
+      </va-checkbox-group>
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
   );
 };
-
-const Template = args => vaCheckboxGroup(args);
 
 const USWDSTiled = ({
   'enable-analytics': enableAnalytics,
@@ -73,8 +92,8 @@ const USWDSTiled = ({
         hint={hint}
       >
         <va-checkbox
-          id="soujourner-truth"
-          label="Soujourner Truth"
+          id="sojourner-truth"
+          label="Sojourner Truth"
           checkbox-description="This is optional text that can be used to describe the label in more detail."
           name="group1"
           value="1"
@@ -106,7 +125,7 @@ const USWDSTiled = ({
   );
 };
 
-const I18nTemplate = args => {
+const I18nTemplate  = args => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -130,7 +149,7 @@ const I18nTemplate = args => {
         style={{ fontSize: '16px' }}
         text="Tagalog"
       />
-      <div style={{ marginTop: '20px' }}>{vaCheckboxGroup(args)}</div>
+      <div style={{ marginTop: '20px' }}><Template {...args} /></div>
     </div>
   );
 };
@@ -147,6 +166,8 @@ const defaultArgs = {
   'form-heading': null,
   'form-description': null,
   'message-aria-describedby': null,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 export const Default = Template.bind(null);
@@ -224,8 +245,8 @@ const FormsPatternMultipleTemplate = ({
         form-description="This is the additional form-description prop"
       >
         <va-checkbox
-          id="soujourner-truth"
-          label="Soujourner Truth"
+          id="sojourner-truth"
+          label="Sojourner Truth"
           name="multiple"
           value="1"
         />
@@ -365,6 +386,9 @@ TileWithHint.args = {
   label: 'Select any historical figure',
   hint: 'This is example hint text',
 };
+TileWithHint.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const TileWithError = USWDSTiled.bind(null);
 TileWithError.args = {
@@ -372,6 +396,9 @@ TileWithError.args = {
   tile: true,
   label: 'Select any historical figure',
   error: 'There has been a problem',
+};
+TileWithError.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const TileWithHintAndError = USWDSTiled.bind(null);
@@ -388,6 +415,10 @@ withDescriptionMessage.args = {
   ...defaultArgs,
   'message-aria-describedby': 'some additional info',
 };
+withDescriptionMessage.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {

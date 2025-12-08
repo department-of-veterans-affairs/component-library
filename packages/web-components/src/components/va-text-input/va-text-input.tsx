@@ -15,9 +15,12 @@ import classnames from 'classnames';
 import { i18next } from '../..';
 import {
   consoleDevError,
+  debounce,
   getCharacterMessage,
   getHeaderLevel,
   isMessageSet,
+  getMaxLength,
+  updateScreenReaderCount,
 } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -45,11 +48,13 @@ if (Build.isTesting) {
 export class VaTextInput {
   @Element() el: HTMLElement;
 
+  charCountElement: HTMLSpanElement;
+
   /**
    * Input types we will allow to be specified with the "type" prop.
    */
   /* eslint-disable-next-line i18next/no-literal-string */
-  allowedInputTypes = ['email', 'number', 'search', 'tel', 'text', 'url'];
+  allowedInputTypes = ['email', 'number', 'password', 'search', 'tel', 'text', 'url'];
 
   /**
    * The label for the text input.
@@ -84,6 +89,11 @@ export class VaTextInput {
   @Prop() required?: boolean = false;
 
   /**
+   * Whether or not to show the (*Required) text.
+   */
+  @Prop() hideRequiredText?: boolean = false;
+
+  /**
    * The inputmode attribute.
    */
   @Prop() inputmode?:
@@ -104,7 +114,7 @@ export class VaTextInput {
   /**
    * The type attribute.
    */
-  @Prop() type?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url' =
+  @Prop() type?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url' =
     'text';
 
   /**
@@ -236,6 +246,38 @@ export class VaTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * The event emitted when the input value changes
+   */
+  @Event() vaInput: EventEmitter;
+
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
+  componentDidRender() {
+    // If the charCountElement is empty, set the initial text
+    if (this.charCountElement && !this.charCountElement.innerText) {
+      this.charCountElement.innerText = getCharacterMessage(
+        this.value,
+        getMaxLength(this.maxlength),
+      );
+
+      // Add aria-live after initial render to prevent value being read on render
+      // thanks to it being programmatically set in this lifecycle method.
+      setTimeout(() => {
+        /* eslint-disable-next-line i18next/no-literal-string */
+        this.charCountElement.setAttribute('aria-live', 'polite');
+      }, 0);
+    }
+  }
+
   componentWillLoad() {
     this.updatePaddingLeft();
     this.updatePaddingRight();
@@ -281,23 +323,17 @@ export class VaTextInput {
     return this.type;
   }
 
-  /**
-   * This ensures that the `maxlength` property will be positive
-   * or it won't be used at all
-   */
-  private getMaxlength() {
-    if (this.maxlength <= 0) {
-      consoleDevError('The maxlength prop must be positive!');
-      return undefined;
-    }
-
-    return this.maxlength;
-  }
+  private debouncedUpdateScreenReaderCount = debounce(updateScreenReaderCount, 1000);
 
   private handleInput = (e: InputEvent) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-  };
+    this.debouncedUpdateScreenReaderCount(this.charCountElement, this.value, getMaxLength(this.maxlength));
+
+    this.vaInput.emit({
+      value: this.value,
+    });
+  }
 
   private handleBlur = (e: Event) => {
     if (this.enableAnalytics) {
@@ -312,9 +348,11 @@ export class VaTextInput {
     }
 
     if (
-      this.inputmode === 'decimal' ||
-      this.inputmode === 'numeric' ||
-      this.currency
+      (
+        this.inputmode === 'decimal' ||
+        this.inputmode === 'numeric' ||
+        this.currency
+      ) && this.value
     ) {
       let defaultError = i18next.t('number-error');
       const target = e.target as HTMLInputElement;
@@ -359,16 +397,6 @@ export class VaTextInput {
     return this.step ? this.step : undefined;
   }
 
-  connectedCallback() {
-    i18next.on('languageChanged', () => {
-      forceUpdate(this.el);
-    });
-  }
-
-  disconnectedCallback() {
-    i18next.off('languageChanged');
-  }
-
   render() {
     const {
       label,
@@ -377,6 +405,7 @@ export class VaTextInput {
       showInputError,
       invalid,
       required,
+      hideRequiredText,
       value,
       name,
       autocomplete,
@@ -400,7 +429,7 @@ export class VaTextInput {
       errorHasPii = false,
     } = this;
     const type = this.getInputType();
-    const maxlength = this.getMaxlength();
+    const maxlength = getMaxLength(this.maxlength);
     const inputmode = this.getInputmode();
     const step = this.getStep();
 
@@ -494,7 +523,7 @@ export class VaTextInput {
               part="label"
             >
               {label}
-              {required && (
+              {required && !hideRequiredText && (
                 <span class="usa-label--required">
                   {' '}
                   {i18next.t('required')}
@@ -571,13 +600,24 @@ export class VaTextInput {
             </span>
           )}
           {charcount && maxlength && (
+            <Fragment>
+            <span aria-hidden="true" class={messageClass}>
+              {getCharacterMessage(this.value, getMaxLength(this.maxlength))}
+            </span>
             <span
               id="charcount-message"
-              class={messageClass}
-              aria-live="polite"
+              class='usa-sr-only'
+              ref={(el) => (this.charCountElement = el as HTMLSpanElement)}
             >
-              {getCharacterMessage(value, maxlength)}
+              {/*
+                Element inner text is empty because it's initially set in componentDidRender
+                and programmatically updated `getCharacterMessage` on input. This
+                is to avoid obtrusive updates for screen readers. Note that the aria-live
+                attribute is also added programmatically after initial render. This is
+                to prevent the screen reader from reading the value set on render.
+              */}
             </span>
+            </Fragment>
           )}
         </div>
       </Host>

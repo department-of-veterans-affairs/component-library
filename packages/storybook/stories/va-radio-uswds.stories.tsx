@@ -3,7 +3,11 @@ import {
   VaRadio,
   VaRadioOption,
 } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { applyFocus } from './wc-helpers';
+import {
+  applyFocus,
+  useErrorToggle,
+  errorToggleArgTypes,
+} from './wc-helpers';
 
 import {
   getWebComponentDocs,
@@ -27,6 +31,11 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={radioDocs} />,
     },
+    storyType: 'form',
+  },
+  argTypes: {
+      ...propStructure(radioDocs),
+      ...errorToggleArgTypes(['#error-demo-wrapper','#radio-error-message','.input-wrap']),
   },
 };
 
@@ -40,24 +49,38 @@ const vaRadioConst = args => {
     required,
     'label-header-level': labelHeaderLevel,
     'header-aria-describedby': headerAriaDescribedby,
-    ...rest
+    showToggleFocusButton,
+    focusEl
   } = args;
 
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-radio
-      enable-analytics={enableAnalytics}
-      error={error}
-      label={label}
-      required={required}
-      hint={hint}
-      label-header-level={labelHeaderLevel}
-      header-aria-describedby={headerAriaDescribedby}
-    >
-      <va-radio-option label="Sojourner Truth" name={name} value="1" />
-      <va-radio-option label="Frederick Douglass" name={name} value="2" />
-      <va-radio-option label="Booker T. Washington" name={name} value="3" />
-      <va-radio-option label="George Washington Carver" name={name} value="4" />
-    </va-radio>
+    <>
+      <va-radio
+        enable-analytics={enableAnalytics}
+        error={errorMsg}
+        label={label}
+        required={required}
+        hint={hint}
+        label-header-level={labelHeaderLevel}
+        header-aria-describedby={headerAriaDescribedby}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      >
+        <va-radio-option label="Sojourner Truth" name={name} value="1" />
+        <va-radio-option label="Frederick Douglass" name={name} value="2" />
+        <va-radio-option label="Booker T. Washington" name={name} value="3" />
+        <va-radio-option label="George Washington Carver" name={name} value="4" />
+      </va-radio>
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
+
   );
 };
 
@@ -203,15 +226,21 @@ const USWDSTiledError = ({
   label,
   required,
   hint,
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
     <>
       <va-radio
         enable-analytics={enableAnalytics}
-        error="This is an error"
+        error={errorMsg}
         label={label}
         required={required}
         hint={hint}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         <va-radio-option
           id="sojourner-truth2"
@@ -236,6 +265,13 @@ const USWDSTiledError = ({
           tile
         />
       </va-radio>
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
     </>
   );
 };
@@ -383,6 +419,7 @@ const FormsPatternSingleTemplate = ({ required, error, label, name }) => {
   );
 };
 
+
 const defaultArgs = {
   'enable-analytics': false,
   'label': 'Select one historical figure',
@@ -395,6 +432,8 @@ const defaultArgs = {
   'form-heading-level': null,
   'form-heading': null,
   'form-description': null,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 export const Default = Template.bind(null);
@@ -469,6 +508,9 @@ export const ReactWithCustomEvent = ReactBindingExample.bind(null);
 ReactWithCustomEvent.args = {
   ...defaultArgs,
 };
+ReactWithCustomEvent.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const Error = USWDSTiledError.bind(null);
 Error.args = {
@@ -481,6 +523,11 @@ IDUsage.args = {
   ...defaultArgs,
   required: true,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+IDUsage.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const withDescriptionMessage = withDescriptionMessageTemplate.bind(null);
 withDescriptionMessage.args = {
@@ -492,6 +539,11 @@ Internationalization.args = {
   ...defaultArgs,
   name: 'i18n-example',
   required: true,
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);

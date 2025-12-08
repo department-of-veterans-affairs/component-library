@@ -2,12 +2,14 @@
   "font": {
     "family": {
       "sans": { "value": "'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
-      "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" }
+      "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" },
+      "mono": { "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace" }
     },
     "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" },
     "source": {
       "sans": { "value": "'Source Sans Pro Web', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"}
     },
+    "mono": { "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace" },
     "weight": {
       "normal": { "value": "400"},
       "bold": { "value": "700"}
@@ -21,7 +23,7 @@
       "root": { "value": "1rem" },
       "md": { "value": "1.063rem" },
       "lg": { "value": "1.25rem" },
-      "xl": { "value": "1.875rem" },
+      "xl": { "value": "2rem" },
       "2xl": { "value": "2.5rem" },
       "h1": { "value": "{font.size.2xl}" },
       "h2": { "value": "{font.size.xl}" },
@@ -46,8 +48,11 @@
       "-6": { "value": "1.75"},
       "body-lead": { "value": "1.75" },
       "default": { "value": "1.5" },
-      "heading": { "value": "1.2" }
+      "heading": { "value": "1.2" },
+      "serif": { "value": "1.9" },
+      "mono": { "value": "1.7" }
     },
+    
     "size": {
       "source-sans-normalized": { "value": "1.06rem" },
       "root": { "value": "1rem" },
@@ -59,12 +64,12 @@
       },
       "eyebrow": { "value": "17px" },
       "heading": {
-        "level-1": { "value": "40px" },
-        "level-2": { "value": "32px" },
-        "level-3": { "value": "20px" },
-        "level-4": { "value": "17px" },
-        "level-5": { "value": "15px" },
-        "level-6": { "value": "15px" }
+        "level-1": { "value": "2.5rem" },
+        "level-2": { "value": "2rem" },
+        "level-3": { "value": "1.25rem" },
+        "level-4": { "value": "1.063rem" },
+        "level-5": { "value": "0.938rem" },
+        "level-6": { "value": "0.938rem" }
       }
     }
   }

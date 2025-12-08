@@ -4,17 +4,17 @@
     font-size: 1.06rem;
 }
 
-:host([error]:not([error=''])) {
+:host([error]:not([error=''])), :host(.va-form-group--error) {
     border-left: 0.25rem solid $vads-color-secondary-dark;
     padding-left: 1rem;
     position: relative;
 }
 
-:host([error]:not([error=''])[use-forms-pattern='multiple']) {
+:host([error]:not([error=''])[use-forms-pattern='multiple']), :host(.va-form-group--error[use-forms-pattern='multiple']) {
     border-left: none;
 }
 
-:host([error]:not([error=''])[use-forms-pattern='multiple']) {
+:host([error]:not([error=''])[use-forms-pattern='multiple']), :host(.va-form-group--error[use-forms-pattern='multiple']) {
     .input-wrap {
         border-left: 0.25rem solid $vads-color-secondary-dark;
         padding-left: 1rem;
@@ -22,19 +22,19 @@
     }
 }
 
-@media screen and (min-width: 1008px) {
-    :host([error]:not([error=''])) {
+@media screen and (min-width: $desktop) {
+    :host([error]:not([error=''])), :host(.va-form-group--error) {
         margin-left: -0.9rem;
     }
-    :host([error]:not([error=''])[use-forms-pattern='multiple']) {
+    :host([error]:not([error=''])[use-forms-pattern='multiple']), :host(.va-form-group--error[use-forms-pattern='multiple']) {
         .input-wrap {
             margin-left: -0.9rem;
         }
     }
 }
 
-@media screen and (max-width: 1008px) {
-    :host([error]:not([error=''])[use-forms-pattern='multiple']) {
+@media screen and (max-width: ($desktop - 1px)) {
+    :host([error]:not([error=''])[use-forms-pattern='multiple']), :host(.va-form-group--error[use-forms-pattern='multiple']) {
         padding-left: 0;
     }
 }

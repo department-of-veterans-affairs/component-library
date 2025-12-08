@@ -110,7 +110,9 @@ export class VaButtonSegmented {
         componentName: 'va-button-segmented',
         action: 'click',
         details: {
-          selected: this.selected,
+          label: buttonItem.label,
+          index: this.buttons.indexOf(buttonItem),
+          totalButtonCount: this.buttons.length,
         },
       };
 
@@ -139,7 +141,7 @@ export class VaButtonSegmented {
 
     return (
       <Host>
-        <ul class={containerClass} aria-label={this.label}>
+        <ul class={containerClass} aria-label={this.label} data-count={this.buttons.length}>
           {this.buttons.map((buttonItem: ButtonItem, index: number) => (
             <li class="usa-button-group__item">
               <button

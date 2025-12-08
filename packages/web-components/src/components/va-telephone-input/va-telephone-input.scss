@@ -9,9 +9,11 @@
 @use 'usa-form-group/src/styles/usa-form-group';
 @use 'usa-error-message/src/styles/usa-error-message';
 
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
+@import '../../mixins/form-field-error.scss';
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/focusable.css';
-@import '../../mixins/form-field-error.css';
 
 @mixin small-screen {
   va-combo-box, va-text-input {
@@ -19,7 +21,6 @@
     max-width: 100% !important;
     margin-top: 16px;
     flex: 0;
-    width: 288px;
   }
 
   .va-input-telephone-wrapper {
@@ -66,12 +67,7 @@ va-text-input {
   max-width: var(--mobile-lg);
 }
 
-// use container query if possible
-@container component-wrapper (max-width: 360px) {
-  @include small-screen;
-}
-
 // fall back if container query not supported
-@media (max-width: 360px) {
+@media (max-width: $mobile-lg) {
   @include small-screen;
 }

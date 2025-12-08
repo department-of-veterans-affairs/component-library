@@ -13,6 +13,7 @@ export default {
     },
   },
   parameters: {
+    chromatic: { disableSnapshot: true },
     componentSubtitle: 'va-notification web component',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={notificationDocs} />,

@@ -192,6 +192,11 @@ export function validate({
   monthSelect,
   monthOptional,
 }: ValidateConfig): void {
+
+  // Don't validate if all values are empty
+  if ((!year) && !month && !day) {
+    return;
+  }
   const maxDays = daysForSelectedMonth(year, month);
 
   // Reset previous invalid states
@@ -274,6 +279,25 @@ export function validate({
   if (year && (year < minYear || year > maxYear) && yearTouched) {
     component.invalidYear = true;
     component.error = 'year-range';
+    return;
+  }
+
+  // If month is selected but day and year have not been touched, set error for untouched fields
+  if (month && monthTouched && !dayTouched && !yearTouched) {
+    if (!monthYearOnly) {
+      component.invalidDay = true;
+      component.error = 'date-error';
+    } else {
+      component.invalidYear = true;
+      component.error = 'date-error';
+    }
+    return;
+  }
+
+  // If month and day is set but year has not been touched, set error
+  if (month && monthTouched && day && dayTouched && !yearTouched) {
+    component.invalidYear = true;
+    component.error = 'date-error';
     return;
   }
 

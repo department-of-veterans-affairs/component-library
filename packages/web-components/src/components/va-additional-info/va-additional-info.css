@@ -3,12 +3,13 @@
 
 :host {
   display: block;
+  font-size: 1rem;
 }
 
 /* Add left side blue border if disable border prop disabled or not present */
 :host(:not([disable-border])) a[aria-expanded='true'] ~ #info,
 :host([disable-border='false']) a[aria-expanded='true'] ~ #info {
-  padding-left: calc(20px - 4px);
+  padding-left: var(--units-2);
   border-left: 4px solid transparent;
   border-left-color: var(--vads-color-primary-alt-darkest);
 }
@@ -44,14 +45,14 @@ a {
   opacity: 1;
   transition: max-height 700ms 0ms, opacity 500ms 200ms, visibility 500ms 200ms;
   max-height: var(--calc-max-height);
-  margin-bottom: 16px;
-  margin-top: 16px;
+  margin-bottom: var(--units-2);
+  margin-top: var(--units-2);
 }
 
 .additional-info-icon {
   display: inline-block;
   color: var(--vads-color-primary-alt-darkest);
-  font-size: 16px;
+  font-size: 1rem;
   transform: rotate(90deg);
   transition: transform 0.15s linear;
   line-height: 1;
@@ -63,7 +64,10 @@ a[aria-expanded='true'] .additional-info-icon {
   transition: transform 0.15s linear;
 }
 
-::slotted(*) {
-  margin-bottom: 0 !important;
+::slotted(*:first-child) {
   margin-top: 0 !important;
+}
+
+::slotted(*:last-child) {
+  margin-bottom: 0 !important;
 }

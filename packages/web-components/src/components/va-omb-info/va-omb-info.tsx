@@ -38,14 +38,26 @@ export class VaOmbInfo {
   @Prop() expDate!: string;
 
   /**
-   * The OMB control number or form number.
+   * The OMB control number
    */
   @Prop() ombNumber?: string;
+
+  /**
+   * The form number to display in the Privacy Act Statement button text.
+   * When provided, the button reads "Privacy Act Statement for VA Form {formId}".
+   * This improves accessibility when multiple instances exist on the same page.
+   */
+  @Prop() formId?: string;
 
   /**
    * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
    */
   @Prop() resBurden?: number;
+
+  /**
+   * If `true`, clicking outside the modal will close it.
+   */
+  @Prop() modalClickToClose?: boolean = false;
 
   private toggleModalVisible = () => {
     this.visible = !this.visible;
@@ -148,6 +160,7 @@ export class VaOmbInfo {
       resBurden,
       toggleModalVisible,
       visible,
+      formId
     } = this;
 
     /* eslint-disable i18next/no-literal-string */
@@ -171,7 +184,7 @@ export class VaOmbInfo {
             onClick={toggleModalVisible}
             onFocusin={() => this.trapFocus()}
             secondary
-            text="View Privacy Act Statement"
+            text={formId ? `Privacy Act Statement for VA Form ${formId}` : 'Privacy Act Statement'}
           />
         </div>
         <va-modal
@@ -179,7 +192,7 @@ export class VaOmbInfo {
           modalTitle="Privacy Act Statement"
           onCloseEvent={toggleModalVisible}
           visible={visible}
-          ariaHiddenNodeExceptions={[this.el]}
+          clickToClose={this.modalClickToClose}
         >
           <slot onSlotchange={handleSlotChange}></slot>
           {modalContents}

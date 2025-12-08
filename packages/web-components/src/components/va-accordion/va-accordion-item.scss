@@ -22,9 +22,13 @@ button {
   line-height: 1.15;
 }
 
-/* Hiding since element would be duplicated via the Shadow DOM */
+// !important needed to override global styles that take precedence over slotted
+// styles
 ::slotted([slot='headline']) {
-  display: none;
+  font-size: var(--vads-font-size-source-sans-normalized) !important;
+  line-height: var(--vads-font-line-height-2) !important;
+  margin: 0px !important;
+  font-family: var(--font-source-sans) !important;
 }
 
 ::slotted([slot='icon']),
@@ -33,28 +37,41 @@ button {
   margin-right: .938rem;
 }
 
-::slotted([slot='subheader-icon']) {
-  margin-top: 0.2rem;
-}
-
 /**
   Custom classes and overrides to add in subheader and icon functionality
 */
-.va-accordion__header, .va-accordion__subheader {
-  display: block;
-}
-
-.va-accordion__header ::slotted([slot=icon]), .va-accordion__subheader ::slotted([slot=subheader-icon]){
-  margin-right: 15px;
-  width: inherit;
-  vertical-align: text-top;
+.va-accordion__header,
+.va-accordion__subheader {
+  display: flex;
+  align-items: center;
 }
 
 .va-accordion__subheader {
   font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 1rem;
+  line-height: var(--vads-font-line-height-5);
   margin-top: 2px;
+}
+
+.va-accordion__header.va-accordion__header--has-icon {
+  padding-top: 2px;
+  line-height: inherit;
+}
+
+.va-accordion__subheader.va-accordion__subheader--has-icon {
+  margin-top: calc(0.2rem + 2px);
+  padding-bottom: 0.2rem;
+  line-height: 1.219;
+}
+
+.va-accordion__header ::slotted([slot=icon]),
+.va-accordion__subheader ::slotted([slot=subheader-icon]){
+  margin-right: var(--units-2);
+  width: inherit;
+}
+
+.va-accordion__header ::slotted([slot=icon]) {
+  line-height: 0;
 }
 
 /**

@@ -70,6 +70,16 @@ export class VaTable {
    */
   @Prop() rightAlignCols?: string;
 
+    /**
+   * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+   */
+  @Prop() monoFontCols?: string;
+
+  /**
+  * Text to display in empty cells. Needed for screen readers to announce empty cells.
+  */
+  @Prop() emptyCellText?: string = 'Not available';
+
   // The number of va-table-rows
   @State() rows: number;
 
@@ -127,14 +137,29 @@ export class VaTable {
     this.cells = cells;
   }
 
+   /**
+   * Check for empty cells and add text if needed
+   */
+  checkForEmptyCells() {
+    this.cells.map(cell => {
+      if(cell.innerHTML.trim() === '' && cell.innerText.trim() === '') {
+        cell.innerText = this.emptyCellText;
+        cell.innerHTML = this.emptyCellText;
+        return cell;
+      }
+      return cell;
+    });
+  }
+
   /**
    * Generate a DocumentFragment that holds the cells
    * to be slotted into a va-table-inner component
    */
   makeFragment(): DocumentFragment {
     const frag = document.createDocumentFragment();
+    this.checkForEmptyCells();
     this.cells.forEach(cell => {
-      frag.appendChild(cell.cloneNode(true));
+      this.sortable ? frag.appendChild(cell.cloneNode(true)) : frag.appendChild(cell);
     });
     return frag;
   }
@@ -175,6 +200,10 @@ export class VaTable {
 
     if (this.rightAlignCols) {
       vaTable.setAttribute('right-align-cols', this.rightAlignCols);
+    }
+
+    if (this.monoFontCols) {
+      vaTable.setAttribute('mono-font-cols', this.monoFontCols);
     }
 
     //make a fragment containing all the cells, one for each slot

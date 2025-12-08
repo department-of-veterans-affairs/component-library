@@ -20,7 +20,7 @@ export default {
 
 const defaultArgs = {
   'status': 'info',
-  'trigger': 'Alert Headline',
+  'trigger': 'Example Headline',
   'iconless': false,
   'disable-analytics': false,
 };
@@ -55,18 +55,6 @@ const IconlessTemplate = ({ trigger, iconless }) => {
     <>
       <va-alert-expandable
         status="info"
-        trigger={trigger}
-        iconless={iconless}
-        disable-analytics="false"
-      >
-        <p>
-          This is the alert content. To take action on this alert, please call{' '}
-          <va-telephone contact="8775551234"></va-telephone>.
-        </p>
-      </va-alert-expandable>
-      <br />
-      <va-alert-expandable
-        status="error"
         trigger={trigger}
         iconless={iconless}
         disable-analytics="false"
@@ -119,12 +107,6 @@ const IconlessTemplate = ({ trigger, iconless }) => {
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(alertExpandableDocs);
-
-export const Error = Template.bind(null);
-Error.args = {
-  ...defaultArgs,
-  status: 'error',
-};
 
 export const Warning = Template.bind(null);
 Warning.args = {

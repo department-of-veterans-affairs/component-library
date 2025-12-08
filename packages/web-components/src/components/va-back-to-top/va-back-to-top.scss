@@ -1,0 +1,153 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
+@import '../../../../../node_modules/animate.css/source/sliding_entrances/slideInUp.css';
+@import '../../../../../node_modules/animate.css/source/sliding_exits/slideOutDown.css';
+@import '../../mixins/buttons.css';
+@import '../../mixins/accessibility.css';
+@import '../../mixins/focusable.css';
+
+#marginWrapper {
+  display: block;
+  width: 100%;
+  height: 44px;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+div {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.reveal-point {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: var(--reveal-breakpoint, 37.5rem);
+  left: 0;
+  /* background: black; /1* For debugging in browser *1/ */
+  /* width: 100%;  /1* For debugging in browser *1/ */
+}
+
+a {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  bottom: 0;
+  color: var(--vads-color-link);
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  height: 48px;
+  width: 48px;
+  margin-bottom: 0.313rem;
+  opacity: 0;
+  padding: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: background-color 0.25s ease-in;
+}
+a:not([disabled]):active, a:not([disabled]):focus {
+  border-radius: 5px;
+  outline: 2px solid var(--vads-color-action-focus-on-light);
+  outline-offset: 2px;
+}
+a:not([disabled]):hover {
+  border-radius: 5px;
+  background-color: var(--vads-color-gray-cool-light);
+  color: var(--vads-color-primary-darker);
+}
+
+div a {
+  display: none;
+}
+  
+div.reveal a {
+  display: inherit;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  text-decoration: none;
+  pointer-events: auto;
+  opacity: 1;
+  animation: slideInUp 0.25s;
+}
+div.reveal a > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div:not(.reveal) a {
+  animation: slideOutDown 0.25s;
+}
+
+@media (prefers-reduced-motion) {
+  a {
+    transition: none;
+  }
+  div.reveal a {
+    animation: none;
+  }
+  div:not(.reveal) a {
+    animation: none;
+  }
+}
+
+a > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+a span.text {
+  display: none;
+  font-weight: 700;
+}
+
+a span.sr-only {
+  visibility: visible;
+}
+
+div.docked {
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+}
+div:not(.docked) {
+  max-width: var(--undocked-width);
+}
+div:not(.docked):not(.reveal) {
+  position: relative;
+}
+
+div.docked a {
+  position: relative;
+}
+
+va-icon {
+  margin-right: 0px;
+}
+
+@media (min-width: $medium-screen) {
+  a {
+    height: 44px;
+    width: 44px;
+    padding: 0 1rem;
+    text-decoration: none;
+    width: auto;
+  }
+
+  a span.text {
+    color: var(--vads-color-link);
+    display: inline-block;
+    text-decoration: underline;
+  }
+
+  a span.sr-only {
+    visibility: hidden;
+  }
+
+  va-icon {
+    margin-right: 4px;
+  }
+}

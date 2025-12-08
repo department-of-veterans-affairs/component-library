@@ -21,6 +21,7 @@ export default {
         <StoryDocs storyDefault={Default} data={memorableDateInputDocs} />
       ),
     },
+    storyType: 'form',
   },
 };
 
@@ -31,7 +32,9 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
-  monthSelect: false,
+  'month-select': false,
+  'remove-date-hint': false,
+  customYearErrorMessage: `Please enter a year between 1900 and ${new Date().getFullYear()}`,
 };
 
 const Template = ({
@@ -41,7 +44,10 @@ const Template = ({
   required,
   error,
   value,
-  monthSelect,
+  'month-select': monthSelect,  
+  'remove-date-hint': removeDateHint,
+  customYearErrorMessage,
+  labelHeaderLevel,
 }) => {
   return (
     <VaMemorableDate
@@ -50,10 +56,13 @@ const Template = ({
       name={name}
       hint={hint}
       required={required}
-      error={error}
+      error={error}  
       value={value}
+      removeDateHint={removeDateHint}
+      customYearErrorMessage={customYearErrorMessage}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+      labelHeaderLevel={labelHeaderLevel}
     />
   );
 };
@@ -145,7 +154,7 @@ const CustomValidationTemplate = ({
   );
 };
 
-const I18nTemplate = ({ label, name, required, hint, error, value }) => {
+const I18nTemplate = ({ label, name, required, hint, error, value, customYearErrorMessage }) => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -178,6 +187,7 @@ const I18nTemplate = ({ label, name, required, hint, error, value }) => {
         value={value}
         onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
         onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        customYearErrorMessage={customYearErrorMessage}
       />
     </div>
   );
@@ -190,7 +200,8 @@ const FormsPatternSingleTemplate = ({
   required,
   error,
   value,
-  monthSelect,
+  'month-select': monthSelect,
+  customYearErrorMessage,
 }) => {
   const id = Math.floor(Math.random() * 100) + 1;
   const handleClick = () => {
@@ -217,6 +228,7 @@ const FormsPatternSingleTemplate = ({
         form-heading-level={1}
         form-heading="Enter a date"
         form-description="This is the additional form-description prop"
+        customYearErrorMessage={customYearErrorMessage}
       >
         <div slot="form-description">
           <p>HTML passed into the form-description slot:</p>
@@ -242,6 +254,7 @@ const FormsPatternMultipleTemplate = ({
   error,
   value,
   monthSelect,
+  customYearErrorMessage,
 }) => {
   const handleClick = () => {
     const header = document
@@ -267,6 +280,7 @@ const FormsPatternMultipleTemplate = ({
         form-heading-level={1}
         form-heading="Enter dates"
         form-description="This is the additional form-description prop"
+        customYearErrorMessage={customYearErrorMessage}
       />
       <VaMemorableDate
         monthSelect={monthSelect}
@@ -279,6 +293,7 @@ const FormsPatternMultipleTemplate = ({
         onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
         use-forms-pattern="single"
         id={`form-pattern-single-input-multiple`}
+        customYearErrorMessage={customYearErrorMessage}
       />
       <hr />
 
@@ -294,6 +309,7 @@ const CustomErrorMessageTemplate = ({
   required,
   error,
   value,
+  customYearErrorMessage,
 }) => {
   return (
     <>
@@ -309,6 +325,7 @@ const CustomErrorMessageTemplate = ({
         onDateBlur={() => {}}
         onDateChange={() => {}}
         customDayErrorMessage="This is a custom error message for an invalid day"
+        customYearErrorMessage={customYearErrorMessage}
       />
       <hr />
       <div>
@@ -334,7 +351,7 @@ Error.args = {
 export const WithMonthSelect = Template.bind(null);
 WithMonthSelect.args = {
   ...defaultArgs,
-  monthSelect: true,
+  'month-select': true,
   value: '2022-04-19',
 };
 
@@ -349,7 +366,7 @@ export const ErrorWithMonthSelect = Template.bind(null);
 ErrorWithMonthSelect.args = {
   ...defaultArgs,
   error: 'Error Message Example',
-  monthSelect: true,
+  'month-select': true,
 };
 
 export const CustomValidation = CustomValidationTemplate.bind(null);
@@ -366,24 +383,29 @@ CustomErrorMessage.args = {
   error: 'true',
 };
 
-// export const Internationalization = I18nTemplate.bind(null);
-// Internationalization.args = {
-//   ...defaultArgs,
-//   error: 'Error Message Example',
-//   required: true,
-// };
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  labelHeaderLevel: 2,
+};
+
+export const Internationalization = I18nTemplate.bind(null);
+Internationalization.args = {
+  ...defaultArgs,
+};
 
 export const FormsPatternSingleWithMonthDropdown =
   FormsPatternSingleTemplate.bind(null);
 FormsPatternSingleWithMonthDropdown.args = {
   ...defaultArgs,
+  'month-select': true,
 };
 
 export const FormsPatternSingleWithoutMonthDropdown =
   FormsPatternSingleTemplate.bind(null);
 FormsPatternSingleWithoutMonthDropdown.args = {
   ...defaultArgs,
-  monthSelect: false,
+  'month-select': false,
 };
 
 export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);

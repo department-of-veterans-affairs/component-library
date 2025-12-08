@@ -10,7 +10,7 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/focusable.css';
-@import '../../mixins/headers.css';
+@import '../../mixins/header-labels.scss';
 
 :host {
   color: var(--vads-color-base);
@@ -28,17 +28,6 @@
   font-weight: normal;
 }
 
-// Overrides for when label is wrapped with a header
-h1, h2, h3, h4, h5, h6 {
-  .usa-label {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-
-    .usa-label--required {
-      font-family: var(--font-source-sans);
-      font-size: initial;
-      font-weight: initial;
-    }
-  }
+textarea {
+  box-sizing: border-box;
 }

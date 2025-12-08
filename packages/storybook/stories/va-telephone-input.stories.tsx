@@ -6,7 +6,7 @@ import {
   StoryDocs,
 } from './wc-helpers';
 
-VaTelephoneInput.displayName = 'VaLanguageToggle';
+VaTelephoneInput.displayName = 'VaTelephoneInput';
 const inputTelephoneDocs = getWebComponentDocs('va-telephone-input');
 
 export default {
@@ -17,6 +17,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={inputTelephoneDocs} />,
     },
+    storyType: 'form',
   },
 };
 

@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure,
+  StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
+} from './wc-helpers';
 // @ts-ignore
 import testImage from './images/search-bar.png';
 
@@ -16,8 +22,11 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={fileInputDocs} />,
     },
+    storyType: 'form',
   },
   argTypes: {
+    ...propStructure(fileInputDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#file-input-error-alert']),
     // hide the uploadMessage prop from the properties table in storybook
     uploadMessage: {
       table: {
@@ -38,7 +47,8 @@ const defaultArgs = {
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'vaPasswordChange': null,
-  'uswds': true,
+  'vaFileInputError': event =>
+    alert(`File input error event received: ${event?.detail?.error}`),
   'header-size': null,
   'children': null,
   'value': null,
@@ -48,7 +58,9 @@ const defaultArgs = {
   'uploadedFile': null,
   'maxFileSize': Infinity,
   'minFileSize': 0,
-  'password-error': false
+  'password-error': false,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -61,6 +73,7 @@ const Template = ({
   enableAnalytics,
   vaChange,
   vaPasswordChange,
+  vaFileInputError,
   headerSize,
   readOnly,
   encrypted,
@@ -70,30 +83,46 @@ const Template = ({
   uploadedFile,
   maxFileSize,
   minFileSize,
-  passwordError
+  passwordError,
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <VaFileInput
-      label={label}
-      name={name}
-      accept={accept}
-      required={required}
-      error={error}
-      hint={hint}
-      enable-analytics={enableAnalytics}
-      onVaChange={vaChange}
-      onVaPasswordChange={vaPasswordChange}
-      header-size={headerSize}
-      readOnly={readOnly}
-      encrypted={encrypted}
-      statusText={statusText}
-      value={value}
-      children={children}
-      uploadedFile={uploadedFile}
-      maxFileSize={maxFileSize}
-      minFileSize={minFileSize}
-      passwordError={passwordError}
-    />
+    <>
+      <VaFileInput
+        label={label}
+        name={name}
+        accept={accept}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        enable-analytics={enableAnalytics}
+        onVaChange={vaChange}
+        onVaPasswordChange={vaPasswordChange}
+        onVaFileInputError={vaFileInputError}
+        header-size={headerSize}
+        readOnly={readOnly}
+        encrypted={encrypted}
+        statusText={statusText}
+        value={value}
+        children={children}
+        uploadedFile={uploadedFile}
+        maxFileSize={maxFileSize}
+        minFileSize={minFileSize}
+        passwordError={passwordError}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      />
+      {showToggleFocusButton && (
+        <va-button
+          text="Toggle error state"
+          onClick={handleClick}
+          class="vads-u-margin-top--2"
+        ></va-button>
+      )}
+    </>
   );
 };
 
@@ -115,9 +144,9 @@ const AcceptsFilePasswordTemplate = ({
 }) => {
   return (
     <>
-      To learn how to check for an encrypted PDF <va-link 
+      To learn how to check for an encrypted PDF <va-link
         text='see platform documentation'
-        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted' 
+        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted'
       />.
       <VaFileInput
         label={label}
@@ -132,9 +161,19 @@ const AcceptsFilePasswordTemplate = ({
 };
 export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
 AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsFilePassword.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
 WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithFilePasswordError.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {
@@ -143,6 +182,12 @@ AcceptsOnlySpecificFileTypes.args = {
   hint: 'You can upload a .pdf or .txt file',
   accept: '.pdf,.txt',
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsOnlySpecificFileTypes.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 
 export const AcceptsAnyKindOfImage = Template.bind(null);
 AcceptsAnyKindOfImage.args = {
@@ -151,6 +196,12 @@ AcceptsAnyKindOfImage.args = {
   hint: 'Select any type of image format',
   accept: 'image/*',
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsAnyKindOfImage.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = {
@@ -167,6 +218,11 @@ WithMaxFileSize.args = {
   hint: 'An error will be thrown if the selected file is greater than 1 KB',
   maxFileSize: 1024,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithMaxFileSize.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithMinFileSize = Template.bind(null);
 WithMinFileSize.args = {
@@ -175,6 +231,11 @@ WithMinFileSize.args = {
   hint: 'An error will be thrown if the selected file is less than 1 MB',
   minFileSize: 1024*1024,
 }
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithMinFileSize.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const HeaderLabel = Template.bind(null);
 HeaderLabel.args = {
@@ -208,6 +269,12 @@ AdditionalFormInputs.args = {
   label: 'Additional Form Inputs',
   children: additionalFormInputsContent,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AdditionalFormInputs.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 
 const CustomValidationTemplate = ({
   label,
@@ -262,33 +329,35 @@ const CustomValidationTemplate = ({
       <div className="vads-u-margin-top--2">
         <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
           <code>
-            {`const [errorVal, setErrorVal] = useState(error);
+            {`
+                const [errorVal, setErrorVal] = useState(error);
 
-function validateFileContents(event) {
-  setErrorVal(null);
-  if (event.detail.files && event.detail.files.length) {
-    const file = event.detail.files[0];
+                function validateFileContents(event) {
+                  setErrorVal(null);
+                  if (event.detail.files && event.detail.files.length) {
+                    const file = event.detail.files[0];
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const contents = reader.result;
-      const hasX = contents.includes('X');
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      const contents = reader.result;
+                      const hasX = contents.includes('X');
 
-      if (hasX)
-        setErrorVal('File contains an \\'X\\' character');
-    };
+                      if (hasX)
+                        setErrorVal('File contains an \\'X\\' character');
+                    };
 
-    reader.readAsText(file);
-  }
-}
+                    reader.readAsText(file);
+                  }
+                }
 
-return (
-  <VaFileInput
-    ...
-    error={errorVal}
-    onVaChange={validateFileContents}
-  />
-)`}
+                return (
+                  <VaFileInput
+                    ...
+                    error={errorVal}
+                    onVaChange={validateFileContents}
+                  />
+                )
+              `}
           </code>
         </pre>
         <a
@@ -309,11 +378,19 @@ CustomValidation.args = {
   hint: 'Select a .txt file',
   accept: '.txt',
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+CustomValidation.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = {
   ...defaultArgs,
   'enable-analytics': true,
+};
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const UploadedFile = Template.bind(null);
@@ -363,6 +440,9 @@ UploadStatus.args = {
 
 export const FileUploaded = FileUploadedTemplate.bind(null);
 FileUploaded.args = { ...defaultArgs, vaChange: event => event };
+FileUploaded.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const ReadOnly = FileUploadedTemplate.bind(null);
 ReadOnly.args = { ...defaultArgs, vaChange: event => event, readOnly: true };
@@ -419,41 +499,8 @@ const PercentUploadedTemplate = args => {
 
 export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
 WithPercentUploaded.args = { ...defaultArgs };
-
-const VisualStateResetTemplate = args => {
-  const [reset, setReset] = useState(false);
-  const [error, setError] = useState(null);
-
-  function handleClick() {
-    setReset(prev => !prev);
-  }
-
-  function handleFileAdd() {
-    setReset(false);
-    setError(null);
-  }
-
-  useEffect(() => {
-    if (reset) {
-      setError('Error encountered during upload. Please try again.');
-    }
-  }, [reset]);
-
-  return (
-    <div>
-      <p>If the component receives an error after or during file upload it may be useful to reset the visual state. Add a file then click the "Reset visual state" button to see a demonstration.</p>
-      <VaFileInput
-        {...args}
-        resetVisualState={reset}
-        error={error}
-        onClick={handleFileAdd}
-      />
-      <p>
-        <va-button text="Reset visual state" onClick={handleClick} />
-      </p>
-    </div>
-  )
-}
-
-export const WithVisualStateReset = VisualStateResetTemplate.bind(null);
-WithVisualStateReset.args = { ...defaultArgs }
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithPercentUploaded.parameters = {
+  chromatic: { disableSnapshot: true },
+};

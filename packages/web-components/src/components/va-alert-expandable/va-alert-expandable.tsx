@@ -19,7 +19,7 @@ import classnames from 'classnames';
  */
 @Component({
   tag: 'va-alert-expandable',
-  styleUrl: 'va-alert-expandable.css',
+  styleUrl: 'va-alert-expandable.scss',
   shadow: true,
 })
 export class VaAlertExpandable {
@@ -29,9 +29,9 @@ export class VaAlertExpandable {
 
   /**
    * Determines the icon and background color.
-   * One of `info`, `error`, `success`, `warning`, or `continue`
+   * One of `info`, `success`, `warning`, or `continue`
    */
-  @Prop() status?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+  @Prop() status?: 'continue' | 'info' | 'success' | 'warning';
 
   /**
    * The text to trigger the expansion
@@ -122,13 +122,18 @@ export class VaAlertExpandable {
       info: 'info',
       success: 'check_circle',
     };
-    const role = status === 'error' ? 'alert' : null;
-    const ariaLive = status === 'error' ? 'assertive' : null;
-    /* eslint-enable i18next/no-literal-string */
+
+    const statusLabels = {
+      continue: 'Continue',
+      error: 'Error',
+      warning: 'Warning',
+      info: 'Information',
+      success: 'Success',
+    };
 
     return (
       <Host>
-        <div role={role} aria-live={ariaLive} class={alertClasses}>
+        <div class={alertClasses}>
           <a
             role="button"
             aria-controls="alert-body"
@@ -147,7 +152,7 @@ export class VaAlertExpandable {
             )}
             <div>
               <span class="alert-expandable-title">
-                <span class="sr-only">Alert:&nbsp;</span>
+                <span class="usa-sr-only">{`${statusLabels[status] || 'Information'} Alert`}&nbsp;</span>
                 {this.trigger}
               </span>
               <va-icon

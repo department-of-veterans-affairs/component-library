@@ -1,0 +1,25 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
+#error-message {
+  margin-bottom: 0.75rem;
+}
+
+#error-message,
+#input-error-message {
+  color: var(--vads-color-secondary-dark);
+  display: block;
+  font-weight: 700;
+  font-size: 1.06rem;
+}
+
+:host([error]:not([error=''])), :host(.va-form-group--error) {
+  border-left: 0.3rem solid var(--vads-color-secondary-dark);
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+@media screen and (min-width: $desktop) {
+  :host([error]:not([error=''])), :host(.va-form-group--error) {
+    margin-left: -1.4375rem; /* padding left + border left */
+  }
+}

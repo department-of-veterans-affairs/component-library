@@ -1,4 +1,5 @@
 import * as PropTypes from 'prop-types';
+import { useState } from 'react';
 import {
   Title,
   Subtitle,
@@ -380,6 +381,98 @@ export function applyFocus(el) {
 }
 
 /**
+ * Reusable hook for error toggle functionality in Storybook stories.
+ *
+ * This hook manages error state and provides focus management for testing web component
+ * accessibility features. It automatically focuses specified elements when errors are shown
+ * (but not when cleared), supports shadow DOM elements, and includes error handling for
+ * missing elements.
+ *
+ * @param {string|null} initialError - The initial error message. Can be null (no error),
+ *   empty string (valid error), or string with message. If null/undefined,
+ *   defaultError will be used when toggling.
+ * @param {string} focusEl - CSS selector for the element to focus when error is shown.
+ *   Supports ID, class, or tag selectors.
+ * @param {string} [defaultError='There has been an error'] - Default error message used when
+ *   initialError is null/undefined.
+ * @param {string} [wrapperId='error-demo-wrapper'] - ID of the wrapper element that contains
+ *   the web component.
+ *
+ * @see {@link errorToggleArgTypes} - Companion function for Storybook argTypes
+ * @see {@link applyFocus} - Underlying focus utility used by this hook
+ */
+export function useErrorToggle(initialError, focusEl, defaultError = 'There has been an error', wrapperId = 'error-demo-wrapper') {
+  const [errorMsg, setErrorMsg] = useState(initialError);
+
+  const handleClick = () => {
+    const willShowError = !errorMsg;
+    const errorToShow = initialError ? initialError : defaultError;
+    errorMsg ? setErrorMsg(null) : setErrorMsg(errorToShow);
+
+    // Only move focus when showing an error (not when clearing it)
+    if (focusEl && willShowError) {
+      // Use setTimeout to ensure DOM updates before focusing
+      setTimeout(() => {
+        const component = document.getElementById(wrapperId);
+
+        if (!component) {
+          console.warn(`useErrorToggle: Could not find wrapper element with ID '${wrapperId}'`);
+          return;
+        }
+
+        // Check if we should focus the wrapper element itself
+        if (focusEl === wrapperId || focusEl === `#${wrapperId}`) {
+          applyFocus(component);
+        } else if (component.shadowRoot) {
+          const moveFocusTo = component.shadowRoot.querySelector(focusEl);
+
+          if (moveFocusTo) {
+            applyFocus(moveFocusTo);
+          } else {
+            console.warn(`useErrorToggle: Could not find focus target '${focusEl}' in shadow DOM`);
+          }
+        } else {
+          console.warn(`useErrorToggle: Component '${wrapperId}' does not have shadow DOM`);
+        }
+      }, 100);
+    }
+  };
+
+  return { errorMsg, setErrorMsg, handleClick };
+}
+
+/**
+ * Generates standardized Storybook argTypes for error toggle functionality.
+ * Creates UI controls for testing focus management and accessibility features in component stories.
+ *
+ * This function provides two argTypes:
+ * 1. `showToggleFocusButton` - A boolean control to show/hide the error toggle button
+ * 2. `focusEl` - A radio control to select which element should receive focus when an error is shown
+ *
+ * @param {string[]} focusOptions - Array of CSS selectors for focus target options.
+ *   Defaults to ['#error-demo-wrapper'] to match useErrorToggle default.
+ * @returns {object} Storybook argTypes configuration object containing showToggleFocusButton and focusEl
+ */
+export function errorToggleArgTypes(focusOptions: string[] = ['#error-demo-wrapper']): object {
+  return {
+    showToggleFocusButton: {
+      name: 'Show toggle error button',
+      control: { type: 'boolean' },
+      description: 'Toggles the visibility of the error toggle button. Used to test focus behavior and screen reader announcements when errors are shown or cleared.',
+      table: {category: 'Storybook-only'}
+    },
+    focusEl: {
+      name: 'Move focus to this element on error',
+      if: { arg: 'showToggleFocusButton' },
+      control: { type: 'radio' },
+      options: [null, ...focusOptions],
+      description: 'Specifies which element should receive focus when an error is shown. Select "null" to disable focus movement, or choose from the available focus targets for this component.',
+      table: {category: 'Storybook-only'}
+    },
+  };
+}
+
+/**
  * This utility will expand the vertical space of the viewport when a web
  * component is active or expanded (e.g. modal, accordion, etc.)
  * @param wrap
@@ -390,4 +483,51 @@ export function resizeViewPorts(wrap, isVisible) {
   if (!wrap) return;
   const story = wrap.closest('.sb-anchor');
   story?.classList.toggle('expand', isVisible);
+}
+
+/**
+ * Removes React.Fragment tags from the source code for clarity in "Code" tab panel
+ * Pass output to `parameters.docs.source.transform` in Storybook stories.
+ * @param source - The source code string to transform
+ * @returns The transformed source code string
+ */
+export function removeFragmentsFromCodeSource(source: string): string {
+  // Remove React.Fragment tags from the source code for clarity
+  return source
+    .replace(/<React\.Fragment\s+key="[^"]*">\s*/g, '')
+    .replace(/\s*<\/React\.Fragment>/g, '')
+    .replace(/<React\.Fragment[^>]*>\s*/g, '')
+    .replace(/\s*<\/React\.Fragment>/g, '')
+    .replace(/\n\s*\n/g, '\n');
+}
+
+/**
+ * Helper function to render an instance of `va-alert` to indicate that a story is for internal testing purposes.
+ * Helpful for downstream users to understand the context of the story and that it may not be suitable for production use.
+ * @param scenario - A string describing the scenario for internal testing.
+ * @param notRecommended - A boolean indicating if the pattern is not recommended for production use.
+ * @returns A JSX element for the internal testing alert.
+ */
+export function internalTestingAlert(scenario: string | null = null, notRecommended: boolean = false) {
+  let contextPara = null;
+
+  if (scenario || notRecommended) {
+    contextPara = (
+      <p className="vads-u-margin-bottom--0">
+        {scenario && `The intention is to test ${scenario}.`}
+        {notRecommended && ' This pattern is not recommended for production use as it may lead to usability issues.'}
+      </p>
+    );
+  }
+  return (
+    <div className="vads-u-margin-y--2">
+      <va-alert status="warning">
+        <h2 slot="headline">Heads up!</h2>
+        <p>
+          This is a developer preview for internal testing purposes.
+        </p>
+        {contextPara}
+      </va-alert>
+    </div>
+  );
 }

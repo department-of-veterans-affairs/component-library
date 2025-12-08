@@ -50,6 +50,8 @@ const Template = args => {
     striped,
     'full-width': fullWidth,
     'right-align-cols': rightAlignCols,
+    'mono-font-cols': monoFontCols,
+    'empty-cell-text': emptyCellText,
   } = args;
 
   return (
@@ -62,6 +64,8 @@ const Template = args => {
       striped={striped}
       full-width={fullWidth}
       right-align-cols={rightAlignCols}
+      mono-font-cols={monoFontCols}
+      empty-cell-text={emptyCellText}
     >
       <va-table-row>
         {columns.map((col, i) => (
@@ -266,21 +270,24 @@ const Pagination = args => {
 
   return (
     <main>
-      <va-table table-title={tableTitle} scrollable={scrollable}>
-        <va-table-row>
-          {columns.map((col, index) => (
-            <span key={`table-header-${index}`}>{col}</span>
-          ))}
-        </va-table-row>
-
-        {currentData.map((row, i) => (
-          <va-table-row key={`table-example-${i}`}>
-            {row.map(item => (
-              <span key={`${item}-${i}`}>{item}</span>
+      {/* Force re-render by wrapping in a div with changing key */}
+      <div key={`table-wrapper-${currentPage}`}>
+        <va-table table-title={tableTitle} scrollable={scrollable} mono-font-cols='1' right-align-cols='1'>
+          <va-table-row>
+            {columns.map((col, index) => (
+              <span key={`table-header-${index}`}>{col}</span>
             ))}
           </va-table-row>
-        ))}
-      </va-table>
+
+          {currentData.map((row, i) => (
+            <va-table-row key={`page-${currentPage}-row-${i}`}>
+              {row.map((item, cellIndex) => (
+                <span key={`page-${currentPage}-cell-${i}-${cellIndex}`}>{item}</span>
+              ))}
+            </va-table-row>
+          ))}
+        </va-table>
+      </div>
       <VaPagination
         onPageSelect={e => onPageChange(e.detail.page)}
         page={currentPage}
@@ -455,6 +462,22 @@ WithMissingData.args = {
     ],
   ],
   'columns': defaultColumns,
+  'empty-cell-text': 'Not available',
+};
+
+export const WithMissingDataCustomText = Template.bind(null);
+WithMissingDataCustomText.args = {
+  'table-title': 'This table has empty cells with custom empty cell text',
+  'rows': [
+    ['A document', '', ''],
+    [
+      'Bill of Rights',
+      'The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms',
+      '1791',
+    ],
+  ],
+  'columns': defaultColumns,
+  'empty-cell-text': 'N/A',
 };
 
 export const Sortable = Template.bind(null);
@@ -528,4 +551,15 @@ RightAlignedColumns.args = {
   'rows': FullWidthRows,
   'columns': FullWidthColumns,
   'right-align-cols': '1,2',
+};
+
+
+export const MonoFontColumns = Template.bind(null);
+MonoFontColumns.args = {
+  'table-title':
+    'This is a regular table with the second column using a monospace font.',
+  'rows': paginationData,
+  'columns': ['Date', 'Amount', 'Type', 'Method', 'Bank', 'Account'],
+  'mono-font-cols': '1',
+  'right-align-cols': '1',
 };

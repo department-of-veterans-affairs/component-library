@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
   applyFocus,
+  useErrorToggle,
+  errorToggleArgTypes,
 } from './wc-helpers';
 
 const textareaDocs = getWebComponentDocs('va-textarea');
@@ -15,6 +18,11 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={textareaDocs} />,
     },
+    storyType: 'form',
+  },
+  argTypes: {
+    ...propStructure(textareaDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
   },
 };
 
@@ -36,6 +44,8 @@ const defaultArgs = {
   'form-description': null,
   'label-header-level': null,
   'header-aria-describedby': null,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -52,27 +62,42 @@ const Template = ({
   'message-aria-describedby': messageAriaDescribedby,
   'label-header-level': labelHeaderLevel,
   'header-aria-describedby': headerAriaDescribedby,
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-textarea
-      name={name}
-      label={label}
-      enable-analytics={enableAnalytics}
-      required={required}
-      error={error}
-      hint={hint}
-      maxlength={maxlength}
-      value={value}
-      placeholder={placeholder}
-      onBlur={e => console.log('blur event', e)}
-      onInput={e =>
-        console.log('input event value', (e.target as HTMLInputElement).value)
-      }
-      charcount={charcount}
-      message-aria-describedby={messageAriaDescribedby}
-      label-header-level={labelHeaderLevel}
-      header-aria-describedby={headerAriaDescribedby}
-    />
+    <>
+      <va-textarea
+        name={name}
+        label={label}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        maxlength={maxlength}
+        value={value}
+        placeholder={placeholder}
+        onBlur={e => console.log('blur event', e)}
+        onInput={e =>
+          console.log('input event value', (e.target as HTMLInputElement).value)
+        }
+        charcount={charcount}
+        message-aria-describedby={messageAriaDescribedby}
+        label-header-level={labelHeaderLevel}
+        header-aria-describedby={headerAriaDescribedby}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      />
+      {showToggleFocusButton && (
+          <va-button
+            text="Toggle error state"
+            onClick={handleClick}
+            class="vads-u-margin-top--2"
+          ></va-button>
+      )}
+    </>
   );
 };
 
@@ -282,6 +307,9 @@ WithHintTextAndHeaderLevel.args = {
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const ResizableControl = ResizableTemplate.bind(null);
 ResizableControl.args = { ...defaultArgs };

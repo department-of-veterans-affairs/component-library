@@ -4,6 +4,8 @@ import {
   propStructure,
   StoryDocs,
   applyFocus,
+  useErrorToggle,
+  errorToggleArgTypes,
 } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
@@ -16,6 +18,16 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={selectDocs} />,
     },
+    storyType: 'form',
+  },
+  argTypes: {
+    ...propStructure(selectDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message']),
+    'hide-required-text': {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -26,8 +38,9 @@ const defaultArgs = {
   'required': false,
   'error': undefined,
   'hint': null,
-  'aria-live-region-text': 'You selected',
   'aria-describedby-message': 'Optional description text for screen readers',
+  'label-header-level': null,
+  'header-aria-describedby': null,
   'options': [
     <option key="1" value="navy">
       Navy
@@ -47,6 +60,8 @@ const defaultArgs = {
   ],
   'use-add-button': false,
   'full-width': false,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -56,13 +71,17 @@ const Template = ({
   required,
   error,
   hint,
-  'aria-live-region-text': ariaLiveRegionText,
   'aria-describedby-message': ariaDescribedbyMessage,
   options,
   'use-add-button': useAddButton,
   'full-width': fullWidth,
+  'label-header-level': labelHeaderLevel,
+  'header-aria-describedby': headerAriaDescribedby,
+  showToggleFocusButton,
+  focusEl
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
 
   return (
     <>
@@ -84,15 +103,24 @@ const Template = ({
         name={name}
         value={value}
         required={required}
-        error={error}
+        error={errorMsg}
         hint={hint}
-        aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
         full-width={fullWidth}
+        label-header-level={labelHeaderLevel}
+        header-aria-describedby={headerAriaDescribedby}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       >
         {modifiedOptions}
       </va-select>
+      {showToggleFocusButton && (
+          <va-button
+            text="Toggle error state"
+            onClick={handleClick}
+            class="vads-u-margin-top--2"
+          ></va-button>
+      )}
     </>
   );
 };
@@ -104,7 +132,6 @@ const InertTemplate = ({
   required,
   error,
   hint,
-  'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
 }) => {
@@ -137,7 +164,6 @@ const InertTemplate = ({
         error={error}
         hint={hint}
         inert
-        aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
       >
         {modifiedOptions}
@@ -153,6 +179,15 @@ Default.argTypes = propStructure(selectDocs);
 export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  'label-header-level': '3',
+  'name': 'header-example',
+  'header-aria-describedby': 'Optional description text for screen readers',
+  'required': true,
+};
+
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is example hint text' };
 
@@ -161,6 +196,11 @@ ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 
 export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+DynamicOptions.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const OptGroups = Template.bind(null);
 OptGroups.args = {
@@ -178,6 +218,11 @@ OptGroups.args = {
     </optgroup>,
   ],
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+OptGroups.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const OptGroupsWithOptions = Template.bind(null);
 OptGroupsWithOptions.args = {
@@ -194,6 +239,11 @@ OptGroupsWithOptions.args = {
       Other
     </option>,
   ],
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+OptGroupsWithOptions.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const ReadOnly = InertTemplate.bind(null);
@@ -218,6 +268,11 @@ const I18nTemplate = args => {
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = { ...defaultArgs, required: true };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const WidthsTemplate = ({
   label,
@@ -226,7 +281,6 @@ const WidthsTemplate = ({
   required,
   error,
   hint,
-  'aria-live-region-text': ariaLiveRegionText,
   'aria-describedby-message': ariaDescribedbyMessage,
   options,
 }) => {
@@ -239,7 +293,6 @@ const WidthsTemplate = ({
         required={required}
         error={error}
         hint={hint}
-        aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         width={width}
       >

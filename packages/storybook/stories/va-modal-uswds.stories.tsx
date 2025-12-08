@@ -22,20 +22,20 @@ export default {
         useEffect(() => {
           // Function to scroll to top
           const scrollToTop = () => window.scrollTo(0, 0);
-          
+
           // Immediate scroll
           scrollToTop();
-          
+
           // Schedule multiple scroll attempts with increasing delays
           // This helps ensure scrolling works even if Storybook does additional rendering
-          const timers = [50, 100, 300, 500, 1000].map(delay => 
+          const timers = [50, 100, 300, 500, 1000].map(delay =>
             setTimeout(scrollToTop, delay)
           );
-          
+
           // Clean up timers on unmount
           return () => timers.forEach(clearTimeout);
         }, []);
-        
+
         return (
           <>
             <style>
@@ -240,6 +240,11 @@ ClickOutsideToClose.args = {
   ...defaultArgs,
   'click-to-close': true,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+ClickOutsideToClose.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithoutButtons = Template.bind(null);
 WithoutButtons.args = {
@@ -262,6 +267,16 @@ WithoutTitleAndWithLabel.args = {
   ...defaultArgs,
   'modal-title': undefined,
   'label': 'A test modal',
+};
+WithoutTitleAndWithLabel.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
+export const WithInitialFocusSelector = Template.bind(null);
+WithInitialFocusSelector.args = {
+  ...defaultArgs,
+  'initial-focus-selector': '.usa-modal__heading',
+  'label': 'Title',
 };
 
 export const WithNestedWebComponents = ({

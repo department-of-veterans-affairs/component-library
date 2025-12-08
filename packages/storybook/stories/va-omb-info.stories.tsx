@@ -2,6 +2,14 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const ombInfoDocs = getWebComponentDocs('va-omb-info');
 
+const defaultArgs = {
+  'benefit-type': undefined,
+  'exp-date': '12/31/2077',
+  'omb-number': '12-3456',
+  'res-burden': 120,
+  'form-id': undefined,
+};
+
 export default {
   title: 'Components/OMB info',
   id: 'components/va-omb-info',
@@ -11,20 +19,17 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={ombInfoDocs} />,
     },
   },
+  args: defaultArgs,
+  argTypes: propStructure(ombInfoDocs),
 };
 
-const defaultArgs = {
-  'benefit-type': undefined,
-  'exp-date': undefined,
-  'omb-number': undefined,
-  'res-burden': undefined,
-};
 
 const Template = ({
   'benefit-type': benefitType,
   'exp-date': expDate,
   'omb-number': ombNumber,
   'res-burden': resBurden,
+  'form-id': formId,
 }) => {
   return (
     // @ts-ignore ignoring the hyphenated prop names
@@ -33,40 +38,36 @@ const Template = ({
       exp-date={expDate}
       omb-number={ombNumber}
       res-burden={resBurden}
+      form-id={formId ? formId : undefined}
     />
   );
 };
 
 export const Default = Template.bind(null);
-Default.args = {
+
+export const WithFormId = Template.bind(null);
+WithFormId.args = {
   ...defaultArgs,
-  'benefit-type': undefined,
-  'exp-date': '12/31/2077',
-  'omb-number': '12-3456',
-  'res-burden': 120,
+  'form-id': '34-5678',
 };
-Default.argTypes = propStructure(ombInfoDocs);
 
 export const WithoutOMBNumber = Template.bind(null);
 WithoutOMBNumber.args = {
   ...defaultArgs,
-  'exp-date': '12/31/2077',
-  'res-burden': 120,
+  'omb-number': undefined,
 };
 
 export const WithoutResponseBurden = Template.bind(null);
 WithoutResponseBurden.args = {
   ...defaultArgs,
-  'exp-date': '12/31/2077',
-  'omb-number': '12-3456',
+  'res-burden': undefined,
 };
+
 
 export const WithCustomRespondentBurdenBenefitType = Template.bind(null);
 WithCustomRespondentBurdenBenefitType.args = {
   ...defaultArgs,
   'benefit-type': 'EXAMPLE BENEFITS',
-  'exp-date': '12/31/2077',
-  'omb-number': '12-3456',
   'res-burden': 90,
 };
 
@@ -75,6 +76,7 @@ const SlotTemplate = ({
   'exp-date': expDate,
   'omb-number': ombNumber,
   'res-burden': resBurden,
+  'form-id': formId,
 }) => {
   return (
     // @ts-ignore ignoring the hyphenated prop names
@@ -83,6 +85,7 @@ const SlotTemplate = ({
       exp-date={expDate}
       omb-number={ombNumber}
       res-burden={resBurden}
+      form-id={formId ? formId : undefined}
     >
       Passing children content will override the default privacy act statement
     </va-omb-info>
@@ -93,7 +96,9 @@ export const Children = SlotTemplate.bind(null);
 Children.args = {
   ...defaultArgs,
   'benefit-type': undefined,
-  'exp-date': '12/31/2077',
-  'omb-number': '12-3456',
-  'res-burden': 120,
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Children.parameters = {
+  chromatic: { disableSnapshot: true },
 };

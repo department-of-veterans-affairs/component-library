@@ -20,7 +20,7 @@ describe('va-table-inner', () => {
       <va-table-row>
         <span>Dog</span>
         <span>Cat</span>
-        <span>Mouse</span>
+        <span></span>
       </va-table-row>
     </va-table>`;
   }
@@ -103,6 +103,13 @@ describe('va-table-inner', () => {
     expect(rowHeader.getAttribute('scope')).toEqual('row');
   });
 
+  it('sets the proper text for empty cells', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const rowSpans = await page.findAll('span');
+    expect(rowSpans[5].innerHTML).toEqual('Not available');
+  });
+
   it('is not striped by default', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());
@@ -145,6 +152,23 @@ describe('va-table-inner', () => {
     await page.setContent(makeTable({ 'right-align-cols': '2' }));
     const rightEl = await page.find(
       'va-table-inner >>> .vads-u-text-align--right',
+    );
+    expect(rightEl).toBeDefined();
+  });
+  it('does not have any font-monospace columns by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const rightEl = await page.find(
+      'va-table-inner >>> .vads-u-font-size--mono-sm',
+    );
+    expect(rightEl).toBeNull();
+  });
+
+  it('has the font-size--mono-sm class when mono-font-cols is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable({ 'mono-font-cols': '2' }));
+    const rightEl = await page.find(
+      'va-table-inner >>> .vads-u-font-size--mono-sm',
     );
     expect(rightEl).toBeDefined();
   });

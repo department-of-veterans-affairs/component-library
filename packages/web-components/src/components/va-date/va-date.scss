@@ -1,6 +1,6 @@
 @import '../../../src/mixins/accessibility.css';
+@import '../../mixins/form-field-error.scss';
 @import '../../mixins/uswds-error-border.scss';
-@import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
 
 .usa-label--required {
@@ -46,6 +46,7 @@ span.required {
   display: flex;
   margin-top: 12px;
   flex-wrap: wrap;
+  row-gap: 12px;
 }
 
 :host([error]:not([error=''])) .date-container {

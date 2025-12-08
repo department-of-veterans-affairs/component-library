@@ -31,7 +31,7 @@ const { repos } = require('./env');
  */
 function filterSearchedComponents(data, searchStrings = []) {
   // Filter out the non-matches
-  const searchTerms = searchStrings.map(s => new RegExp(s));
+  const searchTerms = searchStrings.map(s => new RegExp(_.escapeRegExp(s)));
   const matchedComponentNames = Object.keys(data).filter(componentName =>
     searchTerms.length
       ? searchTerms.reduce(
@@ -205,6 +205,13 @@ function findComponents(searchStrings) {
     usedBindingsRegex
   );
 
+  const usedWebComponentsBindingsRegex =
+    /import {\s*([^;]+)\s*}\s*from '@department-of-veterans-affairs\/web-components\/react-bindings'/gms;
+  const usedWebComponentsBindings = findUsedReactComponents(
+    vwModules,
+    usedWebComponentsBindingsRegex
+  );
+
   const wcTagRegex = /<(va-[^\s>]+)/gms;
   // Excludes uswds="false" (explicit opt-out) == only matches true if V3, else not V3
   const wcUswds3Regex =
@@ -226,6 +233,7 @@ function findComponents(searchStrings) {
       ...usedReactComponents,
       ...vwWebComponents,
       ...usedReactBindings,
+      ...usedWebComponentsBindings,
     ];
   }
 

@@ -141,9 +141,9 @@ export namespace Components {
          */
         "iconless"?: boolean;
         /**
-          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
+          * Determines the icon and background color. One of `info`, `success`, `warning`, or `continue`
          */
-        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        "status"?: 'continue' | 'info' | 'success' | 'warning';
         /**
           * The text to trigger the expansion
          */
@@ -590,6 +590,34 @@ export namespace Components {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl"?: string;
+        /**
+          * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
+         */
+        "mode"?: 'trigger' | 'modal';
+        /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension"?: string;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber"?: string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber"?: string;
+        /**
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
+         */
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action
@@ -665,10 +693,6 @@ export namespace Components {
          */
         "accept"?: string;
         /**
-          * The text displayed on the button.
-         */
-        "buttonText": string;
-        /**
           * Emit component-library-analytics events on the file input change event.
          */
         "enableAnalytics"?: boolean;
@@ -725,10 +749,6 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
-        /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
         "statusText"?: string;
@@ -765,7 +785,7 @@ export namespace Components {
         /**
           * Array of booleans, displays file password field for corresponding file input.
          */
-        "encrypted": boolean[];
+        "encrypted"?: boolean[];
         /**
           * Array of error messages corresponding to each file input. The length and order match the files array.
          */
@@ -783,9 +803,25 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Maximum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "maxFileSize"?: number;
+        /**
+          * Minimum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "minFileSize"?: number;
+        /**
           * Name attribute for the file input element, used to identify the form data in the submission.
          */
         "name"?: string;
+        /**
+          * Array of password error messages corresponding to each file input. The length and order match the files array.
+         */
+        "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of numbers corresponding to the progress of the upload of each file.
+         */
+        "percentUploaded"?: number[];
         /**
           * Optionally displays the read-only view
          */
@@ -798,6 +834,14 @@ export namespace Components {
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
         "slotFieldIndexes"?: Number[];
+        /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
+          * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
+         */
+        "uploadedFiles"?: UploadedFile[];
         /**
           * The value attribute for the file view element.
          */
@@ -1037,6 +1081,10 @@ export namespace Components {
          */
         "maintenanceTitle": string;
         /**
+          * The level of the header for the maintenance title. Default is h2.
+         */
+        "maintenanceTitleHeaderLevel": number;
+        /**
           * The Date/Time of when to be begin warning users of upcoming site maintenance.
          */
         "upcomingWarnStartDateTime": string;
@@ -1075,6 +1123,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
+        /**
           * The content of the heading if `useFormsPattern`.
          */
         "formHeading"?: string;
@@ -1082,6 +1134,10 @@ export namespace Components {
           * The heading level for the heading if `useFormsPattern`.
          */
         "formHeadingLevel"?: number;
+        /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
         /**
           * Hint text string
          */
@@ -1094,6 +1150,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
+        /**
           * Whether or not to use the month as an input or select.
          */
         "monthSelect"?: boolean;
@@ -1101,6 +1161,10 @@ export namespace Components {
           * Used to create unique name attributes for each input.
          */
         "name": string;
+        /**
+          * Removes the default date hint text
+         */
+        "removeDateHint"?: boolean;
         /**
           * Render marker indicating field is required.
          */
@@ -1123,16 +1187,12 @@ export namespace Components {
     }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
-     * @keydown Used to detect Escape key to close modal.
+     * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
      */
     interface VaModal {
-        /**
-          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
-         */
-        "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
           * Click outside modal will trigger closeEvent
          */
@@ -1272,7 +1332,15 @@ export namespace Components {
          */
         "expDate": string;
         /**
-          * The OMB control number or form number.
+          * The form number to display in the Privacy Act Statement button text. When provided, the button reads "Privacy Act Statement for VA Form {formId}". This improves accessibility when multiple instances exist on the same page.
+         */
+        "formId"?: string;
+        /**
+          * If `true`, clicking outside the modal will close it.
+         */
+        "modalClickToClose"?: boolean;
+        /**
+          * The OMB control number
          */
         "ombNumber"?: string;
         /**
@@ -1293,6 +1361,10 @@ export namespace Components {
           * If true, analytics event will not be fired
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headerLevel"?: number;
     }
     /**
      * @componentName Pagination
@@ -1387,6 +1459,10 @@ export namespace Components {
           * The text label for the progress bar.
          */
         "label"?: string;
+        /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
         /**
           * Percent of progress made. 0 to 100.
          */
@@ -1636,6 +1712,14 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1647,6 +1731,10 @@ export namespace Components {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */
@@ -1824,6 +1912,30 @@ export namespace Components {
      */
     interface VaSummaryBox {
     }
+    interface VaTabItem {
+        /**
+          * The text content of the button element.
+         */
+        "buttonText": string;
+        /**
+          * Denotes whether this tab item is currently selected in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
+         */
+        "selected"?: boolean;
+        /**
+          * The `id` of the target panel that this tab item controls.
+         */
+        "targetId": string;
+    }
+    interface VaTabPanel {
+        /**
+          * The unique identifier for the tab panel. This should match the id referenced by the corresponding `va-tab-item`.
+         */
+        "panelId": string;
+        /**
+          * Indicates whether the tab panel is currently selected/visible in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
+         */
+        "selected": boolean;
+    }
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -1831,9 +1943,17 @@ export namespace Components {
      */
     interface VaTable {
         /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
+        /**
           * When active, forces the table to expand to the full-width of its container
          */
         "fullWidth"?: boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
         /**
           * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
          */
@@ -1878,6 +1998,10 @@ export namespace Components {
          */
         "fullWidth": boolean;
         /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
+        /**
           * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
          */
         "rightAlignCols"?: string;
@@ -1908,6 +2032,40 @@ export namespace Components {
         "tableType"?: 'borderless';
     }
     interface VaTableRow {
+    }
+    /**
+     * @componentName Tabs
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTabs {
+        /**
+          * The index of the initially selected tab. Defaults to `0` (the first tab).
+         */
+        "initiallySelected"?: number;
+        /**
+          * A unique name for the rendered div serving as `role="tablist"`. To be set as value for wrapper's `aria-label` attribute.
+         */
+        "label": string;
+    }
+    /**
+     * @componentName Tag - Status
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTagStatus {
+        /**
+          * Screen reader text to provide context about the status tag. Defaults to `Status {status}:`.
+         */
+        "screenReaderText": string;
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "status": 'informational' | 'warning' | 'success' | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "text": string;
     }
     /**
      * @componentName Telephone
@@ -2042,6 +2200,10 @@ export namespace Components {
          */
         "formHeadingLevel"?: number;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2126,7 +2288,7 @@ export namespace Components {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
@@ -2376,6 +2538,10 @@ export interface VaSidenavSubmenuCustomEvent<T> extends CustomEvent<T> {
 export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaStatementOfTruthElement;
+}
+export interface VaTabItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTabItemElement;
 }
 export interface VaTableInnerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2815,6 +2981,7 @@ declare global {
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
         "vaPasswordChange": any;
+        "vaFileInputError": any;
         "component-library-analytics": any;
     }
     /**
@@ -3045,7 +3212,7 @@ declare global {
     }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
-     * @keydown Used to detect Escape key to close modal.
+     * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
@@ -3501,6 +3668,30 @@ declare global {
         prototype: HTMLVaSummaryBoxElement;
         new (): HTMLVaSummaryBoxElement;
     };
+    interface HTMLVaTabItemElementEventMap {
+        "tabItemSelected": any;
+        "tabItemKeyNavigated": any;
+    }
+    interface HTMLVaTabItemElement extends Components.VaTabItem, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaTabItemElementEventMap>(type: K, listener: (this: HTMLVaTabItemElement, ev: VaTabItemCustomEvent<HTMLVaTabItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaTabItemElementEventMap>(type: K, listener: (this: HTMLVaTabItemElement, ev: VaTabItemCustomEvent<HTMLVaTabItemElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaTabItemElement: {
+        prototype: HTMLVaTabItemElement;
+        new (): HTMLVaTabItemElement;
+    };
+    interface HTMLVaTabPanelElement extends Components.VaTabPanel, HTMLStencilElement {
+    }
+    var HTMLVaTabPanelElement: {
+        prototype: HTMLVaTabPanelElement;
+        new (): HTMLVaTabPanelElement;
+    };
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -3539,6 +3730,28 @@ declare global {
     var HTMLVaTableRowElement: {
         prototype: HTMLVaTableRowElement;
         new (): HTMLVaTableRowElement;
+    };
+    /**
+     * @componentName Tabs
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaTabsElement extends Components.VaTabs, HTMLStencilElement {
+    }
+    var HTMLVaTabsElement: {
+        prototype: HTMLVaTabsElement;
+        new (): HTMLVaTabsElement;
+    };
+    /**
+     * @componentName Tag - Status
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaTagStatusElement extends Components.VaTagStatus, HTMLStencilElement {
+    }
+    var HTMLVaTagStatusElement: {
+        prototype: HTMLVaTagStatusElement;
+        new (): HTMLVaTagStatusElement;
     };
     interface HTMLVaTelephoneElementEventMap {
         "component-library-analytics": any;
@@ -3588,6 +3801,7 @@ declare global {
     };
     interface HTMLVaTextInputElementEventMap {
         "component-library-analytics": any;
+        "vaInput": any;
     }
     /**
      * @nativeHandler onInput
@@ -3697,9 +3911,13 @@ declare global {
         "va-sidenav-submenu": HTMLVaSidenavSubmenuElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
+        "va-tab-item": HTMLVaTabItemElement;
+        "va-tab-panel": HTMLVaTabPanelElement;
         "va-table": HTMLVaTableElement;
         "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
+        "va-tabs": HTMLVaTabsElement;
+        "va-tag-status": HTMLVaTagStatusElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-telephone-input": HTMLVaTelephoneInputElement;
         "va-text-input": HTMLVaTextInputElement;
@@ -3862,9 +4080,9 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaAlertExpandableCustomEvent<any>) => void;
         /**
-          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
+          * Determines the icon and background color. One of `info`, `success`, `warning`, or `continue`
          */
-        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        "status"?: 'continue' | 'info' | 'success' | 'warning';
         /**
           * The text to trigger the expansion
          */
@@ -4367,6 +4585,34 @@ declare namespace LocalJSX {
      * @maturityLevel available
      */
     interface VaCrisisLineModal {
+        /**
+          * URL for the chat service. Defaults to Veterans Crisis Line chat.
+         */
+        "chatUrl"?: string;
+        /**
+          * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
+         */
+        "mode"?: 'trigger' | 'modal';
+        /**
+          * Phone extension for the crisis line. Defaults to 1.
+         */
+        "phoneExtension"?: string;
+        /**
+          * Phone number for the crisis line. Defaults to 988.
+         */
+        "phoneNumber"?: string;
+        /**
+          * Text number for the crisis line. Defaults to 838255.
+         */
+        "textNumber"?: string;
+        /**
+          * TTY extension for the crisis line. Defaults to 988.
+         */
+        "ttyCrisisExtension"?: string;
+        /**
+          * TTY number for the crisis line. Defaults to 711.
+         */
+        "ttyNumber"?: string;
     }
     /**
      * @componentName Critical Action
@@ -4454,10 +4700,6 @@ declare namespace LocalJSX {
          */
         "accept"?: string;
         /**
-          * The text displayed on the button.
-         */
-        "buttonText"?: string;
-        /**
           * Emit component-library-analytics events on the file input change event.
          */
         "enableAnalytics"?: boolean;
@@ -4506,6 +4748,10 @@ declare namespace LocalJSX {
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * The event emitted when adding a file results in an error, e.g. exceeding max file size
+         */
+        "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
           * The event emitted when the file input password value changes.
          */
         "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
@@ -4525,10 +4771,6 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Reset to initial visual state. Useful in conjunction with errors
-         */
-        "resetVisualState"?: boolean;
         /**
           * Optional file status, ex: "Uploading...", "Uploaded".
          */
@@ -4584,6 +4826,14 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * Maximum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "maxFileSize"?: number;
+        /**
+          * Minimum allowed file size in bytes. The value is applied to all file inputs.
+         */
+        "minFileSize"?: number;
+        /**
           * Name attribute for the file input element, used to identify the form data in the submission.
          */
         "name"?: string;
@@ -4591,6 +4841,14 @@ declare namespace LocalJSX {
           * Event emitted when any change to the file inputs occurs.  Sends back an object with the following data structure: `{ action: string, file: triggering file, state: files array }`  The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
+        /**
+          * Array of password error messages corresponding to each file input. The length and order match the files array.
+         */
+        "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of numbers corresponding to the progress of the upload of each file.
+         */
+        "percentUploaded"?: number[];
         /**
           * Optionally displays the read-only view
          */
@@ -4603,6 +4861,14 @@ declare namespace LocalJSX {
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
          */
         "slotFieldIndexes"?: Number[];
+        /**
+          * Optional file status, ex: "Uploading...", "Uploaded".
+         */
+        "statusText"?: string;
+        /**
+          * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
+         */
+        "uploadedFiles"?: UploadedFile[];
         /**
           * The value attribute for the file view element.
          */
@@ -4862,6 +5128,10 @@ declare namespace LocalJSX {
          */
         "maintenanceTitle"?: string;
         /**
+          * The level of the header for the maintenance title. Default is h2.
+         */
+        "maintenanceTitleHeaderLevel"?: number;
+        /**
           * Fires when the component is closed by clicking on the close icon.
          */
         "onCloseEvent"?: (event: VaMaintenanceBannerCustomEvent<any>) => void;
@@ -4908,6 +5178,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
+         */
+        "externalValidation"?: boolean;
+        /**
           * The content of the heading if `useFormsPattern`.
          */
         "formHeading"?: string;
@@ -4915,6 +5189,10 @@ declare namespace LocalJSX {
           * The heading level for the heading if `useFormsPattern`.
          */
         "formHeadingLevel"?: number;
+        /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
         /**
           * Hint text string
          */
@@ -4926,6 +5204,10 @@ declare namespace LocalJSX {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * Whether or not to use the month as an input or select.
          */
@@ -4946,6 +5228,10 @@ declare namespace LocalJSX {
           * Fires when the date input loses focus after its value was changed
          */
         "onDateChange"?: (event: VaMemorableDateCustomEvent<any>) => void;
+        /**
+          * Removes the default date hint text
+         */
+        "removeDateHint"?: boolean;
         /**
           * Render marker indicating field is required.
          */
@@ -4968,16 +5254,12 @@ declare namespace LocalJSX {
     }
     /**
      * @click Used to detect clicks outside of modal contents to close modal.
-     * @keydown Used to detect Escape key to close modal.
+     * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
      */
     interface VaModal {
-        /**
-          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
-         */
-        "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
           * Click outside modal will trigger closeEvent
          */
@@ -5145,7 +5427,15 @@ declare namespace LocalJSX {
          */
         "expDate": string;
         /**
-          * The OMB control number or form number.
+          * The form number to display in the Privacy Act Statement button text. When provided, the button reads "Privacy Act Statement for VA Form {formId}". This improves accessibility when multiple instances exist on the same page.
+         */
+        "formId"?: string;
+        /**
+          * If `true`, clicking outside the modal will close it.
+         */
+        "modalClickToClose"?: boolean;
+        /**
+          * The OMB control number
          */
         "ombNumber"?: string;
         /**
@@ -5166,6 +5456,10 @@ declare namespace LocalJSX {
           * If true, analytics event will not be fired
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headerLevel"?: number;
         /**
           * The event used to track usage of the component. This is emitted when the user clicks on a link and enableAnalytics is true.
          */
@@ -5280,6 +5574,10 @@ declare namespace LocalJSX {
           * The text label for the progress bar.
          */
         "label"?: string;
+        /**
+          * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
+         */
+        "noPercentScreenReader"?: boolean;
         /**
           * The event used to track usage of the component. This is emitted when percent is 0 or 100 and enableAnalytics is true.
          */
@@ -5573,6 +5871,14 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -5584,6 +5890,10 @@ declare namespace LocalJSX {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label
+         */
+        "labelHeaderLevel"?: string;
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */
@@ -5797,6 +6107,38 @@ declare namespace LocalJSX {
      */
     interface VaSummaryBox {
     }
+    interface VaTabItem {
+        /**
+          * The text content of the button element.
+         */
+        "buttonText": string;
+        /**
+          * This event is fired when the user navigates between tab items using the keyboard using the left and right arrow keys. It allows focus to be managed by parent va-tabs.
+         */
+        "onTabItemKeyNavigated"?: (event: VaTabItemCustomEvent<any>) => void;
+        /**
+          * This event is fired so that va-tabs element can manage which item is selected.
+         */
+        "onTabItemSelected"?: (event: VaTabItemCustomEvent<any>) => void;
+        /**
+          * Denotes whether this tab item is currently selected in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
+         */
+        "selected"?: boolean;
+        /**
+          * The `id` of the target panel that this tab item controls.
+         */
+        "targetId": string;
+    }
+    interface VaTabPanel {
+        /**
+          * The unique identifier for the tab panel. This should match the id referenced by the corresponding `va-tab-item`.
+         */
+        "panelId": string;
+        /**
+          * Indicates whether the tab panel is currently selected/visible in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
+         */
+        "selected"?: boolean;
+    }
     /**
      * @componentName Table
      * @maturityCategory caution
@@ -5804,9 +6146,17 @@ declare namespace LocalJSX {
      */
     interface VaTable {
         /**
+          * Text to display in empty cells. Needed for screen readers to announce empty cells.
+         */
+        "emptyCellText"?: string;
+        /**
           * When active, forces the table to expand to the full-width of its container
          */
         "fullWidth"?: boolean;
+        /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
         /**
           * A comma-separated, zero-indexed string of which columns, if any, should be right-aligned
          */
@@ -5851,6 +6201,10 @@ declare namespace LocalJSX {
          */
         "fullWidth"?: boolean;
         /**
+          * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
+         */
+        "monoFontCols"?: string;
+        /**
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
         "onSortTable"?: (event: VaTableInnerCustomEvent<any>) => void;
@@ -5885,6 +6239,40 @@ declare namespace LocalJSX {
         "tableType"?: 'borderless';
     }
     interface VaTableRow {
+    }
+    /**
+     * @componentName Tabs
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTabs {
+        /**
+          * The index of the initially selected tab. Defaults to `0` (the first tab).
+         */
+        "initiallySelected"?: number;
+        /**
+          * A unique name for the rendered div serving as `role="tablist"`. To be set as value for wrapper's `aria-label` attribute.
+         */
+        "label"?: string;
+    }
+    /**
+     * @componentName Tag - Status
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaTagStatus {
+        /**
+          * Screen reader text to provide context about the status tag. Defaults to `Status {status}:`.
+         */
+        "screenReaderText"?: string;
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "status"?: 'informational' | 'warning' | 'success' | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "text": string;
     }
     /**
      * @componentName Telephone
@@ -6027,6 +6415,10 @@ declare namespace LocalJSX {
          */
         "formHeadingLevel"?: number;
         /**
+          * Whether or not to show the (*Required) text.
+         */
+        "hideRequiredText"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -6089,6 +6481,10 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaTextInputCustomEvent<any>) => void;
         /**
+          * The event emitted when the input value changes
+         */
+        "onVaInput"?: (event: VaTextInputCustomEvent<any>) => void;
+        /**
           * The regular expression that the input element's value is checked against on submission
          */
         "pattern"?: string;
@@ -6115,7 +6511,7 @@ declare namespace LocalJSX {
         /**
           * The type attribute.
          */
-        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
           * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
@@ -6265,9 +6661,13 @@ declare namespace LocalJSX {
         "va-sidenav-submenu": VaSidenavSubmenu;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
+        "va-tab-item": VaTabItem;
+        "va-tab-panel": VaTabPanel;
         "va-table": VaTable;
         "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
+        "va-tabs": VaTabs;
+        "va-tag-status": VaTagStatus;
         "va-telephone": VaTelephone;
         "va-telephone-input": VaTelephoneInput;
         "va-text-input": VaTextInput;
@@ -6495,7 +6895,7 @@ declare module "@stencil/core" {
             "va-minimal-footer": LocalJSX.VaMinimalFooter & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
             /**
              * @click Used to detect clicks outside of modal contents to close modal.
-             * @keydown Used to detect Escape key to close modal.
+             * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
              * @componentName Modal
              * @maturityCategory use
              * @maturityLevel best_practice
@@ -6635,6 +7035,8 @@ declare module "@stencil/core" {
              * @maturityLevel deployed
              */
             "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
+            "va-tab-item": LocalJSX.VaTabItem & JSXBase.HTMLAttributes<HTMLVaTabItemElement>;
+            "va-tab-panel": LocalJSX.VaTabPanel & JSXBase.HTMLAttributes<HTMLVaTabPanelElement>;
             /**
              * @componentName Table
              * @maturityCategory caution
@@ -6648,6 +7050,18 @@ declare module "@stencil/core" {
              */
             "va-table-inner": LocalJSX.VaTableInner & JSXBase.HTMLAttributes<HTMLVaTableInnerElement>;
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
+            /**
+             * @componentName Tabs
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-tabs": LocalJSX.VaTabs & JSXBase.HTMLAttributes<HTMLVaTabsElement>;
+            /**
+             * @componentName Tag - Status
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-tag-status": LocalJSX.VaTagStatus & JSXBase.HTMLAttributes<HTMLVaTagStatusElement>;
             /**
              * @componentName Telephone
              * @maturityCategory use

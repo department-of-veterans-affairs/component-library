@@ -1,6 +1,7 @@
 @forward 'settings';
 @use 'usa-icon/src/styles/usa-icon';
 @use 'usa-breadcrumb/src/styles/usa-breadcrumb';
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @import '../../mixins/focusable.css';
 
 :host {
@@ -11,7 +12,7 @@
   pointer-events: none;
 }
 
-@media screen and (max-width: 29.99em) {
+@media screen and (max-width: $mobile-lg) {
   .usa-breadcrumb__list-item:not(:nth-last-child(2)) {
     display: none;
   }
@@ -23,7 +24,7 @@
   padding-bottom: 32px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: $medium-screen) {
   .usa-breadcrumb {
     padding-bottom: 48px;
   }
@@ -49,7 +50,7 @@
   background: var(--vads-color-gray-medium);
 }
 
-@media (max-width: 29.99em) {
+@media (max-width: $mobile-lg) {
   .usa-breadcrumb__list-item:nth-last-child(2) .usa-breadcrumb__link {
     padding-top: 0;
     padding-bottom: 0;

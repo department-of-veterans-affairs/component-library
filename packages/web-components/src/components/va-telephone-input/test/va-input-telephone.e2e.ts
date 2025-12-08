@@ -29,12 +29,12 @@ describe('va-telephone-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-telephone-input contact="abcdefg" />');
     const input = await page.find('va-telephone-input >>> input#inputField');
-    await input.click(); 
+    await input.click();
     await input.press('Tab');
     const value = await input.getProperty('value');
     expect(value).toBe('abcdefg')
     const error = await page.find('va-telephone-input >>> span#error-message');
-    expect(error.innerText).toContain('phone number in a valid format, for example,');
+    expect(error.innerText).toContain('Enter a valid United States of America phone number. Use 10 digits.');
   });
 
   it('prefills a country', async () => {
@@ -65,14 +65,15 @@ describe('va-telephone-input', () => {
     expect(error.innerText).toContain('This is an error message');
   });
 
-  it('shows an error message if contact missing', async () => {
+  it('shows an error message if contact invalid', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-telephone-input />');
     const input = await page.find('va-telephone-input >>> va-text-input');
-    await input.click(); 
+    await input.click();
+    await input.press('1');
     await input.press('Tab');
     const error = await page.find('va-telephone-input >>> span#error-message');
-    expect(error.innerText).toContain('phone number in a valid format, for example,');
+    expect(error.innerText).toContain('Enter a valid United States of America phone number. Use 10 digits.');
   });
 
   it('shows an error message if contact does not match the form required by the selected country', async () => {
@@ -82,7 +83,7 @@ describe('va-telephone-input', () => {
     await input.press('2');
     await input.press('Tab');
     const error = await page.find('va-telephone-input >>> span#error-message');
-    expect(error.innerText).toContain('phone number in a valid format, for example,');
+    expect(error.innerText).toContain('Enter a valid United States of America phone number. Use 10 digits.');
   });
 
   it('shows an error message if country is missing', async () => {
@@ -114,9 +115,10 @@ describe('va-telephone-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-telephone-input country="ID" />');
     let input = await page.find('va-telephone-input >>> va-text-input >>> input');
+    await input.press('1');
     await input.press('Tab');
     let error = await page.find('va-telephone-input >>> span#error-message');
-    expect(error.innerText).toContain('Enter an Indonesia');
+    expect(error.innerText).toContain('Enter a valid Indonesia phone number. Use 7 to 17 digits.');
   });
 
   it('handles the a/an in error message appropriately for country doesn\'t start with vowel', async () => {
@@ -124,9 +126,10 @@ describe('va-telephone-input', () => {
     await page.setContent('<va-telephone-input country="FJ" />');
     await page.waitForChanges();
     const input = await page.find('va-telephone-input >>> va-text-input >>> input');
+    await input.press('1');
     await input.press('Tab');
     const error = await page.find('va-telephone-input >>> span#error-message');
-    expect(error.innerText).toContain('Enter a Fiji');
+    expect(error.innerText).toContain('Enter a valid Fiji phone number. Use 7 or 11 digits.');
   });
 
   it('emits the vaContact event', async () => {
@@ -173,7 +176,7 @@ describe('va-telephone-input', () => {
     await page.keyboard.press('Enter');
     await page.waitForChanges();
     const error = await page.find('va-telephone-input >>> span#error-message');
-      expect(error).toBeNull();
+      expect(error.innerText.trim()).toBe('');
   });
 
   it('passes an axe check', async () => {

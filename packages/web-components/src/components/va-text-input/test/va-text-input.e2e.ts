@@ -24,7 +24,7 @@ describe('va-text-input', () => {
         </mock:shadow-root>
       </va-text-input>
     `);
-  });
+  })
 
   it('renders an error message', async () => {
     const page = await newE2EPage();
@@ -215,6 +215,62 @@ describe('va-text-input', () => {
     expect(secondValue).toEqual('as');
   });
 
+  it('emits vaInput custom event with correct value', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Input Field" />');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    const vaInputSpy = await page.spyOnEvent('vaInput');
+
+    await inputEl.press('h');
+    await inputEl.press('e');
+    await inputEl.press('l');
+    await inputEl.press('l');
+    await inputEl.press('o');
+
+    expect(vaInputSpy).toHaveReceivedEventTimes(5);
+    
+    // Check the last event detail contains the complete value
+    expect(vaInputSpy).toHaveReceivedEventDetail({
+      value: 'hello',
+    });
+  });
+
+  it('emits vaInput custom event when value is cleared', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Input Field" value="initial" />');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    const vaInputSpy = await page.spyOnEvent('vaInput');
+
+    await inputEl.click({ clickCount: 3 }); // Select all text
+    await inputEl.press('Backspace');
+
+    expect(vaInputSpy).toHaveReceivedEventTimes(1);
+    expect(vaInputSpy).toHaveReceivedEventDetail({
+      value: '',
+    });
+  });
+
+  it('emits vaInput custom event with updated value on paste', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Input Field" />');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    const vaInputSpy = await page.spyOnEvent('vaInput');
+
+    await inputEl.type('pasted text');
+
+    expect(vaInputSpy).toHaveReceivedEventTimes(11); // "pasted text" = 11 characters
+    
+    expect(vaInputSpy).toHaveReceivedEventDetail({
+      value: 'pasted text',
+    });
+  });
+
   it("doesn't fire analytics events", async () => {
     const page = await newE2EPage();
 
@@ -245,8 +301,16 @@ describe('va-text-input', () => {
     // Test the functionality
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('222');
+
     expect(
       (await page.find('va-text-input >>> span.usa-character-count__status'))
+        .innerText,
+    ).toContain('0 characters left');
+
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1000));
+    expect(
+      (await page.find('va-text-input >>> span#charcount-message'))
         .innerText,
     ).toContain('0 characters left');
 
@@ -254,8 +318,16 @@ describe('va-text-input', () => {
     await inputEl.click({ clickCount: 3 });
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('2');
+
     expect(
       (await page.find('va-text-input >>> span.usa-character-count__status'))
+        .innerText,
+    ).toContain('2 characters left');
+
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1000));
+    expect(
+      (await page.find('va-text-input >>> span#charcount-message'))
         .innerText,
     ).toContain('2 characters left');
 
@@ -355,6 +427,7 @@ describe('va-text-input', () => {
       'email',
       'none',
       'numeric',
+      'password',
       'search',
       'tel',
       'text',
@@ -414,11 +487,18 @@ describe('va-text-input', () => {
 
     const inputEl = await page.find('va-text-input >>> input');
     await inputEl.type('Hello');
-    const span = await page.find(
-      'va-text-input >>> span.usa-character-count__status',
-    );
 
-    expect(span.innerText).toEqual('5 characters left');
+    expect(
+      (await page.find('va-text-input >>> span.usa-character-count__status'))
+        .innerText,
+    ).toContain('5 characters left');
+
+    // Wait 1000ms for the screen reader character count to update (debounced in the component)
+    await new Promise((r) => setTimeout(r, 1000));
+    expect(
+      (await page.find('va-text-input >>> span#charcount-message'))
+        .innerText,
+    ).toContain('5 characters left');
   });
 
   it('charcount and maxlength text does not display on memorable date', async () => {
@@ -563,6 +643,7 @@ describe('va-text-input', () => {
     const inputEl = await page.find('va-text-input >>> input');
     expect(inputEl.getAttribute('step')).toEqual('.01');
   });
+
   it('does not set the step attribute when step is defined', async () => {
     const page = await newE2EPage();
     await page.setContent(

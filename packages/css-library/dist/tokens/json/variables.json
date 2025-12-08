@@ -149,6 +149,21 @@
       "desktop-lg"
     ]
   },
+  "widescreen": {
+    "value": "1400px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "1400px"
+    },
+    "name": "widescreen",
+    "attributes": {
+      "category": "widescreen"
+    },
+    "path": [
+      "widescreen"
+    ]
+  },
   "color-link-default-hover": {
     "alpha": "0.05",
     "value": "rgba(#000000, 0.05)",
@@ -2354,6 +2369,124 @@
       }
     }
   },
+  "vads-elevation": {
+    "shadow": {
+      "1": {
+        "value": "0px 1px 4px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 1px 4px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-1",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "1"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "1"
+        ]
+      },
+      "2": {
+        "value": "0px 4px 8px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 4px 8px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-2",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "2"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "2"
+        ]
+      },
+      "3": {
+        "value": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-3",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "3"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "3"
+        ]
+      },
+      "4": {
+        "value": "0px 12px 24px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 12px 24px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-4",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "4"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "4"
+        ]
+      },
+      "5": {
+        "value": "0px 16px 32px 0px rgba(0, 0, 0, 0.1)",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "0px 16px 32px 0px rgba(0, 0, 0, 0.1)"
+        },
+        "name": "vads-elevation-shadow-5",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "5"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "5"
+        ]
+      },
+      "none": {
+        "value": "none",
+        "filePath": "tokens/elevation.json",
+        "isSource": true,
+        "original": {
+          "value": "none"
+        },
+        "name": "vads-elevation-shadow-none",
+        "attributes": {
+          "category": "vads-elevation",
+          "type": "shadow",
+          "item": "none"
+        },
+        "path": [
+          "vads-elevation",
+          "shadow",
+          "none"
+        ]
+      }
+    }
+  },
   "font": {
     "family": {
       "sans": {
@@ -2392,6 +2525,25 @@
           "font",
           "family",
           "serif"
+        ]
+      },
+      "mono": {
+        "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace"
+        },
+        "name": "font-family-mono",
+        "attributes": {
+          "category": "font",
+          "type": "family",
+          "item": "mono"
+        },
+        "path": [
+          "font",
+          "family",
+          "mono"
         ]
       }
     },
@@ -2432,6 +2584,23 @@
           "sans"
         ]
       }
+    },
+    "mono": {
+      "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace",
+      "filePath": "tokens/fonts.json",
+      "isSource": true,
+      "original": {
+        "value": "'Roboto Mono Web', 'Bitstream Vera Sans Mono', 'Consolas', 'Courier', monospace"
+      },
+      "name": "font-mono",
+      "attributes": {
+        "category": "font",
+        "type": "mono"
+      },
+      "path": [
+        "font",
+        "mono"
+      ]
     },
     "weight": {
       "normal": {
@@ -2591,11 +2760,11 @@
         ]
       },
       "xl": {
-        "value": "1.875rem",
+        "value": "2rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "1.875rem"
+          "value": "2rem"
         },
         "name": "font-size-xl",
         "attributes": {
@@ -2648,7 +2817,7 @@
         ]
       },
       "h2": {
-        "value": "1.875rem",
+        "value": "2rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2939,6 +3108,44 @@
           "line-height",
           "heading"
         ]
+      },
+      "serif": {
+        "value": "1.9",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.9"
+        },
+        "name": "vads-font-line-height-serif",
+        "attributes": {
+          "category": "vads-font",
+          "type": "line-height",
+          "item": "serif"
+        },
+        "path": [
+          "vads-font",
+          "line-height",
+          "serif"
+        ]
+      },
+      "mono": {
+        "value": "1.7",
+        "filePath": "tokens/fonts.json",
+        "isSource": true,
+        "original": {
+          "value": "1.7"
+        },
+        "name": "vads-font-line-height-mono",
+        "attributes": {
+          "category": "vads-font",
+          "type": "line-height",
+          "item": "mono"
+        },
+        "path": [
+          "vads-font",
+          "line-height",
+          "mono"
+        ]
       }
     },
     "size": {
@@ -3087,11 +3294,11 @@
       },
       "heading": {
         "level-1": {
-          "value": "40px",
+          "value": "2.5rem",
           "filePath": "tokens/fonts.json",
           "isSource": true,
           "original": {
-            "value": "40px"
+            "value": "2.5rem"
           },
           "name": "vads-font-size-heading-level-1",
           "attributes": {
@@ -3108,11 +3315,11 @@
           ]
         },
         "level-2": {
-          "value": "32px",
+          "value": "2rem",
           "filePath": "tokens/fonts.json",
           "isSource": true,
           "original": {
-            "value": "32px"
+            "value": "2rem"
           },
           "name": "vads-font-size-heading-level-2",
           "attributes": {
@@ -3129,11 +3336,11 @@
           ]
         },
         "level-3": {
-          "value": "20px",
+          "value": "1.25rem",
           "filePath": "tokens/fonts.json",
           "isSource": true,
           "original": {
-            "value": "20px"
+            "value": "1.25rem"
           },
           "name": "vads-font-size-heading-level-3",
           "attributes": {
@@ -3150,11 +3357,11 @@
           ]
         },
         "level-4": {
-          "value": "17px",
+          "value": "1.063rem",
           "filePath": "tokens/fonts.json",
           "isSource": true,
           "original": {
-            "value": "17px"
+            "value": "1.063rem"
           },
           "name": "vads-font-size-heading-level-4",
           "attributes": {
@@ -3171,11 +3378,11 @@
           ]
         },
         "level-5": {
-          "value": "15px",
+          "value": "0.938rem",
           "filePath": "tokens/fonts.json",
           "isSource": true,
           "original": {
-            "value": "15px"
+            "value": "0.938rem"
           },
           "name": "vads-font-size-heading-level-5",
           "attributes": {
@@ -3192,11 +3399,11 @@
           ]
         },
         "level-6": {
-          "value": "15px",
+          "value": "0.938rem",
           "filePath": "tokens/fonts.json",
           "isSource": true,
           "original": {
-            "value": "15px"
+            "value": "0.938rem"
           },
           "name": "vads-font-size-heading-level-6",
           "attributes": {

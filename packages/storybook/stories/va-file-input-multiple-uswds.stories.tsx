@@ -17,6 +17,7 @@ export default {
         <StoryDocs storyDefault={Default} data={fileInputMultipleDocs} />
       ),
     },
+    storyType: 'form',
   },
 };
 
@@ -83,6 +84,11 @@ Accept.args = {
   label: 'Select PDF files',
   hint: 'All files in this list must be PDFs',
   accept: '.pdf',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Accept.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const HeaderSize = Template.bind(null);
@@ -182,6 +188,11 @@ AdditionalFormInputs.args = {
   label: 'Additional Form Inputs',
   children: additionalFormInputsContent,
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AdditionalFormInputs.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const AdditionalFormInputsOnSpecificFieldsContentTemplate = ({
   label,
@@ -248,6 +259,11 @@ AdditionalFormInputsOnSpecificFields.args = {
   label: 'Additional Form Inputs On Specific Inputs',
   children: additionalFormInputsContent,
   slotFieldIndexes: '[1,3]',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AdditionalFormInputsOnSpecificFields.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 const ErrorsTemplate = ({ label, name, hint }) => {
@@ -322,6 +338,11 @@ export const Errors = ErrorsTemplate.bind(null);
 Errors.args = {
   ...defaultArgs,
   label: 'Label Header',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Errors.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 const CustomValidationTemplate = ({ label, name, accept, hint }) => {
@@ -426,11 +447,16 @@ CustomValidation.args = {
   label: 'Upload files which are smaller than 2 MB',
   hint: 'Select any file type',
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+CustomValidation.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const EncryptedTemplate = ({ label, name }) => {
   const [encryptedList, setEncryptedList] = useState([]);
 
-  function setEncrpytedForEachFile(event) {
+  function setEncryptedForEachFile(event) {
     const fileEntries = event.detail.state;
     const pdfFiles = fileEntries.map((file) => {
       return file.file.type === 'application/pdf'
@@ -440,23 +466,23 @@ const EncryptedTemplate = ({ label, name }) => {
 
   return (
     <>
-      To learn how to check for an encrypted PDF <va-link 
+      To learn how to check for an encrypted PDF <va-link
         text='see platform documentation'
-        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted' 
+        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted'
       />.
       <VaFileInputMultiple
         label={label}
         name={name}
         hint={"This example shows a password field when a .pdf file is uploaded."}
         encrypted={encryptedList}
-        onVaMultipleChange={setEncrpytedForEachFile}
+        onVaMultipleChange={setEncryptedForEachFile}
       />
       <hr />
       <div>
         <p>
           Parent components are responsible for managing if a password
-          needs to be requested for the file through a dedicated encryted
-          array. Each index in this array corresponds to a file input, 
+          needs to be requested for the file through a dedicated encrypted
+          array. Each index in this array corresponds to a file input,
           with the value at each index being true if a password should
           be requested for that specific file, or false if no password is
           needed. By default, no password field will be displayed. This
@@ -468,22 +494,25 @@ const EncryptedTemplate = ({ label, name }) => {
       <div className="vads-u-margin-top--2">
         <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
           <code>
-            {`const [encryptedList, setEncryptedList] = useState([]);
+            {`
+              const [encryptedList, setEncryptedList] = useState([]);
 
-  function setEncrpytedForEachFile(event) {
-    const fileEntries = event.detail.state;
-    const pdfFiles = fileEntries.map((file, index) => {
-      return file.file.type === 'application/pdf'
-    });
-    setEncryptedList(pdfFiles);
-  }
+              function setEncryptedForEachFile(event) {
+                const fileEntries = event.detail.state;
+                const pdfFiles = fileEntries.map((file, index) => {
+                  return file.file.type === 'application/pdf'
+                });
+                setEncryptedList(pdfFiles);
+              }
 
-  return (
-    <VaFileInputMultiple
-      ...
-      encrypted={encryptedList}
-      onVaMultipleChange={setEncrpytedForEachFile}
-    />`}
+              return (
+                <VaFileInputMultiple
+                  ...
+                  encrypted={encryptedList}
+                  onVaMultipleChange={setEncryptedForEachFile}
+                />
+              );
+            `}
           </code>
         </pre>
         <a
@@ -499,6 +528,11 @@ const EncryptedTemplate = ({ label, name }) => {
 
 export const AcceptsFilePassword = EncryptedTemplate.bind(null);
 AcceptsFilePassword.args = {...defaultArgs};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsFilePassword.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const FilesUploadedTemplate = args => {
   const [mockFiles, setMockFiles] = useState(null);

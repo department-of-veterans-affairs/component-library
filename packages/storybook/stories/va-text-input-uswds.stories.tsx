@@ -3,6 +3,8 @@ import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
+  useErrorToggle,
+  errorToggleArgTypes,
   applyFocus,
 } from './wc-helpers';
 import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
@@ -14,11 +16,14 @@ export default {
   id: 'uswds/va-text-input',
   parameters: {
     componentSubtitle: 'va-text-input web component',
+    storyType: 'form',
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={textInputDocs} />,
     },
   },
   argTypes: {
+    ...propStructure(textInputDocs),
+    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
     inputmode: {
       control: {
         type: 'select',
@@ -36,7 +41,12 @@ export default {
     type: {
       control: {
         type: 'select',
-        options: ['email', 'number', 'search', 'tel', 'text', 'url'],
+        options: ['email', 'number', 'password', 'search', 'tel', 'text', 'url'],
+      },
+    },
+    'hide-required-text': {
+      table: {
+        disable: true,
       },
     },
   },
@@ -72,6 +82,8 @@ const defaultArgs = {
   'input-suffix': undefined,
   'input-icon-suffix': undefined,
   'show-input-error': true,
+  'showToggleFocusButton': false,
+  'focusEl': null,
 };
 
 const Template = ({
@@ -99,38 +111,53 @@ const Template = ({
   'input-suffix': inputSuffix,
   'input-icon-suffix': inputIconSuffix,
   'show-input-error': showInputError,
+  showToggleFocusButton,
+  focusEl
 }) => {
+
+  const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
+
   return (
-    <va-text-input
-      name={name}
-      label={label}
-      autocomplete={autocomplete}
-      enable-analytics={enableAnalytics}
-      required={required}
-      error={error}
-      hint={hint}
-      maxlength={maxlength}
-      value={value}
-      inputmode={inputmode}
-      step={step}
-      type={type}
-      success={success}
-      pattern={pattern}
-      onBlur={e => console.log('blur event', e)}
-      onInput={e =>
-        console.log('input event value', (e.target as HTMLInputElement).value)
-      }
-      message-aria-describedby={messageAriaDescribedby}
-      charcount={charcount}
-      min={min}
-      max={max}
-      currency={currency}
-      input-prefix={inputPrefix}
-      input-icon-prefix={inputIconPrefix}
-      input-suffix={inputSuffix}
-      input-icon-suffix={inputIconSuffix}
-      show-input-error={showInputError}
-    />
+    <>
+      <va-text-input
+        name={name}
+        label={label}
+        autocomplete={autocomplete}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={errorMsg}
+        hint={hint}
+        maxlength={maxlength}
+        value={value}
+        inputmode={inputmode}
+        step={step}
+        type={type}
+        success={success}
+        pattern={pattern}
+        onBlur={e => console.log('blur event', e)}
+        onInput={e =>
+          console.log('input event value', (e.target as HTMLInputElement).value)
+        }
+        message-aria-describedby={messageAriaDescribedby}
+        charcount={charcount}
+        min={min}
+        max={max}
+        currency={currency}
+        input-prefix={inputPrefix}
+        input-icon-prefix={inputIconPrefix}
+        input-suffix={inputSuffix}
+        input-icon-suffix={inputIconSuffix}
+        show-input-error={showInputError}
+        id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+      />
+      {showToggleFocusButton && (
+          <va-button
+            text="Toggle error state"
+            onClick={handleClick}
+            class="vads-u-margin-top--2"
+          ></va-button>
+      )}
+    </>
   );
 };
 
@@ -321,12 +348,22 @@ Internationalization.args = {
   required: true,
   maxlength: '6',
 };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Internationalization.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const Pattern = Template.bind(null);
 Pattern.args = {
   ...defaultArgs,
   label: 'Must be 4 digits',
   pattern: '[0-9]{4}',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+Pattern.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const ValidRange = Template.bind(null);
@@ -336,6 +373,11 @@ ValidRange.args = {
   min: 0,
   max: 4,
   hint: 'The valid range is 0 to 4',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+ValidRange.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const Autocomplete = ({ name, label, autocomplete }) => {
@@ -398,9 +440,15 @@ Autocomplete.args = {
   autocomplete: 'email',
   label: 'This va-text-input is configured for email autocompletion',
 };
+Autocomplete.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
@@ -412,6 +460,27 @@ WithStep.args = {
   inputmode: 'decimal',
   step: '.2',
   hint: 'step=".2" (only even values in tenth position valid)',
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+WithStep.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
+export const Password = Template.bind(null);
+Password.args = {
+  ...defaultArgs,
+  type: 'password',
+  label: 'Password',
+  hint: 'Enter your password',
+  required: true,
+};
+Password.parameters = {
+  docs: {
+    description: {
+      story: 'A password input that masks the entered text for security purposes.'
+    }
+  }
 };
 
 const WithInlineHintTextTemplate = ({ name, label }) => {
@@ -425,6 +494,9 @@ const WithInlineHintTextTemplate = ({ name, label }) => {
 
 export const WithInlineHintText = WithInlineHintTextTemplate.bind(null);
 WithInlineHintText.args = { ...defaultArgs, label: 'My input (with hint)' };
+WithInlineHintText.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 const WithAdditionalInfoTemplate = ({ name, label }) => {
   return (

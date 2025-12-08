@@ -7,6 +7,7 @@
 @import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-action-link.css';
 @import '@department-of-veterans-affairs/css-library/dist/stylesheets/_mixins.scss';
 @import '@department-of-veterans-affairs/css-library/dist/stylesheets/site/_m-crisis-line.scss';
+@import '@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
 // Remove Negative Margin via Default Storybook CSS
 // This is causing the show code button to overlap with components
@@ -57,12 +58,6 @@ a.sbdocs-a:hover {
 .resize-y {
   resize: vertical;
 }
-
-/** Global styles for USWDS 3 integration into Storybook **/
-.usa-label {
-  font-size: 15px !important;
-}
-
 button {
   padding: 10px 20px !important;
 }
@@ -70,3 +65,13 @@ button {
 .docblock-argstable a {
   font-size: 14px;
 }
+
+/**
+* Applies left margin for form element stories to allow the error border-left to be visible.
+*/
+.sb-type--form {
+  @include media($small-desktop-screen) {
+    margin-left: .9rem;
+  }
+}
+

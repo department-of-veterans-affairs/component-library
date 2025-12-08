@@ -1,9 +1,11 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @use '../../../css-library/src/stylesheets/formation-overrides/elements/labels' as *;
 @import '../../mixins/focusable.css';
 @import '../../mixins/headers.css';
 
 :host {
   display: block;
+  font-size: 1rem;
 }
 
 .service-list-item {
@@ -94,7 +96,7 @@
       }
 
       .chevron-icon {
-        @media (min-width: 768px) {
+        @media (min-width: $medium-screen) {
           margin-left: 0.938rem;
         }
       }
@@ -103,8 +105,8 @@
     .service-name {
       margin-top: 0;
       width: 11.875rem;
-      color: var(--vads-color-link); 
-      @media (min-width: 768px) {
+      color: var(--vads-color-link);
+      @media (min-width: $medium-screen) {
         width: auto;
       }
     }
@@ -117,7 +119,7 @@
       margin-left: auto;
       font-size: 24px;
       color: var(--vads-color-link);
-      @media (min-width: 768px) {
+      @media (min-width: $medium-screen) {
         margin-left: 0.938rem;
       }
     }
@@ -128,20 +130,20 @@
       background-color: var(--vads-color-action-focus-on-light);
       color: var(--vads-color-link);
       box-shadow: 0px 4px 0px var(--vads-color-base);
-      
+
       .icon {
         background-color: var(--vads-color-base);
       }
-      
+
       .service-name {
         color: var(--vads-color-base);
       }
-      
+
       .chevron-icon {
         color: var(--vads-color-base);
       }
     }
-    
+
     &:active {
       .service-name {
         text-decoration: underline;

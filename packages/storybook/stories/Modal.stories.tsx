@@ -6,6 +6,9 @@ export default {
   title: 'Deprecated/Modal - React',
   component: Modal,
   parameters: {
+    // Snapshots disabled because visual difference is only apparent after interaction.
+    // TODO: Enable snapshots after integrating Storybook play function
+    chromatic: { disableSnapshot: true },
     componentSubtitle: 'Modal React component',
     docs: {
       page: () => <StoryDocs storyDefault={Default} componentName="Modal - React" />,
@@ -173,4 +176,7 @@ CrisisLineModal.args = {
       </div>
     </div>
   ),
+};
+CrisisLineModal.parameters = {
+  chromatic: { disableSnapshot: false },
 };

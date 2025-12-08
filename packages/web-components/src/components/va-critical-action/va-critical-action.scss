@@ -1,3 +1,5 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
+
 :host {
   display: block;
 }
@@ -11,7 +13,7 @@
   position: relative;
   min-height: 2.063rem;
 
-  @media (min-width: 768px) {
+  @media (min-width: $medium-screen) {
     left: 0;
     width: auto;
   }
