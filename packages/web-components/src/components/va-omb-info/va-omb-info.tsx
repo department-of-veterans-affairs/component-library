@@ -54,7 +54,7 @@ export class VaOmbInfo {
    */
   @Prop() resBurden?: number;
 
-  /*
+  /**
    * If `true`, the text for the respondent burden value will be rendered as "hours" instead of "minutes".
    */
   @Prop() displayResBurdenInHours?: boolean = false;
