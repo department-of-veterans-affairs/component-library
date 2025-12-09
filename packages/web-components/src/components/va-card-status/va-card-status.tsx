@@ -122,10 +122,9 @@ export class VaCard {
               <slot></slot>
               <footer>
                 {linkHref && linkText ? (
-                  <va-link
+                  <va-link-action
                     aria-describedby={ariaDescribedbyIds}
-                    iconName="navigate_next"
-                    iconSize={3}
+                    type='secondary'
                     href={linkHref}
                     text={linkText}
                   />

@@ -11,6 +11,12 @@
   .va-card-status__tag {
     display: block;
   }
+
+  #card-title {
+    font-size: 1.33rem;
+    font-family: var(--font-serif);
+    font-weight: 700;
+  }
 }
 
 :host([error]:not([error=''])) .va-card-status__wrapper {

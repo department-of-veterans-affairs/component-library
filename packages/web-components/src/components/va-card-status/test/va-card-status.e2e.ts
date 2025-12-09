@@ -77,7 +77,7 @@ describe('<va-card-status />', () => {
     `);
     await page.waitForChanges();
 
-    const vaLink = await page.find('va-card-status >>> va-link');
+    const vaLink = await page.find('va-card-status >>> va-link-action');
     expect(vaLink).not.toBeNull();
 
   });
@@ -123,7 +123,7 @@ describe('<va-card-status />', () => {
     expect(message.textContent).toBe('Danger!');
   });
 
-  it('sets aria-describedby on <va-link> when errorMessage is present', async () => {
+  it('sets aria-describedby on <va-link-action> when errorMessage is present', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-card-status 
@@ -134,7 +134,7 @@ describe('<va-card-status />', () => {
     `);
     await page.waitForChanges();
 
-    const vaLink = await page.find('va-card-status >>> va-link');
+    const vaLink = await page.find('va-card-status >>> va-link-action');
     expect(vaLink.getAttribute('aria-describedby')).toBe('card-status-error-message');
   });
 });
