@@ -21,7 +21,7 @@ jobs:
       - run: yarn install
       
       - name: Install Puppeteer browsers
-        run: npx puppeteer browsers install chrome
+        run: node node_modules/puppeteer/install.mjs
 
       - name: Test react-components
         run: |
