@@ -190,9 +190,9 @@ __metadata:
   linkType: hard
 
 "@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.19.0":
-  version: 7.27.1
-  resolution: "@babel/runtime@npm:7.27.1"
-  checksum: 10/34cefcbf781ea5a4f1b93f8563327b9ac82694bebdae91e8bd9d7f58d084cbe5b9a6e7f94d77076e15b0bcdaa0040a36cb30737584028df6c4673b4c67b2a31d
+  version: 7.28.4
+  resolution: "@babel/runtime@npm:7.28.4"
+  checksum: 10/6c9a70452322ea80b3c9b2a412bcf60771819213a67576c8cec41e88a95bb7bf01fc983754cda35dc19603eef52df22203ccbf7777b9d6316932f9fb77c25163
   languageName: node
   linkType: hard
 
@@ -288,20 +288,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@department-of-veterans-affairs/component-library@npm:^50.2.1":
-  version: 50.2.1
-  resolution: "@department-of-veterans-affairs/component-library@npm:50.2.1"
+"@department-of-veterans-affairs/component-library@npm:^54.3.0":
+  version: 54.3.0
+  resolution: "@department-of-veterans-affairs/component-library@npm:54.3.0"
   dependencies:
     "@department-of-veterans-affairs/react-components": "npm:28.1.0"
-    "@department-of-veterans-affairs/web-components": "npm:18.1.2"
+    "@department-of-veterans-affairs/web-components": "npm:22.3.0"
     i18next: "npm:^21.6.14"
     i18next-browser-languagedetector: "npm:^6.1.4"
     react-focus-on: "npm:^3.5.1"
     react-transition-group: "npm:^1.0.0"
   peerDependencies:
-    react: ^18
+    react: ^19
     react-dom: "*"
-  checksum: 10/e011fef78aad70ab538fef4562940f9925ab07d0be96f9bcaee86daf13c50416ce62a7cdad21b63b4ccc5fee4bce5d9d8a25e89eeb5df4ec636a38567e76a60f
+  checksum: 10/ab4b1d281e77240249cc149c18a264618445f8840a0615f6727d4756480d46821085e11fccfd288244771c3ab282a96b4d62e426e4b2993ed39526530239214e
   languageName: node
   linkType: hard
 
@@ -335,9 +335,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@department-of-veterans-affairs/web-components@npm:18.1.2":
-  version: 18.1.2
-  resolution: "@department-of-veterans-affairs/web-components@npm:18.1.2"
+"@department-of-veterans-affairs/web-components@npm:22.3.0":
+  version: 22.3.0
+  resolution: "@department-of-veterans-affairs/web-components@npm:22.3.0"
   dependencies:
     "@stencil/core": "npm:4.20.0"
     aria-hidden: "npm:^1.1.3"
@@ -345,10 +345,11 @@ __metadata:
     chromatic: "npm:^11.0.4"
     classnames: "npm:^2.3.1"
     intersection-observer: "npm:^0.12.0"
+    libphonenumber-js: "npm:^1.12.7"
   peerDependencies:
     i18next: "*"
     i18next-browser-languagedetector: "*"
-  checksum: 10/f0bd4bfda5f335e1695abcd8d4760147cd07781e35b8fb54046bad072080a26d8c59b61d40bd8c378c8c046d0765318e992b19d0fea2a41713c5badd1a927b79
+  checksum: 10/4ca2849398f99d433acff3e090a6e87edacaaf471143d36b2f76907e213eb7368782d989312bd11d22703aa2677bfd2a7a88038848737bffadc0d604a59e9da9
   languageName: node
   linkType: hard
 
@@ -1521,8 +1522,8 @@ __metadata:
   linkType: hard
 
 "glob@npm:^10.2.2, glob@npm:^10.3.7":
-  version: 10.4.5
-  resolution: "glob@npm:10.4.5"
+  version: 10.5.0
+  resolution: "glob@npm:10.5.0"
   dependencies:
     foreground-child: "npm:^3.1.0"
     jackspeak: "npm:^3.1.2"
@@ -1532,7 +1533,7 @@ __metadata:
     path-scurry: "npm:^1.11.1"
   bin:
     glob: dist/esm/bin.mjs
-  checksum: 10/698dfe11828b7efd0514cd11e573eaed26b2dff611f0400907281ce3eab0c1e56143ef9b35adc7c77ecc71fba74717b510c7c223d34ca8a98ec81777b293d4ac
+  checksum: 10/ab3bccfefcc0afaedbd1f480cd0c4a2c0e322eb3f0aa7ceaa31b3f00b825069f17cf0f1fc8b6f256795074b903f37c0ade37ddda6a176aa57f1c2bbfe7240653
   languageName: node
   linkType: hard
 
@@ -1747,6 +1748,13 @@ __metadata:
   version: 1.1.0
   resolution: "keyboardevent-key-polyfill@npm:1.1.0"
   checksum: 10/e9564ec35592441f69bd87629266b2b3014818a345e4d97253ba5bc5e0173fd7df3005858c9607de999510b0ff3fb2087ac51a9923897e3b3f22fd5dbd789cbe
+  languageName: node
+  linkType: hard
+
+"libphonenumber-js@npm:^1.12.7":
+  version: 1.12.31
+  resolution: "libphonenumber-js@npm:1.12.31"
+  checksum: 10/e7bcb73ca1e944668361320ecdec1bc7092cab6272a58a5002268df1eaccf0ef6595801fc0bb61e74c17d2b10f6822f6dc20707482d6a347d338e4d246d35056
   languageName: node
   linkType: hard
 
@@ -2757,7 +2765,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vite-react-typescript@workspace:."
   dependencies:
-    "@department-of-veterans-affairs/component-library": "npm:^50.2.1"
+    "@department-of-veterans-affairs/component-library": "npm:^54.3.0"
     "@department-of-veterans-affairs/css-library": "npm:^0.21.1"
     "@types/react": "npm:^19.0.0"
     "@types/react-dom": "npm:^19.0.0"
@@ -2765,12 +2773,67 @@ __metadata:
     jsdom: "npm:^26.0.0"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
-    vite: "npm:6.3.5"
+    vite: "npm:6.4.1"
     vitest: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
 
-"vite@npm:6.3.5, vite@npm:^5.0.0 || ^6.0.0":
+"vite@npm:6.4.1":
+  version: 6.4.1
+  resolution: "vite@npm:6.4.1"
+  dependencies:
+    esbuild: "npm:^0.25.0"
+    fdir: "npm:^6.4.4"
+    fsevents: "npm:~2.3.3"
+    picomatch: "npm:^4.0.2"
+    postcss: "npm:^8.5.3"
+    rollup: "npm:^4.34.9"
+    tinyglobby: "npm:^0.2.13"
+  peerDependencies:
+    "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
+    jiti: ">=1.21.0"
+    less: "*"
+    lightningcss: ^1.21.0
+    sass: "*"
+    sass-embedded: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10/ea2083b6b1d1c9e85a13d6797ae989aa1dbc27a5c054319c71141934bf3f8dba8d54b510618040f95751148da63787f28f043df7458a194c81f8b6d8a2d32844
+  languageName: node
+  linkType: hard
+
+"vite@npm:^5.0.0 || ^6.0.0":
   version: 6.3.5
   resolution: "vite@npm:6.3.5"
   dependencies:
