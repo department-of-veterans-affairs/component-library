@@ -7963,7 +7963,7 @@ __metadata:
     fast-memoize: "npm:^2.5.2"
     glob: "npm:^7.1.6"
     husky: "npm:>=6"
-    jest: "npm:^29.7.0"
+    jest: "npm:29.7.0"
     jsonexport: "npm:^3.2.0"
     lint-staged: "npm:>=10"
     lodash: "npm:^4.17.21"
@@ -11217,7 +11217,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^29, jest@npm:^29.7.0":
+"jest@npm:29.7.0, jest@npm:^29":
   version: 29.7.0
   resolution: "jest@npm:29.7.0"
   dependencies:

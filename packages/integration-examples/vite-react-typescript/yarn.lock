@@ -2765,12 +2765,12 @@ __metadata:
     jsdom: "npm:^26.0.0"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
-    vite: "npm:^6.3.5"
+    vite: "npm:6.3.5"
     vitest: "npm:^3.0.8"
   languageName: unknown
   linkType: soft
 
-"vite@npm:^5.0.0 || ^6.0.0, vite@npm:^6.3.5":
+"vite@npm:6.3.5, vite@npm:^5.0.0 || ^6.0.0":
   version: 6.3.5
   resolution: "vite@npm:6.3.5"
   dependencies:
