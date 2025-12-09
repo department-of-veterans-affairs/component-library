@@ -35,6 +35,8 @@ To install dependencies in the component packages and run a local build of the c
 npm run dev
 ```
 
+_**Note:**_ For engineers on a Windows machine, use `npm run dev-windows` instead.
+
 This setup script automates the following tasks:
 
 1. `cd packages/web-components/`
