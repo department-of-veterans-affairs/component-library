@@ -319,5 +319,6 @@ describe('va-link', () => {
     const anchor = await page.find('va-link >>> a');
     expect(anchor.getAttribute('rel')).toEqual('noreferrer');
     expect(anchor.getAttribute('target')).toEqual('_blank');
+    expect(anchor.innerText).toContain('opens in a new tab');
   });
 });
