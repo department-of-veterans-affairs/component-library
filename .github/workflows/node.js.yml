@@ -18,22 +18,22 @@ jobs:
         with:
           node-version: 22.x
           cache: 'yarn'
-      - run: yarn install --ignore-scripts
+      - run: yarn install
 
       - name: Test react-components
         run: |
-          yarn install --ignore-scripts
+          yarn install
           yarn test
         working-directory: packages/react-components
 
       - name: Test design-system-dashboard-cli
         run: |
-          yarn install --ignore-scripts
+          yarn install
           yarn test
         working-directory: packages/design-system-dashboard-cli
 
       - name: Test web-components
         run: |
-          yarn install --ignore-scripts
+          yarn install
           yarn test
         working-directory: packages/web-components
