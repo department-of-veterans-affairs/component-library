@@ -26,12 +26,12 @@
     "copy": "node ./copy-uswds-color-tokens.js && yarn run copy-assets"
   },
   "devDependencies": {
-    "sass": "^1.64.1",
+    "sass": "1.80.5",
     "style-dictionary": "3.8.0"
   },
   "dependencies": {
-    "@divriots/style-dictionary-to-figma": "^0.4.0",
-    "@uswds/uswds": "^3.9.0",
-    "rimraf": "^5.0.5"
+    "@divriots/style-dictionary-to-figma": "0.4.0",
+    "@uswds/uswds": "3.9.0",
+    "rimraf": "5.0.5"
   }
 }
