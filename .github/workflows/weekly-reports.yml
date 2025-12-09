@@ -48,7 +48,7 @@ jobs:
         cache: 'yarn'
     
     - name: Install dependencies
-      run: yarn install
+      run: yarn install --ignore-scripts
       
     - name: Create correct .env.json for GitHub Actions
       working-directory: packages/design-system-dashboard-cli

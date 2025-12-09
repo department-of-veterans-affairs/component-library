@@ -20,15 +20,15 @@ jobs:
         with:
           node-version: 22.x
           cache: 'yarn'
-      - run: yarn install
+      - run: yarn install --ignore-scripts
       - name: Install dependencies in react-components
-        run: yarn install
+        run: yarn install --ignore-scripts
         working-directory: packages/react-components
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
       - name: Install dependencies in storybook
-        run: yarn install
+        run: yarn install --ignore-scripts
         working-directory: packages/storybook
       - name: Publish Storybook
         run: yarn build-storybook
