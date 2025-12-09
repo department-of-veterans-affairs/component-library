@@ -18,6 +18,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={selectDocs} />,
     },
+    storyType: 'form',
   },
   argTypes: {
     ...propStructure(selectDocs),
