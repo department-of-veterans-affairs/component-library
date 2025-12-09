@@ -22,6 +22,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={fileInputDocs} />,
     },
+    storyType: 'form',
   },
   argTypes: {
     ...propStructure(fileInputDocs),

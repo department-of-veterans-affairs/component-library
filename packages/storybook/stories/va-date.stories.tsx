@@ -14,6 +14,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={dateDocs} />,
     },
+    storyType: 'form',
   },
 };
 
