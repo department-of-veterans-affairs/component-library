@@ -1963,6 +1963,10 @@ export namespace Components {
          */
         "scrollable"?: boolean;
         /**
+          * Set focus on the table caption element
+         */
+        "setCaptionFocus"?: boolean;
+        /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
@@ -2014,6 +2018,10 @@ export namespace Components {
           * When active, the table can be horizontally scrolled and is focusable
          */
         "scrollable"?: boolean;
+        /**
+          * Set focus on the table caption element
+         */
+        "setCaptionFocus"?: boolean;
         /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
@@ -6170,6 +6178,10 @@ declare namespace LocalJSX {
          */
         "scrollable"?: boolean;
         /**
+          * Set focus on the table caption element
+         */
+        "setCaptionFocus"?: boolean;
+        /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
@@ -6225,6 +6237,10 @@ declare namespace LocalJSX {
           * When active, the table can be horizontally scrolled and is focusable
          */
         "scrollable"?: boolean;
+        /**
+          * Set focus on the table caption element
+         */
+        "setCaptionFocus"?: boolean;
         /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */

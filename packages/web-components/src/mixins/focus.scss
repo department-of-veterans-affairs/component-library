@@ -1,0 +1,5 @@
+@mixin focus-style {
+  outline: 2px solid var(--vads-color-action-focus-on-light);
+  outline-offset: 2px;
+  z-index: 2;
+}

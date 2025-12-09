@@ -84,6 +84,54 @@ describe('va-table-inner', () => {
     expect(caption.innerHTML).toEqual('this is a caption');
   });
 
+  it('sets tabindex on caption when set-caption-focus is true on initial render', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable({ 'set-caption-focus': 'true' }));
+    await page.waitForChanges();
+
+    const caption = await page.find('va-table-inner >>> caption');
+    expect(caption.getAttribute('tabindex')).toEqual('-1');
+  });
+
+  it('sets tabindex on caption when set-caption-focus attribute is set dynamically', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    await page.waitForChanges();
+
+    // Set the attribute dynamically
+    await page.evaluate(() => {
+      const vaTable = document.querySelector('va-table');
+      vaTable?.setAttribute('set-caption-focus', 'true');
+    });
+    await page.waitForChanges();
+
+    const caption = await page.find('va-table-inner >>> caption');
+    expect(caption.getAttribute('tabindex')).toEqual('-1');
+  });
+
+  it('removes tabindex from caption after blur', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <button id="other-element">Other</button>
+      ${makeTable({ 'set-caption-focus': 'true' })}
+    `);
+    await page.waitForChanges();
+
+    const caption = await page.find('va-table-inner >>> caption');
+    expect(caption.getAttribute('tabindex')).toEqual('-1');
+
+    // Trigger blur by dispatching blur event on the caption
+    await page.evaluate(() => {
+      const vaTableInner = document.querySelector('va-table-inner');
+      const caption = vaTableInner?.shadowRoot?.querySelector('caption');
+      caption?.dispatchEvent(new FocusEvent('blur'));
+    });
+    await page.waitForChanges();
+
+    const tabindexAfterBlur = await caption.getAttribute('tabindex');
+    expect(tabindexAfterBlur).toBeNull();
+  });
+
   it('renders a table with the proper number of rows and columns', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());

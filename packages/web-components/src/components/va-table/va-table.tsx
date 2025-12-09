@@ -6,6 +6,7 @@ import {
   h,
   State,
   Prop,
+  Watch,
   Listen,
 } from '@stencil/core';
 
@@ -80,6 +81,19 @@ export class VaTable {
    * A comma-separated, zero-indexed string of which columns, if any, should be styled with monospace font
    */
   @Prop() monoFontCols?: string;
+
+  /**
+   * Set focus on the table caption element
+   */
+  @Prop() setCaptionFocus?: boolean = false;
+
+  @Watch('setCaptionFocus')
+  handleSetCaptionFocusChange(newValue: boolean) {
+    const vaTableInner = this.el.querySelector('va-table-inner');
+    if (vaTableInner) {
+      vaTableInner.setAttribute('set-caption-focus', String(newValue));
+    }
+  }
 
   /**
   * Text to display in empty cells. Needed for screen readers to announce empty cells.
@@ -214,6 +228,10 @@ export class VaTable {
 
     if (this.monoFontCols) {
       vaTable.setAttribute('mono-font-cols', this.monoFontCols);
+    }
+
+    if (this.setCaptionFocus) {
+      vaTable.setAttribute('set-caption-focus', String(this.setCaptionFocus));
     }
 
     //make a fragment containing all the cells, one for each slot
