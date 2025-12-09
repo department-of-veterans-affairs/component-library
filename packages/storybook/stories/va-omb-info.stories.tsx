@@ -40,7 +40,6 @@ const Template = ({
       omb-number={ombNumber}
       res-burden={resBurden}
       form-id={formId ? formId : undefined}
-      display-res-burden-in-hours={displayResBurdenInHours}
     />
   );
 };
@@ -64,14 +63,6 @@ WithoutResponseBurden.args = {
   ...defaultArgs,
   'res-burden': undefined,
 };
-
-export const WithResponseBurdenInHours = Template.bind(null);
-WithResponseBurdenInHours.args = {
-  ...defaultArgs,
-  'res-burden': 14,
-  'display-res-burden-in-hours': true,
-};
-
 
 export const WithCustomRespondentBurdenBenefitType = Template.bind(null);
 WithCustomRespondentBurdenBenefitType.args = {
