@@ -1328,10 +1328,6 @@ export namespace Components {
          */
         "benefitType"?: string;
         /**
-          * If `true`, the text for the respondent burden value will be rendered as "hours" instead of "minutes".
-         */
-        "displayResBurdenInHours"?: boolean;
-        /**
           * The form expiration date.
          */
         "expDate": string;
@@ -1348,7 +1344,7 @@ export namespace Components {
          */
         "ombNumber"?: string;
         /**
-          * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
+          * The Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take. Note that the displayed text will convert minutes to hours and minutes when the value is over 60.
          */
         "resBurden"?: number;
     }
@@ -5427,10 +5423,6 @@ declare namespace LocalJSX {
          */
         "benefitType"?: string;
         /**
-          * If `true`, the text for the respondent burden value will be rendered as "hours" instead of "minutes".
-         */
-        "displayResBurdenInHours"?: boolean;
-        /**
           * The form expiration date.
          */
         "expDate": string;
@@ -5447,7 +5439,7 @@ declare namespace LocalJSX {
          */
         "ombNumber"?: string;
         /**
-          * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
+          * The Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take. Note that the displayed text will convert minutes to hours and minutes when the value is over 60.
          */
         "resBurden"?: number;
     }

@@ -50,14 +50,9 @@ export class VaOmbInfo {
   @Prop() formId?: string;
 
   /**
-   * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
+   * The Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take. Note that the displayed text will convert minutes to hours and minutes when the value is over 60.
    */
   @Prop() resBurden?: number;
-
-  /**
-   * If `true`, the text for the respondent burden value will be rendered as "hours" instead of "minutes".
-   */
-  @Prop() displayResBurdenInHours?: boolean = false;
 
   /**
    * If `true`, clicking outside the modal will close it.
@@ -98,6 +93,31 @@ export class VaOmbInfo {
 
       focusedChild?.focus();
     }
+  }
+
+  /**
+   * Formats the respondent burden time into hours and minutes when value is over 60 minutes.
+   * @returns {string}
+   */
+  private formatRespondentBurden(): string {
+    // If resBurden is 60 minutes or less, return only minutes
+    if (this.resBurden <= 60) {
+      /* eslint-disable-next-line i18next/no-literal-string */
+      return `${this.resBurden} minute${this.resBurden === 1 ? '' : 's'}`;
+    }
+
+    // Otherwise, return hours and minutes
+    const hours = Math.floor(this.resBurden / 60);
+    const minutes = this.resBurden % 60;
+    /* eslint-disable-next-line i18next/no-literal-string */
+    let formattedBurden = `${hours} hour${hours === 1 ? '' : 's'}`;
+
+    if (minutes) {
+      /* eslint-disable-next-line i18next/no-literal-string */
+      formattedBurden += ` and ${minutes} minute${minutes === 1 ? '' : 's'}`;
+    }
+
+    return formattedBurden;
   }
 
   componentWillLoad() {
@@ -166,7 +186,6 @@ export class VaOmbInfo {
       toggleModalVisible,
       visible,
       formId,
-      displayResBurdenInHours
     } = this;
 
     /* eslint-disable i18next/no-literal-string */
@@ -174,7 +193,7 @@ export class VaOmbInfo {
       <Host>
         {resBurden && (
           <div>
-            Respondent burden: <strong>{resBurden} {displayResBurdenInHours ? 'hours' : 'minutes'}</strong>
+            Respondent burden: <strong>{this.formatRespondentBurden()}</strong>
           </div>
         )}
         {ombNumber && (
