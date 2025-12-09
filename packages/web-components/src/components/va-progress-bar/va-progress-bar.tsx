@@ -8,7 +8,7 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'va-progress-bar',
-  styleUrl: 'va-progress-bar.css',
+  styleUrl: 'va-progress-bar.scss',
   shadow: true,
 })
 export class VaProgressBar {
