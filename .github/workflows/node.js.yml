@@ -1,6 +1,8 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
+permissions:
+  contents: read
 
 on:
   push:
@@ -8,35 +10,57 @@ on:
   pull_request:
     branches: [main, community-branch]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  test:
+  test-packages:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [react-components, design-system-dashboard-cli, web-components]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'yarn'
-      - run: yarn install
+      
+      - name: Get Puppeteer version
+        id: puppeteer-version
+        run: |
+          echo "version=$(node -p "require('./packages/web-components/package.json').devDependencies.puppeteer")" >> $GITHUB_OUTPUT
+      
+      - name: Cache Puppeteer browsers
+        id: puppeteer-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: puppeteer-${{ runner.os }}-${{ steps.puppeteer-version.outputs.version }}
+      
+      - name: Install dependencies
+        run: yarn install --immutable
       
       - name: Install Puppeteer browsers
-        run: node -e "require('puppeteer/install.js')"
+        if: steps.puppeteer-cache.outputs.cache-hit != 'true'
+        run: node ./node_modules/puppeteer/install.js
 
-      - name: Test react-components
-        run: |
-          yarn install
-          yarn test
-        working-directory: packages/react-components
+      - name: Test ${{ matrix.package }}
+        run: yarn test
+        working-directory: packages/${{ matrix.package }}
 
-      - name: Test design-system-dashboard-cli
+  test:
+    runs-on: ubuntu-latest
+    needs: test-packages
+    if: always()
+    steps:
+      - name: Check test results
         run: |
-          yarn install
-          yarn test
-        working-directory: packages/design-system-dashboard-cli
-
-      - name: Test web-components
-        run: |
-          yarn install
-          yarn test
-        working-directory: packages/web-components
+          if [ "${{ needs.test-packages.result }}" != "success" ]; then
+            echo "One or more tests failed"
+            exit 1
+          fi
+          echo "All tests passed"
