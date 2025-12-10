@@ -46,17 +46,8 @@ jobs:
         if: steps.puppeteer-cache.outputs.cache-hit != 'true'
         run: node ./node_modules/puppeteer/install.js
       
-      - name: Cache build outputs
-        uses: actions/cache@v4
-        with:
-          path: |
-            packages/react-components/dist
-            packages/web-components/dist
-            packages/web-components/loader
-            packages/component-library/dist
-          key: build-cache-${{ runner.os }}-${{ hashFiles('packages/*/src/**', 'packages/*/package.json') }}
-          restore-keys: |
-            build-cache-${{ runner.os }}-
+      # Note: Build cache removed for Chromatic workflow to ensure visual changes are detected
+      # Chromatic needs fresh builds to properly identify visual regressions
       
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
