@@ -63,7 +63,6 @@ WithoutResponseBurden.args = {
   'res-burden': undefined,
 };
 
-
 export const WithCustomRespondentBurdenBenefitType = Template.bind(null);
 WithCustomRespondentBurdenBenefitType.args = {
   ...defaultArgs,
