@@ -11,29 +11,24 @@ jobs:
       matrix:
         bucket: [dev-design.va.gov, staging-design.va.gov, design.va.gov]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'yarn'
-      - run: yarn install
-      - name: Install dependencies in react-components
-        run: yarn install
-        working-directory: packages/react-components
+      - name: Install dependencies
+        run: yarn install --immutable
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
-      - name: Install dependencies in storybook
-        run: yarn install
-        working-directory: packages/storybook
       - name: Publish Storybook
         run: yarn build-storybook
         working-directory: packages/storybook
-      - uses: aws-actions/configure-aws-credentials@v1
+      - uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

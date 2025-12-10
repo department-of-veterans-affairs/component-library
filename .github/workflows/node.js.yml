@@ -12,28 +12,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'yarn'
-      - run: yarn install
+      - name: Install dependencies
+        run: yarn install --immutable
 
       - name: Test react-components
-        run: |
-          yarn install
-          yarn test
+        run: yarn test
         working-directory: packages/react-components
 
       - name: Test design-system-dashboard-cli
-        run: |
-          yarn install
-          yarn test
+        run: yarn test
         working-directory: packages/design-system-dashboard-cli
 
       - name: Test web-components
-        run: |
-          yarn install
-          yarn test
+        run: yarn test
         working-directory: packages/web-components
