@@ -28,16 +28,17 @@ jobs:
         with:
           node-version: 22.x
           cache: 'yarn'
-      - run: yarn install --immutable
       
-      - name: Install Puppeteer browsers
-        run: node -e "require('puppeteer/install.js')"
-
-      - name: Test react-components
-        run: |
-          yarn install --immutable
-          yarn test
-        working-directory: packages/react-components
+      - name: Cache Puppeteer browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: puppeteer-${{ runner.os }}-${{ hashFiles('packages/web-components/package.json') }}
+          restore-keys: |
+            puppeteer-${{ runner.os }}-
+      
+      - name: Install dependencies
+        run: yarn install --immutable
 
       - name: Test ${{ matrix.package }}
         run: yarn test

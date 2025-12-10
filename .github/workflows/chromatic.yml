@@ -20,27 +20,42 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      
       - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'yarn'
+      
+      - name: Cache Puppeteer browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: puppeteer-${{ runner.os }}-${{ hashFiles('packages/web-components/package.json') }}
+          restore-keys: |
+            puppeteer-${{ runner.os }}-
+      
       - name: Install dependencies
         run: yarn install --immutable
       
       - name: Cache build outputs
         uses: actions/cache@v4
-        with:
-          path: |
-            packages/react-components/dist
-            packages/web-components/dist
-            packages/web-components/loader
-            packages/component-library/dist
-          key: build-cache-${{ runner.os }}-${{ hashFiles('packages/*/src/**/*', 'packages/*/package.json') }}
-          restore-keys: |
-            build-cache-${{ runner.os }}-
-      
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
+      - run: yarn workspace @department-of-veterans-affairs/web-components run build
+      - run: yarn workspace @department-of-veterans-affairs/component-library run build
+      
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          onlyChanged: true
+          workingDir: packages/storybook
+          autoAcceptChanges: "main"
+          buildScriptName: build-storybook
+          exitZeroOnChanges: true
+          exitOnceUploaded: true
+          skip: ${{ github.event.pull_request.draft == true && !contains(github.event.pull_request.labels.*.name, 'run chromatic workflow') }}ment-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
       - name: Publish to Chromatic
