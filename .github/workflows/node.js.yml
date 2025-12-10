@@ -19,6 +19,9 @@ jobs:
           node-version: 22.x
           cache: 'yarn'
       - run: yarn install
+      
+      - name: Install Puppeteer browsers
+        run: node -e "require('puppeteer/install.js')"
 
       - name: Test react-components
         run: |
