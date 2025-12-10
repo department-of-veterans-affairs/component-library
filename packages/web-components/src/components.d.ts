@@ -1344,7 +1344,7 @@ export namespace Components {
          */
         "ombNumber"?: string;
         /**
-          * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
+          * The Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take. Note that the displayed text will convert minutes to hours and minutes when the value is over 60.
          */
         "resBurden"?: number;
     }
@@ -5439,7 +5439,7 @@ declare namespace LocalJSX {
          */
         "ombNumber"?: string;
         /**
-          * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
+          * The Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take. Note that the displayed text will convert minutes to hours and minutes when the value is over 60.
          */
         "resBurden"?: number;
     }
