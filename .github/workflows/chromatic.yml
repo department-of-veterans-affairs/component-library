@@ -61,5 +61,3 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           autoAcceptChanges: "main"
-          exitZeroOnChanges: true
-          exitOnceUploaded: true
