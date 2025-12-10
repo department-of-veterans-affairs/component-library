@@ -46,7 +46,7 @@ jobs:
       
       - name: Install Puppeteer browsers
         if: steps.puppeteer-cache.outputs.cache-hit != 'true'
-        run: node ./node_modules/puppeteer/install.mjs
+        run: node ./node_modules/puppeteer/install.js
 
       - name: Test ${{ matrix.package }}
         run: yarn test
