@@ -33,6 +33,7 @@ jobs:
           echo "version=$(node -p "require('./packages/web-components/package.json').devDependencies.puppeteer")" >> $GITHUB_OUTPUT
       
       - name: Cache Puppeteer browsers
+        id: puppeteer-cache
         uses: actions/cache@v4
         with:
           path: ~/.cache/puppeteer
@@ -40,6 +41,11 @@ jobs:
       
       - name: Install dependencies
         run: yarn install --immutable
+      
+      - name: Install Puppeteer browsers
+        if: steps.puppeteer-cache.outputs.cache-hit != 'true'
+        run: npx puppeteer browsers install chrome
+        working-directory: packages/web-components
       
       - name: Cache build outputs
         uses: actions/cache@v4
