@@ -142,7 +142,6 @@ export class VaAccordionItem {
 
     return (
       <Host>
-        <div>Test</div>
         <div class={accordionItemClass}>
           <Header />
           <div
