@@ -24,19 +24,34 @@ jobs:
         with:
           node-version: 22.x
           cache: 'yarn'
-      - run: yarn install
-      - name: Install dependencies in react-components
-        run: yarn install
-        working-directory: packages/react-components
+      - name: Install dependencies
+        run: yarn install --immutable
+      
+      - name: Cache build outputs
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/react-components/dist
+            packages/web-components/dist
+            packages/web-components/loader
+            packages/component-library/dist
+          key: build-cache-${{ runner.os }}-${{ hashFiles('packages/*/src/**/*', 'packages/*/package.json') }}
+          restore-keys: |
+            build-cache-${{ runner.os }}-
+      
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
       
-      - name: Install dependencies in storybook
-        run: yarn install
-        working-directory: packages/storybook
+      - name: Cache Storybook build
+        id: storybook-cache
+        uses: actions/cache@v4
+        with:
+          path: packages/storybook/storybook-static
+          key: storybook-${{ runner.os }}-${{ hashFiles('packages/storybook/**/*', 'packages/*/dist/**/*') }}
       
       - name: Publish Storybook
+        if: steps.storybook-cache.outputs.cache-hit != 'true'
         run: yarn build-storybook
         working-directory: packages/storybook
       - uses: aws-actions/configure-aws-credentials@v2
