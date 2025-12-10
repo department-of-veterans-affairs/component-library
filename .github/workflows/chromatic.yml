@@ -44,7 +44,7 @@ jobs:
       
       - name: Install Puppeteer browsers
         if: steps.puppeteer-cache.outputs.cache-hit != 'true'
-        run: node -e "require('puppeteer').default.launch().then(browser => browser.close())"
+        run: node ./node_modules/puppeteer/install.mjs
         working-directory: packages/web-components
       
       - name: Cache build outputs
