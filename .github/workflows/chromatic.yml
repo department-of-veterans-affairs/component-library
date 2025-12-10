@@ -7,6 +7,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   chromatic-deployment:
     # Run if it's a push to main OR is a PR NOT a draft OR a PR that has the 'run chromatic workflow' label
@@ -23,6 +27,19 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --immutable
+      
+      - name: Cache build outputs
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/react-components/dist
+            packages/web-components/dist
+            packages/web-components/loader
+            packages/component-library/dist
+          key: build-cache-${{ runner.os }}-${{ hashFiles('packages/*/src/**/*', 'packages/*/package.json') }}
+          restore-keys: |
+            build-cache-${{ runner.os }}-
+      
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
       - run: yarn workspace @department-of-veterans-affairs/component-library run build

@@ -8,9 +8,17 @@ on:
   pull_request:
     branches: [main, community-branch]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [react-components, design-system-dashboard-cli, web-components]
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 22.x
@@ -21,14 +29,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Test react-components
+      - name: Test ${{ matrix.package }}
         run: yarn test
-        working-directory: packages/react-components
-
-      - name: Test design-system-dashboard-cli
-        run: yarn test
-        working-directory: packages/design-system-dashboard-cli
-
-      - name: Test web-components
-        run: yarn test
-        working-directory: packages/web-components
+        working-directory: packages/${{ matrix.package }}

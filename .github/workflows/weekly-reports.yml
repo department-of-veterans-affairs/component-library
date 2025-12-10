@@ -13,6 +13,10 @@ on:
       - 'packages/design-system-dashboard-cli/**'
   workflow_dispatch: # Allow manual triggering
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   generate-weekly-reports:
     runs-on: ubuntu-latest
@@ -32,6 +36,9 @@ jobs:
         path: vets-website
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 1
+        sparse-checkout: |
+          src/applications
+          src/platform/forms
         
     - name: Checkout content-build
       uses: actions/checkout@v4
@@ -40,6 +47,8 @@ jobs:
         path: content-build
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 1
+        sparse-checkout: |
+          src
         
     - name: Setup Node.js
       uses: actions/setup-node@v4
