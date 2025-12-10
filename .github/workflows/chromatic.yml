@@ -27,16 +27,22 @@ jobs:
           node-version: 22.x
           cache: 'yarn'
       
+      - name: Get Puppeteer version
+        id: puppeteer-version
+        run: |
+          echo "version=$(node -p "require('./packages/web-components/package.json').devDependencies.puppeteer")" >> $GITHUB_OUTPUT
+      
       - name: Cache Puppeteer browsers
+        id: puppeteer-cache
         uses: actions/cache@v4
         with:
           path: ~/.cache/puppeteer
-          key: puppeteer-${{ runner.os }}-${{ hashFiles('packages/web-components/package.json') }}
-          restore-keys: |
-            puppeteer-${{ runner.os }}-
+          key: puppeteer-${{ runner.os }}-${{ steps.puppeteer-version.outputs.version }}
       
       - name: Install dependencies
         run: yarn install --immutable
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: ${{ steps.puppeteer-cache.outputs.cache-hit == 'true' && 'true' || 'false' }}
       
       - name: Cache build outputs
         uses: actions/cache@v4
