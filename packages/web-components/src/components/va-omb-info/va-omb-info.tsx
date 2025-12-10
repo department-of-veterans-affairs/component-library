@@ -102,18 +102,15 @@ export class VaOmbInfo {
   private formatRespondentBurden(): string {
     // If resBurden is 60 minutes or less, return only minutes
     if (this.resBurden <= 60) {
-      /* eslint-disable-next-line i18next/no-literal-string */
       return `${this.resBurden} minute${this.resBurden === 1 ? '' : 's'}`;
     }
 
     // Otherwise, return hours and minutes
     const hours = Math.floor(this.resBurden / 60);
     const minutes = this.resBurden % 60;
-    /* eslint-disable-next-line i18next/no-literal-string */
     let formattedBurden = `${hours} hour${hours === 1 ? '' : 's'}`;
 
     if (minutes) {
-      /* eslint-disable-next-line i18next/no-literal-string */
       formattedBurden += ` and ${minutes} minute${minutes === 1 ? '' : 's'}`;
     }
 
