@@ -33,6 +33,41 @@ describe('va-banner', () => {
     `);
   });
 
+  it('adds sr-only span to headline when headline prop is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-banner headline="Important announcement"></va-banner>',
+    );
+
+    await page.waitForChanges();
+
+    // Find the h3 headline element inside va-alert
+    const headline = await page.find('va-banner >>> va-alert h3[slot="headline"]');
+    expect(headline).not.toBeNull();
+
+    // Check that sr-only span was added
+    const srOnlySpan = await page.find('va-banner >>> va-alert h3[slot="headline"] .usa-sr-only');
+    expect(srOnlySpan).not.toBeNull();
+
+    const srOnlyText = await srOnlySpan.textContent;
+    expect(srOnlyText).toBe('Information Alert ');
+  });
+
+  it('does not add sr-only span when headline is empty', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-banner></va-banner>');
+
+    await page.waitForChanges();
+
+    // Find the h3 headline element inside va-alert
+    const headline = await page.find('va-banner >>> va-alert h3[slot="headline"]');
+    expect(headline).not.toBeNull();
+
+    // Check that sr-only span was NOT added
+    const srOnlySpan = await page.find('va-banner >>> va-alert h3[slot="headline"] .usa-sr-only');
+    expect(srOnlySpan).toBeNull();
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(

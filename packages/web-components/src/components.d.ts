@@ -595,6 +595,10 @@ export namespace Components {
          */
         "chatUrl"?: string;
         /**
+          * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
+         */
+        "mode"?: 'trigger' | 'modal';
+        /**
           * Phone extension for the crisis line. Defaults to 1.
          */
         "phoneExtension"?: string;
@@ -606,10 +610,6 @@ export namespace Components {
           * Text number for the crisis line. Defaults to 838255.
          */
         "textNumber"?: string;
-        /**
-          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
-         */
-        "triggerRef"?: string;
         /**
           * TTY extension for the crisis line. Defaults to 988.
          */
@@ -1081,6 +1081,10 @@ export namespace Components {
          */
         "maintenanceTitle": string;
         /**
+          * The level of the header for the maintenance title. Default is h2.
+         */
+        "maintenanceTitleHeaderLevel": number;
+        /**
           * The Date/Time of when to be begin warning users of upcoming site maintenance.
          */
         "upcomingWarnStartDateTime": string;
@@ -1331,6 +1335,10 @@ export namespace Components {
           * The form number to display in the Privacy Act Statement button text. When provided, the button reads "Privacy Act Statement for VA Form {formId}". This improves accessibility when multiple instances exist on the same page.
          */
         "formId"?: string;
+        /**
+          * If `true`, clicking outside the modal will close it.
+         */
+        "modalClickToClose"?: boolean;
         /**
           * The OMB control number
          */
@@ -2046,6 +2054,10 @@ export namespace Components {
      * @maturityLevel candidate
      */
     interface VaTagStatus {
+        /**
+          * Screen reader text to provide context about the status tag. Defaults to `Status {status}:`.
+         */
+        "screenReaderText": string;
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
@@ -4578,6 +4590,10 @@ declare namespace LocalJSX {
          */
         "chatUrl"?: string;
         /**
+          * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
+         */
+        "mode"?: 'trigger' | 'modal';
+        /**
           * Phone extension for the crisis line. Defaults to 1.
          */
         "phoneExtension"?: string;
@@ -4589,10 +4605,6 @@ declare namespace LocalJSX {
           * Text number for the crisis line. Defaults to 838255.
          */
         "textNumber"?: string;
-        /**
-          * Selector for an external button that should trigger the modal. When provided, the internal trigger button will not be rendered. Accepts ID (#myButton), class (.my-button), or attribute selector.
-         */
-        "triggerRef"?: string;
         /**
           * TTY extension for the crisis line. Defaults to 988.
          */
@@ -5116,6 +5128,10 @@ declare namespace LocalJSX {
          */
         "maintenanceTitle"?: string;
         /**
+          * The level of the header for the maintenance title. Default is h2.
+         */
+        "maintenanceTitleHeaderLevel"?: number;
+        /**
           * Fires when the component is closed by clicking on the close icon.
          */
         "onCloseEvent"?: (event: VaMaintenanceBannerCustomEvent<any>) => void;
@@ -5414,6 +5430,10 @@ declare namespace LocalJSX {
           * The form number to display in the Privacy Act Statement button text. When provided, the button reads "Privacy Act Statement for VA Form {formId}". This improves accessibility when multiple instances exist on the same page.
          */
         "formId"?: string;
+        /**
+          * If `true`, clicking outside the modal will close it.
+         */
+        "modalClickToClose"?: boolean;
         /**
           * The OMB control number
          */
@@ -6241,6 +6261,10 @@ declare namespace LocalJSX {
      * @maturityLevel candidate
      */
     interface VaTagStatus {
+        /**
+          * Screen reader text to provide context about the status tag. Defaults to `Status {status}:`.
+         */
+        "screenReaderText"?: string;
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
