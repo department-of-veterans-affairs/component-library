@@ -11018,7 +11018,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-
 "is-unicode-supported@npm:^0.1.0":
   version: 0.1.0
   resolution: "is-unicode-supported@npm:0.1.0"
@@ -16639,7 +16638,6 @@ __metadata:
   checksum: 10/159da4805f7e84a3d003d8841557196034155008f817172d4e986bd591f74aa82aa7db55929a54222309e01079a65a92a9e6414da5a6aa4b01ee44a511ac3ee5
   languageName: node
   linkType: hard
-
 
 "write-file-atomic@npm:^4.0.2":
   version: 4.0.2
