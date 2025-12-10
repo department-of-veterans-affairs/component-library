@@ -61,7 +61,5 @@ jobs:
           onlyChanged: true
           workingDir: packages/storybook
           autoAcceptChanges: "main"
-          buildScriptName: build-storybook
           exitZeroOnChanges: true
           exitOnceUploaded: true
-          skip: ${{ github.event.pull_request.draft == true && !contains(github.event.pull_request.labels.*.name, 'run chromatic workflow') }}
