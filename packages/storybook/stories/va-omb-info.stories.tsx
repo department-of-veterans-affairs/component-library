@@ -30,7 +30,6 @@ const Template = ({
   'omb-number': ombNumber,
   'res-burden': resBurden,
   'form-id': formId,
-  'display-res-burden-in-hours': displayResBurdenInHours, 
 }) => {
   return (
     // @ts-ignore ignoring the hyphenated prop names
