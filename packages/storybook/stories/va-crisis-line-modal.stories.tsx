@@ -7,6 +7,10 @@ export default {
   parameters: {
     componentSubtitle: 'va-crisis-line-modal web component',
     docs: {
+      story: {
+        inline: false,
+        height: '100vh'
+      },
       page: () => <StoryDocs storyDefault={Default} data={crisisLineModalDocs} />,
     },
   },
@@ -19,7 +23,7 @@ const defaultArgs = {
   'chat-url': undefined,
   'tty-number': '711',
   'tty-crisis-extension': '988',
-  'trigger-ref': undefined,
+  'mode': undefined,
 };
 
 const Template = ({
@@ -29,9 +33,33 @@ const Template = ({
   'chat-url': chatUrl,
   'tty-number': ttyNumber,
   'tty-crisis-extension': ttyCrisisExtension,
-}) => {
-  return (
+  'mode': mode,
+}) => (
+  <va-crisis-line-modal
+    phone-number={phoneNumber}
+    phone-extension={phoneExtension}
+    text-number={textNumber}
+    chat-url={chatUrl}
+    tty-number={ttyNumber}
+    tty-crisis-extension={ttyCrisisExtension}
+    mode={mode}
+  />
+);
+
+const ExternalOpenEventTemplate = ({
+  'phone-number': phoneNumber,
+  'phone-extension': phoneExtension,
+  'text-number': textNumber,
+  'chat-url': chatUrl,
+  'tty-number': ttyNumber,
+  'tty-crisis-extension': ttyCrisisExtension,
+}) => (
+  <div style={{ display: 'grid', gap: '1rem' }}>
+    <va-button text="Open crisis line modal"
+      onClick={() => document.dispatchEvent(new CustomEvent('vaCrisisLineModalOpen'))}
+    ></va-button>
     <va-crisis-line-modal
+      mode="modal"
       phone-number={phoneNumber}
       phone-extension={phoneExtension}
       text-number={textNumber}
@@ -39,36 +67,8 @@ const Template = ({
       tty-number={ttyNumber}
       tty-crisis-extension={ttyCrisisExtension}
     />
-  );
-};
-
-const ExternalTriggerTemplate = ({
-  'phone-number': phoneNumber,
-  'phone-extension': phoneExtension,
-  'text-number': textNumber,
-  'chat-url': chatUrl,
-  'tty-number': ttyNumber,
-  'tty-crisis-extension': ttyCrisisExtension,
-  'trigger-ref': triggerRef,
-}) => {
-  const resolvedTrigger = triggerRef || '#external-clm-trigger';
-  return (
-    <div style={{ display: 'grid', gap: '1rem' }}>
-      <button id="external-clm-trigger" type="button">
-        Open crisis line modal
-      </button>
-      <va-crisis-line-modal
-        trigger-ref={resolvedTrigger}
-        phone-number={phoneNumber}
-        phone-extension={phoneExtension}
-        text-number={textNumber}
-        chat-url={chatUrl}
-        tty-number={ttyNumber}
-        tty-crisis-extension={ttyCrisisExtension}
-      />
-    </div>
-  );
-};
+  </div>
+);
 
 const baseArgTypes = propStructure(crisisLineModalDocs);
 const overrideArgTypes = {
@@ -87,11 +87,10 @@ const overrideArgTypes = {
       defaultValue: { summary: '988' },
     },
   },
-  'trigger-ref': {
-    control: 'text',
-    description:
-      'CSS selector or HTMLElement reference of an external trigger element that opens the modal.',
-    table: { category: 'accessibility' },
+  'vaCrisisLineModalOpen': {
+    control: { disable: true },
+    description: 'Dispatch `document.dispatchEvent(new CustomEvent(\'vaCrisisLineModalOpen\'))` to open a modal instance.',
+    table: { category: 'Events' },
   },
 };
 
@@ -111,23 +110,16 @@ CustomContacts.args = {
   'tty-crisis-extension': '123',
 };
 
-export const ExternalTrigger = ExternalTriggerTemplate.bind(null);
-ExternalTrigger.argTypes = overrideArgTypes;
-ExternalTrigger.args = {
+export const ExternalOpenEvent = ExternalOpenEventTemplate.bind(null);
+ExternalOpenEvent.argTypes = overrideArgTypes;
+ExternalOpenEvent.args = {
   ...defaultArgs,
-  'trigger-ref': '#external-clm-trigger',
-  'phone-number': '123-456-7890',
-  'phone-extension': '7',
-  'text-number': '77777',
-  'chat-url': 'https://external-trigger-chat.example.com',
-  'tty-number': '999-888-7777',
-  'tty-crisis-extension': '321',
 };
-ExternalTrigger.parameters = {
+ExternalOpenEvent.parameters = {
   docs: {
     description: {
       story:
-        'Demonstrates opening the modal from an existing external button using the trigger-ref attribute. Internal trigger is omitted. Shows explicit TTY defaults.',
+        'Demonstrates opening the modal by dispatching the document event `vaCrisisLineModalOpen` from an external button while rendering only the modal instance.',
     },
   },
 };

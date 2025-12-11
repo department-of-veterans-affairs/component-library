@@ -1,4 +1,4 @@
-@import '../../mixins/accessibility.css';
+@use 'uswds-helpers/src/styles/usa-sr-only'; 
 
 div {
   box-sizing: border-box;
