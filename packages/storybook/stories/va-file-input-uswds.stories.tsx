@@ -44,11 +44,9 @@ const defaultArgs = {
   'error': '',
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
-  'vaChange': event =>
-    alert(`File change event received: ${event?.detail?.files[0]?.name}`),
+  'vaChange': event => null,
   'vaPasswordChange': null,
-  'vaFileInputError': event =>
-    alert(`File input error event received: ${event?.detail?.error}`),
+  'vaFileInputError': event => null,
   'header-size': null,
   'children': null,
   'value': null,
