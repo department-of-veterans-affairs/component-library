@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/web-components",
-  "version": "22.1.3-rc1",
+  "version": "22.3.0",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -28,12 +28,12 @@
   },
   "dependencies": {
     "@stencil/core": "4.20.0",
-    "aria-hidden": "^1.1.3",
-    "body-scroll-lock": "^4.0.0-beta.0",
-    "chromatic": "^11.0.4",
-    "classnames": "^2.3.1",
-    "intersection-observer": "^0.12.0",
-    "libphonenumber-js": "^1.12.7"
+    "aria-hidden": "1.1.3",
+    "body-scroll-lock": "4.0.0-beta.0",
+    "chromatic": "11.0.4",
+    "classnames": "2.3.1",
+    "intersection-observer": "0.12.0",
+    "libphonenumber-js": "1.12.7"
   },
   "license": "MIT",
   "repository": {
@@ -41,33 +41,34 @@
     "url": "git+https://github.com/department-of-veterans-affairs/component-library.git"
   },
   "devDependencies": {
-    "@axe-core/puppeteer": "^4.10.0",
-    "@babel/core": "^7.12.13",
-    "@department-of-veterans-affairs/css-library": "^0.27.0",
-    "@stencil/postcss": "^2.0.0",
-    "@stencil/react-output-target": "^0.5.3",
-    "@stencil/sass": "^2.0.0",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^22.5.0",
+    "@axe-core/puppeteer": "4.10.0",
+    "@babel/core": "7.12.13",
+    "@department-of-veterans-affairs/css-library": "0.27.0",
+    "@stencil/postcss": "2.1.0",
+    "@stencil/react-output-target": "0.5.3",
+    "@stencil/sass": "2.0.0",
+    "@types/jest": "26.0.24",
+    "@types/node": "22.5.0",
+    "@types/react": "19.1.0",
     "@types/react-dom": "19.1.0",
-    "@typescript-eslint/eslint-plugin": "^5.30.5",
-    "@typescript-eslint/parser": "^5.30.5",
-    "@uswds/uswds": "^3.9.0",
-    "animate.css": "^4.1.1",
-    "babel-loader": "^8.2.2",
-    "eslint": "^8.19.0",
-    "eslint-plugin-i18next": "^6.0.0-4",
-    "jest": "^29",
-    "jest-cli": "^29",
-    "jest-transformer-svg": "^2.0.1",
-    "lit-html": "^1.3.0",
-    "postcss-url": "^10.1.1",
+    "@typescript-eslint/eslint-plugin": "5.30.5",
+    "@typescript-eslint/parser": "5.30.5",
+    "@uswds/uswds": "3.9.0",
+    "animate.css": "4.1.1",
+    "babel-loader": "8.2.2",
+    "eslint": "8.19.0",
+    "eslint-plugin-i18next": "6.0.0-4",
+    "jest": "29",
+    "jest-cli": "29",
+    "jest-transformer-svg": "2.0.1",
+    "lit-html": "1.4.1",
+    "postcss-url": "10.1.1",
     "puppeteer": "21.0.0",
-    "react-dom": "^19.1.0",
-    "typescript": "^5.5.4"
+    "react-dom": "19.1.1",
+    "typescript": "5.5.4"
   },
   "peerDependencies": {
-    "i18next": "*",
-    "i18next-browser-languagedetector": "*"
+    "i18next": "25.6.0",
+    "i18next-browser-languagedetector": "8.2.0"
   }
 }
