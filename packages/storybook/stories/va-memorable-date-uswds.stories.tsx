@@ -345,12 +345,14 @@ Default.argTypes = propStructure(memorableDateInputDocs);
 export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
+  label: 'Date entered service',
   error: 'Error Message Example',
 };
 
 export const WithMonthSelect = Template.bind(null);
 WithMonthSelect.args = {
   ...defaultArgs,
+  'label': 'Date entered service',
   'month-select': true,
   value: '2022-04-19',
 };
@@ -358,6 +360,7 @@ WithMonthSelect.args = {
 export const ExtraHintText = Template.bind(null);
 ExtraHintText.args = {
   ...defaultArgs,
+  label: 'Date of marriage',
   value: '2022-04-19',
   hint: 'Extra hint text',
 };
@@ -372,6 +375,7 @@ ErrorWithMonthSelect.args = {
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {
   ...defaultArgs,
+  label: 'Expected graduation date',
   required: true,
   value: '2022-04-19',
 };
