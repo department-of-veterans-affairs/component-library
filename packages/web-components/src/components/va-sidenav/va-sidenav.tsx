@@ -27,6 +27,11 @@ export class VaSidenav {
   @Prop() header?: string;
 
   /**
+   * Aria label for the navigation element.
+   */
+  @Prop() ariaLabel?: string = 'Related pages menu';
+
+  /**
    * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
    */
   @Prop() iconName?: string;
@@ -128,8 +133,6 @@ export class VaSidenav {
     };
   };
 
-  private ariaLabel = "Related pages menu";
-
   render() {
     if (this.isDesktop) {
       return (
@@ -156,7 +159,7 @@ export class VaSidenav {
     return (
       <Host>
         <va-accordion open-single>
-          <va-accordion-item bordered header={this.ariaLabel}>
+          <va-accordion-item bordered header={this.header || 'Menu'}>
             <nav aria-label={this.ariaLabel}>
               <div role="list" class="va-sidenav__list">
                 <slot></slot>
