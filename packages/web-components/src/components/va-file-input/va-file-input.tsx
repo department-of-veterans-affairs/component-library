@@ -17,7 +17,6 @@ import { i18next } from '../..';
 import { fileInput } from './va-file-input-upgrader';
 import { extensionToMimeType } from './fileExtensionToMimeType';
 import { UploadedFile } from './uploadedFile';
-import { JSX } from 'react';
 
 /**
  * @componentName File input
