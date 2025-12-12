@@ -1,7 +1,7 @@
 {
   "name": "@department-of-veterans-affairs/component-library",
   "description": "VA.gov component library. Includes React and web components.",
-  "version": "54.1.2",
+  "version": "54.3.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -21,22 +21,22 @@
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",
     "@department-of-veterans-affairs/web-components": "workspace:*",
-    "i18next": "^21.6.14",
-    "i18next-browser-languagedetector": "^6.1.4",
-    "react-focus-on": "^3.5.1",
-    "react-transition-group": "^1.0.0"
+    "i18next": "21.6.14",
+    "i18next-browser-languagedetector": "6.1.4",
+    "react-focus-on": "3.5.4",
+    "react-transition-group": "1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
-    "babel-loader": "^8.2.2",
-    "copy-webpack-plugin": "^9.0.1",
-    "css-loader": "^6.4.0",
-    "mini-css-extract-plugin": "^2.4.2",
-    "webpack": "^5.94.0",
-    "webpack-cli": "^4.8.0"
+    "@babel/core": "7.15.5",
+    "babel-loader": "8.2.2",
+    "copy-webpack-plugin": "9.1.0",
+    "css-loader": "6.6.0",
+    "mini-css-extract-plugin": "2.5.3",
+    "webpack": "5.94.0",
+    "webpack-cli": "4.9.2"
   },
   "peerDependencies": {
-    "react": "^19",
-    "react-dom": "*"
+    "react": "19",
+    "react-dom": "19"
   }
 }

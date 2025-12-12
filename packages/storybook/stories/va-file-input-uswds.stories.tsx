@@ -22,6 +22,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={fileInputDocs} />,
     },
+    storyType: 'form',
   },
   argTypes: {
     ...propStructure(fileInputDocs),
@@ -43,9 +44,9 @@ const defaultArgs = {
   'error': '',
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
-  'vaChange': null,
+  'vaChange': event => null,
   'vaPasswordChange': null,
-  'vaFileInputError': null,
+  'vaFileInputError': event => null,
   'header-size': null,
   'children': null,
   'value': null,

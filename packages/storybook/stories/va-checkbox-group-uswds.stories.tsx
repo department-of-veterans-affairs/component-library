@@ -24,6 +24,7 @@ export default {
     docs: {
       page: () => <StoryDocs storyDefault={Default} data={checkBoxGroupDocs} />,
     },
+    storyType: 'form',
   },
   argTypes: {
     ...propStructure(checkBoxGroupDocs),
