@@ -477,7 +477,6 @@ const noop = () => {};
     let groupLength = 0;
     let optionIndex = 0;
     const optionsLength = options.filter(option => !isDataOptGroup(option)).length;
-    console.log('in comboscript combo displayList....', comboBox);
     const optionHtml = options.map((option, index) => {
       const isOptGroup = isDataOptGroup(option);
       const isOptgroupOption = option.getAttribute('data-optgroup-option') !== null;
