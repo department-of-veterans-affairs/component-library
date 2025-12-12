@@ -606,7 +606,7 @@ export class VaFileInput {
       <span class="required"> {i18next.t('required')}</span>
     ) : null;
     if (headerSize && headerSize >= 1 && headerSize <= 6) {
-      const HeaderTag = `h${headerSize}` as keyof JSX.IntrinsicElements;
+      const HeaderTag = `h${headerSize}`;
       return (
         <div class="label-header">
           <HeaderTag
@@ -685,9 +685,9 @@ export class VaFileInput {
 
   /**
    * Renderer for the displayed error alert that is hidden from screen readers.
-   * @returns {null | JSX.Element}
+   * @returns {HTMLSpanElement}
    */
-  private renderErrorAlert(): null | JSX.Element {
+  private renderErrorAlert(): HTMLSpanElement {
     // Determine which error message to display (if any). Priority to external error
     // to give teams using the component to programmatically control the error state.
     let displayError: string | undefined = this.error || this.internalError;
