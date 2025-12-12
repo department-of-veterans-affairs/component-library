@@ -1963,6 +1963,10 @@ export namespace Components {
          */
         "scrollable"?: boolean;
         /**
+          * Set focus on the table caption element
+         */
+        "setCaptionFocus"?: boolean;
+        /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
@@ -1978,6 +1982,10 @@ export namespace Components {
           * The title of the table
          */
         "tableTitle"?: string;
+        /**
+          * Additional context for the table. For example, pagination information. e.g. "Showing 1-10 of 13 charges"
+         */
+        "tableTitleSummary"?: string;
         /**
           * The type of table
          */
@@ -2011,6 +2019,10 @@ export namespace Components {
          */
         "scrollable"?: boolean;
         /**
+          * Set focus on the table caption element
+         */
+        "setCaptionFocus"?: boolean;
+        /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
@@ -2026,6 +2038,10 @@ export namespace Components {
           * The title of the table
          */
         "tableTitle": string;
+        /**
+          * Additional context for the table. For example, pagination information. e.g. "Showing 1-10 of 13 charges"
+         */
+        "tableTitleSummary"?: string;
         /**
           * The type of table to be used
          */
@@ -6166,6 +6182,10 @@ declare namespace LocalJSX {
          */
         "scrollable"?: boolean;
         /**
+          * Set focus on the table caption element
+         */
+        "setCaptionFocus"?: boolean;
+        /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
@@ -6181,6 +6201,10 @@ declare namespace LocalJSX {
           * The title of the table
          */
         "tableTitle"?: string;
+        /**
+          * Additional context for the table. For example, pagination information. e.g. "Showing 1-10 of 13 charges"
+         */
+        "tableTitleSummary"?: string;
         /**
           * The type of table
          */
@@ -6218,6 +6242,10 @@ declare namespace LocalJSX {
          */
         "scrollable"?: boolean;
         /**
+          * Set focus on the table caption element
+         */
+        "setCaptionFocus"?: boolean;
+        /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
          */
         "sortable"?: boolean;
@@ -6233,6 +6261,10 @@ declare namespace LocalJSX {
           * The title of the table
          */
         "tableTitle"?: string;
+        /**
+          * Additional context for the table. For example, pagination information. e.g. "Showing 1-10 of 13 charges"
+         */
+        "tableTitleSummary"?: string;
         /**
           * The type of table to be used
          */

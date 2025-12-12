@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 import { VaPagination } from '@department-of-veterans-affairs/component-library/dist/react-bindings';
 
@@ -260,19 +260,33 @@ const Pagination = args => {
 
   const [currentData, setCurrentData] = useState(paginate(rows, MAX_ROWS, 1));
   const [currentPage, setCurrentPage] = useState(1);
+  const tableRef = useRef(null);
 
   function onPageChange(page) {
     setCurrentData(paginate(rows, MAX_ROWS, page));
     setCurrentPage(page);
+
+    // Focus caption with pagination summary after page changes
+    setTimeout(() => {
+      const main = tableRef.current;
+      const vaTable = main?.querySelector('va-table');
+      vaTable?.setAttribute('set-caption-focus', 'true');
+    }, 50);
   }
 
   const numPages = Math.ceil(rows.length / MAX_ROWS);
 
+  // Dynamic pagination summary
+  const totalRows = rows.length;
+  const startRow = (currentPage - 1) * MAX_ROWS + 1;
+  const endRow = Math.min(currentPage * MAX_ROWS, totalRows);
+  const paginationSummary = `Showing ${startRow}-${endRow} of ${totalRows} payments`;
+
   return (
-    <main>
+    <main ref={tableRef}>
       {/* Force re-render by wrapping in a div with changing key */}
       <div key={`table-wrapper-${currentPage}`}>
-        <va-table table-title={tableTitle} scrollable={scrollable} mono-font-cols='1' right-align-cols='1'>
+        <va-table table-title={tableTitle} table-title-summary={paginationSummary} scrollable={scrollable} mono-font-cols='1' right-align-cols='1'>
           <va-table-row>
             {columns.map((col, index) => (
               <span key={`table-header-${index}`}>{col}</span>
