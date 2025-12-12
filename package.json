@@ -15,13 +15,20 @@
   "packageManager": "yarn@4.2.2",
   "resolutions": {
     "ansi-regex": "5.0.1",
+    "brace-expansion": "2.0.2",
     "diff": "3.5.0",
+    "glob": "10.5.0",
     "glob-parent": "5.1.2",
     "json-schema": "0.4.0",
+    "js-yaml": "4.1.1",
+    "minimatch": "3.0.5",
     "minimist": "1.2.6",
     "node-fetch": "2.6.7",
+    "semver": "7.5.2",
+    "tar-fs": "3.1.1",
     "trim": "0.0.3",
-    "prism": "1.27.0"
+    "prism": "1.27.0",
+    "ws": "8.17.1"
   },
   "dependencies": {
     "webpack": "5"
