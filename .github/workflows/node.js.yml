@@ -17,9 +17,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.x
-          # cache: 'yarn' # Temporarily disabled to bust cache
-          # cache-dependency-path: 'yarn.lock'
-          
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
       - run: yarn install
       
       - name: Install Puppeteer browsers
