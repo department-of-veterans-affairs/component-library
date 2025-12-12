@@ -18,7 +18,6 @@ jobs:
         with:
           node-version: 22.x
           cache: 'yarn'
-          cache-dependency-path: 'yarn.lock'
       - run: yarn install
       
       - name: Install Puppeteer browsers
