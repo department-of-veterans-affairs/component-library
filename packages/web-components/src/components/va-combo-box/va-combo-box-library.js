@@ -285,7 +285,7 @@ const noop = () => {};
 
     //Sanitizer does not allow conditional rendering of elements
     // this approach allows tests to pass
-    if (comboBox.isInVaInputTelephone) {
+    if (comboBoxEl.dataset.showflags === 'true') {
       comboBoxEl.querySelector(`:scope > span.${CLEAR_INPUT_BUTTON_WRAPPER_CLASS}`).remove();
     }
 
@@ -406,13 +406,12 @@ const noop = () => {};
     } = getComboBoxContext(el);
     let selectedItemId;
     let firstFoundId;
-
     const listOptionBaseId = `${listEl.id}--option-`;
-
+    const showFlags =  comboBoxEl.dataset.showflags === 'true';
     const inputValue = (inputEl.value || '').trim().toLowerCase();
     const filter = comboBoxEl.dataset.filter || DEFAULT_FILTER;
     const regex = generateDynamicRegExp(filter, inputValue, comboBoxEl.dataset);
-    const filterKey = comboBox.isInVaInputTelephone ? 'innerHTML' : 'text';
+    const filterKey = showFlags ? 'innerHTML' : 'text';
     const filteredOptions = [...selectEl.options].filter(opt => regex.test(opt[filterKey]) && opt.getAttribute('data-optgroup') !== 'true');
 
     const options = [];
@@ -524,7 +523,7 @@ const noop = () => {};
       li.setAttribute('role', isOptGroup ? 'group' : 'option');
       li.setAttribute('data-value', option.value);
 
-      if (comboBox.isInVaInputTelephone) {
+      if (showFlags) {
         li.innerHTML = Sanitizer.escapeHTML`<div class="flag-wrapper">
         <span class="flag flag-${option.value.toLowerCase()}"></span>
         <span class="flag-text">${option.text}</span></div>`;
@@ -613,7 +612,7 @@ const noop = () => {};
 
     // Update the input value after selection
     // To prevent display error, use different text extraction method for telephone inputs
-    if (comboBox.isInVaInputTelephone) {
+    if (comboBoxEl.dataset.showflags === 'true') {
       // Extract just the flag-text portion or preserve the original input value if re-selecting
       const flagText = listOptionEl.querySelector('.flag-text');
       if (flagText) {
@@ -661,10 +660,11 @@ const completeSelection = el => {
     statusEl.textContent = '';
 
     const inputValue = (inputEl.value || '').trim().toLowerCase();
+    const showFlags = comboBoxEl.dataset.showflags === 'true';
 
     if (inputValue) {
       // Find a matching option
-    const matchingFunc = comboBox.isInVaInputTelephone
+    const matchingFunc = showFlags
         ? (option => {
           const [name, _] = inputValue.split('...');
           return option.text.toLowerCase().startsWith(name.toLowerCase());
@@ -675,7 +675,7 @@ const completeSelection = el => {
       if (matchingOption) {
         // If a match is found, update the input and select values
         changeElementValue(selectEl, matchingOption.value);
-        const _text = comboBox.isInVaInputTelephone ? inputEl.value : matchingOption.text;
+        const _text = showFlags ? inputEl.value : matchingOption.text;
         changeElementValue(inputEl, _text);
         comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
         return;
@@ -924,11 +924,7 @@ const completeSelection = el => {
       },
     },
     {
-      init(root, labelEl, value, isInVaInputTelephone = false) {
-        // only set this variable once
-        if (this.isInVaInputTelephone === undefined) {
-          this.isInVaInputTelephone = isInVaInputTelephone;
-        }
+      init(root, labelEl, value) {
         selectOrMatches(COMBO_BOX, root).forEach(comboBoxEl => {
           enhanceComboBox(comboBoxEl, labelEl, value);
         });
