@@ -31,7 +31,7 @@ function readAllModules(rootDir) {
     ],
   });
 
-  return jsFiles.map(modulePath => ({
+  return jsFiles.sort().map(modulePath => ({
     path: modulePath,
     contents: fs.readFileSync(modulePath, 'utf8'),
   }));
@@ -52,7 +52,7 @@ function readAllStylesheets(rootDir) {
     ],
   });
 
-  return cssFiles.map(filePath => ({
+  return cssFiles.sort().map(filePath => ({
     path: filePath,
     contents: fs.readFileSync(filePath, 'utf8'),
   }));
@@ -72,7 +72,7 @@ function readAllTests(rootDir) {
     ],
   });
 
-  return cssFiles.map(filePath => ({
+  return cssFiles.sort().map(filePath => ({
     path: filePath,
     contents: fs.readFileSync(filePath, 'utf8'),
   }));
@@ -104,7 +104,7 @@ function readFile(filepath) {
 function readAllTemplates(rootDir) {
   const templateFiles = glob.sync(`${rootDir}/**/*.@(html|liquid)`);
 
-  return templateFiles.map(modulePath => ({
+  return templateFiles.sort().map(modulePath => ({
     path: modulePath,
     contents: fs.readFileSync(modulePath, 'utf8'),
   }));

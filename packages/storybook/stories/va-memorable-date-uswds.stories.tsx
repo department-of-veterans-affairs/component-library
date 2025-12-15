@@ -21,11 +21,12 @@ export default {
         <StoryDocs storyDefault={Default} data={memorableDateInputDocs} />
       ),
     },
+    storyType: 'form',
   },
 };
 
 const defaultArgs = {
-  label: 'Date of birth',
+  label: 'Military service end date',
   name: 'test',
   hint: undefined,
   required: false,
@@ -33,7 +34,7 @@ const defaultArgs = {
   value: undefined,
   'month-select': false,
   'remove-date-hint': false,
-  customYearErrorMessage: `Please enter a year between 1900 and ${new Date().getFullYear()}`,
+  customYearErrorMessage: `Please enter a year between 1900 and ${new Date().getFullYear() + 100}`,
 };
 
 const Template = ({
@@ -371,6 +372,8 @@ ErrorWithMonthSelect.args = {
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {
   ...defaultArgs,
+  label: 'Date of birth',
+  'custom-year-error-message': `Please enter a year between 1900 and ${new Date().getFullYear()}`,
   required: true,
   value: '2022-04-19',
 };
