@@ -80,8 +80,8 @@ describe('va-table-inner', () => {
   it('adds a caption', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());
-    const caption = await page.find('va-table-inner >>> caption');
-    expect(caption.innerHTML).toEqual('this is a caption');
+    const visibleText = await page.find('va-table-inner >>> caption > span[aria-hidden="true"]');
+    expect(visibleText.textContent).toEqual('this is a caption');
   });
 
   it('sets tabindex on caption when set-caption-focus is true on initial render', async () => {
