@@ -80,20 +80,20 @@ describe('va-table-inner', () => {
   it('adds a caption', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());
-    const visibleText = await page.find('va-table-inner >>> caption > span[aria-hidden="true"]');
-    expect(visibleText.textContent).toEqual('this is a caption');
+    const caption = await page.find('va-table-inner >>> caption');
+    expect(caption.textContent).toEqual('this is a caption');
   });
 
-  it('sets tabindex on caption when set-caption-focus is true on initial render', async () => {
+  it('sets tabindex on table when set-caption-focus is true on initial render', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable({ 'set-caption-focus': 'true' }));
     await page.waitForChanges();
 
-    const caption = await page.find('va-table-inner >>> caption');
-    expect(caption.getAttribute('tabindex')).toEqual('-1');
+    const table = await page.find('va-table-inner >>> table');
+    expect(table.getAttribute('tabindex')).toEqual('-1');
   });
 
-  it('sets tabindex on caption when set-caption-focus attribute is set dynamically', async () => {
+  it('sets tabindex on table when set-caption-focus attribute is set dynamically', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());
     await page.waitForChanges();
@@ -105,11 +105,11 @@ describe('va-table-inner', () => {
     });
     await page.waitForChanges();
 
-    const caption = await page.find('va-table-inner >>> caption');
-    expect(caption.getAttribute('tabindex')).toEqual('-1');
+    const table = await page.find('va-table-inner >>> table');
+    expect(table.getAttribute('tabindex')).toEqual('-1');
   });
 
-  it('removes tabindex from caption after blur', async () => {
+  it('removes tabindex from table after blur', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <button id="other-element">Other</button>
@@ -117,18 +117,18 @@ describe('va-table-inner', () => {
     `);
     await page.waitForChanges();
 
-    const caption = await page.find('va-table-inner >>> caption');
-    expect(caption.getAttribute('tabindex')).toEqual('-1');
+    const table = await page.find('va-table-inner >>> table');
+    expect(table.getAttribute('tabindex')).toEqual('-1');
 
-    // Trigger blur by dispatching blur event on the caption
+    // Trigger blur by dispatching blur event on the table
     await page.evaluate(() => {
       const vaTableInner = document.querySelector('va-table-inner');
-      const caption = vaTableInner?.shadowRoot?.querySelector('caption');
-      caption?.dispatchEvent(new FocusEvent('blur'));
+      const table = vaTableInner?.shadowRoot?.querySelector('table');
+      table?.dispatchEvent(new FocusEvent('blur'));
     });
     await page.waitForChanges();
 
-    const tabindexAfterBlur = await caption.getAttribute('tabindex');
+    const tabindexAfterBlur = await table.getAttribute('tabindex');
     expect(tabindexAfterBlur).toBeNull();
   });
 

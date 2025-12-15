@@ -74,16 +74,14 @@ caption {
   font-size: 1.25rem;
   font-family: var(--font-serif);
   margin-bottom: 0.75rem;
-  margin-top: 0.75rem;
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
   #summary {
     display: block;
     font-weight: normal;
   }
-  &:focus {
-    @include focus-style;
-  }
+}
+
+table:focus {
+  @include focus-style;
 }
 
 @media screen and (max-width: $medium-screen) {
