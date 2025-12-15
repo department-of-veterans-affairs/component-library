@@ -21,18 +21,12 @@ describe('va-segmented-progress-bar', () => {
             </ol>
             <div class=\"usa-step-indicator__header\">
               <h4 class=\"usa-step-indicator__heading\">
-                <span class=\"usa-step-indicator__heading-counter\">
-                  <span class=\"usa-sr-only\">
-                    You are on Step
-                  </span>
-                  <span class=\"usa-step-indicator__current-step\">
-                    3
-                  </span>
-                  <span class=\"usa-step-indicator__total-steps\">
-                    of 6
-                  </span>
+                <span class=\"usa-sr-only\">You are on Step 3 of 6:</span>
+                <span aria-hidden=\"true\" class=\"usa-step-indicator__heading-counter\">
+                  <span class=\"usa-step-indicator__current-step\">3</span>
+                  <span class=\"usa-step-indicator__total-steps\"> of 6</span>
                 </span>
-                <span class=\"usa-step-indicator__heading-text\"></span>
+                <span aria-hidden=\"true\" class=\"usa-step-indicator__heading-text\"></span>
               </h4>
             </div>
           </div>
@@ -142,13 +136,13 @@ describe('va-segmented-progress-bar', () => {
     expect(header.tagName).toBe('H2');
   })
 
-  it("should render correct progress text", async () => {
+  it("should render correct progress term text", async () => {
     const page = await newE2EPage({
       html: '<va-segmented-progress-bar current="3" total="6" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" progress-term="Chapter"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
-    const counter = element.shadowRoot.querySelector('.usa-step-indicator__heading-counter .usa-sr-only');
-    expect(counter.innerHTML).toBe('You are on Chapter');
+    const counter = element.shadowRoot.querySelector('.usa-step-indicator__heading .usa-sr-only');
+    expect(counter.innerHTML).toBe('You are on Chapter 3 of 6: Supporting Documents');
   })
 });
 
