@@ -25,13 +25,10 @@ import '@department-of-veterans-affairs/css-library/dist/stylesheets/shame.css';
 import '@department-of-veterans-affairs/component-library/dist/main.css';
 import { allModes } from "./modes";
 import {
-  applyPolyfills,
   defineCustomElements,
 } from '@department-of-veterans-affairs/component-library';
 
-applyPolyfills().then(() => {
-  defineCustomElements();
-});
+defineCustomElements();
 
 // This CustomEvent polyfill is for IE11:
 // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#polyfill

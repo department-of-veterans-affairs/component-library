@@ -2,7 +2,7 @@
   "name": "@department-of-veterans-affairs/css-library",
   "version": "0.27.0",
   "description": "Department of Veterans Affairs stylesheets, tokens, and utilities",
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@4.2.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/department-of-veterans-affairs/component-library.git"
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "sass": "1.80.5",
-    "style-dictionary": "5.1.1"
+    "style-dictionary": "3.8.0"
   },
   "dependencies": {
     "@divriots/style-dictionary-to-figma": "0.4.0",
