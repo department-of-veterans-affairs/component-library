@@ -12,6 +12,7 @@ import classnames from 'classnames';
  * @componentName Tag - Status
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @guidanceHref tag/tag-status
  */
 @Component({
   tag: 'va-tag-status',
