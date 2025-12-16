@@ -3,5 +3,6 @@ import '@department-of-veterans-affairs/web-components/dist/component-library/co
 export * from '@department-of-veterans-affairs/react-components';
 export * from '@department-of-veterans-affairs/web-components';
 export {
+  applyPolyfills,
   defineCustomElements,
 } from '@department-of-veterans-affairs/web-components/loader';

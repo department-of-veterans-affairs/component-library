@@ -17,6 +17,7 @@ module.exports = function (api) {
         removeImport: true,
       },
     ],
+    'lodash',
   ];
 
   if (api.env('test')) {
