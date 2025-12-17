@@ -472,8 +472,8 @@ const FileUploadedTemplate = args => {
   }, []);
 
   const handleToggleFileClick = async () => {
-    const toFetch = mockFile.name === 'test.jpg' ? additionalTestImage : testImage;
-    const fileName = mockFile.name === 'test.jpg' ? 'another-test.jpg' : 'test.jpg';
+    const toFetch = !mockFile || mockFile.name !== 'test.jpg' ? testImage : additionalTestImage;
+    const fileName = !mockFile || mockFile.name !== 'test.jpg' ? 'test.jpg' : 'another-test.jpg';
     const response = await fetch(toFetch);
     const blob = await response.blob();
     const file = new File([blob], fileName, { type: 'image/jpeg' });
