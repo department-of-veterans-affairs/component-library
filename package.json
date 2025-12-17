@@ -13,6 +13,7 @@
     "packages/*"
   ],
   "packageManager": "yarn@4.2.2",
+  "resolutionsDoc": "resolutions.md",
   "resolutions": {
     "ansi-regex": "5.0.1",
     "cheerio": "1.0.0-rc.12",
