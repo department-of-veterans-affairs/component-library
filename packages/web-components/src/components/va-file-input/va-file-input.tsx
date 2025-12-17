@@ -324,6 +324,38 @@ export class VaFileInput {
   }
 
   /**
+   * Gets the IDs for aria-describedby attribute based on hint and error state.
+   * @returns {string | null}
+   */
+  private getInputAriaDescribedbyIds = (): string | null => {
+    const displayError = this.error || this.internalError;
+    const ariaDescribedbyIds =
+      `${this.hint ? 'input-hint-message' : ''} ${
+        displayError ? 'input-error-message' : ''
+      }`.trim() || null; // Null so we don't add the attribute if we have an empty string
+
+    return ariaDescribedbyIds
+  }
+
+  /**
+   * Either enables or disables the `aria-describedby` attribute on the file input element.
+   * This is used to temporarily disable the attribute when focusing on the input
+   * to prevent screen reader announcements from being overly verbose.
+   * @param {boolean} shouldEnable - Whether to enable or disable the `aria-describedby` attribute.
+   * @returns {void}
+   */
+  private toggleInputAriaDescribedby = (shouldEnable: boolean): void => {
+    if (!this.fileInputRef) {
+      return;
+    }
+    else if (shouldEnable) {
+      this.fileInputRef.setAttribute('aria-describedby', this.getInputAriaDescribedbyIds());
+    } else {
+      this.fileInputRef.removeAttribute('aria-describedby');
+    }
+  }
+
+  /**
    * Focuses on the file input element after a short delay to ensure that the aria-label has been updated in render.
    * @returns {void}
    */
@@ -336,6 +368,8 @@ export class VaFileInput {
         if (this.fileInputRef) {
           this.fileInputRef.focus();
         }
+        // Re-enable aria-describedby after focus
+        this.toggleInputAriaDescribedby(true);
       });
     });
   };
@@ -526,6 +560,8 @@ export class VaFileInput {
         : this.delaySlottedElementFocusUntilWindowFocus = true;
     }
     else {
+      // Disable aria-describedby temporarily to prevent screen reader verbosity
+      this.toggleInputAriaDescribedby(false);
       this.focusInputAfterAriaLabelUpdate();
     }
 
@@ -754,10 +790,7 @@ export class VaFileInput {
     const { file } = this;
 
     const displayError = error || internalError;
-    const ariaDescribedbyIds =
-      `${hint ? 'input-hint-message' : ''} ${
-        displayError ? 'input-error-message' : ''
-      }`.trim() || null; // Null so we don't add the attribute if we have an empty string
+
     const fileInputTargetClasses = `file-input-target ${
       displayError ? 'file-input-target-error' : ''
     }`.trim();
@@ -823,10 +856,10 @@ export class VaFileInput {
       inputAriaLabel = `Error: ${displayError}. ${inputAriaLabel}`;
     }
     else if (this.initialUploadAttemptHasTakenPlace && file) {
-      inputAriaLabel = `You have selected the file: ${file.name}. ${inputAriaLabel}`;
+      inputAriaLabel = `You have selected the file: ${file.name}.`;
     }
     else if (!this.initialUploadAttemptHasTakenPlace && uploadedFile) {
-      inputAriaLabel = `You have selected the file: ${uploadedFile.name}. ${inputAriaLabel}`;
+      inputAriaLabel = `You have selected the file: ${uploadedFile.name}.`;
     }
     else if (this.initialUploadAttemptHasTakenPlace && !file && !uploadedFile) {
       inputAriaLabel = `File deleted. No file selected. ${inputAriaLabel}`;
@@ -880,7 +913,7 @@ export class VaFileInput {
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
             name={name}
             accept={accept}
-            aria-describedby={ariaDescribedbyIds}
+            aria-describedby={this.getInputAriaDescribedbyIds()}
             onChange={this.handleChange}
           />
 
