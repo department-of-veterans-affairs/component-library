@@ -116,6 +116,11 @@
     padding-left: .5rem;
   }
 
+  #input-error-message {
+    padding: 0 8px;
+    width: 100%;
+  }
+
   .file-label {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-bold);
