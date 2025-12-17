@@ -2,6 +2,7 @@
 import { Component, Host, h, Prop, Watch, State, Element } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
 import { Components } from '../../components';
+import { JSX } from 'react';
 
 export interface ServiceDetails {
   [key: string]: string;

@@ -13,7 +13,7 @@ import {
 import classnames from 'classnames';
 import { i18next } from '../..';
 import { Build } from '@stencil/core';
-
+import { JSX } from 'react';
 import { makeArray } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -221,7 +221,7 @@ export class VaPagination {
     previousAriaLabel: string,
   ): JSX.Element {
     // No previous page
-    if (this.page === 1) return null;
+    if (this.page === 1) return null; 
 
     return (
       <li class={arrowClasses}>
