@@ -9,6 +9,7 @@ import {
 } from './wc-helpers';
 // @ts-ignore
 import testImage from './images/search-bar.png';
+import additionalTestImage from './images/canvas-toolbar.png';
 
 VaFileInput.displayName = 'VaFileInput';
 
@@ -59,6 +60,7 @@ const defaultArgs = {
   'password-error': false,
   'showToggleFocusButton': false,
   'focusEl': null,
+  'showToggleFileButton': false,
 };
 
 const Template = ({
@@ -469,7 +471,35 @@ const FileUploadedTemplate = args => {
     };
   }, []);
 
-  return <Template {...args} value={mockFile} />;
+  const handleToggleFileClick = async () => {
+    const toFetch = mockFile.name === 'test.jpg' ? additionalTestImage : testImage;
+    const fileName = mockFile.name === 'test.jpg' ? 'another-test.jpg' : 'test.jpg';
+    const response = await fetch(toFetch);
+    const blob = await response.blob();
+    const file = new File([blob], fileName, { type: 'image/jpeg' });
+
+    setMockFile(file);
+  }
+
+  return (
+    <>
+      <Template {...args} value={mockFile} />
+      {args.showToggleFileButton && (
+        <>
+          <va-button
+            text="Toggle uploaded file"
+            onClick={handleToggleFileClick}
+            class="vads-u-margin-top--2">
+          </va-button>
+          <va-button
+            text="Remove uploaded file"
+            onClick={() => setMockFile(null)}
+            class="vads-u-margin-top--2">
+          </va-button>
+        </>
+      )}
+    </>
+  );
 };
 
 export const UploadStatus = FileUploadedTemplate.bind(null);
@@ -482,7 +512,7 @@ UploadStatus.args = {
 };
 
 export const FileUploaded = FileUploadedTemplate.bind(null);
-FileUploaded.args = { ...defaultArgs, vaChange: event => event };
+FileUploaded.args = { ...defaultArgs, vaChange: event => event, showToggleFileButton: true };
 FileUploaded.parameters = {
   chromatic: { disableSnapshot: true },
 };
