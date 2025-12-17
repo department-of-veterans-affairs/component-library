@@ -894,91 +894,91 @@ export class VaFileInput {
           : (
             // File selected state
           <div class={selectedFileClassName}>
-              {!headless && (
-                <div class="selected-files-label">
-                  {readOnly ? 'Files you uploaded' : 'Selected files'}
+            {!headless && (
+              <div class="selected-files-label">
+                {readOnly ? 'Files you uploaded' : 'Selected files'}
+              </div>
+            )}
+
+            <va-card class="va-card">
+              <div class="file-info-section">
+                {fileThumbnail}
+                <div class="file-info-group vads-u-line-height--2">
+                  <span class="file-label">{file ? file.name : uploadedFile.name}</span>
+
+                  {this.renderErrorAlert()}
+
+                  {!showProgBar && <span class="file-size-label">
+                    {this.formatFileSize(file ? file.size : uploadedFile.size)}
+                  </span>}
+
+                  {(showProgBar || statusText) &&
+                    <span class={statusClassNames}>
+                      {showProgBar ? 'Uploading...' : statusText}
+                    </span>
+                  }
+
                 </div>
-              )}
+              </div>
+                <div class={this.showSeparator ? 'with-separator' : undefined}>
+                  {!readOnly && showProgBar &&
+                    (
+                      <div class="progress-bar-and-cancel-button">
+                        <va-progress-bar percent={percentUploaded} noPercentScreenReader />
+                        <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
+                      </div>
+                    )
+                  }
 
-              <va-card class="va-card">
-                <div class="file-info-section">
-                  {fileThumbnail}
-                  <div class="file-info-group vads-u-line-height--2">
-                    <span class="file-label">{file ? file.name : uploadedFile.name}</span>
+                  {!showProgBar && (
+                    <Fragment>
+                      {encrypted && (
+                        <va-text-input
+                          type="password"
+                          onInput={(e) =>{this.handlePasswordChange(e)}}
+                          label="File password"
+                          required
+                          error={passwordError}
+                        />
+                      )}
+                      <div class="additional-info-slot">
+                        <slot></slot>
+                      </div>
+                    </Fragment>
+                  )}
 
-                    {this.renderErrorAlert()}
-
-                    {!showProgBar && <span class="file-size-label">
-                      {this.formatFileSize(file ? file.size : uploadedFile.size)}
-                    </span>}
-
-                    {(showProgBar || statusText) &&
-                      <span class={statusClassNames}>
-                        {showProgBar ? 'Uploading...' : statusText}
-                      </span>
-                    }
-
-                  </div>
-                </div>
-                  <div class={this.showSeparator ? 'with-separator' : undefined}>
-                    {!readOnly && showProgBar &&
-                      (
-                        <div class="progress-bar-and-cancel-button">
-                          <va-progress-bar percent={percentUploaded} noPercentScreenReader />
-                          <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
-                        </div>
-                      )
-                    }
-
-                    {!showProgBar && (
+                  {!readOnly && !showProgBar &&
+                    (
                       <Fragment>
-                        {encrypted && (
-                          <va-text-input
-                            type="password"
-                            onInput={(e) =>{this.handlePasswordChange(e)}}
-                            label="File password"
-                            required
-                            error={passwordError}
-                          />
-                        )}
-                        <div class="additional-info-slot">
-                          <slot></slot>
-                        </div>
-                      </Fragment>
-                    )}
-
-                    {!readOnly && !showProgBar &&
-                      (
-                        <Fragment>
-                          <div class="file-button-section">
-                            <va-button-icon
-                              buttonType="change-file"
-                              onClick={this.changeFile}
-                              label={changeFileAriaLabel}
-                              ></va-button-icon>
-                            <va-button-icon
-                              buttonType="delete"
-                              onClick={this.openModal}
-                              label={deleteFileAriaLabel}
+                        <div class="file-button-section">
+                          <va-button-icon
+                            buttonType="change-file"
+                            onClick={this.changeFile}
+                            label={changeFileAriaLabel}
                             ></va-button-icon>
-                          </div>
+                          <va-button-icon
+                            buttonType="delete"
+                            onClick={this.openModal}
+                            label={deleteFileAriaLabel}
+                          ></va-button-icon>
+                        </div>
 
-                          <va-modal
-                            modalTitle="Delete this file?"
-                            visible={this.showModal}
-                            primaryButtonText="Yes, delete this"
-                            secondaryButtonText="No, keep this"
-                            onCloseEvent={this.closeModal}
-                            onPrimaryButtonClick={() => this.removeFile(true)}
-                            onSecondaryButtonClick={this.closeModal}
-                          >
-                            We'll delete the uploaded file{' '}
-                            <span class="file-label">{file ? file.name : uploadedFile.name}</span>
-                          </va-modal>
-                        </Fragment>
-                      )
-                    }
-                  </div>
+                        <va-modal
+                          modalTitle="Delete this file?"
+                          visible={this.showModal}
+                          primaryButtonText="Yes, delete this"
+                          secondaryButtonText="No, keep this"
+                          onCloseEvent={this.closeModal}
+                          onPrimaryButtonClick={() => this.removeFile(true)}
+                          onSecondaryButtonClick={this.closeModal}
+                        >
+                          We'll delete the uploaded file{' '}
+                          <span class="file-label">{file ? file.name : uploadedFile.name}</span>
+                        </va-modal>
+                      </Fragment>
+                    )
+                  }
+                </div>
               </va-card>
             </div>
           )}
