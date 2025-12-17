@@ -32,7 +32,6 @@ import { UploadedFile } from './uploadedFile';
 })
 export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
-  private uploadStatus: 'idle' | 'success' = 'idle';
   private fileType?: string;
   private chooseFileString: string ='choose from folder';
   private dragFileString: string = 'Drag a file here or ';
@@ -41,6 +40,7 @@ export class VaFileInput {
   private delayChangeButtonFocusUntilWindowFocus: boolean = false;
   private slottedContent: HTMLElement[] = null;
   private windowHasFocus: boolean = true;
+  private initialUploadAttemptHasTakenPlace: boolean = false;
 
   @Element() el: HTMLElement;
 
@@ -62,7 +62,7 @@ export class VaFileInput {
   @Watch('showModal')
   handleShowModalChange(value: boolean) {
     if (!value && !this.file) {
-      this.updateStatusMessage(`File deleted. No file selected.`);
+      this.focusInputAfterAriaLabelUpdate();
     }
   }
   @State() showSeparator: boolean = true;
@@ -84,6 +84,14 @@ export class VaFileInput {
    * The value attribute for the file view element.
    */
   @Prop() value?: File;
+  @Watch('value')
+  handleValueChange(newValue: File) {
+    // TODO: This may need to be validated that it isn't a breaking change for forms system.
+    // Process new value if it's different from current file
+    if (newValue && newValue !== this.file) {
+      this.handleFile(newValue, false);
+    }
+  }
 
   /**
    * Sets the input to required and renders the (*Required) text.
@@ -102,7 +110,10 @@ export class VaFileInput {
   @Watch('error')
   handleExternalErrorChange(value: string) {
     if (value) {
-      // this.focusOnErrorMessage();
+      // When an external error is set, focus on the input after a short delay
+      // to help with screen reader announcement and ensure that the aria label
+      // has been updated.
+      this.focusInputAfterAriaLabelUpdate();
     }
   }
 
@@ -203,8 +214,10 @@ export class VaFileInput {
   componentLibraryAnalytics: EventEmitter;
 
   @Watch('statusText')
-    handleValueChange(value: string) {
-      this.updateStatusMessage(value);
+  handleStatusTextChange(value: string) {
+    if (value) {
+      this.focusInputAfterAriaLabelUpdate();
+    }
   }
 
   @Watch('percentUploaded')
@@ -285,13 +298,11 @@ export class VaFileInput {
   }
 
   /**
-   * called when file has been uploaded
-   * or file upload has been cancelled
-   * or if resetVisualState prop set to true
+   * Called when file has been uploaded with an error or file upload has been
+   * cancelled.
    */
   private resetState() {
     this.fileContents = null;
-    this.uploadStatus = 'idle';
     this.percentUploaded = null;
     forceUpdate(this.el);
   }
@@ -304,6 +315,23 @@ export class VaFileInput {
     }
     input.value = '';
   }
+
+  /**
+   * Focuses on the file input element after a short delay to ensure that the aria-label has been updated in render.
+   * @returns {void}
+   */
+  private focusInputAfterAriaLabelUpdate = (): void => {
+    // Multiple requestAnimationFrame calls are needed to ensure that the:
+    // First requestAnimationFrame: Queues for next frame (after Stencil render)
+    // Second requestAnimationFrame: Ensures layout and paint have completed
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (this.fileInputRef) {
+          this.fileInputRef.focus();
+        }
+      });
+    });
+  };
 
   /**
    * Focuses on the nested `<button>` element in the "Change File" `<va-button-icon>` after a short delay to help with screen reader announcement.
@@ -428,6 +456,10 @@ export class VaFileInput {
    * @returns {void}
    */
   private handleFile(file: File, emitChange: boolean = true): void {
+    // Ensure that the flag to track the first upload attempt is set to `true`
+    // for conditional setting of `inputAriaLabel` in the render method.
+    this.initialUploadAttemptHasTakenPlace = true;
+
     let fileError: string | null = null;
 
     // Validate file against accept types (i.e. if only PDF files are accepted)
@@ -467,14 +499,11 @@ export class VaFileInput {
       this.vaChange.emit({ files: [this.file] });
     }
 
-    this.uploadStatus = 'success';
     this.internalError = null;
 
     if (file.size < this.FILE_PREVIEW_SIZE_LIMIT) {
       this.generateFileContents(this.file);
     }
-
-    const statusMsg = `You have selected the file: ${file.name}`;
 
     // Check for conditions where focus needs to be manually set, or if the flags
     // to delay focus until window focus are should be set. Note that focusing
@@ -489,10 +518,9 @@ export class VaFileInput {
         ? this.attemptToFocusOnSlottedElement()
         : this.delaySlottedElementFocusUntilWindowFocus = true;
     }
-
-    // For now we aren't worrying about delaying status message updates, instead
-    // focusing on optimizing setting focus on interactive elements.
-    this.updateStatusMessage(statusMsg);
+    else {
+      this.focusInputAfterAriaLabelUpdate();
+    }
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
@@ -506,7 +534,6 @@ export class VaFileInput {
   }
 
   private removeFile = (notifyParent: boolean = true) => {
-    this.uploadStatus = 'idle';
     this.internalError = null;
     if (notifyParent) {
       this.vaChange.emit({ files: [] });
@@ -533,25 +560,6 @@ export class VaFileInput {
       this.fileInputRef.click();
     }
   };
-
-  /**
-   * Updates the sr-only status message element's text content and optionally focuses on it.
-   * @param {string} message - The value to update the element's text content to.
-   * @returns {void}
-   */
-  private updateStatusMessage(message: string): void {
-    // Add delay to encourage screen reader readout
-    setTimeout(() => {
-      const statusMessageDiv =
-        this.el.shadowRoot.querySelector('#input-status-message');
-      statusMessageDiv ? (statusMessageDiv.textContent = message) : '';
-
-      // Clear the status message after 10 seconds to prevent repeated announcements
-      setTimeout(() => {
-        statusMessageDiv ? (statusMessageDiv.textContent = '') : '';
-      }, 10000);
-    }, 1000);
-  }
 
   /**
    * Converts the size of a file from bytes to a more human-readable format for
@@ -672,6 +680,14 @@ export class VaFileInput {
 
   componentDidLoad() {
     fileInput.init(this.el);
+
+    // If there is a passed uploaded file and the initial upload attempt has
+    // not yet been made, flip the flag to indicate that the first upload attempt
+    // has been made and then focus on the file input element.
+    if (this.uploadedFile && !this.initialUploadAttemptHasTakenPlace) {
+      this.initialUploadAttemptHasTakenPlace = true;
+      this.focusInputAfterAriaLabelUpdate();
+    }
   }
 
   private getDefaultUploadMessage() {
@@ -718,7 +734,6 @@ export class VaFileInput {
       fileContents,
       fileType,
       headless,
-      value,
       readOnly,
       encrypted,
       statusText,
@@ -728,12 +743,8 @@ export class VaFileInput {
       internalError,
     } = this;
 
-    if (value && !this.file) {
-      this.handleFile(value, false);
-    }
-
     // these values may get updated after call to this.handleFile above
-    const { uploadStatus, file, } = this;
+    const { file } = this;
 
     const displayError = error || internalError;
     const ariaDescribedbyIds =
@@ -788,13 +799,30 @@ export class VaFileInput {
       statusClassNames = `${statusClassNames} uploading-status`;
     }
 
-    // Determine the aria-label for the file input based on if input is required
-    // and if there is an error.
+    //
+    // Establish aria-label for <input> element. The Default aria-label includes
+    // the label, required status, and instructions to drag or choose a file.
+    //
+    // Update aria-label for <input> element with the priority:
+    //   1. If there is an error, announce the error first.
+    //   2. If a file has been selected and there is no error, announce the selected file name.
+    //   3. If there has been no attempt a file but a value has been passed to the
+    //      `uploadedFile` prop, announce the uploaded file name.
+    //   4. If an attempt has been made to upload a file but no file is selected,
+    //      announce that the file has been deleted.
     let inputAriaLabel: string =
       `${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`;
-
     if (displayError) {
       inputAriaLabel = `Error: ${displayError}. ${inputAriaLabel}`;
+    }
+    else if (this.initialUploadAttemptHasTakenPlace && file) {
+      inputAriaLabel = `You have selected the file: ${file.name}. ${inputAriaLabel}`;
+    }
+    else if (!this.initialUploadAttemptHasTakenPlace && uploadedFile) {
+      inputAriaLabel = `You have selected the file: ${uploadedFile.name}. ${inputAriaLabel}`;
+    }
+    else if (this.initialUploadAttemptHasTakenPlace && !file && !uploadedFile) {
+      inputAriaLabel = `File deleted. No file selected. ${inputAriaLabel}`;
     }
 
     // Determine the aria-label for the "change file" button based on the current state
@@ -831,17 +859,6 @@ export class VaFileInput {
         )}
 
         {/*
-          Using "zero-width space" character as initial value due to some browsers
-          ignoring changes to aria-live regions that start out empty.
-        */}
-        <span
-          id="input-status-message"
-          class="usa-sr-only"
-          aria-live="polite"
-          aria-atomic="true"
-        >{"\u200B"}</span>
-
-        {/*
           Note: ideally we would handle the drop event via Stencil's Listen() decorator,
           but that does not consistently work across browsers, likely due to
           the event not bubbling up through the Shadow DOM consistently (i.e. Chrome
@@ -852,9 +869,6 @@ export class VaFileInput {
             id="fileInputField"
             class="file-input"
             aria-label={inputAriaLabel}
-            style={{
-              visibility: (uploadStatus === 'success' || uploadedFile || internalError) ? 'hidden' : 'unset',
-            }}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
             name={name}
@@ -909,10 +923,10 @@ export class VaFileInput {
                   <div class={this.showSeparator ? 'with-separator' : undefined}>
                     {!readOnly && showProgBar &&
                       (
-                        <Fragment>
-                            <va-progress-bar percent={percentUploaded} noPercentScreenReader />
-                            <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
-                          </Fragment>
+                        <div class="progress-bar-and-cancel-button">
+                          <va-progress-bar percent={percentUploaded} noPercentScreenReader />
+                          <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
+                        </div>
                       )
                     }
 

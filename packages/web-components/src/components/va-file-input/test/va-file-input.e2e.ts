@@ -184,8 +184,6 @@ describe('va-file-input', () => {
 
     const fileInput = await page.find('va-file-input');
     expect(fileInput).not.toBeNull();
-    const input = await fileInput.shadowRoot.querySelector('input[type=file]');
-    expect(input.getAttribute('style')).toEqual('visibility: hidden;');
     const summaryCard = await page.find('va-file-input >>> va-card');
     expect(summaryCard).not.toBeNull();
     expect(await summaryCard.find('.file-label')).toEqualText('test.jpg');
@@ -216,7 +214,8 @@ describe('va-file-input', () => {
     // get delete button
     const [_, deleteButton] = await page.findAll('va-file-input >>> va-button-icon');
     deleteButton.click();
-    await page.waitForTimeout(100);
+
+    await new Promise((r) => setTimeout(r, 250));
 
     // make sure modal opens
     const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
@@ -473,7 +472,7 @@ describe('va-file-input', () => {
     expect(result.buttons[1].innerText).toEqual('DELETE');
   });
 
-  it('renders a screen-reader-only message with uploaded file\'s name when a file is uploaded successfully', async () => {
+  it('updates the aria-label of the nested file input with uploaded file\'s name when a file is uploaded successfully', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input />`);
 
@@ -488,18 +487,16 @@ describe('va-file-input', () => {
 
     await page.waitForChanges();
 
-    // Wait 1000ms for the status message text content to update (debounced in
+    // Wait 250ms for the status message text content to update (debounced in
     // component to help with screen reader announcements).
-    await new Promise((r) => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 250));
 
-    // Get status message and ensure that it has been updated to reflect file upload.
-    const srStatusMessage = await page.find('va-file-input >>> #input-status-message');
-    expect(srStatusMessage).not.toBeNull();
-    expect(srStatusMessage.getAttribute('class')).toContain('usa-sr-only');
-    expect(srStatusMessage.innerText).toBe('You have selected the file: 1x1.png');
+    const fileInput = await page.find('va-file-input >>> input');
+    expect(fileInput).not.toBeNull();
+    expect(fileInput.getAttribute('aria-label')).toContain('You have selected the file: 1x1.png.');
   });
 
-  it('renders a screen-reader-only message when an uploaded file is deleted', async () => {
+  it('updates the aria-label of the nested file input to reflect when an uploaded file is deleted', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input />`);
 
@@ -550,11 +547,9 @@ describe('va-file-input', () => {
     // component to help with screen reader announcements).
     await new Promise((r) => setTimeout(r, 1000));
 
-    // Get status message and ensure that it has been updated to reflect file deletion.
-    const srStatusMessage = await page.find('va-file-input >>> #input-status-message');
-    expect(srStatusMessage).not.toBeNull();
-    expect(srStatusMessage.getAttribute('class')).toContain('usa-sr-only');
-    expect(srStatusMessage.innerText).toBe('File deleted. No file selected.');
+    const fileInput = await page.find('va-file-input >>> input');
+    expect(fileInput).not.toBeNull();
+    expect(fileInput.getAttribute('aria-label')).toContain('File deleted. No file selected.');
   });
 
   it('renders a error message when there is a file input error', async () => {

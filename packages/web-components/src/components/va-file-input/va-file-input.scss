@@ -127,12 +127,6 @@
     overflow: hidden;
   }
 
-  #input-status-message {
-    padding-top: 0;
-    padding-bottom: 0;
-    width: 100%;
-  }
-
   .file-size-label, .file-status-label {
     color: var(--vads-color-base-dark);
     font-weight: var(--font-weight-normal);
@@ -156,6 +150,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    position: relative; /* This rule and the z-index are required for "Change File" and "Delete" buttons to be clickable */
+    z-index: 2;
 
     > va-button-icon {
       font-size: 1.06rem;
@@ -173,7 +169,7 @@
 
   /* copied from Formation
   /* TO DO: decide whether to import from CSS-Library or simply rename,
-  /* as this is the only attibute currently needed from utilities
+  /* as this is the only attribute currently needed from utilities
   */
   .vads-u-line-height--2 {
     line-height: 1.15;
@@ -197,6 +193,11 @@
 
   .thumbnail-error {
     color: $vads-color-error-dark;
+  }
+
+  .progress-bar-and-cancel-button {
+    position: relative; /* This rule and the z-index are required for "Cancel" button to be clickable */
+    z-index: 2;
   }
 
   va-progress-bar {
