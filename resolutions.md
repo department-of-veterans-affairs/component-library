@@ -30,8 +30,6 @@ This document explains the Yarn resolutions defined in the root `package.json` a
 - **When to Remove**: When all workspace packages naturally resolve to tar-fs@3.1.1 or higher
 - **Related Packages**: Multiple packages with transitive dependencies on tar-fs
 
-## Pre-existing Resolutions (Already on main branch)
-
 ### ansi-regex@5.0.1
 - **Why Added**: Security fix for ReDoS vulnerability
 - **When to Remove**: When all packages naturally resolve to 5.0.1+
