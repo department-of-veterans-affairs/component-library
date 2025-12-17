@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Encoding Issue: content: '\a0'</title>
+  <link id="demo-css" rel="stylesheet" href="/broken.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.6;
+      color: #1b1b1b;
+    }
+    h1 { margin-top: 0; color: #112e51; }
+    code {
+      background: #f0f0f0;
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #1b1b1b;
+      color: #e4e2e0;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .alert {
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+    .alert-error {
+      background: #f8d7da;
+      border-left: 4px solid #dc3545;
+    }
+    .alert-success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+    }
+    .demo-box {
+      background: #f1f1f1;
+      border: 1px solid #d6d7d9;
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+    .controls {
+      background: #e7f3fe;
+      border: 1px solid #2196f3;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1.5rem 0;
+    }
+    button {
+      background: #0071bc;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 0.5rem;
+    }
+    button:hover { background: #205493; }
+    button.active {
+      background: #dc3545;
+    }
+    button.fixed {
+      background: #28a745;
+    }
+    #status {
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-left: 1rem;
+    }
+    #status.broken {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    #status.fixed {
+      background: #d4edda;
+      color: #155724;
+    }
+    .hex {
+      font-family: monospace;
+      background: #ffeeba;
+      padding: 0.1em 0.3em;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Encoding Issue: <code>content: '\a0'</code></h1>
+  
+  <div class="alert alert-error">
+    <strong>The Problem:</strong> The CSS property <code>content: '\a0'</code> causes the 
+    character <strong>"Â"</strong> to appear in checkboxes and radio buttons.
+  </div>
+
+  <h2>What's happening?</h2>
+  <pre>
+<span style="color:#888">// Source SCSS (inputs.scss line 214)</span>
+content: '\a0';
+
+<span style="color:#888">// After Sass compilation, CSS contains actual UTF-8 bytes:</span>
+content: " ";  <span style="color:#888">// This " " is bytes: 0xC2 0xA0</span>
+
+<span style="color:#888">// In production, CSS is served with:</span>
+Content-Type: text/css  <span style="color:#888">// No charset specified!</span>
+
+<span style="color:#888">// Some browsers interpret 0xC2 0xA0 as Latin-1:</span>
+<span class="hex">0xC2</span> → "Â"  +  <span class="hex">0xA0</span> → non-breaking space</pre>
+
+  <h2>Live Demo</h2>
+  
+  <div class="controls">
+    <strong>Toggle CSS to see the difference:</strong><br><br>
+    <button id="btn-broken" class="active" onclick="loadCSS('broken')">
+      Show Bug: content: '\a0'
+    </button>
+    <button id="btn-fixed" onclick="loadCSS('fixed')">
+      Show Fix: content: '\00a0'
+    </button>
+    <span id="status" class="broken">Currently showing: BROKEN</span>
+  </div>
+
+  <div class="demo-box">
+    <div>
+      <input type="checkbox" id="check1">
+      <label for="check1">First checkbox option</label>
+    </div>
+    <div>
+      <input type="checkbox" id="check2">
+      <label for="check2">Second checkbox option</label>
+    </div>
+    <div>
+      <input type="checkbox" id="check3">
+      <label for="check3">Third checkbox option</label>
+    </div>
+    <hr style="margin: 1rem 0; border: none; border-top: 1px solid #ddd;">
+    <div>
+      <input type="radio" id="radio1" name="demo">
+      <label for="radio1">Radio option one</label>
+    </div>
+    <div>
+      <input type="radio" id="radio2" name="demo">
+      <label for="radio2">Radio option two</label>
+    </div>
+  </div>
+
+  <div id="explanation-broken" class="alert alert-error">
+    <strong>❌ BROKEN:</strong> You should see the "Â" character inside each checkbox/radio button above.
+    <br><br>
+    The CSS contains UTF-8 bytes <code>0xC2 0xA0</code> which get misinterpreted as Latin-1.
+  </div>
+
+  <div id="explanation-fixed" class="alert alert-success" style="display:none;">
+    <strong>✓ FIXED:</strong> The checkboxes and radio buttons should look normal now.
+    <br><br>
+    Using <code>content: '\00a0'</code> keeps the escape sequence as ASCII in the CSS file.
+    The browser interprets it correctly at render time.
+  </div>
+
+  <h2>The Fix</h2>
+  <pre>
+<span style="color:#f44336">// Before (causes encoding issues)</span>
+content: '\a0';
+
+<span style="color:#4caf50">// After (escape sequence preserved in output)</span>
+content: '\00a0';
+
+<span style="color:#4caf50">// Or simply use empty string (if no content needed)</span>
+content: '';</pre>
+
+  <h2>Affected Files</h2>
+  <ul>
+    <li><code>packages/css-library/src/stylesheets/formation-overrides/elements/inputs.scss</code></li>
+    <li><code>packages/css-library/src/stylesheets/modules/va-pagination.scss</code></li>
+    <li><code>packages/css-library/src/stylesheets/modules/m-nav-sidebar.scss</code></li>
+  </ul>
+
+  <script>
+    function loadCSS(mode) {
+      const link = document.getElementById('demo-css');
+      const status = document.getElementById('status');
+      const btnBroken = document.getElementById('btn-broken');
+      const btnFixed = document.getElementById('btn-fixed');
+      const expBroken = document.getElementById('explanation-broken');
+      const expFixed = document.getElementById('explanation-fixed');
+      
+      link.href = '/' + mode + '.css';
+      
+      if (mode === 'broken') {
+        status.textContent = 'Currently showing: BROKEN';
+        status.className = 'broken';
+        btnBroken.className = 'active';
+        btnFixed.className = '';
+        expBroken.style.display = 'block';
+        expFixed.style.display = 'none';
+      } else {
+        status.textContent = 'Currently showing: FIXED';
+        status.className = 'fixed';
+        btnBroken.className = '';
+        btnFixed.className = 'fixed';
+        expBroken.style.display = 'none';
+        expFixed.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
