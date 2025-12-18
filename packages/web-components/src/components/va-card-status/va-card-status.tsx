@@ -24,7 +24,13 @@ export class VaCard {
   /**
    * Text to be displayed in the card header.
    */
-  @Prop() headingText?: string;
+  @Prop() headingText: string;
+
+  /**
+   * Text to be displayed in the card subheader. 
+   * Heading level will be +1 of headingLevel Prop.
+   */
+  @Prop() subHeaderText: string;
 
   /**
    * Sets the card to required and renders the (*Required) text.
@@ -50,18 +56,19 @@ export class VaCard {
   /**
    * Set the href for the card link.
    */
-  @Prop() linkHref?: string;
+  @Prop() linkHref: string;
   /**
    *
    * Set the text for the card link.
    */
-  @Prop() linkText?: string;
+  @Prop() linkText: string;
 
   render() {
     const {
       el,
       headingLevel,
       headingText,
+      subHeaderText,
       tagStatus,
       tagText,
       errorMessage,
@@ -74,8 +81,9 @@ export class VaCard {
       errorMessage ? 'card-status-error-message' : ''
     }`;
 
-    // Create a header element
+    // Create a headers element
     const HeaderLevel = getHeaderLevel(headingLevel);
+    const SubHeaderLevel = getHeaderLevel(headingLevel + 1);
 
     //Checking if error message exists to display message and enter error state
     if (errorMessage) {
@@ -90,27 +98,25 @@ export class VaCard {
 
     return (
       <Host>
-        <div class="va-card-status__wrapper" aria-labelledby="card-title">
+        <div class="va-card-status__wrapper" aria-labelledby="va-card-status_card-title">
           <va-card>
             <div>
               <header>
-                {headingText ? (
                   <HeaderLevel class="va-card-status__header">
                     {tagText && tagStatus && (
                       <div>
                         <va-tag-status status={tagStatus} text={tagText} />
                       </div>
                     )}
-                    <span id="card-title">{headingText}</span>
+                    <span id="va-card-status_card-title">{headingText}</span>
                     {requiredSpan}
                   </HeaderLevel>
-                ) : (
-                  <slot name="header"></slot>
-                )}
               </header>
-              <div>
-                <slot name="subHeader"></slot>
-              </div>
+              {subHeaderText && (
+                <SubHeaderLevel class="va-card-status__subheader">
+                  {subHeaderText}
+                </SubHeaderLevel>
+              )}
               <span id="card-status-error-message" role="alert">
                 {errorMessage && (
                   <Fragment>
@@ -121,16 +127,12 @@ export class VaCard {
               </span>
               <slot></slot>
               <footer>
-                {linkHref && linkText ? (
-                  <va-link-action
-                    aria-describedby={ariaDescribedbyIds}
-                    type='secondary'
-                    href={linkHref}
-                    text={linkText}
-                  />
-                ) : (
-                  <slot name="footer"></slot>
-                )}
+                <va-link-action
+                  aria-describedby={ariaDescribedbyIds}
+                  type='secondary'
+                  href={linkHref}
+                  text={linkText}
+                /> 
               </footer>
             </div>
           </va-card>

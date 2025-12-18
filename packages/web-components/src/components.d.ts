@@ -431,19 +431,23 @@ export namespace Components {
         /**
           * Text to be displayed in the card header.
          */
-        "headingText"?: string;
+        "headingText": string;
         /**
           * Set the href for the card link.
          */
-        "linkHref"?: string;
+        "linkHref": string;
         /**
           * Set the text for the card link.
          */
-        "linkText"?: string;
+        "linkText": string;
         /**
           * Sets the card to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Text to be displayed in the card subheader.  Heading level will be +1 of headingLevel Prop.
+         */
+        "subHeaderText": string;
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
@@ -4474,6 +4478,10 @@ declare namespace LocalJSX {
           * Sets the card to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Text to be displayed in the card subheader.  Heading level will be +1 of headingLevel Prop.
+         */
+        "subHeaderText"?: string;
         /**
           * The status variant of the tag. Determines the background color and icon.
          */

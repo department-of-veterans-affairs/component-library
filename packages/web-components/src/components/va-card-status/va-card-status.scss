@@ -5,38 +5,43 @@
 
 :host {
   .va-card-status__header {
-    margin: 0.5rem 0 1rem 0;
+    margin: var(--units-1) 0 var(--units-2) 0;
   }
 
   .va-card-status__tag {
     display: block;
   }
 
-  #card-title {
-    font-size: 1.33rem;
+  #va-card-status_card-title {
+    font-size: var(--font-size-h3);
     font-family: var(--font-serif);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .va-card-status__subheader {
+    margin-top: var(--units-1);
+    margin-bottom: var(--units-2);
   }
 }
 
 :host([error]:not([error=''])) .va-card-status__wrapper {
-  border-left: 0.25rem solid var(--vads-color-secondary-dark);
-  padding-left: 1rem;
+  border-left: var(--units-0p5) solid var(--vads-color-secondary-dark);
+  padding-left: var(--units-2);
   position: relative;
 
   va-card {
-    border-width: 0.25rem;
+    border-width: var(--units-0p5);
     border-color: var(--vads-color-secondary-dark);
   }
 
   .required {
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
   }
 }
 
 .required {
   color: var(--vads-color-secondary-dark);
-  margin-left: 0.25rem;
+  margin-left: var(--units-0p5);
   font-size: initial;
   font-weight: initial;
 }

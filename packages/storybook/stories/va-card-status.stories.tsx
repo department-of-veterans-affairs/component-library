@@ -16,31 +16,30 @@ export default {
 const defaultArgs = {
   'heading-level': 3,
   'heading-text': 'Card Status Heading',
+  'sub-header-text': '',
   'tag-status': 'informational',
   'tag-text': '',
   'error-message': '',
-  'link-href': '',
-  'link-text': '',
-  'show-sub-header': false,
-  'show-footer-slot': false,
+  'link-href': 'https://www.va.gov',
+  'link-text': 'Link to more info',
   'required': false,
 };
 
 const Template = ({
   'heading-level': headingLevel,
   'heading-text': headingText,
+  'sub-header-text': subHeaderText,
   'tag-status': tagStatus,
   'tag-text': tagText,
   'error-message': errorMessage,
   'link-href': linkHref,
   'link-text': linkText,
-  'show-sub-header': showSubHeader,
-  'show-footer-slot': showFooterSlot,
   'required': required,
 }) => (
   <va-card-status
     heading-level={headingLevel}
     heading-text={headingText}
+    sub-header-text={subHeaderText}
     tag-status={tagStatus}
     tag-text={tagText}
     error-message={errorMessage}
@@ -48,24 +47,7 @@ const Template = ({
     link-text={linkText}
     required={required}
   >
-    <h3 slot="header" className="vads-u-margin-y--1p5">
-      <span className="vads-c-eyebrow">Eyebrow Title</span>
-      Heading slot
-    </h3>
-    {showSubHeader && (
-      <h4 slot="subHeader" className="vads-u-margin-top--1p5">
-        Subheader Optional
-      </h4>
-    )}
-    <div>
-      <p>Example card content</p>
-    </div>
-    {showFooterSlot && (
-      <div slot="footer" className="vads-u-margin-top--3">
-        <va-button text="Update" />
-        <va-button secondary text="Delete" />
-      </div>
-    )}
+    <p>Example card content</p>
   </va-card-status>
 );
 
@@ -92,33 +74,7 @@ export const withErrorMessageAndRequired = Template.bind(null);
 withErrorMessageAndRequired.args = {
   ...defaultArgs,
   'error-message': 'This is an error message.',
-  'required': true,
-};
-
-export const withErrorTagAndLink = Template.bind(null);
-withErrorTagAndLink.args = {
-  ...defaultArgs,
-  'error-message': 'This is an error message.',
   'tag-status': 'error',
   'tag-text': 'Missing',
-  'link-href': 'https://www.va.gov',
-  'link-text': 'Link to more info',
-};
-
-export const headingSlot = Template.bind(null);
-headingSlot.args = {
-  ...defaultArgs,
-  'heading-text': '',
-};
-
-export const subHeadingSlot = Template.bind(null);
-subHeadingSlot.args = {
-  ...defaultArgs,
-  'show-sub-header': true,
-};
-
-export const footerSlot = Template.bind(null);
-footerSlot.args = {
-  ...defaultArgs,
-  'show-footer-slot': true,
+  'required': true,
 };
