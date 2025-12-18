@@ -256,7 +256,7 @@ export class VaPagination {
             onKeyDown={e => this.handleKeyDown(e, 1)}
             href="javascript:void(0)"
             class="usa-pagination__button"
-            aria-label="page 1, first page"
+            aria-label={`1 of ${this.pages} pages, first page`}
           >
             1
           </a>
@@ -280,15 +280,19 @@ export class VaPagination {
       });
 
       let pageAriaLabel = ariaLabelSuffix
-        ? `page ${pageNumber} ${ariaLabelSuffix}`
-        : `page ${pageNumber}`;
+        /* eslint-disable-next-line i18next/no-literal-string */
+        ? `${pageNumber} of ${this.pages} pages ${ariaLabelSuffix}`
+        /* eslint-disable-next-line i18next/no-literal-string */
+        : `${pageNumber} of ${this.pages} pages`;
 
       if (pageNumber === 1) {
-        pageAriaLabel = `${pageAriaLabel}, first page`;
+        /* eslint-disable-next-line i18next/no-literal-string */
+        pageAriaLabel = `1 of ${this.pages} pages, first page`;
       }
 
       if (pageNumber === this.pages) {
-        pageAriaLabel = `${pageAriaLabel}, last page`;
+        /* eslint-disable-next-line i18next/no-literal-string */
+        pageAriaLabel = `${pageNumber} of ${this.pages} pages, last page`;
       }
 
       return (
@@ -341,7 +345,7 @@ export class VaPagination {
             onKeyDown={e => this.handleKeyDown(e, this.pages)}
             href="javascript:void(0)"
             class="usa-pagination__button"
-            aria-label={`page ${this.pages}, last page`}
+            aria-label={`${this.pages} of ${this.pages} pages, last page`}
           >
             {this.pages}
           </a>
