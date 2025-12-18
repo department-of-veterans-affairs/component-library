@@ -5,8 +5,7 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "static-storybook-server": "yarn build-storybook && npx http-server storybook-static",
-    "build-storybook-chromatic": "chromatic storybook build --project-token=${env.projectToken}"
+    "static-storybook-server": "yarn build-storybook && npx http-server storybook-static"
   },
   "dependencies": {
     "@department-of-veterans-affairs/component-library": "workspace:packages/core",
