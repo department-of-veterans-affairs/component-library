@@ -5,7 +5,7 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "static-storybook-server": "yarn build-storybook && npx http-server storybook-static",
+    "static-storybook-server": "yarn build-storybook && npx http-server storybook-static"
   },
   "dependencies": {
     "@department-of-veterans-affairs/component-library": "workspace:packages/core",
