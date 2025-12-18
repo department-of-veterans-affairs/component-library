@@ -100,7 +100,7 @@ export class VaModal {
   /*
    * Style of modal alert - info, error, success, warning
    */
-  @Prop() status?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+  @Prop({ reflect: true }) status?: 'continue' | 'error' | 'info' | 'success' | 'warning';
 
   /**
    * If the modal is visible or not

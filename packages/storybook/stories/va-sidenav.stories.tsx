@@ -8,9 +8,6 @@ const sidenavDocs = getWebComponentDocs('va-sidenav');
 const sidenavItemDocs = getWebComponentDocs('va-sidenav-item');
 const sidenavSubmenuDocs = getWebComponentDocs('va-sidenav-submenu');
 
-// Helper function to add key prop to web components for React
-const withKey = (key: string, props: any = {}) => ({ ...props, key } as any);
-
 export default {
   title: 'Components/Side Navigation',
   id: 'components/va-sidenav',
@@ -75,13 +72,13 @@ const Template = (args) => {
       {sideNav.map((item, index) =>
         item.submenu ? (
           <va-sidenav-submenu
-            {...withKey(`item-${index}`)}
+            key={new Date().getTime() + Math.random()}
             label={item.label}
             href={item.href}
             onClick={ (e) => handleClick(e)}>
             {item.submenu.map((submenuItem, submenuIndex) =>
               <va-sidenav-item
-                {...withKey(`item-${index}-${submenuIndex}`)}
+                key={new Date().getTime() + Math.random()}
                 href={submenuItem.href}
                 label={submenuItem.label}
                 onClick={ (e) => handleClick(e)}>
@@ -90,7 +87,7 @@ const Template = (args) => {
           </va-sidenav-submenu>
         ) : (
           <va-sidenav-item
-            {...withKey(`item-${index}`)}
+            key={new Date().getTime() + Math.random()}
             current-page={item['current-page']}
             href={item.href}
             label={item.label}

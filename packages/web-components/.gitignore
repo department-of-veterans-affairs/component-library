@@ -24,7 +24,8 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 .env
 
-react-bindings/
+react-bindings/*
+!react-bindings/index.ts
 component-docs.d.ts
 component-docs.json
 package.tgz

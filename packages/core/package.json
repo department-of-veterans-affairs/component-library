@@ -21,6 +21,7 @@
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",
     "@department-of-veterans-affairs/web-components": "workspace:*",
+    "@stencil/react-output-target": "1.2.0",
     "i18next": "25.6.0",
     "i18next-browser-languagedetector": "8.2.0",
     "react-focus-on": "3.5.4",

@@ -11,6 +11,7 @@
   ],
   "homepage": "http://design.va.gov",
   "license": "CC0-1.0",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/department-of-veterans-affairs/component-library.git"
@@ -75,7 +76,7 @@
     "glob": "9.3.5",
     "husky": "5.2.0",
     "is-docker": "2.1.1",
-    "karma": "6.3.16",
+    "karma": "6.4.4",
     "karma-chrome-launcher": "3.1.0",
     "karma-mocha": "2.0.1",
     "karma-webpack": "5.0.0",

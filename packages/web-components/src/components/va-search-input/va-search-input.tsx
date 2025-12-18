@@ -79,12 +79,12 @@ export class VaSearchInput {
   /**
    * If `true`, the component will use the big variant.
    */
-  @Prop() big?: boolean = false;
+  @Prop({ reflect: true }) big?: boolean = false;
 
   /**
    * If `true`, the component will use the small variant.
    */
-  @Prop() small?: boolean = false;
+  @Prop({ reflect: true }) small?: boolean = false;
 
   /**
    * If `true`, the component-library-analytics event is disabled.
