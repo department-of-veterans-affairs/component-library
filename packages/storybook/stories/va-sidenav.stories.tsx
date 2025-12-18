@@ -8,9 +8,6 @@ const sidenavDocs = getWebComponentDocs('va-sidenav');
 const sidenavItemDocs = getWebComponentDocs('va-sidenav-item');
 const sidenavSubmenuDocs = getWebComponentDocs('va-sidenav-submenu');
 
-// Helper function to add key prop to web components for React
-const withKey = (key: string, props: any = {}) => ({ ...props, key } as any);
-
 export default {
   title: 'Components/Side Navigation',
   id: 'components/va-sidenav',
