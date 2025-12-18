@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getWebComponentDocs, propStructure, StoryDocs, componentStructure } from './wc-helpers';
-import { VaSidenavItem } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaSidenav, VaSidenavItem, VaSidenavSubmenu } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { allModes } from "../.storybook/modes";
 
 const sidenavDocs = getWebComponentDocs('va-sidenav');
@@ -67,38 +67,38 @@ const Template = (args) => {
   }
 
   return (
-    <va-sidenav
+    <VaSidenav
       id={args.id}
       header={args.header}
       icon-name={args['icon-name']}
       icon-background-color={args['icon-background-color']}>
       {sideNav.map((item, index) =>
         item.submenu ? (
-          <va-sidenav-submenu
-            {...withKey(`item-${index}`)}
+          <VaSidenavSubmenu
+            key={new Date().getTime() + Math.random()}
             label={item.label}
             href={item.href}
             onClick={ (e) => handleClick(e)}>
             {item.submenu.map((submenuItem, submenuIndex) =>
-              <va-sidenav-item
-                {...withKey(`item-${index}-${submenuIndex}`)}
+              <VaSidenavItem
+                key={new Date().getTime() + Math.random()}
                 href={submenuItem.href}
                 label={submenuItem.label}
                 onClick={ (e) => handleClick(e)}>
-              </va-sidenav-item>
+              </VaSidenavItem>
             )}
-          </va-sidenav-submenu>
+          </VaSidenavSubmenu>
         ) : (
-          <va-sidenav-item
-            {...withKey(`item-${index}`)}
+          <VaSidenavItem
+            key={new Date().getTime() + Math.random()}
             current-page={item['current-page']}
             href={item.href}
             label={item.label}
             onClick={ (e) => handleClick(e)}
-          ></va-sidenav-item>
+          ></VaSidenavItem>
         )
       )}
-    </va-sidenav>
+    </VaSidenav>
   )
 };
 
@@ -175,7 +175,7 @@ const WithRouterTemplate = (args) => {
 
       <p id="route-change-message"></p>
 
-      <va-sidenav
+      <VaSidenav
         id="router-sidenav"
         header={args.header}
         icon-name={args['icon-name']}
@@ -198,7 +198,7 @@ const WithRouterTemplate = (args) => {
           router-link={true}
           onClick={(e) => handleClick(e)}
           onVaRouteChange={handleRouteChange}></VaSidenavItem>
-      </va-sidenav>
+      </VaSidenav>
     </div>
   )
 }
