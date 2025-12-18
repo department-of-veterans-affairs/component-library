@@ -117,8 +117,12 @@
   }
 
   #input-error-message {
-    padding: 0 8px;
+    padding: .25rem 0;
     width: 100%;
+  }
+
+  va-card #input-error-message {
+    padding: 0;
   }
 
   .file-label {
@@ -145,7 +149,7 @@
   }
 
   .file-info-section {
-    padding: 0 12px 8px;
+    padding: 0 8px 8px;
     display: flex;
     align-items: center;
   }

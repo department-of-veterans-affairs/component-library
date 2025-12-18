@@ -320,39 +320,6 @@ export class VaFileInput {
     if (input.files && input.files.length > 0) {
       this.handleFile(input.files[0], true);
     }
-    input.value = '';
-  }
-
-  /**
-   * Gets the IDs for aria-describedby attribute based on hint and error state.
-   * @returns {string | null}
-   */
-  private getInputAriaDescribedbyIds = (): string | null => {
-    const displayError = this.error || this.internalError;
-    const ariaDescribedbyIds =
-      `${this.hint ? 'input-hint-message' : ''} ${
-        displayError ? 'input-error-message' : ''
-      }`.trim() || null; // Null so we don't add the attribute if we have an empty string
-
-    return ariaDescribedbyIds
-  }
-
-  /**
-   * Either enables or disables the `aria-describedby` attribute on the file input element.
-   * This is used to temporarily disable the attribute when focusing on the input
-   * to prevent screen reader announcements from being overly verbose.
-   * @param {boolean} shouldEnable - Whether to enable or disable the `aria-describedby` attribute.
-   * @returns {void}
-   */
-  private toggleInputAriaDescribedby = (shouldEnable: boolean): void => {
-    if (!this.fileInputRef) {
-      return;
-    }
-    else if (shouldEnable) {
-      this.fileInputRef.setAttribute('aria-describedby', this.getInputAriaDescribedbyIds());
-    } else {
-      this.fileInputRef.removeAttribute('aria-describedby');
-    }
   }
 
   /**
@@ -368,8 +335,6 @@ export class VaFileInput {
         if (this.fileInputRef) {
           this.fileInputRef.focus();
         }
-        // Re-enable aria-describedby after focus
-        this.toggleInputAriaDescribedby(true);
       });
     });
   };
@@ -548,7 +513,9 @@ export class VaFileInput {
 
     // Check for conditions where focus needs to be manually set, or if the flags
     // to delay focus until window focus are should be set. Note that focusing
-    // on the password input for encrypted files takes priority over slotted content.
+    // on the password input for encrypted files takes priority over slotted
+    // content. If neither condition is met, focus on the file input element to
+    // announce the selected file.
     if (this.encrypted) {
       this.windowHasFocus
         ? this.focusOnPasswordInput()
@@ -560,8 +527,6 @@ export class VaFileInput {
         : this.delaySlottedElementFocusUntilWindowFocus = true;
     }
     else {
-      // Disable aria-describedby temporarily to prevent screen reader verbosity
-      this.toggleInputAriaDescribedby(false);
       this.focusInputAfterAriaLabelUpdate();
     }
 
@@ -583,6 +548,9 @@ export class VaFileInput {
     }
     this.file = null;
     this.uploadedFile = null;
+    // We need to ensure that the value attribute of the input element is cleared
+    // so that subsequent uploads of the same file will trigger the change event.
+    this.fileInputRef.value = '';
 
     this.closeModal();
   };
@@ -744,12 +712,14 @@ export class VaFileInput {
 
   /**
    * Renderer for the displayed error alert that is hidden from screen readers.
-   * @returns {HTMLSpanElement}
+   * @returns {HTMLSpanElement | void}
    */
-  private renderErrorAlert(): HTMLSpanElement {
+  private renderErrorAlert(): HTMLSpanElement | void {
     // Determine which error message to display (if any). Priority to external error
     // to give teams using the component to programmatically control the error state.
     let displayError: string | undefined = this.error || this.internalError;
+
+    if (!displayError) return;
 
     return (
       <span id="input-error-message" class="usa-error-message">
@@ -913,7 +883,6 @@ export class VaFileInput {
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
             name={name}
             accept={accept}
-            aria-describedby={this.getInputAriaDescribedbyIds()}
             onChange={this.handleChange}
           />
 
