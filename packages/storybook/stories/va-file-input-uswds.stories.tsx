@@ -259,7 +259,7 @@ ErrorMessage.args = {
 export const WithMaxFileSize = Template.bind(null);
 WithMaxFileSize.args = {
   ...defaultArgs,
-  label: 'Input has a maximum file-size restriction (specified in bytes)',
+  label: 'Input has a maximum file-size restriction',
   hint: 'An error will be thrown if the selected file is greater than 1 KB',
   maxFileSize: 1024,
 };
@@ -272,7 +272,7 @@ WithMaxFileSize.parameters = {
 export const WithMinFileSize = Template.bind(null);
 WithMinFileSize.args = {
   ...defaultArgs,
-  label: 'Input has a minimum file-size restriction (specified in bytes)',
+  label: 'Input has a minimum file-size restriction',
   hint: 'An error will be thrown if the selected file is less than 1 MB',
   minFileSize: 1024*1024,
 }
