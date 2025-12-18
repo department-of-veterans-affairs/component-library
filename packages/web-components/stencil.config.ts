@@ -37,6 +37,7 @@ export const config: Config = {
       componentCorePackage:
         '@department-of-veterans-affairs/web-components/dist/types',
       proxiesFile: './react-bindings/index.ts',
+      outDir: './react-bindings',
       includeImportCustomElements: false,
     }),
     {
@@ -57,6 +58,7 @@ export const config: Config = {
     {
       type: 'dist-custom-elements',
       customElementsExportBehavior: 'single-export-module',
+      externalRuntime: false,
     },
   ],
   testing: {
