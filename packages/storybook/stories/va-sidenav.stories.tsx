@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getWebComponentDocs, propStructure, StoryDocs, componentStructure } from './wc-helpers';
-import { VaSidenav, VaSidenavItem, VaSidenavSubmenu } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaSidenavItem } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { allModes } from "../.storybook/modes";
 
 const sidenavDocs = getWebComponentDocs('va-sidenav');
@@ -64,38 +64,38 @@ const Template = (args) => {
   }
 
   return (
-    <VaSidenav
+    <va-sidenav
       id={args.id}
       header={args.header}
       icon-name={args['icon-name']}
       icon-background-color={args['icon-background-color']}>
       {sideNav.map((item, index) =>
         item.submenu ? (
-          <VaSidenavSubmenu
+          <va-sidenav-submenu
             key={new Date().getTime() + Math.random()}
             label={item.label}
             href={item.href}
             onClick={ (e) => handleClick(e)}>
             {item.submenu.map((submenuItem, submenuIndex) =>
-              <VaSidenavItem
+              <va-sidenav-item
                 key={new Date().getTime() + Math.random()}
                 href={submenuItem.href}
                 label={submenuItem.label}
                 onClick={ (e) => handleClick(e)}>
-              </VaSidenavItem>
+              </va-sidenav-item>
             )}
-          </VaSidenavSubmenu>
+          </va-sidenav-submenu>
         ) : (
-          <VaSidenavItem
+          <va-sidenav-item
             key={new Date().getTime() + Math.random()}
             current-page={item['current-page']}
             href={item.href}
             label={item.label}
             onClick={ (e) => handleClick(e)}
-          ></VaSidenavItem>
+          ></va-sidenav-item>
         )
       )}
-    </VaSidenav>
+    </va-sidenav>
   )
 };
 
@@ -172,7 +172,7 @@ const WithRouterTemplate = (args) => {
 
       <p id="route-change-message"></p>
 
-      <VaSidenav
+      <va-sidenav
         id="router-sidenav"
         header={args.header}
         icon-name={args['icon-name']}
@@ -195,7 +195,7 @@ const WithRouterTemplate = (args) => {
           router-link={true}
           onClick={(e) => handleClick(e)}
           onVaRouteChange={handleRouteChange}></VaSidenavItem>
-      </VaSidenav>
+      </va-sidenav>
     </div>
   )
 }
