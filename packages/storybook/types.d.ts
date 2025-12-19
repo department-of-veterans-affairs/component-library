@@ -20,6 +20,7 @@ declare global {
       'va-button-icon': WCTypes.VaButtonIcon & IsElement;
       'va-button-pair': WCTypes.VaButtonPair & IsElement;
       'va-card': WCTypes.VaCard & IsElement;
+      'va-card-status': WCTypes.VaCardStatus & IsElement;
       'va-checkbox': WCTypes.VaCheckbox & IsElement & { value?: string };
       'va-checkbox-group': WCTypes.VaCheckboxGroup & IsElement;
       'va-combo-box': WCTypes.VaComboBox & IsElement & IsElement;

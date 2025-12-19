@@ -1,0 +1,75 @@
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+
+const cardDocs = getWebComponentDocs('va-card-status');
+
+export default {
+  title: 'Components/Card Status',
+  id: 'components/va-card-status',
+  parameters: {
+    componentSubtitle: 'va-card-status web component',
+    docs: {
+      page: () => <StoryDocs storyDefault={Default} data={cardDocs} />,
+    },
+  },
+};
+
+const defaultArgs = {
+  'heading-level': 3,
+  'heading-text': 'Card Status Heading',
+  'sub-header-text': '',
+  'tag-status': 'informational',
+  'tag-text': '',
+  'error-message': '',
+  'link-href': 'https://www.va.gov',
+  'link-text': 'Link to more info',
+  'required': false,
+};
+
+const Template = ({
+  'heading-level': headingLevel,
+  'heading-text': headingText,
+  'sub-header-text': subHeaderText,
+  'tag-status': tagStatus,
+  'tag-text': tagText,
+  'error-message': errorMessage,
+  'link-href': linkHref,
+  'link-text': linkText,
+  'required': required,
+}) => (
+  <va-card-status
+    heading-level={headingLevel}
+    heading-text={headingText}
+    sub-header-text={subHeaderText}
+    tag-status={tagStatus}
+    tag-text={tagText}
+    error-message={errorMessage}
+    link-href={linkHref}
+    link-text={linkText}
+    required={required}
+  >
+    <p>Example card content</p>
+  </va-card-status>
+);
+
+export const Default = Template.bind(null);
+Default.args = {
+  ...defaultArgs,
+};
+Default.argTypes = propStructure(cardDocs);
+
+export const withTagAndRequired = Template.bind(null);
+withTagAndRequired.args = {
+  ...defaultArgs,
+  'tag-text': 'Status',
+  'tag-status': 'informational',
+  'required': true,
+};
+
+export const withErrorMessageAndRequired = Template.bind(null);
+withErrorMessageAndRequired.args = {
+  ...defaultArgs,
+  'error-message': 'This is an error message.',
+  'tag-status': 'error',
+  'tag-text': 'Missing',
+  'required': true,
+};
