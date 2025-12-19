@@ -57,17 +57,12 @@ Default.args = {
 };
 Default.argTypes = propStructure(cardDocs);
 
-export const withRequired = Template.bind(null);
-withRequired.args = {
-  ...defaultArgs,
-  'required': true,
-};
-
-export const withTag = Template.bind(null);
-withTag.args = {
+export const withTagAndRequired = Template.bind(null);
+withTagAndRequired.args = {
   ...defaultArgs,
   'tag-text': 'Status',
   'tag-status': 'informational',
+  'required': true,
 };
 
 export const withErrorMessageAndRequired = Template.bind(null);
