@@ -4,7 +4,7 @@
   "packageManager": "yarn@3.2.0",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "yarn workspace @department-of-veterans-affairs/web-components build && yarn workspace @department-of-veterans-affairs/web-components build-bindings && storybook build",
     "static-storybook-server": "yarn build-storybook && npx http-server storybook-static"
   },
   "dependencies": {
