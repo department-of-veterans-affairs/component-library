@@ -533,7 +533,7 @@ export class VaTextInput {
             </label>
           )}
           <slot></slot>
-          <span id="input-error-message" role="alert" class={errorClass}>
+          <span id="input-error-message" role="alert" class={errorClass} tabIndex={-1}>
             {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span>

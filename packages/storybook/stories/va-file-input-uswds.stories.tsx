@@ -9,6 +9,7 @@ import {
 } from './wc-helpers';
 // @ts-ignore
 import testImage from './images/search-bar.png';
+import additionalTestImage from './images/canvas-toolbar.png';
 
 VaFileInput.displayName = 'VaFileInput';
 
@@ -59,6 +60,7 @@ const defaultArgs = {
   'password-error': false,
   'showToggleFocusButton': false,
   'focusEl': null,
+  'showToggleFileButton': false,
 };
 
 const Template = ({
@@ -173,6 +175,51 @@ WithFilePasswordError.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
+const WithMinimumPasswordRequirementTemplate = ({
+  label,
+  name,
+  accept,
+  required,
+  error,
+  hint,
+}) => {
+  const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
+
+  const handleVaPasswordChange = (e: CustomEvent) => {
+    let newPasswordError: string | undefined;
+
+    const { password } = e.detail;
+
+    if (!password || password.length < 4) {
+      newPasswordError = 'Encrypted file requires a password.';
+    } else if (password.length >= 4) {
+      newPasswordError = null;
+    }
+
+    setPasswordError(newPasswordError);
+  };
+
+  return (
+    <VaFileInput
+      label={label}
+      name={name}
+      accept={accept}
+      required={required}
+      error={error}
+      hint={hint}
+      encrypted={true}
+      onVaPasswordChange={handleVaPasswordChange}
+      passwordError={passwordError}
+    />
+  );
+};
+export const WithMinimumPasswordRequirement = WithMinimumPasswordRequirementTemplate.bind(null);
+WithMinimumPasswordRequirement.args = {
+  ...defaultArgs,
+  label: 'With minimum password length requirement',
+  hint: 'Password must be at least 4 characters long',
+};
+
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
 AcceptsOnlySpecificFileTypes.args = {
   ...defaultArgs,
@@ -212,7 +259,7 @@ ErrorMessage.args = {
 export const WithMaxFileSize = Template.bind(null);
 WithMaxFileSize.args = {
   ...defaultArgs,
-  label: 'Input has a maximum file-size restriction (specified in bytes)',
+  label: 'Input has a maximum file-size restriction',
   hint: 'An error will be thrown if the selected file is greater than 1 KB',
   maxFileSize: 1024,
 };
@@ -225,7 +272,7 @@ WithMaxFileSize.parameters = {
 export const WithMinFileSize = Template.bind(null);
 WithMinFileSize.args = {
   ...defaultArgs,
-  label: 'Input has a minimum file-size restriction (specified in bytes)',
+  label: 'Input has a minimum file-size restriction',
   hint: 'An error will be thrown if the selected file is less than 1 MB',
   minFileSize: 1024*1024,
 }
@@ -424,7 +471,35 @@ const FileUploadedTemplate = args => {
     };
   }, []);
 
-  return <Template {...args} value={mockFile} />;
+  const handleToggleFileClick = async () => {
+    const toFetch = !mockFile || mockFile.name !== 'test.jpg' ? testImage : additionalTestImage;
+    const fileName = !mockFile || mockFile.name !== 'test.jpg' ? 'test.jpg' : 'another-test.jpg';
+    const response = await fetch(toFetch);
+    const blob = await response.blob();
+    const file = new File([blob], fileName, { type: 'image/jpeg' });
+
+    setMockFile(file);
+  }
+
+  return (
+    <>
+      <Template {...args} value={mockFile} />
+      {args.showToggleFileButton && (
+        <>
+          <va-button
+            text="Toggle uploaded file"
+            onClick={handleToggleFileClick}
+            class="vads-u-margin-top--2">
+          </va-button>
+          <va-button
+            text="Remove uploaded file"
+            onClick={() => setMockFile(null)}
+            class="vads-u-margin-top--2">
+          </va-button>
+        </>
+      )}
+    </>
+  );
 };
 
 export const UploadStatus = FileUploadedTemplate.bind(null);
@@ -437,7 +512,7 @@ UploadStatus.args = {
 };
 
 export const FileUploaded = FileUploadedTemplate.bind(null);
-FileUploaded.args = { ...defaultArgs, vaChange: event => event };
+FileUploaded.args = { ...defaultArgs, vaChange: event => event, showToggleFileButton: true };
 FileUploaded.parameters = {
   chromatic: { disableSnapshot: true },
 };
