@@ -2,6 +2,7 @@ import {
   Component,
   Element,
   Prop,
+  Watch,
   h,
   Event,
   EventEmitter,
@@ -34,6 +35,12 @@ export class VaTableInner {
    * The title of the table
    */
   @Prop() tableTitle: string;
+
+  /**
+   * Additional context for the table. For example, pagination information.
+   * e.g. "Showing 1-10 of 13 charges"
+   */
+  @Prop() tableTitleSummary?: string;
 
   /*
    * The number of rows in the table
@@ -85,6 +92,14 @@ export class VaTableInner {
    */
   @Prop() monoFontCols?: string;
 
+  /**
+   * Set focus on the table caption element
+   */
+  @Prop() setCaptionFocus?: boolean = false;
+
+  // Reference to the caption element for focus management
+  private captionRef: HTMLElement;
+
   // Internal 'holder' for the array of columns to right-align, updated in componentWillRender
   colsToAlign: Array<number>;
 
@@ -116,6 +131,32 @@ export class VaTableInner {
   disconnectedCallback() {
     if (this.observer) {
       this.observer.disconnect();
+    }
+  }
+
+  componentDidLoad() {
+    // Handle initial setCaptionFocus if true on first render
+    if (this.setCaptionFocus) {
+      this.focusCaption();
+    }
+  }
+
+  @Watch('setCaptionFocus')
+  handleSetCaptionFocusChange(newValue: boolean) {
+    if (newValue) {
+      this.focusCaption();
+    }
+  }
+
+  private focusCaption() {
+    if (this.captionRef) {
+      this.captionRef.setAttribute('tabindex', '-1');
+      this.captionRef.focus();
+      // Remove tabindex after focus leaves the caption
+      this.captionRef.addEventListener('blur', () => {
+        this.captionRef.removeAttribute('tabindex');
+        this.setCaptionFocus = false;
+      }, { once: true });
     }
   }
 
@@ -394,7 +435,7 @@ export class VaTableInner {
   }
 
   render() {
-    const { tableTitle, tableType, stacked, scrollable, striped, fullWidth } =
+    const { tableTitle, tableTitleSummary, tableType, stacked, scrollable, striped, fullWidth } =
       this;
     const containerClasses = classnames({
       'usa-table-container--scrollable': scrollable,
@@ -409,7 +450,13 @@ export class VaTableInner {
     return (
       <div tabIndex={scrollable ? 0 : null} class={containerClasses}>
         <table class={tableClasses}>
-          {tableTitle && <caption>{tableTitle}</caption>}
+          {tableTitle && <caption ref={(el) => this.captionRef = el}>
+            <span class="usa-sr-only">{tableTitle}{tableTitleSummary ? ` ${tableTitleSummary}` : ''}</span>
+            <span aria-hidden="true">
+              {tableTitle}
+              {tableTitleSummary && <span id="summary">{tableTitleSummary}</span>}
+            </span>
+          </caption>}
           <thead>{this.makeRow(0)}</thead>
           <tbody id="va-table-body">{this.getBodyRows()}</tbody>
         </table>
