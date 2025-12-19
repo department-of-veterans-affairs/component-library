@@ -12,7 +12,6 @@ import { i18next } from '../..';
 import { FileIndex } from "./FileIndex";
 import { FileDetails } from "./FileDetails";
 import { UploadedFile } from "../va-file-input/uploadedFile";
-import { JSX } from 'react';
 
 /**
  * A component that manages multiple file inputs, allowing users to upload several files.

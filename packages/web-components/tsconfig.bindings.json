@@ -16,7 +16,14 @@
     "sourceMap": true,
     "jsx": "react",
     "target": "es5",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "typeRoots": ["../../node_modules/@types"],
+    "paths": {
+      "react": ["../../node_modules/@types/react"],
+      "react-dom": ["../../node_modules/@types/react-dom"],
+      "@types/react": ["../../node_modules/@types/react"],
+      "@types/react-dom": ["../../node_modules/@types/react-dom"]
+    }
   },
   "include": ["react-bindings/**/*.ts", "react-bindings/**/*.tsx"],
   "compileOnSave": false,

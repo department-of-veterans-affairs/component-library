@@ -16,7 +16,6 @@ import { i18next } from '../..';
 import { fileInput } from './va-file-input-upgrader';
 import { extensionToMimeType } from './fileExtensionToMimeType';
 import { UploadedFile } from './uploadedFile';
-import { JSX } from 'react';
 
 /**
  * @componentName File input
@@ -274,11 +273,11 @@ export class VaFileInput {
       this.resetState();
       return;
     }
-  
+
     if (emitChange) {
       this.vaChange.emit({ files: [this.file] });
     }
-    
+
     this.uploadStatus = 'success';
     this.internalError = null;
     if (file.size < this.FILE_PREVIEW_SIZE_LIMIT) {
@@ -598,7 +597,7 @@ export class VaFileInput {
             aria-describedby={ariaDescribedbyIds}
             onChange={this.handleChange}
           />
-          { !uploadedFile && !file  ? 
+          { !uploadedFile && !file  ?
             <div>
               <span id="file-input-error-alert" role="alert">
                 {displayError && (
