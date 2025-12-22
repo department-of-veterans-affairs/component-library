@@ -38,7 +38,7 @@
     "util": "0.12.5"
   },
   "devDependencies": {
-    "@babel/core": "7.12.17",
+    "@babel/core": "7.13.0",
     "@babel/eslint-parser": "7.17.0",
     "@babel/plugin-proposal-class-properties": "7.14.5",
     "@babel/plugin-proposal-export-namespace-from": "7.14.5",
@@ -72,7 +72,7 @@
     "eslint-plugin-prettier": "3.4.1",
     "eslint-plugin-react": "7.29.2",
     "fs-extra": "9.1.0",
-    "glob": "7.1.6",
+    "glob": "9.3.5",
     "husky": "5.2.0",
     "is-docker": "2.1.1",
     "karma": "6.3.16",
