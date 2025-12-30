@@ -7,32 +7,61 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   chromatic-deployment:
     # Run if it's a push to main OR is a PR NOT a draft OR a PR that has the 'run chromatic workflow' label
     if: github.ref == 'refs/heads/main' || github.event.pull_request.draft == false || contains(github.event.pull_request.labels.*.name, 'run chromatic workflow')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'yarn'
-      - run: yarn install
-      - name: Install dependencies in react-components
-        run: yarn install
-        working-directory: packages/react-components
+      
+      - name: Get Puppeteer version
+        id: puppeteer-version
+        run: |
+          echo "version=$(node -p "require('./packages/web-components/package.json').devDependencies.puppeteer")" >> $GITHUB_OUTPUT
+      
+      - name: Cache Puppeteer browsers
+        id: puppeteer-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: puppeteer-${{ runner.os }}-${{ steps.puppeteer-version.outputs.version }}
+      
+      - name: Install dependencies
+        run: yarn install --immutable
+      
+      - name: Install Puppeteer browsers
+        if: steps.puppeteer-cache.outputs.cache-hit != 'true'
+        run: node ./node_modules/puppeteer/install.js
+      
+      # Note: Build cache removed for Chromatic workflow to ensure visual changes are detected
+      # Chromatic needs fresh builds to properly identify visual regressions
+      
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
+      
       - name: Publish to Chromatic
         uses: chromaui/action@latest
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          onlyChanged: true
+          onlyChanged: false
           workingDir: packages/storybook
           autoAcceptChanges: "main"
+          buildScriptName: build-storybook
+          exitZeroOnChanges: true
+          exitOnceUploaded: true
+          skip: ${{ github.event.pull_request.draft == true && !contains(github.event.pull_request.labels.*.name, 'run chromatic workflow') }}
