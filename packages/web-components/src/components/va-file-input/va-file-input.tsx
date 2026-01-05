@@ -507,6 +507,17 @@ export class VaFileInput {
    */
   componentWillRender() {
     this.slottedContent = Array.from(this.el.querySelectorAll(':scope > *'));
+
+    // If there is a passed uploaded file and the initial upload attempt has
+    // not yet been made, process the uploaded file and flip the flag to indicate
+    // that the first upload attempt has been made. This is particularly important
+    // for instances in va-file-input-multiple that are not the first file input
+    // in the list.
+    if (this.value && !this.file && !this.initialUploadAttemptHasTakenPlace) {
+      this.handleFile(this.value, false);
+      this.initialUploadAttemptHasTakenPlace = true;
+    }
+
     const needsButtons = (!!this.value || !!this.file) && !this.readOnly;
     this.showSeparator =
       this.slottedContent.length > 0 || needsButtons;
