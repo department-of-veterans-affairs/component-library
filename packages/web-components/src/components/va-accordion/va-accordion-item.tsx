@@ -92,7 +92,7 @@ export class VaAccordionItem {
     } = this;
 
     const headlineSlot = this.el.querySelector(':scope > [slot="headline"]');
-    
+
     const accordionItemClass = classNames({
       'usa-accordion--bordered': bordered,
     });
@@ -104,14 +104,14 @@ export class VaAccordionItem {
         ? headlineSlot.tagName.toLowerCase()
         : `h${level}`;
 
-      // We need to extract text from slotted heading to render it inside the
-      // button while keeping the heading semantics. Trying to render the slot
-      // directly inside the button causes accessibility issues where the button
-      // cannot be activated with keypress on certain screen readers.
-      let headingTextInSlot = '';
+      // We need to extract the innerHTML from slotted heading to render it
+      // inside the button while keeping the heading semantics. Trying to render
+      // the slot directly inside the button causes accessibility issues where
+      // the button cannot be activated with keypress on certain screen readers.
+      let headingSlotContent = '';
       if (headlineSlotWithHeading) {
         let headingInSlot = headlineSlot.cloneNode(true) as HTMLElement;
-        headingTextInSlot = headingInSlot.innerText;
+        headingSlotContent = <span innerHTML={headingInSlot.innerHTML}></span>;
       }
 
       const headerClass = classNames({
@@ -139,7 +139,7 @@ export class VaAccordionItem {
           >
             <span class={headerClass}>
               <slot name="icon" />
-              {headlineSlot && headingTextInSlot ? headingTextInSlot : header}
+              {headlineSlot && headingSlotContent ? headingSlotContent : header}
               {headerSrOnly && <span class="usa-sr-only">&nbsp;{headerSrOnly}</span>}
             </span>
             {this.subheader &&
