@@ -70,12 +70,11 @@
 }
 
 caption {
-  text-align: left;
-  padding: 0 0 0.313rem;
-  font-weight: 700;
-  font-size: 1.25rem;
-  font-family: var(--font-serif);
-  margin-bottom: 0.75rem;
+  margin: 0.25rem;
+  #summary {
+    display: block;
+    font-weight: normal;
+  }
 }
 
 @media screen and (max-width: $medium-screen) {
