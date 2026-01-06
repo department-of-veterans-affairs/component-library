@@ -65,44 +65,37 @@ describe('va-privacy-agreement', () => {
     expect(checkedValue).toBeFalsy();
   });
 
-  /**
-   * Skipping the following tests because accessing the shadowRoot of the checkbox
-   * in order to trigger an input click is flakey. The tests pass locally but fail in CI.
-   */
-  it.skip('emits the vaChange event', async () => {
+  it('emits the vaChange event', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-privacy-agreement/>',
     );
     const changeSpy = await page.spyOnEvent('vaChange');
-    const input = (
-      await page.waitForFunction(() =>
-        document.querySelector('va-privacy-agreement')
-          .shadowRoot.querySelector('va-checkbox')
-          .shadowRoot.querySelector('input')
-      )
-    );
 
-    await input.click();
+    await page.evaluate(() => {
+      const privacyAgreement = document.querySelector('va-privacy-agreement');
+      const vaCheckbox = privacyAgreement.shadowRoot.querySelector('va-checkbox');
+      const label = vaCheckbox.shadowRoot.querySelector('.va-checkbox__label');
+      (label as HTMLElement).click();
+    });
+    await page.waitForChanges();
 
     expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
   });
 
-  it.skip('fires analytics event when enableAnalytics prop is set', async () => {
+  it('fires analytics event when enableAnalytics prop is set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-privacy-agreement enable-analytics/>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const input = (
-      await page.waitForFunction(() =>
-        document.querySelector('va-privacy-agreement')
-          .shadowRoot.querySelector('va-checkbox')
-          .shadowRoot.querySelector('input')
-      )
-    );
 
-    input.click();
+    await page.evaluate(() => {
+      const privacyAgreement = document.querySelector('va-privacy-agreement');
+      const vaCheckbox = privacyAgreement.shadowRoot.querySelector('va-checkbox');
+      const label = vaCheckbox.shadowRoot.querySelector('.va-checkbox__label');
+      (label as HTMLElement).click();
+    });
     await page.waitForChanges();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -113,7 +106,12 @@ describe('va-privacy-agreement', () => {
       },
     });
 
-    input.click();
+    await page.evaluate(() => {
+      const privacyAgreement = document.querySelector('va-privacy-agreement');
+      const vaCheckbox = privacyAgreement.shadowRoot.querySelector('va-checkbox');
+      const label = vaCheckbox.shadowRoot.querySelector('.va-checkbox__label');
+      (label as HTMLElement).click();
+    });
     await page.waitForChanges();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -123,24 +121,21 @@ describe('va-privacy-agreement', () => {
         checked: false
       },
     });
-
   });
 
-  it.skip('does not fire analytics event when `enableAnalytics` prop is not set', async () => {
+  it('does not fire analytics event when `enableAnalytics` prop is not set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-privacy-agreement/>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const input = (
-      await page.waitForFunction(() =>
-        document.querySelector('va-privacy-agreement')
-          .shadowRoot.querySelector('va-checkbox')
-          .shadowRoot.querySelector('input')
-      )
-    );
 
-    input.click();
+    await page.evaluate(() => {
+      const privacyAgreement = document.querySelector('va-privacy-agreement');
+      const vaCheckbox = privacyAgreement.shadowRoot.querySelector('va-checkbox');
+      const label = vaCheckbox.shadowRoot.querySelector('.va-checkbox__label');
+      (label as HTMLElement).click();
+    });
     await page.waitForChanges();
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
