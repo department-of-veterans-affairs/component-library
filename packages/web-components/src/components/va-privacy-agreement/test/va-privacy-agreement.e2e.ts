@@ -1,5 +1,15 @@
-import { newE2EPage } from '@stencil/core/testing';
+import { newE2EPage, E2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
+
+const clickCheckbox = async (page: E2EPage) => {
+  await page.evaluate(() => {
+    const privacyAgreement = document.querySelector('va-privacy-agreement');
+    const vaCheckbox = privacyAgreement.shadowRoot.querySelector('va-checkbox');
+    const label = vaCheckbox.shadowRoot.querySelector('.va-checkbox__label');
+    (label as HTMLElement).click();
+  });
+  await page.waitForChanges();
+};
 
 describe('va-privacy-agreement', () => {
   it('renders', async () => {
@@ -72,13 +82,7 @@ describe('va-privacy-agreement', () => {
     );
     const changeSpy = await page.spyOnEvent('vaChange');
 
-    await page.evaluate(() => {
-      const privacyAgreement = document.querySelector('va-privacy-agreement');
-      const vaCheckbox = privacyAgreement.shadowRoot.querySelector('va-checkbox');
-      const label = vaCheckbox.shadowRoot.querySelector('.va-checkbox__label');
-      (label as HTMLElement).click();
-    });
-    await page.waitForChanges();
+    await clickCheckbox(page);
 
     expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
   });
@@ -90,13 +94,7 @@ describe('va-privacy-agreement', () => {
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    await page.evaluate(() => {
-      const privacyAgreement = document.querySelector('va-privacy-agreement');
-      const vaCheckbox = privacyAgreement.shadowRoot.querySelector('va-checkbox');
-      const label = vaCheckbox.shadowRoot.querySelector('.va-checkbox__label');
-      (label as HTMLElement).click();
-    });
-    await page.waitForChanges();
+    await clickCheckbox(page);
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'click',
@@ -106,13 +104,7 @@ describe('va-privacy-agreement', () => {
       },
     });
 
-    await page.evaluate(() => {
-      const privacyAgreement = document.querySelector('va-privacy-agreement');
-      const vaCheckbox = privacyAgreement.shadowRoot.querySelector('va-checkbox');
-      const label = vaCheckbox.shadowRoot.querySelector('.va-checkbox__label');
-      (label as HTMLElement).click();
-    });
-    await page.waitForChanges();
+    await clickCheckbox(page);
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'click',
@@ -130,13 +122,7 @@ describe('va-privacy-agreement', () => {
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    await page.evaluate(() => {
-      const privacyAgreement = document.querySelector('va-privacy-agreement');
-      const vaCheckbox = privacyAgreement.shadowRoot.querySelector('va-checkbox');
-      const label = vaCheckbox.shadowRoot.querySelector('.va-checkbox__label');
-      (label as HTMLElement).click();
-    });
-    await page.waitForChanges();
+    await clickCheckbox(page);
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
