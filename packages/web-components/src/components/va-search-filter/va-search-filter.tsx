@@ -316,12 +316,12 @@ export class VaSearchFilter {
         checked={category.active === true}
       />
     };
-
     const renderFacet = (facet: FilterFacet) => {
       const srProps = !isDesktop ? VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly') : {};
       const label = (isDesktop ? '' : facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : ''));
       if (facet.isRadio) {
         return <va-radio
+          class={isDesktop ? "desktop-margin-top" : "mobile-margin-top"}
           label={label}
           {...srProps}
           label-header-level={!isDesktop ? "3" : ""}
@@ -336,6 +336,7 @@ export class VaSearchFilter {
         </va-radio>
       }
       return <va-checkbox-group
+      class={isDesktop ? "desktop-margin-top" : "mobile-margin-top"}
         label={label}
         {...srProps}
         key={facet.id}
