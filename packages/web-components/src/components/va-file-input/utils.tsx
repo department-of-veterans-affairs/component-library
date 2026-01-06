@@ -8,51 +8,6 @@ const chooseFileString: string ='choose from folder';
 const dragFileString: string = 'Drag a file here or ';
 
 /**
- * Attempts to focus on a nested input element within slotted content, if present.
- * This is useful for scenarios where the slotted content includes form inputs
- * that should receive focus after a file is selected.
- * @returns {void}
- */
-export function attemptToFocusOnSlottedElement(
-  slottedContent: HTMLElement[] | null,
-  encrypted: boolean
-): void {
-  // Stop here if no slotted content or if encrypted (to avoid conflicting focus)
-  if (slottedContent?.length === 0 || encrypted) {
-    return;
-  }
-
-  // Find first instance of either `<va-select>` or `<va-text-input>` in slotted content
-  let supportedNestedInputElements = [];
-  for (const element of slottedContent) {
-    const found = element.querySelectorAll('va-select, va-text-input');
-    if (found.length > 0) {
-      supportedNestedInputElements.push(...Array.from(found));
-      break; // Stop at the first element that contains supported input elements
-    }
-  }
-
-  // Determine the first supported nested input element to focus on
-  let nestedElementForFocus = null;
-  if (supportedNestedInputElements.length > 0) {
-    const firstEl = supportedNestedInputElements[0] as HTMLElement;
-
-    if (firstEl.tagName === 'VA-TEXT-INPUT') {
-      nestedElementForFocus = firstEl.shadowRoot.querySelector('input');
-    } else if (firstEl.tagName === 'VA-SELECT') {
-      nestedElementForFocus = firstEl.shadowRoot.querySelector('select');
-    }
-  }
-
-  // Focus on the nested element after a short delay to help with screen reader announcement
-  if (nestedElementForFocus) {
-    setTimeout(() => {
-      nestedElementForFocus.focus();
-    }, 250);
-  }
-}
-
-/**
  * Focuses on the nested `<button>` element in the "Change File" `<va-button-icon>` after a short delay to help with screen reader announcement.
  * @returns {void}
  */

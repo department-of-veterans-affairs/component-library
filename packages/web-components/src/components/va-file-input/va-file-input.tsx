@@ -16,7 +16,6 @@ import {
 import { fileInput } from './va-file-input-upgrader';
 import { UploadedFile } from './uploadedFile';
 import {
-  attemptToFocusOnSlottedElement,
   focusOnChangeButton,
   focusOnInputAfterAriaLabelUpdate,
   focusOnPasswordInput,
@@ -47,7 +46,6 @@ export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
   private fileType?: string;
   private delayPasswordInputFocusUntilWindowFocus: boolean = false;
-  private delaySlottedElementFocusUntilWindowFocus: boolean = false;
   private delayChangeButtonFocusUntilWindowFocus: boolean = false;
   private slottedContent: HTMLElement[] = null;
   private windowHasFocus: boolean = true;
@@ -238,6 +236,26 @@ export class VaFileInput {
     }
   }
 
+  @Watch('encrypted')
+  handleEncryptedChange(newValue: boolean) {
+    if (newValue && this.file) {
+      this.windowHasFocus
+        ? focusOnPasswordInput(this.el)
+        : this.delayPasswordInputFocusUntilWindowFocus = true;
+    }
+  }
+
+  @Watch('file')
+  handleFileChange(newFile: File, oldFile: File) {
+    // Additional check to ensure encryption focus takes place when a user changes
+    // from one encrypted file to another encrypted file.
+    if (newFile && newFile !== oldFile && this.encrypted) {
+      this.windowHasFocus
+        ? focusOnPasswordInput(this.el)
+        : this.delayPasswordInputFocusUntilWindowFocus = true;
+    }
+  }
+
   @Watch('value')
   handleValueChange(newValue: File) {
     // TODO: This may need to be validated that it isn't a breaking change for
@@ -278,8 +296,7 @@ export class VaFileInput {
 
     // Stop if no focus delays are pending
     if (!this.delayChangeButtonFocusUntilWindowFocus &&
-        !this.delayPasswordInputFocusUntilWindowFocus &&
-        !this.delaySlottedElementFocusUntilWindowFocus) {
+        !this.delayPasswordInputFocusUntilWindowFocus) {
       return;
     }
 
@@ -291,9 +308,6 @@ export class VaFileInput {
     // States to consider by priority:
     //   1. Internal error (target: "Change File" button)
     //   2. Encrypted file uploaded (target: <input> element in <va-text-input>)
-    //   3. File is uploaded and there is slotted content with either a <va-select>
-    //      or <va-text-input> child.
-    //      (target: Either the nested <select> or <input> element)
     //
     // Change file button
     if (this.delayChangeButtonFocusUntilWindowFocus) {
@@ -305,12 +319,6 @@ export class VaFileInput {
     else if (this.delayPasswordInputFocusUntilWindowFocus && (this.encrypted || this.passwordError)) {
       this.delayPasswordInputFocusUntilWindowFocus = false;
       focusOnPasswordInput(this.el);
-      return;
-    }
-    // Slotted content nested element
-    else if (this.delaySlottedElementFocusUntilWindowFocus && this.slottedContent.length > 0) {
-      this.delaySlottedElementFocusUntilWindowFocus = false;
-      attemptToFocusOnSlottedElement(this.slottedContent, this.encrypted);
     }
   }
 
@@ -406,24 +414,10 @@ export class VaFileInput {
       this.generateFileContents(this.file);
     }
 
-    // Check for conditions where focus needs to be manually set, or if the flags
-    // to delay focus until window focus are should be set. Note that focusing
-    // on the password input for encrypted files takes priority over slotted
-    // content. If neither condition is met, focus on the file input element to
-    // announce the selected file.
-    if (this.encrypted) {
-      this.windowHasFocus
-        ? focusOnPasswordInput(this.el)
-        : this.delayPasswordInputFocusUntilWindowFocus = true;
-    }
-    else if (!this.encrypted && this.slottedContent.length > 0) {
-      this.windowHasFocus
-        ? attemptToFocusOnSlottedElement(this.slottedContent, this.encrypted)
-        : this.delaySlottedElementFocusUntilWindowFocus = true;
-    }
-    else {
-      focusOnInputAfterAriaLabelUpdate(this.fileInputRef);
-    }
+    // Focus on the input after a short delay to help with screen reader announcement.
+    // Note that if a file is encrypted, focus will be handled in the encrypted
+    // watcher and will take priority over this focus call.
+    focusOnInputAfterAriaLabelUpdate(this.fileInputRef);
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({

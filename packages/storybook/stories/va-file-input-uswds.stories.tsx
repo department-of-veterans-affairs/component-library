@@ -138,10 +138,11 @@ const AcceptsFilePasswordTemplate = ({
   label,
   name,
   hint,
-  vaChange,
-  encrypted,
   passwordError
 }) => {
+
+  const [isEncrypted, setIsEncrypted] = useState(false);
+
   return (
     <>
       To learn how to check for an encrypted PDF <va-link
@@ -152,15 +153,15 @@ const AcceptsFilePasswordTemplate = ({
         label={label}
         name={name}
         hint={hint}
-        onVaChange={vaChange}
-        encrypted={encrypted}
+        onVaChange={(event) => setIsEncrypted(!!event.detail.files.length)}
+        encrypted={isEncrypted}
         passwordError={passwordError}
       />
     </>
   );
 };
 export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
-AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
+AcceptsFilePassword.args = { ...defaultArgs };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 AcceptsFilePassword.parameters = {
