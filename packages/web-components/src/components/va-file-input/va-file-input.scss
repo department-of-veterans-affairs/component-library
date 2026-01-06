@@ -154,13 +154,20 @@
     align-items: center;
   }
 
+  .file-button-section,
+  .additional-info-slot,
+  .progress-bar-and-cancel-button,
+  va-text-input {
+    /* These rules are required for content interactive (e.g., buttons, inputs) to be clickable */
+    position: relative;
+    z-index: 2;
+  }
+
   .file-button-section {
     margin-top: 8px;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    position: relative; /* This rule and the z-index are required for "Change File" and "Delete" buttons to be clickable */
-    z-index: 2;
 
     > va-button-icon {
       font-size: 1.06rem;
@@ -202,11 +209,6 @@
 
   .thumbnail-error {
     color: $vads-color-error-dark;
-  }
-
-  .progress-bar-and-cancel-button {
-    position: relative; /* This rule and the z-index are required for "Cancel" button to be clickable */
-    z-index: 2;
   }
 
   va-progress-bar {
