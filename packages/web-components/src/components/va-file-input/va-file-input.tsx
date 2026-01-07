@@ -258,9 +258,6 @@ export class VaFileInput {
 
   @Watch('value')
   handleValueChange(newValue: File) {
-    // TODO: This may need to be validated that it isn't a breaking change for
-    // forms system. Also, should the calls below notifyParent/emitChange?
-
     // Process new value if it's different from current file
     if (newValue && newValue !== this.file) {
       this.handleFile(newValue, false);
