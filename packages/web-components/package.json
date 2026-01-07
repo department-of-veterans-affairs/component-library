@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "@stencil/core": "4.20.0",
-    "@stencil/react-output-target": "1.2.0",
     "aria-hidden": "1.1.3",
     "body-scroll-lock": "4.0.0-beta.0",
     "chromatic": "11.0.4",
