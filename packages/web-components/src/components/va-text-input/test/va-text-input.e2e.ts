@@ -16,7 +16,7 @@ describe('va-text-input', () => {
             Hello, world
             </label>
             <slot></slot>
-            <span id="input-error-message" role="alert" tabindex="-1"></span>
+            <span id="input-error-message" role="alert"></span>
             <div>
               <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
             </div>
