@@ -208,6 +208,9 @@ export function normalizeAcceptProp(accept: string): string[] {
 export function renderErrorAlert(displayError: string): HTMLSpanElement | void {
   if (!displayError) return;
 
+  // Note that we are not using `aria-live` or `role="alert"` here because the
+  // error is announced via updating `aria-label` values and focus management
+  // instead.
   return (
     <span id="input-error-message" class="usa-error-message">
       {displayError}
