@@ -224,6 +224,8 @@ export class VaFileInput {
 
   @Watch('showModal')
   handleShowModalChange(value: boolean) {
+    // When modal is closed and there is no file selected, a file deletion has
+    // taken place. Focus on the input to ensure screen reader announcement.
     if (!value && !this.file) {
       focusOnInputAfterAriaLabelUpdate(this.fileInputRef);
     }
@@ -260,15 +262,13 @@ export class VaFileInput {
   handleValueChange(newValue: File) {
     // Process new value if it's different from current file
     if (newValue && newValue !== this.file) {
-      // Note that we need to account for the initial upload attempt here to
-      // avoid focusing on the input in `handleFile()` when the value is set
-      // programmatically (via `uploadedFile` prop) on initial load.
-      this.handleFile(newValue, false, !this.initialUploadAttemptHasTakenPlace);
+      // Note that we skip focusing on input since this change is not triggered
+      // by user interaction.
+      this.handleFile(newValue, false, true);
     }
     // If new value is null/undefined, remove the current file and focus on input
     else if (!newValue) {
       this.removeFile(false);
-      focusOnInputAfterAriaLabelUpdate(this.fileInputRef);
     }
   }
 
