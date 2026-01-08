@@ -60,7 +60,6 @@ const defaultArgs = {
   'password-error': false,
   'showToggleFocusButton': false,
   'focusEl': null,
-  'showToggleFileButton': false,
 };
 
 const Template = ({
@@ -472,35 +471,7 @@ const FileUploadedTemplate = args => {
     };
   }, []);
 
-  const handleToggleFileClick = async () => {
-    const toFetch = !mockFile || mockFile.name !== 'test.jpg' ? testImage : additionalTestImage;
-    const fileName = !mockFile || mockFile.name !== 'test.jpg' ? 'test.jpg' : 'another-test.jpg';
-    const response = await fetch(toFetch);
-    const blob = await response.blob();
-    const file = new File([blob], fileName, { type: 'image/jpeg' });
-
-    setMockFile(file);
-  }
-
-  return (
-    <>
-      <Template {...args} value={mockFile} />
-      {args.showToggleFileButton && (
-        <>
-          <va-button
-            text="Toggle uploaded file"
-            onClick={handleToggleFileClick}
-            class="vads-u-margin-top--2">
-          </va-button>
-          <va-button
-            text="Remove uploaded file"
-            onClick={() => setMockFile(null)}
-            class="vads-u-margin-top--2">
-          </va-button>
-        </>
-      )}
-    </>
-  );
+  return <Template {...args} value={mockFile} />;
 };
 
 export const UploadStatus = FileUploadedTemplate.bind(null);
@@ -513,7 +484,7 @@ UploadStatus.args = {
 };
 
 export const FileUploaded = FileUploadedTemplate.bind(null);
-FileUploaded.args = { ...defaultArgs, vaChange: event => event, showToggleFileButton: true };
+FileUploaded.args = { ...defaultArgs, vaChange: event => event };
 FileUploaded.parameters = {
   chromatic: { disableSnapshot: true },
 };
