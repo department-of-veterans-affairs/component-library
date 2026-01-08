@@ -13,18 +13,48 @@ const fileDeletedAriaLabelPrefix: string = 'File deleted. No file selected.';
 const fileSelectedAriaLabelPrefix: string = 'You have selected the file:';
 
 /**
- * Focuses on the nested `<button>` element in the "Change File" `<va-button-icon>` after a short delay to help with screen reader announcement.
+ * Local generic helper function to focus on a nested element within a child
+ * component, with multiple attempts to accommodate for delayed re-rendering
+ * via state updates.
+ * @param componentHostElement - A reference to the `va-file-input` component instance (`this.el` at component-level).
+ * @param componentSelector - The name of the child component that contains the focus target; to be used in `querySelector()`.
+ * @param focusTargetSelector - The HTML tag name of the focus target element to be used in `querySelector()`
+ * @returns {void}
+ */
+function focusOnElementWithRetries(
+  componentHostElement: HTMLElement,
+  componentSelector: string,
+  focusTargetSelector: string,
+): void {
+  let attempts = 0;
+  const maxAttempts = 10;
+
+  const tryFocus = () => {
+    const componentTarget: HTMLElement = componentHostElement.shadowRoot.querySelector(componentSelector);
+    const focusTarget: HTMLElement = componentTarget?.shadowRoot.querySelector(focusTargetSelector);
+
+    if (focusTarget) {
+      focusTarget.focus();
+      return; // Successfully focused
+    } else if (attempts < maxAttempts) {
+      attempts++;
+      setTimeout(tryFocus, 100); // Try every 100ms on subsequent attempts
+    }
+  };
+
+  // Start with initial 250ms delay for first attempt
+  setTimeout(tryFocus, 250);
+}
+
+/**
+ * Focuses on the nested `<button>` element in the "Change File" `<va-button-icon>`
+ * via the generic helper with retries. Currently used when there is an error
+ * with a selected file.
+ * @param componentHostElement - A reference to the `va-file-input` component instance (`this.el` at component-level).
  * @returns {void}
  */
 export function focusOnChangeButton(componentHostElement: HTMLElement): void {
-  setTimeout(() => {
-    const changeButton: HTMLElement = componentHostElement.shadowRoot.querySelector('va-button-icon');
-    const innerButton: HTMLElement = changeButton?.shadowRoot.querySelector('button');
-
-    if (innerButton) {
-      innerButton.focus();
-    }
-  }, 250);
+  focusOnElementWithRetries(componentHostElement, 'va-button-icon', 'button');
 }
 
 /**
@@ -47,30 +77,14 @@ export function focusOnInputAfterAriaLabelUpdate(
 }
 
 /**
- * Attempts to focus on the password input element within the va-text-input component.
- * Using a multi-attempt approach to handle cases where the input element may
- * not be immediately available in the DOM.
+ * Focuses on the nested `<input>` element in the `<va-text-input>` via the
+ * generic helper with retries. Used when a when an encrypted file is selected
+ * and dynamic password input is rendered.
+ * @param componentHostElement - A reference to the `va-file-input` component instance (`this.el` at component-level).
  * @returns {void}
  */
 export function focusOnPasswordInput(componentHostElement: HTMLElement): void {
-  let attempts = 0;
-  const maxAttempts = 10;
-
-  const tryFocus = () => {
-    const passwordTextInput = componentHostElement.shadowRoot.querySelector('va-text-input');
-    const inputElement = passwordTextInput?.shadowRoot?.querySelector('input');
-
-    if (inputElement) {
-      inputElement.focus();
-      return; // Successfully focused
-    } else if (attempts < maxAttempts) {
-      attempts++;
-      setTimeout(tryFocus, 100); // Try every 100ms on subsequent attempts
-    }
-  };
-
-  // Start with initial 250ms delay for first attempt
-  setTimeout(tryFocus, 250);
+  focusOnElementWithRetries(componentHostElement, 'va-text-input', 'input');
 }
 
 /**
