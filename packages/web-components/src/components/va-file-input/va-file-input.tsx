@@ -260,7 +260,10 @@ export class VaFileInput {
   handleValueChange(newValue: File) {
     // Process new value if it's different from current file
     if (newValue && newValue !== this.file) {
-      this.handleFile(newValue, false);
+      // Note that we need to account for the initial upload attempt here to
+      // avoid focusing on the input in `handleFile()` when the value is set
+      // programmatically (via `uploadedFile` prop) on initial load.
+      this.handleFile(newValue, false, !this.initialUploadAttemptHasTakenPlace);
     }
     // If new value is null/undefined, remove the current file and focus on input
     else if (!newValue) {
@@ -359,9 +362,14 @@ export class VaFileInput {
    * Validates the file type and size, updates component state, and emits events as needed.
    * @param {File} file - The file to be processed.
    * @param {boolean} emitChange - Whether to emit a change event.
+   * @param {boolean} skipInputFocus - Whether to skip focusing on the input element after processing.
    * @returns {void}
    */
-  private handleFile(file: File, emitChange: boolean = true): void {
+  private handleFile(
+    file: File,
+    emitChange: boolean = true,
+    skipInputFocus: boolean = false
+  ): void {
     // Ensure that the flag to track the first upload attempt is set to `true`
     // for conditional setting of `inputAriaLabel` in the render method.
     this.initialUploadAttemptHasTakenPlace = true;
@@ -414,7 +422,9 @@ export class VaFileInput {
     // Focus on the input after a short delay to help with screen reader announcement.
     // Note that if a file is encrypted, focus will be handled in the encrypted
     // watcher and will take priority over this focus call.
-    focusOnInputAfterAriaLabelUpdate(this.fileInputRef);
+    if (!skipInputFocus) {
+      focusOnInputAfterAriaLabelUpdate(this.fileInputRef);
+    }
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
@@ -505,7 +515,9 @@ export class VaFileInput {
     // for instances in va-file-input-multiple that are not the first file input
     // in the list.
     if (this.value && !this.file && !this.initialUploadAttemptHasTakenPlace) {
-      this.handleFile(this.value, false);
+      // Skip focusing on input since this is the initial upload attempt that is
+      // not triggered by user interaction.
+      this.handleFile(this.value, false, true);
       this.initialUploadAttemptHasTakenPlace = true;
     }
 
@@ -516,14 +528,6 @@ export class VaFileInput {
 
   componentDidLoad() {
     fileInput.init(this.el);
-
-    // If there is a passed uploaded file and the initial upload attempt has
-    // not yet been made, flip the flag to indicate that the first upload attempt
-    // has been made and then focus on the file input element.
-    if (this.uploadedFile && !this.initialUploadAttemptHasTakenPlace) {
-      this.initialUploadAttemptHasTakenPlace = true;
-      focusOnInputAfterAriaLabelUpdate(this.fileInputRef);
-    }
   }
 
   render() {
