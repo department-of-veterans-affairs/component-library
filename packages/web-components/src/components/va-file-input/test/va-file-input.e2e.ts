@@ -427,8 +427,8 @@ describe('va-file-input', () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'placeholder.png');
     const host = await page.find('va-file-input');
     const buttons = await host.findAll('va-file-input >>> va-button-icon');
-    const changeBtn = await buttons[0].shadowRoot.querySelector('button[aria-label="change file placeholder.png"]');
-    const deleteBtn = await buttons[1].shadowRoot.querySelector('button[aria-label="delete file placeholder.png"]');
+    const changeBtn = await buttons[0].shadowRoot.querySelector('button[aria-label="change file. placeholder.png"]');
+    const deleteBtn = await buttons[1].shadowRoot.querySelector('button[aria-label="delete file. placeholder.png"]');
     expect(changeBtn).not.toBeNull();
     expect(deleteBtn).not.toBeNull();
   });
