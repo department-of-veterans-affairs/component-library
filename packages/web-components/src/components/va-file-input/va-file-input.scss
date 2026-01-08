@@ -158,7 +158,7 @@
   .additional-info-slot,
   .progress-bar-and-cancel-button,
   va-text-input {
-    /* These rules are required for content interactive (e.g., buttons, inputs) to be clickable */
+    /* These rules are required for interactive children (e.g., buttons, inputs) to be clickable */
     position: relative;
     z-index: 2;
   }
