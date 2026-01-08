@@ -145,6 +145,7 @@ export function getAriaLabelsForInputAndButtons(
   let inputAriaLabel: string =
     `${label}${required ? ' ' + i18next.t('required') : ''}. ${dragFileString}${chooseFileString}`;
 
+  // There is an error with the selected file, which takes precedence
   if (displayError) {
     return {
       inputAriaLabel: `${errorAriaLabelString} ${displayError} ${inputAriaLabel}`,
@@ -153,12 +154,16 @@ export function getAriaLabelsForInputAndButtons(
     }
   }
 
+  // A file has been uploaded successfully
   if (initialUploadAttemptHasTakenPlace && file) {
     inputAriaLabel = `${fileSelectedAriaLabelPrefix} ${file.name}.`;
   }
+  // Initial upload attempt has not yet taken place, but there is an uploaded file
   else if (!initialUploadAttemptHasTakenPlace && uploadedFile) {
     inputAriaLabel = `${fileSelectedAriaLabelPrefix} ${uploadedFile.name}.`;
   }
+  // Initial upload attempt has taken place, but there is no file selected or
+  // uploaded file (file has been deleted)
   else if (initialUploadAttemptHasTakenPlace && !file && !uploadedFile) {
     inputAriaLabel = `${fileDeletedAriaLabelPrefix} ${inputAriaLabel}`;
   }
