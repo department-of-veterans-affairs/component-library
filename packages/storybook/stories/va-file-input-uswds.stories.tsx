@@ -9,7 +9,6 @@ import {
 } from './wc-helpers';
 // @ts-ignore
 import testImage from './images/search-bar.png';
-import additionalTestImage from './images/canvas-toolbar.png';
 
 VaFileInput.displayName = 'VaFileInput';
 
