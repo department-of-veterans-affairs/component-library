@@ -6,6 +6,11 @@ import { UploadedFile } from './uploadedFile';
 
 const chooseFileString: string ='choose from folder';
 const dragFileString: string = 'Drag a file here or ';
+const changeFileAriaLabelPrefix: string = 'change file.';
+const deleteFileAriaLabelPrefix: string = 'delete file.';
+const errorAriaLabelString: string = 'Error:';
+const fileDeletedAriaLabelPrefix: string = 'File deleted. No file selected.';
+const fileSelectedAriaLabelPrefix: string = 'You have selected the file:';
 
 /**
  * Focuses on the nested `<button>` element in the "Change File" `<va-button-icon>` after a short delay to help with screen reader announcement.
@@ -127,32 +132,32 @@ export function getAriaLabelsForInputAndButtons(
 
   if (displayError) {
     return {
-      inputAriaLabel: `Error: ${displayError} ${inputAriaLabel}`,
-      deleteFileAriaLabel: `delete file. Error. ${displayError}`,
-      changeFileAriaLabel: `change file. Error. ${displayError}`,
+      inputAriaLabel: `${errorAriaLabelString} ${displayError} ${inputAriaLabel}`,
+      deleteFileAriaLabel: `${deleteFileAriaLabelPrefix} ${errorAriaLabelString} ${displayError}`,
+      changeFileAriaLabel: `${changeFileAriaLabelPrefix} ${errorAriaLabelString} ${displayError}`,
     }
   }
 
   if (initialUploadAttemptHasTakenPlace && file) {
-    inputAriaLabel = `You have selected the file: ${file.name}.`;
+    inputAriaLabel = `${fileSelectedAriaLabelPrefix} ${file.name}.`;
   }
   else if (!initialUploadAttemptHasTakenPlace && uploadedFile) {
-    inputAriaLabel = `You have selected the file: ${uploadedFile.name}.`;
+    inputAriaLabel = `${fileSelectedAriaLabelPrefix} ${uploadedFile.name}.`;
   }
   else if (initialUploadAttemptHasTakenPlace && !file && !uploadedFile) {
-    inputAriaLabel = `File deleted. No file selected. ${inputAriaLabel}`;
+    inputAriaLabel = `${fileDeletedAriaLabelPrefix} ${inputAriaLabel}`;
   }
 
   let changeFileAriaLabel: string | undefined = undefined;
   let deleteFileAriaLabel: string | undefined = undefined;
 
   if (file) {
-    changeFileAriaLabel = `change file ${file.name}`;
-    deleteFileAriaLabel = `delete file ${file.name}`;
+    changeFileAriaLabel = `${changeFileAriaLabelPrefix} ${file.name}`;
+    deleteFileAriaLabel = `${deleteFileAriaLabelPrefix} ${file.name}`;
   }
   else if (uploadedFile) {
-    changeFileAriaLabel = `change file ${uploadedFile.name}`;
-    deleteFileAriaLabel = `delete file ${uploadedFile.name}`;
+    changeFileAriaLabel = `${changeFileAriaLabelPrefix} ${uploadedFile.name}`;
+    deleteFileAriaLabel = `${deleteFileAriaLabelPrefix} ${uploadedFile.name}`;
   }
 
   return {

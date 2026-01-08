@@ -39,8 +39,8 @@ describe('VaFileInput utils', () => {
     );
 
     expect(inputAriaLabel).toBe(`Error: The file you selected is empty. Files must be larger than 0B. Select a file to upload (*Required). Drag a file here or choose from folder`);
-    expect(deleteFileAriaLabel).toBe(`delete file. Error. The file you selected is empty. Files must be larger than 0B.`);
-    expect(changeFileAriaLabel).toBe(`change file. Error. The file you selected is empty. Files must be larger than 0B.`);
+    expect(deleteFileAriaLabel).toBe(`delete file. Error: The file you selected is empty. Files must be larger than 0B.`);
+    expect(changeFileAriaLabel).toBe(`change file. Error: The file you selected is empty. Files must be larger than 0B.`);
   });
 
   it('getAriaLabelsForInputAndButtons returns labels when there are no errors', async () => {
@@ -58,8 +58,8 @@ describe('VaFileInput utils', () => {
     );
 
     expect(inputAriaLabel).toBe(`You have selected the file: test.jpg.`);
-    expect(deleteFileAriaLabel).toBe(`delete file test.jpg`);
-    expect(changeFileAriaLabel).toBe(`change file test.jpg`);
+    expect(deleteFileAriaLabel).toBe(`delete file. test.jpg`);
+    expect(changeFileAriaLabel).toBe(`change file. test.jpg`);
   });
 
   it('getAriaLabelsForInputAndButtons returns label for input when a file has been deleted', async () => {
