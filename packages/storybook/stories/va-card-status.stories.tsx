@@ -1,6 +1,6 @@
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-const cardDocs = getWebComponentDocs('va-card-status');
+const cardStatusDocs = getWebComponentDocs('va-card-status');
 
 export default {
   title: 'Components/Card Status',
@@ -8,7 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-card-status web component',
     docs: {
-      page: () => <StoryDocs storyDefault={Default} data={cardDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={cardStatusDocs} />,
     },
   },
 };
@@ -55,7 +55,7 @@ export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
-Default.argTypes = propStructure(cardDocs);
+Default.argTypes = propStructure(cardStatusDocs);
 
 export const withTagAndRequired = Template.bind(null);
 withTagAndRequired.args = {
@@ -64,12 +64,22 @@ withTagAndRequired.args = {
   'tag-status': 'informational',
   'required': true,
 };
+export const withSubHeader = Template.bind(null);
+withSubHeader.args = {
+  ...defaultArgs,
+  'heading-text': 'Contact Information',
+  'sub-header-text': 'Mailing Address',
+};
 
 export const withErrorMessageAndRequired = Template.bind(null);
 withErrorMessageAndRequired.args = {
   ...defaultArgs,
-  'error-message': 'This is an error message.',
+  'heading-text': 'Date of Birth',
+  'error-message':
+    'Your date of birth is required. Use the "Add date of birth" link to provide this information.',
   'tag-status': 'error',
   'tag-text': 'Missing',
   'required': true,
+  'link-href': 'https://www.va.gov',
+  'link-text': 'Your Personal Information',
 };

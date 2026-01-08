@@ -98,12 +98,11 @@ export class VaCard {
 
     return (
       <Host>
-        <div class="va-card-status__wrapper" aria-labelledby="va-card-status_card-title">
+        <div class="va-card-status__wrapper">
           <va-card>
-            <div>
-              <header>
+              <header aria-label={`${tagText}: ${headingText} ${subHeaderText}`}>
                   <HeaderLevel class="va-card-status__header">
-                    {tagText && tagStatus && (
+                    {tagText && (
                       <div>
                         <va-tag-status status={tagStatus} text={tagText} />
                       </div>
@@ -111,12 +110,12 @@ export class VaCard {
                     <span id="va-card-status_card-title">{headingText}</span>
                     {requiredSpan}
                   </HeaderLevel>
+                  {subHeaderText && (
+                    <SubHeaderLevel class="va-card-status__subheader">
+                      {subHeaderText}
+                    </SubHeaderLevel>
+                  )}
               </header>
-              {subHeaderText && (
-                <SubHeaderLevel class="va-card-status__subheader">
-                  {subHeaderText}
-                </SubHeaderLevel>
-              )}
               <span id="card-status-error-message" role="alert">
                 {errorMessage && (
                   <Fragment>
@@ -126,15 +125,13 @@ export class VaCard {
                 )}
               </span>
               <slot></slot>
-              <footer>
-                <va-link-action
-                  aria-describedby={ariaDescribedbyIds}
-                  type='secondary'
-                  href={linkHref}
-                  text={linkText}
-                /> 
-              </footer>
-            </div>
+              <va-link-action
+                messageAriaDescribedby={errorMessage}
+                aria-describedby={ariaDescribedbyIds}
+                type='secondary'
+                href={linkHref}
+                text={linkText}
+              /> 
           </va-card>
         </div>
       </Host>
