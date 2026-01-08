@@ -59,6 +59,7 @@ export function focusOnChangeButton(componentHostElement: HTMLElement): void {
 
 /**
  * Focuses on the file input element after a short delay to ensure that the aria-label has been updated in render.
+ * This ensures that the screen reader will announce appropriate context about the file selection status.
  * @returns {void}
  */
 export function focusOnInputAfterAriaLabelUpdate(
