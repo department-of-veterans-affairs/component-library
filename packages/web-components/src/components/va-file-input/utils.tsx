@@ -127,7 +127,7 @@ export function getAriaLabelsForInputAndButtons(
 
   if (displayError) {
     return {
-      inputAriaLabel: `Error: ${displayError}. ${inputAriaLabel}`,
+      inputAriaLabel: `Error: ${displayError} ${inputAriaLabel}`,
       deleteFileAriaLabel: `delete file. Error. ${displayError}`,
       changeFileAriaLabel: `change file. Error. ${displayError}`,
     }
