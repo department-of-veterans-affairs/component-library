@@ -191,7 +191,7 @@ const WithMinimumPasswordRequirementTemplate = ({
 
     if (!password || password.length < 4) {
       newPasswordError = 'Encrypted file requires a password.';
-    } else if (password.length >= 4) {
+    } else {
       newPasswordError = null;
     }
 

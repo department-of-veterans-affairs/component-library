@@ -98,6 +98,6 @@ describe('VaFileInput utils', () => {
 
   it('getFileTypeErrorMessage returns correct error message for unaccepted file types', async () => {
     const errorMessage = getFileTypeErrorMessage(uploadedFile as File);
-    expect(errorMessage).toBe('We do not accept .jpg files. Choose a new file.')
+    expect(errorMessage).toBe('We do not accept .jpg files. Choose a new file.');
   });
 });

@@ -121,8 +121,8 @@ export function formatFileSize(filesSize: number): string {
  *  1. If there is an error, announce the error first.
  *  2. If a file has been selected and there is no error, announce the selected
  *     file name.
- *  3. If there has been no attempt a file but a value has been passed to the
- *     `uploadedFile` prop, announce the uploaded file name.
+ *  3. If there has been no attempt to upload a file but a value has been passed
+ *     to the `uploadedFile` prop, announce the uploaded file name.
  *  4. If an attempt has been made to upload a file but no file is selected,
  *     announce that the file has been deleted.
  *
@@ -200,7 +200,7 @@ export function isAcceptedFileType(
     }
   }
   return false;
-};
+}
 
 function getExtension(file: File) {
   const noLeadingDot = file.name.replace(/^\./, '');
@@ -219,7 +219,7 @@ export function normalizeAcceptProp(accept: string): string[] {
     item = item.trim();
     return item.startsWith('.') ? extensionToMimeType[item] : item;
   });
-};
+}
 
 /**
  * Renderer for the displayed error alert.
