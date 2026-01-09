@@ -7,11 +7,12 @@ import {
   Primary,
   Stories,
   Controls,
-} from '@storybook/addon-docs';
+} from '@storybook/addon-docs/blocks';
 
 import webComponentDocs from '../../web-components/component-docs.json';
 import { additionalDocs } from './additional-docs';
 import { category, level } from './maturity-scale';
+import { VaAlert, VaLinkAction } from '@department-of-veterans-affairs/component-library/dist/react-bindings';
 
 /**
  * Return the JSON object matching a specific component tag
@@ -153,7 +154,7 @@ export function Guidance({ href, name }) {
 
   return (
     <div className="vads-u-margin-bottom--5">
-      <va-link-action
+      <VaLinkAction
         href={`https://design.va.gov/components/${href}`}
         text={`View guidance for the ${name} component in the Design System`}
       />
@@ -521,13 +522,13 @@ export function internalTestingAlert(scenario: string | null = null, notRecommen
   }
   return (
     <div className="vads-u-margin-y--2">
-      <va-alert status="warning">
+      <VaAlert status="warning">
         <h2 slot="headline">Heads up!</h2>
         <p>
           This is a developer preview for internal testing purposes.
         </p>
         {contextPara}
-      </va-alert>
+      </VaAlert>
     </div>
   );
 }
