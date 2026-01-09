@@ -108,7 +108,7 @@ export function formatFileSize(filesSize: number): string {
   const sizeInUnit = filesSize / Math.pow(1024, unitIndex);
   const formattedSize = sizeInUnit.toFixed(unitIndex < 2 ? 0 : 1);
   return `${formattedSize}\xa0${units[unitIndex]}`;
-};
+}
 
 /**
  * Establish aria-labels for <input> element, "change file" button, and "delete"
