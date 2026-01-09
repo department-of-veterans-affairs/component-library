@@ -51,7 +51,7 @@
     box-sizing: border-box;
   }
 
-  // When a file is uploaded, move the input behind other elements to the whole
+  // When a file is uploaded, move the input behind other elements to prevent the whole
   // card from being clickable.
   .file-input.with-file {
     z-index: -1;
