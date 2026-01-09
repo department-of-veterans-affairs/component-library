@@ -605,7 +605,7 @@ export class VaFileInput {
         <div class="file-input-wrapper" onDrop={this.handleDrop}>
           <input
             id="fileInputField"
-            class="file-input"
+            class={`file-input ${file || uploadedFile ? 'with-file' : ''}`}
             aria-label={inputAriaLabel}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
