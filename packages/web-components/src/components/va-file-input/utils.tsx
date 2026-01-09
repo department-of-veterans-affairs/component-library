@@ -297,7 +297,7 @@ export function renderLabelOrHeader(
   ) : null;
 
   if (headerSize && headerSize >= 1 && headerSize <= 6) {
-    const HeaderTag = `h${headerSize}`;
+    const HeaderTag = `h${headerSize}` as keyof JSX.IntrinsicElements;
     return (
       <div class="label-header">
         <HeaderTag
