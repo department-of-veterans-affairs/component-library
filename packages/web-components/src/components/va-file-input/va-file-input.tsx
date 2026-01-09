@@ -56,7 +56,6 @@ export class VaFileInput {
   @State() file?: File;
   @State() fileContents?: string;
   @State() internalError?: string;
-  @State() processStatusMessage: string | null = null;
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
 
