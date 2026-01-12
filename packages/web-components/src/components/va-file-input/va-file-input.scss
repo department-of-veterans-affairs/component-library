@@ -51,10 +51,11 @@
     box-sizing: border-box;
   }
 
-  // When a file is uploaded, move the input behind other elements to prevent the whole
-  // card from being clickable.
+  // When a file is uploaded, prevent the whole card from being clickable. Note
+  // that the control elements inside the card will still be clickable due to their
+  // higher z-index.
   .file-input.with-file {
-    z-index: -1;
+    pointer-events: none;
   }
 
   .file-input-target {
