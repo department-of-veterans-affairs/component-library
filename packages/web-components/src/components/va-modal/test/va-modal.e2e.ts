@@ -395,6 +395,15 @@ describe('va-modal', () => {
     await page.keyboard.press('Tab');
     await page.waitForChanges();
 
+    // Verify focus is on va-link's inner anchor
+    const vaLinkFocused = await page.evaluate(() => {
+      const vaLink = document.querySelector('va-link');
+      const innerAnchor = vaLink?.shadowRoot?.querySelector('a');
+      return document.activeElement === vaLink && 
+             vaLink?.shadowRoot?.activeElement === innerAnchor;
+    });
+    expect(vaLinkFocused).toBe(true);
+
     // Tab again should wrap back to close button (focus trap)
     await page.keyboard.press('Tab');
     await page.waitForChanges();
