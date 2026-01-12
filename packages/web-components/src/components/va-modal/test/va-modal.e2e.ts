@@ -369,6 +369,42 @@ describe('va-modal', () => {
     expect(activeElement).toBe('outside-button');
   });
 
+  it('should trap focus when modal contains va-link with va-icon', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal modal-title="Example Title" visible>
+        <p>Modal content</p>
+        <va-link
+          download
+          filetype="PDF"
+          href="#"
+          text="Download Form"
+        ></va-link>
+      </va-modal>
+    `);
+
+    await page.waitForChanges();
+
+    // Start with focus on the close button
+    const focusedElement = await page.find('va-modal >>> :focus');
+    expect(focusedElement.getAttribute('aria-label')).toEqual(
+      'Close Example Title modal',
+    );
+
+    // Tab to va-link
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+
+    // Tab again should wrap back to close button (focus trap)
+    await page.keyboard.press('Tab');
+    await page.waitForChanges();
+
+    const wrappedElement = await page.find('va-modal >>> :focus');
+    expect(wrappedElement.getAttribute('aria-label')).toEqual(
+      'Close Example Title modal',
+    );
+  });
+
   it('should correctly restore focus to va-button element when modal closes', async () => {
     const page = await newE2EPage();
     await page.setContent(`
