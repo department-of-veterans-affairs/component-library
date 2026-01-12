@@ -15,13 +15,13 @@ export default {
 
 const defaultArgs = {
   'heading-level': 3,
-  'heading-text': 'Card Status Heading',
+  'heading-text': 'Mobile phone number',
   'sub-header-text': '',
   'tag-status': 'informational',
   'tag-text': '',
   'error-message': '',
   'link-href': 'https://www.va.gov',
-  'link-text': 'Link to more info',
+  'link-text': 'Add mobile phone number',
   'required': false,
 };
 
@@ -47,7 +47,7 @@ const Template = ({
     link-text={linkText}
     required={required}
   >
-    <p>Example card content</p>
+    <p>123-867-5309</p>
   </va-card-status>
 );
 
@@ -61,25 +61,55 @@ export const withTagAndRequired = Template.bind(null);
 withTagAndRequired.args = {
   ...defaultArgs,
   'tag-text': 'Status',
-  'tag-status': 'informational',
   'required': true,
 };
+
 export const withSubHeader = Template.bind(null);
 withSubHeader.args = {
   ...defaultArgs,
-  'heading-text': 'Contact Information',
-  'sub-header-text': 'Mailing Address',
+  'sub-header-text': 'Mobile phone number on file',
 };
 
-export const withErrorMessageAndRequired = Template.bind(null);
+const TemplateErrorState = ({
+  'heading-level': headingLevel,
+  'heading-text': headingText,
+  'sub-header-text': subHeaderText,
+  'tag-status': tagStatus,
+  'tag-text': tagText,
+  'error-message': errorMessage,
+  'link-href': linkHref,
+  'link-text': linkText,
+  'required': required,
+}) => (
+  <va-card-status
+    heading-level={headingLevel}
+    heading-text={headingText}
+    sub-header-text={subHeaderText}
+    tag-status={tagStatus}
+    tag-text={tagText}
+    error-message={errorMessage}
+    link-href={linkHref}
+    link-text={linkText}
+    required={required}
+  >
+    <p>Not provided</p>
+  </va-card-status>
+);
+
+export const withTagAndRequiredError = TemplateErrorState.bind(null);
+withTagAndRequiredError.args = {
+  ...defaultArgs,
+  'tag-text': 'Missing',
+  'tag-status': 'error',
+  'required': true,
+};
+
+export const withErrorMessageAndRequired = TemplateErrorState.bind(null);
 withErrorMessageAndRequired.args = {
   ...defaultArgs,
-  'heading-text': 'Date of Birth',
   'error-message':
-    'Your date of birth is required. Use the "Add date of birth" link to provide this information.',
-  'tag-status': 'error',
+    'Your mobile phone number is missing. Select "Add" to enter your mobile phone number.',
   'tag-text': 'Missing',
+  'tag-status': 'error',
   'required': true,
-  'link-href': 'https://www.va.gov',
-  'link-text': 'Your Personal Information',
 };
