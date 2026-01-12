@@ -1979,6 +1979,10 @@ export namespace Components {
          */
         "tableTitle"?: string;
         /**
+          * A summary that describes the composition of the table displayed below the table title
+         */
+        "tableTitleSummary"?: string;
+        /**
           * The type of table
          */
         "tableType"?: 'borderless';
@@ -2026,6 +2030,10 @@ export namespace Components {
           * The title of the table
          */
         "tableTitle": string;
+        /**
+          * A summary that describes the composition of the table displayed below the table title
+         */
+        "tableTitleSummary"?: string;
         /**
           * The type of table to be used
          */
@@ -6182,6 +6190,10 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
+          * A summary that describes the composition of the table displayed below the table title
+         */
+        "tableTitleSummary"?: string;
+        /**
           * The type of table
          */
         "tableType"?: 'borderless';
@@ -6233,6 +6245,10 @@ declare namespace LocalJSX {
           * The title of the table
          */
         "tableTitle"?: string;
+        /**
+          * A summary that describes the composition of the table displayed below the table title
+         */
+        "tableTitleSummary"?: string;
         /**
           * The type of table to be used
          */

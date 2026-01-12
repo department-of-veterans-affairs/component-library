@@ -106,4 +106,18 @@ describe('va-table', () => {
 
     expect(nested.getAttribute('slot')).toBeNull();
   });
+
+  it('passes table-title-summary prop to va-table-inner', async () => {
+    const page = await newE2EPage();
+    await page.setContent(getTableMarkup({ 'table-title-summary': 'This is a summary' }));
+    const tableInner = await page.find('va-table-inner');
+    expect(tableInner.getAttribute('table-title-summary')).toEqual('This is a summary');
+  });
+
+  it('renders table-title-summary in caption', async () => {
+    const page = await newE2EPage();
+    await page.setContent(getTableMarkup({ 'table-title-summary': 'This is a summary' }));
+    const summary = await page.find('va-table-inner >>> caption #summary');
+    expect(summary.innerHTML).toEqual('This is a summary');
+  });
 });
