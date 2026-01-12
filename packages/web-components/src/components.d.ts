@@ -1979,7 +1979,7 @@ export namespace Components {
          */
         "tableTitle"?: string;
         /**
-          * The summary description of the table that is announced with the table title
+          * A summary that describes the composition of the table displayed below the table title
          */
         "tableTitleSummary"?: string;
         /**
@@ -6190,7 +6190,7 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
-          * The summary description of the table that is announced with the table title
+          * A summary that describes the composition of the table displayed below the table title
          */
         "tableTitleSummary"?: string;
         /**
