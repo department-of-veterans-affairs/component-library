@@ -1,6 +1,12 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import { dirname, join } from "path";
-const path = require('path');
+import path from 'path';
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+
+const require = createRequire(import.meta.url);
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const config:StorybookConfig = {
   stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx)', '../@(src|stories)/**/*.mdx'],
   staticDirs: ['../public'],
@@ -34,7 +40,7 @@ const config:StorybookConfig = {
   }
 };
 
-function getAbsolutePath(value) {
+function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, "package.json")));
 }
 
