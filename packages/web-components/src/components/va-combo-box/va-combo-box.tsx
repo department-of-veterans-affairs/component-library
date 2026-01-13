@@ -74,7 +74,7 @@ export class VaComboBox {
   /**
    * Error message to display. When defined, this indicates an error.
    */
-  @Prop() error?: string;
+  @Prop({ reflect: true }) error?: string;
 
   /**
    * Optional hint text.
