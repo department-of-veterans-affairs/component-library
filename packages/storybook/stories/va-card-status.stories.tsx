@@ -19,7 +19,7 @@ const defaultArgs = {
   'sub-header-text': '',
   'tag-status': 'informational',
   'tag-text': '',
-  'error-message': '',
+  'error': '',
   'link-href': 'https://www.va.gov',
   'link-text': 'Add mobile phone number',
   'required': false,
@@ -31,7 +31,7 @@ const Template = ({
   'sub-header-text': subHeaderText,
   'tag-status': tagStatus,
   'tag-text': tagText,
-  'error-message': errorMessage,
+  'error': error,
   'link-href': linkHref,
   'link-text': linkText,
   'required': required,
@@ -42,7 +42,7 @@ const Template = ({
     sub-header-text={subHeaderText}
     tag-status={tagStatus}
     tag-text={tagText}
-    error-message={errorMessage}
+    error={error}
     link-href={linkHref}
     link-text={linkText}
     required={required}
@@ -76,7 +76,7 @@ const TemplateErrorState = ({
   'sub-header-text': subHeaderText,
   'tag-status': tagStatus,
   'tag-text': tagText,
-  'error-message': errorMessage,
+  'error': error,
   'link-href': linkHref,
   'link-text': linkText,
   'required': required,
@@ -87,7 +87,7 @@ const TemplateErrorState = ({
     sub-header-text={subHeaderText}
     tag-status={tagStatus}
     tag-text={tagText}
-    error-message={errorMessage}
+    error={error}
     link-href={linkHref}
     link-text={linkText}
     required={required}
@@ -107,7 +107,7 @@ withTagAndRequiredError.args = {
 export const withErrorMessageAndRequired = TemplateErrorState.bind(null);
 withErrorMessageAndRequired.args = {
   ...defaultArgs,
-  'error-message':
+  'error':
     'Your mobile phone number is missing. Select "Add" to enter your mobile phone number.',
   'tag-text': 'Missing',
   'tag-status': 'error',

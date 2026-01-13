@@ -423,7 +423,7 @@ export namespace Components {
         /**
           * The error message to render.
          */
-        "errorMessage"?: string;
+        "error"?: string;
         /**
           * Header level. Must be between 1 and 6
          */
@@ -451,7 +451,7 @@ export namespace Components {
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
-        "tagStatus": 'informational' | 'error';
+        "tagStatus": 'info' | 'error';
         /**
           * The text to be displayed in the tag element.
          */
@@ -4457,7 +4457,7 @@ declare namespace LocalJSX {
         /**
           * The error message to render.
          */
-        "errorMessage"?: string;
+        "error"?: string;
         /**
           * Header level. Must be between 1 and 6
          */
@@ -4485,7 +4485,7 @@ declare namespace LocalJSX {
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
-        "tagStatus"?: 'informational' | 'error';
+        "tagStatus"?: 'info' | 'error';
         /**
           * The text to be displayed in the tag element.
          */

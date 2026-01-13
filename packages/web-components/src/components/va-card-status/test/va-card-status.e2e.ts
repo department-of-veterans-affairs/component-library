@@ -61,7 +61,7 @@ describe('<va-card-status />', () => {
       heading-text="Title"
         link-href="/home"
         link-text="Go Home"
-      error-message="Something went wrong">
+        error="Something went wrong">
       </va-card-status>`);
     await page.waitForChanges();
 
@@ -124,7 +124,7 @@ describe('<va-card-status />', () => {
     await page.setContent(`
       <va-card-status
       heading-text="Title"
-      error-message="Danger!"
+      error="Danger!"
       link-href="/test"
       link-text="Next">
       </va-card-status>
@@ -147,16 +147,16 @@ describe('<va-card-status />', () => {
     await page.setContent(`
       <va-card-status
         heading-text="Title"
-        error-message="Oops"
+        error="Missing info"
         link-href="/test"
         link-text="Next">
       </va-card-status>
     `);
     await page.waitForChanges();
 
-    const vaLink = await page.find('va-card-status >>> va-link-action');
-    expect(vaLink.getAttribute('aria-describedby')).toBe(
-      'card-status-error-message',
+    const vaLink = await page.find(
+      'va-card-status >>> va-link-action >>> #link-description',
     );
+    expect(vaLink.innerText).toBe('Error Missing info');
   });
 });

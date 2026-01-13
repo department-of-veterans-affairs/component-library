@@ -40,8 +40,8 @@ export class VaCard {
   /**
    * The status variant of the tag. Determines the background color and icon.
    */
-  @Prop({ reflect: true, mutable: true }) tagStatus: 'informational' | 'error' =
-    'informational';
+  @Prop({ reflect: true, mutable: true }) tagStatus: 'info' | 'error' =
+    'info';
 
   /**
    * The text to be displayed in the tag element.
@@ -51,7 +51,7 @@ export class VaCard {
   /**
    * The error message to render.
    */
-  @Prop({ reflect: true, mutable: true }) errorMessage?: string;
+  @Prop({ reflect: true, mutable: true }) error?: string;
 
   /**
    * Set the href for the card link.
@@ -71,24 +71,20 @@ export class VaCard {
       subHeaderText,
       tagStatus,
       tagText,
-      errorMessage,
+      error,
       linkHref,
       linkText,
       required,
     } = this;
-
-    const ariaDescribedbyIds = `${
-      errorMessage ? 'card-status-error-message' : ''
-    }`;
 
     // Create a headers element
     const HeaderLevel = getHeaderLevel(headingLevel);
     const SubHeaderLevel = getHeaderLevel(headingLevel + 1);
 
     //Checking if error message exists to display message and enter error state
-    if (errorMessage) {
-      el.setAttribute('error', errorMessage);
-    } else if (!errorMessage) {
+    if (error) {
+      el.setAttribute('error', error);
+    } else if (!error) {
       el.setAttribute('error', '');
     }
 
@@ -100,7 +96,7 @@ export class VaCard {
       <Host>
         <div class="va-card-status__wrapper">
           <va-card>
-              <header aria-label={`${tagText}: ${headingText} ${subHeaderText}`}>
+              <header>
                   <HeaderLevel class="va-card-status__header">
                     {tagText && (
                       <div>
@@ -117,17 +113,16 @@ export class VaCard {
                   )}
               </header>
               <span id="card-status-error-message" role="alert">
-                {errorMessage && (
+                {error && (
                   <Fragment>
                     <span class="usa-sr-only">{i18next.t('error')}</span>
-                    <span class="usa-error-message">{errorMessage}</span>
+                    <span class="usa-error-message">{error}</span>
                   </Fragment>
                 )}
               </span>
               <slot></slot>
               <va-link-action
-                messageAriaDescribedby={errorMessage}
-                aria-describedby={ariaDescribedbyIds}
+                messageAriaDescribedby={`${i18next.t('error')} ${error}`}
                 type='secondary'
                 href={linkHref}
                 text={linkText}
