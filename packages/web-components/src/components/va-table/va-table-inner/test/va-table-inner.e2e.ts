@@ -84,6 +84,22 @@ describe('va-table-inner', () => {
     expect(caption.innerHTML).toEqual('this is a caption');
   });
 
+  it('adds a caption with summary when table-title-summary is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable({ 'table-title-summary': 'This is a summary' }));
+    const caption = await page.find('va-table-inner >>> caption');
+    const summary = await page.find('va-table-inner >>> caption #summary');
+    expect(caption).not.toBeNull();
+    expect(summary.innerHTML).toEqual('This is a summary');
+  });
+
+  it('does not render summary span when table-title-summary is not set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(makeTable());
+    const summary = await page.find('va-table-inner >>> caption #summary');
+    expect(summary).toBeNull();
+  });
+
   it('renders a table with the proper number of rows and columns', async () => {
     const page = await newE2EPage();
     await page.setContent(makeTable());

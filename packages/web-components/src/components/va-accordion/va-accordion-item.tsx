@@ -92,15 +92,27 @@ export class VaAccordionItem {
     } = this;
 
     const headlineSlot = this.el.querySelector(':scope > [slot="headline"]');
-    
+
     const accordionItemClass = classNames({
       'usa-accordion--bordered': bordered,
     });
 
     const Header = () => {
-      const Tag = (headlineSlot && headlineSlot.tagName.includes("H"))
+      const headlineSlotWithHeading = headlineSlot && headlineSlot.tagName.includes("H");
+
+      const Tag = (headlineSlotWithHeading)
         ? headlineSlot.tagName.toLowerCase()
         : `h${level}`;
+
+      // We need to extract the innerHTML from slotted heading to render it
+      // inside the button while keeping the heading semantics. Trying to render
+      // the slot directly inside the button causes accessibility issues where
+      // the button cannot be activated with keypress on certain screen readers.
+      let headingSlotContent = '';
+      if (headlineSlotWithHeading) {
+        let headingInSlot = headlineSlot.cloneNode(true) as HTMLElement;
+        headingSlotContent = <span innerHTML={headingInSlot.innerHTML}></span>;
+      }
 
       const headerClass = classNames({
         'va-accordion__header': true,
@@ -127,7 +139,7 @@ export class VaAccordionItem {
           >
             <span class={headerClass}>
               <slot name="icon" />
-              {headlineSlot ? <slot name="headline" /> : header}
+              {headlineSlot && headingSlotContent ? headingSlotContent : header}
               {headerSrOnly && <span class="usa-sr-only">&nbsp;{headerSrOnly}</span>}
             </span>
             {this.subheader &&
