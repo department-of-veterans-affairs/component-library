@@ -35,6 +35,11 @@ export class VaTableInner {
    */
   @Prop() tableTitle: string;
 
+  /**
+   * A summary that describes the composition of the table displayed below the table title
+   */
+  @Prop() tableTitleSummary?: string;
+
   /*
    * The number of rows in the table
    */
@@ -394,7 +399,7 @@ export class VaTableInner {
   }
 
   render() {
-    const { tableTitle, tableType, stacked, scrollable, striped, fullWidth } =
+    const { tableTitle, tableTitleSummary, tableType, stacked, scrollable, striped, fullWidth } =
       this;
     const containerClasses = classnames({
       'usa-table-container--scrollable': scrollable,
@@ -409,7 +414,12 @@ export class VaTableInner {
     return (
       <div tabIndex={scrollable ? 0 : null} class={containerClasses}>
         <table class={tableClasses}>
-          {tableTitle && <caption>{tableTitle}</caption>}
+          {tableTitle && (
+            <caption>
+              {tableTitle}
+              {tableTitleSummary && <span id="summary">{tableTitleSummary}</span>}
+            </caption>
+          )}
           <thead>{this.makeRow(0)}</thead>
           <tbody id="va-table-body">{this.getBodyRows()}</tbody>
         </table>
