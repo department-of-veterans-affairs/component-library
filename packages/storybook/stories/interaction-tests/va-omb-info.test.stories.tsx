@@ -38,24 +38,24 @@ export const Default: Story = {
     const canvas = within(canvasElement);
     const ombInfo = await canvas.findByTestId('va-omb-info');
 
-    expect(ombInfo).toBeInTheDocument();
+    await expect(ombInfo).toBeInTheDocument();
 
     const vaButton = ombInfo.shadowRoot.querySelector('va-button');
-    expect(vaButton).toBeInTheDocument();
+    await expect(vaButton).toBeInTheDocument();
 
     const button = vaButton.shadowRoot.querySelector('button');
-    expect(button).toBeInTheDocument();
+    await expect(button).toBeInTheDocument();
 
     // Open the modal
     await userEvent.click(button);
 
     const modal = ombInfo.shadowRoot.querySelector('va-modal');
-    expect(modal).toBeInTheDocument();
+    await expect(modal).toBeInTheDocument();
     await expect(modal).toBeVisible();
 
     // Close the modal
     const closeButton = modal.shadowRoot.querySelector('button.va-modal-close');
-    expect(closeButton).toBeInTheDocument();
+    await expect(closeButton).toBeInTheDocument();
     await userEvent.click(closeButton);
     await expect(modal).not.toHaveAttribute('visible');
   },

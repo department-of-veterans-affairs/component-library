@@ -81,17 +81,17 @@ export const Default: Story = {
     const canvas = within(canvasElement);
 
     const vaAccordion = await canvas.findByTestId('va-accordion');
-    expect(vaAccordion).toBeInTheDocument();
+    await expect(vaAccordion).toBeInTheDocument();
 
     const { expandButton, collapseButton } = getExpandAndCollapseButtons(vaAccordion);
 
-    expect(expandButton).toBeInTheDocument();
-    expect(expandButton).toHaveTextContent('Expand all');
-    expect(expandButton).toHaveAttribute('aria-label', 'Expand all accordions');
+    await expect(expandButton).toBeInTheDocument();
+    await expect(expandButton).toHaveTextContent('Expand all');
+    await expect(expandButton).toHaveAttribute('aria-label', 'Expand all accordions');
 
-    expect(collapseButton).toBeInTheDocument();
-    expect(collapseButton).toHaveTextContent('Collapse all');
-    expect(collapseButton).toHaveAttribute('aria-label', 'Collapse all accordions');
+    await expect(collapseButton).toBeInTheDocument();
+    await expect(collapseButton).toHaveTextContent('Collapse all');
+    await expect(collapseButton).toHaveAttribute('aria-label', 'Collapse all accordions');
   }
 };
 
@@ -104,17 +104,17 @@ export const InternationalizationEspanol: Story = {
     const canvas = within(canvasElement);
 
     const vaAccordion = await canvas.findByTestId('va-accordion');
-    expect(vaAccordion).toBeInTheDocument();
+    await expect(vaAccordion).toBeInTheDocument();
 
     const { expandButton, collapseButton } = getExpandAndCollapseButtons(vaAccordion);
 
-    expect(expandButton).toBeInTheDocument();
-    expect(expandButton).toHaveTextContent('Expandir todo');
-    expect(expandButton).toHaveAttribute('aria-label', 'Expandir todos los acordeones');
+    await expect(expandButton).toBeInTheDocument();
+    await expect(expandButton).toHaveTextContent('Expandir todo');
+    await expect(expandButton).toHaveAttribute('aria-label', 'Expandir todos los acordeones');
 
-    expect(collapseButton).toBeInTheDocument();
-    expect(collapseButton).toHaveTextContent('Contraer todo');
-    expect(collapseButton).toHaveAttribute('aria-label', 'Contraer todos los acordeones');
+    await expect(collapseButton).toBeInTheDocument();
+    await expect(collapseButton).toHaveTextContent('Contraer todo');
+    await expect(collapseButton).toHaveAttribute('aria-label', 'Contraer todos los acordeones');
   }
 };
 
@@ -127,16 +127,16 @@ export const InternationalizationTagalog: Story = {
     const canvas = within(canvasElement);
 
     const vaAccordion = await canvas.findByTestId('va-accordion');
-    expect(vaAccordion).toBeInTheDocument();
+    await expect(vaAccordion).toBeInTheDocument();
 
     const { expandButton, collapseButton } = getExpandAndCollapseButtons(vaAccordion);
 
-    expect(expandButton).toBeInTheDocument();
-    expect(expandButton).toHaveTextContent('I-expand lahat');
-    expect(expandButton).toHaveAttribute('aria-label', 'I-expand ang lahat ng accordion');
+    await expect(expandButton).toBeInTheDocument();
+    await expect(expandButton).toHaveTextContent('I-expand lahat');
+    await expect(expandButton).toHaveAttribute('aria-label', 'I-expand ang lahat ng accordion');
 
-    expect(collapseButton).toBeInTheDocument();
-    expect(collapseButton).toHaveTextContent('I-collapse ang lahat');
-    expect(collapseButton).toHaveAttribute('aria-label', 'I-collapse ang lahat ng accordion');
+    await expect(collapseButton).toBeInTheDocument();
+    await expect(collapseButton).toHaveTextContent('I-collapse ang lahat');
+    await expect(collapseButton).toHaveAttribute('aria-label', 'I-collapse ang lahat ng accordion');
   }
 };

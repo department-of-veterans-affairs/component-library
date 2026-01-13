@@ -63,29 +63,29 @@ export const NoBorder: Story = {
     const canvas = within(canvasElement);
     const component = await canvas.findByTestId('va-additional-info');
 
-    expect(component).toBeInTheDocument();
+    await expect(component).toBeInTheDocument();
 
     const trigger = component.shadowRoot.querySelector('a[role="button"]');
-    expect(trigger).toBeInTheDocument();
-    expect(trigger).toHaveTextContent('Additional Information');
+    await expect(trigger).toBeInTheDocument();
+    await expect(trigger).toHaveTextContent('Additional Information');
 
     // Open the additional info via trigger click
     await userEvent.click(trigger);
 
     // Ensure that the slotted content is present
     const slot = component.shadowRoot.querySelector('slot');
-    expect(slot).toBeInTheDocument();
+    await expect(slot).toBeInTheDocument();
     const assignedNodes = slot.assignedNodes();
-    expect(assignedNodes[0].textContent).toBe('Here are some popular pets to consider');
+    await expect(assignedNodes[0].textContent).toBe('Here are some popular pets to consider');
     const slottedList = assignedNodes[1] as HTMLElement;
-    expect(slottedList).toBeDefined();
-    expect(slottedList.nodeName).toBe('UL');
+    await expect(slottedList).toBeDefined();
+    await expect(slottedList.nodeName).toBe('UL');
 
     // Verify that the border is not present
     const info = component.shadowRoot.querySelector('#info');
-    expect(info).toBeInTheDocument();
+    await expect(info).toBeInTheDocument();
     const infoStyles = getComputedStyle(info);
-    expect(infoStyles.borderLeftStyle).toBe('none');
+    await expect(infoStyles.borderLeftStyle).toBe('none');
 
   }
 };
