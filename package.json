@@ -4,13 +4,21 @@
   "scripts": {
     "chromatic-bridge": "echo \"Nothing to see here\"",
     "dev": "bash ./setup.sh",
-    "dev-windows": "powershell.exe -File ./setup.ps1"
+    "dev-windows": "powershell.exe -File ./setup.ps1",
+    "docs": "yarn workspace @va/docs dev",
+    "docs:build": "yarn workspace @va/docs build",
+    "docs:cms": "yarn workspace @va/docs dev:cms",
+    "docs:all": "concurrently \"yarn docs:cms\" \"yarn storybook\"",
+    "storybook": "yarn workspace @department-of-veterans-affairs/storybook storybook",
+    "team-docs": "yarn workspace @va/team-docs dev",
+    "team-docs:cms": "yarn workspace @va/team-docs dev:cms"
   },
   "private": true,
   "version": "1.0.0",
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "packageManager": "yarn@4.2.2",
   "resolutionsDoc": "resolutions.md",
@@ -32,6 +40,7 @@
     "webpack": "5"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "husky": "9.0.11"
   }
 }

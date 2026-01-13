@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Content Manager | VA Team Docs</title>
+  </head>
+  <body>
+    <script>
+      // Prevent auto-initialization
+      window.CMS_MANUAL_INIT = true;
+    </script>
+    <script src="https://unpkg.com/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
+    <script>
+      // Manually fetch and initialize CMS to prevent auto-discovering
+      // multiple config files in the monorepo
+      fetch('/admin/config.yml')
+        .then(response => {
+          if (!response.ok) throw new Error('Failed to load config: ' + response.status);
+          return response.text();
+        })
+        .then(configText => {
+          // Parse YAML and init CMS with explicit config only
+          const config = window.jsyaml.load(configText);
+          CMS.init({
+            config: config
+          });
+        })
+        .catch(error => {
+          console.error('CMS Config Error:', error);
+          document.body.innerHTML = '<div style="padding: 2rem; font-family: system-ui;"><h1>CMS Configuration Error</h1><p>' + error.message + '</p><p>Please check that the dev server is running and /admin/config.yml is accessible.</p></div>';
+        });
+    </script>
+  </body>
+</html>

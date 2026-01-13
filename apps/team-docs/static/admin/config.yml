@@ -1,0 +1,336 @@
+backend:
+  name: github
+  repo: department-of-veterans-affairs/platform
+  branch: main
+  base_url: https://your-oauth-provider.com
+
+# For local development (uses port 8082 to avoid conflict with docs app on 8081)
+local_backend:
+  url: http://localhost:8082/api/v1
+
+# Media files
+media_folder: static/img/uploads
+public_folder: /img/uploads
+
+# Site URL
+site_url: https://team-docs.va.gov
+display_url: https://team-docs.va.gov
+
+# Slug settings
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  # ===================
+  # MEETING NOTES
+  # ===================
+  - name: meeting-notes
+    label: "Meeting Notes"
+    label_singular: "Meeting Note"
+    folder: docs/meetings
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} - {{date}}"
+    fields:
+      - { name: title, label: Meeting Title, widget: string }
+      - { name: date, label: Date, widget: datetime }
+      - name: attendees
+        label: Attendees
+        widget: list
+        field: { name: name, label: Name, widget: string }
+      - name: meeting_type
+        label: Meeting Type
+        widget: select
+        options:
+          - "Standup"
+          - "Sprint Planning"
+          - "Retrospective"
+          - "Design Review"
+          - "Technical Discussion"
+          - "Other"
+      - name: agenda
+        label: Agenda
+        widget: markdown
+        default: |
+          ## Agenda
+
+          1. Topic 1
+          2. Topic 2
+          3. Topic 3
+      - name: discussion
+        label: Discussion Notes
+        widget: markdown
+        default: |
+          ## Discussion
+
+          ### Topic 1
+
+          Notes here...
+      - name: action_items
+        label: Action Items
+        widget: list
+        fields:
+          - { name: task, label: Task, widget: string }
+          - { name: owner, label: Owner, widget: string }
+          - { name: due_date, label: Due Date, widget: datetime, required: false }
+      - name: decisions
+        label: Decisions Made
+        widget: markdown
+        required: false
+        default: |
+          ## Decisions
+
+          - Decision 1
+          - Decision 2
+
+  # ===================
+  # ARCHITECTURE DECISIONS (ADR)
+  # ===================
+  - name: adr
+    label: "Architecture Decisions (ADR)"
+    label_singular: "ADR"
+    folder: docs/architecture
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-adr-{{slug}}"
+    summary: "ADR: {{title}}"
+    fields:
+      - { name: title, label: Title, widget: string, hint: "Short description of the decision" }
+      - { name: date, label: Date, widget: datetime }
+      - name: status
+        label: Status
+        widget: select
+        options:
+          - { label: "Proposed", value: "proposed" }
+          - { label: "Accepted", value: "accepted" }
+          - { label: "Deprecated", value: "deprecated" }
+          - { label: "Superseded", value: "superseded" }
+        default: "proposed"
+      - name: deciders
+        label: Deciders
+        widget: list
+        field: { name: name, label: Name, widget: string }
+      - name: context
+        label: Context
+        widget: markdown
+        default: |
+          ## Context
+
+          What is the issue that we're seeing that is motivating this decision or change?
+      - name: decision
+        label: Decision
+        widget: markdown
+        default: |
+          ## Decision
+
+          What is the change that we're proposing and/or doing?
+      - name: consequences
+        label: Consequences
+        widget: markdown
+        default: |
+          ## Consequences
+
+          What becomes easier or more difficult to do because of this change?
+
+          ### Positive
+
+          -
+
+          ### Negative
+
+          -
+
+          ### Risks
+
+          -
+      - name: alternatives
+        label: Alternatives Considered
+        widget: markdown
+        required: false
+        default: |
+          ## Alternatives Considered
+
+          ### Option 1
+
+          Description and why it wasn't chosen.
+
+          ### Option 2
+
+          Description and why it wasn't chosen.
+
+  # ===================
+  # PROCESS DOCUMENTATION
+  # ===================
+  - name: process
+    label: "Process Documentation"
+    label_singular: "Process"
+    folder: docs/processes
+    create: true
+    summary: "{{title}}"
+    fields:
+      - { name: title, label: Process Name, widget: string }
+      - { name: description, label: Description, widget: string }
+      - name: owner
+        label: Process Owner
+        widget: string
+        required: false
+      - name: last_reviewed
+        label: Last Reviewed
+        widget: datetime
+        required: false
+      - name: overview
+        label: Overview
+        widget: markdown
+        default: |
+          ## Overview
+
+          Brief description of this process and when it should be used.
+      - name: prerequisites
+        label: Prerequisites
+        widget: markdown
+        required: false
+        default: |
+          ## Prerequisites
+
+          What needs to be in place before starting this process?
+
+          - Prerequisite 1
+          - Prerequisite 2
+      - name: steps
+        label: Process Steps
+        widget: markdown
+        default: |
+          ## Steps
+
+          ### Step 1: Title
+
+          Description of what to do.
+
+          ### Step 2: Title
+
+          Description of what to do.
+
+          ### Step 3: Title
+
+          Description of what to do.
+      - name: troubleshooting
+        label: Troubleshooting
+        widget: markdown
+        required: false
+        default: |
+          ## Troubleshooting
+
+          ### Common Issue 1
+
+          **Problem**: Description
+          **Solution**: How to fix it
+      - name: related_links
+        label: Related Links
+        widget: list
+        required: false
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: url, label: URL, widget: string }
+
+  # ===================
+  # ONBOARDING GUIDES
+  # ===================
+  - name: onboarding
+    label: "Onboarding Guides"
+    label_singular: "Onboarding Guide"
+    folder: docs/onboarding
+    create: true
+    summary: "{{title}}"
+    fields:
+      - { name: title, label: Guide Title, widget: string }
+      - { name: description, label: Description, widget: string }
+      - name: role
+        label: Target Role
+        widget: select
+        options:
+          - "Developer"
+          - "Designer"
+          - "Product Manager"
+          - "QA Engineer"
+          - "All Team Members"
+      - name: duration
+        label: Expected Duration
+        widget: string
+        hint: "e.g., 1 week, 2 days"
+        required: false
+      - name: introduction
+        label: Introduction
+        widget: markdown
+        default: |
+          ## Welcome!
+
+          Brief introduction and what to expect from this onboarding guide.
+      - name: day_one
+        label: Day 1 Tasks
+        widget: markdown
+        default: |
+          ## Day 1
+
+          ### Setup
+
+          - [ ] Task 1
+          - [ ] Task 2
+
+          ### Meetings
+
+          - Meet with your manager
+          - Team introduction
+      - name: week_one
+        label: Week 1 Goals
+        widget: markdown
+        default: |
+          ## Week 1
+
+          ### Goals
+
+          - Goal 1
+          - Goal 2
+
+          ### Resources to Review
+
+          - Resource 1
+          - Resource 2
+      - name: key_contacts
+        label: Key Contacts
+        widget: list
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: role, label: Role, widget: string }
+          - { name: contact, label: Slack/Email, widget: string }
+      - name: tools_access
+        label: Tools & Access Needed
+        widget: list
+        fields:
+          - { name: tool, label: Tool Name, widget: string }
+          - { name: how_to_get, label: How to Get Access, widget: string }
+
+  # ===================
+  # TEAM UPDATES (Blog)
+  # ===================
+  - name: blog
+    label: "Team Updates"
+    label_singular: "Update"
+    folder: blog
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: slug, label: Slug, widget: string }
+      - { name: date, label: Date, widget: datetime }
+      - name: authors
+        label: Authors
+        widget: list
+        required: false
+        field: { name: author, label: Author, widget: string }
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+        field: { name: tag, label: Tag, widget: string }
+      - { name: body, label: Body, widget: markdown }
