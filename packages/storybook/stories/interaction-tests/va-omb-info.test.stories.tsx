@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { expect, userEvent, within, findByTestId } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
 import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
 import { VaOmbInfo } from '@department-of-veterans-affairs/web-components/react-bindings';
 

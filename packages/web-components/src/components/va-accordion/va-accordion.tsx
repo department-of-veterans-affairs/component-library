@@ -240,7 +240,7 @@ export class VaAccordion {
     });
 
     return (
-      <Host>
+      <Host data-testid="va-accordion">
         <div
           class={accordionClass}
           ref={accordionContainer =>
