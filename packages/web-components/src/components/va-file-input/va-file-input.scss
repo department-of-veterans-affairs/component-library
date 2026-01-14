@@ -51,6 +51,13 @@
     box-sizing: border-box;
   }
 
+  // When a file is uploaded, prevent the whole card from being clickable. Note
+  // that the control elements inside the card will still be clickable due to their
+  // higher z-index.
+  .file-input.with-file {
+    pointer-events: none;
+  }
+
   .file-input-target {
     border: 1px dashed var(--vads-color-action-border-base-active-on-dark);
     display: block;
@@ -112,11 +119,23 @@
     margin: 8px;
   }
 
+  .file-info-group {
+    padding-left: .5rem;
+  }
+
+  #input-error-message {
+    padding: .25rem 0;
+    width: 100%;
+  }
+
+  va-card #input-error-message {
+    padding: 0;
+  }
+
   .file-label {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-bold);
     font-size: 1.06rem;
-    padding: 0 8px;
     display: block;
     width: 100%;
     word-wrap: break-word;
@@ -124,16 +143,11 @@
     overflow: hidden;
   }
 
-  #input-error-message {
-    padding: 0 8px;
-    width: 100%;
-  }
-
   .file-size-label, .file-status-label {
     color: var(--vads-color-base-dark);
     font-weight: var(--font-weight-normal);
-    font-size: 1.06rem;
-    padding: 0 8px;
+    font-size: var(--vads-font-size-source-sans-normalized);
+    line-height: var(--vads-font-line-height-1);
     display: block;
   }
 
@@ -145,6 +159,15 @@
     padding: 0 8px 8px;
     display: flex;
     align-items: center;
+  }
+
+  .file-button-section,
+  .additional-info-slot,
+  .progress-bar-and-cancel-button,
+  va-text-input {
+    /* These rules are required for interactive children (e.g., buttons, inputs) to be clickable */
+    position: relative;
+    z-index: 2;
   }
 
   .file-button-section {
@@ -169,7 +192,7 @@
 
   /* copied from Formation
   /* TO DO: decide whether to import from CSS-Library or simply rename,
-  /* as this is the only attibute currently needed from utilities
+  /* as this is the only attribute currently needed from utilities
   */
   .vads-u-line-height--2 {
     line-height: 1.15;
@@ -181,6 +204,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
   }
 
   .thumbnail-preview {
