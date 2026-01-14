@@ -16,7 +16,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-tag-status web component',
     docs: {
-      page: () => <StoryDocs storyDefault={Informational} data={tagDocs} />,
+      page: () => <StoryDocs storyDefault={Info} data={tagDocs} />,
     },
   },
   argTypes: {
@@ -31,10 +31,10 @@ const Template = (args) => {
   );
 };
 
-export const Informational = Template.bind({});
-Informational.args = {
-  status: 'informational',
-  text: 'Informational Tag',
+export const Info = Template.bind({});
+Info.args = {
+  status: 'info',
+  text: 'Info Tag',
 };
 
 export const Warning = Template.bind({});

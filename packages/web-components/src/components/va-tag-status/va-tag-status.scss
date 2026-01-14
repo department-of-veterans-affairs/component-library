@@ -16,7 +16,7 @@
   color: var(--vads-color-white);
 }
 
-:host(.va-tag-status[status='informational']) {
+:host(.va-tag-status[status='info']) {
   background: var(--vads-color-info-darker);
   border-color: var(--vads-color-info-darker);
 }

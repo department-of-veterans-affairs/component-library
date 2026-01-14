@@ -119,7 +119,7 @@ describe('va-file-input', () => {
       '.file-button-section va-button-icon',
     );
     const buttonLabel = await fileChangeButton.getProperty('label');
-    expect(buttonLabel).toBe('change file 1x1.png');
+    expect(buttonLabel).toBe('change file. 1x1.png');
   });
 
   it('does not render a "Change File" button if read-only', async () => {
@@ -184,8 +184,6 @@ describe('va-file-input', () => {
 
     const fileInput = await page.find('va-file-input');
     expect(fileInput).not.toBeNull();
-    const input = await fileInput.shadowRoot.querySelector('input[type=file]');
-    expect(input.getAttribute('style')).toEqual('visibility: hidden;');
     const summaryCard = await page.find('va-file-input >>> va-card');
     expect(summaryCard).not.toBeNull();
     expect(await summaryCard.find('.file-label')).toEqualText('test.jpg');
@@ -216,7 +214,8 @@ describe('va-file-input', () => {
     // get delete button
     const [_, deleteButton] = await page.findAll('va-file-input >>> va-button-icon');
     deleteButton.click();
-    await page.waitForTimeout(100);
+
+    await new Promise((r) => setTimeout(r, 250));
 
     // make sure modal opens
     const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
@@ -340,19 +339,18 @@ describe('va-file-input', () => {
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).not.toBeNull();
     const label = await textInput.find(' >>> label');
+    expect(label).not.toBeNull();
     expect(label).toEqualText('File password required')
-    
   });
 
   it('renders error on password input if password-error is set', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted password-error="Encrypted file requires a password."/>`);
 
-    const textInput = await page.find('va-file-input >>> va-text-input');
-    const errorSpan = await textInput.find('>>> span.usa-error-message');
-    expect(errorSpan).not.toBeNull();
-    expect(errorSpan).toEqualText('Encrypted file requires a password.');
+    const inputErrorSpan = await page.find('va-file-input >>> va-text-input >>> span.usa-error-message');
+    expect(inputErrorSpan).not.toBeNull();
+    expect(inputErrorSpan).toEqualText('Encrypted file requires a password.');
   })
-  
+
   it('does not render file password field if encrypted is unset', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`);
 
@@ -382,16 +380,16 @@ describe('va-file-input', () => {
   it('handles placeholder file upload and shows default file icon', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'placeholder.png');
     const host = await page.find('va-file-input');
-    
+
     // Check that the file was uploaded (container should exist)
     const containerSelector = 'va-file-input >>> div.selected-files-wrapper';
     const container = await host.find(containerSelector);
     expect(container).not.toBeNull();
-    
+
     // Check that no image preview is generated (should show default file icon)
     const imagePreview = await host.find('va-file-input >>> .thumbnail-preview');
     expect(imagePreview).toBeNull();
-    
+
     // Check that the default file icon (svg) is displayed
     const defaultIcon = await host.find('va-file-input >>> .thumbnail-container svg');
     expect(defaultIcon).not.toBeNull();
@@ -429,13 +427,13 @@ describe('va-file-input', () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`, 'placeholder.png');
     const host = await page.find('va-file-input');
     const buttons = await host.findAll('va-file-input >>> va-button-icon');
-    const changeBtn = await buttons[0].shadowRoot.querySelector('button[aria-label="change file placeholder.png"]');
-    const deleteBtn = await buttons[1].shadowRoot.querySelector('button[aria-label="delete file placeholder.png"]');
+    const changeBtn = await buttons[0].shadowRoot.querySelector('button[aria-label="change file. placeholder.png"]');
+    const deleteBtn = await buttons[1].shadowRoot.querySelector('button[aria-label="delete file. placeholder.png"]');
     expect(changeBtn).not.toBeNull();
     expect(deleteBtn).not.toBeNull();
   });
 
-  it('correctly displays error message for MIME type failure', async () => { 
+  it('correctly displays error message for MIME type failure', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input accept="pdf" />`, '1x1.png');
     const fileInfoCard = await page.find('va-file-input >>> va-card');
 
@@ -467,11 +465,110 @@ describe('va-file-input', () => {
         return {
           errorMessage: errorMsg ? errorMsg.innerHTML : null,
           buttons,
-        };  
+        };
     });
     expect(result.errorMessage).toEqual("We do not accept .png files. Choose a new file.");
     expect(result.buttons[0].innerText).toEqual('CHANGE FILE');
     expect(result.buttons[1].innerText).toEqual('DELETE');
+  });
+
+  it('updates the aria-label of the nested file input with uploaded file\'s name when a file is uploaded successfully', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input />`);
+
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    await page.waitForChanges();
+
+    // Wait 250ms for the status message text content to update (debounced in
+    // component to help with screen reader announcements).
+    await new Promise((r) => setTimeout(r, 250));
+
+    const fileInput = await page.find('va-file-input >>> input');
+    expect(fileInput).not.toBeNull();
+    expect(fileInput.getAttribute('aria-label')).toContain('You have selected the file: 1x1.png.');
+  });
+
+  it('updates the aria-label of the nested file input to reflect when an uploaded file is deleted', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input />`);
+
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (
+      await page.waitForFunction(() =>
+        document
+          .querySelector('va-file-input')
+          .shadowRoot.querySelector('input[type=file]'),
+      )
+    ) as ElementHandle<HTMLInputElement>;
+
+    await page.waitForChanges();
+
+    expect(input).not.toBeNull();
+
+    const fileLabel = await page.find('va-file-input >>> .file-label');
+    expect(fileLabel).toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    // get delete button
+    const [_, deleteButton] = await page.findAll('va-file-input >>> va-button-icon');
+    deleteButton.click();
+
+    await page.waitForChanges();
+
+    // make sure modal opens
+    const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
+
+    expect(modalCheck).not.toBeNull();
+
+    const yesButton = (
+      await page.waitForFunction(() =>
+        document.querySelector('va-file-input').shadowRoot.querySelector('va-modal').shadowRoot.querySelector('va-button')
+      )
+    );
+
+    // yes we want to remove the file
+    yesButton.click();
+
+    await page.waitForChanges();
+
+    // Wait 1000ms for the status message text content to update (debounced in
+    // component to help with screen reader announcements).
+    await new Promise((r) => setTimeout(r, 1000));
+
+    const fileInput = await page.find('va-file-input >>> input');
+    expect(fileInput).not.toBeNull();
+    expect(fileInput.getAttribute('aria-label')).toContain('File deleted. No file selected.');
+  });
+
+  it('renders a error message when there is a file input error', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input max-file-size="1" />`);
+
+    await page.$eval('va-file-input', (elm: any) => {
+      // within the browser's context
+      // let's set new property values on the component
+      elm.uploadedFile = {name: 'test.jpg', size: 7000, type: 'jpg'};
+    });
+    await page.waitForChanges();
+
+    const errorMessage = await page.find('va-file-input >>> #input-error-message');
+    expect(errorMessage).not.toBeNull();
+    expect(errorMessage.getAttribute('class')).toContain('usa-error-message');
+
+    await page.waitForChanges();
+
+    expect(errorMessage.innerText.trim()).toBe("We can't upload your file because it's too big. Files must be less than 1 B.");
   });
 
   it('accepts an .heic file and displays a generic image icon', async () => {

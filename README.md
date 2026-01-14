@@ -357,6 +357,7 @@ The Design System Team will create a release minimally at the beginning of each 
 12. Once the packages have been published to NPM, create a PR for the following repositories that updates the dependency versions:
     - [vets-website](https://github.com/department-of-veterans-affairs/vets-website)
       - Update the `component-library` dependency version in `package.json`
+      - **Important**: Run all e2e tests to ensure compatibility with existing code. This can be done by toggling the `RUN_FULL_SUITE` environment variable to `true` in the [continuous-integration.yml](https://github.com/department-of-veterans-affairs/vets-website/blob/77a8571f6684423d288ba2eab1c72c2920c17308/.github/workflows/continuous-integration.yml#L333) workflow. Unset before merging or create a separate PR dedicated to running the tests.
     - [content-build](https://github.com/department-of-veterans-affairs/content-build)
       - Update the `web-components` dependency version in `package.json`
     - [vets-design-system-documentation](https://github.com/department-of-veterans-affairs/vets-design-system-documentation)
