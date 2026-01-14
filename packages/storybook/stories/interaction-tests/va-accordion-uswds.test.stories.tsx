@@ -86,11 +86,9 @@ export default meta;
 type Story = StoryObj<typeof VaAccordion>;
 
 export const Default: Story = {
-  async play({ mount, canvasElement }) {
+  async play({ canvasElement }) {
     // Set lang to 'en' to avoid any i18n issues
     document.querySelector('main')?.setAttribute('lang', 'en');
-
-    await mount();
 
     const canvas = within(canvasElement);
 
@@ -113,10 +111,9 @@ export const Default: Story = {
 };
 
 export const InternationalizationEspanol: Story = {
-  async play({ mount, canvasElement }) {
+  async play({ canvasElement }) {
     // Set lang to 'es' to test Spanish internationalization
     document.querySelector('main')?.setAttribute('lang', 'es');
-    await mount();
 
     const canvas = within(canvasElement);
 
@@ -139,10 +136,9 @@ export const InternationalizationEspanol: Story = {
 };
 
 export const InternationalizationTagalog: Story = {
-  async play({ mount, canvasElement }) {
+  async play({ canvasElement }) {
     // Set lang to 'tl' to test Tagalog internationalization
     document.querySelector('main')?.setAttribute('lang', 'tl');
-    await mount();
 
     const canvas = within(canvasElement);
 
