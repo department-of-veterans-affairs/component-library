@@ -36,6 +36,14 @@ const config:StorybookConfig = {
     options: {},
   },
 
+  build: {
+    test: {
+      disabledAddons: [
+        '@storybook/addon-docs',
+      ],
+    },
+  },
+
   refs: {
     'va-mobile': {
       title: 'VA Mobile Design System',
