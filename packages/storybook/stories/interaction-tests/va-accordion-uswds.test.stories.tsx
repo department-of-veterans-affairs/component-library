@@ -38,14 +38,6 @@ const itemsJsx = items.map(({ id, header, body, ...props }) => (
   </VaAccordionItem>
 ));
 
-const getExpandAndCollapseButtons = async (): 
-  Promise<{ expandButton: HTMLElement; collapseButton: HTMLElement }> => {
-  const buttons = await screen.findAllByShadowRole('button');
-  const expandButton = buttons[0];
-  const collapseButton = buttons[1];
-  return { expandButton, collapseButton };
-}
-
 const clickExpandAllOrCollapseAndCheckForOpen = async (button: HTMLElement, status: string) => {
   await userEvent.click(button);
   const accordionItems = await screen.findAllByTestId('va-accordion-item');
@@ -105,7 +97,8 @@ export const Default: Story = {
     const vaAccordion = await canvas.findByTestId('va-accordion');
     await expect(vaAccordion).toBeInTheDocument();
 
-    const { expandButton, collapseButton } = await getExpandAndCollapseButtons();
+    const expandButton = await screen.findByShadowTestId('expand-all-accordions');
+    const collapseButton = await screen.findByShadowTestId('collapse-all-accordions');
 
     await expect(expandButton).toBeInTheDocument();
     await expect(expandButton).toHaveTextContent('Expand all');
@@ -130,7 +123,8 @@ export const InternationalizationEspanol: Story = {
     const vaAccordion = await canvas.findByTestId('va-accordion');
     await expect(vaAccordion).toBeInTheDocument();
 
-    const { expandButton, collapseButton } = await getExpandAndCollapseButtons();
+    const expandButton = await screen.findByShadowTestId('expand-all-accordions');
+    const collapseButton = await screen.findByShadowTestId('collapse-all-accordions');
 
     await expect(expandButton).toBeInTheDocument();
     await expect(expandButton).toHaveTextContent('Expandir todo');
@@ -155,7 +149,8 @@ export const InternationalizationTagalog: Story = {
     const vaAccordion = await canvas.findByTestId('va-accordion');
     await expect(vaAccordion).toBeInTheDocument();
 
-    const { expandButton, collapseButton } = await getExpandAndCollapseButtons();
+    const expandButton = await screen.findByShadowTestId('expand-all-accordions');
+    const collapseButton = await screen.findByShadowTestId('collapse-all-accordions');
 
     await expect(expandButton).toBeInTheDocument();
     await expect(expandButton).toHaveTextContent('I-expand lahat');

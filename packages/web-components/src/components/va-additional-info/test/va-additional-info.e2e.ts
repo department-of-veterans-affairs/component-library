@@ -11,7 +11,7 @@ describe('va-additional-info', () => {
     const element = await page.find('va-additional-info');
 
     expect(element).toEqualHtml(`
-      <va-additional-info trigger="More info" class="hydrated">
+      <va-additional-info data-testid="va-additional-info" trigger="More info" class="hydrated">
         <mock:shadow-root>
           <a aria-controls="info" aria-expanded="false" role="button" tabindex="0">
             <div>
@@ -251,22 +251,22 @@ describe('va-additional-info', () => {
     const maxHeightBeforeResize = await handle.evaluate((domElement: HTMLElement) =>
       domElement.style.getPropertyValue('--calc-max-height'),
     );
-  
+
     // Trigger window resize event
     await page.evaluate(() => window.dispatchEvent(new Event('resize')));
-  
+
     // Get the updated max-height value
     const maxHeightAfterResize = await handle.evaluate((domElement: HTMLElement) =>
       domElement.style.getPropertyValue('--calc-max-height'),
     );
-  
+
     expect(maxHeightAfterResize).toEqual(maxHeightBeforeResize);
   });
 
   it('handles any case where `#info` is not present in the shadow DOM', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-additional-info trigger="More info"></va-additional-info>`);
-  
+
     // Remove `#info` manually after render
     await page.evaluate(() => {
       const info = document
@@ -274,10 +274,10 @@ describe('va-additional-info', () => {
         ?.shadowRoot?.getElementById('info');
       if (info?.parentNode) info.parentNode.removeChild(info);
     });
-  
+
     // Manually call resize to trigger `updateInfoMaxHeight`
     await page.evaluate(() => window.dispatchEvent(new Event('resize')));
-  
+
     expect(true).toBe(true); // If no error, the test passes
   });
 });
