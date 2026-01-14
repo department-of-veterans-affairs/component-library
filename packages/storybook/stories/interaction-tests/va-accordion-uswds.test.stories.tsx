@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
+import { screen } from "shadow-dom-testing-library"
 import { getWebComponentDocs, propStructure, StoryDocs, propDefaults, getDefaultPropValue } from '../wc-helpers';
 import { VaAccordion, VaAccordionItem } from '@department-of-veterans-affairs/web-components/react-bindings';
 
@@ -37,11 +38,32 @@ const itemsJsx = items.map(({ id, header, body, ...props }) => (
   </VaAccordionItem>
 ));
 
-const getExpandAndCollapseButtons = (component) => {
-  const buttons = component.shadowRoot.querySelectorAll('ul.expand-collapse-list li button');
+const getExpandAndCollapseButtons = async (): 
+  Promise<{ expandButton: HTMLElement; collapseButton: HTMLElement }> => {
+  const buttons = await screen.findAllByShadowRole('button');
   const expandButton = buttons[0];
   const collapseButton = buttons[1];
   return { expandButton, collapseButton };
+}
+
+const clickExpandAllOrCollapseAndCheckForOpen = async (button: HTMLElement, status: string) => {
+  await userEvent.click(button);
+  const accordionItems = await screen.findAllByTestId('va-accordion-item');
+
+  let i = 0;
+  for (const item of items) {
+    if (status === 'open') {
+      await expect(accordionItems[i]).toHaveAttribute('open');
+      await expect(accordionItems[i]).not.toHaveAttribute('open', 'false');
+    }
+    else {
+      await expect(accordionItems[i]).toHaveAttribute('open', 'false');
+    }
+    
+    const accordionItem = await screen.findByShadowText(item.header);
+    await expect(accordionItem).toBeInTheDocument();
+    i++;
+  }
 }
 
 const meta: Meta<typeof VaAccordion> = {
@@ -83,7 +105,7 @@ export const Default: Story = {
     const vaAccordion = await canvas.findByTestId('va-accordion');
     await expect(vaAccordion).toBeInTheDocument();
 
-    const { expandButton, collapseButton } = getExpandAndCollapseButtons(vaAccordion);
+    const { expandButton, collapseButton } = await getExpandAndCollapseButtons();
 
     await expect(expandButton).toBeInTheDocument();
     await expect(expandButton).toHaveTextContent('Expand all');
@@ -92,6 +114,8 @@ export const Default: Story = {
     await expect(collapseButton).toBeInTheDocument();
     await expect(collapseButton).toHaveTextContent('Collapse all');
     await expect(collapseButton).toHaveAttribute('aria-label', 'Collapse all accordions');
+    await clickExpandAllOrCollapseAndCheckForOpen(expandButton, 'open');
+    await clickExpandAllOrCollapseAndCheckForOpen(collapseButton, 'closed');
   }
 };
 
@@ -106,7 +130,7 @@ export const InternationalizationEspanol: Story = {
     const vaAccordion = await canvas.findByTestId('va-accordion');
     await expect(vaAccordion).toBeInTheDocument();
 
-    const { expandButton, collapseButton } = getExpandAndCollapseButtons(vaAccordion);
+    const { expandButton, collapseButton } = await getExpandAndCollapseButtons();
 
     await expect(expandButton).toBeInTheDocument();
     await expect(expandButton).toHaveTextContent('Expandir todo');
@@ -115,6 +139,8 @@ export const InternationalizationEspanol: Story = {
     await expect(collapseButton).toBeInTheDocument();
     await expect(collapseButton).toHaveTextContent('Contraer todo');
     await expect(collapseButton).toHaveAttribute('aria-label', 'Contraer todos los acordeones');
+    await clickExpandAllOrCollapseAndCheckForOpen(expandButton, 'open');
+    await clickExpandAllOrCollapseAndCheckForOpen(collapseButton, 'closed');
   }
 };
 
@@ -129,7 +155,7 @@ export const InternationalizationTagalog: Story = {
     const vaAccordion = await canvas.findByTestId('va-accordion');
     await expect(vaAccordion).toBeInTheDocument();
 
-    const { expandButton, collapseButton } = getExpandAndCollapseButtons(vaAccordion);
+    const { expandButton, collapseButton } = await getExpandAndCollapseButtons();
 
     await expect(expandButton).toBeInTheDocument();
     await expect(expandButton).toHaveTextContent('I-expand lahat');
@@ -138,5 +164,7 @@ export const InternationalizationTagalog: Story = {
     await expect(collapseButton).toBeInTheDocument();
     await expect(collapseButton).toHaveTextContent('I-collapse ang lahat');
     await expect(collapseButton).toHaveAttribute('aria-label', 'I-collapse ang lahat ng accordion');
+    await clickExpandAllOrCollapseAndCheckForOpen(expandButton, 'open');
+    await clickExpandAllOrCollapseAndCheckForOpen(collapseButton, 'closed');
   }
 };

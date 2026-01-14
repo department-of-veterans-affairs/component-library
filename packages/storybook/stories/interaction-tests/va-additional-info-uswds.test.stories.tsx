@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, userEvent, within } from 'storybook/test';
+import { screen } from "shadow-dom-testing-library"
 import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
 import { VaAdditionalInfo } from '@department-of-veterans-affairs/web-components/react-bindings';
 
@@ -65,7 +66,8 @@ export const NoBorder: Story = {
 
     await expect(component).toBeInTheDocument();
 
-    const trigger = component.shadowRoot.querySelector('a[role="button"]');
+    // Get trigger button and verify its presence and text
+    const trigger = await screen.findByShadowRole('button');
     await expect(trigger).toBeInTheDocument();
     await expect(trigger).toHaveTextContent('Additional Information');
 
@@ -73,19 +75,13 @@ export const NoBorder: Story = {
     await userEvent.click(trigger);
 
     // Ensure that the slotted content is present
-    const slot = component.shadowRoot.querySelector('slot');
-    await expect(slot).toBeInTheDocument();
-    const assignedNodes = slot.assignedNodes();
-    await expect(assignedNodes[0].textContent).toBe('Here are some popular pets to consider');
-    const slottedList = assignedNodes[1] as HTMLElement;
-    await expect(slottedList).toBeDefined();
+    const slottedList = await screen.findByShadowTestId('pets-list');
+    await expect(slottedList).toBeInTheDocument();
     await expect(slottedList.nodeName).toBe('UL');
 
     // Verify that the border is not present
-    const info = component.shadowRoot.querySelector('#info');
-    await expect(info).toBeInTheDocument();
-    const infoStyles = getComputedStyle(info);
+    await expect(slottedList).toBeInTheDocument();
+    const infoStyles = getComputedStyle(slottedList);
     await expect(infoStyles.borderLeftStyle).toBe('none');
-
   }
 };

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, userEvent, within } from 'storybook/test';
+import { screen } from "shadow-dom-testing-library"
 import { getWebComponentDocs, propStructure, StoryDocs } from '../wc-helpers';
 import { VaOmbInfo } from '@department-of-veterans-affairs/web-components/react-bindings';
 
@@ -40,21 +41,18 @@ export const Default: Story = {
 
     await expect(ombInfo).toBeInTheDocument();
 
-    const vaButton = ombInfo.shadowRoot.querySelector('va-button');
-    await expect(vaButton).toBeInTheDocument();
-
-    const button = vaButton.shadowRoot.querySelector('button');
+    const button = await screen.findByShadowRole('button');
     await expect(button).toBeInTheDocument();
 
     // Open the modal
     await userEvent.click(button);
 
-    const modal = ombInfo.shadowRoot.querySelector('va-modal');
+    const modal = await screen.findByShadowRole('dialog');
     await expect(modal).toBeInTheDocument();
     await expect(modal).toBeVisible();
 
     // Close the modal
-    const closeButton = modal.shadowRoot.querySelector('button.va-modal-close');
+    const closeButton = await screen.findByShadowLabelText('Close Privacy Act Statement modal');
     await expect(closeButton).toBeInTheDocument();
     await userEvent.click(closeButton);
     await expect(modal).not.toHaveAttribute('visible');

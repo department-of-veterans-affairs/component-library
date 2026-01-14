@@ -153,7 +153,7 @@ export class VaAccordionItem {
     }
 
     return (
-      <Host>
+      <Host data-testid="va-accordion-item">
         <div class={accordionItemClass}>
           <Header />
           <div
