@@ -21,7 +21,7 @@ const defaultArgs = {
   'tag-text': '',
   'error': '',
   'link-href': 'https://www.va.gov',
-  'link-text': 'Add mobile phone number',
+  'link-text': 'Edit mobile phone number',
   'required': false,
 };
 
@@ -57,19 +57,6 @@ Default.args = {
 };
 Default.argTypes = propStructure(cardStatusDocs);
 
-export const withTagAndRequired = Template.bind(null);
-withTagAndRequired.args = {
-  ...defaultArgs,
-  'tag-text': 'Status',
-  'required': true,
-};
-
-export const withSubHeader = Template.bind(null);
-withSubHeader.args = {
-  ...defaultArgs,
-  'sub-header-text': 'Mobile phone number on file',
-};
-
 const TemplateErrorState = ({
   'heading-level': headingLevel,
   'heading-text': headingText,
@@ -96,20 +83,30 @@ const TemplateErrorState = ({
   </va-card-status>
 );
 
-export const withTagAndRequiredError = TemplateErrorState.bind(null);
-withTagAndRequiredError.args = {
+export const missingContentState = TemplateErrorState.bind(null);
+missingContentState.args = {
   ...defaultArgs,
   'tag-text': 'Missing',
   'tag-status': 'error',
+  'link-text': 'Add mobile phone number',
   'required': true,
 };
 
-export const withErrorMessageAndRequired = TemplateErrorState.bind(null);
-withErrorMessageAndRequired.args = {
+export const errorState = TemplateErrorState.bind(null);
+errorState.args = {
   ...defaultArgs,
   'error':
     'Your mobile phone number is missing. Select "Add" to enter your mobile phone number.',
   'tag-text': 'Missing',
   'tag-status': 'error',
+  'link-text': 'Add mobile phone number',
   'required': true,
+};
+
+export const withInfoTagAndSubheader= Template.bind(null);
+withInfoTagAndSubheader.args = {
+  ...defaultArgs,
+  'tag-text': 'Status',
+  'required': true,
+  'sub-header-text': 'Optional subheader',
 };
