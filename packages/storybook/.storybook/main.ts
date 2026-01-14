@@ -10,10 +10,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const config:StorybookConfig = {
   stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx)', '../@(src|stories)/**/*.mdx'],
   staticDirs: ['../public'],
-  features: {
-    // @ts-ignore
-    interactionsDebugger: true,
-  },
 
   addons: [
     {
@@ -22,7 +18,6 @@ const config:StorybookConfig = {
     getAbsolutePath('@storybook/addon-links'),
     getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath("@storybook/addon-webpack5-compiler-babel"),
-    getAbsolutePath('@storybook/addon-interactions'),
   ],
 
   webpackFinal: async (config:any) => {
