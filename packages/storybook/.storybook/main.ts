@@ -11,7 +11,8 @@ const config:StorybookConfig = {
   stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx)', '../@(src|stories)/**/*.mdx'],
   staticDirs: ['../public'],
   features: {
-    interactions: true,
+    // @ts-ignore
+    interactionsDebugger: true,
   },
 
   addons: [
