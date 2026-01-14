@@ -174,7 +174,9 @@ export class VaButton {
       composed: true,
     });
     if (this.submit !== 'skip') {
-      formElement.dispatchEvent(submitEvent);
+      requestAnimationFrame(() => {
+        formElement.dispatchEvent(submitEvent);
+      });
     }
     if (this.submit !== 'prevent') {
       formElement.submit();

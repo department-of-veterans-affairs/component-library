@@ -314,13 +314,21 @@ describe('va-button', () => {
     `);
   });
 
-  it('submits form when clicked', async () => {
+  it('submit is not triggered when submit=skip is set', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<form onsubmit="e=>{e.preventDefault();}"><va-button submit text="Submit"></va-button></form>',
-    );
+    await page.setContent('<form><va-button submit="skip" continue></va-button></form>');
     const submitSpy = await page.spyOnEvent('submit');
-    const button = await page.find('va-button >>> button');
+    const button = await page.find('va-button[continue]');
+    await button.click();
+    await page.waitForChanges();
+    expect(submitSpy).toHaveReceivedEventTimes(0);
+  });
+
+  it('submit is triggered when submit=prevent is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<form onsubmit="e=>{e.preventDefault();}"><va-button submit="prevent" continue></va-button></form>');
+    const submitSpy = await page.spyOnEvent('submit');
+    const button = await page.find('va-button[continue]');
     await button.click();
     await page.waitForChanges();
     expect(submitSpy).toHaveReceivedEventTimes(1);
