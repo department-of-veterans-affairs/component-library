@@ -81,11 +81,13 @@ button.usa-search__clear-input:not([disabled]):focus {
   outline-offset: -4px;
 }
 
-:host([big="true"]) .usa-search__clear-input  {
+/* Apply when `big` is present and not explicitly "false" (supports boolean attr and big="true") */
+:host([big]:not([big="false"])) .usa-search__clear-input {
   right: calc(6rem + 6px);
 }
 
-:host([small="true"]) .usa-search__clear-input{
+/* Apply when `small` is present and not explicitly "false" (supports boolean attr and small="true") */
+:host([small]:not([small="false"])) .usa-search__clear-input{
   right: calc(0.5rem + 6px);
 }
 @media (max-width: $mobile-lg) { 

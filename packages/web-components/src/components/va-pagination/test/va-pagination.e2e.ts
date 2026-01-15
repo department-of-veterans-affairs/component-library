@@ -14,13 +14,13 @@ describe('va-pagination', () => {
           <nav aria-label="Pagination" class="usa-pagination">
             <ul class="usa-pagination__list">
               <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
-                <a aria-current="page" aria-label="page 1, first page" href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
+                <a aria-current="page" aria-label="1 of 3 pages, first page" href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
               </li>
               <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
-                <a aria-label="page 2" href="javascript:void(0)" class="usa-pagination__button">2</a>
+                <a aria-label="2 of 3 pages" href="javascript:void(0)" class="usa-pagination__button">2</a>
               </li>
               <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
-                <a aria-label="page 3, last page" href="javascript:void(0)" class="usa-pagination__button">3</a>
+                <a aria-label="3 of 3 pages, last page" href="javascript:void(0)" class="usa-pagination__button">3</a >
               </li>
               <li class="usa-pagination__item usa-pagination__arrow">
                 <a aria-label="Next page" href="javascript:void(0)" class="usa-pagination__link usa-pagination__next-page">
