@@ -30,6 +30,7 @@
     "http-server": "14.1.1",
     "react-dom": "18.3.1",
     "sass-loader": "16.0.5",
+    "shadow-dom-testing-library": "1.13.1",
     "storybook": "10.1.10"
   }
 }

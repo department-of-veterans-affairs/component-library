@@ -187,7 +187,7 @@ export class VaOmbInfo {
 
     /* eslint-disable i18next/no-literal-string */
     return (
-      <Host>
+      <Host data-testid="va-omb-info">
         {resBurden && (
           <div>
             Respondent burden: <strong>{this.formatRespondentBurden()}</strong>

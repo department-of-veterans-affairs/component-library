@@ -11,7 +11,7 @@ describe('va-accordion', () => {
 
     // The i18next translation keys are being rendered
     expect(element).toEqualHtml(`
-      <va-accordion class="hydrated">
+      <va-accordion class="hydrated" data-testid="va-accordion">
         <mock:shadow-root>
           <div class="usa-accordion">
             <ul class="expand-collapse-list">
@@ -40,7 +40,7 @@ describe('va-accordion', () => {
     const element = await page.find('va-accordion');
 
     expect(element).toEqualHtml(`
-      <va-accordion class="hydrated" open-single="true">
+      <va-accordion class="hydrated" data-testid="va-accordion" open-single="true">
         <mock:shadow-root>
           <div class="usa-accordion">
             <slot></slot>
