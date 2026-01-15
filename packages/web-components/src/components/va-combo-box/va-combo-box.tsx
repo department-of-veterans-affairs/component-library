@@ -74,7 +74,7 @@ export class VaComboBox {
   /**
    * Error message to display. When defined, this indicates an error.
    */
-  @Prop() error?: string;
+  @Prop({ reflect: true }) error?: string;
 
   /**
    * Optional hint text.
@@ -110,6 +110,7 @@ export class VaComboBox {
   @Event() vaSelect: EventEmitter;
 
   componentWillLoad() {
+    this.isInVaInputTelephone = this.el.parentElement?.classList.contains('va-input-telephone-wrapper');
     this.populateOptions();
   }
 
@@ -122,7 +123,6 @@ export class VaComboBox {
   componentDidLoad() {
     const comboBoxElement = this.el.shadowRoot.querySelector('.usa-combo-box');
     const labelElement = this.el.shadowRoot.querySelector('label');
-    this.isInVaInputTelephone = this.el.parentElement?.classList.contains('va-input-telephone-wrapper');
     // create span that will hold flag in the input
     if (this.isInVaInputTelephone) {
       const comboBoxEl = this.el.shadowRoot.querySelector('div.usa-combo-box');
@@ -133,7 +133,7 @@ export class VaComboBox {
     }
     
     if (comboBoxElement) {
-      comboBox.init(comboBoxElement, labelElement, this.value, this.isInVaInputTelephone);
+      comboBox.init(comboBoxElement, labelElement, this.value);
       comboBox.on(comboBoxElement);
     }
     const inputElement = this.el.shadowRoot.querySelector('input');
@@ -249,6 +249,7 @@ export class VaComboBox {
       hint,
       messageAriaDescribedby,
       showInputError,
+      isInVaInputTelephone
     } = this;
     const labelClass = classnames({
       'usa-label': true,
@@ -256,7 +257,7 @@ export class VaComboBox {
     });
     const comboBoxContainerClass = classnames({
       'usa-combo-box': true,
-      'input-telephone-wrapper': this.isInVaInputTelephone
+      'input-telephone-wrapper': isInVaInputTelephone
     })
     return (
       <Host>
@@ -285,6 +286,7 @@ export class VaComboBox {
           data-default-value={value}
           data-placeholder={placeholder}
           data-error={!!error}
+          data-showflags={isInVaInputTelephone ? 'true' : 'false'}
         >
           <select
             class="usa-select"
