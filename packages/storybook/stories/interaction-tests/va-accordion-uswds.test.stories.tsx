@@ -99,7 +99,10 @@ export const Default: Story = {
     const collapseButton = await screen.findByShadowTestId('collapse-all-accordions');
 
     await expect(expandButton).toBeInTheDocument();
-    await expect(expandButton).toHaveTextContent('Expand all');
+    // await expect(expandButton).toHaveTextContent('Expand all');
+    // TODO: Remove test that purposely fails to show show how this is handled 
+    // in the PR and on Chromatic
+    await expect(expandButton).toHaveTextContent('This test will fail on purpose');
     await expect(expandButton).toHaveAttribute('aria-label', 'Expand all accordions');
 
     await expect(collapseButton).toBeInTheDocument();
