@@ -24,7 +24,7 @@ export class VaTagStatus {
   /**
    * The status variant of the tag. Determines the background color and icon.
    */
-  @Prop({ reflect: true, mutable: true }) status: 'informational' | 'warning' | 'success' | 'error' = 'informational';
+  @Prop({ reflect: true, mutable: true }) status: 'info' | 'warning' | 'success' | 'error' = 'info';
 
   /**
    * The text to be displayed in the tag element.
@@ -38,8 +38,8 @@ export class VaTagStatus {
 
   // Ensure that a valid status is provided
   componentWillLoad() {
-    if (!['informational', 'warning', 'success', 'error'].includes(this.status)) {
-      this.status = 'informational';
+    if (!['info', 'warning', 'success', 'error'].includes(this.status)) {
+      this.status = 'info';
     }
   }
 
@@ -52,7 +52,7 @@ export class VaTagStatus {
     });
 
     const statusToIcon = {
-      informational: 'info',
+      info: 'info',
       warning: 'warning',
       success: 'check_circle',
       error: 'error',

@@ -42,6 +42,7 @@ const data = [
 const Template = args => {
   const {
     'table-title': tableTitle,
+    'table-title-summary': tableTitleSummary,
     'table-type': tableType,
     rows = data,
     sortable,
@@ -58,6 +59,7 @@ const Template = args => {
     <va-table
       scrollable={scrollable}
       table-title={tableTitle}
+      table-title-summary={tableTitleSummary}
       stacked={args.stacked}
       table-type={tableType}
       sortable={!!sortable}
@@ -562,4 +564,12 @@ MonoFontColumns.args = {
   'columns': ['Date', 'Amount', 'Type', 'Method', 'Bank', 'Account'],
   'mono-font-cols': '1',
   'right-align-cols': '1',
+};
+
+export const WithTitleSummary = Template.bind(null);
+WithTitleSummary.args = {
+  'table-title': 'My table title',
+  'table-title-summary': 'Summary that describes the composition of the table',
+  'rows': data,
+  'columns': defaultColumns,
 };

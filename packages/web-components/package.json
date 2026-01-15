@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/web-components",
-  "version": "22.3.0",
+  "version": "22.4.2",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -45,12 +45,12 @@
     "@babel/core": "7.12.13",
     "@department-of-veterans-affairs/css-library": "0.27.0",
     "@stencil/postcss": "2.1.0",
-    "@stencil/react-output-target": "0.5.3",
+    "@stencil/react-output-target": "1.2.0",
     "@stencil/sass": "2.0.0",
     "@types/jest": "26.0.24",
     "@types/node": "22.5.0",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.0",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
     "@typescript-eslint/eslint-plugin": "5.30.5",
     "@typescript-eslint/parser": "5.30.5",
     "@uswds/uswds": "3.9.0",
@@ -64,11 +64,12 @@
     "lit-html": "1.4.1",
     "postcss-url": "10.1.1",
     "puppeteer": "21.0.0",
-    "react-dom": "19.1.1",
+    "react-dom": "17.0.2",
     "typescript": "5.5.4"
   },
   "peerDependencies": {
     "i18next": "25.6.0",
-    "i18next-browser-languagedetector": "8.2.0"
+    "i18next-browser-languagedetector": "8.2.0",
+    "react": "17.0.2"
   }
 }

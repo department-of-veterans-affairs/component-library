@@ -2022,6 +2022,10 @@ export namespace Components {
          */
         "tableTitle"?: string;
         /**
+          * A summary that describes the composition of the table displayed below the table title
+         */
+        "tableTitleSummary"?: string;
+        /**
           * The type of table
          */
         "tableType"?: 'borderless';
@@ -2070,6 +2074,10 @@ export namespace Components {
          */
         "tableTitle": string;
         /**
+          * A summary that describes the composition of the table displayed below the table title
+         */
+        "tableTitleSummary"?: string;
+        /**
           * The type of table to be used
          */
         "tableType"?: 'borderless';
@@ -2104,7 +2112,7 @@ export namespace Components {
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
-        "status": 'informational' | 'warning' | 'success' | 'error';
+        "status": 'info' | 'warning' | 'success' | 'error';
         /**
           * The text to be displayed in the tag element.
          */
@@ -6280,6 +6288,10 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
+          * A summary that describes the composition of the table displayed below the table title
+         */
+        "tableTitleSummary"?: string;
+        /**
           * The type of table
          */
         "tableType"?: 'borderless';
@@ -6332,6 +6344,10 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
+          * A summary that describes the composition of the table displayed below the table title
+         */
+        "tableTitleSummary"?: string;
+        /**
           * The type of table to be used
          */
         "tableType"?: 'borderless';
@@ -6366,7 +6382,7 @@ declare namespace LocalJSX {
         /**
           * The status variant of the tag. Determines the background color and icon.
          */
-        "status"?: 'informational' | 'warning' | 'success' | 'error';
+        "status"?: 'info' | 'warning' | 'success' | 'error';
         /**
           * The text to be displayed in the tag element.
          */

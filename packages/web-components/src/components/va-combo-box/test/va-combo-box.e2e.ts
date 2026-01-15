@@ -20,7 +20,7 @@ describe('va-combo-box', () => {
                     </label>
                     <span id="input-error-message" role="alert"></span>
                     <slot></slot>
-                    <div class="usa-combo-box"  data-enhanced="true">
+                    <div class="usa-combo-box"  data-enhanced="true" data-showflags="false">
                     <select aria-hidden="true" class="usa-combo-box__select usa-select usa-sr-only" tabindex="-1">
                         <option value="foo">
                         Foo
@@ -88,7 +88,7 @@ describe('va-combo-box', () => {
                     </label>
                     <span id="input-error-message" role="alert"></span>
                     <slot></slot>
-                    <div class="usa-combo-box" data-enhanced="true">
+                    <div class="usa-combo-box" data-enhanced="true" data-showflags="false">
                     <select aria-hidden="true" class="usa-combo-box__select usa-select usa-sr-only" tabindex="-1">
                         <option data-optgroup="true" id="optgroup-0">
                         group 1

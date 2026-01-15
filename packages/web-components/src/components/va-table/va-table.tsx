@@ -35,6 +35,11 @@ export class VaTable {
   @Prop() tableTitle?: string;
 
   /**
+   * A summary that describes the composition of the table displayed below the table title
+   */
+  @Prop() tableTitleSummary?: string;
+
+  /**
    * The type of table
    */
   @Prop() tableType?: 'borderless' = 'borderless';
@@ -188,6 +193,10 @@ export class VaTable {
 
     if (this.tableTitle) {
       vaTable.setAttribute('table-title', this.tableTitle);
+    }
+
+    if (this.tableTitleSummary) {
+      vaTable.setAttribute('table-title-summary', this.tableTitleSummary);
     }
 
     if (this.tableType) {
