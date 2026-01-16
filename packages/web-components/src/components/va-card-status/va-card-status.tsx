@@ -1,4 +1,4 @@
-import { Component, Element, Fragment, Host, Prop, h } from '@stencil/core';
+import { Component, Fragment, Host, Prop, h } from '@stencil/core';
 import { getHeaderLevel } from '../../utils/utils';
 import { i18next } from '../..';
 
@@ -14,23 +14,22 @@ import { i18next } from '../..';
   shadow: true,
 })
 export class VaCard {
-  @Element() el: HTMLElement;
 
   /**
    * Header level. Must be between 1 and 6
    */
-  @Prop() headingLevel?: number = 3;
+  @Prop() headerLevel?: number = 3;
 
   /**
    * Text to be displayed in the card header.
    */
-  @Prop() headingText: string;
+  @Prop() headerText: string;
 
   /**
    * Text to be displayed in the card subheader. 
-   * Heading level will be +1 of headingLevel Prop.
+   * Heading level will be +1 of headerLevel Prop.
    */
-  @Prop() subHeaderText: string;
+  @Prop() subheaderText: string;
 
   /**
    * Sets the card to required and renders the (*Required) text.
@@ -65,10 +64,9 @@ export class VaCard {
 
   render() {
     const {
-      el,
-      headingLevel,
-      headingText,
-      subHeaderText,
+      headerLevel,
+      headerText,
+      subheaderText,
       tagStatus,
       tagText,
       error,
@@ -78,15 +76,8 @@ export class VaCard {
     } = this;
 
     // Create a headers element
-    const HeaderLevel = getHeaderLevel(headingLevel);
-    const SubHeaderLevel = getHeaderLevel(headingLevel + 1);
-
-    //Checking if error message exists to display message and enter error state
-    if (error) {
-      el.setAttribute('error', error);
-    } else if (!error) {
-      el.setAttribute('error', '');
-    }
+    const HeaderLevel = getHeaderLevel(headerLevel);
+    const SubHeaderLevel = getHeaderLevel(headerLevel + 1);
 
     const requiredSpan = required && (
       <span class="required"> {i18next.t('required')}</span>
@@ -103,12 +94,12 @@ export class VaCard {
                         <va-tag-status status={tagStatus} text={tagText} />
                       </div>
                     )}
-                    <span id="va-card-status_card-title">{headingText}</span>
+                    <span id="va-card-status_card-title">{headerText}</span>
                     {requiredSpan}
                   </HeaderLevel>
-                  {subHeaderText && (
+                  {subheaderText && (
                     <SubHeaderLevel class="va-card-status__subheader">
-                      {subHeaderText}
+                      {subheaderText}
                     </SubHeaderLevel>
                   )}
               </header>

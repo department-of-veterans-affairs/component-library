@@ -1,12 +1,12 @@
 import { newE2EPage } from '@stencil/core/testing';
 
 describe('<va-card-status />', () => {
-  it('renders the heading text with the correct header level', async () => {
+  it('renders the header text with the correct header level', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-card-status 
-        heading-text="Hello" 
-        heading-level="2"
+        header-text="Hello" 
+        header-level="2"
         link-href="/home"
         link-text="Go Home">
       </va-card-status>
@@ -24,10 +24,10 @@ describe('<va-card-status />', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-card-status 
-      heading-text="Label"
-      link-href="/home"
+        header-text="Label"
+        link-href="/home"
         link-text="Go Home"
-      required="true">
+        required="true">
       </va-card-status>`);
     await page.waitForChanges();
 
@@ -40,9 +40,9 @@ describe('<va-card-status />', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-card-status 
-        heading-text="Test" 
+        header-text="Test" 
         tag-text="Info" 
-        tag-status="informational"
+        tag-status="info"
         link-href="/home"
         link-text="Go Home">
       </va-card-status>
@@ -51,33 +51,14 @@ describe('<va-card-status />', () => {
 
     const tagStatus = await page.find('va-card-status >>> va-tag-status');
     expect(tagStatus).not.toBeNull();
-    expect(tagStatus.getAttribute('status')).toBe('informational');
+    expect(tagStatus.getAttribute('status')).toBe('info');
   });
 
-  it('sets the host error attribute when errorMessage is provided', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-card-status
-      heading-text="Title"
-        link-href="/home"
-        link-text="Go Home"
-        error="Something went wrong">
-      </va-card-status>`);
-    await page.waitForChanges();
-
-    const el = await page.find('va-card-status');
-    expect(el.getAttribute('error')).toBe('Something went wrong');
-    const error = await page.find(
-      'va-card-status >>> #card-status-error-message .usa-error-message',
-    );
-    expect(error).not.toBeNull();
-  });
-
-  it('does NOT set the error attribute when errorMessage is empty', async () => {
+  it('does NOT set the error attribute when error is empty', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-card-status 
-        heading-text="Title"
+        header-text="Title"
         link-href="/home"
         link-text="Go Home">
       </va-card-status>
@@ -85,14 +66,14 @@ describe('<va-card-status />', () => {
     await page.waitForChanges();
 
     const el = await page.find('va-card-status');
-    expect(el.getAttribute('error')).toBe('');
+    expect(el.getAttribute('error')).toBe(null);
   });
 
   it('renders a link when linkHref and linkText are provided', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-card-status 
-        heading-text="Title"
+        header-text="Title"
         link-href="/home"
         link-text="Go Home">
       </va-card-status>
@@ -107,7 +88,7 @@ describe('<va-card-status />', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-card-status
-        heading-text="Hello"
+        header-text="Hello"
         link-href="/test"
         link-text="Next">
         <p id="my-content">Inside Body</p>
@@ -123,7 +104,7 @@ describe('<va-card-status />', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-card-status
-      heading-text="Title"
+      header-text="Title"
       error="Danger!"
       link-href="/test"
       link-text="Next">
@@ -146,7 +127,7 @@ describe('<va-card-status />', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-card-status
-        heading-text="Title"
+        header-text="Title"
         error="Missing info"
         link-href="/test"
         link-text="Next">
