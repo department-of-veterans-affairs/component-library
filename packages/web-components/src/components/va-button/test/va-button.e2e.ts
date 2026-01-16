@@ -1,6 +1,12 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
+declare global {
+  interface Window {
+    eventOrder: string[];
+  }
+}
+
 describe('va-button', () => {
   it('renders a button with text Edit', async () => {
     const page = await newE2EPage();
@@ -333,4 +339,44 @@ describe('va-button', () => {
     await page.waitForChanges();
     expect(submitSpy).toHaveReceivedEventTimes(1);
   });
+
+  it('fires consumer onClick before onSubmit when submit=prevent', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <script>
+        window.eventOrder = [];
+
+        function handleClick() {
+          window.eventOrder.push('click');
+        }
+
+        function handleSubmit() {
+          window.eventOrder.push('submit');
+        }
+      </script>
+
+      <form onsubmit="handleSubmit()">
+        <va-button
+          submit="prevent"
+          continue
+          onclick="handleClick()"
+          >
+        </va-button>
+      </form>
+    `);
+
+    const submitSpy = await page.spyOnEvent('submit');
+    const button = await page.find('va-button[continue]');
+
+    await button.click();
+    await page.waitForChanges();
+
+    expect(submitSpy).toHaveReceivedEventTimes(1);
+
+    // Assert ordering
+    const order = await page.evaluate(() => window.eventOrder);
+    expect(order).toEqual(['click', 'submit']);
+  });
+
 });
