@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable */
 /* tslint:disable */
 /* auto-generated react proxies */
@@ -74,3 +75,11 @@ export const VaTelephone = /*@__PURE__*/createReactComponent<JSX.VaTelephone, HT
 export const VaTelephoneInput = /*@__PURE__*/createReactComponent<JSX.VaTelephoneInput, HTMLVaTelephoneInputElement>('va-telephone-input');
 export const VaTextInput = /*@__PURE__*/createReactComponent<JSX.VaTextInput, HTMLVaTextInputElement>('va-text-input');
 export const VaTextarea = /*@__PURE__*/createReactComponent<JSX.VaTextarea, HTMLVaTextareaElement>('va-textarea');
+=======
+/**
+ * Re-export all components from ./components to maintain backward compatibility.
+ * Consumers can import from '@department-of-veterans-affairs/web-components/react-bindings'
+ * without needing to specify '/components' in the path.
+ */
+export * from './components';
+>>>>>>> 927d37edf23cf0de75908b5ff2f587c02831537d
