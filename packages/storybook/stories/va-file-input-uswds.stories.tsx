@@ -45,7 +45,7 @@ const defaultArgs = {
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaChange': event => null,
-  'vaPasswordChange': null,
+  'vaPasswordSubmit': event => null,
   'vaFileInputError': event => null,
   'header-size': null,
   'children': null,
@@ -70,7 +70,7 @@ const Template = ({
   hint,
   enableAnalytics,
   vaChange,
-  vaPasswordChange,
+  vaPasswordSubmit,
   vaFileInputError,
   headerSize,
   readOnly,
@@ -99,7 +99,7 @@ const Template = ({
         hint={hint}
         enable-analytics={enableAnalytics}
         onVaChange={vaChange}
-        onVaPasswordChange={vaPasswordChange}
+        onVaPasswordSubmit={vaPasswordSubmit}
         onVaFileInputError={vaFileInputError}
         header-size={headerSize}
         readOnly={readOnly}
@@ -136,10 +136,28 @@ const AcceptsFilePasswordTemplate = ({
   label,
   name,
   hint,
-  passwordError
+  passwordError,
+  vaPasswordSubmit,
 }) => {
 
   const [isEncrypted, setIsEncrypted] = useState(false);
+  const [passwordSubmissionSuccess, setPasswordSubmissionSuccess] = useState(null);
+  const [derivedPasswordError, setDerivedPasswordError] = useState(passwordError);
+
+  const handleChange = (event) => {
+    const hasFile = event?.detail?.files?.length > 0;
+
+    if (hasFile) {
+      setIsEncrypted(true);
+    }
+    // Revert state to original values if there are no files present (file removed)
+    if (!event?.detail?.files?.length) {
+      setIsEncrypted(false);
+      setPasswordSubmissionSuccess(null);
+      setDerivedPasswordError(null);
+      return;
+    }
+  }
 
   return (
     <>
@@ -151,28 +169,54 @@ const AcceptsFilePasswordTemplate = ({
         label={label}
         name={name}
         hint={hint}
-        onVaChange={(event) => setIsEncrypted(!!event.detail.files.length)}
+        onVaChange={handleChange}
+        onVaPasswordSubmit={vaPasswordSubmit}
         encrypted={isEncrypted}
-        passwordError={passwordError}
+        passwordError={derivedPasswordError}
+        passwordSubmissionSuccess={passwordSubmissionSuccess}
       />
+
+      <hr />
+
+      <div
+        className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
+        style={{ width: 'fit-content' }}
+      >
+        <p className="vads-u-margin-y--0">Simulate checking of submitted password (changes <code>passwordSubmissionSuccess</code> prop).</p>
+        <va-button
+          class="vads-u-margin-y--1"
+          text="Submission status - success"
+          onClick={() => setPasswordSubmissionSuccess(true)}
+        />
+        <va-button
+          text="Submission status - error"
+          onClick={() => {
+            setPasswordSubmissionSuccess(false);
+            setDerivedPasswordError('Incorrect password. Try again or delete file.');
+          }}
+        />
+      </div>
     </>
   );
 };
 export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
-AcceptsFilePassword.args = { ...defaultArgs };
+AcceptsFilePassword.args = {
+  ...defaultArgs,
+  vaPasswordSubmit: () => console.log('File input password submitted'),
+};
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 AcceptsFilePassword.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
-WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
-// Snapshots disabled because visual difference is only apparent after interaction.
-// TODO: Enable snapshots after integrating Storybook play function
-WithFilePasswordError.parameters = {
-  chromatic: { disableSnapshot: true },
-};
+// export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
+// WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
+// // Snapshots disabled because visual difference is only apparent after interaction.
+// // TODO: Enable snapshots after integrating Storybook play function
+// WithFilePasswordError.parameters = {
+//   chromatic: { disableSnapshot: true },
+// };
 
 const WithMinimumPasswordRequirementTemplate = ({
   label,
@@ -184,7 +228,7 @@ const WithMinimumPasswordRequirementTemplate = ({
 }) => {
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
 
-  const handleVaPasswordChange = (e: CustomEvent) => {
+  const handleVaPasswordSubmit = (e: CustomEvent) => {
     let newPasswordError: string | undefined;
 
     const { password } = e.detail;
@@ -207,7 +251,7 @@ const WithMinimumPasswordRequirementTemplate = ({
       error={error}
       hint={hint}
       encrypted={true}
-      onVaPasswordChange={handleVaPasswordChange}
+      onVaPasswordSubmit={handleVaPasswordSubmit}
       passwordError={passwordError}
     />
   );
