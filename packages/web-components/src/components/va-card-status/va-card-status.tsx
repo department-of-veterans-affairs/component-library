@@ -113,7 +113,7 @@ export class VaCard {
               </span>
               <slot></slot>
               <va-link-action
-                messageAriaDescribedby={`${i18next.t('error')} ${error}`}
+                messageAriaDescribedby={`${i18next.t('error')}: ${error}`}
                 type='secondary'
                 href={linkHref}
                 text={linkText}
