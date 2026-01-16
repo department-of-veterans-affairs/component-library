@@ -6,24 +6,25 @@
 :host {
   .va-card-status__header {
     margin: var(--units-1) 0 var(--units-1) 0;
+    font-size: var(--font-size-h3);
+
+    #va-card-status_card-title {
+      font-family: var(--font-serif);
+      font-weight: var(--font-weight-bold);
+    }
   }
 
   .va-card-status__tag {
     display: block;
   }
 
-  #va-card-status_card-title {
-    font-size: var(--font-size-h3);
-    font-family: var(--font-serif);
-    font-weight: var(--font-weight-bold);
-  }
 
   .va-card-status__subheader {
     margin-top: var(--units-1);
     margin-bottom: var(--units-2);
     font-size: var(--font-size-h4);
     font-family: var(--font-sans-serif);
-  }
+  } 
 }
 
 :host([error]:not([error=''])) .va-card-status__wrapper {
