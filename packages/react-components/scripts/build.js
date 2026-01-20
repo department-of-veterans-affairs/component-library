@@ -54,7 +54,6 @@ const fileNames = [].concat.apply(
     glob.sync('src/helpers/*.js', {
       ignore: ['**/*.unit.spec.*', '**/*.stories.*'],
     }),
-    glob.sync('../core/src/i18n/**/*.js'),
   ],
 );
 
