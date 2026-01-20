@@ -3215,8 +3215,6 @@ __metadata:
     util: "npm:0.12.5"
   peerDependencies:
     "@department-of-veterans-affairs/web-components": "*"
-    i18next: 25.6.0
-    i18next-browser-languagedetector: 8.2.0
     react: 17
     react-dom: 17
   languageName: unknown
