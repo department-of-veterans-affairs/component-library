@@ -136,10 +136,11 @@ const AcceptsFilePasswordTemplate = ({
   label,
   name,
   hint,
-  vaChange,
-  encrypted,
   passwordError
 }) => {
+
+  const [isEncrypted, setIsEncrypted] = useState(false);
+
   return (
     <>
       To learn how to check for an encrypted PDF <va-link
@@ -150,15 +151,15 @@ const AcceptsFilePasswordTemplate = ({
         label={label}
         name={name}
         hint={hint}
-        onVaChange={vaChange}
-        encrypted={encrypted}
+        onVaChange={(event) => setIsEncrypted(!!event.detail.files.length)}
+        encrypted={isEncrypted}
         passwordError={passwordError}
       />
     </>
   );
 };
 export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
-AcceptsFilePassword.args = { ...defaultArgs, encrypted: true, };
+AcceptsFilePassword.args = { ...defaultArgs };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 AcceptsFilePassword.parameters = {
@@ -171,6 +172,51 @@ WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: '
 // TODO: Enable snapshots after integrating Storybook play function
 WithFilePasswordError.parameters = {
   chromatic: { disableSnapshot: true },
+};
+
+const WithMinimumPasswordRequirementTemplate = ({
+  label,
+  name,
+  accept,
+  required,
+  error,
+  hint,
+}) => {
+  const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
+
+  const handleVaPasswordChange = (e: CustomEvent) => {
+    let newPasswordError: string | undefined;
+
+    const { password } = e.detail;
+
+    if (!password || password.length < 4) {
+      newPasswordError = 'Encrypted file requires a password.';
+    } else {
+      newPasswordError = null;
+    }
+
+    setPasswordError(newPasswordError);
+  };
+
+  return (
+    <VaFileInput
+      label={label}
+      name={name}
+      accept={accept}
+      required={required}
+      error={error}
+      hint={hint}
+      encrypted={true}
+      onVaPasswordChange={handleVaPasswordChange}
+      passwordError={passwordError}
+    />
+  );
+};
+export const WithMinimumPasswordRequirement = WithMinimumPasswordRequirementTemplate.bind(null);
+WithMinimumPasswordRequirement.args = {
+  ...defaultArgs,
+  label: 'With minimum password length requirement',
+  hint: 'Password must be at least 4 characters long',
 };
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
@@ -212,7 +258,7 @@ ErrorMessage.args = {
 export const WithMaxFileSize = Template.bind(null);
 WithMaxFileSize.args = {
   ...defaultArgs,
-  label: 'Input has a maximum file-size restriction (specified in bytes)',
+  label: 'Input has a maximum file-size restriction',
   hint: 'An error will be thrown if the selected file is greater than 1 KB',
   maxFileSize: 1024,
 };
@@ -225,7 +271,7 @@ WithMaxFileSize.parameters = {
 export const WithMinFileSize = Template.bind(null);
 WithMinFileSize.args = {
   ...defaultArgs,
-  label: 'Input has a minimum file-size restriction (specified in bytes)',
+  label: 'Input has a minimum file-size restriction',
   hint: 'An error will be thrown if the selected file is less than 1 MB',
   minFileSize: 1024*1024,
 }

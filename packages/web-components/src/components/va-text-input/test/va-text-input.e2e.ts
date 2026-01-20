@@ -230,7 +230,7 @@ describe('va-text-input', () => {
     await inputEl.press('o');
 
     expect(vaInputSpy).toHaveReceivedEventTimes(5);
-    
+
     // Check the last event detail contains the complete value
     expect(vaInputSpy).toHaveReceivedEventDetail({
       value: 'hello',
@@ -265,7 +265,7 @@ describe('va-text-input', () => {
     await inputEl.type('pasted text');
 
     expect(vaInputSpy).toHaveReceivedEventTimes(11); // "pasted text" = 11 characters
-    
+
     expect(vaInputSpy).toHaveReceivedEventDetail({
       value: 'pasted text',
     });

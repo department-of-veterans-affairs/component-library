@@ -340,3 +340,65 @@ export const WithNestedWebComponents = ({
   );
 };
 WithNestedWebComponents.args = defaultArgs;
+
+export const WithDownloadLink = ({
+  'click-to-close': clickToClose,
+  'disable-analytics': disableAnalytics,
+  large,
+  'modal-title': modalTitle,
+  'initial-focus-selector': initialFocusSelector,
+  primaryButtonClick,
+  'primary-button-text': primaryButtonText,
+  secondaryButtonClick,
+  'secondary-button-text': secondaryButtonText,
+  status,
+  visible,
+  forcedModal,
+}) => {
+  const [isVisible, setIsVisible] = useState(visible);
+  const wrapRef = useRef(null);
+  const onCloseEvent = () => {
+    setIsVisible(!isVisible);
+    resizeViewPorts(wrapRef?.current, false);
+  };
+  const openModal = () => {
+    setIsVisible(true);
+    resizeViewPorts(wrapRef?.current, true);
+  };
+
+  useEffect(() => {
+    resizeViewPorts(wrapRef?.current, isVisible);
+  }, [isVisible]);
+
+  return (
+    <div ref={wrapRef}>
+      <va-button onClick={openModal} text="Click here to open modal" />
+      <VaModal
+        clickToClose={clickToClose}
+        disableAnalytics={disableAnalytics}
+        large={large}
+        modalTitle={modalTitle}
+        initialFocusSelector={initialFocusSelector}
+        onCloseEvent={onCloseEvent}
+        visible={isVisible}
+      >
+        <p>
+          Download this PDF to your desktop computer or laptop. Then use Adobe
+          Acrobat Reader to open and fill out the form.
+        </p>
+        <va-link
+          download
+          filetype="PDF"
+          href="#"
+          text="Download VA Form 10-10EZ"
+        ></va-link>
+      </VaModal>
+    </div>
+  );
+};
+WithDownloadLink.args = {
+  ...defaultArgs,
+  'modal-title': 'Download this PDF',
+  'primary-button-text': undefined,
+  'secondary-button-text': undefined,
+};
