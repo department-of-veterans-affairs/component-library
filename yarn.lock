@@ -3130,7 +3130,7 @@ __metadata:
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
     "@divriots/style-dictionary-to-figma": "npm:0.4.0"
-    "@uswds/uswds": "npm:3.9.0"
+    "@uswds/uswds": "npm:3.13.0"
     rimraf: "npm:6.1.2"
     sass: "npm:1.80.5"
     style-dictionary: "npm:3.8.0"
@@ -5096,18 +5096,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:3.9.0":
-  version: 3.9.0
-  resolution: "@uswds/uswds@npm:3.9.0"
-  dependencies:
-    object-assign: "npm:4.1.1"
-    receptor: "npm:1.0.0"
-    resolve-id-refs: "npm:0.1.0"
-  checksum: 10/cdd7ba35192c54b59f86543070452f0d6a2c49bbc3f68f6d905f8f297f0474b4ea95b6ff039a8212c6020a3dad933e1942dcb53f9479721b339e9b65108f34e5
-  languageName: node
-  linkType: hard
-
-"@uswds/uswds@npm:^3.9.0":
+"@uswds/uswds@npm:3.13.0, @uswds/uswds@npm:^3.9.0":
   version: 3.13.0
   resolution: "@uswds/uswds@npm:3.13.0"
   dependencies:
@@ -5118,6 +5107,17 @@ __metadata:
     sass-embedded-linux-x64:
       optional: true
   checksum: 10/79d2f48156527c531bdf7468711c04ecb06f26d9bed04125cfa4e36ac8b956ce9e29b17679f9cdf3fde730e676662d90de267a5a724e11e2d5f4a8b704c28052
+  languageName: node
+  linkType: hard
+
+"@uswds/uswds@npm:3.9.0":
+  version: 3.9.0
+  resolution: "@uswds/uswds@npm:3.9.0"
+  dependencies:
+    object-assign: "npm:4.1.1"
+    receptor: "npm:1.0.0"
+    resolve-id-refs: "npm:0.1.0"
+  checksum: 10/cdd7ba35192c54b59f86543070452f0d6a2c49bbc3f68f6d905f8f297f0474b4ea95b6ff039a8212c6020a3dad933e1942dcb53f9479721b339e9b65108f34e5
   languageName: node
   linkType: hard
 
