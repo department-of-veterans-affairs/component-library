@@ -96,7 +96,7 @@ export const errorState = TemplateErrorState.bind(null);
 errorState.args = {
   ...defaultArgs,
   'error':
-    'Your mobile phone number is missing. Select "Add" to enter your mobile phone number.',
+    'You must add your mobile phone number',
   'tag-text': 'Missing',
   'tag-status': 'error',
   'link-text': 'Add mobile phone number',

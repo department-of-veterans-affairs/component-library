@@ -14,7 +14,7 @@ describe('<va-card-status />', () => {
     await page.waitForChanges();
 
     const header = await page.find(
-      'va-card-status >>> h2.va-card-status__header span#va-card-status_card-title',
+      'va-card-status >>> h2.va-card-status__header span.va-card-status_card-title',
     );
     expect(header).not.toBeNull();
     expect(header.textContent).toBe('Hello');
@@ -138,6 +138,6 @@ describe('<va-card-status />', () => {
     const vaLink = await page.find(
       'va-card-status >>> va-link-action >>> #link-description',
     );
-    expect(vaLink.innerText).toBe('Error Missing info');
+    expect(vaLink.innerText).toBe('Error: Missing info');
   });
 });

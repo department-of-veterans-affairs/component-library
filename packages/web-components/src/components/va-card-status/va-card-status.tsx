@@ -89,16 +89,19 @@ export class VaCard {
           <va-card>
               <header>
                   <HeaderLevel class="va-card-status__header">
-                    {tagText && (
-                      <div>
-                        <va-tag-status status={tagStatus} text={tagText} />
-                      </div>
-                    )}
-                    <span id="va-card-status_card-title">{headerText}</span>
-                    {requiredSpan}
+                    <span class="usa-sr-only">{tagText} {headerText} {required && 'required'} {subheaderText}</span>
+                    <span aria-hidden="true">
+                      {tagText && (
+                        <div>
+                          <va-tag-status status={tagStatus} text={tagText} />
+                        </div>
+                      )}
+                      <span class="va-card-status_card-title">{headerText}</span>
+                      {requiredSpan}
+                    </span>
                   </HeaderLevel>
                   {subheaderText && (
-                    <SubHeaderLevel class="va-card-status__subheader">
+                    <SubHeaderLevel aria-hidden="true" class="va-card-status__subheader">
                       {subheaderText}
                     </SubHeaderLevel>
                   )}
@@ -113,7 +116,7 @@ export class VaCard {
               </span>
               <slot></slot>
               <va-link-action
-                messageAriaDescribedby={`${i18next.t('error')}: ${error}`}
+                messageAriaDescribedby={error ? `${i18next.t('error')}: ${error}` : null}
                 type='secondary'
                 href={linkHref}
                 text={linkText}
