@@ -2,7 +2,7 @@ import { Component, Host, h, Prop } from '@stencil/core';
 
 /**
  * @componentName Critical Action
- * @maturityCategory caution
+ * @maturityCategory available
  * @maturityLevel candidate
  */
 @Component({
