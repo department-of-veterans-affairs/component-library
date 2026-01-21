@@ -1,7 +1,7 @@
 @use '../functions' as *;
 
-@import "../formation-overrides/variables";
-@import "../../../dist/tokens/scss/variables.scss";
+@use "../formation-overrides/variables" as *;
+@use "../../../dist/tokens/scss/variables.scss" as *;
 
 .loading-indicator-container {
   text-align: center;

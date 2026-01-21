@@ -1,7 +1,7 @@
 @forward 'uswds-theme';
 
-@import 'uswds-core/src/styles/mixins/typography/usa-content-styles';
-@import 'uswds-core/src/styles/mixins/typography/typeset';
+@use 'uswds-core/src/styles/mixins/typography/usa-content-styles' as *;
+@use 'uswds-core/src/styles/mixins/typography/typeset' as *;
 
 /**
   Normalization for Source Sans Pro typeface.

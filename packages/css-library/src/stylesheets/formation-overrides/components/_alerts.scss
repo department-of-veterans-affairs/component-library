@@ -5,48 +5,51 @@
   Original: @import "~uswds/src/stylesheets/components/alerts";
   ***THIS IS USWDS v1***
 */
-
+@use 'sass:map';
+@use 'sass:color';
 @use '../../override-function' as *;
+@use '../../../../dist/tokens/scss/variables.scss' as tokens;
+@use '../variables' as fo-vars;
 
 // Alert variables ---------- //
 $usa-custom-alerts: () !default;
 $usa-custom-alerts-bar: () !default;
 
 $usa-alerts: (
-  success: $vads-color-success-lighter,
-  warning: $vads-color-gold-lightest,
-  error: $vads-color-secondary-lightest,
-  info: $vads-color-primary-alt-lightest
+  success: tokens.$vads-color-success-lighter,
+  warning: tokens.$vads-color-gold-lightest,
+  error: tokens.$vads-color-secondary-lightest,
+  info: tokens.$vads-color-primary-alt-lightest
 );
 
 $usa-alerts-bar: (
-  success: $vads-color-success-dark,
-  warning: $vads-color-warning,
-  error: $vads-color-secondary,
-  info: $vads-color-info
+  success: tokens.$vads-color-success-dark,
+  warning: tokens.$vads-color-warning,
+  error: tokens.$vads-color-secondary,
+  info: tokens.$vads-color-info
 );
 
-$alerts: map-merge($usa-alerts, $usa-custom-alerts);
-$alerts-bar: map-merge($usa-alerts-bar, $usa-custom-alerts-bar);
+$alerts: map.merge($usa-alerts, $usa-custom-alerts);
+$alerts-bar: map.merge($usa-alerts-bar, $usa-custom-alerts-bar);
 
-$h-padding: $spacing-medium;
-$bar-size: $spacing-small;
+$h-padding: fo-vars.$spacing-medium;
+$bar-size: fo-vars.$spacing-small;
 $left-padding: $h-padding + $bar-size;
 $icon-size: scale-rem(3rem);
 
 .usa-alert {
-  background-color: $color-gray-lightest;
+  background-color: fo-vars.$color-gray-lightest;
   background-position: $h-padding $h-padding;
   background-repeat: no-repeat;
   background-size: scale(5.2rem); // TODO abrituary number based on svg size maybe?
-  padding-bottom: $h-padding * 0.7;
+  padding-bottom: scale-rem(1.4rem);
   padding-left: $left-padding;
   padding-right: $h-padding;
   padding-top: $h-padding;
   position: relative;
 
   &::before {
-    background-color: darken($color-gray-lightest, 40%);
+    background-color: color.scale(fo-vars.$color-gray-lightest, $lightness: -40%);
     content: '';
     height: 100%;
     left: 0;
@@ -56,35 +59,35 @@ $icon-size: scale-rem(3rem);
   }
 
   a {
-    color: $color-primary-darker;
+    color: fo-vars.$color-primary-darker;
 
     &:focus,
     &:hover {
-      color: $vads-color-primary-darker;
+      color: tokens.$vads-color-primary-darker;
     }
   }
 
   ul {
     margin-bottom: 0;
-    margin-top: $spacing-small;
-    padding-left: $spacing-small;
+    margin-top: fo-vars.$spacing-small;
+    padding-left: fo-vars.$spacing-small;
   }
 }
 
 .usa-alert-slim {
-  background-position: $h-padding $spacing-small;
-  padding-bottom: $spacing-small;
-  padding-top: $spacing-small;
+  background-position: $h-padding fo-vars.$spacing-small;
+  padding-bottom: fo-vars.$spacing-small;
+  padding-top: fo-vars.$spacing-small;
 
   .usa-alert-text:only-child {
-    margin-bottom: $spacing-x-small;
-    padding-top: $spacing-x-small;
+    margin-bottom: fo-vars.$spacing-x-small;
+    padding-top: fo-vars.$spacing-x-small;
   }
 }
 
 .usa-alert-icon {
   display: table-cell;
-  padding-right: $spacing-small;
+  padding-right: fo-vars.$spacing-small;
 }
 
 .usa-alert-body {
@@ -98,14 +101,14 @@ $icon-size: scale-rem(3rem);
 }
 
 .usa-alert-text {
-  font-family: $font-family-sans;
+  font-family: tokens.$font-family-sans;
   margin-bottom: 0;
   margin-top: 0;
 }
 
 .usa-alert-text:only-child {
-  margin-bottom: $spacing-small;
-  padding-top: $spacing-x-small;
+  margin-bottom: fo-vars.$spacing-small;
+  padding-top: fo-vars.$spacing-x-small;
 }
 
 @each $name, $bgcolor in $alerts {
@@ -115,7 +118,7 @@ $icon-size: scale-rem(3rem);
     background-image: url(~@department-of-veterans-affairs/css-library/dist/img/#{$name}.svg);
 
     &::before {
-      background-color: map-get($alerts-bar, $name);
+      background-color: map.get($alerts-bar, $name);
     }
 
     .usa-alert-body {
@@ -129,7 +132,7 @@ $icon-size: scale-rem(3rem);
 }
 
 .usa-alert-paragraph {
-  width: $text-max-width;
+  width: fo-vars.$text-max-width;
 }
 
 // Deprecated

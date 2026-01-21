@@ -7,8 +7,8 @@
 
 @use './override-function.scss' as *;
 @use "./mixins" as *;
-@import "./formation-overrides/variables";
-@import "../../dist/tokens/scss/variables.scss";
+@use "./formation-overrides/variables" as *;
+@use "../../dist/tokens/scss/variables.scss" as *;
 
 
 body {
