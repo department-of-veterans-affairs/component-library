@@ -8,7 +8,7 @@ describe('va-omb-info', () => {
 
     const element = await page.find('va-omb-info');
     expect(element).toEqualHtml(`
-      <va-omb-info class="hydrated" exp-date="12/31/2077">
+      <va-omb-info class="hydrated" data-testid="va-omb-info" exp-date="12/31/2077">
         <mock:shadow-root>
           <div>
             Expiration date:

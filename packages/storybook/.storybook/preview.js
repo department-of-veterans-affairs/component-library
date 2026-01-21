@@ -110,6 +110,7 @@ export const parameters = {
         'About',
         ['Introduction'],
         'Components',
+        'Interaction Tests',
         'V1 Components',
         'Under development',
         'Deprecated',

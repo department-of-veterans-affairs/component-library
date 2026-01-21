@@ -10,7 +10,7 @@ describe('va-accordion-item', () => {
     const element = await page.find('va-accordion-item');
 
     expect(element).toEqualHtml(`
-    <va-accordion-item class="hydrated">
+    <va-accordion-item class="hydrated" data-testid="va-accordion-item">
       <mock:shadow-root>
         <div>
           <h2 class="usa-accordion__heading">
@@ -70,10 +70,10 @@ describe('va-accordion-item', () => {
 
     const element = await page.find('va-accordion-item');
     const header = element.shadowRoot.childNodes[0].childNodes[0];
-    
+
     // Should use the direct child h3, not the nested h4
     expect(header.nodeName).toEqual('H2');
-    
+
     // The header text should be from the direct child only
     const headerSpan = await page.find('va-accordion-item >>> .va-accordion__header');
     expect(headerSpan.textContent.trim()).toEqual('The header');
@@ -189,7 +189,7 @@ describe('va-accordion-item', () => {
     );
     const element = await page.find('va-accordion-item');
     expect(element).toEqualHtml(
-      `<va-accordion-item class="hydrated" header="The header" subheader="The subheader">
+      `<va-accordion-item class="hydrated" data-testid="va-accordion-item" header="The header" subheader="The subheader">
         <mock:shadow-root>
           <div>
             <h2 class="usa-accordion__heading">
@@ -222,7 +222,7 @@ describe('va-accordion-item', () => {
     );
     const element = await page.find('va-accordion-item');
     expect(element).toEqualHtml(`
-    <va-accordion-item class="hydrated" header="The header">
+    <va-accordion-item class="hydrated" data-testid="va-accordion-item" header="The header">
       <mock:shadow-root>
         <div>
           <h2 class="usa-accordion__heading">
