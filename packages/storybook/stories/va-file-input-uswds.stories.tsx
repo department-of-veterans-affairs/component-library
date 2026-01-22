@@ -210,14 +210,6 @@ AcceptsFilePassword.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-// export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
-// WithFilePasswordError.args = { ...defaultArgs, encrypted: true, passwordError: 'Encrypted file requires a password.' };
-// // Snapshots disabled because visual difference is only apparent after interaction.
-// // TODO: Enable snapshots after integrating Storybook play function
-// WithFilePasswordError.parameters = {
-//   chromatic: { disableSnapshot: true },
-// };
-
 const WithMinimumPasswordRequirementTemplate = ({
   label,
   name,
