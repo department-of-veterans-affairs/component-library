@@ -1,5 +1,5 @@
 @use '../../../src/mixins/accessibility.css';
-@use '../../mixins/form-field-error.scss';
+@use '../../mixins/form-field-error.scss' as *;
 @use '../../mixins/uswds-error-border.scss' as *;
 @use '../../mixins/hint-text.css';
 
