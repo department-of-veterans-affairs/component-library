@@ -1,7 +1,7 @@
-@use '../../../src/mixins/accessibility.css';
 @use '../../mixins/form-field-error.scss' as *;
 @use '../../mixins/uswds-error-border.scss' as *;
-@use '../../mixins/hint-text.css';
+@import '../../../src/mixins/accessibility.css';
+@import '../../mixins/hint-text.css';
 
 .usa-label--required {
   color: var(--vads-color-secondary-dark);

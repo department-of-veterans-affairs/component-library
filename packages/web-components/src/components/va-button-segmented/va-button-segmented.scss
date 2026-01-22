@@ -4,7 +4,7 @@
 @use 'usa-button/src/styles/usa-button';
 @use 'usa-button-group/src/styles/usa-button-group';
 @use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss" as *;
-@use '../../mixins/focusable-no-offset.css';
+@import '../../mixins/focusable-no-offset.css';
 
 :host {
   display: flex;

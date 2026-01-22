@@ -8,8 +8,8 @@
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-error-message/src/styles/usa-error-message';
 
-@use '../../mixins/focusable.css';
 @use '../../mixins/uswds-error-border.scss' as *;
+@import '../../mixins/focusable.css';
 
 :host {
   display: block;

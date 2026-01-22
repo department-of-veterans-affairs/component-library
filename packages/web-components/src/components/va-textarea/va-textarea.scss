@@ -9,8 +9,8 @@
 @use 'usa-character-count/src/styles/_usa-character-count';
 
 @use '../../mixins/uswds-error-border.scss' as *;
-@use '../../mixins/focusable.css';
 @use '../../mixins/header-labels.scss';
+@import '../../mixins/focusable.css';
 
 :host {
   color: var(--vads-color-base);

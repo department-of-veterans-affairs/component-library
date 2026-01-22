@@ -10,8 +10,8 @@
 
 @use '../../mixins/uswds-input-width.scss';
 @use '../../mixins/uswds-error-border.scss' as *;
-@use '../../mixins/focusable.css';
 @use '../../mixins/header-labels.scss';
+@import '../../mixins/focusable.css';
 
 :host {
   display: block;
