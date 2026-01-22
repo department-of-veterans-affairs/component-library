@@ -9,12 +9,11 @@
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-character-count/src/styles/_usa-character-count';
 
-@import '../../mixins/uswds-error-border.scss';
-@import '../../mixins/uswds-input-width.scss';
+@use '../../mixins/uswds-error-border.scss' as *;
+@use '../../mixins/uswds-input-width.scss';
 @import '../../mixins/focusable.css';
 
 @import '../../mixins/headers.css';
-
 :host {
   color: var(--vads-color-base);
 }

@@ -10,11 +10,9 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 
 @use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
-
-@import '../../mixins/form-field-error.scss';
-@import '../../mixins/uswds-error-border.scss';
+@use '../../mixins/uswds-error-border.scss' as *;
+@use '../../mixins/form-field-error.scss' as *;
 @import '../../mixins/focusable.css';
-
 @mixin small-screen {
   va-combo-box, va-text-input {
     width: 100%;

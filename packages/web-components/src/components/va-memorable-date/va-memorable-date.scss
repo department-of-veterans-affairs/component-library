@@ -11,9 +11,8 @@
 @use 'usa-memorable-date/src/styles/usa-memorable-date';
 
 @use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
-
-@import '../../mixins/form-field-error.scss';
-@import '../../mixins/uswds-error-border.scss';
+@use '../../mixins/uswds-error-border.scss' as *;
+@use '../../mixins/form-field-error.scss' as *;
 @import '../../mixins/focusable.css';
 @import '../../mixins/headers.css';
 

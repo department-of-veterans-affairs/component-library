@@ -17,6 +17,8 @@ export const config: Config = {
         'src/global/',
         '../../node_modules'
       ],
+      injectGlobalPaths: ['src/global/_settings.scss'],
+      quietDeps: true,
     }),
     postcss({
       plugins: [url({ url: 'inline' })],

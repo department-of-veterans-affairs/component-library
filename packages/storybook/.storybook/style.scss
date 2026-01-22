@@ -1,5 +1,7 @@
 
 
+@import '@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
+@import '@department-of-veterans-affairs/css-library/dist/stylesheets/formation-overrides/_variables.scss';
 @import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
 @import "~@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-eyebrow.css";
 
@@ -7,7 +9,6 @@
 @import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-action-link.css';
 @import '@department-of-veterans-affairs/css-library/dist/stylesheets/_mixins.scss';
 @import '@department-of-veterans-affairs/css-library/dist/stylesheets/site/_m-crisis-line.scss';
-@import '@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
 // Remove Negative Margin via Default Storybook CSS
 // This is causing the show code button to overlap with components

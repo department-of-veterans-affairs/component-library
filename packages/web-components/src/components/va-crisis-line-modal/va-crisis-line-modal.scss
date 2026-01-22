@@ -1,6 +1,7 @@
 @forward 'settings';
 @use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
-@import '../../mixins/focusable.css';
+@use '../../mixins/uswds-error-border.scss' as *;
+@use '../../mixins/focusable.css';
 
 .va-crisis-line-container {
   position: relative;

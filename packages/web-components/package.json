@@ -17,12 +17,12 @@
     "react-bindings/"
   ],
   "scripts": {
-    "build": "stencil build --docs-json component-docs.json",
+    "build": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --docs-json component-docs.json",
     "build-bindings": "tsc -p tsconfig.bindings.json",
     "lint": "eslint src/**/*{.ts,.tsx}",
-    "watch:stencil": "stencil build --watch",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
+    "watch:stencil": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --watch",
+    "test": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil test --spec --e2e",
+    "test.watch": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "serve": "stencil build --dev --watch --serve"
   },

@@ -2,7 +2,7 @@
 
 @use 'usa-accordion/src/styles/usa-accordion';
 
-@import '../../mixins/focusable.css';
+@use '../../mixins/focusable.css';
 
 .expand-collapse-list {
   display: flex;

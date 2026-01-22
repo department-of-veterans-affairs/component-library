@@ -2,7 +2,8 @@
 @use 'usa-icon/src/styles/usa-icon';
 @use 'usa-breadcrumb/src/styles/usa-breadcrumb';
 @use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
-@import '../../mixins/focusable.css';
+@use '../../mixins/uswds-error-border.scss' as *;
+@use '../../mixins/focusable.css';
 
 :host {
   display: block;
