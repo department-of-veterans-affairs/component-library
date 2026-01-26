@@ -1,6 +1,8 @@
 //  Variables ported over from Formation so that we can keep those stylesheets
 //  working while we work on deprecation.
 
+// Ensure override functions are available within this module for evaluation
+@use '../override-function' as *;
 // Re-export override-function members so consumers don't need to import it separately
 @forward '../override-function';
 

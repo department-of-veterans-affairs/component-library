@@ -113,7 +113,7 @@
 .va-alert-close {
   background-color: transparent;
   color: #005ea2;
-  font-size: scale-rem(2.25rem);
+  font-size: 1.40625rem;
   padding: 0;
   position: absolute;
   margin: units(2);

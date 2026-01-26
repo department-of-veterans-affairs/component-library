@@ -137,17 +137,17 @@ dfn {
 }
 
 .usa-content {
-  max-width: scale-rem(70rem);
+  max-width: 43.75rem;
 }
 
 .usa-content p,
 .usa-content ul:not(.usa-accordion):not(.usa-accordion-bordered),
 .usa-content ol:not(.usa-accordion):not(.usa-accordion-bordered) {
-  max-width: scale-rem(70rem);
+  max-width: 43.75rem;
 }
 
 .usa-content-list {
-  max-width: scale-rem(70rem);
+  max-width: 43.75rem;
 }
 
 .usa-sans p,
@@ -181,17 +181,17 @@ dfn {
 }
 @media screen and (min-width: 768px), print and (min-width: 768px) {
   .usa-display {
-    font-size: scale-rem(5.2rem);
+    font-size: 3.25rem;
     font-weight: 700;
   }
 }
 
 .usa-font-lead {
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
-  font-size: scale-rem(2rem);
+  font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.7;
-  max-width: scale-rem(77rem);
+  max-width: 48.125rem;
 }
 
 .usa-background-dark {

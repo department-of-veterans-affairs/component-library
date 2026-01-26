@@ -6,6 +6,8 @@
 @use "../../dist/tokens/scss/variables.scss" as tokens;
 @use "./formation-overrides/variables" as fo-vars;
 
+// Make override functions available within this module
+@use "./override-function" as *;
 // Forward all mixins so they can be imported with @use "...mixins" as *
 @forward './override-function';
 

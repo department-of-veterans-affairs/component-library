@@ -298,14 +298,14 @@ article > h1 {
 
 .va-introtext {
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
-  font-size: scale-rem(2rem);
+  font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.7;
   max-width: 48.125rem;
 }
 .va-introtext p, .va-introtext a {
   font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
-  font-size: scale-rem(2rem);
+  font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.7;
 }
