@@ -5,6 +5,7 @@
 @use "sass:list";
 @use "../../dist/tokens/scss/variables.scss" as tokens;
 @use "./formation-overrides/variables" as fo-vars;
+@use "./functions" as *;
 
 // Make override functions available within this module
 @use "./override-function" as *;
