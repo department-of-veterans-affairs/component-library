@@ -8,7 +8,6 @@ import {
   Prop,
   Element,
   forceUpdate,
-  getAssetPath,
 } from '@stencil/core';
 import classnames from 'classnames';
 import { i18next } from '../..';
@@ -171,39 +170,6 @@ export class VaPagination {
     }
   };
 
-  /**
-   * Adding SVGs here because if SVGs are included in the render method,
-   * the result is to render the page in xhtml not html
-   * and errors result.
-   */
-  addIcons() {
-    function makeSvgString(icon: string) {
-      const path = `${getAssetPath('/img/sprite.svg')}#${icon}`;
-      // eslint-disable-next-line i18next/no-literal-string
-      return `<svg
-      class="usa-icon"
-      aria-hidden="true"
-      role="img">
-        <use href=${path}></use>
-      </svg>`;
-    }
-
-    const prevIconDiv = this.el.shadowRoot?.querySelector(
-      '#previous-arrow-icon',
-    );
-    if (prevIconDiv) {
-      prevIconDiv.innerHTML = makeSvgString('navigate_before');
-    }
-
-    const nextIconDiv = this.el.shadowRoot?.querySelector('#next-arrow-icon');
-    if (nextIconDiv) {
-      nextIconDiv.innerHTML = makeSvgString('navigate_next');
-    }
-  }
-
-  componentDidRender() {
-    this.addIcons();
-  }
 
   connectedCallback() {
     i18next.on('languageChanged', () => {
@@ -233,7 +199,7 @@ export class VaPagination {
           class="usa-pagination__link usa-pagination__previous-page"
           href="javascript:void(0)"
         >
-          <div id="previous-arrow-icon"></div>
+          <va-icon icon="navigate_before" />
           <span class="usa-pagination__link-text">{i18next.t('previous')}</span>
         </a>
       </li>
@@ -379,7 +345,7 @@ export class VaPagination {
           href="javascript:void(0)"
         >
           <span class="usa-pagination__link-text">{i18next.t('next')}</span>
-          <div id="next-arrow-icon"></div>
+          <va-icon icon="navigate_next" />
         </a>
       </li>
     );
