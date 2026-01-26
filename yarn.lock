@@ -3240,7 +3240,7 @@ __metadata:
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
     "@divriots/style-dictionary-to-figma": "npm:0.4.0"
-    "@uswds/uswds": "npm:3.13.0"
+    "@uswds/uswds": "npm:3.9.0"
     rimraf: "npm:6.1.2"
     sass: "npm:1.80.5"
     style-dictionary: "npm:3.8.0"
@@ -3375,7 +3375,7 @@ __metadata:
     "@types/react-dom": "npm:17.0.2"
     "@typescript-eslint/eslint-plugin": "npm:5.30.5"
     "@typescript-eslint/parser": "npm:5.30.5"
-    "@uswds/uswds": "npm:3.13.0"
+    "@uswds/uswds": "npm:3.9.0"
     animate.css: "npm:4.1.1"
     aria-hidden: "npm:1.1.3"
     babel-loader: "npm:8.2.2"
@@ -5208,7 +5208,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:3.13.0, @uswds/uswds@npm:^3.9.0":
+"@uswds/uswds@npm:3.9.0":
+  version: 3.9.0
+  resolution: "@uswds/uswds@npm:3.9.0"
+  dependencies:
+    object-assign: "npm:4.1.1"
+    receptor: "npm:1.0.0"
+    resolve-id-refs: "npm:0.1.0"
+  checksum: 10/cdd7ba35192c54b59f86543070452f0d6a2c49bbc3f68f6d905f8f297f0474b4ea95b6ff039a8212c6020a3dad933e1942dcb53f9479721b339e9b65108f34e5
+  languageName: node
+  linkType: hard
+
+"@uswds/uswds@npm:^3.9.0":
   version: 3.13.0
   resolution: "@uswds/uswds@npm:3.13.0"
   dependencies:
@@ -12605,7 +12616,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-assign@npm:^4, object-assign@npm:^4.1.0, object-assign@npm:^4.1.1":
+"object-assign@npm:4.1.1, object-assign@npm:^4, object-assign@npm:^4.1.0, object-assign@npm:^4.1.1":
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: 10/fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
@@ -14256,6 +14267,13 @@ __metadata:
   version: 5.0.0
   resolution: "resolve-from@npm:5.0.0"
   checksum: 10/be18a5e4d76dd711778664829841cde690971d02b6cbae277735a09c1c28f407b99ef6ef3cd585a1e6546d4097b28df40ed32c4a287b9699dcf6d7f208495e23
+  languageName: node
+  linkType: hard
+
+"resolve-id-refs@npm:0.1.0":
+  version: 0.1.0
+  resolution: "resolve-id-refs@npm:0.1.0"
+  checksum: 10/0cbfbddda06ea69c6c1da542bddd4fa23a795bbd3b601b0dc53da33c4d2a8283f2b2a4459d6a01b6af159f1cc8d50efe37494bb8087fac0e5b1b40811bbafb7f
   languageName: node
   linkType: hard
 

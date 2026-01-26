@@ -190,7 +190,7 @@ unclassed elements:
 */
 /*
 ----------------------------------------
-Browser compatibility mode
+Broswer compatibility mode
 ----------------------------------------
 When true, outputs woff and ttf font 
 formats in addition to woff2
@@ -1378,11 +1378,6 @@ AND
 Get a normalized font-size in rem from
 a family and a type size in either
 system scale or project scale
-----------------------------------------
-*/
-/*
-----------------------------------------
-Easing
 ----------------------------------------
 */
 /*
