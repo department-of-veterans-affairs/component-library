@@ -49,7 +49,7 @@ $icon-size: scale-rem(3rem);
   position: relative;
 
   &::before {
-    background-color: color.scale(fo-vars.$color-gray-lightest, $lightness: -40%);
+    background-color: color.adjust(fo-vars.$color-gray-lightest, $lightness: -40%);
     content: '';
     height: 100%;
     left: 0;

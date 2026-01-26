@@ -3316,7 +3316,7 @@ dfn {
   position: relative;
 }
 .usa-alert::before {
-  background-color: rgb(144.6, 144.6, 144.6);
+  background-color: #8b8b8b;
   content: "";
   height: 100%;
   left: 0;
