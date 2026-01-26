@@ -4,7 +4,6 @@
 @use 'usa-search/src/styles/usa-search';
 @use 'usa-button/src/styles/usa-button';
 
-@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @use '../../mixins/uswds-error-border.scss' as *;
 @import '../../mixins/inputs.css';
 

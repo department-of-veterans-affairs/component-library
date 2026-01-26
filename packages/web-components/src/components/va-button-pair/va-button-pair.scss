@@ -1,5 +1,4 @@
 @forward 'settings';
-@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @use '../../mixins/uswds-error-border.scss' as *;
 @use 'usa-button-group/src/styles/usa-button-group';
 

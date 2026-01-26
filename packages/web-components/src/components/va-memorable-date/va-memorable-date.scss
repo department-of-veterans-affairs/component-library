@@ -10,7 +10,6 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 @use 'usa-memorable-date/src/styles/usa-memorable-date';
 
-@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @use '../../mixins/form-field-error.scss' as *;
 @use '../../mixins/uswds-error-border.scss' as *;
 @import '../../mixins/focusable.css';

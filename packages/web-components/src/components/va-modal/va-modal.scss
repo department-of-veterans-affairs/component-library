@@ -9,7 +9,6 @@
 @use 'usa-icon/src/styles/usa-icon';
 @use 'usa-modal/src/styles/usa-modal';
 
-@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @use '../../mixins/uswds-error-border.scss' as *;
 
 .usa-modal-alert {

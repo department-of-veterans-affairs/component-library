@@ -1,3 +1,4 @@
+@forward "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables";
 @use "uswds-core" with (
   $theme-show-notifications: false,
   $theme-show-compile-warnings: false,
