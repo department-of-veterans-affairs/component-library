@@ -47,10 +47,16 @@ $unit-types: (
   // unit: a unit || or null
   // joint: the number+ its unit
   @if(meta.type-of($string) == number){
+      $number-value: null;
+
+      @if map.has-key($unit-types, math.unit($string)) {
+        $number-value: $string / map.get($unit-types, math.unit($string));
+      } @else {
+        $number-value: $string;
+      }
+
       @return(
-        number: if(map.has-key($unit-types, math.unit($string)),
-            $string / map.get($unit-types, math.unit($string))
-            ,$string),
+        number: $number-value,
         unit: unit($string),
         joint: $string
       )
@@ -100,11 +106,23 @@ $unit-types: (
         $past: true;
     }
   }
-  $numeric-result: if( $numeric-value == "" , null, $sign * $numeric-value);
+  $numeric-result: null;
+  @if ($numeric-value == "") {
+    $numeric-result: null;
+  } @else {
+    $numeric-result: $sign * $numeric-value;
+  }
+
+  $joint-value: null;
+  @if ($numeric-result != null) {
+    $joint-value: #{$numeric-result} + string.unquote($unit);
+  } @else {
+    $joint-value: $string;
+  }
   @return (
     number: $numeric-result,
     unit: string.unquote($unit),
-    joint: if($numeric-result != null, #{$numeric-result} + string.unquote($unit), $string)
+    joint: $joint-value
   );
 }
 
@@ -130,7 +148,10 @@ $unit-types: (
     @return ($value * $coeff) ;
   }
   @if (meta.type-of($value) == string ) {
-    $inner-sep: if($separator == comma , ",", " ");
+    $inner-sep: " ";
+    @if ($separator == comma) {
+      $inner-sep: ",";
+    }
     $value-set: str-split($value, $inner-sep);
     $scaled-values: ();
 

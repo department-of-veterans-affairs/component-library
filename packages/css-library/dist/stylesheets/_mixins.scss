@@ -176,9 +176,24 @@ $asset-pipeline: false;
   $output: null;
 
   $a: list.nth($vals, 1);
-  $b: if(list.length($vals) < 2, $a, list.nth($vals, 2));
-  $c: if(list.length($vals) < 3, $a, list.nth($vals, 3));
-  $d: if(list.length($vals) < 2, $a, list.nth($vals, if(list.length($vals) < 4, 2, 4)));
+  $len: list.length($vals);
+
+  $b: $a;
+  @if $len >= 2 {
+    $b: list.nth($vals, 2);
+  }
+
+  $c: $a;
+  @if $len >= 3 {
+    $c: list.nth($vals, 3);
+  }
+
+  $d: $a;
+  @if $len >= 4 {
+    $d: list.nth($vals, 4);
+  } @else if $len >= 2 {
+    $d: list.nth($vals, 2);
+  }
 
   @if $a == 0 { $a: 0; }
   @if $b == 0 { $b: 0; }
@@ -209,11 +224,16 @@ $asset-pipeline: false;
 
 @mixin directional-property($pre, $suf, $vals) {
   // Property Names
-  $top:    $pre + "-top"    + if($suf, "-#{$suf}", "");
-  $bottom: $pre + "-bottom" + if($suf, "-#{$suf}", "");
-  $left:   $pre + "-left"   + if($suf, "-#{$suf}", "");
-  $right:  $pre + "-right"  + if($suf, "-#{$suf}", "");
-  $all:    $pre +             if($suf, "-#{$suf}", "");
+  $suffix: "";
+  @if $suf {
+    $suffix: "-#{$suf}";
+  }
+
+  $top:    $pre + "-top"    + $suffix;
+  $bottom: $pre + "-bottom" + $suffix;
+  $left:   $pre + "-left"   + $suffix;
+  $right:  $pre + "-right"  + $suffix;
+  $all:    $pre +             $suffix;
 
   $vals: collapse-directionals($vals);
 
