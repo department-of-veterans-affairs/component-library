@@ -2163,7 +2163,7 @@ button,
   text-decoration: none;
   width: 100%;
 }
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 481px), print and (min-width: 481px) {
   .usa-button,
   .usa-button-primary,
   .usa-button:visited,

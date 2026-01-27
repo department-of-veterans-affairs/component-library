@@ -53,9 +53,9 @@
   outline-offset: u.$focus-spacing;
 }
 
-// Mobile-first media query helper
+// Mobile-first media query helper that mirrors USWDS default (screen + print)
 @mixin media($bp) {
-  @media screen and (min-width: #{$bp}) {
+  @media screen and (min-width: #{$bp}), print and (min-width: #{$bp}) {
     @content;
   }
 }
