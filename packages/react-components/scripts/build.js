@@ -48,11 +48,12 @@ function flattenRequires(bufferString) {
 const fileNames = [].concat.apply(
   [],
   [
-    glob.sync('./src/components/**/*.@(js|jsx)', {
-      ignore: ['./**/*.unit.spec.@(js|jsx)', './**/*.stories.@(js|jsx)'],
+    glob.sync('src/components/**/*.{js,jsx}', {
+      ignore: ['**/*.unit.spec.*', '**/*.stories.*'],
     }),
-    glob.sync('./src/helpers/*.js'),
-    glob.sync('../core/src/i18n/**/*.js'),
+    glob.sync('src/helpers/*.js', {
+      ignore: ['**/*.unit.spec.*', '**/*.stories.*'],
+    }),
   ],
 );
 
