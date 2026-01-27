@@ -6,7 +6,6 @@
 
 @use "./formation-overrides/components/_forms.scss" as *;
 
-@use './override-function.scss' as *;
 @use "./mixins" as *;
 @use "./formation-overrides/variables" as *;
 @use "../../dist/tokens/scss/variables.scss" as *;
