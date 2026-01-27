@@ -4,8 +4,8 @@ import { i18next } from '../..';
 
 /**
  * @componentName Card Status
- * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityCategory caution
+ * @maturityLevel available
  */
 
 @Component({
