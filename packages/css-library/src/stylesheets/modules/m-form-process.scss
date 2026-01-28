@@ -1,9 +1,8 @@
-@import "../formation-overrides/variables";
-@import "../../../dist/tokens/scss/variables.scss";
-@import "../mixins";
+@use "../formation-overrides/variables" as *;
+@use "../../../dist/tokens/scss/variables.scss" as *;
+@use "../mixins" as *;
 
-@import '../override-function';
-
+@use '../override-function' as *;
 .form-process {
   li {
     h5 {

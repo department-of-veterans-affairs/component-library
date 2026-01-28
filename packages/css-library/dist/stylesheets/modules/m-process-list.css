@@ -1,20 +1,12 @@
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
+/*
+  Original: @import "~uswds/src/stylesheets/core/utilities";
+  ***THIS IS USWDS v1***
+*/
 /**
   /uswds/dist/scss/lib/addons/_margin.scss
 **/
 /**
   uswds/src/stylesheets/lib/helpers/_directional-values.scss
-**/
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
 **/
 .usa-sr-only {
   position: absolute;

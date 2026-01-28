@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'uswds-core/src/styles/functions' as *;
 @use 'uswds-core/src/styles/mixins/utilities/font' as *;
 @use '../tokens/font' as *;
@@ -54,7 +55,7 @@ $u-font: map-collect(
   $u-font-weight
 );
 
-@each $family in map-keys($tokens-font-family) {
+@each $family in map.keys($tokens-font-family) {
   @each $size in ('2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl') {
     .vads-u-font-size--#{$family}-#{$size} {
       @include u-font($family, $size);

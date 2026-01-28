@@ -1,7 +1,3 @@
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
 .va-tabs {
   list-style: none;
   margin-bottom: -1px;

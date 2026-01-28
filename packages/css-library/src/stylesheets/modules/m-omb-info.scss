@@ -1,6 +1,6 @@
-@import "../formation-overrides/variables";
-@import "../../../dist/tokens/scss/variables.scss";
-@import '../override-function';
+@use "../formation-overrides/variables" as *;
+@use "../../../dist/tokens/scss/variables.scss" as *;
+@use '../override-function' as *;
 // To avoid double-importing, we're not importing _m-modal.scss,
 //  but if this file is being imported, you'll probably want to include
 //  the modal module as well.

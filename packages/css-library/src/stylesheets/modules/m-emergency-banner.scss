@@ -1,7 +1,7 @@
-@import "../formation-overrides/variables";
-@import "../../../dist/tokens/scss/variables.scss";
+@use "../formation-overrides/variables" as *;
+@use "../../../dist/tokens/scss/variables.scss" as *;
 
-@import '../override-function';
+@use '../override-function' as *;
 
 .vads-c-emergency-banner {
   .usa-alert {
