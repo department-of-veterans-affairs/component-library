@@ -15,6 +15,9 @@ changelog:
     - title: Other Changes
       labels:
         - "*"
+      exclude:
+        labels:
+          - css-library
     - title: CSS Library
       labels:
         - css-library
