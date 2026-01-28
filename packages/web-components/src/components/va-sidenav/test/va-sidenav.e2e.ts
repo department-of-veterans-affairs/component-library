@@ -110,7 +110,7 @@ describe('va-sidenav', () => {
 
     const accordionItem = await page.find('va-sidenav >>> va-accordion-item');
     const accordionItemHeader = await accordionItem.getProperty('header');
-    expect(accordionItemHeader).toEqual('Related pages menu');
+    expect(accordionItemHeader).toEqual('Menu');
     
     await page.close();
   });

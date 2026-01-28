@@ -1858,6 +1858,10 @@ export namespace Components {
      */
     interface VaSidenav {
         /**
+          * Aria label for the navigation element.
+         */
+        "ariaLabel"?: string;
+        /**
           * Header text to display at the top of the side navigation.
          */
         "header"?: string;
@@ -6099,6 +6103,10 @@ declare namespace LocalJSX {
      * @maturityLevel candidate
      */
     interface VaSidenav {
+        /**
+          * Aria label for the navigation element.
+         */
+        "ariaLabel"?: string;
         /**
           * Header text to display at the top of the side navigation.
          */
