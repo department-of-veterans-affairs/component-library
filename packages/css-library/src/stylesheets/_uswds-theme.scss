@@ -1,7 +1,7 @@
 @use "uswds-core" with (
   $theme-show-notifications: false,
   $theme-show-compile-warnings: false,
-  $theme-font-path: '../fonts',
+  $theme-font-path: '~@uswds/uswds/fonts',
   $theme-font-type-sans: 'source-sans-pro',
   $theme-font-sans-custom-stack: '"Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans',
   $theme-typeface-tokens: (
