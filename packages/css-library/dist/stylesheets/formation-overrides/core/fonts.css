@@ -10,28 +10,28 @@
 **/
 /* stylelint-disable at-rule-empty-line-before */
 @font-face {
-  font-family: "Merriweather Web";
+  font-family: "Merriweather";
   font-style: normal;
   font-weight: 300;
   font-display: fallback;
   src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Light.woff2) format("woff2");
 }
 @font-face {
-  font-family: "Merriweather Web";
+  font-family: "Merriweather";
   font-style: normal;
   font-weight: 400;
   font-display: fallback;
   src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Regular.woff2) format("woff2");
 }
 @font-face {
-  font-family: "Merriweather Web";
+  font-family: "Merriweather";
   font-style: normal;
   font-weight: 700;
   font-display: fallback;
   src: url(~@uswds/uswds/fonts/merriweather/Latin-Merriweather-Bold.woff2) format("woff2");
 }
 @font-face {
-  font-family: "Merriweather Web";
+  font-family: "Merriweather";
   font-style: italic;
   font-weight: 400;
   font-display: fallback;
