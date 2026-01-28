@@ -13,6 +13,7 @@ import {
   forceUpdate,
   Listen
 } from '@stencil/core';
+import classNames from 'classnames';
 import { fileInput } from './va-file-input-upgrader';
 import { UploadedFile } from './uploadedFile';
 import {
@@ -47,15 +48,17 @@ export class VaFileInput {
   private fileType?: string;
   private delayPasswordInputFocusUntilWindowFocus: boolean = false;
   private delayChangeButtonFocusUntilWindowFocus: boolean = false;
+  private initialUploadAttemptHasTakenPlace: boolean = false;
+  private passwordSubmitButton: HTMLVaButtonElement;
   private slottedContent: HTMLElement[] = null;
   private windowHasFocus: boolean = true;
-  private initialUploadAttemptHasTakenPlace: boolean = false;
 
   @Element() el: HTMLElement;
 
   @State() file?: File;
   @State() fileContents?: string;
   @State() internalError?: string;
+  @State() passwordValue?: string;
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
 
@@ -160,7 +163,12 @@ export class VaFileInput {
   /**
    * Error message for the encrypted password input
    */
-  @Prop() passwordError?: string;
+  @Prop({ mutable: true }) passwordError?: string;
+
+  /**
+   * Denotes if user submission of encrypted file password was successful.
+   */
+  @Prop({ mutable: true }) passwordSubmissionSuccess?: null | boolean = null;
 
   /**
    * The event emitted when the file input value changes.
@@ -168,9 +176,9 @@ export class VaFileInput {
   @Event() vaChange: EventEmitter;
 
   /**
-   * The event emitted when the file input password value changes.
+   * The event emitted when the file input password is submitted.
    */
-  @Event() vaPasswordChange: EventEmitter;
+  @Event() vaPasswordSubmit: EventEmitter;
 
   /**
    * The event emitted when adding a file results in an error, e.g. exceeding max file size
@@ -268,6 +276,24 @@ export class VaFileInput {
     // If new value is null/undefined, remove the current file and focus on input
     else if (!newValue) {
       this.removeFile(false);
+    }
+  }
+
+  @Watch('passwordSubmissionSuccess')
+  handlePasswordSubmissionSuccess(value: boolean) {
+    // If password was successfully submitted, clear any existing error
+    if (value) {
+      this.passwordError = null;
+      focusOnInputAfterAriaLabelUpdate(this.fileInputRef);
+      return;
+    }
+
+    // If password submission failed, reset button state and focus on password
+    // input
+    if (this.passwordSubmitButton) {
+      this.passwordSubmitButton.removeAttribute('loading');
+      this.passwordSubmitButton.setAttribute('text', 'Submit password');
+      focusOnPasswordInput(this.el);
     }
   }
 
@@ -443,6 +469,7 @@ export class VaFileInput {
     }
     this.file = null;
     this.uploadedFile = null;
+    this.passwordSubmissionSuccess = null;
     // We need to ensure that the value attribute of the input element is cleared
     // so that subsequent uploads of the same file will trigger the change event.
     if (this.fileInputRef) {
@@ -496,8 +523,84 @@ export class VaFileInput {
     }
   }
 
-  private handlePasswordChange(e) {
-    this.vaPasswordChange.emit( {password: e.target.value} );
+  /**
+   * Renders the password input section for encrypted files when `this.file` has been set.
+   * @returns {void|HTMLDivElement} Password input section for encrypted files
+   */
+  private renderPasswordSection(): void|HTMLDivElement {
+    // If we there's not a file yet, this section is not necessary.
+    if (!this.encrypted || !this.file) {
+      return;
+    }
+
+    const passwordSectionClasses = classNames({
+      'password-input-section': true,
+      'password-input-section--success': this.passwordSubmissionSuccess === true,
+    });
+
+    return (
+      <div class={passwordSectionClasses}>
+        {this.passwordSubmissionSuccess === true ?
+          (
+            <va-alert slim={true} status="success">
+              <p class="password-alert-text">File successfully unlocked</p>
+            </va-alert>
+          ) :
+          (
+            <va-alert slim={true} status="warning">
+              <p class="password-alert-text">
+                We can't open <span class="password-alert-text__file-name">{this.file.name}</span> without its password
+              </p>
+            </va-alert>
+          )
+        }
+
+        {!this.passwordSubmissionSuccess &&
+          (
+            <Fragment>
+              <va-text-input
+                type="password"
+                onInput={(e) => this.passwordValue = (e.target as HTMLInputElement).value}
+                label="Password for this file"
+                required
+                error={this.passwordError}
+              />
+              <va-button
+                text="Submit password"
+                onClick={(e) => this.handleSubmitPasswordClick(e)}
+                secondary={true}
+                full-width={true}
+                ref={el => (this.passwordSubmitButton = el as HTMLVaButtonElement)}
+              />
+            </Fragment>
+          )
+        }
+      </div>
+    );
+  }
+
+  /**
+   * Callback passed to `onClick` for password submit button instance of `va-button`. Updates the
+   * password error state if no password has been entered, updates button text and loading props,
+   * and emits the `vaPasswordSubmit` event when a password has been entered.
+   * @param e {Event} click event
+   * @returns {void}
+   */
+  private handleSubmitPasswordClick(e: Event): void {
+    e.preventDefault();
+
+    // Stop here if no password entered
+    if (!this.passwordValue || this.passwordValue.length === 0) {
+      this.passwordError = 'Password cannot be blank';
+      return;
+    }
+
+    // Set button to loading state
+    const target = e.target as HTMLElement
+    target.setAttribute('loading', 'true');
+    target.setAttribute('text', 'Verifying password...');
+
+    this.vaPasswordSubmit.emit( { password: this.passwordValue } );
   }
 
   /**
@@ -548,7 +651,6 @@ export class VaFileInput {
       statusText,
       uploadedFile,
       percentUploaded,
-      passwordError,
       internalError,
     } = this;
 
@@ -668,15 +770,7 @@ export class VaFileInput {
 
                   {!showProgBar && (
                     <Fragment>
-                      {encrypted && (
-                        <va-text-input
-                          type="password"
-                          onInput={(e) =>{this.handlePasswordChange(e)}}
-                          label="File password"
-                          required
-                          error={passwordError}
-                        />
-                      )}
+                      {encrypted && this.renderPasswordSection()}
                       <div class="additional-info-slot">
                         <slot></slot>
                       </div>
