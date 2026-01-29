@@ -166,6 +166,10 @@ export class VaMemorableDate {
     const monthNum = Number(currentMonth || undef);
     const dayNum = Number(currentDay || undef);
 
+    this.yearTouched = this.yearTouched || yearNum !== undefined;
+    this.monthTouched = this.monthTouched || monthNum !== undefined;
+    this.dayTouched = this.dayTouched || dayNum !== undefined;
+
       validate({
         component: this,
         year: yearNum,

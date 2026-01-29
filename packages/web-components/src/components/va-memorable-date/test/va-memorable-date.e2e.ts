@@ -649,6 +649,47 @@ describe('va-memorable-date', () => {
     expect(blurSpy).toHaveReceivedEvent();
   });
 
+  it('does not set an error on blur when all inputs contain valid values', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-memorable-date name="test" month-select />',
+    );
+
+    const date = await page.find('va-memorable-date');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Enter valid values for all fields
+    await handleMonth.select('7');
+    await handleDay.click({ clickCount: 3 });
+    await handleDay.press('1');
+    await handleDay.press('5');
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+
+    // Trigger Blur on the last field
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    // Expect no error to be set on the component
+    expect(date.getAttribute('error')).toBe(null);
+
+    // Change month field to another valid value
+    await handleMonth.select('9');
+
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    // Expect no error to be set on the component
+    expect(date.getAttribute('error')).toBe(null);
+  });
+
   it('emits dateChange event when input value is updated', async () => {
     const page = await newE2EPage();
 
