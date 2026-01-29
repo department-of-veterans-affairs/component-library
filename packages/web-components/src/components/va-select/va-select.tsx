@@ -173,6 +173,10 @@ export class VaSelect {
     i18next.off('languageChanged');
   }
 
+  private isVaSort(): boolean {
+    return this.el.classList.contains('va-sort__select');
+  }
+
   private handleKeyDown() {
     this.vaKeyDown.emit();
   }
@@ -211,7 +215,14 @@ export class VaSelect {
   private populateOptions() {
     const { value } = this;
     // Get all slotted nodes
-    const allNodes = getSlottedNodes(this.el, null, '#select-container slot');
+    let allNodes = getSlottedNodes(this.el, null, '#select-container slot');
+
+    // Handle nested slots (e.g., when va-select is used inside va-sort)
+    // If the slotted content is another slot element, get its assigned nodes
+    if (allNodes.length === 1 && allNodes[0].nodeName.toLowerCase() === 'slot') {
+      const nestedSlot = allNodes[0] as HTMLSlotElement;
+      allNodes = Array.from(nestedSlot.assignedNodes());
+    }
 
     // Filter nodes to include only <option> and <optgroup>
     // supports scenario where <option> may be slotted within <optgroup> as well as <option> directly
@@ -274,6 +285,8 @@ export class VaSelect {
       formHeading,
     } = this;
 
+    const isVaSort = this.isVaSort();
+  
     const errorID = 'input-error-message';
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
@@ -293,6 +306,9 @@ export class VaSelect {
       'usa-input--error': error || reflectInputError,
       [`usa-input--${width}`]: width,
       'va-select--full-width': fullWidth,
+    });
+    const containerClass = classnames({
+      [`va-select__sort-container--${width}`]: isVaSort && width,
     });
 
     const isFormsPattern = ['single', 'multiple'].includes(useFormsPattern);
@@ -369,7 +385,7 @@ export class VaSelect {
             </Fragment>
           )}
         </span>
-        <div id="select-container">
+        <div id="select-container" class={containerClass}>
           <slot onSlotchange={() => this.populateOptions()}></slot>
           <select
             class={selectClass}
@@ -383,9 +399,11 @@ export class VaSelect {
             onBlur={e => this.handleBlur(e)}
             part="select"
           >
-            <option key="0" value="" selected>
-              {i18next.t('select')}
-            </option>
+            {!isVaSort && (
+              <option key="0" value="" selected>
+                {i18next.t('select')}
+              </option>
+            )}
             {this.options}
           </select>
         </div>

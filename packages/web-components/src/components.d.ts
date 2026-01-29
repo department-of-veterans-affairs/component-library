@@ -416,8 +416,8 @@ export namespace Components {
     }
     /**
      * @componentName Card Status
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory caution
+     * @maturityLevel available
      */
     interface VaCardStatus {
         /**
@@ -1905,6 +1905,28 @@ export namespace Components {
          */
         "routerLink"?: boolean;
     }
+    interface VaSort {
+        /**
+          * Whether or not to fire the analytics events
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby": string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name": string;
+        /**
+          * The selected value.
+         */
+        "value"?: string;
+        /**
+          * Displays the select at a specific width. Accepts md or medium (20ex), lg (30ex), xl (40ex).
+         */
+        "width": string;
+    }
     /**
      * @componentName Statement of truth
      * @maturityCategory use
@@ -2586,6 +2608,10 @@ export interface VaSidenavSubmenuCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaSidenavSubmenuElement;
 }
+export interface VaSortCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSortElement;
+}
 export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaStatementOfTruthElement;
@@ -2904,8 +2930,8 @@ declare global {
     };
     /**
      * @componentName Card Status
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory caution
+     * @maturityLevel available
      */
     interface HTMLVaCardStatusElement extends Components.VaCardStatus, HTMLStencilElement {
     }
@@ -3695,6 +3721,25 @@ declare global {
         prototype: HTMLVaSidenavSubmenuElement;
         new (): HTMLVaSidenavSubmenuElement;
     };
+    interface HTMLVaSortElementEventMap {
+        "vaSortKeyDown": any;
+        "vaSortSelect": any;
+        "vaSortSelectBlur": any;
+    }
+    interface HTMLVaSortElement extends Components.VaSort, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaSortElementEventMap>(type: K, listener: (this: HTMLVaSortElement, ev: VaSortCustomEvent<HTMLVaSortElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaSortElementEventMap>(type: K, listener: (this: HTMLVaSortElement, ev: VaSortCustomEvent<HTMLVaSortElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaSortElement: {
+        prototype: HTMLVaSortElement;
+        new (): HTMLVaSortElement;
+    };
     interface HTMLVaStatementOfTruthElementEventMap {
         "vaInputChange": any;
         "vaInputBlur": any;
@@ -3972,6 +4017,7 @@ declare global {
         "va-sidenav": HTMLVaSidenavElement;
         "va-sidenav-item": HTMLVaSidenavItemElement;
         "va-sidenav-submenu": HTMLVaSidenavSubmenuElement;
+        "va-sort": HTMLVaSortElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
         "va-tab-item": HTMLVaTabItemElement;
@@ -4458,8 +4504,8 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Card Status
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory caution
+     * @maturityLevel available
      */
     interface VaCardStatus {
         /**
@@ -6151,6 +6197,40 @@ declare namespace LocalJSX {
          */
         "routerLink"?: boolean;
     }
+    interface VaSort {
+        /**
+          * Whether or not to fire the analytics events
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name"?: string;
+        /**
+          * The event attached to select's onkeydown
+         */
+        "onVaSortKeyDown"?: (event: VaSortCustomEvent<any>) => void;
+        /**
+          * The event emitted when the selected value changes
+         */
+        "onVaSortSelect"?: (event: VaSortCustomEvent<any>) => void;
+        /**
+          * The event emitted when the select element is blurred
+         */
+        "onVaSortSelectBlur"?: (event: VaSortCustomEvent<any>) => void;
+        /**
+          * The selected value.
+         */
+        "value"?: string;
+        /**
+          * Displays the select at a specific width. Accepts md or medium (20ex), lg (30ex), xl (40ex).
+         */
+        "width"?: string;
+    }
     /**
      * @componentName Statement of truth
      * @maturityCategory use
@@ -6774,6 +6854,7 @@ declare namespace LocalJSX {
         "va-sidenav": VaSidenav;
         "va-sidenav-item": VaSidenavItem;
         "va-sidenav-submenu": VaSidenavSubmenu;
+        "va-sort": VaSort;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
         "va-tab-item": VaTabItem;
@@ -6884,8 +6965,8 @@ declare module "@stencil/core" {
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
             /**
              * @componentName Card Status
-             * @maturityCategory use
-             * @maturityLevel deployed
+             * @maturityCategory caution
+             * @maturityLevel available
              */
             "va-card-status": LocalJSX.VaCardStatus & JSXBase.HTMLAttributes<HTMLVaCardStatusElement>;
             /**
@@ -7144,6 +7225,7 @@ declare module "@stencil/core" {
             "va-sidenav": LocalJSX.VaSidenav & JSXBase.HTMLAttributes<HTMLVaSidenavElement>;
             "va-sidenav-item": LocalJSX.VaSidenavItem & JSXBase.HTMLAttributes<HTMLVaSidenavItemElement>;
             "va-sidenav-submenu": LocalJSX.VaSidenavSubmenu & JSXBase.HTMLAttributes<HTMLVaSidenavSubmenuElement>;
+            "va-sort": LocalJSX.VaSort & JSXBase.HTMLAttributes<HTMLVaSortElement>;
             /**
              * @componentName Statement of truth
              * @maturityCategory use

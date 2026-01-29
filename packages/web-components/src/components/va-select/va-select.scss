@@ -19,6 +19,16 @@
   color: var(--vads-color-base);
 }
 
+:host(.va-sort__select) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .usa-label {
+    margin-top: 0;
+  }
+}
+
 :host([inert]) select {
   border: 0;
   background: none;
