@@ -15,7 +15,7 @@
 // Define default feature:
 $default-feature: min-width;
 
-@mixin media($query: $feature $value $columns, $total-columns: $grid-columns) {
+@mixin media($query: $feature $value $columns, $total-columns: fo-vars.$grid-columns) {
   @if list.length($query) == 1 {
     @media screen and ($default-feature: list.nth($query, 1)), print and ($default-feature: list.nth($query, 1)) {
       $default-grid-columns: $grid-columns;
