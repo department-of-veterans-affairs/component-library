@@ -158,7 +158,7 @@ export class VaSidenav {
   
     return (
       <Host>
-        <va-accordion open-single part="sidenav-mobile-accordion">
+        <va-accordion open-single>
           <va-accordion-item
             bordered
             exportparts="accordion-content, accordion-header"
