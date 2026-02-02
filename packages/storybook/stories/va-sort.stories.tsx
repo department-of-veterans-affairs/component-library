@@ -55,3 +55,46 @@ const Template = ({
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(selectDocs);
+
+export const CustomValue = Template.bind(null);
+CustomValue.args = {
+  ...defaultArgs,
+  value: 'newestoldest',
+};
+
+// custom widths
+export const CustomWidth = () => {
+  return (
+    <>
+      <h4>Medium width</h4>
+      <va-sort
+        name="options-md"
+        width="md"
+      >
+        <option value="relevance">Relevance</option>
+        <option value="atoz">A to Z</option>
+        <option value="ztoa">Z to A</option>
+      </va-sort>
+
+      <h4>Large width</h4>
+      <va-sort
+        name="options-lg"
+        width="lg"
+      >
+        <option value="relevance">Relevance</option>
+        <option value="atoz">A to Z</option>
+        <option value="ztoa">Z to A</option>
+      </va-sort>
+
+      <h4>Extra large width</h4>
+      <va-sort
+        name="options-xl"
+        width="xl"
+      >
+        <option value="relevance">Relevance</option>
+        <option value="atoz">A to Z</option>
+        <option value="ztoa">Z to A</option>
+      </va-sort>
+    </>
+  );
+};
