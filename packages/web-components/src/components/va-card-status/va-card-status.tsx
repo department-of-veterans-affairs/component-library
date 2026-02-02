@@ -6,6 +6,7 @@ import { i18next } from '../..';
  * @componentName Card Status
  * @maturityCategory caution
  * @maturityLevel available
+ * @guidanceHref card/card-status
  */
 
 @Component({
