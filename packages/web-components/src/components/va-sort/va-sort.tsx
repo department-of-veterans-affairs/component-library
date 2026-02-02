@@ -48,17 +48,44 @@ export class VaSort {
    */
   @Event() vaSortSelectBlur: EventEmitter;
 
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * option is selected and enableAnalytics is true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
+  // va-select onKeyDown
   private handleVaKeyDown(event: CustomEvent) {
     event.stopPropagation();
     this.vaSortKeyDown.emit();
   }
 
+  // va-select onChange
   private handleVaSelect(event: CustomEvent) {
     event.stopPropagation();
     this.value = event.detail.value;
+
+    if (this.enableAnalytics) {
+      const detail = {
+        componentName: 'va-sort',
+        action: 'change',
+        details: {
+          label: 'Sort by',
+          selectLabel: this.value,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
+
     this.vaSortSelect.emit({ value: this.value });
   }
 
+  // va-select onBlur
   private handleVaSelectBlur(event: CustomEvent) {
     event.stopPropagation();
     this.vaSortSelectBlur.emit({ value: event.detail.value });
@@ -70,19 +97,16 @@ export class VaSort {
       value, 
       width, 
       messageAriaDescribedby,
-      enableAnalytics
     } = this;
     return (
       <Host>
         <va-select 
-          // eslint-disable-next-line i18next/no-literal-string
           label="Sort by" 
           name={name} 
           value={value} 
           message-aria-describedby={messageAriaDescribedby} 
           width={width}
           class="va-sort__select"
-          enable-analytics={enableAnalytics}
           onVaKeyDown={(e: CustomEvent) => this.handleVaKeyDown(e)}
           onVaSelect={(e: CustomEvent) => this.handleVaSelect(e)}
           onVaSelectBlur={(e: CustomEvent) => this.handleVaSelectBlur(e)}

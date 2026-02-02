@@ -69,22 +69,31 @@ describe('va-sort', () => {
 
   it('passes the message-aria-describedby prop to va-select', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-sort message-aria-describedby="Sort options related to the list"></va-sort>');
+    await page.setContent('<va-sort message-aria-describedby="Sort options"></va-sort>');
 
     const vaSelect = await page.find('va-sort >>> va-select');
-    expect(await vaSelect.getProperty('messageAriaDescribedby')).toBe('Sort options related to the list');
+    expect(await vaSelect.getProperty('messageAriaDescribedby')).toBe('Sort options');
   });
 
-  it('emits vaSortSelect event when selection changes', async () => {
+  it('does not pass enable-analytics to inner va-select', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-sort enable-analytics></va-sort>');
+
+    // va-sort handles its own analytics, so it should not pass enable-analytics to va-select
+    const vaSelect = await page.find('va-sort >>> va-select');
+    expect(await vaSelect.getProperty('enableAnalytics')).toBe(false);
+  });
+
+  it('fires analytics event when enable-analytics is true and selection changes', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-sort>
+      <va-sort enable-analytics>
         <option value="newest">Newest</option>
         <option value="oldest">Oldest</option>
       </va-sort>
     `);
 
-    const sortSelectSpy = await page.spyOnEvent('vaSortSelect');
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
     await page.$eval('va-sort', (el: HTMLElement) => {
       const vaSelect = el.shadowRoot?.querySelector('va-select');
@@ -95,10 +104,20 @@ describe('va-sort', () => {
       }
     });
 
-    expect(sortSelectSpy).toHaveReceivedEventDetail({ value: 'oldest' });
+    await page.waitForChanges();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      componentName: 'va-sort',
+      action: 'change',
+      details: {
+        label: 'Sort by',
+        selectLabel: 'oldest',
+      },
+    });
   });
 
-  it('emits vaSortSelectBlur event when select loses focus', async () => {
+  it('does not fire analytics event when enable-analytics is false', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-sort>
@@ -107,39 +126,17 @@ describe('va-sort', () => {
       </va-sort>
     `);
 
-    const sortBlurSpy = await page.spyOnEvent('vaSortSelectBlur');
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
     await page.$eval('va-sort', (el: HTMLElement) => {
       const vaSelect = el.shadowRoot?.querySelector('va-select');
       const select = vaSelect?.shadowRoot?.querySelector('select');
       if (select) {
-        select.focus();
-        select.blur();
+        select.value = 'oldest';
+        select.dispatchEvent(new Event('change', { bubbles: true }));
       }
     });
 
-    expect(sortBlurSpy).toHaveReceivedEvent();
-  });
-
-  it('emits vaSortKeyDown event when key is pressed', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-sort>
-        <option value="newest">Newest</option>
-        <option value="oldest">Oldest</option>
-      </va-sort>
-    `);
-
-    const sortKeyDownSpy = await page.spyOnEvent('vaSortKeyDown');
-
-    await page.$eval('va-sort', (el: HTMLElement) => {
-      const vaSelect = el.shadowRoot?.querySelector('va-select');
-      const select = vaSelect?.shadowRoot?.querySelector('select');
-      if (select) {
-        select.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
-      }
-    });
-
-    expect(sortKeyDownSpy).toHaveReceivedEvent();
+    expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 });

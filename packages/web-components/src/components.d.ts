@@ -3725,6 +3725,7 @@ declare global {
         "vaSortKeyDown": any;
         "vaSortSelect": any;
         "vaSortSelectBlur": any;
+        "component-library-analytics": any;
     }
     interface HTMLVaSortElement extends Components.VaSort, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaSortElementEventMap>(type: K, listener: (this: HTMLVaSortElement, ev: VaSortCustomEvent<HTMLVaSortElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -6210,6 +6211,10 @@ declare namespace LocalJSX {
           * Name attribute for the select field.
          */
         "name"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when an option is selected and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: VaSortCustomEvent<any>) => void;
         /**
           * The event attached to select's onkeydown
          */
