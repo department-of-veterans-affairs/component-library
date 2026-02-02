@@ -32,18 +32,8 @@ const defaultArgs = {
   'header': 'Filters',
   'filter-options': [
     {
-      id: 7,
-      label: "Test",
-      isRadio: true,
-      category: [
-        { label: "one", id: 1, active: true },
-        { label: "two", id: 2 },
-        { label: "three", id: 3 },
-      ]
-    },
-    {
       id: 1,
-      label: "Test",
+      label: "Benefits",
       category: [
         { label: "Health Care", id: 2 },
         { label: "Education", id: 3 },
@@ -63,20 +53,6 @@ const defaultArgs = {
         { label: "Other", id: 12 }
       ]
     },
-    {
-      label: "another test",
-      id: 10,
-      isRadio: true,
-      category: [
-        { label: "asfasdf", id: 6 },
-        { label: "asdfasfa Duty", id: 7 },
-        { label: "hqw345", id: 8 },
-        { label: "2345 Guard", id: 9 },
-        { label: "Retiredsfs", id: 10 },
-        { label: "Disasdfbled", id: 11 },
-        { label: "Othsder", id: 12 }
-      ]
-    }
   ],
 };
 
@@ -132,5 +108,36 @@ ActiveFilters.args = {
     }
   ],
 };
+
+
+export const RadioButtons = Template.bind(null);
+RadioButtons.args = {
+  'header': 'Filters',
+  'filter-options': [
+    {
+      id: 1,
+      label: "Benefits",
+      isRadio: true,
+      category: [
+        { label: "Health Care", id: 2, active: true },
+        { label: "Education", id: 3 },
+        { label: "Housing", id: 4 },
+      ]
+    },
+    {
+      label: "Service Status",
+      id: 5,
+      category: [
+        { label: "Veteran", id: 6 },
+        { label: "Active Duty", id: 7 },
+        { label: "Reservist", id: 8 },
+        { label: "National Guard", id: 9 },
+        { label: "Retired", id: 10 },
+        { label: "Disabled", id: 11 },
+        { label: "Other", id: 12 }
+      ]
+    },
+  ]
+}
 
 Default.argTypes = propStructure(searchFilterDocs);
