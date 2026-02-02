@@ -2125,6 +2125,7 @@ export namespace Components {
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tag/tag-status
      */
     interface VaTagStatus {
         /**
@@ -3854,6 +3855,7 @@ declare global {
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tag/tag-status
      */
     interface HTMLVaTagStatusElement extends Components.VaTagStatus, HTMLStencilElement {
     }
@@ -6458,6 +6460,7 @@ declare namespace LocalJSX {
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tag/tag-status
      */
     interface VaTagStatus {
         /**
@@ -7268,6 +7271,7 @@ declare module "@stencil/core" {
              * @componentName Tag - Status
              * @maturityCategory caution
              * @maturityLevel candidate
+             * @guidanceHref tag/tag-status
              */
             "va-tag-status": LocalJSX.VaTagStatus & JSXBase.HTMLAttributes<HTMLVaTagStatusElement>;
             /**
