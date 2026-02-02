@@ -159,8 +159,11 @@ export class VaSidenav {
     return (
       <Host>
         <va-accordion open-single part="sidenav-mobile-accordion">
-          <va-accordion-item bordered header={this.header || 'Menu'}>
-            <nav aria-label={this.ariaLabel}>
+          <va-accordion-item
+            bordered
+            exportparts="accordion-content, accordion-header"
+            header={this.header || 'Menu'}
+          >
             <nav aria-label={this.navAriaLabel}>
               <div role="list" class="va-sidenav__list">
                 <slot></slot>
