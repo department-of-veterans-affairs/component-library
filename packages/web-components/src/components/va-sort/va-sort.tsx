@@ -26,7 +26,7 @@ export class VaSort {
   /**
    * An optional message that will be read by screen readers when the select is focused.
    */
-  @Prop() messageAriaDescribedby: string;
+  @Prop() messageAriaDescribedby?: string;
 
   /**
    * Whether or not to fire the analytics events

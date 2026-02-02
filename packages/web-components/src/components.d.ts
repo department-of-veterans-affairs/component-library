@@ -1913,7 +1913,7 @@ export namespace Components {
         /**
           * An optional message that will be read by screen readers when the select is focused.
          */
-        "messageAriaDescribedby": string;
+        "messageAriaDescribedby"?: string;
         /**
           * Name attribute for the select field.
          */

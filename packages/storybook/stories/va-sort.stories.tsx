@@ -7,8 +7,8 @@ import {
 const selectDocs = getWebComponentDocs('va-sort');
 
 export default {
-  title: 'Components/Sort USWDS',
-  id: 'uswds/va-sort',
+  title: 'Components/Sort',
+  id: 'components/va-sort',
   parameters: {
     componentSubtitle: 'va-sort web component',
     docs: {
@@ -18,11 +18,6 @@ export default {
   },
   argTypes: {
     ...propStructure(selectDocs),
-    'hide-required-text': {
-      table: {
-        disable: true,
-      },
-    },
   },
 };
 
