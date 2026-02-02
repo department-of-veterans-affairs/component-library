@@ -415,6 +415,49 @@ export namespace Components {
         "showShadow"?: boolean;
     }
     /**
+     * @componentName Card Status
+     * @maturityCategory caution
+     * @maturityLevel available
+     */
+    interface VaCardStatus {
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headerLevel"?: number;
+        /**
+          * Text to be displayed in the card header.
+         */
+        "headerText": string;
+        /**
+          * Set the href for the card link.
+         */
+        "linkHref": string;
+        /**
+          * Set the text for the card link.
+         */
+        "linkText": string;
+        /**
+          * Sets the card to required and renders the (*Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * Text to be displayed in the card subheader.  Heading level will be +1 of headerLevel Prop.
+         */
+        "subheaderText": string;
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "tagStatus": 'info' | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "tagText"?: string;
+    }
+    /**
      * @nativeHandler onBlur
      * @componentName Checkbox
      * @maturityCategory use
@@ -2060,6 +2103,7 @@ export namespace Components {
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tag/tag-status
      */
     interface VaTagStatus {
         /**
@@ -2858,6 +2902,17 @@ declare global {
     var HTMLVaCardElement: {
         prototype: HTMLVaCardElement;
         new (): HTMLVaCardElement;
+    };
+    /**
+     * @componentName Card Status
+     * @maturityCategory caution
+     * @maturityLevel available
+     */
+    interface HTMLVaCardStatusElement extends Components.VaCardStatus, HTMLStencilElement {
+    }
+    var HTMLVaCardStatusElement: {
+        prototype: HTMLVaCardStatusElement;
+        new (): HTMLVaCardStatusElement;
     };
     interface HTMLVaCheckboxElementEventMap {
         "vaChange": any;
@@ -3754,6 +3809,7 @@ declare global {
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tag/tag-status
      */
     interface HTMLVaTagStatusElement extends Components.VaTagStatus, HTMLStencilElement {
     }
@@ -3878,6 +3934,7 @@ declare global {
         "va-button-pair": HTMLVaButtonPairElement;
         "va-button-segmented": HTMLVaButtonSegmentedElement;
         "va-card": HTMLVaCardElement;
+        "va-card-status": HTMLVaCardStatusElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-combo-box": HTMLVaComboBoxElement;
@@ -4400,6 +4457,49 @@ declare namespace LocalJSX {
           * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
+    }
+    /**
+     * @componentName Card Status
+     * @maturityCategory caution
+     * @maturityLevel available
+     */
+    interface VaCardStatus {
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * Header level. Must be between 1 and 6
+         */
+        "headerLevel"?: number;
+        /**
+          * Text to be displayed in the card header.
+         */
+        "headerText"?: string;
+        /**
+          * Set the href for the card link.
+         */
+        "linkHref"?: string;
+        /**
+          * Set the text for the card link.
+         */
+        "linkText"?: string;
+        /**
+          * Sets the card to required and renders the (*Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * Text to be displayed in the card subheader.  Heading level will be +1 of headerLevel Prop.
+         */
+        "subheaderText"?: string;
+        /**
+          * The status variant of the tag. Determines the background color and icon.
+         */
+        "tagStatus"?: 'info' | 'error';
+        /**
+          * The text to be displayed in the tag element.
+         */
+        "tagText"?: string;
     }
     /**
      * @nativeHandler onBlur
@@ -6275,6 +6375,7 @@ declare namespace LocalJSX {
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tag/tag-status
      */
     interface VaTagStatus {
         /**
@@ -6636,6 +6737,7 @@ declare namespace LocalJSX {
         "va-button-pair": VaButtonPair;
         "va-button-segmented": VaButtonSegmented;
         "va-card": VaCard;
+        "va-card-status": VaCardStatus;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
         "va-combo-box": VaComboBox;
@@ -6783,6 +6885,12 @@ declare module "@stencil/core" {
              * @maturityLevel deployed
              */
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
+            /**
+             * @componentName Card Status
+             * @maturityCategory caution
+             * @maturityLevel available
+             */
+            "va-card-status": LocalJSX.VaCardStatus & JSXBase.HTMLAttributes<HTMLVaCardStatusElement>;
             /**
              * @nativeHandler onBlur
              * @componentName Checkbox
@@ -7076,6 +7184,7 @@ declare module "@stencil/core" {
              * @componentName Tag - Status
              * @maturityCategory caution
              * @maturityLevel candidate
+             * @guidanceHref tag/tag-status
              */
             "va-tag-status": LocalJSX.VaTagStatus & JSXBase.HTMLAttributes<HTMLVaTagStatusElement>;
             /**
