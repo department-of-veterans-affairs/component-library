@@ -1858,10 +1858,6 @@ export namespace Components {
      */
     interface VaSidenav {
         /**
-          * Aria label for the navigation element.
-         */
-        "ariaLabel"?: string;
-        /**
           * Header text to display at the top of the side navigation.
          */
         "header"?: string;
@@ -1873,6 +1869,10 @@ export namespace Components {
           * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
+        /**
+          * Aria label for the navigation element.
+         */
+        "navAriaLabel"?: string;
     }
     interface VaSidenavItem {
         /**
@@ -6104,10 +6104,6 @@ declare namespace LocalJSX {
      */
     interface VaSidenav {
         /**
-          * Aria label for the navigation element.
-         */
-        "ariaLabel"?: string;
-        /**
           * Header text to display at the top of the side navigation.
          */
         "header"?: string;
@@ -6119,6 +6115,10 @@ declare namespace LocalJSX {
           * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
+        /**
+          * Aria label for the navigation element.
+         */
+        "navAriaLabel"?: string;
     }
     interface VaSidenavItem {
         /**
