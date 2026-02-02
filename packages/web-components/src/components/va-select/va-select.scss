@@ -21,11 +21,11 @@
 
 :host(.va-sort__select) {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
 
   .usa-label {
-    margin-top: 0;
+    align-self: center;
+    margin-top: 0.4rem;
   }
 }
 

@@ -2,7 +2,6 @@ import {
   getWebComponentDocs,
   propStructure,
   StoryDocs,
-  errorToggleArgTypes,
 } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-sort');
@@ -19,7 +18,6 @@ export default {
   },
   argTypes: {
     ...propStructure(selectDocs),
-    ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message']),
     'hide-required-text': {
       table: {
         disable: true,
@@ -31,14 +29,14 @@ export default {
 const defaultArgs = {
   'name': 'options',
   'value': '',
-  'aria-describedby-message': 'Optional description text for screen readers',
+  'message-aria-describedby': 'Optional description text for screen readers',
   'width': 'lg',
 };
 
 const Template = ({
   name,
   value,
-  'aria-describedby-message': ariaDescribedbyMessage,
+  'message-aria-describedby': ariaDescribedbyMessage,
   width,
 }) => {
   return (
