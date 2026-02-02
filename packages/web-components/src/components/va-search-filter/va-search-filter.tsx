@@ -49,7 +49,25 @@ export class VaSearchFilter {
 
   /**
    * Represents a list of filter facets and their categories.
-   * Use a JSON array of objects with label and id properties.
+   *
+   * Example:
+    ```
+     [
+        {
+          id: int | string,
+          label: string,
+          isRadio?: bool = false,
+          category: [
+            {
+              label: string,
+              id: int | string,
+              active?: bool,
+            },
+          ],
+        },
+     ]
+   ```
+   * Note: `active` must be set for `true` for one and only one category if `isRadio` is `true`.
    */
   @Prop({ mutable: true }) filterOptions: Filter[] = [];
 
