@@ -601,6 +601,10 @@ export class VaFileInput {
     // Stop here if no password entered
     if (!this.passwordValue || this.passwordValue.length === 0) {
       this.passwordError = 'Password cannot be blank';
+    }
+
+    if (this.passwordError) {
+      focusOnPasswordInput(this.el);
       return;
     }
 
