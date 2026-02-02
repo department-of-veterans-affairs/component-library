@@ -256,6 +256,13 @@ export class VaFileInput {
 
   @Watch('file')
   handleFileChange(newFile: File, oldFile: File) {
+    // Clear password state when switching to a different file
+    if (newFile && newFile !== oldFile) {
+      this.passwordValue = null;
+      this.passwordError = null;
+      this.passwordSubmissionSuccess = null;
+    }
+
     // Additional check to ensure encryption focus takes place when a user changes
     // from one encrypted file to another encrypted file.
     if (newFile && newFile !== oldFile && this.encrypted) {
@@ -470,6 +477,8 @@ export class VaFileInput {
     this.file = null;
     this.uploadedFile = null;
     this.passwordSubmissionSuccess = null;
+    this.passwordValue = null;
+    this.passwordError = null;
     // We need to ensure that the value attribute of the input element is cleared
     // so that subsequent uploads of the same file will trigger the change event.
     if (this.fileInputRef) {
