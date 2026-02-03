@@ -11,9 +11,14 @@ const config:StorybookConfig = {
   stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx)', '../@(src|stories)/**/*.mdx'],
   staticDirs: ['../public'],
 
-  addons: [{
-    name: getAbsolutePath("@storybook/addon-docs"),
-  }, getAbsolutePath('@storybook/addon-links'), getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath("@storybook/addon-webpack5-compiler-babel")],
+  addons: [
+    {
+      name: getAbsolutePath("@storybook/addon-docs"),
+    }, 
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath("@storybook/addon-webpack5-compiler-babel"),
+  ],
 
   webpackFinal: async (config:any) => {
     config.module.rules.push({

@@ -104,7 +104,7 @@ export class VaAdditionalInfo {
       'closed': !this.open
     });
     return (
-      <Host>
+      <Host data-testid="va-additional-info">
         <a
           role="button"
           aria-controls="info"

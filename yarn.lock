@@ -3235,6 +3235,7 @@ __metadata:
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     sass-loader: "npm:16.0.5"
+    shadow-dom-testing-library: "npm:1.13.1"
     storybook: "npm:10.1.10"
   languageName: unknown
   linkType: soft
@@ -15010,6 +15011,15 @@ __metadata:
   version: 1.2.0
   resolution: "setprototypeof@npm:1.2.0"
   checksum: 10/fde1630422502fbbc19e6844346778f99d449986b2f9cdcceb8326730d2f3d9964dbcb03c02aaadaefffecd0f2c063315ebea8b3ad895914bf1afc1747fc172e
+  languageName: node
+  linkType: hard
+
+"shadow-dom-testing-library@npm:1.13.1":
+  version: 1.13.1
+  resolution: "shadow-dom-testing-library@npm:1.13.1"
+  peerDependencies:
+    "@testing-library/dom": ">= 8"
+  checksum: 10/a10f3466592691368f260c15230d9e830cc5122d20002ad9b6c2918fa245089219d1f45c026153fa6ccf8848b546da6f985c0e461458c8c1e09786a1de626287
   languageName: node
   linkType: hard
 
