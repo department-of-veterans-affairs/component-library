@@ -334,6 +334,7 @@ export class VaSearchFilter {
         checked={category.active === true}
       />
     };
+
     const renderFacet = (facet: FilterFacet) => {
       const srProps = !isDesktop ? VaSearchFilter.getSrOnlyProp(facet.activeFiltersCount, 'labelSrOnly') : {};
       const label = (isDesktop ? '' : facet.label + (facet.activeFiltersCount > 0 ? ` (${facet.activeFiltersCount})` : ''));
