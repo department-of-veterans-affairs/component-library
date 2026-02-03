@@ -416,8 +416,8 @@ export namespace Components {
     }
     /**
      * @componentName Card Status
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory caution
+     * @maturityLevel available
      */
     interface VaCardStatus {
         /**
@@ -2103,6 +2103,7 @@ export namespace Components {
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tag/tag-status
      */
     interface VaTagStatus {
         /**
@@ -2904,8 +2905,8 @@ declare global {
     };
     /**
      * @componentName Card Status
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory caution
+     * @maturityLevel available
      */
     interface HTMLVaCardStatusElement extends Components.VaCardStatus, HTMLStencilElement {
     }
@@ -3808,6 +3809,7 @@ declare global {
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tag/tag-status
      */
     interface HTMLVaTagStatusElement extends Components.VaTagStatus, HTMLStencilElement {
     }
@@ -4458,8 +4460,8 @@ declare namespace LocalJSX {
     }
     /**
      * @componentName Card Status
-     * @maturityCategory use
-     * @maturityLevel deployed
+     * @maturityCategory caution
+     * @maturityLevel available
      */
     interface VaCardStatus {
         /**
@@ -6373,6 +6375,7 @@ declare namespace LocalJSX {
      * @componentName Tag - Status
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tag/tag-status
      */
     interface VaTagStatus {
         /**
@@ -6884,8 +6887,8 @@ declare module "@stencil/core" {
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
             /**
              * @componentName Card Status
-             * @maturityCategory use
-             * @maturityLevel deployed
+             * @maturityCategory caution
+             * @maturityLevel available
              */
             "va-card-status": LocalJSX.VaCardStatus & JSXBase.HTMLAttributes<HTMLVaCardStatusElement>;
             /**
@@ -7181,6 +7184,7 @@ declare module "@stencil/core" {
              * @componentName Tag - Status
              * @maturityCategory caution
              * @maturityLevel candidate
+             * @guidanceHref tag/tag-status
              */
             "va-tag-status": LocalJSX.VaTagStatus & JSXBase.HTMLAttributes<HTMLVaTagStatusElement>;
             /**
