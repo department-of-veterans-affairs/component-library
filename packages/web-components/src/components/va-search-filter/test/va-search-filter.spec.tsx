@@ -84,6 +84,7 @@ describe('radio validateFilterOptions', () => {
         {
             label: "Benefits",
             id: 1,
+            isRadio: true,
             category: [
                 { label: "Health Care", id: 2, active: true }, // more than one active category
                 { label: "Education", id: 3, active: true },
