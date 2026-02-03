@@ -27,9 +27,9 @@ export class VaSidenav {
   @Prop() header?: string;
 
   /**
-   * Aria label for the navigation element.
+   * Header text to display at the top of the side navigation mobile view.
    */
-  @Prop() navAriaLabel?: string = 'Related pages menu';
+  @Prop() mobileHeader?: string = 'Related pages menu';
 
   /**
    * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
@@ -137,7 +137,7 @@ export class VaSidenav {
     if (this.isDesktop) {
       return (
         <Host>
-          <nav aria-label={this.navAriaLabel}>
+          <nav aria-label={this.header || 'Related pages menu'}>
             {this.header && (
               <span class="va-sidenav__header">
                 {this.iconName ? (
@@ -162,9 +162,9 @@ export class VaSidenav {
           <va-accordion-item
             bordered
             exportparts="accordion-content, accordion-header"
-            header={this.header || 'Menu'}
+            header={this.mobileHeader}
           >
-            <nav aria-label={this.navAriaLabel}>
+            <nav aria-label={this.mobileHeader}>
               <div role="list" class="va-sidenav__list">
                 <slot></slot>
               </div>

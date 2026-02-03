@@ -1870,9 +1870,9 @@ export namespace Components {
          */
         "iconName"?: string;
         /**
-          * Aria label for the navigation element.
+          * Header text to display at the top of the side navigation mobile view.
          */
-        "navAriaLabel"?: string;
+        "mobileHeader"?: string;
     }
     interface VaSidenavItem {
         /**
@@ -6116,9 +6116,9 @@ declare namespace LocalJSX {
          */
         "iconName"?: string;
         /**
-          * Aria label for the navigation element.
+          * Header text to display at the top of the side navigation mobile view.
          */
-        "navAriaLabel"?: string;
+        "mobileHeader"?: string;
     }
     interface VaSidenavItem {
         /**
