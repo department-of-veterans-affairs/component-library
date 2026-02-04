@@ -23,10 +23,10 @@
 :host(.va-sort__select) {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  column-gap: 0;
   @media (min-width: $tablet) {
     flex-direction: row;
-    gap: 0.5rem;
+    column-gap: 0.25rem;
   }
 
   .usa-label {
