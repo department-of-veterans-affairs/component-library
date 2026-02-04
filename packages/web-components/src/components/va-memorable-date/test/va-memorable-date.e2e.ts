@@ -683,6 +683,7 @@ describe('va-memorable-date', () => {
     await handleMonth.select('9');
 
     // Trigger Blur
+    await handleYear.click({ clickCount: 3 });
     await handleYear.press('Tab');
     await page.waitForChanges();
 

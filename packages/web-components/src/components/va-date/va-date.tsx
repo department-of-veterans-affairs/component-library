@@ -151,6 +151,10 @@ export class VaDate {
       .split('-')
       .map(val => Number(val));
 
+    this.yearTouched = this.yearTouched || year !== undefined;
+    this.monthTouched = this.monthTouched || month !== undefined;
+    this.dayTouched = this.dayTouched || day !== undefined;
+
     validate({
       component: this,
       year,
