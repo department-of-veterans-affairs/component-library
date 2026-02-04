@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop, Event, EventEmitter, Listen, forceUpdate, State, Watch } from '@stencil/core';
 import { deepEquals } from '../../utils/utils';
-// import { VaRadioOption } from '../va-radio-option/va-radio-option';
 
 export type FilterFacet = {
   label: string;
