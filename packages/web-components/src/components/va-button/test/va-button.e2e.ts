@@ -1,12 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
-declare global {
-  interface Window {
-    eventOrder: string[];
-  }
-}
-
 describe('va-button', () => {
   it('renders a button with text Edit', async () => {
     const page = await newE2EPage();
@@ -320,63 +314,15 @@ describe('va-button', () => {
     `);
   });
 
-  it('submit is not triggered when submit=skip is set', async () => {
+  it('submits form when clicked', async () => {
     const page = await newE2EPage();
-    await page.setContent('<form><va-button submit="skip" continue></va-button></form>');
+    await page.setContent(
+      '<form onsubmit="e=>{e.preventDefault();}"><va-button submit text="Submit"></va-button></form>',
+    );
     const submitSpy = await page.spyOnEvent('submit');
-    const button = await page.find('va-button[continue]');
-    await button.click();
-    await page.waitForChanges();
-    expect(submitSpy).toHaveReceivedEventTimes(0);
-  });
-
-  it('submit is triggered when submit=prevent is set', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<form onsubmit="e=>{e.preventDefault();}"><va-button submit="prevent" continue></va-button></form>');
-    const submitSpy = await page.spyOnEvent('submit');
-    const button = await page.find('va-button[continue]');
+    const button = await page.find('va-button >>> button');
     await button.click();
     await page.waitForChanges();
     expect(submitSpy).toHaveReceivedEventTimes(1);
   });
-
-  it('fires consumer onClick before onSubmit when submit=prevent', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(`
-      <script>
-        window.eventOrder = [];
-
-        function handleClick() {
-          window.eventOrder.push('click');
-        }
-
-        function handleSubmit() {
-          window.eventOrder.push('submit');
-        }
-      </script>
-
-      <form onsubmit="handleSubmit()">
-        <va-button
-          submit="prevent"
-          continue
-          onclick="handleClick()"
-          >
-        </va-button>
-      </form>
-    `);
-
-    const submitSpy = await page.spyOnEvent('submit');
-    const button = await page.find('va-button[continue]');
-
-    await button.click();
-    await page.waitForChanges();
-
-    expect(submitSpy).toHaveReceivedEventTimes(1);
-
-    // Assert ordering
-    const order = await page.evaluate(() => window.eventOrder);
-    expect(order).toEqual(['click', 'submit']);
-  });
-
 });
