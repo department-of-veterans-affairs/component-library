@@ -1,5 +1,10 @@
 import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 
+/**
+ * @componentName Sort
+ * @maturityCategory caution
+ * @maturityLevel available
+ */
 @Component({
   tag: 'va-sort',
   styleUrl: 'va-sort.scss',
