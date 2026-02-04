@@ -584,3 +584,99 @@ WithPercentUploaded.args = { ...defaultArgs };
 WithPercentUploaded.parameters = {
   chromatic: { disableSnapshot: true },
 };
+
+
+const encryptedFileTemplate = ({
+  label,
+  name,
+  hint,
+}) => {
+    const [isEncrypted, setIsEncrypted] = useState(false);
+    const [successStatus, setSuccessStatus] = useState(null);
+    const [passwordError, setPasswordError] = useState(null);
+
+  // Minimal handler: detect if file is encrypted
+  const handleFileChange = (event) => {
+    const hasFile = event?.detail?.files?.length > 0;
+
+    // Reset password state when file changes
+    // In real implementation: check if file is encrypted
+    // For demo: assume all uploaded files are encrypted
+    if (hasFile) {
+      setIsEncrypted(true);
+      setPasswordError(null);
+      setSuccessStatus(null);
+    } else {
+      // File removed
+      setIsEncrypted(false);
+      setPasswordError(null);
+      setSuccessStatus(null);
+    }
+  };
+
+  // Simulate sending password to server for validation
+  const handlePasswordSubmit = async (event) => {
+    const { password } = event.detail;
+
+    // In real implementation: call API to validate password
+    // For demo: simulate async validation
+    setSuccessStatus(null); // Reset to show loading state
+
+    // Simulate API call
+    setTimeout(() => {
+      // Simulate validation result
+      const isValid = password === 'test123';
+
+      if (isValid) {
+        setSuccessStatus(true);
+        setPasswordError(null);
+      } else {
+        setSuccessStatus(false);
+        setPasswordError('Incorrect password. Try again or delete file.');
+      }
+    }, 500);
+  };
+
+  return (
+    <>
+      <p>
+        This story demonstrates a minimal integration of encrypted file handling.
+      </p>
+      <ol>
+        <li>Detect if uploaded file is encrypted (set <code>encrypted</code> prop)</li>
+        <li>Handle <code>vaPasswordSubmit</code> event to validate password</li>
+        <li>Update <code>passwordError</code> and <code>passwordSubmissionSuccess</code> based on server response</li>
+      </ol>
+
+      <VaFileInput
+        label={label}
+        name={name}
+        hint={hint}
+        onVaChange={handleFileChange}
+        onVaPasswordSubmit={handlePasswordSubmit}
+        encrypted={isEncrypted}
+        passwordError={passwordError}
+        passwordSubmissionSuccess={successStatus}
+      />
+
+      <div className="vads-u-margin-top--2 vads-u-background-color--gray-lightest vads-u-padding--2">
+        <p><strong>Demo instructions:</strong></p>
+        <ul>
+          <li>Upload any file (simulated as encrypted)</li>
+          <li>Enter password: <code>test123</code> for success, anything else for error</li>
+          <li>Component handles all internal state (button loading, focus management, etc.)</li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+export const TestEncryptedFile = encryptedFileTemplate.bind(null);
+TestEncryptedFile.args = {
+  ...defaultArgs,
+  label: 'Minimal integration example',
+  hint: 'Password is "test123"',
+};
+TestEncryptedFile.parameters = {
+  chromatic: { disableSnapshot: true },
+};
