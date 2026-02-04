@@ -1,5 +1,6 @@
 @forward 'settings';
 
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-icon/src/styles/usa-icon';
 @use 'usa-label/src/styles/usa-label';
@@ -21,11 +22,19 @@
 
 :host(.va-sort__select) {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0;
+  @media (min-width: $tablet) {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
 
   .usa-label {
-    align-self: center;
-    margin-top: 0.4rem;
+    align-self: flex-start;
+    @media (min-width: $tablet) {
+      align-self: center;
+      margin-top: 0.4rem;
+    }
   }
 }
 

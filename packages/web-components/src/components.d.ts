@@ -418,6 +418,7 @@ export namespace Components {
      * @componentName Card Status
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref card/card-status
      */
     interface VaCardStatus {
         /**
@@ -1905,6 +1906,11 @@ export namespace Components {
          */
         "routerLink"?: boolean;
     }
+    /**
+     * @componentName Sort
+     * @maturityCategory caution
+     * @maturityLevel available
+     */
     interface VaSort {
         /**
           * Whether or not to fire the analytics events
@@ -2933,6 +2939,7 @@ declare global {
      * @componentName Card Status
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref card/card-status
      */
     interface HTMLVaCardStatusElement extends Components.VaCardStatus, HTMLStencilElement {
     }
@@ -3728,6 +3735,11 @@ declare global {
         "vaSortSelectBlur": any;
         "component-library-analytics": any;
     }
+    /**
+     * @componentName Sort
+     * @maturityCategory caution
+     * @maturityLevel available
+     */
     interface HTMLVaSortElement extends Components.VaSort, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaSortElementEventMap>(type: K, listener: (this: HTMLVaSortElement, ev: VaSortCustomEvent<HTMLVaSortElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -4509,6 +4521,7 @@ declare namespace LocalJSX {
      * @componentName Card Status
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref card/card-status
      */
     interface VaCardStatus {
         /**
@@ -6200,6 +6213,11 @@ declare namespace LocalJSX {
          */
         "routerLink"?: boolean;
     }
+    /**
+     * @componentName Sort
+     * @maturityCategory caution
+     * @maturityLevel available
+     */
     interface VaSort {
         /**
           * Whether or not to fire the analytics events
@@ -6975,6 +6993,7 @@ declare module "@stencil/core" {
              * @componentName Card Status
              * @maturityCategory caution
              * @maturityLevel available
+             * @guidanceHref card/card-status
              */
             "va-card-status": LocalJSX.VaCardStatus & JSXBase.HTMLAttributes<HTMLVaCardStatusElement>;
             /**
@@ -7233,6 +7252,11 @@ declare module "@stencil/core" {
             "va-sidenav": LocalJSX.VaSidenav & JSXBase.HTMLAttributes<HTMLVaSidenavElement>;
             "va-sidenav-item": LocalJSX.VaSidenavItem & JSXBase.HTMLAttributes<HTMLVaSidenavItemElement>;
             "va-sidenav-submenu": LocalJSX.VaSidenavSubmenu & JSXBase.HTMLAttributes<HTMLVaSidenavSubmenuElement>;
+            /**
+             * @componentName Sort
+             * @maturityCategory caution
+             * @maturityLevel available
+             */
             "va-sort": LocalJSX.VaSort & JSXBase.HTMLAttributes<HTMLVaSortElement>;
             /**
              * @componentName Statement of truth
