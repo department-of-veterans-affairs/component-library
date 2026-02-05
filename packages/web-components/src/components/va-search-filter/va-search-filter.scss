@@ -14,8 +14,7 @@ va-accordion-item::part(accordion-content) {
   padding-top: 0;
 }
 
-va-checkbox-group {
-  margin-top: 10px;
+va-checkbox-group, va-radio {
   &::part(legend) {
     font-weight: bold;
   }
@@ -23,6 +22,14 @@ va-checkbox-group {
     font-family: var(--font-source-sans);
     font-size: var(--font-size-md);
   }
+}
+
+.desktop-margin-top {
+  margin-top: -10px !important;
+}
+
+.mobile-margin-top {
+  margin-top: 10px;
 }
 
 #filter-buttons {
