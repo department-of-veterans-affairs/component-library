@@ -11,10 +11,9 @@
   margin: 0;
   padding: 0;
 
-  li:first-child::after {
-    // empty second value prevents pseudo-element from being read by screen readers
-    content: '|' / '';
-    font-size: 0.875rem;
+  .va-accordion__button::part(button) {
+    padding: 12px 8px;
+    margin-right: 0;
   }
 }
 
