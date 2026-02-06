@@ -492,13 +492,16 @@ export class VaModal {
       // store the host and continue up the tree
       ancestors.push(host);
 
-      // Record the element to preserve within this shadow root
-      // 'current' is the child element within 'root' that should remain visible
+      // Record which element to preserve within this shadow root.
+      // 'current' is the direct child of 'root' that should remain visible (not aria-hidden).
+      // This is used later by hideOthers to hide siblings while preserving this element.
       if (!shadowRoots.has(root)) {
         shadowRoots.set(root, current as HTMLElement);
       }
 
       // Collect light DOM ancestors between shadow boundaries
+      // After processing a shadow host,
+      // walk up through regular DOM elements until hitting another shadow root:
       let parent = host.parentElement;
       while (parent) {
         ancestors.push(parent);
@@ -514,6 +517,7 @@ export class VaModal {
         parent = parent.parentElement;
       }
 
+      // Move up to the shadow host for the next iteration
       current = host;
     }
 
