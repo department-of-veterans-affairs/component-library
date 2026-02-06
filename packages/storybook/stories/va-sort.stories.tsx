@@ -43,10 +43,10 @@ const Template = ({
         width={width}
       >
         <option value="relevance">Relevance</option>
-        <option value="atoz">A to Z</option>
-        <option value="ztoa">Z to A</option>
-        <option value="newestoldest">Newest to oldest</option>
-        <option value="oldestnewest">Oldest to newest</option>
+        <option value="atoz">Medication name (A to Z)</option>
+        <option value="ztoa">Medication name (Z to A)</option>
+        <option value="newestoldest">Fill date (newest to oldest)</option>
+        <option value="oldestnewest">Fill date (oldest to newest)</option>
       </va-sort>
     </>
   );
@@ -72,8 +72,10 @@ export const CustomWidth = () => {
         width="md"
       >
         <option value="relevance">Relevance</option>
-        <option value="atoz">A to Z</option>
-        <option value="ztoa">Z to A</option>
+        <option value="atoz">Medication name (A to Z)</option>
+        <option value="ztoa">Medication name (Z to A)</option>
+        <option value="newestoldest">Fill date (newest to oldest)</option>
+        <option value="oldestnewest">Fill date (oldest to newest)</option>
       </va-sort>
 
       <h4>Large width</h4>
@@ -82,8 +84,10 @@ export const CustomWidth = () => {
         width="lg"
       >
         <option value="relevance">Relevance</option>
-        <option value="atoz">A to Z</option>
-        <option value="ztoa">Z to A</option>
+        <option value="atoz">Medication name (A to Z)</option>
+        <option value="ztoa">Medication name (Z to A)</option>
+        <option value="newestoldest">Fill date (newest to oldest)</option>
+        <option value="oldestnewest">Fill date (oldest to newest)</option>
       </va-sort>
 
       <h4>Extra large width</h4>
@@ -92,8 +96,10 @@ export const CustomWidth = () => {
         width="xl"
       >
         <option value="relevance">Relevance</option>
-        <option value="atoz">A to Z</option>
-        <option value="ztoa">Z to A</option>
+        <option value="atoz">Medication name (A to Z)</option>
+        <option value="ztoa">Medication name (Z to A)</option>
+        <option value="newestoldest">Fill date (newest to oldest)</option>
+        <option value="oldestnewest">Fill date (oldest to newest)</option>
       </va-sort>
     </>
   );
