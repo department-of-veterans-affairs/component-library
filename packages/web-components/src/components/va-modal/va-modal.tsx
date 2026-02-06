@@ -359,9 +359,48 @@ export class VaModal {
     return activeElement;
   }
 
-  // This method traps the focus inside our web component, prevents scrolling outside
-  // the modal, and adds aria-hidden="true" to all elements outside the web component.
-  // Fires analytics event unless disableAnalytics is true.
+  /**
+   * Applies aria-hidden to all elements outside the modal.
+   * Handles both document-level siblings and siblings within shadow roots.
+   */
+  private applyAriaHidden(): void {
+    // Reset any previous hide handlers before applying new ones.
+    this.undoAriaHidden = [];
+
+    // Collect all elements that should not be hidden (modal + ancestors)
+    const { ancestors, shadowRootElements } = this.getModalHierarchy();
+
+    // Hide document-level siblings (everything outside the ancestor chain)
+    this.undoAriaHidden.push(hideOthers(ancestors));
+
+    // Hide siblings within each shadow root
+    shadowRootElements.forEach((topLevelElement, root) => {
+      this.undoAriaHidden.push(
+        hideOthers([topLevelElement], root as unknown as HTMLElement),
+      );
+    });
+
+    // Hide siblings within light DOM containers (e.g., other va-file-inputs within div.outer-wrap)
+    ancestors.slice(0, -1).forEach((element, i) => {
+      const parent = ancestors[i + 1];
+
+      // Only process if parent has multiple children and isn't a shadow host
+      if (parent?.children && parent.children.length > 1) {
+        const parentRoot = parent.getRootNode();
+        const isParentShadowHost = parentRoot instanceof ShadowRoot && parentRoot.host === parent;
+
+        if (!isParentShadowHost) {
+          this.undoAriaHidden.push(hideOthers([element], parent));
+        }
+      }
+    });
+  }
+
+  /**
+   * This method traps the focus inside our web component, prevents scrolling outside
+   * the modal, and adds aria-hidden="true" to all elements outside the web component.
+   * Fires analytics event unless disableAnalytics is true.
+   */
   private setupModal() {
     // Save previous focus & restore when modal is closed
     this.savedFocus = this.getRealActiveElement();
@@ -371,29 +410,18 @@ export class VaModal {
 
     // If an initialFocusSelector is provided, the element will be focused on modal open
     // if it exists. You are able to focus elements in both light and shadow DOM.
-    const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
+    const initialFocus = (
+      this.el.querySelector(this.initialFocusSelector) ||
       this.el.shadowRoot?.querySelector(this.initialFocusSelector) ||
-      this.closeButton) as HTMLElement;
+      this.closeButton
+    ) as HTMLElement;
     initialFocus?.focus();
 
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
 
-    // Reset any previous hide handlers before applying new ones.
-    this.undoAriaHidden = [];
-
-    // Collect all elements that should not be hidden (modal + ancestors)
-    const { ancestors, shadowRoots } = this.getModalHierarchy();
-
-    // Sets aria-hidden="true" on all elements except the modal and its ancestors
-    this.undoAriaHidden.push(hideOthers(ancestors));
-
-    // Additionally set aria-hidden="true" on va-modal siblings that live inside the same shadow root
-    shadowRoots.forEach(root => {
-      this.undoAriaHidden.push(
-        hideOthers([this.el], root as unknown as HTMLElement),
-      );
-    });
+    // Apply aria-hidden to external elements
+    this.applyAriaHidden();
 
     // Conditionally track the event.
     if (!this.disableAnalytics) {
@@ -423,48 +451,58 @@ export class VaModal {
 
   /**
    * Maps the modal's position in nested shadow DOMs by traversing up the DOM tree.
-   * Returns both the elements and shadow roots needed for proper aria-hidden handling.
-   *
-   * Why this matters: When va-modal is nested in another web component (e.g., va-file-input),
-   * we need:
-   * 1. The element chain to hide everything except the modal's ancestors
-   * 2. The shadow roots to separately hide siblings within each root's context
-   *
-   * @returns Object with:
-   *   - ancestors: Array of HTMLElements from modal up the shadow DOM chain
-   *   - shadowRoots: Array of ShadowRoots encountered during traversal
+   * When calling hideOthers for a shadow root, we must pass the
+   * top-level element (direct child of the shadow root) to preserve it and all its descendants.
    */
-  private getModalHierarchy(): { ancestors: HTMLElement[]; shadowRoots: ShadowRoot[] } {
+  private getModalHierarchy(): {
+    ancestors: HTMLElement[];
+    shadowRootElements: Map<ShadowRoot, HTMLElement>;
+  } {
     const ancestors: HTMLElement[] = [];
-    const shadowRoots: ShadowRoot[] = [];
+    const shadowRootElements = new Map<ShadowRoot, HTMLElement>();
 
     if (!this.el) {
-      return { ancestors, shadowRoots };
+      return { ancestors, shadowRootElements };
     }
 
-    // Start with the modal element itself
     ancestors.push(this.el);
-
     let current: Node | null = this.el;
 
-    // Traverse up the DOM tree through shadow hosts
+    // Traverse up through shadow boundaries
     while (current) {
       const root = current.getRootNode?.();
-      if (!(root instanceof ShadowRoot)) {
-        break;
-      }
-      // if it finds shadow root, store it and move to its host
-      shadowRoots.push(root);
+      if (!(root instanceof ShadowRoot)) break;
+
       const host = root.host as HTMLElement;
-      if (!host) {
-        break;
-      }
-      // store the host and continue up the tree
+      if (!host) break;
+
       ancestors.push(host);
+
+      // Determine which element to preserve (by not hiding with aria-hidden) within each shadow root
+      if (!shadowRootElements.has(root)) {
+        shadowRootElements.set(root, current === this.el ? this.el : host);
+      }
+
+      // Collect light DOM ancestors between shadow boundaries
+      let parent = host.parentElement;
+      while (parent) {
+        ancestors.push(parent);
+
+        const parentRoot = parent.getRootNode?.();
+        if (parentRoot instanceof ShadowRoot) {
+          // This parent is the top-level element in its shadow root
+          if (!shadowRootElements.has(parentRoot)) {
+            shadowRootElements.set(parentRoot, parent);
+          }
+          break;
+        }
+        parent = parent.parentElement;
+      }
+
       current = host;
     }
 
-    return { ancestors, shadowRoots };
+    return { ancestors, shadowRootElements };
   }
 
 
