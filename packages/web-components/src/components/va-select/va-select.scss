@@ -23,14 +23,13 @@
 :host(.va-sort__select) {
   display: flex;
   flex-direction: column;
-  column-gap: 0;
+
   @media (min-width: $tablet) {
     flex-direction: row;
     column-gap: 0.25rem;
   }
 
   .usa-label {
-    align-self: flex-start;
     @media (min-width: $tablet) {
       align-self: center;
       margin-top: 0.4rem;
