@@ -381,14 +381,14 @@ export class VaModal {
     });
 
     // Hide siblings within light DOM containers (e.g., other va-file-inputs within div.outer-wrap)
+    // Exclude the elements without a parent with slice(0, -1)
     ancestors.slice(0, -1).forEach((element, i) => {
       const parent = ancestors[i + 1];
 
-      // Only process if parent has multiple children and isn't a shadow host
       if (parent?.children && parent.children.length > 1) {
-        const parentRoot = parent.getRootNode();
-        const isParentShadowHost = parentRoot instanceof ShadowRoot && parentRoot.host === parent;
+        const isParentShadowHost = parent.shadowRoot !== null;
 
+        // Skip shadow hosts - their children's siblings are already handled
         if (!isParentShadowHost) {
           this.undoAriaHidden.push(hideOthers([element], parent));
         }
