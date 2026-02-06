@@ -110,7 +110,6 @@ export const propStructure = (comp, subcomp = undefined) => {
   const events = getEventObj(comp.events);
   const listeners = getEventObj(comp.listeners);
   const listenersWithDescriptions = getListenerDescriptions(comp, listeners);
-
   return { ...props, ...events, ...listenersWithDescriptions };
 };
 
