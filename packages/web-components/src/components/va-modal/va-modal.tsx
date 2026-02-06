@@ -464,10 +464,10 @@ export class VaModal {
    */
   private getModalHierarchy(): {
     ancestors: HTMLElement[];
-    shadowRoots: ShadowRoot[];
+    shadowRoots: Map<ShadowRoot, HTMLElement>;
   } {
     const ancestors: HTMLElement[] = [];
-    const shadowRoots: ShadowRoot[] = [];
+    const shadowRoots = new Map<ShadowRoot, HTMLElement>();
 
     if (!this.el) {
       return { ancestors, shadowRoots };
