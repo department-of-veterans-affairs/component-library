@@ -35,6 +35,13 @@
       margin-top: 0.4rem;
     }
   }
+  .usa-select {
+    max-width: 100%;
+
+    @media (min-width: $tablet) {
+      max-width: none;
+    }
+  }
 }
 
 :host([inert]) select {
