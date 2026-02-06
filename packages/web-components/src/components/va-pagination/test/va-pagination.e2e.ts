@@ -25,11 +25,7 @@ describe('va-pagination', () => {
               <li class="usa-pagination__item usa-pagination__arrow">
                 <a aria-label="Next page" href="javascript:void(0)" class="usa-pagination__link usa-pagination__next-page">
                   <span class="usa-pagination__link-text">next</span>
-                  <div id="next-arrow-icon">
-                    <svg class="usa-icon" aria-hidden="true" role="img">
-                      <use href="/img/sprite.svg#navigate_next"></use>
-                    </svg>
-                  </div>
+                  <va-icon class="hydrated"></va-icon>
                 </a>
               </li>
             </ul>
