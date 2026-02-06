@@ -255,7 +255,6 @@ export class VaAccordion {
                   data-testid="expand-all-accordions"
                   ref={el => (this.expandCollapseBtn = el as HTMLVaButtonIconElement)}
                   onClick={() => this.expandCollapseAll(true)}
-                  aria-pressed={this.expanded ? 'true' : 'false'}
                   label={i18next.t('expand-all-aria-label')}
                   buttonType="expand"
                 ></va-button-icon>
@@ -266,7 +265,6 @@ export class VaAccordion {
                   data-testid="collapse-all-accordions"
                   ref={el => (this.expandCollapseBtn = el as HTMLVaButtonIconElement)}
                   onClick={() => this.expandCollapseAll(false)}
-                  aria-pressed={this.collapsed ? 'true' : 'false'}
                   label={i18next.t('collapse-all-aria-label')}
                   buttonType="collapse"
                 ></va-button-icon>
