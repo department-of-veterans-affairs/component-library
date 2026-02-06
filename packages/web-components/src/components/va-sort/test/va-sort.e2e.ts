@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-sort', () => {
   it('renders', async () => {
@@ -115,6 +116,25 @@ describe('va-sort', () => {
         selectLabel: 'oldest',
       },
     });
+  });
+
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-sort
+        name="custom-sort"
+        value="oldest"
+        width="xl"
+        message-aria-describedby="Sort the results"
+        enable-analytics
+      >
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="az">A to Z</option>
+      </va-sort>
+    `);
+
+    await axeCheck(page);
   });
 
   it('does not fire analytics event when enable-analytics is false', async () => {
