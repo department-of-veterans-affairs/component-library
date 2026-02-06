@@ -388,7 +388,8 @@ export class VaModal {
       if (parent?.children && parent.children.length > 1) {
         const isParentShadowHost = parent.shadowRoot !== null;
 
-        // Skip shadow hosts - their children's siblings are already handled
+        // Apply hideOthers only if the parent is not a shadow host,
+        // since shadow root siblings are already handled above.
         if (!isParentShadowHost) {
           this.undoAriaHidden.push(hideOthers([element], parent));
         }
