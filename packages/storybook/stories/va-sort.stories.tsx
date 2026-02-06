@@ -66,7 +66,7 @@ CustomDefaultValue.args = {
 export const Widths = () => {
   return (
     <>
-      <h4>Medium width</h4>
+      <h4 className="vads-u-margin-bottom--0">Medium width</h4>
       <va-sort
         name="options-md"
         width="md"
@@ -78,7 +78,7 @@ export const Widths = () => {
         <option value="oldestnewest">Fill date (oldest to newest)</option>
       </va-sort>
 
-      <h4>Large width</h4>
+      <h4 className="vads-u-margin-bottom--0">Large width</h4>
       <va-sort
         name="options-lg"
         width="lg"
@@ -90,7 +90,7 @@ export const Widths = () => {
         <option value="oldestnewest">Fill date (oldest to newest)</option>
       </va-sort>
 
-      <h4>Extra large width</h4>
+      <h4 className="vads-u-margin-bottom--0">Extra large width</h4>
       <va-sort
         name="options-xl"
         width="xl"

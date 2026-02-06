@@ -304,7 +304,7 @@ export class VaSelect {
     const selectClass = classnames({
       'usa-select': true,
       'usa-input--error': error || reflectInputError,
-      [`usa-input--${width}`]: width,
+      [`usa-input--${width}`]: !isVaSort && width,
       'va-select--full-width': fullWidth,
     });
     const containerClass = classnames({

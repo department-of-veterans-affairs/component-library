@@ -1,3 +1,5 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as tokens;
+
 $system-input-widths: (
   '2xs': 5ex,
   'xs': 9ex,
@@ -31,7 +33,14 @@ $system-input-widths: (
 :host .va-select__sort-container {
   @each $size in ('md', 'medium', 'lg', 'xl') {
     &--#{$size} {
-      flex-basis: map-get($system-input-widths, $size);
+      max-width: 100%;
+
+      // at tablet breakpoint, the flex-direction changes so we will need
+      // flex-basis instead of max-width in order to adjust the width
+      @media (min-width: tokens.$tablet) {
+        max-width: none;
+        flex-basis: map-get($system-input-widths, $size);
+      }
     }
   }
 }
