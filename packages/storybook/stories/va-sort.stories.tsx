@@ -56,14 +56,14 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(selectDocs);
 
-export const CustomValue = Template.bind(null);
-CustomValue.args = {
+export const CustomDefaultValue = Template.bind(null);
+CustomDefaultValue.args = {
   ...defaultArgs,
   value: 'newestoldest',
 };
 
 // custom widths
-export const CustomWidth = () => {
+export const Widths = () => {
   return (
     <>
       <h4>Medium width</h4>
