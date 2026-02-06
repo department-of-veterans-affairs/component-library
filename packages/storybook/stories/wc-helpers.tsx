@@ -114,9 +114,9 @@ export const propStructure = (comp, subcomp = undefined) => {
   // Merge all properties
   const allProps = { ...props, ...events, ...listenersWithDescriptions };
 
-  // Sort alphabetically by key
+  // Sort alphabetically by key (case-insensitive)
   return Object.keys(allProps)
-    .sort((a, b) => a.localeCompare(b))
+    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
     .reduce((sorted, key) => {
       sorted[key] = allProps[key];
       return sorted;
