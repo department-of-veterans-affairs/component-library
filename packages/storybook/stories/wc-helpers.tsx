@@ -110,7 +110,17 @@ export const propStructure = (comp, subcomp = undefined) => {
   const events = getEventObj(comp.events);
   const listeners = getEventObj(comp.listeners);
   const listenersWithDescriptions = getListenerDescriptions(comp, listeners);
-  return { ...props, ...events, ...listenersWithDescriptions };
+
+  // Merge all properties
+  const allProps = { ...props, ...events, ...listenersWithDescriptions };
+
+  // Sort alphabetically by key
+  return Object.keys(allProps)
+    .sort((a, b) => a.localeCompare(b))
+    .reduce((sorted, key) => {
+      sorted[key] = allProps[key];
+      return sorted;
+    }, {});
 };
 
 /**
