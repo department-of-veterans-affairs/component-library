@@ -368,13 +368,13 @@ export class VaModal {
     this.undoAriaHidden = [];
 
     // Collect all elements that should not be hidden (modal + ancestors)
-    const { ancestors, shadowRootElements } = this.getModalHierarchy();
+    const { ancestors, shadowRoots } = this.getModalHierarchy();
 
     // Hide document-level siblings (everything outside the ancestor chain)
     this.undoAriaHidden.push(hideOthers(ancestors));
 
     // Hide siblings within each shadow root
-    shadowRootElements.forEach((topLevelElement, root) => {
+    shadowRoots.forEach((topLevelElement, root) => {
       this.undoAriaHidden.push(
         hideOthers([topLevelElement], root as unknown as HTMLElement),
       );
@@ -451,36 +451,51 @@ export class VaModal {
 
   /**
    * Maps the modal's position in nested shadow DOMs by traversing up the DOM tree.
-   * When calling hideOthers for a shadow root, we must pass the
-   * top-level element (direct child of the shadow root) to preserve it and all its descendants.
+   * Returns both the elements and shadow roots needed for proper aria-hidden handling.
+   *
+   * Why this matters: When va-modal is nested in another web component (e.g., va-file-input),
+   * we need:
+   * 1. The element chain to hide everything except the modal's ancestors
+   * 2. The shadow roots to separately hide siblings within each root's context
+   *
+   * @returns Object with:
+   *   - ancestors: Array of HTMLElements from modal up the shadow DOM chain
+   *   - shadowRoots: Array of ShadowRoots encountered during traversal
    */
   private getModalHierarchy(): {
     ancestors: HTMLElement[];
-    shadowRootElements: Map<ShadowRoot, HTMLElement>;
+    shadowRoots: ShadowRoot[];
   } {
     const ancestors: HTMLElement[] = [];
-    const shadowRootElements = new Map<ShadowRoot, HTMLElement>();
+    const shadowRoots: ShadowRoot[] = [];
 
     if (!this.el) {
-      return { ancestors, shadowRootElements };
+      return { ancestors, shadowRoots };
     }
 
+    // Start with the modal element itself
     ancestors.push(this.el);
+
     let current: Node | null = this.el;
 
-    // Traverse up through shadow boundaries
+    // Traverse up the DOM tree through shadow hosts
     while (current) {
       const root = current.getRootNode?.();
-      if (!(root instanceof ShadowRoot)) break;
+      if (!(root instanceof ShadowRoot)) {
+        break;
+      }
 
       const host = root.host as HTMLElement;
-      if (!host) break;
-
+      if (!host) {
+        break;
+      }
+      // store the host and continue up the tree
       ancestors.push(host);
 
-      // Determine which element to preserve (by not hiding with aria-hidden) within each shadow root
-      if (!shadowRootElements.has(root)) {
-        shadowRootElements.set(root, current === this.el ? this.el : host);
+      // Record the element to preserve within this shadow root
+      // 'current' is the child element within 'root' that should remain visible
+      if (!shadowRoots.has(root)) {
+        shadowRoots.set(root, current as HTMLElement);
       }
 
       // Collect light DOM ancestors between shadow boundaries
@@ -491,8 +506,8 @@ export class VaModal {
         const parentRoot = parent.getRootNode?.();
         if (parentRoot instanceof ShadowRoot) {
           // This parent is the top-level element in its shadow root
-          if (!shadowRootElements.has(parentRoot)) {
-            shadowRootElements.set(parentRoot, parent);
+          if (!shadowRoots.has(parentRoot)) {
+            shadowRoots.set(parentRoot, parent);
           }
           break;
         }
@@ -502,7 +517,7 @@ export class VaModal {
       current = host;
     }
 
-    return { ancestors, shadowRootElements };
+    return { ancestors, shadowRoots };
   }
 
 
