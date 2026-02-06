@@ -441,7 +441,6 @@ export class VaModal {
     if (!this.el) {
       return { ancestors, shadowRoots };
     }
-
     // Start with the modal element itself
     ancestors.push(this.el);
 
@@ -449,6 +448,14 @@ export class VaModal {
 
     // Traverse up the DOM tree through shadow hosts
     while (current) {
+      const nodeName = current.nodeName;
+      const nodeParentId = current.parentElement?.id;
+      // stop if we reach the va-file-input-multiple wrapper to avoid hiding necessary elements
+      // fix for iOS/VoiceOver/Safari modal button navigation
+      if (nodeName === 'VA-FILE-INPUT' && nodeParentId === 'file-input-multi-wrapper') {
+        break;
+      }
+
       const root = current.getRootNode?.();
       if (!(root instanceof ShadowRoot)) {
         break;

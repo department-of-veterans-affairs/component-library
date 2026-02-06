@@ -474,7 +474,7 @@ export class VaFileInputMultiple {
             {hint}
           </div>
         )}
-        <div class={outerWrapClass}>
+        <div id="file-input-multi-wrapper" class={outerWrapClass}>
           <div class="usa-sr-only" aria-live="polite" id="statusMessage"></div>
           {!this.isEmpty() && (
             <div class="selected-files-label">
