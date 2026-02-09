@@ -257,7 +257,7 @@ export class VaFileInput {
   @Watch('file')
   handleFileChange(newFile: File, oldFile: File) {
     // Clear password state when switching to a different file
-    if (newFile && newFile !== oldFile) {
+    if (newFile && oldFile && newFile !== oldFile) {
       this.passwordValue = null;
       this.passwordError = null;
       this.passwordSubmissionSuccess = null;
@@ -265,7 +265,7 @@ export class VaFileInput {
 
     // Additional check to ensure encryption focus takes place when a user changes
     // from one encrypted file to another encrypted file.
-    if (newFile && newFile !== oldFile && this.encrypted) {
+    if (newFile && oldFile && newFile !== oldFile && this.encrypted) {
       this.windowHasFocus
         ? focusOnPasswordInput(this.el)
         : this.delayPasswordInputFocusUntilWindowFocus = true;
