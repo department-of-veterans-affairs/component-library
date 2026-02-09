@@ -374,25 +374,23 @@ export class VaModal {
     this.undoAriaHidden.push(hideOthers(ancestors));
 
     // Hide siblings within each shadow root
-    shadowRoots.forEach((topLevelElement, root) => {
+    shadowRoots.forEach((elementToPreserve, shadowRoot) => {
       this.undoAriaHidden.push(
-        hideOthers([topLevelElement], root as unknown as HTMLElement),
+        hideOthers([elementToPreserve], shadowRoot as unknown as HTMLElement),
       );
     });
 
-    // Hide siblings within light DOM containers (e.g., other va-file-inputs within div.outer-wrap)
-    // Exclude the elements without a parent with slice(0, -1)
+    // Hide siblings within light DOM containers
+    // Exclude the last element (document root) with slice(0, -1)
     ancestors.slice(0, -1).forEach((element, i) => {
       const parent = ancestors[i + 1];
+      const hasSiblings = parent?.children && parent.children.length > 1;
+      const isParentShadowHost = parent?.shadowRoot !== null;
 
-      if (parent?.children && parent.children.length > 1) {
-        const isParentShadowHost = parent.shadowRoot !== null;
-
-        // Apply hideOthers only if the parent is not a shadow host,
-        // since shadow root siblings are already handled above.
-        if (!isParentShadowHost) {
-          this.undoAriaHidden.push(hideOthers([element], parent));
-        }
+      // Apply hideOthers only if parent has siblings and is not a shadow host
+      // (shadow root siblings are already handled above)
+      if (hasSiblings && !isParentShadowHost) {
+        this.undoAriaHidden.push(hideOthers([element], parent));
       }
     });
   }
@@ -461,7 +459,7 @@ export class VaModal {
    *
    * @returns Object with:
    *   - ancestors: Array of HTMLElements from modal up the shadow DOM chain
-   *   - shadowRoots: Array of ShadowRoots encountered during traversal
+   *   - shadowRoots: Map of ShadowRoots to the top-level element to preserve within each
    */
   private getModalHierarchy(): {
     ancestors: HTMLElement[];
@@ -482,43 +480,45 @@ export class VaModal {
     // Traverse up the DOM tree through shadow hosts
     while (current) {
       const root = current.getRootNode?.();
+
+      // Stop if we've reached the document root
       if (!(root instanceof ShadowRoot)) {
         break;
       }
 
+      // Safety check to make sure shadowRoot has a host
       const host = root.host as HTMLElement;
       if (!host) {
         break;
       }
-      // store the host and continue up the tree
+
+      // Store the shadow host and record which element to preserve in this shadow root
       ancestors.push(host);
 
-      // Record which element to preserve within this shadow root.
-      // 'current' is the direct child of 'root' that should remain visible (not aria-hidden).
-      // This is used later by hideOthers to hide siblings while preserving this element.
+      // Record the first element we encounter for each shadow root
       if (!shadowRoots.has(root)) {
         shadowRoots.set(root, current as HTMLElement);
       }
 
       // Collect light DOM ancestors between shadow boundaries
-      // After processing a shadow host,
-      // walk up through regular DOM elements until hitting another shadow root:
-      let parent = host.parentElement;
-      while (parent) {
-        ancestors.push(parent);
+      // Walk up through regular DOM elements until hitting another shadow root
+      let lightDomAncestor = host.parentElement;
+      while (lightDomAncestor) {
+        ancestors.push(lightDomAncestor);
 
-        const parentRoot = parent.getRootNode?.();
-        if (parentRoot instanceof ShadowRoot) {
-          // This parent is the top-level element in its shadow root
-          if (!shadowRoots.has(parentRoot)) {
-            shadowRoots.set(parentRoot, parent);
+        // If shadow root found, record it and break to continue up the shadow host chain
+        const ancestorRoot = lightDomAncestor.getRootNode?.();
+        if (ancestorRoot instanceof ShadowRoot) {
+          if (!shadowRoots.has(ancestorRoot)) {
+            shadowRoots.set(ancestorRoot, lightDomAncestor);
           }
           break;
         }
-        parent = parent.parentElement;
+        // If no shadow root, keep going up the light DOM
+        lightDomAncestor = lightDomAncestor.parentElement;
       }
 
-      // Move up to the shadow host for the next iteration
+      // Move up to the next shadow host
       current = host;
     }
 
