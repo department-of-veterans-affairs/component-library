@@ -140,7 +140,7 @@ export class VaLanguageToggle {
                 href={href}
                 hrefLang={lang}
                 onClick={(e) => this.handleToggle(e, lang, label)}
-                aria-current={"language"}
+                aria-current="true"
               >
                 {label}
               </a>
