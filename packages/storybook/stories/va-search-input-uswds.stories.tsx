@@ -134,6 +134,7 @@ WithTypeahead.args = {
 };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
+WithTypeahead.storyName = 'With Type-ahead';
 WithTypeahead.parameters = {
   chromatic: { disableSnapshot: true },
 };
