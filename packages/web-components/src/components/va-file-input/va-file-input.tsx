@@ -557,7 +557,9 @@ export class VaFileInput {
           ) :
           (
             <va-alert slim={true} status="warning">
-              <p class="password-alert-text">Encrypted file requires a password.</p>
+              <p class="password-alert-text">
+                We can't open your file without its password.
+              </p>
             </va-alert>
           )
         }
@@ -569,11 +571,13 @@ export class VaFileInput {
                 type="password"
                 onInput={(e) => this.passwordValue = (e.target as HTMLInputElement).value}
                 label="Password for this file"
+                messageAriaDescribedby={`${this.file.name}`}
                 required
                 error={this.passwordError}
               />
               <va-button
                 text="Submit password"
+                label={`Submit password for file ${this.file.name}`}
                 onClick={(e) => this.handleSubmitPasswordClick(e)}
                 secondary={true}
                 full-width={true}

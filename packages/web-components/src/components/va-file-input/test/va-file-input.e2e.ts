@@ -338,16 +338,17 @@ describe('va-file-input', () => {
 
     const warningAlert = await page.find('va-file-input >>> va-alert');
     expect(warningAlert).not.toBeNull();
-    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text"><span class=\"usa-sr-only\">Warning Alert </span>Encrypted file requires a password.</p>')
+    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text"><span class=\"usa-sr-only\">Warning Alert </span>We can\'t open your file without its password.</p>')
 
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).not.toBeNull();
-    const label = await textInput.find(' >>> label');
-    expect(label).toEqualText('Password for this file required')
+    const inputMessage = await textInput.find(' >>> #input-message');
+    expect(inputMessage).toEqualText('1x1.png');
 
     const passwordSubmitButton = await page.find('va-file-input >>> va-button');
     expect(passwordSubmitButton).not.toBeNull();
     expect(await passwordSubmitButton.getProperty('text')).toBe('Submit password');
+    expect(await passwordSubmitButton.getProperty('label')).toBe('Submit password for file 1x1.png');
   });
 
   it('updates password submit button state when clicked', async () => {
