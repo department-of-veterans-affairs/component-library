@@ -399,7 +399,7 @@ describe('va-modal', () => {
     const vaLinkFocused = await page.evaluate(() => {
       const vaLink = document.querySelector('va-link');
       const innerAnchor = vaLink?.shadowRoot?.querySelector('a');
-      return document.activeElement === vaLink && 
+      return document.activeElement === vaLink &&
              vaLink?.shadowRoot?.activeElement === innerAnchor;
     });
     expect(vaLinkFocused).toBe(true);
@@ -438,5 +438,346 @@ describe('va-modal', () => {
     // Verify focus was restored to the va-button
     const activeElement = await page.evaluate(() => document.activeElement?.id);
     expect(activeElement).toBe('outside-va-button');
+  });
+
+  describe('applyAriaHidden', () => {
+    // Helper function to setup modal test
+    async function setupModalTest(content: string) {
+      const page = await newE2EPage();
+      await page.setContent(content);
+      const modal = await page.find('va-modal');
+      await modal.setProperty('visible', true);
+      await page.waitForChanges();
+      return { page, modal };
+    }
+
+    describe('document-level siblings', () => {
+      it('should hide all document-level siblings when modal opens', async () => {
+        const { page } = await setupModalTest(`
+          <div id="header">Header content</div>
+          <div id="main-content">Main content</div>
+          <va-modal modal-title="Test Modal">
+            <p>Modal content</p>
+          </va-modal>
+          <div id="footer">Footer content</div>
+        `);
+
+        const header = await page.find('#header');
+        const mainContent = await page.find('#main-content');
+        const footer = await page.find('#footer');
+
+        expect(header.getAttribute('aria-hidden')).toBe('true');
+        expect(mainContent.getAttribute('aria-hidden')).toBe('true');
+        expect(footer.getAttribute('aria-hidden')).toBe('true');
+      });
+
+      it('should remove aria-hidden from siblings when modal closes', async () => {
+        const page = await newE2EPage();
+        await page.setContent(`
+          <div id="header">Header content</div>
+          <va-modal modal-title="Test Modal">
+            <p>Modal content</p>
+          </va-modal>
+          <div id="footer">Footer content</div>
+        `);
+
+        const modal = await page.find('va-modal');
+        await modal.setProperty('visible', true);
+        await page.waitForChanges();
+        await modal.setProperty('visible', false);
+        await page.waitForChanges();
+
+        const header = await page.find('#header');
+        const footer = await page.find('#footer');
+
+        expect(header.getAttribute('aria-hidden')).toBeNull();
+        expect(footer.getAttribute('aria-hidden')).toBeNull();
+      });
+    });
+
+    describe('shadow root siblings', () => {
+      it('should hide siblings within shadow roots', async () => {
+        const { page } = await setupModalTest(`
+          <va-card>
+            <div id="card-content">Card content</div>
+            <va-modal modal-title="Test Modal">
+              <p>Modal content</p>
+            </va-modal>
+          </va-card>
+        `);
+
+        const cardContent = await page.find('#card-content');
+        expect(cardContent.getAttribute('aria-hidden')).toBe('true');
+      });
+
+      it('should hide siblings in nested shadow roots', async () => {
+        const { page } = await setupModalTest(`
+          <va-file-input label="Upload File">
+            <va-modal modal-title="Test Modal">
+              <p>Modal content</p>
+            </va-modal>
+          </va-file-input>
+          <va-file-input label="Another Upload">
+            <p>Another file input</p>
+          </va-file-input>
+        `);
+
+        const secondFileInput = await page.$$('va-file-input');
+        const ariaHidden = await page.evaluate((el: HTMLElement) => {
+          return el.getAttribute('aria-hidden');
+        }, secondFileInput[1]);
+
+        expect(ariaHidden).toBe('true');
+      });
+    });
+
+    describe('light DOM siblings', () => {
+      it('should hide light DOM siblings in va-accordion', async () => {
+        const { page } = await setupModalTest(`
+          <va-accordion>
+            <va-accordion-item header="Panel 1">
+              <p>Panel 1 content</p>
+              <va-modal modal-title="Test Modal">
+                <p>Modal content</p>
+              </va-modal>
+            </va-accordion-item>
+            <va-accordion-item header="Panel 2">
+              <p>Panel 2 content</p>
+            </va-accordion-item>
+            <va-accordion-item header="Panel 3">
+              <p>Panel 3 content</p>
+            </va-accordion-item>
+          </va-accordion>
+        `);
+
+        // Check sibling accordion items
+        const panel2 = await page.find('va-accordion-item[header="Panel 2"]');
+        const panel3 = await page.find('va-accordion-item[header="Panel 3"]');
+
+        expect(panel2.getAttribute('aria-hidden')).toBe('true');
+        expect(panel3.getAttribute('aria-hidden')).toBe('true');
+
+        // Panel 1 contains the modal, so it should NOT have aria-hidden
+        const panel1 = await page.find('va-accordion-item[header="Panel 1"]');
+        expect(panel1.getAttribute('aria-hidden')).toBeNull();
+      });
+    });
+
+    describe('ancestor preservation', () => {
+      it('should not apply aria-hidden to any ancestors (DOM and shadow hosts)', async () => {
+        const { page } = await setupModalTest(`
+          <div id="container">
+            <div id="inner-container">
+              <va-file-input label="Upload File" id="file-input">
+                <va-modal modal-title="Test Modal">
+                  <p>Modal content</p>
+                </va-modal>
+              </va-file-input>
+            </div>
+          </div>
+        `);
+
+        const container = await page.find('#container');
+        const innerContainer = await page.find('#inner-container');
+        const fileInput = await page.find('#file-input');
+
+        expect(container.getAttribute('aria-hidden')).toBeNull();
+        expect(innerContainer.getAttribute('aria-hidden')).toBeNull();
+        expect(fileInput.getAttribute('aria-hidden')).toBeNull();
+      });
+
+      it('should preserve light DOM containers between shadow boundaries', async () => {
+        const { page } = await setupModalTest(`
+          <div id="app-root">
+            <va-accordion>
+              <va-accordion-item header="Section">
+                <div class="content-wrapper">
+                  <va-modal modal-title="Test Modal">
+                    <p>Modal content</p>
+                  </va-modal>
+                </div>
+              </va-accordion-item>
+            </va-accordion>
+          </div>
+        `);
+
+        // The app-root should NOT be hidden (it's an ancestor)
+        const appRoot = await page.find('#app-root');
+        expect(appRoot.getAttribute('aria-hidden')).toBeNull();
+
+        // The content-wrapper should also NOT be hidden (it's an ancestor)
+        const wrapper = await page.find('.content-wrapper');
+        expect(wrapper.getAttribute('aria-hidden')).toBeNull();
+      });
+    });
+
+    describe('complex nested scenarios', () => {
+      it('should handle multiple levels of nesting correctly', async () => {
+        const { page } = await setupModalTest(`
+          <div id="app-root">
+            <va-card>
+              <va-accordion>
+                <va-accordion-item header="Section 1">
+                  <va-modal modal-title="Test Modal">
+                    <p>Modal content</p>
+                  </va-modal>
+                </va-accordion-item>
+                <va-accordion-item header="Section 2">
+                  <p>Other content</p>
+                </va-accordion-item>
+              </va-accordion>
+            </va-card>
+            <div id="sidebar">Sidebar content</div>
+          </div>
+        `);
+
+        // Verify sibling accordion item is hidden
+        const section2 = await page.find('va-accordion-item[header="Section 2"]');
+        expect(section2.getAttribute('aria-hidden')).toBe('true');
+
+        // Verify ancestors are NOT hidden
+        const appRoot = await page.find('#app-root');
+        expect(appRoot.getAttribute('aria-hidden')).toBeNull();
+
+        // Verify document-level sibling is hidden
+        const sidebar = await page.find('#sidebar');
+        expect(sidebar.getAttribute('aria-hidden')).toBe('true');
+      });
+
+      it('should handle modal reopening with different aria-hidden states', async () => {
+        const page = await newE2EPage();
+        await page.setContent(`
+          <div id="content-1">Content 1</div>
+          <div id="content-2">Content 2</div>
+          <va-modal modal-title="Test Modal">
+            <p>Modal content</p>
+          </va-modal>
+        `);
+
+        const modal = await page.find('va-modal');
+        const content1 = await page.find('#content-1');
+        const content2 = await page.find('#content-2');
+
+        // First open
+        await modal.setProperty('visible', true);
+        await page.waitForChanges();
+        expect(content1.getAttribute('aria-hidden')).toBe('true');
+        expect(content2.getAttribute('aria-hidden')).toBe('true');
+
+        // Close
+        await modal.setProperty('visible', false);
+        await page.waitForChanges();
+        expect(content1.getAttribute('aria-hidden')).toBeNull();
+        expect(content2.getAttribute('aria-hidden')).toBeNull();
+
+        // Second open
+        await modal.setProperty('visible', true);
+        await page.waitForChanges();
+        expect(content1.getAttribute('aria-hidden')).toBe('true');
+        expect(content2.getAttribute('aria-hidden')).toBe('true');
+      });
+    });
+
+    describe('edge cases', () => {
+      it('should handle modal with no siblings', async () => {
+        const { page } = await setupModalTest(`
+          <div id="container">
+            <va-modal modal-title="Test Modal">
+              <p>Modal content</p>
+            </va-modal>
+          </div>
+        `);
+
+        // Container should not have aria-hidden (it's an ancestor)
+        const container = await page.find('#container');
+        expect(container.getAttribute('aria-hidden')).toBeNull();
+      });
+
+      it('should handle multiple modals where only one is visible', async () => {
+        const { page } = await setupModalTest(`
+          <va-modal id="modal-1" modal-title="Modal 1">
+            <p>Modal 1 content</p>
+          </va-modal>
+          <va-modal id="modal-2" modal-title="Modal 2">
+            <p>Modal 2 content</p>
+          </va-modal>
+        `);
+
+        // Modal 2 should have aria-hidden
+        const modal2 = await page.find('#modal-2');
+        expect(modal2.getAttribute('aria-hidden')).toBe('true');
+      });
+    });
+
+    describe('cleanup', () => {
+      it('should properly cleanup aria-hidden when modal is destroyed', async () => {
+        const page = await newE2EPage();
+        await page.setContent(`
+          <div id="content">Content</div>
+          <div id="modal-container">
+            <va-modal modal-title="Test Modal" visible>
+              <p>Modal content</p>
+            </va-modal>
+          </div>
+        `);
+
+        await page.waitForChanges();
+
+        // Content should be hidden
+        let content = await page.find('#content');
+        expect(content.getAttribute('aria-hidden')).toBe('true');
+
+        // Remove modal
+        await page.evaluate(() => {
+          const container = document.querySelector('#modal-container');
+          container?.remove();
+        });
+        await page.waitForChanges();
+
+        // Content should no longer be hidden
+        content = await page.find('#content');
+        expect(content.getAttribute('aria-hidden')).toBeNull();
+      });
+
+      it('should cleanup multiple hideOthers calls', async () => {
+        const page = await newE2EPage();
+        await page.setContent(`
+          <va-accordion>
+            <va-accordion-item header="Section 1">
+              <va-modal modal-title="Test Modal">
+                <p>Modal content</p>
+              </va-modal>
+            </va-accordion-item>
+            <va-accordion-item header="Section 2">
+              <p>Other content</p>
+            </va-accordion-item>
+          </va-accordion>
+          <div id="external-content">External content</div>
+        `);
+
+        const modal = await page.find('va-modal');
+
+        // Open modal
+        await modal.setProperty('visible', true);
+        await page.waitForChanges();
+
+        const externalContent = await page.find('#external-content');
+        expect(externalContent.getAttribute('aria-hidden')).toBe('true');
+
+        const section2Open = await page.find('va-accordion-item[header="Section 2"]');
+        expect(section2Open.getAttribute('aria-hidden')).toBe('true');
+
+        // Close modal
+        await modal.setProperty('visible', false);
+        await page.waitForChanges();
+
+        // All aria-hidden should be cleaned up
+        const externalContentAfter = await page.find('#external-content');
+        expect(externalContentAfter.getAttribute('aria-hidden')).toBeNull();
+
+        const section2Closed = await page.find('va-accordion-item[header="Section 2"]');
+        expect(section2Closed.getAttribute('aria-hidden')).toBeNull();
+      });
+    });
   });
 });
