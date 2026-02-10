@@ -6,6 +6,7 @@ import {
   Host,
   h,
   Listen,
+  forceUpdate,
   Prop,
   Watch,
 } from '@stencil/core';
@@ -13,6 +14,12 @@ import classnames from 'classnames';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers, Undo } from 'aria-hidden';
 import { focusableQueryString } from '../../utils/modal';
+
+/**
+ * Value corresponds with the --mobile-lg breakpoint size.
+ * https://design.va.gov/foundation/breakpoints
+ */
+const MOBILE_LG_BREAKPOINT = 480;
 
 /**
  * @click Used to detect clicks outside of modal contents to close modal.
@@ -100,7 +107,12 @@ export class VaModal {
   /*
    * Style of modal alert - info, error, success, warning
    */
-  @Prop({ reflect: true }) status?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+  @Prop({ reflect: true }) status?:
+    | 'continue'
+    | 'error'
+    | 'info'
+    | 'success'
+    | 'warning';
 
   /**
    * If the modal is visible or not
@@ -113,7 +125,6 @@ export class VaModal {
   watchVisibleHandler() {
     this.isVisibleDirty = true;
   }
-
 
   /**
    * Label for the modal, to be set as aria-label. Will take precedence over modalTitle
@@ -229,7 +240,9 @@ export class VaModal {
 
     const activeElement = this.getRealActiveElement();
     const firstElement = this.focusableChildren[0] as HTMLElement;
-    const lastElement = this.focusableChildren[this.focusableChildren.length - 1] as HTMLElement;
+    const lastElement = this.focusableChildren[
+      this.focusableChildren.length - 1
+    ] as HTMLElement;
 
     if (!e.shiftKey && activeElement === lastElement) {
       e.preventDefault();
@@ -239,6 +252,15 @@ export class VaModal {
       lastElement.focus();
     }
   }
+
+  // Trigger a re-render when the screen is resized to update the icon size
+  @Listen('resize', { target: 'window' })
+  handleResize() {
+    this.isLargerScreen = window.innerWidth >= MOBILE_LG_BREAKPOINT;
+    forceUpdate(this);
+  }
+
+  private isLargerScreen: boolean = window.innerWidth >= MOBILE_LG_BREAKPOINT;
 
   private handleClose(e: KeyboardEvent | MouseEvent) {
     this.closeEvent.emit(e);
@@ -352,7 +374,11 @@ export class VaModal {
     let activeElement = document.activeElement as HTMLElement;
 
     // Traverse shadow DOM boundaries to find the actual focused element
-    while (activeElement && activeElement.shadowRoot && activeElement.shadowRoot.activeElement) {
+    while (
+      activeElement &&
+      activeElement.shadowRoot &&
+      activeElement.shadowRoot.activeElement
+    ) {
       activeElement = activeElement.shadowRoot.activeElement as HTMLElement;
     }
 
@@ -420,7 +446,6 @@ export class VaModal {
     this.savedFocus?.focus();
   }
 
-
   /**
    * Maps the modal's position in nested shadow DOMs by traversing up the DOM tree.
    * Returns both the elements and shadow roots needed for proper aria-hidden handling.
@@ -434,7 +459,10 @@ export class VaModal {
    *   - ancestors: Array of HTMLElements from modal up the shadow DOM chain
    *   - shadowRoots: Array of ShadowRoots encountered during traversal
    */
-  private getModalHierarchy(): { ancestors: HTMLElement[]; shadowRoots: ShadowRoot[] } {
+  private getModalHierarchy(): {
+    ancestors: HTMLElement[];
+    shadowRoots: ShadowRoot[];
+  } {
     const ancestors: HTMLElement[] = [];
     const shadowRoots: ShadowRoot[] = [];
 
@@ -467,9 +495,9 @@ export class VaModal {
     return { ancestors, shadowRoots };
   }
 
-
   render() {
     const {
+      isLargerScreen,
       label,
       modalTitle,
       primaryButtonClick,
@@ -479,7 +507,6 @@ export class VaModal {
       status,
       visible,
       forcedModal,
-      unstyled,
     } = this;
 
     if (!visible) return null;
@@ -496,33 +523,32 @@ export class VaModal {
     if (label) {
       ariaLabel = label;
       btnAriaLabel = `Close ${label} modal`;
-    }
-    else if (modalTitle && modalTitle !== '') {
+    } else if (modalTitle && modalTitle !== '') {
       ariaLabel = `${modalTitle} modal`;
       btnAriaLabel = `Close ${modalTitle} modal`;
-    }
-    else {
-      console.warn('<va-modal>: An accessible name for the modal is required. Please provide either a label or modalTitle prop value.');
+    } else {
+      console.warn(
+        '<va-modal>: An accessible name for the modal is required. Please provide either a label or modalTitle prop value.',
+      );
     }
 
     const wrapperClass = classnames({
       'usa-modal': true,
-      'va-modal-alert': status,
-      'usa-modal--lg': this.large,
+      'va-modal': true,
+      'va-modal--status': status,
+      'va-modal--lg': this.large,
     });
     const contentClass = classnames({
       'usa-modal__content': true,
-      'usa-modal-alert': status,
       'va-modal__content': true,
     });
     const bodyClass = classnames({
       'usa-modal__main': true,
-      'usa-modal-alert': status,
-      'va-modal-alert-body': status,
+      'va-modal__main': true,
     });
     const titleClass = classnames({
       'usa-modal__heading': true,
-      'va-modal-alert-title': status,
+      'va-modal__heading': true,
     });
 
     const closingButton = forcedModal ? (
@@ -530,7 +556,7 @@ export class VaModal {
     ) : (
       <button
         aria-label={btnAriaLabel}
-        class="va-modal-close"
+        class="va-modal__close"
         onClick={e => this.handleClose(e)}
         ref={el => (this.closeButton = el as HTMLButtonElement)}
         type="button"
@@ -564,14 +590,15 @@ export class VaModal {
         >
           <div class={contentClass}>
             {closingButton}
-            {status && (
-              <va-icon
-                class="va-modal-alert__icon"
-                icon={statusIcon}
-                size={4}
-              ></va-icon>
-            )}
             <div class={bodyClass}>
+              {/* Resize icon based on breakpoint */}
+              {status && (
+                <va-icon
+                  icon={statusIcon}
+                  class="va-modal__icon"
+                  size={isLargerScreen ? 4 : 3}
+                ></va-icon>
+              )}
               <div role="document">
                 {modalTitle && (
                   <h2 class={titleClass} tabindex={-1} id="heading">
@@ -582,45 +609,30 @@ export class VaModal {
                   <slot></slot>
                 </div>
               </div>
-              {((primaryButtonClick && primaryButtonText) ||
-                (secondaryButtonClick && secondaryButtonText)) && (
-                <div
-                  class="usa-modal__footer"
-                  ref={el => (this.alertActions = el as HTMLDivElement)}
-                >
-                  <ul class="usa-button-group">
-                    {primaryButtonClick && primaryButtonText && (
-                      <li class="usa-button-group__item">
-                        <va-button
-                          onClick={e => this.handlePrimaryButtonClick(e)}
-                          text={primaryButtonText}
-                        />
-                      </li>
-                    )}
-                    {secondaryButtonClick && secondaryButtonText && (
-                      <li class="usa-button-group__item">
-                        {!unstyled && (
-                          <va-button
-                            onClick={e => this.handleSecondaryButtonClick(e)}
-                            secondary
-                            text={secondaryButtonText}
-                          />
-                        )}
-                        {unstyled && (
-                          <button
-                            onClick={e => this.handlePrimaryButtonClick(e)}
-                            type="button"
-                            class="usa-button usa-button--unstyled"
-                          >
-                            {secondaryButtonText}
-                          </button>
-                        )}
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              )}
             </div>
+            {((primaryButtonClick && primaryButtonText) ||
+              (secondaryButtonClick && secondaryButtonText)) && (
+              <div
+                class="va-modal__footer"
+                ref={el => (this.alertActions = el as HTMLDivElement)}
+              >
+                {primaryButtonClick && primaryButtonText && (
+                  <va-button
+                    full-width
+                    onClick={e => this.handlePrimaryButtonClick(e)}
+                    text={primaryButtonText}
+                  />
+                )}
+                {secondaryButtonClick && secondaryButtonText && (
+                  <va-button
+                    full-width
+                    onClick={e => this.handleSecondaryButtonClick(e)}
+                    secondary
+                    text={secondaryButtonText}
+                  />
+                )}
+              </div>
+            )}
           </div>
         </div>
       </Host>
