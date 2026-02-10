@@ -30,6 +30,14 @@ describe('va-language-toggle', () => {
     expect(anchor).toHaveClass('is-current-lang');
   });
 
+  it('sets aria-current="true" on the current language link', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-language-toggle en-href="#" es-href="#" tl-href="#" />`);
+    const anchor = await page.find('va-language-toggle >>> a[aria-current]');
+    expect(anchor.getAttribute('aria-current')).toBe('true');
+    expect(await anchor.innerText).toBe('English');
+  });
+
   it('if router-links is set, clicking an anchor tag does not result in page navigation', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-language-toggle router-links="true" en-href="#" es-href="#" tl-href="#" />`);

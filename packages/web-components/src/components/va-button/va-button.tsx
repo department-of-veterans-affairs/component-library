@@ -173,16 +173,11 @@ export class VaButton {
       cancelable: true,
       composed: true,
     });
-
     if (this.submit !== 'skip') {
-      setTimeout(() => {
-        formElement.dispatchEvent(submitEvent);
-      }, 100);
+      formElement.dispatchEvent(submitEvent);
     }
     if (this.submit !== 'prevent') {
-      setTimeout(() => {
-        formElement.submit();
-      }, 200);
+      formElement.submit();
     }
   }
 
