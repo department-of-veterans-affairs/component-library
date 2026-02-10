@@ -237,6 +237,10 @@ const commonDevices = {
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 
+  controls: {
+    sort: 'alpha',
+  },
+
   options: {
     storySort: {
       method: 'alphabetical',
@@ -259,6 +263,9 @@ export const parameters = {
 
   docs: {
     codePanel: true,
+    controls: {
+      sort: 'alpha',
+    },
   },
 };
 
