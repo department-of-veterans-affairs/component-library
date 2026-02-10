@@ -24,14 +24,12 @@ export default {
 const defaultArgs = {
   'name': 'options',
   'value': '',
-  'message-aria-describedby': 'Optional description text for screen readers',
   'width': 'lg',
 };
 
 const Template = ({
   name,
   value,
-  'message-aria-describedby': ariaDescribedbyMessage,
   width,
 }) => {
   return (
@@ -39,7 +37,6 @@ const Template = ({
       <va-sort
         name={name}
         value={value}
-        message-aria-describedby={ariaDescribedbyMessage}
         width={width}
       >
         <option value="relevance">Relevance</option>
