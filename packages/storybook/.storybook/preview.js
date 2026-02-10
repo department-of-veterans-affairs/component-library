@@ -103,6 +103,10 @@ const viewports = {
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 
+  controls: {
+    sort: 'alpha',
+  },
+
   options: {
     storySort: {
       method: 'alphabetical',
@@ -124,7 +128,10 @@ export const parameters = {
   viewMode: 'docs',
 
   docs: {
-    codePanel: true
+    codePanel: true,
+    controls: {
+      sort: 'alpha',
+    },
   },
 };
 

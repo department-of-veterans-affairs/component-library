@@ -418,6 +418,7 @@ export namespace Components {
      * @componentName Card Status
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref card/card-status
      */
     interface VaCardStatus {
         /**
@@ -2907,6 +2908,7 @@ declare global {
      * @componentName Card Status
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref card/card-status
      */
     interface HTMLVaCardStatusElement extends Components.VaCardStatus, HTMLStencilElement {
     }
@@ -4462,6 +4464,7 @@ declare namespace LocalJSX {
      * @componentName Card Status
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref card/card-status
      */
     interface VaCardStatus {
         /**
@@ -6889,6 +6892,7 @@ declare module "@stencil/core" {
              * @componentName Card Status
              * @maturityCategory caution
              * @maturityLevel available
+             * @guidanceHref card/card-status
              */
             "va-card-status": LocalJSX.VaCardStatus & JSXBase.HTMLAttributes<HTMLVaCardStatusElement>;
             /**
