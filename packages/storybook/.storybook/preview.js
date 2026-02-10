@@ -27,6 +27,7 @@ import {
   applyPolyfills,
   defineCustomElements,
 } from '@department-of-veterans-affairs/component-library';
+import { allModes } from './modes';
 
 applyPolyfills().then(() => {
   defineCustomElements();
@@ -239,6 +240,14 @@ export const parameters = {
 
   controls: {
     sort: 'alpha',
+  },
+
+  // Apply Chromatic modes globally to ALL stories
+  chromatic: {
+    modes: {
+      mobile: allModes['mobile'],
+      desktop: allModes['desktop'],
+    },
   },
 
   options: {
