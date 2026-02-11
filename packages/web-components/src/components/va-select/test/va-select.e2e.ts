@@ -309,4 +309,56 @@ describe('va-select', () => {
     const headerMessage = await page.find('va-select >>> span#header-message');
     expect(headerMessage).toBeNull();
   });
+
+  it('fires analytics event when enableAnalytics is true and not inside va-sort', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" enable-analytics>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    
+    // Use page.$eval to select the option via native DOM
+    await page.$eval('va-select', (el: any) => {
+      const select = el.shadowRoot.querySelector('select');
+      select.value = 'bar';
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await page.waitForChanges();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      componentName: 'va-select',
+      action: 'change',
+      details: {
+        label: 'A label',
+        selectLabel: 'bar',
+      },
+    });
+  });
+
+  it('does not fire analytics event when enableAnalytics is false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label">
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    
+    // Use page.$eval to select the option via native DOM
+    await page.$eval('va-select', (el: any) => {
+      const select = el.shadowRoot.querySelector('select');
+      select.value = 'bar';
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await page.waitForChanges();
+
+    expect(analyticsSpy).not.toHaveReceivedEvent();
+  });
 });
