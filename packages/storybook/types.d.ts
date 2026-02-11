@@ -61,6 +61,7 @@ declare global {
       'va-telephone': WCTypes.VaTelephone & IsElement;
       'va-text-input': WCTypes.VaTextInput & IsElement;
       'va-textarea': WCTypes.VaTextarea & IsElement;
+      'va-sort': WCTypes.VaSort & IsElement;
     }
   }
 }
