@@ -54,12 +54,12 @@ export class VaCard {
   @Prop({ reflect: true, mutable: true }) error?: string;
 
   /**
-   * Set the href for the card link.
+   * Sets the href for the card link.
    */
   @Prop() linkHref: string;
   /**
    *
-   * Set the text for the card link.
+   * Sets the text for the card link.
    */
   @Prop() linkText: string;
 
