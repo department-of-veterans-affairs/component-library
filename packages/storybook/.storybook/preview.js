@@ -82,14 +82,6 @@ const viewports = {
     },
     type: 'tablet',
   },
-  mediumScreen: {
-    name: '768px - VADS Medium Screen',
-    styles: {
-      height: '1024px',
-      width: '768px',
-    },
-    type: 'tablet',
-  },
   desktop: {
     name: '1024px - VADS Desktop',
     styles: {
@@ -113,125 +105,6 @@ const viewports = {
       width: '1400px',
     },
     type: 'desktop',
-  },
-};
-
-// Taken from https://analytics.usa.gov/veterans-affairs to reflect the most common devices used by our users. (February 2026)
-const commonDevices = {
-  common: {
-    name: '👇 Common VA.gov User Devices',
-    styles: {
-      height: '',
-      width: '',
-    },
-    type: 'other',
-  },
-  galaxy: {
-    name: '360px - Samsung Galaxy S24/25',
-    styles: {
-      height: '780px',
-      width: '360px',
-    },
-    type: 'other',
-  },
-
-  iphoneX: {
-    name: '375px - iPhone X, XS, 11 Pro',
-    styles: {
-      height: '812px',
-      width: '375px',
-    },
-    type: 'other',
-  },
-
-  iphone12: {
-    name: '390px - iPhone 12/13/14',
-    styles: {
-      height: '844px',
-      width: '390px',
-    },
-    type: 'other',
-  },
-
-  iphone15: {
-    name: '393px - iPhone 15/16',
-    styles: {
-      height: '852px',
-      width: '393px',
-    },
-    type: 'other',
-  },
-
-  iphone17: {
-    name: '402px - iPhone 17/17 Pro',
-    styles: {
-      height: '874px',
-      width: '402px',
-    },
-    type: 'other',
-  },
-
-  pixel: {
-    name: '412px - Google Pixel 6/7/8',
-    styles: {
-      height: '915px',
-      width: '412px',
-    },
-    type: 'other',
-  },
-
-  iphoneAir: {
-    name: '420px - iPhone Air',
-    styles: {
-      height: '912px',
-      width: '420px',
-    },
-    type: 'other',
-  },
-
-  iphone14ProMax: {
-    name: '430px - iPhone 14-16 Pro Max, 15/16 Plus',
-    styles: {
-      height: '932px',
-      width: '430px',
-    },
-    type: 'other',
-  },
-
-  iphone16ProMax: {
-    name: '440px - iPhone 16/17 Pro Max',
-    styles: {
-      height: '956px',
-      width: '440px',
-    },
-    type: 'other',
-  },
-
-  galaxyUltra: {
-    name: '440px - Samsung Galaxy S24-25 Ultra',
-    styles: {
-      height: '956px',
-      width: '440px',
-    },
-    type: 'other',
-  },
-
-  smallLaptops: {
-    name: '1440px - Common Laptops',
-    styles: {
-      height: '900px',
-      width: '1440px',
-    },
-    type: 'other',
-  },
-
-  largeLaptops: {
-    name: '1536px - Windows Laptop (125% scaling on 1920x1080)',
-    styles: {
-      height: '864px',
-      width: '1536px',
-    },
-    type: 'other',
   },
 };
 
@@ -265,7 +138,7 @@ export const parameters = {
   },
 
   viewport: {
-    options: { ...viewports, ...commonDevices },
+    options: { ...viewports },
   },
 
   viewMode: 'docs',
