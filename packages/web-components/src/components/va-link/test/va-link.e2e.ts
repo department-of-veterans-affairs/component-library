@@ -306,4 +306,19 @@ describe('va-link', () => {
     await anchor.click();
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
+
+  it('supports external and download props on a single instance', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-link href="https://www.va.gov" external download text="Veterans Affairs" />'
+    );
+
+    const downloadIcon = await page.find('va-link >>> va-icon');
+    expect (downloadIcon.classList.contains('link-icon--left')).toBe(true);
+    
+    const anchor = await page.find('va-link >>> a');
+    expect(anchor.getAttribute('rel')).toEqual('noreferrer');
+    expect(anchor.getAttribute('target')).toEqual('_blank');
+    expect(anchor.innerText).toContain('opens in a new tab');
+  });
 });
