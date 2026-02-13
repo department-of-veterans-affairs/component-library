@@ -238,7 +238,37 @@ export class VaMemorableDate {
   };
 
   private handleDateChange = (event: InputEvent) => {
+    let undef;
+
     const { currentYear, currentMonth, currentDay } = this;
+
+    if (currentDay && currentMonth && this.yearTouched) {
+      
+      // Fallback to undefined to preserve validation of empty strings
+      const yearNum = Number(currentYear || undef);
+      const monthNum = Number(currentMonth || undef);
+      const dayNum = Number(currentDay || undef);
+  
+      validate({
+          component: this,
+          year: yearNum,
+          month: monthNum,
+          day: dayNum,
+          yearTouched: this.yearTouched,
+          monthTouched: this.monthTouched,
+          dayTouched: this.dayTouched,
+          monthSelect: this.monthSelect,
+        });
+  
+        if (this.error) {
+          if (this.externalValidation) {
+            this.dateChange.emit(event);
+          }
+          return;
+        }
+      
+    }
+
     /* eslint-disable i18next/no-literal-string */
     this.value =
       currentYear || currentMonth || currentDay

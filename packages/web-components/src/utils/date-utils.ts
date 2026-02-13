@@ -192,9 +192,8 @@ export function validate({
   monthSelect,
   monthOptional,
 }: ValidateConfig): void {
-
   // Don't validate if all values are empty
-  if ((!year) && !month && !day) {
+  if (!year && !month && !day) {
     return;
   }
   const maxDays = daysForSelectedMonth(year, month);
@@ -261,6 +260,8 @@ export function validate({
   }
 
   // Validate year, month, and day ranges if they have a value regardless of whether they are required
+  let invalidFields = false;
+
   if (
     monthRequired &&
     month &&
@@ -269,16 +270,19 @@ export function validate({
   ) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
-    return;
+    invalidFields = true;
   }
   if (day && !monthYearOnly && (day < minDays || day > maxDays) && dayTouched) {
     component.invalidDay = true;
     component.error = 'day-range';
-    return;
+    invalidFields = true;
   }
   if (year && (year < minYear || year > maxYear) && yearTouched) {
     component.invalidYear = true;
     component.error = 'year-range';
+    invalidFields = true;
+  }
+  if (invalidFields && (monthTouched || dayTouched || yearTouched)) {
     return;
   }
 
