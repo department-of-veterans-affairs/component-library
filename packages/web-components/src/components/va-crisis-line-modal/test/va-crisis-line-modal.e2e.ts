@@ -168,7 +168,7 @@ describe('va-crisis-line-modal', () => {
     expect(isVisible).toBe(true);
 
     // Close modal by triggering close event
-    const closeBtn = await modal.find('>>> button.va-modal-close');
+    const closeBtn = await modal.find('>>> button.va-modal__close');
     await closeBtn.click();
     await page.waitForChanges();
 
