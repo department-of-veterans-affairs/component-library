@@ -20,7 +20,7 @@
 @use 'base/utils';
 
 //============ USWDS v1 ==============//
-@use 'formation-overrides/core/fonts' as fo_fonts;
+@use 'formation-overrides/core/fonts';
 @use 'formation-overrides/core/utilities';
 @use 'formation-overrides/core/base';
 
@@ -37,6 +37,6 @@
 
 // ---- USWDS v3 --- //
 @use 'elements/lists';
-@use 'elements/media-block' as uswds_media_block;
+@use 'elements/media-block';
 
 @use 'base/va';
