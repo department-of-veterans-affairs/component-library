@@ -434,11 +434,11 @@ export namespace Components {
          */
         "headerText": string;
         /**
-          * Set the href for the card link.
+          * Sets the href for the card link.
          */
         "linkHref": string;
         /**
-          * Set the text for the card link.
+          * Sets the text for the card link.
          */
         "linkText": string;
         /**
@@ -1877,6 +1877,14 @@ export namespace Components {
           * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
+        /**
+          * Header text to display at the top of the side navigation mobile view. If not provided, it will default to "Related pages menu".
+         */
+        "mobileHeader"?: string;
+        /**
+          * Aria label for the nav element that wraps the side navigation links. If not provided, it will default to "Related pages menu".
+         */
+        "navAriaLabel"?: string;
     }
     interface VaSidenavItem {
         /**
@@ -4545,11 +4553,11 @@ declare namespace LocalJSX {
          */
         "headerText"?: string;
         /**
-          * Set the href for the card link.
+          * Sets the href for the card link.
          */
         "linkHref"?: string;
         /**
-          * Set the text for the card link.
+          * Sets the text for the card link.
          */
         "linkText"?: string;
         /**
@@ -6184,6 +6192,14 @@ declare namespace LocalJSX {
           * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
+        /**
+          * Header text to display at the top of the side navigation mobile view. If not provided, it will default to "Related pages menu".
+         */
+        "mobileHeader"?: string;
+        /**
+          * Aria label for the nav element that wraps the side navigation links. If not provided, it will default to "Related pages menu".
+         */
+        "navAriaLabel"?: string;
     }
     interface VaSidenavItem {
         /**
