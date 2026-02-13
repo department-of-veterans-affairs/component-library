@@ -131,10 +131,12 @@ export class VaMaintenanceBanner {
     // necessary because the slotted content passed as children will be rendered
     // in the light DOM regardless of conditional rendering in the component's
     // render method.
-    const slotToRemove: HTMLElement = this.isWarning ?
-      this.el.querySelector('[slot="maintenance-content"]') :
-      this.el.querySelector('[slot="warn-content"]');
-    slotToRemove?.remove();
+    if (!this.preventRender) {
+      const slotToRemove: HTMLElement = this.isWarning
+        ? this.el.querySelector('[slot="maintenance-content"]')
+        : this.el.querySelector('[slot="warn-content"]');
+      slotToRemove?.remove();
+    }
   }
 
   derivePostContent = (maintenanceStartDateTime: Date, maintenanceEndDateTime: Date) => {
