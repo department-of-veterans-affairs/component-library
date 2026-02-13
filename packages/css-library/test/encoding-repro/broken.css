@@ -1,0 +1,45 @@
+/* BROKEN: Contains actual UTF-8 non-breaking space character */
+/* When served with charset=iso-8859-1, the "Â" character appears */
+
+[type=checkbox],
+[type=radio] {
+  position: absolute;
+  left: -999em;
+}
+
+[type=checkbox] + label,
+[type=radio] + label {
+  cursor: pointer;
+  font-weight: 400;
+  margin-bottom: 0.65em;
+  display: block;
+  font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+[type=checkbox] + label::before,
+[type=radio] + label::before {
+  background: #fff;
+  content: " ";
+  display: inline-block;
+  text-indent: 0.15em;
+  vertical-align: middle;
+}
+
+[type=checkbox] + label::before {
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px #757575;
+  height: 20px;
+  line-height: 20px;
+  margin-right: 0.6em;
+  width: 20px;
+}
+
+[type=radio] + label::before {
+  border-radius: 100%;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #757575;
+  height: 18px;
+  line-height: 18px;
+  margin-right: 0.75em;
+  width: 18px;
+}
