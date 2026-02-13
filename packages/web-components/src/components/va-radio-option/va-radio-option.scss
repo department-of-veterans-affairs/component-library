@@ -94,6 +94,11 @@ va-radio-option input[type="radio"] + label {
 }
 
 va-radio-option input[type="radio"] + label:before {
+  background: unset;
+  display: unset;
+  text-indent: unset;
+  vertical-align: unset;
+  content: none;
   border-radius: 0;
   box-shadow: none;
   height: 0;
