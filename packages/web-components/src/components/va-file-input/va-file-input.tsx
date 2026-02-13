@@ -723,6 +723,7 @@ export class VaFileInput {
             id="fileInputField"
             class={`file-input ${file || uploadedFile ? 'with-file' : ''}`}
             aria-label={inputAriaLabel}
+            data-dd-privacy="mask"
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
             name={name}
@@ -757,7 +758,9 @@ export class VaFileInput {
               <div class="file-info-section">
                 {renderFileThumbnail(displayError, fileContents, fileType)}
                 <div class="file-info-group vads-u-line-height--2">
-                  <span class="file-label">{file ? file.name : uploadedFile.name}</span>
+                  +<span class="file-label" data-dd-privacy="mask">
+                  +  {file ? file.name : uploadedFile.name}
+                  +</span>
 
                   {renderErrorAlert(displayError)}
 
