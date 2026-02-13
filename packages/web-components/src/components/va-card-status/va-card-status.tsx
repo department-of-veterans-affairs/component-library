@@ -77,9 +77,8 @@ export class VaCard {
     } = this;
 
     // Do not render component if required props are not passed.
-    if (!headerText || !linkHref || !linkText) {
-      return null;
-    }
+    const isMissingRequiredProps = !headerText || !linkHref || !linkText;
+    if (isMissingRequiredProps) return null;
 
     // Create a headers element
     const HeaderLevel = getHeaderLevel(headerLevel);
