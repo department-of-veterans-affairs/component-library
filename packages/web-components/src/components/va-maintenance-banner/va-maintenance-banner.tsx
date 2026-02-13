@@ -137,7 +137,7 @@ export class VaMaintenanceBanner {
     slotToRemove?.remove();
   }
 
-  derivePostContent = ( maintenanceStartDateTime: Date, maintenanceEndDateTime: Date) => {
+  derivePostContent = (maintenanceStartDateTime: Date, maintenanceEndDateTime: Date) => {
     let milliseconds = (maintenanceEndDateTime.getTime() - maintenanceStartDateTime.getTime());
     const hours = Math.floor(milliseconds / (1000 * 60 * 60));
     const minutes = ((milliseconds / (1000 * 60 * 60)) - hours) * 60 ;
