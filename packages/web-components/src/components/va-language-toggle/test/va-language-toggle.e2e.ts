@@ -30,6 +30,25 @@ describe('va-language-toggle', () => {
     expect(anchor).toHaveClass('is-current-lang');
   });
 
+  it('updates the aria-label when language changes', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-language-toggle router-links="true" en-href="#" es-href="#" tl-href="#" />`);
+    const group = await page.find('va-language-toggle >>> [role="group"]');
+    expect(group.getAttribute('aria-label')).toBe('Language selection English');
+    const [_, esAnchor] = await page.findAll('va-language-toggle >>> a');
+    await esAnchor.click();
+    await page.waitForChanges();
+    expect(group.getAttribute('aria-label')).toBe('Language selection Español');
+  });
+ 
+  it('sets aria-current="true" on the current language link', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-language-toggle en-href="#" es-href="#" tl-href="#" />`);
+    const anchor = await page.find('va-language-toggle >>> a[aria-current]');
+    expect(anchor.getAttribute('aria-current')).toBe('true');
+    expect(await anchor.innerText).toBe('English');
+  });
+
   it('if router-links is set, clicking an anchor tag does not result in page navigation', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-language-toggle router-links="true" en-href="#" es-href="#" tl-href="#" />`);
