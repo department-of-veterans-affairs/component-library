@@ -211,7 +211,7 @@ legend {
 [type=checkbox] + label::before,
 [type=radio] + label::before {
   background: tok.$vads-color-white;
-  content: '\a0';
+  content: '\00a0';
   display: inline-block;
   text-indent: 0.15em;
   vertical-align: middle\0; // Target IE 11 and below to vertically center inputs
