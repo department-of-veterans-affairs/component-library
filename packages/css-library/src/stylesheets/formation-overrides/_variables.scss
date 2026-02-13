@@ -1,7 +1,8 @@
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
+// Variables ported over from Formation so that we can keep those stylesheets
+// working while we work on deprecation.
+
+// Re-export override-function members so consumers don't need to import it separately
+@forward '../override-function';
 
 @use '../override-function' as *;
 
