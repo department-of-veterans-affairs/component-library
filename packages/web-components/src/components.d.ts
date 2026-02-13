@@ -446,7 +446,7 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Text to be displayed in the card subheader.  Heading level will be +1 of headerLevel Prop.
+          * Text to be displayed in the card subheader. Heading level will be +1 of headerLevel Prop.
          */
         "subheaderText": string;
         /**
@@ -4551,21 +4551,21 @@ declare namespace LocalJSX {
         /**
           * Text to be displayed in the card header.
          */
-        "headerText"?: string;
+        "headerText": string;
         /**
           * Sets the href for the card link.
          */
-        "linkHref"?: string;
+        "linkHref": string;
         /**
           * Sets the text for the card link.
          */
-        "linkText"?: string;
+        "linkText": string;
         /**
           * Sets the card to required and renders the (*Required) text.
          */
         "required"?: boolean;
         /**
-          * Text to be displayed in the card subheader.  Heading level will be +1 of headerLevel Prop.
+          * Text to be displayed in the card subheader. Heading level will be +1 of headerLevel Prop.
          */
         "subheaderText"?: string;
         /**
