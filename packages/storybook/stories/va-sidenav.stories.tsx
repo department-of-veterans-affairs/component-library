@@ -339,6 +339,7 @@ export const WithRouterLinkSupport = WithRouterTemplate.bind(null);
 WithRouterLinkSupport.args = {
   header: "Router link example",
   'icon-name': 'lightbulb',
+  'icon-background-color': 'vads-color-primary-darker',
   sideNav: sideNavBaseline(),
   id: 'router-link-sidenav',
 };
