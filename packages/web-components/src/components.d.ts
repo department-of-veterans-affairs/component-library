@@ -434,11 +434,11 @@ export namespace Components {
          */
         "headerText": string;
         /**
-          * Set the href for the card link.
+          * Sets the href for the card link.
          */
         "linkHref": string;
         /**
-          * Set the text for the card link.
+          * Sets the text for the card link.
          */
         "linkText": string;
         /**
@@ -4545,11 +4545,11 @@ declare namespace LocalJSX {
          */
         "headerText"?: string;
         /**
-          * Set the href for the card link.
+          * Sets the href for the card link.
          */
         "linkHref"?: string;
         /**
-          * Set the text for the card link.
+          * Sets the text for the card link.
          */
         "linkText"?: string;
         /**
