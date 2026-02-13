@@ -24,10 +24,10 @@ export class VaCard {
   /**
    * Text to be displayed in the card header.
    */
-  @Prop() headerText: string;
+  @Prop() headerText!: string;
 
   /**
-   * Text to be displayed in the card subheader. 
+   * Text to be displayed in the card subheader.
    * Heading level will be +1 of headerLevel Prop.
    */
   @Prop() subheaderText: string;
@@ -56,12 +56,12 @@ export class VaCard {
   /**
    * Sets the href for the card link.
    */
-  @Prop() linkHref: string;
+  @Prop() linkHref!: string;
   /**
    *
    * Sets the text for the card link.
    */
-  @Prop() linkText: string;
+  @Prop() linkText!: string;
 
   render() {
     const {
@@ -75,6 +75,10 @@ export class VaCard {
       linkText,
       required,
     } = this;
+
+    // Do not render component if required props are not passed.
+    const isMissingRequiredProps = !headerText || !linkHref || !linkText;
+    if (isMissingRequiredProps) return null;
 
     // Create a headers element
     const HeaderLevel = getHeaderLevel(headerLevel);
@@ -121,7 +125,7 @@ export class VaCard {
                 type='secondary'
                 href={linkHref}
                 text={linkText}
-              /> 
+              />
           </va-card>
         </div>
       </Host>
