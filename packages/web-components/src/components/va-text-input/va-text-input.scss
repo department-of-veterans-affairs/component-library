@@ -9,7 +9,7 @@
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-character-count/src/styles/_usa-character-count';
 
-@use '../../mixins/uswds-error-border.scss' as *;
+@use '../../mixins/uswds-error-border.scss';
 @use '../../mixins/uswds-input-width.scss';
 @import '../../mixins/focusable.css';
 
