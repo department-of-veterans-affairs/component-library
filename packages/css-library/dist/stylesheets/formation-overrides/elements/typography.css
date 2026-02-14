@@ -3,18 +3,10 @@
   ***THIS IS USWDS v1***
 */
 /**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
-/**
   /uswds/dist/scss/lib/addons/_margin.scss
 **/
 /**
   uswds/src/stylesheets/lib/helpers/_directional-values.scss
-**/
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
 **/
 /*
   Original: @import "~uswds/src/stylesheets/elements/typography";

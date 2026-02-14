@@ -8,9 +8,9 @@
 @use 'usa-textarea/src/styles/usa-textarea';
 @use 'usa-character-count/src/styles/_usa-character-count';
 
-@import '../../mixins/uswds-error-border.scss';
+@use '../../mixins/uswds-error-border.scss' as *;
+@use '../../mixins/header-labels.scss';
 @import '../../mixins/focusable.css';
-@import '../../mixins/header-labels.scss';
 
 :host {
   color: var(--vads-color-base);

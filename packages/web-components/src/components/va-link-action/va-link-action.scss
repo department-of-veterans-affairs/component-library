@@ -1,7 +1,7 @@
 @forward 'settings';
 @import '../../mixins/links.css';
 @import '../../mixins/accessibility.css';
-@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
+
 
 :host {
   display: inline-flex;

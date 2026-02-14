@@ -1,6 +1,6 @@
-@import "../formation-overrides/variables";
-@import "../../../dist/tokens/scss/variables.scss";
-@import '../override-function';
+@use "../formation-overrides/variables" as *;
+@use "../../../dist/tokens/scss/variables.scss" as *;
+@use '../override-function' as *;
 //=============================================================
 // Legacy styles for Crisis Line, mobile search modals
 // These styles are not quite the same as m-modal.

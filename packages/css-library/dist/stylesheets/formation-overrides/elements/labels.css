@@ -2,10 +2,6 @@
   Original: @import "~uswds/src/stylesheets/elements/labels";
   ***THIS IS USWDS v1***
 */
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
 .usa-label, .usa-label-big {
   background-color: #565c65;
   border-radius: 2px;

@@ -2,35 +2,41 @@
 
 // This is an override on Neat's media mixin to create media queries for both screen and print
 // https://github.com/thoughtbot/neat/blob/v1.8.0/app/assets/stylesheets/grid/_media.scss
+@use "sass:list";
+@use "../../dist/tokens/scss/variables.scss" as tokens;
+@use "./formation-overrides/variables" as fo-vars;
+@use "./functions" as *;
 
-@import "../../dist/tokens/scss/variables.scss";
-@import "./formation-overrides/variables";
+// Make override functions available within this module
+@use "./override-function" as *;
+// Forward all mixins so they can be imported with @use "...mixins" as *
+@forward './override-function';
 
 // Define default feature:
 $default-feature: min-width;
 
-@mixin media($query: $feature $value $columns, $total-columns: $grid-columns) {
-  @if length($query) == 1 {
-    @media screen and ($default-feature: nth($query, 1)), print and ($default-feature: nth($query, 1)) {
+@mixin media($query: $feature $value $columns, $total-columns: fo-vars.$grid-columns) {
+  @if list.length($query) == 1 {
+    @media screen and ($default-feature: list.nth($query, 1)), print and ($default-feature: list.nth($query, 1)) {
       $default-grid-columns: $grid-columns;
       $grid-columns: $total-columns !global;
       @content;
       $grid-columns: $default-grid-columns !global;
     }
   } @else {
-    $loop-to: length($query);
+    $loop-to: list.length($query);
     $media-query: "screen and ";
     $default-grid-columns: $grid-columns;
     $grid-columns: $total-columns !global;
 
-    @if is-not(is-even(length($query))) {
-      $grid-columns: nth($query, $loop-to) !global;
+    @if is-not(is-even(list.length($query))) {
+      $grid-columns: list.nth($query, $loop-to) !global;
       $loop-to: $loop-to - 1;
     }
 
     $i: 1;
     @while $i <= $loop-to {
-      $media-query: $media-query + "(" + nth($query, $i) + ": " + nth($query, $i + 1) + ") ";
+      $media-query: $media-query + "(" + list.nth($query, $i) + ": " + list.nth($query, $i + 1) + ") ";
 
       @if ($i + 1) != $loop-to {
         $media-query: $media-query + "and ";
@@ -49,7 +55,7 @@ $default-feature: min-width;
   }
 }
 
-$focus-outline: 2px solid $vads-color-action-focus-on-light;
+$focus-outline: 2px solid #{tokens.$vads-color-action-focus-on-light};
 $focus-spacing: 2px;
 
 // Focus state mixin
@@ -88,8 +94,8 @@ $focus-spacing: 2px;
 
   @each $key, $values in $formats-map {
     @if contains($file-formats, $key) {
-      $file-path: nth($values, 1);
-      $font-format: nth($values, 2);
+      $file-path: list.nth($values, 1);
+      $font-format: list.nth($values, 2);
 
       @if $asset-pipeline == true {
         $src: append($src, font-url($file-path) $font-format, comma);
@@ -169,10 +175,25 @@ $asset-pipeline: false;
 @function collapse-directionals($vals) {
   $output: null;
 
-  $a: nth($vals, 1);
-  $b: if(length($vals) < 2, $a, nth($vals, 2));
-  $c: if(length($vals) < 3, $a, nth($vals, 3));
-  $d: if(length($vals) < 2, $a, nth($vals, if(length($vals) < 4, 2, 4)));
+  $a: list.nth($vals, 1);
+  $len: list.length($vals);
+
+  $b: $a;
+  @if $len >= 2 {
+    $b: list.nth($vals, 2);
+  }
+
+  $c: $a;
+  @if $len >= 3 {
+    $c: list.nth($vals, 3);
+  }
+
+  $d: $a;
+  @if $len >= 4 {
+    $d: list.nth($vals, 4);
+  } @else if $len >= 2 {
+    $d: list.nth($vals, 2);
+  }
 
   @if $a == 0 { $a: 0; }
   @if $b == 0 { $b: 0; }
@@ -203,32 +224,37 @@ $asset-pipeline: false;
 
 @mixin directional-property($pre, $suf, $vals) {
   // Property Names
-  $top:    $pre + "-top"    + if($suf, "-#{$suf}", "");
-  $bottom: $pre + "-bottom" + if($suf, "-#{$suf}", "");
-  $left:   $pre + "-left"   + if($suf, "-#{$suf}", "");
-  $right:  $pre + "-right"  + if($suf, "-#{$suf}", "");
-  $all:    $pre +             if($suf, "-#{$suf}", "");
+  $suffix: "";
+  @if $suf {
+    $suffix: "-#{$suf}";
+  }
+
+  $top:    $pre + "-top"    + $suffix;
+  $bottom: $pre + "-bottom" + $suffix;
+  $left:   $pre + "-left"   + $suffix;
+  $right:  $pre + "-right"  + $suffix;
+  $all:    $pre +             $suffix;
 
   $vals: collapse-directionals($vals);
 
   @if contains-falsy($vals) {
-    @if nth($vals, 1) { #{$top}: nth($vals, 1); }
+    @if list.nth($vals, 1) { #{$top}: list.nth($vals, 1); }
 
-    @if length($vals) == 1 {
-      @if nth($vals, 1) { #{$right}: nth($vals, 1); }
+    @if list.length($vals) == 1 {
+      @if list.nth($vals, 1) { #{$right}: list.nth($vals, 1); }
     } @else {
-      @if nth($vals, 2) { #{$right}: nth($vals, 2); }
+      @if list.nth($vals, 2) { #{$right}: list.nth($vals, 2); }
     }
 
-    @if length($vals) == 2 {
-      @if nth($vals, 1) { #{$bottom}: nth($vals, 1); }
-      @if nth($vals, 2) { #{$left}:   nth($vals, 2); }
-    } @else if length($vals) == 3 {
-      @if nth($vals, 3) { #{$bottom}: nth($vals, 3); }
-      @if nth($vals, 2) { #{$left}:   nth($vals, 2); }
-    } @else if length($vals) == 4 {
-      @if nth($vals, 3) { #{$bottom}: nth($vals, 3); }
-      @if nth($vals, 4) { #{$left}:   nth($vals, 4); }
+    @if list.length($vals) == 2 {
+      @if list.nth($vals, 1) { #{$bottom}: list.nth($vals, 1); }
+      @if list.nth($vals, 2) { #{$left}:   list.nth($vals, 2); }
+    } @else if list.length($vals) == 3 {
+      @if list.nth($vals, 3) { #{$bottom}: list.nth($vals, 3); }
+      @if list.nth($vals, 2) { #{$left}:   list.nth($vals, 2); }
+    } @else if list.length($vals) == 4 {
+      @if list.nth($vals, 3) { #{$bottom}: list.nth($vals, 3); }
+      @if list.nth($vals, 4) { #{$left}:   list.nth($vals, 4); }
     }
   } @else {
     #{$all}: $vals;
@@ -319,7 +345,7 @@ $asset-pipeline: false;
 
 @mixin modal-close-button {
   background-color: transparent;
-  color: $color-primary;
+  color: fo-vars.$color-primary;
   font-size: scale-rem(2.25rem);
   padding: 0;
   position: absolute;
@@ -331,12 +357,12 @@ $asset-pipeline: false;
 
   &:hover {
     background-color: transparent;
-    color: $color-primary-darker;
+    color: fo-vars.$color-primary-darker;
   }
 
   &:active {
     background-color: transparent;
-    color: $color-primary-darkest;
+    color: fo-vars.$color-primary-darkest;
   }
 }
 
@@ -374,7 +400,7 @@ $asset-pipeline: false;
 
 @mixin modal-close-button {
   background-color: transparent;
-  color: $color-primary;
+  color: fo-vars.$color-primary;
   font-size: scale-rem(2.25rem);
   padding: 0;
   position: absolute;
@@ -386,12 +412,12 @@ $asset-pipeline: false;
 
   &:hover {
     background-color: transparent;
-    color: $color-primary-darker;
+    color: fo-vars.$color-primary-darker;
   }
 
   &:active {
     background-color: transparent;
-    color: $color-primary-darkest;
+    color: fo-vars.$color-primary-darkest;
   }
 }
 
@@ -405,7 +431,7 @@ $asset-pipeline: false;
   margin: 0;
   text-align: left;
   -webkit-font-smoothing: auto;
-  color: $color-link-default !important;
+  color: fo-vars.$color-link-default !important;
   font-weight: normal;
   text-decoration: underline;
   display: inline;
@@ -417,13 +443,13 @@ $asset-pipeline: false;
     border-radius: 0;
     outline: 0;
     padding: 0 !important;
-    color: $color-link-default;
+    color: fo-vars.$color-link-default;
     text-decoration: underline;
-    background-color: $color-link-default-hover !important;
+    background-color: tokens.$color-link-default-hover !important;
     @include color-transition;
   }
   &:active {
-    background: $color-link-default-hover;
+    background: tokens.$color-link-default-hover;
   }
   &:focus {
     @include focus-gold-light-outline;
@@ -431,7 +457,7 @@ $asset-pipeline: false;
   }
   &:disabled {
     text-decoration: none;
-    color: $color-gray-light !important;
+    color: fo-vars.$color-gray-light !important;
   }
 }
 

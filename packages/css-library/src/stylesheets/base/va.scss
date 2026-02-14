@@ -1,6 +1,8 @@
 @use '../override-function' as *;
-@import '../core-variables';
-@import "../mixins";
+@use '../../../dist/tokens/scss/variables.scss' as tokens;
+@use '../formation-overrides/variables' as fo-vars;
+@use '../core-variables' as *;
+@use "../mixins" as *;
 
 $lead-max-width: scale-rem(77rem);
 
@@ -16,13 +18,13 @@ html {
 }
 
 body {
-  background: $vads-color-white;
-  color: $vads-color-base;
+  background: tokens.$vads-color-white;
+  color: tokens.$vads-color-base;
   // font-family: $font-family-sans;
   // font-size: $base-font-size;
   font-size: 16px;
   font-family: inherit;
-  line-height: $vads-font-line-height-default;
+  line-height: tokens.$vads-font-line-height-default;
   &.modal-open {
     overflow: hidden;
   }
@@ -36,17 +38,17 @@ h1 {
 .show-on-focus {
   position: absolute;
   top: -10em;
-  background: $vads-color-white;
+  background: tokens.$vads-color-white;
   padding: 1em;
   margin: 1em;
-  color: $vads-color-primary-darker;
+  color: tokens.$vads-color-primary-darker;
   display: block;
   font-weight: 600;
 
   &:focus {
     position: inherit;
     top: auto;
-    outline: 2px solid $vads-color-warning;
+    outline: 2px solid tokens.$vads-color-warning;
   }
 }
 
@@ -88,7 +90,7 @@ body .row.full {
 }
 
 a {
-  color: $vads-color-link;
+  color: tokens.$vads-color-link;
   text-decoration: underline;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
@@ -98,16 +100,16 @@ a {
   transition-property: color, background-color, border-color;
 
   &:hover {
-    background-color: $color-link-default-hover;
+    background-color: tokens.$color-link-default-hover;
     color: inherit;
     text-decoration: underline;
   }
   &:active {
-    background: $color-link-default-hover;
+    background: tokens.$color-link-default-hover;
   }
   &:visited,
   &:visited abbr {
-    color: $vads-color-link-visited;
+    color: tokens.$vads-color-link-visited;
   }
 }
 
@@ -131,25 +133,25 @@ figure {
   margin-left: -15px; // converted to 16px base font: -1.875rem/2
   margin-right: -15px; // converted to 16px base font: -1.875rem/2
 
-  @media screen and (min-width: $large-screen), print and (min-width: $large-screen) {
+  @media screen and (min-width: tokens.$large-screen), print and (min-width: tokens.$large-screen) {
     margin-left: -16.66667%;
     margin-right: -16.66667%;
   }
 }
 
 figcaption {
-  color: $vads-color-primary-darker;
+  color: tokens.$vads-color-primary-darker;
 }
 
 input::-webkit-input-placeholder {
-  color: $vads-color-base-dark;
+  color: tokens.$vads-color-base-dark;
 }
 input::-moz-placeholder {
-  color: $vads-color-base-dark;
+  color: tokens.$vads-color-base-dark;
 }
 
 input:-ms-input-placeholder {
-  color: $vads-color-base-dark;
+  color: tokens.$vads-color-base-dark;
 }
 
 // Visually clear placeholder text on focus
@@ -172,7 +174,7 @@ input.va-input-medium-large {
 hr {
   margin: 2.5em 0;
   margin: 48px 0 40px; // converted to 16px base font: 3rem 0 2.5rem
-  border: 1px solid $vads-color-base-light;
+  border: 1px solid tokens.$vads-color-base-light;
 }
 
 // Default table width to being 100%
@@ -186,7 +188,7 @@ table {
 
 // Logo and Header
 .header {
-  background: $vads-color-primary-darker;
+  background: tokens.$vads-color-primary-darker;
   clear: both;
   margin: 0;
   padding: 0;
@@ -197,18 +199,18 @@ table {
   min-height: 189.19px;
 
   // This sets the height of the header on large mobile devices between 480 and 768.
-  @include media($small-screen) {
+  @include media(tokens.$small-screen) {
     min-height: 167.19px;
   }
 
-  @include media($medium-screen) {
+  @include media(tokens.$medium-screen) {
     position: relative;
     // Same reason as the comment above, only the value has been adjusted to be the height of the navbar for tablet/desktop.
     min-height: 159px;
   }
 
   .login-container {
-    background: $vads-color-primary-darker;
+    background: tokens.$vads-color-primary-darker;
     flex-wrap: wrap;
     white-space: nowrap;
 
@@ -216,7 +218,7 @@ table {
       padding: 0;
     }
 
-    @include media($tablet) {
+    @include media(tokens.$tablet) {
       flex: 1 0 100%;
     }
   }
@@ -226,7 +228,7 @@ table {
   flex-wrap: wrap;
   padding: 1em 0.75em 0;
 
-  @include media($tablet) {
+  @include media(tokens.$tablet) {
     padding-bottom: 0;
   }
 }
@@ -234,7 +236,7 @@ table {
 .va-header-logo-wrapper {
   flex: 1 0 164px;
 
-  @include media($tablet) {
+  @include media(tokens.$tablet) {
     flex-basis: scale-rem(6rem);
   }
 }
@@ -251,20 +253,20 @@ table {
 
   &:hover {
     .vets-logo-va path {
-      fill: $vads-color-warning;
+      fill: tokens.$vads-color-warning;
     }
   }
 }
 
 // Notice / feedback banners
 .va-notice--banner {
-  background: $vads-color-white;
+  background: tokens.$vads-color-white;
   margin: 0 0 0.75em 0;
   padding: 0;
   font-weight: 400;
 
-  @include media($medium-screen) {
-    background: $color-gray-lightest;
+  @include media(tokens.$medium-screen) {
+    background: fo-vars.$color-gray-lightest;
     .usa-banner-inner {
       font-size: 12px;
       padding-left: scale-rem(1.5rem);
@@ -279,7 +281,7 @@ table {
     }
   }
 
-  @include media($small-desktop-screen) {
+  @include media(tokens.$small-desktop-screen) {
     .usa-banner-inner {
       padding-left: 0;
       font-size: 12px;
@@ -316,7 +318,7 @@ table {
   &-va {
     path,
     rect {
-      fill: $vads-color-white
+      fill: tokens.$vads-color-white
     }
   }
 }
@@ -329,7 +331,7 @@ article > h1 {
 #content {
   margin: 0;
   padding: 0;
-  color: $vads-color-base;
+  color: tokens.$vads-color-base;
   overflow: hidden;
 }
 
@@ -337,17 +339,17 @@ article > h1 {
 // This is a copy of USWDS's .usa-font-lead style
 // https://github.com/18F/web-design-standards/blob/develop/src/stylesheets/elements/_typography.scss#L164
 .va-introtext {
-  font-family: $font-serif;
-  font-size: $lead-font-size;
-  font-weight: $font-weight-normal;
-  line-height: $lead-line-height;
+  font-family: tokens.$font-serif;
+  font-size: fo-vars.$lead-font-size;
+  font-weight: tokens.$font-weight-normal;
+  line-height: fo-vars.$lead-line-height;
   max-width: $lead-max-width;
 
   p, a {
-    font-family: $font-serif;
-    font-size: $lead-font-size;
-    font-weight: $font-weight-normal;
-    line-height: $lead-line-height;
+    font-family: tokens.$font-serif;
+    font-size: fo-vars.$lead-font-size;
+    font-weight: tokens.$font-weight-normal;
+    line-height: fo-vars.$lead-line-height;
   }
 }
 
@@ -363,7 +365,7 @@ article > h1 {
 
   &::before,
   &::after {
-    border-top: 1px solid $color-gray-light;
+    border-top: 1px solid fo-vars.$color-gray-light;
     content: " ";
     flex: 1 1 50%;
     padding: scale-rule(1rem 0);
@@ -375,18 +377,18 @@ article > h1 {
   padding: scale-rule(2rem 0 0);
   text-align: center;
 
-  @include media($medium-screen) {
+  @include media(tokens.$medium-screen) {
     padding-left: 0;
   }
 }
 
 // DEPRECATED: Replaced with va-button web component (still used in drupal content for anchor tags)
 .va-button-primary {
-  background: $color-green !important;
+  background: fo-vars.$color-green !important;
 
   &:hover,
   &:focus {
-    background-color: $vads-button-color-background-primary-alt-active-on-light !important;
+    background-color: tokens.$vads-button-color-background-primary-alt-active-on-light !important;
     text-decoration: none !important;
   }
 
@@ -401,17 +403,17 @@ article > h1 {
 
 .va-address-block {
   margin-left: scale-rem(5rem);
-  border-left: 3px solid $color-primary;
+  border-left: 3px solid fo-vars.$color-primary;
   padding-left: scale-rem(1rem);
 }
 
 // used mostly in content-build, we should consider moving this over there
 .last-updated {
   margin-top: 1.5em;
-  border-top: 2px solid $color-gray-light;
+  border-top: 2px solid fo-vars.$color-gray-light;
   padding: 1em 0;
   p {
-    color: $color-gray-dark !important;
+    color: fo-vars.$color-gray-dark !important;
   }
 }
 
@@ -421,7 +423,7 @@ article > h1 {
 // https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/2341#top
 
 .feature {
-  background: $color-primary-alt-lightest;
+  background: fo-vars.$color-primary-alt-lightest;
   padding: 1em;
   clear: both;
   margin: 1.5em 0 1.5em 0;
