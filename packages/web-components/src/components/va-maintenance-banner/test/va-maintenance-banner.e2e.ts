@@ -61,9 +61,6 @@ describe('maintenance-banner', () => {
         <div slot="maintenance-content">
           Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience.
         </div>
-        <div slot="warn-content">
-          Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools.
-        </div>
       </va-maintenance-banner>
     `);
   });
@@ -161,9 +158,6 @@ describe('maintenance-banner', () => {
             </button>
           </div>
         </mock:shadow-root>
-        <div slot="maintenance-content">
-          Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience.
-        </div>
         <div slot="warn-content">
           Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools.
         </div>
@@ -231,9 +225,6 @@ describe('maintenance-banner', () => {
         </mock:shadow-root>
         <div slot="maintenance-content">
           Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience.
-        </div>
-        <div slot="warn-content">
-          Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools.
         </div>
       </va-maintenance-banner>
     `);
