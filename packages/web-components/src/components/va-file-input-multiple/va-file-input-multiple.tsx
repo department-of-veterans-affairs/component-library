@@ -499,6 +499,7 @@ export class VaFileInputMultiple {
               <va-file-input
                 key={fileEntry.key}
                 id={`instance-${pageIndex}`}
+                data-dd-privacy="mask"
                 headless
                 label={label}
                 hint={hint}
