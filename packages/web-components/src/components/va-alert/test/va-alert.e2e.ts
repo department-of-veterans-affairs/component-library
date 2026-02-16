@@ -554,5 +554,131 @@ describe('va-alert', () => {
       const secondParagraphSrOnly = await page.find('va-alert p:nth-of-type(2) .usa-sr-only');
       expect(secondParagraphSrOnly).toBeNull();
     });
+
+    it('handles headline slot with text-only content (no HTML elements)', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="error">
+          <span slot="headline">Plain text headline</span>
+          <p>Content</p>
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // The text should be wrapped, and sr-only span added
+      const wrapper = await page.find('va-alert span[slot="headline"]');
+      expect(wrapper).not.toBeNull();
+
+      const srOnlySpan = await page.find('va-alert span[slot="headline"] .usa-sr-only');
+      expect(srOnlySpan).not.toBeNull();
+
+      const srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Error Alert ');
+    });
+
+    it('handles slim alert with text-only content (no HTML elements)', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="success">Simple text content</va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // Verify it's a slim alert
+      const alert = await page.find('va-alert');
+      expect(alert).toHaveAttribute('slim');
+
+      // The text should be wrapped in a span with sr-only prepended
+      const wrapper = await page.find('va-alert span');
+      expect(wrapper).not.toBeNull();
+
+      const srOnlySpan = await page.find('va-alert span .usa-sr-only');
+      expect(srOnlySpan).not.toBeNull();
+
+      const srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Success Alert ');
+    });
+
+    it('prepends sr-only to text when text comes before an element', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="info">
+          <span slot="headline">Text before <a href="#">link</a></span>
+          <p>Content</p>
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // The sr-only span should be at the very beginning
+      const headline = await page.find('va-alert span[slot="headline"]');
+      expect(headline).not.toBeNull();
+
+      const srOnlySpan = await page.find('va-alert span[slot="headline"] .usa-sr-only');
+      expect(srOnlySpan).not.toBeNull();
+
+      const srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Information Alert ');
+
+      // Verify the link is still present
+      const link = await page.find('va-alert span[slot="headline"] a');
+      expect(link).not.toBeNull();
+    });
+
+    it('prepends sr-only to first element when element comes before text', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="warning">
+          <h3 slot="headline"><a href="#">Link</a> followed by text</h3>
+          <p>Content</p>
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // The sr-only should be prepended to the h3 (first element)
+      const headline = await page.find('va-alert h3[slot="headline"]');
+      expect(headline).not.toBeNull();
+
+      const srOnlySpan = await page.find('va-alert h3[slot="headline"] .usa-sr-only');
+      expect(srOnlySpan).not.toBeNull();
+
+      const srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Warning Alert ');
+
+      // Verify the content structure is intact
+      const link = await page.find('va-alert h3[slot="headline"] a');
+      expect(link).not.toBeNull();
+    });
+
+    it('handles mixed content in slim alert default slot', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-alert status="error">
+          Text content with <a href="#">a link</a> in the middle
+        </va-alert>
+      `);
+
+      await page.waitForChanges();
+
+      // Verify it's a slim alert
+      const alert = await page.find('va-alert');
+      expect(alert).toHaveAttribute('slim');
+
+      // The first text node should be wrapped with sr-only prepended
+      const wrapper = await page.find('va-alert span');
+      expect(wrapper).not.toBeNull();
+
+      const srOnlySpan = await page.find('va-alert span .usa-sr-only');
+      expect(srOnlySpan).not.toBeNull();
+
+      const srOnlyText = await srOnlySpan.textContent;
+      expect(srOnlyText).toBe('Error Alert ');
+
+      // Verify the link is still present
+      const link = await page.find('va-alert a');
+      expect(link).not.toBeNull();
+    });
   });
 });
