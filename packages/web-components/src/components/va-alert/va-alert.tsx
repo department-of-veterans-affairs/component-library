@@ -236,16 +236,16 @@ export class VaAlert {
   /**
    * Adds a screen reader-only status announcement to the beginning of alert content.
    * This ensures screen reader users hear the alert type (e.g., "Warning Alert", "Error Alert")
-  * before the alert content. Works with both slim and non-slim alert variations.
-  *
+   * before the alert content. Works with both slim and non-slim alert variations.
+   *
    * For non-slim alerts, prepends to the headline slot content.
-  * For slim alerts, prepends to the default slot content.
-  *
+   * For slim alerts, prepends to the default slot content.
+   *
    * Handles various content structures:
    * - Elements only (e.g., <h3>Headline</h3>)
    * - Text only (e.g., "Plain text")
-  * - Mixed content (e.g., "Text with <a>link</a>")
-  *
+   * - Mixed content (e.g., "Text with <a>link</a>")
+   *
    * If content is text-only, it wraps the text in a span before prepending the sr-only announcement.
    */
   private addSrOnlyToSlot(): void {
