@@ -217,21 +217,21 @@ export class VaAlert {
     return wrapper;
   }
 
+  private static readonly STATUS_LABELS = {
+    warning: 'Warning',
+    error: 'Error',
+    success: 'Success',
+    info: 'Information',
+    continue: 'Continue',
+  };
+
   /**
    * Returns the human-readable label for a given alert status.
    * @param status - The alert status (info, warning, error, success, continue)
    * @returns The corresponding status label for screen readers
    */
   private getStatusLabel(status: string): string {
-    const statusLabels = {
-      warning: 'Warning',
-      error: 'Error',
-      success: 'Success',
-      info: 'Information',
-      continue: 'Continue',
-    };
-    
-    return statusLabels[status] || 'Information';
+    return VaAlert.STATUS_LABELS[status] || 'Information';
   }
 
   /**
