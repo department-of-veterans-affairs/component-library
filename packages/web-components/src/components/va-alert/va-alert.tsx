@@ -182,7 +182,7 @@ export class VaAlert {
    */
   private getFirstContentNode(slot: HTMLSlotElement): Node | null {
     const assignedNodes = slot.assignedNodes();
-    
+
     for (const node of assignedNodes) {
       if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
         return node;
@@ -190,7 +190,7 @@ export class VaAlert {
         return node;
       }
     }
-    
+
     return null;
   }
 
@@ -204,15 +204,14 @@ export class VaAlert {
    */
   private wrapTextNodeInElement(textNode: Node, addHeadlineSlot: boolean): HTMLElement {
     const wrapper = document.createElement('span');
-    
+
     if (addHeadlineSlot) {
       wrapper.setAttribute('slot', 'headline');
     }
-    
+
     if (textNode.parentNode) {
       textNode.parentNode.insertBefore(wrapper, textNode);
     }
-    
     wrapper.appendChild(textNode);
     return wrapper;
   }
@@ -230,23 +229,23 @@ export class VaAlert {
    * @param status - The alert status (info, warning, error, success, continue)
    * @returns The corresponding status label for screen readers
    */
-  private getStatusLabel(status: string): string {
+  private getStatusLabel(status: 'info' | 'warning' | 'error' | 'success' | 'continue'): string {
     return VaAlert.STATUS_LABELS[status] || 'Information';
   }
 
   /**
    * Adds a screen reader-only status announcement to the beginning of alert content.
    * This ensures screen reader users hear the alert type (e.g., "Warning Alert", "Error Alert")
-   * before the alert content. Works with both slim and non-slim alert variations.
-   * 
+  * before the alert content. Works with both slim and non-slim alert variations.
+  *
    * For non-slim alerts, prepends to the headline slot content.
-   * For slim alerts, prepends to the default slot content.
-   * 
+  * For slim alerts, prepends to the default slot content.
+  *
    * Handles various content structures:
    * - Elements only (e.g., <h3>Headline</h3>)
    * - Text only (e.g., "Plain text")
-   * - Mixed content (e.g., "Text with <a>link</a>")
-   * 
+  * - Mixed content (e.g., "Text with <a>link</a>")
+  *
    * If content is text-only, it wraps the text in a span before prepending the sr-only announcement.
    */
   private addSrOnlyToSlot(): void {
@@ -256,12 +255,12 @@ export class VaAlert {
       const slot = slim
         ? this.el.shadowRoot?.querySelector('slot:not([name])')
         : this.el.shadowRoot?.querySelector('slot[name="headline"]');
-      
+
       if (!slot) return;
 
       const firstContentNode = this.getFirstContentNode(slot);
       if (!firstContentNode) return;
-      
+
       const targetElement = firstContentNode.nodeType === Node.TEXT_NODE
         ? this.wrapTextNodeInElement(firstContentNode, !slim)
         : (firstContentNode as HTMLElement);
@@ -279,7 +278,7 @@ export class VaAlert {
       /* eslint-disable-next-line i18next/no-literal-string */
       srOnlySpan.className = 'usa-sr-only';
       srOnlySpan.textContent = `${this.getStatusLabel(status)} Alert `;
-      
+
       targetElement.prepend(srOnlySpan);
     } catch (e) {
       /* eslint-disable-next-line i18next/no-literal-string */
