@@ -1,10 +1,10 @@
 @use '../functions' as *;
 
-@import "../formation-overrides/variables";
-@import "../../../dist/tokens/scss/variables.scss";
-@import "../mixins";
+@use "../formation-overrides/variables" as *;
+@use "../../../dist/tokens/scss/variables.scss" as *;
+@use "../mixins" as *;
 
-@import '../override-function';
+@use '../override-function' as *;
 // Styles for application modals
 
 // Hide initially, to be shown if url contains #modal

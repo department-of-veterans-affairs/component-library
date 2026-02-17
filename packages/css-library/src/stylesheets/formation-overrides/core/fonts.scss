@@ -3,9 +3,9 @@
   ***THIS IS USWDS v1***
 */
 @use "../../../../dist/tokens/scss/variables.scss" as tok;
-@import "../../core-variables";
-@import "../variables";
-@import "../../mixins";
+@use "../../core-variables" as core-vars;
+@use "../variables" as fo-vars;
+@use "../../mixins" as m;
 
 /* stylelint-disable at-rule-empty-line-before */
 @font-face {

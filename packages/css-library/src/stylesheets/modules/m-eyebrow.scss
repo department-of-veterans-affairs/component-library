@@ -1,4 +1,4 @@
-@import '../../../dist/tokens/scss/variables.scss';
+@use '../../../dist/tokens/scss/variables.scss' as *;
 
 .vads-c-eyebrow {
   display: block;

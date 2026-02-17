@@ -1,10 +1,10 @@
 @use "../core-variables" as *;
 @use '../functions' as *;
 
-@import "../formation-overrides/variables";
-@import "../../../dist/tokens/scss/variables.scss";
-@import "../mixins";
-@import '../override-function';
+@use "../formation-overrides/variables" as *;
+@use "../../../dist/tokens/scss/variables.scss" as *;
+@use "../mixins" as *;
+@use '../override-function' as *;
 //====================================
 // SCSS for content/components/navigation-sidebar.html
 //====================================

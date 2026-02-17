@@ -1,41 +1,42 @@
 @use "../../dist/tokens/scss/variables" as *;
 
+@use 'uswds-theme';
 @forward 'uswds-theme';
 @use 'uswds-fonts';
 
 @use './core-variables' as *;
 
 //============ VENDOR PARTIALS ==============//
-@import 'lib/normalize';
+@use 'lib/normalize';
 
 // Grid/columns classes
-@import "./formation-overrides/foundation-sites";
+@use "./formation-overrides/foundation-sites";
 
 //============ PORTED VARIABLES ==============//
-@import './formation-overrides/variables';
+@use './formation-overrides/variables';
 
 // ----- VA GENERAL (MAIN FILE/OTHER) ---- //
-@import 'base/fonts';
-@import 'base/utils';
+@use 'base/fonts' as base_fonts;
+@use 'base/utils';
 
 //============ USWDS v1 ==============//
-@import 'formation-overrides/core/fonts';
-@import 'formation-overrides/core/utilities';
-@import 'formation-overrides/core/base';
+@use 'formation-overrides/core/fonts';
+@use 'formation-overrides/core/utilities';
+@use 'formation-overrides/core/base';
 
 // ---- USWDS v1 STANDARDS ELEMENTS/COMPONENTS --- //
-@import 'formation-overrides/elements/buttons';
-@import 'formation-overrides/elements/inputs';
-@import 'formation-overrides/elements/labels';
-@import 'formation-overrides/elements/typography';
-@import 'formation-overrides/components/alerts';
-@import 'formation-overrides/components/banner';
-@import 'formation-overrides/components/forms';
-@import 'formation-overrides/components/media-block'; // TODO: Remove this when replaced with USWDS v3 classes
-@import 'formation-overrides/components/side-nav';
+@use 'formation-overrides/elements/buttons';
+@use 'formation-overrides/elements/inputs';
+@use 'formation-overrides/elements/labels';
+@use 'formation-overrides/elements/typography';
+@use 'formation-overrides/components/alerts';
+@use 'formation-overrides/components/banner';
+@use 'formation-overrides/components/forms';
+@use 'formation-overrides/components/media-block' as fo_media_block; // TODO: Remove this when replaced with USWDS v3 classes
+@use 'formation-overrides/components/side-nav';
 
 // ---- USWDS v3 --- //
-@import 'elements/lists';
-@import 'elements/media-block';
+@use 'elements/lists';
+@use 'elements/media-block';
 
-@import 'base/va';
+@use 'base/va';
