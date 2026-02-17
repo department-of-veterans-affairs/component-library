@@ -110,12 +110,12 @@ This event is emitted when a file is selected, changed, or removed in any `va-fi
   - `FILE_ADDED`: If `newFile` exists and `fileObject.file` is null
   - `FILE_REMOVED`: If no `newFile` (deletion)
 
-#### Password Submit: `vaPasswordSubmit`
+#### Password Change: `vaPasswordChange`
 
-This event is emitted when a password is submitted in any `va-file-input` child component.
+This event is emitted when a password is entered or changed in any `va-file-input` child component.
 
-- **Trigger**: User clicks the "Submit password" button for encrypted files
-- **Frequency**: Event fires on every click of button while not in loading state.
+- **Trigger**: User enters/changes password for encrypted files
+- **Frequency**: Event fires on every keystroke; consumers should implement debouncing to avoid excessive processing
 - **Action**: 
   - `PASSWORD_UPDATE`: Always
 
@@ -195,7 +195,7 @@ case 'PASSWORD_UPDATE': {
                                        │    array               │
                                        │                        │
                                        │                        │
-┌─────────────────┐  onVaPasswordSubmit│                        │
+┌─────────────────┐  onVaPasswordChange│                        │
 │  va-file-input  │ ────────────────►  │                        │
 │  id: instance-1 │                    │                        │
 └─────────────────┘                    │                        │
@@ -217,7 +217,7 @@ case 'PASSWORD_UPDATE': {
 ```
 
 **Flow Summary:**
-1. **Child Event Received**: `va-file-input` emits `vaChange`, `vaPasswordSubmit`, or `vaFileInputError`
+1. **Child Event Received**: `va-file-input` emits `vaChange`, `vaPasswordChange`, or `vaFileInputError`
 2. **State Update**: Internal `files` array is modified
 3. **Array Building**: `buildFilesArray()` constructs the event payload
 4. **Event Emission**: `vaMultipleChange` or `vaFileInputError` is emitted with complete state
