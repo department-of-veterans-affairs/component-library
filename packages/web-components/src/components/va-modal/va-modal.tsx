@@ -552,8 +552,10 @@ export class VaModal {
 
   render() {
     const {
+      forcedModal,
       isLargerScreen,
       label,
+      large,
       modalTitle,
       primaryButtonClick,
       primaryButtonText,
@@ -561,7 +563,6 @@ export class VaModal {
       secondaryButtonText,
       status,
       visible,
-      forcedModal,
     } = this;
 
     if (!visible) return null;
@@ -591,7 +592,7 @@ export class VaModal {
       'usa-modal': true,
       'va-modal': true,
       'va-modal--status': status,
-      'va-modal--lg': this.large,
+      'va-modal--lg': large,
     });
     const contentClass = classnames({
       'usa-modal__content': true,
