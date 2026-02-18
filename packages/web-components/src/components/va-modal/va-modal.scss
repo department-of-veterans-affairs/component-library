@@ -9,9 +9,7 @@
 @use 'usa-icon/src/styles/usa-icon';
 @use 'usa-modal/src/styles/usa-modal';
 
-@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
-
-@import '../../mixins/uswds-error-border.scss';
+@use '../../mixins/uswds-error-border.scss' as *;
 
 .usa-modal-alert {
   padding: 0px; // => Due to icons

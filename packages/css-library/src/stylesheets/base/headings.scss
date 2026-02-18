@@ -1,6 +1,6 @@
 @use "../../../dist/tokens/scss/variables" as vars;
 
-@import 'uswds-core/src/styles/mixins/typography/usa-content-styles';
+@use 'uswds-core/src/styles/mixins/typography/usa-content-styles' as *;
 
 // H1 should only be used once at the top-level, so we can safely remove the margin-top.
 h1 {
