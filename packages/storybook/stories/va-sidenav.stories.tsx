@@ -68,7 +68,9 @@ const Template = (args) => {
       id={args.id}
       header={args.header}
       icon-name={args['icon-name']}
-      icon-background-color={args['icon-background-color']}>
+      icon-background-color={args['icon-background-color']}
+      mobile-header={args['mobile-header']}
+      nav-aria-label={args['nav-aria-label']}>
       {sideNav.map((item, index) =>
         item.submenu ? (
           <va-sidenav-submenu
@@ -320,6 +322,17 @@ sideNavSubmenuLinked.splice(4, 0, {
 });
 NestedLinks.args = {
   sideNav: sideNavSubmenuLinked,
+};
+
+export const CustomMobileHeaderAndNavAriaLabel = Template.bind(null);
+CustomMobileHeaderAndNavAriaLabel.args = {
+  sideNav: sideNavBaseline(),
+  header: null,
+  'icon-name': null,
+  'icon-background-color': null,
+  'mobile-header': 'Process steps menu',
+  'nav-aria-label': 'Process steps',
+  id: 'custom-mobile-header-sidenav',
 };
 
 export const WithRouterLinkSupport = WithRouterTemplate.bind(null);

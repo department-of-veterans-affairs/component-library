@@ -1,8 +1,8 @@
 @use "../../../dist/tokens/scss/variables" as *;
 @use "../core-variables" as *;
-@import "../formation-overrides/variables";
+@use "../formation-overrides/variables" as *;
 
-@import '../override-function';
+@use '../override-function' as *;
 
 .va-dropdown {
   position: relative;

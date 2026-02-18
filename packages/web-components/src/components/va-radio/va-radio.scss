@@ -8,7 +8,7 @@
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-error-message/src/styles/usa-error-message';
 
-@import '../../mixins/uswds-error-border.scss';
+@use '../../mixins/uswds-error-border.scss' as *;
 @import '../../mixins/focusable.css';
 @import '../../mixins/accessibility.css';
 @import '../../mixins/headers.css';

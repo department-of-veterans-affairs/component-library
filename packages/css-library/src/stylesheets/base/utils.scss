@@ -1,6 +1,6 @@
 @use "../../../dist/tokens/scss/variables.scss" as vars;
-@import "../mixins";
-@import "../formation-overrides/core/utilities";
+@use "../mixins" as *;
+@use "../formation-overrides/core/utilities" as *;
 
 .full-width {
   width: 100%;

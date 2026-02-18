@@ -1,11 +1,14 @@
-// Removing sass math for now because it doesn't play nicely with vets-website
-// @use 'sass:math'; 
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:map';
 
 $uswds-base: 16px;                    // USWDS base
 $formation-base: 10px;                // Formation base
 
-$f2u-coeff: $formation-base / $uswds-base; // Formation  to USDWS conversion coeffient
-$u2f-coeff: $uswds-base / $formation-base; // USDWS to Formation conversion coeffient
+$f2u-coeff: math.div($formation-base, $uswds-base); // Formation  to USDWS conversion coeffient
+$u2f-coeff: math.div($uswds-base, $formation-base); // USDWS to Formation conversion coeffient
 
 
 $unit-types: (
@@ -43,30 +46,36 @@ $unit-types: (
   // number: number || null
   // unit: a unit || or null
   // joint: the number+ its unit
-  @if(type-of($string) == number){
+  @if(meta.type-of($string) == number){
+      $number-value: null;
+
+      @if map.has-key($unit-types, math.unit($string)) {
+        $number-value: $string / map.get($unit-types, math.unit($string));
+      } @else {
+        $number-value: $string;
+      }
+
       @return(
-        number: if(map-has-key($unit-types, unit($string)),
-            $string / map-get($unit-types, unit($string))
-            ,$string),
+        number: $number-value,
         unit: unit($string),
         joint: $string
       )
   }
-  @if(type-of($string) == color){
+  @if(meta.type-of($string) == color){
       @return(
         number: $string,
         unit: color,
         joint: $string
       )
   }
-  @if(type-of($string) != string){
+  @if(meta.type-of($string) != string){
       @return(
         number: null,
         unit: null,
         joint: $string
       )
   }
-  $length: str-length($string);
+  $length: string.length($string);
   $numeric-value: "";
   $unit: "";
   $digits: ( "0":0, "1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9);
@@ -75,7 +84,7 @@ $unit-types: (
   $magnitude: 10;
   $past: false;
   @for $i from 1 through $length {
-    $char: str-slice($string, $i, $i);
+    $char: string.slice($string, $i, $i);
     @if($char == "-") {
       $sign :  -1;
     }
@@ -83,11 +92,11 @@ $unit-types: (
       $decimal : 10;
       $magnitude : 1;
     }
-    @else if( map-get($digits,$char) and $past == false){
+    @else if( map.get($digits,$char) and $past == false){
       @if ($numeric-value == ""){
             $numeric-value : 0;
       }
-      $numeric-value: ($numeric-value * $magnitude) + (map-get($digits,$char)/$decimal);
+      $numeric-value: ($numeric-value * $magnitude) + math.div(map.get($digits, $char), $decimal) or calc(map.get($digits, $char) / $decimal);
         @if ($decimal > 1){
             $decimal : $decimal * 10;
         }
@@ -97,49 +106,64 @@ $unit-types: (
         $past: true;
     }
   }
-  $numeric-result: if( $numeric-value == "" , null, $sign * $numeric-value);
+  $numeric-result: null;
+  @if ($numeric-value == "") {
+    $numeric-result: null;
+  } @else {
+    $numeric-result: $sign * $numeric-value;
+  }
+
+  $joint-value: null;
+  @if ($numeric-result != null) {
+    $joint-value: #{$numeric-result} + string.unquote($unit);
+  } @else {
+    $joint-value: $string;
+  }
   @return (
     number: $numeric-result,
-    unit: unquote($unit),
-    joint: if($numeric-result != null, #{$numeric-result} + unquote($unit), $string)
+    unit: string.unquote($unit),
+    joint: $joint-value
   );
 }
 
 @function str-split($string, $separator: " ") {
   $split-list: ();
-  $index: str-index($string, $separator);
+  $index: string.index($string, $separator);
 
   @while $index != null {
-    $item: str-slice($string, 1, $index - 1);
-    $split-list: append($split-list, $item);
-    $string: str-slice($string, $index + 1);
-    $index: str-index($string, $separator);
+    $item: string.slice($string, 1, $index - 1);
+    $split-list: list.append($split-list, $item);
+    $string: string.slice($string, $index + 1);
+    $index: string.index($string, $separator);
   }
 
-  @return append($split-list, $string);
+  @return list.append($split-list, $string);
 }
 
 @function scale-rem($value, $coeff: $f2u-coeff,  $separator: space) {
   // converts any singular SCSS value with rem units
   // to its scaled equivalent
   // otherwise returns the orginal value
-  @if (type-of($value) == number and unit($value) == rem) {
+  @if (meta.type-of($value) == number and math.unit($value) == rem) {
     @return ($value * $coeff) ;
   }
-  @if (type-of($value) == string ) {
-    $inner-sep: if($separator == comma , ",", " ");
+  @if (meta.type-of($value) == string ) {
+    $inner-sep: " ";
+    @if ($separator == comma) {
+      $inner-sep: ",";
+    }
     $value-set: str-split($value, $inner-sep);
     $scaled-values: ();
 
     @each $val in $value-set{
         $val-parts : split-value-unit($val);
-        @if (map-get($val-parts, unit) == rem) {
-            $rem-number: str-slice($val, 0, -4);
-            $scaled-rem: map-get($val-parts, number) * $coeff ;
-            $scaled-values: append($scaled-values, $scaled-rem + rem);
+        @if (map.get($val-parts, unit) == rem) {
+            $rem-number: string.slice($val, 0, -4);
+            $scaled-rem: map.get($val-parts, number) * $coeff ;
+            $scaled-values: list.append($scaled-values, $scaled-rem + rem);
         } @else {
-            $scaled-values: append($scaled-values,
-            map-get($val-parts, joint), $separator);
+            $scaled-values: list.append($scaled-values,
+            map.get($val-parts, joint), $separator);
         }
     }
     @return  $scaled-values;
@@ -154,7 +178,7 @@ $unit-types: (
   $scaled: ();
   @each $value in $rule {
     $scaled-value: scale-rem($value, $coeff, $separator);
-    $scaled: append($scaled, $scaled-value, $separator);
+    $scaled: list.append($scaled, $scaled-value, $separator);
   }
   @return $scaled;
 }

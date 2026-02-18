@@ -434,11 +434,11 @@ export namespace Components {
          */
         "headerText": string;
         /**
-          * Set the href for the card link.
+          * Sets the href for the card link.
          */
         "linkHref": string;
         /**
-          * Set the text for the card link.
+          * Sets the text for the card link.
          */
         "linkText": string;
         /**
@@ -446,7 +446,7 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Text to be displayed in the card subheader.  Heading level will be +1 of headerLevel Prop.
+          * Text to be displayed in the card subheader. Heading level will be +1 of headerLevel Prop.
          */
         "subheaderText": string;
         /**
@@ -781,10 +781,6 @@ export namespace Components {
          */
         "passwordError"?: string;
         /**
-          * Denotes if user submission of encrypted file password was successful.
-         */
-        "passwordSubmissionSuccess"?: null | boolean;
-        /**
           * Percent upload completed. For use with va-progress-bar component
          */
         "percentUploaded"?: number;
@@ -866,10 +862,6 @@ export namespace Components {
           * Array of password error messages corresponding to each file input. The length and order match the files array.
          */
         "passwordErrors"?: Array<string | null>;
-        /**
-          * Array of booleans corresponding to the password submission success state of each file.
-         */
-        "passwordSubmissionSuccessList"?: boolean[];
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
          */
@@ -1877,6 +1869,14 @@ export namespace Components {
           * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
+        /**
+          * Header text to display at the top of the side navigation mobile view. If not provided, it will default to "Related pages menu".
+         */
+        "mobileHeader"?: string;
+        /**
+          * Aria label for the nav element that wraps the side navigation links. If not provided, it will default to "Related pages menu".
+         */
+        "navAriaLabel"?: string;
     }
     interface VaSidenavItem {
         /**
@@ -3084,7 +3084,7 @@ declare global {
     };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
-        "vaPasswordSubmit": any;
+        "vaPasswordChange": any;
         "vaFileInputError": any;
         "component-library-analytics": any;
     }
@@ -4543,21 +4543,21 @@ declare namespace LocalJSX {
         /**
           * Text to be displayed in the card header.
          */
-        "headerText"?: string;
+        "headerText": string;
         /**
-          * Set the href for the card link.
+          * Sets the href for the card link.
          */
-        "linkHref"?: string;
+        "linkHref": string;
         /**
-          * Set the text for the card link.
+          * Sets the text for the card link.
          */
-        "linkText"?: string;
+        "linkText": string;
         /**
           * Sets the card to required and renders the (*Required) text.
          */
         "required"?: boolean;
         /**
-          * Text to be displayed in the card subheader.  Heading level will be +1 of headerLevel Prop.
+          * Text to be displayed in the card subheader. Heading level will be +1 of headerLevel Prop.
          */
         "subheaderText"?: string;
         /**
@@ -4928,17 +4928,13 @@ declare namespace LocalJSX {
          */
         "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
-          * The event emitted when the file input password is submitted.
+          * The event emitted when the file input password value changes.
          */
-        "onVaPasswordSubmit"?: (event: VaFileInputCustomEvent<any>) => void;
+        "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * Error message for the encrypted password input
          */
         "passwordError"?: string;
-        /**
-          * Denotes if user submission of encrypted file password was successful.
-         */
-        "passwordSubmissionSuccess"?: null | boolean;
         /**
           * Percent upload completed. For use with va-progress-bar component
          */
@@ -5025,10 +5021,6 @@ declare namespace LocalJSX {
           * Array of password error messages corresponding to each file input. The length and order match the files array.
          */
         "passwordErrors"?: Array<string | null>;
-        /**
-          * Array of booleans corresponding to the password submission success state of each file.
-         */
-        "passwordSubmissionSuccessList"?: boolean[];
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
          */
@@ -6184,6 +6176,14 @@ declare namespace LocalJSX {
           * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
+        /**
+          * Header text to display at the top of the side navigation mobile view. If not provided, it will default to "Related pages menu".
+         */
+        "mobileHeader"?: string;
+        /**
+          * Aria label for the nav element that wraps the side navigation links. If not provided, it will default to "Related pages menu".
+         */
+        "navAriaLabel"?: string;
     }
     interface VaSidenavItem {
         /**

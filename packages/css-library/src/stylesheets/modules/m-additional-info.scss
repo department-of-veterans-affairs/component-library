@@ -1,6 +1,6 @@
-@import "../formation-overrides/variables";
-@import "../../../dist/tokens/scss/variables.scss";
-@import '../override-function';
+@use "../formation-overrides/variables" as *;
+@use "../../../dist/tokens/scss/variables.scss" as *;
+@use '../override-function' as *;
 
 .additional-info-content {
   margin-top: 1em;

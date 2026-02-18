@@ -34,7 +34,7 @@ describe('va-sidenav', () => {
     await page.close();
   });
 
-  it('header property sets the header and aria-labelfor desktop and mobile web', async () => {
+  it('header, mobileHeader, and navAriaLabel labels set associated properties on mobile and desktop', async () => {
     const page = await newE2EPage();
 
     // Set viewport to desktop size
@@ -43,14 +43,14 @@ describe('va-sidenav', () => {
       height: 768
     });
 
-    await page.setContent('<va-sidenav header="Profile"></va-sidenav>');
+    await page.setContent('<va-sidenav header="Profile" mobile-header="Menu" nav-aria-label="Associated pages"></va-sidenav>');
 
     const navMenuHeader = await page.find('va-sidenav >>> .va-sidenav__header');
     const navMenu = await page.find('va-sidenav >>> nav');
     const ariaLabel = await navMenu.getAttribute('aria-label');
 
     expect(navMenuHeader).toEqualText('Profile');
-    expect(ariaLabel).toEqualText('Related pages menu');
+    expect(ariaLabel).toEqualText('Associated pages');
 
     // Set viewport to mobile web size
     await page.setViewport({
@@ -63,11 +63,11 @@ describe('va-sidenav', () => {
     const sideNavAccordionItem = await page.find('va-sidenav >>> va-accordion-item');
     const sideNavAccordionHeader = await sideNavAccordionItem.getProperty('header');
     
-    expect(sideNavAccordionHeader).toEqualText('Related pages menu');
+    expect(sideNavAccordionHeader).toEqualText('Menu');
 
     const navElement = await page.find('va-sidenav >>> nav');
     const ariaLabelMobileWeb = await (await navElement.getAttribute('aria-label'));
-    expect(ariaLabelMobileWeb).toEqualText('Related pages menu');
+    expect(ariaLabelMobileWeb).toEqualText('Associated pages');
     
     await page.close();
   });
@@ -98,49 +98,31 @@ describe('va-sidenav', () => {
     await page.close();
   });
 
-  it('displays "Menu" when header is not set on mobile web', async () => {
+  it('aria-label defaults to "Related pages menu" when navAriaLabel is not set for mobile and desktop', async () => {
     const page = await newE2EPage();
-    // Set viewport to mobile size
-    await page.setViewport({
-      width: 480,
-      height: 320
-    });
 
-    await page.setContent('<va-sidenav></va-sidenav>');
-
-    const accordionItem = await page.find('va-sidenav >>> va-accordion-item');
-    const accordionItemHeader = await accordionItem.getProperty('header');
-    expect(accordionItemHeader).toEqual('Related pages menu');
-    
-    await page.close();
-  });
-
-  it('the aria-label is consistent across desktop and mobile web', async () => {
-    const page = await newE2EPage();
     // Set viewport to desktop size
     await page.setViewport({
       width: 1024,
       height: 768
     });
 
-    await page.setContent('<va-sidenav header="Profile"></va-sidenav>');
+    await page.setContent('<va-sidenav header="Profile" mobile-header="Menu"></va-sidenav>');
 
-    const navElement = await page.find('va-sidenav >>> nav');
-    const ariaLabel = await navElement.getAttribute('aria-label');
-    expect(ariaLabel).toBe('Related pages menu');
-
+    const navMenu = await page.find('va-sidenav >>> nav');
+    const ariaLabel = await navMenu.getAttribute('aria-label');
+    expect(ariaLabel).toEqualText('Related pages menu');
 
     // Set viewport to mobile web size
     await page.setViewport({
       width: 480,
       height: 768
     });
-
     await page.waitForChanges();
 
-    const navElementMobileWeb = await page.find('va-sidenav >>> nav');
-    const ariaLabelMobileWeb = await navElementMobileWeb.getAttribute('aria-label');
-    expect(ariaLabelMobileWeb).toBe('Related pages menu');
+    const navElement = await page.find('va-sidenav >>> nav');
+    const ariaLabelMobileWeb = await (await navElement.getAttribute('aria-label'));
+    expect(ariaLabelMobileWeb).toEqualText('Related pages menu');
     
     await page.close();
   });
