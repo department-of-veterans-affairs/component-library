@@ -7,39 +7,43 @@
 */
 
 @use '../../override-function' as *;
-@use "../../mixins" as b;
+@use '../../../../dist/tokens/scss/variables.scss' as tokens;
+@use "../../mixins" as *;
+@use '../variables' as fo-vars;
+@use '../elements/buttons' as but;
+@use '../core/utilities' as util;
 
 .usa-banner {
-    background-color: $color-gray-lightest;
+    background-color: fo-vars.$color-gray-lightest;
     padding-bottom: scale-rem(0.7rem);
   
-    @include media($small-screen) {
-      font-size: $h6-font-size;
+    @include media(tokens.$small-screen) {
+      font-size: fo-vars.$h6-font-size;
       padding-bottom: 0;
     }
   }
   
   .usa-banner-content {
-    @include b.padding(null $site-margins-mobile 3px $site-margins-mobile);
+    @include padding(null fo-vars.$site-margins-mobile 3px fo-vars.$site-margins-mobile);
     background-color: transparent;
-    font-size: $h5-font-size;
+    font-size: fo-vars.$h5-font-size;
     padding-top: scale-rem(2rem);
     width: 100%;
   
-    @include media($medium-screen) {
+    @include media(tokens.$medium-screen) {
       padding-bottom: 23px;
       padding-top: 40px;
     }
   
-    @include media($nav-width) {
-      @include b.padding(null $site-margins);
+    @include media(fo-vars.$nav-width) {
+      @include padding(null fo-vars.$site-margins);
     }
   
     p {
       &:first-child {
         margin-top: scale-rem(1rem);
   
-        @include media($medium-screen) {
+        @include media(tokens.$medium-screen) {
           margin-top: 0;
         }
       }
@@ -47,31 +51,31 @@
   }
   
   .usa-banner-inner {
-    @include b.outer-container($site-max-width);
-    @include b.padding(null $site-margins-mobile);
+    @include outer-container(fo-vars.$site-max-width);
+    @include padding(null fo-vars.$site-margins-mobile);
   
-    @include media($nav-width) {
-      @include b.padding(null $site-margins);
+    @include media(fo-vars.$nav-width) {
+      @include padding(null fo-vars.$site-margins);
     }
   }
   
   .usa-banner-header {
-    @include b.padding(scale-rem(0.55rem) null);
+    @include padding(scale-rem(0.55rem) null);
     font-size: scale-rem(1.2rem);
-    font-weight: $font-weight-normal;
-  
-    @include media($small-screen) {
-      @include b.padding(0 null);
+    font-weight: tokens.$font-weight-normal;
+
+    @include media(tokens.$small-screen) {
+      @include padding(0 null);
     }
   
     p {
-      @include b.margin(0 null);
+      @include margin(0 null);
       display: inline;
       overflow: hidden;
       vertical-align: middle;
-  
-      @include media($small-screen) {
-        @include b.margin(2px null);
+
+      @include media(tokens.$small-screen) {
+        @include margin(2px null);
         display: inline-block;
       }
     }
@@ -82,7 +86,7 @@
       margin-top: 1px;
       width: scale-rem(2.4rem);
   
-      @include media($small-screen) {
+      @include media(tokens.$small-screen) {
         margin-right: 7px;
         width: 20px;
       }
@@ -91,17 +95,17 @@
   
   .usa-banner-header-expanded {
     align-items: center;
-    border-bottom: 1px solid $color-gray-light;
+    border-bottom: 1px solid fo-vars.$color-gray-light;
     display: flex;
-    font-size: $h5-font-size;
+    font-size: fo-vars.$h5-font-size;
     min-height: scale-rem(5.6rem);
     padding-right: scale-rem(3rem);
   
-    @include media($small-screen) {
+    @include media(tokens.$small-screen) {
       border-bottom: none;
       display: block;
       font-size: scale-rem(1.2rem);
-      font-weight: $font-weight-normal;
+      font-weight: tokens.$font-weight-normal;
       min-height: 0;
       padding-right: 0;
     }
@@ -109,7 +113,7 @@
     > .usa-banner-inner {
       margin-left: 0;
   
-      @include media($small-screen) {
+      @include media(tokens.$small-screen) {
         margin-left: auto;
       }
     }
@@ -117,27 +121,27 @@
     img {
       margin-right: scale-rem(2.4rem);
   
-      @include media($small-screen) {
+      @include media(tokens.$small-screen) {
         margin-right: scale-rem(0.7rem);
       }
     }
   
     p {
-      line-height: $heading-line-height;
+      line-height: fo-vars.$heading-line-height;
       vertical-align: top;
   
-      @include media($small-screen) {
-        line-height: $base-line-height;
+      @include media(tokens.$small-screen) {
+        line-height: fo-vars.$base-line-height;
         vertical-align: middle;
       }
     }
   }
   
   .usa-banner-button {
-    @include button-unstyled;
-    @include b.padding(13px null null 48px);
+    @include but.button-unstyled;
+    @include padding(13px null null 48px);
     background-position-x: right;
-    color: $color-primary;
+    color: fo-vars.$color-primary;
     display: block;
     font-size: 12px;
     height: scale-rem(4.3rem);
@@ -147,8 +151,8 @@
     top: 0;
     width: 100%;
   
-    @include media($small-screen) {
-      @include b.padding(0 null null 0);
+    @include media(tokens.$small-screen) {
+      @include padding(0 null null 0);
       /* stylelint-disable declaration-block-no-ignored-properties */
       display: inline;
       height: auto;
@@ -160,12 +164,12 @@
     }
   
     &:hover {
-      color: $color-primary-darker;
+      color: fo-vars.$color-primary-darker;
       text-decoration: underline;
     }
   
     &[aria-expanded=false] {
-      @include display-icon(angle-arrow-down-primary, after, scale-rem(1rem), 0, hover);
+      @include util.display-icon(angle-arrow-down-primary, after, scale-rem(1rem), 0, hover);
       background-image: none;
   
       &::after {
@@ -174,12 +178,12 @@
     }
   
     &[aria-expanded=true] {
-      @include display-icon(close, after, scale-rem(1.3rem), 0, no-hover);
+      @include util.display-icon(close, after, scale-rem(1.3rem), 0, no-hover);
       background-image: none;
       height: scale-rem(5.6rem);
   
-      @include media($small-screen) {
-        @include display-icon(angle-arrow-up-primary, after, scale-rem(1rem), 0, hover);
+      @include media(tokens.$small-screen) {
+        @include util.display-icon(angle-arrow-up-primary, after, scale-rem(1rem), 0, hover);
         height: initial;
         padding: 0;
         position: relative;
@@ -194,7 +198,7 @@
         right: scale-rem(1.5rem);
         top: scale-rem(2.15rem);
   
-        @include media($small-screen) {
+        @include media(tokens.$small-screen) {
           position: static;
         }
       }
@@ -202,7 +206,7 @@
       .usa-banner-button-text {
         display: none;
   
-        @include media($small-screen) {
+        @include media(tokens.$small-screen) {
           display: inline;
         }
       }

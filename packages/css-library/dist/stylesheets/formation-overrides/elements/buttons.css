@@ -7,18 +7,10 @@
   ***THIS IS USWDS v1***
 */
 /**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
-/**
   /uswds/dist/scss/lib/addons/_margin.scss
 **/
 /**
   uswds/src/stylesheets/lib/helpers/_directional-values.scss
-**/
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
 **/
 .usa-sr-only {
   position: absolute;
@@ -56,7 +48,7 @@ button,
   text-decoration: none;
   width: 100%;
 }
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 481px), print and (min-width: 481px) {
   .usa-button,
   .usa-button-primary,
   .usa-button:visited,

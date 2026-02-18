@@ -1,8 +1,4 @@
 @charset "UTF-8";
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
 .va-nav-breadcrumbs {
   background: #ffffff;
   color: #005ea2;

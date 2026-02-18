@@ -1,7 +1,6 @@
 @forward 'settings';
 @use 'usa-icon/src/styles/usa-icon';
 @use 'usa-breadcrumb/src/styles/usa-breadcrumb';
-@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
 @import '../../mixins/focusable.css';
 
 :host {

@@ -4,9 +4,9 @@
 */
 
 
-@import "../variables";
-@import "../../../../dist/tokens/scss/variables.scss";
-@import "../../mixins";
+@use "../variables" as vars;
+@use "../../../../dist/tokens/scss/variables.scss" as tok;
+@use "../../mixins" as mix;
 
 // Apply a natural box layout model to all elements, but allowing components to
 // change
@@ -22,8 +22,8 @@ html {
 }
 
 body {
-  background-color: $vads-color-white;
-  color: $vads-color-base;
+  background-color: tok.$vads-color-white;
+  color: tok.$vads-color-base;
   overflow-x: hidden;
 }
 
@@ -47,7 +47,7 @@ textarea,
 button {
   &:not([disabled]) {
     &:focus {
-      @include focus;
+      @include mix.focus;
     }
   }
 }
@@ -57,10 +57,10 @@ iframe,
 [tabindex],
 [contentEditable=true] {
   &:focus {
-    @include focus;
+    @include mix.focus;
   }
 }
 
 .usa-focus {
-  @include focus;
+  @include mix.focus;
 }

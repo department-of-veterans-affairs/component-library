@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/web-components",
-  "version": "22.6.2",
+  "version": "23.0.0",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -17,12 +17,12 @@
     "react-bindings/"
   ],
   "scripts": {
-    "build": "stencil build --docs-json component-docs.json",
+    "build": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --docs-json component-docs.json",
     "build-bindings": "tsc -p tsconfig.bindings.json",
     "lint": "eslint src/**/*{.ts,.tsx}",
-    "watch:stencil": "stencil build --watch",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
+    "watch:stencil": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --watch",
+    "test": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil test --spec --e2e",
+    "test.watch": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "serve": "stencil build --dev --watch --serve"
   },
@@ -46,7 +46,7 @@
     "@department-of-veterans-affairs/css-library": "0.27.0",
     "@stencil/postcss": "2.1.0",
     "@stencil/react-output-target": "0.5.3",
-    "@stencil/sass": "2.0.0",
+    "@stencil/sass": "3.2.3",
     "@types/jest": "26.0.24",
     "@types/node": "22.5.0",
     "@types/react": "17.0.2",

@@ -1,4 +1,7 @@
-@import '../override-function';
+@use '../../../dist/tokens/scss/variables.scss' as *;
+@use '../formation-overrides/variables' as fo-vars;
+@use '../override-function' as *;
+@use '../mixins' as *;
 
 .va-crisis-line {
   @include media($medium-screen) {
@@ -21,12 +24,12 @@
 
   li {
     &:nth-child(odd) {
-      border-top: 1px solid $color-gray-lighter;
-      border-bottom: 1px solid $color-gray-lighter;
+      border-top: 1px solid fo-vars.$color-gray-lighter;
+      border-bottom: 1px solid fo-vars.$color-gray-lighter;
     }
 
     a {
-      color: $color-base;
+      color: fo-vars.$color-base;
       display: block;
       padding: scale-rule(1.5rem 0);
       text-decoration: none;
@@ -68,7 +71,7 @@ button.va-crisis-line-button {
   background: $vads-color-white url(~@department-of-veterans-affairs/css-library/dist/img/arrow-right.svg) calc(100% - 0.5em) center no-repeat;
   background-size: .8em auto;
   border-radius: 0;
-  color: $color-base;
+  color: fo-vars.$color-base;
   margin: auto;
   padding: 0.4em 26px 0.3em 0;
   font-size: 1em;
@@ -79,14 +82,14 @@ button.va-crisis-line-button {
 
   @include media($medium-screen) {
     border-radius: 0 0 0.2em 0.2em;
-    box-shadow: 0 2px 5px $color-base;
+    box-shadow: 0 2px 5px fo-vars.$color-base;
     padding: 0 26px 0 0;
     text-align: left;
   }
 
   &:hover {
     background-color: $vads-color-white;
-    color: $color-base;
+    color: fo-vars.$color-base;
   }
 
   .vcl {
@@ -115,7 +118,7 @@ button.va-crisis-line-button {
 
   &:hover {
     background: inherit;
-    color: $color-gold;
+    color: fo-vars.$color-gold;
     text-decoration: inherit;
   }
 }

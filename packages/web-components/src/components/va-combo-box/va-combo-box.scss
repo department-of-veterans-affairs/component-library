@@ -9,11 +9,10 @@
 @use 'usa-select/src/styles/usa-select';
 @use 'usa-hint/src/styles/usa-hint';
 
-@import '../../mixins/uswds-input-width.scss';
-@import '../../mixins/uswds-error-border.scss';
+@use '../../mixins/uswds-input-width.scss';
+@use '../../mixins/uswds-error-border.scss' as *;
 @import '../../mixins/focusable.css';
 @import '../../mixins/inputs.css';
-
 
 :host {
   display: block;
