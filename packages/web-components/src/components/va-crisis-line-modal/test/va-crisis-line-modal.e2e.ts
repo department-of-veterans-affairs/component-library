@@ -113,7 +113,7 @@ describe('va-crisis-line-modal', () => {
   it('displays all custom props together correctly', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-crisis-line-modal 
+      <va-crisis-line-modal
         phone-number="555-111-2222"
         text-number="999888"
         chat-url="https://custom-chat.example.com"
@@ -168,7 +168,7 @@ describe('va-crisis-line-modal', () => {
     expect(isVisible).toBe(true);
 
     // Close modal by triggering close event
-    const closeBtn = await modal.find('>>> button.va-modal__close');
+    const closeBtn = await modal.find('>>> button.va-modal-close');
     await closeBtn.click();
     await page.waitForChanges();
 

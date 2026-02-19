@@ -30,7 +30,7 @@ describe('va-modal', () => {
         <mock:shadow-root>
         <div aria-label="Example Title modal" aria-modal="true" class="usa-modal va-modal" role="dialog">
             <div class="usa-modal__content va-modal__content">
-              <button aria-label="Close Example Title modal" class="va-modal__close" type="button">
+              <button aria-label="Close Example Title modal" class="va-modal-close" type="button">
                 <va-icon class="hydrated"></va-icon>
               </button>
               <div class="usa-modal__main va-modal__main">
