@@ -74,7 +74,7 @@
   }
 }
 
-.va-modal--status {
+.va-modal-alert {
   border-left: var(--units-1) solid transparent;
   box-sizing: border-box;
 
@@ -86,24 +86,24 @@
   }
 }
 
-.va-modal__icon {
+.va-modal-alert__icon {
   position: relative;
   // Negate internal icon whitespace to better align with modal content
   left: -2px;
 }
 
-.va-modal__close {
+.va-modal-close {
   background-color: transparent;
   color: var(--vads-color-base-darker);
   font-size: 1.4rem;
-  margin: 0 0 0 auto;
   padding: 6px; // Achieve 44x44 clickable area
   position: absolute;
+  margin: 0 0 0 auto;
   right: 0;
   top: 0;
-  white-space: nowrap;
   width: auto;
   z-index: 9;
+  white-space: nowrap;
 
   &:hover {
     color: var(--vads-color-base);
@@ -139,6 +139,19 @@
 .va-modal__footer {
   display: grid;
   gap: var(--vads-spacing-1);
+
+  // Override USWDS button group styles
+  .va-modal:not(.va-modal--lg) & {
+    .va-button-group {
+      flex-direction: column;
+      gap: var(--vads-spacing-1);
+      margin: 0;
+    }
+
+    .va-button-group__item {
+      margin: 0;
+    }
+  }
 
   va-button {
     // Prevent text overflowing the modal when words are longer than the modal width
