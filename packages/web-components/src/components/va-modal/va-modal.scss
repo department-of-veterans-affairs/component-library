@@ -66,28 +66,30 @@
   @media screen and (min-width: $mobile-lg) {
     max-width: 46.875rem;
     width: 75vw;
+
+    .va-modal__icon-container {
+      padding-top: var(--units-0p5);
+      padding-right: var(--units-0p5);
+    }
   }
 }
 
-// Styles for modals with status attribute set
 .va-modal--status {
   border-left: var(--units-1) solid transparent;
   box-sizing: border-box;
 
-  // Increase footer padding on larger screens to align with content
   .va-modal__footer {
+    // Increase footer padding on larger screens to align with content
     @media screen and (min-width: $mobile-lg) {
-      padding-left: var(--units-5);
+      padding-left: var(--units-4);
     }
   }
 }
 
 .va-modal__icon {
-  margin-top: var(--units-0p5);
-
-  @media screen and (min-width: $mobile-lg) {
-    margin-top: 0;
-  }
+  position: relative;
+  // Negate internal icon whitespace to better align with modal content
+  left: -2px;
 }
 
 .va-modal__close {
@@ -118,12 +120,8 @@
   padding: 0;
 
   [role='document'] {
-    overflow-wrap: anywhere; // Prevent text overflowing the modal when words are longer than the modal width
-    padding-left: var(--units-0p5);
-
-    @media screen and (min-width: $mobile-lg) {
-      padding-left: var(--units-1);
-    }
+    // Prevent text overflowing the modal when words are longer than the modal width
+    overflow-wrap: anywhere;
   }
 }
 
@@ -143,7 +141,8 @@
   gap: var(--vads-spacing-1);
 
   va-button {
-    overflow-wrap: anywhere; // Prevent text overflowing the modal when words are longer than the modal width
+    // Prevent text overflowing the modal when words are longer than the modal width
+    overflow-wrap: anywhere;
   }
 }
 

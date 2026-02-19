@@ -6,7 +6,6 @@ import {
   Host,
   h,
   Listen,
-  forceUpdate,
   Prop,
   Watch,
 } from '@stencil/core';
@@ -14,12 +13,6 @@ import classnames from 'classnames';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers, Undo } from 'aria-hidden';
 import { focusableQueryString } from '../../utils/modal';
-
-/**
- * Value corresponds with the --mobile-lg breakpoint size.
- * https://design.va.gov/foundation/breakpoints
- */
-const MOBILE_LG_BREAKPOINT = 480;
 
 /**
  * @click Used to detect clicks outside of modal contents to close modal.
@@ -252,15 +245,6 @@ export class VaModal {
       lastElement.focus();
     }
   }
-
-  // Trigger a re-render when the screen is resized to update the icon size
-  @Listen('resize', { target: 'window' })
-  handleResize() {
-    this.isLargerScreen = window.innerWidth >= MOBILE_LG_BREAKPOINT;
-    forceUpdate(this);
-  }
-
-  private isLargerScreen: boolean = window.innerWidth >= MOBILE_LG_BREAKPOINT;
 
   private handleClose(e: KeyboardEvent | MouseEvent) {
     this.closeEvent.emit(e);
@@ -553,7 +537,6 @@ export class VaModal {
   render() {
     const {
       forcedModal,
-      isLargerScreen,
       label,
       large,
       modalTitle,
@@ -647,13 +630,14 @@ export class VaModal {
           <div class={contentClass}>
             {closingButton}
             <div class={bodyClass}>
-              {/* Resize icon based on breakpoint */}
               {status && (
-                <va-icon
-                  icon={statusIcon}
-                  class="va-modal__icon"
-                  size={isLargerScreen ? 4 : 3}
-                ></va-icon>
+                <div class="va-modal__icon-container">
+                  <va-icon
+                    icon={statusIcon}
+                    class="va-modal__icon"
+                    size={4}
+                  ></va-icon>
+                </div>
               )}
               <div role="document">
                 {modalTitle && (
