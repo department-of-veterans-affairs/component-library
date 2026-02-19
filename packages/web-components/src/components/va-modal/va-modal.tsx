@@ -573,6 +573,7 @@ export class VaModal {
 
     const wrapperClass = classnames({
       'usa-modal': true,
+      'usa-modal--lg': large,
       'va-modal': true,
       'va-modal--status': status,
       'va-modal--lg': large,
