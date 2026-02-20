@@ -243,6 +243,8 @@ export class VaLink {
             download={filename}
             aria-label={label}
             onClick={handleClick}
+            rel={external ? "noreferrer" : null}
+            target={external ? "_blank" : null}
           >
             <va-icon class="link-icon--left" icon="calendar_today"></va-icon>
             {text}
@@ -261,15 +263,17 @@ export class VaLink {
             download={filename}
             aria-label={label}
             onClick={handleClick}
+            rel={external ? "noreferrer" : null}
+            target={external ? "_blank" : null}
           >
             <va-icon class="link-icon--left" icon="file_download"></va-icon>
             {text}{' '}
-            {filetype && (
+            {filetype ? (
               <dfn>
                 (<abbr title={getAbbreviationTitle()}>{filetype}</abbr>
-                {pages && `, ${pages} pages`})
+                {pages && `, ${pages} pages`}{external ? <span class="screen-only">, opens in a new tab</span> : ''})
               </dfn>
-            )}
+            ) : <span class="screen-only">(opens in a new tab)</span>}
           </a>
         </Host>
       );
