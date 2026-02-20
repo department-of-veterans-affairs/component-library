@@ -21,7 +21,9 @@ jobs:
       - run: yarn install
       
       - name: Install Puppeteer browsers
-        run: timeout 5m npx puppeteer browsers install chrome
+        run: |
+          timeout 5m npx puppeteer browsers install chrome
+          timeout 5m npx puppeteer browsers install chrome-headless-shell
         working-directory: packages/web-components
 
       - name: Test react-components
