@@ -21,7 +21,7 @@ jobs:
       - run: yarn install
       
       - name: Install Puppeteer browsers
-        run: timeout 5m yarn exec puppeteer browsers install chrome
+        run: timeout 5m node -e "require('puppeteer/install.js')"
         working-directory: packages/web-components
 
       - name: Test react-components
