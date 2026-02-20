@@ -11,32 +11,35 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      PUPPETEER_CACHE_DIR: ~/.cache/puppeteer
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'yarn'
       - run: yarn install
+
+      - name: Cache Puppeteer browsers
+        id: puppeteer-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.PUPPETEER_CACHE_DIR }}
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('packages/web-components/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-puppeteer-
       
       - name: Install Puppeteer browsers
+        if: steps.puppeteer-cache.outputs.cache-hit != 'true'
         run: node -e "require('puppeteer/install.js')"
 
       - name: Test react-components
-        run: |
-          yarn install
-          yarn test
-        working-directory: packages/react-components
+        run: yarn workspace @department-of-veterans-affairs/react-components test
 
       - name: Test design-system-dashboard-cli
-        run: |
-          yarn install
-          yarn test
-        working-directory: packages/design-system-dashboard-cli
+        run: yarn workspace @department-of-veterans-affairs/design-system-dashboard-cli test
 
       - name: Test web-components
-        run: |
-          yarn install
-          yarn test
-        working-directory: packages/web-components
+        run: yarn workspace @department-of-veterans-affairs/web-components test

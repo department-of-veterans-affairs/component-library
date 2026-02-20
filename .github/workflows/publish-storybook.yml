@@ -11,12 +11,12 @@ jobs:
       matrix:
         bucket: [dev-design.va.gov, staging-design.va.gov, design.va.gov]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
       - name: Use Node.js 22.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'yarn'
@@ -33,7 +33,7 @@ jobs:
       - name: Publish Storybook
         run: yarn build-storybook
         working-directory: packages/storybook
-      - uses: aws-actions/configure-aws-credentials@v1
+      - uses: aws-actions/configure-aws-credentials@v5
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
