@@ -61,9 +61,6 @@ describe('maintenance-banner', () => {
         <div slot="maintenance-content">
           Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience.
         </div>
-        <div slot="warn-content">
-          Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools.
-        </div>
       </va-maintenance-banner>
     `);
   });
@@ -161,9 +158,6 @@ describe('maintenance-banner', () => {
             </button>
           </div>
         </mock:shadow-root>
-        <div slot="maintenance-content">
-          Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience.
-        </div>
         <div slot="warn-content">
           Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools.
         </div>
@@ -231,9 +225,6 @@ describe('maintenance-banner', () => {
         </mock:shadow-root>
         <div slot="maintenance-content">
           Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience.
-        </div>
-        <div slot="warn-content">
-          Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools.
         </div>
       </va-maintenance-banner>
     `);
@@ -366,5 +357,24 @@ describe('maintenance-banner', () => {
       const text = await element.innerText;
       expect(text).toBe('Site maintenance');
     });
+  });
+
+  it('removes slotted content from the DOM if the current date is outside of both the maintenance window and the upcoming warning window', async () => {
+    let startsAt = new Date(),
+      expiresAt = new Date(),
+      warnStartsAt = new Date();
+    startsAt.setDate(startsAt.getDate() + 1);
+    expiresAt.setDate(expiresAt.getDate() + 2);
+    warnStartsAt.setDate(warnStartsAt.getDate() + 3);
+    const page = await newE2EPage({
+      html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" upcoming-warn-title="Upcoming site maintenance" maintenance-start-date-time="${startsAt}" maintenance-end-date-time="${expiresAt}" upcoming-warn-start-date-time="${warnStartsAt}">
+              <div slot="maintenance-content">Maintenance content</div>
+              <div slot="warn-content">Warning content</div>
+            </va-maintenance-banner>`,
+    });
+    const maintenanceSlot = await page.find('va-maintenance-banner >>> slot[name="maintenance-content"]');
+    const warnSlot = await page.find('va-maintenance-banner >>> slot[name="warn-content"]');
+    expect(maintenanceSlot).toBeNull();
+    expect(warnSlot).toBeNull();
   });
 });
