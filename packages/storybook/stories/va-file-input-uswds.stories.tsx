@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
@@ -519,17 +519,33 @@ ReadOnlyWithAdditionalInputs.args = {
 };
 
 const PercentUploadedTemplate = args => {
-  const [percent, setPercent] = useState(0);
-  function handleUpload() {
-    const intervalId = setInterval(() => {
+  const [percent, setPercent] = useState(null);
+  const intervalRef = useRef(null);
+
+  // Mock upload progress
+  function handleUpload(event) {
+    if (!event.detail.files.length) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+      setPercent(null);
+      return;
+    }
+
+    clearInterval(intervalRef.current);
+    setPercent(null);
+    intervalRef.current = setInterval(() => {
       setPercent(_prev => {
-        if (_prev >= 100) {
-          clearInterval(intervalId);
+        const current = _prev ?? 0;
+        if (current >= 100) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
           return 100;
         }
-        return _prev + Math.random() * 4;
+        return current + Math.random() * 4;
       });
     }, 100);
+
+    return () => clearInterval(intervalRef.current);
   }
 
   return (
