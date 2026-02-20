@@ -12,7 +12,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      PUPPETEER_CACHE_DIR: ~/.cache/puppeteer
+      PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 22.x
