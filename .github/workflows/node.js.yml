@@ -22,6 +22,7 @@ jobs:
       
       - name: Install Puppeteer browsers
         run: npx puppeteer browsers install chrome
+        working-directory: packages/web-components
 
       - name: Test react-components
         run: |
