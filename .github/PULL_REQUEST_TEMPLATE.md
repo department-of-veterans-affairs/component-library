@@ -20,6 +20,16 @@ Label Guidelines:
 <!-- DO NOT REMOVE - This `{{head.ref}}` is a placeholder for a CI job - it will be updated automatically -->
 https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
 
+
+# Summary
+
+_Provide a one or two sentence summary of the update that can be used in the changelog._
+<!--
+A successful summary is written in the past tense and includes:
+**A benefit statement.** A description of the update.
+See [component-library release notes](https://github.com/department-of-veterans-affairs/component-library/releases) for examples.
+-->
+
 ## Description
 
 <!-- 
