@@ -726,6 +726,21 @@ export namespace Components {
         "value"?: string;
     }
     /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaDetails {
+        /**
+          * Value to reflect on the details element to control whether the details element is open or not.
+         */
+        "open"?: boolean;
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "trigger": string;
+    }
+    /**
      * @componentName File input
      * @maturityCategory caution
      * @maturityLevel available
@@ -3082,6 +3097,17 @@ declare global {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
     };
+    /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaDetailsElement extends Components.VaDetails, HTMLStencilElement {
+    }
+    var HTMLVaDetailsElement: {
+        prototype: HTMLVaDetailsElement;
+        new (): HTMLVaDetailsElement;
+    };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
         "vaPasswordChange": any;
@@ -4007,6 +4033,7 @@ declare global {
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-critical-action": HTMLVaCriticalActionElement;
         "va-date": HTMLVaDateElement;
+        "va-details": HTMLVaDetailsElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
@@ -4863,6 +4890,21 @@ declare namespace LocalJSX {
           * Set the default date value must be in YYYY-MM-DD format.
          */
         "value"?: string;
+    }
+    /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaDetails {
+        /**
+          * Value to reflect on the details element to control whether the details element is open or not.
+         */
+        "open"?: boolean;
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "trigger": string;
     }
     /**
      * @componentName File input
@@ -6863,6 +6905,7 @@ declare namespace LocalJSX {
         "va-crisis-line-modal": VaCrisisLineModal;
         "va-critical-action": VaCriticalAction;
         "va-date": VaDate;
+        "va-details": VaDetails;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
@@ -7062,6 +7105,12 @@ declare module "@stencil/core" {
              * @guidanceHref form/date-input
              */
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
+            /**
+             * @componentName Details
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-details": LocalJSX.VaDetails & JSXBase.HTMLAttributes<HTMLVaDetailsElement>;
             /**
              * @componentName File input
              * @maturityCategory caution
