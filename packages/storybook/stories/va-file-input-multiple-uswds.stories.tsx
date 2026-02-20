@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { VaFileInputMultiple } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 // @ts-ignore ignores "module not found" error
@@ -596,4 +596,58 @@ ReadOnlyWithAdditionalInputs.args = {
   vaMultipleChange: event => event,
   readOnly: true,
   children: readOnlyAdditionalInfoContent,
+};
+
+// Mock upload progress per file
+// Note: `index` in the event is the pageIndex from the unfiltered internal files array,
+// which matches how va-file-input-multiple indexes into the percentUploaded prop.
+const PercentUploadedTemplate = args => {
+  const [percents, setPercents] = useState<number[]>([]);
+  const intervalsRef = useRef<{ [key: number]: ReturnType<typeof setInterval> }>({});
+
+  function startInterval(index: number) {
+    clearInterval(intervalsRef.current[index]);
+    delete intervalsRef.current[index];
+    setPercents(prev => { const u = [...prev]; u[index] = null; return u; });
+    intervalsRef.current[index] = setInterval(() => {
+      setPercents(prev => {
+        const updated = [...prev];
+        const current = updated[index] ?? 0;
+        if (current >= 100) {
+          clearInterval(intervalsRef.current[index]);
+          delete intervalsRef.current[index];
+          updated[index] = 100;
+        } else {
+          updated[index] = current + Math.random() * 4;
+        }
+        return updated;
+      });
+    }, 100);
+  }
+
+  function handleUpload(event) {
+    const { action, index: changedIndex } = event.detail;
+
+    if (action === 'FILE_ADDED' || action === 'FILE_UPDATED') {
+      startInterval(changedIndex);
+    } else if (action === 'FILE_REMOVED') {
+      clearInterval(intervalsRef.current[changedIndex]);
+      delete intervalsRef.current[changedIndex];
+      setPercents(prev => { const u = [...prev]; u.splice(changedIndex, 1); return u; });
+    }
+  }
+
+  return (
+    <VaFileInputMultiple
+      {...args}
+      percentUploaded={percents}
+      onVaMultipleChange={handleUpload}
+    />
+  );
+};
+
+export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
+WithPercentUploaded.args = { ...defaultArgs };
+WithPercentUploaded.parameters = {
+  chromatic: { disableSnapshot: true },
 };

@@ -58,6 +58,7 @@ export class VaFileInput {
   @State() internalError?: string;
   @State() showModal: boolean = false;
   @State() showSeparator: boolean = true;
+  @State() uploadCancelled: boolean = false;
 
   // don't generate previews for files bigger than limit because this can lock main thread
   FILE_PREVIEW_SIZE_LIMIT = 1024 * 1024 * 5;
@@ -325,9 +326,17 @@ export class VaFileInput {
    * Called when file has been uploaded with an error or file upload has been
    * cancelled.
    */
-  private resetState() {
+  private resetState(isCancelled: boolean = false) {
     this.fileContents = null;
     this.percentUploaded = null;
+    if (isCancelled) {
+      this.file = null;
+      this.uploadCancelled = true;
+      if (this.fileInputRef) {
+        this.fileInputRef.value = '';
+      }
+      this.vaChange.emit({ files: [] });
+    }
     forceUpdate(this.el);
   }
 
@@ -372,6 +381,7 @@ export class VaFileInput {
     // Ensure that the flag to track the first upload attempt is set to `true`
     // for conditional setting of `inputAriaLabel` in the render method.
     this.initialUploadAttemptHasTakenPlace = true;
+    this.uploadCancelled = false;
 
     let fileError: string | null = null;
 
@@ -565,7 +575,7 @@ export class VaFileInput {
       ? 'headless-selected-files-wrapper'
       : 'selected-files-wrapper';
 
-    const showProgBar = percentUploaded !== null && percentUploaded < 100;
+    const showProgBar = !this.uploadCancelled && percentUploaded !== null && percentUploaded < 100;
 
     let statusClassNames = 'file-status-label'
     if (showProgBar) {
@@ -661,7 +671,7 @@ export class VaFileInput {
                     (
                       <div class="progress-bar-and-cancel-button">
                         <va-progress-bar percent={percentUploaded} noPercentScreenReader />
-                        <va-button-icon buttonType="cancel" onClick={this.resetState.bind(this)} />
+                        <va-button-icon buttonType="cancel" onClick={() => this.resetState(true)} />
                       </div>
                     )
                   }
