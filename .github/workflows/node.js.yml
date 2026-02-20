@@ -20,7 +20,15 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       
+      - name: Cache Puppeteer browsers
+        uses: actions/cache@v4
+        id: puppeteer-cache
+        with:
+          path: ~/.cache/puppeteer
+          key: puppeteer-${{ hashFiles('packages/web-components/package.json') }}
+ 
       - name: Install Puppeteer browsers
+        if: steps.puppeteer-cache.outputs.cache-hit != 'true'
         run: node -e "require('puppeteer/install.js')"
 
       - name: Test react-components
