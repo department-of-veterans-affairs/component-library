@@ -29,9 +29,10 @@ import { getHeaderLevel } from '../../utils/utils';
 })
 export class VaMaintenanceBanner {
   isWarning: boolean = false;
-  preventRender: boolean = false;
   maintenanceBannerEl: HTMLDivElement;
   maintenanceBannerContent: HTMLDivElement;
+  preventRender: boolean = false;
+  currentDateTimeOutsideBothWindows: boolean = false;
 
   @Element() el: HTMLElement;
 
@@ -122,19 +123,41 @@ export class VaMaintenanceBanner {
       this.preventRender = true;
     }
 
+    const bothWindowsInPast =
+      isDateAfter(now, new Date(maintenanceStartDateTime)) &&
+      isDateAfter(now, new Date(maintenanceEndDateTime)) &&
+      isDateAfter(now, new Date(upcomingWarnStartDateTime));
+
+    const bothWindowsInFuture =
+      isDateBefore(now, new Date(maintenanceStartDateTime)) &&
+      isDateBefore(now, new Date(maintenanceEndDateTime)) &&
+      isDateBefore(now, new Date(upcomingWarnStartDateTime));
+
+    if (bothWindowsInPast || bothWindowsInFuture) {
+      this.currentDateTimeOutsideBothWindows = true;
+    }
+
     // Designate as a warning if it's before the maintenance start time and not
     // an error
     this.isWarning = isDateBefore(now, new Date(maintenanceStartDateTime)) && !isError;
 
-    // Ensure that the slot that isn't being used is removed from the DOM to
-    // prevent confusion for screen readers and assistive technologies. This is
-    // necessary because the slotted content passed as children will be rendered
-    // in the light DOM regardless of conditional rendering in the component's
-    // render method.
-    if (!this.preventRender) {
-      const slotToRemove: HTMLElement = this.isWarning
-        ? this.el.querySelector('[slot="maintenance-content"]')
-        : this.el.querySelector('[slot="warn-content"]');
+    const maintenanceSlot = this.el.querySelector('[slot="maintenance-content"]');
+    const warnSlot = this.el.querySelector('[slot="warn-content"]');
+
+    // Ensure that unnecessary slots are removed from the DOM to prevent
+    // confusion for screen readers and assistive technologies.
+    // - If the current date is outside of both windows, remove both slots.
+    // - If component will render and the current date is within one of the
+    //   windows, remove the slot that isn't being used. For example, if it's
+    //   within the maintenance window, remove the warn slot since it won't be
+    //   shown.
+    if (this.currentDateTimeOutsideBothWindows) {
+      maintenanceSlot?.remove();
+      warnSlot?.remove();
+    } else if (!this.preventRender) {
+      const slotToRemove = this.isWarning
+        ? maintenanceSlot
+        : warnSlot;
       slotToRemove?.remove();
     }
   }
