@@ -39,6 +39,7 @@ export const config: Config = {
       componentCorePackage: '@department-of-veterans-affairs/web-components/dist/types',
       proxiesFile: './react-bindings/index.ts',
       includeImportCustomElements: false,
+      outDir: 'react-bindings',
     }),
     {
       type: 'dist',
@@ -58,10 +59,14 @@ export const config: Config = {
     {
       type: 'dist-custom-elements',
       customElementsExportBehavior: 'single-export-module',
+      externalRuntime: false,
     },
   ],
   testing: {
     browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
+    browserWaitUntil: 'networkidle2',
+    browserSlowMo: 50,
+    testTimeout: 30000,
     moduleNameMapper: {
       '^.+.(svg)$': 'jest-transformer-svg',
     },
