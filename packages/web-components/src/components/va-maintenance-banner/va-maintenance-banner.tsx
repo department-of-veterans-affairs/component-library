@@ -32,7 +32,6 @@ export class VaMaintenanceBanner {
   maintenanceBannerEl: HTMLDivElement;
   maintenanceBannerContent: HTMLDivElement;
   preventRender: boolean = false;
-  currentDateTimeOutsideBothWindows: boolean = false;
 
   @Element() el: HTMLElement;
 
