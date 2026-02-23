@@ -141,7 +141,7 @@
   gap: var(--vads-spacing-1);
 
   // Override USWDS button group styles
-  .va-modal:not(.va-modal--lg) & {
+  .va-modal & {
     .va-button-group {
       flex-direction: column;
       gap: var(--vads-spacing-1);
@@ -159,13 +159,18 @@
   }
 }
 
-// On larger screens, display buttons in a row and allow them to size based on their content
-.va-modal--lg .va-modal__footer {
-  @media screen and (min-width: $medium-screen) {
-    display: flex;
+// In large modals on larger screens, display buttons in a row and allow them to size based on their content
+.va-modal--lg {
+  .va-modal__footer {
+    .va-button-group {
+      @media screen and (min-width: $tablet) {
+        display: flex;
+        flex-direction: row;
 
-    va-button {
-      width: auto;
+        va-button {
+          width: auto;
+        }
+      }
     }
   }
 }
