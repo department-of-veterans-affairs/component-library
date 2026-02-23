@@ -22,7 +22,6 @@ jobs:
       
       - name: Install Puppeteer browsers
         run: node -e "require('puppeteer/install.js')"
-        working-directory: packages/web-components
 
       - name: Test react-components
         run: |
