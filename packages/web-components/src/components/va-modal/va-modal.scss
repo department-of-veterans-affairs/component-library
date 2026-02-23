@@ -110,6 +110,7 @@
   }
 }
 
+.va-modal // Extra specificity to override USWDS modal font styles
 .va-modal__heading {
   font-family: var(--font-serif);
 }
