@@ -125,22 +125,15 @@ export class VaMaintenanceBanner {
       maintenanceEndInPast &&
       isDateAfter(now, upcomingWarnStart);
 
-    const bothWindowsInFuture =
-      maintenanceStartInFuture &&
-      isDateBefore(now, maintenanceEnd) &&
-      warningStartInFuture;
-
     // Flip the flag to prevent rendering if any of the following conditions are
     // true:
     // - it's before or after when it should show
     // - both the maintenance and warning windows are in the past
-    // - both the maintenance and warning windows are in the future
     // - the user has already dismissed the banner.
     if (
       warningStartInFuture ||
       maintenanceEndInPast ||
       bothWindowsInPast ||
-      bothWindowsInFuture ||
       window.localStorage.getItem('MAINTENANCE_BANNER') === bannerId
     ) {
       this.preventRender = true;
