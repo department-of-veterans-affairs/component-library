@@ -62,17 +62,6 @@
   border-left-color: var(--vads-color-secondary-dark);
 }
 
-.va-modal--lg {
-  @media screen and (min-width: $mobile-lg) {
-    max-width: 46.875rem;
-
-    .va-modal__icon-container {
-      padding-top: var(--units-0p5);
-      padding-right: var(--units-0p5);
-    }
-  }
-}
-
 .va-modal-alert {
   border-left: var(--units-1) solid transparent;
   box-sizing: border-box;
@@ -159,10 +148,19 @@
   }
 }
 
-// In large modals on larger screens, display buttons in a row and allow them to size based on their content
-.va-modal--lg {
+.va-modal.va-modal--lg {
+  max-width: 46.875rem;
+
+  @media screen and (min-width: $mobile-lg) {
+    .va-modal__icon-container {
+      padding-top: var(--units-0p5);
+      padding-right: var(--units-0p5);
+    }
+  }
+
   .va-modal__footer {
     .va-button-group {
+      // On larger screens, display buttons in a row and allow them to size based on their content
       @media screen and (min-width: $tablet) {
         display: flex;
         flex-direction: row;
