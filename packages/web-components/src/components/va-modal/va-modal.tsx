@@ -648,7 +648,7 @@ export class VaModal {
             {((primaryButtonClick && primaryButtonText) ||
               (secondaryButtonClick && secondaryButtonText)) && (
               <div
-                class="va-modal__footer"
+                class="usa-modal__footer va-modal__footer"
                 ref={el => (this.alertActions = el as HTMLDivElement)}
               >
                 <ul class="usa-button-group va-button-group">
