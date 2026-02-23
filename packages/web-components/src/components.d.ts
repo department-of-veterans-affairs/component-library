@@ -738,7 +738,11 @@ export namespace Components {
         /**
           * The text for the summary element that triggers the details to expand.
          */
-        "trigger": string;
+        "summaryText": string;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: string;
     }
     /**
      * @componentName File input
@@ -4904,7 +4908,11 @@ declare namespace LocalJSX {
         /**
           * The text for the summary element that triggers the details to expand.
          */
-        "trigger": string;
+        "summaryText": string;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: string;
     }
     /**
      * @componentName File input
