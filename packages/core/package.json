@@ -18,6 +18,23 @@
   "main": "dist/app.bundle.js",
   "types": "dist/components/types/index.d.ts",
   "module": "src/main.js",
+  "exports": {
+    ".": {
+      "import": "./src/main.js",
+      "require": "./dist/app.bundle.js",
+      "default": "./dist/app.bundle.js"
+    },
+    "./dist/*": "./dist/*",
+    "./src/*": "./src/*",
+    "./*.js": "./*.js",
+    "./dist/react-bindings": {
+      "types": "./dist/react-bindings/index.d.ts",
+      "import": "./dist/react-bindings/index.js",
+      "require": "./dist/react-bindings/index.js",
+      "default": "./dist/react-bindings/index.js"
+    },
+    "./dist/react-bindings/*": "./dist/react-bindings/*"
+  },
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",
     "@department-of-veterans-affairs/web-components": "workspace:*",
