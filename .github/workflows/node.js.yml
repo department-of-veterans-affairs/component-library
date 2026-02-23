@@ -22,8 +22,8 @@ jobs:
       
       - name: Install Puppeteer browsers
         run: |
-          timeout 5m npx puppeteer browsers install chrome
-          timeout 5m npx puppeteer browsers install chrome-headless-shell
+          npx puppeteer browsers install chrome
+          npx puppeteer browsers install chrome-headless-shell
         working-directory: packages/web-components
 
       - name: Test react-components
