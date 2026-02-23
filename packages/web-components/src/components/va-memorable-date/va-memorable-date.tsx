@@ -159,16 +159,17 @@ export class VaMemorableDate {
   private yearTouched: boolean = false;
 
   private handleDateBlur = (event: FocusEvent) => {
-    let undef;
-    const { currentYear, currentMonth, currentDay } = this;
-    // Fallback to undefined to preserve validation of empty strings
-    const yearNum = Number(currentYear || undef);
-    const monthNum = Number(currentMonth || undef);
-    const dayNum = Number(currentDay || undef);
 
-    this.yearTouched = this.yearTouched || yearNum !== undefined;
-    this.monthTouched = this.monthTouched || monthNum !== undefined;
-    this.dayTouched = this.dayTouched || dayNum !== undefined;
+    const { currentYear, currentMonth, currentDay } = this;
+
+    const yearNum = currentYear ? Number(currentYear) : null;
+    const monthNum = currentMonth ? Number(currentMonth) : null;
+    const dayNum = currentDay ? Number(currentDay) : null;
+
+
+    this.yearTouched = this.yearTouched || yearNum !== null;
+    this.monthTouched = this.monthTouched || monthNum !== null;
+    this.dayTouched = this.dayTouched || dayNum !== null;
 
       validate({
         component: this,
@@ -179,6 +180,7 @@ export class VaMemorableDate {
         monthTouched: this.monthTouched,
         dayTouched: this.dayTouched,
         monthSelect: this.monthSelect,
+        onBlur: true,
       });
 
       if (this.error) {
@@ -222,33 +224,32 @@ export class VaMemorableDate {
   private handleMonthChange = event => {
     const target = event.target as HTMLInputElement;
     this.currentMonth = target.value;
+    this.monthTouched = true;
     this.handleDateChange(event);
   };
 
   private handleDayChange = event => {
     const target = event.target as HTMLInputElement;
     this.currentDay = target.value;
+    this.dayTouched = true;
     this.handleDateChange(event);
   };
 
   private handleYearChange = event => {
     const target = event.target as HTMLInputElement;
     this.currentYear = target.value;
+    this.yearTouched = true;
     this.handleDateChange(event);
   };
 
   private handleDateChange = (event: InputEvent) => {
-    let undef;
-
+    
     const { currentYear, currentMonth, currentDay } = this;
+    // Fallback to undefined to preserve validation of empty strings
+    const yearNum = currentYear ? Number(currentYear) : null;
+    const monthNum = currentMonth ? Number(currentMonth) : null;
+    const dayNum = currentDay ? Number(currentDay) : null;
 
-    if (currentDay && currentMonth && this.yearTouched) {
-      
-      // Fallback to undefined to preserve validation of empty strings
-      const yearNum = Number(currentYear || undef);
-      const monthNum = Number(currentMonth || undef);
-      const dayNum = Number(currentDay || undef);
-  
       validate({
           component: this,
           year: yearNum,
@@ -258,6 +259,7 @@ export class VaMemorableDate {
           monthTouched: this.monthTouched,
           dayTouched: this.dayTouched,
           monthSelect: this.monthSelect,
+          onBlur: false,
         });
   
         if (this.error) {
@@ -266,8 +268,6 @@ export class VaMemorableDate {
           }
           return;
         }
-      
-    }
 
     /* eslint-disable i18next/no-literal-string */
     this.value =
@@ -280,16 +280,19 @@ export class VaMemorableDate {
     this.dateChange.emit(event);
   };
 
-  private handleMonthBlur = () => {
+  private handleMonthBlur = (event: FocusEvent) => {
     this.monthTouched = true;
+    this.handleDateBlur(event);
   };
 
-  private handleDayBlur = () => {
+  private handleDayBlur = (event: FocusEvent) => {
     this.dayTouched = true;
+    this.handleDateBlur(event);
   };
 
-  private handleYearBlur = () => {
+  private handleYearBlur = (event: FocusEvent) => {
     this.yearTouched = true;
+    this.handleDateBlur(event);
   };
 
   /**
@@ -365,7 +368,6 @@ export class VaMemorableDate {
       name,
       hint,
       error,
-      handleDateBlur,
       monthSelect,
       useFormsPattern,
       formHeadingLevel,
@@ -523,7 +525,7 @@ export class VaMemorableDate {
     );
 
     return (
-      <Host onBlur={handleDateBlur}>
+      <Host>
         {formsHeading}
         <div class="input-wrap">
           <fieldset class="usa-form usa-fieldset">
@@ -559,7 +561,7 @@ export class VaMemorableDate {
             <span id="error-message" role="alert">
               {_error && (
                 <Fragment>
-                  <span class="usa-sr-only">{i18next.t('error')}</span>
+                  <span class="usa-sr-only">{i18next.t('error ')}</span>
                   <span class="usa-error-message">
                     {getErrorMessage(_error)}
                   </span>

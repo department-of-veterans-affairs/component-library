@@ -149,30 +149,34 @@ export class VaDate {
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '')
       .split('-')
-      .map(val => Number(val));
 
-    this.yearTouched = this.yearTouched || year !== undefined;
-    this.monthTouched = this.monthTouched || month !== undefined;
-    this.dayTouched = this.dayTouched || day !== undefined;
+    const yearNum = year ? Number(year) : null;
+    const monthNum = month ? Number(month) : null;
+    const dayNum = day ? Number(day) : null;
+
+    this.yearTouched = this.yearTouched || yearNum !== null;
+    this.monthTouched = this.monthTouched || monthNum !== null;
+    this.dayTouched = this.dayTouched || dayNum !== null;
 
     validate({
       component: this,
-      year,
-      month,
-      day,
+      year: yearNum,
+      month: monthNum,
+      day: dayNum,
       yearTouched: this.yearTouched,
       monthTouched: this.monthTouched,
       dayTouched: this.dayTouched,
       monthSelect: true,
       monthYearOnly: this.monthYearOnly,
       monthOptional: this.monthOptional,
+      onBlur: true,
     });
 
     if (this.error) {
       return;
     }
 
-    this.setValue(year, month, day);
+    this.setValue(yearNum, monthNum, dayNum);
     this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
@@ -204,26 +208,51 @@ export class VaDate {
       currentYear = target.value;
     }
 
+    const year = Number(currentYear);
+    const month = Number(currentMonth);
+    const day = Number(currentDay);
+
+    validate({
+      component: this,
+      year,
+      month,
+      day,
+      yearTouched: this.yearTouched,
+      monthTouched: this.monthTouched,
+      dayTouched: this.dayTouched,
+      monthSelect: true,
+      monthYearOnly: this.monthYearOnly,
+      monthOptional: this.monthOptional,
+      onBlur: false,
+    });
+
+    if (this.error) {
+      return;
+    }
+
     this.setValue(
-      parseInt(currentYear),
-      parseInt(currentMonth),
-      parseInt(currentDay),
+      year,
+      month,
+      day,
     );
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
   };
 
-  private handleMonthBlur = () => {
+  private handleMonthBlur = (event: FocusEvent) => {
     this.monthTouched = true;
+    this.handleDateBlur(event);
   };
 
-  private handleDayBlur = () => {
+  private handleDayBlur = (event: FocusEvent) => {
     this.dayTouched = true;
+    this.handleDateBlur(event);
   };
 
-  private handleYearBlur = () => {
+  private handleYearBlur = (event: FocusEvent) => {
     this.yearTouched = true;
+    this.handleDateBlur(event);
   };
 
   render() {
@@ -232,7 +261,6 @@ export class VaDate {
       label,
       name,
       error,
-      handleDateBlur,
       handleDateChange,
       monthYearOnly,
       value,
@@ -253,7 +281,7 @@ export class VaDate {
     };
     // Fieldset has an implicit aria role of group
     return (
-      <Host onBlur={handleDateBlur}>
+      <Host>
         <fieldset>
           <legend>
             {label} {required && <span class="required">(*Required)</span>}

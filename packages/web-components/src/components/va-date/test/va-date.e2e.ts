@@ -674,9 +674,9 @@ describe('va-date', () => {
       action: 'blur',
       componentName: 'va-date',
       details: {
-        'day': 1,
-        'month': 2,
-        'year': 2000,
+        'day': '01',
+        'month': '02',
+        'year': '2000',
         'month-year-only': false,
       },
     });

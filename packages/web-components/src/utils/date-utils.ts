@@ -169,15 +169,16 @@ function getMonthErrorKey(monthSelect: boolean): string {
 
 interface ValidateConfig {
   component: Components.VaDate | Components.VaMemorableDate;
-  year: number;
-  month: number;
-  day: number;
+  year: number | null;
+  month: number | null;
+  day: number | null;
   monthYearOnly?: boolean;
   yearTouched?: boolean;
   monthTouched?: boolean;
   dayTouched?: boolean;
   monthSelect?: boolean;
   monthOptional?: boolean;
+  onBlur?: boolean;
 }
 
 export function validate({
@@ -191,6 +192,7 @@ export function validate({
   dayTouched,
   monthSelect,
   monthOptional,
+  onBlur,
 }: ValidateConfig): void {
   // Don't validate if all values are empty
   if (!year && !month && !day) {
@@ -204,19 +206,18 @@ export function validate({
   component.invalidDay = false;
 
   const monthRequired = !(monthYearOnly && monthOptional);
-
   // Check NaN and set errors based on NaN values
   if (monthRequired && isNaN(month) && monthTouched) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
     return;
   }
-  if (!monthYearOnly && isNaN(day) && dayTouched) {
+  if (!monthYearOnly && isNaN(day) && dayTouched && day !== null) {
     component.invalidDay = true;
     component.error = 'day-range';
     return;
   }
-  if (isNaN(year) && yearTouched) {
+  if (isNaN(year) && yearTouched && year !== undefined && year !== null) {
     component.invalidYear = true;
     component.error = 'year-range';
     return;
@@ -243,19 +244,25 @@ export function validate({
   }
 
   // Check for empty values after the fields are touched
-  if (monthRequired && !month && monthTouched) {
+  let emptyFields = false;
+
+  if (!month && monthTouched && onBlur) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
-    return;
+    emptyFields = true;
   }
-  if (!day && !monthYearOnly && dayTouched) {
+  if (!day && !monthYearOnly && dayTouched && onBlur) {
     component.invalidDay = true;
     component.error = 'day-range';
-    return;
+    emptyFields = true;
   }
-  if (!year && yearTouched) {
+  if (!year && yearTouched && onBlur) {
     component.invalidYear = true;
     component.error = 'year-range';
+    emptyFields = true;
+  }
+
+  if (emptyFields) {
     return;
   }
 
@@ -263,7 +270,6 @@ export function validate({
   let invalidFields = false;
 
   if (
-    monthRequired &&
     month &&
     (month < minMonths || month > maxMonths) &&
     monthTouched
@@ -287,7 +293,7 @@ export function validate({
   }
 
   // If month is selected but day and year have not been touched, set error for untouched fields
-  if (month && monthTouched && !dayTouched && !yearTouched) {
+  if (month && monthTouched && !dayTouched && !day && !year && !yearTouched && onBlur) {
     if (!monthYearOnly) {
       component.invalidDay = true;
       component.error = 'date-error';
@@ -299,7 +305,7 @@ export function validate({
   }
 
   // If month and day is set but year has not been touched, set error
-  if (month && monthTouched && day && dayTouched && !yearTouched) {
+  if (month && monthTouched && day && dayTouched && !year && !yearTouched && onBlur) {
     component.invalidYear = true;
     component.error = 'date-error';
     return;
