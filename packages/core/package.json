@@ -28,10 +28,10 @@
     "./src/*": "./src/*",
     "./*.js": "./*.js",
     "./dist/react-bindings": {
-      "types": "./dist/react-bindings/index.d.ts",
-      "import": "./dist/react-bindings/index.js",
-      "require": "./dist/react-bindings/index.js",
-      "default": "./dist/react-bindings/index.js"
+      "types": "./src/react-bindings.d.ts",
+      "import": "./src/react-bindings.mjs",
+      "require": "./src/react-bindings.cjs",
+      "default": "./src/react-bindings.mjs"
     },
     "./dist/react-bindings/*": "./dist/react-bindings/*"
   },
