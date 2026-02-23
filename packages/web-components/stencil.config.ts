@@ -36,9 +36,6 @@ export const config: Config = {
   },
   outputTargets: [
     reactOutputTarget({
-      componentCorePackage: '@department-of-veterans-affairs/web-components/dist/types',
-      proxiesFile: './react-bindings/index.ts',
-      includeImportCustomElements: false,
       outDir: 'react-bindings',
     }),
     {
@@ -66,7 +63,6 @@ export const config: Config = {
     browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
     browserWaitUntil: 'networkidle2',
     browserSlowMo: 50,
-    testTimeout: 30000,
     moduleNameMapper: {
       '^.+.(svg)$': 'jest-transformer-svg',
     },
