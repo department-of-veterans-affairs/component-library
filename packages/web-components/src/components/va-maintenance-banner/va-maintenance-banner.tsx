@@ -112,49 +112,60 @@ export class VaMaintenanceBanner {
     } = this;
 
     const now = new Date();
+    const maintenanceStart = new Date(maintenanceStartDateTime);
+    const maintenanceEnd = new Date(maintenanceEndDateTime);
+    const upcomingWarnStart = new Date(upcomingWarnStartDateTime);
 
-    // Flip the flag to prevent rendering if it's before or after when it should
-    // show, or if the user has already dismissed the banner.
+    // Time checks to be used multiple times in the logic below
+    const maintenanceStartInFuture = isDateBefore(now, maintenanceStart);
+    const maintenanceEndInPast = isDateAfter(now, maintenanceEnd);
+    const warningStartInFuture = isDateBefore(now, upcomingWarnStart);
+
+    const bothWindowsInPast =
+      isDateAfter(now, maintenanceStart) &&
+      maintenanceEndInPast &&
+      isDateAfter(now, upcomingWarnStart);
+
+    const bothWindowsInFuture =
+      maintenanceStartInFuture &&
+      isDateBefore(now, maintenanceEnd) &&
+      warningStartInFuture;
+
+    // Flip the flag to prevent rendering if any of the following conditions are
+    // true:
+    // - it's before or after when it should show
+    // - both the maintenance and warning windows are in the past
+    // - both the maintenance and warning windows are in the future
+    // - the user has already dismissed the banner.
     if (
-      isDateBefore(now, new Date(upcomingWarnStartDateTime)) ||
-      isDateAfter(now, new Date(maintenanceEndDateTime)) ||
+      warningStartInFuture ||
+      maintenanceEndInPast ||
+      bothWindowsInPast ||
+      bothWindowsInFuture ||
       window.localStorage.getItem('MAINTENANCE_BANNER') === bannerId
     ) {
       this.preventRender = true;
     }
 
-    const bothWindowsInPast =
-      isDateAfter(now, new Date(maintenanceStartDateTime)) &&
-      isDateAfter(now, new Date(maintenanceEndDateTime)) &&
-      isDateAfter(now, new Date(upcomingWarnStartDateTime));
-
-    const bothWindowsInFuture =
-      isDateBefore(now, new Date(maintenanceStartDateTime)) &&
-      isDateBefore(now, new Date(maintenanceEndDateTime)) &&
-      isDateBefore(now, new Date(upcomingWarnStartDateTime));
-
-    if (bothWindowsInPast || bothWindowsInFuture) {
-      this.currentDateTimeOutsideBothWindows = true;
-    }
-
     // Designate as a warning if it's before the maintenance start time and not
     // an error
-    this.isWarning = isDateBefore(now, new Date(maintenanceStartDateTime)) && !isError;
+    this.isWarning = maintenanceStartInFuture && !isError;
 
     const maintenanceSlot = this.el.querySelector('[slot="maintenance-content"]');
     const warnSlot = this.el.querySelector('[slot="warn-content"]');
 
     // Ensure that unnecessary slots are removed from the DOM to prevent
     // confusion for screen readers and assistive technologies.
-    // - If the current date is outside of both windows, remove both slots.
+    // - If render is being prevented based on the criteria above, remove both
+    //   slots since the banner won't be shown at all.
     // - If component will render and the current date is within one of the
     //   windows, remove the slot that isn't being used. For example, if it's
     //   within the maintenance window, remove the warn slot since it won't be
     //   shown.
-    if (this.currentDateTimeOutsideBothWindows) {
+    if (this.preventRender) {
       maintenanceSlot?.remove();
       warnSlot?.remove();
-    } else if (!this.preventRender) {
+    } else {
       const slotToRemove = this.isWarning
         ? maintenanceSlot
         : warnSlot;
