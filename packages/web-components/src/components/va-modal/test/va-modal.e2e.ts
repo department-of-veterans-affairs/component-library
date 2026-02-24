@@ -28,14 +28,14 @@ describe('va-modal', () => {
     expect(element).toEqualHtml(`
       <va-modal class="hydrated" modal-title="Example Title" visible="">
         <mock:shadow-root>
-        <div aria-label="Example Title modal" aria-modal="true" class="usa-modal" role="dialog">
+        <div aria-label="Example Title modal" aria-modal="true" class="usa-modal va-modal" role="dialog">
             <div class="usa-modal__content va-modal__content">
               <button aria-label="Close Example Title modal" class="va-modal-close" type="button">
                 <va-icon class="hydrated"></va-icon>
               </button>
-              <div class="usa-modal__main">
+              <div class="usa-modal__main va-modal__main">
                 <div role="document">
-                  <h2 class="usa-modal__heading" id="heading" tabindex="-1">
+                  <h2 class="usa-modal__heading va-modal__heading" id="heading" tabindex="-1">
                     Example Title
                   </h2>
                   <div class="usa-prose" id="description">
