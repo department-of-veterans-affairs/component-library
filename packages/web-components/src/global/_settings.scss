@@ -1,4 +1,7 @@
-@use "uswds-core" with ($theme-show-notifications: false,
+@forward "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables";
+@use "uswds-core" with (
+  $theme-show-notifications: false,
+  $theme-show-compile-warnings: false,
   $theme-image-path: '../../../../../node_modules/@uswds/uswds/dist/img/',
   $theme-font-type-sans: 'source-sans-pro', // Formation override.
   $theme-font-sans-custom-stack: '"Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans', // Formation override.

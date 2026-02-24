@@ -7,7 +7,7 @@
 @use "../formation-overrides/variables" as *;
 @use "../../../dist/tokens/scss/variables.scss" as *;
 @use '../override-function' as *;
-@import '../formation-overrides/core/utilities';
+@use '../formation-overrides/core/utilities' as *;
 
 .process {
   list-style: none;

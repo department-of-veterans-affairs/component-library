@@ -454,63 +454,93 @@ CustomValidation.parameters = {
 };
 
 const EncryptedTemplate = ({ label, name }) => {
+  const [trackedFiles, setTrackedFiles] = useState([]);
   const [encryptedList, setEncryptedList] = useState([]);
-  const [passwordSubmissionSuccessList, setPasswordSubmissionSuccessList] = useState<boolean[]>([]);
-  const [derivedPasswordErrorList, setDerivedPasswordErrorList] = useState<string[]>([]);
 
-  function handleChange(event) {
-    const { action, file } = event.detail;
+  /**
+   * Callback passed to onVaMultipleChange to track the file objects for each
+   * file input, and update the encryptedList based on the file types of the
+   * tracked files. The encryptedList is used to determine whether a password
+   * field should be displayed for each file input.
+   * @param event The custom event emitted by the va-file-input-multiple component.
+   * @returns {void}
+   */
+  function handleChange(event: CustomEvent<{
+    action: string;
+    file?: File;
+    index?: number }>
+  ): void {
+    const { detail } = event;
 
-    // Only perform logic to update state on PDF files since those are the ones
-    // we're treating as automatically being encrypted for this story.
-    if (file && file.type === 'application/pdf') {
-      if (action === 'FILE_ADDED') {
-        // Update password submission success list with null for newly added file
-        const currentPasswordSubmissionSuccessList = [...passwordSubmissionSuccessList];
-        currentPasswordSubmissionSuccessList.push(null);
-        setPasswordSubmissionSuccessList(currentPasswordSubmissionSuccessList);
+    const trackedFilesToSet = [...trackedFiles];
 
-        // Update derived password error list with empty string for newly added file
-        const currentDerivedPasswordErrorList = [...derivedPasswordErrorList];
-        currentDerivedPasswordErrorList.push('');
-        setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
+    // Add new file to trackedFiles if action is FILE_ADDED
+    if (detail.action === 'FILE_ADDED') {
+      trackedFilesToSet.push(detail.file);
+    } else if (detail.action === 'FILE_UPDATED' && detail.file) {
+      // If an existing file is updated successfully, replace the corresponding
+      // error object in trackedFiles with the file
+      const indexToUpdate = trackedFilesToSet.findIndex(
+        file => file.name === detail.file.name,
+      );
+      if (indexToUpdate !== -1) {
+        trackedFilesToSet[indexToUpdate] = detail.file;
       }
-
-      if (action === 'FILE_REMOVED') {
-        // Remove deleted file's entry from password submission success list
-        const currentPasswordSubmissionSuccessList = [...passwordSubmissionSuccessList];
-        currentPasswordSubmissionSuccessList.splice(file.deletedIndex, 1);
-        setPasswordSubmissionSuccessList(currentPasswordSubmissionSuccessList);
-
-        // Remove deleted file's entry from derived password error list
-        const currentDerivedPasswordErrorList = [...derivedPasswordErrorList];
-        currentDerivedPasswordErrorList.splice(file.deletedIndex, 1);
-        setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
+    } else if (detail.action === 'FILE_REMOVED' && detail.file) {
+      // Remove file from trackedFiles if action is FILE_REMOVED when a valid
+      // file is removed
+      const indexToRemove = trackedFilesToSet.findIndex(
+        file => file.name === detail.file.name,
+      );
+      if (indexToRemove !== -1) {
+        trackedFilesToSet.splice(indexToRemove, 1);
+      }
+    } else if (detail.action === 'FILE_REMOVED' && !detail.file) {
+      // If an error file was deleted, remove the corresponding file from
+      // trackedFiles
+      const indexToRemove = trackedFilesToSet.findIndex(
+        file => file.index === detail.index,
+      );
+      if (indexToRemove !== -1) {
+        trackedFilesToSet.splice(indexToRemove, 1);
       }
     }
 
-    setEncryptedForEachFile(event);
-  }
-
-  function setEncryptedForEachFile(event) {
-    const fileEntries = event.detail.state;
-    const pdfFiles = fileEntries.map((file) => {
-      return file.file.type === 'application/pdf'
+    const pdfFiles = trackedFilesToSet.map((file) => {
+      return file.type === 'application/pdf'
     });
+
     setEncryptedList(pdfFiles);
+    setTrackedFiles(trackedFilesToSet);
   }
 
-  const handlePasswordSubmissionSuccessClick = (index: number, isSuccess: boolean = false) => {
-    const currentState = [...passwordSubmissionSuccessList];
-    currentState[index] = isSuccess;
+  function handleError(event: CustomEvent<{
+    index: number;
+    error: string
+  }>): void {
+    const { index, error } = event.detail;
 
-    if (!isSuccess) {
-      const currentDerivedPasswordErrorList = [...derivedPasswordErrorList];
-      currentDerivedPasswordErrorList[index] = 'Incorrect password. Try again or delete file.';
-      setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
+    let trackedFilesToSet = [...trackedFiles];
+
+    // If index of error is greater than length of trackedFiles, we know this
+    // error is for a new file input that has not been added to trackedFiles
+    // yet, so we add it to the end of trackedFiles. Otherwise, we update the
+    // existing file input at the index of the error with the error.
+    if (index >= trackedFiles.length) {
+      trackedFilesToSet.push({ index, error });
+    } else {
+      trackedFilesToSet[index] = {
+        index,
+        error,
+      }
     }
 
-    setPasswordSubmissionSuccessList(currentState);
+    const pdfFiles = trackedFilesToSet.map((file) => {
+      return file.type === 'application/pdf'
+    });
+
+    setEncryptedList(pdfFiles);
+    setTrackedFiles(trackedFilesToSet);
   }
 
   return (
@@ -524,49 +554,10 @@ const EncryptedTemplate = ({ label, name }) => {
         name={name}
         hint={"This example shows a password field when a .pdf file is uploaded."}
         encrypted={encryptedList}
-        passwordSubmissionSuccessList={passwordSubmissionSuccessList}
-        passwordErrors={derivedPasswordErrorList}
         onVaMultipleChange={handleChange}
+        onVaMultipleError={handleError}
       />
       <hr />
-
-      <div
-        className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
-        style={{ width: 'fit-content' }}
-      >
-        <p className="vads-u-margin-y--0">
-          Simulate checking of submitted password for uploaded <strong>encrypted (PDF)</strong> files. Simulation is done
-          by updating the <code>passwordSubmissionSuccessList</code> prop based on button clicks below.
-        </p>
-        <em>Each pair of buttons controls the password submission status for the corresponding encrypted file in the file list.</em>
-        {
-          encryptedList?.length ? (
-            <ul>
-              {encryptedList.map((isEncrypted, index) => {
-                if (isEncrypted) {
-                  return (
-                    <li key={index}>
-                      <div className="vads-u-display--flex vads-u-align-items--center vads-u-gap--2 vads-u-margin-bottom--1">
-                        <p className="vads-u-margin-y--0 vads-u-margin-right--2">File {index + 1}</p>
-                        <va-button
-                            class="vads-u-margin-y--1"
-                            text="Set success"
-                            onClick={() => handlePasswordSubmissionSuccessClick(index, true)}
-                          />
-                        <va-button
-                          text="Set error"
-                          onClick={() => handlePasswordSubmissionSuccessClick(index, false)}
-                        />
-                      </div>
-                    </li>
-                  );
-                }
-              })}
-            </ul>
-          ) : null
-        }
-      </div>
-
       <div>
         <p>
           Parent components are responsible for managing if a password
