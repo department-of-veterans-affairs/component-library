@@ -11,94 +11,10 @@
 
 @use '../../mixins/uswds-error-border.scss' as *;
 
-.usa-modal-alert {
-  padding: 0px; // => Due to icons
-  margin-left: 1rem;
-}
-
-.usa-modal__heading,
-.usa-modal--lg .usa-modal__heading {
-  font-family: var(--font-serif);
-}
-
-.usa-modal {
-  &:not(.usa-modal--lg) {
-    width: auto; // USWDS style made it so that the modal was wider than it should be
-  }
-
-  & va-button {
-    width: 100%;
-  }
-}
-.usa-modal__main div[role=document] {
-  overflow-wrap: anywhere; // Prevent text overflowing the modal when words are longer than the modal width
-}
-
-@media screen and (max-width: $small-screen) {
-  .usa-modal__content {
-    width: 85%;
-  }
-}
-
-:host([status='info']) .usa-modal {
-  border-left-color: var(--vads-color-primary-alt-dark);
-  background-color: var(--vads-color-primary-alt-lightest);
-}
-
-:host .usa-modal__main {
-  position: relative;
-  margin: 0px auto;
-  box-sizing: border-box;
-}
-
-.va-modal__content {
-  flex-direction: row;
-  align-items: baseline;
-}
-
-.va-modal-alert__icon {
-  color: var(--vads-color-base-darker);
-  padding-top: 1.25rem;
-  position: relative;
-  top: 0.25rem;
-}
-
-:host([status='continue']) .usa-modal {
-  border-left-color: var(--vads-color-success-dark);
-  background-color: var(--vads-color-success-lighter);
-}
-
-:host([status='success']) .usa-modal {
-  border-left-color: var(--vads-color-success-dark);
-  background-color: var(--vads-color-success-lighter);
-}
-
-:host([status='warning']) .usa-modal {
-  border-left-color: var(--vads-color-warning);
-  background-color: var(--vads-color-gold-lightest);
-}
-
-:host([status='error']) .usa-modal {
-  border-left-color: var(--vads-color-secondary-dark);
-  background-color: var(--vads-color-secondary-lightest);
-}
-
-.va-modal-alert {
-  box-sizing: border-box;
-  border-left-style: solid;
-  border-left-width: 10px;
-  display: inline-flex;
-  padding: 2rem 4rem 2rem 1.5rem;
-}
-
-
-/** Original Component Style **/
-
 @import '../../mixins/buttons.css';
 
 :host {
   display: block;
-
 }
 
 :host([visible]:not([visible='false'])) {
@@ -108,7 +24,7 @@
   height: 100%;
   left: 0;
   overflow-y: auto;
-  padding: 0.938rem;
+  padding: var(--vads-spacing-1);
   position: fixed;
   scroll-behavior: smooth;
   text-align: center;
@@ -124,25 +40,51 @@
   vertical-align: middle;
 }
 
-.va-modal-inner {
-  background: var(--vads-color-white);
-  bottom: 0;
+// Semantic coloring for modal based on status attribute
+:host([status='info']) .va-modal {
+  background-color: var(--vads-color-primary-alt-lightest);
+  border-left-color: var(--vads-color-primary-alt-dark);
+}
+
+:host([status='continue']) .va-modal,
+:host([status='success']) .va-modal {
+  background-color: var(--vads-color-success-lighter);
+  border-left-color: var(--vads-color-success-dark);
+}
+
+:host([status='warning']) .va-modal {
+  background-color: var(--vads-color-gold-lightest);
+  border-left-color: var(--vads-color-warning);
+}
+
+:host([status='error']) .va-modal {
+  background-color: var(--vads-color-secondary-lightest);
+  border-left-color: var(--vads-color-secondary-dark);
+}
+
+.va-modal-alert {
+  border-left: var(--units-1) solid transparent;
   box-sizing: border-box;
-  cursor: auto;
-  display: inline-block;
-  margin: 0.781rem auto;
-  max-width: 25rem;
+
+  .va-modal__footer {
+    // Increase footer padding on larger screens to align with content
+    @media screen and (min-width: $mobile-lg) {
+      padding-left: var(--units-4);
+    }
+  }
+}
+
+.va-modal-alert__icon {
   position: relative;
-  text-align: left;
-  vertical-align: middle;
-  width: 100%;
+  // Negate internal icon whitespace to better align with modal content
+  left: -2px;
 }
 
 .va-modal-close {
   background-color: transparent;
   color: var(--vads-color-base-darker);
   font-size: 1.4rem;
-  padding: 6px;
+  padding: 6px; // Achieve 44x44 clickable area
   position: absolute;
   margin: 0 0 0 auto;
   right: 0;
@@ -150,156 +92,84 @@
   width: auto;
   z-index: 9;
   white-space: nowrap;
+
+  &:hover {
+    color: var(--vads-color-base);
+  }
 }
 
-.va-modal-close:hover {
-  color: var(--vads-color-base);
-}
-
-.va-modal-body {
-  margin-right: 1.25rem;
-  overflow-wrap: break-word;
-  padding: 1.25rem;
-  word-break: break-word;
-  word-wrap: break-word;
-}
-
-h1 {
+.va-modal // Extra specificity to override USWDS modal font styles
+.va-modal__heading {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  line-height: 1.3;
-  margin-bottom: 0.3125rem;
-  margin-top: 0.9375rem;
 }
 
-.va-modal-title {
-  margin: 0 0 1rem 0;
-}
-
-.alert-actions button {
-  /* -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased; */
-  background-color: var(--vads-color-primary);
-  margin-top: 0.5rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  white-space: nowrap;
-}
-
-.alert-actions .button-secondary {
-  background-color: transparent;
-  box-shadow: inset 0 0 0 2px var(--vads-color-primary);
-  color: var(--vads-color-primary);
-}
-
-.alert-actions button:hover,
-.alert-actions button:focus {
-  background-color: var(--vads-color-primary-dark);
-}
-.alert-actions .button-secondary:hover,
-.alert-actions .button-secondary:focus {
-  background-color: var(--vads-color-gray-cool-light);
-}
-
-.va-modal-alert::before {
-  display: block;
-  width: auto;
-  background: none;
-  font-family: 'Font Awesome 5 Free';
-  font-size: 1.25rem;
-  margin-right: 1rem;
-  position: static;
-  font-weight: 900;
-  height: 100%;
-  left: 0;
-  top: 0;
-}
-
-.va-modal-alert .va-modal-alert-body {
-  display: table-cell;
-  padding-left: 1rem;
-  padding-right: 0;
-  width: 100%;
-  vertical-align: middle;
-  margin: inherit;
-}
-
-.va-modal-alert-title {
-  margin: 0 0 1.25rem 0;
-}
-
-:host([status='continue']) .va-modal-inner {
-  border-left-color: var(--vads-color-success-dark);
-}
-
-:host([status='error']) .va-modal-inner {
-  border-left-color: var(--vads-color-secondary-dark);
-}
-
-:host([status='info']) .va-modal-inner {
-  border-left-color: var(--vads-color-primary-alt-dark);
-}
-
-:host([status='success']) .va-modal-inner {
-  border-left-color: var(--vads-color-success-dark);
-}
-
-:host([status='warning']) .va-modal-inner {
-  border-left-color: var(--vads-color-warning);
-}
-
-.va-modal-alert .alert-actions {
-  margin-top: 1.5rem;
-}
-
-.va-modal-alert .alert-actions button {
+.va-modal // Extra specificity to override USWDS modal spacing styles
+.va-modal__main {
+  display: flex;
   margin: 0;
-}
+  padding: 0;
 
-.va-modal-alert .alert-actions button + button {
-  margin-left: 1.25rem;
-}
-
-@media (max-width: $mobile) {
-  .alert-actions button {
-    width: 100%;
-  }
-
-  .va-modal-alert .alert-actions {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .va-modal-alert .alert-actions button + button {
-    margin: 1rem 0 0 0;
+  [role='document'] {
+    // Prevent text overflowing the modal when words are longer than the modal width
+    overflow-wrap: anywhere;
   }
 }
 
-@media screen and (max-width: $small-screen) {
-  :host([visible]:not([visible='false'])) {
-    overflow-y: scroll;
-  }
+.va-modal__content {
+  box-sizing: border-box;
+  flex-direction: column; // Override USWDS column-reverse
+  padding: var(--vads-spacing-5) var(--vads-spacing-1p5) var(--vads-spacing-4);
 
-  .va-modal-inner {
-    top: 0;
-  }
-
-  .va-modal-alert .alert-actions {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .va-modal-alert .alert-actions button + button {
-    margin: 1rem 0 0 0;
-  }
-
-  .usa-modal--lg .usa-modal__main {
-    max-width: -webkit-fill-available;
-    max-width: -moz-fit-content;
+  @media screen and (min-width: $mobile-lg) {
+    padding-left: var(--vads-spacing-4);
+    padding-right: var(--vads-spacing-4);
   }
 }
 
-:host([large]:not([large='false'])) .va-modal-inner {
+.va-modal__footer {
+  display: grid;
+  gap: var(--vads-spacing-1);
+
+  // Override USWDS button group styles
+  .va-modal & {
+    .va-button-group {
+      flex-direction: column;
+      gap: var(--vads-spacing-1);
+      margin: 0;
+    }
+
+    .va-button-group__item {
+      margin: 0;
+    }
+  }
+
+  va-button {
+    // Prevent text overflowing the modal when words are longer than the modal width
+    overflow-wrap: anywhere;
+  }
+}
+
+.va-modal.va-modal--lg {
   max-width: 46.875rem;
-  width: 75vw;
+
+  @media screen and (min-width: $mobile-lg) {
+    .va-modal__icon-container {
+      padding-top: var(--units-0p5);
+      padding-right: var(--units-0p5);
+    }
+  }
+
+  .va-modal__footer {
+    .va-button-group {
+      // On larger screens, display buttons in a row and allow them to size based on their content
+      @media screen and (min-width: $tablet) {
+        display: flex;
+        flex-direction: row;
+
+        va-button {
+          width: auto;
+        }
+      }
+    }
+  }
 }
