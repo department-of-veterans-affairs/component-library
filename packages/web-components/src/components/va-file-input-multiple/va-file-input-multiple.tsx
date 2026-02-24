@@ -280,7 +280,6 @@ export class VaFileInputMultiple {
       // Deleted file (could be a failed validation empty placeholder)
       action = 'FILE_REMOVED';
       actionFile = this.files[pageIndex].file;
-      actionFile['deletedIndex'] = pageIndex;
       const next = [...this.files];
       next.splice(pageIndex, 1);
       this.files = next;
