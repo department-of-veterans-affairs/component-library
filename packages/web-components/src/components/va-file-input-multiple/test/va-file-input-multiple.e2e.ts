@@ -175,8 +175,6 @@ describe('va-file-input-multiple', () => {
       .uploadFile(filePath)
       .catch(e => console.log('uploadFile error', e));
 
-<<<<<<< file-input-pw-button-pick
-=======
     await page.waitForChanges();
 
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);
@@ -196,7 +194,6 @@ describe('va-file-input-multiple', () => {
       .uploadFile(filePath)
       .catch(e => console.log('uploadFile error', e));
 
->>>>>>> main
     await page.waitForChanges();
 
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);

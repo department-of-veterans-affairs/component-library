@@ -603,14 +603,10 @@ const EncryptedTemplate = ({ label, name }) => {
         name={name}
         hint={"This example shows a password field when a .pdf file is uploaded."}
         encrypted={encryptedList}
-<<<<<<< file-input-pw-button-pick
         passwordSubmissionSuccessList={passwordSubmissionSuccessList}
         passwordErrors={derivedPasswordErrorList}
         onVaMultipleChange={handleChange}
-=======
-        onVaMultipleChange={handleChange}
         onVaMultipleError={handleError}
->>>>>>> main
       />
       <hr />
 
