@@ -103,6 +103,7 @@
   font-family: var(--font-serif);
 }
 
+.va-modal // Extra specificity to override USWDS modal spacing styles
 .va-modal__main {
   display: flex;
   margin: 0;
