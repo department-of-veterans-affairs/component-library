@@ -136,6 +136,14 @@ export class VaFileInputMultiple {
   @Event() vaMultipleChange: EventEmitter;
 
   /**
+   * Event emitted when an error is emitted from a va-file-input child component. This allows the parent component to be aware of which file input has an error, and what the error is.
+   *
+   * Sends back an object with the following data structure:
+   * `{ action: 'FILE_ERROR', error: error message, file: triggering file, index: index of the file in the files array, state: files array }`
+   */
+  @Event() vaMultipleError: EventEmitter;
+
+  /**
    * Internal state to track files and their unique keys.
    */
   @State() files: FileIndex[] = [{ key: 0, file: null, content: null, hasError: false }];
@@ -297,6 +305,40 @@ export class VaFileInputMultiple {
       index: pageIndex
     });
     return;
+  }
+
+  /**
+   * Handles an error emitted from a va-file-input child component by updating
+   * the corresponding file entry with the error state, and emitting a
+   * vaMultipleError event with details about the error and the current state of
+   * all files.
+   * @param event The custom event emitted by the va-file-input component.
+   * @param fileKey The key of the file associated with the error.
+   */
+  private handleFileInputError(event: CustomEvent, fileKey: number) {
+    const idx = this.findIndexByKey(fileKey);
+    if (idx > -1) {
+      this.files[idx] = {
+        ...this.files[idx],
+        hasError: true,
+      };
+
+      const filesArray = this.buildFilesArray(
+        this.files, false,
+        this.findIndexByKey(fileKey)
+      );
+
+      this.updateFilesState();
+      this.ensurePlaceholder();
+
+      this.vaMultipleError.emit({
+        action: 'FILE_ERROR',
+        error: event.detail.error,
+        file: this.files[idx].file,
+        index: idx,
+        state: filesArray,
+      });
+    }
   }
 
   /**
@@ -520,17 +562,9 @@ export class VaFileInputMultiple {
                 onVaPasswordSubmit={event =>
                   this.handlePasswordSubmit(event, fileEntry.key, pageIndex)
                 }
-                onVaFileInputError={() => {
-                  const idx = this.findIndexByKey(fileEntry.key);
-                  if (idx > -1) {
-                    this.files[idx] = {
-                      ...this.files[idx],
-                      hasError: true,
-                    };
-                    this.updateFilesState();
-                    this.ensurePlaceholder();
-                  }
-                }}
+                onVaFileInputError={event =>
+                  this.handleFileInputError(event, fileEntry.key)
+                }
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}
                 readOnly={readOnly}

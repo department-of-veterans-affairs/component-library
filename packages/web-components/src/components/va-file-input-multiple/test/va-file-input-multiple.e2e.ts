@@ -175,6 +175,28 @@ describe('va-file-input-multiple', () => {
       .uploadFile(filePath)
       .catch(e => console.log('uploadFile error', e));
 
+<<<<<<< file-input-pw-button-pick
+=======
+    await page.waitForChanges();
+
+    expect(fileUploadSpy).toHaveReceivedEventTimes(1);
+  });
+
+  it('emits the vaMultipleError event only once', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input-multiple buttonText="Upload a file" />`);
+
+    const fileUploadSpy = await page.spyOnEvent('vaMultipleError');
+    const filePath = path.relative(process.cwd(), __dirname + '/empty-file.txt');
+
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+>>>>>>> main
     await page.waitForChanges();
 
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);

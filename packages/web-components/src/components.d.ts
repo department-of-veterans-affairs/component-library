@@ -3118,6 +3118,7 @@ declare global {
     };
     interface HTMLVaFileInputMultipleElementEventMap {
         "vaMultipleChange": any;
+        "vaMultipleError": any;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
@@ -5029,6 +5030,10 @@ declare namespace LocalJSX {
           * Event emitted when any change to the file inputs occurs.  Sends back an object with the following data structure: `{ action: string, file: triggering file, state: files array }`  The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
+        /**
+          * Event emitted when an error is emitted from a va-file-input child component. This allows the parent component to be aware of which file input has an error, and what the error is.  Sends back an object with the following data structure: `{ action: 'FILE_ERROR', error: error message, file: triggering file, index: index of the file in the files array, state: files array }`
+         */
+        "onVaMultipleError"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
           * Array of password error messages corresponding to each file input. The length and order match the files array.
          */
