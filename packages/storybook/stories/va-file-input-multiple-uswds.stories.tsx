@@ -459,40 +459,6 @@ const EncryptedTemplate = ({ label, name }) => {
   const [passwordSubmissionSuccessList, setPasswordSubmissionSuccessList] = useState<boolean[]>([]);
   const [derivedPasswordErrorList, setDerivedPasswordErrorList] = useState<string[]>([]);
 
-  function handleChange(event) {
-    const { action, file } = event.detail;
-
-    // Only perform logic to update state on PDF files since those are the ones
-    // we're treating as automatically being encrypted for this story.
-    if (file && file.type === 'application/pdf') {
-      if (action === 'FILE_ADDED') {
-        // Update password submission success list with null for newly added file
-        const currentPasswordSubmissionSuccessList = [...passwordSubmissionSuccessList];
-        currentPasswordSubmissionSuccessList.push(null);
-        setPasswordSubmissionSuccessList(currentPasswordSubmissionSuccessList);
-
-        // Update derived password error list with empty string for newly added file
-        const currentDerivedPasswordErrorList = [...derivedPasswordErrorList];
-        currentDerivedPasswordErrorList.push('');
-        setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
-      }
-
-      if (action === 'FILE_REMOVED') {
-        // Remove deleted file's entry from password submission success list
-        const currentPasswordSubmissionSuccessList = [...passwordSubmissionSuccessList];
-        currentPasswordSubmissionSuccessList.splice(file.deletedIndex, 1);
-        setPasswordSubmissionSuccessList(currentPasswordSubmissionSuccessList);
-
-        // Remove deleted file's entry from derived password error list
-        const currentDerivedPasswordErrorList = [...derivedPasswordErrorList];
-        currentDerivedPasswordErrorList.splice(file.deletedIndex, 1);
-        setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
-      }
-    }
-
-    setEncryptedForEachFile(event);
-  }
-
   /**
    * Callback passed to onVaMultipleChange to track the file objects for each
    * file input, and update the encryptedList based on the file types of the
