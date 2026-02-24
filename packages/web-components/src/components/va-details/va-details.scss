@@ -5,10 +5,20 @@
 :host {
   display: block;
   font-size: var(--vads-font-size-source-sans-normalized);
-  border: 1px solid var(--vads-color-gray-medium);
-  border-radius: var(--vads-spacing-0p5);
 
   details.va-details {
+    width: 100%;
+    border: 1px solid var(--vads-color-gray-medium);
+    border-radius: var(--vads-spacing-0p5);
+
+    &.va-details--width-xl {
+      max-width: 40ex;
+    }
+
+    &.va-details--width-2xl {
+      max-width: 50ex;
+    }
+
     summary.va-details__summary {
       position: relative;
       display: flex;
@@ -17,7 +27,7 @@
       padding: var(--vads-spacing-2px) var(--vads-spacing-0p5);
       padding-left: var(--vads-spacing-3);
       font-weight: var(--font-weight-bold);
-      line-height: var(--vads-font-line-height-2);
+      line-height: 1.25rem;
 
       &::marker {
         content: none; /* Hide default marker */
@@ -64,5 +74,3 @@
     }
   }
 }
-
-

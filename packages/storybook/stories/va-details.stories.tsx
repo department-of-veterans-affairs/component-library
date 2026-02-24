@@ -81,3 +81,21 @@ export const WithContentComponent = WithContentTemplate.bind({});
 WithContentComponent.args = {
   ...defaultArgs,
 };
+
+const WidthsTemplate = (args) => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1rem'}}>
+      <VaDetails summaryText={args.summaryText} open={args.open} width="xl">
+        <p>This details component has a width of xl (40ex).</p>
+      </VaDetails>
+      <VaDetails summaryText={args.summaryText} open={args.open} width="2xl">
+        <p>This details component has a width of 2xl (50ex).</p>
+      </VaDetails>
+    </div>
+  )
+}
+
+export const Widths = WidthsTemplate.bind({});
+Widths.args = {
+  ...defaultArgs,
+};

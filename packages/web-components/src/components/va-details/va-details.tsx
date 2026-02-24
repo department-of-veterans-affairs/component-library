@@ -55,6 +55,18 @@ export class VaDetails {
   }
 
   render() {
+    const {
+      open,
+      summaryText,
+      width
+    } = this;
+
+    const detailsClass = classNames({
+      'va-details': true,
+      'va-details--width-xl': width === 'xl',
+      'va-details--width-2xl': width === '2xl',
+    });
+
     const contentContainerClass = classNames({
       'va-details__content': true,
       'va-details__content--va-component-child': this.firstChildIsVaComponent,
@@ -62,14 +74,14 @@ export class VaDetails {
 
     return (
       <Host>
-        <details class="va-details" open={this.open}>
+        <details class={detailsClass} open={open}>
           <summary class="va-details__summary">
             <va-icon
               class="va-details__icon"
               icon="chevron_right"
               size={2}
             ></va-icon>
-            {this.summaryText}
+            {summaryText}
           </summary>
           <div class={contentContainerClass}>
             <slot></slot>
