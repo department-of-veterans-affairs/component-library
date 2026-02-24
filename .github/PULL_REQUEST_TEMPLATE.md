@@ -24,6 +24,7 @@ https://{{head.ref}}--65a6e2ed2314f7b8f98609d8.chromatic.com
 # Summary
 
 _Provide a one or two sentence summary of the update that can be used in the changelog._
+
 <!--
 A successful summary is written in the past tense and includes:
 **A benefit statement.** A description of the update.
@@ -32,8 +33,9 @@ See [component-library release notes](https://github.com/department-of-veterans-
 
 ## Description
 
+_Describe the change and context._
+
 <!-- 
-Describe the change and context.
 Consider:
     - What is relevant to code reviewer(s)?
     - What context may be relevant to a future dev or you in 6 months about this PR?
@@ -42,23 +44,22 @@ Consider:
 
 ## Related tickets and links
 
-<!-- 
-Link to any related issues, PRs, Slack conversations, or anything else relevant to documenting the changes.
--->
+_Link to any related issues, PRs, Slack conversations, or anything else relevant to documenting the changes._
 
-Closes <ticket>
+<!-- 
+Leverage supported Github keywords like "closed", "fixes", or "resolves". When a github ticket is added directly after 
+one of those keywords, it will trigger auto-closure of the issue upon merging.
+ -->
+
+Closes #_[issue_no]_
 
 ## Screenshots
 
-<!-- 
-If there are any visual changes, screenshots should be added here. 
--->
+_If there are any visual changes, screenshots should be added here._
 
 ## Testing and review
 
-<!--
-Provide any testing instructions or review steps as needed.
--->
+_Provide any testing instructions or review steps as needed._
 
 ## Approvals
 See the QA Checklists section below for suggested approvals. Use your best judgment if additional reviews are needed. When in doubt, request a review.
