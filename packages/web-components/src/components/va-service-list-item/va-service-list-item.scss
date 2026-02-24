@@ -1,5 +1,5 @@
-@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as *;
-@use '../../../css-library/src/stylesheets/formation-overrides/elements/labels' as *;
+@use '../../mixins/uswds-error-border.scss' as *;
+@use '../../../css-library/src/stylesheets/formation-overrides/elements/labels';
 @import '../../mixins/focusable.css';
 @import '../../mixins/headers.css';
 

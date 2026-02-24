@@ -9,6 +9,7 @@ import {
   Element,
 } from '@stencil/core';
 import classnames from 'classnames';
+import { i18next } from '../..';
 
 /**
  * @componentName Button - Icon
@@ -46,6 +47,10 @@ export class VaButtonIcon {
     'delete': { icon: 'delete', text: 'Delete' },
     // eslint-disable-next-line i18next/no-literal-string
     'cancel': { icon: 'cancel', text: 'Cancel' },
+    // eslint-disable-next-line i18next/no-literal-string
+    'expand': { icon: 'add', text: i18next.t('expand-all') },
+    // eslint-disable-next-line i18next/no-literal-string
+    'collapse': { icon: 'remove', text: i18next.t('collapse-all') },
   };
   @Prop() buttonType: keyof typeof this.buttonTypeMap;
 

@@ -1,6 +1,6 @@
+@use '../../mixins/form-field-error.scss' as *;
+@use '../../mixins/uswds-error-border.scss' as *;
 @import '../../../src/mixins/accessibility.css';
-@import '../../mixins/form-field-error.scss';
-@import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/hint-text.css';
 
 .usa-label--required {
