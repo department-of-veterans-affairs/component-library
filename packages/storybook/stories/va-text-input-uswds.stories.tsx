@@ -25,28 +25,37 @@ export default {
     ...propStructure(textInputDocs),
     ...errorToggleArgTypes(['#error-demo-wrapper','#input-error-message','.input-wrap']),
     inputmode: {
-      control: {
-        type: 'select',
-        options: [
-          'decimal',
-          'email',
-          'numeric',
-          'search',
-          'tel',
-          'text',
-          'url',
-        ],
+      control: 'select',
+      options: [
+        'decimal',
+        'email',
+        'numeric',
+        'search',
+        'tel',
+        'text',
+        'url',
+      ],
+      table: {
+        category: 'Properties',
       },
     },
     type: {
-      control: {
-        type: 'select',
-        options: ['email', 'number', 'password', 'search', 'tel', 'text', 'url'],
+      control: 'select',
+      options: ['email', 'number', 'password', 'search', 'tel', 'text', 'url'],
+      table: {
+        category: 'Properties',
       },
     },
     'hide-required-text': {
       table: {
         disable: true,
+      },
+    },
+    width: {
+      control: 'select',
+      options: ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+      table: {
+        category: 'Properties',
       },
     },
   },
@@ -336,7 +345,6 @@ const FormsPatternSingleTemplate = ({ name, value, error }) => {
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(textInputDocs);
 
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'This is an error message' };
