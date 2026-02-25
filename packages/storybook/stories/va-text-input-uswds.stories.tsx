@@ -84,6 +84,7 @@ const defaultArgs = {
   'show-input-error': true,
   'showToggleFocusButton': false,
   'focusEl': null,
+  'width': undefined,
 };
 
 const Template = ({
@@ -112,7 +113,8 @@ const Template = ({
   'input-icon-suffix': inputIconSuffix,
   'show-input-error': showInputError,
   showToggleFocusButton,
-  focusEl
+  focusEl,
+  width
 }) => {
 
   const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
@@ -149,6 +151,7 @@ const Template = ({
         input-icon-suffix={inputIconSuffix}
         show-input-error={showInputError}
         id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
+        width={width}
       />
       {showToggleFocusButton && (
           <va-button
@@ -173,6 +176,7 @@ const I18nTemplate = ({
   inputmode,
   type,
   'message-aria-describedby': messageAriaDescribedby,
+  width
 }) => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
@@ -196,6 +200,7 @@ const I18nTemplate = ({
         inputmode={inputmode}
         type={type}
         message-aria-describedby={messageAriaDescribedby}
+        width={width}
       />
     </>
   );
