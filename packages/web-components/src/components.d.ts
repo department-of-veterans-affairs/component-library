@@ -632,6 +632,7 @@ export namespace Components {
      * @componentName Crisis Line Modal
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref modal/crisis-line-modal
      */
     interface VaCrisisLineModal {
         /**
@@ -3047,6 +3048,7 @@ declare global {
      * @componentName Crisis Line Modal
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref modal/crisis-line-modal
      */
     interface HTMLVaCrisisLineModalElement extends Components.VaCrisisLineModal, HTMLStencilElement {
     }
@@ -4768,6 +4770,7 @@ declare namespace LocalJSX {
      * @componentName Crisis Line Modal
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref modal/crisis-line-modal
      */
     interface VaCrisisLineModal {
         /**
@@ -7068,6 +7071,7 @@ declare module "@stencil/core" {
              * @componentName Crisis Line Modal
              * @maturityCategory caution
              * @maturityLevel available
+             * @guidanceHref modal/crisis-line-modal
              */
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             /**
