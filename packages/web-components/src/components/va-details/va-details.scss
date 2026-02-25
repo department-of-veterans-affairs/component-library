@@ -3,7 +3,6 @@
 @use 'usa-icon/src/styles/_usa-icon.scss';
 
 :host {
-  display: block;
   font-size: var(--vads-font-size-source-sans-normalized);
 
   details.va-details {
@@ -60,17 +59,9 @@
     div.va-details__content {
       padding: 0 var(--vads-spacing-0p5) var(--vads-spacing-0p5) var(--vads-spacing-3);
 
-      &.va-details__content--va-component-child {
+      &.va-details__content--component-child {
         padding-top: var(--vads-spacing-0p5);
       }
-    }
-
-    ::slotted(:first-child) {
-      margin-top: 0 !important;
-    }
-
-    ::slotted(:last-child) {
-      margin-bottom: 0 !important;
     }
   }
 }

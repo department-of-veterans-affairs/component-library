@@ -15,65 +15,42 @@ export default {
 };
 
 const defaultArgs = {
-  summaryText: 'Summary text',
+  label: 'Summary text',
   open: false,
 }
 
 const Template = (args) => {
   return (
-    <div style={{ padding: '1rem'}}>
-    <VaDetails summaryText={args.summaryText} open={args.open}>
-      <p>
-        This is the content of the details component. It can be any HTML
-        content, including links like this one:
-      </p>
-    </VaDetails>
-    </div>
+  <VaDetails label={args.label} open={args.open}>
+    The United States is automatically chosen as your country if you live on a
+    military base outside of the country.
+  </VaDetails>
   )
 }
 
 export const Default = Template.bind({});
-Default.args = {
-  summaryText: 'Summary text',
-};
+Default.args = { ...defaultArgs };
+Default.argTypes = propStructure(detailsDocs);
 
 export const Open = Template.bind({});
 Open.args = {
-  summaryText: 'Summary text',
+  label: 'Summary text',
   open: true,
 };
 
 const WithContentTemplate = (args) => {
   return (
-    <div style={{ padding: '1rem'}}>
-    <VaDetails summaryText={args.summaryText} open={args.open}>
-      <va-summary-box>
-        <h3 slot="headline">
-          If I'm a Veteran, can I get VR&E benefits and services?
-        </h3>
-        <p>
-          You may be eligible for VR&amp;E benefits and services if you're a
-          Veteran, and you meet all of the requirements listed below.
-        </p>
-        <p>
-          <strong>All of these must be true. You:</strong>
-        </p>
+    <VaDetails label={args.label} open={args.open}>
+      <div>
+        <p>Here are some popular pets to consider</p>
         <ul>
-          <li>
-            Didn't receive a dishonorable discharge, <strong>and</strong>
-          </li>s
-          <li>
-            Have a service-connected disability rating of at least 10% from VA,
-            <strong> and</strong>
-          </li>
-          <li>
-            <a href="#">Apply for VR&amp;E services</a>
-          </li>
+          <li>Dogs</li>
+          <li>Cats</li>
+          <li>Fish</li>
+          <li>Birds</li>
         </ul>
-      </va-summary-box>
-      
+      </div>
     </VaDetails>
-    </div>
   )
 }
 
@@ -84,12 +61,12 @@ WithContentComponent.args = {
 
 const WidthsTemplate = (args) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1rem'}}>
-      <VaDetails summaryText={args.summaryText} open={args.open} width="xl">
-        <p>This details component has a width of xl (40ex).</p>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <VaDetails label={args.label} open={args.open} width="xl">
+        This details component has a width of xl (40ex).
       </VaDetails>
-      <VaDetails summaryText={args.summaryText} open={args.open} width="2xl">
-        <p>This details component has a width of 2xl (50ex).</p>
+      <VaDetails label={args.label} open={args.open} width="2xl">
+        This details component has a width of 2xl (50ex).
       </VaDetails>
     </div>
   )

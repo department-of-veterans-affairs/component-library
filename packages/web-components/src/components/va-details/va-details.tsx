@@ -4,6 +4,7 @@ import {
   Host,
   h,
   Prop,
+  State,
 } from '@stencil/core';
 import classNames from 'classnames';
 
@@ -19,8 +20,6 @@ import classNames from 'classnames';
   shadow: true,
 })
 export class VaDetails {
-  private firstChildIsVaComponent: boolean = false;
-
   @Element() el: HTMLElement;
 
   /**
@@ -31,35 +30,39 @@ export class VaDetails {
   /**
    * The text for the summary element that triggers the details to expand.
    */
-  @Prop() summaryText!: string;
+  @Prop() label!: string;
 
   /**
    * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
    */
   @Prop() width?: string;
 
-  /**
-   * Before component loads:
-   * - Check if the first child of the component is a va- component, and set a
-   *  flag to true if it is. This is used to apply different styling to the
-   *  content container if the first child is a va- component, to remove extra
-   *  padding that would be added if the content were wrapped in a div.
-   */
-  componentWillLoad() {
-    const firstChild = this.el?.children[0];
+  @State() firstNodeIsElement: boolean = false;
 
-    let firstChildTag = firstChild?.tagName.toLowerCase();
-    if (firstChildTag?.startsWith('va-')) {
-      this.firstChildIsVaComponent = true;
+  /**
+   * When the slot changes (i.e., when content is added to the details
+   * component), check if the first child of the slot is an element rather than
+   * text, and set a flag to true if it is. This is used to conditionally apply
+   * a class to the content container that removes extra padding.
+   * @returns {void}
+   */
+  private inspectSlot(): void {
+    const detailsSlot = this.el.shadowRoot.querySelector('slot') as HTMLSlotElement;
+
+    const detailsSlotAssignedNodes = detailsSlot?.assignedNodes();
+
+    if (detailsSlotAssignedNodes?.length > 0) {
+      const firstAssignedNode = detailsSlotAssignedNodes[0];
+      if (firstAssignedNode.nodeName !== '#text') {
+        this.firstNodeIsElement = true;
+      }
     }
   }
 
   render() {
-    const {
-      open,
-      summaryText,
-      width
-    } = this;
+    const { open, label, width } = this;
+
+    if (!label) { return null; }
 
     const detailsClass = classNames({
       'va-details': true,
@@ -69,7 +72,7 @@ export class VaDetails {
 
     const contentContainerClass = classNames({
       'va-details__content': true,
-      'va-details__content--va-component-child': this.firstChildIsVaComponent,
+      'va-details__content--component-child': this.firstNodeIsElement,
     });
 
     return (
@@ -81,10 +84,10 @@ export class VaDetails {
               icon="chevron_right"
               size={2}
             ></va-icon>
-            {summaryText}
+            {label}
           </summary>
           <div class={contentContainerClass}>
-            <slot></slot>
+            <slot onSlotchange={() => this.inspectSlot()}></slot>
           </div>
         </details>
       </Host>

@@ -732,13 +732,13 @@ export namespace Components {
      */
     interface VaDetails {
         /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
           * Value to reflect on the details element to control whether the details element is open or not.
          */
         "open"?: boolean;
-        /**
-          * The text for the summary element that triggers the details to expand.
-         */
-        "summaryText": string;
         /**
           * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
          */
@@ -4902,13 +4902,13 @@ declare namespace LocalJSX {
      */
     interface VaDetails {
         /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
           * Value to reflect on the details element to control whether the details element is open or not.
          */
         "open"?: boolean;
-        /**
-          * The text for the summary element that triggers the details to expand.
-         */
-        "summaryText": string;
         /**
           * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
          */
