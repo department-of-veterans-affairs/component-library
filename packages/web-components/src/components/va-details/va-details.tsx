@@ -48,15 +48,13 @@ export class VaDetails {
    */
   private inspectSlot(): void {
     const detailsSlot = this.el.shadowRoot.querySelector('slot') as HTMLSlotElement;
+    const detailsSlotAssignedNodes = detailsSlot?.assignedNodes({ flatten: true }) || [];
 
-    const detailsSlotAssignedNodes = detailsSlot?.assignedNodes();
+    const firstMeaningfulNode = detailsSlotAssignedNodes.find(
+      node => node.nodeType !== Node.TEXT_NODE || node.textContent?.trim(),
+    );
 
-    if (detailsSlotAssignedNodes?.length > 0) {
-      const firstAssignedNode = detailsSlotAssignedNodes[0];
-      if (firstAssignedNode.nodeName !== '#text') {
-        this.firstNodeIsElement = true;
-      }
-    }
+    this.firstNodeIsElement = firstMeaningfulNode?.nodeType === Node.ELEMENT_NODE;
   }
 
   render() {
