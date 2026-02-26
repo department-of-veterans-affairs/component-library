@@ -12,13 +12,23 @@ export default {
       page: () => <StoryDocs storyDefault={Default} data={detailsDocs} />,
     },
   },
+  argTypes: {
+    ...propStructure(detailsDocs),
+    width: {
+      control: 'select',
+      options: ['xl', '2xl'],
+      table: {
+        category: 'Properties',
+      }
+    },
+  }
 };
 
 const defaultArgs = {
   'disable-analytics': false,
   label: 'Learn more about military addresses',
   open: false,
-  width: null,
+  width: undefined,
 }
 
 const Template = (args) => {
@@ -26,6 +36,7 @@ const Template = (args) => {
   <VaDetails
     label={args.label}
     open={args.open}
+    width={args.width}
     disableAnalytics={args['disable-analytics']}
   >
     The United States is automatically chosen as your country if you live on a
@@ -36,7 +47,7 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(detailsDocs);
+// Default.argTypes = propStructure(detailsDocs);
 
 export const Open = Template.bind({});
 Open.args = {
@@ -49,6 +60,7 @@ const WithContentTemplate = (args) => {
     <VaDetails
       label={args.label}
       open={args.open}
+      width={args.width}
       disableAnalytics={args['disable-analytics']}
     >
       <div>
@@ -74,20 +86,20 @@ const WidthsTemplate = (args) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <VaDetails
-        label={args.label}
+        label='This details component has a width of xl'
         open={args.open}
-        width="xl"
+        width={args.width || 'xl'}
         disableAnalytics={args['disable-analytics']}
       >
-        This details component has a width of xl (40ex).
+        The value of "xl" sets the width of the details component to 40ex.
       </VaDetails>
       <VaDetails
-        label={args.label}
+        label='This details component has a width of 2xl'
         open={args.open}
-        width="2xl"
+        width={args.width || '2xl'}
         disableAnalytics={args['disable-analytics']}
       >
-        This details component has a width of 2xl (50ex).
+        The value of "2xl" sets the width of the details component to 50ex.
       </VaDetails>
     </div>
   )
