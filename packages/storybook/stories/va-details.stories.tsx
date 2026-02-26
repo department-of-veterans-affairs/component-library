@@ -15,7 +15,7 @@ export default {
 };
 
 const defaultArgs = {
-  label: 'Summary text',
+  label: 'Learn more about military addresses',
   open: false,
   width: null,
 }
@@ -35,7 +35,7 @@ Default.argTypes = propStructure(detailsDocs);
 
 export const Open = Template.bind({});
 Open.args = {
-  label: 'Summary text',
+  ...defaultArgs,
   open: true,
 };
 
@@ -58,6 +58,7 @@ const WithContentTemplate = (args) => {
 export const WithContentComponent = WithContentTemplate.bind({});
 WithContentComponent.args = {
   ...defaultArgs,
+  label: 'Summary label text',
 };
 
 const WidthsTemplate = (args) => {
@@ -74,6 +75,4 @@ const WidthsTemplate = (args) => {
 }
 
 export const Widths = WidthsTemplate.bind({});
-Widths.args = {
-  ...defaultArgs,
-};
+Widths.args = { ...defaultArgs };
