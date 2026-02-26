@@ -115,11 +115,11 @@ describe('va-details', () => {
     await page.waitForFunction(() => {
       const host = document.querySelector('va-details');
       const content = host?.shadowRoot?.querySelector('.va-details__content');
-      return content?.classList.contains('va-details__content--component-child');
+      return content?.classList.contains('va-details__content--element-child');
     });
 
     const contentContainer = await page.find('va-details >>> .va-details__content');
-    expect(contentContainer.classList.contains('va-details__content--component-child')).toBe(true);
+    expect(contentContainer.classList.contains('va-details__content--element-child')).toBe(true);
   });
 
   it('adds a class for xl width when the width prop is set to xl', async () => {

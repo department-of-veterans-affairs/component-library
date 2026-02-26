@@ -110,7 +110,7 @@ export class VaDetails {
 
     const contentContainerClass = classNames({
       'va-details__content': true,
-      'va-details__content--component-child': this.firstNodeIsElement,
+      'va-details__content--element-child': this.firstNodeIsElement,
     });
 
     return (
