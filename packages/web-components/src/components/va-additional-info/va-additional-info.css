@@ -40,13 +40,14 @@ a {
   max-height: 0;
 }
 
-.open {
+#info.open {
   height: auto;
   opacity: 1;
   transition: max-height 700ms 0ms, opacity 500ms 200ms, visibility 500ms 200ms;
   max-height: var(--calc-max-height);
   margin-bottom: var(--units-2);
   margin-top: var(--units-2);
+  overflow: inherit;
 }
 
 .additional-info-icon {
