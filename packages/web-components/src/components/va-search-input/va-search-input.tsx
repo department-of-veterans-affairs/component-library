@@ -137,7 +137,12 @@ export class VaSearchInput {
    * Closes listbox when focus is outside of the host element
    * and fires analytics event.
    */
-  private handleBlur = () => {
+  private handleBlur = (event: FocusEvent) => {
+    const nextTarget = event.relatedTarget as Node;
+    if (nextTarget && this.el.shadowRoot?.contains(nextTarget)) {
+      return;
+    }
+
     if (!this.disableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-search-input',
@@ -212,24 +217,48 @@ export class VaSearchInput {
    * Tab key was added to aid in isListboxOpen state management.
    */
   private handleInputKeyDown = (event: KeyboardEvent) => {
-    const options = this.el.shadowRoot.querySelectorAll(
+    let options = this.el.shadowRoot.querySelectorAll(
       '[role="option"]',
     ) as NodeListOf<HTMLLIElement>;
 
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
+        if (!options?.length && this.formattedSuggestions.length) {
+          this.isListboxOpen = true;
+          requestAnimationFrame(() => {
+            const firstRenderedOption = this.el.shadowRoot.querySelector(
+              '[role="option"]',
+            ) as HTMLLIElement;
+            if (firstRenderedOption) {
+              this.selectSuggestion(firstRenderedOption);
+            }
+          });
+          return;
+        }
+
         // Option doesn't exist if suggestions aren't provided
         if (!options?.length) return;
-        const firstOption = options[0];
-        this.selectSuggestion(firstOption);
+        this.selectSuggestion(options[0]);
         break;
       case 'ArrowUp':
         event.preventDefault();
+        if (!options?.length && this.formattedSuggestions.length) {
+          this.isListboxOpen = true;
+          requestAnimationFrame(() => {
+            const renderedOptions = this.el.shadowRoot.querySelectorAll(
+              '[role="option"]',
+            ) as NodeListOf<HTMLLIElement>;
+            if (renderedOptions.length) {
+              this.selectSuggestion(renderedOptions[renderedOptions.length - 1]);
+            }
+          });
+          return;
+        }
+
         // Option doesn't exist if suggestions aren't provided
         if (!options?.length) return;
-        const lastOption = options[options.length - 1];
-        this.selectSuggestion(lastOption);
+        this.selectSuggestion(options[options.length - 1]);
         break;
       case 'Enter':
         event.preventDefault();

@@ -277,17 +277,17 @@ export class VaTable {
   // event only fires during a sort
   @Listen('sortTable')
   doSort(e: CustomEvent) {
+    
     e.stopPropagation();
     const { index, sortdir } = e.detail;
     const [header, ...rows] = this.getRows();
     // get function to use in sort
     const compareFunc = getCompareFunc.bind(this)(rows, index, sortdir);
-
     // only do sort if sortable data in column
     if (compareFunc !== null) {
       rows.sort((a: Element, b: Element) => {
-        const cellA = a.children[index];
-        const cellB = b.children[index];
+        const cellA = a.querySelectorAll(':scope > span')[index] as HTMLElement;
+        const cellB = b.querySelectorAll(':scope > span')[index] as HTMLElement;
         
         // Check for data-sort-value attribute first
         const sortValueA = cellA.getAttribute('data-sort-value');

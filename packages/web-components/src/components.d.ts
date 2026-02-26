@@ -30,24 +30,20 @@ export namespace Components {
     interface VaAccordion {
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * True if only a single item can be opened at once
-          * @default false
          */
         "openSingle"?: boolean;
         /**
           * Optional accordion section heading text. Only used in analytics event. Default is null.
-          * @default null
          */
         "sectionHeading"?: string;
     }
     interface VaAccordionItem {
         /**
           * Whether or not the accordion item will have a border
-          * @default false
          */
         "bordered"?: boolean;
         /**
@@ -60,17 +56,14 @@ export namespace Components {
         "headerSrOnly"?: string;
         /**
           * Header level for button wrapper. Must be between 1 and 6
-          * @default 2
          */
         "level"?: number;
         /**
           * True if the item is open
-          * @default false
          */
         "open"?: boolean;
         /**
           * Optional accordion item subheader text. Default is null.
-          * @default null
          */
         "subheader"?: string;
     }
@@ -82,12 +75,10 @@ export namespace Components {
     interface VaAdditionalInfo {
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, left blue border and padding is removed.
-          * @default false
          */
         "disableBorder"?: boolean;
         /**
@@ -107,27 +98,22 @@ export namespace Components {
         "closeBtnAriaLabel"?: string;
         /**
           * If `true`, a close button will be displayed.
-          * @default false
          */
         "closeable"?: boolean;
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, the alert will be full width. Should be for emergency communication only.
-          * @default false
          */
         "fullWidth"?: boolean;
         /**
           * Displays the slim variation.
-          * @default false
          */
         "slim"?: boolean;
         /**
           * Determines the icon and border/background color.
-          * @default 'info'
          */
         "status"?: | 'info'
     | 'warning'
@@ -136,7 +122,6 @@ export namespace Components {
     | 'continue';
         /**
           * If `true`, the alert will be visible.
-          * @default true
          */
         "visible"?: boolean;
     }
@@ -149,12 +134,10 @@ export namespace Components {
     interface VaAlertExpandable {
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, the status icon is removed.
-          * @default false
          */
         "iconless"?: boolean;
         /**
@@ -175,7 +158,6 @@ export namespace Components {
     interface VaAlertSignIn {
         /**
           * Header level for button wrapper. Must be between 1 and 6
-          * @default 2
          */
         "headingLevel"?: number;
         /**
@@ -184,17 +166,14 @@ export namespace Components {
         "noSignInLink"?: string;
         /**
           * For the 'optional' variant, how long the respondent has to submit their form
-          * @default '15 minutes'
          */
         "timeLimit"?: string;
         /**
           * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInOptionalNoPrefill", "signInEither", "verifyIdMe", or "verifyLoginGov".
-          * @default ASIVariants.signInRequired
          */
         "variant": string;
         /**
           * If `true`, the alert will be visible.
-          * @default true
          */
         "visible"?: boolean;
     }
@@ -217,7 +196,6 @@ export namespace Components {
         "dataLabel"?: string;
         /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -230,22 +208,18 @@ export namespace Components {
         "headline": string;
         /**
           * Enable the close functionality. The banner will be closed until storage is cleared.
-          * @default false
          */
         "showClose"?: boolean;
         /**
           * The type of the banner. This affects both the icon of the AlertBox and border color / background.
-          * @default 'info'
          */
         "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
-          * @default true
          */
         "visible"?: boolean;
         /**
           * Enable sessionStorage for the Banner otherwise storage if showClose is enabled will default to localStorage
-          * @default false
          */
         "windowSession"?: boolean;
     }
@@ -261,27 +235,22 @@ export namespace Components {
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
           * When true, the current page link will use the last href value provided in the breadcrumb list instead of the #content hash.
-          * @default false
          */
         "currentPageRedirect"?: boolean;
         /**
           * Analytics tracking function(s) will not be called
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * When true, the first breadcrumb label will be "VA.gov home".
-          * @default true
          */
         "homeVeteransAffairs"?: boolean;
         /**
           * Adds an aria-label attribute to the <nav /> element.
-          * @default 'Breadcrumb'
          */
         "label"?: string;
         /**
           * Whether or not the component will wrap the breadcrumbs.
-          * @default false
          */
         "wrapping"?: boolean;
     }
@@ -294,32 +263,26 @@ export namespace Components {
     interface VaButton {
         /**
           * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
-          * @default false
          */
         "back"?: boolean;
         /**
           * If `true`, the button will use the big variant.
-          * @default false
          */
         "big"?: boolean;
         /**
           * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
-          * @default false
          */
         "continue"?: boolean;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, the click event will not fire.
-          * @default false
          */
         "disabled"?: boolean;
         /**
           * If `true`, the button will expand to the full available width of its container.
-          * @default false
          */
         "fullWidth"?: boolean;
         /**
@@ -328,7 +291,6 @@ export namespace Components {
         "label"?: string;
         /**
           * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
-          * @default false
          */
         "loading"?: boolean;
         /**
@@ -337,12 +299,10 @@ export namespace Components {
         "messageAriaDescribedby"?: string;
         /**
           * If `true`, the button will use the primary alternate variant.
-          * @default false
          */
         "primaryAlternate"?: boolean;
         /**
           * If `true`, the button will use the secondary variant.
-          * @default false
          */
         "secondary"?: boolean;
         /**
@@ -364,7 +324,6 @@ export namespace Components {
         "buttonType": keyof typeof this.buttonTypeMap;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -381,12 +340,10 @@ export namespace Components {
     interface VaButtonPair {
         /**
           * If `true`, button pair will use Continue and Back for button text.
-          * @default false
          */
         "continue"?: boolean;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -411,7 +368,6 @@ export namespace Components {
         "submit"?: string;
         /**
           * If `true`, button pair will use Update and Cancel for button text.
-          * @default false
          */
         "update"?: boolean;
     }
@@ -428,7 +384,6 @@ export namespace Components {
         "buttons": Array<ButtonItem>;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -437,7 +392,6 @@ export namespace Components {
         "label": string;
         /**
           * The index of the selected button.
-          * @default 0
          */
         "selected": number;
     }
@@ -449,7 +403,6 @@ export namespace Components {
     interface VaCard {
         /**
           * If `true`, the card will have a gray background.
-          * @default false
          */
         "background"?: boolean;
         /**
@@ -458,7 +411,6 @@ export namespace Components {
         "iconName"?: string;
         /**
           * If `true`, a drop-shadow will be displayed with a white background.
-          * @default false
          */
         "showShadow"?: boolean;
     }
@@ -475,7 +427,6 @@ export namespace Components {
         "error"?: string;
         /**
           * Header level. Must be between 1 and 6
-          * @default 3
          */
         "headerLevel"?: number;
         /**
@@ -492,7 +443,6 @@ export namespace Components {
         "linkText": string;
         /**
           * Sets the card to required and renders the (*Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -501,7 +451,6 @@ export namespace Components {
         "subheaderText": string;
         /**
           * The status variant of the tag. Determines the background color and icon.
-          * @default 'info'
          */
         "tagStatus": 'info' | 'error';
         /**
@@ -526,7 +475,6 @@ export namespace Components {
         "checkboxDescription"?: string;
         /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
-          * @default false
          */
         "checked"?: boolean;
         /**
@@ -535,12 +483,10 @@ export namespace Components {
         "description"?: string;
         /**
           * Whether or not the checkbox option is disabled.
-          * @default false
          */
         "disabled"?: boolean;
         /**
           * True if the analytics event should fire.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -553,7 +499,6 @@ export namespace Components {
         "hint"?: string;
         /**
           * When true, the checkbox can be toggled between checked and indeterminate states.
-          * @default false
          */
         "indeterminate"?: boolean;
         /**
@@ -570,12 +515,10 @@ export namespace Components {
         "name"?: string;
         /**
           * Set the input to required and render the (Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
           * Whether or not the component will display as a tile.
-          * @default false
          */
         "tile"?: boolean;
     }
@@ -592,7 +535,6 @@ export namespace Components {
     interface VaCheckboxGroup {
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -605,7 +547,6 @@ export namespace Components {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern` is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
@@ -630,7 +571,6 @@ export namespace Components {
         "messageAriaDescribedby"?: string;
         /**
           * Whether or not this input field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -649,7 +589,6 @@ export namespace Components {
     interface VaComboBox {
         /**
           * The combo box component will be disabled / read-only.
-          * @default false
          */
         "disabled"?: boolean;
         /**
@@ -678,12 +617,10 @@ export namespace Components {
         "placeholder"?: string;
         /**
           * Whether or not this is a required field.
-          * @default false
          */
         "required"?: boolean;
         /**
           * Whether to show error message text
-          * @default true
          */
         "showInputError"?: boolean;
         /**
@@ -699,37 +636,30 @@ export namespace Components {
     interface VaCrisisLineModal {
         /**
           * URL for the chat service. Defaults to Veterans Crisis Line chat.
-          * @default 'https://www.veteranscrisisline.net/get-help-now/chat/'
          */
         "chatUrl"?: string;
         /**
           * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
-          * @default undefined
          */
         "mode"?: 'trigger' | 'modal';
         /**
           * Phone extension for the crisis line. Defaults to 1.
-          * @default '1'
          */
         "phoneExtension"?: string;
         /**
           * Phone number for the crisis line. Defaults to 988.
-          * @default '988'
          */
         "phoneNumber"?: string;
         /**
           * Text number for the crisis line. Defaults to 838255.
-          * @default '838255'
          */
         "textNumber"?: string;
         /**
           * TTY extension for the crisis line. Defaults to 988.
-          * @default CONTACTS_WITH_EXTENSION.CRISIS_MODAL_TTY.extension || '988'
          */
         "ttyCrisisExtension"?: string;
         /**
           * TTY number for the crisis line. Defaults to 711.
-          * @default CONTACTS_WITH_EXTENSION.CRISIS_MODAL_TTY.phoneNumber || '711'
          */
         "ttyNumber"?: string;
     }
@@ -757,7 +687,6 @@ export namespace Components {
     interface VaDate {
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -768,17 +697,8 @@ export namespace Components {
           * Optional hint text.
          */
         "hint"?: string;
-        /**
-          * @default false
-         */
         "invalidDay"?: boolean;
-        /**
-          * @default false
-         */
         "invalidMonth"?: boolean;
-        /**
-          * @default false
-         */
         "invalidYear"?: boolean;
         /**
           * Label for the field.
@@ -786,12 +706,10 @@ export namespace Components {
         "label": string;
         /**
           * Whether month should be optional; has no effect unless monthYearOnly is true
-          * @default false
          */
         "monthOptional"?: boolean;
         /**
           * Whether or not only the Month and Year inputs should be displayed.
-          * @default false
          */
         "monthYearOnly"?: boolean;
         /**
@@ -800,7 +718,6 @@ export namespace Components {
         "name": string;
         /**
           * Render marker indicating field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -821,12 +738,10 @@ export namespace Components {
         "accept"?: string;
         /**
           * Emit component-library-analytics events on the file input change event.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
           * When true, displays a password field.  Note: This component does not check if a file is encrypted. For encryption checks, see: [Checking if an uploaded PDF is encrypted](https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted)
-          * @default false
          */
         "encrypted"?: boolean;
         /**
@@ -839,7 +754,6 @@ export namespace Components {
         "headerSize"?: number;
         /**
           * DST only prop removes extraneous display for multiple file input
-          * @default false
          */
         "headless"?: boolean;
         /**
@@ -852,12 +766,10 @@ export namespace Components {
         "label"?: string;
         /**
           * Maximum allowed file size in bytes.
-          * @default Infinity
          */
         "maxFileSize"?: number;
         /**
           * Minimum allowed file size in bytes.
-          * @default 0
          */
         "minFileSize"?: number;
         /**
@@ -870,17 +782,14 @@ export namespace Components {
         "passwordError"?: string;
         /**
           * Percent upload completed. For use with va-progress-bar component
-          * @default null
          */
         "percentUploaded"?: number;
         /**
           * Optionally displays the read-only view
-          * @default false
          */
         "readOnly"?: boolean;
         /**
           * Sets the input to required and renders the (*Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -889,7 +798,6 @@ export namespace Components {
         "statusText"?: string;
         /**
           * Custom instructional message in the file input.
-          * @default null
          */
         "uploadMessage"?: HTMLElement;
         /**
@@ -916,17 +824,14 @@ export namespace Components {
         "accept"?: string;
         /**
           * If enabled, emits custom analytics events when file changes occur.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
           * Array of booleans, displays file password field for corresponding file input.
-          * @default []
          */
         "encrypted"?: boolean[];
         /**
           * Array of error messages corresponding to each file input. The length and order match the files array.
-          * @default []
          */
         "errors": string[];
         /**
@@ -943,12 +848,10 @@ export namespace Components {
         "label"?: string;
         /**
           * Maximum allowed file size in bytes. The value is applied to all file inputs.
-          * @default Infinity
          */
         "maxFileSize"?: number;
         /**
           * Minimum allowed file size in bytes. The value is applied to all file inputs.
-          * @default 0
          */
         "minFileSize"?: number;
         /**
@@ -957,27 +860,22 @@ export namespace Components {
         "name"?: string;
         /**
           * Array of password error messages corresponding to each file input. The length and order match the files array.
-          * @default []
          */
         "passwordErrors"?: Array<string | null>;
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
-          * @default []
          */
         "percentUploaded"?: number[];
         /**
           * Optionally displays the read-only view
-          * @default false
          */
         "readOnly"?: boolean;
         /**
           * If true, the file input is marked as required, and users must select a file.
-          * @default false
          */
         "required"?: boolean;
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
-          * @default null
          */
         "slotFieldIndexes"?: Number[];
         /**
@@ -1002,7 +900,6 @@ export namespace Components {
     interface VaHeaderMinimal {
         /**
           * Enables use of heading tags in the minimal header instead of `<div>` tags. This is for when a heading level 1 needs to be used in the header, as there should only be one heading level 1 per page.
-          * @default false
          */
         "enableHeadings"?: boolean;
         "header"?: string;
@@ -1047,12 +944,10 @@ export namespace Components {
         "esHref"?: string;
         /**
           * The ISO language code for the page. Default is 'en'.
-          * @default 'en'
          */
         "language": string;
         /**
           * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
-          * @default false
          */
         "routerLinks"?: boolean;
         /**
@@ -1072,37 +967,30 @@ export namespace Components {
         "abbrTitle"?: string;
         /**
           * If `true`, the anchor text will be bolded and include a right arrow icon.
-          * @default false
          */
         "active"?: boolean;
         /**
           * If 'true', renders a "back arrow" in front of the link text
-          * @default false
          */
         "back"?: boolean;
         /**
           * If `true`, a calendar icon will be displayed before the anchor text.
-          * @default false
          */
         "calendar"?: boolean;
         /**
           * If `true`, a channel icon will be displayed before the anchor text.
-          * @default false
          */
         "channel"?: boolean;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
-          * @default false
          */
         "download"?: boolean;
         /**
           * If 'true', will open in a new tab and will have the text "opens in a new tab" appended to the link text in screen reader only span
-          * @default false
          */
         "external"?: boolean;
         /**
@@ -1119,17 +1007,14 @@ export namespace Components {
         "href": string;
         /**
           * The name of the icon to be displayed in the link.
-          * @default null
          */
         "iconName"?: string;
         /**
           * The size variant of the icon, an integer between 3 and 9 inclusive.
-          * @default 3
          */
         "iconSize"?: number;
         /**
           * Adds an aria-label attribute to the link element.
-          * @default null
          */
         "label"?: string;
         /**
@@ -1142,7 +1027,6 @@ export namespace Components {
         "pages"?: number;
         /**
           * If 'true', will represent the link with white text instead of blue.
-          * @default false
          */
         "reverse"?: boolean;
         /**
@@ -1151,7 +1035,6 @@ export namespace Components {
         "text": string;
         /**
           * If `true`, a video icon will be displayed before the anchor text.
-          * @default false
          */
         "video"?: boolean;
     }
@@ -1165,7 +1048,6 @@ export namespace Components {
     interface VaLinkAction {
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -1186,7 +1068,6 @@ export namespace Components {
         "text": string;
         /**
           * The type of the link, which determines its style. Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
-          * @default 'primary'
          */
         "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
     }
@@ -1198,12 +1079,10 @@ export namespace Components {
     interface VaLoadingIndicator {
         /**
           * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
           * An aria label
-          * @default 'Loading'
          */
         "label"?: string;
         /**
@@ -1212,7 +1091,6 @@ export namespace Components {
         "message": string;
         /**
           * Set to true if the loading indicator should capture focus
-          * @default false
          */
         "setFocus"?: boolean;
     }
@@ -1228,7 +1106,6 @@ export namespace Components {
         "bannerId": string;
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -1249,7 +1126,6 @@ export namespace Components {
         "maintenanceTitle": string;
         /**
           * The level of the header for the maintenance title. Default is h2.
-          * @default 2
          */
         "maintenanceTitleHeaderLevel": number;
         /**
@@ -1284,7 +1160,6 @@ export namespace Components {
         "customYearErrorMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics": boolean;
         /**
@@ -1293,7 +1168,6 @@ export namespace Components {
         "error"?: string;
         /**
           * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
-          * @default false
          */
         "externalValidation"?: boolean;
         /**
@@ -1302,7 +1176,6 @@ export namespace Components {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern`.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
@@ -1313,17 +1186,8 @@ export namespace Components {
           * Hint text string
          */
         "hint"?: string;
-        /**
-          * @default false
-         */
         "invalidDay"?: boolean;
-        /**
-          * @default false
-         */
         "invalidMonth"?: boolean;
-        /**
-          * @default false
-         */
         "invalidYear"?: boolean;
         /**
           * Label for the field.
@@ -1335,7 +1199,6 @@ export namespace Components {
         "labelHeaderLevel"?: string;
         /**
           * Whether or not to use the month as an input or select.
-          * @default false
          */
         "monthSelect"?: boolean;
         /**
@@ -1344,12 +1207,10 @@ export namespace Components {
         "name": string;
         /**
           * Removes the default date hint text
-          * @default false
          */
         "removeDateHint"?: boolean;
         /**
           * Render marker indicating field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -1378,17 +1239,14 @@ export namespace Components {
     interface VaModal {
         /**
           * Click outside modal will trigger closeEvent
-          * @default false
          */
         "clickToClose"?: boolean;
         /**
           * If true, analytics event won't be fired
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * Whether or not the component will be forced to take action.
-          * @default false
          */
         "forcedModal"?: boolean;
         /**
@@ -1397,12 +1255,10 @@ export namespace Components {
         "initialFocusSelector"?: string;
         /**
           * Label for the modal, to be set as aria-label. Will take precedence over modalTitle in settings of aria-label.
-          * @default ''
          */
         "label"?: string;
         /**
           * If `true`, modal will be wider.
-          * @default false
          */
         "large"?: boolean;
         /**
@@ -1420,12 +1276,10 @@ export namespace Components {
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * Whether or not the component will be using the unstyled button.
-          * @default false
          */
         "unstyled"?: boolean;
         /**
           * If the modal is visible or not
-          * @default false
          */
         "visible"?: boolean;
     }
@@ -1445,12 +1299,10 @@ export namespace Components {
     interface VaNotification {
         /**
           * Aria-label text for the close button.
-          * @default 'Close notification'
          */
         "closeBtnAriaLabel"?: string;
         /**
           * If `true`, a close button will be displayed.
-          * @default false
          */
         "closeable"?: boolean;
         /**
@@ -1459,17 +1311,14 @@ export namespace Components {
         "dateTime"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `false`, card will not have border
-          * @default true
          */
         "hasBorder"?: boolean;
         /**
           * If `false`, card will not have the word "CLOSE" next to close icon
-          * @default false
          */
         "hasCloseText"?: boolean;
         /**
@@ -1478,7 +1327,6 @@ export namespace Components {
         "headline"?: string;
         /**
           * Define level for headline. Font size will remain the same regardless of header level.
-          * @default '3'
          */
         "headlineLevel"?: string;
         /**
@@ -1487,7 +1335,6 @@ export namespace Components {
         "href"?: string;
         /**
           * Symbol indicates type of notification Current options are: action-required, update
-          * @default 'none'
          */
         "symbol"?: string;
         /**
@@ -1496,7 +1343,6 @@ export namespace Components {
         "text"?: string;
         /**
           * If `true`, the card will be visible.
-          * @default true
          */
         "visible"?: boolean;
     }
@@ -1508,12 +1354,10 @@ export namespace Components {
     interface VaOfficialGovBanner {
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * Accepts a top level domain (TLD) value of either `gov` or `mil`. Default is `gov`.
-          * @default 'gov'
          */
         "tld": string;
     }
@@ -1525,7 +1369,6 @@ export namespace Components {
     interface VaOmbInfo {
         /**
           * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
-          * @default 'benefits'
          */
         "benefitType"?: string;
         /**
@@ -1538,7 +1381,6 @@ export namespace Components {
         "formId"?: string;
         /**
           * If `true`, clicking outside the modal will close it.
-          * @default false
          */
         "modalClickToClose"?: boolean;
         /**
@@ -1561,12 +1403,10 @@ export namespace Components {
     interface VaOnThisPage {
         /**
           * If true, analytics event will not be fired
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * Header level. Must be between 1 and 6
-          * @default 2
          */
         "headerLevel"?: number;
     }
@@ -1578,12 +1418,10 @@ export namespace Components {
     interface VaPagination {
         /**
           * Aria-label suffix text for buttons
-          * @default ''
          */
         "ariaLabelSuffix"?: string;
         /**
           * Whether or not an analytics event will be fired
-          * @default true
          */
         "enableAnalytics"?: boolean;
         /**
@@ -1596,7 +1434,6 @@ export namespace Components {
         "pages": number;
         /**
           * Don't show the last page if the unbounded flag is set
-          * @default false
          */
         "unbounded"?: boolean;
     }
@@ -1608,17 +1445,14 @@ export namespace Components {
     interface VaPrivacyAgreement {
         /**
           * Whether the checkbox is checked or not.
-          * @default false
          */
         "checked"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
           * Whether to display the error message or not.
-          * @default false
          */
         "showError"?: boolean;
     }
@@ -1632,12 +1466,10 @@ export namespace Components {
     interface VaProcessListItem {
         /**
           * Whether or not the item is active
-          * @default false
          */
         "active"?: boolean;
         /**
           * Whether or not the item should display the checkmark icon
-          * @default false
          */
         "checkmark"?: boolean;
         /**
@@ -1646,12 +1478,10 @@ export namespace Components {
         "header"?: string;
         /**
           * Header level for item header. Must be between 1 and 6
-          * @default 3
          */
         "level"?: number;
         /**
           * Whether or not the item is pending
-          * @default false
          */
         "pending"?: boolean;
         /**
@@ -1667,7 +1497,6 @@ export namespace Components {
     interface VaProgressBar {
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -1676,7 +1505,6 @@ export namespace Components {
         "label"?: string;
         /**
           * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
-          * @default false
          */
         "noPercentScreenReader"?: boolean;
         /**
@@ -1693,7 +1521,6 @@ export namespace Components {
     interface VaPromoBanner {
         /**
           * Analytics tracking function(s) will not be called
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -1719,7 +1546,6 @@ export namespace Components {
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -1732,7 +1558,6 @@ export namespace Components {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern` is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
@@ -1757,7 +1582,6 @@ export namespace Components {
         "messageAriaDescribedby"?: string;
         /**
           * Whether or not this input field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -1772,7 +1596,6 @@ export namespace Components {
         "ariaDescribedby"?: string;
         /**
           * Whether or not the option is selected.
-          * @default false
          */
         "checked"?: boolean;
         /**
@@ -1781,7 +1604,6 @@ export namespace Components {
         "description"?: string;
         /**
           * Whether or not the radio option is disabled.
-          * @default false
          */
         "disabled"?: boolean;
         /**
@@ -1794,7 +1616,6 @@ export namespace Components {
         "name": string;
         /**
           * Whether or not the component will display as a tile.
-          * @default false
          */
         "tile"?: boolean;
         /**
@@ -1810,12 +1631,10 @@ export namespace Components {
     interface VaSearchFilter {
         /**
           * Represents a list of filter facets and their categories. Use a JSON array of objects with label and id properties.
-          * @default []
          */
         "filterOptions": Filter[];
         /**
           * The filter header text.
-          * @default 'Filters'
          */
         "header": string;
     }
@@ -1827,27 +1646,22 @@ export namespace Components {
     interface VaSearchInput {
         /**
           * If `true`, the component will use the big variant.
-          * @default false
          */
         "big"?: boolean;
         /**
           * Text displayed inside the search button
-          * @default 'Search'
          */
         "buttonText"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * The aria-label for search input and button. Default is 'Search'.
-          * @default 'Search'
          */
         "label"?: string;
         /**
           * If `true`, the component will use the small variant.
-          * @default false
          */
         "small"?: boolean;
         /**
@@ -1856,7 +1670,6 @@ export namespace Components {
         "suggestions"?: any;
         /**
           * The value of the input field
-          * @default ''
          */
         "value"?: string;
     }
@@ -1881,12 +1694,10 @@ export namespace Components {
         "current": number;
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
           * Header level for button wrapper. Must be between 1 and 6
-          * @default 4
          */
         "headerLevel"?: number;
         /**
@@ -1903,7 +1714,6 @@ export namespace Components {
         "labels"?: string;
         /**
           * The term used to indicate the current progress for the heading "[progressTerm] 2 of 5". (Screen reader only)
-          * @default 'Step'
          */
         "progressTerm"?: string;
         /**
@@ -1927,7 +1737,6 @@ export namespace Components {
     interface VaSelect {
         /**
           * Whether or not to fire the analytics events
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -1940,12 +1749,10 @@ export namespace Components {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern` is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
           * If true, sets the select to take the full-width of its container
-          * @default false
          */
         "fullWidth"?: boolean;
         /**
@@ -1954,7 +1761,6 @@ export namespace Components {
         "headerAriaDescribedby"?: string;
         /**
           * Whether or not to show the (*Required) text.
-          * @default false
          */
         "hideRequiredText"?: boolean;
         /**
@@ -1963,7 +1769,6 @@ export namespace Components {
         "hint"?: string;
         /**
           * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
-          * @default false
          */
         "invalid"?: boolean;
         /**
@@ -1984,17 +1789,14 @@ export namespace Components {
         "name": string;
         /**
           * Whether or not to add usa-input--error as class if error message is outside of component
-          * @default false
          */
         "reflectInputError"?: boolean;
         /**
           * Whether or not this is a required field.
-          * @default false
          */
         "required"?: boolean;
         /**
           * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
-          * @default true
          */
         "showError"?: boolean;
         /**
@@ -2042,7 +1844,6 @@ export namespace Components {
         "serviceName": string;
         /**
           * The heading level for the service name (defaults to h3)
-          * @default 3
          */
         "serviceNameHeadingLevel"?: number;
         /**
@@ -2062,7 +1863,6 @@ export namespace Components {
         "header"?: string;
         /**
           * Adds a circle around the icon with the provided background [VADS color token](https://design.va.gov/foundation/color-palette).
-          * @default 'vads-color-primary'
          */
         "iconBackgroundColor"?: string;
         /**
@@ -2071,12 +1871,10 @@ export namespace Components {
         "iconName"?: string;
         /**
           * Header text to display at the top of the side navigation mobile view. If not provided, it will default to "Related pages menu".
-          * @default 'Related pages menu'
          */
         "mobileHeader"?: string;
         /**
           * Aria label for the nav element that wraps the side navigation links. If not provided, it will default to "Related pages menu".
-          * @default 'Related pages menu'
          */
         "navAriaLabel"?: string;
     }
@@ -2124,7 +1922,6 @@ export namespace Components {
     interface VaSort {
         /**
           * Whether or not to fire the analytics events
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -2133,7 +1930,6 @@ export namespace Components {
         "messageAriaDescribedby"?: string;
         /**
           * Name attribute for the select field.
-          * @default 'sort'
          */
         "name": string;
         /**
@@ -2142,7 +1938,6 @@ export namespace Components {
         "value"?: string;
         /**
           * Displays the select at a specific width. Accepts md or medium (20ex), lg (30ex), xl (40ex).
-          * @default 'lg'
          */
         "width": string;
     }
@@ -2154,12 +1949,10 @@ export namespace Components {
     interface VaStatementOfTruth {
         /**
           * The error to be applied to the va-check-box element
-          * @default ''
          */
         "checkboxError": string;
         /**
           * The label for the va-checkbox-component
-          * @default 'I certify the information above is correct and true to the best of my knowledge and belief.'
          */
         "checkboxLabel": string;
         /**
@@ -2168,7 +1961,6 @@ export namespace Components {
         "checked": boolean;
         /**
           * An optional custom header for the component
-          * @default 'Statement of truth'
          */
         "heading": string;
         /**
@@ -2177,22 +1969,18 @@ export namespace Components {
         "hideLegalNote": boolean;
         /**
           * The error to be applied to the va-text-input element
-          * @default ''
          */
         "inputError": string;
         /**
           * The label for the va-text-input component
-          * @default 'Your full name'
          */
         "inputLabel": string;
         /**
           * An optional message that will be read by screen readers when the input in the va-text-input component is focused.
-          * @default ''
          */
         "inputMessageAriaDescribedby": string;
         /**
           * The value to pre-fill the va-text-input element
-          * @default ''
          */
         "inputValue": string;
     }
@@ -2210,7 +1998,6 @@ export namespace Components {
         "buttonText": string;
         /**
           * Denotes whether this tab item is currently selected in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
-          * @default false
          */
         "selected"?: boolean;
         /**
@@ -2225,7 +2012,6 @@ export namespace Components {
         "panelId": string;
         /**
           * Indicates whether the tab panel is currently selected/visible in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
-          * @default false
          */
         "selected": boolean;
     }
@@ -2237,12 +2023,10 @@ export namespace Components {
     interface VaTable {
         /**
           * Text to display in empty cells. Needed for screen readers to announce empty cells.
-          * @default 'Not available'
          */
         "emptyCellText"?: string;
         /**
           * When active, forces the table to expand to the full-width of its container
-          * @default false
          */
         "fullWidth"?: boolean;
         /**
@@ -2255,22 +2039,18 @@ export namespace Components {
         "rightAlignCols"?: string;
         /**
           * When active, the table can be horizontally scrolled and is focusable
-          * @default false
          */
         "scrollable"?: boolean;
         /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
-          * @default false
          */
         "sortable"?: boolean;
         /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
-          * @default true
          */
         "stacked"?: boolean;
         /**
           * When active, the table will display alternating row background colors.
-          * @default false
          */
         "striped"?: boolean;
         /**
@@ -2283,7 +2063,6 @@ export namespace Components {
         "tableTitleSummary"?: string;
         /**
           * The type of table
-          * @default 'borderless'
          */
         "tableType"?: 'borderless';
     }
@@ -2299,7 +2078,6 @@ export namespace Components {
         "cols"?: number;
         /**
           * When active, the table will expand to the full width of its container
-          * @default false
          */
         "fullWidth": boolean;
         /**
@@ -2313,22 +2091,18 @@ export namespace Components {
         "rows"?: number;
         /**
           * When active, the table can be horizontally scrolled and is focusable
-          * @default false
          */
         "scrollable"?: boolean;
         /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
-          * @default false
          */
         "sortable"?: boolean;
         /**
           * If true convert to a stacked table when screen size is small
-          * @default false
          */
         "stacked"?: boolean;
         /**
           * When active, the table will display alternating row background colors.
-          * @default false
          */
         "striped": boolean;
         /**
@@ -2341,7 +2115,6 @@ export namespace Components {
         "tableTitleSummary"?: string;
         /**
           * The type of table to be used
-          * @default 'borderless'
          */
         "tableType"?: 'borderless';
     }
@@ -2355,7 +2128,6 @@ export namespace Components {
     interface VaTabs {
         /**
           * The index of the initially selected tab. Defaults to `0` (the first tab).
-          * @default 0
          */
         "initiallySelected"?: number;
         /**
@@ -2372,12 +2144,10 @@ export namespace Components {
     interface VaTagStatus {
         /**
           * Screen reader text to provide context about the status tag. Defaults to `Status {status}:`.
-          * @default `Status ${this.status}:`
          */
         "screenReaderText": string;
         /**
           * The status variant of the tag. Determines the background color and icon.
-          * @default 'info'
          */
         "status": 'info' | 'warning' | 'success' | 'error';
         /**
@@ -2401,7 +2171,6 @@ export namespace Components {
         "countryCode"?: string;
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -2410,7 +2179,6 @@ export namespace Components {
         "extension"?: string;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
-          * @default false
          */
         "international"?: boolean;
         /**
@@ -2419,17 +2187,14 @@ export namespace Components {
         "messageAriaDescribedby"?: string;
         /**
           * Indicates if the phone number can be clicked or not
-          * @default false
          */
         "notClickable"?: boolean;
         /**
           * Indicates if this is a number meant to be used to text.
-          * @default false
          */
         "sms"?: boolean;
         /**
           * Indicates if this is a number meant to be called from a teletypewriter for deaf users.
-          * @default false
          */
         "tty"?: boolean;
         /**
@@ -2447,17 +2212,14 @@ export namespace Components {
     interface VaTelephoneInput {
         /**
           * The telephone contact information
-          * @default ''
          */
         "contact"?: string;
         /**
           * The 2 letter ISO country code for a country
-          * @default this.DEFAULT_COUNTRY
          */
         "country"?: CountryCode;
         /**
           * The error for the component
-          * @default ''
          */
         "error"?: string;
         /**
@@ -2466,22 +2228,18 @@ export namespace Components {
         "hint"?: string;
         /**
           * Label text for the component
-          * @default 'Home phone number'
          */
         "label"?: string;
         /**
           * Whether the country select should be included. Set to true to exclude it.
-          * @default false
          */
         "noCountry"?: boolean;
         /**
           * Render marker indicating field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
           * If true, this prop instructs the component to display error messages in response to the internal error state. If false, error messages must be passed in from consumer.
-          * @default true
          */
         "showInternalErrors"?: boolean;
     }
@@ -2503,17 +2261,14 @@ export namespace Components {
         "autocomplete"?: string;
         /**
           * Whether the component should show a character count message. Has no effect without maxlength being set.
-          * @default false
          */
         "charcount"?: boolean;
         /**
           * Whether this component will be used to accept a currency value.
-          * @default false
          */
         "currency"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -2522,7 +2277,6 @@ export namespace Components {
         "error"?: string;
         /**
           * Adds a Datadog privacy class to the error message for cases when sensitive information is included, such as in va-statement-of-truth.
-          * @default false
          */
         "errorHasPii"?: boolean;
         /**
@@ -2531,12 +2285,10 @@ export namespace Components {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern`is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
           * Whether or not to show the (*Required) text.
-          * @default false
          */
         "hideRequiredText"?: boolean;
         /**
@@ -2571,7 +2323,6 @@ export namespace Components {
     | 'url';
         /**
           * Whether or not `aria-invalid` will be set on the inner input. Useful when composing the component into something larger, like a date component.
-          * @default false
          */
         "invalid"?: boolean;
         /**
@@ -2604,17 +2355,14 @@ export namespace Components {
         "pattern"?: string;
         /**
           * Whether or not to add usa-input--error as class if error message is outside of component
-          * @default false
          */
         "reflectInputError"?: boolean;
         /**
           * Set the input to required and render the (Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
           * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
-          * @default true
          */
         "showInputError"?: boolean;
         /**
@@ -2623,12 +2371,10 @@ export namespace Components {
         "step"?: string;
         /**
           * Adds styling based on status value
-          * @default false
          */
         "success"?: boolean;
         /**
           * The type attribute.
-          * @default 'text'
          */
         "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
@@ -2657,12 +2403,10 @@ export namespace Components {
     interface VaTextarea {
         /**
           * Whether the component should show a character count message. Has no effect without maxlength being set.
-          * @default false
          */
         "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -2675,7 +2419,6 @@ export namespace Components {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern` is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
@@ -2712,7 +2455,6 @@ export namespace Components {
         "placeholder"?: string;
         /**
           * Set the input to required and render the (Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -4316,8 +4058,6 @@ declare global {
     }
 }
 declare namespace LocalJSX {
-    type OneOf<K extends string, PropT, AttrT = PropT> = { [P in K]: PropT } & { [P in `attr:${K}` | `prop:${K}`]?: never } | { [P in `attr:${K}`]: AttrT } & { [P in K | `prop:${K}`]?: never } | { [P in `prop:${K}`]: PropT } & { [P in K | `attr:${K}`]?: never };
-
     /**
      * @componentName Accordion
      * @accordionItemToggled This event is fired when an accordion item is opened or closed
@@ -4330,7 +4070,6 @@ declare namespace LocalJSX {
     interface VaAccordion {
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -4343,19 +4082,16 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaAccordionCustomEvent<any>) => void;
         /**
           * True if only a single item can be opened at once
-          * @default false
          */
         "openSingle"?: boolean;
         /**
           * Optional accordion section heading text. Only used in analytics event. Default is null.
-          * @default null
          */
         "sectionHeading"?: string;
     }
     interface VaAccordionItem {
         /**
           * Whether or not the accordion item will have a border
-          * @default false
          */
         "bordered"?: boolean;
         /**
@@ -4368,7 +4104,6 @@ declare namespace LocalJSX {
         "headerSrOnly"?: string;
         /**
           * Header level for button wrapper. Must be between 1 and 6
-          * @default 2
          */
         "level"?: number;
         /**
@@ -4377,12 +4112,10 @@ declare namespace LocalJSX {
         "onAccordionItemToggled"?: (event: VaAccordionItemCustomEvent<any>) => void;
         /**
           * True if the item is open
-          * @default false
          */
         "open"?: boolean;
         /**
           * Optional accordion item subheader text. Default is null.
-          * @default null
          */
         "subheader"?: string;
     }
@@ -4394,12 +4127,10 @@ declare namespace LocalJSX {
     interface VaAdditionalInfo {
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, left blue border and padding is removed.
-          * @default false
          */
         "disableBorder"?: boolean;
         /**
@@ -4423,17 +4154,14 @@ declare namespace LocalJSX {
         "closeBtnAriaLabel"?: string;
         /**
           * If `true`, a close button will be displayed.
-          * @default false
          */
         "closeable"?: boolean;
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, the alert will be full width. Should be for emergency communication only.
-          * @default false
          */
         "fullWidth"?: boolean;
         /**
@@ -4450,12 +4178,10 @@ declare namespace LocalJSX {
         "onVa-component-did-load"?: (event: VaAlertCustomEvent<any>) => void;
         /**
           * Displays the slim variation.
-          * @default false
          */
         "slim"?: boolean;
         /**
           * Determines the icon and border/background color.
-          * @default 'info'
          */
         "status"?: | 'info'
     | 'warning'
@@ -4464,7 +4190,6 @@ declare namespace LocalJSX {
     | 'continue';
         /**
           * If `true`, the alert will be visible.
-          * @default true
          */
         "visible"?: boolean;
     }
@@ -4477,12 +4202,10 @@ declare namespace LocalJSX {
     interface VaAlertExpandable {
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, the status icon is removed.
-          * @default false
          */
         "iconless"?: boolean;
         /**
@@ -4507,7 +4230,6 @@ declare namespace LocalJSX {
     interface VaAlertSignIn {
         /**
           * Header level for button wrapper. Must be between 1 and 6
-          * @default 2
          */
         "headingLevel"?: number;
         /**
@@ -4516,17 +4238,14 @@ declare namespace LocalJSX {
         "noSignInLink"?: string;
         /**
           * For the 'optional' variant, how long the respondent has to submit their form
-          * @default '15 minutes'
          */
         "timeLimit"?: string;
         /**
           * **Required.** Determines the text content and border/background color. Must be one of "signInRequired", "signInOptional", "signInOptionalNoPrefill", "signInEither", "verifyIdMe", or "verifyLoginGov".
-          * @default ASIVariants.signInRequired
          */
         "variant"?: string;
         /**
           * If `true`, the alert will be visible.
-          * @default true
          */
         "visible"?: boolean;
     }
@@ -4549,7 +4268,6 @@ declare namespace LocalJSX {
         "dataLabel"?: string;
         /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -4566,22 +4284,18 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaBannerCustomEvent<any>) => void;
         /**
           * Enable the close functionality. The banner will be closed until storage is cleared.
-          * @default false
          */
         "showClose"?: boolean;
         /**
           * The type of the banner. This affects both the icon of the AlertBox and border color / background.
-          * @default 'info'
          */
         "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
-          * @default true
          */
         "visible"?: boolean;
         /**
           * Enable sessionStorage for the Banner otherwise storage if showClose is enabled will default to localStorage
-          * @default false
          */
         "windowSession"?: boolean;
     }
@@ -4597,22 +4311,18 @@ declare namespace LocalJSX {
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
           * When true, the current page link will use the last href value provided in the breadcrumb list instead of the #content hash.
-          * @default false
          */
         "currentPageRedirect"?: boolean;
         /**
           * Analytics tracking function(s) will not be called
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * When true, the first breadcrumb label will be "VA.gov home".
-          * @default true
          */
         "homeVeteransAffairs"?: boolean;
         /**
           * Adds an aria-label attribute to the <nav /> element.
-          * @default 'Breadcrumb'
          */
         "label"?: string;
         /**
@@ -4625,7 +4335,6 @@ declare namespace LocalJSX {
         "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{ href: string }>) => void;
         /**
           * Whether or not the component will wrap the breadcrumbs.
-          * @default false
          */
         "wrapping"?: boolean;
     }
@@ -4638,32 +4347,26 @@ declare namespace LocalJSX {
     interface VaButton {
         /**
           * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
-          * @default false
          */
         "back"?: boolean;
         /**
           * If `true`, the button will use the big variant.
-          * @default false
          */
         "big"?: boolean;
         /**
           * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
-          * @default false
          */
         "continue"?: boolean;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, the click event will not fire.
-          * @default false
          */
         "disabled"?: boolean;
         /**
           * If `true`, the button will expand to the full available width of its container.
-          * @default false
          */
         "fullWidth"?: boolean;
         /**
@@ -4672,7 +4375,6 @@ declare namespace LocalJSX {
         "label"?: string;
         /**
           * If `true`, the button will appear disabled, a loading icon will show next to the text, and the click event will not fire.
-          * @default false
          */
         "loading"?: boolean;
         /**
@@ -4685,12 +4387,10 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaButtonCustomEvent<any>) => void;
         /**
           * If `true`, the button will use the primary alternate variant.
-          * @default false
          */
         "primaryAlternate"?: boolean;
         /**
           * If `true`, the button will use the secondary variant.
-          * @default false
          */
         "secondary"?: boolean;
         /**
@@ -4712,7 +4412,6 @@ declare namespace LocalJSX {
         "buttonType"?: keyof typeof this.buttonTypeMap;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -4733,12 +4432,10 @@ declare namespace LocalJSX {
     interface VaButtonPair {
         /**
           * If `true`, button pair will use Continue and Back for button text.
-          * @default false
          */
         "continue"?: boolean;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -4775,7 +4472,6 @@ declare namespace LocalJSX {
         "submit"?: string;
         /**
           * If `true`, button pair will use Update and Cancel for button text.
-          * @default false
          */
         "update"?: boolean;
     }
@@ -4792,7 +4488,6 @@ declare namespace LocalJSX {
         "buttons": Array<ButtonItem>;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -4809,7 +4504,6 @@ declare namespace LocalJSX {
         "onVaButtonClick"?: (event: VaButtonSegmentedCustomEvent<any>) => void;
         /**
           * The index of the selected button.
-          * @default 0
          */
         "selected"?: number;
     }
@@ -4821,7 +4515,6 @@ declare namespace LocalJSX {
     interface VaCard {
         /**
           * If `true`, the card will have a gray background.
-          * @default false
          */
         "background"?: boolean;
         /**
@@ -4830,7 +4523,6 @@ declare namespace LocalJSX {
         "iconName"?: string;
         /**
           * If `true`, a drop-shadow will be displayed with a white background.
-          * @default false
          */
         "showShadow"?: boolean;
     }
@@ -4847,7 +4539,6 @@ declare namespace LocalJSX {
         "error"?: string;
         /**
           * Header level. Must be between 1 and 6
-          * @default 3
          */
         "headerLevel"?: number;
         /**
@@ -4864,7 +4555,6 @@ declare namespace LocalJSX {
         "linkText": string;
         /**
           * Sets the card to required and renders the (*Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -4873,7 +4563,6 @@ declare namespace LocalJSX {
         "subheaderText"?: string;
         /**
           * The status variant of the tag. Determines the background color and icon.
-          * @default 'info'
          */
         "tagStatus"?: 'info' | 'error';
         /**
@@ -4898,7 +4587,6 @@ declare namespace LocalJSX {
         "checkboxDescription"?: string;
         /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
-          * @default false
          */
         "checked"?: boolean;
         /**
@@ -4907,12 +4595,10 @@ declare namespace LocalJSX {
         "description"?: string;
         /**
           * Whether or not the checkbox option is disabled.
-          * @default false
          */
         "disabled"?: boolean;
         /**
           * True if the analytics event should fire.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -4925,7 +4611,6 @@ declare namespace LocalJSX {
         "hint"?: string;
         /**
           * When true, the checkbox can be toggled between checked and indeterminate states.
-          * @default false
          */
         "indeterminate"?: boolean;
         /**
@@ -4950,12 +4635,10 @@ declare namespace LocalJSX {
         "onVaChange"?: (event: VaCheckboxCustomEvent<any>) => void;
         /**
           * Set the input to required and render the (Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
           * Whether or not the component will display as a tile.
-          * @default false
          */
         "tile"?: boolean;
     }
@@ -4972,7 +4655,6 @@ declare namespace LocalJSX {
     interface VaCheckboxGroup {
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -4985,7 +4667,6 @@ declare namespace LocalJSX {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern` is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
@@ -5014,7 +4695,6 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaCheckboxGroupCustomEvent<any>) => void;
         /**
           * Whether or not this input field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -5033,7 +4713,6 @@ declare namespace LocalJSX {
     interface VaComboBox {
         /**
           * The combo box component will be disabled / read-only.
-          * @default false
          */
         "disabled"?: boolean;
         /**
@@ -5066,12 +4745,10 @@ declare namespace LocalJSX {
         "placeholder"?: string;
         /**
           * Whether or not this is a required field.
-          * @default false
          */
         "required"?: boolean;
         /**
           * Whether to show error message text
-          * @default true
          */
         "showInputError"?: boolean;
         /**
@@ -5087,37 +4764,30 @@ declare namespace LocalJSX {
     interface VaCrisisLineModal {
         /**
           * URL for the chat service. Defaults to Veterans Crisis Line chat.
-          * @default 'https://www.veteranscrisisline.net/get-help-now/chat/'
          */
         "chatUrl"?: string;
         /**
           * Determines what to render: - `'trigger'`: Renders only the trigger button (no modal in DOM). Use the document event to open a separate modal instance. - `'modal'`: Renders only the modal (no trigger button). Dispatch the custom event `vaCrisisLineModalOpen` on `document` to open it. - `null` or `undefined`: Renders both trigger and modal (default behavior).
-          * @default undefined
          */
         "mode"?: 'trigger' | 'modal';
         /**
           * Phone extension for the crisis line. Defaults to 1.
-          * @default '1'
          */
         "phoneExtension"?: string;
         /**
           * Phone number for the crisis line. Defaults to 988.
-          * @default '988'
          */
         "phoneNumber"?: string;
         /**
           * Text number for the crisis line. Defaults to 838255.
-          * @default '838255'
          */
         "textNumber"?: string;
         /**
           * TTY extension for the crisis line. Defaults to 988.
-          * @default CONTACTS_WITH_EXTENSION.CRISIS_MODAL_TTY.extension || '988'
          */
         "ttyCrisisExtension"?: string;
         /**
           * TTY number for the crisis line. Defaults to 711.
-          * @default CONTACTS_WITH_EXTENSION.CRISIS_MODAL_TTY.phoneNumber || '711'
          */
         "ttyNumber"?: string;
     }
@@ -5145,7 +4815,6 @@ declare namespace LocalJSX {
     interface VaDate {
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -5156,17 +4825,8 @@ declare namespace LocalJSX {
           * Optional hint text.
          */
         "hint"?: string;
-        /**
-          * @default false
-         */
         "invalidDay"?: boolean;
-        /**
-          * @default false
-         */
         "invalidMonth"?: boolean;
-        /**
-          * @default false
-         */
         "invalidYear"?: boolean;
         /**
           * Label for the field.
@@ -5174,12 +4834,10 @@ declare namespace LocalJSX {
         "label": string;
         /**
           * Whether month should be optional; has no effect unless monthYearOnly is true
-          * @default false
          */
         "monthOptional"?: boolean;
         /**
           * Whether or not only the Month and Year inputs should be displayed.
-          * @default false
          */
         "monthYearOnly"?: boolean;
         /**
@@ -5200,7 +4858,6 @@ declare namespace LocalJSX {
         "onDateChange"?: (event: VaDateCustomEvent<any>) => void;
         /**
           * Render marker indicating field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -5221,12 +4878,10 @@ declare namespace LocalJSX {
         "accept"?: string;
         /**
           * Emit component-library-analytics events on the file input change event.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
           * When true, displays a password field.  Note: This component does not check if a file is encrypted. For encryption checks, see: [Checking if an uploaded PDF is encrypted](https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted)
-          * @default false
          */
         "encrypted"?: boolean;
         /**
@@ -5239,7 +4894,6 @@ declare namespace LocalJSX {
         "headerSize"?: number;
         /**
           * DST only prop removes extraneous display for multiple file input
-          * @default false
          */
         "headless"?: boolean;
         /**
@@ -5252,12 +4906,10 @@ declare namespace LocalJSX {
         "label"?: string;
         /**
           * Maximum allowed file size in bytes.
-          * @default Infinity
          */
         "maxFileSize"?: number;
         /**
           * Minimum allowed file size in bytes.
-          * @default 0
          */
         "minFileSize"?: number;
         /**
@@ -5286,17 +4938,14 @@ declare namespace LocalJSX {
         "passwordError"?: string;
         /**
           * Percent upload completed. For use with va-progress-bar component
-          * @default null
          */
         "percentUploaded"?: number;
         /**
           * Optionally displays the read-only view
-          * @default false
          */
         "readOnly"?: boolean;
         /**
           * Sets the input to required and renders the (*Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -5305,7 +4954,6 @@ declare namespace LocalJSX {
         "statusText"?: string;
         /**
           * Custom instructional message in the file input.
-          * @default null
          */
         "uploadMessage"?: HTMLElement;
         /**
@@ -5332,17 +4980,14 @@ declare namespace LocalJSX {
         "accept"?: string;
         /**
           * If enabled, emits custom analytics events when file changes occur.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
           * Array of booleans, displays file password field for corresponding file input.
-          * @default []
          */
         "encrypted"?: boolean[];
         /**
           * Array of error messages corresponding to each file input. The length and order match the files array.
-          * @default []
          */
         "errors"?: string[];
         /**
@@ -5359,12 +5004,10 @@ declare namespace LocalJSX {
         "label"?: string;
         /**
           * Maximum allowed file size in bytes. The value is applied to all file inputs.
-          * @default Infinity
          */
         "maxFileSize"?: number;
         /**
           * Minimum allowed file size in bytes. The value is applied to all file inputs.
-          * @default 0
          */
         "minFileSize"?: number;
         /**
@@ -5381,27 +5024,22 @@ declare namespace LocalJSX {
         "onVaMultipleError"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
           * Array of password error messages corresponding to each file input. The length and order match the files array.
-          * @default []
          */
         "passwordErrors"?: Array<string | null>;
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
-          * @default []
          */
         "percentUploaded"?: number[];
         /**
           * Optionally displays the read-only view
-          * @default false
          */
         "readOnly"?: boolean;
         /**
           * If true, the file input is marked as required, and users must select a file.
-          * @default false
          */
         "required"?: boolean;
         /**
           * Optional, shows the additional info slot content only for indexes of file inputs provided. Defaults to `null` (show on all fields). ex: [1,3]
-          * @default null
          */
         "slotFieldIndexes"?: Number[];
         /**
@@ -5426,7 +5064,6 @@ declare namespace LocalJSX {
     interface VaHeaderMinimal {
         /**
           * Enables use of heading tags in the minimal header instead of `<div>` tags. This is for when a heading level 1 needs to be used in the header, as there should only be one heading level 1 per page.
-          * @default false
          */
         "enableHeadings"?: boolean;
         "header"?: string;
@@ -5471,7 +5108,6 @@ declare namespace LocalJSX {
         "esHref"?: string;
         /**
           * The ISO language code for the page. Default is 'en'.
-          * @default 'en'
          */
         "language"?: string;
         /**
@@ -5484,7 +5120,6 @@ declare namespace LocalJSX {
         "onVaLanguageToggle"?: (event: VaLanguageToggleCustomEvent<any>) => void;
         /**
           * If true, specifies that the toggle is being used on a page with a router and clicking on a link will not result in page navigation.
-          * @default false
          */
         "routerLinks"?: boolean;
         /**
@@ -5504,37 +5139,30 @@ declare namespace LocalJSX {
         "abbrTitle"?: string;
         /**
           * If `true`, the anchor text will be bolded and include a right arrow icon.
-          * @default false
          */
         "active"?: boolean;
         /**
           * If 'true', renders a "back arrow" in front of the link text
-          * @default false
          */
         "back"?: boolean;
         /**
           * If `true`, a calendar icon will be displayed before the anchor text.
-          * @default false
          */
         "calendar"?: boolean;
         /**
           * If `true`, a channel icon will be displayed before the anchor text.
-          * @default false
          */
         "channel"?: boolean;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
-          * @default false
          */
         "download"?: boolean;
         /**
           * If 'true', will open in a new tab and will have the text "opens in a new tab" appended to the link text in screen reader only span
-          * @default false
          */
         "external"?: boolean;
         /**
@@ -5551,17 +5179,14 @@ declare namespace LocalJSX {
         "href": string;
         /**
           * The name of the icon to be displayed in the link.
-          * @default null
          */
         "iconName"?: string;
         /**
           * The size variant of the icon, an integer between 3 and 9 inclusive.
-          * @default 3
          */
         "iconSize"?: number;
         /**
           * Adds an aria-label attribute to the link element.
-          * @default null
          */
         "label"?: string;
         /**
@@ -5578,7 +5203,6 @@ declare namespace LocalJSX {
         "pages"?: number;
         /**
           * If 'true', will represent the link with white text instead of blue.
-          * @default false
          */
         "reverse"?: boolean;
         /**
@@ -5587,7 +5211,6 @@ declare namespace LocalJSX {
         "text": string;
         /**
           * If `true`, a video icon will be displayed before the anchor text.
-          * @default false
          */
         "video"?: boolean;
     }
@@ -5601,7 +5224,6 @@ declare namespace LocalJSX {
     interface VaLinkAction {
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -5626,7 +5248,6 @@ declare namespace LocalJSX {
         "text": string;
         /**
           * The type of the link, which determines its style. Can be 'primary', 'secondary', 'reverse', or 'primary-entry'.
-          * @default 'primary'
          */
         "type"?: 'primary' | 'secondary' | 'reverse' | 'primary-entry';
     }
@@ -5638,12 +5259,10 @@ declare namespace LocalJSX {
     interface VaLoadingIndicator {
         /**
           * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
           * An aria label
-          * @default 'Loading'
          */
         "label"?: string;
         /**
@@ -5656,7 +5275,6 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaLoadingIndicatorCustomEvent<any>) => void;
         /**
           * Set to true if the loading indicator should capture focus
-          * @default false
          */
         "setFocus"?: boolean;
     }
@@ -5672,7 +5290,6 @@ declare namespace LocalJSX {
         "bannerId": string;
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -5693,7 +5310,6 @@ declare namespace LocalJSX {
         "maintenanceTitle"?: string;
         /**
           * The level of the header for the maintenance title. Default is h2.
-          * @default 2
          */
         "maintenanceTitleHeaderLevel"?: number;
         /**
@@ -5736,7 +5352,6 @@ declare namespace LocalJSX {
         "customYearErrorMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -5745,7 +5360,6 @@ declare namespace LocalJSX {
         "error"?: string;
         /**
           * Set this flag to true if component will recieve external validation that might conflict  with internal validation due to race conditions, i.e. if both internal and external validation will be set in response to same user input.
-          * @default false
          */
         "externalValidation"?: boolean;
         /**
@@ -5754,7 +5368,6 @@ declare namespace LocalJSX {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern`.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
@@ -5765,17 +5378,8 @@ declare namespace LocalJSX {
           * Hint text string
          */
         "hint"?: string;
-        /**
-          * @default false
-         */
         "invalidDay"?: boolean;
-        /**
-          * @default false
-         */
         "invalidMonth"?: boolean;
-        /**
-          * @default false
-         */
         "invalidYear"?: boolean;
         /**
           * Label for the field.
@@ -5787,7 +5391,6 @@ declare namespace LocalJSX {
         "labelHeaderLevel"?: string;
         /**
           * Whether or not to use the month as an input or select.
-          * @default false
          */
         "monthSelect"?: boolean;
         /**
@@ -5808,12 +5411,10 @@ declare namespace LocalJSX {
         "onDateChange"?: (event: VaMemorableDateCustomEvent<any>) => void;
         /**
           * Removes the default date hint text
-          * @default false
          */
         "removeDateHint"?: boolean;
         /**
           * Render marker indicating field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -5842,17 +5443,14 @@ declare namespace LocalJSX {
     interface VaModal {
         /**
           * Click outside modal will trigger closeEvent
-          * @default false
          */
         "clickToClose"?: boolean;
         /**
           * If true, analytics event won't be fired
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * Whether or not the component will be forced to take action.
-          * @default false
          */
         "forcedModal"?: boolean;
         /**
@@ -5861,12 +5459,10 @@ declare namespace LocalJSX {
         "initialFocusSelector"?: string;
         /**
           * Label for the modal, to be set as aria-label. Will take precedence over modalTitle in settings of aria-label.
-          * @default ''
          */
         "label"?: string;
         /**
           * If `true`, modal will be wider.
-          * @default false
          */
         "large"?: boolean;
         /**
@@ -5900,12 +5496,10 @@ declare namespace LocalJSX {
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * Whether or not the component will be using the unstyled button.
-          * @default false
          */
         "unstyled"?: boolean;
         /**
           * If the modal is visible or not
-          * @default false
          */
         "visible"?: boolean;
     }
@@ -5925,12 +5519,10 @@ declare namespace LocalJSX {
     interface VaNotification {
         /**
           * Aria-label text for the close button.
-          * @default 'Close notification'
          */
         "closeBtnAriaLabel"?: string;
         /**
           * If `true`, a close button will be displayed.
-          * @default false
          */
         "closeable"?: boolean;
         /**
@@ -5939,17 +5531,14 @@ declare namespace LocalJSX {
         "dateTime"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * If `false`, card will not have border
-          * @default true
          */
         "hasBorder"?: boolean;
         /**
           * If `false`, card will not have the word "CLOSE" next to close icon
-          * @default false
          */
         "hasCloseText"?: boolean;
         /**
@@ -5958,7 +5547,6 @@ declare namespace LocalJSX {
         "headline"?: string;
         /**
           * Define level for headline. Font size will remain the same regardless of header level.
-          * @default '3'
          */
         "headlineLevel"?: string;
         /**
@@ -5975,7 +5563,6 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaNotificationCustomEvent<any>) => void;
         /**
           * Symbol indicates type of notification Current options are: action-required, update
-          * @default 'none'
          */
         "symbol"?: string;
         /**
@@ -5984,7 +5571,6 @@ declare namespace LocalJSX {
         "text"?: string;
         /**
           * If `true`, the card will be visible.
-          * @default true
          */
         "visible"?: boolean;
     }
@@ -5996,7 +5582,6 @@ declare namespace LocalJSX {
     interface VaOfficialGovBanner {
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -6005,7 +5590,6 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaOfficialGovBannerCustomEvent<any>) => void;
         /**
           * Accepts a top level domain (TLD) value of either `gov` or `mil`. Default is `gov`.
-          * @default 'gov'
          */
         "tld"?: string;
     }
@@ -6017,7 +5601,6 @@ declare namespace LocalJSX {
     interface VaOmbInfo {
         /**
           * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
-          * @default 'benefits'
          */
         "benefitType"?: string;
         /**
@@ -6030,7 +5613,6 @@ declare namespace LocalJSX {
         "formId"?: string;
         /**
           * If `true`, clicking outside the modal will close it.
-          * @default false
          */
         "modalClickToClose"?: boolean;
         /**
@@ -6053,12 +5635,10 @@ declare namespace LocalJSX {
     interface VaOnThisPage {
         /**
           * If true, analytics event will not be fired
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * Header level. Must be between 1 and 6
-          * @default 2
          */
         "headerLevel"?: number;
         /**
@@ -6074,12 +5654,10 @@ declare namespace LocalJSX {
     interface VaPagination {
         /**
           * Aria-label suffix text for buttons
-          * @default ''
          */
         "ariaLabelSuffix"?: string;
         /**
           * Whether or not an analytics event will be fired
-          * @default true
          */
         "enableAnalytics"?: boolean;
         /**
@@ -6100,7 +5678,6 @@ declare namespace LocalJSX {
         "pages"?: number;
         /**
           * Don't show the last page if the unbounded flag is set
-          * @default false
          */
         "unbounded"?: boolean;
     }
@@ -6112,12 +5689,10 @@ declare namespace LocalJSX {
     interface VaPrivacyAgreement {
         /**
           * Whether the checkbox is checked or not.
-          * @default false
          */
         "checked"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -6130,7 +5705,6 @@ declare namespace LocalJSX {
         "onVaChange"?: (event: VaPrivacyAgreementCustomEvent<any>) => void;
         /**
           * Whether to display the error message or not.
-          * @default false
          */
         "showError"?: boolean;
     }
@@ -6144,12 +5718,10 @@ declare namespace LocalJSX {
     interface VaProcessListItem {
         /**
           * Whether or not the item is active
-          * @default false
          */
         "active"?: boolean;
         /**
           * Whether or not the item should display the checkmark icon
-          * @default false
          */
         "checkmark"?: boolean;
         /**
@@ -6158,12 +5730,10 @@ declare namespace LocalJSX {
         "header"?: string;
         /**
           * Header level for item header. Must be between 1 and 6
-          * @default 3
          */
         "level"?: number;
         /**
           * Whether or not the item is pending
-          * @default false
          */
         "pending"?: boolean;
         /**
@@ -6179,7 +5749,6 @@ declare namespace LocalJSX {
     interface VaProgressBar {
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -6188,7 +5757,6 @@ declare namespace LocalJSX {
         "label"?: string;
         /**
           * Whether to render screen reader updates for percent prop changes; set to true to handle externally.
-          * @default false
          */
         "noPercentScreenReader"?: boolean;
         /**
@@ -6209,7 +5777,6 @@ declare namespace LocalJSX {
     interface VaPromoBanner {
         /**
           * Analytics tracking function(s) will not be called
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -6243,7 +5810,6 @@ declare namespace LocalJSX {
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -6256,7 +5822,6 @@ declare namespace LocalJSX {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern` is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
@@ -6289,7 +5854,6 @@ declare namespace LocalJSX {
         "onVaValueChange"?: (event: VaRadioCustomEvent<any>) => void;
         /**
           * Whether or not this input field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -6304,7 +5868,6 @@ declare namespace LocalJSX {
         "ariaDescribedby"?: string;
         /**
           * Whether or not the option is selected.
-          * @default false
          */
         "checked"?: boolean;
         /**
@@ -6313,7 +5876,6 @@ declare namespace LocalJSX {
         "description"?: string;
         /**
           * Whether or not the radio option is disabled.
-          * @default false
          */
         "disabled"?: boolean;
         /**
@@ -6330,7 +5892,6 @@ declare namespace LocalJSX {
         "onRadioOptionSelected"?: (event: VaRadioOptionCustomEvent<any>) => void;
         /**
           * Whether or not the component will display as a tile.
-          * @default false
          */
         "tile"?: boolean;
         /**
@@ -6346,12 +5907,10 @@ declare namespace LocalJSX {
     interface VaSearchFilter {
         /**
           * Represents a list of filter facets and their categories. Use a JSON array of objects with label and id properties.
-          * @default []
          */
         "filterOptions"?: Filter[];
         /**
           * The filter header text.
-          * @default 'Filters'
          */
         "header"?: string;
         /**
@@ -6375,22 +5934,18 @@ declare namespace LocalJSX {
     interface VaSearchInput {
         /**
           * If `true`, the component will use the big variant.
-          * @default false
          */
         "big"?: boolean;
         /**
           * Text displayed inside the search button
-          * @default 'Search'
          */
         "buttonText"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
           * The aria-label for search input and button. Default is 'Search'.
-          * @default 'Search'
          */
         "label"?: string;
         /**
@@ -6399,7 +5954,6 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
         /**
           * If `true`, the component will use the small variant.
-          * @default false
          */
         "small"?: boolean;
         /**
@@ -6408,7 +5962,6 @@ declare namespace LocalJSX {
         "suggestions"?: any;
         /**
           * The value of the input field
-          * @default ''
          */
         "value"?: string;
     }
@@ -6433,12 +5986,10 @@ declare namespace LocalJSX {
         "current": number;
         /**
           * Whether or not an analytics event will be fired.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
           * Header level for button wrapper. Must be between 1 and 6
-          * @default 4
          */
         "headerLevel"?: number;
         /**
@@ -6459,7 +6010,6 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaSegmentedProgressBarCustomEvent<any>) => void;
         /**
           * The term used to indicate the current progress for the heading "[progressTerm] 2 of 5". (Screen reader only)
-          * @default 'Step'
          */
         "progressTerm"?: string;
         /**
@@ -6483,7 +6033,6 @@ declare namespace LocalJSX {
     interface VaSelect {
         /**
           * Whether or not to fire the analytics events
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -6496,12 +6045,10 @@ declare namespace LocalJSX {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern` is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
           * If true, sets the select to take the full-width of its container
-          * @default false
          */
         "fullWidth"?: boolean;
         /**
@@ -6510,7 +6057,6 @@ declare namespace LocalJSX {
         "headerAriaDescribedby"?: string;
         /**
           * Whether or not to show the (*Required) text.
-          * @default false
          */
         "hideRequiredText"?: boolean;
         /**
@@ -6519,7 +6065,6 @@ declare namespace LocalJSX {
         "hint"?: string;
         /**
           * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
-          * @default false
          */
         "invalid"?: boolean;
         /**
@@ -6556,17 +6101,14 @@ declare namespace LocalJSX {
         "onVaSelectBlur"?: (event: VaSelectCustomEvent<any>) => void;
         /**
           * Whether or not to add usa-input--error as class if error message is outside of component
-          * @default false
          */
         "reflectInputError"?: boolean;
         /**
           * Whether or not this is a required field.
-          * @default false
          */
         "required"?: boolean;
         /**
           * Whether an error message should be shown - set to false when this component is used inside va-date or va-memorable-date in which the error for the va-select will be rendered outside of va-select
-          * @default true
          */
         "showError"?: boolean;
         /**
@@ -6614,7 +6156,6 @@ declare namespace LocalJSX {
         "serviceName"?: string;
         /**
           * The heading level for the service name (defaults to h3)
-          * @default 3
          */
         "serviceNameHeadingLevel"?: number;
         /**
@@ -6634,7 +6175,6 @@ declare namespace LocalJSX {
         "header"?: string;
         /**
           * Adds a circle around the icon with the provided background [VADS color token](https://design.va.gov/foundation/color-palette).
-          * @default 'vads-color-primary'
          */
         "iconBackgroundColor"?: string;
         /**
@@ -6643,12 +6183,10 @@ declare namespace LocalJSX {
         "iconName"?: string;
         /**
           * Header text to display at the top of the side navigation mobile view. If not provided, it will default to "Related pages menu".
-          * @default 'Related pages menu'
          */
         "mobileHeader"?: string;
         /**
           * Aria label for the nav element that wraps the side navigation links. If not provided, it will default to "Related pages menu".
-          * @default 'Related pages menu'
          */
         "navAriaLabel"?: string;
     }
@@ -6704,7 +6242,6 @@ declare namespace LocalJSX {
     interface VaSort {
         /**
           * Whether or not to fire the analytics events
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -6713,7 +6250,6 @@ declare namespace LocalJSX {
         "messageAriaDescribedby"?: string;
         /**
           * Name attribute for the select field.
-          * @default 'sort'
          */
         "name"?: string;
         /**
@@ -6738,7 +6274,6 @@ declare namespace LocalJSX {
         "value"?: string;
         /**
           * Displays the select at a specific width. Accepts md or medium (20ex), lg (30ex), xl (40ex).
-          * @default 'lg'
          */
         "width"?: string;
     }
@@ -6750,12 +6285,10 @@ declare namespace LocalJSX {
     interface VaStatementOfTruth {
         /**
           * The error to be applied to the va-check-box element
-          * @default ''
          */
         "checkboxError"?: string;
         /**
           * The label for the va-checkbox-component
-          * @default 'I certify the information above is correct and true to the best of my knowledge and belief.'
          */
         "checkboxLabel"?: string;
         /**
@@ -6764,7 +6297,6 @@ declare namespace LocalJSX {
         "checked"?: boolean;
         /**
           * An optional custom header for the component
-          * @default 'Statement of truth'
          */
         "heading"?: string;
         /**
@@ -6773,22 +6305,18 @@ declare namespace LocalJSX {
         "hideLegalNote"?: boolean;
         /**
           * The error to be applied to the va-text-input element
-          * @default ''
          */
         "inputError"?: string;
         /**
           * The label for the va-text-input component
-          * @default 'Your full name'
          */
         "inputLabel"?: string;
         /**
           * An optional message that will be read by screen readers when the input in the va-text-input component is focused.
-          * @default ''
          */
         "inputMessageAriaDescribedby"?: string;
         /**
           * The value to pre-fill the va-text-input element
-          * @default ''
          */
         "inputValue"?: string;
         /**
@@ -6826,7 +6354,6 @@ declare namespace LocalJSX {
         "onTabItemSelected"?: (event: VaTabItemCustomEvent<any>) => void;
         /**
           * Denotes whether this tab item is currently selected in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
-          * @default false
          */
         "selected"?: boolean;
         /**
@@ -6841,7 +6368,6 @@ declare namespace LocalJSX {
         "panelId": string;
         /**
           * Indicates whether the tab panel is currently selected/visible in parent `va-tabs`. Note that this value does not need to be passed for component initialization, it will be set via logic in parent `va-tabs` on initial render.
-          * @default false
          */
         "selected"?: boolean;
     }
@@ -6853,12 +6379,10 @@ declare namespace LocalJSX {
     interface VaTable {
         /**
           * Text to display in empty cells. Needed for screen readers to announce empty cells.
-          * @default 'Not available'
          */
         "emptyCellText"?: string;
         /**
           * When active, forces the table to expand to the full-width of its container
-          * @default false
          */
         "fullWidth"?: boolean;
         /**
@@ -6871,22 +6395,18 @@ declare namespace LocalJSX {
         "rightAlignCols"?: string;
         /**
           * When active, the table can be horizontally scrolled and is focusable
-          * @default false
          */
         "scrollable"?: boolean;
         /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
-          * @default false
          */
         "sortable"?: boolean;
         /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
-          * @default true
          */
         "stacked"?: boolean;
         /**
           * When active, the table will display alternating row background colors.
-          * @default false
          */
         "striped"?: boolean;
         /**
@@ -6899,7 +6419,6 @@ declare namespace LocalJSX {
         "tableTitleSummary"?: string;
         /**
           * The type of table
-          * @default 'borderless'
          */
         "tableType"?: 'borderless';
     }
@@ -6915,7 +6434,6 @@ declare namespace LocalJSX {
         "cols"?: number;
         /**
           * When active, the table will expand to the full width of its container
-          * @default false
          */
         "fullWidth"?: boolean;
         /**
@@ -6933,22 +6451,18 @@ declare namespace LocalJSX {
         "rows"?: number;
         /**
           * When active, the table can be horizontally scrolled and is focusable
-          * @default false
          */
         "scrollable"?: boolean;
         /**
           * If true, the table is sortable. To use a raw sort value for a cell, add a data-sort-value attribute to the span element.
-          * @default false
          */
         "sortable"?: boolean;
         /**
           * If true convert to a stacked table when screen size is small
-          * @default false
          */
         "stacked"?: boolean;
         /**
           * When active, the table will display alternating row background colors.
-          * @default false
          */
         "striped"?: boolean;
         /**
@@ -6961,7 +6475,6 @@ declare namespace LocalJSX {
         "tableTitleSummary"?: string;
         /**
           * The type of table to be used
-          * @default 'borderless'
          */
         "tableType"?: 'borderless';
     }
@@ -6975,7 +6488,6 @@ declare namespace LocalJSX {
     interface VaTabs {
         /**
           * The index of the initially selected tab. Defaults to `0` (the first tab).
-          * @default 0
          */
         "initiallySelected"?: number;
         /**
@@ -6992,12 +6504,10 @@ declare namespace LocalJSX {
     interface VaTagStatus {
         /**
           * Screen reader text to provide context about the status tag. Defaults to `Status {status}:`.
-          * @default `Status ${this.status}:`
          */
         "screenReaderText"?: string;
         /**
           * The status variant of the tag. Determines the background color and icon.
-          * @default 'info'
          */
         "status"?: 'info' | 'warning' | 'success' | 'error';
         /**
@@ -7021,7 +6531,6 @@ declare namespace LocalJSX {
         "countryCode"?: string;
         /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-          * @default false
          */
         "disableAnalytics"?: boolean;
         /**
@@ -7030,7 +6539,6 @@ declare namespace LocalJSX {
         "extension"?: string;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
-          * @default false
          */
         "international"?: boolean;
         /**
@@ -7039,7 +6547,6 @@ declare namespace LocalJSX {
         "messageAriaDescribedby"?: string;
         /**
           * Indicates if the phone number can be clicked or not
-          * @default false
          */
         "notClickable"?: boolean;
         /**
@@ -7048,12 +6555,10 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: VaTelephoneCustomEvent<any>) => void;
         /**
           * Indicates if this is a number meant to be used to text.
-          * @default false
          */
         "sms"?: boolean;
         /**
           * Indicates if this is a number meant to be called from a teletypewriter for deaf users.
-          * @default false
          */
         "tty"?: boolean;
         /**
@@ -7071,17 +6576,14 @@ declare namespace LocalJSX {
     interface VaTelephoneInput {
         /**
           * The telephone contact information
-          * @default ''
          */
         "contact"?: string;
         /**
           * The 2 letter ISO country code for a country
-          * @default this.DEFAULT_COUNTRY
          */
         "country"?: CountryCode;
         /**
           * The error for the component
-          * @default ''
          */
         "error"?: string;
         /**
@@ -7090,12 +6592,10 @@ declare namespace LocalJSX {
         "hint"?: string;
         /**
           * Label text for the component
-          * @default 'Home phone number'
          */
         "label"?: string;
         /**
           * Whether the country select should be included. Set to true to exclude it.
-          * @default false
          */
         "noCountry"?: boolean;
         /**
@@ -7104,12 +6604,10 @@ declare namespace LocalJSX {
         "onVaContact"?: (event: VaTelephoneInputCustomEvent<any>) => void;
         /**
           * Render marker indicating field is required.
-          * @default false
          */
         "required"?: boolean;
         /**
           * If true, this prop instructs the component to display error messages in response to the internal error state. If false, error messages must be passed in from consumer.
-          * @default true
          */
         "showInternalErrors"?: boolean;
     }
@@ -7131,17 +6629,14 @@ declare namespace LocalJSX {
         "autocomplete"?: string;
         /**
           * Whether the component should show a character count message. Has no effect without maxlength being set.
-          * @default false
          */
         "charcount"?: boolean;
         /**
           * Whether this component will be used to accept a currency value.
-          * @default false
          */
         "currency"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -7150,7 +6645,6 @@ declare namespace LocalJSX {
         "error"?: string;
         /**
           * Adds a Datadog privacy class to the error message for cases when sensitive information is included, such as in va-statement-of-truth.
-          * @default false
          */
         "errorHasPii"?: boolean;
         /**
@@ -7159,12 +6653,10 @@ declare namespace LocalJSX {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern`is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
           * Whether or not to show the (*Required) text.
-          * @default false
          */
         "hideRequiredText"?: boolean;
         /**
@@ -7199,7 +6691,6 @@ declare namespace LocalJSX {
     | 'url';
         /**
           * Whether or not `aria-invalid` will be set on the inner input. Useful when composing the component into something larger, like a date component.
-          * @default false
          */
         "invalid"?: boolean;
         /**
@@ -7240,17 +6731,14 @@ declare namespace LocalJSX {
         "pattern"?: string;
         /**
           * Whether or not to add usa-input--error as class if error message is outside of component
-          * @default false
          */
         "reflectInputError"?: boolean;
         /**
           * Set the input to required and render the (Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
           * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
-          * @default true
          */
         "showInputError"?: boolean;
         /**
@@ -7259,12 +6747,10 @@ declare namespace LocalJSX {
         "step"?: string;
         /**
           * Adds styling based on status value
-          * @default false
          */
         "success"?: boolean;
         /**
           * The type attribute.
-          * @default 'text'
          */
         "type"?: 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
         /**
@@ -7293,12 +6779,10 @@ declare namespace LocalJSX {
     interface VaTextarea {
         /**
           * Whether the component should show a character count message. Has no effect without maxlength being set.
-          * @default false
          */
         "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
-          * @default false
          */
         "enableAnalytics"?: boolean;
         /**
@@ -7311,7 +6795,6 @@ declare namespace LocalJSX {
         "formHeading"?: string;
         /**
           * The heading level for the heading if `useFormsPattern` is true.
-          * @default 3
          */
         "formHeadingLevel"?: number;
         /**
@@ -7352,7 +6835,6 @@ declare namespace LocalJSX {
         "placeholder"?: string;
         /**
           * Set the input to required and render the (Required) text.
-          * @default false
          */
         "required"?: boolean;
         /**
@@ -7364,691 +6846,75 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-
-    interface VaAccordionAttributes {
-        "openSingle": boolean;
-        "disableAnalytics": boolean;
-        "sectionHeading": string;
-    }
-    interface VaAccordionItemAttributes {
-        "header": string;
-        "headerSrOnly": string;
-        "subheader": string;
-        "open": boolean;
-        "level": number;
-        "bordered": boolean;
-    }
-    interface VaAdditionalInfoAttributes {
-        "trigger": string;
-        "disableAnalytics": boolean;
-        "disableBorder": boolean;
-    }
-    interface VaAlertAttributes {
-        "status": | 'info'
-    | 'warning'
-    | 'error'
-    | 'success'
-    | 'continue';
-        "disableAnalytics": boolean;
-        "visible": boolean;
-        "closeBtnAriaLabel": string;
-        "closeable": boolean;
-        "fullWidth": boolean;
-        "slim": boolean;
-    }
-    interface VaAlertExpandableAttributes {
-        "status": 'continue' | 'info' | 'success' | 'warning';
-        "trigger": string;
-        "disableAnalytics": boolean;
-        "iconless": boolean;
-    }
-    interface VaAlertSignInAttributes {
-        "variant": string;
-        "headingLevel": number;
-        "visible": boolean;
-        "timeLimit": string;
-        "noSignInLink": string;
-    }
-    interface VaBannerAttributes {
-        "disableAnalytics": boolean;
-        "showClose": boolean;
-        "headline": string;
-        "type": 'info' | 'warning' | 'error' | 'success' | 'continue';
-        "visible": boolean;
-        "windowSession": boolean;
-        "dataLabel": string;
-        "dismissedBannerId": string;
-    }
-    interface VaBreadcrumbsAttributes {
-        "label": string;
-        "wrapping": boolean;
-        "breadcrumbList": Breadcrumb[] | string;
-        "homeVeteransAffairs": boolean;
-        "currentPageRedirect": boolean;
-        "disableAnalytics": boolean;
-    }
-    interface VaButtonAttributes {
-        "back": boolean;
-        "big": boolean;
-        "continue": boolean;
-        "disableAnalytics": boolean;
-        "disabled": boolean;
-        "fullWidth": boolean;
-        "loading": boolean;
-        "label": string;
-        "primaryAlternate": boolean;
-        "secondary": boolean;
-        "submit": string;
-        "text": string;
-        "messageAriaDescribedby": string;
-    }
-    interface VaButtonIconAttributes {
-        "disableAnalytics": boolean;
-        "label": string;
-        "buttonType": keyof typeof this.buttonTypeMap;
-    }
-    interface VaButtonPairAttributes {
-        "continue": boolean;
-        "disableAnalytics": boolean;
-        "primaryLabel": string;
-        "secondaryLabel": string;
-        "submit": string;
-        "update": boolean;
-        "leftButtonText": string;
-        "rightButtonText": string;
-    }
-    interface VaButtonSegmentedAttributes {
-        "label": string;
-        "disableAnalytics": boolean;
-        "selected": number;
-    }
-    interface VaCardAttributes {
-        "showShadow": boolean;
-        "background": boolean;
-        "iconName": string;
-    }
-    interface VaCardStatusAttributes {
-        "headerLevel": number;
-        "headerText": string;
-        "subheaderText": string;
-        "required": boolean;
-        "tagStatus": 'info' | 'error';
-        "tagText": string;
-        "error": string;
-        "linkHref": string;
-        "linkText": string;
-    }
-    interface VaCheckboxAttributes {
-        "label": string;
-        "error": string;
-        "description": string;
-        "required": boolean;
-        "enableAnalytics": boolean;
-        "checked": boolean;
-        "hint": string;
-        "tile": boolean;
-        "checkboxDescription": string;
-        "disabled": boolean;
-        "messageAriaDescribedby": string;
-        "name": string;
-        "indeterminate": boolean;
-    }
-    interface VaCheckboxGroupAttributes {
-        "label": string;
-        "labelSrOnly": string;
-        "required": boolean;
-        "error": string;
-        "enableAnalytics": boolean;
-        "hint": string;
-        "labelHeaderLevel": string;
-        "messageAriaDescribedby": string;
-        "useFormsPattern": string;
-        "formHeadingLevel": number;
-        "formHeading": string;
-    }
-    interface VaComboBoxAttributes {
-        "required": boolean;
-        "disabled": boolean;
-        "label": string;
-        "placeholder": string;
-        "name": string;
-        "value": string;
-        "error": string;
-        "hint": string;
-        "messageAriaDescribedby": string;
-        "showInputError": boolean;
-    }
-    interface VaCrisisLineModalAttributes {
-        "phoneNumber": string;
-        "phoneExtension": string;
-        "textNumber": string;
-        "chatUrl": string;
-        "ttyNumber": string;
-        "ttyCrisisExtension": string;
-        "mode": 'trigger' | 'modal';
-    }
-    interface VaCriticalActionAttributes {
-        "link": string;
-        "text": string;
-    }
-    interface VaDateAttributes {
-        "required": boolean;
-        "label": string;
-        "name": string;
-        "hint": string;
-        "error": string;
-        "monthYearOnly": boolean;
-        "monthOptional": boolean;
-        "value": string;
-        "invalidDay": boolean;
-        "invalidMonth": boolean;
-        "invalidYear": boolean;
-        "enableAnalytics": boolean;
-    }
-    interface VaFileInputAttributes {
-        "label": string;
-        "name": string;
-        "required": boolean;
-        "accept": string;
-        "error": string;
-        "hint": string;
-        "statusText": string;
-        "enableAnalytics": boolean;
-        "headerSize": number;
-        "headless": boolean;
-        "readOnly": boolean;
-        "encrypted": boolean;
-        "maxFileSize": number;
-        "minFileSize": number;
-        "percentUploaded": number;
-        "passwordError": string;
-    }
-    interface VaFileInputMultipleAttributes {
-        "label": string;
-        "name": string;
-        "required": boolean;
-        "accept": string;
-        "hint": string;
-        "enableAnalytics": boolean;
-        "headerSize": number;
-        "readOnly": boolean;
-        "maxFileSize": number;
-        "minFileSize": number;
-        "statusText": string;
-    }
-    interface VaHeaderMinimalAttributes {
-        "header": string;
-        "subheader": string;
-        "enableHeadings": boolean;
-    }
-    interface VaIconAttributes {
-        "icon": string;
-        "spriteLocation": string;
-        "size": number;
-        "srtext": string;
-    }
-    interface VaLanguageToggleAttributes {
-        "language": string;
-        "enHref": string;
-        "esHref": string;
-        "tlHref": string;
-        "routerLinks": boolean;
-    }
-    interface VaLinkAttributes {
-        "abbrTitle": string;
-        "active": boolean;
-        "back": boolean;
-        "calendar": boolean;
-        "channel": boolean;
-        "disableAnalytics": boolean;
-        "download": boolean;
-        "href": string;
-        "filename": string;
-        "filetype": string;
-        "pages": number;
-        "text": string;
-        "video": boolean;
-        "reverse": boolean;
-        "external": boolean;
-        "label": string;
-        "iconName": string;
-        "iconSize": number;
-        "language": string;
-    }
-    interface VaLinkActionAttributes {
-        "disableAnalytics": boolean;
-        "href": string;
-        "text": string;
-        "messageAriaDescribedby": string;
-        "type": 'primary' | 'secondary' | 'reverse' | 'primary-entry';
-        "label": string;
-    }
-    interface VaLoadingIndicatorAttributes {
-        "message": string;
-        "label": string;
-        "setFocus": boolean;
-        "enableAnalytics": boolean;
-    }
-    interface VaMaintenanceBannerAttributes {
-        "disableAnalytics": boolean;
-        "bannerId": string;
-        "maintenanceStartDateTime": string;
-        "maintenanceEndDateTime": string;
-        "maintenanceTitle": string;
-        "maintenanceTitleHeaderLevel": number;
-        "upcomingWarnStartDateTime": string;
-        "upcomingWarnTitle": string;
-        "isError": boolean;
-    }
-    interface VaMemorableDateAttributes {
-        "required": boolean;
-        "useFormsPattern": string;
-        "formHeadingLevel": number;
-        "formHeading": string;
-        "monthSelect": boolean;
-        "label": string;
-        "name": string;
-        "hint": string;
-        "error": string;
-        "value": string;
-        "customDayErrorMessage": string;
-        "customMonthErrorMessage": string;
-        "customYearErrorMessage": string;
-        "removeDateHint": boolean;
-        "externalValidation": boolean;
-        "invalidDay": boolean;
-        "invalidMonth": boolean;
-        "invalidYear": boolean;
-        "enableAnalytics": boolean;
-        "labelHeaderLevel": string;
-        "headerAriaDescribedby": string;
-    }
-    interface VaModalAttributes {
-        "clickToClose": boolean;
-        "disableAnalytics": boolean;
-        "large": boolean;
-        "modalTitle": string;
-        "forcedModal": boolean;
-        "unstyled": boolean;
-        "initialFocusSelector": string;
-        "primaryButtonText": string;
-        "secondaryButtonText": string;
-        "status": 'continue' | 'error' | 'info' | 'success' | 'warning';
-        "visible": boolean;
-        "label": string;
-    }
-    interface VaNotificationAttributes {
-        "visible": boolean;
-        "symbol": string;
-        "closeBtnAriaLabel": string;
-        "closeable": boolean;
-        "hasBorder": boolean;
-        "hasCloseText": boolean;
-        "headline": string;
-        "headlineLevel": string;
-        "dateTime": string;
-        "href": string;
-        "text": string;
-        "disableAnalytics": boolean;
-    }
-    interface VaOfficialGovBannerAttributes {
-        "disableAnalytics": boolean;
-        "tld": string;
-    }
-    interface VaOmbInfoAttributes {
-        "benefitType": string;
-        "expDate": string;
-        "ombNumber": string;
-        "formId": string;
-        "resBurden": number;
-        "modalClickToClose": boolean;
-    }
-    interface VaOnThisPageAttributes {
-        "headerLevel": number;
-        "disableAnalytics": boolean;
-    }
-    interface VaPaginationAttributes {
-        "ariaLabelSuffix": string;
-        "enableAnalytics": boolean;
-        "page": number;
-        "pages": number;
-        "unbounded": boolean;
-    }
-    interface VaPrivacyAgreementAttributes {
-        "checked": boolean;
-        "showError": boolean;
-        "enableAnalytics": boolean;
-    }
-    interface VaProcessListItemAttributes {
-        "header": string;
-        "level": number;
-        "active": boolean;
-        "pending": boolean;
-        "checkmark": boolean;
-        "statusText": string;
-    }
-    interface VaProgressBarAttributes {
-        "enableAnalytics": boolean;
-        "percent": number;
-        "label": string;
-        "noPercentScreenReader": boolean;
-    }
-    interface VaPromoBannerAttributes {
-        "href": string;
-        "type": 'announcement' | 'news' | 'email-signup';
-        "disableAnalytics": boolean;
-    }
-    interface VaRadioAttributes {
-        "label": string;
-        "hint": string;
-        "required": boolean;
-        "error": string;
-        "enableAnalytics": boolean;
-        "labelHeaderLevel": string;
-        "headerAriaDescribedby": string;
-        "messageAriaDescribedby": string;
-        "useFormsPattern": string;
-        "formHeadingLevel": number;
-        "formHeading": string;
-    }
-    interface VaRadioOptionAttributes {
-        "name": string;
-        "label": string;
-        "value": string;
-        "checked": boolean;
-        "tile": boolean;
-        "description": string;
-        "disabled": boolean;
-        "ariaDescribedby": string;
-    }
-    interface VaSearchFilterAttributes {
-        "header": string;
-    }
-    interface VaSearchInputAttributes {
-        "buttonText": string;
-        "label": string;
-        "suggestions": string;
-        "value": string;
-        "big": boolean;
-        "small": boolean;
-        "disableAnalytics": boolean;
-    }
-    interface VaSegmentedProgressBarAttributes {
-        "enableAnalytics": boolean;
-        "current": number;
-        "total": number;
-        "label": string;
-        "headerLevel": number;
-        "progressTerm": string;
-        "labels": string;
-        "centeredLabels": boolean;
-        "counters": "default" | "small";
-        "headingText": string;
-        "useDiv": boolean;
-    }
-    interface VaSelectAttributes {
-        "required": boolean;
-        "hideRequiredText": boolean;
-        "label": string;
-        "name": string;
-        "value": string;
-        "error": string;
-        "reflectInputError": boolean;
-        "invalid": boolean;
-        "enableAnalytics": boolean;
-        "labelHeaderLevel": string;
-        "headerAriaDescribedby": string;
-        "hint": string;
-        "messageAriaDescribedby": string;
-        "width": string;
-        "fullWidth": boolean;
-        "showError": boolean;
-        "useFormsPattern": string;
-        "formHeadingLevel": number;
-        "formHeading": string;
-    }
-    interface VaServiceListItemAttributes {
-        "serviceName": string;
-        "serviceNameHeadingLevel": number;
-        "serviceLink": string;
-        "serviceStatus": string;
-        "serviceDetails": ServiceDetails | string;
-        "icon": string;
-        "action": ServiceAction | string;
-        "optionalLink": OptionalLink | string;
-    }
-    interface VaSidenavAttributes {
-        "header": string;
-        "mobileHeader": string;
-        "navAriaLabel": string;
-        "iconName": string;
-        "iconBackgroundColor": string;
-    }
-    interface VaSidenavItemAttributes {
-        "href": string;
-        "label": string;
-        "currentPage": boolean;
-        "routerLink": boolean;
-    }
-    interface VaSidenavSubmenuAttributes {
-        "label": string;
-        "href": string;
-        "currentPage": boolean;
-        "routerLink": boolean;
-    }
-    interface VaSortAttributes {
-        "name": string;
-        "value": string;
-        "width": string;
-        "messageAriaDescribedby": string;
-        "enableAnalytics": boolean;
-    }
-    interface VaStatementOfTruthAttributes {
-        "heading": string;
-        "inputValue": string;
-        "inputError": string;
-        "checkboxError": string;
-        "inputMessageAriaDescribedby": string;
-        "hideLegalNote": boolean;
-        "checked": boolean;
-        "inputLabel": string;
-        "checkboxLabel": string;
-    }
-    interface VaTabItemAttributes {
-        "buttonText": string;
-        "targetId": string;
-        "selected": boolean;
-    }
-    interface VaTabPanelAttributes {
-        "panelId": string;
-        "selected": boolean;
-    }
-    interface VaTableAttributes {
-        "tableTitle": string;
-        "tableTitleSummary": string;
-        "tableType": 'borderless';
-        "stacked": boolean;
-        "scrollable": boolean;
-        "sortable": boolean;
-        "striped": boolean;
-        "fullWidth": boolean;
-        "rightAlignCols": string;
-        "monoFontCols": string;
-        "emptyCellText": string;
-    }
-    interface VaTableInnerAttributes {
-        "tableTitle": string;
-        "tableTitleSummary": string;
-        "rows": number;
-        "cols": number;
-        "tableType": 'borderless';
-        "stacked": boolean;
-        "sortable": boolean;
-        "scrollable": boolean;
-        "striped": boolean;
-        "fullWidth": boolean;
-        "rightAlignCols": string;
-        "monoFontCols": string;
-    }
-    interface VaTabsAttributes {
-        "label": string;
-        "initiallySelected": number;
-    }
-    interface VaTagStatusAttributes {
-        "status": 'info' | 'warning' | 'success' | 'error';
-        "text": string;
-        "screenReaderText": string;
-    }
-    interface VaTelephoneAttributes {
-        "contact": string;
-        "extension": string;
-        "notClickable": boolean;
-        "international": boolean;
-        "countryCode": string;
-        "tty": boolean;
-        "sms": boolean;
-        "vanity": string;
-        "messageAriaDescribedby": string;
-        "disableAnalytics": boolean;
-    }
-    interface VaTelephoneInputAttributes {
-        "contact": string;
-        "country": CountryCode;
-        "label": string;
-        "hint": string;
-        "error": string;
-        "noCountry": boolean;
-        "required": boolean;
-        "showInternalErrors": boolean;
-    }
-    interface VaTextInputAttributes {
-        "label": string;
-        "error": string;
-        "reflectInputError": boolean;
-        "showInputError": boolean;
-        "invalid": boolean;
-        "required": boolean;
-        "hideRequiredText": boolean;
-        "inputmode": | 'decimal'
-    | 'email'
-    | 'numeric'
-    | 'search'
-    | 'tel'
-    | 'text'
-    | 'url';
-        "step": string;
-        "type": 'email' | 'number' | 'password' | 'search' | 'tel' | 'text' | 'url';
-        "maxlength": number;
-        "autocomplete": string;
-        "enableAnalytics": boolean;
-        "name": string;
-        "pattern": string;
-        "hint": string;
-        "messageAriaDescribedby": string;
-        "value": string;
-        "success": boolean;
-        "width": string;
-        "useFormsPattern": string;
-        "formHeadingLevel": number;
-        "formHeading": string;
-        "charcount": boolean;
-        "currency": boolean;
-        "inputPrefix": string;
-        "inputIconPrefix": string;
-        "inputSuffix": string;
-        "inputIconSuffix": string;
-        "min": string;
-        "max": string;
-        "errorHasPii": boolean;
-    }
-    interface VaTextareaAttributes {
-        "label": string;
-        "error": string;
-        "placeholder": string;
-        "name": string;
-        "required": boolean;
-        "hint": string;
-        "messageAriaDescribedby": string;
-        "maxlength": number;
-        "value": string;
-        "enableAnalytics": boolean;
-        "labelHeaderLevel": string;
-        "headerAriaDescribedby": string;
-        "useFormsPattern": string;
-        "formHeadingLevel": number;
-        "formHeading": string;
-        "charcount": boolean;
-    }
-
     interface IntrinsicElements {
-        "va-accordion": Omit<VaAccordion, keyof VaAccordionAttributes> & { [K in keyof VaAccordion & keyof VaAccordionAttributes]?: VaAccordion[K] } & { [K in keyof VaAccordion & keyof VaAccordionAttributes as `attr:${K}`]?: VaAccordionAttributes[K] } & { [K in keyof VaAccordion & keyof VaAccordionAttributes as `prop:${K}`]?: VaAccordion[K] };
-        "va-accordion-item": Omit<VaAccordionItem, keyof VaAccordionItemAttributes> & { [K in keyof VaAccordionItem & keyof VaAccordionItemAttributes]?: VaAccordionItem[K] } & { [K in keyof VaAccordionItem & keyof VaAccordionItemAttributes as `attr:${K}`]?: VaAccordionItemAttributes[K] } & { [K in keyof VaAccordionItem & keyof VaAccordionItemAttributes as `prop:${K}`]?: VaAccordionItem[K] };
-        "va-additional-info": Omit<VaAdditionalInfo, keyof VaAdditionalInfoAttributes> & { [K in keyof VaAdditionalInfo & keyof VaAdditionalInfoAttributes]?: VaAdditionalInfo[K] } & { [K in keyof VaAdditionalInfo & keyof VaAdditionalInfoAttributes as `attr:${K}`]?: VaAdditionalInfoAttributes[K] } & { [K in keyof VaAdditionalInfo & keyof VaAdditionalInfoAttributes as `prop:${K}`]?: VaAdditionalInfo[K] } & OneOf<"trigger", VaAdditionalInfo["trigger"], VaAdditionalInfoAttributes["trigger"]>;
-        "va-alert": Omit<VaAlert, keyof VaAlertAttributes> & { [K in keyof VaAlert & keyof VaAlertAttributes]?: VaAlert[K] } & { [K in keyof VaAlert & keyof VaAlertAttributes as `attr:${K}`]?: VaAlertAttributes[K] } & { [K in keyof VaAlert & keyof VaAlertAttributes as `prop:${K}`]?: VaAlert[K] };
-        "va-alert-expandable": Omit<VaAlertExpandable, keyof VaAlertExpandableAttributes> & { [K in keyof VaAlertExpandable & keyof VaAlertExpandableAttributes]?: VaAlertExpandable[K] } & { [K in keyof VaAlertExpandable & keyof VaAlertExpandableAttributes as `attr:${K}`]?: VaAlertExpandableAttributes[K] } & { [K in keyof VaAlertExpandable & keyof VaAlertExpandableAttributes as `prop:${K}`]?: VaAlertExpandable[K] } & OneOf<"trigger", VaAlertExpandable["trigger"], VaAlertExpandableAttributes["trigger"]>;
-        "va-alert-sign-in": Omit<VaAlertSignIn, keyof VaAlertSignInAttributes> & { [K in keyof VaAlertSignIn & keyof VaAlertSignInAttributes]?: VaAlertSignIn[K] } & { [K in keyof VaAlertSignIn & keyof VaAlertSignInAttributes as `attr:${K}`]?: VaAlertSignInAttributes[K] } & { [K in keyof VaAlertSignIn & keyof VaAlertSignInAttributes as `prop:${K}`]?: VaAlertSignIn[K] };
+        "va-accordion": VaAccordion;
+        "va-accordion-item": VaAccordionItem;
+        "va-additional-info": VaAdditionalInfo;
+        "va-alert": VaAlert;
+        "va-alert-expandable": VaAlertExpandable;
+        "va-alert-sign-in": VaAlertSignIn;
         "va-back-to-top": VaBackToTop;
-        "va-banner": Omit<VaBanner, keyof VaBannerAttributes> & { [K in keyof VaBanner & keyof VaBannerAttributes]?: VaBanner[K] } & { [K in keyof VaBanner & keyof VaBannerAttributes as `attr:${K}`]?: VaBannerAttributes[K] } & { [K in keyof VaBanner & keyof VaBannerAttributes as `prop:${K}`]?: VaBanner[K] };
-        "va-breadcrumbs": Omit<VaBreadcrumbs, keyof VaBreadcrumbsAttributes> & { [K in keyof VaBreadcrumbs & keyof VaBreadcrumbsAttributes]?: VaBreadcrumbs[K] } & { [K in keyof VaBreadcrumbs & keyof VaBreadcrumbsAttributes as `attr:${K}`]?: VaBreadcrumbsAttributes[K] } & { [K in keyof VaBreadcrumbs & keyof VaBreadcrumbsAttributes as `prop:${K}`]?: VaBreadcrumbs[K] };
-        "va-button": Omit<VaButton, keyof VaButtonAttributes> & { [K in keyof VaButton & keyof VaButtonAttributes]?: VaButton[K] } & { [K in keyof VaButton & keyof VaButtonAttributes as `attr:${K}`]?: VaButtonAttributes[K] } & { [K in keyof VaButton & keyof VaButtonAttributes as `prop:${K}`]?: VaButton[K] };
-        "va-button-icon": Omit<VaButtonIcon, keyof VaButtonIconAttributes> & { [K in keyof VaButtonIcon & keyof VaButtonIconAttributes]?: VaButtonIcon[K] } & { [K in keyof VaButtonIcon & keyof VaButtonIconAttributes as `attr:${K}`]?: VaButtonIconAttributes[K] } & { [K in keyof VaButtonIcon & keyof VaButtonIconAttributes as `prop:${K}`]?: VaButtonIcon[K] };
-        "va-button-pair": Omit<VaButtonPair, keyof VaButtonPairAttributes> & { [K in keyof VaButtonPair & keyof VaButtonPairAttributes]?: VaButtonPair[K] } & { [K in keyof VaButtonPair & keyof VaButtonPairAttributes as `attr:${K}`]?: VaButtonPairAttributes[K] } & { [K in keyof VaButtonPair & keyof VaButtonPairAttributes as `prop:${K}`]?: VaButtonPair[K] };
-        "va-button-segmented": Omit<VaButtonSegmented, keyof VaButtonSegmentedAttributes> & { [K in keyof VaButtonSegmented & keyof VaButtonSegmentedAttributes]?: VaButtonSegmented[K] } & { [K in keyof VaButtonSegmented & keyof VaButtonSegmentedAttributes as `attr:${K}`]?: VaButtonSegmentedAttributes[K] } & { [K in keyof VaButtonSegmented & keyof VaButtonSegmentedAttributes as `prop:${K}`]?: VaButtonSegmented[K] };
-        "va-card": Omit<VaCard, keyof VaCardAttributes> & { [K in keyof VaCard & keyof VaCardAttributes]?: VaCard[K] } & { [K in keyof VaCard & keyof VaCardAttributes as `attr:${K}`]?: VaCardAttributes[K] } & { [K in keyof VaCard & keyof VaCardAttributes as `prop:${K}`]?: VaCard[K] };
-        "va-card-status": Omit<VaCardStatus, keyof VaCardStatusAttributes> & { [K in keyof VaCardStatus & keyof VaCardStatusAttributes]?: VaCardStatus[K] } & { [K in keyof VaCardStatus & keyof VaCardStatusAttributes as `attr:${K}`]?: VaCardStatusAttributes[K] } & { [K in keyof VaCardStatus & keyof VaCardStatusAttributes as `prop:${K}`]?: VaCardStatus[K] } & OneOf<"headerText", VaCardStatus["headerText"], VaCardStatusAttributes["headerText"]> & OneOf<"linkHref", VaCardStatus["linkHref"], VaCardStatusAttributes["linkHref"]> & OneOf<"linkText", VaCardStatus["linkText"], VaCardStatusAttributes["linkText"]>;
-        "va-checkbox": Omit<VaCheckbox, keyof VaCheckboxAttributes> & { [K in keyof VaCheckbox & keyof VaCheckboxAttributes]?: VaCheckbox[K] } & { [K in keyof VaCheckbox & keyof VaCheckboxAttributes as `attr:${K}`]?: VaCheckboxAttributes[K] } & { [K in keyof VaCheckbox & keyof VaCheckboxAttributes as `prop:${K}`]?: VaCheckbox[K] } & OneOf<"label", VaCheckbox["label"], VaCheckboxAttributes["label"]>;
-        "va-checkbox-group": Omit<VaCheckboxGroup, keyof VaCheckboxGroupAttributes> & { [K in keyof VaCheckboxGroup & keyof VaCheckboxGroupAttributes]?: VaCheckboxGroup[K] } & { [K in keyof VaCheckboxGroup & keyof VaCheckboxGroupAttributes as `attr:${K}`]?: VaCheckboxGroupAttributes[K] } & { [K in keyof VaCheckboxGroup & keyof VaCheckboxGroupAttributes as `prop:${K}`]?: VaCheckboxGroup[K] } & OneOf<"label", VaCheckboxGroup["label"], VaCheckboxGroupAttributes["label"]>;
-        "va-combo-box": Omit<VaComboBox, keyof VaComboBoxAttributes> & { [K in keyof VaComboBox & keyof VaComboBoxAttributes]?: VaComboBox[K] } & { [K in keyof VaComboBox & keyof VaComboBoxAttributes as `attr:${K}`]?: VaComboBoxAttributes[K] } & { [K in keyof VaComboBox & keyof VaComboBoxAttributes as `prop:${K}`]?: VaComboBox[K] } & OneOf<"label", VaComboBox["label"], VaComboBoxAttributes["label"]> & OneOf<"name", VaComboBox["name"], VaComboBoxAttributes["name"]>;
-        "va-crisis-line-modal": Omit<VaCrisisLineModal, keyof VaCrisisLineModalAttributes> & { [K in keyof VaCrisisLineModal & keyof VaCrisisLineModalAttributes]?: VaCrisisLineModal[K] } & { [K in keyof VaCrisisLineModal & keyof VaCrisisLineModalAttributes as `attr:${K}`]?: VaCrisisLineModalAttributes[K] } & { [K in keyof VaCrisisLineModal & keyof VaCrisisLineModalAttributes as `prop:${K}`]?: VaCrisisLineModal[K] };
-        "va-critical-action": Omit<VaCriticalAction, keyof VaCriticalActionAttributes> & { [K in keyof VaCriticalAction & keyof VaCriticalActionAttributes]?: VaCriticalAction[K] } & { [K in keyof VaCriticalAction & keyof VaCriticalActionAttributes as `attr:${K}`]?: VaCriticalActionAttributes[K] } & { [K in keyof VaCriticalAction & keyof VaCriticalActionAttributes as `prop:${K}`]?: VaCriticalAction[K] } & OneOf<"link", VaCriticalAction["link"], VaCriticalActionAttributes["link"]> & OneOf<"text", VaCriticalAction["text"], VaCriticalActionAttributes["text"]>;
-        "va-date": Omit<VaDate, keyof VaDateAttributes> & { [K in keyof VaDate & keyof VaDateAttributes]?: VaDate[K] } & { [K in keyof VaDate & keyof VaDateAttributes as `attr:${K}`]?: VaDateAttributes[K] } & { [K in keyof VaDate & keyof VaDateAttributes as `prop:${K}`]?: VaDate[K] } & OneOf<"label", VaDate["label"], VaDateAttributes["label"]> & OneOf<"name", VaDate["name"], VaDateAttributes["name"]>;
-        "va-file-input": Omit<VaFileInput, keyof VaFileInputAttributes> & { [K in keyof VaFileInput & keyof VaFileInputAttributes]?: VaFileInput[K] } & { [K in keyof VaFileInput & keyof VaFileInputAttributes as `attr:${K}`]?: VaFileInputAttributes[K] } & { [K in keyof VaFileInput & keyof VaFileInputAttributes as `prop:${K}`]?: VaFileInput[K] };
-        "va-file-input-multiple": Omit<VaFileInputMultiple, keyof VaFileInputMultipleAttributes> & { [K in keyof VaFileInputMultiple & keyof VaFileInputMultipleAttributes]?: VaFileInputMultiple[K] } & { [K in keyof VaFileInputMultiple & keyof VaFileInputMultipleAttributes as `attr:${K}`]?: VaFileInputMultipleAttributes[K] } & { [K in keyof VaFileInputMultiple & keyof VaFileInputMultipleAttributes as `prop:${K}`]?: VaFileInputMultiple[K] };
-        "va-header-minimal": Omit<VaHeaderMinimal, keyof VaHeaderMinimalAttributes> & { [K in keyof VaHeaderMinimal & keyof VaHeaderMinimalAttributes]?: VaHeaderMinimal[K] } & { [K in keyof VaHeaderMinimal & keyof VaHeaderMinimalAttributes as `attr:${K}`]?: VaHeaderMinimalAttributes[K] } & { [K in keyof VaHeaderMinimal & keyof VaHeaderMinimalAttributes as `prop:${K}`]?: VaHeaderMinimal[K] };
-        "va-icon": Omit<VaIcon, keyof VaIconAttributes> & { [K in keyof VaIcon & keyof VaIconAttributes]?: VaIcon[K] } & { [K in keyof VaIcon & keyof VaIconAttributes as `attr:${K}`]?: VaIconAttributes[K] } & { [K in keyof VaIcon & keyof VaIconAttributes as `prop:${K}`]?: VaIcon[K] } & OneOf<"icon", VaIcon["icon"], VaIconAttributes["icon"]>;
-        "va-language-toggle": Omit<VaLanguageToggle, keyof VaLanguageToggleAttributes> & { [K in keyof VaLanguageToggle & keyof VaLanguageToggleAttributes]?: VaLanguageToggle[K] } & { [K in keyof VaLanguageToggle & keyof VaLanguageToggleAttributes as `attr:${K}`]?: VaLanguageToggleAttributes[K] } & { [K in keyof VaLanguageToggle & keyof VaLanguageToggleAttributes as `prop:${K}`]?: VaLanguageToggle[K] } & OneOf<"enHref", VaLanguageToggle["enHref"], VaLanguageToggleAttributes["enHref"]>;
-        "va-link": Omit<VaLink, keyof VaLinkAttributes> & { [K in keyof VaLink & keyof VaLinkAttributes]?: VaLink[K] } & { [K in keyof VaLink & keyof VaLinkAttributes as `attr:${K}`]?: VaLinkAttributes[K] } & { [K in keyof VaLink & keyof VaLinkAttributes as `prop:${K}`]?: VaLink[K] } & OneOf<"href", VaLink["href"], VaLinkAttributes["href"]> & OneOf<"text", VaLink["text"], VaLinkAttributes["text"]>;
-        "va-link-action": Omit<VaLinkAction, keyof VaLinkActionAttributes> & { [K in keyof VaLinkAction & keyof VaLinkActionAttributes]?: VaLinkAction[K] } & { [K in keyof VaLinkAction & keyof VaLinkActionAttributes as `attr:${K}`]?: VaLinkActionAttributes[K] } & { [K in keyof VaLinkAction & keyof VaLinkActionAttributes as `prop:${K}`]?: VaLinkAction[K] } & OneOf<"href", VaLinkAction["href"], VaLinkActionAttributes["href"]> & OneOf<"text", VaLinkAction["text"], VaLinkActionAttributes["text"]>;
-        "va-loading-indicator": Omit<VaLoadingIndicator, keyof VaLoadingIndicatorAttributes> & { [K in keyof VaLoadingIndicator & keyof VaLoadingIndicatorAttributes]?: VaLoadingIndicator[K] } & { [K in keyof VaLoadingIndicator & keyof VaLoadingIndicatorAttributes as `attr:${K}`]?: VaLoadingIndicatorAttributes[K] } & { [K in keyof VaLoadingIndicator & keyof VaLoadingIndicatorAttributes as `prop:${K}`]?: VaLoadingIndicator[K] };
-        "va-maintenance-banner": Omit<VaMaintenanceBanner, keyof VaMaintenanceBannerAttributes> & { [K in keyof VaMaintenanceBanner & keyof VaMaintenanceBannerAttributes]?: VaMaintenanceBanner[K] } & { [K in keyof VaMaintenanceBanner & keyof VaMaintenanceBannerAttributes as `attr:${K}`]?: VaMaintenanceBannerAttributes[K] } & { [K in keyof VaMaintenanceBanner & keyof VaMaintenanceBannerAttributes as `prop:${K}`]?: VaMaintenanceBanner[K] } & OneOf<"bannerId", VaMaintenanceBanner["bannerId"], VaMaintenanceBannerAttributes["bannerId"]> & OneOf<"maintenanceStartDateTime", VaMaintenanceBanner["maintenanceStartDateTime"], VaMaintenanceBannerAttributes["maintenanceStartDateTime"]> & OneOf<"maintenanceEndDateTime", VaMaintenanceBanner["maintenanceEndDateTime"], VaMaintenanceBannerAttributes["maintenanceEndDateTime"]> & OneOf<"upcomingWarnStartDateTime", VaMaintenanceBanner["upcomingWarnStartDateTime"], VaMaintenanceBannerAttributes["upcomingWarnStartDateTime"]>;
-        "va-memorable-date": Omit<VaMemorableDate, keyof VaMemorableDateAttributes> & { [K in keyof VaMemorableDate & keyof VaMemorableDateAttributes]?: VaMemorableDate[K] } & { [K in keyof VaMemorableDate & keyof VaMemorableDateAttributes as `attr:${K}`]?: VaMemorableDateAttributes[K] } & { [K in keyof VaMemorableDate & keyof VaMemorableDateAttributes as `prop:${K}`]?: VaMemorableDate[K] } & OneOf<"label", VaMemorableDate["label"], VaMemorableDateAttributes["label"]> & OneOf<"name", VaMemorableDate["name"], VaMemorableDateAttributes["name"]>;
+        "va-banner": VaBanner;
+        "va-breadcrumbs": VaBreadcrumbs;
+        "va-button": VaButton;
+        "va-button-icon": VaButtonIcon;
+        "va-button-pair": VaButtonPair;
+        "va-button-segmented": VaButtonSegmented;
+        "va-card": VaCard;
+        "va-card-status": VaCardStatus;
+        "va-checkbox": VaCheckbox;
+        "va-checkbox-group": VaCheckboxGroup;
+        "va-combo-box": VaComboBox;
+        "va-crisis-line-modal": VaCrisisLineModal;
+        "va-critical-action": VaCriticalAction;
+        "va-date": VaDate;
+        "va-file-input": VaFileInput;
+        "va-file-input-multiple": VaFileInputMultiple;
+        "va-header-minimal": VaHeaderMinimal;
+        "va-icon": VaIcon;
+        "va-language-toggle": VaLanguageToggle;
+        "va-link": VaLink;
+        "va-link-action": VaLinkAction;
+        "va-loading-indicator": VaLoadingIndicator;
+        "va-maintenance-banner": VaMaintenanceBanner;
+        "va-memorable-date": VaMemorableDate;
         "va-minimal-footer": VaMinimalFooter;
-        "va-modal": Omit<VaModal, keyof VaModalAttributes> & { [K in keyof VaModal & keyof VaModalAttributes]?: VaModal[K] } & { [K in keyof VaModal & keyof VaModalAttributes as `attr:${K}`]?: VaModalAttributes[K] } & { [K in keyof VaModal & keyof VaModalAttributes as `prop:${K}`]?: VaModal[K] };
+        "va-modal": VaModal;
         "va-need-help": VaNeedHelp;
-        "va-notification": Omit<VaNotification, keyof VaNotificationAttributes> & { [K in keyof VaNotification & keyof VaNotificationAttributes]?: VaNotification[K] } & { [K in keyof VaNotification & keyof VaNotificationAttributes as `attr:${K}`]?: VaNotificationAttributes[K] } & { [K in keyof VaNotification & keyof VaNotificationAttributes as `prop:${K}`]?: VaNotification[K] };
-        "va-official-gov-banner": Omit<VaOfficialGovBanner, keyof VaOfficialGovBannerAttributes> & { [K in keyof VaOfficialGovBanner & keyof VaOfficialGovBannerAttributes]?: VaOfficialGovBanner[K] } & { [K in keyof VaOfficialGovBanner & keyof VaOfficialGovBannerAttributes as `attr:${K}`]?: VaOfficialGovBannerAttributes[K] } & { [K in keyof VaOfficialGovBanner & keyof VaOfficialGovBannerAttributes as `prop:${K}`]?: VaOfficialGovBanner[K] };
-        "va-omb-info": Omit<VaOmbInfo, keyof VaOmbInfoAttributes> & { [K in keyof VaOmbInfo & keyof VaOmbInfoAttributes]?: VaOmbInfo[K] } & { [K in keyof VaOmbInfo & keyof VaOmbInfoAttributes as `attr:${K}`]?: VaOmbInfoAttributes[K] } & { [K in keyof VaOmbInfo & keyof VaOmbInfoAttributes as `prop:${K}`]?: VaOmbInfo[K] } & OneOf<"expDate", VaOmbInfo["expDate"], VaOmbInfoAttributes["expDate"]>;
-        "va-on-this-page": Omit<VaOnThisPage, keyof VaOnThisPageAttributes> & { [K in keyof VaOnThisPage & keyof VaOnThisPageAttributes]?: VaOnThisPage[K] } & { [K in keyof VaOnThisPage & keyof VaOnThisPageAttributes as `attr:${K}`]?: VaOnThisPageAttributes[K] } & { [K in keyof VaOnThisPage & keyof VaOnThisPageAttributes as `prop:${K}`]?: VaOnThisPage[K] };
-        "va-pagination": Omit<VaPagination, keyof VaPaginationAttributes> & { [K in keyof VaPagination & keyof VaPaginationAttributes]?: VaPagination[K] } & { [K in keyof VaPagination & keyof VaPaginationAttributes as `attr:${K}`]?: VaPaginationAttributes[K] } & { [K in keyof VaPagination & keyof VaPaginationAttributes as `prop:${K}`]?: VaPagination[K] };
-        "va-privacy-agreement": Omit<VaPrivacyAgreement, keyof VaPrivacyAgreementAttributes> & { [K in keyof VaPrivacyAgreement & keyof VaPrivacyAgreementAttributes]?: VaPrivacyAgreement[K] } & { [K in keyof VaPrivacyAgreement & keyof VaPrivacyAgreementAttributes as `attr:${K}`]?: VaPrivacyAgreementAttributes[K] } & { [K in keyof VaPrivacyAgreement & keyof VaPrivacyAgreementAttributes as `prop:${K}`]?: VaPrivacyAgreement[K] };
+        "va-notification": VaNotification;
+        "va-official-gov-banner": VaOfficialGovBanner;
+        "va-omb-info": VaOmbInfo;
+        "va-on-this-page": VaOnThisPage;
+        "va-pagination": VaPagination;
+        "va-privacy-agreement": VaPrivacyAgreement;
         "va-process-list": VaProcessList;
-        "va-process-list-item": Omit<VaProcessListItem, keyof VaProcessListItemAttributes> & { [K in keyof VaProcessListItem & keyof VaProcessListItemAttributes]?: VaProcessListItem[K] } & { [K in keyof VaProcessListItem & keyof VaProcessListItemAttributes as `attr:${K}`]?: VaProcessListItemAttributes[K] } & { [K in keyof VaProcessListItem & keyof VaProcessListItemAttributes as `prop:${K}`]?: VaProcessListItem[K] };
-        "va-progress-bar": Omit<VaProgressBar, keyof VaProgressBarAttributes> & { [K in keyof VaProgressBar & keyof VaProgressBarAttributes]?: VaProgressBar[K] } & { [K in keyof VaProgressBar & keyof VaProgressBarAttributes as `attr:${K}`]?: VaProgressBarAttributes[K] } & { [K in keyof VaProgressBar & keyof VaProgressBarAttributes as `prop:${K}`]?: VaProgressBar[K] } & OneOf<"percent", VaProgressBar["percent"], VaProgressBarAttributes["percent"]>;
-        "va-promo-banner": Omit<VaPromoBanner, keyof VaPromoBannerAttributes> & { [K in keyof VaPromoBanner & keyof VaPromoBannerAttributes]?: VaPromoBanner[K] } & { [K in keyof VaPromoBanner & keyof VaPromoBannerAttributes as `attr:${K}`]?: VaPromoBannerAttributes[K] } & { [K in keyof VaPromoBanner & keyof VaPromoBannerAttributes as `prop:${K}`]?: VaPromoBanner[K] };
-        "va-radio": Omit<VaRadio, keyof VaRadioAttributes> & { [K in keyof VaRadio & keyof VaRadioAttributes]?: VaRadio[K] } & { [K in keyof VaRadio & keyof VaRadioAttributes as `attr:${K}`]?: VaRadioAttributes[K] } & { [K in keyof VaRadio & keyof VaRadioAttributes as `prop:${K}`]?: VaRadio[K] } & OneOf<"label", VaRadio["label"], VaRadioAttributes["label"]>;
-        "va-radio-option": Omit<VaRadioOption, keyof VaRadioOptionAttributes> & { [K in keyof VaRadioOption & keyof VaRadioOptionAttributes]?: VaRadioOption[K] } & { [K in keyof VaRadioOption & keyof VaRadioOptionAttributes as `attr:${K}`]?: VaRadioOptionAttributes[K] } & { [K in keyof VaRadioOption & keyof VaRadioOptionAttributes as `prop:${K}`]?: VaRadioOption[K] } & OneOf<"name", VaRadioOption["name"], VaRadioOptionAttributes["name"]> & OneOf<"label", VaRadioOption["label"], VaRadioOptionAttributes["label"]> & OneOf<"value", VaRadioOption["value"], VaRadioOptionAttributes["value"]>;
-        "va-search-filter": Omit<VaSearchFilter, keyof VaSearchFilterAttributes> & { [K in keyof VaSearchFilter & keyof VaSearchFilterAttributes]?: VaSearchFilter[K] } & { [K in keyof VaSearchFilter & keyof VaSearchFilterAttributes as `attr:${K}`]?: VaSearchFilterAttributes[K] } & { [K in keyof VaSearchFilter & keyof VaSearchFilterAttributes as `prop:${K}`]?: VaSearchFilter[K] };
-        "va-search-input": Omit<VaSearchInput, keyof VaSearchInputAttributes> & { [K in keyof VaSearchInput & keyof VaSearchInputAttributes]?: VaSearchInput[K] } & { [K in keyof VaSearchInput & keyof VaSearchInputAttributes as `attr:${K}`]?: VaSearchInputAttributes[K] } & { [K in keyof VaSearchInput & keyof VaSearchInputAttributes as `prop:${K}`]?: VaSearchInput[K] };
-        "va-segmented-progress-bar": Omit<VaSegmentedProgressBar, keyof VaSegmentedProgressBarAttributes> & { [K in keyof VaSegmentedProgressBar & keyof VaSegmentedProgressBarAttributes]?: VaSegmentedProgressBar[K] } & { [K in keyof VaSegmentedProgressBar & keyof VaSegmentedProgressBarAttributes as `attr:${K}`]?: VaSegmentedProgressBarAttributes[K] } & { [K in keyof VaSegmentedProgressBar & keyof VaSegmentedProgressBarAttributes as `prop:${K}`]?: VaSegmentedProgressBar[K] } & OneOf<"current", VaSegmentedProgressBar["current"], VaSegmentedProgressBarAttributes["current"]> & OneOf<"total", VaSegmentedProgressBar["total"], VaSegmentedProgressBarAttributes["total"]>;
-        "va-select": Omit<VaSelect, keyof VaSelectAttributes> & { [K in keyof VaSelect & keyof VaSelectAttributes]?: VaSelect[K] } & { [K in keyof VaSelect & keyof VaSelectAttributes as `attr:${K}`]?: VaSelectAttributes[K] } & { [K in keyof VaSelect & keyof VaSelectAttributes as `prop:${K}`]?: VaSelect[K] } & OneOf<"label", VaSelect["label"], VaSelectAttributes["label"]> & OneOf<"name", VaSelect["name"], VaSelectAttributes["name"]>;
-        "va-service-list-item": Omit<VaServiceListItem, keyof VaServiceListItemAttributes> & { [K in keyof VaServiceListItem & keyof VaServiceListItemAttributes]?: VaServiceListItem[K] } & { [K in keyof VaServiceListItem & keyof VaServiceListItemAttributes as `attr:${K}`]?: VaServiceListItemAttributes[K] } & { [K in keyof VaServiceListItem & keyof VaServiceListItemAttributes as `prop:${K}`]?: VaServiceListItem[K] };
-        "va-sidenav": Omit<VaSidenav, keyof VaSidenavAttributes> & { [K in keyof VaSidenav & keyof VaSidenavAttributes]?: VaSidenav[K] } & { [K in keyof VaSidenav & keyof VaSidenavAttributes as `attr:${K}`]?: VaSidenavAttributes[K] } & { [K in keyof VaSidenav & keyof VaSidenavAttributes as `prop:${K}`]?: VaSidenav[K] };
-        "va-sidenav-item": Omit<VaSidenavItem, keyof VaSidenavItemAttributes> & { [K in keyof VaSidenavItem & keyof VaSidenavItemAttributes]?: VaSidenavItem[K] } & { [K in keyof VaSidenavItem & keyof VaSidenavItemAttributes as `attr:${K}`]?: VaSidenavItemAttributes[K] } & { [K in keyof VaSidenavItem & keyof VaSidenavItemAttributes as `prop:${K}`]?: VaSidenavItem[K] } & OneOf<"href", VaSidenavItem["href"], VaSidenavItemAttributes["href"]> & OneOf<"label", VaSidenavItem["label"], VaSidenavItemAttributes["label"]>;
-        "va-sidenav-submenu": Omit<VaSidenavSubmenu, keyof VaSidenavSubmenuAttributes> & { [K in keyof VaSidenavSubmenu & keyof VaSidenavSubmenuAttributes]?: VaSidenavSubmenu[K] } & { [K in keyof VaSidenavSubmenu & keyof VaSidenavSubmenuAttributes as `attr:${K}`]?: VaSidenavSubmenuAttributes[K] } & { [K in keyof VaSidenavSubmenu & keyof VaSidenavSubmenuAttributes as `prop:${K}`]?: VaSidenavSubmenu[K] } & OneOf<"label", VaSidenavSubmenu["label"], VaSidenavSubmenuAttributes["label"]>;
-        "va-sort": Omit<VaSort, keyof VaSortAttributes> & { [K in keyof VaSort & keyof VaSortAttributes]?: VaSort[K] } & { [K in keyof VaSort & keyof VaSortAttributes as `attr:${K}`]?: VaSortAttributes[K] } & { [K in keyof VaSort & keyof VaSortAttributes as `prop:${K}`]?: VaSort[K] };
-        "va-statement-of-truth": Omit<VaStatementOfTruth, keyof VaStatementOfTruthAttributes> & { [K in keyof VaStatementOfTruth & keyof VaStatementOfTruthAttributes]?: VaStatementOfTruth[K] } & { [K in keyof VaStatementOfTruth & keyof VaStatementOfTruthAttributes as `attr:${K}`]?: VaStatementOfTruthAttributes[K] } & { [K in keyof VaStatementOfTruth & keyof VaStatementOfTruthAttributes as `prop:${K}`]?: VaStatementOfTruth[K] };
+        "va-process-list-item": VaProcessListItem;
+        "va-progress-bar": VaProgressBar;
+        "va-promo-banner": VaPromoBanner;
+        "va-radio": VaRadio;
+        "va-radio-option": VaRadioOption;
+        "va-search-filter": VaSearchFilter;
+        "va-search-input": VaSearchInput;
+        "va-segmented-progress-bar": VaSegmentedProgressBar;
+        "va-select": VaSelect;
+        "va-service-list-item": VaServiceListItem;
+        "va-sidenav": VaSidenav;
+        "va-sidenav-item": VaSidenavItem;
+        "va-sidenav-submenu": VaSidenavSubmenu;
+        "va-sort": VaSort;
+        "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
-        "va-tab-item": Omit<VaTabItem, keyof VaTabItemAttributes> & { [K in keyof VaTabItem & keyof VaTabItemAttributes]?: VaTabItem[K] } & { [K in keyof VaTabItem & keyof VaTabItemAttributes as `attr:${K}`]?: VaTabItemAttributes[K] } & { [K in keyof VaTabItem & keyof VaTabItemAttributes as `prop:${K}`]?: VaTabItem[K] } & OneOf<"buttonText", VaTabItem["buttonText"], VaTabItemAttributes["buttonText"]> & OneOf<"targetId", VaTabItem["targetId"], VaTabItemAttributes["targetId"]>;
-        "va-tab-panel": Omit<VaTabPanel, keyof VaTabPanelAttributes> & { [K in keyof VaTabPanel & keyof VaTabPanelAttributes]?: VaTabPanel[K] } & { [K in keyof VaTabPanel & keyof VaTabPanelAttributes as `attr:${K}`]?: VaTabPanelAttributes[K] } & { [K in keyof VaTabPanel & keyof VaTabPanelAttributes as `prop:${K}`]?: VaTabPanel[K] } & OneOf<"panelId", VaTabPanel["panelId"], VaTabPanelAttributes["panelId"]>;
-        "va-table": Omit<VaTable, keyof VaTableAttributes> & { [K in keyof VaTable & keyof VaTableAttributes]?: VaTable[K] } & { [K in keyof VaTable & keyof VaTableAttributes as `attr:${K}`]?: VaTableAttributes[K] } & { [K in keyof VaTable & keyof VaTableAttributes as `prop:${K}`]?: VaTable[K] };
-        "va-table-inner": Omit<VaTableInner, keyof VaTableInnerAttributes> & { [K in keyof VaTableInner & keyof VaTableInnerAttributes]?: VaTableInner[K] } & { [K in keyof VaTableInner & keyof VaTableInnerAttributes as `attr:${K}`]?: VaTableInnerAttributes[K] } & { [K in keyof VaTableInner & keyof VaTableInnerAttributes as `prop:${K}`]?: VaTableInner[K] };
+        "va-tab-item": VaTabItem;
+        "va-tab-panel": VaTabPanel;
+        "va-table": VaTable;
+        "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
-        "va-tabs": Omit<VaTabs, keyof VaTabsAttributes> & { [K in keyof VaTabs & keyof VaTabsAttributes]?: VaTabs[K] } & { [K in keyof VaTabs & keyof VaTabsAttributes as `attr:${K}`]?: VaTabsAttributes[K] } & { [K in keyof VaTabs & keyof VaTabsAttributes as `prop:${K}`]?: VaTabs[K] };
-        "va-tag-status": Omit<VaTagStatus, keyof VaTagStatusAttributes> & { [K in keyof VaTagStatus & keyof VaTagStatusAttributes]?: VaTagStatus[K] } & { [K in keyof VaTagStatus & keyof VaTagStatusAttributes as `attr:${K}`]?: VaTagStatusAttributes[K] } & { [K in keyof VaTagStatus & keyof VaTagStatusAttributes as `prop:${K}`]?: VaTagStatus[K] } & OneOf<"text", VaTagStatus["text"], VaTagStatusAttributes["text"]>;
-        "va-telephone": Omit<VaTelephone, keyof VaTelephoneAttributes> & { [K in keyof VaTelephone & keyof VaTelephoneAttributes]?: VaTelephone[K] } & { [K in keyof VaTelephone & keyof VaTelephoneAttributes as `attr:${K}`]?: VaTelephoneAttributes[K] } & { [K in keyof VaTelephone & keyof VaTelephoneAttributes as `prop:${K}`]?: VaTelephone[K] } & OneOf<"contact", VaTelephone["contact"], VaTelephoneAttributes["contact"]>;
-        "va-telephone-input": Omit<VaTelephoneInput, keyof VaTelephoneInputAttributes> & { [K in keyof VaTelephoneInput & keyof VaTelephoneInputAttributes]?: VaTelephoneInput[K] } & { [K in keyof VaTelephoneInput & keyof VaTelephoneInputAttributes as `attr:${K}`]?: VaTelephoneInputAttributes[K] } & { [K in keyof VaTelephoneInput & keyof VaTelephoneInputAttributes as `prop:${K}`]?: VaTelephoneInput[K] };
-        "va-text-input": Omit<VaTextInput, keyof VaTextInputAttributes> & { [K in keyof VaTextInput & keyof VaTextInputAttributes]?: VaTextInput[K] } & { [K in keyof VaTextInput & keyof VaTextInputAttributes as `attr:${K}`]?: VaTextInputAttributes[K] } & { [K in keyof VaTextInput & keyof VaTextInputAttributes as `prop:${K}`]?: VaTextInput[K] };
-        "va-textarea": Omit<VaTextarea, keyof VaTextareaAttributes> & { [K in keyof VaTextarea & keyof VaTextareaAttributes]?: VaTextarea[K] } & { [K in keyof VaTextarea & keyof VaTextareaAttributes as `attr:${K}`]?: VaTextareaAttributes[K] } & { [K in keyof VaTextarea & keyof VaTextareaAttributes as `prop:${K}`]?: VaTextarea[K] };
+        "va-tabs": VaTabs;
+        "va-tag-status": VaTagStatus;
+        "va-telephone": VaTelephone;
+        "va-telephone-input": VaTelephoneInput;
+        "va-text-input": VaTextInput;
+        "va-textarea": VaTextarea;
     }
 }
 export { LocalJSX as JSX };
@@ -8064,93 +6930,93 @@ declare module "@stencil/core" {
              * @translations Spanish
              * @translations Tagalog
              */
-            "va-accordion": LocalJSX.IntrinsicElements["va-accordion"] & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
-            "va-accordion-item": LocalJSX.IntrinsicElements["va-accordion-item"] & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
+            "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             /**
              * @componentName Additional info
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-additional-info": LocalJSX.IntrinsicElements["va-additional-info"] & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
+            "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
             /**
              * @componentName Alert
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-alert": LocalJSX.IntrinsicElements["va-alert"] & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
+            "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             /**
              * @componentName Alert - expandable
              * @guidanceHref alert/alert-expandable
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-alert-expandable": LocalJSX.IntrinsicElements["va-alert-expandable"] & JSXBase.HTMLAttributes<HTMLVaAlertExpandableElement>;
+            "va-alert-expandable": LocalJSX.VaAlertExpandable & JSXBase.HTMLAttributes<HTMLVaAlertExpandableElement>;
             /**
              * @componentName Alert - Sign-in
              * @guidanceHref alert/alert-sign-in
              * @maturityCategory caution
              * @maturityLevel candidate
              */
-            "va-alert-sign-in": LocalJSX.IntrinsicElements["va-alert-sign-in"] & JSXBase.HTMLAttributes<HTMLVaAlertSignInElement>;
+            "va-alert-sign-in": LocalJSX.VaAlertSignIn & JSXBase.HTMLAttributes<HTMLVaAlertSignInElement>;
             /**
              * @componentName Back to top
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-back-to-top": LocalJSX.IntrinsicElements["va-back-to-top"] & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
+            "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             /**
              * @componentName Banner
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-banner": LocalJSX.IntrinsicElements["va-banner"] & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
+            "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             /**
              * @componentName Breadcrumbs
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-breadcrumbs": LocalJSX.IntrinsicElements["va-breadcrumbs"] & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
+            "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             /**
              * @componentName Button
              * @nativeHandler onClick
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-button": LocalJSX.IntrinsicElements["va-button"] & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
+            "va-button": LocalJSX.VaButton & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
             /**
              * @componentName Button - Icon
              * @nativeHandler onClick
              * @maturityCategory caution
              * @maturityLevel available
              */
-            "va-button-icon": LocalJSX.IntrinsicElements["va-button-icon"] & JSXBase.HTMLAttributes<HTMLVaButtonIconElement>;
+            "va-button-icon": LocalJSX.VaButtonIcon & JSXBase.HTMLAttributes<HTMLVaButtonIconElement>;
             /**
              * @componentName Button pair
              * @maturityCategory use
              * @maturityLevel deployed
              * @guidanceHref button/button-pair
              */
-            "va-button-pair": LocalJSX.IntrinsicElements["va-button-pair"] & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
+            "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
             /**
              * @componentName Button Segmented
              * @maturityCategory caution
              * @maturityLevel candidate
              * @guidanceHref button/button-segmented
              */
-            "va-button-segmented": LocalJSX.IntrinsicElements["va-button-segmented"] & JSXBase.HTMLAttributes<HTMLVaButtonSegmentedElement>;
+            "va-button-segmented": LocalJSX.VaButtonSegmented & JSXBase.HTMLAttributes<HTMLVaButtonSegmentedElement>;
             /**
              * @componentName Card
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-card": LocalJSX.IntrinsicElements["va-card"] & JSXBase.HTMLAttributes<HTMLVaCardElement>;
+            "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
             /**
              * @componentName Card Status
              * @maturityCategory caution
              * @maturityLevel available
              * @guidanceHref card/card-status
              */
-            "va-card-status": LocalJSX.IntrinsicElements["va-card-status"] & JSXBase.HTMLAttributes<HTMLVaCardStatusElement>;
+            "va-card-status": LocalJSX.VaCardStatus & JSXBase.HTMLAttributes<HTMLVaCardStatusElement>;
             /**
              * @nativeHandler onBlur
              * @componentName Checkbox
@@ -8161,7 +7027,7 @@ declare module "@stencil/core" {
              * @translations Spanish
              * @translations Tagalog
              */
-            "va-checkbox": LocalJSX.IntrinsicElements["va-checkbox"] & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
+            "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             /**
              * @vaChange The event emitted when the input value changes.
              * @componentName Checkbox group
@@ -8172,7 +7038,7 @@ declare module "@stencil/core" {
              * @translations Spanish
              * @translations Tagalog
              */
-            "va-checkbox-group": LocalJSX.IntrinsicElements["va-checkbox-group"] & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
+            "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             /**
              * @componentName Combo Box
              * @maturityCategory caution
@@ -8181,33 +7047,33 @@ declare module "@stencil/core" {
              * @translations English
              * @translations Spanish
              */
-            "va-combo-box": LocalJSX.IntrinsicElements["va-combo-box"] & JSXBase.HTMLAttributes<HTMLVaComboBoxElement>;
+            "va-combo-box": LocalJSX.VaComboBox & JSXBase.HTMLAttributes<HTMLVaComboBoxElement>;
             /**
              * @componentName Crisis Line Modal
              * @maturityCategory caution
              * @maturityLevel available
              */
-            "va-crisis-line-modal": LocalJSX.IntrinsicElements["va-crisis-line-modal"] & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
+            "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             /**
              * @componentName Critical Action
              * @maturityCategory caution
              * @maturityLevel candidate
              */
-            "va-critical-action": LocalJSX.IntrinsicElements["va-critical-action"] & JSXBase.HTMLAttributes<HTMLVaCriticalActionElement>;
+            "va-critical-action": LocalJSX.VaCriticalAction & JSXBase.HTMLAttributes<HTMLVaCriticalActionElement>;
             /**
              * @componentName Date input
              * @maturityCategory use
              * @maturityLevel deployed
              * @guidanceHref form/date-input
              */
-            "va-date": LocalJSX.IntrinsicElements["va-date"] & JSXBase.HTMLAttributes<HTMLVaDateElement>;
+            "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             /**
              * @componentName File input
              * @maturityCategory caution
              * @maturityLevel available
              * @guidanceHref form/file-input
              */
-            "va-file-input": LocalJSX.IntrinsicElements["va-file-input"] & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
+            "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
             /**
              * A component that manages multiple file inputs, allowing users to upload several files.
              * It supports adding, changing, and removing files with dynamic error handling.
@@ -8216,32 +7082,32 @@ declare module "@stencil/core" {
              * @maturityLevel available
              * @guidanceHref form/file-input-multiple
              */
-            "va-file-input-multiple": LocalJSX.IntrinsicElements["va-file-input-multiple"] & JSXBase.HTMLAttributes<HTMLVaFileInputMultipleElement>;
+            "va-file-input-multiple": LocalJSX.VaFileInputMultiple & JSXBase.HTMLAttributes<HTMLVaFileInputMultipleElement>;
             /**
              * @componentName Header - Minimal
              * @maturityCategory caution
              * @maturityLevel available
              * @guidanceHref header/header-minimal
              */
-            "va-header-minimal": LocalJSX.IntrinsicElements["va-header-minimal"] & JSXBase.HTMLAttributes<HTMLVaHeaderMinimalElement>;
+            "va-header-minimal": LocalJSX.VaHeaderMinimal & JSXBase.HTMLAttributes<HTMLVaHeaderMinimalElement>;
             /**
              * @componentName Icon
              * @maturityCategory caution
              * @maturityLevel available
              */
-            "va-icon": LocalJSX.IntrinsicElements["va-icon"] & JSXBase.HTMLAttributes<HTMLVaIconElement>;
+            "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             /**
              * @componentName Language Toggle
              * @maturityCategory caution
              * @maturityLevel available
              */
-            "va-language-toggle": LocalJSX.IntrinsicElements["va-language-toggle"] & JSXBase.HTMLAttributes<HTMLVaLanguageToggleElement>;
+            "va-language-toggle": LocalJSX.VaLanguageToggle & JSXBase.HTMLAttributes<HTMLVaLanguageToggleElement>;
             /**
              * @componentName Link
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-link": LocalJSX.IntrinsicElements["va-link"] & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
+            "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             /**
              * @componentName Link - Action
              * @maturityCategory use
@@ -8249,19 +7115,19 @@ declare module "@stencil/core" {
              * @guidanceHref link/action
              * @guidanceName Action link
              */
-            "va-link-action": LocalJSX.IntrinsicElements["va-link-action"] & JSXBase.HTMLAttributes<HTMLVaLinkActionElement>;
+            "va-link-action": LocalJSX.VaLinkAction & JSXBase.HTMLAttributes<HTMLVaLinkActionElement>;
             /**
              * @componentName Loading indicator
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-loading-indicator": LocalJSX.IntrinsicElements["va-loading-indicator"] & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
+            "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             /**
              * @componentName Banner - Maintenance
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-maintenance-banner": LocalJSX.IntrinsicElements["va-maintenance-banner"] & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
+            "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             /**
              * @componentName Memorable date
              * @maturityCategory use
@@ -8270,13 +7136,13 @@ declare module "@stencil/core" {
              * @translations English
              * @translations Spanish
              */
-            "va-memorable-date": LocalJSX.IntrinsicElements["va-memorable-date"] & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
+            "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             /**
              * @componentName Minimal Footer
              * @maturityCategory caution
              * @maturityLevel available
              */
-            "va-minimal-footer": LocalJSX.IntrinsicElements["va-minimal-footer"] & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
+            "va-minimal-footer": LocalJSX.VaMinimalFooter & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
             /**
              * @click Used to detect clicks outside of modal contents to close modal.
              * @keydown Used to detect Escape key to close modal and Tab key/Shift key to trap focus within the component.
@@ -8284,32 +7150,32 @@ declare module "@stencil/core" {
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-modal": LocalJSX.IntrinsicElements["va-modal"] & JSXBase.HTMLAttributes<HTMLVaModalElement>;
+            "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             /**
              * @componentName Need help?
              * @maturityCategory use
              * @maturityLevel deployed
              * @guidanceHref form/need-help
              */
-            "va-need-help": LocalJSX.IntrinsicElements["va-need-help"] & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
+            "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             /**
              * @componentName Notification
              * @maturityCategory dont_use
              * @maturityLevel deprecated
              */
-            "va-notification": LocalJSX.IntrinsicElements["va-notification"] & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
+            "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
             /**
              * @componentName Banner - Official Gov
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-official-gov-banner": LocalJSX.IntrinsicElements["va-official-gov-banner"] & JSXBase.HTMLAttributes<HTMLVaOfficialGovBannerElement>;
+            "va-official-gov-banner": LocalJSX.VaOfficialGovBanner & JSXBase.HTMLAttributes<HTMLVaOfficialGovBannerElement>;
             /**
              * @componentName OMB info
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-omb-info": LocalJSX.IntrinsicElements["va-omb-info"] & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
+            "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
             /**
              * @componentName On this page
              * @maturityCategory use
@@ -8318,39 +7184,39 @@ declare module "@stencil/core" {
              * @translations Spanish
              * @translations Tagalog
              */
-            "va-on-this-page": LocalJSX.IntrinsicElements["va-on-this-page"] & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             /**
              * @componentName Pagination
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-pagination": LocalJSX.IntrinsicElements["va-pagination"] & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
+            "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             /**
              * @componentName Privacy agreement
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-privacy-agreement": LocalJSX.IntrinsicElements["va-privacy-agreement"] & JSXBase.HTMLAttributes<HTMLVaPrivacyAgreementElement>;
+            "va-privacy-agreement": LocalJSX.VaPrivacyAgreement & JSXBase.HTMLAttributes<HTMLVaPrivacyAgreementElement>;
             /**
              * @componentName Process list
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-process-list": LocalJSX.IntrinsicElements["va-process-list"] & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
-            "va-process-list-item": LocalJSX.IntrinsicElements["va-process-list-item"] & JSXBase.HTMLAttributes<HTMLVaProcessListItemElement>;
+            "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
+            "va-process-list-item": LocalJSX.VaProcessListItem & JSXBase.HTMLAttributes<HTMLVaProcessListItemElement>;
             /**
              * @componentName Progress bar - activity
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-progress-bar": LocalJSX.IntrinsicElements["va-progress-bar"] & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
+            "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             /**
              * @componentName Banner - Promo
              * @maturityCategory dont_use
              * @maturityLevel deprecated
              * @guidanceHref banner/promo
              */
-            "va-promo-banner": LocalJSX.IntrinsicElements["va-promo-banner"] & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
+            "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
             /**
              * @keydown The event emitted when a key is pressed.
              * @radioOptionSelected The event emitted when the selected option value changes.
@@ -8362,27 +7228,27 @@ declare module "@stencil/core" {
              * @translations Spanish
              * @translations Tagalog
              */
-            "va-radio": LocalJSX.IntrinsicElements["va-radio"] & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
-            "va-radio-option": LocalJSX.IntrinsicElements["va-radio-option"] & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
+            "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
+            "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
             /**
              * @componentName Search Filter
              * @maturityCategory caution
              * @maturityLevel candidate
              */
-            "va-search-filter": LocalJSX.IntrinsicElements["va-search-filter"] & JSXBase.HTMLAttributes<HTMLVaSearchFilterElement>;
+            "va-search-filter": LocalJSX.VaSearchFilter & JSXBase.HTMLAttributes<HTMLVaSearchFilterElement>;
             /**
              * @componentName Search input
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-search-input": LocalJSX.IntrinsicElements["va-search-input"] & JSXBase.HTMLAttributes<HTMLVaSearchInputElement>;
+            "va-search-input": LocalJSX.VaSearchInput & JSXBase.HTMLAttributes<HTMLVaSearchInputElement>;
             /**
              * @componentName Progress bar - segmented
              * @maturityCategory use
              * @maturityLevel deployed
              * @guidanceHref form/progress-bar-segmented
              */
-            "va-segmented-progress-bar": LocalJSX.IntrinsicElements["va-segmented-progress-bar"] & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
+            "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             /**
              * @nativeHandler onKeyDown
              * @componentName Select
@@ -8392,73 +7258,73 @@ declare module "@stencil/core" {
              * @translations English
              * @translations Spanish
              */
-            "va-select": LocalJSX.IntrinsicElements["va-select"] & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
+            "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             /**
              * @componentName Service List Item
              * @maturityCategory caution
              * @maturityLevel candidate
              */
-            "va-service-list-item": LocalJSX.IntrinsicElements["va-service-list-item"] & JSXBase.HTMLAttributes<HTMLVaServiceListItemElement>;
+            "va-service-list-item": LocalJSX.VaServiceListItem & JSXBase.HTMLAttributes<HTMLVaServiceListItemElement>;
             /**
              * @componentName Side Navigation
              * @maturityCategory caution
              * @maturityLevel candidate
              */
-            "va-sidenav": LocalJSX.IntrinsicElements["va-sidenav"] & JSXBase.HTMLAttributes<HTMLVaSidenavElement>;
-            "va-sidenav-item": LocalJSX.IntrinsicElements["va-sidenav-item"] & JSXBase.HTMLAttributes<HTMLVaSidenavItemElement>;
-            "va-sidenav-submenu": LocalJSX.IntrinsicElements["va-sidenav-submenu"] & JSXBase.HTMLAttributes<HTMLVaSidenavSubmenuElement>;
+            "va-sidenav": LocalJSX.VaSidenav & JSXBase.HTMLAttributes<HTMLVaSidenavElement>;
+            "va-sidenav-item": LocalJSX.VaSidenavItem & JSXBase.HTMLAttributes<HTMLVaSidenavItemElement>;
+            "va-sidenav-submenu": LocalJSX.VaSidenavSubmenu & JSXBase.HTMLAttributes<HTMLVaSidenavSubmenuElement>;
             /**
              * @componentName Sort
              * @maturityCategory caution
              * @maturityLevel available
              */
-            "va-sort": LocalJSX.IntrinsicElements["va-sort"] & JSXBase.HTMLAttributes<HTMLVaSortElement>;
+            "va-sort": LocalJSX.VaSort & JSXBase.HTMLAttributes<HTMLVaSortElement>;
             /**
              * @componentName Statement of truth
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-statement-of-truth": LocalJSX.IntrinsicElements["va-statement-of-truth"] & JSXBase.HTMLAttributes<HTMLVaStatementOfTruthElement>;
+            "va-statement-of-truth": LocalJSX.VaStatementOfTruth & JSXBase.HTMLAttributes<HTMLVaStatementOfTruthElement>;
             /**
              * @componentName Summary box
              * @maturityCategory use
              * @maturityLevel deployed
              */
-            "va-summary-box": LocalJSX.IntrinsicElements["va-summary-box"] & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
-            "va-tab-item": LocalJSX.IntrinsicElements["va-tab-item"] & JSXBase.HTMLAttributes<HTMLVaTabItemElement>;
-            "va-tab-panel": LocalJSX.IntrinsicElements["va-tab-panel"] & JSXBase.HTMLAttributes<HTMLVaTabPanelElement>;
+            "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
+            "va-tab-item": LocalJSX.VaTabItem & JSXBase.HTMLAttributes<HTMLVaTabItemElement>;
+            "va-tab-panel": LocalJSX.VaTabPanel & JSXBase.HTMLAttributes<HTMLVaTabPanelElement>;
             /**
              * @componentName Table
              * @maturityCategory caution
              * @maturityLevel available
              */
-            "va-table": LocalJSX.IntrinsicElements["va-table"] & JSXBase.HTMLAttributes<HTMLVaTableElement>;
+            "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
             /**
              * @componentName Table
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-table-inner": LocalJSX.IntrinsicElements["va-table-inner"] & JSXBase.HTMLAttributes<HTMLVaTableInnerElement>;
-            "va-table-row": LocalJSX.IntrinsicElements["va-table-row"] & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
+            "va-table-inner": LocalJSX.VaTableInner & JSXBase.HTMLAttributes<HTMLVaTableInnerElement>;
+            "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
             /**
              * @componentName Tabs
              * @maturityCategory caution
              * @maturityLevel candidate
              */
-            "va-tabs": LocalJSX.IntrinsicElements["va-tabs"] & JSXBase.HTMLAttributes<HTMLVaTabsElement>;
+            "va-tabs": LocalJSX.VaTabs & JSXBase.HTMLAttributes<HTMLVaTabsElement>;
             /**
              * @componentName Tag - Status
              * @maturityCategory caution
              * @maturityLevel candidate
              * @guidanceHref tag/tag-status
              */
-            "va-tag-status": LocalJSX.IntrinsicElements["va-tag-status"] & JSXBase.HTMLAttributes<HTMLVaTagStatusElement>;
+            "va-tag-status": LocalJSX.VaTagStatus & JSXBase.HTMLAttributes<HTMLVaTagStatusElement>;
             /**
              * @componentName Telephone
              * @maturityCategory use
              * @maturityLevel best_practice
              */
-            "va-telephone": LocalJSX.IntrinsicElements["va-telephone"] & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
+            "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             /**
              * @componentName Telephone Input
              * @maturityCategory caution
@@ -8466,7 +7332,7 @@ declare module "@stencil/core" {
              * @guidanceHref form/telephone-input
              * @translations English
              */
-            "va-telephone-input": LocalJSX.IntrinsicElements["va-telephone-input"] & JSXBase.HTMLAttributes<HTMLVaTelephoneInputElement>;
+            "va-telephone-input": LocalJSX.VaTelephoneInput & JSXBase.HTMLAttributes<HTMLVaTelephoneInputElement>;
             /**
              * @nativeHandler onInput
              * @nativeHandler onBlur
@@ -8478,7 +7344,7 @@ declare module "@stencil/core" {
              * @translations Spanish
              * @translations Tagalog
              */
-            "va-text-input": LocalJSX.IntrinsicElements["va-text-input"] & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
+            "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
             /**
              * @nativeHandler onInput
              * @nativeHandler onBlur
@@ -8489,7 +7355,7 @@ declare module "@stencil/core" {
              * @translations English
              * @translations Spanish
              */
-            "va-textarea": LocalJSX.IntrinsicElements["va-textarea"] & JSXBase.HTMLAttributes<HTMLVaTextareaElement>;
+            "va-textarea": LocalJSX.VaTextarea & JSXBase.HTMLAttributes<HTMLVaTextareaElement>;
         }
     }
 }

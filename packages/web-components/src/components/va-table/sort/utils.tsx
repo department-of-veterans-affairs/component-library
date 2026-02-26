@@ -26,10 +26,12 @@ export function _getCompareFunc(a: string, sortdir: string) {
 // if all values are empty strings, return null to signify do not sort 
 export function getCompareFunc(rows: Element[], index: number, sortdir: string): CompareFuncReturn | null {
   for (const row of rows) {
-    const cell = row.children[index];
+    const cell = row.querySelectorAll(':scope > span')[index] as HTMLElement;
+    if (!cell || !(cell instanceof HTMLElement)) {
+      continue;
+    }
     // First check for data-sort-value attribute
     const dataSortValue = cell.getAttribute('data-sort-value');
-    
     if (dataSortValue !== null) {
       // If data-sort-value exists, use it to determine the sort function
       return _getCompareFunc.bind(this)(dataSortValue, sortdir);
