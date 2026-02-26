@@ -63,10 +63,10 @@ export class VaDetails {
 
 
   /**
-   * When the slot changes (i.e., when content is added to the details
-   * component), check if the first child of the slot is an element rather than
-   * text, and set a flag to true if it is. This is used to conditionally apply
-   * a class to the content container that removes extra padding.
+   * When the slot changes check if the first child of the slot is an element
+   * rather than text, and set a flag to true if it is. This is used to
+   * conditionally apply a class to the content container that removes extra
+   * padding.
    * @returns {void}
    */
   private inspectSlot(): void {
