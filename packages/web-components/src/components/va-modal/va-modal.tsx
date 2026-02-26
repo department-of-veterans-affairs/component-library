@@ -114,7 +114,6 @@ export class VaModal {
     this.isVisibleDirty = true;
   }
 
-
   /**
    * Label for the modal, to be set as aria-label. Will take precedence over modalTitle
    * in settings of aria-label.
@@ -499,7 +498,6 @@ export class VaModal {
     this.savedFocus?.focus();
   }
 
-
   /**
    * Maps the modal's position in nested shadow DOMs by traversing up the DOM tree.
    * Returns both the elements and shadow roots needed for proper aria-hidden handling.
@@ -565,10 +563,10 @@ export class VaModal {
     return { ancestors, shadowRoots };
   }
 
-
   render() {
     const {
       label,
+      large,
       modalTitle,
       primaryButtonClick,
       primaryButtonText,
@@ -606,7 +604,9 @@ export class VaModal {
     const wrapperClass = classnames({
       'usa-modal': true,
       'va-modal-alert': status,
-      'usa-modal--lg': this.large,
+      'usa-modal--lg': large,
+      'va-modal': true,
+      'va-modal--lg': large,
     });
     const contentClass = classnames({
       'usa-modal__content': true,
@@ -617,10 +617,12 @@ export class VaModal {
       'usa-modal__main': true,
       'usa-modal-alert': status,
       'va-modal-alert-body': status,
+      'va-modal__main': true,
     });
     const titleClass = classnames({
       'usa-modal__heading': true,
       'va-modal-alert-title': status,
+      'va-modal__heading': true,
     });
 
     const closingButton = forcedModal ? (
@@ -662,14 +664,16 @@ export class VaModal {
         >
           <div class={contentClass}>
             {closingButton}
-            {status && (
-              <va-icon
-                class="va-modal-alert__icon"
-                icon={statusIcon}
-                size={4}
-              ></va-icon>
-            )}
             <div class={bodyClass}>
+              {status && (
+                <div class="va-modal__icon-container">
+                  <va-icon
+                    class="va-modal-alert__icon"
+                    icon={statusIcon}
+                    size={4}
+                  ></va-icon>
+                </div>
+              )}
               <div role="document">
                 {modalTitle && (
                   <h2 class={titleClass} tabindex={-1} id="heading">
@@ -680,45 +684,47 @@ export class VaModal {
                   <slot></slot>
                 </div>
               </div>
-              {((primaryButtonClick && primaryButtonText) ||
-                (secondaryButtonClick && secondaryButtonText)) && (
-                <div
-                  class="usa-modal__footer"
-                  ref={el => (this.alertActions = el as HTMLDivElement)}
-                >
-                  <ul class="usa-button-group">
-                    {primaryButtonClick && primaryButtonText && (
-                      <li class="usa-button-group__item">
-                        <va-button
-                          onClick={e => this.handlePrimaryButtonClick(e)}
-                          text={primaryButtonText}
-                        />
-                      </li>
-                    )}
-                    {secondaryButtonClick && secondaryButtonText && (
-                      <li class="usa-button-group__item">
-                        {!unstyled && (
-                          <va-button
-                            onClick={e => this.handleSecondaryButtonClick(e)}
-                            secondary
-                            text={secondaryButtonText}
-                          />
-                        )}
-                        {unstyled && (
-                          <button
-                            onClick={e => this.handlePrimaryButtonClick(e)}
-                            type="button"
-                            class="usa-button usa-button--unstyled"
-                          >
-                            {secondaryButtonText}
-                          </button>
-                        )}
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              )}
             </div>
+            {((primaryButtonClick && primaryButtonText) ||
+              (secondaryButtonClick && secondaryButtonText)) && (
+              <div
+                class="usa-modal__footer va-modal__footer"
+                ref={el => (this.alertActions = el as HTMLDivElement)}
+              >
+                <ul class="usa-button-group va-button-group">
+                  {primaryButtonClick && primaryButtonText && (
+                    <li class="usa-button-group__item va-button-group__item">
+                      <va-button
+                        full-width
+                        onClick={e => this.handlePrimaryButtonClick(e)}
+                        text={primaryButtonText}
+                      />
+                    </li>
+                  )}
+                  {secondaryButtonClick && secondaryButtonText && (
+                    <li class="usa-button-group__item va-button-group__item">
+                      {!unstyled && (
+                        <va-button
+                          full-width
+                          onClick={e => this.handleSecondaryButtonClick(e)}
+                          secondary
+                          text={secondaryButtonText}
+                        />
+                      )}
+                      {unstyled && (
+                        <button
+                          onClick={e => this.handlePrimaryButtonClick(e)}
+                          type="button"
+                          class="usa-button usa-button--unstyled"
+                        >
+                          {secondaryButtonText}
+                        </button>
+                      )}
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </Host>
