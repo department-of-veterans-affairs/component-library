@@ -37,6 +37,10 @@ export class VaDetails {
    */
   @Prop() width?: string;
 
+  /**
+   * A flag to indicate whether the first node in the slot is an element or not.
+   * This is used to conditionally apply a class that for styling purposes.
+   */
   @State() firstNodeIsElement: boolean = false;
 
   /**
