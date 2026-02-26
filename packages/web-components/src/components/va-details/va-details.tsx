@@ -39,7 +39,7 @@ export class VaDetails {
 
   /**
    * A flag to indicate whether the first node in the slot is an element or not.
-   * This is used to conditionally apply a class that for styling purposes.
+   * This is used to conditionally apply a class for styling purposes.
    */
   @State() firstNodeIsElement: boolean = false;
 
