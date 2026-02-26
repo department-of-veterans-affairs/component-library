@@ -17,6 +17,7 @@ export default {
 const defaultArgs = {
   label: 'Summary text',
   open: false,
+  width: null,
 }
 
 const Template = (args) => {
