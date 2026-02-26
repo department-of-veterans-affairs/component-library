@@ -145,4 +145,27 @@ describe('va-details', () => {
     const detailsEl = await page.find('va-details >>> details');
     expect(detailsEl.classList.contains('va-details--width-2xl')).toBe(true);
   });
+
+  it('emits an analytics event when the summary is clicked and disableAnalytics is not true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-details label="Details label">
+        Details content
+      </va-details>`,
+    );
+
+    const summaryEl = await page.find('va-details >>> summary');
+
+    const analyticsEventSpy = page.waitForEvent('component-library-analytics');
+
+    await summaryEl.click();
+
+    const analyticsEvent = await analyticsEventSpy;
+
+    expect(analyticsEvent.detail).toEqual({
+      componentName: 'va-details',
+      action: 'summary-click',
+      details: { open: true },
+    });
+  });
 });

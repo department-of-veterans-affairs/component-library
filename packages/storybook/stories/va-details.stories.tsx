@@ -15,6 +15,7 @@ export default {
 };
 
 const defaultArgs = {
+  'disable-analytics': false,
   label: 'Learn more about military addresses',
   open: false,
   width: null,
@@ -22,7 +23,11 @@ const defaultArgs = {
 
 const Template = (args) => {
   return (
-  <VaDetails label={args.label} open={args.open}>
+  <VaDetails
+    label={args.label}
+    open={args.open}
+    disableAnalytics={args['disable-analytics']}
+  >
     The United States is automatically chosen as your country if you live on a
     military base outside of the country.
   </VaDetails>
@@ -41,7 +46,11 @@ Open.args = {
 
 const WithContentTemplate = (args) => {
   return (
-    <VaDetails label={args.label} open={args.open}>
+    <VaDetails
+      label={args.label}
+      open={args.open}
+      disableAnalytics={args['disable-analytics']}
+    >
       <div>
         <p>Here are some popular pets to consider</p>
         <ul>
@@ -64,10 +73,20 @@ WithContentComponent.args = {
 const WidthsTemplate = (args) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <VaDetails label={args.label} open={args.open} width="xl">
+      <VaDetails
+        label={args.label}
+        open={args.open}
+        width="xl"
+        disableAnalytics={args['disable-analytics']}
+      >
         This details component has a width of xl (40ex).
       </VaDetails>
-      <VaDetails label={args.label} open={args.open} width="2xl">
+      <VaDetails
+        label={args.label}
+        open={args.open}
+        width="2xl"
+        disableAnalytics={args['disable-analytics']}
+      >
         This details component has a width of 2xl (50ex).
       </VaDetails>
     </div>

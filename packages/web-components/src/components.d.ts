@@ -733,6 +733,10 @@ export namespace Components {
      */
     interface VaDetails {
         /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * The text for the summary element that triggers the details to expand.
          */
         "label": string;
@@ -2555,6 +2559,10 @@ export interface VaDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaDateElement;
 }
+export interface VaDetailsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaDetailsElement;
+}
 export interface VaFileInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputElement;
@@ -3111,12 +3119,23 @@ declare global {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
     };
+    interface HTMLVaDetailsElementEventMap {
+        "component-library-analytics": any;
+    }
     /**
      * @componentName Details
      * @maturityCategory caution
      * @maturityLevel candidate
      */
     interface HTMLVaDetailsElement extends Components.VaDetails, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaDetailsElementEventMap>(type: K, listener: (this: HTMLVaDetailsElement, ev: VaDetailsCustomEvent<HTMLVaDetailsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaDetailsElementEventMap>(type: K, listener: (this: HTMLVaDetailsElement, ev: VaDetailsCustomEvent<HTMLVaDetailsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVaDetailsElement: {
         prototype: HTMLVaDetailsElement;
@@ -4914,9 +4933,17 @@ declare namespace LocalJSX {
      */
     interface VaDetails {
         /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * The text for the summary element that triggers the details to expand.
          */
         "label": string;
+        /**
+          * The event used to track usage of the component. This is emitted when the summary element is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: VaDetailsCustomEvent<any>) => void;
         /**
           * Value to reflect on the details element to control whether the details element is open or not.
          */

@@ -1,6 +1,8 @@
 import {
   Component,
   Element,
+  Event,
+  EventEmitter,
   Host,
   h,
   Prop,
@@ -21,6 +23,11 @@ import classNames from 'classnames';
 })
 export class VaDetails {
   @Element() el: HTMLElement;
+
+  /**
+   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+   */
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
    * Value to reflect on the details element to control whether the details element is open or not.
@@ -44,6 +51,18 @@ export class VaDetails {
   @State() firstNodeIsElement: boolean = false;
 
   /**
+   * The event used to track usage of the component. This is emitted when the
+   * summary element is clicked and disableAnalytics is not true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
+
+  /**
    * When the slot changes (i.e., when content is added to the details
    * component), check if the first child of the slot is an element rather than
    * text, and set a flag to true if it is. This is used to conditionally apply
@@ -59,6 +78,23 @@ export class VaDetails {
     );
 
     this.firstNodeIsElement = firstMeaningfulNode?.nodeType === Node.ELEMENT_NODE;
+  }
+
+  /**
+   * Handles clicks on the summary element. If analytics tracking isn't
+   * disabled, emits an event with details about the click.
+   * @returns {void}
+   */
+  private handleSummaryClick(): void {
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-details',
+        action: 'summary-click',
+        details: { open: !this.open },
+      };
+
+      this.componentLibraryAnalytics.emit(detail);
+    }
   }
 
   render() {
@@ -80,7 +116,10 @@ export class VaDetails {
     return (
       <Host>
         <details class={detailsClass} open={open}>
-          <summary class="va-details__summary">
+          <summary
+            class="va-details__summary"
+            onClick={() => this.handleSummaryClick()}
+          >
             <va-icon
               class="va-details__icon"
               icon="chevron_right"
