@@ -47,7 +47,6 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
-// Default.argTypes = propStructure(detailsDocs);
 
 export const Open = Template.bind({});
 Open.args = {
