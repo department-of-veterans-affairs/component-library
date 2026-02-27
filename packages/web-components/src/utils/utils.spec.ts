@@ -46,26 +46,33 @@ describe('isNumeric', () => {
 });
 
 describe('getSlottedNodes()', () => {
+  class CustomElement extends window.HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.shadowRoot.innerHTML = `<div>ABC</div><slot name="headline">Updated Test Headline</slot><p>GHI</p>`;
+    }
+  }
+
   it('gathers slot nodes in the shadow DOM if slot is used', async () => {
     var mockObject = {
       assignedNodes: () => {
         return ['h2', 'a', 'a'];
       },
     };
+    window.customElements.define('custom-element', CustomElement);
 
-    const defaultElement = document.createElement('div');
-    // Manually mock shadowRoot without calling attachShadow to avoid Stencil mock-doc issues
-    const mockShadowRoot = {
-      querySelector: jest.fn(selectors => {
-        if (selectors === 'slot') {
-          return mockObject as unknown as Element;
-        }
-        return null;
-      }),
-    };
-    Object.defineProperty(defaultElement, 'shadowRoot', {
-      value: mockShadowRoot,
-      writable: false,
+    const defaultElement = document.createElement('custom-element');
+
+    const defElement_shadowRoot_querySelector =
+      defaultElement.shadowRoot.querySelector;
+
+    const spy = jest.spyOn(defaultElement.shadowRoot, 'querySelector');
+    spy.mockImplementation(selectors => {
+      if (selectors === 'slot') {
+        return mockObject as unknown as Element;
+      }
+      return defElement_shadowRoot_querySelector(selectors);
     });
 
     const slottedNodes = getSlottedNodes(defaultElement, null);
@@ -78,21 +85,20 @@ describe('getSlottedNodes()', () => {
         return [{ nodeName: 'DIV' }, { nodeName: 'A' }, { nodeName: 'P' }];
       },
     };
+    window.customElements.define('custom-element', CustomElement);
 
-    const defaultElement = document.createElement('div');
-    // Manually mock shadowRoot without calling attachShadow to avoid Stencil mock-doc issues
-    const mockShadowRoot = {
-      querySelector: jest.fn(selector => {
+    const defaultElement = document.createElement('custom-element');
+
+    const defElement_shadowRoot_querySelector =
+      defaultElement.shadowRoot.querySelector;
+    jest
+      .spyOn(defaultElement.shadowRoot, 'querySelector')
+      .mockImplementation(selector => {
         if (selector === 'slot') {
           return mockObject as unknown as Element;
         }
-        return null;
-      }),
-    };
-    Object.defineProperty(defaultElement, 'shadowRoot', {
-      value: mockShadowRoot,
-      writable: false,
-    });
+        return defElement_shadowRoot_querySelector(selector);
+      });
 
     const slottedNodes = getSlottedNodes(defaultElement, 'a');
     expect(slottedNodes).toEqual([{ nodeName: 'A' }]);
