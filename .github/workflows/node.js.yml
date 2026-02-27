@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: 22.x
           cache: 'yarn'
+      - run: yarn install
+      
       - name: Cache Puppeteer browsers
         uses: actions/cache@v3
         with:
@@ -26,11 +28,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-puppeteer-
       
-      - run: yarn install
-      
-      - name: Download Chromium for Puppeteer
-        run: node ./node_modules/puppeteer/install.mjs
+      - name: Reinstall Puppeteer to download Chromium
+        run: |
+          rm -rf node_modules/puppeteer
+          yarn install
         working-directory: packages/web-components
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: false
 
       - name: Test react-components
         run: |
