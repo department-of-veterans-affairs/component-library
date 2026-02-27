@@ -27,9 +27,6 @@ jobs:
             ${{ runner.os }}-puppeteer-
       
       - run: yarn install
-      
-      - name: Install Chromium for Puppeteer
-        run: cd packages/web-components && npx puppeteer install
 
       - name: Test react-components
         run: |
