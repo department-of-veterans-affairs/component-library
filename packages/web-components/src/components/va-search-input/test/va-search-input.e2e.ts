@@ -111,9 +111,11 @@ describe('va-search-input', () => {
     await page.waitForChanges();
 
     const input = await page.find('va-search-input >>> input');
-    await input.focus();
+    await input.click();
+    await page.waitForChanges();
 
     await input.press('ArrowDown');
+    await page.waitForChanges();
 
     const selectedSuggestion = await page.find(
       'va-search-input >>> [aria-selected="true"]',
@@ -140,9 +142,11 @@ describe('va-search-input', () => {
     await page.waitForChanges();
 
     const input = await page.find('va-search-input >>> input');
-    await input.focus();
+    await input.click();
+    await page.waitForChanges();
 
     await input.press('ArrowUp');
+    await page.waitForChanges();
 
     const selectedSuggestion = await page.find(
       'va-search-input >>> [aria-selected="true"]',
@@ -205,13 +209,13 @@ describe('va-search-input', () => {
     await page.waitForChanges();
 
     const input = await page.find('va-search-input >>> input');
-    await input.focus();
+    await input.click();
+    await page.waitForChanges();
     await input.press('ArrowDown');
+    await page.waitForChanges();
 
-    const currentSuggestion = await page.find(
-      'va-search-input >>> [aria-selected="true"]',
-    );
-    await currentSuggestion.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
+    await page.waitForChanges();
 
     const selectedSuggestion = await page.find(
       'va-search-input >>> [aria-selected="true"]',
@@ -236,13 +240,13 @@ describe('va-search-input', () => {
     await page.waitForChanges();
 
     const input = await page.find('va-search-input >>> input');
-    await input.focus();
+    await input.click();
+    await page.waitForChanges();
     await input.press('ArrowDown');
+    await page.waitForChanges();
 
-    const currentSuggestion = await page.find(
-      'va-search-input >>> [aria-selected="true"]',
-    );
-    await currentSuggestion.press('ArrowUp');
+    await page.keyboard.press('ArrowUp');
+    await page.waitForChanges();
 
     const selectedSuggestion = await page.find(
       'va-search-input >>> [aria-selected="true"]',
@@ -267,13 +271,13 @@ describe('va-search-input', () => {
     await page.waitForChanges();
 
     const input = await page.find('va-search-input >>> input');
-    await input.focus();
+    await input.click();
+    await page.waitForChanges();
     await input.press('ArrowDown');
+    await page.waitForChanges();
 
-    const selectedSuggestion = await page.find(
-      'va-search-input >>> [aria-selected="true"]',
-    );
-    await selectedSuggestion.press('Enter');
+    await page.keyboard.press('Enter');
+    await page.waitForChanges();
 
     const inputValue = await input.getProperty('value');
 
@@ -296,13 +300,13 @@ describe('va-search-input', () => {
     await page.waitForChanges();
 
     const input = await page.find('va-search-input >>> input');
-    await input.focus();
+    await input.click();
+    await page.waitForChanges();
     await input.press('ArrowDown');
+    await page.waitForChanges();
 
-    const selectedSuggestion = await page.find(
-      'va-search-input >>> [aria-selected="true"]',
-    );
-    await selectedSuggestion.press('Escape');
+    await page.keyboard.press('Escape');
+    await page.waitForChanges();
 
     const inputValue = await input.getProperty('value');
 
