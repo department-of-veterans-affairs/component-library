@@ -18,21 +18,18 @@ jobs:
         with:
           node-version: 22.x
           cache: 'yarn'
-      - run: yarn install
-      
       - name: Cache Puppeteer browsers
         uses: actions/cache@v3
         with:
-          path: |
-            ~/.cache/puppeteer
-            node_modules/puppeteer/.local-chromium
+          path: ~/.cache/puppeteer
           key: ${{ runner.os }}-puppeteer-${{ hashFiles('packages/web-components/package.json') }}
           restore-keys: |
             ${{ runner.os }}-puppeteer-
       
-      - name: Install Puppeteer browsers
-        run: node node_modules/puppeteer/install.js
-        working-directory: packages/web-components
+      - run: yarn install
+      
+      - name: Install Chromium for Puppeteer
+        run: cd packages/web-components && npx puppeteer install
 
       - name: Test react-components
         run: |
