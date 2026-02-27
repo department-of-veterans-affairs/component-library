@@ -27,6 +27,10 @@ jobs:
             ${{ runner.os }}-puppeteer-
       
       - run: yarn install
+      
+      - name: Download Chromium for Puppeteer
+        run: node -e "const puppeteer = require('puppeteer'); puppeteer.createBrowserFetcher().download(puppeteer.PUPPETEER_REVISIONS.chromium);"
+        working-directory: packages/web-components
 
       - name: Test react-components
         run: |
