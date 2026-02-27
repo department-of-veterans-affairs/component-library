@@ -16,10 +16,10 @@ describe('va-accordion', () => {
           <div class="usa-accordion">
             <ul class="expand-collapse-list">
               <li>
-                <va-button-icon class="hydrated va-accordion__button" data-testid="expand-all-accordions"></va-button-icon>
+                <va-button-icon button-type="expand" class="hydrated va-accordion__button" data-testid="expand-all-accordions"></va-button-icon>
               </li>
               <li>
-                <va-button-icon class="hydrated va-accordion__button" data-testid="collapse-all-accordions"></va-button-icon>
+                <va-button-icon button-type="collapse" class="hydrated va-accordion__button" data-testid="collapse-all-accordions"></va-button-icon>
               </li>
             </ul>
             <slot></slot>
