@@ -20,21 +20,8 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       
-      - name: Cache Puppeteer browsers
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/puppeteer
-          key: ${{ runner.os }}-puppeteer-${{ hashFiles('packages/web-components/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-puppeteer-
-      
-      - name: Reinstall Puppeteer to download Chromium
-        run: |
-          rm -rf node_modules/puppeteer
-          yarn install
-        working-directory: packages/web-components
-        env:
-          PUPPETEER_SKIP_DOWNLOAD: false
+      - name: Install Puppeteer browsers
+        run: node -e "require('puppeteer/install.js')"
 
       - name: Test react-components
         run: |
