@@ -174,41 +174,96 @@ export class VaAlert {
     }
   }
 
+  /**
+   * Finds the first node in a slot that contains content (either a text node with
+   * non-whitespace content or an element node).
+   * @param slot - The HTMLSlotElement to search within
+   * @returns The first content node found, or null if no content exists
+   */
+  private getFirstContentNode(slot: HTMLSlotElement): Node | null {
+    const assignedNodes = slot.assignedNodes();
+
+    for (const node of assignedNodes) {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
+        return node;
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        return node;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Wraps a text node in a span element and optionally adds a slot attribute.
+   * This is used to provide an element target for prepending the sr-only span
+   * when slot content consists of only text nodes.
+   * @param textNode - The text node to wrap
+   * @param addHeadlineSlot - If true, adds slot="headline" attribute to the wrapper
+   * @returns The created wrapper span element
+   */
+  private wrapTextNodeInElement(textNode: Node, addHeadlineSlot: boolean): HTMLElement {
+    const wrapper = document.createElement('span');
+
+    if (addHeadlineSlot) {
+      wrapper.setAttribute('slot', 'headline');
+    }
+
+    if (textNode.parentNode) {
+      textNode.parentNode.insertBefore(wrapper, textNode);
+    }
+    wrapper.appendChild(textNode);
+    return wrapper;
+  }
+
+  private static readonly STATUS_LABELS = {
+    warning: 'Warning',
+    error: 'Error',
+    success: 'Success',
+    info: 'Information',
+    continue: 'Continue',
+  };
+
+  /**
+   * Returns the human-readable label for a given alert status.
+   * @param status - The alert status (info, warning, error, success, continue)
+   * @returns The corresponding status label for screen readers
+   */
+  private getStatusLabel(status: 'info' | 'warning' | 'error' | 'success' | 'continue'): string {
+    return VaAlert.STATUS_LABELS[status] || 'Information';
+  }
+
+  /**
+   * Adds a screen reader-only status announcement to the beginning of alert content.
+   * This ensures screen reader users hear the alert type (e.g., "Warning Alert", "Error Alert")
+   * before the alert content. Works with both slim and non-slim alert variations.
+   *
+   * For non-slim alerts, prepends to the headline slot content.
+   * For slim alerts, prepends to the default slot content.
+   *
+   * Handles various content structures:
+   * - Elements only (e.g., <h3>Headline</h3>)
+   * - Text only (e.g., "Plain text")
+   * - Mixed content (e.g., "Text with <a>link</a>")
+   *
+   * If content is text-only, it wraps the text in a span before prepending the sr-only announcement.
+   */
   private addSrOnlyToSlot(): void {
     const { status, slim } = this;
 
-    const statusLabels = {
-      warning: 'Warning',
-      error: 'Error',
-      success: 'Success',
-      info: 'Information',
-      continue: 'Continue',
-    };
-
     try {
-      // Get the appropriate slot based on alert type
       const slot = slim
         ? this.el.shadowRoot?.querySelector('slot:not([name])')
         : this.el.shadowRoot?.querySelector('slot[name="headline"]');
-      
+
       if (!slot) return;
 
-      // Get the target element to prepend the sr-only span to
-      let targetElement: HTMLElement | null = null;
-      
-      if (slim) {
-        // For slim alerts, find the first element node in the default slot
-        const assignedNodes = (slot as HTMLSlotElement).assignedNodes();
-        targetElement = Array.from(assignedNodes).find(
-          node => node.nodeType === Node.ELEMENT_NODE
-        ) as HTMLElement;
-      } else {
-        // For non-slim alerts, get the first assigned element from headline slot
-        const assignedElements = (slot as HTMLSlotElement).assignedElements();
-        targetElement = assignedElements.length > 0 ? assignedElements[0] as HTMLElement : null;
-      }
+      const firstContentNode = this.getFirstContentNode(slot);
+      if (!firstContentNode) return;
 
-      if (!targetElement) return;
+      const targetElement = firstContentNode.nodeType === Node.TEXT_NODE
+        ? this.wrapTextNodeInElement(firstContentNode, !slim)
+        : (firstContentNode as HTMLElement);
 
       // Remove existing sr-only span if present (for status updates)
       const existingSrOnly = targetElement.querySelector('.usa-sr-only');
@@ -216,20 +271,16 @@ export class VaAlert {
         existingSrOnly.remove();
       }
 
-      // Check if the target element has any text content
-      // Don't add sr-only if the element is empty
-      const hasContent = targetElement.textContent?.trim();
-      if (!hasContent) return;
+      if (!targetElement.textContent?.trim()) return;
 
       // Create and prepend the sr-only span
       const srOnlySpan = document.createElement('span');
       /* eslint-disable-next-line i18next/no-literal-string */
       srOnlySpan.className = 'usa-sr-only';
-      srOnlySpan.textContent = `${statusLabels[status] || 'Information'} Alert `;
-      
+      srOnlySpan.textContent = `${this.getStatusLabel(status)} Alert `;
+
       targetElement.prepend(srOnlySpan);
     } catch (e) {
-      // Silently fail if there's an issue accessing the slot
       /* eslint-disable-next-line i18next/no-literal-string */
       console.error('Error adding sr-only to alert content:', e);
     }
