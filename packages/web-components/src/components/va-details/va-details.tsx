@@ -104,8 +104,7 @@ export class VaDetails {
 
     const detailsClass = classNames({
       'va-details': true,
-      'va-details--width-xl': width === 'xl',
-      'va-details--width-2xl': width === '2xl',
+      [`usa-input--${width}`]: ['xl', '2xl'].includes(width),
     });
 
     const contentContainerClass = classNames({
