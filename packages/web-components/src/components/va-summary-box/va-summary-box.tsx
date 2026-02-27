@@ -20,9 +20,13 @@ export class VaSummaryBox {
 
   @Element() el: HTMLElement;
 
+  private getHeadlineText(): string {
+    const headline = this.el?.querySelector('[slot="headline"]');
+    return headline?.textContent?.trim() || null;
+  }
+
   componentWillLoad() {
-    let childElements = Array.from(this.el.children);
-    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
+    this.headlineText = this.getHeadlineText();
   }
 
   componentDidLoad() {
@@ -35,14 +39,15 @@ export class VaSummaryBox {
     headline.classList.add('usa-summary-box__heading');
     content.classList.add('usa-summary-box__text');
 
-    let childElements = Array.from(this.el.children);
-    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
+    this.headlineText = this.getHeadlineText();
   }
 
   render() {
+    const headlineText = this.headlineText || this.getHeadlineText();
+
     return (
       <Host>
-        <div class="usa-summary-box" role="region" aria-label={this.headlineText}>
+        <div class="usa-summary-box" role="region" aria-label={headlineText}>
           <div class="usa-summary-box__body">
             <slot name="headline"></slot>
             <slot />

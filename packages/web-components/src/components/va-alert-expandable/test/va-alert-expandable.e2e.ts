@@ -78,8 +78,9 @@ describe('va-alert-expandable', () => {
     expect(anchorEl.getAttribute('aria-expanded')).toEqual('false');
 
     await anchorEl.click();
-    // Allow the transition to complete
-    await page.waitForTimeout(600);
+    await page.waitForChanges();
+    // Wait for CSS transition to complete
+    await new Promise(resolve => setTimeout(resolve, 700));
     expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
 
     const postOpacity = await handle.evaluate(
@@ -111,8 +112,9 @@ describe('va-alert-expandable', () => {
     // Use keyboard to expand
     const anchorEl = await page.find('va-alert-expandable >>> a');
     await anchorEl.press(' ');
-    // Allow the transition to complete
-    await page.waitForTimeout(600);
+    await page.waitForChanges();
+    // Wait for CSS transition to complete
+    await new Promise(resolve => setTimeout(resolve, 700));
 
     const postOpacity = await handle.evaluate(
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,
@@ -143,8 +145,9 @@ describe('va-alert-expandable', () => {
     // Use keyboard to expand
     const anchorEl = await page.find('va-alert-expandable >>> a');
     await anchorEl.press('Enter');
-    // Allow the transition to complete
-    await page.waitForTimeout(600);
+    await page.waitForChanges();
+    // Wait for CSS transition to complete
+    await new Promise(resolve => setTimeout(resolve, 700));
 
     const postOpacity = await handle.evaluate(
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,

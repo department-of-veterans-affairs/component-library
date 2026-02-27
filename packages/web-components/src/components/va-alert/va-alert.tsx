@@ -136,15 +136,8 @@ export class VaAlert {
   // Check light DOM instead of shadow DOM because it
   // will be present during willRender
   private hasHeadlineContent(): boolean {
-    if (this.el) {
-      for (const child of this.el.children) {
-        if (child.slot === "headline" && child.textContent?.trim()) {
-          return true;
-        }
-      }
-    }
-
-    return false;
+    const headlineEl = this.el?.querySelector('[slot="headline"]');
+    return !!headlineEl?.textContent?.trim();
   }
 
   private updateCloseAriaLabelWithHeadlineText(): void {
@@ -248,10 +241,13 @@ export class VaAlert {
 
   componentWillRender() {
     const isBannerAlert = this.el.id === 'va-banner-alert';
+    const hasHeadline = this.hasHeadlineContent();
+    const slimExplicitlySet = this.el?.hasAttribute('slim');
 
-    // Apply the slim property if there is no headline text and this alert is not used by va-banner
-    if (!isBannerAlert && !this.hasHeadlineContent()) {
-      this.slim = true;
+    // Auto-apply slim only when no headline exists and slim was not explicitly set.
+    // Keep this in sync both ways to avoid stale slim state after rerenders/toggle visibility.
+    if (!isBannerAlert && !slimExplicitlySet) {
+      this.slim = !hasHeadline;
     }
   }
 
