@@ -69,15 +69,17 @@
   .va-modal__footer {
     // Increase footer padding on larger screens to align with content
     @media screen and (min-width: $mobile-lg) {
-      padding-left: var(--units-4);
+      padding-left: var(--units-5);
     }
   }
 }
 
-.va-modal-alert__icon {
-  position: relative;
-  // Negate internal icon whitespace to better align with modal content
-  left: -2px;
+.va-modal__icon-container {
+  padding-right: var(--units-0p5);
+
+  @media screen and (min-width: $mobile-lg) {
+    padding-right: var(--units-1);
+  }
 }
 
 .va-modal-close {
@@ -154,8 +156,7 @@
 
   @media screen and (min-width: $mobile-lg) {
     .va-modal__icon-container {
-      padding-top: var(--units-0p5);
-      padding-right: var(--units-0p5);
+      padding-top: var(--units-1);
     }
   }
 
