@@ -727,6 +727,29 @@ export namespace Components {
         "value"?: string;
     }
     /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaDetails {
+        /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
+          * Value to reflect on the details element to control whether the details element is open or not.
+         */
+        "open"?: boolean;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: string;
+    }
+    /**
      * @componentName File input
      * @maturityCategory caution
      * @maturityLevel available
@@ -2536,6 +2559,10 @@ export interface VaDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaDateElement;
 }
+export interface VaDetailsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaDetailsElement;
+}
 export interface VaFileInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputElement;
@@ -3091,6 +3118,28 @@ declare global {
     var HTMLVaDateElement: {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
+    };
+    interface HTMLVaDetailsElementEventMap {
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaDetailsElement extends Components.VaDetails, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaDetailsElementEventMap>(type: K, listener: (this: HTMLVaDetailsElement, ev: VaDetailsCustomEvent<HTMLVaDetailsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaDetailsElementEventMap>(type: K, listener: (this: HTMLVaDetailsElement, ev: VaDetailsCustomEvent<HTMLVaDetailsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaDetailsElement: {
+        prototype: HTMLVaDetailsElement;
+        new (): HTMLVaDetailsElement;
     };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
@@ -4018,6 +4067,7 @@ declare global {
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-critical-action": HTMLVaCriticalActionElement;
         "va-date": HTMLVaDateElement;
+        "va-details": HTMLVaDetailsElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
@@ -4875,6 +4925,33 @@ declare namespace LocalJSX {
           * Set the default date value must be in YYYY-MM-DD format.
          */
         "value"?: string;
+    }
+    /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaDetails {
+        /**
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
+          * The event used to track usage of the component. This is emitted when the summary element is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: VaDetailsCustomEvent<any>) => void;
+        /**
+          * Value to reflect on the details element to control whether the details element is open or not.
+         */
+        "open"?: boolean;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: string;
     }
     /**
      * @componentName File input
@@ -6887,6 +6964,7 @@ declare namespace LocalJSX {
         "va-crisis-line-modal": VaCrisisLineModal;
         "va-critical-action": VaCriticalAction;
         "va-date": VaDate;
+        "va-details": VaDetails;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
@@ -7087,6 +7165,12 @@ declare module "@stencil/core" {
              * @guidanceHref form/date-input
              */
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
+            /**
+             * @componentName Details
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-details": LocalJSX.VaDetails & JSXBase.HTMLAttributes<HTMLVaDetailsElement>;
             /**
              * @componentName File input
              * @maturityCategory caution

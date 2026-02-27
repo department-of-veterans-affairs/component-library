@@ -1,0 +1,132 @@
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  h,
+  Prop,
+  State,
+} from '@stencil/core';
+import classNames from 'classnames';
+
+/**
+ * @componentName Details
+ * @maturityCategory caution
+ * @maturityLevel candidate
+ */
+
+@Component({
+  tag: 'va-details',
+  styleUrl: 'va-details.scss',
+  shadow: true,
+})
+export class VaDetails {
+  @Element() el: HTMLElement;
+
+  /**
+   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+   */
+  @Prop() disableAnalytics?: boolean = false;
+
+  /**
+   * Value to reflect on the details element to control whether the details element is open or not.
+   */
+  @Prop({ reflect: true }) open?: boolean = false;
+
+  /**
+   * The text for the summary element that triggers the details to expand.
+   */
+  @Prop() label!: string;
+
+  /**
+   * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+   */
+  @Prop() width?: string;
+
+  /**
+   * A flag to indicate whether the first node in the slot is an element or not.
+   * This is used to conditionally apply a class for styling purposes.
+   */
+  @State() firstNodeIsElement: boolean = false;
+
+  /**
+   * The event used to track usage of the component. This is emitted when the
+   * summary element is clicked and disableAnalytics is not true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
+
+  /**
+   * When the slot changes check if the first child of the slot is an element
+   * rather than text, and set a flag to true if it is. This is used to
+   * conditionally apply a class to the content container that removes extra
+   * padding.
+   * @returns {void}
+   */
+  private inspectSlot(): void {
+    const detailsSlot = this.el.shadowRoot.querySelector('slot') as HTMLSlotElement;
+    const detailsSlotAssignedNodes = detailsSlot?.assignedNodes({ flatten: true }) || [];
+
+    const firstMeaningfulNode = detailsSlotAssignedNodes.find(
+      node => node.nodeType !== Node.TEXT_NODE || node.textContent?.trim(),
+    );
+
+    this.firstNodeIsElement = firstMeaningfulNode?.nodeType === Node.ELEMENT_NODE;
+  }
+
+  /**
+   * Handles clicks on the summary element. If analytics tracking isn't
+   * disabled, emits an event with details about the click.
+   * @returns {void}
+   */
+  private handleSummaryClick(): void {
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-details',
+        action: 'summary-click',
+        details: { open: !this.open },
+      };
+
+      this.componentLibraryAnalytics.emit(detail);
+    }
+  }
+
+  render() {
+    const { open, label, width } = this;
+
+    if (!label) { return null; }
+
+    const detailsClass = classNames({
+      'va-details': true,
+      [`usa-input--${width}`]: ['xl', '2xl'].includes(width),
+    });
+
+    const contentContainerClass = classNames({
+      'va-details__content': true,
+      'va-details__content--element-child': this.firstNodeIsElement,
+    });
+
+    return (
+      <Host>
+        <details class={detailsClass} open={open}>
+          <summary
+            class="va-details__summary"
+            onClick={() => this.handleSummaryClick()}
+          >
+            <va-icon class="va-details__icon" icon="chevron_right"></va-icon>
+            {label}
+          </summary>
+          <div class={contentContainerClass}>
+            <slot onSlotchange={() => this.inspectSlot()}></slot>
+          </div>
+        </details>
+      </Host>
+    );
+  }
+}
