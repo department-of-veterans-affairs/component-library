@@ -131,7 +131,7 @@ describe('va-details', () => {
     );
 
     const detailsEl = await page.find('va-details >>> details');
-    expect(detailsEl.classList.contains('va-details--width-xl')).toBe(true);
+    expect(detailsEl.classList.contains('usa-input--xl')).toBe(true);
   });
 
   it('adds a class for 2xl width when the width prop is set to 2xl', async () => {
@@ -143,7 +143,7 @@ describe('va-details', () => {
     );
 
     const detailsEl = await page.find('va-details >>> details');
-    expect(detailsEl.classList.contains('va-details--width-2xl')).toBe(true);
+    expect(detailsEl.classList.contains('usa-input--2xl')).toBe(true);
   });
 
   it('emits an analytics event when the summary is clicked and disableAnalytics is not true', async () => {
