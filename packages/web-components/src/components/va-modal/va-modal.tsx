@@ -160,7 +160,7 @@ export class VaModal {
 
   componentDidLoad() {
     if (this.visible) {
-      this.setupModal();
+      requestAnimationFrame(() => this.setupModal());
     }
   }
 
@@ -173,7 +173,7 @@ export class VaModal {
 
     this.isVisibleDirty = false;
     if (this.visible) {
-      this.setupModal();
+      requestAnimationFrame(() => this.setupModal());
     } else {
       this.teardownModal();
     }
