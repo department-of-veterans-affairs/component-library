@@ -467,12 +467,6 @@ export class VaModal {
     // Apply aria-hidden to external elements
     this.applyAriaHidden();
 
-    requestAnimationFrame(() => {
-      if (this.visible) {
-        this.applyAriaHidden();
-      }
-    });
-
     // Conditionally track the event.
     if (!this.disableAnalytics) {
       const detail = {
