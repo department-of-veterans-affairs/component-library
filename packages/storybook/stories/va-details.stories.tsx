@@ -54,7 +54,7 @@ Open.args = {
   open: true,
 };
 
-const WithContentTemplate = (args) => {
+const WithElementContentTemplate = (args) => {
   return (
     <VaDetails
       label={args.label}
@@ -75,8 +75,8 @@ const WithContentTemplate = (args) => {
   )
 }
 
-export const WithContentComponent = WithContentTemplate.bind({});
-WithContentComponent.args = {
+export const WithElementContent = WithElementContentTemplate.bind({});
+WithElementContent.args = {
   ...defaultArgs,
   label: 'Summary label text',
 };
