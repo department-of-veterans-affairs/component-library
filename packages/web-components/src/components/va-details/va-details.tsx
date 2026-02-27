@@ -119,11 +119,7 @@ export class VaDetails {
             class="va-details__summary"
             onClick={() => this.handleSummaryClick()}
           >
-            <va-icon
-              class="va-details__icon"
-              icon="chevron_right"
-              size={2}
-            ></va-icon>
+            <va-icon class="va-details__icon" icon="chevron_right"></va-icon>
             {label}
           </summary>
           <div class={contentContainerClass}>
