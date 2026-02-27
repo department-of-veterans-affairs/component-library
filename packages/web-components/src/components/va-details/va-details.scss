@@ -38,8 +38,8 @@
 
       va-icon.va-details__icon {
         position: absolute;
-        left: var(--vads-spacing-2px);
         left: var(--vads-spacing-0p5);
+        top: 3.5px;
         transform: rotate(90deg);
         transition: transform 0.15s linear;
       }
