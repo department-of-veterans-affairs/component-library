@@ -33,15 +33,15 @@ const defaultArgs = {
 
 const Template = (args) => {
   return (
-  <VaDetails
-    label={args.label}
-    open={args.open}
-    width={args.width}
-    disableAnalytics={args['disable-analytics']}
-  >
-    The United States is automatically chosen as your country if you live on a
-    military base outside of the country.
-  </VaDetails>
+    <VaDetails
+      label={args.label}
+      open={args.open}
+      width={args.width}
+      disableAnalytics={args['disable-analytics']}
+    >
+      The United States is automatically chosen as your country if you live on a
+      military base outside of the country.
+    </VaDetails>
   )
 }
 
