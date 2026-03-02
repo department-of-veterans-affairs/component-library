@@ -326,11 +326,68 @@ describe('va-file-input', () => {
   it('resets the component if the cancel button is clicked during upload', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="12" />`);
 
-    const button = await page.find('va-file-input >>> va-button-icon');
+    const button = await page.find('va-file-input >>> va-button-icon[button-type="cancel"]');
     button.click();
     await page.waitForChanges();
     const progBar = await page.find('va-file-input >>> va-progress-bar');
     expect(progBar).toBeNull();
+  });
+
+  it('emits vaChange with empty files array when cancel button is clicked during upload', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="50" />`);
+
+    const vaChangeSpy = await page.spyOnEvent('vaChange');
+    const button = await page.find('va-file-input >>> va-button-icon[button-type="cancel"]');
+    button.click();
+    await page.waitForChanges();
+
+    expect(vaChangeSpy).toHaveReceivedEventDetail({ files: [] });
+  });
+
+  it('does not show progress bar after cancel', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="50" />`);
+
+    const button = await page.find('va-file-input >>> va-button-icon[button-type="cancel"]');
+    button.click();
+    await page.waitForChanges();
+
+    const progBar = await page.find('va-file-input >>> va-progress-bar');
+    expect(progBar).toBeNull();
+  });
+
+  it('shows progress bar again after a new file is uploaded following a cancel', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="50" />`);
+
+    // Cancel the upload
+    const cancelButton = await page.find('va-file-input >>> va-button-icon[button-type="cancel"]');
+    cancelButton.click();
+    await page.waitForChanges();
+
+    // Simulate parent resetting percentUploaded to null on cancel
+    await page.$eval('va-file-input', (elm: any) => {
+      elm.percentUploaded = null;
+    });
+    await page.waitForChanges();
+
+    // Upload a new file
+    const filePath = path.relative(process.cwd(), __dirname + '/placeholder.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath).catch(e => console.log('uploadFile error', e));
+    await page.waitForChanges();
+
+    // Verify the new file was picked up by checking the file label is visible
+    const fileLabelAfterUpload = await page.find('va-file-input >>> .file-label');
+    expect(fileLabelAfterUpload).not.toBeNull();
+    expect(fileLabelAfterUpload).toEqualText('placeholder.png');
+
+    // Set percentUploaded to simulate a new upload in progress
+    await page.$eval('va-file-input', (elm: any) => {
+      elm.percentUploaded = 25;
+    });
+    await page.waitForChanges();
+
+    const progBar = await page.find('va-file-input >>> va-progress-bar');
+    expect(progBar).not.toBeNull();
   });
 
   it('renders a slim warning alert, a file password input, and a password submit button if encrypted is true', async () => {

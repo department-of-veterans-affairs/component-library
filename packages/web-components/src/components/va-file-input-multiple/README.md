@@ -21,7 +21,7 @@ Each `va-file-input` instance is assigned a unique `id` attribute in the format 
 - **State Arrays**: All props that manage file-specific data (`errors`, `passwordErrors`, `percentUploaded`, `encrypted`) are arrays that correspond by index to the files
 - **File Index Detection**: Use the `changed: true` property in the `state` array to identify which file triggered an event
 - **Encryption Workflow**: Integrate with file analysis libraries (like the platform utility `standardFileChecks`) to detect encrypted PDFs
-- **Progress Tracking**: Use `percentUploaded` array to show upload progress, setting to `null` when complete
+- **Progress Tracking**: Use `percentUploaded` array to show upload progress, setting to `null` when complete or when an upload is cancelled
 
 ### State Management
 
@@ -118,6 +118,31 @@ This event is emitted when a password is submitted in any `va-file-input` child 
 - **Frequency**: Event fires on every click of button while not in loading state.
 - **Action**: 
   - `PASSWORD_UPDATE`: Always
+
+#### Upload Cancellation: `vaChange` with empty files
+
+When a user clicks the cancel button during an in-progress upload, `va-file-input` emits a `vaChange` event with an empty `files` array — the same payload as a file deletion. The component internally suppresses the progress bar immediately, but the consumer is responsible for resetting their `percentUploaded` state to `null` so that the next file upload starts fresh from 0%.
+
+```typescript
+function handleChange(event) {
+  const { files } = event.detail;
+
+  if (!files.length) {
+    // Upload was cancelled or file was deleted — reset progress
+    setPercentsUploaded(prev => {
+      const updated = [...prev];
+      updated[index] = null;
+      return updated;
+    });
+    return;
+  }
+
+  // New file selected — begin upload
+  startUpload(files[0], index);
+}
+```
+
+> **Important**: If `percentUploaded` is not reset to `null` after a cancel, the progress bar will not appear for the next file uploaded to that slot, because the component suppresses the bar until a new file is selected.
 
 #### Validation Error: `vaFileInputError`
 
@@ -451,7 +476,7 @@ This example demonstrates:
 - Debounced password processing to prevent excessive API calls
 - Automatic password field management and error handling
 
-### Progress Tracking & Error Handling
+### Progress Tracking, Cancellation & Error Handling
 - Mock file upload with progress simulation
 - Multiple error scenarios based on filename patterns:
   - **Network errors**: Files with "error" in filename
@@ -466,5 +491,5 @@ This example demonstrates:
 - Event handling using callback function
 
 ### Visual State Management
-- Progress bar reset on upload failures
+- Progress bar reset on upload failures and cancellations
 - Retry experience after error resolution
