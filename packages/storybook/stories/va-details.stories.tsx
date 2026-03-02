@@ -62,15 +62,13 @@ const WithElementContentTemplate = (args) => {
       width={args.width}
       disableAnalytics={args['disable-analytics']}
     >
-      <div>
-        <p>Here are some popular pets to consider</p>
-        <ul>
-          <li>Dogs</li>
-          <li>Cats</li>
-          <li>Fish</li>
-          <li>Birds</li>
-        </ul>
-      </div>
+      <p>Here are some popular pets to consider</p>
+      <ul>
+        <li>Dogs</li>
+        <li>Cats</li>
+        <li>Fish</li>
+        <li>Birds</li>
+      </ul>
     </VaDetails>
   )
 }

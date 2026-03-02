@@ -59,4 +59,14 @@
       }
     }
   }
+
+  ::slotted(*:first-child) {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  ::slotted(*:last-child) {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
 }
