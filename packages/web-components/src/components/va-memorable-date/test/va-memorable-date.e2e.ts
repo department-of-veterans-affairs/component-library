@@ -720,7 +720,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('2');
     await handleYear.press('2');
 
-    expect(spy).toHaveReceivedEventTimes(4);
+    expect(spy).toHaveReceivedEventTimes(7);
   });
 
   it('formats single digit days and months into 2 digits with a leading 0', async () => {
@@ -773,7 +773,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
 
-    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventTimes(3);
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'blur',
       componentName: 'va-memorable-date',
@@ -1475,7 +1475,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
 
-    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventTimes(3);
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'blur',
       componentName: 'va-memorable-date',

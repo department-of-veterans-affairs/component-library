@@ -146,7 +146,7 @@ export class VaDate {
     this.value = val ? val : null;
   }
 
-  private handleDateBlur = (event: FocusEvent) => {
+  private handleDateBlur = (event: FocusEvent, validateAll: boolean = true) => {
     const [year, month, day] = (this.value || '')
       .split('-')
 
@@ -169,7 +169,7 @@ export class VaDate {
       monthSelect: true,
       monthYearOnly: this.monthYearOnly,
       monthOptional: this.monthOptional,
-      onBlur: true,
+      validateAll,
     });
 
     if (this.error) {
@@ -211,6 +211,7 @@ export class VaDate {
     const year = Number(currentYear);
     const month = Number(currentMonth);
     const day = Number(currentDay);
+    this.yearTouched = currentYear.length > 3 ? true : false;
 
     validate({
       component: this,
@@ -223,7 +224,7 @@ export class VaDate {
       monthSelect: true,
       monthYearOnly: this.monthYearOnly,
       monthOptional: this.monthOptional,
-      onBlur: false,
+      validateAll: false,
     });
 
     if (this.error) {
@@ -242,17 +243,17 @@ export class VaDate {
 
   private handleMonthBlur = (event: FocusEvent) => {
     this.monthTouched = true;
-    this.handleDateBlur(event);
+    this.handleDateBlur(event, false);
   };
 
   private handleDayBlur = (event: FocusEvent) => {
     this.dayTouched = true;
-    this.handleDateBlur(event);
+    this.handleDateBlur(event, false);
   };
 
   private handleYearBlur = (event: FocusEvent) => {
     this.yearTouched = true;
-    this.handleDateBlur(event);
+    this.handleDateBlur(event, false);
   };
 
   render() {

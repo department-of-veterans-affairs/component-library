@@ -158,8 +158,7 @@ export class VaMemorableDate {
   private monthTouched: boolean = false;
   private yearTouched: boolean = false;
 
-  private handleDateBlur = (event: FocusEvent) => {
-
+  private handleDateBlur = (event: FocusEvent, validateAll: boolean = true) => {
     const { currentYear, currentMonth, currentDay } = this;
 
     const yearNum = currentYear ? Number(currentYear) : null;
@@ -180,7 +179,7 @@ export class VaMemorableDate {
         monthTouched: this.monthTouched,
         dayTouched: this.dayTouched,
         monthSelect: this.monthSelect,
-        onBlur: true,
+        validateAll
       });
 
       if (this.error) {
@@ -238,12 +237,11 @@ export class VaMemorableDate {
   private handleYearChange = event => {
     const target = event.target as HTMLInputElement;
     this.currentYear = target.value;
-    this.yearTouched = true;
+    this.yearTouched = this.currentYear.length > 3 ? true : false;
     this.handleDateChange(event);
   };
 
   private handleDateChange = (event: InputEvent) => {
-    
     const { currentYear, currentMonth, currentDay } = this;
     // Fallback to undefined to preserve validation of empty strings
     const yearNum = currentYear ? Number(currentYear) : null;
@@ -259,7 +257,7 @@ export class VaMemorableDate {
           monthTouched: this.monthTouched,
           dayTouched: this.dayTouched,
           monthSelect: this.monthSelect,
-          onBlur: false,
+          validateAll: false,
         });
   
         if (this.error) {
@@ -282,17 +280,17 @@ export class VaMemorableDate {
 
   private handleMonthBlur = (event: FocusEvent) => {
     this.monthTouched = true;
-    this.handleDateBlur(event);
+    this.handleDateBlur(event, false);
   };
 
   private handleDayBlur = (event: FocusEvent) => {
     this.dayTouched = true;
-    this.handleDateBlur(event);
+    this.handleDateBlur(event, false);
   };
 
   private handleYearBlur = (event: FocusEvent) => {
     this.yearTouched = true;
-    this.handleDateBlur(event);
+    this.handleDateBlur(event, false);
   };
 
   /**

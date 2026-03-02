@@ -178,7 +178,7 @@ interface ValidateConfig {
   dayTouched?: boolean;
   monthSelect?: boolean;
   monthOptional?: boolean;
-  onBlur?: boolean;
+  validateAll?: boolean;
 }
 
 export function validate({
@@ -192,7 +192,7 @@ export function validate({
   dayTouched,
   monthSelect,
   monthOptional,
-  onBlur,
+  validateAll,
 }: ValidateConfig): void {
   // Don't validate if all values are empty
   if (!year && !month && !day) {
@@ -246,23 +246,23 @@ export function validate({
   // Check for empty values after the fields are touched
   let emptyFields = false;
 
-  if (!month && monthTouched && onBlur) {
+  if (!month && monthTouched) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
     emptyFields = true;
   }
-  if (!day && !monthYearOnly && dayTouched && onBlur) {
+  if (!day && !monthYearOnly && dayTouched) {
     component.invalidDay = true;
     component.error = 'day-range';
     emptyFields = true;
   }
-  if (!year && yearTouched && onBlur) {
+  if (!year && yearTouched) {
     component.invalidYear = true;
     component.error = 'year-range';
     emptyFields = true;
   }
 
-  if (emptyFields) {
+  if (emptyFields && monthTouched && dayTouched && yearTouched) {
     return;
   }
 
@@ -293,7 +293,7 @@ export function validate({
   }
 
   // If month is selected but day and year have not been touched, set error for untouched fields
-  if (month && monthTouched && !dayTouched && !day && !year && !yearTouched && onBlur) {
+  if (month && monthTouched && !dayTouched && !day && !year && !yearTouched && validateAll) {
     if (!monthYearOnly) {
       component.invalidDay = true;
       component.error = 'date-error';
@@ -305,7 +305,7 @@ export function validate({
   }
 
   // If month and day is set but year has not been touched, set error
-  if (month && monthTouched && day && dayTouched && !year && !yearTouched && onBlur) {
+  if (month && monthTouched && day && dayTouched && !year && !yearTouched && validateAll) {
     component.invalidYear = true;
     component.error = 'date-error';
     return;

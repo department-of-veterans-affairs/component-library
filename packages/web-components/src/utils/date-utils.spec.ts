@@ -137,9 +137,9 @@ describe('validate', () => {
       const month = null;
       const day = 1;
       const monthTouched = true;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, month, day, monthTouched, onBlur });
+      validate({ component: memorableDateComponent, year, month, day, monthTouched, validateAll });
 
       expect(memorableDateComponent.error).toEqual(`month-range`);
       expect(memorableDateComponent.invalidYear).toEqual(false);
@@ -153,9 +153,9 @@ describe('validate', () => {
       const month = 1;
       const day = null;
       const dayTouched = true;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, month, day, dayTouched, onBlur} );
+      validate({ component: memorableDateComponent, year, month, day, dayTouched, validateAll} );
 
       expect(memorableDateComponent.error).toEqual(`day-range`);
       expect(memorableDateComponent.invalidYear).toEqual(false);
@@ -169,9 +169,9 @@ describe('validate', () => {
       const month = 1;
       const day = 1;
       const yearTouched = true;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, month, day, yearTouched, onBlur} );
+      validate({ component: memorableDateComponent, year, month, day, yearTouched, validateAll} );
 
       expect(memorableDateComponent.error).toEqual(`year-range`);
       expect(memorableDateComponent.invalidYear).toEqual(true);
@@ -232,9 +232,9 @@ describe('validate', () => {
       const month = 0;
       const day = 1;
       const monthTouched = true;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, month, day, monthTouched, onBlur} );
+      validate({ component: memorableDateComponent, year, month, day, monthTouched, validateAll} );
 
       expect(memorableDateComponent.error).toEqual('month-range');
       expect(memorableDateComponent.invalidYear).toEqual(false);
@@ -276,9 +276,9 @@ describe('validate', () => {
       const month = 1;
       const day = 0;
       const dayTouched = true;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, month, day, dayTouched, onBlur} );
+      validate({ component: memorableDateComponent, year, month, day, dayTouched, validateAll} );
 
       expect(memorableDateComponent.error).toEqual('day-range');
       expect(memorableDateComponent.invalidYear).toEqual(false);
@@ -310,9 +310,9 @@ describe('validate', () => {
       const day = null;
       const dayTouched = false;
       const monthYearOnly = false;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, yearTouched, month, monthTouched, day, dayTouched, monthYearOnly, onBlur} );
+      validate({ component: memorableDateComponent, year, yearTouched, month, monthTouched, day, dayTouched, monthYearOnly, validateAll} );
       expect(memorableDateComponent.invalidDay).toBe(true);
       expect(memorableDateComponent.error).toBe('date-error');
     });
@@ -326,9 +326,9 @@ describe('validate', () => {
       const day = 1;
       const dayTouched = true;
       const monthYearOnly = false;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, yearTouched, month, monthTouched, day, dayTouched, monthYearOnly, onBlur} );
+      validate({ component: memorableDateComponent, year, yearTouched, month, monthTouched, day, dayTouched, monthYearOnly, validateAll} );
       expect(memorableDateComponent.invalidYear).toBe(true);
       expect(memorableDateComponent.error).toBe('date-error');
     });
@@ -342,9 +342,9 @@ describe('validate', () => {
       const day = null;
       const dayTouched = false;
       const monthYearOnly = true;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, yearTouched, month, monthTouched, day, dayTouched, monthYearOnly, onBlur} );
+      validate({ component: memorableDateComponent, year, yearTouched, month, monthTouched, day, dayTouched, monthYearOnly, validateAll} );
       expect(memorableDateComponent.error).toBe('date-error');
     });
   });
@@ -392,9 +392,9 @@ describe('validate', () => {
       const yearTouched = true;
       const monthTouched = true;
       const dayTouched = true;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched, onBlur});
+      validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched, validateAll});
 
       expect(memorableDateComponent.error).toEqual('month-range');
       expect(memorableDateComponent.invalidYear).toEqual(false);
@@ -411,9 +411,9 @@ describe('validate', () => {
       const yearTouched = true;
       const monthTouched = true;
       const dayTouched = true;
-      const onBlur = true;
+      const validateAll = true;
 
-      validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched, onBlur});
+      validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched, validateAll});
 
       expect(memorableDateComponent.error).toEqual('month-range');
       expect(memorableDateComponent.invalidYear).toEqual(false);
