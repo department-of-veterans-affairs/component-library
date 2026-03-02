@@ -7,35 +7,38 @@
 */
 
 @use '../../override-function' as *;
-@use '../../mixins' as s;
+@use '../../../../dist/tokens/scss/variables.scss' as tokens;
+@use "../../mixins" as *;
+@use '../core/utilities' as util;
+@use '../variables' as fo-vars;
 
 .usa-sidenav-list {
-    @include usa-sidenav-list;
+    @include util.usa-sidenav-list;
     border-bottom: 1px solid;
     border-top: 1px solid;
   
-    @include media($large-screen) {
+    @include media(tokens.$large-screen) {
       border-bottom: none;
       border-top: none;
     }
   
     .usa-grid & {
-      @include s.margin(null (-$site-margins-mobile) null (-$site-margins-mobile));
-  
-      @include media($medium-screen) {
-        @include s.margin(null 0);
+      @include margin(null scale-rem(-1.5rem) null scale-rem(-1.5rem));
+
+      @include media(tokens.$medium-screen) {
+        @include margin(null 0);
       }
     }
   }
   
   .usa-sidenav-sub_list {
-    @include usa-sidenav-sublist;
+    @include util.usa-sidenav-sublist;
   }
   
   .usa-layout-docs-sidenav {
     padding-top: scale-rem(2.4rem);
   
-    @include media($large-screen) {
+    @include media(tokens.$large-screen) {
       padding-top: 0;
     }
   }

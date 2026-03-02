@@ -19,6 +19,17 @@ const defaultArgs = {
   'button-type': 'change-file',
 };
 
+const buttonIconArgTypes = propStructure(buttonIconDocs);
+buttonIconArgTypes['button-type'] = {
+  ...buttonIconArgTypes['button-type'],
+  options: ['cancel', 'change-file', 'delete'],
+  control: { type: 'select' },
+  table: {
+    ...buttonIconArgTypes['button-type'].table,
+    type: { summary: '"cancel" | "change-file" | "delete"' },
+  },
+};
+
 const Template = ({
   'disable-analytics': disableAnalytics,
   label,
@@ -39,7 +50,7 @@ export const ChangeFile = Template.bind(null);
 ChangeFile.args = {
   ...defaultArgs,
 };
-ChangeFile.argTypes = propStructure(buttonIconDocs);
+ChangeFile.argTypes = buttonIconArgTypes;
 
 export const Delete = Template.bind(null);
 Delete.args = {

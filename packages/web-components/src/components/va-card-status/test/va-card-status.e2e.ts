@@ -4,8 +4,8 @@ describe('<va-card-status />', () => {
   it('renders the header text with the correct header level', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-card-status 
-        header-text="Hello" 
+      <va-card-status
+        header-text="Hello"
         header-level="2"
         link-href="/home"
         link-text="Go Home">
@@ -23,7 +23,7 @@ describe('<va-card-status />', () => {
   it('renders the required text when required=true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-card-status 
+      <va-card-status
         header-text="Label"
         link-href="/home"
         link-text="Go Home"
@@ -39,9 +39,9 @@ describe('<va-card-status />', () => {
   it('renders tag status when tagText + tagStatus are provided', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-card-status 
-        header-text="Test" 
-        tag-text="Info" 
+      <va-card-status
+        header-text="Test"
+        tag-text="Info"
         tag-status="info"
         link-href="/home"
         link-text="Go Home">
@@ -57,7 +57,7 @@ describe('<va-card-status />', () => {
   it('does NOT set the error attribute when error is empty', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-card-status 
+      <va-card-status
         header-text="Title"
         link-href="/home"
         link-text="Go Home">
@@ -72,7 +72,7 @@ describe('<va-card-status />', () => {
   it('renders a link when linkHref and linkText are provided', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-card-status 
+      <va-card-status
         header-text="Title"
         link-href="/home"
         link-text="Go Home">
@@ -139,5 +139,16 @@ describe('<va-card-status />', () => {
       'va-card-status >>> va-link-action >>> #link-description',
     );
     expect(vaLink.innerText).toBe('Error: Missing info');
+  });
+
+  it('does not render the component if required props are not passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-card-status></va-card-status>
+    `);
+    await page.waitForChanges();
+
+    const cardStatus = await page.find('va-card-status >>> .va-card-status__wrapper');
+    expect(cardStatus).toBeNull();
   });
 });

@@ -55,7 +55,7 @@ if (Build.isTesting) {
 export class VaAccordion {
   @Element() el!: any;
   accordionContainer: HTMLDivElement;
-  expandCollapseBtn!: HTMLButtonElement;
+  expandCollapseBtn!: HTMLVaButtonIconElement | HTMLButtonElement;
 
   @State() expanded = false;
   @State() collapsed = true;
@@ -250,28 +250,24 @@ export class VaAccordion {
           {(!openSingle && !isInsideSearchFilter) ? (
             <ul class="expand-collapse-list">
               <li>
-                <button
+                <va-button-icon
                   class="va-accordion__button"
                   data-testid="expand-all-accordions"
-                  ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+                  ref={el => (this.expandCollapseBtn = el as HTMLVaButtonIconElement)}
                   onClick={() => this.expandCollapseAll(true)}
-                  aria-pressed={this.expanded ? 'true' : 'false'}
-                  aria-label={i18next.t('expand-all-aria-label')}
-                >
-                  {i18next.t('expand-all')}
-                </button>
+                  label={i18next.t('expand-all-aria-label')}
+                  buttonType="expand"
+                ></va-button-icon>
               </li>
               <li>
-                <button
+                <va-button-icon
                   class="va-accordion__button"
                   data-testid="collapse-all-accordions"
-                  ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+                  ref={el => (this.expandCollapseBtn = el as HTMLVaButtonIconElement)}
                   onClick={() => this.expandCollapseAll(false)}
-                  aria-pressed={this.collapsed ? 'true' : 'false'}
-                  aria-label={i18next.t('collapse-all-aria-label')}
-                >
-                  {i18next.t('collapse-all')}
-                </button>
+                  label={i18next.t('collapse-all-aria-label')}
+                  buttonType="collapse"
+                ></va-button-icon>
               </li>
             </ul>
           ) : null}

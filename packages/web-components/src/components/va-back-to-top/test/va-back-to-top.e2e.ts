@@ -73,6 +73,7 @@ describe('va-back-to-top', () => {
 
     // 1000px scrolled + 200px viewport height means that the dock is in the viewport
     await page.mouse.wheel({ deltaY: pastPlaceholder });
+    await new Promise(r => setTimeout(r, 100));
     await page.waitForChanges();
 
     expect(await wrapper.isIntersectingViewport()).toEqual(true);

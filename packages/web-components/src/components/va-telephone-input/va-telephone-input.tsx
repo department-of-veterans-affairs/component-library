@@ -453,7 +453,7 @@ export class VaTelephoneInput {
             <span id="error-message" role="alert">
               {visibleError && visibleError}
             </span>
-            <div class="va-input-telephone-wrapper" tabIndex={0}>
+            <div class="va-input-telephone-wrapper">
               { !noCountry &&
               <va-combo-box
                 label="Country code"

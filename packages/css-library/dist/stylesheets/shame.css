@@ -3,14 +3,6 @@
   ***THIS IS USWDS v1***
 */
 /**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
-/**
   /uswds/dist/scss/lib/addons/_margin.scss
 **/
 /**
@@ -146,10 +138,6 @@ fieldset {
   background-size: 100%;
 }
 
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
 body .row {
   max-width: 62.5em;
   margin: 0 auto;

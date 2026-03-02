@@ -5,7 +5,7 @@
   Original: @import "~uswds/src/stylesheets/elements/inputs";
   ***THIS IS USWDS v1***
 */
-
+@use "sass:math";
 @use '../../override-function' as *;
 @use "../../../../dist/tokens/scss/variables" as tok;
 @use "../../core-variables" as core-vars;
@@ -29,7 +29,7 @@ $input-height-exact: (
 
 // truncated to 1 decimal place
 // (i.e., 1.21rem -> 1.2rem)
-$input-height: calc(floor($input-height-exact * 10) / 10);
+$input-height: calc(math.floor($input-height-exact * 10) / 10);
 
 // Block form elements
 /* stylelint-disable selector-no-qualifying-type */
@@ -211,7 +211,7 @@ legend {
 [type=checkbox] + label::before,
 [type=radio] + label::before {
   background: tok.$vads-color-white;
-  content: '\a0';
+  content: '\00a0';
   display: inline-block;
   text-indent: 0.15em;
   vertical-align: middle\0; // Target IE 11 and below to vertically center inputs

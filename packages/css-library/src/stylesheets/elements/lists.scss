@@ -1,5 +1,5 @@
-@import 'uswds-core/src/styles/mixins/typography/usa-list';
-@import 'uswds-core/src/styles/mixins/typography/unstyled-list';
+@use 'uswds-core/src/styles/mixins/typography/usa-list' as *;
+@use 'uswds-core/src/styles/mixins/typography/unstyled-list' as *;
 
 ul, ol {
     @include usa-list;

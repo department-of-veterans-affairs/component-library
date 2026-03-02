@@ -1,8 +1,4 @@
 @charset "UTF-8";
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
 .va-pagination {
   border-top: 1px solid #f1f1f1;
   font-size: 0.9em;

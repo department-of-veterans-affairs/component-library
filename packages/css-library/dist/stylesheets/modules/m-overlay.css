@@ -1,7 +1,3 @@
-/**
-  Variables ported over from Formation so that we can keep those stylesheets
-  working while we work on deprecation.
-**/
 .va-overlay {
   background: rgba(50, 58, 69, 0.8);
   height: 100%;

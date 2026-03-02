@@ -121,9 +121,10 @@ export class VaLanguageToggle {
 
   render() {
     const { language, urls } = this;
+    const currentLangLabel = urls.find(url => url.lang === language)?.label || 'English';
     return (
       <Host>
-        <div role="group" aria-label="Language selection">
+        <div role="group" aria-label={`Language selection ${currentLangLabel}`}>
         {urls.map(({href, lang, label}, i) => {
           const anchorClass = classNames({
             'is-current-lang': lang === language
@@ -139,7 +140,7 @@ export class VaLanguageToggle {
                 href={href}
                 hrefLang={lang}
                 onClick={(e) => this.handleToggle(e, lang, label)}
-                aria-current={"language"}
+                aria-current="true"
               >
                 {label}
               </a>

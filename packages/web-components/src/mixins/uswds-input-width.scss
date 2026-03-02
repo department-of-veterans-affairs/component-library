@@ -1,25 +1,46 @@
+@use "~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables" as tokens;
+
+$system-input-widths: (
+  '2xs': 5ex,
+  'xs': 9ex,
+  'sm': 13ex,
+  'small': 13ex,
+  'md': 20ex,
+  'medium': 20ex,
+  'lg': 30ex,
+  'xl': 40ex,
+  '2xl': 50ex,
+);
+
+// TODO: Add this @use and remove the $system-input-widths map above
+// when USWDS is updated to v3.11.0+. At that version, the 
+// $system-input-widths map will be available in the uswds-core package.
+// 
+// @use 'uswds-core' as *;
+
 :host .usa-input {
-  &--2xs {
-    max-width: 5ex;
+  @each $size, $width in $system-input-widths {
+    &--#{$size} {
+      max-width: $width;
+    }
   }
-  &--xs {
-    max-width: 9ex;
-  }
-  &--sm,
-  &--small {
-    max-width: 13ex;
-  }
-  &--md,
-  &--medium {
-    max-width: 20ex;
-  }
-  &--lg {
-    max-width: 30ex;
-  }
-  &--xl {
-    max-width: 40ex;
-  }
-  &--2xl {
-    max-width: 50ex;
+}
+
+/**
+ * The va-sort component only supports the following width values:
+ * md, medium, lg, xl
+ */
+:host .va-select__sort-container {
+  @each $size in ('md', 'medium', 'lg', 'xl') {
+    &--#{$size} {
+      max-width: 100%;
+
+      // at tablet breakpoint, the flex-direction changes so we will need
+      // flex-basis instead of max-width in order to adjust the width
+      @media (min-width: tokens.$tablet) {
+        max-width: none;
+        flex-basis: map-get($system-input-widths, $size);
+      }
+    }
   }
 }

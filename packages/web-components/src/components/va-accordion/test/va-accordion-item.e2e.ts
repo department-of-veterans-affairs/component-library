@@ -60,10 +60,10 @@ describe('va-accordion-item', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion-item header="The header" level="2">
-        <va-alert>
+        <div class="nested-element">
           <h4 slot="headline">Nested Header</h4>
           Content with nested headline slot
-        </va-alert>
+        </div>
         Some accordion content
       </va-accordion-item>
     `);
@@ -71,7 +71,7 @@ describe('va-accordion-item', () => {
     const element = await page.find('va-accordion-item');
     const header = element.shadowRoot.childNodes[0].childNodes[0];
     
-    // Should use the direct child h3, not the nested h4
+    // Should use the direct child h2, not the nested h4
     expect(header.nodeName).toEqual('H2');
     
     // The header text should be from the direct child only

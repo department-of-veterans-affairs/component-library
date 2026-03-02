@@ -23,11 +23,11 @@ import '@department-of-veterans-affairs/css-library/dist/stylesheets/modules/m-n
 import '@department-of-veterans-affairs/css-library/dist/stylesheets/shame.css';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
-import { allModes } from "./modes";
 import {
   applyPolyfills,
   defineCustomElements,
 } from '@department-of-veterans-affairs/component-library';
+import { allModes } from './modes';
 
 applyPolyfills().then(() => {
   defineCustomElements();
@@ -58,43 +58,51 @@ applyPolyfills().then(() => {
 })();
 
 const viewports = {
-  xsmall: {
-    name: 'XSmall Screen',
+  mobile: {
+    name: '320px - VADS Mobile',
     styles: {
       height: '568px',
       width: '320px',
     },
     type: 'mobile',
   },
-  small: {
-    name: 'Small Screen',
+  mobileLg: {
+    name: '480px - VADS Large Mobile',
     styles: {
       height: '896px',
-      width: '481px',
+      width: '480px',
     },
     type: 'mobile',
   },
-  medium: {
-    name: 'Medium',
+  tablet: {
+    name: '640px - VADS Tablet',
     styles: {
-      height: '1112px',
-      width: '768px',
+      height: '1136px',
+      width: '640px',
     },
     type: 'tablet',
   },
-  smallDesktop: {
-    name: 'Small Desktop',
+  desktop: {
+    name: '1024px - VADS Desktop',
     styles: {
-      height: '1400px',
+      height: '',
       width: '1024px',
     },
     type: 'desktop',
   },
-  large: {
-    name: 'Large',
+  desktopLg: {
+    name: '1200px - VADS Large Desktop',
     styles: {
-      height: '1600px',
-      width: '1201px',
+      height: '',
+      width: '1200px',
+    },
+    type: 'desktop',
+  },
+  widescreen: {
+    name: '1400px - VADS Widescreen',
+    styles: {
+      height: '',
+      width: '1400px',
     },
     type: 'desktop',
   },
@@ -105,6 +113,14 @@ export const parameters = {
 
   controls: {
     sort: 'alpha',
+  },
+
+  // Apply Chromatic modes globally to ALL stories
+  chromatic: {
+    modes: {
+      mobile: allModes['mobile'],
+      desktop: allModes['desktop'],
+    },
   },
 
   options: {
@@ -122,7 +138,7 @@ export const parameters = {
   },
 
   viewport: {
-    options: viewports,
+    options: { ...viewports },
   },
 
   viewMode: 'docs',
@@ -135,22 +151,17 @@ export const parameters = {
   },
 };
 
-export const initialGlobals = {
-  viewport: { value: 'small' },
-};
-
 export const decorators = [
-  (Story, { parameters }) => 
-  {
+  (Story, { parameters }) => {
     const pageLayout = parameters.storyType;
     switch (pageLayout) {
       case 'form':
         return (
-          <div className='sb-type--form'>
+          <div className="sb-type--form">
             <Story />
           </div>
         );
-      default: 
+      default:
         return (
           <div>
             <Story />
@@ -166,7 +177,7 @@ const observeDocsRoot = () => {
   const targetNode = document.getElementById('docs-root');
 
   // Configuration options for the observer
-  const config = {attributes: true, childList: false, subtree: false}
+  const config = { attributes: true, childList: false, subtree: false };
 
   // Callback function that 'resets' the aria-hidden attribute to false
   const callback = (
@@ -184,7 +195,7 @@ const observeDocsRoot = () => {
 
   // Start observing
   if (targetNode) observer.observe(targetNode, config);
-}
+};
 
 document.body.onload = function () {
   observeDocsRoot();

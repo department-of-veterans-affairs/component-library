@@ -434,11 +434,11 @@ export namespace Components {
          */
         "headerText": string;
         /**
-          * Set the href for the card link.
+          * Sets the href for the card link.
          */
         "linkHref": string;
         /**
-          * Set the text for the card link.
+          * Sets the text for the card link.
          */
         "linkText": string;
         /**
@@ -446,7 +446,7 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Text to be displayed in the card subheader.  Heading level will be +1 of headerLevel Prop.
+          * Text to be displayed in the card subheader. Heading level will be +1 of headerLevel Prop.
          */
         "subheaderText": string;
         /**
@@ -1869,6 +1869,14 @@ export namespace Components {
           * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
+        /**
+          * Header text to display at the top of the side navigation mobile view. If not provided, it will default to "Related pages menu".
+         */
+        "mobileHeader"?: string;
+        /**
+          * Aria label for the nav element that wraps the side navigation links. If not provided, it will default to "Related pages menu".
+         */
+        "navAriaLabel"?: string;
     }
     interface VaSidenavItem {
         /**
@@ -1905,6 +1913,33 @@ export namespace Components {
           * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
          */
         "routerLink"?: boolean;
+    }
+    /**
+     * @componentName Sort
+     * @maturityCategory caution
+     * @maturityLevel available
+     */
+    interface VaSort {
+        /**
+          * Whether or not to fire the analytics events
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name": string;
+        /**
+          * The selected value.
+         */
+        "value"?: string;
+        /**
+          * Displays the select at a specific width. Accepts md or medium (20ex), lg (30ex), xl (40ex).
+         */
+        "width": string;
     }
     /**
      * @componentName Statement of truth
@@ -2588,6 +2623,10 @@ export interface VaSidenavSubmenuCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaSidenavSubmenuElement;
 }
+export interface VaSortCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSortElement;
+}
 export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaStatementOfTruthElement;
@@ -3071,6 +3110,7 @@ declare global {
     };
     interface HTMLVaFileInputMultipleElementEventMap {
         "vaMultipleChange": any;
+        "vaMultipleError": any;
     }
     /**
      * A component that manages multiple file inputs, allowing users to upload several files.
@@ -3698,6 +3738,31 @@ declare global {
         prototype: HTMLVaSidenavSubmenuElement;
         new (): HTMLVaSidenavSubmenuElement;
     };
+    interface HTMLVaSortElementEventMap {
+        "vaSortKeyDown": any;
+        "vaSortSelect": any;
+        "vaSortSelectBlur": any;
+        "component-library-analytics": any;
+    }
+    /**
+     * @componentName Sort
+     * @maturityCategory caution
+     * @maturityLevel available
+     */
+    interface HTMLVaSortElement extends Components.VaSort, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVaSortElementEventMap>(type: K, listener: (this: HTMLVaSortElement, ev: VaSortCustomEvent<HTMLVaSortElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVaSortElementEventMap>(type: K, listener: (this: HTMLVaSortElement, ev: VaSortCustomEvent<HTMLVaSortElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVaSortElement: {
+        prototype: HTMLVaSortElement;
+        new (): HTMLVaSortElement;
+    };
     interface HTMLVaStatementOfTruthElementEventMap {
         "vaInputChange": any;
         "vaInputBlur": any;
@@ -3976,6 +4041,7 @@ declare global {
         "va-sidenav": HTMLVaSidenavElement;
         "va-sidenav-item": HTMLVaSidenavItemElement;
         "va-sidenav-submenu": HTMLVaSidenavSubmenuElement;
+        "va-sort": HTMLVaSortElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
         "va-tab-item": HTMLVaTabItemElement;
@@ -4478,21 +4544,21 @@ declare namespace LocalJSX {
         /**
           * Text to be displayed in the card header.
          */
-        "headerText"?: string;
+        "headerText": string;
         /**
-          * Set the href for the card link.
+          * Sets the href for the card link.
          */
-        "linkHref"?: string;
+        "linkHref": string;
         /**
-          * Set the text for the card link.
+          * Sets the text for the card link.
          */
-        "linkText"?: string;
+        "linkText": string;
         /**
           * Sets the card to required and renders the (*Required) text.
          */
         "required"?: boolean;
         /**
-          * Text to be displayed in the card subheader.  Heading level will be +1 of headerLevel Prop.
+          * Text to be displayed in the card subheader. Heading level will be +1 of headerLevel Prop.
          */
         "subheaderText"?: string;
         /**
@@ -4952,6 +5018,10 @@ declare namespace LocalJSX {
           * Event emitted when any change to the file inputs occurs.  Sends back an object with the following data structure: `{ action: string, file: triggering file, state: files array }`  The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
+        /**
+          * Event emitted when an error is emitted from a va-file-input child component. This allows the parent component to be aware of which file input has an error, and what the error is.  Sends back an object with the following data structure: `{ action: 'FILE_ERROR', error: error message, file: triggering file, index: index of the file in the files array, state: files array }`
+         */
+        "onVaMultipleError"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
           * Array of password error messages corresponding to each file input. The length and order match the files array.
          */
@@ -6111,6 +6181,14 @@ declare namespace LocalJSX {
           * The [icon name](https://design.va.gov/components/icon) for the icon that will display to the left of the header text. The `icon-background-color` prop must be set too.
          */
         "iconName"?: string;
+        /**
+          * Header text to display at the top of the side navigation mobile view. If not provided, it will default to "Related pages menu".
+         */
+        "mobileHeader"?: string;
+        /**
+          * Aria label for the nav element that wraps the side navigation links. If not provided, it will default to "Related pages menu".
+         */
+        "navAriaLabel"?: string;
     }
     interface VaSidenavItem {
         /**
@@ -6155,6 +6233,49 @@ declare namespace LocalJSX {
           * When set, native link routing behavior will be disabled with `preventDefault` and the `vaRouteChange` event will fire.
          */
         "routerLink"?: boolean;
+    }
+    /**
+     * @componentName Sort
+     * @maturityCategory caution
+     * @maturityLevel available
+     */
+    interface VaSort {
+        /**
+          * Whether or not to fire the analytics events
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when an option is selected and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: VaSortCustomEvent<any>) => void;
+        /**
+          * The event attached to select's onkeydown
+         */
+        "onVaSortKeyDown"?: (event: VaSortCustomEvent<any>) => void;
+        /**
+          * The event emitted when the selected value changes
+         */
+        "onVaSortSelect"?: (event: VaSortCustomEvent<any>) => void;
+        /**
+          * The event emitted when the select element is blurred
+         */
+        "onVaSortSelectBlur"?: (event: VaSortCustomEvent<any>) => void;
+        /**
+          * The selected value.
+         */
+        "value"?: string;
+        /**
+          * Displays the select at a specific width. Accepts md or medium (20ex), lg (30ex), xl (40ex).
+         */
+        "width"?: string;
     }
     /**
      * @componentName Statement of truth
@@ -6780,6 +6901,7 @@ declare namespace LocalJSX {
         "va-sidenav": VaSidenav;
         "va-sidenav-item": VaSidenavItem;
         "va-sidenav-submenu": VaSidenavSubmenu;
+        "va-sort": VaSort;
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
         "va-tab-item": VaTabItem;
@@ -7151,6 +7273,12 @@ declare module "@stencil/core" {
             "va-sidenav": LocalJSX.VaSidenav & JSXBase.HTMLAttributes<HTMLVaSidenavElement>;
             "va-sidenav-item": LocalJSX.VaSidenavItem & JSXBase.HTMLAttributes<HTMLVaSidenavItemElement>;
             "va-sidenav-submenu": LocalJSX.VaSidenavSubmenu & JSXBase.HTMLAttributes<HTMLVaSidenavSubmenuElement>;
+            /**
+             * @componentName Sort
+             * @maturityCategory caution
+             * @maturityLevel available
+             */
+            "va-sort": LocalJSX.VaSort & JSXBase.HTMLAttributes<HTMLVaSortElement>;
             /**
              * @componentName Statement of truth
              * @maturityCategory use
