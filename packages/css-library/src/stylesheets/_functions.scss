@@ -15,7 +15,7 @@
   }
 
   $val: map.get($units, $unit) ;
-  $remVal: $val + rem;
+  $remVal: #{$val}rem;
   @return scale-rem($remVal);
 }
 
@@ -29,5 +29,5 @@
   }
 
   $val: map.get($units, $unit) ;
-  @return ($val * 10) + px;
+  @return #{$val * 10}px;
 }

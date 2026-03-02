@@ -160,7 +160,7 @@ $unit-types: (
         @if (map.get($val-parts, unit) == rem) {
             $rem-number: string.slice($val, 0, -4);
             $scaled-rem: map.get($val-parts, number) * $coeff ;
-            $scaled-values: list.append($scaled-values, $scaled-rem + rem);
+            $scaled-values: list.append($scaled-values, $scaled-rem * 1rem);
         } @else {
             $scaled-values: list.append($scaled-values,
             map.get($val-parts, joint), $separator);
