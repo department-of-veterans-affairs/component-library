@@ -33,7 +33,7 @@
 
       &:focus {
         outline: 2px solid var(--vads-color-action-focus-on-light);
-        outline-offset: 0.25rem;
+        outline-offset: calc(-1 * var(--vads-spacing-2px));
       }
 
       va-icon.va-details__icon {
