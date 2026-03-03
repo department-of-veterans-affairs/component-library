@@ -52,7 +52,7 @@ export class VaButtonIcon {
     // eslint-disable-next-line i18next/no-literal-string
     'collapse': { icon: 'remove', text: i18next.t('collapse-all') },
   };
-  @Prop() buttonType: keyof typeof this.buttonTypeMap;
+  @Prop({reflect: true}) buttonType: keyof typeof this.buttonTypeMap;
 
   /**
    * The event used to track usage of the component.
