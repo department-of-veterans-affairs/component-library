@@ -25,7 +25,6 @@ export default {
 };
 
 const defaultArgs = {
-  'disable-analytics': false,
   label: 'Learn more about military addresses',
   open: false,
   width: undefined,
@@ -37,7 +36,6 @@ const Template = (args) => {
       label={args.label}
       open={args.open}
       width={args.width}
-      disableAnalytics={args['disable-analytics']}
     >
       The United States is automatically chosen as your country if you live on a
       military base outside of the country.
@@ -60,7 +58,6 @@ const WithElementContentTemplate = (args) => {
       label={args.label}
       open={args.open}
       width={args.width}
-      disableAnalytics={args['disable-analytics']}
     >
       <p>Here are some popular pets to consider</p>
       <ul>
@@ -86,7 +83,6 @@ const WidthsTemplate = (args) => {
         label='This details component has a width of xl'
         open={args.open}
         width={args.width || 'xl'}
-        disableAnalytics={args['disable-analytics']}
       >
         The value of "xl" sets the width of the details component to 40ex.
       </VaDetails>
@@ -94,7 +90,6 @@ const WidthsTemplate = (args) => {
         label='This details component has a width of 2xl'
         open={args.open}
         width={args.width || '2xl'}
-        disableAnalytics={args['disable-analytics']}
       >
         The value of "2xl" sets the width of the details component to 50ex.
       </VaDetails>
