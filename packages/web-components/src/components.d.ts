@@ -743,7 +743,7 @@ export namespace Components {
         /**
           * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
          */
-        "width"?: string;
+        "width"?: 'xl' | '2xl' | undefined;
     }
     /**
      * @componentName File input
@@ -4924,7 +4924,7 @@ declare namespace LocalJSX {
         /**
           * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
          */
-        "width"?: string;
+        "width"?: 'xl' | '2xl' | undefined;
     }
     /**
      * @componentName File input

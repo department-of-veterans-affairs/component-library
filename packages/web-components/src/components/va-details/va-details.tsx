@@ -35,7 +35,7 @@ export class VaDetails {
   /**
    * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
    */
-  @Prop() width?: string;
+  @Prop() width?: 'xl' | '2xl' | undefined;
 
   /**
    * A flag to indicate whether the first node in the slot is an element or not.
@@ -66,9 +66,11 @@ export class VaDetails {
 
     if (!label) { return null; }
 
+    const validatedWidth = ['xl', '2xl'].includes(width) ? width : undefined;
+
     const detailsClass = classNames({
       'va-details': true,
-      [`usa-input--${width}`]: ['xl', '2xl'].includes(width),
+      [`usa-input--${validatedWidth}`]: ['xl', '2xl'].includes(validatedWidth),
     });
 
     const contentContainerClass = classNames({
