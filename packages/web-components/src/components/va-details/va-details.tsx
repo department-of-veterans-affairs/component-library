@@ -46,7 +46,7 @@ export class VaDetails {
   /**
    * When the slot changes check if the first child of the slot is an element
    * rather than text, and set a flag to true if it is. This is used to
-   * conditionally apply a class to the content container that removes extra
+   * conditionally apply a class to the content container that adds extra top
    * padding.
    * @returns {void}
    */
