@@ -737,10 +737,6 @@ export namespace Components {
          */
         "label": string;
         /**
-          * Value to reflect on the details element to control whether the details element is open or not.
-         */
-        "open"?: boolean;
-        /**
           * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
          */
         "width"?: 'xl' | '2xl' | undefined;
@@ -4917,10 +4913,6 @@ declare namespace LocalJSX {
           * The text for the summary element that triggers the details to expand.
          */
         "label": string;
-        /**
-          * Value to reflect on the details element to control whether the details element is open or not.
-         */
-        "open"?: boolean;
         /**
           * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
          */

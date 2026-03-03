@@ -26,7 +26,6 @@ export default {
 
 const defaultArgs = {
   label: 'Learn more about military addresses',
-  open: false,
   width: undefined,
 }
 
@@ -34,7 +33,6 @@ const Template = (args) => {
   return (
     <VaDetails
       label={args.label}
-      open={args.open}
       width={args.width}
     >
       The United States is automatically chosen as your country if you live on a
@@ -46,17 +44,32 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 
-export const Open = Template.bind({});
-Open.args = {
-  ...defaultArgs,
-  open: true,
-};
+const WidthsTemplate = (args) => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <VaDetails
+        label='This details component has a width of xl'
+        width={args.width || 'xl'}
+      >
+        The value of "xl" sets the width of the details component to 40ex.
+      </VaDetails>
+      <VaDetails
+        label='This details component has a width of 2xl'
+        width={args.width || '2xl'}
+      >
+        The value of "2xl" sets the width of the details component to 50ex.
+      </VaDetails>
+    </div>
+  )
+}
+
+export const Widths = WidthsTemplate.bind({});
+Widths.args = { ...defaultArgs };
 
 const WithElementContentTemplate = (args) => {
   return (
     <VaDetails
       label={args.label}
-      open={args.open}
       width={args.width}
     >
       <p>Here are some popular pets to consider</p>
@@ -75,27 +88,3 @@ WithElementContent.args = {
   ...defaultArgs,
   label: 'Summary label text',
 };
-
-const WidthsTemplate = (args) => {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <VaDetails
-        label='This details component has a width of xl'
-        open={args.open}
-        width={args.width || 'xl'}
-      >
-        The value of "xl" sets the width of the details component to 40ex.
-      </VaDetails>
-      <VaDetails
-        label='This details component has a width of 2xl'
-        open={args.open}
-        width={args.width || '2xl'}
-      >
-        The value of "2xl" sets the width of the details component to 50ex.
-      </VaDetails>
-    </div>
-  )
-}
-
-export const Widths = WidthsTemplate.bind({});
-Widths.args = { ...defaultArgs };

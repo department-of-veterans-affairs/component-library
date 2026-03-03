@@ -23,11 +23,6 @@ export class VaDetails {
   @Element() el: HTMLElement;
 
   /**
-   * Value to reflect on the details element to control whether the details element is open or not.
-   */
-  @Prop({ reflect: true }) open?: boolean = false;
-
-  /**
    * The text for the summary element that triggers the details to expand.
    */
   @Prop() label!: string;
@@ -62,7 +57,7 @@ export class VaDetails {
   }
 
   render() {
-    const { open, label, width } = this;
+    const { label, width } = this;
 
     if (!label) { return null; }
 
@@ -80,7 +75,7 @@ export class VaDetails {
 
     return (
       <Host>
-        <details class={detailsClass} open={open}>
+        <details class={detailsClass}>
           <summary class="va-details__summary">
             <va-icon class="va-details__icon" icon="chevron_right"></va-icon>
             {label}

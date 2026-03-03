@@ -77,19 +77,6 @@ describe('va-details', () => {
     expect(detailsEl).not.toHaveAttribute('open');
   });
 
-  it('is open on render when the open prop is set', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `<va-details label="Details label" open>
-        Details content
-      </va-details>`,
-    );
-
-    const detailsEl = await page.find('va-details >>> details');
-
-    expect(detailsEl).toHaveAttribute('open');
-  });
-
   it('does not render if the label prop is not provided', async () => {
     const page = await newE2EPage();
     await page.setContent(
