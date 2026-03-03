@@ -6,6 +6,7 @@ import { i18next } from '../..';
  * @componentName Crisis Line Modal
  * @maturityCategory caution
  * @maturityLevel available
+ * @guidanceHref modal/crisis-line-modal
  **/
 
 @Component({
