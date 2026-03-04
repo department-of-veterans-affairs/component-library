@@ -27,7 +27,7 @@ $marketing-container-height: 380px;
       font-weight: bold;
 
       svg {
-        width: 15px;
+        width: 0.9375rem;
       }
     }
   }
@@ -95,7 +95,7 @@ $marketing-container-height: 380px;
     .vetnav-panel--submenu:not([hidden]) {
       position: absolute;
       box-shadow: none;
-      width: 260px;
+      width: 16.25rem;
       padding: 72px 0px 0px 28px;
       white-space: normal;
 
@@ -131,7 +131,7 @@ $marketing-container-height: 380px;
     .vetnav-panel {
       box-shadow: 0 7px 25px -11px $vads-color-black;
       height: $vetnav-panel-height-desktop;
-      width: 1008px;
+      width: 63rem;
       left: 0;
 
       .mm-links {
@@ -139,13 +139,13 @@ $marketing-container-height: 380px;
       }
 
       .mm-link-container {
-        width: 225px;
+        width: 14.0625rem;
         margin-bottom: 0;
       }
     }
 
     .column-one {
-      left: 20px;
+      left: 1.25rem;
 
       &.panel-white {
         background-color: $vads-color-white;
@@ -155,7 +155,7 @@ $marketing-container-height: 380px;
 
     .column-two {
       border-left: none;
-      left: 280px;
+      left: 17.5rem;
 
       &.panel-white {
         background-color: $vads-color-white;
@@ -166,12 +166,12 @@ $marketing-container-height: 380px;
     .column-three {
       border-left: none;
       color: $vads-color-black;
-      left: 540px;
+      left: 33.75rem;
       white-space: normal;
 
       &.vetnav-panel--submenu:not([hidden]) {
         padding: 86px 20px 20px 14px;
-        width: 240px;
+        width: 15rem;
 
         &.panel-white {
           padding-top: 30px;
@@ -213,7 +213,7 @@ $marketing-container-height: 380px;
   }
 
   .main-column {
-    left: -230px;
+    left: -14.375rem;
 
     &.panel-white {
       background-color: $vads-color-white;
@@ -316,8 +316,8 @@ $marketing-container-height: 380px;
     .panel-bottom-link {
       position: absolute;
       height: 60px;
-      width: $medium-screen - 297px;
-      left: 280px;
+      width: calc(#{$medium-screen} - 18.5625rem);
+      left: 17.5rem;
       border-bottom: 1px solid #d0d0d0;
       z-index: 3;
       top: 0;
@@ -330,7 +330,7 @@ $marketing-container-height: 380px;
 
         svg {
           height: 11px;
-          width: 11px;
+          width: 0.6875rem;
           margin-left: 5px;
           vertical-align: middle;
         }
@@ -346,15 +346,15 @@ $marketing-container-height: 380px;
 
     .panel-bottom-link {
       position: absolute;
-      width: $small-desktop-screen - 297px;
+      width: calc(#{$small-desktop-screen} - 18.5625rem);
     }
 
     .column-one {
-      width: 260px;
+      width: 16.25rem;
     }
 
     .column-two {
-      width: 260px;
+      width: 16.25rem;
     }
 
     .column-three {
