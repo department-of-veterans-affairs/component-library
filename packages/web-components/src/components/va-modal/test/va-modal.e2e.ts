@@ -527,7 +527,6 @@ describe('va-modal', () => {
         `);
 
         const cardContent = await page.find('#card-content');
-        //console.log(cardContent)
         expect(cardContent.getAttribute('aria-hidden')).toBe('true');
       });
 
