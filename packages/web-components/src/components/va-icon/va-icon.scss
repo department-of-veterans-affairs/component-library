@@ -3,6 +3,6 @@
 
 :host {
   display: inline-block;
-  line-height: 0;
+  line-height: 0 !important;
   vertical-align: bottom;
 }

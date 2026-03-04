@@ -11,12 +11,10 @@
     border-radius: var(--units-0p5);
 
     summary.va-details__summary {
-      position: relative;
       display: flex;
       align-items: center;
-      gap: 0.125rem;
+      gap: var(--units-0p5);
       padding: 0.125rem var(--units-0p5);
-      padding-left: var(--units-3);
       font-weight: var(--font-weight-bold);
       line-height: 1.25rem;
 
@@ -35,7 +33,6 @@
       }
 
       va-icon.va-details__icon {
-        position: absolute;
         left: var(--units-0p5);
         top: 0.219rem;
         transform: rotate(90deg);
