@@ -109,6 +109,25 @@ describe('va-details', () => {
     expect(contentContainer.classList.contains('va-details__content--element-child')).toBe(true);
   });
 
+  it('does not add the class to the content container when the first slotted node is text', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-details label="Details label">
+        Details content
+      </va-details>`,
+    );
+
+    // Wait until slotchange-driven class update has happened
+    await page.waitForFunction(() => {
+      const host = document.querySelector('va-details');
+      const content = host?.shadowRoot?.querySelector('.va-details__content');
+      return !content?.classList.contains('va-details__content--element-child');
+    });
+
+    const contentContainer = await page.find('va-details >>> .va-details__content');
+    expect(contentContainer.classList.contains('va-details__content--element-child')).toBe(false);
+  });
+
   it('adds a class for xl width when the width prop is set to xl', async () => {
     const page = await newE2EPage();
     await page.setContent(
