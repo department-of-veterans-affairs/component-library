@@ -65,7 +65,7 @@ export class VaDetails {
 
     const detailsClass = classNames({
       'va-details': true,
-      [`usa-input--${validatedWidth}`]: ['xl', '2xl'].includes(validatedWidth),
+      [`usa-input--${validatedWidth}`]: validatedWidth,
     });
 
     const contentContainerClass = classNames({
