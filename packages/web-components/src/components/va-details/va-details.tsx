@@ -67,6 +67,13 @@ export class VaDetails {
   /**
    * Handle toggle of the details element
    * Delay added to allow VoiceOver to announce state before DOM changes
+   *
+   * NOTE: This functionality is necessary to resolve a bug on iOS/Voiceover
+   * where the details element will not open from user interactions. From our
+   * testing, manually manipulating the open attribute of the element is the
+   * best way to get around this bug. If the bug within VoiceOver is resolved,
+   * we can remove this function and simply allow the details element to handle
+   * its own open state as it normally would.
    */
   private handleToggle = (e: Event): void => {
     e.preventDefault();
@@ -78,6 +85,13 @@ export class VaDetails {
 
   /**
    * Handle keyboard events for accessibility
+   *
+   * NOTE: This functionality is necessary to resolve a bug on iOS/Voiceover
+   * where the details element will not open from user interactions. From our
+   * testing, manually manipulating the open attribute of the element is the
+   * best way to get around this bug. If the bug within VoiceOver is resolved,
+   * we can remove this function and simply allow the details element to handle
+   * its own open state as it normally would.
    */
   private handleKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Enter' || event.key === ' ') {
