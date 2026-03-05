@@ -30,6 +30,6 @@
     "http-server": "14.1.1",
     "react-dom": "18.3.1",
     "sass-loader": "16.0.5",
-    "storybook": "10.1.10"
+    "storybook": "10.2.10"
   }
 }
