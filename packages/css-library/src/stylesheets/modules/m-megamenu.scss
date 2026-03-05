@@ -27,7 +27,7 @@ $marketing-container-height: 380px;
       font-weight: bold;
 
       svg {
-        width: 0.9375rem;
+        width: 15px;
       }
     }
   }
@@ -314,8 +314,8 @@ $marketing-container-height: 380px;
     .panel-bottom-link {
       position: absolute;
       height: 60px;
-      width: calc(#{$medium-screen} - 18.5625rem);
-      left: 17.5rem;
+      width: $medium-screen - 297px;
+      left: 280px;
       border-bottom: 1px solid #d0d0d0;
       z-index: 3;
       top: 0;
@@ -328,7 +328,7 @@ $marketing-container-height: 380px;
 
         svg {
           height: 11px;
-          width: 0.6875rem;
+          width: 11px;
           margin-left: 5px;
           vertical-align: middle;
         }
@@ -344,7 +344,7 @@ $marketing-container-height: 380px;
 
     .panel-bottom-link {
       position: absolute;
-      width: calc(#{$small-desktop-screen} - 18.5625rem);
+      width: $small-desktop-screen - 297px;
     }
 
     .column-one {

@@ -27,7 +27,7 @@
 }
 #mega-menu .panel-bottom-link a svg,
 .mega-menu .panel-bottom-link a svg {
-  width: 0.9375rem;
+  width: 15px;
 }
 #mega-menu .column-three,
 .mega-menu .column-three {
@@ -308,8 +308,8 @@
   .mega-menu .panel-bottom-link {
     position: absolute;
     height: 60px;
-    width: calc(768px - 18.5625rem);
-    left: 17.5rem;
+    width: 471px;
+    left: 280px;
     border-bottom: 1px solid #d0d0d0;
     z-index: 3;
     top: 0;
@@ -324,7 +324,7 @@
   #mega-menu .panel-bottom-link a svg,
   .mega-menu .panel-bottom-link a svg {
     height: 11px;
-    width: 0.6875rem;
+    width: 11px;
     margin-left: 5px;
     vertical-align: middle;
   }
@@ -338,7 +338,7 @@
   #mega-menu .panel-bottom-link,
   .mega-menu .panel-bottom-link {
     position: absolute;
-    width: calc(1024px - 18.5625rem);
+    width: 727px;
   }
   #mega-menu .column-one,
   .mega-menu .column-one {
