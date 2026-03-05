@@ -33,6 +33,14 @@ export class VaDetails {
   @Prop() width?: 'xl' | '2xl' | undefined;
 
   /**
+    * Internal open state.
+    *
+    * Note: this is intentionally not exposed as a public `@Prop` so downstream
+    * teams cannot control the open/closed state via attribute/property.
+   */
+    @State() isOpen: boolean = false;
+
+  /**
    * A flag to indicate whether the first node in the slot is an element or not.
    * This is used to conditionally apply a class for styling purposes.
    */
@@ -56,6 +64,27 @@ export class VaDetails {
     this.firstNodeIsElement = firstMeaningfulNode?.nodeType === Node.ELEMENT_NODE;
   }
 
+  /**
+   * Handle toggle of the details element
+   * Delay added to allow VoiceOver to announce state before DOM changes
+   */
+  private handleToggle = (e: Event): void => {
+    e.preventDefault();
+    // Small delay to allow screen readers to announce before DOM changes
+    setTimeout(() => {
+      this.isOpen = !this.isOpen;
+    }, 100);
+  };
+
+  /**
+   * Handle keyboard events for accessibility
+   */
+  private handleKeyDown = (event: KeyboardEvent): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.handleToggle(event);
+    }
+  };
+
   render() {
     const { label, width } = this;
 
@@ -75,8 +104,12 @@ export class VaDetails {
 
     return (
       <Host>
-        <details class={detailsClass}>
-          <summary class="va-details__summary">
+        <details class={detailsClass} open={this.isOpen}>
+          <summary
+            class="va-details__summary"
+            onClick={this.handleToggle}
+            onKeyDown={this.handleKeyDown}
+          >
             <va-icon class="va-details__icon" icon="chevron_right"></va-icon>
             {label}
           </summary>
