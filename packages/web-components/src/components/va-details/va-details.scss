@@ -12,7 +12,6 @@
 
     summary.va-details__summary {
       display: flex;
-      align-items: center;
       gap: var(--units-0p5);
       padding: 0.125rem var(--units-0p5);
       font-weight: var(--font-weight-bold);
@@ -33,6 +32,9 @@
       }
 
       va-icon.va-details__icon {
+        width: fit-content;
+        height: fit-content;
+        margin-top: 0.094rem;
         transform: rotate(90deg);
         transition: transform 0.15s linear;
       }
