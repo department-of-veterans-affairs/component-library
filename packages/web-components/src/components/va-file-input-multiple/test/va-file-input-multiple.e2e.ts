@@ -199,6 +199,39 @@ describe('va-file-input-multiple', () => {
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);
   });
 
+  it('uses passwordSubmissionSuccessList to pass password submission status to child file input components', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input-multiple />');
+
+    // Upload files to create multiple inputs
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input1 = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input1.uploadFile(filePath);
+    await page.waitForChanges();
+
+    const inputs = await page.$$('pierce/#fileInputField');
+    const input2 = inputs[1] as ElementHandle<HTMLInputElement>;
+    await input2.uploadFile(filePath);
+    await page.waitForChanges();
+
+    // Set percentUploaded with only one value for two inputs
+    await page.$eval('va-file-input-multiple', (el: any) => {
+      el.encrypted = [true, true];
+      el.passwordSubmissionSuccessList = [true];
+    });
+    await page.waitForChanges();
+
+    const fileInputs = await page.findAll('va-file-input-multiple >>> va-file-input');
+
+    // First input should should have success status
+    const firstInputSuccess = await fileInputs[0].getProperty('passwordSubmissionSuccess');
+    expect(firstInputSuccess).toBe(true);
+
+    // Second input should have null status (no value provided)
+    const secondInputSuccess = await fileInputs[1].getProperty('passwordSubmissionSuccess');
+    expect(secondInputSuccess).toBe(null);
+  });
+
   it('passes percentUploaded prop to individual file input components', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-file-input-multiple />');
