@@ -33,9 +33,12 @@ export class VaDetails {
   @Prop() width?: 'xl' | '2xl' | undefined;
 
   /**
-   * Whether the details element is open initially
+    * Internal open state.
+    *
+    * Note: this is intentionally not exposed as a public `@Prop` so downstream
+    * teams cannot control the open/closed state via attribute/property.
    */
-  @Prop({ mutable: true, reflect: true }) open?: boolean = false;
+    @State() isOpen: boolean = false;
 
   /**
    * A flag to indicate whether the first node in the slot is an element or not.
@@ -69,7 +72,7 @@ export class VaDetails {
     e.preventDefault();
     // Small delay to allow screen readers to announce before DOM changes
     setTimeout(() => {
-      this.open = !this.open;
+      this.isOpen = !this.isOpen;
     }, 100);
   };
 
@@ -101,7 +104,7 @@ export class VaDetails {
 
     return (
       <Host>
-        <details class={detailsClass} open={this.open}>
+        <details class={detailsClass} open={this.isOpen}>
           <summary
             class="va-details__summary"
             onClick={this.handleToggle}
