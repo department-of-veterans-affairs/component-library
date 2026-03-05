@@ -263,6 +263,7 @@ export class VaDate {
       name,
       error,
       handleDateChange,
+      handleDateBlur,
       monthYearOnly,
       value,
       hint,
@@ -282,7 +283,7 @@ export class VaDate {
     };
     // Fieldset has an implicit aria role of group
     return (
-      <Host>
+      <Host onBlur={event => handleDateBlur(event, true)}>
         <fieldset>
           <legend>
             {label} {required && <span class="required">(*Required)</span>}

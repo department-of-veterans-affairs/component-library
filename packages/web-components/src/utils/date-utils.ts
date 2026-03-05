@@ -246,23 +246,23 @@ export function validate({
   // Check for empty values after the fields are touched
   let emptyFields = false;
 
-  if (!month && monthTouched) {
+  if (!month && monthTouched && validateAll) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
     emptyFields = true;
   }
-  if (!day && !monthYearOnly && dayTouched) {
+  if (!day && !monthYearOnly && dayTouched && validateAll) {
     component.invalidDay = true;
     component.error = 'day-range';
     emptyFields = true;
   }
-  if (!year && yearTouched) {
+  if (!year && yearTouched && validateAll) {
     component.invalidYear = true;
     component.error = 'year-range';
     emptyFields = true;
   }
 
-  if (emptyFields && monthTouched && dayTouched && yearTouched) {
+  if (emptyFields && monthTouched && dayTouched && yearTouched && validateAll) {
     return;
   }
 

@@ -773,7 +773,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
 
-    expect(analyticsSpy).toHaveReceivedEventTimes(3);
+    expect(analyticsSpy).toHaveReceivedEventTimes(4);
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'blur',
       componentName: 'va-memorable-date',
@@ -1475,7 +1475,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
 
-    expect(analyticsSpy).toHaveReceivedEventTimes(3);
+    expect(analyticsSpy).toHaveReceivedEventTimes(4);
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'blur',
       componentName: 'va-memorable-date',

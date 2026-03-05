@@ -669,7 +669,7 @@ describe('va-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
 
-    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventTimes(2);
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'blur',
       componentName: 'va-date',

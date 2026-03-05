@@ -523,7 +523,7 @@ export class VaMemorableDate {
     );
 
     return (
-      <Host>
+      <Host onBlur={event => this.handleDateBlur(event, true)}>
         {formsHeading}
         <div class="input-wrap">
           <fieldset class="usa-form usa-fieldset">
