@@ -96,6 +96,11 @@ export class VaFileInputMultiple {
   @Prop() slotFieldIndexes?: Number[] = null;
 
   /**
+   * Array of booleans corresponding to the password submission success state of each file.
+   */
+  @Prop() passwordSubmissionSuccessList?: boolean[] = [];
+
+  /**
    * Array of numbers corresponding to the progress of the upload of each file.
    */
   @Prop() percentUploaded?: number[] = [];
@@ -129,6 +134,14 @@ export class VaFileInputMultiple {
    * The action will be `'FILE_ADDED'`, `'FILE UPDATED'` or `'FILE_REMOVED'`
    */
   @Event() vaMultipleChange: EventEmitter;
+
+  /**
+   * Event emitted when an error is emitted from a va-file-input child component. This allows the parent component to be aware of which file input has an error, and what the error is.
+   *
+   * Sends back an object with the following data structure:
+   * `{ action: 'FILE_ERROR', error: error message, file: triggering file, index: index of the file in the files array, state: files array }`
+   */
+  @Event() vaMultipleError: EventEmitter;
 
   /**
    * Internal state to track files and their unique keys.
@@ -294,12 +307,46 @@ export class VaFileInputMultiple {
   }
 
   /**
-   * Handles file input changes by updating, adding, or removing files based on user interaction.
+   * Handles an error emitted from a va-file-input child component by updating
+   * the corresponding file entry with the error state, and emitting a
+   * vaMultipleError event with details about the error and the current state of
+   * all files.
+   * @param event The custom event emitted by the va-file-input component.
+   * @param fileKey The key of the file associated with the error.
+   */
+  private handleFileInputError(event: CustomEvent, fileKey: number) {
+    const idx = this.findIndexByKey(fileKey);
+    if (idx > -1) {
+      this.files[idx] = {
+        ...this.files[idx],
+        hasError: true,
+      };
+
+      const filesArray = this.buildFilesArray(
+        this.files, false,
+        this.findIndexByKey(fileKey)
+      );
+
+      this.updateFilesState();
+      this.ensurePlaceholder();
+
+      this.vaMultipleError.emit({
+        action: 'FILE_ERROR',
+        error: event.detail.error,
+        file: this.files[idx].file,
+        index: idx,
+        state: filesArray,
+      });
+    }
+  }
+
+  /**
+   * Handles submission of passwords for encrypted files.
    * @param {any} event - The event object containing file details.
    * @param {number} fileKey - The key of the file being changed.
    * @param {number} pageIndex - The index of the file in the files array.
    */
-  private handlePasswordChange(event: any, fileKey: number, pageIndex: number) {
+  private handlePasswordSubmit(event: any, fileKey: number, pageIndex: number) {
     const fileObject = this.findFileByKey(fileKey);
     fileObject.password = event.detail.password;
     const filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
@@ -441,7 +488,7 @@ export class VaFileInputMultiple {
    * The render method to display the component structure.
    * @returns {JSX.Element} The rendered component.
    */
-  render() {
+  render(): JSX.Element {
     const {
       label,
       required,
@@ -454,6 +501,7 @@ export class VaFileInputMultiple {
       encrypted,
       percentUploaded,
       passwordErrors,
+      passwordSubmissionSuccessList,
       enableAnalytics,
       readOnly,
       maxFileSize,
@@ -506,22 +554,15 @@ export class VaFileInputMultiple {
                 encrypted={encrypted[pageIndex]}
                 percentUploaded={_percentUploaded}
                 passwordError={_passwordError}
+                passwordSubmissionSuccess={passwordSubmissionSuccessList[pageIndex]}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
-                onVaFileInputError={() => {
-                  const idx = this.findIndexByKey(fileEntry.key);
-                  if (idx > -1) {
-                    this.files[idx] = {
-                      ...this.files[idx],
-                      hasError: true,
-                    };
-                    this.updateFilesState();
-                    this.ensurePlaceholder();
-                  }
-                }}
-                onVaPasswordChange={event =>
-                  this.handlePasswordChange(event, fileEntry.key, pageIndex)
+                onVaPasswordSubmit={event =>
+                  this.handlePasswordSubmit(event, fileEntry.key, pageIndex)
+                }
+                onVaFileInputError={event =>
+                  this.handleFileInputError(event, fileEntry.key)
                 }
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}

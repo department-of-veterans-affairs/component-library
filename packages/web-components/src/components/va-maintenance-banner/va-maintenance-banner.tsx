@@ -1,4 +1,12 @@
-import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  h
+} from '@stencil/core';
 import classNames from 'classnames';
 import {
   formatDate,
@@ -20,8 +28,13 @@ import { getHeaderLevel } from '../../utils/utils';
   shadow: true,
 })
 export class VaMaintenanceBanner {
+  isWarning: boolean = false;
   maintenanceBannerEl: HTMLDivElement;
   maintenanceBannerContent: HTMLDivElement;
+  preventRender: boolean = false;
+
+  @Element() el: HTMLElement;
+
   /**
    * Whether or not an analytics event will be fired.
    */
@@ -78,7 +91,81 @@ export class VaMaintenanceBanner {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  derivePostContent = ( maintenanceStartDateTime: Date, maintenanceEndDateTime: Date) => {
+  /**
+   * Logic to run before the component loads.
+   * - Check if value of passed props meet the criteria for rendering the
+   *   banner, and if not, set a flag to prevent rendering.
+   * - Determine whether the banner is an error or warning based on the current
+   *   date and the passed maintenance start date, unless the isError prop is
+   *   set to true.
+   * - Remove the unused slot from the DOM to prevent confusion for screen
+   *   readers and assistive technologies.
+   */
+  componentWillLoad() {
+    const {
+      bannerId,
+      isError,
+      upcomingWarnStartDateTime,
+      maintenanceEndDateTime,
+      maintenanceStartDateTime,
+    } = this;
+
+    const now = new Date();
+    const maintenanceStart = new Date(maintenanceStartDateTime);
+    const maintenanceEnd = new Date(maintenanceEndDateTime);
+    const upcomingWarnStart = new Date(upcomingWarnStartDateTime);
+
+    // Time checks to be used multiple times in the logic below
+    const maintenanceStartInFuture = isDateBefore(now, maintenanceStart);
+    const maintenanceEndInPast = isDateAfter(now, maintenanceEnd);
+    const warningStartInFuture = isDateBefore(now, upcomingWarnStart);
+
+    const bothWindowsInPast =
+      isDateAfter(now, maintenanceStart) &&
+      maintenanceEndInPast &&
+      isDateAfter(now, upcomingWarnStart);
+
+    // Flip the flag to prevent rendering if any of the following conditions are
+    // true:
+    // - it's before or after when it should show
+    // - both the maintenance and warning windows are in the past
+    // - the user has already dismissed the banner.
+    if (
+      warningStartInFuture ||
+      maintenanceEndInPast ||
+      bothWindowsInPast ||
+      window.localStorage.getItem('MAINTENANCE_BANNER') === bannerId
+    ) {
+      this.preventRender = true;
+    }
+
+    // Designate as a warning if it's before the maintenance start time and not
+    // an error
+    this.isWarning = maintenanceStartInFuture && !isError;
+
+    const maintenanceSlot = this.el.querySelector('[slot="maintenance-content"]');
+    const warnSlot = this.el.querySelector('[slot="warn-content"]');
+
+    // Ensure that unnecessary slots are removed from the DOM to prevent
+    // confusion for screen readers and assistive technologies.
+    // - If render is being prevented based on the criteria above, remove both
+    //   slots since the banner won't be shown at all.
+    // - If component will render and the current date is within one of the
+    //   windows, remove the slot that isn't being used. For example, if it's
+    //   within the maintenance window, remove the warn slot since it won't be
+    //   shown.
+    if (this.preventRender) {
+      maintenanceSlot?.remove();
+      warnSlot?.remove();
+    } else {
+      const slotToRemove = this.isWarning
+        ? maintenanceSlot
+        : warnSlot;
+      slotToRemove?.remove();
+    }
+  }
+
+  derivePostContent = (maintenanceStartDateTime: Date, maintenanceEndDateTime: Date) => {
     let milliseconds = (maintenanceEndDateTime.getTime() - maintenanceStartDateTime.getTime());
     const hours = Math.floor(milliseconds / (1000 * 60 * 60));
     const minutes = ((milliseconds / (1000 * 60 * 60)) - hours) * 60 ;
@@ -138,80 +225,80 @@ export class VaMaintenanceBanner {
   };
 
   render() {
-    const {upcomingWarnStartDateTime, maintenanceEndDateTime, isError, maintenanceTitleHeaderLevel} = this,
-      now = new Date();
+    const {
+      maintenanceEndDateTime,
+      isError,
+      maintenanceTitleHeaderLevel,
+      upcomingWarnTitle,
+      maintenanceStartDateTime,
+      maintenanceTitle,
+      preventRender,
+    } = this;
+
+    // Stop here if property flag has been set to prevent rendering based on the
+    // criteria in componentWillLoad
+    if (preventRender) {
+      return null;
+    }
 
     const HeaderLevel = getHeaderLevel(maintenanceTitleHeaderLevel);
 
-    // Escape early if it's before when it should show.
-    if (isDateBefore(now, new Date(upcomingWarnStartDateTime))) {
-      return null;
-    }
+    const maintenanceBannerClass = classNames({
+      'maintenance-banner': true,
+      'maintenance-banner--warning': this.isWarning,
+      'maintenance-banner--error': !this.isWarning
+    })
 
-    // Escape early if it's after when it should show.
-    if (isDateAfter(now, new Date(maintenanceEndDateTime))) {
-      return null;
-    }
-    if (window.localStorage.getItem('MAINTENANCE_BANNER') !== this.bannerId) {
-      const { upcomingWarnTitle, maintenanceStartDateTime, maintenanceTitle} = this;
-      const isWarning = isDateBefore(now, new Date(maintenanceStartDateTime)) && !isError;
+    const bannerIconName = isError ? 'error' : 'warning';
 
-      const maintenanceBannerClass = classNames({
-        'maintenance-banner': true,
-        'maintenance-banner--warning': isWarning,
-        'maintenance-banner--error': !isWarning
-      })
+    return (
+      <Host>
+        <div
+          class={maintenanceBannerClass}
+          ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}
+        >
+          <va-icon
+            class="maintenance-banner__icon"
+            icon={bannerIconName}
+            size={4}
+          ></va-icon>
 
-      const bannerIconName = isError ? 'error' : 'warning';
+          <div class="maintenance-banner__body">
+            <HeaderLevel class="maintenance-banner__title">
+              {this.isWarning ? upcomingWarnTitle : maintenanceTitle}
+            </HeaderLevel>
 
-      return (
-        <Host>
-          <div
-            class={maintenanceBannerClass}
-            ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}
-          >
-            <va-icon
-              class="maintenance-banner__icon"
-              icon={bannerIconName}
-              size={4}
-            ></va-icon>
-            <div class="maintenance-banner__body">
-              <HeaderLevel class="maintenance-banner__title">
-                {isWarning ? upcomingWarnTitle : maintenanceTitle}
-              </HeaderLevel>
-              <div
-                class="maintenance-banner__content"
-                ref={el =>
-                  (this.maintenanceBannerContent = el as HTMLDivElement)
-                }
-              >
-                {isWarning ? (
-                  <slot name="warn-content"></slot>
-                ) : (
-                  <slot name="maintenance-content"></slot>
-                )}
-              </div>
-              <div class="maintenance-banner__derived-content">
-                {this.derivePostContent(
-                  new Date(maintenanceStartDateTime),
-                  new Date(maintenanceEndDateTime),
-                )}
-              </div>
-            </div>
-            <button
-              aria-label="Close notification"
-              class="maintenance-banner__close"
-              onClick={this.onCloseAlert}
-              type="button"
+            <div
+              class="maintenance-banner__content"
+              ref={el =>
+                (this.maintenanceBannerContent = el as HTMLDivElement)
+              }
             >
-              <va-icon icon="close" size={4}></va-icon>
-            </button>
-          </div>
-        </Host>
-      );
-    } else {
-      return null
-    }
+              {this.isWarning ? (
+                <slot name="warn-content"></slot>
+              ) : (
+                <slot name="maintenance-content"></slot>
+              )}
+            </div>
 
+            <div class="maintenance-banner__derived-content">
+              {this.derivePostContent(
+                new Date(maintenanceStartDateTime),
+                new Date(maintenanceEndDateTime),
+              )}
+            </div>
+          </div>
+
+          <button
+            aria-label="Close notification"
+            class="maintenance-banner__close"
+            onClick={this.onCloseAlert}
+            type="button"
+          >
+            <va-icon icon="close" size={4}></va-icon>
+          </button>
+        </div>
+      </Host>
+    );
   }
 }
