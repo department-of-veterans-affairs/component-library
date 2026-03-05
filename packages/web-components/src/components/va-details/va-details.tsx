@@ -33,12 +33,12 @@ export class VaDetails {
   @Prop() width?: 'xl' | '2xl' | undefined;
 
   /**
-    * Internal open state.
-    *
-    * Note: this is intentionally not exposed as a public `@Prop` so downstream
-    * teams cannot control the open/closed state via attribute/property.
+   * Internal open state.
+   *
+   * Note: this is intentionally not exposed as a public `@Prop` so downstream
+   * teams cannot control the open/closed state via attribute/property.
    */
-    @State() isOpen: boolean = false;
+  @State() isOpen: boolean = false;
 
   /**
    * A flag to indicate whether the first node in the slot is an element or not.
