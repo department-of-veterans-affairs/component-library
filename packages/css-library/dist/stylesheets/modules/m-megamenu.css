@@ -220,8 +220,6 @@
 #mega-menu .mm-marketing-container,
 .mega-menu .mm-marketing-container {
   background-color: #ffffff;
-  height: 380px;
-  overflow: hidden;
 }
 #mega-menu .mm-marketing-container.mm-marketing-gray,
 .mega-menu .mm-marketing-container.mm-marketing-gray {
@@ -273,10 +271,6 @@
 .mega-menu .my-va-top-nav.current-page {
   margin-left: auto;
 }
-#mega-menu .mm-marketing-container,
-.mega-menu .mm-marketing-container {
-  height: 380px;
-}
 #mega-menu .mm-marketing-container p,
 .mega-menu .mm-marketing-container p {
   margin-top: 5px;
@@ -296,6 +290,7 @@
   .mega-menu .vetnav-panel {
     width: 768px;
     height: 380px;
+    overflow: scroll;
   }
   #mega-menu .column-one,
   .mega-menu .column-one {

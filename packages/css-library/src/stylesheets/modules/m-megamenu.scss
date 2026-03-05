@@ -222,8 +222,6 @@ $marketing-container-height: 380px;
 
   .mm-marketing-container {
     background-color: $vads-color-white;
-    height: $marketing-container-height;
-    overflow: hidden;
 
     &.mm-marketing-gray {
       background-color: $vads-color-base-lightest;
@@ -279,7 +277,6 @@ $marketing-container-height: 380px;
   }
 
   .mm-marketing-container {
-    height: $marketing-container-height;
 
     p {
       margin-top: 5px;
@@ -299,6 +296,7 @@ $marketing-container-height: 380px;
     .vetnav-panel {
       width: $medium-screen;
       height: $vetnav-panel-height;
+      overflow: scroll;
     }
 
     .column-one {
