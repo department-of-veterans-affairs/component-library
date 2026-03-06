@@ -492,6 +492,47 @@ export class VaFileInput {
     }
   }
 
+  /**
+   * Callback passed to `onInput` for password input field instance of
+   * `va-text-input`. Emits the `vaPasswordChange` event with the entered
+   * password.
+   * @param {InputEvent} e
+   * @returns {void}
+   */
+  private handlePasswordChange(e: InputEvent): void {
+    this.vaPasswordChange.emit({
+      password: (e.target as HTMLVaTextInputElement).value
+    });
+  }
+
+  /**
+   * Callback passed to `onClick` for password submit button instance of `va-button`. Updates the
+   * password error state if no password has been entered, updates button text and loading props,
+   * and emits the `vaPasswordSubmit` event when a password has been entered.
+   * @param {Event} e
+   * @returns {void}
+   */
+  private handleSubmitPasswordClick(e: Event): void {
+    e.preventDefault();
+
+    // Stop here if no password entered
+    if (!this.passwordValue || this.passwordValue.length === 0) {
+      this.passwordError = 'Password cannot be blank';
+    }
+
+    if (this.passwordError) {
+      focusOnPasswordInput(this.el);
+      return;
+    }
+
+    // Set button to loading state
+    const target = e.target as HTMLVaButtonElement;
+    target.setAttribute('loading', 'true');
+    target.setAttribute('text', 'Verifying password...');
+
+    this.vaPasswordSubmit.emit( { password: this.passwordValue } );
+  }
+
   private removeFile = (notifyParent: boolean = true) => {
     this.internalError = null;
     if (notifyParent) {
@@ -629,47 +670,6 @@ export class VaFileInput {
         }
       </div>
     );
-  }
-
-  /**
-   * Callback passed to `onInput` for password input field instance of
-   * `va-text-input`. Emits the `vaPasswordChange` event with the entered
-   * password.
-   * @param {InputEvent} e
-   * @returns {void}
-   */
-  private handlePasswordChange(e: InputEvent): void {
-    this.vaPasswordChange.emit({
-      password: (e.target as HTMLVaTextInputElement).value
-    });
-  }
-
-  /**
-   * Callback passed to `onClick` for password submit button instance of `va-button`. Updates the
-   * password error state if no password has been entered, updates button text and loading props,
-   * and emits the `vaPasswordSubmit` event when a password has been entered.
-   * @param {Event} e
-   * @returns {void}
-   */
-  private handleSubmitPasswordClick(e: Event): void {
-    e.preventDefault();
-
-    // Stop here if no password entered
-    if (!this.passwordValue || this.passwordValue.length === 0) {
-      this.passwordError = 'Password cannot be blank';
-    }
-
-    if (this.passwordError) {
-      focusOnPasswordInput(this.el);
-      return;
-    }
-
-    // Set button to loading state
-    const target = e.target as HTMLVaButtonElement;
-    target.setAttribute('loading', 'true');
-    target.setAttribute('text', 'Verifying password...');
-
-    this.vaPasswordSubmit.emit( { password: this.passwordValue } );
   }
 
   /**
