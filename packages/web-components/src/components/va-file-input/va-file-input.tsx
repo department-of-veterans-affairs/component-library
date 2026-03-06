@@ -167,14 +167,27 @@ export class VaFileInput {
   @Prop({ mutable: true }) passwordError?: string;
 
   /**
-   * Denotes if user submission of encrypted file password was successful.
+   * Denotes if user submission of encrypted file password was successful. Use of this prop is optional, but is required while using the `usePasswordSubmitButtonPattern` pattern.
    */
   @Prop({ mutable: true }) passwordSubmissionSuccess?: null | boolean = null;
+
+  /**
+   * When true, the component will render a "Submit password" button in addition
+   * to the password input field for encrypted files. When false, only the
+   * password input field will be rendered for encrypted files.
+   */
+  @Prop() usePasswordSubmitButtonPattern?: boolean = false;
 
   /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
+
+  /**
+   * The event emitted when the file input password value changes when
+   * `usePasswordSubmitButtonPattern` is false.
+   */
+  @Event() vaPasswordChange: EventEmitter;
 
   /**
    * The event emitted when the file input password is submitted.
@@ -543,13 +556,31 @@ export class VaFileInput {
   }
 
   /**
-   * Renders the password input section for encrypted files when `this.file` has been set.
-   * @returns {void|HTMLDivElement} Password input section for encrypted files
+   * Renders the password input section for encrypted files.
+   * - When `usePasswordSubmitButtonPattern` is false, only the password input
+   *   field will be rendered.
+   * - When `usePasswordSubmitButtonPattern` is true, both the password input
+   *   field and the "Submit password" button will be rendered.
+   * @returns {void | HTMLDivElement | HTMLVaTextInputElement} Password input section for encrypted files
    */
-  private renderPasswordSection(): void|HTMLDivElement {
+  private renderPasswordInputSection(): void | HTMLDivElement|HTMLVaTextInputElement {
     // If we there's not a file yet, this section is not necessary.
     if (!this.encrypted || !this.file) {
       return;
+    }
+
+    // If the submit button pattern is not being used, simply render the
+    // password input.
+    if (!this.usePasswordSubmitButtonPattern) {
+      return (
+        <va-text-input
+          type="password"
+          onInput={(e) =>{this.handlePasswordChange(e)}}
+          label="File password"
+          required
+          error={this.passwordError}
+        />
+      )
     }
 
     const passwordSectionClasses = classNames({
@@ -601,10 +632,23 @@ export class VaFileInput {
   }
 
   /**
+   * Callback passed to `onInput` for password input field instance of
+   * `va-text-input`. Emits the `vaPasswordChange` event with the entered
+   * password.
+   * @param {InputEvent} e
+   * @returns {void}
+   */
+  private handlePasswordChange(e: InputEvent): void {
+    this.vaPasswordChange.emit({
+      password: (e.target as HTMLVaTextInputElement).value
+    });
+  }
+
+  /**
    * Callback passed to `onClick` for password submit button instance of `va-button`. Updates the
    * password error state if no password has been entered, updates button text and loading props,
    * and emits the `vaPasswordSubmit` event when a password has been entered.
-   * @param e {Event} click event
+   * @param {Event} e
    * @returns {void}
    */
   private handleSubmitPasswordClick(e: Event): void {
@@ -621,7 +665,7 @@ export class VaFileInput {
     }
 
     // Set button to loading state
-    const target = e.target as HTMLElement
+    const target = e.target as HTMLVaButtonElement;
     target.setAttribute('loading', 'true');
     target.setAttribute('text', 'Verifying password...');
 
@@ -795,7 +839,7 @@ export class VaFileInput {
 
                   {!showProgBar && (
                     <Fragment>
-                      {encrypted && this.renderPasswordSection()}
+                      {encrypted && this.renderPasswordInputSection()}
                       <div class="additional-info-slot">
                         <slot></slot>
                       </div>

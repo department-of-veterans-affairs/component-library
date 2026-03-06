@@ -782,7 +782,7 @@ export namespace Components {
          */
         "passwordError"?: string;
         /**
-          * Denotes if user submission of encrypted file password was successful.
+          * Denotes if user submission of encrypted file password was successful. Use of this prop is optional, but is required while using the `usePasswordSubmitButtonPattern` pattern.
          */
         "passwordSubmissionSuccess"?: null | boolean;
         /**
@@ -809,6 +809,10 @@ export namespace Components {
           * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
          */
         "uploadedFile"?: UploadedFile;
+        /**
+          * When true, the component will render a "Submit password" button in addition to the password input field for encrypted files. When false, only the password input field will be rendered for encrypted files.
+         */
+        "usePasswordSubmitButtonPattern"?: boolean;
         /**
           * The value attribute for the file view element.
          */
@@ -895,6 +899,10 @@ export namespace Components {
           * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
          */
         "uploadedFiles"?: UploadedFile[];
+        /**
+          * When true, the child instances of va-file-input will render a password input with a submit button, instead of emitting password changes immediately.
+         */
+        "usePasswordSubmitButtonPattern"?: boolean;
         /**
           * The value attribute for the file view element.
          */
@@ -3094,6 +3102,7 @@ declare global {
     };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
+        "vaPasswordChange": any;
         "vaPasswordSubmit": any;
         "vaFileInputError": any;
         "component-library-analytics": any;
@@ -4940,6 +4949,10 @@ declare namespace LocalJSX {
          */
         "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * The event emitted when the file input password value changes when `usePasswordSubmitButtonPattern` is false.
+         */
+        "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
           * The event emitted when the file input password is submitted.
          */
         "onVaPasswordSubmit"?: (event: VaFileInputCustomEvent<any>) => void;
@@ -4948,7 +4961,7 @@ declare namespace LocalJSX {
          */
         "passwordError"?: string;
         /**
-          * Denotes if user submission of encrypted file password was successful.
+          * Denotes if user submission of encrypted file password was successful. Use of this prop is optional, but is required while using the `usePasswordSubmitButtonPattern` pattern.
          */
         "passwordSubmissionSuccess"?: null | boolean;
         /**
@@ -4975,6 +4988,10 @@ declare namespace LocalJSX {
           * Object representing a previously uploaded file. Example: `{ name: string, type: string, size: number}`
          */
         "uploadedFile"?: UploadedFile;
+        /**
+          * When true, the component will render a "Submit password" button in addition to the password input field for encrypted files. When false, only the password input field will be rendered for encrypted files.
+         */
+        "usePasswordSubmitButtonPattern"?: boolean;
         /**
           * The value attribute for the file view element.
          */
@@ -5069,6 +5086,10 @@ declare namespace LocalJSX {
           * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
          */
         "uploadedFiles"?: UploadedFile[];
+        /**
+          * When true, the child instances of va-file-input will render a password input with a submit button, instead of emitting password changes immediately.
+         */
+        "usePasswordSubmitButtonPattern"?: boolean;
         /**
           * The value attribute for the file view element.
          */
