@@ -167,7 +167,9 @@ export class VaFileInput {
   @Prop({ mutable: true }) passwordError?: string;
 
   /**
-   * Denotes if user submission of encrypted file password was successful. Use of this prop is optional, but is required while using the `usePasswordSubmitButtonPattern` pattern.
+   * Denotes if user submission of encrypted file password was successful. Use
+   * of this prop is optional, but is required while using the
+   * `usePasswordSubmitButtonPattern` pattern.
    */
   @Prop({ mutable: true }) passwordSubmissionSuccess?: null | boolean = null;
 
