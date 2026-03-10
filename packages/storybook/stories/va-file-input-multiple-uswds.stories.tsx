@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { VaFileInputMultiple } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 // @ts-ignore ignores "module not found" error
@@ -456,8 +456,6 @@ CustomValidation.parameters = {
 const EncryptedTemplate = ({ label, name }) => {
   const [trackedFiles, setTrackedFiles] = useState([]);
   const [encryptedList, setEncryptedList] = useState([]);
-  const [passwordSubmissionSuccessList, setPasswordSubmissionSuccessList] = useState<boolean[]>([]);
-  const [derivedPasswordErrorList, setDerivedPasswordErrorList] = useState<string[]>([]);
 
   /**
    * Callback passed to onVaMultipleChange to track the file objects for each
@@ -545,19 +543,6 @@ const EncryptedTemplate = ({ label, name }) => {
     setTrackedFiles(trackedFilesToSet);
   }
 
-  const handlePasswordSubmissionSuccessClick = (index: number, isSuccess: boolean = false) => {
-    const currentState = [...passwordSubmissionSuccessList];
-    currentState[index] = isSuccess;
-
-    if (!isSuccess) {
-      const currentDerivedPasswordErrorList = [...derivedPasswordErrorList];
-      currentDerivedPasswordErrorList[index] = 'Incorrect password. Try again or delete file.';
-      setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
-    }
-
-    setPasswordSubmissionSuccessList(currentState);
-  }
-
   return (
     <>
       To learn how to check for an encrypted PDF <va-link
@@ -569,50 +554,10 @@ const EncryptedTemplate = ({ label, name }) => {
         name={name}
         hint={"This example shows a password field when a .pdf file is uploaded."}
         encrypted={encryptedList}
-        passwordSubmissionSuccessList={passwordSubmissionSuccessList}
-        passwordErrors={derivedPasswordErrorList}
         onVaMultipleChange={handleChange}
         onVaMultipleError={handleError}
       />
       <hr />
-
-      <div
-        className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
-        style={{ width: 'fit-content' }}
-      >
-        <p className="vads-u-margin-y--0">
-          Simulate checking of submitted password for uploaded <strong>encrypted (PDF)</strong> files. Simulation is done
-          by updating the <code>passwordSubmissionSuccessList</code> prop based on button clicks below.
-        </p>
-        <em>Each pair of buttons controls the password submission status for the corresponding encrypted file in the file list.</em>
-        {
-          encryptedList?.length ? (
-            <ul>
-              {encryptedList.map((isEncrypted, index) => {
-                if (isEncrypted) {
-                  return (
-                    <li key={index}>
-                      <div className="vads-u-display--flex vads-u-align-items--center vads-u-gap--2 vads-u-margin-bottom--1">
-                        <p className="vads-u-margin-y--0 vads-u-margin-right--2">File {index + 1}</p>
-                        <va-button
-                            class="vads-u-margin-y--1"
-                            text="Set success"
-                            onClick={() => handlePasswordSubmissionSuccessClick(index, true)}
-                          />
-                        <va-button
-                          text="Set error"
-                          onClick={() => handlePasswordSubmissionSuccessClick(index, false)}
-                        />
-                      </div>
-                    </li>
-                  );
-                }
-              })}
-            </ul>
-          ) : null
-        }
-      </div>
-
       <div>
         <p>
           Parent components are responsible for managing if a password
@@ -731,4 +676,58 @@ ReadOnlyWithAdditionalInputs.args = {
   vaMultipleChange: event => event,
   readOnly: true,
   children: readOnlyAdditionalInfoContent,
+};
+
+// Mock upload progress per file
+// Note: `index` in the event is the pageIndex from the unfiltered internal files array,
+// which matches how va-file-input-multiple indexes into the percentUploaded prop.
+const PercentUploadedTemplate = args => {
+  const [percents, setPercents] = useState<number[]>([]);
+  const intervalsRef = useRef<{ [key: number]: ReturnType<typeof setInterval> }>({});
+
+  function startInterval(index: number) {
+    clearInterval(intervalsRef.current[index]);
+    delete intervalsRef.current[index];
+    setPercents(prev => { const u = [...prev]; u[index] = null; return u; });
+    intervalsRef.current[index] = setInterval(() => {
+      setPercents(prev => {
+        const updated = [...prev];
+        const current = updated[index] ?? 0;
+        if (current >= 100) {
+          clearInterval(intervalsRef.current[index]);
+          delete intervalsRef.current[index];
+          updated[index] = 100;
+        } else {
+          updated[index] = current + Math.random() * 4;
+        }
+        return updated;
+      });
+    }, 100);
+  }
+
+  function handleUpload(event) {
+    const { action, index: changedIndex } = event.detail;
+
+    if (action === 'FILE_ADDED' || action === 'FILE_UPDATED') {
+      startInterval(changedIndex);
+    } else if (action === 'FILE_REMOVED') {
+      clearInterval(intervalsRef.current[changedIndex]);
+      delete intervalsRef.current[changedIndex];
+      setPercents(prev => { const u = [...prev]; u.splice(changedIndex, 1); return u; });
+    }
+  }
+
+  return (
+    <VaFileInputMultiple
+      {...args}
+      percentUploaded={percents}
+      onVaMultipleChange={handleUpload}
+    />
+  );
+};
+
+export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
+WithPercentUploaded.args = { ...defaultArgs };
+WithPercentUploaded.parameters = {
+  chromatic: { disableSnapshot: true },
 };

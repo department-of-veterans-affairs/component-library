@@ -326,84 +326,79 @@ describe('va-file-input', () => {
   it('resets the component if the cancel button is clicked during upload', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="12" />`);
 
-    const button = await page.find('va-file-input >>> va-button-icon');
+    const button = await page.find('va-file-input >>> va-button-icon[button-type="cancel"]');
     button.click();
     await page.waitForChanges();
     const progBar = await page.find('va-file-input >>> va-progress-bar');
     expect(progBar).toBeNull();
   });
 
-  it('renders a slim warning alert, a file password input, and a password submit button if encrypted is true', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
+  it('emits vaChange with empty files array when cancel button is clicked during upload', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="50" />`);
 
-    const warningAlert = await page.find('va-file-input >>> va-alert');
-    expect(warningAlert).not.toBeNull();
-    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text"><span class=\"usa-sr-only\">Warning Alert </span>We can\'t open your file without its password.</p>')
+    const vaChangeSpy = await page.spyOnEvent('vaChange');
+    const button = await page.find('va-file-input >>> va-button-icon[button-type="cancel"]');
+    button.click();
+    await page.waitForChanges();
+
+    expect(vaChangeSpy).toHaveReceivedEventDetail({ files: [] });
+  });
+
+  it('does not show progress bar after cancel', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="50" />`);
+
+    const button = await page.find('va-file-input >>> va-button-icon[button-type="cancel"]');
+    button.click();
+    await page.waitForChanges();
+
+    const progBar = await page.find('va-file-input >>> va-progress-bar');
+    expect(progBar).toBeNull();
+  });
+
+  it('shows progress bar again after a new file is uploaded following a cancel', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input percent-uploaded="50" />`);
+
+    // Cancel the upload
+    const cancelButton = await page.find('va-file-input >>> va-button-icon[button-type="cancel"]');
+    cancelButton.click();
+    await page.waitForChanges();
+
+    // Simulate parent resetting percentUploaded to null on cancel
+    await page.$eval('va-file-input', (elm: any) => {
+      elm.percentUploaded = null;
+    });
+    await page.waitForChanges();
+
+    // Upload a new file
+    const filePath = path.relative(process.cwd(), __dirname + '/placeholder.png');
+    const input = await page.$('pierce/#fileInputField') as ElementHandle<HTMLInputElement>;
+    await input.uploadFile(filePath).catch(e => console.log('uploadFile error', e));
+    await page.waitForChanges();
+
+    // Verify the new file was picked up by checking the file label is visible
+    const fileLabelAfterUpload = await page.find('va-file-input >>> .file-label');
+    expect(fileLabelAfterUpload).not.toBeNull();
+    expect(fileLabelAfterUpload).toEqualText('placeholder.png');
+
+    // Set percentUploaded to simulate a new upload in progress
+    await page.$eval('va-file-input', (elm: any) => {
+      elm.percentUploaded = 25;
+    });
+    await page.waitForChanges();
+
+    const progBar = await page.find('va-file-input >>> va-progress-bar');
+    expect(progBar).not.toBeNull();
+  });
+
+  it('renders file password field if encrypted is true upload', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
 
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).not.toBeNull();
-    const inputMessage = await textInput.find(' >>> #input-message');
-    expect(inputMessage).toEqualText('1x1.png');
-
-    const passwordSubmitButton = await page.find('va-file-input >>> va-button');
-    expect(passwordSubmitButton).not.toBeNull();
-    expect(await passwordSubmitButton.getProperty('text')).toBe('Submit password');
-    expect(await passwordSubmitButton.getProperty('label')).toBe('Submit password for file 1x1.png');
+    const label = await textInput.find(' >>> label');
+    expect(label).not.toBeNull();
+    expect(label).toEqualText('File password required')
   });
-
-  it('updates password submit button state when clicked', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
-
-    // Type a password into the input
-    const textInputElement = await page.find('va-file-input >>> va-text-input >>> input');
-    await textInputElement.type('test-password');
-    await page.waitForChanges();
-
-    // Get submit button and click it
-    const passwordSubmitButton = await page.find('va-file-input >>> va-button');
-    expect(passwordSubmitButton).not.toBeNull();
-    expect(await passwordSubmitButton.getProperty('text')).toBe('Submit password');
-    passwordSubmitButton.click();
-    await page.waitForChanges();
-
-    expect(await passwordSubmitButton.getProperty('text')).toBe('Verifying password...');
-    expect(passwordSubmitButton).toHaveAttribute('loading');
-  });
-
-  it('removes password input/submit button and shows success alert when passwordSubmissionSuccess is true', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
-
-    // Type a password into the input
-    const textInputElement = await page.find('va-file-input >>> va-text-input >>> input');
-    await textInputElement.type('test-password');
-    await page.waitForChanges();
-
-    // Get submit button and click it
-    const passwordSubmitButton = await page.find('va-file-input >>> va-button');
-    expect(passwordSubmitButton).not.toBeNull();
-    expect(await passwordSubmitButton.getProperty('text')).toBe('Submit password');
-    passwordSubmitButton.click();
-    await page.waitForChanges();
-
-    // Simulate successful password submission
-    const fileInput = await page.find('va-file-input');
-    fileInput.setAttribute('password-submission-success', 'true');
-    await page.waitForChanges();
-
-    // Check that password input and submit button are removed
-    const textInput = await page.find('va-file-input >>> va-text-input');
-    expect(textInput).toBeNull();
-    const passwordButton = await page.find('va-file-input >>> va-button');
-    expect(passwordButton).toBeNull();
-
-    // Check that success alert is shown
-    const successAlert = await page.find('va-file-input >>> va-alert');
-    expect(successAlert).not.toBeNull();
-    expect(successAlert.getAttribute('status')).toEqual('success');
-    expect(successAlert.innerHTML).toContain('File successfully unlocked');
-  });
-
-
 
   it('renders error on password input if password-error is set', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted password-error="Encrypted file requires a password."/>`);
@@ -412,25 +407,6 @@ describe('va-file-input', () => {
     expect(inputErrorSpan).not.toBeNull();
     expect(inputErrorSpan).toEqualText('Encrypted file requires a password.');
   })
-
-  it('renders error on password input if password submit button is clicked without a password entered in input', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
-
-    // Get submit button and click it (note that no password has been entered)
-    const passwordSubmitButton = await page.find('va-file-input >>> va-button');
-    expect(passwordSubmitButton).not.toBeNull();
-    expect(await passwordSubmitButton.getProperty('text')).toBe('Submit password');
-    passwordSubmitButton.click();
-    await page.waitForChanges();
-
-    // Check for error message on password input
-    const textInput = await page.find('va-file-input >>> va-text-input');
-    const errorSpan = await textInput.find('>>> span.usa-error-message');
-    expect(errorSpan).not.toBeNull();
-    expect(errorSpan).toEqualText('Password cannot be blank');
-  });
-
-
 
   it('does not render file password field if encrypted is unset', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`);
