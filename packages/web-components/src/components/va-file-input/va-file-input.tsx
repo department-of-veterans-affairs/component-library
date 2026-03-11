@@ -50,6 +50,7 @@ export class VaFileInput {
   private delayChangeButtonFocusUntilWindowFocus: boolean = false;
   private initialUploadAttemptHasTakenPlace: boolean = false;
   private passwordSubmitButton: HTMLVaButtonElement;
+  private pendingNewPasswordSubmissionAfterError: boolean = false;
   private slottedContent: HTMLElement[] = null;
   private windowHasFocus: boolean = true;
 
@@ -303,7 +304,13 @@ export class VaFileInput {
   }
 
   @Watch('passwordSubmissionSuccess')
-  handlePasswordSubmissionSuccess(value: boolean) {
+  handlePasswordSubmissionSuccess(value: boolean | null) {
+    // `null` represents pending/unknown submission state and should not trigger
+    // success or failure side effects.
+    if (value === null) {
+      return;
+    }
+
     // If password was successfully submitted, clear any existing error
     if (value) {
       this.passwordError = null;
@@ -508,6 +515,31 @@ export class VaFileInput {
   }
 
   /**
+   * Callback passed to `onInput` for password input field instance of
+   * `va-text-input` when `usePasswordSubmitButtonPattern` is true. Updates the
+   * local `passwordValue` state with the entered password and sets a flag to
+   * indicate that a new password submission is pending if there's an existing
+   * password error.
+   * @param {InputEvent} e
+   * @returns {void}
+   */
+  private handlePasswordInputForSubmitButtonPattern(e: InputEvent): void {
+    if (!this.usePasswordSubmitButtonPattern) {
+      return;
+    }
+
+    this.passwordValue = (e.target as HTMLVaTextInputElement).value;
+
+    // When there's already a password error, set flag to indicate that a new
+    // password submission is pending so that a subsequent submission will be
+    // handled correctly.
+    if (this.passwordError) {
+      this.pendingNewPasswordSubmissionAfterError = true;
+      this.passwordSubmissionSuccess = null;
+    }
+  }
+
+  /**
    * Callback passed to `onClick` for password submit button instance of `va-button`. Updates the
    * password error state if no password has been entered, updates button text and loading props,
    * and emits the `vaPasswordSubmit` event when a password has been entered.
@@ -522,9 +554,20 @@ export class VaFileInput {
       this.passwordError = 'Password cannot be blank';
     }
 
-    if (this.passwordError) {
+    // If there's an existing password error and a new password submission is
+    // not pending, stop here after focusing on password input to allow user to
+    // attempt to correct their password.
+    //
+    // IF a new password submission is pending, this means the user has already
+    // attempted to submit a new password after the error was set, so we should
+    // allow the submission to go through and handle the error state update in
+    // the `handlePasswordSubmissionSuccess` watcher.
+    if (this.passwordError && !this.pendingNewPasswordSubmissionAfterError) {
       focusOnPasswordInput(this.el);
       return;
+    }
+    else if (this.passwordError && this.pendingNewPasswordSubmissionAfterError) {
+      this.pendingNewPasswordSubmissionAfterError = false;
     }
 
     // Set button to loading state
@@ -653,7 +696,7 @@ export class VaFileInput {
             <Fragment>
               <va-text-input
                 type="password"
-                onInput={(e) => this.passwordValue = (e.target as HTMLInputElement).value}
+                onInput={(e) => this.handlePasswordInputForSubmitButtonPattern(e)}
                 label="Password for this file"
                 messageAriaDescribedby={`${this.file.name}`}
                 required

@@ -230,7 +230,6 @@ const AcceptsFilePasswordWithSubmitButtonTemplate = ({
   name,
   hint,
   passwordError,
-  vaPasswordSubmit,
   usePasswordSubmitButtonPattern,
 }) => {
 
@@ -240,7 +239,7 @@ const AcceptsFilePasswordWithSubmitButtonTemplate = ({
 
   const handleChange = (event) => {
     const hasFile = event?.detail?.files?.length > 0;
-
+  
     if (hasFile) {
       setIsEncrypted(true);
     }
@@ -251,6 +250,10 @@ const AcceptsFilePasswordWithSubmitButtonTemplate = ({
       setDerivedPasswordError(null);
       return;
     }
+  }
+
+  const handleVaPasswordSubmit = (e: CustomEvent) => {
+    setPasswordSubmissionSuccess(null);
   }
 
   return (
@@ -264,7 +267,7 @@ const AcceptsFilePasswordWithSubmitButtonTemplate = ({
         name={name}
         hint={hint}
         onVaChange={handleChange}
-        onVaPasswordSubmit={vaPasswordSubmit}
+        onVaPasswordSubmit={handleVaPasswordSubmit}
         encrypted={isEncrypted}
         passwordError={derivedPasswordError}
         passwordSubmissionSuccess={passwordSubmissionSuccess}
@@ -297,7 +300,6 @@ const AcceptsFilePasswordWithSubmitButtonTemplate = ({
 export const AcceptsFilePasswordWithSubmitButton = AcceptsFilePasswordWithSubmitButtonTemplate.bind(null);
 AcceptsFilePasswordWithSubmitButton.args = {
   ...defaultArgs,
-  vaPasswordSubmit: () => console.log('File input password submitted'),
   usePasswordSubmitButtonPattern: true,
 };
 // Snapshots disabled because visual difference is only apparent after interaction.
@@ -313,6 +315,7 @@ const PasswordButtonWithMinimumPasswordRequirementTemplate = ({
   required,
   error,
   hint,
+  usePasswordSubmitButtonPattern,
 }) => {
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
 
@@ -341,6 +344,7 @@ const PasswordButtonWithMinimumPasswordRequirementTemplate = ({
       encrypted={true}
       onVaPasswordSubmit={handleVaPasswordSubmit}
       passwordError={passwordError}
+      usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
     />
   );
 };
