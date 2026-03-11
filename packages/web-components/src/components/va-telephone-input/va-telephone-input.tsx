@@ -235,11 +235,11 @@ export class VaTelephoneInput {
    * If the country is selected, checks the phone number validity and sets error messages as needed.
    * If the country is not selected, triggers country validation and error state.
    */
-  validateContact() {
+  validateContact(initialRender=false) {
     if (this.country) {
       this.resetErrors();
       this.setValidityState();
-      if (!this.isValid && this.touched && this.showInternalErrors) {
+      if (!this.isValid && (this.touched || initialRender) && this.showInternalErrors) {
         this.visibleError = this.getErrorMessageForCountry();
         this.contactError = this.visibleError;
       }
@@ -276,10 +276,12 @@ export class VaTelephoneInput {
       }
     }
 
+    // contact is included in the payload to avoid regressions in app code but the forms-system does not use it
     this.vaContact.emit({
       callingCode: (tryParse && phoneNumber !== null) ? phoneNumber.countryCallingCode : undefined,
       countryCode: this.country,
       contact: (tryParse && phoneNumber !== null) ? phoneNumber.nationalNumber : this.contact,
+      contactRaw: this.contact,
       isValid: this.isValid,
       error,
       touched: this.touched,
@@ -326,8 +328,15 @@ export class VaTelephoneInput {
     // some territories are formatted / validated as if they were a different, larger country
     const _country = mapCountry(this.country);
     const _formatted = new AsYouType(_country).input(value);
-    // if input has no numbers return it for sake of error correction
-    return _formatted === '' ? value : _formatted;
+
+    // check if the contact prop has more typed characters than the formatted input 
+    // if yes then the contact prop is invalid, e.g. (234) 567-8900abc
+    // in this case return the contact prop to make sure that the value saved in the form system stays in sync with the component's internal contact
+    const filter = new RegExp('[()\\-\\s]', 'g');
+    const errorInContact = value.replace(filter, '').length !== _formatted.replace(filter, '').length;
+
+    // if input has no numbers or is invalid return it for sake of error correction
+    return (_formatted === '' || errorInContact) ? value : _formatted;
   }
 
   /**
@@ -379,7 +388,7 @@ export class VaTelephoneInput {
     // if a contact was provided, check if it's valid for the country
     if (this.contact) {
       this.formattedContact = this.formatContact(this.contact);
-      this.validateContact();
+      this.validateContact(true);
     }
     const comboBox = this.el.shadowRoot.querySelector('va-combo-box');
     if (comboBox) {
