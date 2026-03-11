@@ -26,6 +26,7 @@ declare global {
       'va-combo-box': WCTypes.VaComboBox & IsElement & IsElement;
       'va-crisis-line-modal': WCTypes.VaCrisisLineModal & IsElement;
       'va-date': WCTypes.VaDate & IsElement;
+      'va-details': WCTypes.VaDetails & IsElement;
       'va-header-minimal': WCTypes.VaHeaderMinimal & IsElement;
       'va-icon': WCTypes.VaIcon & IsElement;
       'va-link': WCTypes.VaLink & IsElement;
