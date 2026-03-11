@@ -810,6 +810,21 @@ export namespace Components {
         "value"?: string;
     }
     /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaDetails {
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: 'xl' | '2xl' | undefined;
+    }
+    /**
      * @componentName File input
      * @maturityCategory caution
      * @maturityLevel available
@@ -3342,6 +3357,17 @@ declare global {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
     };
+    /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaDetailsElement extends Components.VaDetails, HTMLStencilElement {
+    }
+    var HTMLVaDetailsElement: {
+        prototype: HTMLVaDetailsElement;
+        new (): HTMLVaDetailsElement;
+    };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
         "vaPasswordChange": any;
@@ -4268,6 +4294,7 @@ declare global {
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-critical-action": HTMLVaCriticalActionElement;
         "va-date": HTMLVaDateElement;
+        "va-details": HTMLVaDetailsElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
@@ -5210,6 +5237,21 @@ declare namespace LocalJSX {
           * Set the default date value must be in YYYY-MM-DD format.
          */
         "value"?: string;
+    }
+    /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaDetails {
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: 'xl' | '2xl' | undefined;
     }
     /**
      * @componentName File input
@@ -7548,6 +7590,10 @@ declare namespace LocalJSX {
         "invalidYear": boolean;
         "enableAnalytics": boolean;
     }
+    interface VaDetailsAttributes {
+        "label": string;
+        "width": 'xl' | '2xl' | undefined;
+    }
     interface VaFileInputAttributes {
         "label": string;
         "name": string;
@@ -8005,6 +8051,7 @@ declare namespace LocalJSX {
         "va-crisis-line-modal": Omit<VaCrisisLineModal, keyof VaCrisisLineModalAttributes> & { [K in keyof VaCrisisLineModal & keyof VaCrisisLineModalAttributes]?: VaCrisisLineModal[K] } & { [K in keyof VaCrisisLineModal & keyof VaCrisisLineModalAttributes as `attr:${K}`]?: VaCrisisLineModalAttributes[K] } & { [K in keyof VaCrisisLineModal & keyof VaCrisisLineModalAttributes as `prop:${K}`]?: VaCrisisLineModal[K] };
         "va-critical-action": Omit<VaCriticalAction, keyof VaCriticalActionAttributes> & { [K in keyof VaCriticalAction & keyof VaCriticalActionAttributes]?: VaCriticalAction[K] } & { [K in keyof VaCriticalAction & keyof VaCriticalActionAttributes as `attr:${K}`]?: VaCriticalActionAttributes[K] } & { [K in keyof VaCriticalAction & keyof VaCriticalActionAttributes as `prop:${K}`]?: VaCriticalAction[K] } & OneOf<"link", VaCriticalAction["link"], VaCriticalActionAttributes["link"]> & OneOf<"text", VaCriticalAction["text"], VaCriticalActionAttributes["text"]>;
         "va-date": Omit<VaDate, keyof VaDateAttributes> & { [K in keyof VaDate & keyof VaDateAttributes]?: VaDate[K] } & { [K in keyof VaDate & keyof VaDateAttributes as `attr:${K}`]?: VaDateAttributes[K] } & { [K in keyof VaDate & keyof VaDateAttributes as `prop:${K}`]?: VaDate[K] } & OneOf<"label", VaDate["label"], VaDateAttributes["label"]> & OneOf<"name", VaDate["name"], VaDateAttributes["name"]>;
+        "va-details": Omit<VaDetails, keyof VaDetailsAttributes> & { [K in keyof VaDetails & keyof VaDetailsAttributes]?: VaDetails[K] } & { [K in keyof VaDetails & keyof VaDetailsAttributes as `attr:${K}`]?: VaDetailsAttributes[K] } & { [K in keyof VaDetails & keyof VaDetailsAttributes as `prop:${K}`]?: VaDetails[K] } & OneOf<"label", VaDetails["label"], VaDetailsAttributes["label"]>;
         "va-file-input": Omit<VaFileInput, keyof VaFileInputAttributes> & { [K in keyof VaFileInput & keyof VaFileInputAttributes]?: VaFileInput[K] } & { [K in keyof VaFileInput & keyof VaFileInputAttributes as `attr:${K}`]?: VaFileInputAttributes[K] } & { [K in keyof VaFileInput & keyof VaFileInputAttributes as `prop:${K}`]?: VaFileInput[K] };
         "va-file-input-multiple": Omit<VaFileInputMultiple, keyof VaFileInputMultipleAttributes> & { [K in keyof VaFileInputMultiple & keyof VaFileInputMultipleAttributes]?: VaFileInputMultiple[K] } & { [K in keyof VaFileInputMultiple & keyof VaFileInputMultipleAttributes as `attr:${K}`]?: VaFileInputMultipleAttributes[K] } & { [K in keyof VaFileInputMultiple & keyof VaFileInputMultipleAttributes as `prop:${K}`]?: VaFileInputMultiple[K] };
         "va-header-minimal": Omit<VaHeaderMinimal, keyof VaHeaderMinimalAttributes> & { [K in keyof VaHeaderMinimal & keyof VaHeaderMinimalAttributes]?: VaHeaderMinimal[K] } & { [K in keyof VaHeaderMinimal & keyof VaHeaderMinimalAttributes as `attr:${K}`]?: VaHeaderMinimalAttributes[K] } & { [K in keyof VaHeaderMinimal & keyof VaHeaderMinimalAttributes as `prop:${K}`]?: VaHeaderMinimal[K] };
@@ -8205,6 +8252,12 @@ declare module "@stencil/core" {
              * @guidanceHref form/date-input
              */
             "va-date": LocalJSX.IntrinsicElements["va-date"] & JSXBase.HTMLAttributes<HTMLVaDateElement>;
+            /**
+             * @componentName Details
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-details": LocalJSX.IntrinsicElements["va-details"] & JSXBase.HTMLAttributes<HTMLVaDetailsElement>;
             /**
              * @componentName File input
              * @maturityCategory caution
