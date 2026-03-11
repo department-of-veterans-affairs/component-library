@@ -252,7 +252,7 @@ const AcceptsFilePasswordWithSubmitButtonTemplate = ({
     }
   }
 
-  const handleVaPasswordSubmit = (e: CustomEvent) => {
+  const handleVaPasswordSubmit = () => {
     setPasswordSubmissionSuccess(null);
   }
 

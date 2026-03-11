@@ -513,6 +513,16 @@ const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
         // Remove index from encryptedList as well to ensure password field is no longer displayed
         trackedPasswordSubmissionSuccessList.splice(indexToRemove, 1);
       }
+    } else if (detail.action === 'PASSWORD_UPDATE') {
+      // Update value at index of file that password was updated to null to
+      // enable validation to take place again at va-file-input level.
+      const indexToUpdate = trackedFilesToSet.findIndex(
+        file => file.name === detail.file.name,
+      );
+
+      if (indexToUpdate !== -1) {
+        trackedPasswordSubmissionSuccessList[indexToUpdate] = null;
+      }
     }
 
     const pdfFiles = trackedFilesToSet.map((file) => {
