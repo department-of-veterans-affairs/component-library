@@ -364,79 +364,34 @@ export class VaModal {
    */
   private applyAriaHidden(): void {
     // Reset any previous hide handlers before applying new ones.
-    this.undoAriaHidden.forEach(undo => undo?.());
     this.undoAriaHidden = [];
 
     // Collect all elements that should not be hidden (modal + ancestors)
-    const { ancestors } = this.getModalHierarchy();
+    const { ancestors, shadowRoots } = this.getModalHierarchy();
 
     // Hide document-level siblings (everything outside the ancestor chain)
     this.undoAriaHidden.push(hideOthers(ancestors));
 
-    // Hide siblings within light DOM and shadow DOM containers.
-    // We do this explicitly to avoid version-specific behavior differences in aria-hidden,
-    // and to correctly handle nested web-components.
-    const manuallyHidden = new Map<HTMLElement, string | null>();
+    // Hide siblings within each shadow root
+    shadowRoots.forEach((elementToPreserve, shadowRoot) => {
+      this.undoAriaHidden.push(
+        hideOthers([elementToPreserve], shadowRoot as unknown as HTMLElement),
+      );
+    });
 
-    const hideSiblings = (
-      elementToPreserve: HTMLElement,
-      siblings: ArrayLike<Element> | Element[],
-    ) => {
-      if (!siblings || siblings.length <= 1) {
-        return;
+    // Hide siblings within light DOM containers
+    // Exclude the last element (document root) with slice(0, -1)
+    ancestors.slice(0, -1).forEach((element, i) => {
+      const parent = ancestors[i + 1];
+      const hasSiblings = parent?.children && parent.children.length > 1;
+      const isParentShadowHost = parent?.shadowRoot !== null;
+
+      // Apply hideOthers only if parent has siblings and is not a shadow host
+      // (shadow root siblings are already handled above)
+      if (hasSiblings && !isParentShadowHost) {
+        this.undoAriaHidden.push(hideOthers([element], parent));
       }
-
-      Array.from(siblings).forEach(sibling => {
-        if (sibling === elementToPreserve || !(sibling instanceof HTMLElement)) {
-          return;
-        }
-
-        if (!manuallyHidden.has(sibling)) {
-          manuallyHidden.set(sibling, sibling.getAttribute('aria-hidden'));
-          sibling.setAttribute('aria-hidden', 'true');
-        }
-      });
-    };
-
-    let current: HTMLElement | null = this.el;
-    while (current) {
-      if (current.assignedSlot) {
-        const assignedSiblings = current.assignedSlot.assignedElements({
-          flatten: true,
-        });
-        hideSiblings(current, assignedSiblings);
-        current = current.assignedSlot;
-        continue;
-      }
-
-      const parent = current.parentElement;
-      if (parent) {
-        hideSiblings(current, parent.children);
-        current = parent;
-        continue;
-      }
-
-      const root = current.getRootNode?.();
-      if (root instanceof ShadowRoot) {
-        hideSiblings(current, root.children);
-        current = root.host as HTMLElement;
-        continue;
-      }
-
-      break;
-    }
-
-    if (manuallyHidden.size) {
-      this.undoAriaHidden.push(() => {
-        manuallyHidden.forEach((previousValue, element) => {
-          if (previousValue === null) {
-            element.removeAttribute('aria-hidden');
-          } else {
-            element.setAttribute('aria-hidden', previousValue);
-          }
-        });
-      });
-    }
+    });
   }
 
   /**
@@ -454,9 +409,8 @@ export class VaModal {
     // If an initialFocusSelector is provided, the element will be focused on modal open
     // if it exists. You are able to focus elements in both light and shadow DOM.
     const initialFocus = (
-      (this.initialFocusSelector &&
-        (this.el.querySelector(this.initialFocusSelector) ||
-          this.el.shadowRoot?.querySelector(this.initialFocusSelector))) ||
+      this.el.querySelector(this.initialFocusSelector) ||
+      this.el.shadowRoot?.querySelector(this.initialFocusSelector) ||
       this.closeButton
     ) as HTMLElement;
     initialFocus?.focus();
@@ -519,39 +473,51 @@ export class VaModal {
     // Start with the modal element itself
     ancestors.push(this.el);
 
-    let current: HTMLElement | null = this.el;
+    let current: Node | null = this.el;
 
-    // Traverse both light DOM and shadow DOM boundaries up to the document root.
+    // Traverse up the DOM tree through shadow hosts
     while (current) {
-      const parent = current.parentElement;
+      const root = current.getRootNode?.();
 
-      if (parent) {
-        if (!ancestors.includes(parent)) {
-          ancestors.push(parent);
-        }
-        current = parent;
-        continue;
+      // Stop if we've reached the document root
+      if (!(root instanceof ShadowRoot)) {
+        break;
       }
 
-      const root = current.getRootNode?.();
-      if (root instanceof ShadowRoot) {
-        if (!shadowRoots.has(root)) {
-          shadowRoots.set(root, current);
-        }
+      // Safety check to make sure shadowRoot has a host
+      const host = root.host as HTMLElement;
+      if (!host) {
+        break;
+      }
 
-        const host = root.host as HTMLElement;
-        if (!host) {
+      // Store the shadow host and record which element to preserve in this shadow root
+      ancestors.push(host);
+
+      // Record the first element we encounter for each shadow root
+      if (!shadowRoots.has(root)) {
+        shadowRoots.set(root, current as HTMLElement);
+      }
+
+      // Collect light DOM ancestors between shadow boundaries
+      // Walk up through regular DOM elements until hitting another shadow root
+      let lightDomAncestor = host.parentElement;
+      while (lightDomAncestor) {
+        ancestors.push(lightDomAncestor);
+
+        // If shadow root found, record it and break to continue up the shadow host chain
+        const ancestorRoot = lightDomAncestor.getRootNode?.();
+        if (ancestorRoot instanceof ShadowRoot) {
+          if (!shadowRoots.has(ancestorRoot)) {
+            shadowRoots.set(ancestorRoot, lightDomAncestor);
+          }
           break;
         }
-
-        if (!ancestors.includes(host)) {
-          ancestors.push(host);
-        }
-        current = host;
-        continue;
+        // If no shadow root, keep going up the light DOM
+        lightDomAncestor = lightDomAncestor.parentElement;
       }
 
-      break;
+      // Move up to the next shadow host
+      current = host;
     }
 
     return { ancestors, shadowRoots };

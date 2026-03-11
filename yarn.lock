@@ -3284,7 +3284,7 @@ __metadata:
     "@axe-core/puppeteer": "npm:4.10.0"
     "@babel/core": "npm:7.12.13"
     "@department-of-veterans-affairs/css-library": "npm:0.27.0"
-    "@stencil/core": "npm:4.25.0"
+    "@stencil/core": "npm:4.43.2"
     "@stencil/postcss": "npm:2.1.0"
     "@stencil/react-output-target": "npm:0.5.3"
     "@stencil/sass": "npm:3.2.3"
@@ -3294,7 +3294,7 @@ __metadata:
     "@types/react-dom": "npm:17.0.2"
     "@typescript-eslint/eslint-plugin": "npm:5.30.5"
     "@typescript-eslint/parser": "npm:5.30.5"
-    "@uswds/uswds": "npm:3.9.0"
+    "@uswds/uswds": "npm:3.13.0"
     animate.css: "npm:4.1.1"
     aria-hidden: "npm:1.1.3"
     babel-loader: "npm:8.2.2"
@@ -4352,6 +4352,62 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-darwin-arm64@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-darwin-arm64@npm:4.44.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-darwin-x64@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-darwin-x64@npm:4.44.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-arm64-gnu@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-linux-arm64-gnu@npm:4.44.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-arm64-musl@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-linux-arm64-musl@npm:4.44.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-x64-gnu@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-linux-x64-gnu@npm:4.44.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-linux-x64-musl@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-linux-x64-musl@npm:4.44.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-win32-arm64-msvc@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-win32-arm64-msvc@npm:4.44.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rollup/rollup-win32-x64-msvc@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@rollup/rollup-win32-x64-msvc@npm:4.44.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@sinclair/typebox@npm:^0.27.8":
   version: 0.27.8
   resolution: "@sinclair/typebox@npm:0.27.8"
@@ -4420,12 +4476,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stencil/core@npm:4.25.0":
-  version: 4.25.0
-  resolution: "@stencil/core@npm:4.25.0"
+"@stencil/core@npm:4.43.2":
+  version: 4.43.2
+  resolution: "@stencil/core@npm:4.43.2"
+  dependencies:
+    "@rollup/rollup-darwin-arm64": "npm:4.44.0"
+    "@rollup/rollup-darwin-x64": "npm:4.44.0"
+    "@rollup/rollup-linux-arm64-gnu": "npm:4.44.0"
+    "@rollup/rollup-linux-arm64-musl": "npm:4.44.0"
+    "@rollup/rollup-linux-x64-gnu": "npm:4.44.0"
+    "@rollup/rollup-linux-x64-musl": "npm:4.44.0"
+    "@rollup/rollup-win32-arm64-msvc": "npm:4.44.0"
+    "@rollup/rollup-win32-x64-msvc": "npm:4.44.0"
+  dependenciesMeta:
+    "@rollup/rollup-darwin-arm64":
+      optional: true
+    "@rollup/rollup-darwin-x64":
+      optional: true
+    "@rollup/rollup-linux-arm64-gnu":
+      optional: true
+    "@rollup/rollup-linux-arm64-musl":
+      optional: true
+    "@rollup/rollup-linux-x64-gnu":
+      optional: true
+    "@rollup/rollup-linux-x64-musl":
+      optional: true
+    "@rollup/rollup-win32-arm64-msvc":
+      optional: true
+    "@rollup/rollup-win32-x64-msvc":
+      optional: true
   bin:
     stencil: bin/stencil
-  checksum: 10/8e664e650cc5bdaf1b0ad547f10b667bf6321d6f4fb70e8ae3d425e7c5df1cd873859b3bcd0b4c9e78169baab0a92244df3054a977fbc91259384cd42706e7c1
+  checksum: 10/af236436784b68c77b363140d0f99352282424887b54ea66dd755146b8dbc81f0621430af35ea0e3e338400101cb81d90513ca0aca59b5c43e8263dccae444c7
   languageName: node
   linkType: hard
 
@@ -5204,18 +5286,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:3.9.0":
-  version: 3.9.0
-  resolution: "@uswds/uswds@npm:3.9.0"
-  dependencies:
-    object-assign: "npm:4.1.1"
-    receptor: "npm:1.0.0"
-    resolve-id-refs: "npm:0.1.0"
-  checksum: 10/cdd7ba35192c54b59f86543070452f0d6a2c49bbc3f68f6d905f8f297f0474b4ea95b6ff039a8212c6020a3dad933e1942dcb53f9479721b339e9b65108f34e5
-  languageName: node
-  linkType: hard
-
-"@uswds/uswds@npm:^3.9.0":
+"@uswds/uswds@npm:3.13.0, @uswds/uswds@npm:^3.9.0":
   version: 3.13.0
   resolution: "@uswds/uswds@npm:3.13.0"
   dependencies:
@@ -5226,6 +5297,17 @@ __metadata:
     sass-embedded-linux-x64:
       optional: true
   checksum: 10/79d2f48156527c531bdf7468711c04ecb06f26d9bed04125cfa4e36ac8b956ce9e29b17679f9cdf3fde730e676662d90de267a5a724e11e2d5f4a8b704c28052
+  languageName: node
+  linkType: hard
+
+"@uswds/uswds@npm:3.9.0":
+  version: 3.9.0
+  resolution: "@uswds/uswds@npm:3.9.0"
+  dependencies:
+    object-assign: "npm:4.1.1"
+    receptor: "npm:1.0.0"
+    resolve-id-refs: "npm:0.1.0"
+  checksum: 10/cdd7ba35192c54b59f86543070452f0d6a2c49bbc3f68f6d905f8f297f0474b4ea95b6ff039a8212c6020a3dad933e1942dcb53f9479721b339e9b65108f34e5
   languageName: node
   linkType: hard
 
