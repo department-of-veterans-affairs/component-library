@@ -96,11 +96,6 @@ export class VaFileInputMultiple {
   @Prop() slotFieldIndexes?: Number[] = null;
 
   /**
-   * Array of booleans corresponding to the password submission success state of each file.
-   */
-  @Prop() passwordSubmissionSuccessList?: boolean[] = [];
-
-  /**
    * Array of numbers corresponding to the progress of the upload of each file.
    */
   @Prop() percentUploaded?: number[] = [];
@@ -341,12 +336,12 @@ export class VaFileInputMultiple {
   }
 
   /**
-   * Handles submission of passwords for encrypted files.
+   * Handles file input changes by updating, adding, or removing files based on user interaction.
    * @param {any} event - The event object containing file details.
    * @param {number} fileKey - The key of the file being changed.
    * @param {number} pageIndex - The index of the file in the files array.
    */
-  private handlePasswordSubmit(event: any, fileKey: number, pageIndex: number) {
+  private handlePasswordChange(event: any, fileKey: number, pageIndex: number) {
     const fileObject = this.findFileByKey(fileKey);
     fileObject.password = event.detail.password;
     const filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
@@ -488,7 +483,7 @@ export class VaFileInputMultiple {
    * The render method to display the component structure.
    * @returns {JSX.Element} The rendered component.
    */
-  render(): JSX.Element {
+  render() {
     const {
       label,
       required,
@@ -501,7 +496,6 @@ export class VaFileInputMultiple {
       encrypted,
       percentUploaded,
       passwordErrors,
-      passwordSubmissionSuccessList,
       enableAnalytics,
       readOnly,
       maxFileSize,
@@ -554,15 +548,14 @@ export class VaFileInputMultiple {
                 encrypted={encrypted[pageIndex]}
                 percentUploaded={_percentUploaded}
                 passwordError={_passwordError}
-                passwordSubmissionSuccess={passwordSubmissionSuccessList[pageIndex]}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
-                onVaPasswordSubmit={event =>
-                  this.handlePasswordSubmit(event, fileEntry.key, pageIndex)
-                }
                 onVaFileInputError={event =>
                   this.handleFileInputError(event, fileEntry.key)
+                }
+                onVaPasswordChange={event =>
+                  this.handlePasswordChange(event, fileEntry.key, pageIndex)
                 }
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}

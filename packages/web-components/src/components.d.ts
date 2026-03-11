@@ -727,6 +727,21 @@ export namespace Components {
         "value"?: string;
     }
     /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaDetails {
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: 'xl' | '2xl' | undefined;
+    }
+    /**
      * @componentName File input
      * @maturityCategory caution
      * @maturityLevel available
@@ -781,10 +796,6 @@ export namespace Components {
           * Error message for the encrypted password input
          */
         "passwordError"?: string;
-        /**
-          * Denotes if user submission of encrypted file password was successful.
-         */
-        "passwordSubmissionSuccess"?: null | boolean;
         /**
           * Percent upload completed. For use with va-progress-bar component
          */
@@ -867,10 +878,6 @@ export namespace Components {
           * Array of password error messages corresponding to each file input. The length and order match the files array.
          */
         "passwordErrors"?: Array<string | null>;
-        /**
-          * Array of booleans corresponding to the password submission success state of each file.
-         */
-        "passwordSubmissionSuccessList"?: boolean[];
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
          */
@@ -3092,9 +3099,20 @@ declare global {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
     };
+    /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface HTMLVaDetailsElement extends Components.VaDetails, HTMLStencilElement {
+    }
+    var HTMLVaDetailsElement: {
+        prototype: HTMLVaDetailsElement;
+        new (): HTMLVaDetailsElement;
+    };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
-        "vaPasswordSubmit": any;
+        "vaPasswordChange": any;
         "vaFileInputError": any;
         "component-library-analytics": any;
     }
@@ -4018,6 +4036,7 @@ declare global {
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-critical-action": HTMLVaCriticalActionElement;
         "va-date": HTMLVaDateElement;
+        "va-details": HTMLVaDetailsElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
@@ -4877,6 +4896,21 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     */
+    interface VaDetails {
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: 'xl' | '2xl' | undefined;
+    }
+    /**
      * @componentName File input
      * @maturityCategory caution
      * @maturityLevel available
@@ -4940,17 +4974,13 @@ declare namespace LocalJSX {
          */
         "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
-          * The event emitted when the file input password is submitted.
+          * The event emitted when the file input password value changes.
          */
-        "onVaPasswordSubmit"?: (event: VaFileInputCustomEvent<any>) => void;
+        "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * Error message for the encrypted password input
          */
         "passwordError"?: string;
-        /**
-          * Denotes if user submission of encrypted file password was successful.
-         */
-        "passwordSubmissionSuccess"?: null | boolean;
         /**
           * Percent upload completed. For use with va-progress-bar component
          */
@@ -5041,10 +5071,6 @@ declare namespace LocalJSX {
           * Array of password error messages corresponding to each file input. The length and order match the files array.
          */
         "passwordErrors"?: Array<string | null>;
-        /**
-          * Array of booleans corresponding to the password submission success state of each file.
-         */
-        "passwordSubmissionSuccessList"?: boolean[];
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
          */
@@ -6887,6 +6913,7 @@ declare namespace LocalJSX {
         "va-crisis-line-modal": VaCrisisLineModal;
         "va-critical-action": VaCriticalAction;
         "va-date": VaDate;
+        "va-details": VaDetails;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
@@ -7087,6 +7114,12 @@ declare module "@stencil/core" {
              * @guidanceHref form/date-input
              */
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
+            /**
+             * @componentName Details
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             */
+            "va-details": LocalJSX.VaDetails & JSXBase.HTMLAttributes<HTMLVaDetailsElement>;
             /**
              * @componentName File input
              * @maturityCategory caution
