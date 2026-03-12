@@ -4,7 +4,7 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-modal', () => {
   let consoleWarnSpy;
 
-    beforeEach(() => {
+  beforeEach(() => {
     // Spy on console.warn and mock its implementation to prevent it from logging to the actual console
     consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
   });
