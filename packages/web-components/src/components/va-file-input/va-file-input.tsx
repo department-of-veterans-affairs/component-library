@@ -278,6 +278,12 @@ export class VaFileInput {
       this.passwordValue = null;
       this.passwordError = null;
       this.passwordSubmissionSuccess = null;
+
+      // Reset password submit button loading state if necessary
+      if (this.passwordSubmitButton?.hasAttribute('loading')) {
+        this.passwordSubmitButton.removeAttribute('loading');
+        this.passwordSubmitButton.setAttribute('text', 'Submit password');
+      }
     }
 
     // Additional check to ensure encryption focus takes place when a user changes
@@ -665,6 +671,7 @@ export class VaFileInput {
           label="File password"
           required
           error={this.passwordError}
+          value={this.passwordValue}
         />
       )
     }
@@ -701,6 +708,7 @@ export class VaFileInput {
                 messageAriaDescribedby={`${this.file.name}`}
                 required
                 error={this.passwordError}
+                value={this.passwordValue}
               />
               <va-button
                 text="Submit password"

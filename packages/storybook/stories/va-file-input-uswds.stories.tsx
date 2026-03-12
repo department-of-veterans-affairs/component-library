@@ -190,6 +190,12 @@ const WithMinimumPasswordRequirementTemplate = ({
 }) => {
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
 
+  // Reset password error on file change
+  const handleVaChange = () => {
+    setPasswordError(null);
+  }
+
+  // Example password validation on password change
   const handleVaPasswordChange = (e: CustomEvent) => {
     let newPasswordError: string | undefined;
 
@@ -213,6 +219,7 @@ const WithMinimumPasswordRequirementTemplate = ({
       error={error}
       hint={hint}
       encrypted={true}
+      onVaChange={handleVaChange}
       onVaPasswordChange={handleVaPasswordChange}
       passwordError={passwordError}
     />
