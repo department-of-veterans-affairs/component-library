@@ -329,12 +329,12 @@ export class VaTelephoneInput {
     const _country = mapCountry(this.country);
     const _formatted = new AsYouType(_country).input(value);
 
-    // check if the contact prop has more typed characters than the formatted input 
-    // if yes then the contact prop is invalid, e.g. (234) 567-8900abc
+    // check if the contact prop has the same typed characters as the formatted input 
+    // if no then the contact prop is invalid, e.g. (234) 567-8900abc
     // in this case return the contact prop to make sure that the value saved in the form system stays in sync with the component's internal contact
     const filter = new RegExp('[()\\-\\s]', 'g');
-    const errorInContact = value.replace(filter, '').length !== _formatted.replace(filter, '').length;
-
+    const errorInContact = value.replace(filter, '') !== _formatted.replace(filter, '');
+    debugger;
     // if input has no numbers or is invalid return it for sake of error correction
     return (_formatted === '' || errorInContact) ? value : _formatted;
   }
