@@ -106,7 +106,7 @@ export class VaComboBox {
   @Watch('value')
   updateInputValueOnValueChange(newValue: string) {
     const inputElement = this.el.shadowRoot.querySelector('input');
-    if (inputElement) inputElement.value = newValue;
+    if (inputElement) this.updateInputBox(newValue);
   }
 
   /**
@@ -117,14 +117,8 @@ export class VaComboBox {
   @Watch('options')
   updateInputValueOnOptionsChange() {
     const inputElement = this.el.shadowRoot.querySelector('input');
-    const allNodes = this.el.querySelectorAll('option') as Array<HTMLOptionElement>;
-    const nodes = Array.from(allNodes);
-    if (
-      inputElement &&
-      inputElement.value !== this.value &&
-      nodes.some(option => option.value === this.value)
-    )
-      inputElement.value = this.value;
+    if (inputElement && inputElement.value !== this.value)
+      this.updateInputBox(this.value);
   }
 
   /**
@@ -187,6 +181,23 @@ export class VaComboBox {
     if (comboBoxElement) {
       comboBox.off(comboBoxElement);
     }
+  }
+
+  /**
+   * Update input box according to given value
+   * if the option exists then set the value to that options textContent
+   * otherwise set the text to the value
+   */
+  private updateInputBox(newValue: string) {
+    const inputElement = this.el.shadowRoot.querySelector('input');
+    const allNodes = this.el.querySelectorAll(
+      'option',
+    ) as Array<HTMLOptionElement>;
+    const nodes = Array.from(allNodes);
+
+    const foundOption = nodes.find(option => option.value === newValue);
+    if (foundOption) inputElement.value = foundOption.textContent;
+    else inputElement.value = newValue;
   }
 
   /**
