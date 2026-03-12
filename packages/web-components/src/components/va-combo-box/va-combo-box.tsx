@@ -185,10 +185,14 @@ export class VaComboBox {
 
   /**
    * Update input box according to given value
-   * only if the option exists
+   * only if the option exists or the new value is blank/null
    */
   private updateInputBox(newValue: string) {
     const inputElement = this.el.shadowRoot.querySelector('input');
+    if(newValue == null || newValue === '') {
+      inputElement.value = '';
+      return;
+    }
     const allNodes = this.el.querySelectorAll(
       'option:not([data-optgroup])',
     ) as Array<HTMLOptionElement>;
