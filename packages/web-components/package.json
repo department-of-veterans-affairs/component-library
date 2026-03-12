@@ -18,7 +18,6 @@
   ],
   "scripts": {
     "build": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --docs-json component-docs.json",
-    "copy-bindings": "node ./scripts/copy-bindings.cjs",
     "build-bindings": "tsc -p tsconfig.bindings.json",
     "lint": "eslint src/**/*{.ts,.tsx}",
     "watch:stencil": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --watch",
