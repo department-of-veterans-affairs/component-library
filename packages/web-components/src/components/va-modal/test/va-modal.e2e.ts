@@ -4,27 +4,7 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-modal', () => {
   let consoleWarnSpy;
 
-  const getModalActiveElementDetails = async (page) => {
-    return page.evaluate(() => {
-      const modal = document.querySelector('va-modal');
-      const shadowRoot = modal?.shadowRoot;
-      if (!shadowRoot) {
-        return null;
-      }
-
-      const active = shadowRoot.activeElement as HTMLElement | null;
-      if (!active) {
-        return null;
-      }
-
-      return {
-        ariaLabel: active.getAttribute('aria-label'),
-        textContent: active.textContent?.trim(),
-      };
-    });
-  };
-
-  beforeEach(() => {
+    beforeEach(() => {
     // Spy on console.warn and mock its implementation to prevent it from logging to the actual console
     consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
   });
@@ -143,9 +123,9 @@ describe('va-modal', () => {
       </va-modal>
     `);
 
-    const focusedElement = await getModalActiveElementDetails(page);
+    const focusedElement = await page.find('va-modal >>> :focus');
 
-    expect(focusedElement?.ariaLabel).toEqual(
+    expect(focusedElement.getAttribute('aria-label')).toEqual(
       'Close Example Title modal',
     );
   });
@@ -160,9 +140,9 @@ describe('va-modal', () => {
       </va-modal>
     `);
 
-    const focusedElement = await getModalActiveElementDetails(page);
+    const focusedElement = await page.find('va-modal >>> :focus');
 
-    expect(focusedElement?.textContent).toEqual('Example Title');
+    expect(focusedElement.textContent).toEqual('Example Title');
   });
 
   it('should prevent tabbing outside of the modal', async () => {
@@ -179,8 +159,8 @@ describe('va-modal', () => {
     `);
 
     // Start with focus on the close button
-    const focusedElement = await getModalActiveElementDetails(page);
-    expect(focusedElement?.ariaLabel).toEqual(
+    const focusedElement = await page.find('va-modal >>> :focus');
+    expect(focusedElement.getAttribute('aria-label')).toEqual(
       'Close Example Title modal',
     );
 
@@ -190,16 +170,16 @@ describe('va-modal', () => {
     await page.keyboard.up('Shift');
 
     // Shift + tab x2 returns to close button
-    const shiftTabElement = await getModalActiveElementDetails(page);
-    expect(shiftTabElement?.ariaLabel).toEqual(
+    const shiftTabElement = await page.find('va-modal >>> :focus');
+    expect(shiftTabElement.getAttribute('aria-label')).toEqual(
       'Close Example Title modal',
     );
 
     // Try to tab outside of the modal, it will return focus to the close button
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
-    const tab2Element = await getModalActiveElementDetails(page);
-    expect(tab2Element?.ariaLabel).toEqual(
+    const tab2Element = await page.find('va-modal >>> :focus');
+    expect(tab2Element.getAttribute('aria-label')).toEqual(
       'Close Example Title modal',
     );
   });
@@ -406,8 +386,8 @@ describe('va-modal', () => {
     await page.waitForChanges();
 
     // Start with focus on the close button
-    const focusedElement = await getModalActiveElementDetails(page);
-    expect(focusedElement?.ariaLabel).toEqual(
+    const focusedElement = await page.find('va-modal >>> :focus');
+    expect(focusedElement.getAttribute('aria-label')).toEqual(
       'Close Example Title modal',
     );
 
@@ -428,8 +408,8 @@ describe('va-modal', () => {
     await page.keyboard.press('Tab');
     await page.waitForChanges();
 
-    const wrappedElement = await getModalActiveElementDetails(page);
-    expect(wrappedElement?.ariaLabel).toEqual(
+    const wrappedElement = await page.find('va-modal >>> :focus');
+    expect(wrappedElement.getAttribute('aria-label')).toEqual(
       'Close Example Title modal',
     );
   });
