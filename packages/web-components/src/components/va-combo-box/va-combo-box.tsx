@@ -185,19 +185,17 @@ export class VaComboBox {
 
   /**
    * Update input box according to given value
-   * if the option exists then set the value to that options textContent
-   * otherwise set the text to the value
+   * only if the option exists
    */
   private updateInputBox(newValue: string) {
     const inputElement = this.el.shadowRoot.querySelector('input');
     const allNodes = this.el.querySelectorAll(
-      'option',
+      'option:not([data-optgroup])',
     ) as Array<HTMLOptionElement>;
     const nodes = Array.from(allNodes);
 
     const foundOption = nodes.find(option => option.value === newValue);
     if (foundOption) inputElement.value = foundOption.textContent;
-    else inputElement.value = newValue;
   }
 
   /**
