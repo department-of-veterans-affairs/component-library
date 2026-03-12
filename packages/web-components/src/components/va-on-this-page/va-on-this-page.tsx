@@ -37,6 +37,13 @@ if (Build.isTesting) {
 export class VaOnThisPage {
   @Element() el: HTMLElement;
 
+  private getHeadingText = (heading: HTMLElement): string => {
+    return heading.childNodes.length === 1 ? heading.textContent : 
+      Array.from(heading.childNodes).map((node: HTMLElement) => {
+        return node.classList?.contains('usa-sr-only') ? '' : node.textContent;
+      }).join(' ');
+  };
+
   /**
    * The event used to track usage of the component. This is emitted when the
    * user clicks on a link and enableAnalytics is true.
@@ -119,14 +126,17 @@ export class VaOnThisPage {
     // eslint-disable-next-line i18next/no-literal-string
     const HeaderLevel = getHeaderLevel(this.headerLevel) || 'h2';
 
-    const h2s = Array.from(document.querySelectorAll('article h2')).filter(
-      heading => {
+    const h2s = Array.from(document.querySelectorAll<HTMLElement>('article h2'))
+      .filter(heading => {
         if (!heading.id) {
           consoleDevError(`${heading.textContent} is missing an id`);
         }
         return heading.id;
-      },
-    ) as Array<HTMLElement>;
+      })
+      .map(heading => ({
+        id: heading.id,
+        text: this.getHeadingText(heading),
+      }));
 
     return (
       <nav aria-labelledby="on-this-page">
@@ -136,7 +146,7 @@ export class VaOnThisPage {
             <li>
               <a href={`#${heading.id}`} onClick={handleOnClick}>
                 <va-icon icon="arrow_downward"></va-icon>
-                <span>{heading.innerText}</span>
+                <span>{heading.text}</span>
               </a>
             </li>
           ))}

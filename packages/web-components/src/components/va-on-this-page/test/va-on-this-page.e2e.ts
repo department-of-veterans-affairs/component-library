@@ -239,4 +239,44 @@ describe('va-on-this-page', () => {
       </va-on-this-page>
     `);
   });
+
+  it('excludes usa-sr-only content from link text', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      `
+      <article>
+        <va-on-this-page></va-on-this-page>
+        <h2 id="section-1">Getting started <span class="usa-sr-only">(optional)</span></h2>
+        <div>Some content</div>
+        <h2 id="section-2"><span>Process</span> <span class="usa-sr-only">- updated</span></h2>
+      </article>
+      `,
+    );
+    const element = await page.find('va-on-this-page');
+
+    expect(element).toEqualHtml(`
+      <va-on-this-page class="hydrated">
+        <mock:shadow-root>
+          <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
+            <ul>
+              <li>
+                <a href="#section-1">
+                  <va-icon class="hydrated"></va-icon>
+                  <span>Getting started</span>
+                </a>
+              </li>
+              <li>
+                <a href="#section-2">
+                  <va-icon class="hydrated"></va-icon>
+                  <span>Process</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </mock:shadow-root>
+      </va-on-this-page>
+    `);
+  });
 });
