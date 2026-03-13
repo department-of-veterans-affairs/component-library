@@ -334,7 +334,6 @@ export class VaTelephoneInput {
     // in this case return the contact prop to make sure that the value saved in the form system stays in sync with the component's internal contact
     const filter = new RegExp('[()\\-\\s]', 'g');
     const errorInContact = value.replace(filter, '') !== _formatted.replace(filter, '');
-    debugger;
     // if input has no numbers or is invalid return it for sake of error correction
     return (_formatted === '' || errorInContact) ? value : _formatted;
   }
