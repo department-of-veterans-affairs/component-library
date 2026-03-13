@@ -77,7 +77,7 @@ describe('va-additional-info', () => {
 
     await anchorEl.click();
     // Allow the transition to complete
-    await page.waitForTimeout(600);
+    await new Promise(resolve => setTimeout(resolve, 600));
     expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
 
     const postOpacity = await handle.evaluate(
@@ -110,7 +110,7 @@ describe('va-additional-info', () => {
     const anchorEl = await page.find('va-additional-info >>> a');
     await anchorEl.press(' ');
     // Allow the transition to complete
-    await page.waitForTimeout(600);
+    await new Promise(resolve => setTimeout(resolve, 600));
 
     const postOpacity = await handle.evaluate(
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,
@@ -142,7 +142,7 @@ describe('va-additional-info', () => {
     const anchorEl = await page.find('va-additional-info >>> a');
     await anchorEl.press('Enter');
     // Allow the transition to complete
-    await page.waitForTimeout(600);
+    await new Promise(resolve => setTimeout(resolve, 600));
 
     const postOpacity = await handle.evaluate(
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,
