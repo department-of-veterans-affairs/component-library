@@ -231,7 +231,7 @@ describe('va-file-input', () => {
     //don't delete
     noButton.click();
 
-    await page.waitForTimeout(100);
+    await new Promise((r) => setTimeout(r, 100));
 
     const modalCheck2 = await page.find('va-file-input >>> va-modal[visible]');
 
@@ -269,7 +269,7 @@ describe('va-file-input', () => {
     // get delete button
     const [_, deleteButton] = await page.findAll('va-file-input >>> va-button-icon');
     deleteButton.click();
-    await page.waitForTimeout(100);
+    await new Promise((r) => setTimeout(r, 100));
 
     // make sure modal opens
     const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
@@ -284,7 +284,7 @@ describe('va-file-input', () => {
 
     // yes we want to remove the file
     yesButton.click();
-    await page.waitForTimeout(100);
+    await new Promise((r) => setTimeout(r, 100));
 
     // get buttons again
     const btns = await page.findAll('va-file-input >>> va-button-icon');
