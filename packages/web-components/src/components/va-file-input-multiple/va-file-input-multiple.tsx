@@ -96,6 +96,11 @@ export class VaFileInputMultiple {
   @Prop() slotFieldIndexes?: Number[] = null;
 
   /**
+   * Array of booleans corresponding to the password submission success state of each file.
+   */
+  @Prop() passwordSubmissionSuccessList?: boolean[] = [];
+
+  /**
    * Array of numbers corresponding to the progress of the upload of each file.
    */
   @Prop() percentUploaded?: number[] = [];
@@ -119,6 +124,13 @@ export class VaFileInputMultiple {
    * Array of objects representing a previously uploaded file. Example: `[{ name: string, type: string, size: number}]`
    */
   @Prop() uploadedFiles?: UploadedFile[];
+
+  /**
+   * When true, the child instances of va-file-input will render a password
+   * input with a submit button, instead of emitting password changes
+   * immediately.
+   */
+  @Prop() usePasswordSubmitButtonPattern?: boolean = false;
 
   /**
    * Event emitted when any change to the file inputs occurs.
@@ -355,6 +367,26 @@ export class VaFileInputMultiple {
 
   }
 
+  /**
+   * Handles submission of passwords for encrypted files.
+   * @param {any} event - The event object containing file details.
+   * @param {number} fileKey - The key of the file being changed.
+   * @param {number} pageIndex - The index of the file in the files array.
+   */
+  private handlePasswordSubmit(event: any, fileKey: number, pageIndex: number) {
+    const fileObject = this.findFileByKey(fileKey);
+    fileObject.password = event.detail.password;
+    const filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
+    const result = {
+      action: "PASSWORD_UPDATE",
+      file: fileObject.file,
+      state: filesArray,
+      index: pageIndex
+    }
+    this.vaMultipleChange.emit(result);
+
+  }
+
   private updateFilesState() {
     // Replace array reference to trigger re-render
     this.files = [...this.files];
@@ -483,7 +515,7 @@ export class VaFileInputMultiple {
    * The render method to display the component structure.
    * @returns {JSX.Element} The rendered component.
    */
-  render() {
+  render(): JSX.Element {
     const {
       label,
       required,
@@ -496,12 +528,14 @@ export class VaFileInputMultiple {
       encrypted,
       percentUploaded,
       passwordErrors,
+      passwordSubmissionSuccessList,
       enableAnalytics,
       readOnly,
       maxFileSize,
       minFileSize,
       statusText,
       uploadedFiles,
+      usePasswordSubmitButtonPattern,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error' : '';
@@ -548,14 +582,18 @@ export class VaFileInputMultiple {
                 encrypted={encrypted[pageIndex]}
                 percentUploaded={_percentUploaded}
                 passwordError={_passwordError}
+                passwordSubmissionSuccess={passwordSubmissionSuccessList[pageIndex]}
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
-                onVaFileInputError={event =>
-                  this.handleFileInputError(event, fileEntry.key)
-                }
                 onVaPasswordChange={event =>
                   this.handlePasswordChange(event, fileEntry.key, pageIndex)
+                }
+                onVaPasswordSubmit={event =>
+                  this.handlePasswordSubmit(event, fileEntry.key, pageIndex)
+                }
+                onVaFileInputError={event =>
+                  this.handleFileInputError(event, fileEntry.key)
                 }
                 enable-analytics={enableAnalytics}
                 value={fileEntry.file}
@@ -567,6 +605,7 @@ export class VaFileInputMultiple {
                 class={fileEntry.file || fileEntry.hasError ? 'has-file' : 'no-file'}
                 max-file-size={maxFileSize}
                 min-file-size={minFileSize}
+                usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
               />
             );
           })}

@@ -453,9 +453,11 @@ CustomValidation.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-const EncryptedTemplate = ({ label, name }) => {
+const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
   const [trackedFiles, setTrackedFiles] = useState([]);
   const [encryptedList, setEncryptedList] = useState([]);
+  const [passwordSubmissionSuccessList, setPasswordSubmissionSuccessList] = useState<boolean[]>([]);
+  const [derivedPasswordErrorList, setDerivedPasswordErrorList] = useState<string[]>([]);
 
   /**
    * Callback passed to onVaMultipleChange to track the file objects for each
@@ -473,6 +475,9 @@ const EncryptedTemplate = ({ label, name }) => {
     const { detail } = event;
 
     const trackedFilesToSet = [...trackedFiles];
+    const trackedPasswordSubmissionSuccessList = [
+      ...passwordSubmissionSuccessList
+    ];
 
     // Add new file to trackedFiles if action is FILE_ADDED
     if (detail.action === 'FILE_ADDED') {
@@ -494,6 +499,8 @@ const EncryptedTemplate = ({ label, name }) => {
       );
       if (indexToRemove !== -1) {
         trackedFilesToSet.splice(indexToRemove, 1);
+        // Remove index from encryptedList as well to ensure password field is no longer displayed
+        trackedPasswordSubmissionSuccessList.splice(indexToRemove, 1);
       }
     } else if (detail.action === 'FILE_REMOVED' && !detail.file) {
       // If an error file was deleted, remove the corresponding file from
@@ -503,6 +510,18 @@ const EncryptedTemplate = ({ label, name }) => {
       );
       if (indexToRemove !== -1) {
         trackedFilesToSet.splice(indexToRemove, 1);
+        // Remove index from encryptedList as well to ensure password field is no longer displayed
+        trackedPasswordSubmissionSuccessList.splice(indexToRemove, 1);
+      }
+    } else if (detail.action === 'PASSWORD_UPDATE') {
+      // Update value at index of file that password was updated to null to
+      // enable validation to take place again at va-file-input level.
+      const indexToUpdate = trackedFilesToSet.findIndex(
+        file => file.name === detail.file.name,
+      );
+
+      if (indexToUpdate !== -1) {
+        trackedPasswordSubmissionSuccessList[indexToUpdate] = null;
       }
     }
 
@@ -510,6 +529,7 @@ const EncryptedTemplate = ({ label, name }) => {
       return file.type === 'application/pdf'
     });
 
+    setPasswordSubmissionSuccessList(trackedPasswordSubmissionSuccessList);
     setEncryptedList(pdfFiles);
     setTrackedFiles(trackedFilesToSet);
   }
@@ -543,6 +563,19 @@ const EncryptedTemplate = ({ label, name }) => {
     setTrackedFiles(trackedFilesToSet);
   }
 
+  const handlePasswordSubmissionSuccessClick = (index: number, isSuccess: boolean = false) => {
+    const currentState = [...passwordSubmissionSuccessList];
+    currentState[index] = isSuccess;
+
+    if (!isSuccess) {
+      const currentDerivedPasswordErrorList = [...derivedPasswordErrorList];
+      currentDerivedPasswordErrorList[index] = 'Incorrect password. Try again or delete file.';
+      setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
+    }
+
+    setPasswordSubmissionSuccessList(currentState);
+  }
+
   return (
     <>
       To learn how to check for an encrypted PDF <va-link
@@ -554,10 +587,53 @@ const EncryptedTemplate = ({ label, name }) => {
         name={name}
         hint={"This example shows a password field when a .pdf file is uploaded."}
         encrypted={encryptedList}
+        passwordSubmissionSuccessList={passwordSubmissionSuccessList}
+        passwordErrors={derivedPasswordErrorList}
         onVaMultipleChange={handleChange}
         onVaMultipleError={handleError}
+        usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
       />
       <hr />
+
+      { usePasswordSubmitButtonPattern &&
+        (<div
+          className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
+          style={{ width: 'fit-content' }}
+        >
+          <p className="vads-u-margin-y--0">
+            Simulate checking of submitted password for uploaded <strong>encrypted (PDF)</strong> files. Simulation is done
+            by updating the <code>passwordSubmissionSuccessList</code> prop based on button clicks below.
+          </p>
+          <em>Each pair of buttons controls the password submission status for the corresponding encrypted file in the file list.</em>
+          {
+            encryptedList?.length ? (
+              <ul>
+                {encryptedList.map((isEncrypted, index) => {
+                  if (isEncrypted) {
+                    return (
+                      <li key={index}>
+                        <div className="vads-u-display--flex vads-u-align-items--center vads-u-gap--2 vads-u-margin-bottom--1">
+                          <p className="vads-u-margin-y--0 vads-u-margin-right--2">File {index + 1}</p>
+                          <va-button
+                              class="vads-u-margin-y--1"
+                              text="Set success"
+                              onClick={() => handlePasswordSubmissionSuccessClick(index, true)}
+                            />
+                          <va-button
+                            text="Set error"
+                            onClick={() => handlePasswordSubmissionSuccessClick(index, false)}
+                          />
+                        </div>
+                      </li>
+                    );
+                  }
+                })}
+              </ul>
+            ) : null
+          }
+        </div>)
+      }
+
       <div>
         <p>
           Parent components are responsible for managing if a password
@@ -611,6 +687,17 @@ AcceptsFilePassword.args = {...defaultArgs};
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 AcceptsFilePassword.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
+export const AcceptsFilePasswordWithSubmitButton = EncryptedTemplate.bind(null);
+AcceptsFilePasswordWithSubmitButton.args = {
+  ...defaultArgs,
+  usePasswordSubmitButtonPattern: true,
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsFilePasswordWithSubmitButton.parameters = {
   chromatic: { disableSnapshot: true },
 };
 

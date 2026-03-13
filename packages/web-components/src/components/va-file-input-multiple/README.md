@@ -15,6 +15,7 @@ Each `va-file-input` instance is assigned a unique `id` attribute in the format 
 - **Slot Content**: Slot content is captured, cloned, and distributed to individual file input instances
 - **Error Handling**: Errors are assigned to individual files using the `errors` and `passwordErrors` props to signify which file has an error.
 - **Integration Patterns**: Designed to work with external state management, file upload services, and encryption detection libraries
+- **Encrypted file pattern variants**: The component includes the `usePasswordSubmitButtonPattern` prop (default: `false`). When this prop is `true`, encrypted file passwords are handled differently: a "Submit password" `va-button` is rendered alongside the password `va-text-input`. In this variant, the `vaPasswordSubmit` custom event is emitted when that button is clicked.
 
 ### Key Integration Considerations
 
@@ -25,7 +26,7 @@ Each `va-file-input` instance is assigned a unique `id` attribute in the format 
 
 ### State Management
 
-The component uses two `@State` decorators internallyto manage internal reactive state:
+The component uses two `@State` decorators internally to manage internal reactive state:
 
 #### `@State() files: FileIndex[]`
 
@@ -110,12 +111,26 @@ This event is emitted when a file is selected, changed, or removed in any `va-fi
   - `FILE_ADDED`: If `newFile` exists and `fileObject.file` is null
   - `FILE_REMOVED`: If no `newFile` (deletion)
 
-#### Password Change: `vaPasswordChange`
+#### Password Change: vaPasswordChange
 
-This event is emitted when a password is entered or changed in any `va-file-input` child component.
+This event is emitted when a password is entered or changed in any va-file-input child component.
 
-- **Trigger**: User enters/changes password for encrypted files
+**NOTE:** This event only fires when the `usePasswordSubmitButtonPattern` prop is `false`.
+
+- **Trigger**:: User enters/changes password for encrypted files
 - **Frequency**: Event fires on every keystroke; consumers should implement debouncing to avoid excessive processing
+- **Action**:
+      PASSWORD_UPDATE: Always
+
+
+#### Password Submit: `vaPasswordSubmit`
+
+This event is emitted when a password is submitted in any `va-file-input` child component.
+
+**NOTE:** This event only fires when the `usePasswordSubmitButtonPattern` prop is `true`.
+
+- **Trigger**: User clicks the "Submit password" button for encrypted files
+- **Frequency**: Event fires on every click of button while not in loading state.
 - **Action**: 
   - `PASSWORD_UPDATE`: Always
 
