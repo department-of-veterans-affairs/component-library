@@ -197,10 +197,8 @@ export class VaComboBox {
       return;
     }
 
-    const allNodes = this.el.querySelectorAll(
-      'option:not([data-optgroup])',
-    ) as Array<HTMLOptionElement>;
-    const nodes = Array.from(allNodes);
+    const allNodes = this.el.querySelectorAll('option:not([data-optgroup])');
+    const nodes = Array.from(allNodes) as Array<HTMLOptionElement>;
 
     const foundOption = nodes.find(option => option.value === newValue);
     if (foundOption) {
