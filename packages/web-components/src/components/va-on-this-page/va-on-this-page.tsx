@@ -37,11 +37,58 @@ if (Build.isTesting) {
 export class VaOnThisPage {
   @Element() el: HTMLElement;
 
+  /**
+   * Returns the DOM scope used to find headings for this instance.
+   *
+   * limit the scope to this component's parent container
+   * so if there are multiple instances, each instance only builds links for its own section.
+   */
+  private getHeadingScope = (): ParentNode => {
+    const article = this.el.closest('article');
+    if (article?.querySelectorAll('va-on-this-page').length > 1) {
+      return this.el.parentElement || article;
+    }
+    return article || this.el.parentElement || document;
+  };
+
+  /**
+   * Creates the link label text from an h2.
+   *
+   * This filters out common screen-reader-only classes and invisible elements
+   * so the visual link label matches what sighted users see on the page.
+   */
   private getHeadingText = (heading: HTMLElement): string => {
     return heading.childNodes.length === 1 ? heading.textContent : 
-      Array.from(heading.childNodes).map((node: HTMLElement) => {
-        return node.classList?.contains('usa-sr-only') ? '' : node.textContent;
+      Array.from(heading.childNodes).map((node: ChildNode) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return node.textContent;
+        }
+        const elementNode = node as HTMLElement;
+        return elementNode.classList?.contains('usa-sr-only') ||
+          elementNode.classList?.contains('sr-only') ||
+                elementNode.style?.visibility === 'hidden' ||
+                elementNode.style?.display === 'none' ||
+                !elementNode.checkVisibility() ? '' : elementNode.textContent;
       }).join(' ');
+  };
+
+  /**
+   * Finds a heading by id within the component scope first, then globally.
+   *
+   * Scoped lookup avoids collisions when duplicate ids exist on the same page
+   */
+  private getHeadingById = (id: string): HTMLHeadingElement | null => {
+    const escapedId = id
+      .replace(/\\/g, '\\\\')
+      .replace(/"/g, '\\"');
+    const scopedHeading = this.getHeadingScope().querySelector<HTMLElement>(
+      `[id="${escapedId}"]`,
+    ) as HTMLHeadingElement;
+
+    return (
+      scopedHeading ||
+      (document.getElementById(id) as HTMLHeadingElement)
+    );
   };
 
   /**
@@ -86,9 +133,14 @@ export class VaOnThisPage {
    */
   private moveFocusToHeading = (event: MouseEvent) => {
     const anchor = event.currentTarget as HTMLAnchorElement;
-    const heading = document.getElementById(anchor.hash.slice(1)) as HTMLHeadingElement;
+    const headingId = decodeURIComponent(anchor.hash.slice(1));
+    const heading = this.getHeadingById(headingId);
 
     if (heading) {
+      // Keep hash links as fallback, but prevent default jumping to a duplicate id elsewhere on the page.
+      event.preventDefault();
+
+      heading.scrollIntoView({ block: 'start' });
       heading.setAttribute('tabindex', '-1');
       heading.setAttribute('role', 'text');
       heading.focus();
@@ -126,7 +178,7 @@ export class VaOnThisPage {
     // eslint-disable-next-line i18next/no-literal-string
     const HeaderLevel = getHeaderLevel(this.headerLevel) || 'h2';
 
-    const h2s = Array.from(document.querySelectorAll<HTMLElement>('article h2'))
+    const h2s = Array.from(this.getHeadingScope().querySelectorAll<HTMLElement>('h2'))
       .filter(heading => {
         if (!heading.id) {
           consoleDevError(`${heading.textContent} is missing an id`);

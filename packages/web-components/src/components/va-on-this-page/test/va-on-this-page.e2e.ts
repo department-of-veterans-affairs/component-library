@@ -279,4 +279,89 @@ describe('va-on-this-page', () => {
       </va-on-this-page>
     `);
   });
+
+  it('scopes headings when multiple components are in one article', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      `
+      <article>
+        <section>
+          <va-on-this-page></va-on-this-page>
+          <h2 id="section-a">Section A</h2>
+        </section>
+        <section>
+          <va-on-this-page></va-on-this-page>
+          <h2 id="section-b">Section B</h2>
+        </section>
+      </article>
+      `,
+    );
+
+    const elements = await page.findAll('va-on-this-page');
+
+    expect(elements[0]).toEqualHtml(`
+      <va-on-this-page class="hydrated">
+        <mock:shadow-root>
+          <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
+            <ul>
+              <li>
+                <a href="#section-a">
+                  <va-icon class="hydrated"></va-icon>
+                  <span>Section A</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </mock:shadow-root>
+      </va-on-this-page>
+    `);
+
+    expect(elements[1]).toEqualHtml(`
+      <va-on-this-page class="hydrated">
+        <mock:shadow-root>
+          <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
+            <ul>
+              <li>
+                <a href="#section-b">
+                  <va-icon class="hydrated"></va-icon>
+                  <span>Section B</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </mock:shadow-root>
+      </va-on-this-page>
+    `);
+  });
+
+  it('focuses the scoped heading when duplicate ids exist on the page', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      `
+      <article>
+        <section>
+          <va-on-this-page></va-on-this-page>
+          <h2 id="shared-id">First heading</h2>
+        </section>
+        <section>
+          <va-on-this-page></va-on-this-page>
+          <h2 id="shared-id">Second heading</h2>
+        </section>
+      </article>
+      `,
+    );
+
+    const anchors = await page.findAll('va-on-this-page >>> a');
+    await anchors[1].click();
+
+    const activeHeadingText = await page.evaluate(
+      () => document.activeElement?.textContent?.trim(),
+    );
+
+    expect(activeHeadingText).toEqual('Second heading');
+  });
 });
