@@ -636,22 +636,10 @@ export const ReadOnly = FileUploadedTemplate.bind(null);
 ReadOnly.args = { ...defaultArgs, vaChange: event => event, readOnly: true };
 
 const readOnlyAdditionalInfoContent = (
-  <div>
-    <va-select
-      className="hydrated"
-      label="What kind of file is this?"
-      name="fileType"
-      inert
-      value="1"
-    >
-      <option key="1" value="1">
-        Public Document
-      </option>
-      <option key="2" value="2">
-        Private Document
-      </option>
-    </va-select>
-  </div>
+  <dl>
+    <dt className="vads-u-margin-top--2">What kind of file is this?</dt>
+    <dd className="vads-u-margin-top--1">Public Document</dd>
+  </dl>
 );
 
 export const ReadOnlyWithAdditionalInputs = FileUploadedTemplate.bind(null);

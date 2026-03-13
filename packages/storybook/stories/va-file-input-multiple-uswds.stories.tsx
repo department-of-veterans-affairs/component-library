@@ -739,22 +739,10 @@ ReadOnly.args = {
 };
 
 const readOnlyAdditionalInfoContent = (
-  <div>
-    <va-select
-      label="What kind of file is this?"
-      name="fileType"
-      required
-      inert
-      value="1"
-    >
-      <option key="1" value="1">
-        Public Document
-      </option>
-      <option key="2" value="2">
-        Private Document
-      </option>
-    </va-select>
-  </div>
+  <dl>
+    <dt style={{ marginTop: '1rem' }}>What kind of file is this?</dt>
+    <dd style={{ marginTop: '.5rem', marginLeft: '0' }}>Public Document</dd>
+  </dl>
 );
 
 export const ReadOnlyWithAdditionalInputs = FilesUploadedTemplate.bind(null);
