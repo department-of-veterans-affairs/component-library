@@ -3221,7 +3221,7 @@ __metadata:
     eslint-plugin-prettier: "npm:3.4.1"
     eslint-plugin-react: "npm:7.29.2"
     fs-extra: "npm:9.1.0"
-    glob: "npm:13.0.2"
+    glob: "npm:13.0.3"
     husky: "npm:5.2.0"
     is-docker: "npm:2.1.1"
     karma: "npm:6.4.4"
@@ -8109,7 +8109,7 @@ __metadata:
     csv: "npm:6.3.10"
     eslint: "npm:9.26.0"
     fast-memoize: "npm:2.5.2"
-    glob: "npm:13.0.2"
+    glob: "npm:13.0.3"
     husky: "npm:6"
     jest: "npm:29.7.0"
     jsonexport: "npm:3.2.0"
@@ -9482,9 +9482,9 @@ __metadata:
   linkType: hard
 
 "flatted@npm:^3.2.7, flatted@npm:^3.2.9":
-  version: 3.3.3
-  resolution: "flatted@npm:3.3.3"
-  checksum: 10/8c96c02fbeadcf4e8ffd0fa24983241e27698b0781295622591fc13585e2f226609d95e422bcf2ef044146ffacb6b68b1f20871454eddf75ab3caa6ee5f4a1fe
+  version: 3.4.1
+  resolution: "flatted@npm:3.4.1"
+  checksum: 10/39a308e2ef82d2d8c80ebc74b67d4ff3f668be168137b649440b6735eb9c115d1e0c13ab0d9958b3d2ea9c85087ab7e14c14aa6f625a22b2916d89bbd91bc4a0
   languageName: node
   linkType: hard
 
@@ -9885,14 +9885,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:13.0.2":
-  version: 13.0.2
-  resolution: "glob@npm:13.0.2"
+"glob@npm:13.0.3":
+  version: 13.0.3
+  resolution: "glob@npm:13.0.3"
   dependencies:
-    minimatch: "npm:^10.1.2"
+    minimatch: "npm:^10.2.0"
     minipass: "npm:^7.1.2"
     path-scurry: "npm:^2.0.0"
-  checksum: 10/4dc7e3c4570a5626f93c284c9877424c35ffe092730afa5d09aec3bc4230af09795130d389bb76ffbc049ba3283c58d92ca45316684c51c1b9d525ef4b1eed22
+  checksum: 10/38a9c78de078f61df1a555badf1198833c298fd3320520c93504a499f14afed6c37c892c576119f05e4d94981a4550a1a2246e826ffa6894a427004aff5b78b2
   languageName: node
   linkType: hard
 
