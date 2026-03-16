@@ -39,6 +39,8 @@ export class VaComboBox {
 
   @State() labelNode: HTMLLabelElement;
 
+  @State() isUpdatingValue: boolean = false;
+
   private isInVaInputTelephone: boolean;
 
   /**
@@ -190,21 +192,24 @@ export class VaComboBox {
   private updateElementValues(newValue: string) {
     const inputElement = this.el.shadowRoot.querySelector('input');
     const selectElement = this.el.shadowRoot.querySelector('select');
-    if(newValue == null || newValue === '') {
+
+    if (this.isUpdatingValue || !inputElement || !selectElement) return;
+    this.isUpdatingValue = true;
+
+    if (newValue == null || newValue === '') {
       inputElement.value = '';
       selectElement.value = '';
+    } else {
+      const allNodes = this.el.querySelectorAll('option:not([data-optgroup])');
+      const nodes = Array.from(allNodes) as Array<HTMLOptionElement>;
 
-      return;
+      const foundOption = nodes.find(option => option.value === newValue);
+      if (foundOption) {
+        inputElement.value = foundOption.textContent;
+        selectElement.value = newValue;
+      }
     }
-
-    const allNodes = this.el.querySelectorAll('option:not([data-optgroup])');
-    const nodes = Array.from(allNodes) as Array<HTMLOptionElement>;
-
-    const foundOption = nodes.find(option => option.value === newValue);
-    if (foundOption) {
-      inputElement.value = foundOption.textContent;
-      selectElement.value = newValue;
-    }
+    this.isUpdatingValue = false;
   }
 
   /**
