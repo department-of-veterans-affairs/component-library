@@ -17,6 +17,7 @@ import { isMessageSet } from '../../utils/utils';
  * @nativeHandler onClick
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref button
  */
 
 @Component({

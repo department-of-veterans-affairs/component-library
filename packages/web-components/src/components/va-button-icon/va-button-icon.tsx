@@ -16,6 +16,7 @@ import { i18next } from '../..';
  * @nativeHandler onClick
  * @maturityCategory caution
  * @maturityLevel available
+ * @guidanceHref button/button-icon
  */
 
 @Component({

@@ -43,6 +43,7 @@ if (Build.isTesting) {
  * @accordionItemToggled This event is fired when an accordion item is opened or closed
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref accordion
  * @translations English
  * @translations Spanish
  * @translations Tagalog

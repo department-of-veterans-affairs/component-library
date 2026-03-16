@@ -4,6 +4,7 @@ import { Component, Host, h, Prop, State, Element, Listen } from '@stencil/core'
  * @componentName OMB info
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref omb-info
  */
 @Component({
   tag: 'va-omb-info',
