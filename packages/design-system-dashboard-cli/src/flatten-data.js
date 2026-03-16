@@ -19,13 +19,27 @@ function normalizeNames(data, componentName) {
 /**
  * Takes an object keyed by component name and returns an array containing all
  * the data for each component.
+ *
+ * Column order is explicitly stabilized so the CSV schema is consistent across
+ * runs regardless of filesystem traversal order:
+ *   date, component_name, uswds, <app columns a-z>, total
  */
 function flattenData(data, date) {
   const flattened = Object.keys(data).map(componentName => {
+    const normalized = normalizeNames(data, componentName);
+    const { total, uswds, ...appColumns } = normalized;
+
+    // Sort app columns alphabetically so the header is identical every run.
+    const sortedAppColumns = Object.keys(appColumns)
+      .sort()
+      .reduce((obj, key) => ({ ...obj, [key]: appColumns[key] }), {});
+
     return {
-      date: date,
+      date,
       component_name: componentName,
-      ...normalizeNames(data, componentName),
+      ...(uswds !== undefined ? { uswds } : {}),
+      ...sortedAppColumns,
+      ...(total !== undefined ? { total } : {}),
     };
   });
 
