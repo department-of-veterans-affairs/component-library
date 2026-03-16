@@ -52,6 +52,17 @@ export class VaOnThisPage {
   };
 
   /**
+   * Determines whether an element is visible to the user.
+   */
+  private isVisibleElement = (node: HTMLElement): boolean => {
+    return !node.classList?.contains('usa-sr-only') &&
+           !node.classList?.contains('sr-only') &&
+            node.style?.visibility !== 'hidden' &&
+            node.style?.display !== 'none' &&
+            node.checkVisibility();
+  };
+
+  /**
    * Creates the link label text from an h2.
    *
    * This filters out common screen-reader-only classes and invisible elements
@@ -64,11 +75,7 @@ export class VaOnThisPage {
           return node.textContent;
         }
         const elementNode = node as HTMLElement;
-        return elementNode.classList?.contains('usa-sr-only') ||
-          elementNode.classList?.contains('sr-only') ||
-                elementNode.style?.visibility === 'hidden' ||
-                elementNode.style?.display === 'none' ||
-                !elementNode.checkVisibility() ? '' : elementNode.textContent;
+        return this.isVisibleElement(elementNode) ? (elementNode.textContent || '') : '';
       }).join(' ');
   };
 

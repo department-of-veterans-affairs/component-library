@@ -50,7 +50,7 @@ const Template = ({
     </ul>
     <h2 id="telephone-contacts">Telephone Contacts</h2>
     <p>Here is a table of phone numbers</p>
-    <h2 id="some-additional-info"><span className="usa-sr-only">SR only placeholder</span>Some additional information</h2>
+    <h2 id="some-additional-info">Some additional information</h2>
     <p>Placeholder for additional content.</p>
     <ol>
       <li>Alpha</li>
