@@ -35,6 +35,12 @@ input.usa-input {
   color: var(--vads-color-base);
 }
 
+label.usa-label--error {
+  .usa-hint {
+    font-weight: var(--font-weight-normal);
+  }
+}
+
 .usa-hint {
   display: block;
 }
