@@ -13,6 +13,7 @@
   },
   "plugins": ["react", "i18next"],
   "rules": {
+    "require-guidance-href": "error",
     "i18next/no-literal-string": [
       1,
       {

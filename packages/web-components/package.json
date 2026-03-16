@@ -19,7 +19,7 @@
   "scripts": {
     "build": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --docs-json component-docs.json",
     "build-bindings": "tsc -p tsconfig.bindings.json",
-    "lint": "eslint src/**/*{.ts,.tsx}",
+    "lint": "eslint --rulesdir eslint-rules src/**/*{.ts,.tsx}",
     "watch:stencil": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --watch",
     "test": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil test --spec --e2e",
     "test.watch": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil test --spec --e2e --watchAll",
