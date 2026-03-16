@@ -24,6 +24,12 @@
 legend {
   padding-inline-end: 0;
   padding-inline-start: 0;
+
+  &.usa-label--error {
+    .usa-hint {
+      font-weight: var(--font-weight-normal);
+    }
+  }
 }
 
 #error-message {

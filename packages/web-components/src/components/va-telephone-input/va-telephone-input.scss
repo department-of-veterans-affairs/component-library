@@ -45,6 +45,12 @@ fieldset {
   container-type: inline-size;
 }
 
+legend.usa-label--error {
+  .usa-hint {
+    font-weight: var(--font-weight-normal);
+  }
+}
+
 va-combo-box {
   flex: 1;
   min-width: 216px;
