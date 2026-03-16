@@ -4,6 +4,7 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
  * @componentName Progress bar - activity
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref progress-bar
  */
 
 @Component({

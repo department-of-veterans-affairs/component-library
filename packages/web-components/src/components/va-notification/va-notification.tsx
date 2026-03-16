@@ -14,6 +14,7 @@ import classnames from 'classnames';
  * @componentName Notification
  * @maturityCategory dont_use
  * @maturityLevel deprecated
+ * @guidanceHref notification
  */
 
 @Component({

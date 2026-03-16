@@ -4,6 +4,7 @@ import { Component, Host, h, Element, State } from '@stencil/core';
  * @componentName Summary box
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref summary-box
  */
 @Component({
   tag: 'va-summary-box',

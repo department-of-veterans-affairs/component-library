@@ -12,6 +12,7 @@ import {
  * @componentName Statement of truth
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref statement-of-truth
  */
 
 @Component({
