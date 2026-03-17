@@ -387,7 +387,7 @@ describe('va-combo-box', () => {
     expect(updatedElement.textContent).toEqualText('1 group available. 1 result available.');
   });
 
-  it('sets value to empty when user-typed text does not match any valid options', async () => {
+  it('sets value and input to previous value when user-typed text does not match any valid options', async () => {
     const page = await newE2EPage();
 
     // Initialize 2 combo boxes, the first with a value of "foo"
@@ -411,9 +411,35 @@ describe('va-combo-box', () => {
     await page.keyboard.press('Enter');
 
     await page.waitForChanges();
+    // Verify the value of the first combo box has been reset
+    let firstComboValue = await firstComboBox.getProperty('value');
+    let inputValue = await firstComboInput.getProperty('value');
+    expect(firstComboValue).toBe('foo');
+    expect(inputValue).toBe('Foo');
+
+    // Clear the combo box input
+    for(let i = 0; i < 3; i++) {
+      await firstComboInput.press('Backspace');
+    }
+    await page.keyboard.press('Enter');
+
+    await page.waitForChanges();
     // Verify the value of the first combo box has been cleared
-    const firstComboValue = await firstComboBox.getProperty('value');
+    firstComboValue = await firstComboBox.getProperty('value');
+    inputValue = await firstComboInput.getProperty('value');
     expect(firstComboValue).toBe('');
+    expect(firstComboInput.textContent).toBe('');
+
+    // Type into the combo box input
+    await firstComboInput.type('faa');
+    await page.keyboard.press('Enter');
+
+    await page.waitForChanges();
+    // Verify the value of the first combo box has been cleared
+    firstComboValue = await firstComboBox.getProperty('value');
+    inputValue = await firstComboInput.getProperty('value');
+    expect(firstComboValue).toBe('');
+    expect(firstComboInput.textContent).toBe('');
   });
 
   it('updates input and option if upstream the value changes to another valid option value', async () => {

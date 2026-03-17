@@ -41,6 +41,8 @@ export class VaComboBox {
 
   @State() isUpdatingValue: boolean = false;
 
+  @State() internalValueUpdate: boolean = false;
+
   private isInVaInputTelephone: boolean;
 
   /**
@@ -107,6 +109,10 @@ export class VaComboBox {
 
   @Watch('value')
   updateInputValueOnValueChange(newValue: string) {
+    if(this.internalValueUpdate) {
+      this.internalValueUpdate = false;
+      return;
+    }
     const inputElement = this.el.shadowRoot.querySelector('input');
     if (inputElement) this.updateElementValues(newValue);
   }
@@ -205,7 +211,7 @@ export class VaComboBox {
 
       const foundOption = nodes.find(option => option.value === newValue);
       if (foundOption) {
-        inputElement.value = foundOption.textContent;
+        inputElement.value = this.isInVaInputTelephone ? newValue : foundOption.textContent;
         selectElement.value = newValue;
       }
     }
@@ -274,6 +280,8 @@ export class VaComboBox {
 
   private handleChange(e: Event) {
     const target: HTMLSelectElement = e.target as HTMLSelectElement;
+    if (this.value === target.value) return;
+    this.internalValueUpdate = true;
     this.value = target.value;
     this.vaSelect.emit({ value: this.value });
   }
