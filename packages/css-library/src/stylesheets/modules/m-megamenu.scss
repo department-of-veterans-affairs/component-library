@@ -3,9 +3,9 @@
 @use "../mixins" as *;
 
 @use '../override-function' as *;
-$vetnav-panel-height-desktop: 490px;
-$vetnav-panel-height: 380px;
-$marketing-container-height: 380px;
+$vetnav-panel-height-desktop: 30.625rem;
+$vetnav-panel-height: 25.75rem;
+$marketing-container-height: 23.75rem;
 
 #mega-menu,
 .mega-menu {
@@ -95,15 +95,16 @@ $marketing-container-height: 380px;
     .vetnav-panel--submenu:not([hidden]) {
       position: absolute;
       box-shadow: none;
-      width: 260px;
+      width: 16rem;
       padding: 72px 0px 0px 28px;
       white-space: normal;
+      height: 100%;
 
       h3 {
         display: block;
         color: $vads-color-black;
         font-family: $font-family-sans;
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: bold;
         margin-top: 4px;
         padding: 0;
@@ -131,7 +132,7 @@ $marketing-container-height: 380px;
     .vetnav-panel {
       box-shadow: 0 7px 25px -11px $vads-color-black;
       height: $vetnav-panel-height-desktop;
-      width: 1008px;
+      width: 63rem;
       left: 0;
 
       .mm-links {
@@ -139,13 +140,13 @@ $marketing-container-height: 380px;
       }
 
       .mm-link-container {
-        width: 225px;
+        width: 14.0625rem;
         margin-bottom: 0;
       }
     }
 
     .column-one {
-      left: 20px;
+      left: 1.25rem;
 
       &.panel-white {
         background-color: $vads-color-white;
@@ -155,7 +156,7 @@ $marketing-container-height: 380px;
 
     .column-two {
       border-left: none;
-      left: 280px;
+      left: 17rem;
 
       &.panel-white {
         background-color: $vads-color-white;
@@ -166,12 +167,12 @@ $marketing-container-height: 380px;
     .column-three {
       border-left: none;
       color: $vads-color-black;
-      left: 540px;
+      left: 33rem; // max on desktop before horizontal scroll 
       white-space: normal;
 
       &.vetnav-panel--submenu:not([hidden]) {
         padding: 86px 20px 20px 14px;
-        width: 240px;
+        width: 15.1rem;
 
         &.panel-white {
           padding-top: 30px;
@@ -213,7 +214,7 @@ $marketing-container-height: 380px;
   }
 
   .main-column {
-    left: -230px;
+    left: -14.375rem;
 
     &.panel-white {
       background-color: $vads-color-white;
@@ -222,8 +223,7 @@ $marketing-container-height: 380px;
 
   .mm-marketing-container {
     background-color: $vads-color-white;
-    height: $marketing-container-height;
-    overflow: hidden;
+    max-height: 100%;
 
     &.mm-marketing-gray {
       background-color: $vads-color-base-lightest;
@@ -232,12 +232,12 @@ $marketing-container-height: 380px;
     .mm-marketing-text {
       padding: 20px;
       a {
-        font-size: 16px;
+        font-size: 1rem;
       }
     }
 
     p {
-      font-size: 16px;
+      font-size: 1rem;
       margin-top: 5px;
     }
   }
@@ -260,7 +260,7 @@ $marketing-container-height: 380px;
     .vetnav-panel--submenu:not([hidden]) {
       h3 {
         font-family: $font-family-sans;
-        font-size: 16px;
+        font-size: 1rem;
       }
     }
   }
@@ -279,7 +279,6 @@ $marketing-container-height: 380px;
   }
 
   .mm-marketing-container {
-    height: $marketing-container-height;
 
     p {
       margin-top: 5px;
@@ -299,6 +298,7 @@ $marketing-container-height: 380px;
     .vetnav-panel {
       width: $medium-screen;
       height: $vetnav-panel-height;
+      overflow: scroll;
     }
 
     .column-one {
@@ -316,8 +316,8 @@ $marketing-container-height: 380px;
     .panel-bottom-link {
       position: absolute;
       height: 60px;
-      width: $medium-screen - 297px;
-      left: 280px;
+      width: calc(#{$medium-screen} - 18.5625rem);
+      left: 17rem;
       border-bottom: 1px solid #d0d0d0;
       z-index: 3;
       top: 0;
@@ -346,15 +346,15 @@ $marketing-container-height: 380px;
 
     .panel-bottom-link {
       position: absolute;
-      width: $small-desktop-screen - 297px;
+      width: calc(#{$small-desktop-screen} - 18.5625rem);
     }
 
     .column-one {
-      width: 260px;
+      width: 16.25rem;
     }
 
     .column-two {
-      width: 260px;
+      width: 16.25rem;
     }
 
     .column-three {
