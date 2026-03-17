@@ -324,7 +324,21 @@ const PasswordButtonWithMinimumPasswordRequirementTemplate = ({
   hint,
   'use-password-submit-button-pattern': usePasswordSubmitButtonPattern,
 }) => {
+  const [isEncrypted, setIsEncrypted] = useState(false);
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
+
+  const handleChange = (event) => {
+    const hasFile = event?.detail?.files?.length > 0;
+  
+    if (hasFile) {
+      setIsEncrypted(true);
+    }
+    // Revert state to original values if there are no files present (file removed)
+    if (!event?.detail?.files?.length) {
+      setIsEncrypted(false);
+      return;
+    }
+  }
 
   const handleVaPasswordSubmit = (e: CustomEvent) => {
     let newPasswordError: string | undefined;
@@ -348,7 +362,8 @@ const PasswordButtonWithMinimumPasswordRequirementTemplate = ({
       required={required}
       error={error}
       hint={hint}
-      encrypted={true}
+      encrypted={isEncrypted}
+      onVaChange={handleChange}
       onVaPasswordSubmit={handleVaPasswordSubmit}
       passwordError={passwordError}
       usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
