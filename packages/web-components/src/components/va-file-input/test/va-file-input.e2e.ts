@@ -415,12 +415,20 @@ describe('va-file-input', () => {
     expect(textInput).toBeNull();
   });
 
+  it('renders a slim warning alert if encrypted is true [default password pattern]', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
+
+    const warningAlert = await page.find('va-file-input >>> va-alert');
+    expect(warningAlert).not.toBeNull();
+    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text"><span class=\"usa-sr-only\">Warning Alert </span>We can\'t open your file without its password.</p>')
+  });
+
   it('renders a slim warning alert, a file password input, and a password submit button if encrypted and usePasswordSubmitButtonPattern are true', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted use-password-submit-button-pattern />`);
 
     const warningAlert = await page.find('va-file-input >>> va-alert');
     expect(warningAlert).not.toBeNull();
-    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text"><span class=\"usa-sr-only\">Warning Alert </span>We can\'t open your file without its password.</p>')
+    expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text"><span class=\"usa-sr-only\">Warning Alert </span>We can\'t open your file without its password.</p>');
 
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).not.toBeNull();

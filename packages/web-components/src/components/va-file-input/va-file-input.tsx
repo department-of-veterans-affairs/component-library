@@ -661,25 +661,39 @@ export class VaFileInput {
       return;
     }
 
+    const passwordSectionClasses = classNames({
+      'password-input-section': true,
+      'password-input-section--success': (
+        this.usePasswordSubmitButtonPattern === true &&
+        this.passwordSubmissionSuccess === true
+      )
+    });
+
+    const warningVaAlert = (
+      <va-alert slim={true} status="warning">
+        <p class="password-alert-text">
+          We can't open your file without its password.
+        </p>
+      </va-alert>
+  )
+
     // If the submit button pattern is not being used, simply render the
     // password input.
     if (!this.usePasswordSubmitButtonPattern) {
       return (
-        <va-text-input
-          type="password"
-          onInput={(e) =>{this.handlePasswordChange(e)}}
-          label="File password"
-          required
-          error={this.passwordError}
-          value={this.passwordValue}
-        />
+        <div class={passwordSectionClasses}>
+          {warningVaAlert}
+          <va-text-input
+            type="password"
+            onInput={(e) =>{this.handlePasswordChange(e)}}
+            label="File password"
+            required
+            error={this.passwordError}
+            value={this.passwordValue}
+          />
+        </div>
       )
     }
-
-    const passwordSectionClasses = classNames({
-      'password-input-section': true,
-      'password-input-section--success': this.passwordSubmissionSuccess === true,
-    });
 
     return (
       <div class={passwordSectionClasses}>
@@ -689,13 +703,7 @@ export class VaFileInput {
               <p class="password-alert-text">File successfully unlocked</p>
             </va-alert>
           ) :
-          (
-            <va-alert slim={true} status="warning">
-              <p class="password-alert-text">
-                We can't open your file without its password.
-              </p>
-            </va-alert>
-          )
+          warningVaAlert
         }
 
         {!this.passwordSubmissionSuccess &&
