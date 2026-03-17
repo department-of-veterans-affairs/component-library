@@ -433,7 +433,7 @@ describe('va-file-input', () => {
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).not.toBeNull();
     const inputMessage = await textInput.find(' >>> #input-message');
-    expect(inputMessage).toEqualText('1x1.png');
+    expect(inputMessage).toEqualText('File password for 1x1.png');
 
     const passwordSubmitButton = await page.find('va-file-input >>> va-button');
     expect(passwordSubmitButton).not.toBeNull();

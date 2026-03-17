@@ -687,6 +687,7 @@ export class VaFileInput {
             type="password"
             onInput={(e) =>{this.handlePasswordChange(e)}}
             label="File password"
+            messageAriaDescribedby={`File password for ${this.file.name}`}
             required
             error={this.passwordError}
             value={this.passwordValue}
@@ -712,8 +713,8 @@ export class VaFileInput {
               <va-text-input
                 type="password"
                 onInput={(e) => this.handlePasswordInputForSubmitButtonPattern(e)}
-                label="Password for this file"
-                messageAriaDescribedby={`${this.file.name}`}
+                label="File password"
+                messageAriaDescribedby={`File password for ${this.file.name}`}
                 required
                 error={this.passwordError}
                 value={this.passwordValue}
