@@ -58,7 +58,7 @@ const defaultArgs = {
   'maxFileSize': Infinity,
   'minFileSize': 0,
   'password-error': false,
-  'usePasswordSubmitButtonPattern': false,
+  'use-password-submit-button-pattern': false,
   'showToggleFocusButton': false,
   'focusEl': null,
 };
@@ -237,7 +237,7 @@ const AcceptsFilePasswordWithSubmitButtonTemplate = ({
   name,
   hint,
   passwordError,
-  usePasswordSubmitButtonPattern,
+  'use-password-submit-button-pattern': usePasswordSubmitButtonPattern,
 }) => {
 
   const [isEncrypted, setIsEncrypted] = useState(false);
@@ -307,7 +307,7 @@ const AcceptsFilePasswordWithSubmitButtonTemplate = ({
 export const AcceptsFilePasswordWithSubmitButton = AcceptsFilePasswordWithSubmitButtonTemplate.bind(null);
 AcceptsFilePasswordWithSubmitButton.args = {
   ...defaultArgs,
-  usePasswordSubmitButtonPattern: true,
+  'use-password-submit-button-pattern': true,
 };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
@@ -322,7 +322,7 @@ const PasswordButtonWithMinimumPasswordRequirementTemplate = ({
   required,
   error,
   hint,
-  usePasswordSubmitButtonPattern,
+  'use-password-submit-button-pattern': usePasswordSubmitButtonPattern,
 }) => {
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
 
@@ -360,7 +360,7 @@ PasswordButtonWithMinimumPasswordRequirement.args = {
   ...defaultArgs,
   label: 'With minimum password length requirement',
   hint: 'Password must be at least 4 characters long',
-  usePasswordSubmitButtonPattern: true,
+  'use-password-submit-button-pattern': true,
 };
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
