@@ -18,7 +18,6 @@ import 'intersection-observer';
  * @componentName Back to top
  * @maturityCategory use
  * @maturityLevel deployed
- * @guidanceHref back-to-top
  */
 @Component({
   tag: 'va-back-to-top',

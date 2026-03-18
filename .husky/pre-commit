@@ -26,3 +26,23 @@ if [[ ! $BRANCH_NAME =~ $VALID_BRANCH_REGEX ]]; then
   echo "number, and include only lowercase letters, numbers, and dashes."
   exit 1
 fi
+
+##
+# Run ESLint with custom rules on staged TypeScript files
+##
+
+# Get list of staged .ts and .tsx files in web-components
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep 'packages/web-components/src/.*\.tsx\?$' || true)
+
+if [ -n "$STAGED_FILES" ]; then
+  echo "Running ESLint on staged files..."
+  cd packages/web-components
+  npx eslint --rulesdir eslint-rules $STAGED_FILES
+  ESLINT_EXIT=$?
+  cd ../..
+  
+  if [ $ESLINT_EXIT -ne 0 ]; then
+    echo "ESLint failed. Please fix the errors before committing."
+    exit 1
+  fi
+fi
