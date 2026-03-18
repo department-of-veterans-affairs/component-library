@@ -213,7 +213,7 @@ const WithMinimumPasswordRequirementTemplate = ({
     const { password } = e.detail;
 
     if (!password || password.length < 4) {
-      newPasswordError = 'Encrypted file requires a password.';
+      newPasswordError = 'Password must be at least four characters.';
     } else {
       newPasswordError = null;
     }
@@ -357,7 +357,7 @@ const PasswordButtonWithMinimumPasswordRequirementTemplate = ({
     const { password } = e.detail;
 
     if (!password || password.length < 4) {
-      newPasswordError = 'Encrypted file requires a password.';
+      newPasswordError = 'Password must be at least four characters.';
     } else {
       newPasswordError = null;
     }
