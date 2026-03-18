@@ -218,12 +218,7 @@ describe('va-file-input', () => {
     await new Promise((r) => setTimeout(r, 250));
 
     // make sure modal opens
-    const modalCheck = await page.waitForFunction(() => {
-      const modal = document
-        .querySelector('va-file-input')
-        ?.shadowRoot?.querySelector('va-modal') as any;
-      return modal?.visible ? modal : null;
-    });
+    const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
 
     expect(modalCheck).not.toBeNull();
 
@@ -277,12 +272,7 @@ describe('va-file-input', () => {
     await new Promise((r) => setTimeout(r, 100));
 
     // make sure modal opens
-    const modalCheck = await page.waitForFunction(() => {
-      const modal = document
-        .querySelector('va-file-input')
-        ?.shadowRoot?.querySelector('va-modal') as any;
-      return modal?.visible ? modal : null;
-    });
+    const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
 
     expect(modalCheck).not.toBeNull();
 
@@ -595,12 +585,7 @@ describe('va-file-input', () => {
     await page.waitForChanges();
 
     // make sure modal opens
-    const modalCheck = await page.waitForFunction(() => {
-      const modal = document
-        .querySelector('va-file-input')
-        ?.shadowRoot?.querySelector('va-modal') as any;
-      return modal?.visible ? modal : null;
-    });
+    const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
 
     expect(modalCheck).not.toBeNull();
 
