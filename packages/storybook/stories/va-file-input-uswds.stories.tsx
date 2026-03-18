@@ -213,7 +213,7 @@ const WithMinimumPasswordRequirementTemplate = ({
     const { password } = e.detail;
 
     if (!password || password.length < 4) {
-      newPasswordError = 'Password must be at least 4 characters long.';
+      newPasswordError = 'Enter a password with at least 4 characters';
     } else {
       newPasswordError = null;
     }
@@ -357,7 +357,7 @@ const PasswordButtonWithMinimumPasswordRequirementTemplate = ({
     const { password } = e.detail;
 
     if (!password || password.length < 4) {
-      newPasswordError = 'Password must be at least 4 characters long.';
+      newPasswordError = 'Enter a password with at least 4 characters';
     } else {
       newPasswordError = null;
     }
