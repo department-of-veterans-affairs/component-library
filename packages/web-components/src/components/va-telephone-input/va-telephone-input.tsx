@@ -235,7 +235,7 @@ export class VaTelephoneInput {
    * If the country is selected, checks the phone number validity and sets error messages as needed.
    * If the country is not selected, triggers country validation and error state.
    */
-  validateContact(initialRender=false) {
+  validateContact(initialRender: boolean = false) {
     if (this.country) {
       this.resetErrors();
       this.setValidityState();
