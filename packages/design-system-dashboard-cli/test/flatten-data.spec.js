@@ -53,5 +53,38 @@ describe('flattenData', () => {
     expect(numeric._100app).toEqual(3)
   });
 
+  it('puts date and component_name first, total last, app columns sorted alphabetically', () => {
+    const flattened = flattenData(dataMock, date)
+
+    const alert = flattened.find(item => item.component_name === 'AlertComponent')
+    const keys = Object.keys(alert)
+
+    expect(keys[0]).toEqual('date')
+    expect(keys[1]).toEqual('component_name')
+    expect(keys[keys.length - 1]).toEqual('total')
+
+    // App columns between component_name and total should be sorted
+    const appKeys = keys.slice(2, keys.length - 1)
+    expect(appKeys).toEqual([...appKeys].sort())
+  });
+
+  it('places uswds immediately after component_name when present', () => {
+    const dataWithUswds = {
+      AlertComponent: {
+        total: 5,
+        'App one': 2,
+        'App two': 3,
+        uswds: 1,
+      },
+    }
+    const flattened = flattenData(dataWithUswds, date)
+    const keys = Object.keys(flattened[0])
+
+    expect(keys[0]).toEqual('date')
+    expect(keys[1]).toEqual('component_name')
+    expect(keys[2]).toEqual('uswds')
+    expect(keys[keys.length - 1]).toEqual('total')
+  });
+
 });
 
