@@ -20,7 +20,6 @@ import classnames from 'classnames';
  * @componentName Alert
  * @maturityCategory use
  * @maturityLevel best_practice
- * @guidanceHref alert
  */
 @Component({
   tag: 'va-alert',
