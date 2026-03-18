@@ -105,13 +105,21 @@ export class VaModal {
   /**
    * If the modal is visible or not
    */
-  @Prop({ reflect: true }) visible?: boolean = false;
+  @Prop() visible?: boolean = false;
+
+  private syncVisibleAttribute() {
+    if (!this.visible && this.el?.hasAttribute('visible')) {
+      this.el.removeAttribute('visible');
+    }
+  }
+
   // This is a workaround for determining when to call setupModal or teardownModal.
   // Elements are not yet available in the DOM due to `if (!visible) return null;`.
   // See componentDidUpdate.
   @Watch('visible')
   watchVisibleHandler() {
     this.isVisibleDirty = true;
+    this.syncVisibleAttribute();
   }
 
   /**
@@ -159,6 +167,8 @@ export class VaModal {
   componentLibraryAnalytics: EventEmitter;
 
   componentDidLoad() {
+    this.syncVisibleAttribute();
+
     if (this.visible) {
       requestAnimationFrame(() => this.setupModal());
     }
