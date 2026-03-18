@@ -188,10 +188,21 @@ const WithMinimumPasswordRequirementTemplate = ({
   error,
   hint,
 }) => {
+  const [isEncrypted, setIsEncrypted] = useState(false);
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
 
-  // Reset password error on file change
-  const handleVaChange = () => {
+  const handleVaChange = (event) => {
+    const hasFile = event?.detail?.files?.length > 0;
+  
+    if (hasFile) {
+      setIsEncrypted(true);
+    }
+    // Revert state to original values if there are no files present (file removed)
+    if (!event?.detail?.files?.length) {
+      setIsEncrypted(false);
+    }
+
+    // Reset password error on file change
     setPasswordError(null);
   }
 
@@ -218,7 +229,7 @@ const WithMinimumPasswordRequirementTemplate = ({
       required={required}
       error={error}
       hint={hint}
-      encrypted={true}
+      encrypted={isEncrypted}
       onVaChange={handleVaChange}
       onVaPasswordChange={handleVaPasswordChange}
       passwordError={passwordError}
