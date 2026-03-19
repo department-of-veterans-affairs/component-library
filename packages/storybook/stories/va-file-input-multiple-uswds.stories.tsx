@@ -587,7 +587,6 @@ const EncryptedTemplate = ( {label, name, disablePasswordSubmitButtonPattern }) 
       setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
     }
 
-    console.log('Updating password submission success list to: ', currentState);
     setPasswordSubmissionSuccessList(currentState);
   }
 
