@@ -4,6 +4,7 @@ import { Component, Host, Prop, h } from '@stencil/core';
  * @componentName Card
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref card
  */
 
 @Component({

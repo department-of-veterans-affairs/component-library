@@ -20,6 +20,7 @@ import { getHeaderLevel } from '../../utils/utils';
  * @componentName Banner - Maintenance
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref banner/maintenance
  */
 
 @Component({

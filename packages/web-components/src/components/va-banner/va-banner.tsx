@@ -23,6 +23,7 @@ const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
  * @componentName Banner
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref banner
  */
 @Component({
   tag: 'va-banner',

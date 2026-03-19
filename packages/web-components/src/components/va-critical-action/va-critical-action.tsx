@@ -4,6 +4,7 @@ import { Component, Host, h, Prop } from '@stencil/core';
  * @componentName Critical Action
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @guidanceHref critical-action
  */
 @Component({
   tag: 'va-critical-action',
