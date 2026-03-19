@@ -384,6 +384,7 @@ export class VaFileInputMultiple {
     label: string,
     required: boolean,
     headerSize?: number,
+    hasErrors?: boolean
   ) => {
     const requiredSpan = required ? (
       <span class="required"> {i18next.t('required')}</span>
@@ -405,7 +406,10 @@ export class VaFileInputMultiple {
     } else {
       return (
         <div class="label-header">
-          <label part="label" class="usa-label">
+          <label
+            part="label"
+            class={"usa-label" + (hasErrors ? ' usa-label--error' : '')}
+          >
             {label}
             {requiredSpan}
           </label>
@@ -504,13 +508,14 @@ export class VaFileInputMultiple {
       uploadedFiles,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
-    const hasError = this.hasErrors() ? 'has-error' : '';
+    const hasErrors = this.hasErrors();
+    const hasError = hasErrors ? 'has-error' : '';
 
     return (
-      <Host class={hasError} error={hasError ? 'error' : ''}>
+      <Host class={hasError} error={hasErrors ? 'error' : ''}>
         {label &&
           !readOnly &&
-          this.renderLabelOrHeader(label, required, headerSize)}
+          this.renderLabelOrHeader(label, required, headerSize, hasErrors)}
         {hint && !readOnly && (
           <div class="usa-hint" id="input-hint-message">
             {hint}
