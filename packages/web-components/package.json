@@ -20,6 +20,7 @@
     "build": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --docs-json component-docs.json",
     "build-bindings": "tsc -p tsconfig.bindings.json",
     "lint": "eslint src/**/*{.ts,.tsx}",
+    "test:lint-rules": "node eslint-rules/tests/require-guidance-href.js",
     "watch:stencil": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil build --watch",
     "test": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil test --spec --e2e",
     "test.watch": "BROWSERSLIST_IGNORE_OLD_DATA=1 stencil test --spec --e2e --watchAll",

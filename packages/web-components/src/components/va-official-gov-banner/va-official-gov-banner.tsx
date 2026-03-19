@@ -23,6 +23,7 @@ if (Build.isTesting) {
  * @componentName Banner - Official Gov
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref banner/official
  */
 
 @Component({

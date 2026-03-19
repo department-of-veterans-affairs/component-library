@@ -5,6 +5,7 @@ import classNames from 'classnames';
  * @componentName Link
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref link
  */
 @Component({
   tag: 'va-link',

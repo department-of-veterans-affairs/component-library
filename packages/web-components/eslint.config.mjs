@@ -2,6 +2,13 @@ import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import reactPlugin from 'eslint-plugin-react';
 import i18nextPlugin from 'eslint-plugin-i18next';
+import requireGuidanceHref from './eslint-rules/require-guidance-href.js';
+
+const localPlugin = {
+  rules: {
+    'require-guidance-href': requireGuidanceHref,
+  },
+};
 
 export default [
   {
@@ -59,8 +66,10 @@ export default [
       '@typescript-eslint': tsPlugin,
       react: reactPlugin,
       i18next: i18nextPlugin,
+      local: localPlugin,
     },
     rules: {
+      'local/require-guidance-href': 'error',
       'i18next/no-literal-string': [
         1,
         {

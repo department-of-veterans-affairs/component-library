@@ -13,6 +13,7 @@ import isChromatic from "chromatic/isChromatic";
  * @componentName Loading indicator
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref loading-indicator
  */
 
 @Component({

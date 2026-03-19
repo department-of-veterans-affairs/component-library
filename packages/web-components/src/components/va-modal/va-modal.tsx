@@ -20,6 +20,7 @@ import { focusableQueryString } from '../../utils/modal';
  * @componentName Modal
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref modal
  */
 @Component({
   tag: 'va-modal',

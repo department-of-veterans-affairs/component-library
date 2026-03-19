@@ -16,6 +16,7 @@ import classnames from 'classnames';
  * @componentName Search input
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref search-input
  */
 
 @Component({

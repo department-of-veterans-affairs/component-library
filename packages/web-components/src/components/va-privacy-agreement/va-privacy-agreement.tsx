@@ -5,6 +5,7 @@ import classnames from 'classnames';
  * @componentName Privacy agreement
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref privacy-agreement
  */
 @Component({
   tag: 'va-privacy-agreement',
