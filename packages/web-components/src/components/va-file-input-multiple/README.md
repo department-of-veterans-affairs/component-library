@@ -15,7 +15,7 @@ Each `va-file-input` instance is assigned a unique `id` attribute in the format 
 - **Slot Content**: Slot content is captured, cloned, and distributed to individual file input instances
 - **Error Handling**: Errors are assigned to individual files using the `errors` and `passwordErrors` props to signify which file has an error.
 - **Integration Patterns**: Designed to work with external state management, file upload services, and encryption detection libraries
-- **Encrypted file pattern variants**: The component includes the `usePasswordSubmitButtonPattern` prop (default: `true`). When this prop is `true`, encrypted file passwords are handled differently: a "Submit password" `va-button` is rendered alongside the password `va-text-input`. In this variant, the `vaPasswordSubmit` custom event is emitted when that button is clicked.
+- **Encrypted file pattern variants**: The component includes the `disablePasswordSubmitButtonPattern` prop (default: `false`). When this prop is `false`, encrypted file passwords are handled differently: a "Submit password" `va-button` is rendered alongside the password `va-text-input`. In this variant, the `vaPasswordSubmit` custom event is emitted when that button is clicked.
 
 ### Key Integration Considerations
 
@@ -115,7 +115,7 @@ This event is emitted when a file is selected, changed, or removed in any `va-fi
 
 This event is emitted when a password is submitted in any `va-file-input` child component.
 
-**NOTE:** This event only fires when the `usePasswordSubmitButtonPattern` prop is `true`.
+**NOTE:** This event only fires when the `disablePasswordSubmitButtonPattern` prop is `false`.
 
 - **Trigger**: User clicks the "Submit password" button for encrypted files
 - **Frequency**: Event fires on every click of button while not in loading state.
@@ -126,7 +126,7 @@ This event is emitted when a password is submitted in any `va-file-input` child 
 
 This event is emitted when a password is entered or changed in any va-file-input child component.
 
-**NOTE:** This event only fires when the `usePasswordSubmitButtonPattern` prop is `false`.
+**NOTE:** This event only fires when the `disablePasswordSubmitButtonPattern` prop is `true`.
 
 - **Trigger**:: User enters/changes password for encrypted files
 - **Frequency**: Event fires on every keystroke; consumers should implement debouncing to avoid excessive processing
