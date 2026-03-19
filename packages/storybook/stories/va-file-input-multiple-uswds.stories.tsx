@@ -36,7 +36,7 @@ const defaultArgs = {
   'value': null,
   'read-only': false,
   'slotFieldIndexes': null,
-  'usePasswordSubmitButtonPattern': true,
+  'disablePasswordSubmitButtonPattern': false,
 };
 
 const Template = ({
@@ -54,7 +54,7 @@ const Template = ({
   readOnly,
   children,
   slotFieldIndexes,
-  usePasswordSubmitButton,
+  disablePasswordSubmitButton,
 }) => {
   return (
     <VaFileInputMultiple
@@ -72,7 +72,7 @@ const Template = ({
       read-only={readOnly}
       children={children}
       slot-field-indexes={slotFieldIndexes}
-      usePasswordSubmitButtonPattern={usePasswordSubmitButton}
+      disablePasswordSubmitButtonPattern={disablePasswordSubmitButton}
     />
   );
 };
@@ -456,7 +456,7 @@ CustomValidation.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
+const EncryptedTemplate = ( {label, name, disablePasswordSubmitButtonPattern }) => {
   const [trackedFiles, setTrackedFiles] = useState([]);
   const [encryptedList, setEncryptedList] = useState([]);
   const [passwordSubmissionSuccessList, setPasswordSubmissionSuccessList] = useState<boolean[]>([]);
@@ -481,10 +481,15 @@ const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
     const trackedPasswordSubmissionSuccessList = [
       ...passwordSubmissionSuccessList
     ];
+    const currentDerivedPasswordErrorList = [...derivedPasswordErrorList];
 
     // Add new file to trackedFiles if action is FILE_ADDED
     if (detail.action === 'FILE_ADDED') {
       trackedFilesToSet.push(detail.file);
+
+      if (detail.file.type === 'application/pdf') {
+        trackedPasswordSubmissionSuccessList.push(null);
+      }
     } else if (detail.action === 'FILE_UPDATED' && detail.file) {
       // If an existing file is updated successfully, replace the corresponding
       // error object in trackedFiles with the file
@@ -493,6 +498,7 @@ const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
       );
       if (indexToUpdate !== -1) {
         trackedFilesToSet[indexToUpdate] = detail.file;
+        trackedPasswordSubmissionSuccessList[indexToUpdate] = null;
       }
     } else if (detail.action === 'FILE_REMOVED' && detail.file) {
       // Remove file from trackedFiles if action is FILE_REMOVED when a valid
@@ -502,8 +508,10 @@ const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
       );
       if (indexToRemove !== -1) {
         trackedFilesToSet.splice(indexToRemove, 1);
-        // Remove index from encryptedList as well to ensure password field is no longer displayed
+        // Remove index from success submission list and derived error list to
+        // ensure password submission/error state is cleared for deleted file
         trackedPasswordSubmissionSuccessList.splice(indexToRemove, 1);
+        currentDerivedPasswordErrorList.splice(indexToRemove, 1);
       }
     } else if (detail.action === 'FILE_REMOVED' && !detail.file) {
       // If an error file was deleted, remove the corresponding file from
@@ -513,8 +521,10 @@ const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
       );
       if (indexToRemove !== -1) {
         trackedFilesToSet.splice(indexToRemove, 1);
-        // Remove index from encryptedList as well to ensure password field is no longer displayed
+        // Remove index from success submission list and derived error list to
+        // ensure password submission/error state is cleared for deleted file
         trackedPasswordSubmissionSuccessList.splice(indexToRemove, 1);
+        currentDerivedPasswordErrorList.splice(indexToRemove, 1);
       }
     } else if (detail.action === 'PASSWORD_UPDATE') {
       // Update value at index of file that password was updated to null to
@@ -533,6 +543,7 @@ const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
     });
 
     setPasswordSubmissionSuccessList(trackedPasswordSubmissionSuccessList);
+    setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
     setEncryptedList(pdfFiles);
     setTrackedFiles(trackedFilesToSet);
   }
@@ -576,6 +587,7 @@ const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
       setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
     }
 
+    console.log('Updating password submission success list to: ', currentState);
     setPasswordSubmissionSuccessList(currentState);
   }
 
@@ -594,11 +606,13 @@ const EncryptedTemplate = ( {label, name, usePasswordSubmitButtonPattern }) => {
         passwordErrors={derivedPasswordErrorList}
         onVaMultipleChange={handleChange}
         onVaMultipleError={handleError}
-        usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
+        disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
       />
       <hr />
 
-      { usePasswordSubmitButtonPattern &&
+      <p>Password submission list: {JSON.stringify(passwordSubmissionSuccessList)}</p>
+
+      { !disablePasswordSubmitButtonPattern &&
         (<div
           className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
           style={{ width: 'fit-content' }}
@@ -696,7 +710,7 @@ AcceptsFilePassword.parameters = {
 export const AcceptsFilePasswordWithoutSubmitButton = EncryptedTemplate.bind(null);
 AcceptsFilePasswordWithoutSubmitButton.args = {
   ...defaultArgs,
-  usePasswordSubmitButtonPattern: false,
+  disablePasswordSubmitButtonPattern: true,
 };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function

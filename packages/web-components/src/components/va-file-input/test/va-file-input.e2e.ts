@@ -510,8 +510,8 @@ describe('va-file-input', () => {
     expect(errorSpan).toEqualText('Password cannot be blank');
   });
 
-  it('does not render a password submit button if usePasswordSubmitButtonPattern is false', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted use-password-submit-button-pattern="false" />`);
+  it('does not render a password submit button if disablePasswordSubmitButtonPattern is true', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted disable-password-submit-button-pattern="true" />`);
 
     const passwordSubmitButton = await page.find('va-file-input >>> va-button');
     expect(passwordSubmitButton).toBeNull();
@@ -536,8 +536,8 @@ describe('va-file-input', () => {
     });
   });
 
-  it('emits the vaPasswordSubmit event with the entered password when password submit button is clicked for encrypted files with usePasswordSubmitButtonPattern', async () => {
-    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted use-password-submit-button-pattern />`);
+  it('emits the vaPasswordSubmit event with the entered password when password submit button is clicked for encrypted files [default password pattern]', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
 
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
 

@@ -169,17 +169,17 @@ export class VaFileInput {
 
   /**
    * Denotes if user submission of encrypted file password was successful. Use
-   * of this prop is optional, but is required while using the default
-   * `usePasswordSubmitButtonPattern` pattern.
+   * of this prop is required, unless `disablePasswordSubmitButtonPattern` is
+   * true.
    */
   @Prop({ mutable: true }) passwordSubmissionSuccess?: null | boolean = null;
 
   /**
-   * When true, the component will render a "Submit password" button in addition
-   * to the password input field for encrypted files. When false, only the
+   * When false, the component will render a "Submit password" button in addition
+   * to the password input field for encrypted files. When true, only the
    * password input field will be rendered for encrypted files.
    */
-  @Prop() usePasswordSubmitButtonPattern?: boolean = true;
+  @Prop() disablePasswordSubmitButtonPattern?: boolean = false;
 
   /**
    * The event emitted when the file input value changes.
@@ -188,7 +188,7 @@ export class VaFileInput {
 
   /**
    * The event emitted when the file input password value changes when
-   * `usePasswordSubmitButtonPattern` is false.
+   * `disablePasswordSubmitButtonPattern` is true.
    */
   @Event() vaPasswordChange: EventEmitter;
 
@@ -522,7 +522,7 @@ export class VaFileInput {
 
   /**
    * Callback passed to `onInput` for password input field instance of
-   * `va-text-input` when `usePasswordSubmitButtonPattern` is true. Updates the
+   * `va-text-input` when `disablePasswordSubmitButtonPattern` is false. Updates the
    * local `passwordValue` state with the entered password and sets a flag to
    * indicate that a new password submission is pending if there's an existing
    * password error.
@@ -530,7 +530,7 @@ export class VaFileInput {
    * @returns {void}
    */
   private handlePasswordInputForSubmitButtonPattern(e: InputEvent): void {
-    if (!this.usePasswordSubmitButtonPattern) {
+    if (this.disablePasswordSubmitButtonPattern) {
       return;
     }
 
@@ -649,7 +649,7 @@ export class VaFileInput {
 
   /**
    * Renders the password input section for encrypted files.
-   * - Dynamically includes the "Submit password" button if `usePasswordSubmitButtonPattern` is true.
+   * - Dynamically excludes the "Submit password" button if `disablePasswordSubmitButtonPattern` is true.
    * @returns {void | HTMLDivElement | HTMLVaTextInputElement} Password input section for encrypted files
    */
   private renderPasswordInputSection(): void | HTMLDivElement|HTMLVaTextInputElement {
@@ -661,7 +661,7 @@ export class VaFileInput {
     const passwordSectionClasses = classNames({
       'password-input-section': true,
       'password-input-section--success': (
-        this.usePasswordSubmitButtonPattern === true &&
+        this.disablePasswordSubmitButtonPattern === true &&
         this.passwordSubmissionSuccess === true
       )
     });
@@ -676,7 +676,7 @@ export class VaFileInput {
 
     // If the submit button pattern is not being used, simply render the
     // password input along with the va-alert.
-    if (!this.usePasswordSubmitButtonPattern) {
+    if (this.disablePasswordSubmitButtonPattern) {
       return (
         <div class={passwordSectionClasses}>
           {warningVaAlert}

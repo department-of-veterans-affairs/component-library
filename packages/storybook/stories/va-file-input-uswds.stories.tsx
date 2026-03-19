@@ -58,7 +58,7 @@ const defaultArgs = {
   'maxFileSize': Infinity,
   'minFileSize': 0,
   'password-error': false,
-  'use-password-submit-button-pattern': false,
+  'disable-password-submit-button-pattern': false,
   'showToggleFocusButton': false,
   'focusEl': null,
 };
@@ -85,7 +85,7 @@ const Template = ({
   maxFileSize,
   minFileSize,
   passwordError,
-  usePasswordSubmitButtonPattern,
+  disablePasswordSubmitButtonPattern,
   showToggleFocusButton,
   focusEl
 }) => {
@@ -116,7 +116,7 @@ const Template = ({
         maxFileSize={maxFileSize}
         minFileSize={minFileSize}
         passwordError={passwordError}
-        usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
+        disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
         id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       />
       {showToggleFocusButton && (
@@ -142,7 +142,7 @@ const AcceptsFilePasswordTemplate = ({
   name,
   hint,
   passwordError,
-  'use-password-submit-button-pattern': usePasswordSubmitButtonPattern,
+  'disable-password-submit-button-pattern': disablePasswordSubmitButtonPattern,
 }) => {
 
   const [isEncrypted, setIsEncrypted] = useState(false);
@@ -183,7 +183,7 @@ const AcceptsFilePasswordTemplate = ({
         encrypted={isEncrypted}
         passwordError={derivedPasswordError}
         passwordSubmissionSuccess={passwordSubmissionSuccess}
-        usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
+        disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
       />
 
       <hr />
@@ -231,7 +231,7 @@ const WithFilePasswordCustomValidationTemplate = ({
   required,
   error,
   hint,
-  'use-password-submit-button-pattern': usePasswordSubmitButtonPattern,
+  'disable-password-submit-button-pattern': disablePasswordSubmitButtonPattern,
 }) => {
   const [isEncrypted, setIsEncrypted] = useState(false);
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
@@ -275,7 +275,7 @@ const WithFilePasswordCustomValidationTemplate = ({
       onVaChange={handleChange}
       onVaPasswordSubmit={handleVaPasswordSubmit}
       passwordError={passwordError}
-      usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
+      disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
     />
   );
 };
@@ -291,7 +291,7 @@ const AcceptsFilePasswordWithoutSubmitButtonTemplate = ({
   name,
   hint,
   passwordError,
-  'use-password-submit-button-pattern': usePasswordSubmitButtonPattern,
+  'disable-password-submit-button-pattern': disablePasswordSubmitButtonPattern,
 }) => {
 
   const [isEncrypted, setIsEncrypted] = useState(false);
@@ -309,14 +309,14 @@ const AcceptsFilePasswordWithoutSubmitButtonTemplate = ({
         onVaChange={(event) => setIsEncrypted(!!event.detail.files.length)}
         encrypted={isEncrypted}
         passwordError={passwordError}
-        usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
+        disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
       />
     </>
   );
 };
 
 export const AcceptsFilePasswordWithoutSubmitButton = AcceptsFilePasswordWithoutSubmitButtonTemplate.bind(null);
-AcceptsFilePasswordWithoutSubmitButton.args = {...defaultArgs, 'use-password-submit-button-pattern': false };
+AcceptsFilePasswordWithoutSubmitButton.args = {...defaultArgs, 'disable-password-submit-button-pattern': true };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 AcceptsFilePasswordWithoutSubmitButton.parameters = {

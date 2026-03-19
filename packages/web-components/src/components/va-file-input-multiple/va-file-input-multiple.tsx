@@ -126,11 +126,11 @@ export class VaFileInputMultiple {
   @Prop() uploadedFiles?: UploadedFile[];
 
   /**
-   * When true, the child instances of va-file-input will render a password
-   * input with a submit button, instead of emitting password changes
-   * immediately.
+   * When false, the child instances of va-file-input will not render a "Submit
+   * password" button in addition to the password input field for encrypted
+   * files.
    */
-  @Prop() usePasswordSubmitButtonPattern?: boolean = true;
+  @Prop() disablePasswordSubmitButtonPattern?: boolean = false;
 
   /**
    * Event emitted when any change to the file inputs occurs.
@@ -535,7 +535,7 @@ export class VaFileInputMultiple {
       minFileSize,
       statusText,
       uploadedFiles,
-      usePasswordSubmitButtonPattern,
+      disablePasswordSubmitButtonPattern,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error' : '';
@@ -605,7 +605,7 @@ export class VaFileInputMultiple {
                 class={fileEntry.file || fileEntry.hasError ? 'has-file' : 'no-file'}
                 max-file-size={maxFileSize}
                 min-file-size={minFileSize}
-                usePasswordSubmitButtonPattern={usePasswordSubmitButtonPattern}
+                disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
               />
             );
           })}
