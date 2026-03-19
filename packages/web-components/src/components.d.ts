@@ -836,6 +836,11 @@ export namespace Components {
          */
         "accept"?: string;
         /**
+          * When false, the component will render a "Submit password" button in addition to the password input field for encrypted files. When true, only the password input field will be rendered for encrypted files.
+          * @default false
+         */
+        "disablePasswordSubmitButtonPattern"?: boolean;
+        /**
           * Emit component-library-analytics events on the file input change event.
           * @default false
          */
@@ -885,6 +890,11 @@ export namespace Components {
          */
         "passwordError"?: string;
         /**
+          * Denotes if user submission of encrypted file password was successful. Use of this prop is required, unless `disablePasswordSubmitButtonPattern` is true.
+          * @default null
+         */
+        "passwordSubmissionSuccess"?: null | boolean;
+        /**
           * Percent upload completed. For use with va-progress-bar component
           * @default null
          */
@@ -931,6 +941,11 @@ export namespace Components {
          */
         "accept"?: string;
         /**
+          * When false, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+          * @default false
+         */
+        "disablePasswordSubmitButtonPattern"?: boolean;
+        /**
           * If enabled, emits custom analytics events when file changes occur.
           * @default false
          */
@@ -976,6 +991,11 @@ export namespace Components {
           * @default []
          */
         "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of booleans corresponding to the password submission success state of each file.
+          * @default []
+         */
+        "passwordSubmissionSuccessList"?: boolean[];
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
           * @default []
@@ -3371,6 +3391,7 @@ declare global {
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
         "vaPasswordChange": any;
+        "vaPasswordSubmit": any;
         "vaFileInputError": any;
         "component-library-analytics": any;
     }
@@ -5265,6 +5286,11 @@ declare namespace LocalJSX {
          */
         "accept"?: string;
         /**
+          * When false, the component will render a "Submit password" button in addition to the password input field for encrypted files. When true, only the password input field will be rendered for encrypted files.
+          * @default false
+         */
+        "disablePasswordSubmitButtonPattern"?: boolean;
+        /**
           * Emit component-library-analytics events on the file input change event.
           * @default false
          */
@@ -5322,13 +5348,22 @@ declare namespace LocalJSX {
          */
         "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
-          * The event emitted when the file input password value changes.
+          * The event emitted when the file input password value changes when `disablePasswordSubmitButtonPattern` is true.
          */
         "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * The event emitted when the file input password is submitted.
+         */
+        "onVaPasswordSubmit"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * Error message for the encrypted password input
          */
         "passwordError"?: string;
+        /**
+          * Denotes if user submission of encrypted file password was successful. Use of this prop is required, unless `disablePasswordSubmitButtonPattern` is true.
+          * @default null
+         */
+        "passwordSubmissionSuccess"?: null | boolean;
         /**
           * Percent upload completed. For use with va-progress-bar component
           * @default null
@@ -5375,6 +5410,11 @@ declare namespace LocalJSX {
           * Defines acceptable file types the user can select; uses file type or extensions.
          */
         "accept"?: string;
+        /**
+          * When false, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+          * @default false
+         */
+        "disablePasswordSubmitButtonPattern"?: boolean;
         /**
           * If enabled, emits custom analytics events when file changes occur.
           * @default false
@@ -5429,6 +5469,11 @@ declare namespace LocalJSX {
           * @default []
          */
         "passwordErrors"?: Array<string | null>;
+        /**
+          * Array of booleans corresponding to the password submission success state of each file.
+          * @default []
+         */
+        "passwordSubmissionSuccessList"?: boolean[];
         /**
           * Array of numbers corresponding to the progress of the upload of each file.
           * @default []
@@ -7611,6 +7656,8 @@ declare namespace LocalJSX {
         "minFileSize": number;
         "percentUploaded": number;
         "passwordError": string;
+        "passwordSubmissionSuccess": null | boolean;
+        "disablePasswordSubmitButtonPattern": boolean;
     }
     interface VaFileInputMultipleAttributes {
         "label": string;
@@ -7624,6 +7671,7 @@ declare namespace LocalJSX {
         "maxFileSize": number;
         "minFileSize": number;
         "statusText": string;
+        "disablePasswordSubmitButtonPattern": boolean;
     }
     interface VaHeaderMinimalAttributes {
         "header": string;
