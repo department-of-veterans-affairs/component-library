@@ -106,7 +106,20 @@ export class VaModal {
   /**
    * If the modal is visible or not
    */
-  @Prop({ reflect: true }) visible?: boolean = false;
+  @Prop({ reflect: true }) visible?: boolean | string = false;
+
+  /**
+   * Some frameworks serialize custom-element boolean props as strings
+   * (e.g. visible="false"). Treat that explicitly as false.
+   */
+  private isVisible(): boolean {
+    if (typeof this.visible === 'string') {
+      return this.visible.toLowerCase() !== 'false';
+    }
+
+    return !!this.visible;
+  }
+
   // This is a workaround for determining when to call setupModal or teardownModal.
   // Elements are not yet available in the DOM due to `if (!visible) return null;`.
   // See componentDidUpdate.
@@ -160,7 +173,7 @@ export class VaModal {
   componentLibraryAnalytics: EventEmitter;
 
   componentDidLoad() {
-    if (this.visible) {
+    if (this.isVisible()) {
       requestAnimationFrame(() => this.setupModal());
     }
   }
@@ -173,7 +186,7 @@ export class VaModal {
     if (!this.isVisibleDirty) return;
 
     this.isVisibleDirty = false;
-    if (this.visible) {
+    if (this.isVisible()) {
       requestAnimationFrame(() => this.setupModal());
     } else {
       this.teardownModal();
@@ -207,7 +220,7 @@ export class VaModal {
 
     // event.target is always the shadow host
     // event.composedPath()[0] returns the node clicked when shadow root is open
-    if (this.visible && e.composedPath()[0] === this.el) {
+    if (this.isVisible() && e.composedPath()[0] === this.el) {
       this.handleClose(e);
     }
   }
@@ -216,7 +229,7 @@ export class VaModal {
   // the Escape key.
   @Listen('keydown', { target: 'window' })
   handleKeyDown(e: KeyboardEvent) {
-    if (!this.visible) return;
+    if (!this.isVisible()) return;
 
     const keyCode = e.key;
     if (keyCode === 'Escape') {
@@ -534,12 +547,11 @@ export class VaModal {
       secondaryButtonClick,
       secondaryButtonText,
       status,
-      visible,
       forcedModal,
       unstyled,
     } = this;
-
-    if (!visible) return null;
+    
+    if (!this.isVisible()) return null;
 
     // Conditionally set value to eventually be passed to the aria-label attribute
     // of the modal's inner div wrapper. If label prop is provided, use that. Otherwise
