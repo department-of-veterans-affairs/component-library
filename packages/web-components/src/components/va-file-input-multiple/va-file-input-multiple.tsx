@@ -126,7 +126,7 @@ export class VaFileInputMultiple {
   @Prop() uploadedFiles?: UploadedFile[];
 
   /**
-   * When false, the child instances of va-file-input will not render a "Submit
+   * When true, the child instances of va-file-input will not render a "Submit
    * password" button in addition to the password input field for encrypted
    * files.
    */
