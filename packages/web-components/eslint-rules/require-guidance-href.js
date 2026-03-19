@@ -52,17 +52,16 @@ module.exports = {
     return {
       ClassDeclaration(node) {
         // Must have a @Component({...}) decorator — this is a Stencil component.
-        // Detect via tokens rather than node.decorators: @typescript-eslint/parser 5.x +
-        // TypeScript 5 no longer exposes decorators on node.decorators in the ESTree output.
-        const sourceCode = context.getSourceCode();
-        const firstTokens = sourceCode.getFirstTokens(node, { count: 3 });
-        const hasComponentDecorator =
-          firstTokens.length >= 2 &&
-          firstTokens[0].value === '@' &&
-          firstTokens[1].value === 'Component';
+        const hasComponentDecorator = node.decorators?.some(
+          d =>
+            d.expression.type === 'CallExpression' &&
+            d.expression.callee?.name === 'Component',
+        );
         if (!hasComponentDecorator) return;
 
-        const nodeStart = node.range[0];
+        const sourceCode = context.getSourceCode();
+        // nodeStart is the start of @Component (decorators sit before the class keyword).
+        const nodeStart = node.decorators[0].range[0];
 
         // Find the last block comment before this class (decorators are included
         // in the class node range, so nodeStart is the start of @Component).
@@ -71,8 +70,8 @@ module.exports = {
           .filter(c => c.type === 'Block' && c.range[1] <= nodeStart);
 
         if (blockComments.length === 0) {
-          // No JSDoc at all — point at the @Component token.
-          context.report({ loc: firstTokens[0].loc, messageId: 'missing' });
+          // No JSDoc at all — point at the @Component decorator.
+          context.report({ loc: node.decorators[0].loc, messageId: 'missing' });
           return;
         }
 
