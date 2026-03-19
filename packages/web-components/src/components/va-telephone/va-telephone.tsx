@@ -14,6 +14,7 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
  * @componentName Telephone
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref telephone
  */
 
 @Component({

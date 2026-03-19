@@ -15,6 +15,7 @@ import classnames from 'classnames';
  * @componentName Additional info
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref additional-info
  */
 @Component({
   tag: 'va-additional-info',

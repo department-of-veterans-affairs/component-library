@@ -11,6 +11,7 @@ export type LangUrl = {
  * @componentName Language Toggle
  * @maturityCategory caution
  * @maturityLevel available
+ * @guidanceHref language-toggle
  */
 
 @Component({

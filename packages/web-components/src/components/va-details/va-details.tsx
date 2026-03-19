@@ -12,6 +12,7 @@ import classNames from 'classnames';
  * @componentName Details
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @guidanceHref details
  */
 
 @Component({

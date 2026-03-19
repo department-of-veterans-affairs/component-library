@@ -14,6 +14,7 @@ import classnames from 'classnames';
  * @componentName Tabs
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @guidanceHref tabs
  */
 @Component({
   tag: 'va-tabs',

@@ -22,6 +22,7 @@ export type Breadcrumb = {
  * @componentName Breadcrumbs
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref breadcrumbs
  */
 @Component({
   tag: 'va-breadcrumbs',

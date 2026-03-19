@@ -32,6 +32,7 @@ const TABLET_BREAKPOINT = 640;
  * @componentName Search Filter
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @guidanceHref search-filter
  */
 @Component({
   tag: 'va-search-filter',
