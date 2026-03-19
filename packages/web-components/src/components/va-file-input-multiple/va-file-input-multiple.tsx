@@ -130,7 +130,7 @@ export class VaFileInputMultiple {
    * input with a submit button, instead of emitting password changes
    * immediately.
    */
-  @Prop() usePasswordSubmitButtonPattern?: boolean = false;
+  @Prop() usePasswordSubmitButtonPattern?: boolean = true;
 
   /**
    * Event emitted when any change to the file inputs occurs.

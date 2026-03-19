@@ -390,7 +390,7 @@ describe('va-file-input', () => {
     expect(progBar).not.toBeNull();
   });
 
-  it('renders file password field if encrypted is true upload [default password pattern]', async () => {
+  it('renders file password field if encrypted is true', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
 
     const textInput = await page.find('va-file-input >>> va-text-input');
@@ -400,7 +400,7 @@ describe('va-file-input', () => {
     expect(label).toEqualText('File password required')
   });
 
-  it('renders error on password input if password-error is set [default password pattern]', async () => {
+  it('renders error on password input if password-error is set', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted password-error="Encrypted file requires a password."/>`);
 
     const inputErrorSpan = await page.find('va-file-input >>> va-text-input >>> span.usa-error-message');
@@ -408,14 +408,14 @@ describe('va-file-input', () => {
     expect(inputErrorSpan).toEqualText('Encrypted file requires a password.');
   });
 
-  it('does not render file password field if encrypted is unset [default password pattern]', async () => {
+  it('does not render file password field if encrypted is unset', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input />`);
 
     const textInput = await page.find('va-file-input >>> va-text-input');
     expect(textInput).toBeNull();
-  });
+  })
 
-  it('renders a slim warning alert if encrypted is true [default password pattern]', async () => {
+  it('renders a slim warning alert if encrypted is true', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted />`);
 
     const warningAlert = await page.find('va-file-input >>> va-alert');
@@ -423,7 +423,7 @@ describe('va-file-input', () => {
     expect(warningAlert.innerHTML).toEqual('<p class="password-alert-text"><span class=\"usa-sr-only\">Warning Alert </span>We can\'t open your file without its password.</p>')
   });
 
-  it('renders a slim warning alert, a file password input, and a password submit button if encrypted and usePasswordSubmitButtonPattern are true', async () => {
+  it('renders a slim warning alert, a file password input, and a password submit button if encrypted is true[default password pattern]', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted use-password-submit-button-pattern />`);
 
     const warningAlert = await page.find('va-file-input >>> va-alert');
@@ -441,7 +441,7 @@ describe('va-file-input', () => {
     expect(await passwordSubmitButton.getProperty('label')).toBe('Submit password for file 1x1.png');
   });
 
-  it('updates password submit button state when clicked for encrypted files with usePasswordSubmitButtonPattern', async () => {
+  it('updates password submit button state when clicked for encrypted files [default password pattern]', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted use-password-submit-button-pattern />`);
 
     // Type a password into the input
@@ -460,7 +460,7 @@ describe('va-file-input', () => {
     expect(passwordSubmitButton).toHaveAttribute('loading');
   });
 
-  it('removes password input/submit button and shows success alert when passwordSubmissionSuccess is true for usePasswordSubmitButtonPattern', async () => {
+  it('removes password input/submit button and shows success alert when passwordSubmissionSuccess is true [default password pattern]', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted use-password-submit-button-pattern />`);
 
     // Type a password into the input
@@ -493,7 +493,7 @@ describe('va-file-input', () => {
     expect(successAlert.innerHTML).toContain('File successfully unlocked');
   });
 
-  it('renders error on password input if password submit button is clicked without a password entered in input for usePasswordSubmitButtonPattern', async () => {
+  it('renders error on password input if password submit button is clicked without a password entered in input [default password pattern]', async () => {
     const page = await setUpPageWithUploadedFile(`<va-file-input encrypted use-password-submit-button-pattern />`);
 
     // Get submit button and click it (note that no password has been entered)
@@ -508,6 +508,13 @@ describe('va-file-input', () => {
     const errorSpan = await textInput.find('>>> span.usa-error-message');
     expect(errorSpan).not.toBeNull();
     expect(errorSpan).toEqualText('Password cannot be blank');
+  });
+
+  it('does not render a password submit button if usePasswordSubmitButtonPattern is false', async () => {
+    const page = await setUpPageWithUploadedFile(`<va-file-input encrypted use-password-submit-button-pattern="false" />`);
+
+    const passwordSubmitButton = await page.find('va-file-input >>> va-button');
+    expect(passwordSubmitButton).toBeNull();
   });
 
   it('emits the vaChange event only once', async () => {

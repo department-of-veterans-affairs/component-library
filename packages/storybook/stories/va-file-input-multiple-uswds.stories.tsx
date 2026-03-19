@@ -36,6 +36,7 @@ const defaultArgs = {
   'value': null,
   'read-only': false,
   'slotFieldIndexes': null,
+  'usePasswordSubmitButtonPattern': true,
 };
 
 const Template = ({
@@ -53,6 +54,7 @@ const Template = ({
   readOnly,
   children,
   slotFieldIndexes,
+  usePasswordSubmitButton,
 }) => {
   return (
     <VaFileInputMultiple
@@ -70,6 +72,7 @@ const Template = ({
       read-only={readOnly}
       children={children}
       slot-field-indexes={slotFieldIndexes}
+      usePasswordSubmitButtonPattern={usePasswordSubmitButton}
     />
   );
 };
@@ -690,14 +693,14 @@ AcceptsFilePassword.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-export const AcceptsFilePasswordWithSubmitButton = EncryptedTemplate.bind(null);
-AcceptsFilePasswordWithSubmitButton.args = {
+export const AcceptsFilePasswordWithoutSubmitButton = EncryptedTemplate.bind(null);
+AcceptsFilePasswordWithoutSubmitButton.args = {
   ...defaultArgs,
-  usePasswordSubmitButtonPattern: true,
+  usePasswordSubmitButtonPattern: false,
 };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
-AcceptsFilePasswordWithSubmitButton.parameters = {
+AcceptsFilePasswordWithoutSubmitButton.parameters = {
   chromatic: { disableSnapshot: true },
 };
 

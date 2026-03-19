@@ -885,7 +885,7 @@ export namespace Components {
          */
         "passwordError"?: string;
         /**
-          * Denotes if user submission of encrypted file password was successful. Use of this prop is optional, but is required while using the `usePasswordSubmitButtonPattern` pattern.
+          * Denotes if user submission of encrypted file password was successful. Use of this prop is optional, but is required while using the default `usePasswordSubmitButtonPattern` pattern.
           * @default null
          */
         "passwordSubmissionSuccess"?: null | boolean;
@@ -919,7 +919,7 @@ export namespace Components {
         "uploadedFile"?: UploadedFile;
         /**
           * When true, the component will render a "Submit password" button in addition to the password input field for encrypted files. When false, only the password input field will be rendered for encrypted files.
-          * @default false
+          * @default true
          */
         "usePasswordSubmitButtonPattern"?: boolean;
         /**
@@ -1021,7 +1021,7 @@ export namespace Components {
         "uploadedFiles"?: UploadedFile[];
         /**
           * When true, the child instances of va-file-input will render a password input with a submit button, instead of emitting password changes immediately.
-          * @default false
+          * @default true
          */
         "usePasswordSubmitButtonPattern"?: boolean;
         /**
@@ -5355,7 +5355,7 @@ declare namespace LocalJSX {
          */
         "passwordError"?: string;
         /**
-          * Denotes if user submission of encrypted file password was successful. Use of this prop is optional, but is required while using the `usePasswordSubmitButtonPattern` pattern.
+          * Denotes if user submission of encrypted file password was successful. Use of this prop is optional, but is required while using the default `usePasswordSubmitButtonPattern` pattern.
           * @default null
          */
         "passwordSubmissionSuccess"?: null | boolean;
@@ -5389,7 +5389,7 @@ declare namespace LocalJSX {
         "uploadedFile"?: UploadedFile;
         /**
           * When true, the component will render a "Submit password" button in addition to the password input field for encrypted files. When false, only the password input field will be rendered for encrypted files.
-          * @default false
+          * @default true
          */
         "usePasswordSubmitButtonPattern"?: boolean;
         /**
@@ -5499,7 +5499,7 @@ declare namespace LocalJSX {
         "uploadedFiles"?: UploadedFile[];
         /**
           * When true, the child instances of va-file-input will render a password input with a submit button, instead of emitting password changes immediately.
-          * @default false
+          * @default true
          */
         "usePasswordSubmitButtonPattern"?: boolean;
         /**
