@@ -71,13 +71,27 @@ module.exports = {
           .filter(c => c.type === 'Block' && c.range[1] <= nodeStart);
 
         if (blockComments.length === 0) {
-          context.report({ node, messageId: 'missing' });
+          // No JSDoc at all — point at the @Component token.
+          context.report({ loc: firstTokens[0].loc, messageId: 'missing' });
           return;
         }
 
         const closestComment = blockComments[blockComments.length - 1];
         if (!closestComment.value.includes('@guidanceHref')) {
-          context.report({ node, messageId: 'missing' });
+          // JSDoc exists but is missing @guidanceHref — point at the @maturityLevel
+          // tag line if present, otherwise the last line of the comment.
+          const commentLines = closestComment.value.split('\n');
+          const maturityLineIdx = commentLines.findIndex(l =>
+            l.includes('@maturityLevel'),
+          );
+          const targetLineOffset =
+            maturityLineIdx !== -1 ? maturityLineIdx : commentLines.length - 1;
+          const reportLine =
+            closestComment.loc.start.line + targetLineOffset;
+          context.report({
+            loc: { line: reportLine, column: 0 },
+            messageId: 'missing',
+          });
         }
       },
     };

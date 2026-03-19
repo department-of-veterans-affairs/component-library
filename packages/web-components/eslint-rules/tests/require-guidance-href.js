@@ -58,16 +58,16 @@ ruleTester.run('require-guidance-href', rule, {
   ],
 
   invalid: [
-    // Has @Component decorator but no JSDoc comment at all
+    // Has @Component decorator but no JSDoc comment at all — error points at @Component
     {
       filename: COMPONENT_FILENAME,
       code: `
         @Component({ tag: 'va-button', styleUrl: 'va-button.scss', shadow: true })
         class VaButton {}
       `,
-      errors: [{ messageId: 'missing' }],
+      errors: [{ messageId: 'missing', line: 2 }],
     },
-    // Has @Component decorator and a JSDoc comment but @guidanceHref is missing
+    // Has @Component decorator and JSDoc but @guidanceHref is missing — error points at @maturityLevel
     {
       filename: COMPONENT_FILENAME,
       code: `
@@ -79,7 +79,7 @@ ruleTester.run('require-guidance-href', rule, {
         @Component({ tag: 'va-button', styleUrl: 'va-button.scss', shadow: true })
         class VaButton {}
       `,
-      errors: [{ messageId: 'missing' }],
+      errors: [{ messageId: 'missing', line: 5 }],
     },
   ],
 });
