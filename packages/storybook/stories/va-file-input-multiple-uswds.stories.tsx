@@ -609,8 +609,6 @@ const EncryptedTemplate = ( {label, name, disablePasswordSubmitButtonPattern }) 
       />
       <hr />
 
-      <p>Password submission list: {JSON.stringify(passwordSubmissionSuccessList)}</p>
-
       { !disablePasswordSubmitButtonPattern &&
         (<div
           className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
