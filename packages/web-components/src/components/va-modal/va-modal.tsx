@@ -43,6 +43,9 @@ export class VaModal {
   // Track cleanup handlers returned by hideOthers so we can restore DOM state on close.
   undoAriaHidden: Undo[] = [];
 
+  // Track the requestAnimationFrame ID so we can cancel a pending setupModal call.
+  private setupModalRafId?: number;
+
   // This stores reference to previously focused element
   savedFocus: HTMLElement;
 
@@ -174,7 +177,7 @@ export class VaModal {
 
   componentDidLoad() {
     if (this.isVisible()) {
-      requestAnimationFrame(() => this.setupModal());
+      this.setupModalRafId = requestAnimationFrame(() => this.setupModal());
     }
   }
 
@@ -187,13 +190,17 @@ export class VaModal {
 
     this.isVisibleDirty = false;
     if (this.isVisible()) {
-      requestAnimationFrame(() => this.setupModal());
+      this.setupModalRafId = requestAnimationFrame(() => this.setupModal());
     } else {
       this.teardownModal();
     }
   }
 
   disconnectedCallback() {
+    if (this.setupModalRafId) {
+      cancelAnimationFrame(this.setupModalRafId);
+      this.setupModalRafId = undefined;
+    }
     this.teardownModal();
   }
 
@@ -454,6 +461,10 @@ export class VaModal {
   // This method removes the focus trap, re-enables scrolling and
   // removes aria-hidden="true" from external elements.
   private teardownModal() {
+    if (this.setupModalRafId) {
+      cancelAnimationFrame(this.setupModalRafId);
+      this.setupModalRafId = undefined;
+    }
     clearAllBodyScrollLocks();
     this.undoAriaHidden.forEach(undo => undo?.());
     this.undoAriaHidden = [];

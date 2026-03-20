@@ -792,6 +792,51 @@ describe('va-modal', () => {
         const section2Closed = await page.find('va-accordion-item[header="Section 2"]');
         expect(section2Closed.getAttribute('aria-hidden')).toBeNull();
       });
+
+      it('should not leave orphaned aria-hidden after open/close cycle', async () => {
+        // This test verifies no orphaned aria-hidden attributes remain after
+        // an open/close cycle. The production fix in teardownModal (canceling
+        // pending rAFs) prevents a race condition where React's binding rapidly
+        // sets visible=true then visible=false across two render passes,
+        // causing setupModal's rAF to fire after teardownModal. That exact
+        // timing interleave cannot be reliably reproduced in Stencil e2e tests
+        // since waitForChanges() lets the rAF complete before proceeding.
+        const page = await newE2EPage();
+        await page.setContent(`
+          <div id="sibling-content">
+            <va-link href="#" text="A link"></va-link>
+          </div>
+          <va-modal modal-title="Race Condition Modal">
+            <p>Modal content</p>
+          </va-modal>
+        `);
+
+        // Open the modal and wait for the full setup (including rAF) to complete
+        const modal = await page.find('va-modal');
+        await modal.setProperty('visible', true);
+        await page.waitForChanges();
+
+        // Confirm aria-hidden was correctly applied to sibling
+        const siblingWhileOpen = await page.find('#sibling-content');
+        expect(siblingWhileOpen.getAttribute('aria-hidden')).toBe('true');
+
+        // Close the modal - teardownModal should undo aria-hidden
+        await modal.setProperty('visible', false);
+        await page.waitForChanges();
+
+        // Verify no orphaned aria-hidden attributes remain on siblings
+        const siblingAfterClose = await page.find('#sibling-content');
+        expect(siblingAfterClose.getAttribute('aria-hidden')).toBeNull();
+        expect(siblingAfterClose.getAttribute('data-aria-hidden')).toBeNull();
+
+        // Additionally verify no elements in the document have orphaned attributes
+        const orphanedCount = await page.evaluate(() => {
+          return document.querySelectorAll(
+            '[aria-hidden="true"], [data-aria-hidden="true"]',
+          ).length;
+        });
+        expect(orphanedCount).toBe(0);
+      });
     });
   });
 });
