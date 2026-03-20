@@ -21,6 +21,32 @@ export default {
   },
 };
 
+const genericHandleChange = (e: CustomEvent, currentErrorState: string[], callback: Function) => {
+  if (!callback) return;
+
+  const workingErrorState = [...currentErrorState];
+
+  const { action, index, file, state } = e.detail;
+
+  if (action === 'FILE_ADDED' && state[index].changed && workingErrorState[index]) {
+    workingErrorState[index] = '';
+    callback(workingErrorState);
+  }
+  else if (action === 'FILE_REMOVED' && !file) {
+    const workingErrorState = state.map(() => '');
+    workingErrorState.splice(index, 1);
+    callback(workingErrorState);
+  }
+}
+
+const genericHandleError = (e: CustomEvent, callback: Function) => {
+  if (!callback) return;
+
+  const workingErrorState = e.detail?.state.map(() => '');
+  workingErrorState[e.detail.index] = e.detail.error;
+  callback(workingErrorState);
+};
+
 const defaultArgs = {
   'label': 'Select a file to upload',
   'name': 'my-file-input',
@@ -30,7 +56,8 @@ const defaultArgs = {
   'encrypted': [],
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
-  'vaMultipleChange': null,
+  'vaMultipleChange': (e, currentErrorState, callback) => genericHandleChange(e, currentErrorState, callback),
+  'vaMultipleError': (e, callback) => genericHandleError(e, callback),
   'header-size': null,
   'children': null,
   'value': null,
@@ -49,6 +76,7 @@ const Template = ({
   hint,
   enableAnalytics,
   vaMultipleChange,
+  vaMultipleError,
   headerSize,
   value,
   readOnly,
@@ -56,17 +84,20 @@ const Template = ({
   slotFieldIndexes,
   disablePasswordSubmitButton,
 }) => {
+  const [errorState, setErrorState] = useState(errors);
+
   return (
     <VaFileInputMultiple
       label={label}
       name={name}
       accept={accept}
       required={required}
-      errors={errors}
+      errors={errorState}
       encrypted={encrypted}
       hint={hint}
       enable-analytics={enableAnalytics}
-      onVaMultipleChange={vaMultipleChange}
+      onVaMultipleChange={(e) => vaMultipleChange(e, errorState, setErrorState)}
+      onVaMultipleError={(e) => vaMultipleError(e, setErrorState)}
       header-size={headerSize}
       value={value}
       read-only={readOnly}
