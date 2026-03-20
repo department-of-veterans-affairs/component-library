@@ -36,6 +36,8 @@ input.usa-input {
 }
 
 label.usa-label--error {
+  margin-top: 1.5rem;
+
   .usa-hint {
     font-weight: var(--font-weight-normal);
   }
