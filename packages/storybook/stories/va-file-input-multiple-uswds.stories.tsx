@@ -32,6 +32,10 @@ const genericHandleChange = (e: CustomEvent, currentErrorState: string[], callba
     workingErrorState[index] = '';
     callback(workingErrorState);
   }
+  else if (action === 'FILE_UPDATED' && file && workingErrorState[index]) {
+    workingErrorState[index] = '';
+    callback(workingErrorState);
+  }
   else if (action === 'FILE_REMOVED' && !file) {
     const workingErrorState = state.map(() => '');
     workingErrorState.splice(index, 1);
