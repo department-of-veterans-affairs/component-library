@@ -8,6 +8,7 @@ import {
   truncate,
   getArticle,
   getMaxLength,
+  normalizeStringArrayProp,
 } from './utils';
 
 describe('format', () => {
@@ -124,6 +125,41 @@ describe('isMessageSet()', () => {
   });
   it('returns false if message is set to "false"', () => {
     expect(isMessageSet('false')).toEqual(false);
+  });
+});
+
+describe('normalizeStringArrayProp()', () => {
+  it('returns trimmed items for array input', () => {
+    expect(normalizeStringArrayProp([' one ', 'two', '', '  '])).toEqual([
+      'one',
+      'two',
+    ]);
+  });
+
+  it('parses valid JSON array string input', () => {
+    expect(normalizeStringArrayProp('["one", " two "]')).toEqual([
+      'one',
+      'two',
+    ]);
+  });
+
+  it('returns only string items when parsed array contains mixed types', () => {
+    expect(normalizeStringArrayProp('["one", 2, true, " three "]')).toEqual([
+      'one',
+      'three',
+    ]);
+  });
+
+  it('returns empty array for non-array JSON values', () => {
+    expect(normalizeStringArrayProp('{"selector":"h2"}')).toEqual([]);
+  });
+
+  it('returns empty array for invalid JSON', () => {
+    expect(normalizeStringArrayProp('["one",]')).toEqual([]);
+  });
+
+  it('returns empty array for undefined input', () => {
+    expect(normalizeStringArrayProp(undefined)).toEqual([]);
   });
 });
 

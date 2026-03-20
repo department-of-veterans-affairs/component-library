@@ -952,7 +952,7 @@ export namespace Components {
          */
         "accept"?: string;
         /**
-          * When false, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+          * When true, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
           * @default false
          */
         "disablePasswordSubmitButtonPattern"?: boolean;
@@ -1622,6 +1622,11 @@ export namespace Components {
           * @default false
          */
         "disableAnalytics"?: boolean;
+        /**
+          * CSS selectors for H2 elements that should be excluded from the list.  Accepts either a string array property or a JSON string attribute value.
+          * @default []
+         */
+        "excludeSelectors"?: string[] | string;
         /**
           * Header level. Must be between 1 and 6
           * @default 2
@@ -5494,7 +5499,7 @@ declare namespace LocalJSX {
          */
         "accept"?: string;
         /**
-          * When false, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+          * When true, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
           * @default false
          */
         "disablePasswordSubmitButtonPattern"?: boolean;
@@ -6240,6 +6245,11 @@ declare namespace LocalJSX {
           * @default false
          */
         "disableAnalytics"?: boolean;
+        /**
+          * CSS selectors for H2 elements that should be excluded from the list.  Accepts either a string array property or a JSON string attribute value.
+          * @default []
+         */
+        "excludeSelectors"?: string[] | string;
         /**
           * Header level. Must be between 1 and 6
           * @default 2
@@ -7911,6 +7921,7 @@ declare namespace LocalJSX {
     interface VaOnThisPageAttributes {
         "headerLevel": number;
         "disableAnalytics": boolean;
+        "excludeSelectors": string[] | string;
     }
     interface VaPaginationAttributes {
         "ariaLabelSuffix": string;

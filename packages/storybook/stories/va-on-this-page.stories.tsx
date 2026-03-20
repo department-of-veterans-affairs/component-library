@@ -79,6 +79,51 @@ const I18nTemplate = args => {
   );
 };
 
+const ExcludeTemplate = ({
+  'header-level': headerLevel
+}) => {
+  return (
+<article>
+    <va-on-this-page header-level={headerLevel} exclude-selectors='["va-alert h2"]'/>
+    <va-alert status="info">
+      <h2 id="this-is-an-alert" slot="headline">This is a heading</h2>
+      <p>This heading should be excluded from the on this page navigation.</p>
+    </va-alert>
+    <h2 id="if-im-a-veteran">
+      If I’m a Veteran, can I get VR&amp;E benefits and services?
+    </h2>
+    <p>
+      You may be eligible for VR&amp;E benefits and services if you’re a
+      Veteran, and you meet all of the requirements listed below.
+    </p>
+    <p>
+      <strong>All of these must be true. You:</strong>
+    </p>
+    <ul>
+      <li>
+        Didn’t receive a dishonorable discharge, <strong>and</strong>
+      </li>
+      <li>
+        Have a service-connected disability rating of at least 10% from VA,
+        <strong>and</strong>
+      </li>
+      <li>
+        <a href="#">Apply for VR&amp;E services</a>
+      </li>
+    </ul>
+    <h2 id="telephone-contacts">Telephone Contacts</h2>
+    <p>Here is a table of phone numbers</p>
+    <h2 id="some-additional-info">Some additional information</h2>
+    <p>Placeholder for additional content.</p>
+    <ol>
+      <li>Alpha</li>
+      <li>Beta</li>
+      <li>Gamma</li>
+    </ol>
+  </article>
+  )
+}
+
 export const Default = Template.bind(null);
 
 export const Internationalization = I18nTemplate.bind(null);
@@ -92,4 +137,10 @@ export const CustomHeaderLevel = Template.bind(null);
 CustomHeaderLevel.args = {
   ...defaultArgs,
   'header-level': 3,
+};
+
+export const ExcludeHeadings = ExcludeTemplate.bind(null);
+ExcludeHeadings.args = {
+  ...defaultArgs,
+  'header-level': 2,
 };
