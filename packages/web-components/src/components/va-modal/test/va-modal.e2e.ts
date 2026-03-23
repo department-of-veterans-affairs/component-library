@@ -724,6 +724,34 @@ describe('va-modal', () => {
     });
 
     describe('cleanup', () => {
+      it('should restore aria-hidden after repeated visible=true updates', async () => {
+        const page = await newE2EPage();
+        await page.setContent(`
+          <div id="content">Content</div>
+          <va-modal modal-title="Test Modal">
+            <p>Modal content</p>
+          </va-modal>
+        `);
+
+        const modal = await page.find('va-modal');
+        const content = await page.find('#content');
+
+        // First open with boolean true
+        await modal.setProperty('visible', true);
+        await page.waitForChanges();
+        expect(content.getAttribute('aria-hidden')).toBe('true');
+
+        // Second open-style update from frameworks that serialize booleans as strings.
+        await modal.setProperty('visible', 'true');
+        await page.waitForChanges();
+        expect(content.getAttribute('aria-hidden')).toBe('true');
+
+        // Close should fully restore aria-hidden regardless of repeated setup calls.
+        await modal.setProperty('visible', false);
+        await page.waitForChanges();
+        expect(content.getAttribute('aria-hidden')).toBeNull();
+      });
+
       it('should properly cleanup aria-hidden when modal is destroyed', async () => {
         const page = await newE2EPage();
         await page.setContent(`

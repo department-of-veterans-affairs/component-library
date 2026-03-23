@@ -43,6 +43,9 @@ export class VaModal {
   // Track cleanup handlers returned by hideOthers so we can restore DOM state on close.
   undoAriaHidden: Undo[] = [];
 
+  // Track the requestAnimationFrame ID so we can cancel a pending setupModal call.
+  private setupModalRafId?: number;
+  
   // This stores reference to previously focused element
   savedFocus: HTMLElement;
 
@@ -174,7 +177,7 @@ export class VaModal {
 
   componentDidLoad() {
     if (this.isVisible()) {
-      requestAnimationFrame(() => this.setupModal());
+      this.scheduleSetupModal();
     }
   }
 
@@ -187,14 +190,34 @@ export class VaModal {
 
     this.isVisibleDirty = false;
     if (this.isVisible()) {
-      requestAnimationFrame(() => this.setupModal());
+      this.scheduleSetupModal();
     } else {
       this.teardownModal();
     }
   }
 
   disconnectedCallback() {
+    if (this.setupModalRafId) {
+      cancelAnimationFrame(this.setupModalRafId);
+      this.setupModalRafId = undefined;
+    }
     this.teardownModal();
+  }
+
+  private scheduleSetupModal(): void {
+    if (this.setupModalRafId) {
+      cancelAnimationFrame(this.setupModalRafId);
+    }
+
+    this.setupModalRafId = requestAnimationFrame(() => {
+      this.setupModalRafId = undefined;
+
+      if (!this.isVisible()) {
+        return;
+      }
+
+      this.setupModal();
+    });
   }
 
   /**
@@ -377,8 +400,8 @@ export class VaModal {
    * Handles both document-level siblings and siblings within shadow roots.
    */
   private applyAriaHidden(): void {
-    // Reset any previous hide handlers before applying new ones.
-    this.undoAriaHidden = [];
+    // Ensure previous hide handlers are always unwound before re-applying.
+    this.cleanupAriaHidden();
 
     // Collect all elements that should not be hidden (modal + ancestors)
     const { ancestors, shadowRoots } = this.getModalHierarchy();
@@ -406,6 +429,22 @@ export class VaModal {
         this.undoAriaHidden.push(hideOthers([element], parent));
       }
     });
+  }
+
+  /**
+   * Unwinds aria-hidden handlers in reverse order.
+   * This is safe to call multiple times.
+   */
+  private cleanupAriaHidden(): void {
+    const undoCallbacks = this.undoAriaHidden.splice(0);
+
+    for (let i = undoCallbacks.length - 1; i >= 0; i--) {
+      try {
+        undoCallbacks[i]?.();
+      } catch (error) {
+        console.warn('<va-modal>: Failed to restore aria-hidden state.', error);
+      }
+    }
   }
 
   /**
@@ -454,9 +493,13 @@ export class VaModal {
   // This method removes the focus trap, re-enables scrolling and
   // removes aria-hidden="true" from external elements.
   private teardownModal() {
+    if (this.setupModalRafId) {
+      cancelAnimationFrame(this.setupModalRafId);
+      this.setupModalRafId = undefined;
+    }
+
     clearAllBodyScrollLocks();
-    this.undoAriaHidden.forEach(undo => undo?.());
-    this.undoAriaHidden = [];
+    this.cleanupAriaHidden();
     this.savedFocus?.focus();
   }
 
