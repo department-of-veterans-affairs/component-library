@@ -25,6 +25,7 @@ if (Build.isTesting) {
  * @componentName On this page
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref on-this-page
  * @translations English
  * @translations Spanish
  * @translations Tagalog

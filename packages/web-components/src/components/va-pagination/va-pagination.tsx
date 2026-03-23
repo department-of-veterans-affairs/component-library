@@ -23,6 +23,7 @@ if (Build.isTesting) {
  * @componentName Pagination
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref pagination
  */
 
 @Component({

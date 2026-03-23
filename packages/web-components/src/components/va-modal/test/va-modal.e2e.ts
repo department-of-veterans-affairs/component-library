@@ -79,6 +79,20 @@ describe('va-modal', () => {
     await axeCheck(page);
   });
 
+  it('does not render when visible is set to string false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal modal-title="Example Title" visible="false">
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    const modalContent = await page.find('va-modal >>> .usa-modal');
+    expect(modalContent).toBeNull();
+  });
+
   it('should trigger closeEvent using the Escape key when modal is visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
