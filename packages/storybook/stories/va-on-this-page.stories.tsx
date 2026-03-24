@@ -5,6 +5,7 @@ const otpDocs = getWebComponentDocs('va-on-this-page');
 
 const defaultArgs = {
   'header-level': undefined,
+  'exclude-selectors': undefined,
 };
 
 export default {
@@ -21,11 +22,13 @@ export default {
 };
 
 const Template = ({
-  'header-level': headerLevel
+  'header-level': headerLevel,
+  'exclude-selectors': excludeSelectors
+
 }) => {
   return (
 <article>
-    <va-on-this-page header-level={headerLevel}/>
+    <va-on-this-page header-level={headerLevel} exclude-selectors={excludeSelectors}/>
     <h2 id="if-im-a-veteran">
       If I’m a Veteran, can I get VR&amp;E benefits and services?
     </h2>
@@ -80,11 +83,12 @@ const I18nTemplate = args => {
 };
 
 const ExcludeTemplate = ({
-  'header-level': headerLevel
+  'header-level': headerLevel,
+  'exclude-selectors': excludeSelectors
 }) => {
   return (
 <article>
-    <va-on-this-page header-level={headerLevel} exclude-selectors='["va-alert h2"]'/>
+    <va-on-this-page header-level={headerLevel} exclude-selectors={excludeSelectors}/>
     <va-alert status="info">
       <h2 id="this-is-an-alert" slot="headline">This is a heading</h2>
       <p>This heading should be excluded from the on this page navigation.</p>
@@ -143,4 +147,5 @@ export const ExcludeHeadings = ExcludeTemplate.bind(null);
 ExcludeHeadings.args = {
   ...defaultArgs,
   'header-level': 2,
+  'exclude-selectors': '["va-alert h2"]',
 };
