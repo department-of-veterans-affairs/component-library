@@ -126,6 +126,13 @@ export class VaFileInputMultiple {
   @Prop() uploadedFiles?: UploadedFile[];
 
   /**
+   * When true, the child instances of va-file-input will not render a "Submit
+   * password" button in addition to the password input field for encrypted
+   * files.
+   */
+  @Prop() disablePasswordSubmitButtonPattern?: boolean = false;
+
+  /**
    * Event emitted when any change to the file inputs occurs.
    *
    * Sends back an object with the following data structure:
@@ -341,6 +348,26 @@ export class VaFileInputMultiple {
   }
 
   /**
+   * Handles file input changes by updating, adding, or removing files based on user interaction.
+   * @param {any} event - The event object containing file details.
+   * @param {number} fileKey - The key of the file being changed.
+   * @param {number} pageIndex - The index of the file in the files array.
+   */
+  private handlePasswordChange(event: any, fileKey: number, pageIndex: number) {
+    const fileObject = this.findFileByKey(fileKey);
+    fileObject.password = event.detail.password;
+    const filesArray = this.buildFilesArray(this.files, false, this.findIndexByKey(fileKey))
+    const result = {
+      action: "PASSWORD_UPDATE",
+      file: fileObject.file,
+      state: filesArray,
+      index: pageIndex
+    }
+    this.vaMultipleChange.emit(result);
+
+  }
+
+  /**
    * Handles submission of passwords for encrypted files.
    * @param {any} event - The event object containing file details.
    * @param {number} fileKey - The key of the file being changed.
@@ -508,6 +535,7 @@ export class VaFileInputMultiple {
       minFileSize,
       statusText,
       uploadedFiles,
+      disablePasswordSubmitButtonPattern,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error' : '';
@@ -558,6 +586,9 @@ export class VaFileInputMultiple {
                 onVaChange={event =>
                   this.handleChange(event, fileEntry.key, pageIndex)
                 }
+                onVaPasswordChange={event =>
+                  this.handlePasswordChange(event, fileEntry.key, pageIndex)
+                }
                 onVaPasswordSubmit={event =>
                   this.handlePasswordSubmit(event, fileEntry.key, pageIndex)
                 }
@@ -574,6 +605,7 @@ export class VaFileInputMultiple {
                 class={fileEntry.file || fileEntry.hasError ? 'has-file' : 'no-file'}
                 max-file-size={maxFileSize}
                 min-file-size={minFileSize}
+                disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
               />
             );
           })}

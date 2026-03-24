@@ -168,6 +168,14 @@
     z-index: 2;
   }
 
+  va-text-input {
+    margin-top: 1.5rem;
+  }
+
+  div.password-input-section va-text-input {
+    margin-top: 0;
+  }
+
   .file-button-section {
     margin-top: 8px;
     display: flex;

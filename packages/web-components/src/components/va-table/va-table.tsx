@@ -15,6 +15,7 @@ import { getCompareFunc } from './sort/utils';
  * @componentName Table
  * @maturityCategory caution
  * @maturityLevel available
+ * @guidanceHref table
  */
 
 @Component({

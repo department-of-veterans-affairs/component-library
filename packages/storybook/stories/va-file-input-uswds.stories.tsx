@@ -45,6 +45,7 @@ const defaultArgs = {
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaChange': event => null,
+  'vaPasswordChange': event => null,
   'vaPasswordSubmit': event => null,
   'vaFileInputError': event => null,
   'header-size': null,
@@ -57,6 +58,7 @@ const defaultArgs = {
   'maxFileSize': Infinity,
   'minFileSize': 0,
   'password-error': false,
+  'disable-password-submit-button-pattern': false,
   'showToggleFocusButton': false,
   'focusEl': null,
 };
@@ -70,6 +72,7 @@ const Template = ({
   hint,
   enableAnalytics,
   vaChange,
+  vaPasswordChange,
   vaPasswordSubmit,
   vaFileInputError,
   headerSize,
@@ -82,6 +85,7 @@ const Template = ({
   maxFileSize,
   minFileSize,
   passwordError,
+  disablePasswordSubmitButtonPattern,
   showToggleFocusButton,
   focusEl
 }) => {
@@ -99,6 +103,7 @@ const Template = ({
         hint={hint}
         enable-analytics={enableAnalytics}
         onVaChange={vaChange}
+        onVaPasswordChange={vaPasswordChange}
         onVaPasswordSubmit={vaPasswordSubmit}
         onVaFileInputError={vaFileInputError}
         header-size={headerSize}
@@ -111,6 +116,7 @@ const Template = ({
         maxFileSize={maxFileSize}
         minFileSize={minFileSize}
         passwordError={passwordError}
+        disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
         id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
       />
       {showToggleFocusButton && (
@@ -131,13 +137,12 @@ Default.argTypes = propStructure(fileInputDocs);
 export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
-
 const AcceptsFilePasswordTemplate = ({
   label,
   name,
   hint,
   passwordError,
-  vaPasswordSubmit,
+  'disable-password-submit-button-pattern': disablePasswordSubmitButtonPattern,
 }) => {
 
   const [isEncrypted, setIsEncrypted] = useState(false);
@@ -146,7 +151,7 @@ const AcceptsFilePasswordTemplate = ({
 
   const handleChange = (event) => {
     const hasFile = event?.detail?.files?.length > 0;
-
+  
     if (hasFile) {
       setIsEncrypted(true);
     }
@@ -157,6 +162,10 @@ const AcceptsFilePasswordTemplate = ({
       setDerivedPasswordError(null);
       return;
     }
+  }
+
+  const handleVaPasswordSubmit = () => {
+    setPasswordSubmissionSuccess(null);
   }
 
   return (
@@ -170,10 +179,11 @@ const AcceptsFilePasswordTemplate = ({
         name={name}
         hint={hint}
         onVaChange={handleChange}
-        onVaPasswordSubmit={vaPasswordSubmit}
+        onVaPasswordSubmit={handleVaPasswordSubmit}
         encrypted={isEncrypted}
         passwordError={derivedPasswordError}
         passwordSubmissionSuccess={passwordSubmissionSuccess}
+        disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
       />
 
       <hr />
@@ -200,25 +210,44 @@ const AcceptsFilePasswordTemplate = ({
   );
 };
 export const AcceptsFilePassword = AcceptsFilePasswordTemplate.bind(null);
-AcceptsFilePassword.args = {
-  ...defaultArgs,
-  vaPasswordSubmit: () => console.log('File input password submitted'),
-};
+AcceptsFilePassword.args = { ...defaultArgs, encrypted: true };
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 AcceptsFilePassword.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-const WithMinimumPasswordRequirementTemplate = ({
+export const WithFilePasswordError = AcceptsFilePasswordTemplate.bind(null);
+WithFilePasswordError.args = {
+  ...defaultArgs,
+  encrypted: true,
+  passwordError: 'Encrypted file requires a password.',
+}
+
+const WithFilePasswordCustomValidationTemplate = ({
   label,
   name,
   accept,
   required,
   error,
   hint,
+  'disable-password-submit-button-pattern': disablePasswordSubmitButtonPattern,
 }) => {
+  const [isEncrypted, setIsEncrypted] = useState(false);
   const [passwordError, setPasswordError] = useState<string | undefined>(undefined);
+
+  const handleChange = (event) => {
+    const hasFile = event?.detail?.files?.length > 0;
+  
+    if (hasFile) {
+      setIsEncrypted(true);
+    }
+    // Revert state to original values if there are no files present (file removed)
+    if (!event?.detail?.files?.length) {
+      setIsEncrypted(false);
+      return;
+    }
+  }
 
   const handleVaPasswordSubmit = (e: CustomEvent) => {
     let newPasswordError: string | undefined;
@@ -226,7 +255,7 @@ const WithMinimumPasswordRequirementTemplate = ({
     const { password } = e.detail;
 
     if (!password || password.length < 4) {
-      newPasswordError = 'Encrypted file requires a password.';
+      newPasswordError = 'Enter a password with at least 4 characters';
     } else {
       newPasswordError = null;
     }
@@ -242,17 +271,56 @@ const WithMinimumPasswordRequirementTemplate = ({
       required={required}
       error={error}
       hint={hint}
-      encrypted={true}
+      encrypted={isEncrypted}
+      onVaChange={handleChange}
       onVaPasswordSubmit={handleVaPasswordSubmit}
       passwordError={passwordError}
+      disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
     />
   );
 };
-export const WithMinimumPasswordRequirement = WithMinimumPasswordRequirementTemplate.bind(null);
-WithMinimumPasswordRequirement.args = {
+export const WithFilePasswordCustomValidation = WithFilePasswordCustomValidationTemplate.bind(null);
+WithFilePasswordCustomValidation.args = {
   ...defaultArgs,
   label: 'With minimum password length requirement',
   hint: 'Password must be at least 4 characters long',
+};
+
+const AcceptsFilePasswordWithoutSubmitButtonTemplate = ({
+  label,
+  name,
+  hint,
+  passwordError,
+  'disable-password-submit-button-pattern': disablePasswordSubmitButtonPattern,
+}) => {
+
+  const [isEncrypted, setIsEncrypted] = useState(false);
+
+  return (
+    <>
+      To learn how to check for an encrypted PDF <va-link
+        text='see platform documentation'
+        href='https://depo-platform-documentation.scrollhelp.site/developer-docs/checking-if-an-uploaded-pdf-is-encrypted'
+      />.
+      <VaFileInput
+        label={label}
+        name={name}
+        hint={hint}
+        onVaChange={(event) => setIsEncrypted(!!event.detail.files.length)}
+        encrypted={isEncrypted}
+        passwordError={passwordError}
+        disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
+      />
+    </>
+  );
+};
+
+export const AcceptsFilePasswordWithoutSubmitButton = AcceptsFilePasswordWithoutSubmitButtonTemplate.bind(null);
+AcceptsFilePasswordWithoutSubmitButton.args = {...defaultArgs, 'disable-password-submit-button-pattern': true };
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsFilePasswordWithoutSubmitButton.parameters = {
+  chromatic: { disableSnapshot: true },
 };
 
 export const AcceptsOnlySpecificFileTypes = Template.bind(null);
@@ -528,22 +596,10 @@ export const ReadOnly = FileUploadedTemplate.bind(null);
 ReadOnly.args = { ...defaultArgs, vaChange: event => event, readOnly: true };
 
 const readOnlyAdditionalInfoContent = (
-  <div>
-    <va-select
-      className="hydrated"
-      label="What kind of file is this?"
-      name="fileType"
-      inert
-      value="1"
-    >
-      <option key="1" value="1">
-        Public Document
-      </option>
-      <option key="2" value="2">
-        Private Document
-      </option>
-    </va-select>
-  </div>
+  <dl>
+    <dt className="vads-u-margin-top--2">What kind of file is this?</dt>
+    <dd className="vads-u-margin-top--1">Public Document</dd>
+  </dl>
 );
 
 export const ReadOnlyWithAdditionalInputs = FileUploadedTemplate.bind(null);

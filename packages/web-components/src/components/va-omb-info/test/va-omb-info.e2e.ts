@@ -126,7 +126,7 @@ describe('va-omb-info', () => {
 
     // Verify modal is open
     let modal = await page.find('va-omb-info >>> va-modal');
-    expect(await modal.getProperty('visible')).toBe(true);
+    expect(await modal.find('>>> .usa-modal')).not.toBeNull();
 
     // Click the modal host element directly to trigger clickToClose
     await page.evaluate(() => {
@@ -136,7 +136,7 @@ describe('va-omb-info', () => {
     });
     await page.waitForChanges();
 
-    expect(await modal.getProperty('visible')).toBe(false);
+    expect(await modal.find('>>> .usa-modal')).toBeNull();
   });
 
   it('does not close when clicking overlay by default', async () => {
@@ -149,7 +149,7 @@ describe('va-omb-info', () => {
 
     // Verify modal is open
     let modal = await page.find('va-omb-info >>> va-modal');
-    expect(await modal.getProperty('visible')).toBe(true);
+    expect(await modal.find('>>> .usa-modal')).not.toBeNull();
 
     // Click the modal host element - should not close when clickToClose is false
     await page.evaluate(() => {
@@ -159,6 +159,6 @@ describe('va-omb-info', () => {
     });
     await page.waitForChanges();
 
-    expect(await modal.getProperty('visible')).toBe(true);
+    expect(await modal.find('>>> .usa-modal')).not.toBeNull();
   });
 });

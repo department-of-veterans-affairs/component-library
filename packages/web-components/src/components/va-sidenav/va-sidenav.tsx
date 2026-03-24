@@ -11,6 +11,7 @@ const MEDIUM_SCREEN_BREAKPOINT = 768;
  * @componentName Side Navigation
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @guidanceHref sidenav
  */
 @Component({
   tag: 'va-sidenav',

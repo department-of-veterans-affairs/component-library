@@ -178,7 +178,7 @@ describe('va-file-input-multiple', () => {
     await page.waitForChanges();
 
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);
-  });
+  })
 
   it('emits the vaMultipleError event only once', async () => {
     const page = await newE2EPage();

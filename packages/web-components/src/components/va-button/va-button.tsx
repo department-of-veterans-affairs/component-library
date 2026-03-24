@@ -17,6 +17,7 @@ import { isMessageSet } from '../../utils/utils';
  * @nativeHandler onClick
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref button
  */
 
 @Component({
@@ -174,7 +175,9 @@ export class VaButton {
       composed: true,
     });
     if (this.submit !== 'skip') {
-      formElement.dispatchEvent(submitEvent);
+      requestAnimationFrame(() => {
+        formElement.dispatchEvent(submitEvent);
+      });
     }
     if (this.submit !== 'prevent') {
       formElement.submit();
