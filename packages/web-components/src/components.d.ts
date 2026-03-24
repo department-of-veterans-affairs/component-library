@@ -398,6 +398,11 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Adds an aria-label attribute to the button pair container.
+          * @default null
+         */
+        "label"?: string;
+        /**
           * Custom text that will be applied to the left va-button inside the component. If set will override text controlled by the 'update' prop.
          */
         "leftButtonText"?: string;
@@ -952,7 +957,7 @@ export namespace Components {
          */
         "accept"?: string;
         /**
-          * When false, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+          * When true, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
           * @default false
          */
         "disablePasswordSubmitButtonPattern"?: boolean;
@@ -4872,6 +4877,11 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Adds an aria-label attribute to the button pair container.
+          * @default null
+         */
+        "label"?: string;
+        /**
           * Custom text that will be applied to the left va-button inside the component. If set will override text controlled by the 'update' prop.
          */
         "leftButtonText"?: string;
@@ -5494,7 +5504,7 @@ declare namespace LocalJSX {
          */
         "accept"?: string;
         /**
-          * When false, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+          * When true, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
           * @default false
          */
         "disablePasswordSubmitButtonPattern"?: boolean;
@@ -7654,6 +7664,7 @@ declare namespace LocalJSX {
         "update": boolean;
         "leftButtonText": string;
         "rightButtonText": string;
+        "label": string;
     }
     interface VaButtonSegmentedAttributes {
         "label": string;

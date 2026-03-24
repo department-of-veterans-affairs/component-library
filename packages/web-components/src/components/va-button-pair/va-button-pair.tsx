@@ -68,6 +68,11 @@ export class VaButtonPair {
   @Prop() rightButtonText?: string
 
   /**
+   * Adds an aria-label attribute to the button pair container.
+   */
+  @Prop() label?: string = null;
+
+  /**
    * Fires when the primary button is clicked.
    */
   @Event({
@@ -162,8 +167,8 @@ export class VaButtonPair {
     if (_continue) {
       return (
         <Host>
-          <ul class="usa-button-group">
-            <li class="usa-button-group__item">
+          <div class="usa-button-group" role="group" aria-label={this.label}>
+            <div class="usa-button-group__item">
               <va-button
                 back
                 disable-analytics={disableAnalytics}
@@ -171,8 +176,8 @@ export class VaButtonPair {
                 onClick={handleSecondaryClick}
                 text={this.getLeftButtonText()}
               />
-            </li>
-            <li class="usa-button-group__item">
+            </div>
+            <div class="usa-button-group__item">
               <va-button
                 continue
                 disable-analytics={disableAnalytics}
@@ -181,16 +186,16 @@ export class VaButtonPair {
                 text={this.getRightButtonText()}
                 submit={submit}
               />
-            </li>
-          </ul>
+            </div>
+          </div>
         </Host>
       );
     }
 
     return (
       <Host>
-        <ul class="usa-button-group">
-          <li class="usa-button-group__item">
+        <div class="usa-button-group" role="group" aria-label={this.label}>
+          <div class="usa-button-group__item">
             <va-button
               disable-analytics={disableAnalytics}
               label={primaryLabel}
@@ -198,8 +203,8 @@ export class VaButtonPair {
               text={this.getLeftButtonText()}
               submit={submit}
             />
-          </li>
-          <li class="usa-button-group__item">
+          </div>
+          <div class="usa-button-group__item">
             <va-button
               disable-analytics={disableAnalytics}
               label={secondaryLabel}
@@ -207,8 +212,8 @@ export class VaButtonPair {
               secondary
               text={this.getRightButtonText()}
             />
-          </li>
-        </ul>
+          </div>
+        </div>
       </Host>
     );
   }
