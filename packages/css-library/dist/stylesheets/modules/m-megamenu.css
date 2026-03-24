@@ -292,7 +292,7 @@
   .mega-menu .vetnav-panel {
     width: 768px;
     height: 25.75rem;
-    overflow: scroll;
+    overflow: auto;
   }
   #mega-menu .column-one,
   .mega-menu .column-one {
