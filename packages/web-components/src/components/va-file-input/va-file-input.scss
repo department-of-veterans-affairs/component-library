@@ -20,6 +20,10 @@
   .label-header {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-normal);
+
+    label.usa-label--error {
+      margin-top: 1.5rem;
+    }
   }
 
   .label-header-tag {
