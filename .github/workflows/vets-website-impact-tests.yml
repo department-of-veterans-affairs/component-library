@@ -1,0 +1,349 @@
+name: Vets Website Impact Tests
+
+on:
+  pull_request:
+    branches: [main, community-branch]
+    paths:
+      - 'packages/core/**'
+      - 'packages/web-components/**'
+      - 'packages/react-components/**'
+      - 'packages/css-library/**'
+      - '.github/workflows/vets-website-impact-tests.yml'
+
+concurrency:
+  group: vets-impact-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  vets-impact-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout component-library
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node for component-library
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: yarn
+
+      - name: Install component-library dependencies
+        run: yarn install
+
+      - name: Detect changed package scope
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          base_sha="${{ github.event.pull_request.base.sha }}"
+          head_sha="${{ github.event.pull_request.head.sha }}"
+
+          git diff --name-only "$base_sha" "$head_sha" > /tmp/changed-files.txt
+
+          echo "Changed files:" 
+          cat /tmp/changed-files.txt
+
+          has_web=false
+          has_core=false
+          has_react=false
+          has_css=false
+
+          if grep -q '^packages/web-components/' /tmp/changed-files.txt; then
+            has_web=true
+          fi
+          if grep -q '^packages/core/' /tmp/changed-files.txt; then
+            has_core=true
+          fi
+          if grep -q '^packages/react-components/' /tmp/changed-files.txt; then
+            has_react=true
+          fi
+          if grep -q '^packages/css-library/' /tmp/changed-files.txt; then
+            has_css=true
+          fi
+
+          component_tags=$(
+            grep -E '^packages/web-components/src/components/va-[^/]+/' /tmp/changed-files.txt \
+              | sed -E 's|^packages/web-components/src/components/(va-[^/]+)/.*|\1|' \
+              | sort -u \
+              | tr '\n' ' '
+          )
+
+          echo "has_web=$has_web" >> "$GITHUB_OUTPUT"
+          echo "has_core=$has_core" >> "$GITHUB_OUTPUT"
+          echo "has_react=$has_react" >> "$GITHUB_OUTPUT"
+          echo "has_css=$has_css" >> "$GITHUB_OUTPUT"
+          echo "component_tags=$component_tags" >> "$GITHUB_OUTPUT"
+
+      - name: Build changed packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ steps.changes.outputs.has_web }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/web-components run build
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_react }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/react-components run build
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_core }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/component-library run build
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/css-library run build
+          fi
+
+      - name: Pack changed packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p /tmp/component-library-packs
+
+          if [[ "${{ steps.changes.outputs.has_web }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/web-components pack --out /tmp/component-library-packs/web-components.tgz
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_react }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/react-components pack --out /tmp/component-library-packs/react-components.tgz
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_core }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/component-library pack --out /tmp/component-library-packs/core.tgz
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/css-library pack --out /tmp/component-library-packs/css-library.tgz
+          fi
+
+          ls -lah /tmp/component-library-packs
+
+      - name: Checkout vets-website
+        uses: actions/checkout@v4
+        with:
+          repository: department-of-veterans-affairs/vets-website
+          ref: main
+          path: vets-website
+
+      - name: Setup Node for vets-website
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: vets-website/.nvmrc
+          cache: yarn
+          cache-dependency-path: vets-website/yarn.lock
+
+      - name: Install vets-website dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: vets-website
+
+      - name: Install PR package tarballs in vets-website
+        shell: bash
+        working-directory: vets-website
+        run: |
+          set -euo pipefail
+
+          shopt -s nullglob
+          packs=(/tmp/component-library-packs/*.tgz)
+
+          if [[ ${#packs[@]} -eq 0 ]]; then
+            echo "No packed component-library artifacts were found."
+            exit 0
+          fi
+
+          for pack in "${packs[@]}"; do
+            echo "Installing $pack"
+            yarn add -W "$pack"
+          done
+
+      - name: Find impacted vets-website source files
+        id: impacted
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          : > /tmp/impacted-vets-files.txt
+
+          changed_tags="${{ steps.changes.outputs.component_tags }}"
+
+          if [[ -n "$changed_tags" ]]; then
+            for tag in $changed_tags; do
+              rg -l -g '*.{js,jsx,ts,tsx}' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src >> /tmp/impacted-vets-files.txt || true
+            done
+          fi
+
+          # Broader package updates can affect wrapper usage even when specific component tags are unchanged.
+          if [[ "${{ steps.changes.outputs.has_core }}" == "true" || "${{ steps.changes.outputs.has_react }}" == "true" || "${{ steps.changes.outputs.has_web }}" == "true" || "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
+            rg -l -g '*.{js,jsx,ts,tsx}' "@department-of-veterans-affairs/(component-library|react-components|web-components|css-library)" vets-website/src >> /tmp/impacted-vets-files.txt || true
+          fi
+
+          sort -u /tmp/impacted-vets-files.txt -o /tmp/impacted-vets-files.txt
+
+          impacted_count=$(wc -l < /tmp/impacted-vets-files.txt | tr -d ' ')
+          echo "impacted_count=$impacted_count" >> "$GITHUB_OUTPUT"
+          echo "Impacted files found: $impacted_count"
+
+          if [[ "$impacted_count" -gt 0 ]]; then
+            head -n 200 /tmp/impacted-vets-files.txt
+          fi
+
+      - name: Find impacted vets-website cypress and e2e specs
+        id: impacted_specs
+        if: steps.impacted.outputs.impacted_count != '0'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          : > /tmp/impacted-cypress-specs.txt
+          : > /tmp/impacted-e2e-specs.txt
+          : > /tmp/impacted-roots.txt
+
+          mapfile -t impacted_files < /tmp/impacted-vets-files.txt
+
+          for file in "${impacted_files[@]}"; do
+            if [[ "$file" =~ ^vets-website/src/applications/([^/]+)/ ]]; then
+              echo "vets-website/src/applications/${BASH_REMATCH[1]}" >> /tmp/impacted-roots.txt
+            elif [[ "$file" =~ ^vets-website/src/platform/([^/]+)/ ]]; then
+              echo "vets-website/src/platform/${BASH_REMATCH[1]}" >> /tmp/impacted-roots.txt
+            fi
+          done
+
+          sort -u /tmp/impacted-roots.txt -o /tmp/impacted-roots.txt
+
+          if [[ -s /tmp/impacted-roots.txt ]]; then
+            while IFS= read -r root; do
+              find "$root" -type f \( \
+                -name '*.cy.js' -o -name '*.cy.jsx' -o -name '*.cy.ts' -o -name '*.cy.tsx' -o \
+                -name '*.cypress.js' -o -name '*.cypress.jsx' -o -name '*.cypress.ts' -o -name '*.cypress.tsx' -o \
+                -name '*.cypress.spec.js' -o -name '*.cypress.spec.jsx' -o -name '*.cypress.spec.ts' -o -name '*.cypress.spec.tsx' \
+              \) >> /tmp/impacted-cypress-specs.txt || true
+
+              find "$root" -type f \( \
+                -name '*.e2e.js' -o -name '*.e2e.jsx' -o -name '*.e2e.ts' -o -name '*.e2e.tsx' -o \
+                -name '*.e2e.spec.js' -o -name '*.e2e.spec.jsx' -o -name '*.e2e.spec.ts' -o -name '*.e2e.spec.tsx' \
+              \) >> /tmp/impacted-e2e-specs.txt || true
+            done < /tmp/impacted-roots.txt
+          fi
+
+          changed_tags="${{ steps.changes.outputs.component_tags }}"
+          if [[ -n "$changed_tags" ]]; then
+            for tag in $changed_tags; do
+              rg -l -g '*.{js,jsx,ts,tsx}' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
+                | rg '(cypress|e2e|\\.cy\\.|\\.cypress\\.|\\.e2e\\.)' >> /tmp/impacted-cypress-specs.txt || true
+              rg -l -g '*.{js,jsx,ts,tsx}' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
+                | rg '(e2e|\\.e2e\\.)' >> /tmp/impacted-e2e-specs.txt || true
+            done
+          fi
+
+          sort -u /tmp/impacted-cypress-specs.txt -o /tmp/impacted-cypress-specs.txt
+          sort -u /tmp/impacted-e2e-specs.txt -o /tmp/impacted-e2e-specs.txt
+
+          cypress_count=$(wc -l < /tmp/impacted-cypress-specs.txt | tr -d ' ')
+          e2e_count=$(wc -l < /tmp/impacted-e2e-specs.txt | tr -d ' ')
+
+          echo "cypress_count=$cypress_count" >> "$GITHUB_OUTPUT"
+          echo "e2e_count=$e2e_count" >> "$GITHUB_OUTPUT"
+
+          echo "Impacted Cypress specs: $cypress_count"
+          echo "Impacted e2e specs: $e2e_count"
+
+          if [[ "$cypress_count" -gt 0 ]]; then
+            head -n 100 /tmp/impacted-cypress-specs.txt
+          fi
+
+          if [[ "$e2e_count" -gt 0 ]]; then
+            head -n 100 /tmp/impacted-e2e-specs.txt
+          fi
+
+      - name: Run impacted vets-website unit tests
+        if: steps.impacted.outputs.impacted_count != '0'
+        shell: bash
+        working-directory: vets-website
+        run: |
+          set -euo pipefail
+
+          mapfile -t files < /tmp/impacted-vets-files.txt
+
+          max_files=120
+          if [[ ${#files[@]} -gt $max_files ]]; then
+            echo "Truncating impacted file list from ${#files[@]} to $max_files to keep CI runtime bounded."
+            files=("${files[@]:0:$max_files}")
+          fi
+
+          chunk_size=30
+          total=${#files[@]}
+          start=0
+
+          while [[ $start -lt $total ]]; do
+            end=$((start + chunk_size))
+            if [[ $end -gt $total ]]; then
+              end=$total
+            fi
+
+            chunk=("${files[@]:$start:$((end - start))}")
+
+            echo "Running related unit tests for files $start to $((end - 1))."
+            yarn test:unit --coverage=false --runInBand --passWithNoTests --findRelatedTests "${chunk[@]}"
+
+            start=$end
+          done
+
+      - name: Run impacted vets-website Cypress specs
+        if: steps.impacted_specs.outputs.cypress_count != '0'
+        shell: bash
+        working-directory: vets-website
+        run: |
+          set -euo pipefail
+
+          mapfile -t specs < /tmp/impacted-cypress-specs.txt
+
+          max_specs=30
+          if [[ ${#specs[@]} -gt $max_specs ]]; then
+            echo "Truncating Cypress spec list from ${#specs[@]} to $max_specs for runtime bounds."
+            specs=("${specs[@]:0:$max_specs}")
+          fi
+
+          npx cypress install
+
+          spec_csv=$(IFS=,; echo "${specs[*]}")
+          echo "Running Cypress specs: $spec_csv"
+          npx cypress run --config-file config/cypress.config.js --browser electron --spec "$spec_csv"
+
+      - name: Run impacted vets-website e2e specs
+        if: steps.impacted_specs.outputs.e2e_count != '0'
+        shell: bash
+        working-directory: vets-website
+        run: |
+          set -euo pipefail
+
+          mapfile -t specs < /tmp/impacted-e2e-specs.txt
+
+          max_specs=30
+          if [[ ${#specs[@]} -gt $max_specs ]]; then
+            echo "Truncating e2e spec list from ${#specs[@]} to $max_specs for runtime bounds."
+            specs=("${specs[@]:0:$max_specs}")
+          fi
+
+          spec_csv=$(IFS=,; echo "${specs[*]}")
+
+          if yarn -s run | grep -E '^[[:space:]]*test:e2e[[:space:]]' > /dev/null; then
+            echo "Running test:e2e for specs: $spec_csv"
+            yarn test:e2e -- --spec "$spec_csv"
+          elif yarn -s run | grep -E '^[[:space:]]*e2e[[:space:]]' > /dev/null; then
+            echo "Running e2e for specs: $spec_csv"
+            yarn e2e -- --spec "$spec_csv"
+          else
+            echo "Detected impacted e2e specs but no test:e2e or e2e script exists in vets-website package.json."
+            exit 1
+          fi
+
+      - name: No impacted tests found
+        if: steps.impacted.outputs.impacted_count == '0'
+        run: echo "No impacted vets-website source, Cypress, or e2e files were detected from current component-library changes."
