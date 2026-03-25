@@ -859,6 +859,7 @@ export namespace Components {
         "accept"?: string;
         /**
           * When true, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+          * @default false
          */
         "disablePasswordSubmitButtonPattern"?: boolean;
         /**
@@ -5137,6 +5138,7 @@ declare namespace LocalJSX {
         "accept"?: string;
         /**
           * When true, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+          * @default false
          */
         "disablePasswordSubmitButtonPattern"?: boolean;
         /**
