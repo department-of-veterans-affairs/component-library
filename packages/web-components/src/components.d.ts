@@ -1481,7 +1481,7 @@ export namespace Components {
           * If the modal is visible or not
           * @default false
          */
-        "visible"?: boolean | string;
+        "visible"?: boolean;
     }
     /**
      * @componentName Need help?
@@ -6087,7 +6087,7 @@ declare namespace LocalJSX {
           * If the modal is visible or not
           * @default false
          */
-        "visible"?: boolean | string;
+        "visible"?: boolean;
     }
     /**
      * @componentName Need help?
@@ -7879,7 +7879,7 @@ declare namespace LocalJSX {
         "primaryButtonText": string;
         "secondaryButtonText": string;
         "status": 'continue' | 'error' | 'info' | 'success' | 'warning';
-        "visible": string;
+        "visible": boolean;
         "label": string;
     }
     interface VaNotificationAttributes {
