@@ -7,13 +7,10 @@ on:
     branches: [main, community-branch]
   pull_request:
     branches: [main, community-branch]
-    
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer-cache
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 22.x
@@ -33,6 +30,8 @@ jobs:
       
       - name: Install Puppeteer browsers
         timeout-minutes: 10
+        env:
+          PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer-cache
         run: node -e "require('puppeteer/install.js')"
 
       - name: Test react-components
@@ -48,6 +47,8 @@ jobs:
         working-directory: packages/design-system-dashboard-cli
 
       - name: Test web-components
+        env:
+          PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer-cache
         run: |
           yarn install
           yarn test
