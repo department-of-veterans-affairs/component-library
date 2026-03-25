@@ -141,9 +141,27 @@ describe('va-telephone-input', () => {
     expect(contactSpy).toHaveReceivedEventDetail({
       callingCode: "1",
       contact: '2345678900',
+      contactRaw: '(234) 567-8900',
       countryCode: 'US',
       isValid: true,
       error: null,
+      touched: false
+    });
+  });
+
+   it('emits the vaContact event with invalid contact when entered', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-telephone-input />');
+    const contactSpy = await page.spyOnEvent('vaContact');
+    const input = await page.find('va-telephone-input >>> va-text-input >>> input');
+    await input.type('2345678900abc');
+    expect(contactSpy).toHaveReceivedEventDetail({
+      callingCode: "1",
+      contact: '2345678900',
+      contactRaw: '(234) 567-8900abc',
+      countryCode: 'US',
+      isValid: false,
+      error: "Enter a valid United States of America phone number. Use 10 digits.",
       touched: false
     });
   });
@@ -177,6 +195,13 @@ describe('va-telephone-input', () => {
     await page.waitForChanges();
     const error = await page.find('va-telephone-input >>> span#error-message');
       expect(error.innerText.trim()).toBe('');
+  });
+
+  it('shows an error on load if the contact prop is invalid', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-telephone-input contact="2342342345a" />');
+    const error = await page.find('va-telephone-input >>> span#error-message');
+    expect(error.innerText).toContain('Enter a valid United States of America phone number. Use 10 digits.');
   });
 
   it('passes an axe check', async () => {
