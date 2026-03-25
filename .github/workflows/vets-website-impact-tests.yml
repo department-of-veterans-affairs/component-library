@@ -35,6 +35,11 @@ jobs:
       - name: Install component-library dependencies
         run: yarn install
 
+      - name: Install ripgrep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ripgrep
+
       - name: Detect changed package scope
         id: changes
         shell: bash
@@ -190,20 +195,20 @@ jobs:
 
           if [[ -n "$changed_tags" ]]; then
             for tag in $changed_tags; do
-              rg -l -g '*.{js,jsx,ts,tsx}' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src >> /tmp/impacted-vets-files.txt || true
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src >> /tmp/impacted-vets-files.txt || true
             done
           fi
 
           changed_bindings="${{ steps.changes.outputs.component_bindings }}"
           if [[ -n "$changed_bindings" ]]; then
             for binding in $changed_bindings; do
-              rg -l -g '*.{js,jsx,ts,tsx}' "\\b${binding}\\b" vets-website/src >> /tmp/impacted-vets-files.txt || true
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "\\b${binding}\\b" vets-website/src >> /tmp/impacted-vets-files.txt || true
             done
           fi
 
           # Broader package updates can affect wrapper usage even when specific component tags are unchanged.
           if [[ "${{ steps.changes.outputs.has_core }}" == "true" || "${{ steps.changes.outputs.has_react }}" == "true" || "${{ steps.changes.outputs.has_web }}" == "true" || "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
-            rg -l -g '*.{js,jsx,ts,tsx}' "@department-of-veterans-affairs/(component-library|react-components|web-components|css-library)" vets-website/src >> /tmp/impacted-vets-files.txt || true
+            rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "@department-of-veterans-affairs/(component-library|react-components|web-components|css-library)" vets-website/src >> /tmp/impacted-vets-files.txt || true
           fi
 
           # Fallback: use dashboard usage data to capture app consumers when direct source matching misses wrappers/re-exports.
@@ -237,7 +242,7 @@ jobs:
                 while IFS= read -r dir; do
                   base_norm=$(basename "$dir" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
                   if [[ -n "$base_norm" && ( "$base_norm" == *"$slug_norm"* || "$slug_norm" == *"$base_norm"* ) ]]; then
-                    find "$dir" -type f \( -name '*.js' -o -name '*.jsx' -o -name '*.ts' -o -name '*.tsx' \) >> /tmp/impacted-vets-files.txt || true
+                    find "$dir" -type d -name node_modules -prune -o -type f \( -name '*.js' -o -name '*.jsx' -o -name '*.ts' -o -name '*.tsx' \) -print >> /tmp/impacted-vets-files.txt || true
                   fi
                 done < <(find vets-website/src/applications vets-website/src/platform -type d)
               done < /tmp/dashboard-impacted-slugs.txt
@@ -279,25 +284,25 @@ jobs:
 
           if [[ -s /tmp/impacted-roots.txt ]]; then
             while IFS= read -r root; do
-              find "$root" -type f \( \
+              find "$root" -type d -name node_modules -prune -o -type f \( \
                 -name '*.cy.js' -o -name '*.cy.jsx' -o -name '*.cy.ts' -o -name '*.cy.tsx' -o \
                 -name '*.cypress.js' -o -name '*.cypress.jsx' -o -name '*.cypress.ts' -o -name '*.cypress.tsx' -o \
                 -name '*.cypress.spec.js' -o -name '*.cypress.spec.jsx' -o -name '*.cypress.spec.ts' -o -name '*.cypress.spec.tsx' \
-              \) >> /tmp/impacted-cypress-specs.txt || true
+              \) -print >> /tmp/impacted-cypress-specs.txt || true
 
-              find "$root" -type f \( \
+              find "$root" -type d -name node_modules -prune -o -type f \( \
                 -name '*.e2e.js' -o -name '*.e2e.jsx' -o -name '*.e2e.ts' -o -name '*.e2e.tsx' -o \
                 -name '*.e2e.spec.js' -o -name '*.e2e.spec.jsx' -o -name '*.e2e.spec.ts' -o -name '*.e2e.spec.tsx' \
-              \) >> /tmp/impacted-e2e-specs.txt || true
+              \) -print >> /tmp/impacted-e2e-specs.txt || true
             done < /tmp/impacted-roots.txt
           fi
 
           changed_tags="${{ steps.changes.outputs.component_tags }}"
           if [[ -n "$changed_tags" ]]; then
             for tag in $changed_tags; do
-              rg -l -g '*.{js,jsx,ts,tsx}' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
                 | rg '(cypress|e2e|\\.cy\\.|\\.cypress\\.|\\.e2e\\.)' >> /tmp/impacted-cypress-specs.txt || true
-              rg -l -g '*.{js,jsx,ts,tsx}' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
                 | rg '(e2e|\\.e2e\\.)' >> /tmp/impacted-e2e-specs.txt || true
             done
           fi
@@ -305,9 +310,9 @@ jobs:
           changed_bindings="${{ steps.changes.outputs.component_bindings }}"
           if [[ -n "$changed_bindings" ]]; then
             for binding in $changed_bindings; do
-              rg -l -g '*.{js,jsx,ts,tsx}' "\\b${binding}\\b" vets-website/src \
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "\\b${binding}\\b" vets-website/src \
                 | rg '(cypress|e2e|\\.cy\\.|\\.cypress\\.|\\.e2e\\.)' >> /tmp/impacted-cypress-specs.txt || true
-              rg -l -g '*.{js,jsx,ts,tsx}' "\\b${binding}\\b" vets-website/src \
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "\\b${binding}\\b" vets-website/src \
                 | rg '(e2e|\\.e2e\\.)' >> /tmp/impacted-e2e-specs.txt || true
             done
           fi
@@ -341,29 +346,40 @@ jobs:
 
           mapfile -t files < /tmp/impacted-vets-files.txt
 
-          max_files=120
-          if [[ ${#files[@]} -gt $max_files ]]; then
-            echo "Truncating impacted file list from ${#files[@]} to $max_files to keep CI runtime bounded."
-            files=("${files[@]:0:$max_files}")
+          : > /tmp/impacted-unit-roots.txt
+          for file in "${files[@]}"; do
+            rel_file="${file#vets-website/}"
+            if [[ "$rel_file" =~ ^src/applications/([^/]+)/ ]]; then
+              echo "src/applications/${BASH_REMATCH[1]}" >> /tmp/impacted-unit-roots.txt
+            elif [[ "$rel_file" =~ ^src/platform/([^/]+)/ ]]; then
+              echo "src/platform/${BASH_REMATCH[1]}" >> /tmp/impacted-unit-roots.txt
+            fi
+          done
+
+          sort -u /tmp/impacted-unit-roots.txt -o /tmp/impacted-unit-roots.txt
+
+          if [[ ! -s /tmp/impacted-unit-roots.txt ]]; then
+            echo "No impacted application/platform roots were found for unit tests."
+            exit 0
           fi
 
-          chunk_size=30
-          total=${#files[@]}
-          start=0
+          mapfile -t roots < /tmp/impacted-unit-roots.txt
 
-          while [[ $start -lt $total ]]; do
-            end=$((start + chunk_size))
-            if [[ $end -gt $total ]]; then
-              end=$total
-            fi
+          max_roots=30
+          if [[ ${#roots[@]} -gt $max_roots ]]; then
+            echo "Truncating impacted unit roots from ${#roots[@]} to $max_roots for runtime bounds."
+            roots=("${roots[@]:0:$max_roots}")
+          fi
 
-            chunk=("${files[@]:$start:$((end - start))}")
-
-            echo "Running related unit tests for files $start to $((end - 1))."
-            yarn test:unit --coverage=false --runInBand --passWithNoTests --findRelatedTests "${chunk[@]}"
-
-            start=$end
+          patterns=()
+          for root in "${roots[@]}"; do
+            patterns+=("${root}/**/*.unit.spec.js")
+            patterns+=("${root}/**/*.unit.spec.jsx")
           done
+
+          echo "Running impacted unit test patterns:"
+          printf '%s\n' "${patterns[@]}" | head -n 100
+          yarn test:unit -- "${patterns[@]}"
 
       - name: Run impacted vets-website Cypress specs
         if: steps.impacted_specs.outputs.cypress_count != '0'
