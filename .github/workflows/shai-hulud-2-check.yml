@@ -1,0 +1,15 @@
+name: Shai-Hulud 2.0 Security CheckCollapse commentComment on line L1jamigibbs commented on Mar 25, 2026 jamigibbson Mar 25, 2026ContributorMore actionsquestion: Should we keep this?ReactWrite a replyResolve comment
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  security-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gensecaihq/Shai-Hulud-2.0-Detector@v1
+        with:
+          fail-on-critical: true
