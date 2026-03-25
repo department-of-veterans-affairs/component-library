@@ -23,7 +23,7 @@ jobs:
       - name: Cache Puppeteer browser binaries
         uses: actions/cache@v4
         with:
-          path: ~/.cache/puppeteer
+          path: ${{ runner.temp }}/puppeteer-cache
           key: ${{ runner.os }}-puppeteer-${{ hashFiles('packages/web-components/package.json', 'yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-puppeteer-
@@ -31,7 +31,7 @@ jobs:
       - name: Install Puppeteer browsers
         timeout-minutes: 10
         env:
-          PUPPETEER_CACHE_DIR: ~/.cache/puppeteer
+          PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer-cache
         run: node -e "require('puppeteer/install.js')"
 
       - name: Test react-components
