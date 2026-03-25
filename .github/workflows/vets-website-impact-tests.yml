@@ -389,7 +389,29 @@ jobs:
 
           echo "Running impacted unit specs: ${#specs[@]}"
           printf '%s\n' "${specs[@]}" | head -n 100
-          yarn test:unit -- "${specs[@]}"
+
+          chunk_size=25
+          total=${#specs[@]}
+          start=0
+
+          while [[ $start -lt $total ]]; do
+            end=$((start + chunk_size))
+            if [[ $end -gt $total ]]; then
+              end=$total
+            fi
+
+            chunk=("${specs[@]:$start:$((end - start))}")
+
+            echo "Running unit test chunk: $start to $((end - 1))"
+            if ! yarn test:unit -- --log-level debug "${chunk[@]}"; then
+              echo "Unit test failure in chunk $start to $((end - 1))."
+              echo "Failing chunk spec list:"
+              printf '%s\n' "${chunk[@]}"
+              exit 1
+            fi
+
+            start=$end
+          done
 
       - name: Run impacted vets-website Cypress specs
         if: steps.impacted_specs.outputs.cypress_count != '0'
