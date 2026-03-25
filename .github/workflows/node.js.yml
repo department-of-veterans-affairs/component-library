@@ -11,6 +11,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer-cache
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 22.x
@@ -30,8 +32,6 @@ jobs:
       
       - name: Install Puppeteer browsers
         timeout-minutes: 10
-        env:
-          PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer-cache
         run: node -e "require('puppeteer/install.js')"
 
       - name: Test react-components
