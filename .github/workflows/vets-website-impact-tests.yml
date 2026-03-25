@@ -347,6 +347,8 @@ jobs:
           mapfile -t files < /tmp/impacted-vets-files.txt
 
           : > /tmp/impacted-unit-roots.txt
+          : > /tmp/impacted-unit-specs.txt
+
           for file in "${files[@]}"; do
             rel_file="${file#vets-website/}"
             if [[ "$rel_file" =~ ^src/applications/([^/]+)/ ]]; then
@@ -354,32 +356,40 @@ jobs:
             elif [[ "$rel_file" =~ ^src/platform/([^/]+)/ ]]; then
               echo "src/platform/${BASH_REMATCH[1]}" >> /tmp/impacted-unit-roots.txt
             fi
+
+            if [[ "$rel_file" =~ \.unit\.spec\.(js|jsx|ts|tsx)$ ]]; then
+              echo "$rel_file" >> /tmp/impacted-unit-specs.txt
+            fi
           done
 
           sort -u /tmp/impacted-unit-roots.txt -o /tmp/impacted-unit-roots.txt
 
-          if [[ ! -s /tmp/impacted-unit-roots.txt ]]; then
-            echo "No impacted application/platform roots were found for unit tests."
+          if [[ -s /tmp/impacted-unit-roots.txt ]]; then
+            while IFS= read -r root; do
+              find "$root" -type d -name node_modules -prune -o -type f \( \
+                -name '*.unit.spec.js' -o -name '*.unit.spec.jsx' -o -name '*.unit.spec.ts' -o -name '*.unit.spec.tsx' \
+              \) -print >> /tmp/impacted-unit-specs.txt || true
+            done < /tmp/impacted-unit-roots.txt
+          fi
+
+          sort -u /tmp/impacted-unit-specs.txt -o /tmp/impacted-unit-specs.txt
+
+          if [[ ! -s /tmp/impacted-unit-specs.txt ]]; then
+            echo "No impacted unit specs were found."
             exit 0
           fi
 
-          mapfile -t roots < /tmp/impacted-unit-roots.txt
+          mapfile -t specs < /tmp/impacted-unit-specs.txt
 
-          max_roots=30
-          if [[ ${#roots[@]} -gt $max_roots ]]; then
-            echo "Truncating impacted unit roots from ${#roots[@]} to $max_roots for runtime bounds."
-            roots=("${roots[@]:0:$max_roots}")
+          max_specs=250
+          if [[ ${#specs[@]} -gt $max_specs ]]; then
+            echo "Truncating impacted unit specs from ${#specs[@]} to $max_specs for runtime bounds."
+            specs=("${specs[@]:0:$max_specs}")
           fi
 
-          patterns=()
-          for root in "${roots[@]}"; do
-            patterns+=("${root}/**/*.unit.spec.js")
-            patterns+=("${root}/**/*.unit.spec.jsx")
-          done
-
-          echo "Running impacted unit test patterns:"
-          printf '%s\n' "${patterns[@]}" | head -n 100
-          yarn test:unit -- "${patterns[@]}"
+          echo "Running impacted unit specs: ${#specs[@]}"
+          printf '%s\n' "${specs[@]}" | head -n 100
+          yarn test:unit -- "${specs[@]}"
 
       - name: Run impacted vets-website Cypress specs
         if: steps.impacted_specs.outputs.cypress_count != '0'
