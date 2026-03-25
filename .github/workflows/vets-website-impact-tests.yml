@@ -74,11 +74,26 @@ jobs:
               | tr '\n' ' '
           )
 
+          component_bindings=$(
+            for tag in $component_tags; do
+              echo "$tag" | sed -E 's/^va-//' | awk -F- '{
+                out="Va";
+                for (i=1; i<=NF; i++) {
+                  if (length($i) > 0) {
+                    out = out toupper(substr($i,1,1)) substr($i,2);
+                  }
+                }
+                print out;
+              }'
+            done | sort -u | tr '\n' ' '
+          )
+
           echo "has_web=$has_web" >> "$GITHUB_OUTPUT"
           echo "has_core=$has_core" >> "$GITHUB_OUTPUT"
           echo "has_react=$has_react" >> "$GITHUB_OUTPUT"
           echo "has_css=$has_css" >> "$GITHUB_OUTPUT"
           echo "component_tags=$component_tags" >> "$GITHUB_OUTPUT"
+          echo "component_bindings=$component_bindings" >> "$GITHUB_OUTPUT"
 
       - name: Build changed packages
         shell: bash
@@ -179,9 +194,54 @@ jobs:
             done
           fi
 
+          changed_bindings="${{ steps.changes.outputs.component_bindings }}"
+          if [[ -n "$changed_bindings" ]]; then
+            for binding in $changed_bindings; do
+              rg -l -g '*.{js,jsx,ts,tsx}' "\\b${binding}\\b" vets-website/src >> /tmp/impacted-vets-files.txt || true
+            done
+          fi
+
           # Broader package updates can affect wrapper usage even when specific component tags are unchanged.
           if [[ "${{ steps.changes.outputs.has_core }}" == "true" || "${{ steps.changes.outputs.has_react }}" == "true" || "${{ steps.changes.outputs.has_web }}" == "true" || "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
             rg -l -g '*.{js,jsx,ts,tsx}' "@department-of-veterans-affairs/(component-library|react-components|web-components|css-library)" vets-website/src >> /tmp/impacted-vets-files.txt || true
+          fi
+
+          # Fallback: use dashboard usage data to capture app consumers when direct source matching misses wrappers/re-exports.
+          latest_usage_csv=$(ls -1 packages/design-system-dashboard-cli/output/ds-components-*.csv 2>/dev/null | sort | tail -n 1 || true)
+          if [[ -n "$changed_tags" && -n "$latest_usage_csv" ]]; then
+            : > /tmp/dashboard-impacted-slugs.txt
+
+            for tag in $changed_tags; do
+              awk -F, -v target="$tag" '
+                NR==1 {
+                  for (i=3; i<=NF; i++) headers[i]=$i;
+                  next;
+                }
+                $2==target {
+                  for (i=3; i<=NF; i++) {
+                    if (($i + 0) > 0) print headers[i];
+                  }
+                }
+              ' "$latest_usage_csv" >> /tmp/dashboard-impacted-slugs.txt
+            done
+
+            sort -u /tmp/dashboard-impacted-slugs.txt -o /tmp/dashboard-impacted-slugs.txt
+
+            if [[ -s /tmp/dashboard-impacted-slugs.txt ]]; then
+              while IFS= read -r slug; do
+                [[ -z "$slug" ]] && continue
+
+                slug_norm=$(echo "$slug" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
+                [[ -z "$slug_norm" ]] && continue
+
+                while IFS= read -r dir; do
+                  base_norm=$(basename "$dir" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
+                  if [[ -n "$base_norm" && ( "$base_norm" == *"$slug_norm"* || "$slug_norm" == *"$base_norm"* ) ]]; then
+                    find "$dir" -type f \( -name '*.js' -o -name '*.jsx' -o -name '*.ts' -o -name '*.tsx' \) >> /tmp/impacted-vets-files.txt || true
+                  fi
+                done < <(find vets-website/src/applications vets-website/src/platform -type d)
+              done < /tmp/dashboard-impacted-slugs.txt
+            fi
           fi
 
           sort -u /tmp/impacted-vets-files.txt -o /tmp/impacted-vets-files.txt
@@ -196,7 +256,7 @@ jobs:
 
       - name: Find impacted vets-website cypress and e2e specs
         id: impacted_specs
-        if: steps.impacted.outputs.impacted_count != '0'
+        if: steps.changes.outputs.has_core == 'true' || steps.changes.outputs.has_react == 'true' || steps.changes.outputs.has_web == 'true' || steps.changes.outputs.has_css == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -238,6 +298,16 @@ jobs:
               rg -l -g '*.{js,jsx,ts,tsx}' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
                 | rg '(cypress|e2e|\\.cy\\.|\\.cypress\\.|\\.e2e\\.)' >> /tmp/impacted-cypress-specs.txt || true
               rg -l -g '*.{js,jsx,ts,tsx}' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
+                | rg '(e2e|\\.e2e\\.)' >> /tmp/impacted-e2e-specs.txt || true
+            done
+          fi
+
+          changed_bindings="${{ steps.changes.outputs.component_bindings }}"
+          if [[ -n "$changed_bindings" ]]; then
+            for binding in $changed_bindings; do
+              rg -l -g '*.{js,jsx,ts,tsx}' "\\b${binding}\\b" vets-website/src \
+                | rg '(cypress|e2e|\\.cy\\.|\\.cypress\\.|\\.e2e\\.)' >> /tmp/impacted-cypress-specs.txt || true
+              rg -l -g '*.{js,jsx,ts,tsx}' "\\b${binding}\\b" vets-website/src \
                 | rg '(e2e|\\.e2e\\.)' >> /tmp/impacted-e2e-specs.txt || true
             done
           fi
@@ -345,5 +415,5 @@ jobs:
           fi
 
       - name: No impacted tests found
-        if: steps.impacted.outputs.impacted_count == '0'
+        if: steps.impacted.outputs.impacted_count == '0' && steps.impacted_specs.outputs.cypress_count == '0' && steps.impacted_specs.outputs.e2e_count == '0'
         run: echo "No impacted vets-website source, Cypress, or e2e files were detected from current component-library changes."
