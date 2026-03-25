@@ -21,9 +21,7 @@ jobs:
       - run: yarn install
       
       - name: Install Puppeteer browsers
-        run: |
-          npx puppeteer browsers install chrome
-          npx puppeteer browsers install chrome-headless-shell
+        run: node -e "require('puppeteer/install.js')"
 
       - name: Test react-components
         run: |
