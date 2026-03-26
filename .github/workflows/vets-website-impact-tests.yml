@@ -355,7 +355,7 @@ jobs:
           mapfile -t files < /tmp/impacted-vets-files.txt
 
           : > /tmp/impacted-unit-roots.txt
-          : > /tmp/impacted-unit-specs.txt
+          : > /tmp/impacted-unit-patterns.txt
 
           for file in "${files[@]}"; do
             rel_file="${file#vets-website/}"
@@ -366,7 +366,7 @@ jobs:
             fi
 
             if [[ "$rel_file" =~ \.unit\.spec\.(js|jsx|ts|tsx)$ ]]; then
-              echo "$rel_file" >> /tmp/impacted-unit-specs.txt
+              echo "$rel_file" >> /tmp/impacted-unit-patterns.txt
             fi
           done
 
@@ -374,40 +374,38 @@ jobs:
 
           if [[ -s /tmp/impacted-unit-roots.txt ]]; then
             while IFS= read -r root; do
-              find "$root" -type d -name node_modules -prune -o -type f \( \
-                -name '*.unit.spec.js' -o -name '*.unit.spec.jsx' -o -name '*.unit.spec.ts' -o -name '*.unit.spec.tsx' \
-              \) -print >> /tmp/impacted-unit-specs.txt || true
+              echo "$root/**/*.unit.spec.js?(x)" >> /tmp/impacted-unit-patterns.txt
             done < /tmp/impacted-unit-roots.txt
           fi
 
-          sort -u /tmp/impacted-unit-specs.txt -o /tmp/impacted-unit-specs.txt
+          sort -u /tmp/impacted-unit-patterns.txt -o /tmp/impacted-unit-patterns.txt
 
-          if [[ ! -s /tmp/impacted-unit-specs.txt ]]; then
-            echo "No impacted unit specs were found."
+          if [[ ! -s /tmp/impacted-unit-patterns.txt ]]; then
+            echo "No impacted unit test patterns were found."
             exit 0
           fi
 
-          mapfile -t specs < /tmp/impacted-unit-specs.txt
+          mapfile -t patterns < /tmp/impacted-unit-patterns.txt
 
-          max_specs=250
-          if [[ ${#specs[@]} -gt $max_specs ]]; then
-            echo "Truncating impacted unit specs from ${#specs[@]} to $max_specs for runtime bounds."
-            specs=("${specs[@]:0:$max_specs}")
+          max_patterns=120
+          if [[ ${#patterns[@]} -gt $max_patterns ]]; then
+            echo "Truncating impacted unit patterns from ${#patterns[@]} to $max_patterns for runtime bounds."
+            patterns=("${patterns[@]:0:$max_patterns}")
           fi
 
-          echo "Running impacted unit specs: ${#specs[@]}"
-          echo "First 100 specs:"
-          printf '%s\n' "${specs[@]:0:100}"
+          echo "Running impacted unit patterns: ${#patterns[@]}"
+          echo "First 100 patterns:"
+          printf '%s\n' "${patterns[@]:0:100}"
 
-          if [[ ${#specs[@]} -eq 0 ]]; then
-            echo "ERROR: Specs array is empty after mapfile"
-            echo "Contents of /tmp/impacted-unit-specs.txt:"
-            cat /tmp/impacted-unit-specs.txt
+          if [[ ${#patterns[@]} -eq 0 ]]; then
+            echo "ERROR: Pattern array is empty after mapfile"
+            echo "Contents of /tmp/impacted-unit-patterns.txt:"
+            cat /tmp/impacted-unit-patterns.txt
             exit 1
           fi
 
-          chunk_size=25
-          total=${#specs[@]}
+          chunk_size=12
+          total=${#patterns[@]}
           start=0
           unit_test_failed=0
 
@@ -417,9 +415,9 @@ jobs:
               end=$total
             fi
 
-            chunk=("${specs[@]:$start:$((end - start))}")
+            chunk=("${patterns[@]:$start:$((end - start))}")
 
-            echo "Processing unit test chunk: specs $start to $((end - 1)) (${#chunk[@]} specs in chunk)"
+            echo "Processing unit test chunk: patterns $start to $((end - 1)) (${#chunk[@]} patterns in chunk)"
             
             if output=$(yarn test:unit:gha -- "${chunk[@]}" 2>&1); then
               echo "$output"
