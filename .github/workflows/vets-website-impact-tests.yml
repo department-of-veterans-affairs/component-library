@@ -481,19 +481,19 @@ jobs:
             exit 1
           fi
 
-       - name: Check test results
-         if: always()
-         run: |
-           echo "=== Test Summary ==="
-         
-           if [[ -f /tmp/unit-test-exit-code.txt ]]; then
-             unit_exit=$(cat /tmp/unit-test-exit-code.txt)
-             echo "❌ Unit tests failed with exit code: $unit_exit"
-             exit "$unit_exit"
-           else
-             echo "✅ Unit tests passed"
-           fi
+      - name: Check test results
+        if: always()
+        run: |
+          echo "=== Test Summary ==="
 
-       - name: No impacted tests found
+          if [[ -f /tmp/unit-test-exit-code.txt ]]; then
+            unit_exit=$(cat /tmp/unit-test-exit-code.txt)
+            echo "Unit tests failed with exit code: $unit_exit"
+            exit "$unit_exit"
+          else
+            echo "Unit tests passed"
+          fi
+
+      - name: No impacted tests found
         if: steps.impacted.outputs.impacted_count == '0' && steps.impacted_specs.outputs.cypress_count == '0' && steps.impacted_specs.outputs.e2e_count == '0'
         run: echo "No impacted vets-website source, Cypress, or e2e files were detected from current component-library changes."
