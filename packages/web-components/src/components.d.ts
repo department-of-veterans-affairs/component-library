@@ -355,6 +355,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Adds an aria-label attribute to the button pair container.
+         */
+        "label"?: string;
+        /**
           * Custom text that will be applied to the left va-button inside the component. If set will override text controlled by the 'update' prop.
          */
         "leftButtonText"?: string;
@@ -4568,6 +4572,10 @@ declare namespace LocalJSX {
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Adds an aria-label attribute to the button pair container.
+         */
+        "label"?: string;
         /**
           * Custom text that will be applied to the left va-button inside the component. If set will override text controlled by the 'update' prop.
          */

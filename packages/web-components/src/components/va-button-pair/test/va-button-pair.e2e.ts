@@ -9,14 +9,14 @@ describe('va-button-pair', () => {
     expect(element).toEqualHtml(`
     <va-button-pair class="hydrated">
       <mock:shadow-root>
-        <ul class="usa-button-group">
-          <li class="usa-button-group__item">
+        <div class="usa-button-group" role="group">
+          <div class="usa-button-group__item">
             <va-button class="hydrated"></va-button>
-          </li>
-          <li class="usa-button-group__item">
+          </div>
+          <div class="usa-button-group__item">
             <va-button secondary="" class="hydrated"></va-button>
-          </li>
-        </ul>
+          </div>
+        </div>
       </mock:shadow-root>
     </va-button-pair>
     `);
@@ -155,5 +155,12 @@ describe('va-button-pair', () => {
     await button.click();
     await page.waitForChanges();
     expect(submitSpy).toHaveReceivedEventTimes(1);
+  });
+
+  it('applies aria-label to button group when label prop is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button-pair label="Action buttons"></va-button-pair>');
+    const buttonGroup = await page.find('va-button-pair >>> .usa-button-group');
+    expect(buttonGroup.getAttribute('aria-label')).toBe('Action buttons');
   });
 });
