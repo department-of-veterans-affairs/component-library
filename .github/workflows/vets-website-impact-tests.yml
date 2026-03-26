@@ -564,14 +564,16 @@ jobs:
           done
 
           spec_csv=$(IFS=,; echo "${specs[*]}")
+          has_test_e2e=$(node -e 'const s=require("./package.json").scripts||{}; process.stdout.write(s["test:e2e"] ? "true" : "false")')
+          has_e2e=$(node -e 'const s=require("./package.json").scripts||{}; process.stdout.write(s["e2e"] ? "true" : "false")')
 
-          if yarn -s run | grep -E '^[[:space:]]*test:e2e[[:space:]]' > /dev/null; then
+          if [[ "$has_test_e2e" == "true" ]]; then
             echo "Running test:e2e for specs: $spec_csv"
             if ! yarn test:e2e -- --spec "$spec_csv"; then
               echo "e2e tests had failures."
               echo "1" > /tmp/e2e-exit-code.txt
             fi
-          elif yarn -s run | grep -E '^[[:space:]]*e2e[[:space:]]' > /dev/null; then
+          elif [[ "$has_e2e" == "true" ]]; then
             echo "Running e2e for specs: $spec_csv"
             if ! yarn e2e -- --spec "$spec_csv"; then
               echo "e2e tests had failures."
