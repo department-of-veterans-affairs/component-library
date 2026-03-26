@@ -390,7 +390,8 @@ jobs:
           fi
 
           echo "Running impacted unit specs: ${#specs[@]}"
-          printf '%s\n' "${specs[@]}" | head -n 100
+          echo "First 100 specs:"
+          printf '%s\n' "${specs[@]:0:100}"
 
           if [[ ${#specs[@]} -eq 0 ]]; then
             echo "ERROR: Specs array is empty after mapfile"
