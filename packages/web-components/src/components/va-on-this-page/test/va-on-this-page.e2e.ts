@@ -163,7 +163,9 @@ describe('va-on-this-page', () => {
     await page.setContent(
       `
       <article>
-        <va-on-this-page exclude-selectors='["va-alert h2"]'></va-on-this-page>
+        <va-on-this-page exclude-selectors='["va-alert h2", "#excluded-heading", ".my-heading"]'></va-on-this-page>
+        <h2 id="excluded-heading">excluded heading</h2>
+        <h2 class="my-heading">also excluded</h2>
         <va-alert status="info">
           <h2 id="this-is-an-alert" slot="headline">This is a heading</h2>
           <p>This heading should be excluded from the on this page navigation.</p>
@@ -175,7 +177,7 @@ describe('va-on-this-page', () => {
     const element = await page.find('va-on-this-page');
 
     expect(element).toEqualHtml(`
-      <va-on-this-page class="hydrated" exclude-selectors='["va-alert h2"]'>
+      <va-on-this-page class="hydrated" exclude-selectors="[&quot;va-alert h2&quot;, &quot;#excluded-heading&quot;, &quot;.my-heading&quot;]">
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
             <h2 id="on-this-page">on-this-page</h2>
