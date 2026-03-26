@@ -344,7 +344,7 @@ jobs:
         shell: bash
         working-directory: vets-website
         run: |
-          set -euo pipefail
+          set -uo pipefail
 
           mapfile -t files < /tmp/impacted-vets-files.txt
 
@@ -403,6 +403,7 @@ jobs:
           chunk_size=25
           total=${#specs[@]}
           start=0
+          unit_test_failed=0
 
           while [[ $start -lt $total ]]; do
             end=$((start + chunk_size))
@@ -413,22 +414,23 @@ jobs:
             chunk=("${specs[@]:$start:$((end - start))}")
 
             echo "Processing unit test chunk: specs $start to $((end - 1)) (${#chunk[@]} specs in chunk)"
-            echo "Chunk specs: ${chunk[*]}"
-            echo "Running: yarn test:unit -- ${chunk[*]}"
             
             if output=$(yarn test:unit -- "${chunk[@]}" 2>&1); then
               echo "$output"
             else
               exit_code=$?
               echo "$output"
-              echo "Unit test failure in chunk $start to $((end - 1)) with exit code $exit_code."
-              echo "Failing chunk spec list:"
-              printf '%s\n' "${chunk[@]}"
-              exit "$exit_code"
+              echo "⚠️  Unit test failure in chunk $start to $((end - 1)) with exit code $exit_code."
+              unit_test_failed=$exit_code
             fi
 
             start=$end
           done
+
+          if [[ $unit_test_failed -ne 0 ]]; then
+            echo "Unit tests had failures. Continuing to run other test types..."
+            echo "$unit_test_failed" > /tmp/unit-test-exit-code.txt
+          fi
 
       - name: Run impacted vets-website Cypress specs
         if: steps.impacted_specs.outputs.cypress_count != '0'
@@ -479,6 +481,19 @@ jobs:
             exit 1
           fi
 
-      - name: No impacted tests found
+       - name: Check test results
+         if: always()
+         run: |
+           echo "=== Test Summary ==="
+         
+           if [[ -f /tmp/unit-test-exit-code.txt ]]; then
+             unit_exit=$(cat /tmp/unit-test-exit-code.txt)
+             echo "❌ Unit tests failed with exit code: $unit_exit"
+             exit "$unit_exit"
+           else
+             echo "✅ Unit tests passed"
+           fi
+
+       - name: No impacted tests found
         if: steps.impacted.outputs.impacted_count == '0' && steps.impacted_specs.outputs.cypress_count == '0' && steps.impacted_specs.outputs.e2e_count == '0'
         run: echo "No impacted vets-website source, Cypress, or e2e files were detected from current component-library changes."
