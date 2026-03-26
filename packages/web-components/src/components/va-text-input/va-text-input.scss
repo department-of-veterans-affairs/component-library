@@ -61,10 +61,12 @@ label.usa-label--error {
   // for v3
   #symbol {
     margin-top: 8px;
+    z-index: 2;
   }
 
   #inputField {
     padding-left: 25px;
+    z-index: 1;
   }
 }
 
