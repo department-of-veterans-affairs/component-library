@@ -394,6 +394,49 @@ export function getMaxLength(maxLength?: number | string): number | undefined {
 
   return maxLengthNumber;
 }
+
+/**
+ * Normalizes a prop that can be either a string array or a JSON array string.
+ *
+ * @param value - The prop value to normalize
+ * @param invalidValueMessage - Optional dev error message when a string value is invalid JSON
+ * @returns A trimmed string array, or an empty array when invalid
+ */
+export function normalizeStringArrayProp(
+  value: string[] | string | undefined,
+  invalidValueMessage?: string,
+): string[] {
+  if (Array.isArray(value)) {
+    return value.map(item => item?.trim()).filter(Boolean);
+  }
+
+  if (typeof value !== 'string') {
+    return [];
+  }
+
+  const trimmedValue = value.trim();
+  if (!trimmedValue) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(trimmedValue);
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed
+      .filter((item): item is string => typeof item === 'string')
+      .map(item => item.trim())
+      .filter(Boolean);
+  } catch {
+    if (invalidValueMessage) {
+      consoleDevError(invalidValueMessage);
+    }
+    return [];
+  }
+}
+
 /**
  * Updates the screen reader count for a character count element (va-input or va-textarea).
  * NOTE: This function should be debounced with a 1000ms to avoid excessive updates.
