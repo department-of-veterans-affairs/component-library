@@ -5,7 +5,6 @@ import { sass } from '@stencil/sass';
 import url from 'postcss-url';
 import { reactOutputTarget } from '@stencil/react-output-target';
 import * as path from 'path';
-const { resolveUswdsInternalModules } = require('./rollup.config');
 
 export const config: Config = {
   namespace: 'component-library',
@@ -61,9 +60,6 @@ export const config: Config = {
       customElementsExportBehavior: 'single-export-module',
     },
   ],
-  rollupPlugins: {
-    before: [resolveUswdsInternalModules()],
-  },
   testing: {
     browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
     moduleNameMapper: {

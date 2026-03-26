@@ -291,6 +291,7 @@ export function renderLabelOrHeader(
   label: string,
   required: boolean,
   headerSize?: number,
+  error: string | null = null,
 ) {
   const requiredSpan = required ? (
     <span class="required"> {i18next.t('required')}</span>
@@ -313,7 +314,11 @@ export function renderLabelOrHeader(
   } else {
     return (
       <div class="label-header">
-        <label htmlFor="fileInputField" part="label" class="usa-label">
+        <label
+          htmlFor="fileInputField"
+          part="label"
+          class={"usa-label" + (error ? " usa-label--error" : "")}
+        >
           {label}
           {requiredSpan}
         </label>
