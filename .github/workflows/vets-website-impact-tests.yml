@@ -404,31 +404,22 @@ jobs:
             exit 1
           fi
 
-          chunk_size=12
-          total=${#patterns[@]}
-          start=0
           unit_test_failed=0
+          pattern_timeout_seconds=600
 
-          while [[ $start -lt $total ]]; do
-            end=$((start + chunk_size))
-            if [[ $end -gt $total ]]; then
-              end=$total
-            fi
+          for i in "${!patterns[@]}"; do
+            pattern="${patterns[i]}"
+            echo "Processing unit test pattern $((i + 1))/${#patterns[@]}: $pattern"
 
-            chunk=("${patterns[@]:$start:$((end - start))}")
-
-            echo "Processing unit test chunk: patterns $start to $((end - 1)) (${#chunk[@]} patterns in chunk)"
-            
-            if output=$(yarn test:unit:gha -- "${chunk[@]}" 2>&1); then
-              echo "$output"
-            else
+            if ! timeout "${pattern_timeout_seconds}s" yarn test:unit:gha -- "$pattern"; then
               exit_code=$?
-              echo "$output"
-              echo "⚠️  Unit test failure in chunk $start to $((end - 1)) with exit code $exit_code."
-              unit_test_failed=$exit_code
+              if [[ $exit_code -eq 124 ]]; then
+                echo "⚠️  Unit test pattern timed out after ${pattern_timeout_seconds}s: $pattern"
+              else
+                echo "⚠️  Unit test failure for pattern with exit code $exit_code: $pattern"
+              fi
+              unit_test_failed=1
             fi
-
-            start=$end
           done
 
           if [[ $unit_test_failed -ne 0 ]]; then
