@@ -356,7 +356,6 @@ export namespace Components {
         "disableAnalytics"?: boolean;
         /**
           * Adds an aria-label attribute to the button pair container.
-          * @default null
          */
         "label"?: string;
         /**
@@ -4571,7 +4570,6 @@ declare namespace LocalJSX {
         "disableAnalytics"?: boolean;
         /**
           * Adds an aria-label attribute to the button pair container.
-          * @default null
          */
         "label"?: string;
         /**
