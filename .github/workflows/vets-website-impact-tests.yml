@@ -421,7 +421,7 @@ jobs:
 
             echo "Processing unit test chunk: specs $start to $((end - 1)) (${#chunk[@]} specs in chunk)"
             
-            if output=$(yarn test:unit -- "${chunk[@]}" 2>&1); then
+            if output=$(yarn test:unit:gha -- "${chunk[@]}" 2>&1); then
               echo "$output"
             else
               exit_code=$?
