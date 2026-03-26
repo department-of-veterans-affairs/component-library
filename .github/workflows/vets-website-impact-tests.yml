@@ -93,12 +93,14 @@ jobs:
             done | sort -u | tr '\n' ' '
           )
 
-          echo "has_web=$has_web" >> "$GITHUB_OUTPUT"
-          echo "has_core=$has_core" >> "$GITHUB_OUTPUT"
-          echo "has_react=$has_react" >> "$GITHUB_OUTPUT"
-          echo "has_css=$has_css" >> "$GITHUB_OUTPUT"
-          echo "component_tags=$component_tags" >> "$GITHUB_OUTPUT"
-          echo "component_bindings=$component_bindings" >> "$GITHUB_OUTPUT"
+          {
+            echo "has_web=$has_web"
+            echo "has_core=$has_core"
+            echo "has_react=$has_react"
+            echo "has_css=$has_css"
+            echo "component_tags=$component_tags"
+            echo "component_bindings=$component_bindings"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Build changed packages
         shell: bash
@@ -212,7 +214,7 @@ jobs:
           fi
 
           # Fallback: use dashboard usage data to capture app consumers when direct source matching misses wrappers/re-exports.
-          latest_usage_csv=$(ls -1 packages/design-system-dashboard-cli/output/ds-components-*.csv 2>/dev/null | sort | tail -n 1 || true)
+          latest_usage_csv=$(find packages/design-system-dashboard-cli/output -maxdepth 1 -name 'ds-components-*.csv' -type f -print0 | xargs -0 ls -t 2>/dev/null | head -n 1 || true)
           if [[ -n "$changed_tags" && -n "$latest_usage_csv" ]]; then
             : > /tmp/dashboard-impacted-slugs.txt
 
