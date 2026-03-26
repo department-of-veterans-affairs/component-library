@@ -447,12 +447,16 @@ jobs:
             specs=("${specs[@]:0:$max_specs}")
           fi
 
+          for i in "${!specs[@]}"; do
+            specs[i]="${specs[i]#vets-website/}"
+          done
+
           npx cypress install
 
           cypress_failed=0
           for spec in "${specs[@]}"; do
             echo "Running Cypress spec with managed server: $spec"
-            if ! yarn cy:run:auto --serve --no-retry --no-video --spec "$spec"; then
+            if ! yarn cy:run:auto --spec "$spec"; then
               cypress_failed=1
               echo "Cypress failed for spec: $spec"
             fi
@@ -477,6 +481,10 @@ jobs:
             echo "Truncating e2e spec list from ${#specs[@]} to $max_specs for runtime bounds."
             specs=("${specs[@]:0:$max_specs}")
           fi
+
+          for i in "${!specs[@]}"; do
+            specs[i]="${specs[i]#vets-website/}"
+          done
 
           spec_csv=$(IFS=,; echo "${specs[*]}")
 
