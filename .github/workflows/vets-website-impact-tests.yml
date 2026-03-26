@@ -322,6 +322,10 @@ jobs:
           sort -u /tmp/impacted-cypress-specs.txt -o /tmp/impacted-cypress-specs.txt
           sort -u /tmp/impacted-e2e-specs.txt -o /tmp/impacted-e2e-specs.txt
 
+          # Consolidate e2e specs into cypress specs (both use same managed server runner)
+          cat /tmp/impacted-e2e-specs.txt >> /tmp/impacted-cypress-specs.txt
+          sort -u /tmp/impacted-cypress-specs.txt -o /tmp/impacted-cypress-specs.txt
+
           cypress_count=$(wc -l < /tmp/impacted-cypress-specs.txt | tr -d ' ')
           e2e_count=$(wc -l < /tmp/impacted-e2e-specs.txt | tr -d ' ')
 
@@ -433,7 +437,7 @@ jobs:
           fi
 
       - name: Run impacted vets-website Cypress specs
-        if: steps.impacted_specs.outputs.cypress_count != '0'
+        if: steps.impacted_specs.outputs.cypress_count != '0' || steps.impacted_specs.outputs.e2e_count != '0'
         shell: bash
         working-directory: vets-website
         run: |
@@ -544,46 +548,6 @@ jobs:
             echo "1" > /tmp/cypress-exit-code.txt
           fi
 
-      - name: Run impacted vets-website e2e specs
-        if: steps.impacted_specs.outputs.e2e_count != '0'
-        shell: bash
-        working-directory: vets-website
-        run: |
-          set -uo pipefail
-
-          mapfile -t specs < /tmp/impacted-e2e-specs.txt
-
-          max_specs=30
-          if [[ ${#specs[@]} -gt $max_specs ]]; then
-            echo "Truncating e2e spec list from ${#specs[@]} to $max_specs for runtime bounds."
-            specs=("${specs[@]:0:$max_specs}")
-          fi
-
-          for i in "${!specs[@]}"; do
-            specs[i]="${specs[i]#vets-website/}"
-          done
-
-          spec_csv=$(IFS=,; echo "${specs[*]}")
-          has_test_e2e=$(node -e 'const s=require("./package.json").scripts||{}; process.stdout.write(s["test:e2e"] ? "true" : "false")')
-          has_e2e=$(node -e 'const s=require("./package.json").scripts||{}; process.stdout.write(s["e2e"] ? "true" : "false")')
-
-          if [[ "$has_test_e2e" == "true" ]]; then
-            echo "Running test:e2e for specs: $spec_csv"
-            if ! yarn test:e2e -- --spec "$spec_csv"; then
-              echo "e2e tests had failures."
-              echo "1" > /tmp/e2e-exit-code.txt
-            fi
-          elif [[ "$has_e2e" == "true" ]]; then
-            echo "Running e2e for specs: $spec_csv"
-            if ! yarn e2e -- --spec "$spec_csv"; then
-              echo "e2e tests had failures."
-              echo "1" > /tmp/e2e-exit-code.txt
-            fi
-          else
-            echo "Detected impacted e2e specs but no test:e2e or e2e script exists in vets-website package.json."
-            exit 1
-          fi
-
       - name: Check test results
         if: always()
         run: |
@@ -600,17 +564,10 @@ jobs:
           fi
 
           if [[ -f /tmp/cypress-exit-code.txt ]]; then
-            echo "Cypress tests failed"
+            echo "Cypress/e2e tests failed"
             failed=1
           else
-            echo "Cypress tests passed"
-          fi
-
-          if [[ -f /tmp/e2e-exit-code.txt ]]; then
-            echo "e2e tests failed"
-            failed=1
-          else
-            echo "e2e tests passed"
+            echo "Cypress/e2e tests passed"
           fi
 
           if [[ $failed -ne 0 ]]; then
