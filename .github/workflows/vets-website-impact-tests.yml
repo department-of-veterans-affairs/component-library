@@ -208,8 +208,9 @@ jobs:
             done
           fi
 
-          # Broader package updates can affect wrapper usage even when specific component tags are unchanged.
-          if [[ "${{ steps.changes.outputs.has_core }}" == "true" || "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
+          # Broader package updates can affect wrapper usage, but only search if we have specific component changes.
+          # This restricts the search to component-related changes, avoiding false positives from core-only changes.
+          if [[ -n "$changed_tags" ]] && ( [[ "${{ steps.changes.outputs.has_core }}" == "true" ]] || [[ "${{ steps.changes.outputs.has_css }}" == "true" ]] ); then
             rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "@department-of-veterans-affairs/(component-library|react-components|web-components|css-library)" vets-website/src >> /tmp/impacted-vets-files.txt || true
           fi
 
@@ -354,9 +355,18 @@ jobs:
 
           mapfile -t files < /tmp/impacted-vets-files.txt
 
-          : > /tmp/impacted-unit-roots.txt
-          : > /tmp/impacted-unit-patterns.txt
+          : > /tmp/impacted-unit-files.txt
 
+          for file in "${files[@]}"; do
+            rel_file="${file#vets-website/}"
+
+            if [[ "$rel_file" =~ \.unit\.spec\.(js|jsx|ts|tsx)$ ]]; then
+              echo "$rel_file" >> /tmp/impacted-unit-files.txt
+            fi
+          done
+
+          # Find all unit test files in impacted directories
+          : > /tmp/impacted-unit-roots.txt
           for file in "${files[@]}"; do
             rel_file="${file#vets-website/}"
             if [[ "$rel_file" =~ ^src/applications/([^/]+)/ ]]; then
@@ -364,59 +374,55 @@ jobs:
             elif [[ "$rel_file" =~ ^src/platform/([^/]+)/ ]]; then
               echo "src/platform/${BASH_REMATCH[1]}" >> /tmp/impacted-unit-roots.txt
             fi
-
-            if [[ "$rel_file" =~ \.unit\.spec\.(js|jsx|ts|tsx)$ ]]; then
-              echo "$rel_file" >> /tmp/impacted-unit-patterns.txt
-            fi
           done
 
           sort -u /tmp/impacted-unit-roots.txt -o /tmp/impacted-unit-roots.txt
 
           if [[ -s /tmp/impacted-unit-roots.txt ]]; then
             while IFS= read -r root; do
-              echo "$root/**/*.unit.spec.js?(x)" >> /tmp/impacted-unit-patterns.txt
+              find "$root" -type f \( -name '*.unit.spec.js' -o -name '*.unit.spec.jsx' -o -name '*.unit.spec.ts' -o -name '*.unit.spec.tsx' \) >> /tmp/impacted-unit-files.txt || true
             done < /tmp/impacted-unit-roots.txt
           fi
 
-          sort -u /tmp/impacted-unit-patterns.txt -o /tmp/impacted-unit-patterns.txt
+          sort -u /tmp/impacted-unit-files.txt -o /tmp/impacted-unit-files.txt
 
-          if [[ ! -s /tmp/impacted-unit-patterns.txt ]]; then
-            echo "No impacted unit test patterns were found."
+          if [[ ! -s /tmp/impacted-unit-files.txt ]]; then
+            echo "No impacted unit test files were found."
             exit 0
           fi
 
-          mapfile -t patterns < /tmp/impacted-unit-patterns.txt
+          mapfile -t unit_files < /tmp/impacted-unit-files.txt
 
-          max_patterns=120
-          if [[ ${#patterns[@]} -gt $max_patterns ]]; then
-            echo "Truncating impacted unit patterns from ${#patterns[@]} to $max_patterns for runtime bounds."
-            patterns=("${patterns[@]:0:$max_patterns}")
+          max_files=120
+          if [[ ${#unit_files[@]} -gt $max_files ]]; then
+            echo "Truncating impacted unit test files from ${#unit_files[@]} to $max_files for runtime bounds."
+            unit_files=("${unit_files[@]:0:$max_files}")
           fi
 
-          echo "Running impacted unit patterns: ${#patterns[@]}"
-          echo "First 100 patterns:"
-          printf '%s\n' "${patterns[@]:0:100}"
+          echo "Running impacted unit test files: ${#unit_files[@]}"
+          echo "First 100 files:"
+          printf '%s\n' "${unit_files[@]:0:100}"
 
-          if [[ ${#patterns[@]} -eq 0 ]]; then
-            echo "ERROR: Pattern array is empty after mapfile"
-            echo "Contents of /tmp/impacted-unit-patterns.txt:"
-            cat /tmp/impacted-unit-patterns.txt
+          if [[ ${#unit_files[@]} -eq 0 ]]; then
+            echo "ERROR: Unit test files array is empty after mapfile"
+            echo "Contents of /tmp/impacted-unit-files.txt:"
+            cat /tmp/impacted-unit-files.txt
             exit 1
           fi
 
           unit_test_failed=0
-          pattern_timeout_seconds=600
+          file_timeout_seconds=600
 
-          for i in "${!patterns[@]}"; do
-            pattern="${patterns[i]}"
-            echo "Processing unit test pattern $((i + 1))/${#patterns[@]}: $pattern"
+          for i in "${!unit_files[@]}"; do
+            file="${unit_files[i]}"
+            echo "Processing unit test file $((i + 1))/${#unit_files[@]}: $file"
 
-            if ! timeout "${pattern_timeout_seconds}s" yarn test:unit:gha -- "$pattern"; then
+            if ! timeout "${file_timeout_seconds}s" yarn test:unit:gha -- "$file"; then
               exit_code=$?
               if [[ $exit_code -eq 124 ]]; then
-                echo "⚠️  Unit test pattern timed out after ${pattern_timeout_seconds}s: $pattern"
+                echo "⚠️  Unit test file timed out after ${file_timeout_seconds}s: $file"
               else
-                echo "⚠️  Unit test failure for pattern with exit code $exit_code: $pattern"
+                echo "⚠️  Unit test failure for file with exit code $exit_code: $file"
               fi
               unit_test_failed=1
             fi
