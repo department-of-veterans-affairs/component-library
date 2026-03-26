@@ -454,12 +454,89 @@ jobs:
           npx cypress install
 
           cypress_failed=0
-          for spec in "${specs[@]}"; do
-            echo "Running Cypress spec with managed server: $spec"
-            if ! yarn cy:run:auto --spec "$spec"; then
+
+          : > /tmp/cypress-entry-specs.tsv
+          # shellcheck disable=SC2016
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+
+            const manifest = JSON.parse(
+              fs.readFileSync("src/applications/manifest-catalog.json", "utf8"),
+            );
+            const apps = (manifest.applications || []).map(app => ({
+              dir: String(app.directoryPath || "").replace(/\\/g, "/"),
+              entry: String(app.entryName || ""),
+            }));
+
+            const entriesByDir = new Map(apps.map(app => [app.dir, app.entry]));
+            const specs = process.argv.slice(1);
+
+            for (const rawSpec of specs) {
+              const spec = rawSpec.replace(/\\/g, "/").replace(/^\.\//, "");
+              let dir = path.posix.dirname(spec);
+              let entry = "";
+
+              while (dir && dir !== ".") {
+                if (entriesByDir.has(dir)) {
+                  entry = entriesByDir.get(dir);
+                  break;
+                }
+                const parent = path.posix.dirname(dir);
+                if (parent === dir) break;
+                dir = parent;
+              }
+
+              if (!entry) {
+                process.stdout.write(`UNMAPPED\t${spec}\n`);
+              } else {
+                process.stdout.write(`${entry}\t${spec}\n`);
+              }
+            }
+          ' "${specs[@]}" > /tmp/cypress-entry-specs.tsv
+
+          if rg -q '^UNMAPPED\t' /tmp/cypress-entry-specs.tsv; then
+            echo "Some Cypress specs could not be mapped to an entry in manifest-catalog.json:"
+            awk -F'\t' '$1=="UNMAPPED" { print $2 }' /tmp/cypress-entry-specs.tsv
+            cypress_failed=1
+          fi
+
+          mapfile -t entries < <(awk -F'\t' '$1!="UNMAPPED" { print $1 }' /tmp/cypress-entry-specs.tsv | sort -u)
+
+          for entry in "${entries[@]}"; do
+            spec_csv=$(awk -F'\t' -v target="$entry" '$1==target { print $2 }' /tmp/cypress-entry-specs.tsv | paste -sd, -)
+            echo "Running Cypress specs for entry $entry"
+            echo "$spec_csv"
+
+            watch_log="/tmp/cypress-watch-${entry}.log"
+            setsid yarn watch --env "entry=$entry" --env port=3001 > "$watch_log" 2>&1 &
+            watch_pid=$!
+
+            ready=0
+            for _ in $(seq 1 180); do
+              if curl -fsS http://127.0.0.1:3001 > /dev/null; then
+                ready=1
+                break
+              fi
+              sleep 1
+            done
+
+            if [[ $ready -ne 1 ]]; then
+              echo "Dev server failed to start for entry: $entry"
+              tail -n 200 "$watch_log" || true
               cypress_failed=1
-              echo "Cypress failed for spec: $spec"
+              kill -TERM -"$watch_pid" >/dev/null 2>&1 || true
+              wait "$watch_pid" >/dev/null 2>&1 || true
+              continue
             fi
+
+            if ! npx cypress run --config-file config/cypress.config.js --browser chrome --headless --config "baseUrl=http://127.0.0.1:3001,retries=0,video=false" --spec "$spec_csv"; then
+              cypress_failed=1
+              echo "Cypress failed for entry: $entry"
+            fi
+
+            kill -TERM -"$watch_pid" >/dev/null 2>&1 || true
+            wait "$watch_pid" >/dev/null 2>&1 || true
           done
 
           if [[ $cypress_failed -ne 0 ]]; then
