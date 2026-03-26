@@ -420,7 +420,7 @@ const noop = () => {};
       const optionEl = selectEl.options[i];
       const optionId = `${listOptionBaseId}${options.length}`;
       const filterValue = optionEl[filterKey];
-      
+
       if (
         optionEl.value &&
         (
@@ -441,7 +441,7 @@ const noop = () => {};
         }
 
         // handle filtering when input contains a value
-        
+
         if (
           inputValue &&
           regex.test(filterValue) &&
@@ -655,41 +655,51 @@ const noop = () => {};
    * @param {HTMLElement} el An element within the combo box component
    */
 const completeSelection = el => {
-    const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
+  const { comboBoxEl, selectEl, inputEl, statusEl } = getComboBoxContext(el);
 
-    statusEl.textContent = '';
+  statusEl.textContent = '';
 
-    const inputValue = (inputEl.value || '').trim().toLowerCase();
-    const showFlags = comboBoxEl.dataset.showflags === 'true';
+  const inputValue = (inputEl.value || '').trim().toLowerCase();
+  const showFlags = comboBoxEl.dataset.showflags === 'true';
+  // Find a matching option
 
-    if (inputValue) {
-      // Find a matching option
+  if (inputValue) {
     const matchingFunc = showFlags
-        ? (option => {
+      ? option => {
           const [name, _] = inputValue.split('...');
           return option.text.toLowerCase().startsWith(name.toLowerCase());
-        })
-        : (option => option.text.toLowerCase() === inputValue)
-      const matchingOption = Array.from(selectEl.options).filter(opt => opt.dataset.optgroup !== 'true').find(matchingFunc)
+        }
+      : option => option.text.toLowerCase() === inputValue;
+    const matchingOption = Array.from(selectEl.options)
+      .filter(opt => opt.dataset.optgroup !== 'true')
+      .find(matchingFunc);
 
-      if (matchingOption) {
-        // If a match is found, update the input and select values
-        changeElementValue(selectEl, matchingOption.value);
-        const _text = showFlags ? inputEl.value : matchingOption.text;
-        changeElementValue(inputEl, _text);
-        comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
-        return;
-      }
+    if (matchingOption) {
+      // If a match is found, update the input and select values
+      changeElementValue(selectEl, matchingOption.value);
+      const _text = showFlags ? inputEl.value : matchingOption.text;
+      changeElementValue(inputEl, _text);
+      comboBoxEl.classList.add(COMBO_BOX_PRISTINE_CLASS);
+      return;
     }
 
-    // If no match is found or input value is empty,
-    // clear the select value but maintain the input value.
-    // This allows the user to type a value that doesn't exist in the options
-    // and still have it displayed in the input.
-    // error handling should be added per unique team requirements
+    // If there is no selection, clear the input
+    // If there was a selection, reset input to selection
+    if (selectEl.value === '') {
+      changeElementValue(inputEl, '');
+    } else {
+      const matchingOption = Array.from(selectEl.options)
+        .filter(opt => opt.dataset.optgroup !== 'true')
+        .find(option => option.value === selectEl.value);
+      const _text = showFlags ? inputEl.value : matchingOption.text;
+      changeElementValue(inputEl, _text);
+    }
+  }
+  else {
     changeElementValue(selectEl, '');
-    comboBoxEl.classList.remove(COMBO_BOX_PRISTINE_CLASS);
-  };
+  }
+  comboBoxEl.classList.remove(COMBO_BOX_PRISTINE_CLASS);
+};
 
   /**
    * Handle the escape event within the combo box component.
