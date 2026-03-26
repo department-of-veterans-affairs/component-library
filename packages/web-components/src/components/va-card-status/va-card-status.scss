@@ -4,6 +4,10 @@
 @import '../../mixins/hint-text.css';
 
 :host {
+  /* Prevent long unbroken values from spilling outside the card. */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
   .va-card-status__header {
     margin: var(--units-1) 0 var(--units-1) 0;
     font-size: var(--font-size-h3);
@@ -11,6 +15,8 @@
     .va-card-status_card-title {
       font-family: var(--font-serif);
       font-weight: var(--font-weight-bold);
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
   }
 
@@ -25,6 +31,11 @@
     font-size: var(--font-size-h4);
     font-family: var(--font-sans-serif);
   } 
+}
+
+::slotted(*) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 :host([error]:not([error=''])) .va-card-status__wrapper {

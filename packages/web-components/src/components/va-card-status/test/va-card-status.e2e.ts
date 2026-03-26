@@ -151,4 +151,32 @@ describe('<va-card-status />', () => {
     const cardStatus = await page.find('va-card-status >>> .va-card-status__wrapper');
     expect(cardStatus).toBeNull();
   });
+
+  it('wraps long unbroken slotted content within the card', async () => {
+    const page = await newE2EPage();
+    const longText = 'x'.repeat(200);
+    await page.setContent(`
+      <va-card-status
+        header-text="Title"
+        link-href="/test"
+        link-text="Next">
+        <p id="long-content">${longText}</p>
+      </va-card-status>
+    `);
+    await page.waitForChanges();
+
+    const overflows = await page.$eval('va-card-status', el => {
+      const root = el.shadowRoot;
+      const card = root?.querySelector('va-card');
+      const paragraph = el.querySelector('#long-content') as HTMLElement | null;
+
+      if (!card || !paragraph) return true;
+
+      const cardRect = card.getBoundingClientRect();
+      const paragraphRect = paragraph.getBoundingClientRect();
+      return paragraphRect.right > cardRect.right + 1;
+    });
+
+    expect(overflows).toBe(false);
+  });
 });
