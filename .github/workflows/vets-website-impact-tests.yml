@@ -403,7 +403,7 @@ jobs:
             chunk=("${specs[@]:$start:$((end - start))}")
 
             echo "Running unit test chunk: $start to $((end - 1))"
-            if ! yarn test:unit -- --log-level debug "${chunk[@]}"; then
+            if ! yarn test:unit -- "${chunk[@]}"; then
               echo "Unit test failure in chunk $start to $((end - 1))."
               echo "Failing chunk spec list:"
               printf '%s\n' "${chunk[@]}"
