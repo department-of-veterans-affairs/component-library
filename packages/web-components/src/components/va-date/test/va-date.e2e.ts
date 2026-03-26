@@ -424,16 +424,22 @@ describe('va-date', () => {
     const spy = await page.spyOnEvent('dateChange');
 
     await handleMonth.select('7');
+    await page.waitForChanges();
     await handleDay.select('21');
+    await page.waitForChanges();
 
     expect(spy).toHaveReceivedEventTimes(2);
 
     // Click three times to select all text in input
     await handleYear.click({ clickCount: 3 });
     await handleYear.press('2');
+    await page.waitForChanges();
     await handleYear.press('0');
+    await page.waitForChanges();
     await handleYear.press('2');
+    await page.waitForChanges();
     await handleYear.press('2');
+    await page.waitForChanges();
 
     expect(spy).toHaveReceivedEventTimes(6);
   });

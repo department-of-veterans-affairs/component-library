@@ -154,8 +154,8 @@ describe('va-crisis-line-modal', () => {
 
     // Initially modal should not be visible
     let modal = await page.find('va-crisis-line-modal >>> va-modal');
-    let modalContent = await modal.find('>>> .usa-modal');
-    expect(modalContent).toBeNull();
+    let isVisible = await modal.getProperty('visible');
+    expect(isVisible).toBe(false);
 
     // Click trigger button to open modal
     const triggerButton = await page.find('va-crisis-line-modal >>> .va-crisis-line');
@@ -164,8 +164,8 @@ describe('va-crisis-line-modal', () => {
 
     // Modal should now be visible
     modal = await page.find('va-crisis-line-modal >>> va-modal');
-    modalContent = await modal.find('>>> .usa-modal');
-    expect(modalContent).not.toBeNull();
+    isVisible = await modal.getProperty('visible');
+    expect(isVisible).toBe(true);
 
     // Close modal by triggering close event
     const closeBtn = await modal.find('>>> button.va-modal-close');
@@ -174,8 +174,8 @@ describe('va-crisis-line-modal', () => {
 
     // Modal should be hidden again
     modal = await page.find('va-crisis-line-modal >>> va-modal');
-    modalContent = await modal.find('>>> .usa-modal');
-    expect(modalContent).toBeNull();
+    isVisible = await modal.getProperty('visible');
+    expect(isVisible).toBe(false);
   });
 
   it('has proper accessibility attributes', async () => {
@@ -218,8 +218,8 @@ describe('va-crisis-line-modal', () => {
 
     // Modal should become visible
     const modal = await page.find('va-crisis-line-modal >>> va-modal');
-    const modalContent = await modal.find('>>> .usa-modal');
-    expect(modalContent).not.toBeNull();
+    const isVisible = await modal.getProperty('visible');
+    expect(isVisible).toBe(true);
   });
   it('only renders a single modal when multiple instances are on the page', async () => {
     const page = await newE2EPage();
