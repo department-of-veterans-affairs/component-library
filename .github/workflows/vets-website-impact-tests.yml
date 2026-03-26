@@ -209,13 +209,15 @@ jobs:
           fi
 
           # Broader package updates can affect wrapper usage even when specific component tags are unchanged.
-          if [[ "${{ steps.changes.outputs.has_core }}" == "true" || "${{ steps.changes.outputs.has_react }}" == "true" || "${{ steps.changes.outputs.has_web }}" == "true" || "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
+          if [[ "${{ steps.changes.outputs.has_core }}" == "true" || "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
             rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "@department-of-veterans-affairs/(component-library|react-components|web-components|css-library)" vets-website/src >> /tmp/impacted-vets-files.txt || true
           fi
 
-          # Fallback: use dashboard usage data to capture app consumers when direct source matching misses wrappers/re-exports.
+          # Fallback: only use dashboard usage data when direct source matching finds nothing.
+          # This avoids pulling in whole app trees for widely used components like va-modal.
           latest_usage_csv=$(find packages/design-system-dashboard-cli/output -maxdepth 1 -name 'ds-components-*.csv' -type f -print0 | xargs -0 ls -t 2>/dev/null | head -n 1 || true)
-          if [[ -n "$changed_tags" && -n "$latest_usage_csv" ]]; then
+          if [[ -n "$changed_tags" && -n "$latest_usage_csv" && ! -s /tmp/impacted-vets-files.txt ]]; then
+            echo "Direct matches were empty; using dashboard fallback detection."
             : > /tmp/dashboard-impacted-slugs.txt
 
             for tag in $changed_tags; do
@@ -445,7 +447,7 @@ jobs:
 
           mapfile -t specs < /tmp/impacted-cypress-specs.txt
 
-          max_specs=30
+          max_specs=100
           if [[ ${#specs[@]} -gt $max_specs ]]; then
             echo "Truncating Cypress spec list from ${#specs[@]} to $max_specs for runtime bounds."
             specs=("${specs[@]:0:$max_specs}")
