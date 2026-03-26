@@ -437,7 +437,7 @@ jobs:
         shell: bash
         working-directory: vets-website
         run: |
-          set -euo pipefail
+          set -uo pipefail
 
           mapfile -t specs < /tmp/impacted-cypress-specs.txt
 
@@ -449,16 +449,26 @@ jobs:
 
           npx cypress install
 
-          spec_csv=$(IFS=,; echo "${specs[*]}")
-          echo "Running Cypress specs: $spec_csv"
-          npx cypress run --config-file config/cypress.config.js --browser electron --spec "$spec_csv"
+          cypress_failed=0
+          for spec in "${specs[@]}"; do
+            echo "Running Cypress spec with managed server: $spec"
+            if ! yarn cy:run:auto --serve --no-retry --no-video --spec "$spec"; then
+              cypress_failed=1
+              echo "Cypress failed for spec: $spec"
+            fi
+          done
+
+          if [[ $cypress_failed -ne 0 ]]; then
+            echo "Cypress specs had failures. Continuing to run other test types..."
+            echo "1" > /tmp/cypress-exit-code.txt
+          fi
 
       - name: Run impacted vets-website e2e specs
         if: steps.impacted_specs.outputs.e2e_count != '0'
         shell: bash
         working-directory: vets-website
         run: |
-          set -euo pipefail
+          set -uo pipefail
 
           mapfile -t specs < /tmp/impacted-e2e-specs.txt
 
@@ -472,10 +482,16 @@ jobs:
 
           if yarn -s run | grep -E '^[[:space:]]*test:e2e[[:space:]]' > /dev/null; then
             echo "Running test:e2e for specs: $spec_csv"
-            yarn test:e2e -- --spec "$spec_csv"
+            if ! yarn test:e2e -- --spec "$spec_csv"; then
+              echo "e2e tests had failures."
+              echo "1" > /tmp/e2e-exit-code.txt
+            fi
           elif yarn -s run | grep -E '^[[:space:]]*e2e[[:space:]]' > /dev/null; then
             echo "Running e2e for specs: $spec_csv"
-            yarn e2e -- --spec "$spec_csv"
+            if ! yarn e2e -- --spec "$spec_csv"; then
+              echo "e2e tests had failures."
+              echo "1" > /tmp/e2e-exit-code.txt
+            fi
           else
             echo "Detected impacted e2e specs but no test:e2e or e2e script exists in vets-website package.json."
             exit 1
@@ -486,12 +502,32 @@ jobs:
         run: |
           echo "=== Test Summary ==="
 
+          failed=0
+
           if [[ -f /tmp/unit-test-exit-code.txt ]]; then
             unit_exit=$(cat /tmp/unit-test-exit-code.txt)
             echo "Unit tests failed with exit code: $unit_exit"
-            exit "$unit_exit"
+            failed=1
           else
             echo "Unit tests passed"
+          fi
+
+          if [[ -f /tmp/cypress-exit-code.txt ]]; then
+            echo "Cypress tests failed"
+            failed=1
+          else
+            echo "Cypress tests passed"
+          fi
+
+          if [[ -f /tmp/e2e-exit-code.txt ]]; then
+            echo "e2e tests failed"
+            failed=1
+          else
+            echo "e2e tests passed"
+          fi
+
+          if [[ $failed -ne 0 ]]; then
+            exit 1
           fi
 
       - name: No impacted tests found
