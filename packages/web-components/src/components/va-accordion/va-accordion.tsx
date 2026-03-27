@@ -228,28 +228,25 @@ export class VaAccordion {
   }
 
   /**
-   * Dynamically generates the aria-label for the "Expand all" and "Collapse all" buttons based on the value of `isExpandBtn` and whether or not to include the `sectionHeading` value based on the prop `includeSectionHeadingInExpandCollapseAllAriaLabels`.
+   * Gets the aria-label for the "Expand all" and "Collapse all" buttons via dynamic keys for i18next translation, with optional section heading interpolation.
    * @param {boolean} isExpandBtn - If the aria-label being generated is for the "Expand all" button or not.
    * @returns {string}
    */
   private getExpandOrCollapseBtnAriaLabel(isExpandBtn: boolean): string {
-    let translationKey = isExpandBtn ?
-      'expand-all-aria-label' :
-      'collapse-all-aria-label';
-
-    const defaultLabel = i18next.t(translationKey);
-
-    // Return default label with comma and sectionHeading interpolation removed
-    // if sectionHeading or prop flag to include it in aria-label are not
-    // truthy.
+    // Return default label if sectionHeading is not provided or prop flag to
+    // include it in aria-label are not truthy.
     if (
       !this.includeSectionHeadingInExpandCollapseAllAriaLabels ||
       !this.sectionHeading
     ) {
-      return defaultLabel.slice(0, defaultLabel.indexOf(',')).trim();
+      return i18next.t(isExpandBtn ? 'expand-all-aria-label' : 'collapse-all-aria-label');
     }
 
-    return i18next.t(translationKey, { sectionHeading: this.sectionHeading });
+    return i18next.t(isExpandBtn ?
+      'expand-all-aria-label-section-heading' :
+      'collapse-all-aria-label-section-heading',
+      { sectionHeading: this.sectionHeading }
+    );
   }
 
   connectedCallback() {
