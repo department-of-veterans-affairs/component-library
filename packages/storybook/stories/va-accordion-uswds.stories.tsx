@@ -100,42 +100,48 @@ export default {
 
 const Template = (args) => {
   return (
-    <va-accordion
-      open-single={args['open-single'] ? args['open-single'] : undefined}
-      disableAnalytics={
-        args['disable-analytics'] ? args['disable-analytics'] : undefined
-      }
-      section-heading={
-        args['section-heading'] ? args['section-heading'] : undefined
-      }
-    >
-      {args.accordionItems.map(accordion => (
-        <va-accordion-item
-          key={accordion.id}
-          id={accordion.id}
-          header={args.itemsHeadlineSlot ? undefined : accordion.header}
-          bordered={args.bordered}
-          subheader={
-            accordion.subheader
-              ? accordion.subheader
-              : undefined
-          }
-          level={args.level ? args.level : undefined}
-          open={accordion.open}
-        >
-          {args.itemsIcon && (
-            <span slot="icon" className="vads-u-color--green">
-              <va-icon icon="info" />
-            </span>
-          )}
-          {args.itemsIcon && <va-icon icon="mail" slot="subheader-icon" />}
-          {args.itemsHeadlineSlot && (
-            <h3 slot="headline">Slotted {accordion.header}</h3>
-          )}
-          <p>{accordion.body}</p>
-        </va-accordion-item>
-      ))}
-    </va-accordion>
+    <>
+      {args['section-heading'] && <h2>{args['section-heading']}</h2>}
+      <va-accordion
+        open-single={args['open-single'] ? args['open-single'] : undefined}
+        disableAnalytics={
+          args['disable-analytics'] ? args['disable-analytics'] : undefined
+        }
+        section-heading={
+          args['section-heading'] ? args['section-heading'] : undefined
+        }
+        include-section-heading-in-expand-collapse-all-aria-labels={
+          args['include-section-heading-in-expand-collapse-all-aria-labels']
+        }
+      >
+        {args.accordionItems.map(accordion => (
+          <va-accordion-item
+            key={accordion.id}
+            id={accordion.id}
+            header={args.itemsHeadlineSlot ? undefined : accordion.header}
+            bordered={args.bordered}
+            subheader={
+              accordion.subheader
+                ? accordion.subheader
+                : undefined
+            }
+            level={args.level ? args.level : undefined}
+            open={accordion.open}
+          >
+            {args.itemsIcon && (
+              <span slot="icon" className="vads-u-color--green">
+                <va-icon icon="info" />
+              </span>
+            )}
+            {args.itemsIcon && <va-icon icon="mail" slot="subheader-icon" />}
+            {args.itemsHeadlineSlot && (
+              <h3 slot="headline">Slotted {accordion.header}</h3>
+            )}
+            <p>{accordion.body}</p>
+          </va-accordion-item>
+        ))}
+      </va-accordion>
+    </>
   );
 };
 
@@ -288,4 +294,13 @@ PrintAccordion.parameters = {
     media: 'print',
     disableSnapshot: true,
   },
+};
+
+export const WithSectionHeadingInButtonAriaLabels = Template.bind(null);
+WithSectionHeadingInButtonAriaLabels.args = {
+  'section-heading': 'First Three Amendments',
+  'include-section-heading-in-expand-collapse-all-aria-labels': true,
+};
+WithSectionHeadingInButtonAriaLabels.parameters = {
+  chromatic: { disableSnapshot: true },
 };
