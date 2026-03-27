@@ -62,6 +62,15 @@ export class VaAccordion {
   @State() collapsed = true;
 
   /**
+   * If true, the `sectionHeading` value will be included in the aria-label for
+   * the "Expand/Collapse All" buttons, providing additional context for screen
+   * reader users. This is particularly important when there are multiple
+   * accordion groups on a single page. Requires a value for `sectionHeading` to
+   * be provided.
+   */
+  @Prop() includeSectionHeadingInExpandCollapseAllAriaLabels?: boolean = false;
+
+  /**
    * True if only a single item can be opened at once
    */
   @Prop() openSingle?: boolean = false;
@@ -72,7 +81,10 @@ export class VaAccordion {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * Optional accordion section heading text. Only used in analytics event. Default is null.
+   * Optional accordion section heading text. Emitted in analytics event and
+   * optionally included in the aria-label for the "Expand/Collapse All" buttons
+   * if `includeSectionHeadingInExpandCollapseAllAriaLabels` is true. Default is
+   * null.
    */
   @Prop() sectionHeading?: string = null;
 
@@ -215,6 +227,28 @@ export class VaAccordion {
     return elemTop >= 0 && elemTop <= window.innerHeight;
   }
 
+  /**
+   * Gets the aria-label for the "Expand all" and "Collapse all" buttons via dynamic keys for i18next translation, with optional section heading interpolation.
+   * @param {boolean} isExpandBtn - If the aria-label being generated is for the "Expand all" button or not.
+   * @returns {string}
+   */
+  private getExpandOrCollapseBtnAriaLabel(isExpandBtn: boolean): string {
+    // Return default label if sectionHeading is not provided or prop flag to
+    // include it in aria-label are not truthy.
+    if (
+      !this.includeSectionHeadingInExpandCollapseAllAriaLabels ||
+      !this.sectionHeading
+    ) {
+      return i18next.t(isExpandBtn ? 'expand-all-aria-label' : 'collapse-all-aria-label');
+    }
+
+    return i18next.t(isExpandBtn ?
+      'expand-all-aria-label-section-heading' :
+      'collapse-all-aria-label-section-heading',
+      { sectionHeading: this.sectionHeading }
+    );
+  }
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -230,6 +264,15 @@ export class VaAccordion {
     this.accordionsOpened('some');
     this.expanded = false;
     this.collapsed = false;
+
+    // Validate value includeSectionHeadingInExpandCollapseAllAriaLabels prop -
+    // sectionHeading value must be provided, if not set to false.
+    if (
+      this.includeSectionHeadingInExpandCollapseAllAriaLabels &&
+      !this.sectionHeading
+    ) {
+      this.includeSectionHeadingInExpandCollapseAllAriaLabels = false;
+    }
   }
 
   render() {
@@ -256,7 +299,7 @@ export class VaAccordion {
                   data-testid="expand-all-accordions"
                   ref={el => (this.expandCollapseBtn = el as HTMLVaButtonIconElement)}
                   onClick={() => this.expandCollapseAll(true)}
-                  label={i18next.t('expand-all-aria-label')}
+                  label={this.getExpandOrCollapseBtnAriaLabel(true)}
                   buttonType="expand"
                 ></va-button-icon>
               </li>
@@ -266,7 +309,7 @@ export class VaAccordion {
                   data-testid="collapse-all-accordions"
                   ref={el => (this.expandCollapseBtn = el as HTMLVaButtonIconElement)}
                   onClick={() => this.expandCollapseAll(false)}
-                  label={i18next.t('collapse-all-aria-label')}
+                  label={this.getExpandOrCollapseBtnAriaLabel(false)}
                   buttonType="collapse"
                 ></va-button-icon>
               </li>
