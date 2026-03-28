@@ -389,4 +389,46 @@ describe('va-search-filter', () => {
     const labelSrOnly = await checkboxGroup.getProperty('labelSrOnly');
     expect(labelSrOnly).toBe('filters applied');
   })
+
+    it('fires vaFilterApply when clear button is clicked', async () => {
+    const page = await newE2EPage();
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filters"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+
+    // Get the va-checkbox-group element
+    const button = await page.find('va-search-filter >>> #filter-buttons >>> va-button >>> .usa-button');
+    expect(button).not.toBeNull();
+    // let button = await buttons[1].find("button");
+    const vaFilterApply = await page.spyOnEvent('vaFilterApply');
+    await button.click();
+    expect(vaFilterApply).toHaveReceivedEventTimes(1);
+  });
+
+  it('fires vaClearAllEvent when clear button is clicked', async () => {
+    const page = await newE2EPage();
+
+    // Create the component
+    await page.setContent('<va-search-filter header="Filters"></va-search-filter>');
+    const element = await page.find('va-search-filter');
+
+    // Set the filter options
+    const options = JSON.parse(filterOptions);
+    element.setProperty('filterOptions', options);
+    await page.waitForChanges();
+
+    // Get the va-checkbox-group element
+    const button = await page.find('va-search-filter >>> #filter-buttons >>> va-button >>> .usa-button--outline');
+    expect(button).not.toBeNull();
+    // let button = await buttons[1].find("button");
+    const vaFilterClearAll = await page.spyOnEvent('vaFilterClearAll');
+    await button.click();
+    expect(vaFilterClearAll).toHaveReceivedEventTimes(1);
+  });
 });
