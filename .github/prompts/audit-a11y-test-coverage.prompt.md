@@ -69,11 +69,16 @@ Ask the user which component to audit, or accept it as a parameter. The componen
 
 ## Step 2: Gather inputs
 
-**First, ask the user**: "Do you have `vets-design-system-documentation` cloned at `~/Projects/vets-design-system-documentation`?"
-- If **yes**: Use local file paths (reads your current working branch with uncommitted changes)
-- If **no** or **different path**: Ask for the path or use remote GitHub URLs (reads the `5291-a11y-test-pilot` branch)
+**First, ask the user**: "Do you want to use local files from your cloned `vets-design-system-documentation` repo, or fetch from the remote GitHub repo?"
 
-This matters because local files reflect current branch state including uncommitted work, while remote URLs only show committed code on the specified branch.
+- If **local**: Ask "What is the path to your `vets-design-system-documentation` clone?" (e.g., `~/Projects/vets-design-system-documentation` or `/Users/username/repos/vets-design-system-documentation`)
+  - Use local file paths with the provided path
+  - Local files reflect the current working branch state including uncommitted changes
+  
+- If **remote**: Use GitHub raw URLs
+  - Remote URLs only show committed code on the specified branch (`5291-a11y-test-pilot`)
+
+This matters because local files allow you to test against work-in-progress changes, while remote URLs are useful when you don't have the documentation repo cloned.
 
 You need three data sources:
 
@@ -81,9 +86,9 @@ You need three data sources:
 
 Fetch the component's accessibility test YAML:
 
-**Local path**:
+**Local path** (replace `[path]` with user's provided path):
 ```
-~/Projects/vets-design-system-documentation/src/_data/accessibility_tests/va-[component].yml
+[path]/src/_data/accessibility_tests/va-[component].yml
 ```
 
 **Remote URL**:
@@ -105,12 +110,12 @@ Then stop.
 
 Fetch the four test library files to look up each assigned test ID.
 
-**Local paths**:
+**Local paths** (replace `[path]` with user's provided path):
 ```
-~/Projects/vets-design-system-documentation/src/_data/accessibility_tests/test-library/1-perceivable.yml
-~/Projects/vets-design-system-documentation/src/_data/accessibility_tests/test-library/2-operable.yml
-~/Projects/vets-design-system-documentation/src/_data/accessibility_tests/test-library/3-understandable.yml
-~/Projects/vets-design-system-documentation/src/_data/accessibility_tests/test-library/4-robust.yml
+[path]/src/_data/accessibility_tests/test-library/1-perceivable.yml
+[path]/src/_data/accessibility_tests/test-library/2-operable.yml
+[path]/src/_data/accessibility_tests/test-library/3-understandable.yml
+[path]/src/_data/accessibility_tests/test-library/4-robust.yml
 ```
 
 **Remote URLs**:
@@ -275,7 +280,8 @@ Recommended approach:
 3. Finally add remaining tests: [list test IDs]
 
 Or generate all at once: "Generate tests for: WEB-211, WEB-247, WEB-1412, ..."
-```
+Note: The generate prompt will automatically re-audit after creating tests to verify 
+coverage improved. If gaps remain, it will suggest generating the next batch.```
 
 ### If coverage is complete
 
