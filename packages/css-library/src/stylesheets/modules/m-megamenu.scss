@@ -298,7 +298,7 @@ $marketing-container-height: 23.75rem;
     .vetnav-panel {
       width: $medium-screen;
       height: $vetnav-panel-height;
-      overflow: scroll;
+      overflow: auto;
     }
 
     .column-one {

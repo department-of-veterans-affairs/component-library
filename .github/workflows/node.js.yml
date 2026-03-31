@@ -19,11 +19,20 @@ jobs:
           node-version: 22.x
           cache: 'yarn'
       - run: yarn install
+
+      - name: Cache Puppeteer browser binaries
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/puppeteer-cache
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('packages/web-components/package.json', 'yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-puppeteer-
       
       - name: Install Puppeteer browsers
-        run: |
-          npx puppeteer browsers install chrome
-          npx puppeteer browsers install chrome-headless-shell
+        timeout-minutes: 10
+        env:
+          PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer-cache
+        run: node -e "require('puppeteer/install.js')"
 
       - name: Test react-components
         run: |
@@ -38,6 +47,8 @@ jobs:
         working-directory: packages/design-system-dashboard-cli
 
       - name: Test web-components
+        env:
+          PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer-cache
         run: |
           yarn install
           yarn test

@@ -1,5 +1,8 @@
 @use '../../mixins/form-field-error.scss' as *;
 @use '../../mixins/uswds-error-border.scss' as *;
+
+@use 'usa-label/src/styles/usa-label';
+
 @import '../../../src/mixins/accessibility.css';
 @import '../../mixins/hint-text.css';
 

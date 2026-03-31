@@ -9,6 +9,7 @@ import {
   Fragment,
 } from '@stencil/core';
 import { i18next } from '../..';
+import classNames from 'classnames';
 
 import {
   months,
@@ -281,11 +282,16 @@ export class VaDate {
     const errorParameters = (error: string) => {
       return getErrorParameters(error, year, month);
     };
+
+    const legendClasses = classNames({
+      'usa-label--error': !!error,
+    });
+
     // Fieldset has an implicit aria role of group
     return (
       <Host onBlur={event => handleDateBlur(event, true)}>
         <fieldset>
-          <legend>
+          <legend class={legendClasses}>
             {label} {required && <span class="required">(*Required)</span>}
           </legend>
           {hint && <span class="hint-text">{hint}</span>}
