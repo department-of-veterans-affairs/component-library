@@ -387,7 +387,7 @@ describe('va-combo-box', () => {
     expect(updatedElement.textContent).toEqualText('1 group available. 1 result available.');
   });
 
-  it('sets value to empty when user-typed text does not match any valid options', async () => {
+  it('sets value and input to previous value when user-typed text does not match any valid options', async () => {
     const page = await newE2EPage();
 
     // Initialize 2 combo boxes, the first with a value of "foo"
@@ -411,8 +411,126 @@ describe('va-combo-box', () => {
     await page.keyboard.press('Enter');
 
     await page.waitForChanges();
+    // Verify the value of the first combo box has been reset
+    let firstComboValue = await firstComboBox.getProperty('value');
+    let inputValue = await firstComboInput.getProperty('value');
+    expect(firstComboValue).toBe('foo');
+    expect(inputValue).toBe('Foo');
+
+    // Clear the combo box input
+    for(let i = 0; i < 3; i++) {
+      await firstComboInput.press('Backspace');
+    }
+    await page.keyboard.press('Enter');
+
+    await page.waitForChanges();
     // Verify the value of the first combo box has been cleared
-    const firstComboValue = await firstComboBox.getProperty('value');
+    firstComboValue = await firstComboBox.getProperty('value');
+    inputValue = await firstComboInput.getProperty('value');
     expect(firstComboValue).toBe('');
+    expect(firstComboInput.textContent).toBe('');
+
+    // Type into the combo box input
+    await firstComboInput.type('faa');
+    await page.keyboard.press('Enter');
+
+    await page.waitForChanges();
+    // Verify the value of the first combo box has been cleared
+    firstComboValue = await firstComboBox.getProperty('value');
+    inputValue = await firstComboInput.getProperty('value');
+    expect(firstComboValue).toBe('');
+    expect(firstComboInput.textContent).toBe('');
+  });
+
+  it('updates input and option if upstream the value changes to another valid option value', async () => {
+    const page = await newE2EPage();
+
+    // Initialize 2 combo boxes, the first with a value of "foo"
+    await page.setContent(`
+          <va-combo-box label="label 1" value="foo">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-combo-box>
+        `);
+
+    // Get the entire first va-combo-box element
+    const comboBox = await page.find('va-combo-box');
+    const initialFirstComboBoxValue = await comboBox.getProperty('value');
+    expect(initialFirstComboBoxValue).toBe('foo');
+
+    // Change the value on the combo box element
+    comboBox.setProperty('value', 'bar');
+    await page.waitForChanges();
+
+    const input = await page.find('va-combo-box >>> input');
+    const inputValue = await input.getProperty('value');
+    expect(inputValue).toBe('Bar');
+
+    await input.click();
+    const listOptions = await page.findAll('va-combo-box >>> li');
+
+    expect(listOptions[1].getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('clears input and option if upstream the value changes to an empty string', async () => {
+    const page = await newE2EPage();
+
+    // Initialize 2 combo boxes, the first with a value of "foo"
+    await page.setContent(`
+          <va-combo-box label="label 1" value="foo">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-combo-box>
+        `);
+
+    // Get the entire first va-combo-box element
+    const comboBox = await page.find('va-combo-box');
+    const initialFirstComboBoxValue = await comboBox.getProperty('value');
+    expect(initialFirstComboBoxValue).toBe('foo');
+
+    // Change the value on the combo box element
+    comboBox.setProperty('value', '');
+    await page.waitForChanges();
+
+    const input = await page.find('va-combo-box >>> input');
+    const inputValue = await input.getProperty('value');
+    expect(inputValue).toBe('');
+
+    await input.click();
+    const listOptions = await page.findAll('va-combo-box >>> li');
+
+    expect(listOptions[0].getAttribute('aria-selected')).toBe('false');
+    expect(listOptions[1].getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('clears input and option if upstream the value changes to null', async () => {
+    const page = await newE2EPage();
+
+    // Initialize 2 combo boxes, the first with a value of "foo"
+    await page.setContent(`
+          <va-combo-box label="label 1" value="foo">
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </va-combo-box>
+        `);
+
+    // Get the entire first va-combo-box element
+    const comboBox = await page.find('va-combo-box');
+    const initialFirstComboBoxValue = await comboBox.getProperty('value');
+    expect(initialFirstComboBoxValue).toBe('foo');
+
+    // Change the value on the combo box element
+    comboBox.setProperty('value', null);
+    await page.waitForChanges();
+
+    const input = await page.find('va-combo-box >>> input');
+    const inputValue = await input.getProperty('value');
+    expect(inputValue).toBe('');
+
+    await input.click();
+    const listOptions = await page.findAll('va-combo-box >>> li');
+
+    expect(listOptions[0].getAttribute('aria-selected')).toBe('false');
+    expect(listOptions[1].getAttribute('aria-selected')).toBe('false');
   });
 });

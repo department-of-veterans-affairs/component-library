@@ -9,7 +9,7 @@ import {
   h,
   State,
   Fragment,
-  Watch, 
+  Watch,
   Listen
 } from '@stencil/core';
 import classnames from 'classnames';
@@ -38,6 +38,10 @@ export class VaComboBox {
   @State() options: Array<Node>;
 
   @State() labelNode: HTMLLabelElement;
+
+  @State() isUpdatingValue: boolean = false;
+
+  @State() internalValueUpdate: boolean = false;
 
   private isInVaInputTelephone: boolean;
 
@@ -86,9 +90,8 @@ export class VaComboBox {
    */
   @Prop() messageAriaDescribedby?: string;
 
-
   /**
-   * Whether to show error message text 
+   * Whether to show error message text
    */
   @Prop() showInputError?: boolean = true;
 
@@ -99,9 +102,31 @@ export class VaComboBox {
       if (newValue) {
         input.classList.add('usa-input--error');
       } else {
-        input.classList.remove('usa-input--error')
+        input.classList.remove('usa-input--error');
       }
     }
+  }
+
+  @Watch('value')
+  updateInputValueOnValueChange(newValue: string) {
+    if(this.internalValueUpdate) {
+      this.internalValueUpdate = false;
+      return;
+    }
+    const inputElement = this.el.shadowRoot.querySelector('input');
+    if (inputElement) this.updateElementValues(newValue);
+  }
+
+  /**
+   * When options are updated, and the property value set does not match the input el value,
+   * but the option does exist now:
+   * update the input el value to match the property value
+   */
+  @Watch('options')
+  updateInputValueOnOptionsChange() {
+    const inputElement = this.el.shadowRoot.querySelector('input');
+    if (inputElement && inputElement.value !== this.value)
+      this.updateElementValues(this.value);
   }
 
   /**
@@ -110,7 +135,9 @@ export class VaComboBox {
   @Event() vaSelect: EventEmitter;
 
   componentWillLoad() {
-    this.isInVaInputTelephone = this.el.parentElement?.classList.contains('va-input-telephone-wrapper');
+    this.isInVaInputTelephone = this.el.parentElement?.classList.contains(
+      'va-input-telephone-wrapper',
+    );
     this.populateOptions();
   }
 
@@ -128,10 +155,14 @@ export class VaComboBox {
       const comboBoxEl = this.el.shadowRoot.querySelector('div.usa-combo-box');
       const flagSpan = document.createElement('span');
       this.value = !!this.value ? this.value : 'US';
-      flagSpan.classList.add('flag', `flag-${this.value.toLowerCase()}`, 'dynamic-flag');
+      flagSpan.classList.add(
+        'flag',
+        `flag-${this.value.toLowerCase()}`,
+        'dynamic-flag',
+      );
       comboBoxEl.appendChild(flagSpan);
     }
-    
+
     if (comboBoxElement) {
       comboBox.init(comboBoxElement, labelElement, this.value);
       comboBox.on(comboBoxElement);
@@ -161,6 +192,33 @@ export class VaComboBox {
   }
 
   /**
+   * Update input element and select element value according to upstream value
+   * only if the option exists or the new value is blank/null
+   */
+  private updateElementValues(newValue: string) {
+    const inputElement = this.el.shadowRoot.querySelector('input');
+    const selectElement = this.el.shadowRoot.querySelector('select');
+
+    if (this.isUpdatingValue || !inputElement || !selectElement) return;
+    this.isUpdatingValue = true;
+
+    if (newValue == null || newValue === '') {
+      inputElement.value = '';
+      selectElement.value = '';
+    } else {
+      const allNodes = this.el.querySelectorAll('option:not([data-optgroup])');
+      const nodes = Array.from(allNodes) as Array<HTMLOptionElement>;
+
+      const foundOption = nodes.find(option => option.value === newValue);
+      if (foundOption) {
+        inputElement.value = this.isInVaInputTelephone ? newValue : foundOption.textContent;
+        selectElement.value = newValue;
+      }
+    }
+    this.isUpdatingValue = false;
+  }
+
+  /**
    * This function is pulling all <option> and <optgroup> elements from the light DOM
    * and creating a new array of <option> elements to be rendered in the shadow DOM.
    * It also creates <option> elements for each <optgroup> element to act as a label.
@@ -171,55 +229,59 @@ export class VaComboBox {
     const allNodes = this.el.querySelectorAll('option, optgroup');
 
     const nodes = Array.from(allNodes);
-    this.options = nodes.map((node: HTMLOptionElement | HTMLOptGroupElement, index) => {
-      if (node.nodeName.toLowerCase() === 'optgroup') {
-        return (
-          <Fragment>
-            {/* adding data-optgroup attribute to identify this element as an optgroup header
-             * assigning unique id to reference in va-combo-box-library.js while transforming options to <li> elements
-             */}
-            <option data-optgroup="true" id={'optgroup-' + index}>
-              {node.label}
-            </option>
+    this.options = nodes.map(
+      (node: HTMLOptionElement | HTMLOptGroupElement, index) => {
+        if (node.nodeName.toLowerCase() === 'optgroup') {
+          return (
+            <Fragment>
+              {/* adding data-optgroup attribute to identify this element as an optgroup header
+               * assigning unique id to reference in va-combo-box-library.js while transforming options to <li> elements
+               */}
+              <option data-optgroup="true" id={'optgroup-' + index}>
+                {node.label}
+              </option>
 
-            {/* iterate through all children <option> elements within an <optgroup>
-             * assign specific attributes
-             * add aria-described bto associate <option> with an <optgroup> for SR */}
-            {Array.from(node.children).map((child: HTMLOptionElement) => {
-              return (
-                <option
-                  value={child.value}
-                  selected={value === child.value}
-                  data-optgroup-option="true"
-                  aria-describedby={'optgroup-' + index}
-                >
-                  {child.text}
-                </option>
-              );
-            })}
-          </Fragment>
-        );
-      } else if (
-        node.nodeName.toLowerCase() === 'option' &&
-        node.parentElement.nodeName.toLowerCase() !== 'optgroup'
-      ) {
-        {
-          /* handling <option> elements that are not nested within <optgroup> element */
+              {/* iterate through all children <option> elements within an <optgroup>
+               * assign specific attributes
+               * add aria-described bto associate <option> with an <optgroup> for SR */}
+              {Array.from(node.children).map((child: HTMLOptionElement) => {
+                return (
+                  <option
+                    value={child.value}
+                    selected={value === child.value}
+                    data-optgroup-option="true"
+                    aria-describedby={'optgroup-' + index}
+                  >
+                    {child.text}
+                  </option>
+                );
+              })}
+            </Fragment>
+          );
+        } else if (
+          node.nodeName.toLowerCase() === 'option' &&
+          node.parentElement.nodeName.toLowerCase() !== 'optgroup'
+        ) {
+          {
+            /* handling <option> elements that are not nested within <optgroup> element */
+          }
+          return (
+            <option
+              value={(node as HTMLOptionElement).value}
+              selected={value === (node as HTMLOptionElement).value}
+            >
+              {node.textContent}
+            </option>
+          );
         }
-        return (
-          <option
-            value={(node as HTMLOptionElement).value}
-            selected={value === (node as HTMLOptionElement).value}
-          >
-            {node.textContent}
-          </option>
-        );
-      }
-    });
+      },
+    );
   }
 
   private handleChange(e: Event) {
     const target: HTMLSelectElement = e.target as HTMLSelectElement;
+    if (this.value === target.value) return;
+    this.internalValueUpdate = true;
     this.value = target.value;
     this.vaSelect.emit({ value: this.value });
   }
@@ -249,7 +311,7 @@ export class VaComboBox {
       hint,
       messageAriaDescribedby,
       showInputError,
-      isInVaInputTelephone
+      isInVaInputTelephone,
     } = this;
     const labelClass = classnames({
       'usa-label': true,
@@ -257,11 +319,16 @@ export class VaComboBox {
     });
     const comboBoxContainerClass = classnames({
       'usa-combo-box': true,
-      'input-telephone-wrapper': isInVaInputTelephone
-    })
+      'input-telephone-wrapper': isInVaInputTelephone,
+    });
     return (
       <Host>
-        <label htmlFor="options" class={labelClass} id="options-label" part="label">
+        <label
+          htmlFor="options"
+          class={labelClass}
+          id="options-label"
+          part="label"
+        >
           {label}
           {required && (
             <span class="usa-label--required"> {i18next.t('required')}</span>
