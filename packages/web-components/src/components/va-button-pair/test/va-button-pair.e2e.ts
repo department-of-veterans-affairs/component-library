@@ -9,14 +9,14 @@ describe('va-button-pair', () => {
     expect(element).toEqualHtml(`
     <va-button-pair class="hydrated">
       <mock:shadow-root>
-        <ul class="usa-button-group">
-          <li class="usa-button-group__item">
+        <div class="usa-button-group">
+          <div class="usa-button-group__item">
             <va-button class="hydrated"></va-button>
-          </li>
-          <li class="usa-button-group__item">
+          </div>
+          <div class="usa-button-group__item">
             <va-button secondary="" class="hydrated"></va-button>
-          </li>
-        </ul>
+          </div>
+        </div>
       </mock:shadow-root>
     </va-button-pair>
     `);
