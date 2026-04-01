@@ -2032,6 +2032,10 @@ export namespace Components {
          */
         "heading": string;
         /**
+          * Header level for the statement of truth headline. Must be between 1 and 6
+         */
+        "headingLevel"?: number;
+        /**
           * Removes the legal notice text. Use this property when there are multiple statement of truth components on the page to avoid redundancy.
          */
         "hideLegalNote": boolean;
@@ -6493,6 +6497,10 @@ declare namespace LocalJSX {
           * An optional custom header for the component
          */
         "heading"?: string;
+        /**
+          * Header level for the statement of truth headline. Must be between 1 and 6
+         */
+        "headingLevel"?: number;
         /**
           * Removes the legal notice text. Use this property when there are multiple statement of truth components on the page to avoid redundancy.
          */
