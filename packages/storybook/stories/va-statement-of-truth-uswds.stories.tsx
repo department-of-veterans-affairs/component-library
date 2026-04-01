@@ -29,6 +29,7 @@ const defaultArgs = {
   inputLabel: 'Your full name',
   checkboxLabel:
     'I certify the information above is correct and true to the best of my knowledge and belief.',
+  headingLevel: 3,
 };
 
 const Template = ({
@@ -41,6 +42,7 @@ const Template = ({
   checked,
   inputLabel,
   checkboxLabel,
+  headingLevel,
 }) => {
   return (
     <div style={{ maxWidth: 600 }}>
@@ -54,6 +56,7 @@ const Template = ({
         checked={checked}
         inputLabel={inputLabel}
         checkboxLabel={checkboxLabel}
+        headingLevel={headingLevel}
         onVaInputChange={e => console.log(e, 'vaInputChange fired')}
         onVaInputBlur={e => console.log(e, 'vaInputBlur fired')}
         onVaCheckboxChange={e => console.log(e, 'vaCheckboxChange fired')}
