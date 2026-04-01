@@ -167,7 +167,7 @@ export class VaButtonPair {
     if (_continue) {
       return (
         <Host>
-          <div class="usa-button-group" role="group" aria-label={this.label}>
+          <div class="usa-button-group" aria-label={this.label}>
             <div class="usa-button-group__item">
               <va-button
                 back
@@ -194,7 +194,7 @@ export class VaButtonPair {
 
     return (
       <Host>
-        <div class="usa-button-group" role="group" aria-label={this.label}>
+        <div class="usa-button-group" aria-label={this.label}>
           <div class="usa-button-group__item">
             <va-button
               disable-analytics={disableAnalytics}

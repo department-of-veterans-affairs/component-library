@@ -9,7 +9,7 @@ describe('va-button-pair', () => {
     expect(element).toEqualHtml(`
     <va-button-pair class="hydrated">
       <mock:shadow-root>
-        <div class="usa-button-group" role="group">
+        <div class="usa-button-group">
           <div class="usa-button-group__item">
             <va-button class="hydrated"></va-button>
           </div>
