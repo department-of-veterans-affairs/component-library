@@ -212,7 +212,9 @@ CustomHeaderLevel.args = {
 };
 
 export const Internationalization = I18nTemplate.bind(null);
-Internationalization.args = {};
+Internationalization.args = {
+  'use-heading-in-toggle-all-labels': false,
+};
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 Internationalization.parameters = {
