@@ -9,7 +9,11 @@ import {
 } from '@stencil/core';
 import { i18next } from '../..';
 import { Build } from '@stencil/core';
-import { consoleDevError, getHeaderLevel } from '../../utils/utils';
+import {
+  consoleDevError,
+  getHeaderLevel,
+  normalizeStringArrayProp,
+} from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -121,6 +125,14 @@ export class VaOnThisPage {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
+    * CSS selectors for H2 elements that should be excluded from the list.
+    *
+    * Accepts either a string array property or a JSON string attribute value.
+    * For example: exclude-selectors='["va-alert h2", ".my-heading"]' or excludeSelectors={["va-alert h2", ".my-heading"]}
+   */
+  @Prop() excludeSelectors?: string[] | string = [];
+
+  /**
    * Handler for removing tabindex and role attributes on blur.
    */
   private handleHeadingBlur = (event: FocusEvent) => {
@@ -156,6 +168,11 @@ export class VaOnThisPage {
     }
   };
 
+  /**
+   * Handles click events for heading links.
+   *
+   * Moves focus to the destination heading and emits analytics when enabled.
+   */
   private handleOnClick = event => {
     this.moveFocusToHeading(event);
 
@@ -171,12 +188,66 @@ export class VaOnThisPage {
     });
   };
 
+  /**
+   * Normalizes exclude selectors from either an array prop or a string attribute.
+   */
+  private getExcludeSelectors = (): string[] => {
+    return normalizeStringArrayProp(
+      this.excludeSelectors,
+      'exclude-selectors must be a valid JSON array string.',
+    );
+  };
+
+  /**
+   * Returns whether a heading should be excluded based on the configured selectors.
+   */
+  private isExcludedHeading = (heading: HTMLElement, excludeSelectors: string[]): boolean => {
+    return excludeSelectors.some(selector => {
+      try {
+        const matchingElements = this.getHeadingScope().querySelectorAll(selector);
+        return Array.from(matchingElements).includes(heading);
+      } catch {
+        consoleDevError(`Invalid exclude selector: ${selector}`);
+        return false;
+      }
+    });
+  };
+
+  /**
+   * Collects eligible H2 headings in scope and maps them to link metadata.
+   */
+  private getHeadings = () => {
+    const excludeSelectors = this.getExcludeSelectors();
+
+    return Array.from(this.getHeadingScope().querySelectorAll<HTMLElement>('h2'))
+      .filter(heading => {
+        if (!heading.id) {
+          consoleDevError(`${heading.textContent} is missing an id`);
+        }
+        // Check if heading matches any exclude selector
+        if (excludeSelectors.length > 0) {
+          if (this.isExcludedHeading(heading, excludeSelectors)) return false;
+        }
+        return heading.id;
+      })
+      .map(heading => ({
+        id: heading.id,
+        text: this.getHeadingText(heading),
+      }));
+  };
+
+  /**
+   * Subscribes to language changes and triggers a rerender.
+   */
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
   }
 
+  /**
+   * Removes language-change subscriptions when the component is unmounted.
+   */
   disconnectedCallback() {
     i18next.off('languageChanged');
   }
@@ -186,23 +257,13 @@ export class VaOnThisPage {
     // eslint-disable-next-line i18next/no-literal-string
     const HeaderLevel = getHeaderLevel(this.headerLevel) || 'h2';
 
-    const h2s = Array.from(this.getHeadingScope().querySelectorAll<HTMLElement>('h2'))
-      .filter(heading => {
-        if (!heading.id) {
-          consoleDevError(`${heading.textContent} is missing an id`);
-        }
-        return heading.id;
-      })
-      .map(heading => ({
-        id: heading.id,
-        text: this.getHeadingText(heading),
-      }));
+    const headings = this.getHeadings();
 
     return (
       <nav aria-labelledby="on-this-page">
         <HeaderLevel id="on-this-page">{i18next.t('on-this-page')}</HeaderLevel>
         <ul>
-          {h2s.map(heading => (
+          {headings.map(heading => (
             <li>
               <a href={`#${heading.id}`} onClick={handleOnClick}>
                 <va-icon icon="arrow_downward"></va-icon>

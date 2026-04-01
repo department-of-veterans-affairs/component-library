@@ -157,6 +157,44 @@ describe('va-on-this-page', () => {
     `);
   });
 
+  it('excludes headings that match exclude-selectors', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      `
+      <article>
+        <va-on-this-page exclude-selectors='["va-alert h2", "#excluded-heading", ".my-heading"]'></va-on-this-page>
+        <h2 id="excluded-heading">excluded heading</h2>
+        <h2 class="my-heading">also excluded</h2>
+        <va-alert status="info">
+          <h2 id="this-is-an-alert" slot="headline">This is a heading</h2>
+          <p>This heading should be excluded from the on this page navigation.</p>
+        </va-alert>
+        <h2 id="visible-heading">Visible heading</h2>
+      </article>
+      `,
+    );
+    const element = await page.find('va-on-this-page');
+
+    expect(element).toEqualHtml(`
+      <va-on-this-page class="hydrated" exclude-selectors="[&quot;va-alert h2&quot;, &quot;#excluded-heading&quot;, &quot;.my-heading&quot;]">
+        <mock:shadow-root>
+          <nav aria-labelledby="on-this-page">
+            <h2 id="on-this-page">on-this-page</h2>
+            <ul>
+              <li>
+                <a href="#visible-heading">
+                  <va-icon class="hydrated"></va-icon>
+                  <span>Visible heading</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </mock:shadow-root>
+      </va-on-this-page>
+    `);
+  });
+
   it('fires analytics event when an anchor is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
