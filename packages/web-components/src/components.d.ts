@@ -1464,6 +1464,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * CSS selectors for H2 elements that should be excluded from the list.  Accepts either a string array property or a JSON string attribute value. For example: exclude-selectors='["va-alert h2", ".my-heading"]' or excludeSelectors={["va-alert h2", ".my-heading"]}
+         */
+        "excludeSelectors"?: string[] | string;
+        /**
           * Header level. Must be between 1 and 6
          */
         "headerLevel"?: number;
@@ -5821,6 +5825,10 @@ declare namespace LocalJSX {
           * If true, analytics event will not be fired
          */
         "disableAnalytics"?: boolean;
+        /**
+          * CSS selectors for H2 elements that should be excluded from the list.  Accepts either a string array property or a JSON string attribute value. For example: exclude-selectors='["va-alert h2", ".my-heading"]' or excludeSelectors={["va-alert h2", ".my-heading"]}
+         */
+        "excludeSelectors"?: string[] | string;
         /**
           * Header level. Must be between 1 and 6
          */
