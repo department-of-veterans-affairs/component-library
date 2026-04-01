@@ -110,8 +110,8 @@ const Template = (args) => {
         section-heading={
           args['section-heading'] ? args['section-heading'] : undefined
         }
-        include-section-heading-in-expand-collapse-all-aria-labels={
-          args['include-section-heading-in-expand-collapse-all-aria-labels']
+        use-heading-in-toggle-all-labels={
+          args['use-heading-in-toggle-all-labels']
         }
       >
         {args.accordionItems.map(accordion => (
@@ -296,11 +296,11 @@ PrintAccordion.parameters = {
   },
 };
 
-export const WithSectionHeadingInButtonAriaLabels = Template.bind(null);
-WithSectionHeadingInButtonAriaLabels.args = {
+export const WithHeadingInToggleAllLabels = Template.bind(null);
+WithHeadingInToggleAllLabels.args = {
   'section-heading': 'First Three Amendments',
-  'include-section-heading-in-expand-collapse-all-aria-labels': true,
+  'use-heading-in-toggle-all-labels': true,
 };
-WithSectionHeadingInButtonAriaLabels.parameters = {
+WithHeadingInToggleAllLabels.parameters = {
   chromatic: { disableSnapshot: true },
 };

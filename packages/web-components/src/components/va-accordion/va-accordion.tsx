@@ -68,7 +68,7 @@ export class VaAccordion {
    * accordion groups on a single page. Requires a value for `sectionHeading` to
    * be provided.
    */
-  @Prop() includeSectionHeadingInExpandCollapseAllAriaLabels?: boolean = false;
+  @Prop() useHeadingInToggleAllLabels?: boolean = false;
 
   /**
    * True if only a single item can be opened at once
@@ -83,8 +83,7 @@ export class VaAccordion {
   /**
    * Optional accordion section heading text. Emitted in analytics event and
    * optionally included in the aria-label for the "Expand/Collapse All" buttons
-   * if `includeSectionHeadingInExpandCollapseAllAriaLabels` is true. Default is
-   * null.
+   * if `useHeadingInToggleAllLabels` is true. Default is null.
    */
   @Prop() sectionHeading?: string = null;
 
@@ -236,7 +235,7 @@ export class VaAccordion {
     // Return default label if sectionHeading is not provided or prop flag to
     // include it in aria-label are not truthy.
     if (
-      !this.includeSectionHeadingInExpandCollapseAllAriaLabels ||
+      !this.useHeadingInToggleAllLabels ||
       !this.sectionHeading
     ) {
       return i18next.t(isExpandBtn ? 'expand-all-aria-label' : 'collapse-all-aria-label');
@@ -265,13 +264,13 @@ export class VaAccordion {
     this.expanded = false;
     this.collapsed = false;
 
-    // Validate value includeSectionHeadingInExpandCollapseAllAriaLabels prop -
+    // Validate value useHeadingInToggleAllLabels prop -
     // sectionHeading value must be provided, if not set to false.
     if (
-      this.includeSectionHeadingInExpandCollapseAllAriaLabels &&
+      this.useHeadingInToggleAllLabels &&
       !this.sectionHeading
     ) {
-      this.includeSectionHeadingInExpandCollapseAllAriaLabels = false;
+      this.useHeadingInToggleAllLabels = false;
     }
   }
 

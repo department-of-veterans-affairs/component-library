@@ -377,12 +377,12 @@ describe('va-accordion', () => {
     });
   });
 
-  it('includes sectionHeading in expand/collapse all button aria-labels when it is provided and includeSectionHeadingInExpandCollapseAllAriaLabels is true', async () => {
+  it('includes sectionHeading in expand/collapse all button aria-labels when it is provided and useHeadingInToggleAllLabels is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion
         section-heading="The Section Heading"
-        include-section-heading-in-expand-collapse-all-aria-labels
+        use-heading-in-toggle-all-labels
       >
         <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
       </va-accordion>`);
@@ -394,10 +394,10 @@ describe('va-accordion', () => {
     expect(collapseButton.getAttribute('aria-label')).toBe('collapse-all-aria-label-section-heading');
   });
 
-  it('uses default aria-labels for expand/collapse all buttons when sectionHeading is not provided even if includeSectionHeadingInExpandCollapseAllAriaLabels is true', async () => {
+  it('uses default aria-labels for expand/collapse all buttons when sectionHeading is not provided even if useHeadingInToggleAllLabels is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion include-section-heading-in-expand-collapse-all-aria-labels>
+      <va-accordion use-heading-in-toggle-all-labels>
         <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
       </va-accordion>`);
 
