@@ -1,0 +1,78 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    groups:
+      npm_and_yarn:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/packages/core"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    groups:
+      npm_and_yarn:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/packages/css-library"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    groups:
+      npm_and_yarn:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/packages/design-system-dashboard-cli"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    groups:
+      npm_and_yarn:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/packages/react-components"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    groups:
+      npm_and_yarn:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/packages/storybook"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    groups:
+      npm_and_yarn:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/packages/web-components"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    groups:
+      npm_and_yarn:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
