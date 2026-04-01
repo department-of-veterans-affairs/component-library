@@ -68,11 +68,6 @@ export class VaButtonPair {
   @Prop() rightButtonText?: string
 
   /**
-   * Adds an aria-label attribute to the button pair container.
-   */
-  @Prop() label?: string = null;
-
-  /**
    * Fires when the primary button is clicked.
    */
   @Event({
@@ -167,7 +162,7 @@ export class VaButtonPair {
     if (_continue) {
       return (
         <Host>
-          <div class="usa-button-group" aria-label={this.label}>
+          <div class="usa-button-group">
             <div class="usa-button-group__item">
               <va-button
                 back
@@ -194,7 +189,7 @@ export class VaButtonPair {
 
     return (
       <Host>
-        <div class="usa-button-group" aria-label={this.label}>
+        <div class="usa-button-group">
           <div class="usa-button-group__item">
             <va-button
               disable-analytics={disableAnalytics}
