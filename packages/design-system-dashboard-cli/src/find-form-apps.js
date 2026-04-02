@@ -24,7 +24,8 @@ function extractFormNumber(manifest) {
     /\((\d{2}[A-Z]?-\d{4,5})\)/i,                       // In parentheses: (21P-0537)
     /\b(\d{2}-\d{4,5}[A-Z0-9]*)\b/i,                    // Full format: 22-1995, 40-10007, 21-10210
     /\b(\d{2}[A-Z]-\d{4,5}[A-Z0-9]*)\b/i,               // With letter: 21P-0537, 21P-0847
-    /\b(\d{2,3}-\d{2,3}[A-Z]{2,})\b/i,                  // 10-10EZ format
+    /\b(\d{2,3}-\d{2,3}[A-Z]{2,})\b/i,                  // 10-10EZ, 10-10CG format (2+ letter suffix)
+    /\b(\d{2,3}-\d{2,3}[A-Z])\b/i,                      // 10-10D format (single letter suffix)
     /\bform[- ]?(\d{1,3}[A-Z]?-\d{1,5}[A-Z0-9]*)\b/i,  // "form-21-4142" or "form 20-0995"
     /\b(\d{4,5}[A-Z]{2,})\b/,                           // Compact: 1010EZ, 527EZ
     /\b(\d{4,5}[Mm]\d?)\b/,                             // Medallion forms: 1330M, 1330M2

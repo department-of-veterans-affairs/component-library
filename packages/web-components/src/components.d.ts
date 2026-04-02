@@ -23,6 +23,7 @@ export namespace Components {
      * @accordionItemToggled This event is fired when an accordion item is opened or closed
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref accordion
      * @translations English
      * @translations Spanish
      * @translations Tagalog
@@ -71,6 +72,7 @@ export namespace Components {
      * @componentName Additional info
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref additional-info
      */
     interface VaAdditionalInfo {
         /**
@@ -90,6 +92,7 @@ export namespace Components {
      * @componentName Alert
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref alert
      */
     interface VaAlert {
         /**
@@ -181,6 +184,7 @@ export namespace Components {
      * @componentName Back to top
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref back-to-top
      */
     interface VaBackToTop {
     }
@@ -188,6 +192,7 @@ export namespace Components {
      * @componentName Banner
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref banner
      */
     interface VaBanner {
         /**
@@ -227,6 +232,7 @@ export namespace Components {
      * @componentName Breadcrumbs
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref breadcrumbs
      */
     interface VaBreadcrumbs {
         /**
@@ -259,6 +265,7 @@ export namespace Components {
      * @nativeHandler onClick
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref button
      */
     interface VaButton {
         /**
@@ -319,6 +326,7 @@ export namespace Components {
      * @nativeHandler onClick
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref button/button-icon
      */
     interface VaButtonIcon {
         "buttonType": keyof typeof this.buttonTypeMap;
@@ -399,6 +407,7 @@ export namespace Components {
      * @componentName Card
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref card
      */
     interface VaCard {
         /**
@@ -668,6 +677,7 @@ export namespace Components {
      * @componentName Critical Action
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref critical-action
      */
     interface VaCriticalAction {
         /**
@@ -727,6 +737,22 @@ export namespace Components {
         "value"?: string;
     }
     /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref details
+     */
+    interface VaDetails {
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: 'xl' | '2xl' | undefined;
+    }
+    /**
      * @componentName File input
      * @maturityCategory caution
      * @maturityLevel available
@@ -737,6 +763,10 @@ export namespace Components {
           * A comma-separated list of unique file type specifiers.
          */
         "accept"?: string;
+        /**
+          * When false, the component will render a "Submit password" button in addition to the password input field for encrypted files. When true, only the password input field will be rendered for encrypted files.
+         */
+        "disablePasswordSubmitButtonPattern"?: boolean;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
@@ -782,7 +812,7 @@ export namespace Components {
          */
         "passwordError"?: string;
         /**
-          * Denotes if user submission of encrypted file password was successful.
+          * Denotes if user submission of encrypted file password was successful. Use of this prop is required, unless `disablePasswordSubmitButtonPattern` is true.
          */
         "passwordSubmissionSuccess"?: null | boolean;
         /**
@@ -827,6 +857,10 @@ export namespace Components {
           * Defines acceptable file types the user can select; uses file type or extensions.
          */
         "accept"?: string;
+        /**
+          * When true, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+         */
+        "disablePasswordSubmitButtonPattern"?: boolean;
         /**
           * If enabled, emits custom analytics events when file changes occur.
          */
@@ -918,6 +952,7 @@ export namespace Components {
      * @componentName Icon
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref icon
      */
     interface VaIcon {
         /**
@@ -941,6 +976,7 @@ export namespace Components {
      * @componentName Language Toggle
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref language-toggle
      */
     interface VaLanguageToggle {
         /**
@@ -968,6 +1004,7 @@ export namespace Components {
      * @componentName Link
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref link
      */
     interface VaLink {
         /**
@@ -1084,6 +1121,7 @@ export namespace Components {
      * @componentName Loading indicator
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref loading-indicator
      */
     interface VaLoadingIndicator {
         /**
@@ -1107,6 +1145,7 @@ export namespace Components {
      * @componentName Banner - Maintenance
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref banner/maintenance
      */
     interface VaMaintenanceBanner {
         /**
@@ -1235,6 +1274,7 @@ export namespace Components {
      * @componentName Minimal Footer
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref minimal-footer
      */
     interface VaMinimalFooter {
     }
@@ -1244,6 +1284,7 @@ export namespace Components {
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref modal
      */
     interface VaModal {
         /**
@@ -1304,6 +1345,7 @@ export namespace Components {
      * @componentName Notification
      * @maturityCategory dont_use
      * @maturityLevel deprecated
+     * @guidanceHref notification
      */
     interface VaNotification {
         /**
@@ -1359,6 +1401,7 @@ export namespace Components {
      * @componentName Banner - Official Gov
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref banner/official
      */
     interface VaOfficialGovBanner {
         /**
@@ -1374,6 +1417,7 @@ export namespace Components {
      * @componentName OMB info
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref omb-info
      */
     interface VaOmbInfo {
         /**
@@ -1405,6 +1449,7 @@ export namespace Components {
      * @componentName On this page
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref on-this-page
      * @translations English
      * @translations Spanish
      * @translations Tagalog
@@ -1415,6 +1460,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * CSS selectors for H2 elements that should be excluded from the list.  Accepts either a string array property or a JSON string attribute value. For example: exclude-selectors='["va-alert h2", ".my-heading"]' or excludeSelectors={["va-alert h2", ".my-heading"]}
+         */
+        "excludeSelectors"?: string[] | string;
+        /**
           * Header level. Must be between 1 and 6
          */
         "headerLevel"?: number;
@@ -1423,6 +1472,7 @@ export namespace Components {
      * @componentName Pagination
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref pagination
      */
     interface VaPagination {
         /**
@@ -1450,6 +1500,7 @@ export namespace Components {
      * @componentName Privacy agreement
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref privacy-agreement
      */
     interface VaPrivacyAgreement {
         /**
@@ -1469,6 +1520,7 @@ export namespace Components {
      * @componentName Process list
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref process-list
      */
     interface VaProcessList {
     }
@@ -1502,6 +1554,7 @@ export namespace Components {
      * @componentName Progress bar - activity
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref progress-bar
      */
     interface VaProgressBar {
         /**
@@ -1636,6 +1689,7 @@ export namespace Components {
      * @componentName Search Filter
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref search-filter
      */
     interface VaSearchFilter {
         /**
@@ -1651,6 +1705,7 @@ export namespace Components {
      * @componentName Search input
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref search-input
      */
     interface VaSearchInput {
         /**
@@ -1825,6 +1880,7 @@ export namespace Components {
      * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref service-list-item
      */
     interface VaServiceListItem {
         /**
@@ -1864,6 +1920,7 @@ export namespace Components {
      * @componentName Side Navigation
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref sidenav
      */
     interface VaSidenav {
         /**
@@ -1927,6 +1984,7 @@ export namespace Components {
      * @componentName Sort
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref sort
      */
     interface VaSort {
         /**
@@ -1954,6 +2012,7 @@ export namespace Components {
      * @componentName Statement of truth
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref statement-of-truth
      */
     interface VaStatementOfTruth {
         /**
@@ -1997,6 +2056,7 @@ export namespace Components {
      * @componentName Summary box
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref summary-box
      */
     interface VaSummaryBox {
     }
@@ -2028,6 +2088,7 @@ export namespace Components {
      * @componentName Table
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref table
      */
     interface VaTable {
         /**
@@ -2133,6 +2194,7 @@ export namespace Components {
      * @componentName Tabs
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tabs
      */
     interface VaTabs {
         /**
@@ -2168,6 +2230,7 @@ export namespace Components {
      * @componentName Telephone
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref telephone
      */
     interface VaTelephone {
         /**
@@ -2674,6 +2737,7 @@ declare global {
      * @accordionItemToggled This event is fired when an accordion item is opened or closed
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref accordion
      * @translations English
      * @translations Spanish
      * @translations Tagalog
@@ -2716,6 +2780,7 @@ declare global {
      * @componentName Additional info
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref additional-info
      */
     interface HTMLVaAdditionalInfoElement extends Components.VaAdditionalInfo, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaAdditionalInfoElementEventMap>(type: K, listener: (this: HTMLVaAdditionalInfoElement, ev: VaAdditionalInfoCustomEvent<HTMLVaAdditionalInfoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2740,6 +2805,7 @@ declare global {
      * @componentName Alert
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref alert
      */
     interface HTMLVaAlertElement extends Components.VaAlert, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaAlertElementEventMap>(type: K, listener: (this: HTMLVaAlertElement, ev: VaAlertCustomEvent<HTMLVaAlertElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2794,6 +2860,7 @@ declare global {
      * @componentName Back to top
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref back-to-top
      */
     interface HTMLVaBackToTopElement extends Components.VaBackToTop, HTMLStencilElement {
     }
@@ -2808,6 +2875,7 @@ declare global {
      * @componentName Banner
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref banner
      */
     interface HTMLVaBannerElement extends Components.VaBanner, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaBannerElementEventMap>(type: K, listener: (this: HTMLVaBannerElement, ev: VaBannerCustomEvent<HTMLVaBannerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2831,6 +2899,7 @@ declare global {
      * @componentName Breadcrumbs
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref breadcrumbs
      */
     interface HTMLVaBreadcrumbsElement extends Components.VaBreadcrumbs, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaBreadcrumbsElementEventMap>(type: K, listener: (this: HTMLVaBreadcrumbsElement, ev: VaBreadcrumbsCustomEvent<HTMLVaBreadcrumbsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2854,6 +2923,7 @@ declare global {
      * @nativeHandler onClick
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref button
      */
     interface HTMLVaButtonElement extends Components.VaButton, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaButtonElementEventMap>(type: K, listener: (this: HTMLVaButtonElement, ev: VaButtonCustomEvent<HTMLVaButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2877,6 +2947,7 @@ declare global {
      * @nativeHandler onClick
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref button/button-icon
      */
     interface HTMLVaButtonIconElement extends Components.VaButtonIcon, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaButtonIconElementEventMap>(type: K, listener: (this: HTMLVaButtonIconElement, ev: VaButtonIconCustomEvent<HTMLVaButtonIconElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2945,6 +3016,7 @@ declare global {
      * @componentName Card
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref card
      */
     interface HTMLVaCardElement extends Components.VaCard, HTMLStencilElement {
     }
@@ -3060,6 +3132,7 @@ declare global {
      * @componentName Critical Action
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref critical-action
      */
     interface HTMLVaCriticalActionElement extends Components.VaCriticalAction, HTMLStencilElement {
     }
@@ -3092,8 +3165,21 @@ declare global {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
     };
+    /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref details
+     */
+    interface HTMLVaDetailsElement extends Components.VaDetails, HTMLStencilElement {
+    }
+    var HTMLVaDetailsElement: {
+        prototype: HTMLVaDetailsElement;
+        new (): HTMLVaDetailsElement;
+    };
     interface HTMLVaFileInputElementEventMap {
         "vaChange": any;
+        "vaPasswordChange": any;
         "vaPasswordSubmit": any;
         "vaFileInputError": any;
         "component-library-analytics": any;
@@ -3160,6 +3246,7 @@ declare global {
      * @componentName Icon
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref icon
      */
     interface HTMLVaIconElement extends Components.VaIcon, HTMLStencilElement {
     }
@@ -3175,6 +3262,7 @@ declare global {
      * @componentName Language Toggle
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref language-toggle
      */
     interface HTMLVaLanguageToggleElement extends Components.VaLanguageToggle, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaLanguageToggleElementEventMap>(type: K, listener: (this: HTMLVaLanguageToggleElement, ev: VaLanguageToggleCustomEvent<HTMLVaLanguageToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3197,6 +3285,7 @@ declare global {
      * @componentName Link
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref link
      */
     interface HTMLVaLinkElement extends Components.VaLink, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaLinkElementEventMap>(type: K, listener: (this: HTMLVaLinkElement, ev: VaLinkCustomEvent<HTMLVaLinkElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3243,6 +3332,7 @@ declare global {
      * @componentName Loading indicator
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref loading-indicator
      */
     interface HTMLVaLoadingIndicatorElement extends Components.VaLoadingIndicator, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaLoadingIndicatorElementEventMap>(type: K, listener: (this: HTMLVaLoadingIndicatorElement, ev: VaLoadingIndicatorCustomEvent<HTMLVaLoadingIndicatorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3266,6 +3356,7 @@ declare global {
      * @componentName Banner - Maintenance
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref banner/maintenance
      */
     interface HTMLVaMaintenanceBannerElement extends Components.VaMaintenanceBanner, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaMaintenanceBannerElementEventMap>(type: K, listener: (this: HTMLVaMaintenanceBannerElement, ev: VaMaintenanceBannerCustomEvent<HTMLVaMaintenanceBannerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3312,6 +3403,7 @@ declare global {
      * @componentName Minimal Footer
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref minimal-footer
      */
     interface HTMLVaMinimalFooterElement extends Components.VaMinimalFooter, HTMLStencilElement {
     }
@@ -3331,6 +3423,7 @@ declare global {
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref modal
      */
     interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaModalElementEventMap>(type: K, listener: (this: HTMLVaModalElement, ev: VaModalCustomEvent<HTMLVaModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3366,6 +3459,7 @@ declare global {
      * @componentName Notification
      * @maturityCategory dont_use
      * @maturityLevel deprecated
+     * @guidanceHref notification
      */
     interface HTMLVaNotificationElement extends Components.VaNotification, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaNotificationElementEventMap>(type: K, listener: (this: HTMLVaNotificationElement, ev: VaNotificationCustomEvent<HTMLVaNotificationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3388,6 +3482,7 @@ declare global {
      * @componentName Banner - Official Gov
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref banner/official
      */
     interface HTMLVaOfficialGovBannerElement extends Components.VaOfficialGovBanner, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaOfficialGovBannerElementEventMap>(type: K, listener: (this: HTMLVaOfficialGovBannerElement, ev: VaOfficialGovBannerCustomEvent<HTMLVaOfficialGovBannerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3407,6 +3502,7 @@ declare global {
      * @componentName OMB info
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref omb-info
      */
     interface HTMLVaOmbInfoElement extends Components.VaOmbInfo, HTMLStencilElement {
     }
@@ -3421,6 +3517,7 @@ declare global {
      * @componentName On this page
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref on-this-page
      * @translations English
      * @translations Spanish
      * @translations Tagalog
@@ -3447,6 +3544,7 @@ declare global {
      * @componentName Pagination
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref pagination
      */
     interface HTMLVaPaginationElement extends Components.VaPagination, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaPaginationElementEventMap>(type: K, listener: (this: HTMLVaPaginationElement, ev: VaPaginationCustomEvent<HTMLVaPaginationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3470,6 +3568,7 @@ declare global {
      * @componentName Privacy agreement
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref privacy-agreement
      */
     interface HTMLVaPrivacyAgreementElement extends Components.VaPrivacyAgreement, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaPrivacyAgreementElementEventMap>(type: K, listener: (this: HTMLVaPrivacyAgreementElement, ev: VaPrivacyAgreementCustomEvent<HTMLVaPrivacyAgreementElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3489,6 +3588,7 @@ declare global {
      * @componentName Process list
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref process-list
      */
     interface HTMLVaProcessListElement extends Components.VaProcessList, HTMLStencilElement {
     }
@@ -3509,6 +3609,7 @@ declare global {
      * @componentName Progress bar - activity
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref progress-bar
      */
     interface HTMLVaProgressBarElement extends Components.VaProgressBar, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaProgressBarElementEventMap>(type: K, listener: (this: HTMLVaProgressBarElement, ev: VaProgressBarCustomEvent<HTMLVaProgressBarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3603,6 +3704,7 @@ declare global {
      * @componentName Search Filter
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref search-filter
      */
     interface HTMLVaSearchFilterElement extends Components.VaSearchFilter, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaSearchFilterElementEventMap>(type: K, listener: (this: HTMLVaSearchFilterElement, ev: VaSearchFilterCustomEvent<HTMLVaSearchFilterElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3625,6 +3727,7 @@ declare global {
      * @componentName Search input
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref search-input
      */
     interface HTMLVaSearchInputElement extends Components.VaSearchInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaSearchInputElementEventMap>(type: K, listener: (this: HTMLVaSearchInputElement, ev: VaSearchInputCustomEvent<HTMLVaSearchInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3696,6 +3799,7 @@ declare global {
      * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref service-list-item
      */
     interface HTMLVaServiceListItemElement extends Components.VaServiceListItem, HTMLStencilElement {
     }
@@ -3707,6 +3811,7 @@ declare global {
      * @componentName Side Navigation
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref sidenav
      */
     interface HTMLVaSidenavElement extends Components.VaSidenav, HTMLStencilElement {
     }
@@ -3758,6 +3863,7 @@ declare global {
      * @componentName Sort
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref sort
      */
     interface HTMLVaSortElement extends Components.VaSort, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaSortElementEventMap>(type: K, listener: (this: HTMLVaSortElement, ev: VaSortCustomEvent<HTMLVaSortElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3782,6 +3888,7 @@ declare global {
      * @componentName Statement of truth
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref statement-of-truth
      */
     interface HTMLVaStatementOfTruthElement extends Components.VaStatementOfTruth, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaStatementOfTruthElementEventMap>(type: K, listener: (this: HTMLVaStatementOfTruthElement, ev: VaStatementOfTruthCustomEvent<HTMLVaStatementOfTruthElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3801,6 +3908,7 @@ declare global {
      * @componentName Summary box
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref summary-box
      */
     interface HTMLVaSummaryBoxElement extends Components.VaSummaryBox, HTMLStencilElement {
     }
@@ -3836,6 +3944,7 @@ declare global {
      * @componentName Table
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref table
      */
     interface HTMLVaTableElement extends Components.VaTable, HTMLStencilElement {
     }
@@ -3875,6 +3984,7 @@ declare global {
      * @componentName Tabs
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tabs
      */
     interface HTMLVaTabsElement extends Components.VaTabs, HTMLStencilElement {
     }
@@ -3901,6 +4011,7 @@ declare global {
      * @componentName Telephone
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref telephone
      */
     interface HTMLVaTelephoneElement extends Components.VaTelephone, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVaTelephoneElementEventMap>(type: K, listener: (this: HTMLVaTelephoneElement, ev: VaTelephoneCustomEvent<HTMLVaTelephoneElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -4018,6 +4129,7 @@ declare global {
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-critical-action": HTMLVaCriticalActionElement;
         "va-date": HTMLVaDateElement;
+        "va-details": HTMLVaDetailsElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
@@ -4073,6 +4185,7 @@ declare namespace LocalJSX {
      * @accordionItemToggled This event is fired when an accordion item is opened or closed
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref accordion
      * @translations English
      * @translations Spanish
      * @translations Tagalog
@@ -4133,6 +4246,7 @@ declare namespace LocalJSX {
      * @componentName Additional info
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref additional-info
      */
     interface VaAdditionalInfo {
         /**
@@ -4156,6 +4270,7 @@ declare namespace LocalJSX {
      * @componentName Alert
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref alert
      */
     interface VaAlert {
         /**
@@ -4263,6 +4378,7 @@ declare namespace LocalJSX {
      * @componentName Back to top
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref back-to-top
      */
     interface VaBackToTop {
     }
@@ -4270,6 +4386,7 @@ declare namespace LocalJSX {
      * @componentName Banner
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref banner
      */
     interface VaBanner {
         /**
@@ -4313,6 +4430,7 @@ declare namespace LocalJSX {
      * @componentName Breadcrumbs
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref breadcrumbs
      */
     interface VaBreadcrumbs {
         /**
@@ -4353,6 +4471,7 @@ declare namespace LocalJSX {
      * @nativeHandler onClick
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref button
      */
     interface VaButton {
         /**
@@ -4417,6 +4536,7 @@ declare namespace LocalJSX {
      * @nativeHandler onClick
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref button/button-icon
      */
     interface VaButtonIcon {
         "buttonType"?: keyof typeof this.buttonTypeMap;
@@ -4521,6 +4641,7 @@ declare namespace LocalJSX {
      * @componentName Card
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref card
      */
     interface VaCard {
         /**
@@ -4806,6 +4927,7 @@ declare namespace LocalJSX {
      * @componentName Critical Action
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref critical-action
      */
     interface VaCriticalAction {
         /**
@@ -4877,6 +4999,22 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * @componentName Details
+     * @maturityCategory caution
+     * @maturityLevel candidate
+     * @guidanceHref details
+     */
+    interface VaDetails {
+        /**
+          * The text for the summary element that triggers the details to expand.
+         */
+        "label": string;
+        /**
+          * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+         */
+        "width"?: 'xl' | '2xl' | undefined;
+    }
+    /**
      * @componentName File input
      * @maturityCategory caution
      * @maturityLevel available
@@ -4887,6 +5025,10 @@ declare namespace LocalJSX {
           * A comma-separated list of unique file type specifiers.
          */
         "accept"?: string;
+        /**
+          * When false, the component will render a "Submit password" button in addition to the password input field for encrypted files. When true, only the password input field will be rendered for encrypted files.
+         */
+        "disablePasswordSubmitButtonPattern"?: boolean;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
@@ -4940,6 +5082,10 @@ declare namespace LocalJSX {
          */
         "onVaFileInputError"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * The event emitted when the file input password value changes when `disablePasswordSubmitButtonPattern` is true.
+         */
+        "onVaPasswordChange"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
           * The event emitted when the file input password is submitted.
          */
         "onVaPasswordSubmit"?: (event: VaFileInputCustomEvent<any>) => void;
@@ -4948,7 +5094,7 @@ declare namespace LocalJSX {
          */
         "passwordError"?: string;
         /**
-          * Denotes if user submission of encrypted file password was successful.
+          * Denotes if user submission of encrypted file password was successful. Use of this prop is required, unless `disablePasswordSubmitButtonPattern` is true.
          */
         "passwordSubmissionSuccess"?: null | boolean;
         /**
@@ -4993,6 +5139,10 @@ declare namespace LocalJSX {
           * Defines acceptable file types the user can select; uses file type or extensions.
          */
         "accept"?: string;
+        /**
+          * When true, the child instances of va-file-input will not render a "Submit password" button in addition to the password input field for encrypted files.
+         */
+        "disablePasswordSubmitButtonPattern"?: boolean;
         /**
           * If enabled, emits custom analytics events when file changes occur.
          */
@@ -5092,6 +5242,7 @@ declare namespace LocalJSX {
      * @componentName Icon
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref icon
      */
     interface VaIcon {
         /**
@@ -5115,6 +5266,7 @@ declare namespace LocalJSX {
      * @componentName Language Toggle
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref language-toggle
      */
     interface VaLanguageToggle {
         /**
@@ -5150,6 +5302,7 @@ declare namespace LocalJSX {
      * @componentName Link
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref link
      */
     interface VaLink {
         /**
@@ -5274,6 +5427,7 @@ declare namespace LocalJSX {
      * @componentName Loading indicator
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref loading-indicator
      */
     interface VaLoadingIndicator {
         /**
@@ -5301,6 +5455,7 @@ declare namespace LocalJSX {
      * @componentName Banner - Maintenance
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref banner/maintenance
      */
     interface VaMaintenanceBanner {
         /**
@@ -5449,6 +5604,7 @@ declare namespace LocalJSX {
      * @componentName Minimal Footer
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref minimal-footer
      */
     interface VaMinimalFooter {
     }
@@ -5458,6 +5614,7 @@ declare namespace LocalJSX {
      * @componentName Modal
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref modal
      */
     interface VaModal {
         /**
@@ -5534,6 +5691,7 @@ declare namespace LocalJSX {
      * @componentName Notification
      * @maturityCategory dont_use
      * @maturityLevel deprecated
+     * @guidanceHref notification
      */
     interface VaNotification {
         /**
@@ -5597,6 +5755,7 @@ declare namespace LocalJSX {
      * @componentName Banner - Official Gov
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref banner/official
      */
     interface VaOfficialGovBanner {
         /**
@@ -5616,6 +5775,7 @@ declare namespace LocalJSX {
      * @componentName OMB info
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref omb-info
      */
     interface VaOmbInfo {
         /**
@@ -5647,6 +5807,7 @@ declare namespace LocalJSX {
      * @componentName On this page
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref on-this-page
      * @translations English
      * @translations Spanish
      * @translations Tagalog
@@ -5656,6 +5817,10 @@ declare namespace LocalJSX {
           * If true, analytics event will not be fired
          */
         "disableAnalytics"?: boolean;
+        /**
+          * CSS selectors for H2 elements that should be excluded from the list.  Accepts either a string array property or a JSON string attribute value. For example: exclude-selectors='["va-alert h2", ".my-heading"]' or excludeSelectors={["va-alert h2", ".my-heading"]}
+         */
+        "excludeSelectors"?: string[] | string;
         /**
           * Header level. Must be between 1 and 6
          */
@@ -5669,6 +5834,7 @@ declare namespace LocalJSX {
      * @componentName Pagination
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref pagination
      */
     interface VaPagination {
         /**
@@ -5704,6 +5870,7 @@ declare namespace LocalJSX {
      * @componentName Privacy agreement
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref privacy-agreement
      */
     interface VaPrivacyAgreement {
         /**
@@ -5731,6 +5898,7 @@ declare namespace LocalJSX {
      * @componentName Process list
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref process-list
      */
     interface VaProcessList {
     }
@@ -5764,6 +5932,7 @@ declare namespace LocalJSX {
      * @componentName Progress bar - activity
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref progress-bar
      */
     interface VaProgressBar {
         /**
@@ -5922,6 +6091,7 @@ declare namespace LocalJSX {
      * @componentName Search Filter
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref search-filter
      */
     interface VaSearchFilter {
         /**
@@ -5949,6 +6119,7 @@ declare namespace LocalJSX {
      * @componentName Search input
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref search-input
      */
     interface VaSearchInput {
         /**
@@ -6147,6 +6318,7 @@ declare namespace LocalJSX {
      * @componentName Service List Item
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref service-list-item
      */
     interface VaServiceListItem {
         /**
@@ -6186,6 +6358,7 @@ declare namespace LocalJSX {
      * @componentName Side Navigation
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref sidenav
      */
     interface VaSidenav {
         /**
@@ -6257,6 +6430,7 @@ declare namespace LocalJSX {
      * @componentName Sort
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref sort
      */
     interface VaSort {
         /**
@@ -6300,6 +6474,7 @@ declare namespace LocalJSX {
      * @componentName Statement of truth
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref statement-of-truth
      */
     interface VaStatementOfTruth {
         /**
@@ -6355,6 +6530,7 @@ declare namespace LocalJSX {
      * @componentName Summary box
      * @maturityCategory use
      * @maturityLevel deployed
+     * @guidanceHref summary-box
      */
     interface VaSummaryBox {
     }
@@ -6394,6 +6570,7 @@ declare namespace LocalJSX {
      * @componentName Table
      * @maturityCategory caution
      * @maturityLevel available
+     * @guidanceHref table
      */
     interface VaTable {
         /**
@@ -6503,6 +6680,7 @@ declare namespace LocalJSX {
      * @componentName Tabs
      * @maturityCategory caution
      * @maturityLevel candidate
+     * @guidanceHref tabs
      */
     interface VaTabs {
         /**
@@ -6538,6 +6716,7 @@ declare namespace LocalJSX {
      * @componentName Telephone
      * @maturityCategory use
      * @maturityLevel best_practice
+     * @guidanceHref telephone
      */
     interface VaTelephone {
         /**
@@ -6887,6 +7066,7 @@ declare namespace LocalJSX {
         "va-crisis-line-modal": VaCrisisLineModal;
         "va-critical-action": VaCriticalAction;
         "va-date": VaDate;
+        "va-details": VaDetails;
         "va-file-input": VaFileInput;
         "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
@@ -6945,6 +7125,7 @@ declare module "@stencil/core" {
              * @accordionItemToggled This event is fired when an accordion item is opened or closed
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref accordion
              * @translations English
              * @translations Spanish
              * @translations Tagalog
@@ -6955,12 +7136,14 @@ declare module "@stencil/core" {
              * @componentName Additional info
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref additional-info
              */
             "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
             /**
              * @componentName Alert
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref alert
              */
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             /**
@@ -6981,18 +7164,21 @@ declare module "@stencil/core" {
              * @componentName Back to top
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref back-to-top
              */
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             /**
              * @componentName Banner
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref banner
              */
             "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             /**
              * @componentName Breadcrumbs
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref breadcrumbs
              */
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             /**
@@ -7000,6 +7186,7 @@ declare module "@stencil/core" {
              * @nativeHandler onClick
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref button
              */
             "va-button": LocalJSX.VaButton & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
             /**
@@ -7007,6 +7194,7 @@ declare module "@stencil/core" {
              * @nativeHandler onClick
              * @maturityCategory caution
              * @maturityLevel available
+             * @guidanceHref button/button-icon
              */
             "va-button-icon": LocalJSX.VaButtonIcon & JSXBase.HTMLAttributes<HTMLVaButtonIconElement>;
             /**
@@ -7027,6 +7215,7 @@ declare module "@stencil/core" {
              * @componentName Card
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref card
              */
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
             /**
@@ -7078,6 +7267,7 @@ declare module "@stencil/core" {
              * @componentName Critical Action
              * @maturityCategory caution
              * @maturityLevel candidate
+             * @guidanceHref critical-action
              */
             "va-critical-action": LocalJSX.VaCriticalAction & JSXBase.HTMLAttributes<HTMLVaCriticalActionElement>;
             /**
@@ -7087,6 +7277,13 @@ declare module "@stencil/core" {
              * @guidanceHref form/date-input
              */
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
+            /**
+             * @componentName Details
+             * @maturityCategory caution
+             * @maturityLevel candidate
+             * @guidanceHref details
+             */
+            "va-details": LocalJSX.VaDetails & JSXBase.HTMLAttributes<HTMLVaDetailsElement>;
             /**
              * @componentName File input
              * @maturityCategory caution
@@ -7114,18 +7311,21 @@ declare module "@stencil/core" {
              * @componentName Icon
              * @maturityCategory caution
              * @maturityLevel available
+             * @guidanceHref icon
              */
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             /**
              * @componentName Language Toggle
              * @maturityCategory caution
              * @maturityLevel available
+             * @guidanceHref language-toggle
              */
             "va-language-toggle": LocalJSX.VaLanguageToggle & JSXBase.HTMLAttributes<HTMLVaLanguageToggleElement>;
             /**
              * @componentName Link
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref link
              */
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             /**
@@ -7140,12 +7340,14 @@ declare module "@stencil/core" {
              * @componentName Loading indicator
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref loading-indicator
              */
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             /**
              * @componentName Banner - Maintenance
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref banner/maintenance
              */
             "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             /**
@@ -7161,6 +7363,7 @@ declare module "@stencil/core" {
              * @componentName Minimal Footer
              * @maturityCategory caution
              * @maturityLevel available
+             * @guidanceHref minimal-footer
              */
             "va-minimal-footer": LocalJSX.VaMinimalFooter & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
             /**
@@ -7169,6 +7372,7 @@ declare module "@stencil/core" {
              * @componentName Modal
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref modal
              */
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             /**
@@ -7182,24 +7386,28 @@ declare module "@stencil/core" {
              * @componentName Notification
              * @maturityCategory dont_use
              * @maturityLevel deprecated
+             * @guidanceHref notification
              */
             "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
             /**
              * @componentName Banner - Official Gov
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref banner/official
              */
             "va-official-gov-banner": LocalJSX.VaOfficialGovBanner & JSXBase.HTMLAttributes<HTMLVaOfficialGovBannerElement>;
             /**
              * @componentName OMB info
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref omb-info
              */
             "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
             /**
              * @componentName On this page
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref on-this-page
              * @translations English
              * @translations Spanish
              * @translations Tagalog
@@ -7209,18 +7417,21 @@ declare module "@stencil/core" {
              * @componentName Pagination
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref pagination
              */
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             /**
              * @componentName Privacy agreement
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref privacy-agreement
              */
             "va-privacy-agreement": LocalJSX.VaPrivacyAgreement & JSXBase.HTMLAttributes<HTMLVaPrivacyAgreementElement>;
             /**
              * @componentName Process list
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref process-list
              */
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
             "va-process-list-item": LocalJSX.VaProcessListItem & JSXBase.HTMLAttributes<HTMLVaProcessListItemElement>;
@@ -7228,6 +7439,7 @@ declare module "@stencil/core" {
              * @componentName Progress bar - activity
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref progress-bar
              */
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             /**
@@ -7254,12 +7466,14 @@ declare module "@stencil/core" {
              * @componentName Search Filter
              * @maturityCategory caution
              * @maturityLevel candidate
+             * @guidanceHref search-filter
              */
             "va-search-filter": LocalJSX.VaSearchFilter & JSXBase.HTMLAttributes<HTMLVaSearchFilterElement>;
             /**
              * @componentName Search input
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref search-input
              */
             "va-search-input": LocalJSX.VaSearchInput & JSXBase.HTMLAttributes<HTMLVaSearchInputElement>;
             /**
@@ -7283,12 +7497,14 @@ declare module "@stencil/core" {
              * @componentName Service List Item
              * @maturityCategory caution
              * @maturityLevel candidate
+             * @guidanceHref service-list-item
              */
             "va-service-list-item": LocalJSX.VaServiceListItem & JSXBase.HTMLAttributes<HTMLVaServiceListItemElement>;
             /**
              * @componentName Side Navigation
              * @maturityCategory caution
              * @maturityLevel candidate
+             * @guidanceHref sidenav
              */
             "va-sidenav": LocalJSX.VaSidenav & JSXBase.HTMLAttributes<HTMLVaSidenavElement>;
             "va-sidenav-item": LocalJSX.VaSidenavItem & JSXBase.HTMLAttributes<HTMLVaSidenavItemElement>;
@@ -7297,18 +7513,21 @@ declare module "@stencil/core" {
              * @componentName Sort
              * @maturityCategory caution
              * @maturityLevel available
+             * @guidanceHref sort
              */
             "va-sort": LocalJSX.VaSort & JSXBase.HTMLAttributes<HTMLVaSortElement>;
             /**
              * @componentName Statement of truth
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref statement-of-truth
              */
             "va-statement-of-truth": LocalJSX.VaStatementOfTruth & JSXBase.HTMLAttributes<HTMLVaStatementOfTruthElement>;
             /**
              * @componentName Summary box
              * @maturityCategory use
              * @maturityLevel deployed
+             * @guidanceHref summary-box
              */
             "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
             "va-tab-item": LocalJSX.VaTabItem & JSXBase.HTMLAttributes<HTMLVaTabItemElement>;
@@ -7317,6 +7536,7 @@ declare module "@stencil/core" {
              * @componentName Table
              * @maturityCategory caution
              * @maturityLevel available
+             * @guidanceHref table
              */
             "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
             /**
@@ -7330,6 +7550,7 @@ declare module "@stencil/core" {
              * @componentName Tabs
              * @maturityCategory caution
              * @maturityLevel candidate
+             * @guidanceHref tabs
              */
             "va-tabs": LocalJSX.VaTabs & JSXBase.HTMLAttributes<HTMLVaTabsElement>;
             /**
@@ -7343,6 +7564,7 @@ declare module "@stencil/core" {
              * @componentName Telephone
              * @maturityCategory use
              * @maturityLevel best_practice
+             * @guidanceHref telephone
              */
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             /**

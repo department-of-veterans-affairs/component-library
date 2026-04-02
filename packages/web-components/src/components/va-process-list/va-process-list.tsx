@@ -4,6 +4,7 @@ import { Component, h } from '@stencil/core';
  * @componentName Process list
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @guidanceHref process-list
  */
 @Component({
   tag: 'va-process-list',

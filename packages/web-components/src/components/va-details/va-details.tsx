@@ -1,0 +1,138 @@
+import {
+  Component,
+  Element,
+  Host,
+  h,
+  Prop,
+  State,
+} from '@stencil/core';
+import classNames from 'classnames';
+
+/**
+ * @componentName Details
+ * @maturityCategory caution
+ * @maturityLevel candidate
+ * @guidanceHref details
+ */
+
+@Component({
+  tag: 'va-details',
+  styleUrl: 'va-details.scss',
+  shadow: true,
+})
+export class VaDetails {
+  @Element() el: HTMLElement;
+
+  /**
+   * The text for the summary element that triggers the details to expand.
+   */
+  @Prop() label!: string;
+
+  /**
+   * Displays the component at a specific width. Accepts xl (40ex) or 2xl (50ex).
+   */
+  @Prop() width?: 'xl' | '2xl' | undefined;
+
+  /**
+   * Internal open state.
+   *
+   * Note: this is intentionally not exposed as a public `@Prop` so downstream
+   * teams cannot control the open/closed state via attribute/property.
+   */
+  @State() isOpen: boolean = false;
+
+  /**
+   * A flag to indicate whether the first node in the slot is an element or not.
+   * This is used to conditionally apply a class for styling purposes.
+   */
+  @State() firstNodeIsElement: boolean = false;
+
+  /**
+   * When the slot changes check if the first child of the slot is an element
+   * rather than text, and set a flag to true if it is. This is used to
+   * conditionally apply a class to the content container that adds extra top
+   * padding.
+   * @returns {void}
+   */
+  private inspectSlot(): void {
+    const detailsSlot = this.el.shadowRoot.querySelector('slot') as HTMLSlotElement;
+    const detailsSlotAssignedNodes = detailsSlot?.assignedNodes({ flatten: true }) || [];
+
+    const firstMeaningfulNode = detailsSlotAssignedNodes.find(
+      node => node.nodeType !== Node.TEXT_NODE || node.textContent?.trim(),
+    );
+
+    this.firstNodeIsElement = firstMeaningfulNode?.nodeType === Node.ELEMENT_NODE;
+  }
+
+  /**
+   * Handle toggle of the details element
+   * Delay added to allow VoiceOver to announce state before DOM changes
+   *
+   * NOTE: This functionality is necessary to resolve a bug on iOS/Voiceover
+   * where the details element will not open from user interactions. From our
+   * testing, manually manipulating the open attribute of the element is the
+   * best way to get around this bug. If the bug within VoiceOver is resolved,
+   * we can remove this function and simply allow the details element to handle
+   * its own open state as it normally would.
+   */
+  private handleToggle = (e: Event): void => {
+    e.preventDefault();
+    // Small delay to allow screen readers to announce before DOM changes
+    setTimeout(() => {
+      this.isOpen = !this.isOpen;
+    }, 100);
+  };
+
+  /**
+   * Handle keyboard events for accessibility
+   *
+   * NOTE: This functionality is necessary to resolve a bug on iOS/Voiceover
+   * where the details element will not open from user interactions. From our
+   * testing, manually manipulating the open attribute of the element is the
+   * best way to get around this bug. If the bug within VoiceOver is resolved,
+   * we can remove this function and simply allow the details element to handle
+   * its own open state as it normally would.
+   */
+  private handleKeyDown = (event: KeyboardEvent): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.handleToggle(event);
+    }
+  };
+
+  render() {
+    const { label, width } = this;
+
+    if (!label) { return null; }
+
+    const validatedWidth = ['xl', '2xl'].includes(width) ? width : undefined;
+
+    const detailsClass = classNames({
+      'va-details': true,
+      [`usa-input--${validatedWidth}`]: validatedWidth,
+    });
+
+    const contentContainerClass = classNames({
+      'va-details__content': true,
+      'va-details__content--element-child': this.firstNodeIsElement,
+    });
+
+    return (
+      <Host>
+        <details class={detailsClass} open={this.isOpen}>
+          <summary
+            class="va-details__summary"
+            onClick={this.handleToggle}
+            onKeyDown={this.handleKeyDown}
+          >
+            <va-icon class="va-details__icon" icon="chevron_right"></va-icon>
+            {label}
+          </summary>
+          <div class={contentContainerClass}>
+            <slot onSlotchange={() => this.inspectSlot()}></slot>
+          </div>
+        </details>
+      </Host>
+    );
+  }
+}

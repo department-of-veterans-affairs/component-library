@@ -92,16 +92,17 @@
   .mega-menu .vetnav-panel--submenu:not([hidden]) {
     position: absolute;
     box-shadow: none;
-    width: 260px;
+    width: 16rem;
     padding: 72px 0px 0px 28px;
     white-space: normal;
+    height: 100%;
   }
   #mega-menu .vetnav-panel--submenu:not([hidden]) h3,
   .mega-menu .vetnav-panel--submenu:not([hidden]) h3 {
     display: block;
     color: #000000;
     font-family: "Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     margin-top: 4px;
     padding: 0;
@@ -128,8 +129,8 @@
   #mega-menu .vetnav-panel,
   .mega-menu .vetnav-panel {
     box-shadow: 0 7px 25px -11px #000000;
-    height: 490px;
-    width: 1008px;
+    height: 30.625rem;
+    width: 63rem;
     left: 0;
   }
   #mega-menu .vetnav-panel .mm-links,
@@ -138,12 +139,12 @@
   }
   #mega-menu .vetnav-panel .mm-link-container,
   .mega-menu .vetnav-panel .mm-link-container {
-    width: 225px;
+    width: 14.0625rem;
     margin-bottom: 0;
   }
   #mega-menu .column-one,
   .mega-menu .column-one {
-    left: 20px;
+    left: 1.25rem;
   }
   #mega-menu .column-one.panel-white,
   .mega-menu .column-one.panel-white {
@@ -153,7 +154,7 @@
   #mega-menu .column-two,
   .mega-menu .column-two {
     border-left: none;
-    left: 280px;
+    left: 17rem;
   }
   #mega-menu .column-two.panel-white,
   .mega-menu .column-two.panel-white {
@@ -164,13 +165,13 @@
   .mega-menu .column-three {
     border-left: none;
     color: #000000;
-    left: 540px;
+    left: 33rem;
     white-space: normal;
   }
   #mega-menu .column-three.vetnav-panel--submenu:not([hidden]),
   .mega-menu .column-three.vetnav-panel--submenu:not([hidden]) {
     padding: 86px 20px 20px 14px;
-    width: 240px;
+    width: 15.1rem;
   }
   #mega-menu .column-three.vetnav-panel--submenu:not([hidden]).panel-white,
   .mega-menu .column-three.vetnav-panel--submenu:not([hidden]).panel-white {
@@ -211,7 +212,7 @@
 }
 #mega-menu .main-column,
 .mega-menu .main-column {
-  left: -230px;
+  left: -14.375rem;
 }
 #mega-menu .main-column.panel-white,
 .mega-menu .main-column.panel-white {
@@ -220,8 +221,7 @@
 #mega-menu .mm-marketing-container,
 .mega-menu .mm-marketing-container {
   background-color: #ffffff;
-  height: 380px;
-  overflow: hidden;
+  max-height: 100%;
 }
 #mega-menu .mm-marketing-container.mm-marketing-gray,
 .mega-menu .mm-marketing-container.mm-marketing-gray {
@@ -233,11 +233,11 @@
 }
 #mega-menu .mm-marketing-container .mm-marketing-text a,
 .mega-menu .mm-marketing-container .mm-marketing-text a {
-  font-size: 16px;
+  font-size: 1rem;
 }
 #mega-menu .mm-marketing-container p,
 .mega-menu .mm-marketing-container p {
-  font-size: 16px;
+  font-size: 1rem;
   margin-top: 5px;
 }
 #mega-menu #vetnav-column-one-col .panel-bottom-link,
@@ -256,7 +256,7 @@
   #mega-menu .vetnav-panel--submenu:not([hidden]) h3,
   .mega-menu .vetnav-panel--submenu:not([hidden]) h3 {
     font-family: "Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
   }
 }
 #mega-menu #vetnav-menu,
@@ -272,10 +272,6 @@
 #mega-menu .my-va-top-nav.current-page,
 .mega-menu .my-va-top-nav.current-page {
   margin-left: auto;
-}
-#mega-menu .mm-marketing-container,
-.mega-menu .mm-marketing-container {
-  height: 380px;
 }
 #mega-menu .mm-marketing-container p,
 .mega-menu .mm-marketing-container p {
@@ -295,7 +291,8 @@
   #mega-menu .vetnav-panel,
   .mega-menu .vetnav-panel {
     width: 768px;
-    height: 380px;
+    height: 25.75rem;
+    overflow: auto;
   }
   #mega-menu .column-one,
   .mega-menu .column-one {
@@ -313,8 +310,8 @@
   .mega-menu .panel-bottom-link {
     position: absolute;
     height: 60px;
-    width: 471px;
-    left: 280px;
+    width: calc(768px - 18.5625rem);
+    left: 17rem;
     border-bottom: 1px solid #d0d0d0;
     z-index: 3;
     top: 0;
@@ -338,20 +335,20 @@
   #mega-menu .vetnav-panel,
   .mega-menu .vetnav-panel {
     width: 1024px;
-    height: 490px;
+    height: 30.625rem;
   }
   #mega-menu .panel-bottom-link,
   .mega-menu .panel-bottom-link {
     position: absolute;
-    width: 727px;
+    width: calc(1024px - 18.5625rem);
   }
   #mega-menu .column-one,
   .mega-menu .column-one {
-    width: 260px;
+    width: 16.25rem;
   }
   #mega-menu .column-two,
   .mega-menu .column-two {
-    width: 260px;
+    width: 16.25rem;
   }
   #mega-menu .column-three,
   .mega-menu .column-three {

@@ -7,6 +7,7 @@ import { initIconSpriteLocation } from './va-icon-global';
  * @componentName Icon
  * @maturityCategory caution
  * @maturityLevel available
+ * @guidanceHref icon
  */
 
 @Component({

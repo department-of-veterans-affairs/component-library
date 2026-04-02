@@ -21,6 +21,36 @@ export default {
   },
 };
 
+const genericHandleChange = (e: CustomEvent, currentErrorState: string[], callback: Function) => {
+  if (!callback) return;
+
+  const workingErrorState = [...currentErrorState];
+
+  const { action, index, file, state } = e.detail;
+
+  if (action === 'FILE_ADDED' && state[index].changed && workingErrorState[index]) {
+    workingErrorState[index] = '';
+    callback(workingErrorState);
+  }
+  else if (action === 'FILE_UPDATED' && file && workingErrorState[index]) {
+    workingErrorState[index] = '';
+    callback(workingErrorState);
+  }
+  else if (action === 'FILE_REMOVED' && !file) {
+    const workingErrorState = state.map(() => '');
+    workingErrorState.splice(index, 1);
+    callback(workingErrorState);
+  }
+}
+
+const genericHandleError = (e: CustomEvent, callback: Function) => {
+  if (!callback) return;
+
+  const workingErrorState = e.detail?.state.map(() => '');
+  workingErrorState[e.detail.index] = e.detail.error;
+  callback(workingErrorState);
+};
+
 const defaultArgs = {
   'label': 'Select a file to upload',
   'name': 'my-file-input',
@@ -30,12 +60,14 @@ const defaultArgs = {
   'encrypted': [],
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
-  'vaMultipleChange': null,
+  'vaMultipleChange': (e, currentErrorState, callback) => genericHandleChange(e, currentErrorState, callback),
+  'vaMultipleError': (e, callback) => genericHandleError(e, callback),
   'header-size': null,
   'children': null,
   'value': null,
   'read-only': false,
   'slotFieldIndexes': null,
+  'disablePasswordSubmitButtonPattern': false,
 };
 
 const Template = ({
@@ -48,28 +80,34 @@ const Template = ({
   hint,
   enableAnalytics,
   vaMultipleChange,
+  vaMultipleError,
   headerSize,
   value,
   readOnly,
   children,
   slotFieldIndexes,
+  disablePasswordSubmitButton,
 }) => {
+  const [errorState, setErrorState] = useState(errors);
+
   return (
     <VaFileInputMultiple
       label={label}
       name={name}
       accept={accept}
       required={required}
-      errors={errors}
+      errors={errorState}
       encrypted={encrypted}
       hint={hint}
       enable-analytics={enableAnalytics}
-      onVaMultipleChange={vaMultipleChange}
+      onVaMultipleChange={(e) => vaMultipleChange(e, errorState, setErrorState)}
+      onVaMultipleError={(e) => vaMultipleError(e, setErrorState)}
       header-size={headerSize}
       value={value}
       read-only={readOnly}
       children={children}
       slot-field-indexes={slotFieldIndexes}
+      disablePasswordSubmitButtonPattern={disablePasswordSubmitButton}
     />
   );
 };
@@ -453,7 +491,7 @@ CustomValidation.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-const EncryptedTemplate = ({ label, name }) => {
+const EncryptedTemplate = ( {label, name, disablePasswordSubmitButtonPattern }) => {
   const [trackedFiles, setTrackedFiles] = useState([]);
   const [encryptedList, setEncryptedList] = useState([]);
   const [passwordSubmissionSuccessList, setPasswordSubmissionSuccessList] = useState<boolean[]>([]);
@@ -475,10 +513,18 @@ const EncryptedTemplate = ({ label, name }) => {
     const { detail } = event;
 
     const trackedFilesToSet = [...trackedFiles];
+    const trackedPasswordSubmissionSuccessList = [
+      ...passwordSubmissionSuccessList
+    ];
+    const currentDerivedPasswordErrorList = [...derivedPasswordErrorList];
 
     // Add new file to trackedFiles if action is FILE_ADDED
     if (detail.action === 'FILE_ADDED') {
       trackedFilesToSet.push(detail.file);
+
+      if (detail.file.type === 'application/pdf') {
+        trackedPasswordSubmissionSuccessList.push(null);
+      }
     } else if (detail.action === 'FILE_UPDATED' && detail.file) {
       // If an existing file is updated successfully, replace the corresponding
       // error object in trackedFiles with the file
@@ -487,6 +533,7 @@ const EncryptedTemplate = ({ label, name }) => {
       );
       if (indexToUpdate !== -1) {
         trackedFilesToSet[indexToUpdate] = detail.file;
+        trackedPasswordSubmissionSuccessList[indexToUpdate] = null;
       }
     } else if (detail.action === 'FILE_REMOVED' && detail.file) {
       // Remove file from trackedFiles if action is FILE_REMOVED when a valid
@@ -496,6 +543,10 @@ const EncryptedTemplate = ({ label, name }) => {
       );
       if (indexToRemove !== -1) {
         trackedFilesToSet.splice(indexToRemove, 1);
+        // Remove index from success submission list and derived error list to
+        // ensure password submission/error state is cleared for deleted file
+        trackedPasswordSubmissionSuccessList.splice(indexToRemove, 1);
+        currentDerivedPasswordErrorList.splice(indexToRemove, 1);
       }
     } else if (detail.action === 'FILE_REMOVED' && !detail.file) {
       // If an error file was deleted, remove the corresponding file from
@@ -505,6 +556,20 @@ const EncryptedTemplate = ({ label, name }) => {
       );
       if (indexToRemove !== -1) {
         trackedFilesToSet.splice(indexToRemove, 1);
+        // Remove index from success submission list and derived error list to
+        // ensure password submission/error state is cleared for deleted file
+        trackedPasswordSubmissionSuccessList.splice(indexToRemove, 1);
+        currentDerivedPasswordErrorList.splice(indexToRemove, 1);
+      }
+    } else if (detail.action === 'PASSWORD_UPDATE') {
+      // Update value at index of file that password was updated to null to
+      // enable validation to take place again at va-file-input level.
+      const indexToUpdate = trackedFilesToSet.findIndex(
+        file => file.name === detail.file.name,
+      );
+
+      if (indexToUpdate !== -1) {
+        trackedPasswordSubmissionSuccessList[indexToUpdate] = null;
       }
     }
 
@@ -512,6 +577,8 @@ const EncryptedTemplate = ({ label, name }) => {
       return file.type === 'application/pdf'
     });
 
+    setPasswordSubmissionSuccessList(trackedPasswordSubmissionSuccessList);
+    setDerivedPasswordErrorList(currentDerivedPasswordErrorList);
     setEncryptedList(pdfFiles);
     setTrackedFiles(trackedFilesToSet);
   }
@@ -573,45 +640,48 @@ const EncryptedTemplate = ({ label, name }) => {
         passwordErrors={derivedPasswordErrorList}
         onVaMultipleChange={handleChange}
         onVaMultipleError={handleError}
+        disablePasswordSubmitButtonPattern={disablePasswordSubmitButtonPattern}
       />
       <hr />
 
-      <div
-        className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
-        style={{ width: 'fit-content' }}
-      >
-        <p className="vads-u-margin-y--0">
-          Simulate checking of submitted password for uploaded <strong>encrypted (PDF)</strong> files. Simulation is done
-          by updating the <code>passwordSubmissionSuccessList</code> prop based on button clicks below.
-        </p>
-        <em>Each pair of buttons controls the password submission status for the corresponding encrypted file in the file list.</em>
-        {
-          encryptedList?.length ? (
-            <ul>
-              {encryptedList.map((isEncrypted, index) => {
-                if (isEncrypted) {
-                  return (
-                    <li key={index}>
-                      <div className="vads-u-display--flex vads-u-align-items--center vads-u-gap--2 vads-u-margin-bottom--1">
-                        <p className="vads-u-margin-y--0 vads-u-margin-right--2">File {index + 1}</p>
-                        <va-button
-                            class="vads-u-margin-y--1"
-                            text="Set success"
-                            onClick={() => handlePasswordSubmissionSuccessClick(index, true)}
+      { !disablePasswordSubmitButtonPattern &&
+        (<div
+          className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin--2 vads-u-border--1px vads-u-border-color--gray-light vads-u-padding--2"
+          style={{ width: 'fit-content' }}
+        >
+          <p className="vads-u-margin-y--0">
+            Simulate checking of submitted password for uploaded <strong>encrypted (PDF)</strong> files. Simulation is done
+            by updating the <code>passwordSubmissionSuccessList</code> prop based on button clicks below.
+          </p>
+          <em>Each pair of buttons controls the password submission status for the corresponding encrypted file in the file list.</em>
+          {
+            encryptedList?.length ? (
+              <ul>
+                {encryptedList.map((isEncrypted, index) => {
+                  if (isEncrypted) {
+                    return (
+                      <li key={index}>
+                        <div className="vads-u-display--flex vads-u-align-items--center vads-u-gap--2 vads-u-margin-bottom--1">
+                          <p className="vads-u-margin-y--0 vads-u-margin-right--2">File {index + 1}</p>
+                          <va-button
+                              class="vads-u-margin-y--1"
+                              text="Set success"
+                              onClick={() => handlePasswordSubmissionSuccessClick(index, true)}
+                            />
+                          <va-button
+                            text="Set error"
+                            onClick={() => handlePasswordSubmissionSuccessClick(index, false)}
                           />
-                        <va-button
-                          text="Set error"
-                          onClick={() => handlePasswordSubmissionSuccessClick(index, false)}
-                        />
-                      </div>
-                    </li>
-                  );
-                }
-              })}
-            </ul>
-          ) : null
-        }
-      </div>
+                        </div>
+                      </li>
+                    );
+                  }
+                })}
+              </ul>
+            ) : null
+          }
+        </div>)
+      }
 
       <div>
         <p>
@@ -669,6 +739,17 @@ AcceptsFilePassword.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
+export const AcceptsFilePasswordWithoutSubmitButton = EncryptedTemplate.bind(null);
+AcceptsFilePasswordWithoutSubmitButton.args = {
+  ...defaultArgs,
+  disablePasswordSubmitButtonPattern: true,
+};
+// Snapshots disabled because visual difference is only apparent after interaction.
+// TODO: Enable snapshots after integrating Storybook play function
+AcceptsFilePasswordWithoutSubmitButton.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 const FilesUploadedTemplate = args => {
   const [mockFiles, setMockFiles] = useState(null);
 
@@ -707,22 +788,10 @@ ReadOnly.args = {
 };
 
 const readOnlyAdditionalInfoContent = (
-  <div>
-    <va-select
-      label="What kind of file is this?"
-      name="fileType"
-      required
-      inert
-      value="1"
-    >
-      <option key="1" value="1">
-        Public Document
-      </option>
-      <option key="2" value="2">
-        Private Document
-      </option>
-    </va-select>
-  </div>
+  <dl>
+    <dt style={{ marginTop: '1rem' }}>What kind of file is this?</dt>
+    <dd style={{ marginTop: '.5rem', marginLeft: '0' }}>Public Document</dd>
+  </dl>
 );
 
 export const ReadOnlyWithAdditionalInputs = FilesUploadedTemplate.bind(null);

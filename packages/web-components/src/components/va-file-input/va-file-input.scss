@@ -20,6 +20,10 @@
   .label-header {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-normal);
+
+    label.usa-label--error {
+      margin-top: 1.5rem;
+    }
   }
 
   .label-header-tag {
@@ -166,6 +170,14 @@
     /* These rules are required for interactive children (e.g., buttons, inputs) to be clickable */
     position: relative;
     z-index: 2;
+  }
+
+  va-text-input {
+    margin-top: 1.5rem;
+  }
+
+  div.password-input-section va-text-input {
+    margin-top: 0;
   }
 
   .file-button-section {
