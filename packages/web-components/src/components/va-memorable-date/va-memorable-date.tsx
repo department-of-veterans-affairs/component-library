@@ -559,7 +559,7 @@ export class VaMemorableDate {
             <span id="error-message" role="alert">
               {_error && (
                 <Fragment>
-                  <span class="usa-sr-only">{i18next.t('error ')}</span>
+                  <span class="usa-sr-only">{i18next.t('error')}</span>
                   <span class="usa-error-message">
                     {getErrorMessage(_error)}
                   </span>

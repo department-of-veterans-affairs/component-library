@@ -194,16 +194,41 @@ export function validate({
   monthOptional,
   validateAll,
 }: ValidateConfig): void {
+
+if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
+    yearTouched && validateAll && (component.invalidMonth || component.invalidDay || component.invalidYear)) {
+    component.invalidMonth = true
+    component.invalidDay = true;
+    component.invalidYear = true;
+    component.error = 'date-error';
+    return;
+  }
+
   // Don't validate if all values are empty
   if (!year && !month && !day) {
     return;
   }
+
   const maxDays = daysForSelectedMonth(year, month);
 
   // Reset previous invalid states
   component.invalidYear = false;
   component.invalidMonth = false;
   component.invalidDay = false;
+
+   // Allow year only. No validation needed for month.
+  if (monthYearOnly && monthOptional && !month && year && yearTouched && monthTouched) {
+    if ((year < minYear || year > maxYear)) {
+      component.invalidYear = true;
+      component.error = 'year-range';
+      return;
+    }
+
+    if (year && !component.invalidYear) {
+      component.error = null;
+      return
+    }
+  }
 
   const monthRequired = !(monthYearOnly && monthOptional);
   // Check NaN and set errors based on NaN values
@@ -241,6 +266,28 @@ export function validate({
       component.error = 'date-error';
       return;
     }
+  }
+
+  let incompleteDate = false;
+
+  //Incomplete date
+  if (validateAll && ((monthTouched && month) || (dayTouched && day) || (yearTouched && year)) && (!monthTouched || !dayTouched || !yearTouched)) {
+    if (!month) { 
+      component.invalidMonth = true;
+       component.error = 'date-error';
+       incompleteDate = true;
+    }
+    if (!day && !monthYearOnly) {
+      component.invalidDay = true;
+       component.error = 'date-error';
+       incompleteDate = true;
+    }
+    if (!year) {
+      component.invalidYear = true;
+       component.error = 'date-error';
+       incompleteDate = true;
+    }
+    if (incompleteDate) return;
   }
 
   // Check for empty values after the fields are touched

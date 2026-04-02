@@ -1173,7 +1173,7 @@ describe('va-memorable-date', () => {
       const errorSpan = await page.find(
         'va-memorable-date >>> span#error-message',
       );
-      expect(errorSpan.textContent).toContain('error date-error');
+      expect(errorSpan.textContent).toContain('errordate-error');
     });
 
     it('with monthSelect displays the correct error message', async () => {
@@ -1196,7 +1196,7 @@ describe('va-memorable-date', () => {
       const errorSpan = await page.find(
         'va-memorable-date >>> span#error-message',
       );
-      expect(errorSpan.textContent).toContain('error date-error');
+      expect(errorSpan.textContent).toContain('errordate-error');
     });
 
     it('without monthSelect allows for a custom required message', async () => {

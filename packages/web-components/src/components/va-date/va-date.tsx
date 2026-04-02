@@ -147,7 +147,11 @@ export class VaDate {
     this.value = val ? val : null;
   }
 
-  private handleDateBlur = (event: FocusEvent, validateAll: boolean = true) => {
+  private shouldValidateAll = () => {
+    return this.yearTouched && this.monthTouched && (this.dayTouched || this.monthYearOnly);
+  };
+
+  private handleDateBlur = (event: FocusEvent, validateAll: boolean) => {
     const [year, month, day] = (this.value || '')
       .split('-')
 
@@ -212,7 +216,10 @@ export class VaDate {
     const year = Number(currentYear);
     const month = Number(currentMonth);
     const day = Number(currentDay);
-    this.yearTouched = currentYear.length > 3 ? true : false;
+
+    if (currentYear.length > 3 && !this.invalidYear) {
+      this.yearTouched = true;
+    } 
 
     validate({
       component: this,
@@ -225,36 +232,33 @@ export class VaDate {
       monthSelect: true,
       monthYearOnly: this.monthYearOnly,
       monthOptional: this.monthOptional,
-      validateAll: false,
+      validateAll: this.shouldValidateAll(),
     });
 
-    if (this.error) {
-      return;
-    }
-
-    this.setValue(
+     this.setValue(
       year,
       month,
       day,
     );
 
+    if (this.error) {
+      return;
+    }
+
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
   };
 
-  private handleMonthBlur = (event: FocusEvent) => {
+  private handleMonthBlur = () => {
     this.monthTouched = true;
-    this.handleDateBlur(event, false);
   };
 
-  private handleDayBlur = (event: FocusEvent) => {
+  private handleDayBlur = () => {
     this.dayTouched = true;
-    this.handleDateBlur(event, false);
   };
 
-  private handleYearBlur = (event: FocusEvent) => {
+  private handleYearBlur = () => {
     this.yearTouched = true;
-    this.handleDateBlur(event, false);
   };
 
   render() {

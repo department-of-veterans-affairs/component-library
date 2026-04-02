@@ -158,7 +158,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('month-select');
+      expect(date.getAttribute('error')).toEqual('date-error');
     });
 
     it('allows for a custom required message', async () => {
@@ -479,7 +479,7 @@ describe('va-date', () => {
     await handleYear.press('2');
     await page.waitForChanges();
 
-    expect(spy).toHaveReceivedEventTimes(6);
+    expect(spy).toHaveReceivedEventTimes(3);
   });
 
   it('formats single digit days and months into 2 digits with a leading 0', async () => {
@@ -603,7 +603,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('month-select');
+      expect(date.getAttribute('error')).toEqual('date-error');
     });
 
     it('is valid without a day value', async () => {
@@ -675,7 +675,7 @@ describe('va-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
 
-    expect(analyticsSpy).toHaveReceivedEventTimes(2);
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'blur',
       componentName: 'va-date',
