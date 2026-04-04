@@ -633,6 +633,7 @@ export class VaModal {
                     icon={statusIcon}
                     size={4}
                   ></va-icon>
+                  Testing
                 </div>
               )}
               <div role="document">
