@@ -26,7 +26,6 @@ const defaultArgs = {
   'update': undefined,
   'left-button-text': undefined,
   'right-button-text': undefined,
-  'label': undefined,
 };
 
 const Template = ({
@@ -38,7 +37,6 @@ const Template = ({
   update,
   'left-button-text': lbText,
   'right-button-text': rbText,
-  'label': label,
   }) => {
   return (
     <div style={{ paddingLeft: '8px' }}>
@@ -53,7 +51,6 @@ const Template = ({
         update={update}
         leftButtonText={lbText}
         rightButtonText={rbText}
-        label={label}
       />
     </div>
   );
