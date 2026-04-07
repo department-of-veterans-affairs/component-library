@@ -150,6 +150,13 @@ const additionalFormInputsContent = (
   </div>
 );
 
+interface FileState {
+  file?: File | null;
+  key?: number;
+  content?: any;
+  hasError?: boolean;
+}
+
 const AdditionalFormInputsContentTemplate = ({
   label,
   name,
@@ -164,19 +171,21 @@ const AdditionalFormInputsContentTemplate = ({
 }) => {
   const componentRef = useRef(null);
 
-  // Update aria-describedby-message on va-select elements after files change
-  const handleFileData = (e: CustomEvent) => {
-    const { state } = e.detail;
+  /**
+   * Update to va-select slot elements with filenames
+   * Using mutation observer to wait for va-select elements to be available
+   * @param state - Array of file state objects
+   */
+  const syncFilenamesToSlotSelects = (state: FileState[]) => {
+    if (!componentRef.current?.shadowRoot) return;
     
-    // Wait for DOM to update, then sync all va-select elements with current state
-    setTimeout(() => {
-      if (!componentRef.current) return;
+    const observer = new MutationObserver(() => {
+      const fileInputs = componentRef.current.shadowRoot.querySelectorAll('va-file-input');
       
-      const fileInputs = Array.from(
-        componentRef.current.shadowRoot?.querySelectorAll('va-file-input') || []
-      );
+      // Count how many files should have slotted content
+      const expectedSlots = state.filter(fileData => fileData?.file).length;
+      let foundSlots = 0;
       
-      // Update each file input's va-select with the corresponding filename
       fileInputs.forEach((fileInput: HTMLElement, index: number) => {
         const vaSelect = fileInput.querySelector('va-select');
         const fileData = state[index];
@@ -184,12 +193,28 @@ const AdditionalFormInputsContentTemplate = ({
         if (vaSelect) {
           if (fileData?.file) {
             vaSelect.setAttribute('message-aria-describedby', fileData.file.name);
+            foundSlots++;
           } else {
             vaSelect.removeAttribute('message-aria-describedby');
           }
         }
       });
-    }, 100);
+      
+      // Only disconnect when all expected slotted content has been found and updated
+      if (foundSlots >= expectedSlots && expectedSlots > 0) {
+        observer.disconnect();
+      }
+    });
+    
+    observer.observe(componentRef.current.shadowRoot, {
+      childList: true,
+      subtree: true
+    });
+  };
+
+  const handleFileChange = (e: CustomEvent) => {
+    const { state } = e.detail;
+    syncFilenamesToSlotSelects(state);
   };
 
   return (
@@ -203,7 +228,7 @@ const AdditionalFormInputsContentTemplate = ({
         errors={errors}
         hint={hint}
         enable-analytics={enableAnalytics}
-        onVaMultipleChange={handleFileData}
+        onVaMultipleChange={handleFileChange}
         slot-field-indexes={slotFieldIndexes}
         header-size={headerSize}
       >
