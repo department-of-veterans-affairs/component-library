@@ -150,6 +150,12 @@ const additionalFormInputsContent = (
   </div>
 );
 
+interface FileState {
+  file?: File | null;
+  changed?: boolean;
+  hasError?: boolean;
+}
+
 const AdditionalFormInputsContentTemplate = ({
   label,
   name,
@@ -158,14 +164,61 @@ const AdditionalFormInputsContentTemplate = ({
   required,
   hint,
   'enable-analytics': enableAnalytics,
-  vaMultipleChange,
   headerSize,
   slotFieldIndexes,
   children,
 }) => {
+  const componentRef = useRef(null);
+
+  /**
+   * Add filenames as aria-describedby to va-select elements in the shadow DOM.
+   * Using mutation observer to watch for slotted content to load.
+   * @param state - Array of file state objects
+   */
+  const syncFilenamesToSelects = (state: FileState[]) => {
+    if (!componentRef.current?.shadowRoot) return;
+    
+    const observer = new MutationObserver(() => {
+      const fileInputs = componentRef.current.shadowRoot.querySelectorAll('va-file-input');
+      
+      // Check if slotted content has loaded by looking for va-select elements
+      let hasSlottedContent = false;
+      
+      fileInputs.forEach((fileInput: HTMLElement, index: number) => {
+        const vaSelect = fileInput.querySelector('va-select');
+        const fileData = state[index];
+        
+        if (vaSelect) {
+          hasSlottedContent = true;
+          if (fileData?.file) {
+            vaSelect.setAttribute('message-aria-describedby', fileData.file.name);
+          } else {
+            vaSelect.removeAttribute('message-aria-describedby');
+          }
+        }
+      });
+      
+      // Only disconnect if we found and updated slotted content
+      if (hasSlottedContent) {
+        observer.disconnect();
+      }
+    });
+    
+    observer.observe(componentRef.current.shadowRoot, {
+      childList: true,
+      subtree: true
+    });
+  };
+
+  const handleFileChange = (e: CustomEvent) => {
+    const { state } = e.detail;
+    syncFilenamesToSelects(state);
+  };
+
   return (
     <>
       <VaFileInputMultiple
+        ref={componentRef}
         label={label}
         name={name}
         accept={accept}
@@ -173,7 +226,7 @@ const AdditionalFormInputsContentTemplate = ({
         errors={errors}
         hint={hint}
         enable-analytics={enableAnalytics}
-        onVaMultipleChange={vaMultipleChange}
+        onVaMultipleChange={handleFileChange}
         slot-field-indexes={slotFieldIndexes}
         header-size={headerSize}
       >
