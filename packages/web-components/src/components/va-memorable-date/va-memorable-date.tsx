@@ -237,8 +237,14 @@ export class VaMemorableDate {
   private handleYearChange = event => {
     const target = event.target as HTMLInputElement;
     this.currentYear = target.value;
-    this.yearTouched = this.currentYear.length > 3 ? true : false;
+    if (this.currentYear.length > 3 && !this.invalidYear) {
+      this.yearTouched = true;
+    } 
     this.handleDateChange(event);
+  };
+
+  private shouldValidateAll = () => {
+    return this.yearTouched && this.monthTouched && this.dayTouched;
   };
 
   private handleDateChange = (event: InputEvent) => {
@@ -257,7 +263,7 @@ export class VaMemorableDate {
           monthTouched: this.monthTouched,
           dayTouched: this.dayTouched,
           monthSelect: this.monthSelect,
-          validateAll: false,
+          validateAll: this.shouldValidateAll(),
         });
   
         if (this.error) {
@@ -280,17 +286,17 @@ export class VaMemorableDate {
 
   private handleMonthBlur = (event: FocusEvent) => {
     this.monthTouched = true;
-    this.handleDateBlur(event, false);
+    this.handleDateBlur(event, this.shouldValidateAll());
   };
 
   private handleDayBlur = (event: FocusEvent) => {
     this.dayTouched = true;
-    this.handleDateBlur(event, false);
+    this.handleDateBlur(event, this.shouldValidateAll());
   };
 
   private handleYearBlur = (event: FocusEvent) => {
     this.yearTouched = true;
-    this.handleDateBlur(event, false);
+    this.handleDateBlur(event, this.shouldValidateAll());
   };
 
   /**

@@ -384,42 +384,42 @@ describe('validate', () => {
   });
 
   describe('errors on fields have precedence', () => {
-    it('overrides an invalid year message with an invalid month message', () => {
-      const memorableDateComponent = { error: 'year-error'}  as Components.VaMemorableDate;
-      const year = 5000;
+    it('displays last error message of invalid inputs', () => {
+      const memorableDateComponent = { error: 'day-error'}  as Components.VaMemorableDate;
       const month = null;
-      const day = 5;
-      const yearTouched = true;
+      const day = 55;
+      const year = 5000;
       const monthTouched = true;
       const dayTouched = true;
+      const yearTouched = true;
       const validateAll = true;
 
       validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched, validateAll});
 
-      expect(memorableDateComponent.error).toEqual('month-range');
-      expect(memorableDateComponent.invalidYear).toEqual(false);
+      expect(memorableDateComponent.error).toEqual('year-range');
+      expect(memorableDateComponent.invalidYear).toEqual(true);
       expect(memorableDateComponent.invalidMonth).toEqual(true);
       // invalid month sets max days to zero
-      expect(memorableDateComponent.invalidDay).toEqual(false);
+      expect(memorableDateComponent.invalidDay).toEqual(true);
     });
 
     it('overrides an invalid day message with an invalid month message', () => {
-      const memorableDateComponent = { error: 'day-error'}  as Components.VaMemorableDate;
-      const year = 2000;
+      const memorableDateComponent = { error: 'month-range'}  as Components.VaMemorableDate;
       const month = null;
       const day = 500;
-      const yearTouched = true;
+      const year = 2000;
       const monthTouched = true;
       const dayTouched = true;
+      const yearTouched = true;
       const validateAll = true;
 
       validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched, validateAll});
 
-      expect(memorableDateComponent.error).toEqual('month-range');
+      expect(memorableDateComponent.error).toEqual('day-range');
       expect(memorableDateComponent.invalidYear).toEqual(false);
       expect(memorableDateComponent.invalidMonth).toEqual(true);
       // invalid month sets max days to zero
-      expect(memorableDateComponent.invalidDay).toEqual(false);
+      expect(memorableDateComponent.invalidDay).toEqual(true);
     });
 
     it('overrides an invalid year message with an invalid day message', () => {

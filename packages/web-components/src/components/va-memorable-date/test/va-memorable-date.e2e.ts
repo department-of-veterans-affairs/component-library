@@ -266,7 +266,10 @@ describe('va-memorable-date', () => {
       await handleMonth.select('');
       await handleMonth.press('Tab');
       // Trigger Blur
-      await handleYear.press('1');
+      await handleYear.press('2');
+      await handleYear.press('0');
+      await handleYear.press('2');
+      await handleYear.press('2');
       await handleYear.press('Tab');
 
       await page.waitForChanges();
@@ -305,7 +308,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('date-error');
+      expect(date.getAttribute('error')).toEqual('year-range');
     });
 
     it('allows for a custom required message', async () => {
@@ -720,7 +723,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('2');
     await handleYear.press('2');
 
-    expect(spy).toHaveReceivedEventTimes(7);
+    expect(spy).toHaveReceivedEventTimes(4);
   });
 
   it('formats single digit days and months into 2 digits with a leading 0', async () => {
@@ -1168,12 +1171,12 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('date-error');
+      expect(date.getAttribute('error')).toEqual('year-range');
 
       const errorSpan = await page.find(
         'va-memorable-date >>> span#error-message',
       );
-      expect(errorSpan.textContent).toContain('errordate-error');
+      expect(errorSpan.textContent).toContain('erroryear-range');
     });
 
     it('with monthSelect displays the correct error message', async () => {
@@ -1191,12 +1194,12 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('date-error');
+      expect(date.getAttribute('error')).toEqual('year-range');
 
       const errorSpan = await page.find(
         'va-memorable-date >>> span#error-message',
       );
-      expect(errorSpan.textContent).toContain('errordate-error');
+      expect(errorSpan.textContent).toContain('erroryear-range');
     });
 
     it('without monthSelect allows for a custom required message', async () => {

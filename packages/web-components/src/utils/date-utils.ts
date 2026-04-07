@@ -235,17 +235,14 @@ if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
   if (monthRequired && isNaN(month) && monthTouched) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
-    return;
   }
   if (!monthYearOnly && isNaN(day) && dayTouched && day !== null) {
     component.invalidDay = true;
     component.error = 'day-range';
-    return;
   }
   if (isNaN(year) && yearTouched && year !== undefined && year !== null) {
     component.invalidYear = true;
     component.error = 'year-range';
-    return;
   }
 
   // Validate required fields
@@ -256,15 +253,12 @@ if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
     if (monthRequired && monthTouched && !month) {
       component.invalidMonth = true;
       component.error = 'date-error';
-      return;
     } else if (dayTouched && !day && !monthYearOnly) {
       component.invalidDay = true;
       component.error = 'date-error';
-      return;
     } else if (yearTouched && !year) {
       component.invalidYear = true;
       component.error = 'date-error';
-      return;
     }
   }
 
@@ -274,11 +268,11 @@ if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
   if (validateAll && ((monthTouched && month) || (dayTouched && day) || (yearTouched && year)) && (!monthTouched || !dayTouched || !yearTouched)) {
     if (!month) { 
       component.invalidMonth = true;
-       component.error = 'date-error';
-       incompleteDate = true;
+      component.error = 'date-error';
+      incompleteDate = true;
     }
     if (!day && !monthYearOnly) {
-      component.invalidDay = true;
+       component.invalidDay = true;
        component.error = 'date-error';
        incompleteDate = true;
     }
@@ -291,26 +285,17 @@ if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
   }
 
   // Check for empty values after the fields are touched
-  let emptyFields = false;
-
   if (!month && monthTouched && validateAll) {
     component.invalidMonth = true;
     component.error = getMonthErrorKey(monthSelect);
-    emptyFields = true;
   }
   if (!day && !monthYearOnly && dayTouched && validateAll) {
     component.invalidDay = true;
     component.error = 'day-range';
-    emptyFields = true;
   }
   if (!year && yearTouched && validateAll) {
     component.invalidYear = true;
     component.error = 'year-range';
-    emptyFields = true;
-  }
-
-  if (emptyFields && monthTouched && dayTouched && yearTouched && validateAll) {
-    return;
   }
 
   // Validate year, month, and day ranges if they have a value regardless of whether they are required

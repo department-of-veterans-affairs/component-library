@@ -158,7 +158,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('date-error');
+      expect(date.getAttribute('error')).toEqual('year-range');
     });
 
     it('allows for a custom required message', async () => {
