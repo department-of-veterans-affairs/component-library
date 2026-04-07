@@ -54,20 +54,3 @@
     padding-right: .4em;
   }
 }
-
-
-.va-homepage-benefits {
-  padding-bottom: scale-rem(2rem);
-  // Commenting to remove this for now because there's still a discussion about
-  // whether these links should be one column or two.
-  // Restore if we use two columns. Remove if we use one.
-  //@include media($medium-screen) {
-  //  .va-nav-linkslist {
-  //    @include span-columns(6); // Pulls from Neat
-  //  }
-  //}
-
-  li:first-child{
-    margin-top: scale-rem(1rem);
-  }
-}

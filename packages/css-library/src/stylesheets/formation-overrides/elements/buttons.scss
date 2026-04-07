@@ -82,22 +82,6 @@ button,
     background-color: tok.$vads-color-primary-darker;
   }
 
-  &.usa-button-primary-alt {
-    background-color: vars.$color-primary-alt;
-    color: vars.$color-base;
-
-    &:hover,
-    &.usa-button-hover {
-      background-color: vars.$color-primary-alt-dark;
-    }
-
-    &:active,
-    &.usa-button-active {
-      background-color: vars.$color-primary-alt-darkest;
-      color: tok.$vads-color-white;
-    }
-  }
-
   &.usa-button-secondary {
     background-color: tok.$vads-color-white;
     box-shadow: $button-stroke tok.$vads-color-link;
@@ -132,34 +116,6 @@ button,
     &.usa-button-active {
       box-shadow: $button-stroke vars.$color-gray-light;
       color: tok.$vads-color-base-lighter;
-    }
-  }
-
-  &.usa-button-gray {
-    background-color: vars.$color-gray;
-
-    &:hover,
-    &.usa-button-hover {
-      background-color: vars.$color-gray-dark;
-    }
-
-    &:active,
-    &.usa-button-active {
-      background-color: vars.$color-base;
-    }
-  }
-
-  &.usa-button-red {
-    background-color: vars.$color-secondary;
-
-    &:hover,
-    &.usa-button-hover {
-      background-color: vars.$color-secondary-dark;
-    }
-
-    &:active,
-    &.usa-button-active {
-      background-color: vars.$color-secondary-darkest;
     }
   }
 

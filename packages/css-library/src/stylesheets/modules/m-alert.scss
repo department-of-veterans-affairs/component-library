@@ -124,15 +124,6 @@
     }
   }
 
-  &-continue {
-    border-left-color: $color-green;
-
-    &::before {
-      // color: $color-green;
-      // content: "\f023";
-    }
-  }
-
   &.background-color-only {
     border-left: none;
     padding: scale-rem(2rem);
@@ -155,10 +146,6 @@ p.usa-alert-heading {
 .claims-list-alert {
   margin-bottom: 1em;
   margin-top: 0;
-}
-
-.va-alert-close-icon {
-  font-size: 1.1em !important;
 }
 
 .claims-alert-status {
@@ -202,69 +189,5 @@ p.usa-alert-heading {
 
   @include media($medium-screen) {
     flex-direction: row;
-  }
-}
-
-.usa-alert-full-width {
-  background-color: $color-gray-lightest;
-  &.dismissable-option-header {
-    display: none;
-    &.show-alert {
-      display: block;
-    }
-    &.dismissed {
-      display: none;
-    }
-  }
-  .usa-alert-dismiss {
-    position: absolute;
-    right: 0;
-    top: 5px;
-    cursor: pointer;
-  }
-  > .usa-alert {
-    border-left: none;
-    max-width: 1000px;
-    margin: 0 auto;
-    .paragraph--type--expandable-text {
-      .field--name-field-text-expander {
-        .field__label {
-          display: none;
-        }
-        .field__item {
-          font-size: scale-rem(2rem);
-          margin-top: 0;
-          padding-top: 0;
-          font-weight: 700;
-          text-decoration: underline;
-          color: #1a4480;
-          cursor: pointer;
-        }
-      }
-      .field--type-text-long {
-        display: none;
-        .field__label {
-          display: none;
-        }
-        &.expander-content-open {
-          display: block;
-        }
-      }
-    }
-  }
-  &-warning {
-    border-top: scale-rem(1rem) solid $color-gold;
-  }
-  &-info,
-  &-information {
-    border-top: scale-rem(1rem) solid $color-primary-alt-dark;
-    .usa-alert:before {
-      // content: "\F05A";
-      background: none;
-      // font-size: scale-rem(2rem);
-      // margin-right: scale-rem(1.5rem);
-      // position: static;
-      // font-weight: 900;
-    }
   }
 }
