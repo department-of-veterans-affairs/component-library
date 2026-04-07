@@ -150,12 +150,6 @@ const additionalFormInputsContent = (
   </div>
 );
 
-interface FileState {
-  file?: File | null;
-  changed?: boolean;
-  hasError?: boolean;
-}
-
 const AdditionalFormInputsContentTemplate = ({
   label,
   name,
@@ -170,26 +164,24 @@ const AdditionalFormInputsContentTemplate = ({
 }) => {
   const componentRef = useRef(null);
 
-  /**
-   * Add filenames as aria-describedby to va-select elements in the shadow DOM.
-   * Using mutation observer to watch for slotted content to load.
-   * @param state - Array of file state objects
-   */
-  const syncFilenamesToSelects = (state: FileState[]) => {
-    if (!componentRef.current?.shadowRoot) return;
+  // Update aria-describedby-message on va-select elements after files change
+  const handleFileData = (e: CustomEvent) => {
+    const { state } = e.detail;
     
-    const observer = new MutationObserver(() => {
-      const fileInputs = componentRef.current.shadowRoot.querySelectorAll('va-file-input');
+    // Wait for DOM to update, then sync all va-select elements with current state
+    setTimeout(() => {
+      if (!componentRef.current) return;
       
-      // Check if slotted content has loaded by looking for va-select elements
-      let hasSlottedContent = false;
+      const fileInputs = Array.from(
+        componentRef.current.shadowRoot?.querySelectorAll('va-file-input') || []
+      );
       
+      // Update each file input's va-select with the corresponding filename
       fileInputs.forEach((fileInput: HTMLElement, index: number) => {
         const vaSelect = fileInput.querySelector('va-select');
         const fileData = state[index];
         
         if (vaSelect) {
-          hasSlottedContent = true;
           if (fileData?.file) {
             vaSelect.setAttribute('message-aria-describedby', fileData.file.name);
           } else {
@@ -197,22 +189,7 @@ const AdditionalFormInputsContentTemplate = ({
           }
         }
       });
-      
-      // Only disconnect if we found and updated slotted content
-      if (hasSlottedContent) {
-        observer.disconnect();
-      }
-    });
-    
-    observer.observe(componentRef.current.shadowRoot, {
-      childList: true,
-      subtree: true
-    });
-  };
-
-  const handleFileChange = (e: CustomEvent) => {
-    const { state } = e.detail;
-    syncFilenamesToSelects(state);
+    }, 100);
   };
 
   return (
@@ -226,7 +203,7 @@ const AdditionalFormInputsContentTemplate = ({
         errors={errors}
         hint={hint}
         enable-analytics={enableAnalytics}
-        onVaMultipleChange={handleFileChange}
+        onVaMultipleChange={handleFileData}
         slot-field-indexes={slotFieldIndexes}
         header-size={headerSize}
       >
