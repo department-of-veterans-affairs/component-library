@@ -148,7 +148,7 @@ export class VaDate {
   }
 
   private shouldValidateAll = () => {
-    return this.yearTouched && this.monthTouched && (this.dayTouched || this.monthYearOnly);
+    return this.yearTouched && this.monthTouched && (this.dayTouched || this.monthYearOnly) || ( this.invalidYear || this.invalidMonth || this.invalidDay);
   };
 
   private handleDateBlur = (event: FocusEvent, validateAll: boolean) => {
@@ -203,10 +203,12 @@ export class VaDate {
     const target = event.target as HTMLSelectElement | HTMLInputElement;
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
     if (target.classList.contains('select-month')) {
+      this.monthTouched = true;
       currentMonth = target.value;
     }
     // This won't happen for monthYearOnly dates
     if (target.classList.contains('select-day')) {
+      this.dayTouched = true;
       currentDay = target.value;
     }
     if (target.classList.contains('input-year')) {
@@ -217,9 +219,9 @@ export class VaDate {
     const month = Number(currentMonth);
     const day = Number(currentDay);
 
-    if (currentYear.length > 3 && !this.invalidYear) {
+    if (currentYear.length > 3) {
       this.yearTouched = true;
-    } 
+    }
 
     validate({
       component: this,
@@ -321,7 +323,7 @@ export class VaDate {
               class="select-month"
               required={required}
               hideRequiredText={true}
-              error={this.monthTouched && this.invalidMonth ? error : null}
+              error={this.invalidMonth ? error : null}
               showError={false}
             >
               {months &&
@@ -344,7 +346,7 @@ export class VaDate {
                 class="select-day"
                 required={required}
                 hideRequiredText={true}
-                error={this.dayTouched && this.invalidDay ? this.error : null}
+                error={this.invalidDay ? this.error : null}
                 showError={false}
               >
                 {arrayDaysForSelectedMonth.map(day => (
@@ -366,7 +368,7 @@ export class VaDate {
               onBlur={this.handleYearBlur}
               required={required}
               hideRequiredText={true}
-              error={this.yearTouched && this.invalidYear ? error : null}
+              error={this.invalidYear ? error : null}
               show-input-error="false"
               class="input-year"
               inputmode="numeric"

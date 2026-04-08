@@ -351,6 +351,10 @@ describe('validate', () => {
 
   it('removes error indicators when the values are valid', () => {
     const memorableDateComponent = { error: 'date-error'} as Components.VaMemorableDate;
+    memorableDateComponent.invalidYear = true;
+    memorableDateComponent.invalidMonth = true;
+    memorableDateComponent.invalidDay = true;
+
     const year = 2000;
     const month = 1;
     const day = 1;
@@ -361,23 +365,6 @@ describe('validate', () => {
     validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched} );
 
     expect(memorableDateComponent.error).toEqual(null);
-    expect(memorableDateComponent.invalidYear).toEqual(false);
-    expect(memorableDateComponent.invalidMonth).toEqual(false);
-    expect(memorableDateComponent.invalidDay).toEqual(false);
-  });
-
-  it('should not remove custom error even if values are valid', () => {
-    const memorableDateComponent = { error: 'Some error'} as Components.VaMemorableDate;
-    const year = 2000;
-    const month = 1;
-    const day = 1;
-    const yearTouched = true;
-    const monthTouched = true;
-    const dayTouched = true;
-
-    validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched} );
-
-    expect(memorableDateComponent.error).toEqual('Some error');
     expect(memorableDateComponent.invalidYear).toEqual(false);
     expect(memorableDateComponent.invalidMonth).toEqual(false);
     expect(memorableDateComponent.invalidDay).toEqual(false);
@@ -423,15 +410,20 @@ describe('validate', () => {
     });
 
     it('overrides an invalid year message with an invalid day message', () => {
-      const memorableDateComponent = { error: 'day-error'}  as Components.VaMemorableDate;
+      const memorableDateComponent = { error: 'year-range'}  as Components.VaMemorableDate;
+      memorableDateComponent.invalidYear = false;
+      memorableDateComponent.invalidMonth = false;
+      memorableDateComponent.invalidDay = true;
       const year = 2000;
       const month = 1;
       const day = 500;
       const yearTouched = true;
       const monthTouched = true;
       const dayTouched = true;
+      const validateAll = true;
+      const monthYearOnly = false;
 
-      validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched });
+      validate({ component: memorableDateComponent, year, month, day, yearTouched, monthTouched, dayTouched, validateAll, monthYearOnly });
 
       expect(memorableDateComponent.error).toEqual('day-range');
       expect(memorableDateComponent.invalidYear).toEqual(false);

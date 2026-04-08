@@ -237,7 +237,7 @@ export class VaMemorableDate {
   private handleYearChange = event => {
     const target = event.target as HTMLInputElement;
     this.currentYear = target.value;
-    if (this.currentYear.length > 3 && !this.invalidYear) {
+    if (this.currentYear.length > 3) {
       this.yearTouched = true;
     } 
     this.handleDateChange(event);

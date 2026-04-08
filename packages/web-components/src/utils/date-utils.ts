@@ -194,7 +194,6 @@ export function validate({
   monthOptional,
   validateAll,
 }: ValidateConfig): void {
-
 if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
     yearTouched && validateAll && (component.invalidMonth || component.invalidDay || component.invalidYear)) {
     component.invalidMonth = true
@@ -205,16 +204,17 @@ if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
   }
 
   // Don't validate if all values are empty
-  if (!year && !month && !day) {
+  if (!year && !month && !day || (year && month && day && !component.invalidYear && !component.invalidMonth &&!component.invalidDay && component.error)) {
+    component.error = null;
     return;
   }
 
   const maxDays = daysForSelectedMonth(year, month);
 
   // Reset previous invalid states
-  component.invalidYear = false;
-  component.invalidMonth = false;
-  component.invalidDay = false;
+  component.invalidYear = !yearTouched && component.invalidYear ? true : false;
+  component.invalidMonth =  !monthTouched && component.invalidMonth ? true : false;
+  component.invalidDay = !dayTouched && component.invalidDay ? true : false;
 
    // Allow year only. No validation needed for month.
   if (monthYearOnly && monthOptional && !month && year && yearTouched && monthTouched) {
@@ -262,26 +262,20 @@ if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
     }
   }
 
-  let incompleteDate = false;
-
   //Incomplete date
   if (validateAll && ((monthTouched && month) || (dayTouched && day) || (yearTouched && year)) && (!monthTouched || !dayTouched || !yearTouched)) {
     if (!month) { 
       component.invalidMonth = true;
       component.error = 'date-error';
-      incompleteDate = true;
     }
     if (!day && !monthYearOnly) {
        component.invalidDay = true;
        component.error = 'date-error';
-       incompleteDate = true;
     }
     if (!year) {
       component.invalidYear = true;
        component.error = 'date-error';
-       incompleteDate = true;
     }
-    if (incompleteDate) return;
   }
 
   // Check for empty values after the fields are touched
@@ -333,7 +327,6 @@ if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
       component.invalidYear = true;
       component.error = 'date-error';
     }
-    return;
   }
 
   // If month and day is set but year has not been touched, set error
