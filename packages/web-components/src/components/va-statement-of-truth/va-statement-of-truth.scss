@@ -2,12 +2,13 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'uswds-utilities/src/styles/utility-fonts.scss';
 
-:host :not(h3) {
+:host :not(.headline) {
   font-size: var(--vads-font-size-source-sans-normalized);
 }
 
-:host h3 {
+:host .headline {
   font-family: var(--font-serif);
+  font-size: var(--vads-font-size-heading-level-3);
   margin: var(--units-3) 0;
 }
 

@@ -150,4 +150,100 @@ describe('va-statement-of-truth', () => {
     const checkboxLabel = await checkboxEl.getProperty('label');
     expect(checkboxLabel).toBe('test label');
   });
+
+  it('renders h3 heading by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth />');
+    const h3 = await page.find('va-statement-of-truth >>> h3');
+    expect(h3).not.toBeNull();
+    expect(h3.innerHTML).toEqual('Statement of truth');
+  });
+
+  it('renders h1 when headingLevel is 1', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth heading-level="1" />');
+    const h1 = await page.find('va-statement-of-truth >>> h1');
+    expect(h1).not.toBeNull();
+    expect(h1.innerHTML).toEqual('Statement of truth');
+  });
+
+  it('renders h2 when headingLevel is 2', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth heading-level="2" />');
+    const h2 = await page.find('va-statement-of-truth >>> h2');
+    expect(h2).not.toBeNull();
+    expect(h2.innerHTML).toEqual('Statement of truth');
+  });
+
+  it('renders h4 when headingLevel is 4', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth heading-level="4" />');
+    const h4 = await page.find('va-statement-of-truth >>> h4');
+    expect(h4).not.toBeNull();
+    expect(h4.innerHTML).toEqual('Statement of truth');
+  });
+
+  it('renders h5 when headingLevel is 5', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth heading-level="5" />');
+    const h5 = await page.find('va-statement-of-truth >>> h5');
+    expect(h5).not.toBeNull();
+    expect(h5.innerHTML).toEqual('Statement of truth');
+  });
+
+  it('renders h6 when headingLevel is 6', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth heading-level="6" />');
+    const h6 = await page.find('va-statement-of-truth >>> h6');
+    expect(h6).not.toBeNull();
+    expect(h6.innerHTML).toEqual('Statement of truth');
+  });
+
+  it('renders correct heading level with custom heading text', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-statement-of-truth heading-level="2" heading="Custom heading" />',
+    );
+    const h2 = await page.find('va-statement-of-truth >>> h2');
+    expect(h2).not.toBeNull();
+    expect(h2.innerHTML).toEqual('Custom heading');
+  });
+
+  it('falls back to h3 when headingLevel is invalid (7)', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth heading-level="7" />');
+    const h3 = await page.find('va-statement-of-truth >>> h3');
+    expect(h3).not.toBeNull();
+    expect(h3.innerHTML).toEqual('Statement of truth');
+  });
+
+  it('falls back to h3 when headingLevel is invalid (0)', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth heading-level="0" />');
+    const h3 = await page.find('va-statement-of-truth >>> h3');
+    expect(h3).not.toBeNull();
+    expect(h3.innerHTML).toEqual('Statement of truth');
+  });
+
+  it('falls back to h3 when headingLevel is invalid (negative)', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-statement-of-truth heading-level="-1" />');
+    const h3 = await page.find('va-statement-of-truth >>> h3');
+    expect(h3).not.toBeNull();
+    expect(h3.innerHTML).toEqual('Statement of truth');
+  });
+
+  it('applies consistent font size (1.25rem) to all heading levels', async () => {
+    const headingLevels = [1, 2, 3, 4, 5, 6];
+    
+    for (const level of headingLevels) {
+      const page = await newE2EPage();
+      await page.setContent(`<va-statement-of-truth heading-level="${level}" />`);
+      
+      const heading = await page.find(`va-statement-of-truth >>> h${level}`);
+      const fontSize = await heading.getComputedStyle();
+      
+      expect(fontSize.fontSize).toBe('20px'); // 1.25rem = 20px (16px base)
+    }
+  });
 });
