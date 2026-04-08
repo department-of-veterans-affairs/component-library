@@ -194,8 +194,12 @@ export function validate({
   monthOptional,
   validateAll,
 }: ValidateConfig): void {
-if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
-    yearTouched && validateAll && (component.invalidMonth || component.invalidDay || component.invalidYear)) {
+  
+  // If all inputs have been touched and all values are empty and 
+  // there is at least one invalid field, set all to invalid and show error
+if (!month && monthTouched && !day && !monthYearOnly && dayTouched && 
+  !year && yearTouched && validateAll && 
+  (component.invalidMonth || component.invalidDay || component.invalidYear)) {
     component.invalidMonth = true
     component.invalidDay = true;
     component.invalidYear = true;
@@ -204,7 +208,8 @@ if (!month && monthTouched && !day && !monthYearOnly && dayTouched && !year &&
   }
 
   // Don't validate if all values are empty
-  if (!year && !month && !day || (year && month && day && !component.invalidYear && !component.invalidMonth &&!component.invalidDay && component.error)) {
+  if (!year && !month && !day || (year && month && day && !component.invalidYear 
+    && !component.invalidMonth &&!component.invalidDay && component.error)) {
     component.error = null;
     return;
   }

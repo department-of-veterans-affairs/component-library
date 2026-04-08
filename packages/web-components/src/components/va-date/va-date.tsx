@@ -148,7 +148,14 @@ export class VaDate {
   }
 
   private shouldValidateAll = () => {
-    return this.yearTouched && this.monthTouched && (this.dayTouched || this.monthYearOnly) || ( this.invalidYear || this.invalidMonth || this.invalidDay);
+    return (
+      (this.yearTouched &&
+        this.monthTouched &&
+        (this.dayTouched || this.monthYearOnly)) ||
+      this.invalidYear ||
+      this.invalidMonth ||
+      this.invalidDay
+    );
   };
 
   private handleDateBlur = (event: FocusEvent, validateAll: boolean) => {
