@@ -8,6 +8,8 @@ import {
   EventEmitter,
 } from '@stencil/core';
 
+import { getHeaderLevel } from '../../utils/utils';
+
 /**
  * @componentName Statement of truth
  * @maturityCategory use
@@ -68,6 +70,11 @@ export class VaStatementOfTruth {
     'I certify the information above is correct and true to the best of my knowledge and belief.';
 
   /**
+   * Header level for the statement of truth headline. Must be between 1 and 6
+   */
+  @Prop() headingLevel?: number = 3;
+
+  /**
    * The event emitted when the value of the input changes
    */
   @Event({
@@ -125,6 +132,10 @@ export class VaStatementOfTruth {
       inputError,
       checkboxError,
     } = this;
+
+    // Create a header element
+    const HeaderLevel = (getHeaderLevel(this.headingLevel) || 'h3') as any;
+
     return (
       <Host>
         {!hideLegalNote && (
@@ -136,7 +147,9 @@ export class VaStatementOfTruth {
           </p>
         )}
         <article>
-          <h3>{heading}</h3>
+          <HeaderLevel class="headline">
+            {heading}
+          </HeaderLevel>
           <slot></slot>
           <p class="font-sans-6 short-line">
             I have read and accept the&nbsp;
