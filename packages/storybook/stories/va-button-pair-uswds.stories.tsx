@@ -37,7 +37,7 @@ const Template = ({
   update,
   'left-button-text': lbText,
   'right-button-text': rbText,
-}) => {
+  }) => {
   return (
     <div style={{ paddingLeft: '8px' }}>
       <VaButtonPair

@@ -162,8 +162,8 @@ export class VaButtonPair {
     if (_continue) {
       return (
         <Host>
-          <ul class="usa-button-group">
-            <li class="usa-button-group__item">
+          <div class="usa-button-group">
+            <div class="usa-button-group__item">
               <va-button
                 back
                 disable-analytics={disableAnalytics}
@@ -171,8 +171,8 @@ export class VaButtonPair {
                 onClick={handleSecondaryClick}
                 text={this.getLeftButtonText()}
               />
-            </li>
-            <li class="usa-button-group__item">
+            </div>
+            <div class="usa-button-group__item">
               <va-button
                 continue
                 disable-analytics={disableAnalytics}
@@ -181,16 +181,16 @@ export class VaButtonPair {
                 text={this.getRightButtonText()}
                 submit={submit}
               />
-            </li>
-          </ul>
+            </div>
+          </div>
         </Host>
       );
     }
 
     return (
       <Host>
-        <ul class="usa-button-group">
-          <li class="usa-button-group__item">
+        <div class="usa-button-group">
+          <div class="usa-button-group__item">
             <va-button
               disable-analytics={disableAnalytics}
               label={primaryLabel}
@@ -198,8 +198,8 @@ export class VaButtonPair {
               text={this.getLeftButtonText()}
               submit={submit}
             />
-          </li>
-          <li class="usa-button-group__item">
+          </div>
+          <div class="usa-button-group__item">
             <va-button
               disable-analytics={disableAnalytics}
               label={secondaryLabel}
@@ -207,8 +207,8 @@ export class VaButtonPair {
               secondary
               text={this.getRightButtonText()}
             />
-          </li>
-        </ul>
+          </div>
+        </div>
       </Host>
     );
   }
