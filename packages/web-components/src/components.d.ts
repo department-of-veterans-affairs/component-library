@@ -2406,6 +2406,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
+        /**
           * The max attribute specifies the maximum value for an input element if the inputmode is numeric.
          */
         "max"?: number | string;
@@ -6903,6 +6907,10 @@ declare namespace LocalJSX {
           * The label for the text input.
          */
         "label"?: string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * The max attribute specifies the maximum value for an input element if the inputmode is numeric.
          */
