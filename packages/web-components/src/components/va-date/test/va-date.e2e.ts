@@ -158,7 +158,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('month-select');
+      expect(date.getAttribute('error')).toEqual('year-range');
     });
 
     it('allows for a custom required message', async () => {
@@ -206,6 +206,44 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
       expect(date.getAttribute('error')).toEqual(null);
+    });
+
+    it('does not set an error on blur when all inputs contain valid values', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-date name="test" required />');
+    
+    const date = await page.find('va-date');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+
+    // Enter valid values for all fields
+    await handleMonth.select('7');
+    await handleDay.click({ clickCount: 3 });
+    await handleDay.select('4');
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+
+    // Trigger Blur on the last field
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    // Expect no error to be set on the component
+    expect(date.getAttribute('error')).toBe(null);
+
+    // Change month field to another valid value
+    await handleMonth.select('9');
+
+    // Trigger Blur
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    // Expect no error to be set on the component
+    expect(date.getAttribute('error')).toBe(null);
     });
 
     describe('invalid subcomponents', () => {
@@ -441,7 +479,7 @@ describe('va-date', () => {
     await handleYear.press('2');
     await page.waitForChanges();
 
-    expect(spy).toHaveReceivedEventTimes(6);
+    expect(spy).toHaveReceivedEventTimes(3);
   });
 
   it('formats single digit days and months into 2 digits with a leading 0', async () => {
@@ -642,9 +680,9 @@ describe('va-date', () => {
       action: 'blur',
       componentName: 'va-date',
       details: {
-        'day': 1,
-        'month': 2,
-        'year': 2000,
+        'day': '01',
+        'month': '02',
+        'year': '2000',
         'month-year-only': false,
       },
     });

@@ -255,7 +255,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual(`year-range`);
     });
 
-    it('does month validation without required prop', async () => {
+    it('does validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-memorable-date name="test" month-select />');
       const date = await page.find('va-memorable-date');
@@ -266,11 +266,14 @@ describe('va-memorable-date', () => {
       await handleMonth.select('');
       await handleMonth.press('Tab');
       // Trigger Blur
-      await handleYear.press('1');
+      await handleYear.press('2');
+      await handleYear.press('0');
+      await handleYear.press('2');
+      await handleYear.press('2');
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual('month-select');
+      expect(date.getAttribute('error')).toEqual('day-range');
     });
 
     it('does day validation without required prop', async () => {
@@ -305,7 +308,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('month-range');
+      expect(date.getAttribute('error')).toEqual('year-range');
     });
 
     it('allows for a custom required message', async () => {
@@ -613,7 +616,7 @@ describe('va-memorable-date', () => {
     expect(elementMonth.getAttribute('value')).toBe('7');
     expect(elementDay.getAttribute('value')).toBe('21');
     expect(elementYear.getAttribute('value')).toBe('2022');
-    expect(date.getAttribute('value')).toBe('2022-7-21');
+    expect(date.getAttribute('value')).toBe('2022-07-21');
   });
 
   it('year input only allows for 4 characters to be used', async () => {
@@ -649,6 +652,48 @@ describe('va-memorable-date', () => {
     expect(blurSpy).toHaveReceivedEvent();
   });
 
+  it('does not set an error on blur when all inputs contain valid values', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-memorable-date name="test" month-select />',
+    );
+
+    const date = await page.find('va-memorable-date');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Enter valid values for all fields
+    await handleMonth.select('7');
+    await handleDay.click({ clickCount: 3 });
+    await handleDay.press('1');
+    await handleDay.press('5');
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+
+    // Trigger Blur on the last field
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    // Expect no error to be set on the component
+    expect(date.getAttribute('error')).toBe(null);
+
+    // Change month field to another valid value
+    await handleMonth.select('9');
+
+    // Trigger Blur
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    // Expect no error to be set on the component
+    expect(date.getAttribute('error')).toBe(null);
+  });
+
   it('emits dateChange event when input value is updated', async () => {
     const page = await newE2EPage();
 
@@ -678,7 +723,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('2');
     await handleYear.press('2');
 
-    expect(spy).toHaveReceivedEventTimes(7);
+    expect(spy).toHaveReceivedEventTimes(4);
   });
 
   it('formats single digit days and months into 2 digits with a leading 0', async () => {
@@ -731,7 +776,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
 
-    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventTimes(4);
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'blur',
       componentName: 'va-memorable-date',
@@ -1126,12 +1171,12 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('month-range');
+      expect(date.getAttribute('error')).toEqual('year-range');
 
       const errorSpan = await page.find(
         'va-memorable-date >>> span#error-message',
       );
-      expect(errorSpan.textContent).toContain('month-range');
+      expect(errorSpan.textContent).toContain('erroryear-range');
     });
 
     it('with monthSelect displays the correct error message', async () => {
@@ -1149,12 +1194,12 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('month-select');
+      expect(date.getAttribute('error')).toEqual('year-range');
 
       const errorSpan = await page.find(
         'va-memorable-date >>> span#error-message',
       );
-      expect(errorSpan.textContent).toContain('month-select');
+      expect(errorSpan.textContent).toContain('erroryear-range');
     });
 
     it('without monthSelect allows for a custom required message', async () => {
@@ -1433,7 +1478,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
 
-    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventTimes(4);
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'blur',
       componentName: 'va-memorable-date',

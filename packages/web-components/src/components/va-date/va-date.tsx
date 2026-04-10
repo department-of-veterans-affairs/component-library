@@ -147,29 +147,48 @@ export class VaDate {
     this.value = val ? val : null;
   }
 
-  private handleDateBlur = (event: FocusEvent) => {
+  private shouldValidateAll = () => {
+    return (
+      (this.yearTouched &&
+        this.monthTouched &&
+        (this.dayTouched || this.monthYearOnly)) ||
+      this.invalidYear ||
+      this.invalidMonth ||
+      this.invalidDay
+    );
+  };
+
+  private handleDateBlur = (event: FocusEvent, validateAll: boolean) => {
     const [year, month, day] = (this.value || '')
       .split('-')
-      .map(val => Number(val));
+
+    const yearNum = year ? Number(year) : null;
+    const monthNum = month ? Number(month) : null;
+    const dayNum = day ? Number(day) : null;
+
+    this.yearTouched = this.yearTouched || yearNum !== null;
+    this.monthTouched = this.monthTouched || monthNum !== null;
+    this.dayTouched = this.dayTouched || dayNum !== null;
 
     validate({
       component: this,
-      year,
-      month,
-      day,
+      year: yearNum,
+      month: monthNum,
+      day: dayNum,
       yearTouched: this.yearTouched,
       monthTouched: this.monthTouched,
       dayTouched: this.dayTouched,
       monthSelect: true,
       monthYearOnly: this.monthYearOnly,
       monthOptional: this.monthOptional,
+      validateAll,
     });
 
     if (this.error) {
       return;
     }
 
-    this.setValue(year, month, day);
+    this.setValue(yearNum, monthNum, dayNum);
     this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
@@ -191,21 +210,49 @@ export class VaDate {
     const target = event.target as HTMLSelectElement | HTMLInputElement;
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
     if (target.classList.contains('select-month')) {
+      this.monthTouched = true;
       currentMonth = target.value;
     }
     // This won't happen for monthYearOnly dates
     if (target.classList.contains('select-day')) {
+      this.dayTouched = true;
       currentDay = target.value;
     }
     if (target.classList.contains('input-year')) {
       currentYear = target.value;
     }
 
-    this.setValue(
-      parseInt(currentYear),
-      parseInt(currentMonth),
-      parseInt(currentDay),
+    const year = Number(currentYear);
+    const month = Number(currentMonth);
+    const day = Number(currentDay);
+
+    if (currentYear.length > 3) {
+      this.yearTouched = true;
+    }
+
+    validate({
+      component: this,
+      year,
+      month,
+      day,
+      yearTouched: this.yearTouched,
+      monthTouched: this.monthTouched,
+      dayTouched: this.dayTouched,
+      monthSelect: true,
+      monthYearOnly: this.monthYearOnly,
+      monthOptional: this.monthOptional,
+      validateAll: this.shouldValidateAll(),
+    });
+
+     this.setValue(
+      year,
+      month,
+      day,
     );
+
+    if (this.error) {
+      return;
+    }
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
@@ -229,8 +276,8 @@ export class VaDate {
       label,
       name,
       error,
-      handleDateBlur,
       handleDateChange,
+      handleDateBlur,
       monthYearOnly,
       value,
       hint,
@@ -255,7 +302,7 @@ export class VaDate {
 
     // Fieldset has an implicit aria role of group
     return (
-      <Host onBlur={handleDateBlur}>
+      <Host onBlur={event => handleDateBlur(event, true)}>
         <fieldset>
           <legend class={legendClasses}>
             {label} {required && <span class="required">(*Required)</span>}
@@ -283,7 +330,7 @@ export class VaDate {
               class="select-month"
               required={required}
               hideRequiredText={true}
-              error={this.monthTouched && this.invalidMonth ? error : null}
+              error={this.invalidMonth ? error : null}
               showError={false}
             >
               {months &&
@@ -306,7 +353,7 @@ export class VaDate {
                 class="select-day"
                 required={required}
                 hideRequiredText={true}
-                error={this.dayTouched && this.invalidDay ? this.error : null}
+                error={this.invalidDay ? this.error : null}
                 showError={false}
               >
                 {arrayDaysForSelectedMonth.map(day => (
@@ -328,7 +375,7 @@ export class VaDate {
               onBlur={this.handleYearBlur}
               required={required}
               hideRequiredText={true}
-              error={this.yearTouched && this.invalidYear ? error : null}
+              error={this.invalidYear ? error : null}
               show-input-error="false"
               class="input-year"
               inputmode="numeric"
