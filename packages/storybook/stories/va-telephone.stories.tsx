@@ -155,7 +155,7 @@ SMS.args = {
 export const AriaDescribedBy = Template.bind(null);
 AriaDescribedBy.args = {
   ...defaultArgs,
-  'message-aria-describedby': 'Main number to facility',
+  'message-aria-describedby': 'Call to schedule',
 };
 AriaDescribedBy.parameters = {
   chromatic: { disableSnapshot: true },
