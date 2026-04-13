@@ -250,10 +250,6 @@ export class VaDate {
       day,
     );
 
-    if (this.error) {
-      return;
-    }
-
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
   };

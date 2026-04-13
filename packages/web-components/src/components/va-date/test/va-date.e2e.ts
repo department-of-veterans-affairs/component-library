@@ -479,7 +479,7 @@ describe('va-date', () => {
     await handleYear.press('2');
     await page.waitForChanges();
 
-    expect(spy).toHaveReceivedEventTimes(3);
+    expect(spy).toHaveReceivedEventTimes(6);
   });
 
   it('formats single digit days and months into 2 digits with a leading 0', async () => {
