@@ -24,7 +24,7 @@
     "fast-memoize": "2.5.2",
     "glob": "13.0.3",
     "jsonexport": "3.2.0",
-    "lodash": "4.17.23"
+    "lodash": "4.18.1"
   },
   "devDependencies": {
     "eslint": "9.26.0",
