@@ -70,7 +70,7 @@ const Template = ({
   return (
     <div>
       {messageAriaDescribedBy && messageAriaDescribedBy !== 'false' && (
-        <span>Main number to facility </span>
+        <span>Call to schedule an appointment: </span>
       )}
       <va-telephone
         contact={contact}
