@@ -404,8 +404,8 @@ export class VaTextInput {
 
   // get label content based on label string and possible labelHeaderLevel
   private getLabelContent(label: string, labelHeaderLevel: string): string | HTMLHeadingElement {
-    if (!labelHeaderLevel) return label;
     const Header = getHeaderLevel(labelHeaderLevel);
+    if (!Header) return label;
     return <Header part="header">{label}</Header>
   }
 
