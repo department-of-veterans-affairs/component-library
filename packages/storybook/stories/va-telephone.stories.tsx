@@ -70,7 +70,7 @@ const Template = ({
   return (
     <div>
       {messageAriaDescribedBy && messageAriaDescribedBy !== 'false' && (
-        <span>Main number to facility </span>
+        <span>Call to schedule an appointment: </span>
       )}
       <va-telephone
         contact={contact}
@@ -155,7 +155,7 @@ SMS.args = {
 export const AriaDescribedBy = Template.bind(null);
 AriaDescribedBy.args = {
   ...defaultArgs,
-  'message-aria-describedby': 'Call to schedule',
+  'message-aria-describedby': 'Main number to facility',
 };
 AriaDescribedBy.parameters = {
   chromatic: { disableSnapshot: true },
