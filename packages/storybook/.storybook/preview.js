@@ -118,7 +118,6 @@ export const parameters = {
   // Apply Chromatic modes globally to ALL stories
   chromatic: {
     modes: {
-      mobile: allModes['mobile'],
       desktop: allModes['desktop'],
     },
   },
