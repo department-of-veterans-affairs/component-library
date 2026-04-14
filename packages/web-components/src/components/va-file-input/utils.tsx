@@ -331,10 +331,12 @@ export function renderLabelOrHeader(
  * Renders the upload message element, which serves as the displayed prompt
  * within the file input area when it's empty.
  * @param {HTMLElement} uploadMessage - The custom upload message element, if provided.
+ * @param {Function} callback - The callback function to be invoked when the "choose file" text is clicked.
  * @returns {HTMLElement}
  */
 export function renderUploadMessage(
   uploadMessage: HTMLElement | null,
+  callback: () => void,
 ): HTMLElement {
 
   if (uploadMessage) return uploadMessage;
@@ -342,7 +344,7 @@ export function renderUploadMessage(
   return (
     <span>
       {dragFileString}
-      <span class="file-input-choose-text">{chooseFileString}</span>
+      <span class="file-input-choose-text" onClick={callback}>{chooseFileString}</span>
     </span>
   );
 }
