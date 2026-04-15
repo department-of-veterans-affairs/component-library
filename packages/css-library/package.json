@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
-  "version": "0.31.1",
+  "version": "0.31.2-rc.2",
   "description": "Department of Veterans Affairs stylesheets, tokens, and utilities",
   "packageManager": "yarn@4.2.2",
   "repository": {
@@ -16,8 +16,8 @@
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
-    "build:stylesheets": "sass --quiet-deps --load-path=./node_modules/@uswds/uswds/packages/ src/stylesheets:dist/stylesheets",
-    "build:minify": "yarn build:stylesheets --style compressed",
+    "build:stylesheets": "sass --quiet-deps --load-path=./node_modules/@uswds/uswds/packages/ src/stylesheets:dist/stylesheets && postcss dist/stylesheets/*.css --dir dist/stylesheets --no-map",
+    "build:minify": "sass --quiet-deps --load-path=./node_modules/@uswds/uswds/packages/ --style compressed src/stylesheets:dist/stylesheets && postcss dist/stylesheets/*.css --dir dist/stylesheets --no-map",
     "build:minify-core": "sass --style compressed dist/core.css:dist/core.min.css",
     "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn copy:scss-files",
     "clean-dist": "rimraf dist/*",
@@ -32,6 +32,9 @@
   "dependencies": {
     "@divriots/style-dictionary-to-figma": "0.4.0",
     "@uswds/uswds": "3.9.0",
+    "postcss": "8.5.10",
+    "postcss-cli": "11.0.1",
+    "postcss-sort-media-queries": "6.5.0",
     "rimraf": "6.1.2"
   }
 }
