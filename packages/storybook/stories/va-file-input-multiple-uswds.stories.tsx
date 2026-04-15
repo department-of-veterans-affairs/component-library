@@ -150,6 +150,13 @@ const additionalFormInputsContent = (
   </div>
 );
 
+interface FileState {
+  file?: File | null;
+  key?: number;
+  content?: any;
+  hasError?: boolean;
+}
+
 const AdditionalFormInputsContentTemplate = ({
   label,
   name,
@@ -158,14 +165,62 @@ const AdditionalFormInputsContentTemplate = ({
   required,
   hint,
   'enable-analytics': enableAnalytics,
-  vaMultipleChange,
   headerSize,
   slotFieldIndexes,
   children,
 }) => {
+  const componentRef = useRef(null);
+
+  /**
+   * Update to va-select slot elements with filenames
+   * Using mutation observer to wait for va-select elements to be available
+   * @param state - Array of file state objects
+   */
+  const syncFilenamesToSlotSelects = (state: FileState[]) => {
+    if (!componentRef.current?.shadowRoot) return;
+    
+    const observer = new MutationObserver(() => {
+      const fileInputs = componentRef.current.shadowRoot.querySelectorAll('va-file-input');
+      
+      // Count how many files should have slotted content
+      const expectedSlots = state.filter(fileData => fileData?.file).length;
+      let foundSlots = 0;
+      
+      fileInputs.forEach((fileInput: HTMLElement, index: number) => {
+        const vaSelect = fileInput.querySelector('va-select');
+        const fileData = state[index];
+        
+        if (vaSelect) {
+          if (fileData?.file) {
+            vaSelect.setAttribute('message-aria-describedby', fileData.file.name);
+            foundSlots++;
+          } else {
+            vaSelect.removeAttribute('message-aria-describedby');
+          }
+        }
+      });
+      
+      // Only disconnect when all expected slotted content has been found and updated
+      if (foundSlots >= expectedSlots && expectedSlots > 0) {
+        observer.disconnect();
+      }
+    });
+    
+    observer.observe(componentRef.current.shadowRoot, {
+      childList: true,
+      subtree: true
+    });
+  };
+
+  const handleFileChange = (e: CustomEvent) => {
+    const { state } = e.detail;
+    syncFilenamesToSlotSelects(state);
+  };
+
   return (
     <>
       <VaFileInputMultiple
+        ref={componentRef}
         label={label}
         name={name}
         accept={accept}
@@ -173,7 +228,7 @@ const AdditionalFormInputsContentTemplate = ({
         errors={errors}
         hint={hint}
         enable-analytics={enableAnalytics}
-        onVaMultipleChange={vaMultipleChange}
+        onVaMultipleChange={handleFileChange}
         slot-field-indexes={slotFieldIndexes}
         header-size={headerSize}
       >
