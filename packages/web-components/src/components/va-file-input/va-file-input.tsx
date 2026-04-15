@@ -853,7 +853,7 @@ export class VaFileInput {
               <div class={fileInputTargetClasses}>
                 <div class="file-input-box"></div>
                 <div class="file-input-instructions">
-                  {renderUploadMessage(uploadMessage, this.changeFile)}
+                  {renderUploadMessage(uploadMessage)}
                 </div>
               </div>
             </div>
