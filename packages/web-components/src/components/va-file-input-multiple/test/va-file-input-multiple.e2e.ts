@@ -24,7 +24,7 @@ describe('va-file-input-multiple', () => {
     await page.setContent(`<va-file-input-multiple />`);
 
     const fileInput = await page.find('va-file-input-multiple >>> va-file-input >>> .file-input-instructions');
-    expect(fileInput.innerHTML).toContain(`<span>Drag a file here or <span class="file-input-choose-text">choose from folder</span></span>`);
+    expect(fileInput.innerHTML).toContain(`<span aria-hidden="true">Drag a file here or <span class="file-input-choose-text">choose from folder</span></span>`);
 
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
 
