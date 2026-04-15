@@ -62,15 +62,6 @@ export class VaAccordion {
   @State() collapsed = true;
 
   /**
-   * If true, the `sectionHeading` value will be included in the aria-label for
-   * the "Expand/Collapse All" buttons, providing additional context for screen
-   * reader users. This is particularly important when there are multiple
-   * accordion groups on a single page. Requires a value for `sectionHeading` to
-   * be provided.
-   */
-  @Prop() useHeadingInToggleAllAriaLabels?: boolean = false;
-
-  /**
    * True if only a single item can be opened at once
    */
   @Prop() openSingle?: boolean = false;
@@ -82,8 +73,7 @@ export class VaAccordion {
 
   /**
    * Optional accordion section heading text. Emitted in analytics event and
-   * optionally included in the aria-label for the "Expand/Collapse All" buttons
-   * if `useHeadingInToggleAllAriaLabels` is true. Default is null.
+   * included in the aria-label for the "Expand/Collapse All" buttons.
    */
   @Prop() sectionHeading?: string = null;
 
@@ -234,10 +224,7 @@ export class VaAccordion {
   private getExpandOrCollapseBtnAriaLabel(isExpandBtn: boolean): string {
     // Return default label if sectionHeading is not provided or prop flag to
     // include it in aria-label are not truthy.
-    if (
-      !this.useHeadingInToggleAllAriaLabels ||
-      !this.sectionHeading
-    ) {
+    if (!this.sectionHeading) {
       return i18next.t(isExpandBtn ? 'expand-all-aria-label' : 'collapse-all-aria-label');
     }
 
@@ -263,15 +250,6 @@ export class VaAccordion {
     this.accordionsOpened('some');
     this.expanded = false;
     this.collapsed = false;
-
-    // Validate value useHeadingInToggleAllAriaLabels prop -
-    // sectionHeading value must be provided, if not set to false.
-    if (
-      this.useHeadingInToggleAllAriaLabels &&
-      !this.sectionHeading
-    ) {
-      this.useHeadingInToggleAllAriaLabels = false;
-    }
   }
 
   render() {

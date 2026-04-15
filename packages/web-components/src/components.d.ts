@@ -38,13 +38,9 @@ export namespace Components {
          */
         "openSingle"?: boolean;
         /**
-          * Optional accordion section heading text. Emitted in analytics event and optionally included in the aria-label for the "Expand/Collapse All" buttons if `useHeadingInToggleAllAriaLabels` is true. Default is null.
+          * Optional accordion section heading text. Emitted in analytics event and included in the aria-label for the "Expand/Collapse All" buttons.
          */
         "sectionHeading"?: string;
-        /**
-          * If true, the `sectionHeading` value will be included in the aria-label for the "Expand/Collapse All" buttons, providing additional context for screen reader users. This is particularly important when there are multiple accordion groups on a single page. Requires a value for `sectionHeading` to be provided.
-         */
-        "useHeadingInToggleAllAriaLabels"?: boolean;
     }
     interface VaAccordionItem {
         /**
@@ -4212,13 +4208,9 @@ declare namespace LocalJSX {
          */
         "openSingle"?: boolean;
         /**
-          * Optional accordion section heading text. Emitted in analytics event and optionally included in the aria-label for the "Expand/Collapse All" buttons if `useHeadingInToggleAllAriaLabels` is true. Default is null.
+          * Optional accordion section heading text. Emitted in analytics event and included in the aria-label for the "Expand/Collapse All" buttons.
          */
         "sectionHeading"?: string;
-        /**
-          * If true, the `sectionHeading` value will be included in the aria-label for the "Expand/Collapse All" buttons, providing additional context for screen reader users. This is particularly important when there are multiple accordion groups on a single page. Requires a value for `sectionHeading` to be provided.
-         */
-        "useHeadingInToggleAllAriaLabels"?: boolean;
     }
     interface VaAccordionItem {
         /**

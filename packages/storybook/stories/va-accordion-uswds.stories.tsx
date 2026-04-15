@@ -110,9 +110,6 @@ const Template = (args) => {
         section-heading={
           args['section-heading'] ? args['section-heading'] : undefined
         }
-        use-heading-in-toggle-all-aria-labels={
-          args['use-heading-in-toggle-all-aria-labels']
-        }
       >
         {args.accordionItems.map(accordion => (
           <va-accordion-item
@@ -212,9 +209,7 @@ CustomHeaderLevel.args = {
 };
 
 export const Internationalization = I18nTemplate.bind(null);
-Internationalization.args = {
-  'use-heading-in-toggle-all-aria-labels': false,
-};
+Internationalization.args = {};
 // Snapshots disabled because visual difference is only apparent after interaction.
 // TODO: Enable snapshots after integrating Storybook play function
 Internationalization.parameters = {
@@ -298,11 +293,8 @@ PrintAccordion.parameters = {
   },
 };
 
-export const WithHeadingInToggleAllAriaLabels = Template.bind(null);
-WithHeadingInToggleAllAriaLabels.args = {
-  'section-heading': 'First Three Amendments',
-  'use-heading-in-toggle-all-aria-labels': true,
-};
-WithHeadingInToggleAllAriaLabels.parameters = {
+export const WithSectionHeading = Template.bind(null);
+WithSectionHeading.args = { 'section-heading': 'First Three Amendments' };
+WithSectionHeading.parameters = {
   chromatic: { disableSnapshot: true },
 };
