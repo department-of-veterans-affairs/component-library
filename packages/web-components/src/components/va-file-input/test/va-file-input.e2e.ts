@@ -107,7 +107,7 @@ describe('va-file-input', () => {
       'va-file-input >>> .file-input-instructions',
     );
     expect(fileInput.innerHTML).toContain(
-      `<span>Drag a file here or <span class="file-input-choose-text">choose from folder</span></span>`,
+      `<span aria-hidden="true">Drag a file here or <span class="file-input-choose-text">choose from folder</span></span>`,
     );
   });
 

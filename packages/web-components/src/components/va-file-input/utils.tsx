@@ -340,7 +340,7 @@ export function renderUploadMessage(
   if (uploadMessage) return uploadMessage;
 
   return (
-    <span>
+    <span aria-hidden="true">
       {dragFileString}
       <span class="file-input-choose-text">{chooseFileString}</span>
     </span>
