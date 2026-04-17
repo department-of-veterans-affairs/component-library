@@ -34,6 +34,12 @@ This document explains the Yarn resolutions defined in the root `package.json` a
 - **Why Added**: Security fix for ReDoS vulnerability
 - **When to Remove**: When all packages naturally resolve to 5.0.1+
 
+### basic-ftp@5.2.0
+- **Why Added**: Security quarantine compliance - version 5.2.2 published 2026-04-09 (4 days ago), requires 7-day quarantine period
+- **Security Related**: Yes - 5.2.0 includes CVE-2026-27699 fix (directory traversal), published 2026-02-23 (passed quarantine)
+- **When to Remove**: After 2026-04-16 when version 5.2.2 passes 7-day security quarantine (includes additional control character injection fixes)
+- **Related Packages**: `packages/design-system-dashboard-cli`
+
 ### diff@3.5.0
 - **Why Added**: Security fix
 - **When to Remove**: When all packages naturally resolve to 3.5.0+
