@@ -130,6 +130,23 @@ const Template = ({
   );
 };
 
+export const Default = Template.bind(null);
+Default.args = { ...defaultArgs };
+Default.argTypes = propStructure(fileInputDocs);
+
+export const Required = Template.bind(null);
+Required.args = { ...defaultArgs, required: true };
+
+export const UploadedFile = Template.bind(null);
+UploadedFile.args = {
+  ...defaultArgs,
+  uploadedFile: {
+    name: 'test.jpg',
+    size: 7000,
+    type: 'JPG',
+  },
+};
+
 const FileUploadedTemplate = args => {
   const [mockFile, setMockFile] = useState(null);
 
@@ -154,62 +171,6 @@ const FileUploadedTemplate = args => {
   }, []);
 
   return <Template {...args} value={mockFile} />;
-};
-
-const PercentUploadedTemplate = args => {
-  const [percent, setPercent] = useState(null);
-  const intervalRef = useRef(null);
-
-  // Mock upload progress
-  function handleUpload(event) {
-    if (!event.detail.files.length) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-      setPercent(null);
-      return;
-    }
-
-    clearInterval(intervalRef.current);
-    setPercent(null);
-    intervalRef.current = setInterval(() => {
-      setPercent(_prev => {
-        const current = _prev ?? 0;
-        if (current >= 100) {
-          clearInterval(intervalRef.current);
-          intervalRef.current = null;
-          return 100;
-        }
-        return current + Math.random() * 4;
-      });
-    }, 100);
-
-    return () => clearInterval(intervalRef.current);
-  }
-
-  return (
-    <VaFileInput
-      {...args}
-      percentUploaded={percent}
-      onVaChange={handleUpload}
-    />
-  );
-};
-
-export const Default = Template.bind(null);
-Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(fileInputDocs);
-
-export const Required = Template.bind(null);
-Required.args = { ...defaultArgs, required: true };
-
-export const UploadedFile = Template.bind(null);
-UploadedFile.args = {
-  ...defaultArgs,
-  uploadedFile: {
-    name: 'test.jpg',
-    size: 7000,
-    type: 'JPG',
-  },
 };
 
 export const UploadStatus = FileUploadedTemplate.bind(null);
@@ -303,6 +264,45 @@ HeaderLabel.args = {
   label: 'Header label',
   headerSize: 3,
   required: true,
+};
+
+const PercentUploadedTemplate = args => {
+  const [percent, setPercent] = useState(null);
+  const intervalRef = useRef(null);
+
+  // Mock upload progress
+  function handleUpload(event) {
+    if (!event.detail.files.length) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+      setPercent(null);
+      return;
+    }
+
+    clearInterval(intervalRef.current);
+    setPercent(null);
+    intervalRef.current = setInterval(() => {
+      setPercent(_prev => {
+        const current = _prev ?? 0;
+        if (current >= 100) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+          return 100;
+        }
+        return current + Math.random() * 4;
+      });
+    }, 100);
+
+    return () => clearInterval(intervalRef.current);
+  }
+
+  return (
+    <VaFileInput
+      {...args}
+      percentUploaded={percent}
+      onVaChange={handleUpload}
+    />
+  );
 };
 
 export const WithPercentUploaded = PercentUploadedTemplate.bind(null);
