@@ -38,7 +38,7 @@ export namespace Components {
          */
         "openSingle"?: boolean;
         /**
-          * Optional accordion section heading text. Only used in analytics event. Default is null.
+          * Optional accordion section heading text. Emitted in analytics event and included in the aria-label for the "Expand/Collapse All" buttons.
          */
         "sectionHeading"?: string;
     }
@@ -4216,7 +4216,7 @@ declare namespace LocalJSX {
          */
         "openSingle"?: boolean;
         /**
-          * Optional accordion section heading text. Only used in analytics event. Default is null.
+          * Optional accordion section heading text. Emitted in analytics event and included in the aria-label for the "Expand/Collapse All" buttons.
          */
         "sectionHeading"?: string;
     }

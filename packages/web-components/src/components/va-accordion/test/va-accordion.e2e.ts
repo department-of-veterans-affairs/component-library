@@ -31,7 +31,7 @@ describe('va-accordion', () => {
     // Verify aria-labels are applied in the button shadow DOM
     const expandButton = await page.find('va-accordion >>> va-button-icon[data-testid="expand-all-accordions"] >>> button');
     const collapseButton = await page.find('va-accordion >>> va-button-icon[data-testid="collapse-all-accordions"] >>> button');
-    
+
     expect(expandButton.getAttribute('aria-label')).toBe('expand-all-aria-label');
     expect(collapseButton.getAttribute('aria-label')).toBe('collapse-all-aria-label');
   });
@@ -375,5 +375,33 @@ describe('va-accordion', () => {
         subheader: null,
       },
     });
+  });
+
+  it('includes sectionHeading in expand/collapse all button aria-labels when it is provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion section-heading="The Section Heading">
+        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+      </va-accordion>`);
+
+    const expandButton = await page.find('va-accordion >>> va-button-icon[data-testid="expand-all-accordions"] >>> button');
+    const collapseButton = await page.find('va-accordion >>> va-button-icon[data-testid="collapse-all-accordions"] >>> button');
+
+    expect(expandButton.getAttribute('aria-label')).toBe('expand-all-aria-label-section-heading');
+    expect(collapseButton.getAttribute('aria-label')).toBe('collapse-all-aria-label-section-heading');
+  });
+
+  it('uses default aria-labels for expand/collapse all buttons when sectionHeading is not provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+      </va-accordion>`);
+
+    const expandButton = await page.find('va-accordion >>> va-button-icon[data-testid="expand-all-accordions"] >>> button');
+    const collapseButton = await page.find('va-accordion >>> va-button-icon[data-testid="collapse-all-accordions"] >>> button');
+
+    expect(expandButton.getAttribute('aria-label')).toBe('expand-all-aria-label');
+    expect(collapseButton.getAttribute('aria-label')).toBe('collapse-all-aria-label');
   });
 });
