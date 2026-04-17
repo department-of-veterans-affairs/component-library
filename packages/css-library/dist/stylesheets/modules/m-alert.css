@@ -99,9 +99,6 @@
 .usa-alert-warning.background-color-only {
   background-color: #fff1d2;
 }
-.usa-alert-continue {
-  border-left-color: #008817;
-}
 .usa-alert.background-color-only {
   border-left: none;
   padding: 1.25rem;
@@ -138,10 +135,6 @@ p.usa-alert-heading {
 .claims-list-alert {
   margin-bottom: 1em;
   margin-top: 0;
-}
-
-.va-alert-close-icon {
-  font-size: 1.1em !important;
 }
 
 .claims-alert-status {
@@ -185,60 +178,6 @@ p.usa-alert-heading {
   .alert-with-details {
     flex-direction: row;
   }
-}
-
-.usa-alert-full-width {
-  background-color: #f1f1f1;
-}
-.usa-alert-full-width.dismissable-option-header {
-  display: none;
-}
-.usa-alert-full-width.dismissable-option-header.show-alert {
-  display: block;
-}
-.usa-alert-full-width.dismissable-option-header.dismissed {
-  display: none;
-}
-.usa-alert-full-width .usa-alert-dismiss {
-  position: absolute;
-  right: 0;
-  top: 5px;
-  cursor: pointer;
-}
-.usa-alert-full-width > .usa-alert {
-  border-left: none;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.usa-alert-full-width > .usa-alert .paragraph--type--expandable-text .field--name-field-text-expander .field__label {
-  display: none;
-}
-.usa-alert-full-width > .usa-alert .paragraph--type--expandable-text .field--name-field-text-expander .field__item {
-  font-size: 1.25rem;
-  margin-top: 0;
-  padding-top: 0;
-  font-weight: 700;
-  text-decoration: underline;
-  color: #1a4480;
-  cursor: pointer;
-}
-.usa-alert-full-width > .usa-alert .paragraph--type--expandable-text .field--type-text-long {
-  display: none;
-}
-.usa-alert-full-width > .usa-alert .paragraph--type--expandable-text .field--type-text-long .field__label {
-  display: none;
-}
-.usa-alert-full-width > .usa-alert .paragraph--type--expandable-text .field--type-text-long.expander-content-open {
-  display: block;
-}
-.usa-alert-full-width-warning {
-  border-top: 0.625rem solid #fdb81e;
-}
-.usa-alert-full-width-info, .usa-alert-full-width-information {
-  border-top: 0.625rem solid #00a6d2;
-}
-.usa-alert-full-width-info .usa-alert:before, .usa-alert-full-width-information .usa-alert:before {
-  background: none;
 }
 
 /*# sourceMappingURL=m-alert.css.map */

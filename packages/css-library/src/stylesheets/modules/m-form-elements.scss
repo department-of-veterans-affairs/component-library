@@ -47,14 +47,6 @@ legend.legend-label + .form-radio-buttons {
 }
 
 
-button.form-button-green {
-  background: $color-green;
-}
-
-button.form-button-disabled {
-  pointer-events: none;
-}
-
 .form-datefield-month,
 .form-datefield-day {
   clear: none;
@@ -65,10 +57,6 @@ button.form-button-disabled {
     padding-top: scale-rem(0.85rem);
     padding-bottom: scale-rem(0.85rem);
   }
-}
-
-.form-alert-body {
-  padding: scale-rule(0 3.5rem);
 }
 
 .form-datefield-month {
@@ -143,10 +131,6 @@ legend.legend-label + .form-checkbox-buttons {
     display: inline-block;
     margin: scale-rule(0 0 0 1.2rem);
   }
-}
-
-.form-field-alert label {
-  margin-top: 0.5em;
 }
 
 .form-error-date {
@@ -242,18 +226,4 @@ legend.legend-label + .form-checkbox-buttons {
 
 .form-expanding-group-open.form-expanding-group-plus::after {
     content: "-";
-}
-
-.form-errorable-group {
-  > .usa-input-error {
-    label {
-      margin-top: scale-rem(3rem);
-    }
-    .usa-input-error-label {
-      margin-top: 0;
-    }
-    .usa-input-error-message {
-      margin-bottom: scale-rem(-2rem);
-    }
-  }
 }
