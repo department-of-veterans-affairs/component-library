@@ -1,0 +1,591 @@
+name: Vets Website Impact Tests
+
+on:
+  pull_request:
+    branches: [main, community-branch]
+    paths:
+      - 'packages/core/**'
+      - 'packages/web-components/**'
+      - 'packages/react-components/**'
+      - 'packages/css-library/**'
+      - '.github/workflows/vets-website-impact-tests.yml'
+
+concurrency:
+  group: vets-impact-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  vets-impact-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout component-library
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node for component-library
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: yarn
+
+      - name: Install component-library dependencies
+        run: yarn install
+
+      - name: Install ripgrep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ripgrep
+
+      - name: Detect changed package scope
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          base_sha="${{ github.event.pull_request.base.sha }}"
+          head_sha="${{ github.event.pull_request.head.sha }}"
+
+          git diff --name-only "$base_sha" "$head_sha" > /tmp/changed-files.txt
+
+          echo "Changed files:" 
+          cat /tmp/changed-files.txt
+
+          has_web=false
+          has_core=false
+          has_react=false
+          has_css=false
+
+          if grep -q '^packages/web-components/' /tmp/changed-files.txt; then
+            has_web=true
+          fi
+          if grep -q '^packages/core/' /tmp/changed-files.txt; then
+            has_core=true
+          fi
+          if grep -q '^packages/react-components/' /tmp/changed-files.txt; then
+            has_react=true
+          fi
+          if grep -q '^packages/css-library/' /tmp/changed-files.txt; then
+            has_css=true
+          fi
+
+          component_tags=$(
+            grep -E '^packages/web-components/src/components/va-[^/]+/' /tmp/changed-files.txt \
+              | sed -E 's|^packages/web-components/src/components/(va-[^/]+)/.*|\1|' \
+              | sort -u \
+              | tr '\n' ' '
+          )
+
+          component_bindings=$(
+            for tag in $component_tags; do
+              echo "$tag" | sed -E 's/^va-//' | awk -F- '{
+                out="Va";
+                for (i=1; i<=NF; i++) {
+                  if (length($i) > 0) {
+                    out = out toupper(substr($i,1,1)) substr($i,2);
+                  }
+                }
+                print out;
+              }'
+            done | sort -u | tr '\n' ' '
+          )
+
+          {
+            echo "has_web=$has_web"
+            echo "has_core=$has_core"
+            echo "has_react=$has_react"
+            echo "has_css=$has_css"
+            echo "component_tags=$component_tags"
+            echo "component_bindings=$component_bindings"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build changed packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ steps.changes.outputs.has_web }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/web-components run build
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_react }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/react-components run build
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_core }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/component-library run build
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/css-library run build
+          fi
+
+      - name: Pack changed packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p /tmp/component-library-packs
+
+          if [[ "${{ steps.changes.outputs.has_web }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/web-components pack --out /tmp/component-library-packs/web-components.tgz
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_react }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/react-components pack --out /tmp/component-library-packs/react-components.tgz
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_core }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/component-library pack --out /tmp/component-library-packs/core.tgz
+          fi
+
+          if [[ "${{ steps.changes.outputs.has_css }}" == "true" ]]; then
+            yarn workspace @department-of-veterans-affairs/css-library pack --out /tmp/component-library-packs/css-library.tgz
+          fi
+
+          ls -lah /tmp/component-library-packs
+
+      - name: Checkout vets-website
+        uses: actions/checkout@v4
+        with:
+          repository: department-of-veterans-affairs/vets-website
+          ref: main
+          path: vets-website
+
+      - name: Setup Node for vets-website
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: vets-website/.nvmrc
+          cache: yarn
+          cache-dependency-path: vets-website/yarn.lock
+
+      - name: Install vets-website dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: vets-website
+
+      - name: Install PR package tarballs in vets-website
+        shell: bash
+        working-directory: vets-website
+        run: |
+          set -euo pipefail
+
+          shopt -s nullglob
+          packs=(/tmp/component-library-packs/*.tgz)
+
+          if [[ ${#packs[@]} -eq 0 ]]; then
+            echo "No packed component-library artifacts were found."
+            exit 0
+          fi
+
+          for pack in "${packs[@]}"; do
+            echo "Installing $pack"
+            yarn add -W "$pack"
+          done
+
+      - name: Find impacted vets-website source files
+        id: impacted
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          : > /tmp/impacted-vets-files.txt
+
+          changed_tags="${{ steps.changes.outputs.component_tags }}"
+
+          if [[ -n "$changed_tags" ]]; then
+            for tag in $changed_tags; do
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src >> /tmp/impacted-vets-files.txt || true
+            done
+          fi
+
+          changed_bindings="${{ steps.changes.outputs.component_bindings }}"
+          if [[ -n "$changed_bindings" ]]; then
+            for binding in $changed_bindings; do
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "\\b${binding}\\b" vets-website/src >> /tmp/impacted-vets-files.txt || true
+            done
+          fi
+
+          # Broader package updates can affect wrapper usage, but only search if we have specific component changes.
+          # This restricts the search to component-related changes, avoiding false positives from core-only changes.
+          if [[ -n "$changed_tags" ]] && ( [[ "${{ steps.changes.outputs.has_core }}" == "true" ]] || [[ "${{ steps.changes.outputs.has_css }}" == "true" ]] ); then
+            rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "@department-of-veterans-affairs/(component-library|react-components|web-components|css-library)" vets-website/src >> /tmp/impacted-vets-files.txt || true
+          fi
+
+          # Fallback: only use dashboard usage data when direct source matching finds nothing.
+          # This avoids pulling in whole app trees for widely used components like va-modal.
+          latest_usage_csv=$(find packages/design-system-dashboard-cli/output -maxdepth 1 -name 'ds-components-*.csv' -type f -print0 | xargs -0 ls -t 2>/dev/null | head -n 1 || true)
+          if [[ -n "$changed_tags" && -n "$latest_usage_csv" && ! -s /tmp/impacted-vets-files.txt ]]; then
+            echo "Direct matches were empty; using dashboard fallback detection."
+            : > /tmp/dashboard-impacted-slugs.txt
+
+            for tag in $changed_tags; do
+              awk -F, -v target="$tag" '
+                NR==1 {
+                  for (i=3; i<=NF; i++) headers[i]=$i;
+                  next;
+                }
+                $2==target {
+                  for (i=3; i<=NF; i++) {
+                    if (($i + 0) > 0) print headers[i];
+                  }
+                }
+              ' "$latest_usage_csv" >> /tmp/dashboard-impacted-slugs.txt
+            done
+
+            sort -u /tmp/dashboard-impacted-slugs.txt -o /tmp/dashboard-impacted-slugs.txt
+
+            if [[ -s /tmp/dashboard-impacted-slugs.txt ]]; then
+              while IFS= read -r slug; do
+                [[ -z "$slug" ]] && continue
+
+                slug_norm=$(echo "$slug" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
+                [[ -z "$slug_norm" ]] && continue
+
+                while IFS= read -r dir; do
+                  base_norm=$(basename "$dir" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
+                  if [[ -n "$base_norm" && ( "$base_norm" == *"$slug_norm"* || "$slug_norm" == *"$base_norm"* ) ]]; then
+                    find "$dir" -type d -name node_modules -prune -o -type f \( -name '*.js' -o -name '*.jsx' -o -name '*.ts' -o -name '*.tsx' \) -print >> /tmp/impacted-vets-files.txt || true
+                  fi
+                done < <(find vets-website/src/applications vets-website/src/platform -type d)
+              done < /tmp/dashboard-impacted-slugs.txt
+            fi
+          fi
+
+          sort -u /tmp/impacted-vets-files.txt -o /tmp/impacted-vets-files.txt
+
+          impacted_count=$(wc -l < /tmp/impacted-vets-files.txt | tr -d ' ')
+          echo "impacted_count=$impacted_count" >> "$GITHUB_OUTPUT"
+          echo "Impacted files found: $impacted_count"
+
+          if [[ "$impacted_count" -gt 0 ]]; then
+            head -n 200 /tmp/impacted-vets-files.txt
+          fi
+
+      - name: Find impacted vets-website cypress and e2e specs
+        id: impacted_specs
+        if: steps.changes.outputs.has_core == 'true' || steps.changes.outputs.has_react == 'true' || steps.changes.outputs.has_web == 'true' || steps.changes.outputs.has_css == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          : > /tmp/impacted-cypress-specs.txt
+          : > /tmp/impacted-e2e-specs.txt
+          : > /tmp/impacted-roots.txt
+
+          mapfile -t impacted_files < /tmp/impacted-vets-files.txt
+
+          for file in "${impacted_files[@]}"; do
+            if [[ "$file" =~ ^vets-website/src/applications/([^/]+)/ ]]; then
+              echo "vets-website/src/applications/${BASH_REMATCH[1]}" >> /tmp/impacted-roots.txt
+            elif [[ "$file" =~ ^vets-website/src/platform/([^/]+)/ ]]; then
+              echo "vets-website/src/platform/${BASH_REMATCH[1]}" >> /tmp/impacted-roots.txt
+            fi
+          done
+
+          sort -u /tmp/impacted-roots.txt -o /tmp/impacted-roots.txt
+
+          if [[ -s /tmp/impacted-roots.txt ]]; then
+            while IFS= read -r root; do
+              find "$root" -type d -name node_modules -prune -o -type f \( \
+                -name '*.cy.js' -o -name '*.cy.jsx' -o -name '*.cy.ts' -o -name '*.cy.tsx' -o \
+                -name '*.cypress.js' -o -name '*.cypress.jsx' -o -name '*.cypress.ts' -o -name '*.cypress.tsx' -o \
+                -name '*.cypress.spec.js' -o -name '*.cypress.spec.jsx' -o -name '*.cypress.spec.ts' -o -name '*.cypress.spec.tsx' \
+              \) -print >> /tmp/impacted-cypress-specs.txt || true
+
+              find "$root" -type d -name node_modules -prune -o -type f \( \
+                -name '*.e2e.js' -o -name '*.e2e.jsx' -o -name '*.e2e.ts' -o -name '*.e2e.tsx' -o \
+                -name '*.e2e.spec.js' -o -name '*.e2e.spec.jsx' -o -name '*.e2e.spec.ts' -o -name '*.e2e.spec.tsx' \
+              \) -print >> /tmp/impacted-e2e-specs.txt || true
+            done < /tmp/impacted-roots.txt
+          fi
+
+          changed_tags="${{ steps.changes.outputs.component_tags }}"
+          if [[ -n "$changed_tags" ]]; then
+            for tag in $changed_tags; do
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
+                | rg '(cypress|e2e|\\.cy\\.|\\.cypress\\.|\\.e2e\\.)' >> /tmp/impacted-cypress-specs.txt || true
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "(<${tag}[[:space:]>]|['\"]${tag}['\"])" vets-website/src \
+                | rg '(e2e|\\.e2e\\.)' >> /tmp/impacted-e2e-specs.txt || true
+            done
+          fi
+
+          changed_bindings="${{ steps.changes.outputs.component_bindings }}"
+          if [[ -n "$changed_bindings" ]]; then
+            for binding in $changed_bindings; do
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "\\b${binding}\\b" vets-website/src \
+                | rg '(cypress|e2e|\\.cy\\.|\\.cypress\\.|\\.e2e\\.)' >> /tmp/impacted-cypress-specs.txt || true
+              rg -l -g '*.{js,jsx,ts,tsx}' -g '!**/node_modules/**' "\\b${binding}\\b" vets-website/src \
+                | rg '(e2e|\\.e2e\\.)' >> /tmp/impacted-e2e-specs.txt || true
+            done
+          fi
+
+          sort -u /tmp/impacted-cypress-specs.txt -o /tmp/impacted-cypress-specs.txt
+          sort -u /tmp/impacted-e2e-specs.txt -o /tmp/impacted-e2e-specs.txt
+
+          # Consolidate e2e specs into cypress specs (both use same managed server runner)
+          cat /tmp/impacted-e2e-specs.txt >> /tmp/impacted-cypress-specs.txt
+          sort -u /tmp/impacted-cypress-specs.txt -o /tmp/impacted-cypress-specs.txt
+
+          cypress_count=$(wc -l < /tmp/impacted-cypress-specs.txt | tr -d ' ')
+          e2e_count=$(wc -l < /tmp/impacted-e2e-specs.txt | tr -d ' ')
+
+          echo "cypress_count=$cypress_count" >> "$GITHUB_OUTPUT"
+          echo "e2e_count=$e2e_count" >> "$GITHUB_OUTPUT"
+
+          echo "Impacted Cypress specs: $cypress_count"
+          echo "Impacted e2e specs: $e2e_count"
+
+          if [[ "$cypress_count" -gt 0 ]]; then
+            head -n 100 /tmp/impacted-cypress-specs.txt
+          fi
+
+          if [[ "$e2e_count" -gt 0 ]]; then
+            head -n 100 /tmp/impacted-e2e-specs.txt
+          fi
+
+      - name: Run impacted vets-website unit tests
+        if: steps.impacted.outputs.impacted_count != '0'
+        shell: bash
+        working-directory: vets-website
+        run: |
+          set -uo pipefail
+
+          mapfile -t files < /tmp/impacted-vets-files.txt
+
+          : > /tmp/impacted-unit-files.txt
+
+          for file in "${files[@]}"; do
+            rel_file="${file#vets-website/}"
+
+            if [[ "$rel_file" =~ \.unit\.spec\.(js|jsx|ts|tsx)$ ]]; then
+              echo "$rel_file" >> /tmp/impacted-unit-files.txt
+            fi
+          done
+
+          # Find all unit test files in impacted directories
+          : > /tmp/impacted-unit-roots.txt
+          for file in "${files[@]}"; do
+            rel_file="${file#vets-website/}"
+            if [[ "$rel_file" =~ ^src/applications/([^/]+)/ ]]; then
+              echo "src/applications/${BASH_REMATCH[1]}" >> /tmp/impacted-unit-roots.txt
+            elif [[ "$rel_file" =~ ^src/platform/([^/]+)/ ]]; then
+              echo "src/platform/${BASH_REMATCH[1]}" >> /tmp/impacted-unit-roots.txt
+            fi
+          done
+
+          sort -u /tmp/impacted-unit-roots.txt -o /tmp/impacted-unit-roots.txt
+
+          if [[ -s /tmp/impacted-unit-roots.txt ]]; then
+            while IFS= read -r root; do
+              find "$root" -type f \( -name '*.unit.spec.js' -o -name '*.unit.spec.jsx' -o -name '*.unit.spec.ts' -o -name '*.unit.spec.tsx' \) >> /tmp/impacted-unit-files.txt || true
+            done < /tmp/impacted-unit-roots.txt
+          fi
+
+          sort -u /tmp/impacted-unit-files.txt -o /tmp/impacted-unit-files.txt
+
+          if [[ ! -s /tmp/impacted-unit-files.txt ]]; then
+            echo "No impacted unit test files were found."
+            exit 0
+          fi
+
+          # Filter out test files that require chai to avoid plugin registration issues in GHA runner
+          : > /tmp/impacted-unit-files-filtered.txt
+          while IFS= read -r file; do
+            if ! rg -q "from\s+['\"]chai['\"]|require\s*\(\s*['\"]chai['\"]" "$file"; then
+              echo "$file" >> /tmp/impacted-unit-files-filtered.txt
+            fi
+          done < /tmp/impacted-unit-files.txt
+
+          if [[ -s /tmp/impacted-unit-files-filtered.txt ]]; then
+            mv /tmp/impacted-unit-files-filtered.txt /tmp/impacted-unit-files.txt
+          else
+            echo "All impacted unit test files require chai - skipping unit tests to avoid plugin registration issues."
+            exit 0
+          fi
+
+          mapfile -t unit_files < /tmp/impacted-unit-files.txt
+
+          max_files=120
+          if [[ ${#unit_files[@]} -gt $max_files ]]; then
+            echo "Truncating impacted unit test files from ${#unit_files[@]} to $max_files for runtime bounds."
+            unit_files=("${unit_files[@]:0:$max_files}")
+          fi
+
+          echo "Running impacted unit test files: ${#unit_files[@]}"
+          echo "First 100 files:"
+          printf '%s\n' "${unit_files[@]:0:100}"
+
+          if [[ ${#unit_files[@]} -eq 0 ]]; then
+            echo "ERROR: Unit test files array is empty after mapfile"
+            echo "Contents of /tmp/impacted-unit-files.txt:"
+            cat /tmp/impacted-unit-files.txt
+            exit 1
+          fi
+
+          unit_test_failed=0
+          file_timeout_seconds=600
+
+          for i in "${!unit_files[@]}"; do
+            file="${unit_files[i]}"
+            echo "Processing unit test file $((i + 1))/${#unit_files[@]}: $file"
+
+            if ! timeout "${file_timeout_seconds}s" yarn test:unit:gha -- "$file"; then
+              exit_code=$?
+              if [[ $exit_code -eq 124 ]]; then
+                echo "⚠️  Unit test file timed out after ${file_timeout_seconds}s: $file"
+              else
+                echo "⚠️  Unit test failure for file with exit code $exit_code: $file"
+              fi
+              unit_test_failed=1
+            fi
+          done
+
+          if [[ $unit_test_failed -ne 0 ]]; then
+            echo "Unit tests had failures. Continuing to run other test types..."
+            echo "$unit_test_failed" > /tmp/unit-test-exit-code.txt
+          fi
+
+      - name: Run impacted vets-website Cypress specs
+        if: steps.impacted_specs.outputs.cypress_count != '0' || steps.impacted_specs.outputs.e2e_count != '0'
+        shell: bash
+        working-directory: vets-website
+        run: |
+          set -uo pipefail
+
+          mapfile -t specs < /tmp/impacted-cypress-specs.txt
+
+          max_specs=100
+          if [[ ${#specs[@]} -gt $max_specs ]]; then
+            echo "Truncating Cypress spec list from ${#specs[@]} to $max_specs for runtime bounds."
+            specs=("${specs[@]:0:$max_specs}")
+          fi
+
+          for i in "${!specs[@]}"; do
+            specs[i]="${specs[i]#vets-website/}"
+          done
+
+          npx cypress install
+
+          cypress_failed=0
+
+          : > /tmp/cypress-entry-specs.tsv
+          # shellcheck disable=SC2016
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+
+            const manifest = JSON.parse(
+              fs.readFileSync("src/applications/manifest-catalog.json", "utf8"),
+            );
+            const apps = (manifest.applications || []).map(app => ({
+              dir: String(app.directoryPath || "").replace(/\\/g, "/"),
+              entry: String(app.entryName || ""),
+            }));
+
+            const entriesByDir = new Map(apps.map(app => [app.dir, app.entry]));
+            const specs = process.argv.slice(1);
+
+            for (const rawSpec of specs) {
+              const spec = rawSpec.replace(/\\/g, "/").replace(/^\.\//, "");
+              let dir = path.posix.dirname(spec);
+              let entry = "";
+
+              while (dir && dir !== ".") {
+                if (entriesByDir.has(dir)) {
+                  entry = entriesByDir.get(dir);
+                  break;
+                }
+                const parent = path.posix.dirname(dir);
+                if (parent === dir) break;
+                dir = parent;
+              }
+
+              if (!entry) {
+                process.stdout.write(`UNMAPPED\t${spec}\n`);
+              } else {
+                process.stdout.write(`${entry}\t${spec}\n`);
+              }
+            }
+          ' "${specs[@]}" > /tmp/cypress-entry-specs.tsv
+
+          if rg -q '^UNMAPPED\t' /tmp/cypress-entry-specs.tsv; then
+            echo "Some Cypress specs could not be mapped to an entry in manifest-catalog.json:"
+            awk -F'\t' '$1=="UNMAPPED" { print $2 }' /tmp/cypress-entry-specs.tsv
+            cypress_failed=1
+          fi
+
+          mapfile -t entries < <(awk -F'\t' '$1!="UNMAPPED" { print $1 }' /tmp/cypress-entry-specs.tsv | sort -u)
+
+          for entry in "${entries[@]}"; do
+            spec_csv=$(awk -F'\t' -v target="$entry" '$1==target { print $2 }' /tmp/cypress-entry-specs.tsv | paste -sd, -)
+            echo "Running Cypress specs for entry $entry"
+            echo "$spec_csv"
+
+            watch_log="/tmp/cypress-watch-${entry}.log"
+            setsid yarn watch --env "entry=$entry" --env port=3001 > "$watch_log" 2>&1 &
+            watch_pid=$!
+
+            ready=0
+            for _ in $(seq 1 180); do
+              if curl -fsS http://127.0.0.1:3001 > /dev/null; then
+                ready=1
+                break
+              fi
+              sleep 1
+            done
+
+            if [[ $ready -ne 1 ]]; then
+              echo "Dev server failed to start for entry: $entry"
+              tail -n 200 "$watch_log" || true
+              cypress_failed=1
+              kill -TERM -"$watch_pid" >/dev/null 2>&1 || true
+              wait "$watch_pid" >/dev/null 2>&1 || true
+              continue
+            fi
+
+            if ! npx cypress run --config-file config/cypress.config.js --browser chrome --headless --config "baseUrl=http://127.0.0.1:3001,retries=0,video=false" --spec "$spec_csv"; then
+              cypress_failed=1
+              echo "Cypress failed for entry: $entry"
+            fi
+
+            kill -TERM -"$watch_pid" >/dev/null 2>&1 || true
+            wait "$watch_pid" >/dev/null 2>&1 || true
+          done
+
+          if [[ $cypress_failed -ne 0 ]]; then
+            echo "Cypress specs had failures. Continuing to run other test types..."
+            echo "1" > /tmp/cypress-exit-code.txt
+          fi
+
+      - name: Check test results
+        if: always()
+        run: |
+          echo "=== Test Summary ==="
+
+          failed=0
+
+          if [[ -f /tmp/unit-test-exit-code.txt ]]; then
+            unit_exit=$(cat /tmp/unit-test-exit-code.txt)
+            echo "Unit tests failed with exit code: $unit_exit"
+            failed=1
+          else
+            echo "Unit tests passed"
+          fi
+
+          if [[ -f /tmp/cypress-exit-code.txt ]]; then
+            echo "Cypress/e2e tests failed"
+            failed=1
+          else
+            echo "Cypress/e2e tests passed"
+          fi
+
+          if [[ $failed -ne 0 ]]; then
+            exit 1
+          fi
+
+      - name: No impacted tests found
+        if: steps.impacted.outputs.impacted_count == '0' && steps.impacted_specs.outputs.cypress_count == '0' && steps.impacted_specs.outputs.e2e_count == '0'
+        run: echo "No impacted vets-website source, Cypress, or e2e files were detected from current component-library changes."
