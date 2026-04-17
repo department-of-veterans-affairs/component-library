@@ -652,4 +652,14 @@ describe('va-text-input', () => {
     const inputEl = await page.find('va-text-input >>> input');
     expect(inputEl.getAttribute('step')).toEqual('any');
   });
+
+  it('it wraps the label in an appropriate heading if label-header-level is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-text-input label="This is the label" label-header-level="3" />'
+    );
+    const h3El = await page.find('va-text-input >>> h3');
+    expect(h3El).toBeTruthy();
+    expect(h3El.getAttribute('part')).toEqual('header');
+  })
 });
