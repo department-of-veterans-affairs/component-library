@@ -24,6 +24,7 @@
     "@storybook/addon-links": "10.2.10",
     "@storybook/addon-webpack5-compiler-babel": "4.0.0",
     "@storybook/react-webpack5": "10.2.10",
+    "@vueless/storybook-dark-mode": "10.0.7",
     "babel-loader": "10.0.0",
     "chromatic": "11.16.3",
     "css-loader": "7.1.2",
