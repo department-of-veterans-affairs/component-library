@@ -497,6 +497,7 @@ export class VaMemorableDate {
               {label && HeaderLevel ? (
                   <HeaderLevel
                     aria-describedby={headerAriaDescribedbyId}
+                    part="header"
                   >
                     {InnerLabelPart}
                   </HeaderLevel>

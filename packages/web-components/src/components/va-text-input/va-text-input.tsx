@@ -232,6 +232,11 @@ export class VaTextInput {
    */
   @Prop() errorHasPii?: boolean = false;
 
+  /**
+   * Insert a header with defined level inside the label (legend)
+   */
+  @Prop() labelHeaderLevel?: string;
+
   @State() paddingLeftValue: string = '0';
   @State() paddingRightValue: string = '0';
 
@@ -397,9 +402,17 @@ export class VaTextInput {
     return this.step ? this.step : undefined;
   }
 
+  // get label content based on label string and possible labelHeaderLevel
+  private getLabelContent(label: string, labelHeaderLevel: string): string | HTMLHeadingElement {
+    const Header = getHeaderLevel(labelHeaderLevel);
+    if (!Header) return label;
+    return <Header part="header">{label}</Header>
+  }
+
   render() {
     const {
       label,
+      labelHeaderLevel,
       error,
       reflectInputError,
       showInputError,
@@ -522,7 +535,7 @@ export class VaTextInput {
               class={labelClass}
               part="label"
             >
-              {label}
+              {this.getLabelContent(label, labelHeaderLevel)}
               {required && !hideRequiredText && (
                 <span class="usa-label--required">
                   {' '}
