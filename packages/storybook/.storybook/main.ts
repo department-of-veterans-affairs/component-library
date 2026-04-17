@@ -18,7 +18,6 @@ const config: StorybookConfig = {
     //   Note: Assumes va-mobile-library is in the same parent directory as component-library
     //   1. Build the mobile Storybook in va-mobile-library (yarn storybook:build)
     //   2. Uncomment the staticDirs entry below
-    //   3. Change the va-mobile ref url below to `/storybook-mobile`
     // {
     //   from: '../../../../va-mobile-library/packages/components/storybook-static',
     //   to: '/storybook-mobile',
@@ -54,7 +53,7 @@ const config: StorybookConfig = {
   refs: {
     'va-mobile': {
       title: 'Mobile Components',
-      url: 'https://dev-design.va.gov/storybook-mobile',
+      url: '/storybook-mobile',
       expanded: true,
     },
   },
