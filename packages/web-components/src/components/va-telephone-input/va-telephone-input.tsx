@@ -196,7 +196,9 @@ export class VaTelephoneInput {
     requestAnimationFrame(() => {
       const input = this.getNativeInput();
       if (!input) return;
-      if (/^\d*$/.test(newFormatted)) return;
+      // Skip cursor adjustment if no reformatting occurred (value unchanged)
+      // or if the formatted value contains only digits (no formatting chars to shift around)
+      if (value === newFormatted || /^\d*$/.test(newFormatted)) return;
 
       const digitsBeforeCursor = countDigitsUpTo(value, cursorPos);
       const newPos = digitsBeforeCursor === 0
