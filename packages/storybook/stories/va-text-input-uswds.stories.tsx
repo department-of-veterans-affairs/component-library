@@ -94,6 +94,7 @@ const defaultArgs = {
   'showToggleFocusButton': false,
   'focusEl': null,
   'width': undefined,
+  'label-header-level': undefined
 };
 
 const Template = ({
@@ -123,7 +124,8 @@ const Template = ({
   'show-input-error': showInputError,
   showToggleFocusButton,
   focusEl,
-  width
+  width,
+  'label-header-level': labelHeaderLevel
 }) => {
 
   const { errorMsg, handleClick } = useErrorToggle(error, focusEl);
@@ -161,6 +163,7 @@ const Template = ({
         show-input-error={showInputError}
         id={showToggleFocusButton ? 'error-demo-wrapper' : undefined}
         width={width}
+        label-header-level={labelHeaderLevel}
       />
       {showToggleFocusButton && (
           <va-button
@@ -606,4 +609,12 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
+};
+
+
+export const WithLabelHeaderLevel = Template.bind(null);
+WithLabelHeaderLevel.args = {
+  ...defaultArgs,
+  label: 'My input',
+  'label-header-level': 3
 };

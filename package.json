@@ -16,6 +16,7 @@
   "resolutionsDoc": "resolutions.md",
   "resolutions": {
     "ansi-regex": "5.0.1",
+    "basic-ftp": "5.2.0",
     "cheerio": "1.0.0-rc.12",
     "diff": "3.5.0",
     "glob-parent": "5.1.2",
