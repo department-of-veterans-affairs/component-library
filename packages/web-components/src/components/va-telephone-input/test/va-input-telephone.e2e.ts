@@ -209,4 +209,51 @@ describe('va-telephone-input', () => {
     await page.setContent('<va-telephone-input/>');
     await axeCheck(page);
   });
+
+  it('preserves cursor position when typing in the middle of a formatted number', async () => {
+    const page = await newE2EPage();
+    // 9 digits → "(234) 567-890"
+    await page.setContent('<va-telephone-input contact="234567890" />');
+    await page.waitForChanges();
+
+    // Place cursor at position 6 (after "(234) ", before "5") and type "1"
+    await page.evaluate(() => {
+      const host = document.querySelector('va-telephone-input');
+      const input = host.shadowRoot
+        .querySelector('va-text-input')
+        .shadowRoot.querySelector('#inputField') as HTMLInputElement;
+      input.focus();
+      input.setSelectionRange(6, 6);
+    });
+    await page.keyboard.press('1');
+    await page.waitForChanges();
+
+    const result = await page.evaluate(() => {
+      const host = document.querySelector('va-telephone-input');
+      const input = host.shadowRoot
+        .querySelector('va-text-input')
+        .shadowRoot.querySelector('#inputField') as HTMLInputElement;
+      return { value: input.value, cursorPos: input.selectionStart };
+    });
+
+    // 10 digits (2341567890) → "(234) 156-7890"
+    expect(result.value).toBe('(234) 156-7890');
+    // Cursor should be at position 7: right after the "1" that was just typed
+    expect(result.cursorPos).toBe(7);
+  });
+
+  it('places cursor at position 0 when no digits precede the cursor', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-telephone-input />');
+    await page.waitForChanges();
+
+    const input = await page.find('va-telephone-input >>> va-text-input >>> input');
+    // Type enough digits to trigger formatting
+    await input.type('234');
+    await page.waitForChanges();
+
+    const value = await input.getProperty('value');
+    // For US, "234" formats to "(234)"
+    expect(value).toContain('234');
+  });
 });

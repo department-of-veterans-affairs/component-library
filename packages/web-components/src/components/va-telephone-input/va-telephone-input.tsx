@@ -22,7 +22,7 @@ import {
 } from 'libphonenumber-js/min';
 import classNames from 'classnames';
 import { i18next } from '../..';
-import { DATA_MAP, mapCountry } from './utils';
+import { DATA_MAP, mapCountry, countDigitsUpTo, findPositionForDigitCount } from './utils';
 
 /**
  * @componentName Telephone Input
@@ -148,6 +148,15 @@ export class VaTelephoneInput {
   }
 
   /**
+   * Returns the native <input> element inside the va-text-input shadow DOM.
+   */
+  getNativeInput(): HTMLInputElement | null {
+    return this.textInputRef
+      ?.shadowRoot
+      ?.querySelector('#inputField') as HTMLInputElement | null;
+  }
+
+  /**
    * Sets the validity state of the phone number for the selected country.
    * Updates isValid and formattedContact based on the current contact and country values.
    */
@@ -170,10 +179,34 @@ export class VaTelephoneInput {
   updateContact(event: InputEvent) {
     const target = event.target as HTMLInputElement;
     const { value } = target;
+
+    // Capture cursor position before reformatting
+    const nativeInput = this.getNativeInput();
+    const cursorPos = nativeInput?.selectionStart ?? value.length;
+
     this.contact = value;
-    this.formattedContact = this.formatContact(value);
+    const newFormatted = this.formatContact(value);
+    this.formattedContact = newFormatted;
     this.validateContact();
     this.handleEmit();
+
+    // Restore cursor position after Stencil re-renders
+    // Count how many digits are before the cursor in the current input value,
+    // then find where that same digit count lands in the new formatted value.
+    requestAnimationFrame(() => {
+      const input = this.getNativeInput();
+      if (!input) return;
+      // Skip cursor adjustment if no reformatting occurred (value unchanged)
+      // or if the formatted value contains only digits (no formatting chars to shift around)
+      if (value === newFormatted || /^\d*$/.test(newFormatted)) return;
+
+      const digitsBeforeCursor = countDigitsUpTo(value, cursorPos);
+      const newPos = digitsBeforeCursor === 0
+        ? 0
+        : findPositionForDigitCount(newFormatted, digitsBeforeCursor);
+
+      input.setSelectionRange(newPos, newPos);
+    });
   }
 
   /**
@@ -488,6 +521,7 @@ export class VaTelephoneInput {
                 error={contactError}
                 onInput={(e) => this.updateContact(e)}
                 onBlur={() => this.handleBlur()}
+                ref={(el) => (this.textInputRef = el)}
               />
             </div>
           </fieldset>

@@ -47,3 +47,21 @@ export function mapCountry(country: CountryCode) {
   console.error(`Not a valid country: ${country}`);
 }
   
+ /**
+   * Returns the number of numeric characters that occur before an index position in a string taking into account that the string may contain more than numeric characters.
+   * For example, in "(234) 5" with index 7, only digits 2, 3, 4, 5 are counted → returns 4.
+   */
+  export function countDigitsUpTo(value: string, index: number): number {
+    return value.slice(0, index).replace(/\D/g, '').length;
+  }
+
+  /**
+   * Given a digit count, returns the index in `str` where that many digits have been seen.
+   * This maps a cursor position from one formatted string to another.
+   */
+  export function findPositionForDigitCount(str: string, digitCount: number): number {
+    for (let i = 0; i < str.length; i++) {
+      if (digitCount === countDigitsUpTo(str, i)) return i;
+    }
+    return str.length;
+  }
