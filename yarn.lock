@@ -3256,6 +3256,7 @@ __metadata:
     "@storybook/addon-links": "npm:10.2.10"
     "@storybook/addon-webpack5-compiler-babel": "npm:4.0.0"
     "@storybook/react-webpack5": "npm:10.2.10"
+    "@vueless/storybook-dark-mode": "npm:10.0.7"
     babel-loader: "npm:10.0.0"
     chromatic: "npm:11.16.3"
     css-loader: "npm:7.1.2"
@@ -5293,6 +5294,18 @@ __metadata:
     loupe: "npm:^3.1.4"
     tinyrainbow: "npm:^2.0.0"
   checksum: 10/7f12ef63bd8ee13957744d1f336b0405f164ade4358bf9dfa531f75bbb58ffac02bf61aba65724311ddbc50b12ba54853a169e59c6b837c16086173b9a480710
+  languageName: node
+  linkType: hard
+
+"@vueless/storybook-dark-mode@npm:10.0.7":
+  version: 10.0.7
+  resolution: "@vueless/storybook-dark-mode@npm:10.0.7"
+  dependencies:
+    "@storybook/global": "npm:^5.0.0"
+    lodash-es: "npm:^4.17.23"
+  peerDependencies:
+    storybook: ^10.0.0
+  checksum: 10/5fbd2a34f7c7b28cee305bde36f33f62d89c90c8045b98444524fcd53601330181b6508b21b35100d8710a813b5e7f63482fef256b73a0ca687d364d96d6b8ce
   languageName: node
   linkType: hard
 
@@ -12114,6 +12127,13 @@ __metadata:
   dependencies:
     p-locate: "npm:^5.0.0"
   checksum: 10/72eb661788a0368c099a184c59d2fee760b3831c9c1c33955e8a19ae4a21b4116e53fa736dc086cdeb9fce9f7cc508f2f92d2d3aae516f133e16a2bb59a39f5a
+  languageName: node
+  linkType: hard
+
+"lodash-es@npm:^4.17.23":
+  version: 4.18.1
+  resolution: "lodash-es@npm:4.18.1"
+  checksum: 10/8bfad225ef09ef42b04283cdaf7830efcc2ba29ae41b56501c74422155ee1ccaa1f0f6e8319def3451a1fe54dec501c8e4bee622bae2b2d98ac993731e0a5cce
   languageName: node
   linkType: hard
 
